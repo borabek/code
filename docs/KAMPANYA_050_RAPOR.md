@@ -372,6 +372,25 @@ SKORLAYICIYLA verilemez. Guven kapisi AYRI bir kalibrasyon modeli ister
 (parca-ici goreli konum + kafes tutarliligi + aday mutabakati gibi sinyaller).
 Kapsama sayisi uydurmak yerine bu boyle kaydedildi.
 
+**KALIBRASYON MODELI KURULDU VE OLCULDU** (`kos_kalibrasyon.py`; secilmis
+tahminler uzerinde 15 sinyalle ikinci model; tam+d6, 8015 tahmin, 6 marka
+kati, KAT-DISI):
+
+| hedef kesinlik | ham kapsama | **kalibre kapsama** |
+|---|---|---|
+| 0.60 | 0.2299 | **0.3023** |
+| 0.70 | 0.1007 | **0.1584** |
+| 0.80 | 0.0403 | **0.0905** |
+| **0.90** | 0.0041 | **0.0035** |
+
+Kalibrasyon 0.60-0.80 bandinda kapsamayi **~2 kat** artiriyor. Ama 0.90'da
+ikisi de sifira yakin (%0.35).
+
+**SAHA SOZUNUN DURUST HALI:** ">=0.90 kesinlikli isaret" bugun GT'nin BINDE
+3.5'i icin verilebilir -- kullanilabilir bir teklif DEGIL. **Bugun
+verilebilecek en iyi soz: 0.80 kesinlikte %9 kapsama.** 0.90'a ancak
+tam-otomatik bandin kendisi yukselince ulasilir; kisa yolu yok.
+
 ### 5.1 Okuma plani (onceden ilan)
 
 D7 butcesi 3 okuma; bu birincisi. Ayni kosuda iki kol olculur (taban URUN_P6=0,
