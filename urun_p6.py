@@ -117,7 +117,37 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
 # SESSIZ GERI DUSME SAYACI. Kol calisamazsa `None` doner ve cagiran ESKI yola
 # duser -- bu dogru davranis, ama SIK olursa "P6 sonucu" aslinda taban sonucudur
 # ve bu SESSIZ olur. Olcum betikleri bu sayaci makbuza yazar.
-SAYAC = {"cagri": 0, "p6": 0, "model_yok": 0, "aday_yok": 0, "tablo_yok": 0}
+SAYAC = {"cagri": 0, "p6": 0, "model_yok": 0, "aday_yok": 0, "tablo_yok": 0,
+         "rejim_disi": 0}
+
+
+def _rejim_gecer(pk, P, kaynak):
+    """REJIM KAPISI: bu parcada P6 mi, DAGITILAN TABAN mi?
+
+    OLCULDU (gercek egitim, marka katlari):
+        WEI  TABAN 0.2797 -> P6 0.3795  (+0.0998)
+        PXC  TABAN 0.5850 -> P6 0.3972  (-0.1878)
+        SIE  TABAN 0.6226 -> P6 0.4681  (-0.1545)
+    Mesh havuzu HER PARCADA dogru arac degil: tabanin zaten guclu oldugu
+    seyrek/temiz parcalarda havuzu uce katlamak kesinligi boguyor. Kapi,
+    cikarim aninda gorulebilen bir istatistige (aday sayilari) bakar; esik
+    `kos_p6_rejim.py` ile MARKA KATLARINDA secilir, sinavda taranmaz.
+
+    Kapiyi gecemeyen parcada `cikti` None doner ve `kanonik_zincir` ZATEN VAR
+    OLAN geri-dusmeyle eski yola gecer -- yeni bir kod yolu acilmaz.
+    """
+    r = pk.get("rejim")
+    if not r:
+        return True
+    k = np.asarray(kaynak, int)
+    n01 = int((k != 2).sum())
+    nm = int((k == 2).sum())
+    deger = {"n01": float(n01), "mesh_oran": nm / max(n01, 1),
+             "n_aday": float(len(P)),
+             "n_secenek": float(len(P))}.get(r["istatistik"])
+    if deger is None:
+        return True
+    return deger >= float(r["esik"])
 
 
 def cikti(V, F, probs, cps_seg, step_path, CE, CT):
@@ -133,8 +163,11 @@ def cikti(V, F, probs, cps_seg, step_path, CE, CT):
     if tab is None:
         SAYAC["tablo_yok"] += 1
         return None
-    SAYAC["p6"] += 1
     P, idx, YD, X, kaynak = tab
+    if not _rejim_gecer(pk, P, kaynak):
+        SAYAC["rejim_disi"] += 1
+        return None
+    SAYAC["p6"] += 1                  # BU parcada P6 gercekten kullanildi
     zskor = pk.get("zskor", "ab")
     # EGITIMDEKI SUTUN SIRASI: [donusturulmus 92] + [kaynak gostergesi 3]
     Xd = np.hstack([p6_karar.donustur(X, zskor),
