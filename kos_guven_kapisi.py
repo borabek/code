@@ -36,7 +36,9 @@ HEDEF = 0.90
 def cift(makbuz):
     """Makbuzdan (skor, dogru) dizileri + GT sayisi."""
     s = makbuz["sonuc"]
-    kir = s.get("parca_kirilim") or {}
+    # Pay makbuzu `parca_tp_fp_fn`, birlestirilmis makbuz `parca_kirilim`
+    # yaziyor. Ikisini de kabul et; tek isim aramak sessizce BOS sonuc veriyordu.
+    kir = s.get("parca_kirilim") or s.get("parca_tp_fp_fn") or {}
     S, Y = [], []
     n_gt = 0
     for v in kir.values():
