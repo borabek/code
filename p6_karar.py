@@ -28,6 +28,18 @@ def donustur(X, zskor="ab"):
         return wire_gate.parca_ici(X, "zskor")
     if zskor == "yok":
         return X
+    if zskor == "sira":
+        # PARCA-ICI SIRA (yuzdelik). Z-skor parcanin ORTALAMA ve SAPMASINA
+        # baglidir; aday sayisi ve karisimi degisince (egitim ~232 aday/parca,
+        # NIT 407 ve cogunlugu mesh) ayni fiziksel aday farkli bir z-skora
+        # dusuyor. Sira bu kaymadan ETKILENMEZ: "bu parcadaki en derin 3. delik"
+        # ifadesi aday sayisindan bagimsizdir.
+        return np.hstack([wire_gate.parca_ici(X[:, :AB], "sira"), X[:, AB:]])
+    if zskor == "ikisi":
+        # Hem z-skor hem sira: model hangisine nerede guvenecegine karar versin.
+        return np.hstack([wire_gate.parca_ici(X[:, :AB], "zskor"),
+                          wire_gate.parca_ici(X[:, :AB], "sira")[:, AB:],
+                          X[:, AB:]])
     return np.hstack([wire_gate.parca_ici(X[:, :AB], "zskor"), X[:, AB:]])
 
 
