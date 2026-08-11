@@ -111,6 +111,45 @@ Damgasiz sayi sayi degildir.
 
 ---
 
+## 3b. Kapanmayan cephe: YOGUN parcalar (NIT ornegi)
+
+NIT: 50 parca / 1222 GT / 24.4 CP-parca. **Dagitilan urun 1222 GT'den 2'sini
+buluyor** (F1 0.0032) -- yani bu kampanyanin actigi bir sorun degil, sistemin
+sureklilik arz eden kor noktasi. Yeni havuz o markada yonlu recall **0.5254**
+veriyor, yani cevabin yarisi HAVUZDA.
+
+Kayip nerede? Uc olcum:
+
+| soru | olcum | cevap |
+|---|---|---|
+| esik mi? | o markadaki EN IYI kural | 0.0349 -- HAYIR |
+| siralama rastgele mi? | recall@k / rastgele | 9.4x -- HAYIR |
+| ne kadar iyilestirilebildi? | C blogu + `zskor=ikisi` | **12.0x** |
+
+Denenen ve olculen iki mudahale:
+* **Segmentasyon oznitelikleri (A blogu) NIT'te ZARAR VERIYOR**: yalniz yon
+  bankasi (C) 10.4x, hepsi 9.4x.
+* **Parca-ici SIRA donusumu** tek basina kotu (5.9x) ama Z-SKORLA BIRLIKTE en
+  iyisi (12.0x).
+
+**Neden yetmiyor:** NIT parcasinda 4467 secenek var ve 24'u dogru (%0.69). 12x
+siralama top-24'e 2 dogru koyar -> F1 ~0.08. Kullanilabilir bir sayi icin
+~50-100x gerekir; bu, mevcut oznitelik uzayinda kapanacak bir fark DEGILDIR.
+Yeni bilgi kaynagi (o yogunlukta etiketli veri ya da farkli bir temsil) gerekir.
+
+**Sinav icin baglami:** D7 D6'dan cok daha SEYREK.
+
+| kume | ort CP/parca | >=8 CP olan parca | o parcalardaki GT payi |
+|---|---|---|---|
+| tam | 5.7 | %14.4 | %55.7 |
+| d6 | 5.7 | %13.7 | %55.4 |
+| **d7** | **3.7** | **%7.4** | **%30.3** |
+
+Yani D6'nin mikro sayisi yogun parcalarin egemenliginde; D7'ninki degil. D6'da
+olculen mikro kazanc D7 icin KOTUMSER bir tahmindir.
+
+---
+
 ## 4. Yakalanan tuzaklar
 
 | tuzak | belirti | sonuc |

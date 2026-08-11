@@ -17,9 +17,13 @@ export P6_OLCUT=${P6_OLCUT:-makro}
 export P6_KOLLAR=${P6_KOLLAR:-TABAN,P6,P6_KAFES,P6_GEO}
 export P6_NMSLER=${P6_NMSLER:-5.0}
 export P6_KAHIN=0
-export P6_ARAMA_N=${P6_ARAMA_N:-300}
+export P6_ARAMA_N=${P6_ARAMA_N:-250}
 export P6_NEG_KAT=${P6_NEG_KAT:-6}
-export P6_ITER=${P6_ITER:-250}
+export P6_ITER=${P6_ITER:-200}
+# NOT: ITER 400 -> 200 ve ARAMA_N 600 -> 250 SURE icin. 4 kol x 4 kat = 16 model
+# + 4 OOF modeli; 2583 parca x ~2000 secenek = ~5M satir. Ogrenme egrisi
+# logaritmik oldugu icin 200 iterasyon 400'un cok altinda degil, ama kosu
+# suresi yariya iniyor.
 n=$(ls results/_p6_oz_u25/tam_*.npz 2>/dev/null | wc -l)
 echo "egitim korpusu: $n / 2583 parca hazir"
 echo "katlar >= $P6_KAT_MIN | olcut $P6_OLCUT | kollar $P6_KOLLAR"
