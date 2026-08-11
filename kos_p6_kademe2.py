@@ -82,7 +82,9 @@ TOHUM_NMS = 5.0
 # olarak alir ve zor negatifleri ayirmaya odaklanir.
 KISA_ESIK = float(os.environ.get("P6_KISA_ESIK", "0.20"))
 NEG_KAT = int(os.environ.get("P6_NEG_KAT", "8"))
-KOLLAR = ("TABAN", "P6", "P6_KAFES")
+KOLLAR = tuple(os.environ.get("P6_KOLLAR",
+                              "TABAN,P6,P6_KAFES,P6_GEO").split(","))
+A_SUT = 58        # havuz oznitelikleri (segmentasyon agindan turer)
 
 
 ITER = int(os.environ.get("P6_ITER", "400"))
@@ -186,6 +188,15 @@ def oz(d, kol, kafes_blok=None, s1=None):
         return p6_karar.donustur(d["X"][taban_satir(d)][:, :AB], "hepsi")
     X = np.hstack([p6_karar.donustur(d["X"]),
                    p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
+    if kol == "P6_GEO":
+        # SEGMENTASYON OZNITELIKLERI ATILDI (ilk 58 sutun).
+        # NEDEN: NIT'te kural kahini bile 0.0349 verdi -- yani kayip esikte
+        # DEGIL, skorda. Havuzun yonlu recall'u 0.5254 oldugu halde model o
+        # markada bilgi uretemiyor. A blogu segmentasyon agindan turer ve o ag
+        # NIT'e aktarilmiyorsa, ona dayanmayan bir model DAHA IYI genellesebilir.
+        # Kalan: agiz olculeri (9) + yon bankasi (16) + secenek yonuyle agiz
+        # olculeri (9) + kaynak (3) = 37 sutun, hepsi GEOMETRIK/FIZIKSEL.
+        return np.hstack([X[:, A_SUT:AB], X[:, AB:]])
     if kol == "P6_KAFES":
         return np.hstack([X, kafes_blok, np.asarray(s1, float)[:, None]])
     return X

@@ -126,6 +126,10 @@ def cikti(V, F, probs, cps_seg, step_path, CE, CT):
     # EGITIMDEKI SUTUN SIRASI: [donusturulmus 92] + [kaynak gostergesi 3]
     Xd = np.hstack([p6_karar.donustur(X, zskor),
                     p6_karar.kaynak_blok(kaynak[idx])])
+    if pk.get("kol") == "P6_GEO":
+        # SEGMENTASYON BLOGU (ilk 58 sutun) ATILIR -- egitimdekiyle AYNI dilim.
+        ab = int(pk.get("AB", 67))
+        Xd = np.hstack([Xd[:, 58:ab], Xd[:, ab:]])
     s = np.asarray(pk["kademe1"].predict_proba(Xd)[:, 1], float)
     if pk.get("kademe2") is not None:
         # IKINCI KADEME = KISA LISTE UZERINDE FP REDDEDICI.
