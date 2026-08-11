@@ -26,6 +26,15 @@ import yon_bankasi as YB      # noqa: E402
 
 DIZ = os.environ.get("P6_DIZIN", "results/_p6_oz_u25")
 ONLER = os.environ.get("HT_ONLER", "d6").split(",")
+
+
+def _makbuz_yolu():
+    """MAKBUZ ADI KUMEYI DE TASIR. Onceden yalnizca dizine gore adlandiriliyordu;
+    ayni dizin uzerinde `d6` ve `tam` kosulunca ikincisi birincinin USTUNE
+    yaziyordu ve iki farkli olcum tek dosyada karisiyordu."""
+    import os as _o
+    return (f"results/havuz_tavani_{_o.path.basename(DIZ)}"
+            f"_{'-'.join(ONLER)}.json")
 YANAL, ACI, EKSENEL = 2.0, 10.0, 40.0
 
 
@@ -123,9 +132,8 @@ def main():
                "kapi_a_gecti": bool(ry >= 0.85),
                "not": "Havuz TAVANI (mukemmel secici). Kabul kutusu urun "
                       "metrigiyle birebir. D7'ye BAKILMADI."},
-              open(f"results/havuz_tavani_{os.path.basename(DIZ)}.json", "w"),
-              indent=1)
-    print(f"makbuz -> results/havuz_tavani_{os.path.basename(DIZ)}.json")
+              open(_makbuz_yolu(), "w"), indent=1)
+    print(f"makbuz -> {_makbuz_yolu()}")
 
 
 if __name__ == "__main__":

@@ -149,12 +149,17 @@ def main():
                        "secenek": se, "maliyet_kat": se / max(taban, 1)}
         print(f"{t:>7d}{gt:>7d}{ya:>11d}{rec:>14.4f}{se:>10d}"
               f"{se / max(taban, 1):>11.2f}")
-    json.dump({"on": on, "n_parca": len(fs), "yelpaze": YB.FAN_N,
+    # MAKBUZ ADI ORNEKLEMI TASIR: sabit ad kullanilinca iki farkli orneklem
+    # (UPUN/SUPU ve NIT) ayni dosyayi ezip birbirinin sonucu sanildi.
+    _yol = (f"results/max_sec_sondasi_{hedef or 'karisik'}"
+            f"{len(fs)}.json")
+    json.dump({"on": on, "n_parca": len(fs), "marka": hedef or "karisik",
+               "yelpaze": YB.FAN_N,
                "sonuc": out,
                "not": "Yonlu TAVAN (mukemmel secici). Kabul kutusu urun "
                       "metrigiyle ayni. D7'ye BAKILMADI."},
-              open("results/max_sec_sondasi.json", "w"), indent=1)
-    print("\nmakbuz -> results/max_sec_sondasi.json")
+              open(_yol, "w"), indent=1)
+    print(f"\nmakbuz -> {_yol}")
 
 
 if __name__ == "__main__":

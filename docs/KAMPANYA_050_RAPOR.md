@@ -715,3 +715,49 @@ ders: bir aciklamayi kabul etmeden once onu YANLISLAYACAK durumu aramak gerek.
 Bellek yine de gercek bir kisittir (her EK kosusu ~6 GB, makinede 31 GB) --
 `kos_ek_kuyruk.sh`'nin 10 GB kapisi yerinde kaliyor. Ama gece yasanan
 olumlerin sebebi o degildi.
+
+---
+
+## 12. KARAR ARITMETIGI -- 0.50 NEREDEN GELEBILIR? (belirleyici)
+
+Ayni kumede (`tam`) olculdu; makbuz `results/havuz_tavani__p6_oz_u25_tam.json`.
+
+| | deger |
+|---|---|
+| havuz F1 TAVANI (mukemmel secici) | **0.8474** |
+| GERCEKLESEN (P6 kolu) | **0.3091** |
+| **secici verimliligi** | **%36.5** |
+
+0.50'ye iki yol var ve biri kapali:
+
+1. **Havuzla:** verimlilik sabit kalirsa tavanin **1.3707** olmasi gerekir.
+   F1 tavani 1.0'i asamaz -> **HAVUZ KOLU TEK BASINA IMKANSIZ.**
+2. **Seciciyle:** tavan sabit kalirsa verimliligin **%59.0** olmasi gerekir
+   (**1.62x** iyilesme).
+
+**Sonuc: onceligi SECICI alir.** Havuz genisletme (A1b) hala degerli --
+tavani yukseltir ve gerekli verimlilik carpanini dusurur -- ama tek basina
+hedefe goturmez. Bu, EK bloklarina (kanonik/topoloji/simetri/derinlik) ve
+aday-kumesi modeline (D2) verilen onceligi belirler.
+
+### MAX_SEC tavani BAGLIYOR (olculdu)
+
+Makbuz `results/max_sec_sondasi_UPUN-SUPU30.json` (30 parca, yelpaze 256):
+
+| secenek tavani | yonlu recall | secenek maliyeti |
+|---|---|---|
+| 12 (BUGUNKU) | 0.8462 | 1.00x |
+| **24** | **0.9077** | 1.20x |
+| 40 | 0.9077 | 1.23x |
+
+Tavani 12'den 24'e cikarmak yonlu recall'u **+0.0615** artiriyor ve maliyeti
+yalnizca **1.20x**. 40'a cikarmak hicbir sey eklemiyor -> **diz noktasi 24.**
+
+Bu, "yelpaze olu" gorunumunun sebebini de acikliyor: 256 isin onlarca yon
+uretiyor ama tavan 12 oldugu icin cogu eleniyor; yelpaze yeni yon EKLEMIYOR,
+mevcut kaynaklarin yerini ALIYOR.
+
+**ACIK SORU (kosuyor):** bu kazanc, tavani asagi ceken markada (NIT: D6
+GT'sinin %45.7'si, yonlu recall 0.5254, kaybi tam olarak YON kaybi) da var mi?
+Orneklem markaya gore secilmeli -- ilk kosu dosya sirasi yuzunden yalnizca
+UPUN/SUPU'yu ornekliyordu.

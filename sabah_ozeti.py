@@ -53,11 +53,18 @@ def ek_bloklar():
     return out
 
 
-def havuz(dizin="_p6_oz_tam3"):
+def havuz(dizin="_p6_oz_tam3", kume=None):
     """Degerler KOKTE degil `toplam` altinda: konum_recall / yonlu_recall /
-    f1_tavani. (Ilk yazimda kokte aranmisti ve rapor bos gosteriyordu.)"""
-    y = os.path.join(KOK, "results", f"havuz_tavani_{dizin}.json")
-    d = oku(y)
+    f1_tavani. (Ilk yazimda kokte aranmisti ve rapor bos gosteriyordu.)
+
+    Makbuz adi artik kumeyi de tasiyor; eski (kumesiz) ada da bakilir."""
+    adlar = ([f"havuz_tavani_{dizin}_{kume}.json"] if kume else []) + \
+            [f"havuz_tavani_{dizin}_d6.json", f"havuz_tavani_{dizin}.json"]
+    d = None
+    for a in adlar:
+        d = oku(os.path.join(KOK, "results", a))
+        if d:
+            break
     if not d:
         return None
     t = d.get("toplam", {})
@@ -149,6 +156,39 @@ def main():
     L.append("## 4. GECE FAZLARI")
     fz = gece_fazlari()
     L.extend(f"- {s}" for s in fz) if fz else L.append("- log yok")
+    L.append("")
+
+    L.append("## 3b. SECICI VERIMLILIGI -- 0.50 nereden gelebilir?")
+    tv = havuz("_p6_oz_u25", "tam") or havuz("_p6_oz_tam3", "tam")
+    ger = None
+    for ad, _dz, _sec, kollar in kademe2():
+        if "P6" in kollar:
+            ger = kollar["P6"]
+            break
+    if tv and ger:
+        tavan = tv[2]
+        verim = ger / max(tavan, 1e-9)
+        L.append(f"- havuz F1 TAVANI (`tam`, mukemmel secici): **{tavan:.4f}**")
+        L.append(f"- GERCEKLESEN (P6 kolu): **{ger:.4f}**")
+        L.append(f"- **secici verimliligi = {verim:.1%}**")
+        L.append("")
+        ger_tavan = 0.50 / max(verim, 1e-9)
+        ger_verim = 0.50 / max(tavan, 1e-9)
+        L.append(f"0.50'ye iki yoldan gidilebilir:")
+        L.append(f"1. **Havuzla:** verimlilik sabit kalirsa tavanin "
+                 f"**{ger_tavan:.4f}** olmasi gerekir"
+                 + ("  -> 1.0'i asiyor, TEK BASINA IMKANSIZ"
+                    if ger_tavan > 1.0 else ""))
+        L.append(f"2. **Seciciyle:** tavan sabit kalirsa verimliligin "
+                 f"**{ger_verim:.1%}** olmasi gerekir "
+                 f"({ger_verim / max(verim, 1e-9):.2f}x iyilesme)")
+        L.append("")
+        L.append("> Havuz kolu tek basina hedefe goturmuyor; SECICI kolu "
+                 "zorunlu. Bu, EK bloklarina ve aday-kumesi modeline "
+                 "(D2) verilen onceligi belirler.")
+    else:
+        L.append("- `tam` kumesinde tavan olcumu henuz yok "
+                 "(`HT_ONLER=tam python sonda_havuz_tavani.py`)")
     L.append("")
 
     L.append("## 4b. SAHA -- AUTO KATMANI (tier cokusu)")
