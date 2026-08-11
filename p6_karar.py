@@ -89,7 +89,12 @@ def sec_ayrintili(P, idx, YD, s, esik, nms_mm=NMS_MM):
     kural = ("mutlak", float(esik)) if np.isscalar(esik) else tuple(esik)
     k = np.where(kabul_maskesi(s, kural))[0]
     if not len(k):
-        return np.zeros((0, 3)), np.zeros((0, 3)), np.zeros(0, int)
+        # DORT deger: erken cikis dali da normal dalla AYNI imzayi dondurmeli.
+        # Skor alani eklendiginde burasi 3'te kalmisti ve D7 okumasinin P6 kolu
+        # "expected 4, got 3" ile CoKTU. Cikis dallari imza degisikliginde
+        # gozden kaciyor -- test bunu yakalar.
+        return (np.zeros((0, 3)), np.zeros((0, 3)), np.zeros(0, int),
+                np.zeros(0, float))
     sira = k[np.argsort(-s[k])]
     ap, ad, ai, asc, kapali = [], [], [], [], set()
     for j in sira:
