@@ -390,6 +390,47 @@ KARAR KURALLARI (okumadan ONCE yazildi):
 
 ---
 
+### 5g. D7 SONRASI TESHISLER -- 0.50'ye giden yol nerede tikaniyor
+
+**1. Rejim kapisi D7'nin iki buyuk markasinda TERS calisiyor.**
+
+| marka | n01/parca | konum recall (tum mesh) | yon recall (banka) | taban | P6 |
+|---|---|---|---|---|---|
+| WIE | 141 | 0.8897 | 0.8536 | 0.5712 | 0.4910 |
+| CWT | 86 | 0.5532 | 0.4415 | 0.0370 | 0.0466 |
+
+Esik 90 idi: CWT (86) TABANA gidiyor -- oysa taban orada cokuyor; WIE (141)
+P6'ya gidiyor -- oysa taban orada iyi. D7'deki WIE kaybi (-0.0802) ve CWT'nin
+kipirdamamasi AYNI sebepten.
+
+**2. Ogrenilmis yonlendirici (v2) BASARISIZ.** 13 parca ozniteligiyle egitilen
+yonlendirici kat-disi 0.5269 -> 0.4646 (**-0.0624**); egitim markalarina ozgu
+oruntuleri ezberleyip gorulmemis markaya tasimiyor. TOGI'de -0.1137. **Tek esik
+KALIYOR.**
+
+**3. CWT'nin havuzu segmentasyon esiginin ALTINDA kalmis.** Mesh adaylari
+`p_pos >= 0.50` ile seciliyor:
+
+| marka | p>=0.5 | p>=0.3 | p>=0.2 | p>=0.1 | p>=0.05 |
+|---|---|---|---|---|---|
+| **CWT** | 0.5532 | 0.6108 | 0.6501 | 0.7286 | **0.7914** |
+| WEG | 0.6768 | 0.7439 | 0.7805 | 0.8232 | 0.8354 |
+| WIE | 0.8897 | 0.9278 | 0.9430 | 0.9544 | 0.9620 |
+
+CWT'de konum recall **+0.2382** aciliyor (aday 267 -> 700).
+
+**METODOLOJIK CIKMAZ:** ayni tarama `tam` korpusunda WEI 0.9497 -> 0.9954,
+PXC 0.9914 -> 0.9914 veriyor. Yani egitim markalarinda havuz ZATEN tavanda ve
+orada yapilan bir secim "0.50'de kal" der. Kaldirac, egitimden FARKLI markalarda
+degerli ve o farki yalniz sinavda gorebiliyorum.
+
+**Cozum ILKESEL olmali, D7'ye bakarak degil:** esigi dusurmek aday EKLER, asla
+CIKARMAZ -> havuz tavanini MONOTON yukseltir. Tek risk kesinliktir ve o egitim
+katlarinda olculebilir. Yapilacak deney: dusuk esikle korpusu yeniden cikar,
+egitim katlarinda uctan uca ZARARSIZ oldugunu goster, sonra dagit.
+
+---
+
 ## 5d. Bu oturumun EN ONEMLI iki dersi
 
 **1. Gelistirme kumesinden okunan kazanc aldatir.** D6'da P6 kolu +0.1681
