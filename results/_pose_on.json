@@ -1,0 +1,48 @@
+{
+ "3031238": [
+  {
+   "point": [
+    2.7523,
+    6.3346,
+    33.4298
+   ],
+   "direction": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "size_mm": 4.8,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.99,
+   "depth_mm": 5.25,
+   "confidence": 0.981,
+   "votes": 4,
+   "wire_score": 1.0,
+   "kind": "Contact",
+   "n_verts": 349,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    2.7195,
+    42.9252,
+    33.4386
+   ],
+   "direction": [
+    -0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 4.8,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.04,
+   "depth_mm": 4.61,
+   "confidence": 0.971,
+   "votes": 4,
+   "wire_score": 0.986,
+   "kind": "Contact",
+   "n_verts": 357,
+   "tier": "auto"
+  }
+ ]
+}

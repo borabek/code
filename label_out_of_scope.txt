@@ -1,0 +1,16 @@
+# Parts the annotator (domain expert) ruled OUT OF CP SCOPE -- never re-select for labelling.
+# 2026-07-21: 10 BT/BTO Phoenix screw terminals take NO direct cable (component/bridge type);
+#             2 PTU 16/14 collective parts the annotator classed as plates.
+3281100
+3281103
+3281110
+3281117
+3281122
+3281123
+3281124
+3281133
+3281136
+3281182
+3214014
+3214015
+3214016

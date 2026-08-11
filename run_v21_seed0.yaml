@@ -1,0 +1,41 @@
+backbone: knngraph
+run_name: cp_knn_v21_seed0
+seed: 0
+extra_sources:
+  - wscad_corpus_v2
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+device: cuda
+max_gpu_verts: 7000
+# disk cache intentionally OFF: it re-filled the near-full C: drive (9 GB of
+# SHA256-keyed .npy/.npz). Graphs are held in RAM for the run either way; the
+# cache only saved ~26s of first-epoch prebuild -- not worth an ENOSPC crash.
+
+epochs: 90          # same cold-start margin as hp_v22 (heat peaks need ~15-25
+eval_every: 5       # epochs to cross the 0.30 decode threshold); patience 10 so
+patience: 10        # early-stop can't kill the run before it starts detecting.
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001          # v19's proven value; 5e-4 was too slow -- heat head made ZERO
+lr_schedule: cosine  # detections through epoch 10. Cosine handles the late collapse
+                     # that 5e-4 was (wrongly) chosen to prevent.
+weight_decay: 0.0005
+grad_clip: 1.0

@@ -1,0 +1,1192 @@
+[
+ {
+  "pid": "0271017",
+  "src": "corpus/train",
+  "n_boxes": 0
+ },
+ {
+  "pid": "0309112",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0311126",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0313085",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0441025",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0441106",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0441504",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0443010",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0443023",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0443049",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0443078",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0443081",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0444019",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0452014",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0501059",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0503057",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0505055",
+  "src": "corpus/train",
+  "n_boxes": 3
+ },
+ {
+  "pid": "0531210",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0552024",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0561002",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0561028",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0701011",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0701024",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0711344",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0711580",
+  "src": "corpus/train",
+  "n_boxes": 8
+ },
+ {
+  "pid": "0719074",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0790446",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0790462",
+  "src": "corpus/train",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0790527",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0790530",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0790543",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0920083",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "2200-1407",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "2210-1307",
+  "src": "corpus/train",
+  "n_boxes": 3
+ },
+ {
+  "pid": "2250-1207",
+  "src": "corpus/train",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3000608",
+  "src": "corpus/train",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3000715",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3000716",
+  "src": "corpus/train",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3001369",
+  "src": "corpus/train",
+  "n_boxes": 3
+ },
+ {
+  "pid": "3001501",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3002389",
+  "src": "corpus/train",
+  "n_boxes": 12
+ },
+ {
+  "pid": "3002652",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3003091",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3004058",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3004524",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3005099",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3005837",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3006043",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3006179",
+  "src": "corpus/train",
+  "n_boxes": 8
+ },
+ {
+  "pid": "3007042",
+  "src": "corpus/train",
+  "n_boxes": 8
+ },
+ {
+  "pid": "3009053",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3031681",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3035693",
+  "src": "corpus/train",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3036084",
+  "src": "corpus/train",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3044076",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3044160",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3044238",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3044555",
+  "src": "corpus/train",
+  "n_boxes": 8
+ },
+ {
+  "pid": "3046485",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3046566",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3048823",
+  "src": "corpus/train",
+  "n_boxes": 8
+ },
+ {
+  "pid": "3072803",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3073018",
+  "src": "corpus/train",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3100318",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3208746",
+  "src": "corpus/train",
+  "n_boxes": 3
+ },
+ {
+  "pid": "3209511",
+  "src": "corpus/train",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3209606",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3210499",
+  "src": "corpus/train",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3212154",
+  "src": "corpus/train",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3215928",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3248037",
+  "src": "corpus/train",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0311087",
+  "src": "corpus/val",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0311142",
+  "src": "corpus/val",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0441517",
+  "src": "corpus/val",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0452043",
+  "src": "corpus/val",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0461018",
+  "src": "corpus/val",
+  "n_boxes": 8
+ },
+ {
+  "pid": "0701008",
+  "src": "corpus/val",
+  "n_boxes": 4
+ },
+ {
+  "pid": "0701095",
+  "src": "corpus/val",
+  "n_boxes": 6
+ },
+ {
+  "pid": "0719016",
+  "src": "corpus/val",
+  "n_boxes": 5
+ },
+ {
+  "pid": "0719113",
+  "src": "corpus/val",
+  "n_boxes": 5
+ },
+ {
+  "pid": "2002-2941",
+  "src": "corpus/val",
+  "n_boxes": 4
+ },
+ {
+  "pid": "2002-7214",
+  "src": "corpus/val",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3001035",
+  "src": "corpus/val",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3001381",
+  "src": "corpus/val",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3001695",
+  "src": "corpus/val",
+  "n_boxes": 8
+ },
+ {
+  "pid": "3002602",
+  "src": "corpus/val",
+  "n_boxes": 5
+ },
+ {
+  "pid": "3008025",
+  "src": "corpus/val",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3011041",
+  "src": "corpus/val",
+  "n_boxes": 14
+ },
+ {
+  "pid": "3044364",
+  "src": "corpus/val",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3100062",
+  "src": "corpus/val",
+  "n_boxes": 8
+ },
+ {
+  "pid": "3214602",
+  "src": "corpus/val",
+  "n_boxes": 3
+ },
+ {
+  "pid": "0294380000",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1231700",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1552680000",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1772090000",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1815120000",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "2001-1307",
+  "src": "_label_targets",
+  "n_boxes": 3
+ },
+ {
+  "pid": "2102-1207",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "2202-1881",
+  "src": "_label_targets",
+  "n_boxes": 4
+ },
+ {
+  "pid": "2494000000",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "2674770000",
+  "src": "_label_targets",
+  "n_boxes": 4
+ },
+ {
+  "pid": "2782550000",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "280-835",
+  "src": "_label_targets",
+  "n_boxes": 4
+ },
+ {
+  "pid": "5043321",
+  "src": "_label_targets",
+  "n_boxes": 4
+ },
+ {
+  "pid": "783-613",
+  "src": "_label_targets",
+  "n_boxes": 1
+ },
+ {
+  "pid": "7904280000",
+  "src": "_label_targets",
+  "n_boxes": 4
+ },
+ {
+  "pid": "826-159",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "870-837",
+  "src": "_label_targets",
+  "n_boxes": 4
+ },
+ {
+  "pid": "880-687",
+  "src": "_label_targets",
+  "n_boxes": 3
+ },
+ {
+  "pid": "9512190000",
+  "src": "_label_targets",
+  "n_boxes": 1
+ },
+ {
+  "pid": "DK4N",
+  "src": "_label_targets",
+  "n_boxes": 2
+ },
+ {
+  "pid": "282-811",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "282-821",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3034248",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3038516",
+  "src": "_label_targets_2",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3038529",
+  "src": "_label_targets_2",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3073979",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3212439",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3212442",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3213938",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3213939",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3214275",
+  "src": "_label_targets_2",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3214288",
+  "src": "_label_targets_2",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3216053",
+  "src": "_label_targets_2",
+  "n_boxes": 3
+ },
+ {
+  "pid": "3270047",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3270059",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3270251",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3270269",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3270500",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3270503",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3270506",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3271055",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3271070",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3271305",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3271317",
+  "src": "_label_targets_2",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3281102",
+  "src": "_label_targets_2",
+  "n_boxes": 3
+ },
+ {
+  "pid": "3281104",
+  "src": "_label_targets_2",
+  "n_boxes": 1
+ },
+ {
+  "pid": "3281105",
+  "src": "_label_targets_2",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3281111",
+  "src": "_label_targets_2",
+  "n_boxes": 1
+ },
+ {
+  "pid": "282-841",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3034251",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3034264",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3038532",
+  "src": "_label_targets_3",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3038545",
+  "src": "_label_targets_3",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3212455",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3212468",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3213937",
+  "src": "_label_targets_3",
+  "n_boxes": 5
+ },
+ {
+  "pid": "3213970",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3214262",
+  "src": "_label_targets_3",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3214301",
+  "src": "_label_targets_3",
+  "n_boxes": 6
+ },
+ {
+  "pid": "3248150",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3248152",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3270040",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3270062",
+  "src": "_label_targets_3",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3270254",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3270272",
+  "src": "_label_targets_3",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3270509",
+  "src": "_label_targets_3",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3271050",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3271071",
+  "src": "_label_targets_3",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3271300",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3271320",
+  "src": "_label_targets_3",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3271326",
+  "src": "_label_targets_3",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3280112",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3280114",
+  "src": "_label_targets_3",
+  "n_boxes": 4
+ },
+ {
+  "pid": "3281101",
+  "src": "_label_targets_3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "3281108",
+  "src": "_label_targets_3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "3281109",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "3281112",
+  "src": "_label_targets_3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1010000000",
+  "src": "_label_targets_recall",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1010100000",
+  "src": "_label_targets_recall",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1010200000",
+  "src": "_label_targets_recall",
+  "n_boxes": 4
+ },
+ {
+  "pid": "1010300000",
+  "src": "_label_targets_recall",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1010400000",
+  "src": "_label_targets_recall",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1010500000",
+  "src": "_label_targets_recall",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1011000000",
+  "src": "_label_targets_recall",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1015560000",
+  "src": "_label_targets_recall",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1018400000",
+  "src": "_label_targets_recall",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1019710000",
+  "src": "_label_targets_recall",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1020000000",
+  "src": "_label_targets_recall",
+  "n_boxes": 5
+ },
+ {
+  "pid": "1020080000",
+  "src": "_label_targets_recall",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1020100000",
+  "src": "_label_targets_recall",
+  "n_boxes": 4
+ },
+ {
+  "pid": "1020180000",
+  "src": "_label_targets_recall",
+  "n_boxes": 4
+ },
+ {
+  "pid": "1020200000",
+  "src": "_label_targets_recall",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1020280000",
+  "src": "_label_targets_recall",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1020300000",
+  "src": "_label_targets_recall",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1020380000",
+  "src": "_label_targets_recall",
+  "n_boxes": 4
+ },
+ {
+  "pid": "1020400000",
+  "src": "_label_targets_recall",
+  "n_boxes": 4
+ },
+ {
+  "pid": "1020480000",
+  "src": "_label_targets_recall",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1020500000",
+  "src": "_label_targets_recall",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1020580000",
+  "src": "_label_targets_recall",
+  "n_boxes": 4
+ },
+ {
+  "pid": "1021500000",
+  "src": "_label_targets_recall",
+  "n_boxes": 5
+ },
+ {
+  "pid": "1022360000",
+  "src": "_label_targets_recall",
+  "n_boxes": 6
+ },
+ {
+  "pid": "1027410000",
+  "src": "_label_targets_recall",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1037820000",
+  "src": "_label_targets_recall",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1038100000",
+  "src": "_label_targets_recall",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1058520000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1173800000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 9
+ },
+ {
+  "pid": "1173840000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1173850000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 11
+ },
+ {
+  "pid": "1265990000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1267840000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 7
+ },
+ {
+  "pid": "1267870000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 10
+ },
+ {
+  "pid": "1288250000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 4
+ },
+ {
+  "pid": "1394040000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 7
+ },
+ {
+  "pid": "1562090000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1562160000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 2
+ },
+ {
+  "pid": "2506350000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 0
+ },
+ {
+  "pid": "2518540000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 0
+ },
+ {
+  "pid": "2521730000",
+  "src": "_label_targets_recall_hard",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1020700000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1020800000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1024780000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1025700000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1029900000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1030200000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1030600000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1031100000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1031200000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1031480000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 6
+ },
+ {
+  "pid": "1039900000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 0
+ },
+ {
+  "pid": "1041620000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 5
+ },
+ {
+  "pid": "1042400000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1042480000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1131740000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1131750000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1131760000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1173710000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1173820000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1357440000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1521870000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1608540000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "1706010000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 1
+ },
+ {
+  "pid": "1771420000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1802810000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 3
+ },
+ {
+  "pid": "1988200000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "2428910000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 5
+ },
+ {
+  "pid": "2428930000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ },
+ {
+  "pid": "2428960000",
+  "src": "_label_targets_recall_r3",
+  "n_boxes": 2
+ }
+]

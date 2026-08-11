@@ -1,0 +1,4133 @@
+{
+ "1492-HC6": [
+  {
+   "point": [
+    43.8645,
+    21.5219,
+    8.7452
+   ],
+   "direction": [
+    -0.0071,
+    0.0096,
+    -0.9999
+   ],
+   "size_mm": 1.9,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.77,
+   "depth_mm": 4.67,
+   "confidence": 0.74,
+   "votes": 2,
+   "wire_score": 0.429,
+   "kind": "Contact",
+   "n_verts": 59,
+   "tier": "review"
+  },
+  {
+   "point": [
+    45.4888,
+    15.1801,
+    8.8437
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 3.91,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.46,
+   "depth_mm": 3.94,
+   "confidence": 0.659,
+   "votes": 1,
+   "wire_score": 0.608,
+   "kind": "Contact",
+   "n_verts": 68,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    42.7616,
+    22.5867,
+    7.0861
+   ],
+   "direction": [
+    -0.0071,
+    0.0096,
+    -0.9999
+   ],
+   "size_mm": 1.7,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.63,
+   "depth_mm": 1.67,
+   "confidence": 0.509,
+   "votes": 1,
+   "wire_score": 0.327,
+   "kind": "Contact",
+   "n_verts": 44,
+   "tier": "review"
+  }
+ ],
+ "HDTB-12": [
+  {
+   "point": [
+    66.6535,
+    19.4076,
+    20.8325
+   ],
+   "direction": [
+    -0.0378,
+    0.9983,
+    0.0438
+   ],
+   "size_mm": 7.55,
+   "size_source": "measured",
+   "mouth_wide_mm": 11.97,
+   "depth_mm": 2.39,
+   "confidence": 0.446,
+   "votes": 3,
+   "wire_score": 0.333,
+   "kind": "Contact",
+   "n_verts": 15,
+   "tier": "review"
+  },
+  {
+   "point": [
+    51.8294,
+    5.0061,
+    8.0429
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.87,
+   "depth_mm": 6.95,
+   "confidence": 0.402,
+   "votes": 3,
+   "wire_score": 0.341,
+   "kind": "Contact",
+   "n_verts": 22,
+   "tier": "review"
+  },
+  {
+   "point": [
+    51.6979,
+    19.6644,
+    19.4211
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 6.99,
+   "size_source": "measured",
+   "mouth_wide_mm": 11.59,
+   "depth_mm": 1.74,
+   "confidence": 0.284,
+   "votes": 3,
+   "wire_score": 0.324,
+   "kind": "Contact",
+   "n_verts": 12,
+   "tier": "review"
+  },
+  {
+   "point": [
+    9.3875,
+    12.2162,
+    19.1081
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 7.56,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.65,
+   "depth_mm": 1.24,
+   "confidence": 0.849,
+   "votes": 2,
+   "wire_score": 0.272,
+   "kind": "Contact",
+   "n_verts": 71,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.8691,
+    12.3606,
+    17.9207
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 7.56,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.41,
+   "depth_mm": 1.24,
+   "confidence": 0.559,
+   "votes": 2,
+   "wire_score": 0.293,
+   "kind": "Contact",
+   "n_verts": 71,
+   "tier": "review"
+  },
+  {
+   "point": [
+    80.3445,
+    5.0916,
+    11.3964
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.94,
+   "depth_mm": 9.4,
+   "confidence": 0.557,
+   "votes": 2,
+   "wire_score": 0.319,
+   "kind": "Contact",
+   "n_verts": 27,
+   "tier": "review"
+  },
+  {
+   "point": [
+    51.9094,
+    12.3587,
+    18.4907
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 4.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.46,
+   "depth_mm": 1.24,
+   "confidence": 0.44,
+   "votes": 2,
+   "wire_score": 0.308,
+   "kind": "Contact",
+   "n_verts": 72,
+   "tier": "review"
+  },
+  {
+   "point": [
+    23.1667,
+    19.3541,
+    20.1017
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 1.94,
+   "size_source": "measured",
+   "mouth_wide_mm": 5.47,
+   "depth_mm": 5.59,
+   "confidence": 0.248,
+   "votes": 2,
+   "wire_score": 0.357,
+   "kind": "Contact",
+   "n_verts": 17,
+   "tier": "review"
+  },
+  {
+   "point": [
+    9.4548,
+    4.7297,
+    7.8908
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.81,
+   "depth_mm": 6.5,
+   "confidence": 0.708,
+   "votes": 1,
+   "wire_score": 0.319,
+   "kind": "Contact",
+   "n_verts": 20,
+   "tier": "review"
+  },
+  {
+   "point": [
+    124.2802,
+    9.95,
+    19.1668
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 2.3,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.5,
+   "depth_mm": 5.06,
+   "confidence": 0.672,
+   "votes": 1,
+   "wire_score": 0.422,
+   "kind": "Contact",
+   "n_verts": 2149,
+   "tier": "review"
+  },
+  {
+   "point": [
+    101.8808,
+    4.6837,
+    18.0602
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 0.55,
+   "size_source": "measured",
+   "mouth_wide_mm": 5.1,
+   "depth_mm": 29.95,
+   "confidence": 0.656,
+   "votes": 1,
+   "wire_score": 0.27,
+   "kind": "Contact",
+   "n_verts": 5845,
+   "tier": "review"
+  },
+  {
+   "point": [
+    164.9635,
+    4.8978,
+    27.8908
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 1.85,
+   "depth_mm": 1.56,
+   "confidence": 0.618,
+   "votes": 1,
+   "wire_score": 0.266,
+   "kind": "Contact",
+   "n_verts": 27,
+   "tier": "review"
+  },
+  {
+   "point": [
+    66.1326,
+    12.2899,
+    18.4907
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 4.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.46,
+   "depth_mm": 1.24,
+   "confidence": 0.617,
+   "votes": 1,
+   "wire_score": 0.356,
+   "kind": "Contact",
+   "n_verts": 72,
+   "tier": "review"
+  },
+  {
+   "point": [
+    23.579,
+    4.8237,
+    10.3943
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.86,
+   "depth_mm": 6.05,
+   "confidence": 0.615,
+   "votes": 1,
+   "wire_score": 0.307,
+   "kind": "Contact",
+   "n_verts": 28,
+   "tier": "review"
+  },
+  {
+   "point": [
+    109.1051,
+    9.8392,
+    18.9909
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 2.75,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.2,
+   "depth_mm": 5.84,
+   "confidence": 0.612,
+   "votes": 1,
+   "wire_score": 0.45,
+   "kind": "Contact",
+   "n_verts": 2749,
+   "tier": "review"
+  },
+  {
+   "point": [
+    165.2654,
+    -4.8644,
+    10.8364
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.88,
+   "depth_mm": 9.31,
+   "confidence": 0.587,
+   "votes": 1,
+   "wire_score": 0.393,
+   "kind": "Contact",
+   "n_verts": 25,
+   "tier": "review"
+  },
+  {
+   "point": [
+    23.7445,
+    11.4859,
+    18.931
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 6.11,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.34,
+   "depth_mm": 1.12,
+   "confidence": 0.57,
+   "votes": 1,
+   "wire_score": 0.342,
+   "kind": "Contact",
+   "n_verts": 63,
+   "tier": "review"
+  },
+  {
+   "point": [
+    69.0418,
+    12.8674,
+    18.8247
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 4.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.08,
+   "depth_mm": 2.19,
+   "confidence": 0.556,
+   "votes": 1,
+   "wire_score": 0.348,
+   "kind": "Contact",
+   "n_verts": 106,
+   "tier": "review"
+  },
+  {
+   "point": [
+    80.525,
+    4.5852,
+    27.6007
+   ],
+   "direction": [
+    0.0324,
+    0.087,
+    0.9957
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 1.83,
+   "depth_mm": 1.23,
+   "confidence": 0.544,
+   "votes": 1,
+   "wire_score": 0.267,
+   "kind": "Contact",
+   "n_verts": 23,
+   "tier": "review"
+  },
+  {
+   "point": [
+    23.832,
+    6.2203,
+    2.6086
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.54,
+   "depth_mm": 1.29,
+   "confidence": 0.538,
+   "votes": 1,
+   "wire_score": 0.278,
+   "kind": "Contact",
+   "n_verts": 13,
+   "tier": "review"
+  },
+  {
+   "point": [
+    66.3603,
+    4.778,
+    4.5482
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.93,
+   "depth_mm": 3.01,
+   "confidence": 0.523,
+   "votes": 1,
+   "wire_score": 0.324,
+   "kind": "Contact",
+   "n_verts": 16,
+   "tier": "review"
+  },
+  {
+   "point": [
+    66.4047,
+    4.85,
+    12.3153
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 2.39,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.98,
+   "depth_mm": 1.38,
+   "confidence": 0.512,
+   "votes": 1,
+   "wire_score": 0.363,
+   "kind": "Contact",
+   "n_verts": 30,
+   "tier": "review"
+  },
+  {
+   "point": [
+    165.5904,
+    -0.106,
+    22.1736
+   ],
+   "direction": [
+    -0.029,
+    -0.1329,
+    0.9907
+   ],
+   "size_mm": 1.91,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.64,
+   "depth_mm": 1.38,
+   "confidence": 0.457,
+   "votes": 1,
+   "wire_score": 0.337,
+   "kind": "Contact",
+   "n_verts": 12,
+   "tier": "review"
+  },
+  {
+   "point": [
+    159.2686,
+    0.1235,
+    13.9951
+   ],
+   "direction": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "size_mm": 7.27,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.56,
+   "depth_mm": 2.7,
+   "confidence": 0.453,
+   "votes": 1,
+   "wire_score": 0.531,
+   "kind": "Contact",
+   "n_verts": 50,
+   "tier": "review"
+  },
+  {
+   "point": [
+    52.2991,
+    5.2663,
+    4.4282
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.88,
+   "depth_mm": 2.87,
+   "confidence": 0.429,
+   "votes": 1,
+   "wire_score": 0.287,
+   "kind": "Contact",
+   "n_verts": 16,
+   "tier": "review"
+  },
+  {
+   "point": [
+    49.2042,
+    18.6584,
+    14.3651
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.46,
+   "depth_mm": 3.42,
+   "confidence": 0.421,
+   "votes": 1,
+   "wire_score": 0.276,
+   "kind": "Contact",
+   "n_verts": 96,
+   "tier": "review"
+  },
+  {
+   "point": [
+    51.8743,
+    14.7733,
+    8.5051
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 1.5,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.93,
+   "depth_mm": 4.42,
+   "confidence": 0.417,
+   "votes": 1,
+   "wire_score": 0.355,
+   "kind": "Contact",
+   "n_verts": 25,
+   "tier": "review"
+  },
+  {
+   "point": [
+    7.8316,
+    1.0617,
+    19.1911
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.23,
+   "depth_mm": 4.85,
+   "confidence": 0.408,
+   "votes": 1,
+   "wire_score": 0.276,
+   "kind": "Contact",
+   "n_verts": 46,
+   "tier": "review"
+  },
+  {
+   "point": [
+    38.2977,
+    4.8976,
+    4.4642
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.8,
+   "depth_mm": 3.1,
+   "confidence": 0.388,
+   "votes": 1,
+   "wire_score": 0.325,
+   "kind": "CableEntry",
+   "n_verts": 16,
+   "tier": "review"
+  },
+  {
+   "point": [
+    65.9651,
+    11.4654,
+    12.3089
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 1.82,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.37,
+   "depth_mm": 1.94,
+   "confidence": 0.382,
+   "votes": 1,
+   "wire_score": 0.363,
+   "kind": "Contact",
+   "n_verts": 33,
+   "tier": "review"
+  },
+  {
+   "point": [
+    151.3402,
+    -5.1182,
+    11.7258
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.8,
+   "depth_mm": 2.97,
+   "confidence": 0.38,
+   "votes": 1,
+   "wire_score": 0.383,
+   "kind": "Contact",
+   "n_verts": 26,
+   "tier": "review"
+  },
+  {
+   "point": [
+    8.8265,
+    4.5622,
+    1.5897
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 0.34,
+   "size_source": "measured",
+   "mouth_wide_mm": 1.61,
+   "depth_mm": 1.27,
+   "confidence": 0.37,
+   "votes": 1,
+   "wire_score": 0.278,
+   "kind": "Contact",
+   "n_verts": 9,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.3964,
+    -4.6382,
+    10.7958
+   ],
+   "direction": [
+    -0.0106,
+    0.0558,
+    0.9984
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.78,
+   "depth_mm": 9.27,
+   "confidence": 0.364,
+   "votes": 1,
+   "wire_score": 0.361,
+   "kind": "Contact",
+   "n_verts": 22,
+   "tier": "review"
+  },
+  {
+   "point": [
+    137.2537,
+    -0.0462,
+    22.2598
+   ],
+   "direction": [
+    0.0186,
+    -0.1053,
+    0.9943
+   ],
+   "size_mm": 2.06,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.73,
+   "depth_mm": 1.86,
+   "confidence": 0.362,
+   "votes": 1,
+   "wire_score": 0.337,
+   "kind": "Contact",
+   "n_verts": 16,
+   "tier": "review"
+  },
+  {
+   "point": [
+    170.8061,
+    -2.0335,
+    23.1854
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 7.27,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.92,
+   "depth_mm": 8.92,
+   "confidence": 0.36,
+   "votes": 1,
+   "wire_score": 0.402,
+   "kind": "Contact",
+   "n_verts": 30,
+   "tier": "review"
+  },
+  {
+   "point": [
+    94.7187,
+    -13.4717,
+    12.4216
+   ],
+   "direction": [
+    0.0047,
+    -0.004,
+    -1.0
+   ],
+   "size_mm": 7.56,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.2,
+   "depth_mm": 2.72,
+   "confidence": 0.332,
+   "votes": 1,
+   "wire_score": 0.4,
+   "kind": "Contact",
+   "n_verts": 37,
+   "tier": "review"
+  },
+  {
+   "point": [
+    26.2422,
+    4.0082,
+    12.7203
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 2.63,
+   "size_source": "measured",
+   "mouth_wide_mm": 18.26,
+   "depth_mm": 6.22,
+   "confidence": 0.325,
+   "votes": 1,
+   "wire_score": 0.276,
+   "kind": "Contact",
+   "n_verts": 973,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.56,
+    4.9342,
+    8.9068
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.85,
+   "depth_mm": 7.39,
+   "confidence": 0.305,
+   "votes": 1,
+   "wire_score": 0.353,
+   "kind": "Contact",
+   "n_verts": 21,
+   "tier": "review"
+  },
+  {
+   "point": [
+    97.2264,
+    11.949,
+    16.9401
+   ],
+   "direction": [
+    0.0023,
+    0.0024,
+    -1.0
+   ],
+   "size_mm": 1.98,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.5,
+   "depth_mm": 3.07,
+   "confidence": 0.301,
+   "votes": 1,
+   "wire_score": 0.413,
+   "kind": "Contact",
+   "n_verts": 125,
+   "tier": "review"
+  },
+  {
+   "point": [
+    52.2011,
+    -4.3571,
+    5.1165
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.64,
+   "depth_mm": 3.61,
+   "confidence": 0.301,
+   "votes": 1,
+   "wire_score": 0.317,
+   "kind": "Contact",
+   "n_verts": 17,
+   "tier": "review"
+  },
+  {
+   "point": [
+    137.3211,
+    -4.3029,
+    2.4904
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.94,
+   "depth_mm": 1.21,
+   "confidence": 0.29,
+   "votes": 1,
+   "wire_score": 0.311,
+   "kind": "Contact",
+   "n_verts": 13,
+   "tier": "review"
+  },
+  {
+   "point": [
+    24.3293,
+    12.1554,
+    11.6544
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 7.56,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.21,
+   "depth_mm": 7.22,
+   "confidence": 0.283,
+   "votes": 1,
+   "wire_score": 0.305,
+   "kind": "Contact",
+   "n_verts": 44,
+   "tier": "review"
+  },
+  {
+   "point": [
+    93.9628,
+    -5.4216,
+    14.3736
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.08,
+   "depth_mm": 4.63,
+   "confidence": 0.281,
+   "votes": 1,
+   "wire_score": 0.349,
+   "kind": "Contact",
+   "n_verts": 65,
+   "tier": "review"
+  },
+  {
+   "point": [
+    80.2105,
+    -8.2786,
+    16.2695
+   ],
+   "direction": [
+    0.0324,
+    0.087,
+    0.9957
+   ],
+   "size_mm": 1.48,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.99,
+   "depth_mm": 1.8,
+   "confidence": 0.277,
+   "votes": 1,
+   "wire_score": 0.34,
+   "kind": "Contact",
+   "n_verts": 26,
+   "tier": "review"
+  },
+  {
+   "point": [
+    9.6099,
+    14.0435,
+    16.5932
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 0.06,
+   "size_source": "measured",
+   "mouth_wide_mm": 4.22,
+   "depth_mm": 1.72,
+   "confidence": 0.268,
+   "votes": 1,
+   "wire_score": 0.307,
+   "kind": "Contact",
+   "n_verts": 57,
+   "tier": "review"
+  },
+  {
+   "point": [
+    66.3783,
+    6.3779,
+    2.5996
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.34,
+   "depth_mm": 1.29,
+   "confidence": 0.263,
+   "votes": 1,
+   "wire_score": 0.296,
+   "kind": "Contact",
+   "n_verts": 13,
+   "tier": "review"
+  },
+  {
+   "point": [
+    21.1309,
+    15.2902,
+    15.9741
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 2.8,
+   "size_source": "measured",
+   "mouth_wide_mm": 5.45,
+   "depth_mm": 0.97,
+   "confidence": 0.246,
+   "votes": 1,
+   "wire_score": 0.271,
+   "kind": "CableEntry",
+   "n_verts": 24,
+   "tier": "review"
+  },
+  {
+   "point": [
+    36.0829,
+    13.9274,
+    16.4436
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 1.05,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.39,
+   "depth_mm": 2.06,
+   "confidence": 0.244,
+   "votes": 1,
+   "wire_score": 0.339,
+   "kind": "CableEntry",
+   "n_verts": 39,
+   "tier": "review"
+  },
+  {
+   "point": [
+    123.0041,
+    -3.6163,
+    5.1182
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 3.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.0,
+   "depth_mm": 3.66,
+   "confidence": 0.239,
+   "votes": 1,
+   "wire_score": 0.365,
+   "kind": "Contact",
+   "n_verts": 19,
+   "tier": "review"
+  },
+  {
+   "point": [
+    11.9661,
+    12.149,
+    16.6549
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 1.69,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.57,
+   "depth_mm": 1.51,
+   "confidence": 0.234,
+   "votes": 1,
+   "wire_score": 0.323,
+   "kind": "CableEntry",
+   "n_verts": 119,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.1187,
+    14.807,
+    20.0827
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 0.68,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.78,
+   "depth_mm": 1.31,
+   "confidence": 0.226,
+   "votes": 1,
+   "wire_score": 0.365,
+   "kind": "Contact",
+   "n_verts": 18,
+   "tier": "review"
+  },
+  {
+   "point": [
+    23.1732,
+    13.078,
+    16.8636
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 1.7,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.15,
+   "depth_mm": 1.28,
+   "confidence": 0.226,
+   "votes": 1,
+   "wire_score": 0.314,
+   "kind": "Contact",
+   "n_verts": 75,
+   "tier": "review"
+  },
+  {
+   "point": [
+    108.7735,
+    -5.2317,
+    3.5877
+   ],
+   "direction": [
+    0.0155,
+    -0.1145,
+    -0.9933
+   ],
+   "size_mm": 2.22,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.95,
+   "depth_mm": 2.26,
+   "confidence": 0.213,
+   "votes": 1,
+   "wire_score": 0.291,
+   "kind": "Contact",
+   "n_verts": 15,
+   "tier": "review"
+  }
+ ],
+ "1001.2": [
+  {
+   "point": [
+    2.8444,
+    8.256,
+    38.1196
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 4.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.97,
+   "depth_mm": 4.48,
+   "confidence": 0.85,
+   "votes": 3,
+   "wire_score": 0.371,
+   "kind": "Contact",
+   "n_verts": 105,
+   "tier": "review"
+  },
+  {
+   "point": [
+    2.3149,
+    17.5055,
+    19.0181
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 3.03,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.37,
+   "depth_mm": 2.25,
+   "confidence": 0.729,
+   "votes": 2,
+   "wire_score": 0.34,
+   "kind": "Contact",
+   "n_verts": 129,
+   "tier": "review"
+  }
+ ],
+ "DB100-134": [
+  {
+   "point": [
+    14.9673,
+    15.6752,
+    25.9288
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.89,
+   "depth_mm": 2.02,
+   "confidence": 0.348,
+   "votes": 3,
+   "wire_score": 0.336,
+   "kind": "Contact",
+   "n_verts": 157,
+   "tier": "review"
+  },
+  {
+   "point": [
+    15.1749,
+    32.1397,
+    12.9849
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 2.75,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.09,
+   "depth_mm": 1.92,
+   "confidence": 0.299,
+   "votes": 3,
+   "wire_score": 0.387,
+   "kind": "Contact",
+   "n_verts": 212,
+   "tier": "review"
+  },
+  {
+   "point": [
+    24.1479,
+    16.187,
+    24.7399
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.66,
+   "depth_mm": 3.72,
+   "confidence": 0.291,
+   "votes": 3,
+   "wire_score": 0.364,
+   "kind": "Contact",
+   "n_verts": 102,
+   "tier": "review"
+  },
+  {
+   "point": [
+    117.0816,
+    10.6,
+    27.1765
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 0.3,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.24,
+   "depth_mm": 2.05,
+   "confidence": 0.621,
+   "votes": 2,
+   "wire_score": 0.262,
+   "kind": "Contact",
+   "n_verts": 10,
+   "tier": "review"
+  },
+  {
+   "point": [
+    7.0131,
+    15.8181,
+    26.3906
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.29,
+   "depth_mm": 5.29,
+   "confidence": 0.417,
+   "votes": 2,
+   "wire_score": 0.331,
+   "kind": "Contact",
+   "n_verts": 154,
+   "tier": "review"
+  },
+  {
+   "point": [
+    80.3925,
+    16.4189,
+    24.4885
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.75,
+   "depth_mm": 2.12,
+   "confidence": 0.361,
+   "votes": 2,
+   "wire_score": 0.365,
+   "kind": "Contact",
+   "n_verts": 30,
+   "tier": "review"
+  },
+  {
+   "point": [
+    9.9454,
+    18.0801,
+    22.4449
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 9.36,
+   "depth_mm": 3.88,
+   "confidence": 0.346,
+   "votes": 2,
+   "wire_score": 0.351,
+   "kind": "Contact",
+   "n_verts": 54,
+   "tier": "review"
+  },
+  {
+   "point": [
+    24.0174,
+    31.8062,
+    16.4488
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.97,
+   "depth_mm": 10.87,
+   "confidence": 0.301,
+   "votes": 2,
+   "wire_score": 0.367,
+   "kind": "Contact",
+   "n_verts": 326,
+   "tier": "review"
+  },
+  {
+   "point": [
+    39.3082,
+    32.3149,
+    7.6406
+   ],
+   "direction": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.76,
+   "depth_mm": 1.22,
+   "confidence": 0.259,
+   "votes": 2,
+   "wire_score": 0.377,
+   "kind": "Contact",
+   "n_verts": 41,
+   "tier": "review"
+  },
+  {
+   "point": [
+    32.4247,
+    17.2749,
+    21.482
+   ],
+   "direction": [
+    -0.9994,
+    -0.0121,
+    -0.0319
+   ],
+   "size_mm": 0.04,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.11,
+   "depth_mm": 1.84,
+   "confidence": 0.242,
+   "votes": 2,
+   "wire_score": 0.347,
+   "kind": "Contact",
+   "n_verts": 31,
+   "tier": "review"
+  },
+  {
+   "point": [
+    7.0955,
+    32.6113,
+    8.895
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.55,
+   "depth_mm": 5.17,
+   "confidence": 0.238,
+   "votes": 2,
+   "wire_score": 0.339,
+   "kind": "Contact",
+   "n_verts": 55,
+   "tier": "review"
+  },
+  {
+   "point": [
+    65.6425,
+    37.5067,
+    -2.856
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.48,
+   "depth_mm": 11.27,
+   "confidence": 0.912,
+   "votes": 1,
+   "wire_score": 0.352,
+   "kind": "Contact",
+   "n_verts": 94,
+   "tier": "review"
+  },
+  {
+   "point": [
+    8.465,
+    29.4975,
+    12.9471
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.4,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.64,
+   "depth_mm": 6.14,
+   "confidence": 0.875,
+   "votes": 1,
+   "wire_score": 0.37,
+   "kind": "Contact",
+   "n_verts": 228,
+   "tier": "review"
+  },
+  {
+   "point": [
+    122.8553,
+    12.6144,
+    16.3464
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 6.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 22.19,
+   "depth_mm": 13.81,
+   "confidence": 0.83,
+   "votes": 1,
+   "wire_score": 0.391,
+   "kind": "Contact",
+   "n_verts": 461,
+   "tier": "review"
+  },
+  {
+   "point": [
+    7.8855,
+    33.8615,
+    11.7579
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.13,
+   "depth_mm": 5.68,
+   "confidence": 0.819,
+   "votes": 1,
+   "wire_score": 0.347,
+   "kind": "Contact",
+   "n_verts": 176,
+   "tier": "review"
+  },
+  {
+   "point": [
+    57.5263,
+    34.2568,
+    -4.9012
+   ],
+   "direction": [
+    -0.9997,
+    0.0042,
+    -0.0251
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 13.85,
+   "depth_mm": 19.18,
+   "confidence": 0.811,
+   "votes": 1,
+   "wire_score": 0.398,
+   "kind": "Contact",
+   "n_verts": 106,
+   "tier": "review"
+  },
+  {
+   "point": [
+    121.1217,
+    20.7422,
+    18.7039
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 0.37,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.66,
+   "depth_mm": 12.85,
+   "confidence": 0.805,
+   "votes": 1,
+   "wire_score": 0.412,
+   "kind": "Contact",
+   "n_verts": 351,
+   "tier": "review"
+  },
+  {
+   "point": [
+    121.5786,
+    20.7969,
+    10.9199
+   ],
+   "direction": [
+    -0.0049,
+    -0.9951,
+    -0.0989
+   ],
+   "size_mm": 6.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 23.92,
+   "depth_mm": 12.63,
+   "confidence": 0.734,
+   "votes": 1,
+   "wire_score": 0.453,
+   "kind": "Contact",
+   "n_verts": 345,
+   "tier": "review"
+  },
+  {
+   "point": [
+    87.8816,
+    31.1059,
+    9.5573
+   ],
+   "direction": [
+    -1.0,
+    0.0,
+    -0.0
+   ],
+   "size_mm": 2.07,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.48,
+   "depth_mm": 21.12,
+   "confidence": 0.725,
+   "votes": 1,
+   "wire_score": 0.507,
+   "kind": "Contact",
+   "n_verts": 318,
+   "tier": "review"
+  },
+  {
+   "point": [
+    57.9672,
+    -7.9592,
+    25.3003
+   ],
+   "direction": [
+    -0.9997,
+    0.0042,
+    -0.0251
+   ],
+   "size_mm": 2.19,
+   "size_source": "measured",
+   "mouth_wide_mm": 5.88,
+   "depth_mm": 25.63,
+   "confidence": 0.717,
+   "votes": 1,
+   "wire_score": 0.411,
+   "kind": "Contact",
+   "n_verts": 568,
+   "tier": "review"
+  },
+  {
+   "point": [
+    43.3509,
+    41.6737,
+    24.7241
+   ],
+   "direction": [
+    0.9993,
+    -0.0203,
+    0.0301
+   ],
+   "size_mm": 5.59,
+   "size_source": "measured",
+   "mouth_wide_mm": 11.96,
+   "depth_mm": 17.37,
+   "confidence": 0.666,
+   "votes": 1,
+   "wire_score": 0.387,
+   "kind": "Contact",
+   "n_verts": 64,
+   "tier": "review"
+  },
+  {
+   "point": [
+    54.9645,
+    35.5033,
+    -1.2644
+   ],
+   "direction": [
+    -0.9996,
+    0.0006,
+    -0.0283
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.83,
+   "depth_mm": 11.93,
+   "confidence": 0.666,
+   "votes": 1,
+   "wire_score": 0.287,
+   "kind": "Contact",
+   "n_verts": 82,
+   "tier": "review"
+  },
+  {
+   "point": [
+    66.0454,
+    38.9953,
+    5.4808
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 1.81,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.64,
+   "depth_mm": 19.41,
+   "confidence": 0.638,
+   "votes": 1,
+   "wire_score": 0.351,
+   "kind": "Contact",
+   "n_verts": 115,
+   "tier": "review"
+  },
+  {
+   "point": [
+    85.33,
+    16.6005,
+    25.5697
+   ],
+   "direction": [
+    -0.999,
+    -0.0082,
+    0.0444
+   ],
+   "size_mm": 5.6,
+   "size_source": "measured",
+   "mouth_wide_mm": 9.35,
+   "depth_mm": 14.52,
+   "confidence": 0.634,
+   "votes": 1,
+   "wire_score": 0.343,
+   "kind": "Contact",
+   "n_verts": 350,
+   "tier": "review"
+  },
+  {
+   "point": [
+    52.4887,
+    43.8586,
+    20.3407
+   ],
+   "direction": [
+    0.9993,
+    0.0041,
+    0.0369
+   ],
+   "size_mm": 1.48,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.87,
+   "depth_mm": 9.21,
+   "confidence": 0.612,
+   "votes": 1,
+   "wire_score": 0.267,
+   "kind": "Contact",
+   "n_verts": 52,
+   "tier": "review"
+  },
+  {
+   "point": [
+    94.6164,
+    37.373,
+    5.2028
+   ],
+   "direction": [
+    -0.9954,
+    0.0029,
+    0.0956
+   ],
+   "size_mm": 3.12,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.84,
+   "depth_mm": 13.62,
+   "confidence": 0.61,
+   "votes": 1,
+   "wire_score": 0.29,
+   "kind": "Contact",
+   "n_verts": 66,
+   "tier": "review"
+  },
+  {
+   "point": [
+    62.8003,
+    32.1807,
+    32.0875
+   ],
+   "direction": [
+    0.9992,
+    -0.0115,
+    0.0374
+   ],
+   "size_mm": 16.6,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.56,
+   "depth_mm": 17.16,
+   "confidence": 0.598,
+   "votes": 1,
+   "wire_score": 0.397,
+   "kind": "Contact",
+   "n_verts": 88,
+   "tier": "review"
+  },
+  {
+   "point": [
+    92.0129,
+    0.7918,
+    23.2218
+   ],
+   "direction": [
+    -0.9938,
+    0.0,
+    0.111
+   ],
+   "size_mm": 1.09,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.57,
+   "depth_mm": 10.8,
+   "confidence": 0.598,
+   "votes": 1,
+   "wire_score": 0.257,
+   "kind": "Contact",
+   "n_verts": 23,
+   "tier": "review"
+  },
+  {
+   "point": [
+    54.2688,
+    31.5762,
+    9.6839
+   ],
+   "direction": [
+    0.9996,
+    -0.006,
+    0.0285
+   ],
+   "size_mm": 6.15,
+   "size_source": "measured",
+   "mouth_wide_mm": 9.38,
+   "depth_mm": 18.74,
+   "confidence": 0.584,
+   "votes": 1,
+   "wire_score": 0.423,
+   "kind": "Contact",
+   "n_verts": 767,
+   "tier": "review"
+  },
+  {
+   "point": [
+    62.8541,
+    31.4427,
+    10.7586
+   ],
+   "direction": [
+    0.9992,
+    -0.0115,
+    0.0374
+   ],
+   "size_mm": 0.16,
+   "size_source": "measured",
+   "mouth_wide_mm": 0.8,
+   "depth_mm": 24.88,
+   "confidence": 0.575,
+   "votes": 1,
+   "wire_score": 0.468,
+   "kind": "Contact",
+   "n_verts": 561,
+   "tier": "review"
+  },
+  {
+   "point": [
+    105.1448,
+    16.539,
+    25.0215
+   ],
+   "direction": [
+    0.9951,
+    0.0153,
+    -0.0977
+   ],
+   "size_mm": 3.39,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.54,
+   "depth_mm": 14.84,
+   "confidence": 0.546,
+   "votes": 1,
+   "wire_score": 0.44,
+   "kind": "Contact",
+   "n_verts": 179,
+   "tier": "review"
+  },
+  {
+   "point": [
+    104.6122,
+    13.1906,
+    30.8497
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.6,
+   "depth_mm": 10.22,
+   "confidence": 0.462,
+   "votes": 1,
+   "wire_score": 0.334,
+   "kind": "Contact",
+   "n_verts": 324,
+   "tier": "review"
+  },
+  {
+   "point": [
+    92.1757,
+    16.4737,
+    25.1159
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 6.24,
+   "size_source": "measured",
+   "mouth_wide_mm": 9.41,
+   "depth_mm": 17.32,
+   "confidence": 0.461,
+   "votes": 1,
+   "wire_score": 0.339,
+   "kind": "Contact",
+   "n_verts": 296,
+   "tier": "review"
+  },
+  {
+   "point": [
+    90.0269,
+    24.1303,
+    21.3504
+   ],
+   "direction": [
+    -0.9986,
+    -0.0084,
+    0.0518
+   ],
+   "size_mm": 0.35,
+   "size_source": "measured",
+   "mouth_wide_mm": 4.51,
+   "depth_mm": 32.6,
+   "confidence": 0.455,
+   "votes": 1,
+   "wire_score": 0.285,
+   "kind": "Contact",
+   "n_verts": 20,
+   "tier": "review"
+  },
+  {
+   "point": [
+    7.0569,
+    31.9416,
+    16.3887
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 1.93,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.45,
+   "depth_mm": 2.26,
+   "confidence": 0.446,
+   "votes": 1,
+   "wire_score": 0.311,
+   "kind": "Contact",
+   "n_verts": 312,
+   "tier": "review"
+  },
+  {
+   "point": [
+    0.853,
+    34.2358,
+    -3.4471
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 0.26,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.12,
+   "depth_mm": 2.92,
+   "confidence": 0.442,
+   "votes": 1,
+   "wire_score": 0.294,
+   "kind": "Contact",
+   "n_verts": 13,
+   "tier": "review"
+  },
+  {
+   "point": [
+    6.8006,
+    13.7269,
+    27.9495
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.78,
+   "depth_mm": 7.65,
+   "confidence": 0.411,
+   "votes": 1,
+   "wire_score": 0.33,
+   "kind": "Contact",
+   "n_verts": 232,
+   "tier": "review"
+  },
+  {
+   "point": [
+    68.9203,
+    31.6055,
+    9.6763
+   ],
+   "direction": [
+    -0.9988,
+    -0.0008,
+    -0.0481
+   ],
+   "size_mm": 6.21,
+   "size_source": "measured",
+   "mouth_wide_mm": 9.4,
+   "depth_mm": 31.62,
+   "confidence": 0.398,
+   "votes": 1,
+   "wire_score": 0.427,
+   "kind": "Contact",
+   "n_verts": 578,
+   "tier": "review"
+  },
+  {
+   "point": [
+    88.5698,
+    29.8705,
+    18.7838
+   ],
+   "direction": [
+    -0.9998,
+    -0.0039,
+    0.0206
+   ],
+   "size_mm": 0.67,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.27,
+   "depth_mm": 4.26,
+   "confidence": 0.392,
+   "votes": 1,
+   "wire_score": 0.437,
+   "kind": "Contact",
+   "n_verts": 381,
+   "tier": "review"
+  },
+  {
+   "point": [
+    80.0977,
+    30.2052,
+    18.6522
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 0.42,
+   "size_source": "measured",
+   "mouth_wide_mm": 5.29,
+   "depth_mm": 3.76,
+   "confidence": 0.389,
+   "votes": 1,
+   "wire_score": 0.467,
+   "kind": "Contact",
+   "n_verts": 378,
+   "tier": "review"
+  },
+  {
+   "point": [
+    72.28,
+    31.7211,
+    9.5763
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.19,
+   "depth_mm": 1.27,
+   "confidence": 0.383,
+   "votes": 1,
+   "wire_score": 0.395,
+   "kind": "Contact",
+   "n_verts": 28,
+   "tier": "review"
+  },
+  {
+   "point": [
+    73.1188,
+    31.4568,
+    18.2905
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 0.69,
+   "size_source": "measured",
+   "mouth_wide_mm": 9.14,
+   "depth_mm": 3.19,
+   "confidence": 0.379,
+   "votes": 1,
+   "wire_score": 0.427,
+   "kind": "Contact",
+   "n_verts": 365,
+   "tier": "review"
+  },
+  {
+   "point": [
+    6.9378,
+    32.1912,
+    12.2676
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 6.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.36,
+   "depth_mm": 1.83,
+   "confidence": 0.364,
+   "votes": 1,
+   "wire_score": 0.363,
+   "kind": "Contact",
+   "n_verts": 188,
+   "tier": "review"
+  },
+  {
+   "point": [
+    64.0468,
+    32.0631,
+    17.2074
+   ],
+   "direction": [
+    0.9992,
+    -0.0123,
+    0.037
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.71,
+   "depth_mm": 7.04,
+   "confidence": 0.364,
+   "votes": 1,
+   "wire_score": 0.432,
+   "kind": "Contact",
+   "n_verts": 334,
+   "tier": "review"
+  },
+  {
+   "point": [
+    96.2666,
+    15.5635,
+    27.9163
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.03,
+   "depth_mm": 6.48,
+   "confidence": 0.357,
+   "votes": 1,
+   "wire_score": 0.353,
+   "kind": "Contact",
+   "n_verts": 205,
+   "tier": "review"
+  },
+  {
+   "point": [
+    56.1689,
+    32.1053,
+    15.3988
+   ],
+   "direction": [
+    -0.9996,
+    0.0006,
+    -0.0283
+   ],
+   "size_mm": 3.05,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.29,
+   "depth_mm": 1.82,
+   "confidence": 0.343,
+   "votes": 1,
+   "wire_score": 0.48,
+   "kind": "Contact",
+   "n_verts": 280,
+   "tier": "review"
+  },
+  {
+   "point": [
+    72.3657,
+    16.3104,
+    24.8654
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.89,
+   "depth_mm": 1.27,
+   "confidence": 0.341,
+   "votes": 1,
+   "wire_score": 0.34,
+   "kind": "Contact",
+   "n_verts": 28,
+   "tier": "review"
+  },
+  {
+   "point": [
+    34.7516,
+    16.8714,
+    24.0505
+   ],
+   "direction": [
+    -0.9994,
+    -0.0111,
+    -0.034
+   ],
+   "size_mm": 0.19,
+   "size_source": "measured",
+   "mouth_wide_mm": 0.67,
+   "depth_mm": 8.23,
+   "confidence": 0.338,
+   "votes": 1,
+   "wire_score": 0.433,
+   "kind": "Contact",
+   "n_verts": 247,
+   "tier": "review"
+  },
+  {
+   "point": [
+    33.237,
+    29.8684,
+    19.1097
+   ],
+   "direction": [
+    -0.9994,
+    -0.0121,
+    -0.0319
+   ],
+   "size_mm": 0.46,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.3,
+   "depth_mm": 4.22,
+   "confidence": 0.337,
+   "votes": 1,
+   "wire_score": 0.257,
+   "kind": "Contact",
+   "n_verts": 384,
+   "tier": "review"
+  },
+  {
+   "point": [
+    64.4461,
+    -11.7207,
+    32.6293
+   ],
+   "direction": [
+    0.9992,
+    -0.0123,
+    0.037
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.94,
+   "depth_mm": 7.1,
+   "confidence": 0.325,
+   "votes": 1,
+   "wire_score": 0.331,
+   "kind": "Contact",
+   "n_verts": 339,
+   "tier": "review"
+  },
+  {
+   "point": [
+    48.4237,
+    31.9793,
+    11.8265
+   ],
+   "direction": [
+    -0.9999,
+    0.0028,
+    -0.0126
+   ],
+   "size_mm": 3.29,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.17,
+   "depth_mm": 1.7,
+   "confidence": 0.312,
+   "votes": 1,
+   "wire_score": 0.441,
+   "kind": "Contact",
+   "n_verts": 178,
+   "tier": "review"
+  },
+  {
+   "point": [
+    88.4561,
+    16.1113,
+    25.4639
+   ],
+   "direction": [
+    -0.9998,
+    -0.0039,
+    0.0206
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.15,
+   "depth_mm": 4.11,
+   "confidence": 0.299,
+   "votes": 1,
+   "wire_score": 0.367,
+   "kind": "Contact",
+   "n_verts": 133,
+   "tier": "review"
+  },
+  {
+   "point": [
+    5.4816,
+    24.3636,
+    4.3722
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.4,
+   "size_source": "brep",
+   "mouth_wide_mm": 17.97,
+   "depth_mm": 3.29,
+   "confidence": 0.293,
+   "votes": 1,
+   "wire_score": 0.287,
+   "kind": "Contact",
+   "n_verts": 107,
+   "tier": "review"
+  },
+  {
+   "point": [
+    56.5963,
+    16.3384,
+    24.7242
+   ],
+   "direction": [
+    -0.9996,
+    0.0006,
+    -0.0283
+   ],
+   "size_mm": 3.23,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.97,
+   "depth_mm": 2.15,
+   "confidence": 0.285,
+   "votes": 1,
+   "wire_score": 0.367,
+   "kind": "Contact",
+   "n_verts": 22,
+   "tier": "review"
+  },
+  {
+   "point": [
+    6.7723,
+    16.7806,
+    24.1919
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.83,
+   "depth_mm": 3.44,
+   "confidence": 0.281,
+   "votes": 1,
+   "wire_score": 0.361,
+   "kind": "Contact",
+   "n_verts": 89,
+   "tier": "review"
+  },
+  {
+   "point": [
+    22.4703,
+    18.0575,
+    22.4496
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 4.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 8.82,
+   "depth_mm": 3.35,
+   "confidence": 0.271,
+   "votes": 1,
+   "wire_score": 0.364,
+   "kind": "Contact",
+   "n_verts": 108,
+   "tier": "review"
+  },
+  {
+   "point": [
+    65.2884,
+    11.9978,
+    31.9745
+   ],
+   "direction": [
+    0.9992,
+    -0.0123,
+    0.037
+   ],
+   "size_mm": 5.4,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.73,
+   "depth_mm": 1.64,
+   "confidence": 0.263,
+   "votes": 1,
+   "wire_score": 0.276,
+   "kind": "Contact",
+   "n_verts": 353,
+   "tier": "review"
+  },
+  {
+   "point": [
+    5.3485,
+    15.2951,
+    14.5859
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 0.03,
+   "size_source": "measured",
+   "mouth_wide_mm": 10.31,
+   "depth_mm": 0.0,
+   "confidence": 0.263,
+   "votes": 1,
+   "wire_score": 0.271,
+   "kind": "CableEntry",
+   "n_verts": 5,
+   "tier": "review"
+  },
+  {
+   "point": [
+    31.5955,
+    22.0428,
+    37.8335
+   ],
+   "direction": [
+    -0.9996,
+    -0.016,
+    -0.0235
+   ],
+   "size_mm": 7.6,
+   "size_source": "brep",
+   "mouth_wide_mm": 17.54,
+   "depth_mm": 16.85,
+   "confidence": 0.246,
+   "votes": 1,
+   "wire_score": 0.3,
+   "kind": "CableEntry",
+   "n_verts": 24,
+   "tier": "review"
+  },
+  {
+   "point": [
+    66.3074,
+    17.106,
+    24.0951
+   ],
+   "direction": [
+    0.9989,
+    -0.0033,
+    0.0473
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.98,
+   "depth_mm": 1.02,
+   "confidence": 0.245,
+   "votes": 1,
+   "wire_score": 0.349,
+   "kind": "Contact",
+   "n_verts": 8,
+   "tier": "review"
+  },
+  {
+   "point": [
+    48.2999,
+    32.0824,
+    9.04
+   ],
+   "direction": [
+    -0.9999,
+    0.0028,
+    -0.0126
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.86,
+   "depth_mm": 1.17,
+   "confidence": 0.243,
+   "votes": 1,
+   "wire_score": 0.405,
+   "kind": "Contact",
+   "n_verts": 28,
+   "tier": "review"
+  },
+  {
+   "point": [
+    72.0387,
+    17.5501,
+    23.0145
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.64,
+   "depth_mm": 1.47,
+   "confidence": 0.238,
+   "votes": 1,
+   "wire_score": 0.352,
+   "kind": "Contact",
+   "n_verts": 48,
+   "tier": "review"
+  },
+  {
+   "point": [
+    121.1355,
+    -5.8326,
+    23.8053
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 6.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.21,
+   "depth_mm": 1.09,
+   "confidence": 0.232,
+   "votes": 1,
+   "wire_score": 0.402,
+   "kind": "Contact",
+   "n_verts": 15,
+   "tier": "review"
+  },
+  {
+   "point": [
+    56.648,
+    12.6541,
+    33.1603
+   ],
+   "direction": [
+    -0.9996,
+    0.0006,
+    -0.0283
+   ],
+   "size_mm": 4.4,
+   "size_source": "brep",
+   "mouth_wide_mm": 11.8,
+   "depth_mm": 2.7,
+   "confidence": 0.219,
+   "votes": 1,
+   "wire_score": 0.292,
+   "kind": "Contact",
+   "n_verts": 365,
+   "tier": "review"
+  },
+  {
+   "point": [
+    6.8466,
+    31.4584,
+    6.8957
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 6.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.55,
+   "depth_mm": 3.64,
+   "confidence": 0.211,
+   "votes": 1,
+   "wire_score": 0.364,
+   "kind": "Contact",
+   "n_verts": 31,
+   "tier": "review"
+  },
+  {
+   "point": [
+    49.13,
+    16.876,
+    21.4378
+   ],
+   "direction": [
+    -0.9999,
+    0.0028,
+    -0.0126
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.8,
+   "depth_mm": 0.0,
+   "confidence": 0.21,
+   "votes": 1,
+   "wire_score": 0.353,
+   "kind": "CableEntry",
+   "n_verts": 5,
+   "tier": "review"
+  },
+  {
+   "point": [
+    48.8404,
+    13.7986,
+    28.5505
+   ],
+   "direction": [
+    -0.9999,
+    0.0028,
+    -0.0126
+   ],
+   "size_mm": 2.32,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.99,
+   "depth_mm": 1.04,
+   "confidence": 0.185,
+   "votes": 1,
+   "wire_score": 0.343,
+   "kind": "Contact",
+   "n_verts": 318,
+   "tier": "review"
+  },
+  {
+   "point": [
+    32.8879,
+    32.2725,
+    7.5144
+   ],
+   "direction": [
+    -0.9994,
+    -0.0121,
+    -0.0319
+   ],
+   "size_mm": 2.73,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.35,
+   "depth_mm": 0.39,
+   "confidence": 0.174,
+   "votes": 1,
+   "wire_score": 0.362,
+   "kind": "CableEntry",
+   "n_verts": 19,
+   "tier": "review"
+  },
+  {
+   "point": [
+    41.4424,
+    17.4206,
+    22.3614
+   ],
+   "direction": [
+    0.9998,
+    -0.0102,
+    0.0151
+   ],
+   "size_mm": 4.4,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.52,
+   "depth_mm": 1.81,
+   "confidence": 0.169,
+   "votes": 1,
+   "wire_score": 0.359,
+   "kind": "CableEntry",
+   "n_verts": 45,
+   "tier": "review"
+  },
+  {
+   "point": [
+    41.2875,
+    15.6787,
+    25.5775
+   ],
+   "direction": [
+    0.9998,
+    -0.0102,
+    0.0151
+   ],
+   "size_mm": 4.4,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.5,
+   "depth_mm": 1.39,
+   "confidence": 0.161,
+   "votes": 1,
+   "wire_score": 0.328,
+   "kind": "Contact",
+   "n_verts": 160,
+   "tier": "review"
+  },
+  {
+   "point": [
+    26.0003,
+    31.4114,
+    6.6743
+   ],
+   "direction": [
+    1.0,
+    0.0008,
+    -0.0008
+   ],
+   "size_mm": 5.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.28,
+   "depth_mm": 0.0,
+   "confidence": 0.157,
+   "votes": 1,
+   "wire_score": 0.34,
+   "kind": "CableEntry",
+   "n_verts": 6,
+   "tier": "review"
+  }
+ ],
+ "ADLG2.5": [],
+ "DC2.5-01P-1Y-00AH": [
+  {
+   "point": [
+    2.6829,
+    -2.7327,
+    29.0258
+   ],
+   "direction": [
+    -0.0211,
+    0.0101,
+    0.9997
+   ],
+   "size_mm": 1.83,
+   "size_source": "measured",
+   "mouth_wide_mm": 4.98,
+   "depth_mm": 3.53,
+   "confidence": 0.736,
+   "votes": 1,
+   "wire_score": 0.333,
+   "kind": "Contact",
+   "n_verts": 108,
+   "tier": "review"
+  },
+  {
+   "point": [
+    2.568,
+    15.6501,
+    18.3622
+   ],
+   "direction": [
+    -0.0352,
+    0.3656,
+    -0.9301
+   ],
+   "size_mm": 3.94,
+   "size_source": "measured",
+   "mouth_wide_mm": 4.95,
+   "depth_mm": 2.9,
+   "confidence": 0.732,
+   "votes": 1,
+   "wire_score": 0.307,
+   "kind": "Contact",
+   "n_verts": 161,
+   "tier": "review"
+  }
+ ],
+ "AK1.5": [
+  {
+   "point": [
+    2.3818,
+    13.464,
+    27.9729
+   ],
+   "direction": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "size_mm": 3.85,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.16,
+   "depth_mm": 1.19,
+   "confidence": 0.772,
+   "votes": 3,
+   "wire_score": 0.413,
+   "kind": "Contact",
+   "n_verts": 181,
+   "tier": "review"
+  },
+  {
+   "point": [
+    2.1914,
+    16.5553,
+    26.8022
+   ],
+   "direction": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "size_mm": 2.58,
+   "size_source": "measured",
+   "mouth_wide_mm": 4.14,
+   "depth_mm": 1.33,
+   "confidence": 0.707,
+   "votes": 1,
+   "wire_score": 0.309,
+   "kind": "Contact",
+   "n_verts": 74,
+   "tier": "review"
+  },
+  {
+   "point": [
+    4.2,
+    17.8103,
+    16.8386
+   ],
+   "direction": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "size_mm": 8.4,
+   "size_source": "measured",
+   "mouth_wide_mm": 13.34,
+   "depth_mm": 0.0,
+   "confidence": 0.533,
+   "votes": 1,
+   "wire_score": 0.273,
+   "kind": "CableEntry",
+   "n_verts": 4,
+   "tier": "review"
+  }
+ ],
+ "561132": [
+  {
+   "point": [
+    43.7342,
+    16.5946,
+    5.7862
+   ],
+   "direction": [
+    0.0039,
+    0.994,
+    0.1093
+   ],
+   "size_mm": 0.06,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.93,
+   "depth_mm": 4.26,
+   "confidence": 0.5,
+   "votes": 1,
+   "wire_score": 0.27,
+   "kind": "Contact",
+   "n_verts": 14,
+   "tier": "review"
+  }
+ ],
+ "DST2.5_GY": [
+  {
+   "point": [
+    -2.3863,
+    12.4933,
+    23.8125
+   ],
+   "direction": [
+    -0.0096,
+    -0.0715,
+    0.9974
+   ],
+   "size_mm": 1.22,
+   "size_source": "measured",
+   "mouth_wide_mm": 3.62,
+   "depth_mm": 2.07,
+   "confidence": 0.673,
+   "votes": 2,
+   "wire_score": 1.0,
+   "kind": "Contact",
+   "n_verts": 41,
+   "tier": "auto"
+  }
+ ],
+ "110010": [
+  {
+   "point": [
+    6.5851,
+    15.2822,
+    8.2759
+   ],
+   "direction": [
+    -0.0985,
+    -0.0493,
+    0.9939
+   ],
+   "size_mm": 1.84,
+   "size_source": "measured",
+   "mouth_wide_mm": 16.27,
+   "depth_mm": 0.0,
+   "confidence": 0.674,
+   "votes": 1,
+   "wire_score": 0.293,
+   "kind": "CableEntry",
+   "n_verts": 6,
+   "tier": "review"
+  },
+  {
+   "point": [
+    1.0,
+    8.4294,
+    13.2943
+   ],
+   "direction": [
+    -0.0985,
+    -0.0493,
+    0.9939
+   ],
+   "size_mm": 2.01,
+   "size_source": "measured",
+   "mouth_wide_mm": 11.13,
+   "depth_mm": 0.0,
+   "confidence": 0.551,
+   "votes": 1,
+   "wire_score": 0.283,
+   "kind": "CableEntry",
+   "n_verts": 6,
+   "tier": "review"
+  }
+ ],
+ "MAA1016A10": [
+  {
+   "point": [
+    6.8554,
+    16.5394,
+    15.3836
+   ],
+   "direction": [
+    -0.031,
+    0.9995,
+    -0.0095
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 10.43,
+   "depth_mm": 1.78,
+   "confidence": 0.721,
+   "votes": 2,
+   "wire_score": 0.617,
+   "kind": "CableEntry",
+   "n_verts": 123,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.3389,
+    16.7015,
+    11.5434
+   ],
+   "direction": [
+    -0.0268,
+    0.9994,
+    0.0229
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 10.47,
+   "depth_mm": 1.63,
+   "confidence": 0.659,
+   "votes": 1,
+   "wire_score": 0.432,
+   "kind": "Contact",
+   "n_verts": 78,
+   "tier": "review"
+  },
+  {
+   "point": [
+    2.8977,
+    22.2004,
+    8.4691
+   ],
+   "direction": [
+    -0.0006,
+    0.991,
+    0.1338
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.4,
+   "depth_mm": 2.45,
+   "confidence": 0.653,
+   "votes": 1,
+   "wire_score": 0.331,
+   "kind": "Contact",
+   "n_verts": 27,
+   "tier": "review"
+  },
+  {
+   "point": [
+    10.3389,
+    17.6155,
+    18.7241
+   ],
+   "direction": [
+    -0.04,
+    0.999,
+    0.02
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 8.54,
+   "depth_mm": 1.25,
+   "confidence": 0.631,
+   "votes": 1,
+   "wire_score": 0.348,
+   "kind": "CableEntry",
+   "n_verts": 16,
+   "tier": "review"
+  },
+  {
+   "point": [
+    9.398,
+    20.0248,
+    20.1184
+   ],
+   "direction": [
+    -0.0435,
+    0.9986,
+    0.0302
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 7.51,
+   "depth_mm": 1.57,
+   "confidence": 0.56,
+   "votes": 1,
+   "wire_score": 0.357,
+   "kind": "CableEntry",
+   "n_verts": 20,
+   "tier": "review"
+  }
+ ],
+ "BP43-4T(TBF)": [
+  {
+   "point": [
+    73.5074,
+    0.0378,
+    29.407
+   ],
+   "direction": [
+    0.0365,
+    -0.1103,
+    0.9932
+   ],
+   "size_mm": 0.08,
+   "size_source": "measured",
+   "mouth_wide_mm": 32.47,
+   "depth_mm": 16.77,
+   "confidence": 0.545,
+   "votes": 1,
+   "wire_score": 0.302,
+   "kind": "Contact",
+   "n_verts": 30,
+   "tier": "review"
+  },
+  {
+   "point": [
+    20.1292,
+    20.7221,
+    21.6911
+   ],
+   "direction": [
+    0.0365,
+    -0.1103,
+    0.9932
+   ],
+   "size_mm": 13.75,
+   "size_source": "measured",
+   "mouth_wide_mm": 57.24,
+   "depth_mm": 7.52,
+   "confidence": 0.428,
+   "votes": 1,
+   "wire_score": 0.422,
+   "kind": "Contact",
+   "n_verts": 77,
+   "tier": "review"
+  }
+ ],
+ "VG03-0003": [
+  {
+   "point": [
+    10.9881,
+    31.2726,
+    13.4635
+   ],
+   "direction": [
+    -0.0003,
+    0.9998,
+    0.0194
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 9.35,
+   "depth_mm": 3.43,
+   "confidence": 0.584,
+   "votes": 2,
+   "wire_score": 0.424,
+   "kind": "CableEntry",
+   "n_verts": 357,
+   "tier": "review"
+  },
+  {
+   "point": [
+    22.1197,
+    31.6189,
+    8.1566
+   ],
+   "direction": [
+    -0.0213,
+    0.9993,
+    0.0312
+   ],
+   "size_mm": 7.83,
+   "size_source": "measured",
+   "mouth_wide_mm": 10.04,
+   "depth_mm": 1.46,
+   "confidence": 0.417,
+   "votes": 2,
+   "wire_score": 0.345,
+   "kind": "CableEntry",
+   "n_verts": 64,
+   "tier": "review"
+  },
+  {
+   "point": [
+    5.8178,
+    35.4835,
+    17.8443
+   ],
+   "direction": [
+    0.001,
+    1.0,
+    0.0075
+   ],
+   "size_mm": 5.73,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.69,
+   "depth_mm": 11.12,
+   "confidence": 0.877,
+   "votes": 1,
+   "wire_score": 0.407,
+   "kind": "CableEntry",
+   "n_verts": 91,
+   "tier": "review"
+  },
+  {
+   "point": [
+    6.262,
+    38.5784,
+    18.2182
+   ],
+   "direction": [
+    -0.0028,
+    1.0,
+    0.0052
+   ],
+   "size_mm": 6.38,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.8,
+   "depth_mm": 15.08,
+   "confidence": 0.87,
+   "votes": 1,
+   "wire_score": 0.395,
+   "kind": "CableEntry",
+   "n_verts": 108,
+   "tier": "review"
+  },
+  {
+   "point": [
+    16.418,
+    38.2155,
+    17.2437
+   ],
+   "direction": [
+    -0.0058,
+    0.9999,
+    0.0162
+   ],
+   "size_mm": 5.03,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.61,
+   "depth_mm": 14.77,
+   "confidence": 0.818,
+   "votes": 1,
+   "wire_score": 0.349,
+   "kind": "CableEntry",
+   "n_verts": 107,
+   "tier": "review"
+  },
+  {
+   "point": [
+    27.5425,
+    36.6731,
+    18.0663
+   ],
+   "direction": [
+    0.0063,
+    0.9995,
+    0.0311
+   ],
+   "size_mm": 6.27,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.79,
+   "depth_mm": 13.19,
+   "confidence": 0.647,
+   "votes": 1,
+   "wire_score": 0.435,
+   "kind": "CableEntry",
+   "n_verts": 97,
+   "tier": "review"
+  },
+  {
+   "point": [
+    21.9308,
+    28.1866,
+    8.0671
+   ],
+   "direction": [
+    -0.0166,
+    0.9996,
+    0.0247
+   ],
+   "size_mm": 7.61,
+   "size_source": "measured",
+   "mouth_wide_mm": 9.98,
+   "depth_mm": 1.23,
+   "confidence": 0.637,
+   "votes": 1,
+   "wire_score": 0.319,
+   "kind": "CableEntry",
+   "n_verts": 124,
+   "tier": "review"
+  },
+  {
+   "point": [
+    7.046,
+    23.5112,
+    8.8787
+   ],
+   "direction": [
+    0.0107,
+    0.9999,
+    0.007
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 12.57,
+   "depth_mm": 4.03,
+   "confidence": 0.492,
+   "votes": 1,
+   "wire_score": 0.444,
+   "kind": "CableEntry",
+   "n_verts": 102,
+   "tier": "review"
+  },
+  {
+   "point": [
+    39.8874,
+    26.4999,
+    5.8744
+   ],
+   "direction": [
+    0.0025,
+    0.9967,
+    0.0815
+   ],
+   "size_mm": 2.18,
+   "size_source": "measured",
+   "mouth_wide_mm": 11.04,
+   "depth_mm": 3.36,
+   "confidence": 0.435,
+   "votes": 1,
+   "wire_score": 0.262,
+   "kind": "CableEntry",
+   "n_verts": 41,
+   "tier": "review"
+  },
+  {
+   "point": [
+    38.7291,
+    36.6063,
+    14.5108
+   ],
+   "direction": [
+    -0.003,
+    0.9996,
+    0.0265
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.66,
+   "depth_mm": 2.11,
+   "confidence": 0.415,
+   "votes": 1,
+   "wire_score": 0.372,
+   "kind": "Contact",
+   "n_verts": 136,
+   "tier": "review"
+  },
+  {
+   "point": [
+    6.6169,
+    31.8411,
+    18.0031
+   ],
+   "direction": [
+    -0.0028,
+    1.0,
+    0.0014
+   ],
+   "size_mm": 5.8,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.71,
+   "depth_mm": 7.37,
+   "confidence": 0.405,
+   "votes": 1,
+   "wire_score": 0.413,
+   "kind": "CableEntry",
+   "n_verts": 72,
+   "tier": "review"
+  },
+  {
+   "point": [
+    29.8646,
+    36.5717,
+    17.1455
+   ],
+   "direction": [
+    0.0019,
+    1.0,
+    -0.0006
+   ],
+   "size_mm": 2.67,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.91,
+   "depth_mm": 3.64,
+   "confidence": 0.405,
+   "votes": 1,
+   "wire_score": 0.314,
+   "kind": "Contact",
+   "n_verts": 770,
+   "tier": "review"
+  },
+  {
+   "point": [
+    22.3159,
+    15.782,
+    5.4037
+   ],
+   "direction": [
+    0.0073,
+    0.9999,
+    0.0138
+   ],
+   "size_mm": 6.05,
+   "size_source": "measured",
+   "mouth_wide_mm": 9.48,
+   "depth_mm": 3.58,
+   "confidence": 0.374,
+   "votes": 1,
+   "wire_score": 0.311,
+   "kind": "Contact",
+   "n_verts": 33,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.9395,
+    19.2587,
+    6.0102
+   ],
+   "direction": [
+    0.0005,
+    0.9937,
+    0.1121
+   ],
+   "size_mm": 6.09,
+   "size_source": "measured",
+   "mouth_wide_mm": 12.15,
+   "depth_mm": 4.28,
+   "confidence": 0.322,
+   "votes": 1,
+   "wire_score": 0.26,
+   "kind": "Contact",
+   "n_verts": 76,
+   "tier": "review"
+  },
+  {
+   "point": [
+    28.1356,
+    39.3992,
+    14.2601
+   ],
+   "direction": [
+    -0.0024,
+    0.9994,
+    0.0349
+   ],
+   "size_mm": 1.31,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.07,
+   "depth_mm": 1.25,
+   "confidence": 0.322,
+   "votes": 1,
+   "wire_score": 0.27,
+   "kind": "Contact",
+   "n_verts": 99,
+   "tier": "review"
+  },
+  {
+   "point": [
+    34.3528,
+    16.5947,
+    7.5875
+   ],
+   "direction": [
+    0.0024,
+    0.9985,
+    0.0552
+   ],
+   "size_mm": 10.41,
+   "size_source": "measured",
+   "mouth_wide_mm": 12.58,
+   "depth_mm": 2.68,
+   "confidence": 0.31,
+   "votes": 1,
+   "wire_score": 0.344,
+   "kind": "Contact",
+   "n_verts": 72,
+   "tier": "review"
+  },
+  {
+   "point": [
+    12.0839,
+    13.6944,
+    4.7957
+   ],
+   "direction": [
+    -0.001,
+    0.9991,
+    0.0417
+   ],
+   "size_mm": 0.54,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.43,
+   "depth_mm": 2.71,
+   "confidence": 0.306,
+   "votes": 1,
+   "wire_score": 0.262,
+   "kind": "Contact",
+   "n_verts": 16,
+   "tier": "review"
+  },
+  {
+   "point": [
+    32.1449,
+    38.7017,
+    22.795
+   ],
+   "direction": [
+    0.0067,
+    0.9987,
+    0.05
+   ],
+   "size_mm": 4.71,
+   "size_source": "brep",
+   "mouth_wide_mm": 4.2,
+   "depth_mm": 3.01,
+   "confidence": 0.304,
+   "votes": 1,
+   "wire_score": 0.309,
+   "kind": "Contact",
+   "n_verts": 17,
+   "tier": "review"
+  },
+  {
+   "point": [
+    15.4645,
+    36.1711,
+    26.5481
+   ],
+   "direction": [
+    -0.0227,
+    0.9997,
+    -0.0036
+   ],
+   "size_mm": 2.1,
+   "size_source": "brep",
+   "mouth_wide_mm": 8.09,
+   "depth_mm": 1.42,
+   "confidence": 0.294,
+   "votes": 1,
+   "wire_score": 0.283,
+   "kind": "Contact",
+   "n_verts": 15,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.6719,
+    24.7253,
+    18.3375
+   ],
+   "direction": [
+    0.0093,
+    0.9973,
+    0.0735
+   ],
+   "size_mm": 4.81,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.36,
+   "depth_mm": 1.16,
+   "confidence": 0.278,
+   "votes": 1,
+   "wire_score": 0.369,
+   "kind": "Contact",
+   "n_verts": 17,
+   "tier": "review"
+  },
+  {
+   "point": [
+    31.4147,
+    21.0581,
+    12.1545
+   ],
+   "direction": [
+    0.0024,
+    0.9966,
+    0.0821
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 9.37,
+   "depth_mm": 0.0,
+   "confidence": 0.275,
+   "votes": 1,
+   "wire_score": 0.361,
+   "kind": "CableEntry",
+   "n_verts": 6,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.2082,
+    34.9938,
+    27.3444
+   ],
+   "direction": [
+    0.0078,
+    0.9999,
+    0.0082
+   ],
+   "size_mm": 4.71,
+   "size_source": "brep",
+   "mouth_wide_mm": 6.03,
+   "depth_mm": 1.66,
+   "confidence": 0.261,
+   "votes": 1,
+   "wire_score": 0.304,
+   "kind": "Contact",
+   "n_verts": 13,
+   "tier": "review"
+  },
+  {
+   "point": [
+    12.5997,
+    39.2157,
+    23.5632
+   ],
+   "direction": [
+    -0.0081,
+    0.9999,
+    0.0092
+   ],
+   "size_mm": 2.1,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.21,
+   "depth_mm": 3.53,
+   "confidence": 0.251,
+   "votes": 1,
+   "wire_score": 0.279,
+   "kind": "CableEntry",
+   "n_verts": 17,
+   "tier": "review"
+  },
+  {
+   "point": [
+    15.6891,
+    30.9821,
+    16.6236
+   ],
+   "direction": [
+    -0.007,
+    0.9999,
+    0.0129
+   ],
+   "size_mm": 4.64,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.2,
+   "depth_mm": 4.27,
+   "confidence": 0.246,
+   "votes": 1,
+   "wire_score": 0.26,
+   "kind": "CableEntry",
+   "n_verts": 63,
+   "tier": "review"
+  },
+  {
+   "point": [
+    31.6933,
+    28.7052,
+    12.371
+   ],
+   "direction": [
+    -0.0046,
+    0.9989,
+    0.0473
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 9.54,
+   "depth_mm": 1.0,
+   "confidence": 0.222,
+   "votes": 1,
+   "wire_score": 0.379,
+   "kind": "CableEntry",
+   "n_verts": 14,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.1874,
+    33.5278,
+    20.0383
+   ],
+   "direction": [
+    -0.0053,
+    0.9998,
+    0.0168
+   ],
+   "size_mm": 6.6,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.68,
+   "depth_mm": 4.14,
+   "confidence": 0.221,
+   "votes": 1,
+   "wire_score": 0.337,
+   "kind": "CableEntry",
+   "n_verts": 19,
+   "tier": "review"
+  },
+  {
+   "point": [
+    37.9717,
+    26.0015,
+    11.0744
+   ],
+   "direction": [
+    0.0038,
+    0.9976,
+    0.0691
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 11.16,
+   "depth_mm": 4.21,
+   "confidence": 0.206,
+   "votes": 1,
+   "wire_score": 0.367,
+   "kind": "CableEntry",
+   "n_verts": 18,
+   "tier": "review"
+  }
+ ],
+ "V7-H4": [
+  {
+   "point": [
+    4.725,
+    10.3072,
+    40.2172
+   ],
+   "direction": [
+    -0.0,
+    0.0,
+    -1.0
+   ],
+   "size_mm": 1.02,
+   "size_source": "brep",
+   "mouth_wide_mm": 5.76,
+   "depth_mm": 2.53,
+   "confidence": 0.703,
+   "votes": 1,
+   "wire_score": 0.271,
+   "kind": "Contact",
+   "n_verts": 40,
+   "tier": "review"
+  },
+  {
+   "point": [
+    4.8129,
+    22.7411,
+    39.2426
+   ],
+   "direction": [
+    -0.0,
+    -0.0,
+    1.0
+   ],
+   "size_mm": 4.22,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.34,
+   "depth_mm": 1.41,
+   "confidence": 0.624,
+   "votes": 1,
+   "wire_score": 0.364,
+   "kind": "CableEntry",
+   "n_verts": 181,
+   "tier": "review"
+  }
+ ],
+ "NTSXTB02030H": [
+  {
+   "point": [
+    10.325,
+    1.8983,
+    10.2707
+   ],
+   "direction": [
+    0.99,
+    -0.0321,
+    0.1374
+   ],
+   "size_mm": 2.8,
+   "size_source": "measured",
+   "mouth_wide_mm": 6.67,
+   "depth_mm": 3.15,
+   "confidence": 0.748,
+   "votes": 1,
+   "wire_score": 1.0,
+   "kind": "Contact",
+   "n_verts": 115,
+   "tier": "auto"
+  }
+ ],
+ "204921": [
+  {
+   "point": [
+    2.4249,
+    -2.9029,
+    21.8404
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 2.85,
+   "size_source": "measured",
+   "mouth_wide_mm": 5.29,
+   "depth_mm": 4.16,
+   "confidence": 0.749,
+   "votes": 1,
+   "wire_score": 0.409,
+   "kind": "Contact",
+   "n_verts": 62,
+   "tier": "review"
+  },
+  {
+   "point": [
+    4.1079,
+    7.693,
+    26.7113
+   ],
+   "direction": [
+    -0.0,
+    0.1099,
+    0.9939
+   ],
+   "size_mm": 2.18,
+   "size_source": "measured",
+   "mouth_wide_mm": 4.49,
+   "depth_mm": 1.81,
+   "confidence": 0.702,
+   "votes": 1,
+   "wire_score": 0.448,
+   "kind": "Contact",
+   "n_verts": 72,
+   "tier": "review"
+  }
+ ],
+ "016029": [
+  {
+   "point": [
+    2.8061,
+    6.5631,
+    12.9905
+   ],
+   "direction": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 1.58,
+   "depth_mm": 1.26,
+   "confidence": 0.624,
+   "votes": 1,
+   "wire_score": 1.0,
+   "kind": "Contact",
+   "n_verts": 28,
+   "tier": "auto"
+  }
+ ],
+ "UTB-6S-GY": [
+  {
+   "point": [
+    4.0175,
+    17.5342,
+    30.026
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 6.1,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.39,
+   "depth_mm": 10.34,
+   "confidence": 0.77,
+   "votes": 3,
+   "wire_score": 0.526,
+   "kind": "Contact",
+   "n_verts": 161,
+   "tier": "review"
+  },
+  {
+   "point": [
+    4.2664,
+    17.5461,
+    21.2691
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 6.1,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.55,
+   "depth_mm": 2.65,
+   "confidence": 0.8,
+   "votes": 2,
+   "wire_score": 0.537,
+   "kind": "Contact",
+   "n_verts": 111,
+   "tier": "review"
+  },
+  {
+   "point": [
+    4.1753,
+    17.6721,
+    26.0769
+   ],
+   "direction": [
+    -0.0044,
+    0.0041,
+    1.0
+   ],
+   "size_mm": 6.1,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.41,
+   "depth_mm": 6.03,
+   "confidence": 0.839,
+   "votes": 1,
+   "wire_score": 0.574,
+   "kind": "Contact",
+   "n_verts": 138,
+   "tier": "review"
+  },
+  {
+   "point": [
+    3.389,
+    33.7624,
+    14.7219
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 5.38,
+   "size_source": "measured",
+   "mouth_wide_mm": 8.75,
+   "depth_mm": 5.24,
+   "confidence": 0.668,
+   "votes": 1,
+   "wire_score": 0.553,
+   "kind": "Contact",
+   "n_verts": 78,
+   "tier": "review"
+  },
+  {
+   "point": [
+    3.0735,
+    18.7704,
+    19.7138
+   ],
+   "direction": [
+    -0.0011,
+    0.001,
+    1.0
+   ],
+   "size_mm": 5.2,
+   "size_source": "brep",
+   "mouth_wide_mm": 2.8,
+   "depth_mm": 1.09,
+   "confidence": 0.604,
+   "votes": 1,
+   "wire_score": 0.418,
+   "kind": "Contact",
+   "n_verts": 30,
+   "tier": "review"
+  }
+ ],
+ "BTWA 3": [
+  {
+   "point": [
+    3.083,
+    10.4676,
+    38.6896
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 2.97,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.83,
+   "depth_mm": 2.67,
+   "confidence": 0.737,
+   "votes": 1,
+   "wire_score": 0.274,
+   "kind": "Contact",
+   "n_verts": 84,
+   "tier": "review"
+  },
+  {
+   "point": [
+    4.3474,
+    15.7983,
+    44.7011
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 4.8,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.72,
+   "depth_mm": 5.25,
+   "confidence": 0.678,
+   "votes": 1,
+   "wire_score": 0.486,
+   "kind": "Contact",
+   "n_verts": 67,
+   "tier": "review"
+  }
+ ],
+ "5D.202.0055.0": [
+  {
+   "point": [
+    1.6846,
+    16.8196,
+    21.9878
+   ],
+   "direction": [
+    -0.0045,
+    -0.0177,
+    0.9998
+   ],
+   "size_mm": 4.6,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.7,
+   "depth_mm": 2.71,
+   "confidence": 0.853,
+   "votes": 2,
+   "wire_score": 1.0,
+   "kind": "Contact",
+   "n_verts": 198,
+   "tier": "auto"
+  }
+ ]
+}

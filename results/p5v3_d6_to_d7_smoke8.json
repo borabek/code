@@ -1,0 +1,86 @@
+{
+ "experiment": "p5v3-resource-selector-v1",
+ "production_changed": false,
+ "train": "D6 only",
+ "validation": "D6 manufacturer-out 4-fold",
+ "test": "D7 locked application; D7 is DEV, not final",
+ "contract": {
+  "resource": "base+cylinder+planar, 0.5mm spatial cluster",
+  "direction": "signed local axes within 8mm + OBB/PCA axes",
+  "null": "joint accept/direction logit versus frozen OOF threshold",
+  "capacity": "at most one signed direction per physical resource",
+  "label_position_axis": "GT axis",
+  "robot": "lateral<=2mm, |axial|<=40mm, signed angle<=10deg"
+ },
+ "selection": {
+  "lambda": 0.75,
+  "null_threshold": 1.3145146179374003,
+  "oof": {
+   "robot_f1": 0.12898809523809526,
+   "manufacturer_macro_f1": 0.12152777777777778,
+   "manufacturer_worst_f1": 0.0,
+   "per_manufacturer": {
+    "MOR": 0.3333333333333333,
+    "NIT": 0.2222222222222222,
+    "ONV": 0.41666666666666663,
+    "S+S": 0.0,
+    "SE": 0.0,
+    "SUPU": 0.0,
+    "UPUN": 0.0,
+    "UTL": 0.0
+   },
+   "accepted": 37
+  }
+ },
+ "d7": {
+  "robot_f1": 0.002658227848101266,
+  "manufacturer_macro_f1": 0.00625,
+  "manufacturer_worst_f1": 0.0,
+  "per_manufacturer": {
+   "A-B": 0.0,
+   "C3": 0.0,
+   "CCD": 0.0,
+   "CEM": 0.05,
+   "CWT": 0.0,
+   "DEG": 0.0,
+   "DIN": 0.0,
+   "EFX": 0.0
+  },
+  "accepted": 18
+ },
+ "n_d6_parts": 8,
+ "n_d7_parts": 8,
+ "cache_version": "p5v3-resource-selector-v1",
+ "sources": {
+  "d6": {
+   "cache_path": "C:\\Users\\DE00024082\\Desktop\\code\\results\\_p5v3_selector_d6_smoke8.pkl",
+   "cache_sha16": "084b65c272b92914",
+   "source_hashes": {
+    "manifest_sha16": "2c61326664d062ad",
+    "records_sha16": "dbb49d98c93cd348",
+    "cylinders_sha16": "d14a6282e85ae3d4",
+    "planars_sha16": "f34d95539e29353a",
+    "probabilities_sha16": "3a452642d0c1aa3f"
+   },
+   "selected_count": 8,
+   "scored_count": 8,
+   "missing_count": 0,
+   "missing_ids": []
+  },
+  "d7": {
+   "cache_path": "C:\\Users\\DE00024082\\Desktop\\code\\results\\_p5v3_selector_d7_smoke8.pkl",
+   "cache_sha16": "fb52c9ec781b036f",
+   "source_hashes": {
+    "manifest_sha16": "20dabad23c74f980",
+    "records_sha16": "e9ea8bfb7c30bdc8",
+    "cylinders_sha16": "8fb2425e558cb21f",
+    "planars_sha16": "629415126b206f4b",
+    "probabilities_sha16": "8441b84bc9054c95"
+   },
+   "selected_count": 8,
+   "scored_count": 8,
+   "missing_count": 0,
+   "missing_ids": []
+  }
+ }
+}

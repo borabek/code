@@ -1,0 +1,34 @@
+{
+ "kollar": {
+  "A": {
+   "tanidik": 0.7398723817749946,
+   "PXC": 0.7034486769085154,
+   "WEI": 0.48185885702664233
+  },
+  "D": {
+   "tanidik": 0.7460609327717362,
+   "PXC": 0.6877486887888543,
+   "WEI": 0.5689236505106177
+  },
+  "R": {
+   "tanidik": 0.7427222060219333,
+   "PXC": 0.687331700013611,
+   "WEI": 0.5668714330943896
+  }
+ },
+ "kararlar": {
+  "A->D": true,
+  "A->R": true,
+  "D->R": false
+ },
+ "sonuc": "R KALIR (dagitik model dogrulandi)",
+ "kume": {
+  "puanlanan_parca": 194,
+  "geometri_grubu": 171,
+  "kume_dagilimi": {
+   "dev": 54,
+   "atanmamis": 40,
+   "val": 100
+  }
+ }
+}

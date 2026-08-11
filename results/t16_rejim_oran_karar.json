@@ -1,0 +1,19 @@
+{
+ "not": "REJIM-KOSULLU GORELI ORAN olculdu ve ALINMADI. Teknik olarak kill'i gecti ama kazanc +0.0012..+0.0018 = gece boyunca olculen gurultu tabaninin ONDA BIRI.",
+ "en_iyiler": {
+  "0.5/0.4": {
+   "tanidik": -0.0019,
+   "en_kotu_uretici": 0.0012
+  },
+  "0.5/0.35": {
+   "tanidik": -0.0029,
+   "en_kotu_uretici": 0.0018
+  },
+  "0.55/0.4": {
+   "tanidik": -0.0063,
+   "en_kotu_uretici": 0.006,
+   "not": "tanidik butcesini asti"
+  }
+ },
+ "ders": "Kill olcutum ISARET istemis, BUYUKLUK istememisti. +0.0018 bir kazanc degil; bundan sonra kill'lere magnitude yazilacak (orn. >= +0.01)."
+}

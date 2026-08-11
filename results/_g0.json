@@ -1,0 +1,28 @@
+{
+ "0175960000": [
+  {
+   "point": [
+    2.8268,
+    4.4652,
+    13.4183
+   ],
+   "direction": [
+    1.0,
+    -0.0,
+    0.0
+   ],
+   "size_mm": 0.95,
+   "size_source": "measured",
+   "mouth_wide_mm": 2.49,
+   "depth_mm": 1.86,
+   "confidence": 0.809,
+   "votes": 3,
+   "wire_score": 1.0,
+   "kind": "Contact",
+   "n_verts": 67,
+   "tier": "auto"
+  }
+ ],
+ "0270018": [],
+ "0271017": []
+}

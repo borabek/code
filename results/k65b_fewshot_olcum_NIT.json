@@ -1,0 +1,27 @@
+{
+ "marka": "NIT",
+ "sonuc": {
+  "1": {
+   "tespit_k0": 0.628657563685825,
+   "tespit_k": 0.6099273639807259,
+   "tespit_fark": -0.01873019970509915,
+   "robot_k0": 0.0819529748029559,
+   "robot_k": 0.05823886755525118,
+   "robot_fark": -0.023714107247704716,
+   "robot_std": 0.022435640245332993,
+   "n_cekilis": 2
+  },
+  "5": {
+   "tespit_k0": 0.6245143317415953,
+   "tespit_k": 0.7232856620964451,
+   "tespit_fark": 0.09877133035484975,
+   "robot_k0": 0.07748782549494218,
+   "robot_k": 0.11486633063311276,
+   "robot_fark": 0.03737850513817058,
+   "robot_std": 0.013807221200582823,
+   "n_cekilis": 2
+  }
+ },
+ "taban": "results/_p1_olasilik_g10",
+ "not": "k=0 tabani AYNI parcalarda olculdu; adaptasyon parcalari her iki kolda da DISARIDA. Son-epoch ckpt kullanildi (genel val'e gore secim adaptasyonu cezalandirir)."
+}

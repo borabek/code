@@ -1,0 +1,13 @@
+{
+ "parca": 53,
+ "tel_tepe": 30433,
+ "alet_tepe": 56547,
+ "yaricap_mm": 5.0,
+ "dizinler": [
+  "_label_targets",
+  "_label_targets_2",
+  "_label_targets_3",
+  "_label_targets_recall",
+  "_label_targets_recall_hard"
+ ]
+}

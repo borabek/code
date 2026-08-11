@@ -1,0 +1,968 @@
+{
+ "audit": "D7 independent exact-STEP physical candidate-node oracle",
+ "n_manifest_parts": 838,
+ "n_scored_parts": 835,
+ "missing_record_parts": [
+  "DB100-134",
+  "DB40-114",
+  "SPT95XL_GY"
+ ],
+ "contract": {
+  "cylinder_position": "OCP exact finite cylinder mouth_a/mouth_b",
+  "cylinder_radius_mm": [
+   0.5,
+   4.5
+  ],
+  "planar_position": "brep_aciklik inner planar-wire centroid",
+  "spatial_dedupe_mm": 0.5,
+  "resource_rule": "one deduped spatial cluster = one candidate row = at most one GT",
+  "oracle_rule": "maximum-cardinality bipartite match; FP forced to zero",
+  "detection": "lateral <= max(3mm, 0.06*diag), |axial| <= 40mm, angle free",
+  "robot": "lateral <= 2mm, |axial| <= 40mm, signed angle <= 10deg",
+  "directions": "base=current signed direction; physical=explicit +/- own axis/normal",
+  "direction_factor": "same base+physical position rows; +/- current/cylinder/planar axes; local uses nearest aligned source within 8mm; partwide uses any part axis; OBB=PCA axes; feasibility evaluated lazily without pose-row expansion"
+ },
+ "raw_source_nodes": {
+  "base": 11231,
+  "cylinder": 134724,
+  "planar": 10725
+ },
+ "branches": {
+  "base": {
+   "raw_nodes": 11231,
+   "deduped_candidate_rows": 11231,
+   "detection_oracle": {
+    "f1": 0.8459459310837978,
+    "low_cp_f1": 0.8791036998436685,
+    "high_cp_f1": 0.5633154259401382,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "strict_signed_robot_oracle": {
+    "f1": 0.3982728886957564,
+    "low_cp_f1": 0.4367732558139535,
+    "high_cp_f1": 0.07010309278350516,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "detection_f1": 0.9174892395982783,
+     "strict_signed_robot_f1": 0.46554435483870976,
+     "parts": 124
+    },
+    "C3": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.7888669950738916,
+     "parts": 5
+    },
+    "CCD": {
+     "detection_f1": 0.9666666666666666,
+     "strict_signed_robot_f1": 0.8019323671497584,
+     "parts": 47
+    },
+    "CEM": {
+     "detection_f1": 0.9814814814814815,
+     "strict_signed_robot_f1": 0.03571428571428572,
+     "parts": 4
+    },
+    "CWT": {
+     "detection_f1": 0.6888449773238107,
+     "strict_signed_robot_f1": 0.05161655446496347,
+     "parts": 226
+    },
+    "DEG": {
+     "detection_f1": 0.8571428571428571,
+     "strict_signed_robot_f1": 0.2978723404255319,
+     "parts": 19
+    },
+    "DIN": {
+     "detection_f1": 0.930250922509225,
+     "strict_signed_robot_f1": 0.5832385466034755,
+     "parts": 57
+    },
+    "EFX": {
+     "detection_f1": 0.9336051940472717,
+     "strict_signed_robot_f1": 0.1568499669530734,
+     "parts": 34
+    },
+    "ELMEX": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.8,
+     "parts": 27
+    },
+    "KLM": {
+     "detection_f1": 0.7230769230769232,
+     "strict_signed_robot_f1": 0.11363636363636363,
+     "parts": 65
+    },
+    "WEG": {
+     "detection_f1": 0.8327402135231318,
+     "strict_signed_robot_f1": 0.07058823529411765,
+     "parts": 58
+    },
+    "WIE": {
+     "detection_f1": 0.9439262242951028,
+     "strict_signed_robot_f1": 0.6354491193737768,
+     "parts": 169
+    }
+   }
+  },
+  "cylinder": {
+   "raw_nodes": 134724,
+   "deduped_candidate_rows": 95433,
+   "detection_oracle": {
+    "f1": 0.7920806368369997,
+    "low_cp_f1": 0.802671861953799,
+    "high_cp_f1": 0.7018030513176144,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "strict_signed_robot_oracle": {
+    "f1": 0.5371933592966983,
+    "low_cp_f1": 0.5524899057873486,
+    "high_cp_f1": 0.40680851063829787,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "detection_f1": 0.9071353383458647,
+     "strict_signed_robot_f1": 0.5666666666666667,
+     "parts": 124
+    },
+    "C3": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.0,
+     "parts": 5
+    },
+    "CCD": {
+     "detection_f1": 0.8246445497630333,
+     "strict_signed_robot_f1": 0.7083333333333333,
+     "parts": 47
+    },
+    "CEM": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.97196261682243,
+     "parts": 4
+    },
+    "CWT": {
+     "detection_f1": 0.6450464135021097,
+     "strict_signed_robot_f1": 0.28054429816578696,
+     "parts": 226
+    },
+    "DEG": {
+     "detection_f1": 0.5714285714285714,
+     "strict_signed_robot_f1": 0.5454545454545454,
+     "parts": 19
+    },
+    "DIN": {
+     "detection_f1": 0.9810915492957747,
+     "strict_signed_robot_f1": 0.9005555555555556,
+     "parts": 57
+    },
+    "EFX": {
+     "detection_f1": 0.8951841652323581,
+     "strict_signed_robot_f1": 0.3684177066164352,
+     "parts": 34
+    },
+    "ELMEX": {
+     "detection_f1": 0.4,
+     "strict_signed_robot_f1": 0.0,
+     "parts": 27
+    },
+    "KLM": {
+     "detection_f1": 0.6337448559670782,
+     "strict_signed_robot_f1": 0.4190476190476191,
+     "parts": 65
+    },
+    "WEG": {
+     "detection_f1": 0.8029197080291971,
+     "strict_signed_robot_f1": 0.36,
+     "parts": 58
+    },
+    "WIE": {
+     "detection_f1": 0.8921686746987951,
+     "strict_signed_robot_f1": 0.7453453038674033,
+     "parts": 169
+    }
+   }
+  },
+  "planar": {
+   "raw_nodes": 10725,
+   "deduped_candidate_rows": 10263,
+   "detection_oracle": {
+    "f1": 0.6905515008672598,
+    "low_cp_f1": 0.6927985414767548,
+    "high_cp_f1": 0.6713981547196594,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "strict_signed_robot_oracle": {
+    "f1": 0.36189109211940884,
+    "low_cp_f1": 0.3415574402467232,
+    "high_cp_f1": 0.5352112676056338,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "detection_f1": 0.5890310786106033,
+     "strict_signed_robot_f1": 0.1916301703163017,
+     "parts": 124
+    },
+    "C3": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.0,
+     "parts": 5
+    },
+    "CCD": {
+     "detection_f1": 0.7961165048543689,
+     "strict_signed_robot_f1": 0.76,
+     "parts": 47
+    },
+    "CEM": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.9908256880733944,
+     "parts": 4
+    },
+    "CWT": {
+     "detection_f1": 0.6437092712797787,
+     "strict_signed_robot_f1": 0.36646680072626464,
+     "parts": 226
+    },
+    "DEG": {
+     "detection_f1": 0.2608695652173913,
+     "strict_signed_robot_f1": 0.09523809523809523,
+     "parts": 19
+    },
+    "DIN": {
+     "detection_f1": 0.7998523206751056,
+     "strict_signed_robot_f1": 0.6579052132701422,
+     "parts": 57
+    },
+    "EFX": {
+     "detection_f1": 0.8476781275890638,
+     "strict_signed_robot_f1": 0.48733179157331796,
+     "parts": 34
+    },
+    "ELMEX": {
+     "detection_f1": 0.6813186813186815,
+     "strict_signed_robot_f1": 0.4210526315789474,
+     "parts": 27
+    },
+    "KLM": {
+     "detection_f1": 0.5872340425531914,
+     "strict_signed_robot_f1": 0.3564356435643564,
+     "parts": 65
+    },
+    "WEG": {
+     "detection_f1": 0.6612244897959184,
+     "strict_signed_robot_f1": 0.13636363636363635,
+     "parts": 58
+    },
+    "WIE": {
+     "detection_f1": 0.7358778758000347,
+     "strict_signed_robot_f1": 0.18030570142535635,
+     "parts": 169
+    }
+   }
+  },
+  "physical": {
+   "raw_nodes": null,
+   "deduped_candidate_rows": 100813,
+   "detection_oracle": {
+    "f1": 0.8403624654454347,
+    "low_cp_f1": 0.8466487935656837,
+    "high_cp_f1": 0.7867790019442645,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "strict_signed_robot_oracle": {
+    "f1": 0.6236253993610223,
+    "low_cp_f1": 0.6255591054313099,
+    "high_cp_f1": 0.6071428571428571,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "detection_f1": 0.9188781575037147,
+     "strict_signed_robot_f1": 0.6042057761732853,
+     "parts": 124
+    },
+    "C3": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.0,
+     "parts": 5
+    },
+    "CCD": {
+     "detection_f1": 0.8465116279069768,
+     "strict_signed_robot_f1": 0.7722772277227723,
+     "parts": 47
+    },
+    "CEM": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.9954337899543378,
+     "parts": 4
+    },
+    "CWT": {
+     "detection_f1": 0.7382102089419162,
+     "strict_signed_robot_f1": 0.41926564660648236,
+     "parts": 226
+    },
+    "DEG": {
+     "detection_f1": 0.6206896551724138,
+     "strict_signed_robot_f1": 0.5964912280701754,
+     "parts": 19
+    },
+    "DIN": {
+     "detection_f1": 0.9810915492957747,
+     "strict_signed_robot_f1": 0.9442673992673992,
+     "parts": 57
+    },
+    "EFX": {
+     "detection_f1": 0.9361685096550587,
+     "strict_signed_robot_f1": 0.48733179157331796,
+     "parts": 34
+    },
+    "ELMEX": {
+     "detection_f1": 0.7096774193548387,
+     "strict_signed_robot_f1": 0.4210526315789474,
+     "parts": 27
+    },
+    "KLM": {
+     "detection_f1": 0.7518796992481204,
+     "strict_signed_robot_f1": 0.5689655172413793,
+     "parts": 65
+    },
+    "WEG": {
+     "detection_f1": 0.8450704225352113,
+     "strict_signed_robot_f1": 0.4077669902912621,
+     "parts": 58
+    },
+    "WIE": {
+     "detection_f1": 0.9064608076009502,
+     "strict_signed_robot_f1": 0.7792493297587131,
+     "parts": 169
+    }
+   }
+  },
+  "base+cylinder": {
+   "raw_nodes": null,
+   "deduped_candidate_rows": 106373,
+   "detection_oracle": {
+    "f1": 0.9129912510359439,
+    "low_cp_f1": 0.9319761668321749,
+    "high_cp_f1": 0.7511674449633088,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "strict_signed_robot_oracle": {
+    "f1": 0.628592326404246,
+    "low_cp_f1": 0.6522556390977444,
+    "high_cp_f1": 0.426890756302521,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "detection_f1": 0.9926236263736264,
+     "strict_signed_robot_f1": 0.6708688245315162,
+     "parts": 124
+    },
+    "C3": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.7951428571428572,
+     "parts": 5
+    },
+    "CCD": {
+     "detection_f1": 0.9794238683127573,
+     "strict_signed_robot_f1": 0.8465116279069768,
+     "parts": 47
+    },
+    "CEM": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.97196261682243,
+     "parts": 4
+    },
+    "CWT": {
+     "detection_f1": 0.8137508220030214,
+     "strict_signed_robot_f1": 0.30395686520994314,
+     "parts": 226
+    },
+    "DEG": {
+     "detection_f1": 0.8571428571428571,
+     "strict_signed_robot_f1": 0.6440677966101694,
+     "parts": 19
+    },
+    "DIN": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.9613669064748201,
+     "parts": 57
+    },
+    "EFX": {
+     "detection_f1": 0.9916956859696852,
+     "strict_signed_robot_f1": 0.44501415164605984,
+     "parts": 34
+    },
+    "ELMEX": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.8,
+     "parts": 27
+    },
+    "KLM": {
+     "detection_f1": 0.7838827838827839,
+     "strict_signed_robot_f1": 0.42654028436018954,
+     "parts": 65
+    },
+    "WEG": {
+     "detection_f1": 0.8843537414965986,
+     "strict_signed_robot_f1": 0.4,
+     "parts": 58
+    },
+    "WIE": {
+     "detection_f1": 0.9873118865866957,
+     "strict_signed_robot_f1": 0.8373761118170266,
+     "parts": 169
+    }
+   }
+  },
+  "base+planar": {
+   "raw_nodes": null,
+   "deduped_candidate_rows": 21435,
+   "detection_oracle": {
+    "f1": 0.9085927562534523,
+    "low_cp_f1": 0.9250374812593704,
+    "high_cp_f1": 0.768421052631579,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "strict_signed_robot_oracle": {
+    "f1": 0.5757882104454686,
+    "low_cp_f1": 0.5773809523809523,
+    "high_cp_f1": 0.5622119815668203,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "detection_f1": 0.9386395511921459,
+     "strict_signed_robot_f1": 0.5193423597678917,
+     "parts": 124
+    },
+    "C3": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.7888669950738916,
+     "parts": 5
+    },
+    "CCD": {
+     "detection_f1": 0.970954356846473,
+     "strict_signed_robot_f1": 0.8571428571428571,
+     "parts": 47
+    },
+    "CEM": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.9908256880733944,
+     "parts": 4
+    },
+    "CWT": {
+     "detection_f1": 0.8229476564515839,
+     "strict_signed_robot_f1": 0.38763821784600333,
+     "parts": 226
+    },
+    "DEG": {
+     "detection_f1": 0.8732394366197184,
+     "strict_signed_robot_f1": 0.3673469387755102,
+     "parts": 19
+    },
+    "DIN": {
+     "detection_f1": 0.9874825174825174,
+     "strict_signed_robot_f1": 0.8286122448979591,
+     "parts": 57
+    },
+    "EFX": {
+     "detection_f1": 0.9707843137254902,
+     "strict_signed_robot_f1": 0.5399937434827945,
+     "parts": 34
+    },
+    "ELMEX": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.8118811881188119,
+     "parts": 27
+    },
+    "KLM": {
+     "detection_f1": 0.8268551236749118,
+     "strict_signed_robot_f1": 0.3804878048780488,
+     "parts": 65
+    },
+    "WEG": {
+     "detection_f1": 0.888135593220339,
+     "strict_signed_robot_f1": 0.18784530386740328,
+     "parts": 58
+    },
+    "WIE": {
+     "detection_f1": 0.9638246977043052,
+     "strict_signed_robot_f1": 0.6913530105822057,
+     "parts": 169
+    }
+   }
+  },
+  "base+physical": {
+   "raw_nodes": null,
+   "deduped_candidate_rows": 111735,
+   "detection_oracle": {
+    "f1": 0.9325251749351934,
+    "low_cp_f1": 0.9453297376808042,
+    "high_cp_f1": 0.8233815210559396,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "strict_signed_robot_oracle": {
+    "f1": 0.6869805588247919,
+    "low_cp_f1": 0.6947815533980582,
+    "high_cp_f1": 0.6204863669859986,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "detection_f1": 0.9938614540466393,
+     "strict_signed_robot_f1": 0.684057239057239,
+     "parts": 124
+    },
+    "C3": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.7951428571428572,
+     "parts": 5
+    },
+    "CCD": {
+     "detection_f1": 0.9794238683127573,
+     "strict_signed_robot_f1": 0.867579908675799,
+     "parts": 47
+    },
+    "CEM": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.9954337899543378,
+     "parts": 4
+    },
+    "CWT": {
+     "detection_f1": 0.855627653346269,
+     "strict_signed_robot_f1": 0.4368082338241167,
+     "parts": 226
+    },
+    "DEG": {
+     "detection_f1": 0.8732394366197184,
+     "strict_signed_robot_f1": 0.6885245901639345,
+     "parts": 19
+    },
+    "DIN": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.9613669064748201,
+     "parts": 57
+    },
+    "EFX": {
+     "detection_f1": 0.9916956859696852,
+     "strict_signed_robot_f1": 0.5399937434827945,
+     "parts": 34
+    },
+    "ELMEX": {
+     "detection_f1": 1.0,
+     "strict_signed_robot_f1": 0.8118811881188119,
+     "parts": 27
+    },
+    "KLM": {
+     "detection_f1": 0.8512110726643599,
+     "strict_signed_robot_f1": 0.5689655172413793,
+     "parts": 65
+    },
+    "WEG": {
+     "detection_f1": 0.903010033444816,
+     "strict_signed_robot_f1": 0.4454976303317535,
+     "parts": 58
+    },
+    "WIE": {
+     "detection_f1": 0.9902717391304349,
+     "strict_signed_robot_f1": 0.8558614232209737,
+     "parts": 169
+    }
+   }
+  }
+ },
+ "direction_factor_branches": {
+  "own_signed": {
+   "candidate_rows": 111735,
+   "strict_signed_robot_oracle": {
+    "f1": 0.6869805588247919,
+    "low_cp_f1": 0.6947815533980582,
+    "high_cp_f1": 0.6204863669859986,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "strict_signed_robot_f1": 0.684057239057239,
+     "parts": 124
+    },
+    "C3": {
+     "strict_signed_robot_f1": 0.7951428571428572,
+     "parts": 5
+    },
+    "CCD": {
+     "strict_signed_robot_f1": 0.867579908675799,
+     "parts": 47
+    },
+    "CEM": {
+     "strict_signed_robot_f1": 0.9954337899543378,
+     "parts": 4
+    },
+    "CWT": {
+     "strict_signed_robot_f1": 0.4368082338241167,
+     "parts": 226
+    },
+    "DEG": {
+     "strict_signed_robot_f1": 0.6885245901639345,
+     "parts": 19
+    },
+    "DIN": {
+     "strict_signed_robot_f1": 0.9613669064748201,
+     "parts": 57
+    },
+    "EFX": {
+     "strict_signed_robot_f1": 0.5399937434827945,
+     "parts": 34
+    },
+    "ELMEX": {
+     "strict_signed_robot_f1": 0.8118811881188119,
+     "parts": 27
+    },
+    "KLM": {
+     "strict_signed_robot_f1": 0.5689655172413793,
+     "parts": 65
+    },
+    "WEG": {
+     "strict_signed_robot_f1": 0.4454976303317535,
+     "parts": 58
+    },
+    "WIE": {
+     "strict_signed_robot_f1": 0.8558614232209737,
+     "parts": 169
+    }
+   }
+  },
+  "factor_local_8mm": {
+   "candidate_rows": 111735,
+   "strict_signed_robot_oracle": {
+    "f1": 0.7209678945009679,
+    "low_cp_f1": 0.7283476204552173,
+    "high_cp_f1": 0.6580645161290322,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "strict_signed_robot_f1": 0.7677218015919239,
+     "parts": 124
+    },
+    "C3": {
+     "strict_signed_robot_f1": 0.9765294117647059,
+     "parts": 5
+    },
+    "CCD": {
+     "strict_signed_robot_f1": 0.8727272727272727,
+     "parts": 47
+    },
+    "CEM": {
+     "strict_signed_robot_f1": 0.9954337899543378,
+     "parts": 4
+    },
+    "CWT": {
+     "strict_signed_robot_f1": 0.5235928617637747,
+     "parts": 226
+    },
+    "DEG": {
+     "strict_signed_robot_f1": 0.6885245901639345,
+     "parts": 19
+    },
+    "DIN": {
+     "strict_signed_robot_f1": 0.9680357142857143,
+     "parts": 57
+    },
+    "EFX": {
+     "strict_signed_robot_f1": 0.5815179968701095,
+     "parts": 34
+    },
+    "ELMEX": {
+     "strict_signed_robot_f1": 0.8679245283018869,
+     "parts": 27
+    },
+    "KLM": {
+     "strict_signed_robot_f1": 0.5991561181434599,
+     "parts": 65
+    },
+    "WEG": {
+     "strict_signed_robot_f1": 0.5090909090909091,
+     "parts": 58
+    },
+    "WIE": {
+     "strict_signed_robot_f1": 0.8610248447204969,
+     "parts": 169
+    }
+   }
+  },
+  "factor_partwide": {
+   "candidate_rows": 111735,
+   "strict_signed_robot_oracle": {
+    "f1": 0.7602204057602941,
+    "low_cp_f1": 0.76592082616179,
+    "high_cp_f1": 0.7116311080523056,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "strict_signed_robot_f1": 0.845591054313099,
+     "parts": 124
+    },
+    "C3": {
+     "strict_signed_robot_f1": 1.0,
+     "parts": 5
+    },
+    "CCD": {
+     "strict_signed_robot_f1": 0.8828828828828829,
+     "parts": 47
+    },
+    "CEM": {
+     "strict_signed_robot_f1": 0.9954337899543378,
+     "parts": 4
+    },
+    "CWT": {
+     "strict_signed_robot_f1": 0.6026299120234604,
+     "parts": 226
+    },
+    "DEG": {
+     "strict_signed_robot_f1": 0.7096774193548387,
+     "parts": 19
+    },
+    "DIN": {
+     "strict_signed_robot_f1": 0.9680357142857143,
+     "parts": 57
+    },
+    "EFX": {
+     "strict_signed_robot_f1": 0.6715541355196528,
+     "parts": 34
+    },
+    "ELMEX": {
+     "strict_signed_robot_f1": 0.9189189189189189,
+     "parts": 27
+    },
+    "KLM": {
+     "strict_signed_robot_f1": 0.6224066390041494,
+     "parts": 65
+    },
+    "WEG": {
+     "strict_signed_robot_f1": 0.592274678111588,
+     "parts": 58
+    },
+    "WIE": {
+     "strict_signed_robot_f1": 0.8699384236453203,
+     "parts": 169
+    }
+   }
+  },
+  "factor_obb_only": {
+   "candidate_rows": 111735,
+   "strict_signed_robot_oracle": {
+    "f1": 0.5933114207900715,
+    "low_cp_f1": 0.6158301158301158,
+    "high_cp_f1": 0.4013663535439795,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "strict_signed_robot_f1": 0.5757116451016635,
+     "parts": 124
+    },
+    "C3": {
+     "strict_signed_robot_f1": 0.09624999999999999,
+     "parts": 5
+    },
+    "CCD": {
+     "strict_signed_robot_f1": 0.8133971291866028,
+     "parts": 47
+    },
+    "CEM": {
+     "strict_signed_robot_f1": 0.3206106870229008,
+     "parts": 4
+    },
+    "CWT": {
+     "strict_signed_robot_f1": 0.477550028990958,
+     "parts": 226
+    },
+    "DEG": {
+     "strict_signed_robot_f1": 0.6440677966101694,
+     "parts": 19
+    },
+    "DIN": {
+     "strict_signed_robot_f1": 0.8399186991869919,
+     "parts": 57
+    },
+    "EFX": {
+     "strict_signed_robot_f1": 0.5703150120907131,
+     "parts": 34
+    },
+    "ELMEX": {
+     "strict_signed_robot_f1": 0.5,
+     "parts": 27
+    },
+    "KLM": {
+     "strict_signed_robot_f1": 0.43396226415094347,
+     "parts": 65
+    },
+    "WEG": {
+     "strict_signed_robot_f1": 0.5486725663716815,
+     "parts": 58
+    },
+    "WIE": {
+     "strict_signed_robot_f1": 0.6127015558698726,
+     "parts": 169
+    }
+   }
+  },
+  "factor_local_8mm+obb": {
+   "candidate_rows": 111735,
+   "strict_signed_robot_oracle": {
+    "f1": 0.7507032582105442,
+    "low_cp_f1": 0.7587997691863819,
+    "high_cp_f1": 0.6816901408450705,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "strict_signed_robot_f1": 0.7887711783742624,
+     "parts": 124
+    },
+    "C3": {
+     "strict_signed_robot_f1": 1.0,
+     "parts": 5
+    },
+    "CCD": {
+     "strict_signed_robot_f1": 0.8778280542986425,
+     "parts": 47
+    },
+    "CEM": {
+     "strict_signed_robot_f1": 0.9954337899543378,
+     "parts": 4
+    },
+    "CWT": {
+     "strict_signed_robot_f1": 0.574733758854284,
+     "parts": 226
+    },
+    "DEG": {
+     "strict_signed_robot_f1": 0.6885245901639345,
+     "parts": 19
+    },
+    "DIN": {
+     "strict_signed_robot_f1": 0.9680357142857143,
+     "parts": 57
+    },
+    "EFX": {
+     "strict_signed_robot_f1": 0.650437983069562,
+     "parts": 34
+    },
+    "ELMEX": {
+     "strict_signed_robot_f1": 0.9189189189189189,
+     "parts": 27
+    },
+    "KLM": {
+     "strict_signed_robot_f1": 0.6166666666666667,
+     "parts": 65
+    },
+    "WEG": {
+     "strict_signed_robot_f1": 0.6502057613168725,
+     "parts": 58
+    },
+    "WIE": {
+     "strict_signed_robot_f1": 0.8661372064276884,
+     "parts": 169
+    }
+   }
+  },
+  "factor_partwide+obb": {
+   "candidate_rows": 111735,
+   "strict_signed_robot_oracle": {
+    "f1": 0.7665210381652297,
+    "low_cp_f1": 0.7729606389047348,
+    "high_cp_f1": 0.7116311080523056,
+    "low_cp_parts": 773,
+    "high_cp_parts": 62
+   },
+   "per_manufacturer": {
+    "A-B": {
+     "strict_signed_robot_f1": 0.845591054313099,
+     "parts": 124
+    },
+    "C3": {
+     "strict_signed_robot_f1": 1.0,
+     "parts": 5
+    },
+    "CCD": {
+     "strict_signed_robot_f1": 0.8878923766816144,
+     "parts": 47
+    },
+    "CEM": {
+     "strict_signed_robot_f1": 0.9954337899543378,
+     "parts": 4
+    },
+    "CWT": {
+     "strict_signed_robot_f1": 0.6074214536106567,
+     "parts": 226
+    },
+    "DEG": {
+     "strict_signed_robot_f1": 0.7096774193548387,
+     "parts": 19
+    },
+    "DIN": {
+     "strict_signed_robot_f1": 0.9680357142857143,
+     "parts": 57
+    },
+    "EFX": {
+     "strict_signed_robot_f1": 0.6715541355196528,
+     "parts": 34
+    },
+    "ELMEX": {
+     "strict_signed_robot_f1": 0.9189189189189189,
+     "parts": 27
+    },
+    "KLM": {
+     "strict_signed_robot_f1": 0.6337448559670782,
+     "parts": 65
+    },
+    "WEG": {
+     "strict_signed_robot_f1": 0.6666666666666666,
+     "parts": 58
+    },
+    "WIE": {
+     "strict_signed_robot_f1": 0.8711992619926199,
+     "parts": 169
+    }
+   }
+  }
+ },
+ "direction_factor_stats": {
+  "mesh_cache_parts": 835,
+  "local_mm": 8.0,
+  "unsigned_source_axis_rows_median": 111.0,
+  "unsigned_source_axis_rows_p95": 282.89999999999986,
+  "obb_axes_median": 3.0
+ },
+ "sha256": {
+  "results\\d7_sinav_kumesi.json": "20dabad23c74f980b578d4696ed3eb14f8b05da52d7dc7a821c31ae38cf436cd",
+  "results\\_der_yeni_G7BIRLESIK.pkl": "e9ea8bfb7c30bdc8ea5493242801bbf552c429167a03a7b4c7ca89fe179ed4c8",
+  "results\\_d7_silindirler.pkl": "8fb2425e558cb21f062086f3d4320292abed4d681598956aceb696d94e559c41",
+  "results\\_d7_acikliklar.pkl": "629415126b206f4b9b9455e388980eca1029919ab5bb145dd7d0fb2c71c96340",
+  "audit_d7_physical_node_oracle.py": "069883b2ecb2a9a698c668408303f73366fce19fc4781ad2f78569f2d0b6dd9a"
+ }
+}

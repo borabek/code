@@ -1,0 +1,255 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "n_gt": 3087,
+ "n_parca": 835,
+ "sonuc": {
+  "1.01|0.0": {
+   "recall": 0.6391318432134758,
+   "f1_tavani": 0.7798418972332015,
+   "aday_per_parca": 1162.4239520958083,
+   "kirilim": {
+    "KONUM YOK": 976,
+    "Y3 ana eksen": 118,
+    "Y0 kendi": 1488,
+    "Y2 silindir ekseni": 170,
+    "Y1 komsu": 197,
+    "YON YOK": 138
+   }
+  },
+  "0.5|0.0": {
+   "recall": 0.749271137026239,
+   "f1_tavani": 0.8566666666666667,
+   "aday_per_parca": 2019.5892215568863,
+   "kirilim": {
+    "KONUM YOK": 674,
+    "Y_normal": 415,
+    "Y0 kendi": 1488,
+    "Y1 komsu": 197,
+    "YON YOK": 100,
+    "Y3 ana eksen": 71,
+    "Y2 silindir ekseni": 142
+   }
+  },
+  "0.5|1.0": {
+   "recall": 0.746031746031746,
+   "f1_tavani": 0.8545454545454546,
+   "aday_per_parca": 1664.2215568862275,
+   "kirilim": {
+    "KONUM YOK": 682,
+    "Y_normal": 399,
+    "Y0 kendi": 1488,
+    "Y2 silindir ekseni": 145,
+    "Y1 komsu": 197,
+    "YON YOK": 102,
+    "Y3 ana eksen": 74
+   }
+  },
+  "0.5|1.5": {
+   "recall": 0.7421444768383544,
+   "f1_tavani": 0.8519895872071402,
+   "aday_per_parca": 1470.6778443113772,
+   "kirilim": {
+    "KONUM YOK": 692,
+    "Y_normal": 379,
+    "Y0 kendi": 1488,
+    "Y2 silindir ekseni": 148,
+    "Y1 komsu": 197,
+    "YON YOK": 104,
+    "Y3 ana eksen": 79
+   }
+  },
+  "0.5|2.0": {
+   "recall": 0.7330741820537738,
+   "f1_tavani": 0.8459813084112149,
+   "aday_per_parca": 1379.0383233532934,
+   "kirilim": {
+    "KONUM YOK": 716,
+    "Y_normal": 335,
+    "Y0 kendi": 1488,
+    "Y2 silindir ekseni": 156,
+    "Y1 komsu": 197,
+    "YON YOK": 108,
+    "Y3 ana eksen": 87
+   }
+  },
+  "0.5|3.0": {
+   "recall": 0.7091026886945254,
+   "f1_tavani": 0.8297952994692949,
+   "aday_per_parca": 1276.3508982035928,
+   "kirilim": {
+    "KONUM YOK": 776,
+    "Y_normal": 232,
+    "Y0 kendi": 1488,
+    "Y2 silindir ekseni": 175,
+    "Y1 komsu": 197,
+    "YON YOK": 122,
+    "Y3 ana eksen": 97
+   }
+  },
+  "0.2|0.0": {
+   "recall": 0.8098477486232588,
+   "f1_tavani": 0.8949346697691067,
+   "aday_per_parca": 2912.7329341317363,
+   "kirilim": {
+    "Y3 ana eksen": 52,
+    "Y_normal": 654,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 509,
+    "Y1 komsu": 197,
+    "Y2 silindir ekseni": 109,
+    "YON YOK": 78
+   }
+  },
+  "0.2|1.0": {
+   "recall": 0.8072562358276644,
+   "f1_tavani": 0.8933500627352573,
+   "aday_per_parca": 2198.825149700599,
+   "kirilim": {
+    "Y3 ana eksen": 54,
+    "Y_normal": 639,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 511,
+    "Y1 komsu": 197,
+    "Y2 silindir ekseni": 114,
+    "YON YOK": 84
+   }
+  },
+  "0.2|1.5": {
+   "recall": 0.8043407839326207,
+   "f1_tavani": 0.8915619389587074,
+   "aday_per_parca": 1800.0838323353294,
+   "kirilim": {
+    "Y3 ana eksen": 68,
+    "Y_normal": 606,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 516,
+    "Y2 silindir ekseni": 124,
+    "Y1 komsu": 197,
+    "YON YOK": 88
+   }
+  },
+  "0.2|2.0": {
+   "recall": 0.7968901846452867,
+   "f1_tavani": 0.8869659275283938,
+   "aday_per_parca": 1608.4502994011975,
+   "kirilim": {
+    "Y3 ana eksen": 78,
+    "Y_normal": 558,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 534,
+    "Y2 silindir ekseni": 139,
+    "Y1 komsu": 197,
+    "YON YOK": 93
+   }
+  },
+  "0.2|3.0": {
+   "recall": 0.75348234531908,
+   "f1_tavani": 0.8594125254018105,
+   "aday_per_parca": 1394.4514970059881,
+   "kirilim": {
+    "KONUM YOK": 648,
+    "Y_normal": 381,
+    "Y0 kendi": 1488,
+    "Y2 silindir ekseni": 168,
+    "Y1 komsu": 197,
+    "YON YOK": 113,
+    "Y3 ana eksen": 92
+   }
+  },
+  "0.05|0.0": {
+   "recall": 0.8853255587949466,
+   "f1_tavani": 0.9391752577319588,
+   "aday_per_parca": 4056.108982035928,
+   "kirilim": {
+    "Y3 ana eksen": 39,
+    "Y_normal": 947,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 289,
+    "Y1 komsu": 197,
+    "Y2 silindir ekseni": 62,
+    "YON YOK": 65
+   }
+  },
+  "0.05|1.0": {
+   "recall": 0.8807904114026563,
+   "f1_tavani": 0.9366172924560799,
+   "aday_per_parca": 2918.8958083832335,
+   "kirilim": {
+    "Y3 ana eksen": 41,
+    "Y_normal": 922,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 295,
+    "Y1 komsu": 197,
+    "Y2 silindir ekseni": 71,
+    "YON YOK": 73
+   }
+  },
+  "0.05|1.5": {
+   "recall": 0.8756073858114675,
+   "f1_tavani": 0.933678756476684,
+   "aday_per_parca": 2217.79880239521,
+   "kirilim": {
+    "Y3 ana eksen": 49,
+    "Y_normal": 885,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 305,
+    "Y1 komsu": 197,
+    "Y2 silindir ekseni": 84,
+    "YON YOK": 79
+   }
+  },
+  "0.05|2.0": {
+   "recall": 0.8639455782312925,
+   "f1_tavani": 0.927007299270073,
+   "aday_per_parca": 1889.7880239520957,
+   "kirilim": {
+    "Y3 ana eksen": 62,
+    "Y_normal": 817,
+    "Y0 kendi": 1488,
+    "KONUM YOK": 332,
+    "Y1 komsu": 197,
+    "Y2 silindir ekseni": 103,
+    "YON YOK": 88
+   }
+  },
+  "0.05|3.0": {
+   "recall": 0.8108195659216068,
+   "f1_tavani": 0.8955277280858676,
+   "aday_per_parca": 1532.0419161676646,
+   "kirilim": {
+    "KONUM YOK": 482,
+    "Y_normal": 599,
+    "Y0 kendi": 1488,
+    "Y2 silindir ekseni": 138,
+    "Y1 komsu": 197,
+    "YON YOK": 102,
+    "Y3 ana eksen": 81
+   }
+  }
+ },
+ "not": "Mesh tepeleri p_pos ile filtrelendi + YEREL NORMAL yon kaynagi eklendi. ISARETLI aci. D7 marka-disi. TAVAN."
+}

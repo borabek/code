@@ -1,0 +1,147 @@
+[
+ {
+  "mfg": "KLM",
+  "pid": "307169",
+  "stp": "all_wscad_stp\\wscaduniverse_307169_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "KLM",
+  "pid": "351129",
+  "stp": "all_wscad_stp\\wscaduniverse_351129_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "KLM",
+  "pid": "351769",
+  "stp": "all_wscad_stp\\wscaduniverse_351769_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "MOR",
+  "pid": "MAJ1185S10",
+  "stp": "all_wscad_stp\\MOR.MAJ1185S10_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "MOR",
+  "pid": "MAJ2240E10",
+  "stp": "all_wscad_stp\\MOR.MAJ2240E10_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "MOR",
+  "pid": "MAJ4095S10",
+  "stp": "all_wscad_stp\\MOR.MAJ4095S10_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SE",
+  "pid": "NTSXTB18001XH",
+  "stp": "all_wscad_stp\\SE.NTSXTB18001XH_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SE",
+  "pid": "NTSXTB18200H",
+  "stp": "all_wscad_stp\\SE.NTSXTB18200H_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SE",
+  "pid": "NTSXTB18200XH",
+  "stp": "all_wscad_stp\\SE.NTSXTB18200XH_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SE",
+  "pid": "NTSXTB18201H",
+  "stp": "all_wscad_stp\\SE.NTSXTB18201H_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SE",
+  "pid": "NTSXTB18201XH",
+  "stp": "all_wscad_stp\\SE.NTSXTB18201XH_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SIE",
+  "pid": "8WH2000-0AJ00",
+  "stp": "all_wscad_stp\\wscaduniverse_8WH2000-0AJ00_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "SUPU",
+  "pid": "TPA2.5-18-GY",
+  "stp": "all_wscad_stp\\SUPU.TPA2.5-18-GY_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SUPU",
+  "pid": "TPA4-1.5-19-GY",
+  "stp": "all_wscad_stp\\SUPU.TPA4-1.5-19-GY_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SUPU",
+  "pid": "TPA4_1.5-19-GY",
+  "stp": "all_wscad_stp\\SUPU.TPA4_1.5-19-GY_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SUPU",
+  "pid": "TPA6-2.5-13-GY",
+  "stp": "all_wscad_stp\\SUPU.TPA6-2.5-13-GY_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "SUPU",
+  "pid": "TPA6_2.5-19-GY",
+  "stp": "all_wscad_stp\\SUPU.TPA6_2.5-19-GY_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "UTL",
+  "pid": "UUT-4RDLED24-BK",
+  "stp": "all_wscad_stp\\UTL.UUT-4RDLED24-BK_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "UTL",
+  "pid": "UUT-4RDLED60-BK",
+  "stp": "all_wscad_stp\\UTL.UUT-4RDLED60-BK_ElectricalTerminal_ElectricalTerminal.stp"
+ },
+ {
+  "mfg": "WEG",
+  "pid": "BTWP 4 CZ",
+  "stp": "all_wscad_stp\\wscaduniverse_BTWP 4 CZ_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WEI",
+  "pid": "2502870000",
+  "stp": "all_wscad_stp\\wscaduniverse_2502870000_2026-07-23-15-25-37.stp"
+ },
+ {
+  "mfg": "WEI",
+  "pid": "2694130000",
+  "stp": "all_wscad_stp\\wscaduniverse_2694130000_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WEI",
+  "pid": "2694180000",
+  "stp": "all_wscad_stp\\wscaduniverse_2694180000_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WIE",
+  "pid": "5D.206.9255.0",
+  "stp": "all_wscad_stp\\wscaduniverse_5D.206.9255.0_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WIE",
+  "pid": "5D.S02.9555.0",
+  "stp": "all_wscad_stp\\wscaduniverse_5D.S02.9555.0_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WIE",
+  "pid": "5D.S03.9655.0",
+  "stp": "all_wscad_stp\\wscaduniverse_5D.S03.9655.0_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WIE",
+  "pid": "5D.S03.9755.0",
+  "stp": "all_wscad_stp\\wscaduniverse_5D.S03.9755.0_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WIE",
+  "pid": "5D.S50.1655.0",
+  "stp": "all_wscad_stp\\wscaduniverse_5D.S50.1655.0_2026-08-04-13-25-02.stp"
+ },
+ {
+  "mfg": "WIE",
+  "pid": "5D.S96.1655.0",
+  "stp": "all_wscad_stp\\wscaduniverse_5D.S96.1655.0_2026-08-04-13-25-02.stp"
+ }
+]

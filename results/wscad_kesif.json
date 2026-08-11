@@ -1,0 +1,18 @@
+{
+ "profil": "C:\\Users\\DE0002~1\\AppData\\Local\\Temp\\wscad_pw_profil",
+ "hedef": "8WH2040-4LF00",
+ "giris": true,
+ "url_ana": "https://www.wscaduniverse.com/home",
+ "arama_yapildi": true,
+ "url_sonuc": "https://www.wscaduniverse.com/home",
+ "izler": {
+  "3d_metin": 0,
+  "download_metin": 3,
+  "cad_metin": 1,
+  "iframe": 0,
+  "part_detail_link": 0
+ },
+ "iframe_src": [
+  "https://www.wscaduniverse.com/search?searchText=8WH2040-4LF00&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
+ ]
+}

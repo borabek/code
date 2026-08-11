@@ -1,0 +1,132 @@
+{
+ "tarih": "2026-08-02 gece",
+ "disk_gb": 21.95,
+ "disk_esik_gb": 12.0,
+ "artefakt": {
+  "results/wire_gate.pkl": {
+   "md5": "6cbcc16db49708982b12730c70e50e8c",
+   "bayt": 68986781
+  },
+  "results/pose_head.pkl": {
+   "md5": "f1bb3f3c68eedb26ffdf129e83660d52",
+   "bayt": 49807766
+  },
+  "results/aci_secici.pkl": {
+   "md5": "ec4d8080b824e7c7314a5bee617d5d81",
+   "bayt": 60919064
+  },
+  "results/uye_secici.pkl": {
+   "md5": "780b0cf389a5605a7de08994d97629ba",
+   "bayt": 97405837
+  },
+  "results/highcp_router.pkl": {
+   "md5": "391ab4fa5fec9497435265b396c76948",
+   "bayt": 1988596
+  },
+  "results/seg_extra/recall_hard_s2.pt": {
+   "md5": "0e5ef8753412f6b62b9e373b3bdd0e22",
+   "bayt": 1400302
+  },
+  "results/seg_extra/recall_hard_keig96_s0.pt": {
+   "md5": "8bbb3b734204ac45f1181e690a64dedf",
+   "bayt": 1400547
+  },
+  "results/seg_extra/recall_hard_keig96_s1.pt": {
+   "md5": "d1f130ebe9711f0efe9fdf9cceea8c0a",
+   "bayt": 1400547
+  },
+  "results/seg_extra/recall_hard_keig96_s2.pt": {
+   "md5": "219fc74c3ee2552a667a22f161062428",
+   "bayt": 1400547
+  }
+ },
+ "manset": {
+  "DEV": {
+   "tespit": 0.806,
+   "robot": 0.6374,
+   "n": 54
+  },
+  "VAL": {
+   "tespit": 0.7535,
+   "robot": 0.5556,
+   "n": 100
+  },
+  "ATANMAMIS": {
+   "tespit": 0.6635,
+   "robot": 0.5529,
+   "n": 40
+  },
+  "HAVUZLANMIS": {
+   "tespit": 0.7584,
+   "robot": 0.5893,
+   "n": 194
+  },
+  "PXC disarida": {
+   "tespit": 0.668,
+   "robot": 0.5591,
+   "n": 90
+  },
+  "WEI disarida": {
+   "tespit": 0.5968,
+   "robot": 0.4048,
+   "n": 103
+  },
+  "seri 10": {
+   "tespit": 0.6196,
+   "robot": 0.4658,
+   "n": 18
+  },
+  "seri 15": {
+   "tespit": 0.6416,
+   "robot": 0.3757,
+   "n": 10
+  },
+  "seri 16": {
+   "tespit": 0.8333,
+   "robot": 0.7098,
+   "n": 11
+  },
+  "seri 17": {
+   "tespit": 0.6531,
+   "robot": 0.5322,
+   "n": 14
+  },
+  "seri 30": {
+   "tespit": 0.6957,
+   "robot": 0.6188,
+   "n": 20
+  },
+  "seri 32": {
+   "tespit": 0.7746,
+   "robot": 0.6292,
+   "n": 61
+  }
+ },
+ "gate": {
+  "dosya": "results/wire_gate.pkl",
+  "md5": "6cbcc16db49708982b12730c70e50e8c",
+  "sutun": 116,
+  "egitim_verisi": "results/zengin_parite_w2.npz",
+  "aday": 20974,
+  "parca": 1709,
+  "donusum": "zskor",
+  "router": false,
+  "tarih": "2026-08-02",
+  "kanit": "results/w2_veri_etkisi.json",
+  "not": "W2: +110 yeni WEI parcasi. Prospektif 109 parca (results/yeni_wei.npz bolme=='test') EGITIME GIRMEDI, harcanmamis test kumesidir."
+ },
+ "egitim_verisi": "results/zengin_parite_w2.npz",
+ "locked_temiz": 95,
+ "locked_celiskisi": [
+  {
+   "dosya": "PRODUCT_MODEL.md",
+   "bulunan": "98",
+   "baglam": "zır **0.4391 → 0.5801 (+0.141)**, tespit 0.7384 → 0.7538. **98 grup-temiz LOCKED parça harcanmadı.**  ### 🔧 GECENİN ÜÇ K"
+  }
+ ],
+ "dogrulanan_denetim_bulgulari": {
+  "s7_brep_graf_eksik": "g_agiz_cev ve g_yuz_alan HIC hesaplanmiyor (graf_ozellik 10 slot acip yalniz 0-7'yi dolduruyor) ve gercek yuz-kenar komsulugu YOK -> BOSLUK GRAFI DENENMEMIS",
+  "yon_sozlesmesi_bozuk": "robot_cp docstring 'the way the wire goes in' diyor ama olculdu: aday yonleri DISARI bakiyor ((p-merkez).d=+3.99), uretici InsertDirection ICERI (-4.8). sina_kume abs() kullandigi icin metrik bunu GOREMIYOR."
+ },
+ "prospektif_109_durumu": "EGITIME GIRMEDI ama W2'yi dagitma KARARINDA kullanildi -> model secimi acisindan HARCANMISTIR. Bakir sinav yalniz 95 LOCKED."
+}

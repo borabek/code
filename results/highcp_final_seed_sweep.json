@@ -1,0 +1,50 @@
+{
+  "seed_sweep": {
+    "part": [
+      0.807,
+      0.808,
+      0.8059,
+      0.8059,
+      0.8059
+    ],
+    "family": [
+      0.7988,
+      0.7981,
+      0.7977,
+      0.7967,
+      0.797
+    ]
+  },
+  "modes": {
+    "base_product": {
+      "F1": 0.75,
+      "needs": "nothing (RF gate threshold 0.35)",
+      "deployed": true
+    },
+    "metadata_cp_count": {
+      "F1": 0.775,
+      "needs": "manufacturer CP count (top-N)",
+      "deployed": true
+    },
+    "full_stack_highcp": {
+      "F1_leave_part_out": 0.8065,
+      "F1_leave_family_out": 0.7977,
+      "needs": "CP count + high-CP(>=11) 7-model 6k+9k multires + lattice selector",
+      "deployed": false,
+      "note": "family-out is the STRICT unseen-family number"
+    }
+  },
+  "family": {
+    "delta": 0.0089,
+    "verdict": "0.807 (part-out) is family-optimistic by ~0.008; STRICT unseen-family = 0.799",
+    "families": {
+      "1047": 0.632,
+      "2770": 0.375,
+      "3001": 0.771,
+      "3002": 0.552,
+      "3270": 0.758,
+      "3273": 0.69
+    },
+    "worst": "singleton families (2770=0.41, 3002=0.55) collapse -- no similar training"
+  }
+}

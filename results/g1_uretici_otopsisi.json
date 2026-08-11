@@ -1,0 +1,185 @@
+{
+ "CWT": {
+  "F1": 0.15419501133786848,
+  "tp": 34,
+  "fp": 97,
+  "fn": {
+   "ADAY_YOK": 214,
+   "ADAY_KALABALIK": 33,
+   "GATE_REDDI": 27,
+   "ATAMA": 2
+  },
+  "parca": 43,
+  "ort_diag": 94.23548167832513,
+  "ort_gt": 7.209302325581396,
+  "cerceve_ortanca": 9.02324423180985
+ },
+ "WEG": {
+  "F1": 0.1794871794871795,
+  "tp": 7,
+  "fp": 14,
+  "fn": {
+   "ADAY_YOK": 39,
+   "ADAY_KALABALIK": 4,
+   "GATE_REDDI": 7
+  },
+  "parca": 20,
+  "ort_diag": 92.54431582983926,
+  "ort_gt": 2.85,
+  "cerceve_ortanca": 13.336128028386714
+ },
+ "EFX": {
+  "F1": 0.25225225225225223,
+  "tp": 14,
+  "fp": 51,
+  "fn": {
+   "GATE_REDDI": 14,
+   "ADAY_YOK": 16,
+   "ATAMA": 1,
+   "ADAY_KALABALIK": 1
+  },
+  "parca": 15,
+  "ort_diag": 171.88922013779512,
+  "ort_gt": 3.066666666666667,
+  "cerceve_ortanca": 8.187177089039059
+ },
+ "KLM": {
+  "F1": 0.2716049382716049,
+  "tp": 11,
+  "fp": 6,
+  "fn": {
+   "ADAY_KALABALIK": 6,
+   "GATE_REDDI": 6,
+   "ADAY_YOK": 41
+  },
+  "parca": 22,
+  "ort_diag": 81.46392854324591,
+  "ort_gt": 2.909090909090909,
+  "cerceve_ortanca": 12.008850862208359
+ },
+ "MOR": {
+  "F1": 0.2727272727272727,
+  "tp": 3,
+  "fp": 5,
+  "fn": {
+   "ADAY_KALABALIK": 2,
+   "ADAY_YOK": 8,
+   "GATE_REDDI": 1
+  },
+  "parca": 2,
+  "ort_diag": 88.69210429708002,
+  "ort_gt": 7.0,
+  "cerceve_ortanca": 4.971312763971839
+ },
+ "DIN": {
+  "F1": 0.35051546391752575,
+  "tp": 17,
+  "fp": 19,
+  "fn": {
+   "ADAY_YOK": 37,
+   "GATE_REDDI": 5,
+   "ADAY_KALABALIK": 2
+  },
+  "parca": 19,
+  "ort_diag": 73.97531585154596,
+  "ort_gt": 3.210526315789474,
+  "cerceve_ortanca": 7.589910735946
+ },
+ "WIE": {
+  "F1": 0.425531914893617,
+  "tp": 50,
+  "fp": 25,
+  "fn": {
+   "GATE_REDDI": 13,
+   "ADAY_YOK": 86,
+   "ADAY_KALABALIK": 11
+  },
+  "parca": 30,
+  "ort_diag": 87.78183770331133,
+  "ort_gt": 5.333333333333333,
+  "cerceve_ortanca": 9.677451361869199
+ },
+ "CCD": {
+  "F1": 0.45454545454545453,
+  "tp": 30,
+  "fp": 24,
+  "fn": {
+   "ADAY_KALABALIK": 10,
+   "ADAY_YOK": 31,
+   "GATE_REDDI": 7
+  },
+  "parca": 26,
+  "ort_diag": 87.48164562445172,
+  "ort_gt": 3.0,
+  "cerceve_ortanca": 3.905447133628591
+ },
+ "A-B": {
+  "F1": 0.5031446540880503,
+  "tp": 40,
+  "fp": 10,
+  "fn": {
+   "ADAY_KALABALIK": 14,
+   "GATE_REDDI": 16,
+   "ADAY_YOK": 39
+  },
+  "parca": 31,
+  "ort_diag": 87.87828973149917,
+  "ort_gt": 3.5161290322580645,
+  "cerceve_ortanca": 2.500301359547192
+ },
+ "C3": {
+  "F1": 0.5482233502538071,
+  "tp": 54,
+  "fp": 87,
+  "fn": {
+   "GATE_REDDI": 2
+  },
+  "parca": 5,
+  "ort_diag": 110.46783277127531,
+  "ort_gt": 11.2,
+  "cerceve_ortanca": 1.8453853103270765
+ },
+ "CEM": {
+  "F1": 0.5876777251184834,
+  "tp": 124,
+  "fp": 76,
+  "fn": {
+   "ADAY_YOK": 44,
+   "ATAMA": 3,
+   "ADAY_KALABALIK": 44,
+   "GATE_REDDI": 7
+  },
+  "parca": 6,
+  "ort_diag": 138.112540693021,
+  "ort_gt": 37.0,
+  "cerceve_ortanca": 4.171278578051059
+ },
+ "DEG": {
+  "F1": 0.6086956521739131,
+  "tp": 14,
+  "fp": 4,
+  "fn": {
+   "ADAY_KALABALIK": 9,
+   "ADAY_YOK": 4,
+   "GATE_REDDI": 1
+  },
+  "parca": 14,
+  "ort_diag": 68.6802127171878,
+  "ort_gt": 2.0,
+  "cerceve_ortanca": 2.534173607664371
+ },
+ "ELMEX": {
+  "F1": 0.625,
+  "tp": 20,
+  "fp": 4,
+  "fn": {
+   "ADAY_KALABALIK": 11,
+   "GATE_REDDI": 5,
+   "ADAY_YOK": 4
+  },
+  "parca": 17,
+  "ort_diag": 79.70850276113106,
+  "ort_gt": 2.3529411764705883,
+  "cerceve_ortanca": 1.1364561824460861
+ }
+}

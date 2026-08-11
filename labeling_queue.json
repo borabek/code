@@ -1,0 +1,24 @@
+{
+ "priority_1_no_cableentry": [
+  "0294380000",
+  "1552680000",
+  "1SNA511003R0500",
+  "280-835",
+  "3191026",
+  "826-159",
+  "9512190000",
+  "DK4N"
+ ],
+ "priority_2_noisy": [
+  "0711616",
+  "1231700",
+  "1815120000",
+  "2001-1307",
+  "2494000000",
+  "2674770000",
+  "2782550000",
+  "870-837",
+  "880-687"
+ ],
+ "note": "product model (best.pt) still fails these on gen_dev_40 -> human-label queue for _label_targets. Order: no_cableentry first (model finds nothing) then noisy."
+}

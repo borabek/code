@@ -1,0 +1,58 @@
+# v27: THE DATA RUN -- first training on wscad_corpus_v3 (1028 CAD-direct
+# labelled TB parts, deflection 0.5; replaces corpus_v2's 136). Per the
+# measured learning curve (RESULTS 11c: ~300 parts -> ~0.75, ~1300 -> ~0.90)
+# this is the single highest-expected-gain experiment in the project.
+# Recipe = v22/v26 (clean scope), SCRATCH init so the only new variable vs v26
+# is the corpus; if the v25-vs-v26 A/B says synth pretrain helps, v28 = this
+# + init_from.
+# Changes forced by 6.5x data / denser meshes (median 38k verts):
+#   augment 4 -> 1  (1028 unique parts carry the diversity; clones only guard
+#                    pose overfit -- one rotated clone each is enough)
+#   epochs 90 -> 60, patience 10 -> 8  (more steps/epoch, converges sooner)
+#   val/test 0.20/0.15 -> 0.10/0.10  (103 val parts is plenty; keeps eval fast)
+#   snapshot_every 5 -> 10  (C: has only ~4GB free)
+backbone: hierpoint
+run_name: cp_hp_v27_c3
+seed: 0
+split_seed: 0
+exclude_parts_file: pxc_out_of_scope.txt
+extra_sources:
+  - wscad_corpus_v3
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.10
+test_frac: 0.10
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 28000
+
+epochs: 60
+eval_every: 5
+patience: 8
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 10
+
+# augment 1 -> 0 after the 2026-07-11 01:24 OOM: prebuilding 4476 feature
+# tensors (2238 parts x aug1, median 38k verts) exhausted commit on the 31GB
+# box while a full C: blocked pagefile growth (OpenBLAS "allocation failed").
+# 1028 unique parts carry the diversity; pose robustness comes from the
+# corpus size itself. Halves the prebuild footprint.
+augment: 0
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

@@ -1,0 +1,46 @@
+# cp_real_dn — the THESIS'S BACKBONE. DiffusionNet (intrinsic Laplace-Beltrami, multi-
+# scale diffusion) on the UNIFORM-REMESHED corpus. hierpoint-on-remeshed closed the domain
+# gap (STEP F1 0.148, FP 107->7) but was weak overall (val 0.11) because its kNN-PCA
+# curvature washes out on the smoothed remesh. DiffusionNet's intrinsic features suit the
+# remeshed 2-manifold (thesis got test Jaccard 0.51 with it). No init_from (different arch).
+# augment 0 first: each DiffusionNet clone needs a fresh eigenbasis (expensive) -- add later.
+backbone: diffusionnet
+run_name: cp_real_dn
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt
+
+device: cuda
+op_cache_dir: _op_cache
+
+epochs: 90
+eval_every: 5
+patience: 12          # DiffusionNet heat peaks rise slowly; don't early-stop before they clear thresh
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+heatmap_thresh: 0.15  # MONITORING only: DiffusionNet's raw peaks sit below 0.30 early, so val
+                      # decoded 0 and best.ckpt never updated. 0.15 lets val track progress; the
+                      # deployment operating point is locked later via sweep_val.
+
+augment: 0
+aug_rotate: false
+
+dn_eig: 128
+dn_width: 128
+dn_blocks: 4
+dn_dropout: 0.1
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

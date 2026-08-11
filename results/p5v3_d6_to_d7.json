@@ -1,0 +1,90 @@
+{
+ "experiment": "p5v3-resource-selector-v1",
+ "production_changed": false,
+ "train": "D6 only",
+ "validation": "D6 manufacturer-out 8-fold",
+ "test": "D7 locked application; D7 is DEV, not final",
+ "contract": {
+  "resource": "base+cylinder+planar, 0.5mm spatial cluster",
+  "direction": "signed local axes within 8mm + OBB/PCA axes",
+  "null": "joint accept/direction logit versus frozen OOF threshold",
+  "capacity": "at most one signed direction per physical resource",
+  "label_position_axis": "GT axis",
+  "robot": "lateral<=2mm, |axial|<=40mm, signed angle<=10deg"
+ },
+ "selection": {
+  "lambda": 1.0,
+  "null_threshold": 4.489162684760034,
+  "oof": {
+   "robot_f1": 0.2829886276086494,
+   "manufacturer_macro_f1": 0.24974492955639183,
+   "manufacturer_worst_f1": 0.0,
+   "per_manufacturer": {
+    "MOR": 0.22419486864656074,
+    "NIT": 0.0,
+    "ONV": 0.5072247706422018,
+    "S+S": 0.13636363636363638,
+    "SE": 0.29833333333333334,
+    "SUPU": 0.31433333333333335,
+    "UPUN": 0.33916554508748314,
+    "UTL": 0.178343949044586
+   },
+   "accepted": 2631
+  }
+ },
+ "d7": {
+  "robot_f1": 0.2242099113534585,
+  "manufacturer_macro_f1": 0.24966697439884833,
+  "manufacturer_worst_f1": 0.10314307854550114,
+  "per_manufacturer": {
+   "A-B": 0.24098632109431242,
+   "C3": 0.3938536585365854,
+   "CCD": 0.3,
+   "CEM": 0.24852071005917165,
+   "CWT": 0.10314307854550114,
+   "DEG": 0.2484472049689441,
+   "DIN": 0.3741919191919192,
+   "EFX": 0.1693081081081081,
+   "ELMEX": 0.3300970873786407,
+   "KLM": 0.16981132075471697,
+   "WEG": 0.162291169451074,
+   "WIE": 0.25535311469720634
+  },
+  "accepted": 5071
+ },
+ "n_d6_parts": 468,
+ "n_d7_parts": 835,
+ "cache_version": "p5v3-resource-selector-v1",
+ "sources": {
+  "d6": {
+   "cache_path": "C:\\Users\\DE00024082\\Desktop\\code\\results\\_p5v3_selector_d6.pkl",
+   "cache_sha16": "0ac7e3ced36923b4",
+   "source_hashes": {
+    "manifest_sha16": "2c61326664d062ad",
+    "records_sha16": "dbb49d98c93cd348",
+    "cylinders_sha16": "d14a6282e85ae3d4",
+    "planars_sha16": "f34d95539e29353a",
+    "probabilities_sha16": "066b3d1da0671f4a"
+   },
+   "selected_count": 468,
+   "scored_count": 468,
+   "missing_count": 0,
+   "missing_ids": []
+  },
+  "d7": {
+   "cache_path": "C:\\Users\\DE00024082\\Desktop\\code\\results\\_p5v3_selector_d7.pkl",
+   "cache_sha16": "16ef6f8312487fac",
+   "source_hashes": {
+    "manifest_sha16": "20dabad23c74f980",
+    "records_sha16": "e9ea8bfb7c30bdc8",
+    "cylinders_sha16": "8fb2425e558cb21f",
+    "planars_sha16": "629415126b206f4b",
+    "probabilities_sha16": "8fb9efe3e536449c"
+   },
+   "selected_count": 835,
+   "scored_count": 835,
+   "missing_count": 0,
+   "missing_ids": []
+  }
+ }
+}

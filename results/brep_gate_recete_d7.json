@@ -1,0 +1,56 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "GENISLETILMIS (seg + B-rep)": {
+   "kural": "goreli (0.5, 0.2)",
+   "robot": 0.15146010898421125,
+   "tespit": 0.40994830236132457,
+   "makro": 0.17459788860947448,
+   "en_kotu": 0.027698185291308502,
+   "marka": {
+    "CCD": 0.32386363636363635,
+    "KLM": 0.06060606060606061,
+    "A-B": 0.23383768913342504,
+    "EFX": 0.08304498269896193,
+    "WIE": 0.29684055841293167,
+    "CWT": 0.027698185291308502,
+    "DIN": 0.32989690721649484,
+    "WEG": 0.05421686746987952,
+    "CEM": 0.12462908011869436,
+    "DEG": 0.2631578947368421,
+    "ELMEX": 0.26229508196721313,
+    "C3": 0.03508771929824561
+   }
+  }
+ },
+ "taban_tez_saf": {
+  "robot": 0.2029,
+  "tespit": 0.4523
+ },
+ "tavan_genisletilmis": 0.5748,
+ "not": "Urunun gate recetesi (parca_ici zskor PARCA PARCA, RF 400/leaf3) ve urunun karar_skoru ile olculdu. D7 marka-disi, MIKRO. B-rep TEZ TURETMESI DEGIL, ek aday kaynagi."
+}

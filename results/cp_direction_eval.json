@@ -1,0 +1,219 @@
+{
+ "metric": "CP approach-direction vs manufacturer InsertDirection",
+ "ckpt": "results/seg_extra/selftrain_120.pt",
+ "n_matched": 13,
+ "median_deg": 0.0,
+ "within_15_deg": 13,
+ "within_30_deg": 13,
+ "opposite_gt150": 0,
+ "per_cp": [
+  {
+   "part_id": "3036550",
+   "mfg_cp": 0,
+   "pos_err_mm": 3.61,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3036550",
+   "mfg_cp": 1,
+   "pos_err_mm": 3.48,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3036563",
+   "mfg_cp": 0,
+   "pos_err_mm": 3.6,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3036563",
+   "mfg_cp": 1,
+   "pos_err_mm": 3.65,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211813",
+   "mfg_cp": 0,
+   "pos_err_mm": 1.9,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211813",
+   "mfg_cp": 1,
+   "pos_err_mm": 2.14,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211814",
+   "mfg_cp": 0,
+   "pos_err_mm": 2.27,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211814",
+   "mfg_cp": 1,
+   "pos_err_mm": 1.85,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211819",
+   "mfg_cp": 0,
+   "pos_err_mm": 3.18,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211819",
+   "mfg_cp": 1,
+   "pos_err_mm": 1.83,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211822",
+   "mfg_cp": 0,
+   "pos_err_mm": 2.92,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3211822",
+   "mfg_cp": 1,
+   "pos_err_mm": 2.13,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "mfg": [
+    0.0,
+    1.0,
+    0.0
+   ]
+  },
+  {
+   "part_id": "3212140",
+   "mfg_cp": 1,
+   "pos_err_mm": 4.91,
+   "angle_deg": 0.0,
+   "ours": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "mfg": [
+    -0.0,
+    -1.0,
+    0.0
+   ]
+  }
+ ]
+}

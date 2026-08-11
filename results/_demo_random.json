@@ -1,0 +1,234 @@
+{
+ "3001381": [
+  {
+   "point": [
+    5.0534,
+    8.2693,
+    23.8925
+   ],
+   "direction": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "size_mm": 17.49,
+   "depth_mm": 6.18,
+   "confidence": 0.942,
+   "votes": 4,
+   "kind": "CableEntry",
+   "n_verts": 194,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.3031,
+    39.9376,
+    24.675
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 22.58,
+   "depth_mm": 4.84,
+   "confidence": 0.93,
+   "votes": 4,
+   "kind": "CableEntry",
+   "n_verts": 312,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.1379,
+    45.4155,
+    33.3215
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 14.16,
+   "depth_mm": 7.57,
+   "confidence": 0.908,
+   "votes": 4,
+   "kind": "CableEntry",
+   "n_verts": 136,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    4.9714,
+    12.2956,
+    45.4376
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 11.42,
+   "depth_mm": 3.88,
+   "confidence": 0.852,
+   "votes": 4,
+   "kind": "Contact",
+   "n_verts": 90,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.0333,
+    30.7453,
+    44.2079
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 10.41,
+   "depth_mm": 3.36,
+   "confidence": 0.833,
+   "votes": 3,
+   "kind": "Contact",
+   "n_verts": 79,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    4.8087,
+    40.6731,
+    45.6074
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 7.56,
+   "depth_mm": 1.2,
+   "confidence": 0.792,
+   "votes": 3,
+   "kind": "Contact",
+   "n_verts": 48,
+   "tier": "auto"
+  }
+ ],
+ "3001475": [
+  {
+   "point": [
+    5.0457,
+    8.2663,
+    23.889
+   ],
+   "direction": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "size_mm": 17.5,
+   "depth_mm": 9.23,
+   "confidence": 0.942,
+   "votes": 4,
+   "kind": "CableEntry",
+   "n_verts": 192,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.2086,
+    40.0084,
+    24.6234
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 22.63,
+   "depth_mm": 11.34,
+   "confidence": 0.93,
+   "votes": 4,
+   "kind": "CableEntry",
+   "n_verts": 313,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    4.9797,
+    45.5193,
+    33.4126
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 14.2,
+   "depth_mm": 7.69,
+   "confidence": 0.907,
+   "votes": 4,
+   "kind": "CableEntry",
+   "n_verts": 136,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.0963,
+    12.2856,
+    45.5427
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 11.48,
+   "depth_mm": 4.56,
+   "confidence": 0.852,
+   "votes": 4,
+   "kind": "Contact",
+   "n_verts": 88,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.144,
+    30.7936,
+    44.2575
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 10.43,
+   "depth_mm": 3.74,
+   "confidence": 0.825,
+   "votes": 3,
+   "kind": "Contact",
+   "n_verts": 76,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    4.8087,
+    40.6731,
+    45.6074
+   ],
+   "direction": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "size_mm": 7.56,
+   "depth_mm": 2.02,
+   "confidence": 0.795,
+   "votes": 3,
+   "kind": "Contact",
+   "n_verts": 47,
+   "tier": "auto"
+  }
+ ]
+}

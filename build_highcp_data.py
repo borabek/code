@@ -1,0 +1,87 @@
+# -*- coding: utf-8 -*-
+"""Op 4 hazirlik: high-CP PXC genisletilmis havuzu CACHE'le (bir GPU kosusu). Her aday icin:
+part, point (JSON frame), wire_score (sizintisiz RF gate), y (uretici-tel mi), main-axis projeksiyonu.
+Sonra lattice_rerank.py grid mantigini OFFLINE (hizli) dener."""
+import os, sys, json, time
+import numpy as np, torch
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import diffusionnet as D, cp_openings, thesis_remesh, connector3d, wire_gate
+from cad_eval import align_frames
+from infer_step_cp import step_to_mesh, load_any
+from big_arbiter import eligible, CE, CT, OP
+from robot_cp import _vote2
+from sklearn.ensemble import RandomForestClassifier
+
+dev = "cuda" if torch.cuda.is_available() else "cpu"; HICP = 11
+
+
+def derive(V, F, pb, mv, vc, cl):
+    return cp_openings.connection_points(V, F, pb.argmax(-1), min_v=mv, classes=(CE, CT), dedupe_mm=10.0,
+                                         probs=pb, vertex_conf=vc, ct_depth_min_mm=1.0, cluster_mm=cl)
+
+
+def main():
+    d = np.load("results/f1_sweep_data.npz", allow_pickle=True)
+    Xs, ys, grp = d["X"], d["y"], d["groups"]; ngt_of = dict(zip(d["grp_ids"].tolist(), d["ngt"].tolist()))
+    hicp_grp = {g for g in ngt_of if ngt_of[g] >= HICP}; keep = ~np.isin(grp, list(hicp_grp))
+    clf = RandomForestClassifier(n_estimators=400, min_samples_leaf=3, n_jobs=-1, random_state=0).fit(Xs[keep], ys[keep])
+    print(f"gate high-CP-disi egitildi ({keep.sum()} CP)", flush=True)
+
+    cks = json.load(open("cp_config.json"))["robot_vote2_checkpoints"] + ["results/seg_extra/recall_hard_keig128_s0.pt","results/seg_extra/recall_hard_keig128_s1.pt","results/seg_extra/recall_hard_keig128_s2.pt"]
+    models = [load_any(c, dev=dev)[:2] for c in cks]  # 7 model: aday cesitliligi
+    os.environ["BA_ALLOW_SEEN"] = "1"
+    hi = []
+    for mfg, pid, jf, stp in [p for p in eligible() if p[0] == "PXC"]:
+        try:
+            n = len(json.load(open(jf, encoding="utf-8-sig")).get("ConnectionPoints", []))
+            if n >= HICP: hi.append((pid, jf, stp, n))
+        except Exception: pass
+    print(f"high-CP PXC: {len(hi)} parca", flush=True)
+
+    out = {}; t0 = time.time()
+    for k, (pid, jf, stp, n) in enumerate(hi, 1):
+        try:
+            j = json.load(open(jf, encoding="utf-8-sig"))
+            Vj = np.array([[p["X"], p["Y"], p["Z"]] for p in j["Graphic3d"]["Points"]], float)
+            G = np.array([[c["Point"]["X"], c["Point"]["Y"], c["Point"]["Z"]] for c in j.get("ConnectionPoints", [])], float)
+            Gd = np.array([[c["InsertDirection"]["X"], c["InsertDirection"]["Y"], c["InsertDirection"]["Z"]] for c in j.get("ConnectionPoints", [])], float)
+            if not len(G): continue
+            Gd = Gd / (np.linalg.norm(Gd, axis=1, keepdims=True) + 1e-9)
+            Vr, Fr = step_to_mesh(stp)
+            V6, F6 = thesis_remesh.remesh_uniform(Vr, Fr, target=6000); V6 = np.ascontiguousarray(V6, np.float64); F6 = np.ascontiguousarray(F6, np.int64)
+            acc = None; per = []
+            for model, meta in models:
+                _, pb = D.predict(model, meta, V6, F6, device=dev, op_cache_dir=f"{OP}_k{int(meta.get('k_eig',64))}", return_probs=True)
+                pb = np.asarray(pb, float); acc = pb if acc is None else acc+pb; per.append(derive(V6, F6, pb, 30, 0.5, 5.0))
+            avg = acc/len(per)
+            V9, F9 = thesis_remesh.remesh_uniform(Vr, Fr, target=9000); V9 = np.ascontiguousarray(V9, np.float64); F9 = np.ascontiguousarray(F9, np.int64)
+            per9 = []
+            for model, meta in models:
+                _, pb = D.predict(model, meta, V9, F9, device=dev, op_cache_dir=f"{OP}_k{int(meta.get('k_eig',64))}_9k", return_probs=True)
+                per9.append(derive(V9, F9, np.asarray(pb, float), 12, 0.20, 0.0))  # vc 0.2 = daha cok aday
+            cps = _vote2(per + per9)
+            if not cps: continue
+            Xf = wire_gate.feats_for(V6, None, avg, cps, CE, CT)
+            ws = clf.predict_proba(Xf)[:, 1]
+            R, t, _ = align_frames(Vr, Vj)
+            P = np.array([np.asarray(c["point"]) for c in cps], float) @ R.T + t   # JSON frame
+            Dv = np.array([np.asarray(c["direction"], float) for c in cps], float)
+            tol = max(3.0, 0.06 * float(np.linalg.norm(Vj.max(0) - Vj.min(0))))
+            diff = P[:, None, :] - G[None, :, :]; al = (diff * Gd[None, :, :]).sum(-1)
+            pe = np.where(np.abs(al) <= 40.0, np.linalg.norm(diff - al[..., None]*Gd[None, :, :], axis=-1), np.inf)
+            yy = np.zeros(len(P), int); order = sorted((pe[a, b], a, b) for a in range(len(P)) for b in range(len(G)) if pe[a, b] <= tol)
+            up, ug = set(), set()
+            for dd, a, b in order:
+                if a in up or b in ug: continue
+                up.add(a); ug.add(b); yy[a] = 1
+            out[pid] = {"P": P.tolist(), "dir": Dv.tolist(), "ws": ws.tolist(), "y": yy.tolist(), "X": Xf.tolist(),
+                        "N": int(len(G)), "bbox": (Vj.max(0)-Vj.min(0)).tolist()}
+        except Exception:
+            continue
+        if k % 5 == 0: print(f"  {k}/{len(hi)}  {time.time()-t0:.0f}s", flush=True)
+    json.dump(out, open("results/highcp_pool.json", "w"))
+    print(f"-> results/highcp_pool.json ({len(out)} parca) -- lattice_rerank.py offline")
+
+
+if __name__ == "__main__":
+    main()

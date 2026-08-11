@@ -1,0 +1,39 @@
+backbone: knngraph
+run_name: cp_knn_v20_plateau
+extra_sources:
+  - wscad_corpus
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+device: cuda
+max_gpu_verts: 7000
+knn_cache_dir: knn_cache_real
+
+epochs: 70
+eval_every: 5
+patience: 4
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.0005
+lr_schedule: plateau
+lr_decay_every: 2
+lr_decay_rate: 0.5
+weight_decay: 0.0005
+grad_clip: 1.0

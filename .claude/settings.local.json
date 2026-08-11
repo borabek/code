@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "defaultMode": "bypassPermissions",
+    "allow": [
+      "Bash(python -c ' *)",
+      "Bash(.venv/Scripts/python.exe preflight_audit.py wscad_corpus_v8 --exclude-parts-file pxc_out_of_scope.txt)"
+    ]
+  },
+  "skipDangerousModePermissionPrompt": true
+}

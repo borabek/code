@@ -1,0 +1,55 @@
+{
+ "n_cand": 1073,
+ "n_tp": 851,
+ "n_parts": 379,
+ "auc_base": 0.8246366225214639,
+ "auc_channel_only": 0.8039137845248303,
+ "auc_combined": 0.8486571177522999,
+ "delta": 0.024020495230836048,
+ "kill_threshold": 0.02,
+ "verdict": "YASIYOR",
+ "base_ci": [
+  0.7949894551790359,
+  0.8518506818638532
+ ],
+ "combined_ci": [
+  0.8208089260067661,
+  0.8741980466170659
+ ],
+ "standalone": {
+  "serbest_derinlik": 0.4641915711245911,
+  "kesisim_sayisi": 0.49378579519590093,
+  "dip_var": 0.45309439874657265,
+  "kesit_r2": 0.4771969384190301,
+  "kesit_r4": 0.5251479446544076,
+  "kesit_r6": 0.5441293232127544,
+  "daralma": 0.546238659340892,
+  "eksen_sapma": 0.445353108690359,
+  "dip_CE": 0.5114359365240682,
+  "dip_CT": 0.320658790400271
+ },
+ "f1_base": 0.7863,
+ "f1_combined": 0.7895,
+ "f1_delta": 0.0031,
+ "f1_seed_sd": 0.0038,
+ "delta_paired_bootstrap_ci": [
+  0.0074,
+  0.0413
+ ],
+ "seed_deltas_auc": [
+  0.024,
+  0.0265,
+  0.0201,
+  0.0231,
+  0.0199
+ ],
+ "VERDICT_FINAL": "AUC gain REAL but does NOT convert: CP-F1 +0.0031 (within seed noise). Family is DEAD for the product metric.",
+ "methodology_flaw": "Kill criterion was written on AUC; the product metric is CP-F1. Should have been F1 from the start -- AUC +0.024 looked alive, F1 +0.003 is not.",
+ "subset_probe": {
+  "dip_CT_only": 0.0077,
+  "dip_CT+dip_CE": 0.0119,
+  "three_feat": 0.0137,
+  "cross_sections": 0.0078,
+  "all_ten": 0.0235
+ }
+}

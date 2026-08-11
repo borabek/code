@@ -1,0 +1,9 @@
+{
+ "winner": "prob: RF+SetNet",
+ "WORK_ALL": 0.7739082365948038,
+ "WORK_WEI": 0.7420814479638008,
+ "WORK_PXC": 0.7733151803948263,
+ "locked_threshold": 0.34,
+ "deployability_rule": "rank-normalizasyonlu ensemble'lar ELENDI: rank tum korpustan hesaplanir, esik yuzdelige donusur, robot tek parca islerken TANIMSIZ. Sadece olasilik-uzayi birlesimleri aday alindi.",
+ "note": "SADECE WORK (541 parca) uzerinde secildi; kilitli holdout'a dokunulmadi."
+}

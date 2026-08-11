@@ -1,0 +1,1775 @@
+{
+ "n_parts": 77,
+ "n_disagreements": 91,
+ "per_part": {
+  "1231700": 2,
+  "5043321": 1,
+  "3034248": 2,
+  "3073979": 2,
+  "3270047": 2,
+  "3270059": 4,
+  "3270251": 2,
+  "3270269": 3,
+  "3270500": 4,
+  "3270503": 4,
+  "3271055": 2,
+  "3271070": 4,
+  "3271305": 2,
+  "3271317": 3,
+  "3281102": 1,
+  "3281104": 1,
+  "3281105": 1,
+  "3281111": 1,
+  "3034251": 2,
+  "3034264": 2,
+  "3213970": 2,
+  "3248150": 2,
+  "3248152": 2,
+  "3270040": 2,
+  "3270062": 4,
+  "3270254": 2,
+  "3270272": 3,
+  "3270509": 4,
+  "3271050": 2,
+  "3271071": 4,
+  "3271300": 2,
+  "3271320": 4,
+  "3271326": 2,
+  "3280112": 2,
+  "3280114": 4,
+  "3281108": 1,
+  "3281109": 2,
+  "3281112": 2
+ },
+ "items": [
+  {
+   "part_id": "1231700",
+   "dir": "_label_targets",
+   "point": [
+    2.83802,
+    4.6846310526315795,
+    35.25
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9806065339142653,
+   "n_verts": 258,
+   "source": "Contact",
+   "nearest_human_mm": 7.6,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "1231700",
+   "dir": "_label_targets",
+   "point": [
+    2.918362588235294,
+    19.649999176470583,
+    45.850000000000016
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9604449800434656,
+   "n_verts": 258,
+   "source": "Contact",
+   "nearest_human_mm": 7.7,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "5043321",
+   "dir": "_label_targets",
+   "point": [
+    3.0613459,
+    36.8930409,
+    20.820473049999997
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "confidence": 0.8580304748482175,
+   "n_verts": 87,
+   "source": "CableEntry",
+   "nearest_human_mm": 1000000000.0,
+   "tol_mm": 3.7
+  },
+  {
+   "part_id": "3034248",
+   "dir": "_label_targets_2",
+   "point": [
+    6.640969741935486,
+    66.85732661290324,
+    34.6784499032258
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9871184106311226,
+   "n_verts": 390,
+   "source": "Contact",
+   "nearest_human_mm": 8.6,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3034248",
+   "dir": "_label_targets_2",
+   "point": [
+    6.150000000000001,
+    5.542374944444444,
+    34.64914377777777
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9191848557070317,
+   "n_verts": 297,
+   "source": "Contact",
+   "nearest_human_mm": 8.3,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3073979",
+   "dir": "_label_targets_2",
+   "point": [
+    6.15,
+    5.542374944444445,
+    34.64914377777777
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9332141745438343,
+   "n_verts": 297,
+   "source": "Contact",
+   "nearest_human_mm": 8.7,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3073979",
+   "dir": "_label_targets_2",
+   "point": [
+    6.123460342857145,
+    66.87396051428573,
+    34.67465422857142
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9849113347240259,
+   "n_verts": 389,
+   "source": "Contact",
+   "nearest_human_mm": 8.5,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3270047",
+   "dir": "_label_targets_2",
+   "point": [
+    3.9278254411764704,
+    5.9125194117647055,
+    33.38686435294118
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9809774193601343,
+   "n_verts": 323,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 3.6
+  },
+  {
+   "part_id": "3270047",
+   "dir": "_label_targets_2",
+   "point": [
+    3.9150865882352948,
+    43.53886394117648,
+    33.29985255882353
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9883290526744068,
+   "n_verts": 317,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 3.6
+  },
+  {
+   "part_id": "3270059",
+   "dir": "_label_targets_2",
+   "point": [
+    3.8831969375000015,
+    17.392139531249995,
+    33.298949031250004
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.979262478981351,
+   "n_verts": 277,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270059",
+   "dir": "_label_targets_2",
+   "point": [
+    3.829679205882353,
+    54.75561291176473,
+    33.40151823529412
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "confidence": 0.9843064493148908,
+   "n_verts": 277,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270059",
+   "dir": "_label_targets_2",
+   "point": [
+    3.732909866666667,
+    65.62762330000001,
+    33.289067933333335
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9904150393651191,
+   "n_verts": 281,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270059",
+   "dir": "_label_targets_2",
+   "point": [
+    3.8137272424242425,
+    6.822150424242424,
+    33.62178060606061
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9818854432028553,
+   "n_verts": 277,
+   "source": "Contact",
+   "nearest_human_mm": 6.8,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270251",
+   "dir": "_label_targets_2",
+   "point": [
+    6.23644494871795,
+    6.99721294871795,
+    38.75865720512821
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9725364550300266,
+   "n_verts": 391,
+   "source": "Contact",
+   "nearest_human_mm": 8.4,
+   "tol_mm": 4.3
+  },
+  {
+   "part_id": "3270251",
+   "dir": "_label_targets_2",
+   "point": [
+    6.287933214285717,
+    50.570312833333325,
+    38.84704138095238
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9841765058629308,
+   "n_verts": 405,
+   "source": "Contact",
+   "nearest_human_mm": 8.5,
+   "tol_mm": 4.3
+  },
+  {
+   "part_id": "3270269",
+   "dir": "_label_targets_2",
+   "point": [
+    6.093715382352943,
+    67.40562311764705,
+    39.25178782352943
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9873044154348652,
+   "n_verts": 261,
+   "source": "Contact",
+   "nearest_human_mm": 8.5,
+   "tol_mm": 6.0
+  },
+  {
+   "part_id": "3270269",
+   "dir": "_label_targets_2",
+   "point": [
+    6.011995441176473,
+    83.85630517647057,
+    39.322743705882374
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9885661345705126,
+   "n_verts": 262,
+   "source": "Contact",
+   "nearest_human_mm": 8.5,
+   "tol_mm": 6.0
+  },
+  {
+   "part_id": "3270269",
+   "dir": "_label_targets_2",
+   "point": [
+    6.185380484848486,
+    6.959616787878788,
+    38.97728951515151
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.977970350697367,
+   "n_verts": 258,
+   "source": "Contact",
+   "nearest_human_mm": 8.4,
+   "tol_mm": 6.0
+  },
+  {
+   "part_id": "3270500",
+   "dir": "_label_targets_2",
+   "point": [
+    3.5937584285714292,
+    14.564987892857143,
+    44.84594475
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.974059210972743,
+   "n_verts": 222,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270500",
+   "dir": "_label_targets_2",
+   "point": [
+    3.621051785714287,
+    3.918033714285715,
+    29.69731528571429
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9770103728456119,
+   "n_verts": 227,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270500",
+   "dir": "_label_targets_2",
+   "point": [
+    3.8388289333333345,
+    75.81778923333333,
+    27.2917834
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9799466142378285,
+   "n_verts": 236,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270500",
+   "dir": "_label_targets_2",
+   "point": [
+    3.7619520689655173,
+    59.06211779310344,
+    44.96100051724138
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9800730257442122,
+   "n_verts": 228,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270503",
+   "dir": "_label_targets_2",
+   "point": [
+    3.593739714285715,
+    14.564987607142857,
+    44.84582728571428
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9741173505961273,
+   "n_verts": 223,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270503",
+   "dir": "_label_targets_2",
+   "point": [
+    3.576973000000001,
+    4.003638703703704,
+    29.649096925925917
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9781308963610386,
+   "n_verts": 227,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270503",
+   "dir": "_label_targets_2",
+   "point": [
+    3.8388289333333345,
+    75.81778923333333,
+    27.2917834
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9800376475783391,
+   "n_verts": 236,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270503",
+   "dir": "_label_targets_2",
+   "point": [
+    3.761952068965518,
+    59.06211779310344,
+    44.96100051724138
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9805853929784564,
+   "n_verts": 228,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3271055",
+   "dir": "_label_targets_2",
+   "point": [
+    4.143050000000001,
+    47.50043286486488,
+    30.595662891891884
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9865560841874993,
+   "n_verts": 341,
+   "source": "Contact",
+   "nearest_human_mm": 4.6,
+   "tol_mm": 4.0
+  },
+  {
+   "part_id": "3271055",
+   "dir": "_label_targets_2",
+   "point": [
+    4.549944068965517,
+    8.544847,
+    33.15376658620689
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9777225338850154,
+   "n_verts": 332,
+   "source": "Contact",
+   "nearest_human_mm": 7.3,
+   "tol_mm": 4.0
+  },
+  {
+   "part_id": "3271070",
+   "dir": "_label_targets_2",
+   "point": [
+    4.589528151515153,
+    7.465508666666665,
+    33.40022939393939
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9805285642233986,
+   "n_verts": 320,
+   "source": "Contact",
+   "nearest_human_mm": 7.5,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271070",
+   "dir": "_label_targets_2",
+   "point": [
+    4.705456312500001,
+    19.13149575,
+    33.15919362500001
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9764830991547442,
+   "n_verts": 317,
+   "source": "Contact",
+   "nearest_human_mm": 7.3,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271070",
+   "dir": "_label_targets_2",
+   "point": [
+    4.326412937500001,
+    57.964164250000024,
+    33.3544010625
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9901191078372401,
+   "n_verts": 313,
+   "source": "Contact",
+   "nearest_human_mm": 7.4,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271070",
+   "dir": "_label_targets_2",
+   "point": [
+    4.542011656250001,
+    69.9059741875,
+    33.402315781249996
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9884479388486983,
+   "n_verts": 323,
+   "source": "Contact",
+   "nearest_human_mm": 7.5,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271305",
+   "dir": "_label_targets_2",
+   "point": [
+    2.575112864864865,
+    41.17525513513515,
+    28.972711027027024
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.987785322417669,
+   "n_verts": 339,
+   "source": "Contact",
+   "nearest_human_mm": 5.0,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3271305",
+   "dir": "_label_targets_2",
+   "point": [
+    2.6259731428571422,
+    6.5671729999999995,
+    29.091254314285713
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9866750637393684,
+   "n_verts": 335,
+   "source": "Contact",
+   "nearest_human_mm": 5.0,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3271317",
+   "dir": "_label_targets_2",
+   "point": [
+    2.6019083870967736,
+    5.400265161290322,
+    28.918304806451612
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9798855849366257,
+   "n_verts": 230,
+   "source": "Contact",
+   "nearest_human_mm": 4.6,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3271317",
+   "dir": "_label_targets_2",
+   "point": [
+    2.7172200285714285,
+    14.56294937142857,
+    28.94830568571428
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9714382912689473,
+   "n_verts": 231,
+   "source": "Contact",
+   "nearest_human_mm": 4.6,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3271317",
+   "dir": "_label_targets_2",
+   "point": [
+    2.5425498749999997,
+    57.832315124999994,
+    29.00333659375
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9870066303807778,
+   "n_verts": 233,
+   "source": "Contact",
+   "nearest_human_mm": 4.8,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3281102",
+   "dir": "_label_targets_2",
+   "point": [
+    4.634523625000001,
+    34.43455933333333,
+    27.139372874999996
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.8681243724917966,
+   "n_verts": 159,
+   "source": "Contact",
+   "nearest_human_mm": 4.0,
+   "tol_mm": 3.2
+  },
+  {
+   "part_id": "3281104",
+   "dir": "_label_targets_2",
+   "point": [
+    10.634715414634151,
+    34.319716926829265,
+    29.642134560975624
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9816854062112602,
+   "n_verts": 370,
+   "source": "Contact",
+   "nearest_human_mm": 5.5,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3281105",
+   "dir": "_label_targets_2",
+   "point": [
+    4.904097897435897,
+    7.819056256410258,
+    29.55049938461539
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9083045379585689,
+   "n_verts": 375,
+   "source": "Contact",
+   "nearest_human_mm": 5.4,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3281111",
+   "dir": "_label_targets_2",
+   "point": [
+    12.580663538461543,
+    35.498013820512824,
+    33.36725133333333
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9911760540640208,
+   "n_verts": 463,
+   "source": "Contact",
+   "nearest_human_mm": 7.3,
+   "tol_mm": 3.4
+  },
+  {
+   "part_id": "3034251",
+   "dir": "_label_targets_3",
+   "point": [
+    6.150000000000001,
+    5.542374944444445,
+    34.64914377777778
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9338180414420854,
+   "n_verts": 297,
+   "source": "Contact",
+   "nearest_human_mm": 9.8,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3034251",
+   "dir": "_label_targets_3",
+   "point": [
+    6.22280946875,
+    66.58308534375,
+    34.72561637499999
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.986865056782133,
+   "n_verts": 384,
+   "source": "Contact",
+   "nearest_human_mm": 8.6,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3034264",
+   "dir": "_label_targets_3",
+   "point": [
+    6.15,
+    5.542374944444445,
+    34.64914377777777
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9346961621550466,
+   "n_verts": 297,
+   "source": "Contact",
+   "nearest_human_mm": 9.8,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3034264",
+   "dir": "_label_targets_3",
+   "point": [
+    6.133682352941178,
+    66.85368585294118,
+    34.67812658823528
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9872226216323635,
+   "n_verts": 386,
+   "source": "Contact",
+   "nearest_human_mm": 8.6,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3213970",
+   "dir": "_label_targets_3",
+   "point": [
+    4.638157083333333,
+    60.41576577777778,
+    30.7091088611111
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9839145116733783,
+   "n_verts": 352,
+   "source": "Contact",
+   "nearest_human_mm": 7.3,
+   "tol_mm": 4.7
+  },
+  {
+   "part_id": "3213970",
+   "dir": "_label_targets_3",
+   "point": [
+    4.617753257142858,
+    15.404310828571429,
+    36.98575908571429
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9038148404818664,
+   "n_verts": 349,
+   "source": "Contact",
+   "nearest_human_mm": 7.3,
+   "tol_mm": 4.7
+  },
+  {
+   "part_id": "3248150",
+   "dir": "_label_targets_3",
+   "point": [
+    2.8519724651162806,
+    4.382876465116279,
+    23.142109465116278
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9923920563082185,
+   "n_verts": 631,
+   "source": "Contact",
+   "nearest_human_mm": 5.8,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3248150",
+   "dir": "_label_targets_3",
+   "point": [
+    2.7734657619047627,
+    17.770366833333327,
+    23.079241642857134
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9920630654956721,
+   "n_verts": 632,
+   "source": "Contact",
+   "nearest_human_mm": 5.7,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3248152",
+   "dir": "_label_targets_3",
+   "point": [
+    2.853625674418606,
+    4.393916279069767,
+    23.13895660465116
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9919331435601421,
+   "n_verts": 632,
+   "source": "Contact",
+   "nearest_human_mm": 5.7,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3248152",
+   "dir": "_label_targets_3",
+   "point": [
+    2.7565832439024396,
+    17.737140731707314,
+    23.083391829268287
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9919864210859531,
+   "n_verts": 631,
+   "source": "Contact",
+   "nearest_human_mm": 5.8,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3270040",
+   "dir": "_label_targets_3",
+   "point": [
+    3.8942729411764714,
+    42.992272058823524,
+    33.26855588235294
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9882209516126357,
+   "n_verts": 308,
+   "source": "Contact",
+   "nearest_human_mm": 6.3,
+   "tol_mm": 3.6
+  },
+  {
+   "part_id": "3270040",
+   "dir": "_label_targets_3",
+   "point": [
+    3.942434351351353,
+    5.484168189189189,
+    33.53642451351351
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9837777594787187,
+   "n_verts": 321,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 3.6
+  },
+  {
+   "part_id": "3270062",
+   "dir": "_label_targets_3",
+   "point": [
+    3.8825368125000015,
+    17.39209234375,
+    33.298949031250004
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9797432667583621,
+   "n_verts": 277,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270062",
+   "dir": "_label_targets_3",
+   "point": [
+    3.790184454545454,
+    54.791766393939405,
+    33.44298118181818
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "confidence": 0.9847548027833304,
+   "n_verts": 280,
+   "source": "Contact",
+   "nearest_human_mm": 6.6,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270062",
+   "dir": "_label_targets_3",
+   "point": [
+    3.7329098666666662,
+    65.62762330000002,
+    33.289067933333335
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.99046628656195,
+   "n_verts": 281,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270062",
+   "dir": "_label_targets_3",
+   "point": [
+    3.813727242424244,
+    6.822150424242424,
+    33.621780606060604
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9813374898004414,
+   "n_verts": 274,
+   "source": "Contact",
+   "nearest_human_mm": 6.7,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270254",
+   "dir": "_label_targets_3",
+   "point": [
+    6.236444948717951,
+    6.99721294871795,
+    38.758657205128216
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9721717782254912,
+   "n_verts": 390,
+   "source": "Contact",
+   "nearest_human_mm": 8.4,
+   "tol_mm": 4.3
+  },
+  {
+   "part_id": "3270254",
+   "dir": "_label_targets_3",
+   "point": [
+    6.280586023809526,
+    50.57031283333332,
+    38.87412471428572
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.984850977095637,
+   "n_verts": 404,
+   "source": "Contact",
+   "nearest_human_mm": 8.5,
+   "tol_mm": 4.3
+  },
+  {
+   "part_id": "3270272",
+   "dir": "_label_targets_3",
+   "point": [
+    6.0937153823529435,
+    67.40562311764705,
+    39.25178782352942
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9872337076551306,
+   "n_verts": 261,
+   "source": "Contact",
+   "nearest_human_mm": 8.5,
+   "tol_mm": 6.0
+  },
+  {
+   "part_id": "3270272",
+   "dir": "_label_targets_3",
+   "point": [
+    5.99132281818182,
+    83.71873615151515,
+    39.23555412121214
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9896833611174105,
+   "n_verts": 261,
+   "source": "Contact",
+   "nearest_human_mm": 8.4,
+   "tol_mm": 6.0
+  },
+  {
+   "part_id": "3270272",
+   "dir": "_label_targets_3",
+   "point": [
+    6.185380484848486,
+    6.959616787878788,
+    38.97728951515153
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9778284100907101,
+   "n_verts": 258,
+   "source": "Contact",
+   "nearest_human_mm": 8.4,
+   "tol_mm": 6.0
+  },
+  {
+   "part_id": "3270509",
+   "dir": "_label_targets_3",
+   "point": [
+    3.769883607142858,
+    14.514999071428567,
+    44.65116485714287
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9793078112746075,
+   "n_verts": 221,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270509",
+   "dir": "_label_targets_3",
+   "point": [
+    3.625320571428572,
+    3.921420214285714,
+    29.697869071428563
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9755008916060129,
+   "n_verts": 228,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270509",
+   "dir": "_label_targets_3",
+   "point": [
+    3.7960201562500013,
+    75.83192418749998,
+    27.196702531249997
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9831489091791676,
+   "n_verts": 236,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3270509",
+   "dir": "_label_targets_3",
+   "point": [
+    3.761952068965518,
+    59.118596551724146,
+    44.743894999999995
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9817855874265451,
+   "n_verts": 230,
+   "source": "Contact",
+   "nearest_human_mm": 6.3,
+   "tol_mm": 5.8
+  },
+  {
+   "part_id": "3271050",
+   "dir": "_label_targets_3",
+   "point": [
+    4.532018275862069,
+    8.441398724137933,
+    33.28691234482759
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9839189531600323,
+   "n_verts": 337,
+   "source": "Contact",
+   "nearest_human_mm": 7.4,
+   "tol_mm": 4.0
+  },
+  {
+   "part_id": "3271050",
+   "dir": "_label_targets_3",
+   "point": [
+    4.456698366666668,
+    47.71517626666667,
+    33.39452253333334
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9858972697874198,
+   "n_verts": 345,
+   "source": "Contact",
+   "nearest_human_mm": 7.4,
+   "tol_mm": 4.0
+  },
+  {
+   "part_id": "3271071",
+   "dir": "_label_targets_3",
+   "point": [
+    4.635424382352942,
+    7.425346647058822,
+    33.421546176470585
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9803369331830263,
+   "n_verts": 321,
+   "source": "Contact",
+   "nearest_human_mm": 7.5,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271071",
+   "dir": "_label_targets_3",
+   "point": [
+    4.705456312500001,
+    19.13149575,
+    33.15919362500001
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9762082241116331,
+   "n_verts": 318,
+   "source": "Contact",
+   "nearest_human_mm": 7.3,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271071",
+   "dir": "_label_targets_3",
+   "point": [
+    4.326412937500001,
+    57.96416425000002,
+    33.3544010625
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9902056940891747,
+   "n_verts": 313,
+   "source": "Contact",
+   "nearest_human_mm": 7.4,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271071",
+   "dir": "_label_targets_3",
+   "point": [
+    4.542170437500002,
+    69.90744353125,
+    33.402315781249996
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9880269859351365,
+   "n_verts": 323,
+   "source": "Contact",
+   "nearest_human_mm": 7.5,
+   "tol_mm": 5.1
+  },
+  {
+   "part_id": "3271300",
+   "dir": "_label_targets_3",
+   "point": [
+    2.5891656756756753,
+    39.78859397297298,
+    28.983034459459457
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9871468245983124,
+   "n_verts": 349,
+   "source": "Contact",
+   "nearest_human_mm": 4.8,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3271300",
+   "dir": "_label_targets_3",
+   "point": [
+    2.6011954571428575,
+    5.310755771428571,
+    29.10891214285714
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9872793314126572,
+   "n_verts": 344,
+   "source": "Contact",
+   "nearest_human_mm": 5.1,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3271320",
+   "dir": "_label_targets_3",
+   "point": [
+    2.608484258064516,
+    5.378951451612902,
+    28.918305129032255
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9784492807728904,
+   "n_verts": 231,
+   "source": "Contact",
+   "nearest_human_mm": 4.6,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3271320",
+   "dir": "_label_targets_3",
+   "point": [
+    2.6880338529411767,
+    14.492311176470587,
+    28.820506382352942
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9743696665781058,
+   "n_verts": 231,
+   "source": "Contact",
+   "nearest_human_mm": 4.5,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3271320",
+   "dir": "_label_targets_3",
+   "point": [
+    2.5401816249999998,
+    57.832761906250006,
+    29.00333675
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9869042980739147,
+   "n_verts": 233,
+   "source": "Contact",
+   "nearest_human_mm": 4.8,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3271320",
+   "dir": "_label_targets_3",
+   "point": [
+    2.7107064,
+    48.4096838,
+    29.031683533333325
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9840444895899159,
+   "n_verts": 232,
+   "source": "Contact",
+   "nearest_human_mm": 4.9,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3271326",
+   "dir": "_label_targets_3",
+   "point": [
+    2.647695793103448,
+    5.188949551724138,
+    28.99761127586207
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9734505472336223,
+   "n_verts": 187,
+   "source": "Contact",
+   "nearest_human_mm": 4.6,
+   "tol_mm": 4.6
+  },
+  {
+   "part_id": "3271326",
+   "dir": "_label_targets_3",
+   "point": [
+    2.5974636470588233,
+    60.347721352941164,
+    29.074039882352942
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.981541589339986,
+   "n_verts": 193,
+   "source": "Contact",
+   "nearest_human_mm": 4.7,
+   "tol_mm": 4.6
+  },
+  {
+   "part_id": "3280112",
+   "dir": "_label_targets_3",
+   "point": [
+    3.827599823529413,
+    5.655594970588237,
+    33.35127573529411
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9829129170613601,
+   "n_verts": 388,
+   "source": "Contact",
+   "nearest_human_mm": 7.0,
+   "tol_mm": 4.0
+  },
+  {
+   "part_id": "3280112",
+   "dir": "_label_targets_3",
+   "point": [
+    3.683480756756758,
+    50.43058743243243,
+    33.46207454054054
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9884734707717211,
+   "n_verts": 399,
+   "source": "Contact",
+   "nearest_human_mm": 7.0,
+   "tol_mm": 4.0
+  },
+  {
+   "part_id": "3280114",
+   "dir": "_label_targets_3",
+   "point": [
+    3.7747465517241388,
+    61.95873920689655,
+    33.226427758620694
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.988917566947083,
+   "n_verts": 268,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3280114",
+   "dir": "_label_targets_3",
+   "point": [
+    3.6656383333333347,
+    72.9142018,
+    33.31371943333333
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9879362600148092,
+   "n_verts": 269,
+   "source": "Contact",
+   "nearest_human_mm": 6.6,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3280114",
+   "dir": "_label_targets_3",
+   "point": [
+    3.8938024814814813,
+    17.391021592592594,
+    33.142792222222226
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9772741050304223,
+   "n_verts": 256,
+   "source": "Contact",
+   "nearest_human_mm": 6.4,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3280114",
+   "dir": "_label_targets_3",
+   "point": [
+    3.8601731379310342,
+    6.984802137931035,
+    33.339839275862076
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.986113056270959,
+   "n_verts": 258,
+   "source": "Contact",
+   "nearest_human_mm": 6.5,
+   "tol_mm": 5.3
+  },
+  {
+   "part_id": "3281108",
+   "dir": "_label_targets_3",
+   "point": [
+    5.7167918085106395,
+    35.399731957446825,
+    33.45139270212766
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.978314982562772,
+   "n_verts": 389,
+   "source": "Contact",
+   "nearest_human_mm": 3.8,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3281109",
+   "dir": "_label_targets_3",
+   "point": [
+    5.792530851063832,
+    6.616013446808514,
+    33.338732680851074
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.978359569500468,
+   "n_verts": 361,
+   "source": "Contact",
+   "nearest_human_mm": 3.9,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3281109",
+   "dir": "_label_targets_3",
+   "point": [
+    5.71244112244898,
+    35.127766285714294,
+    33.567730244897966
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.979647977090168,
+   "n_verts": 361,
+   "source": "Contact",
+   "nearest_human_mm": 4.0,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3281112",
+   "dir": "_label_targets_3",
+   "point": [
+    12.511480976190482,
+    35.18856661904763,
+    33.58182371428572
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.987421486163417,
+   "n_verts": 458,
+   "source": "Contact",
+   "nearest_human_mm": 7.5,
+   "tol_mm": 3.4
+  },
+  {
+   "part_id": "3281112",
+   "dir": "_label_targets_3",
+   "point": [
+    12.549123026315796,
+    6.490548789473684,
+    33.43850036842105
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "confidence": 0.9824777379566926,
+   "n_verts": 458,
+   "source": "Contact",
+   "nearest_human_mm": 7.3,
+   "tol_mm": 3.4
+  }
+ ]
+}

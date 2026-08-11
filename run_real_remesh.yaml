@@ -1,0 +1,44 @@
+# cp_real_remesh — THE THESIS FIX. Identical to run_real_v1.yaml but trains on the
+# UNIFORM-REMESHED corpus (_remeshed: every part isotropic-remeshed to ~6000 vertices, so
+# tessellation is normalised). At inference the STEP mesh is remeshed the SAME way, so
+# JSON-train and STEP-infer share one tessellation and hierpoint's kNN-PCA features MATCH.
+# Single lever vs cp_real_v1 = uniform remeshing. Baseline: cp_real_v1 STEP transfer 0.093.
+backbone: hierpoint
+init_from: checkpoints/cp_hp_pretrain_synth_best.ckpt
+run_name: cp_real_remesh
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 48000
+knn_cache_dir: _prep_cache_rm
+
+epochs: 90
+eval_every: 5
+patience: 8
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+
+augment: 2
+aug_rotate: false
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

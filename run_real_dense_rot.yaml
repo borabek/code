@@ -1,0 +1,46 @@
+# cp_real_dense_rot — density + FRAME. Identical to run_real_dense.yaml but adds
+# aug_cube_rotate: each augmented clone is one of the 24 octahedral (axis-preserving)
+# rotations, teaching the model frame/axis-permutation invariance (STEP arrives in a
+# signed-axis-permuted frame vs JSON). Tested NATIVE (no pre-align) = deployment-realistic.
+# vs cp_real_dense (density only, tested with pre-align): isolates whether cube-rotation
+# lets the model handle STEP's frame on its own. Baseline: cp_real_v1 STEP native 0.093.
+backbone: hierpoint
+init_from: checkpoints/cp_hp_pretrain_synth_best.ckpt
+run_name: cp_real_dense_rot
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 48000
+knn_cache_dir: _prep_cache_dense
+
+epochs: 90
+eval_every: 5
+patience: 8
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+
+augment: 2
+aug_rotate: false
+aug_cube_rotate: true
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

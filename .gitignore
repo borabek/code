@@ -1,0 +1,85 @@
+# KONTROL NOKTASI .gitignore -- 2026-08-11
+# Dizin 50+ GB. Politika: HER SEYI yoksay, sonra yalniz kod/config/makbuz geri al.
+# Sonra da buyuk turetilmis dizinleri (3. blogu ezerek) tamamen disarida birak.
+# Model agirliklari git'te DEGIL -- onlar `_KN_2026-08-11/` icinde fiziksel kopya
+# + SHA-256 manifesto olarak tutulur (bkz. `geri_al.py`).
+
+# --- 1) her sey disarida
+*
+
+# --- 2) dizinlere inebil
+!*/
+
+# --- 3) kod / config / makbuz geri
+!*.py
+!*.md
+!*.json
+!*.toml
+!*.cfg
+!*.ini
+!*.txt
+!*.sh
+!*.yml
+!*.yaml
+!.gitignore
+
+# --- 4) buyuk / turetilmis dizinler TAMAMEN disarida
+.venv/
+.pytest_cache/
+__pycache__/
+.remember/
+.agents/
+.codex/
+_KN_*/
+checkpoints/
+all_wscad_stp/
+stp_data/
+3d models/
+abb_samples/
+all_connectors/
+real_json/
+rect_slot_verified/
+knn_cache_smoke/
+knn_cache_synth/
+wscad_corpus_scheffler_exact/
+_arsiv/
+_ds1/
+_ds2/
+_ds3/
+_label_*/
+_mfg_labels*/
+_p2_*/
+_cp_*/
+_cad_eval_pxc/
+_diffusion_net_repo/
+_dltest/
+_eec_extra/
+_eplan_mac/
+_KARANTINA_*/
+_QUARANTINE_*/
+_m0_*/
+_scheffler_*/
+_stp_project/
+_synth_*/
+_viz*/
+_wspak/
+_wsprofile/
+
+# --- 5) results: YALNIZ ust duzey json makbuzlar (10.2 MB, 678 dosya)
+results/*
+!results/*.json
+
+# --- 6) her yerde yasak uzantilar (guvenlik agi)
+*.pkl
+*.pt
+*.npz
+*.npy
+*.log
+*.stp
+*.step
+*.glb
+*.stl
+*.obj
+*.ply
+*.zip
+*.7z

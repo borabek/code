@@ -1,0 +1,2194 @@
+{
+ "tag": "fair_adj_pxc_s0",
+ "ckpts": [
+  "results/seg_extra/adj_s0.pt"
+ ],
+ "n_parts": 242,
+ "n_cps": 1076,
+ "precision": 0.7618,
+ "recall": 0.5112,
+ "f1": 0.6118,
+ "cluster_mm": 5.0,
+ "min_v": 45,
+ "remesh_target": 6000,
+ "per_part": [
+  {
+   "mfg": "PXC",
+   "part_id": "0441041",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "0442079",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1017448",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1047455",
+   "mfg_cps": 19,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 19
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1078962",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1082479",
+   "mfg_cps": 6,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1082480",
+   "mfg_cps": 6,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1086498",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1088742",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1329672",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "1923160",
+   "mfg_cps": 3,
+   "pred": 4,
+   "tp": 3,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "2716305",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 1,
+   "fp": 2,
+   "fn": 3
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "2716376",
+   "mfg_cps": 6,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "2770943",
+   "mfg_cps": 32,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 32
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3001871",
+   "mfg_cps": 16,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 15
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3001879",
+   "mfg_cps": 32,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 32
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3001939",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3002605",
+   "mfg_cps": 5,
+   "pred": 5,
+   "tp": 4,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3002617",
+   "mfg_cps": 5,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3002618",
+   "mfg_cps": 5,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3002926",
+   "mfg_cps": 18,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 17
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3002928",
+   "mfg_cps": 6,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 5
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3004100",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3005073",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3007929",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3009105",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3010013",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3010110",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3024407",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3025150",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3025163",
+   "mfg_cps": 1,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031076",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031225",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031238",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031241",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031267",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031270",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031364",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031377",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031380",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031487",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031490",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031500",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3031623",
+   "mfg_cps": 4,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 3
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3033029",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3033184",
+   "mfg_cps": 4,
+   "pred": 5,
+   "tp": 4,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3034015",
+   "mfg_cps": 1,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035250",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035289",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035373",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035483",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035519",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035551",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035577",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035580",
+   "mfg_cps": 6,
+   "pred": 6,
+   "tp": 6,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3035694",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036026",
+   "mfg_cps": 4,
+   "pred": 5,
+   "tp": 4,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036042",
+   "mfg_cps": 6,
+   "pred": 5,
+   "tp": 5,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036055",
+   "mfg_cps": 7,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 6
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036110",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036136",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036149",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036165",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036178",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036288",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036495",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036534",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036550",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036563",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3037151",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3037164",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3037504",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3037795",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3037892",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3038639",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3038778",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3042858",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044157",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044173",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044199",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044209",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044212",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044225",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044241",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044636",
+   "mfg_cps": 4,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044679",
+   "mfg_cps": 4,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044746",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3044788",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3045596",
+   "mfg_cps": 1,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046032",
+   "mfg_cps": 2,
+   "pred": 7,
+   "tp": 2,
+   "fp": 5,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046090",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046140",
+   "mfg_cps": 3,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046236",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046317",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046443",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046595",
+   "mfg_cps": 1,
+   "pred": 4,
+   "tp": 1,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046728",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3046760",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3047647",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3047663",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3047730",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3048027",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3048836",
+   "mfg_cps": 4,
+   "pred": 5,
+   "tp": 4,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3049000",
+   "mfg_cps": 4,
+   "pred": 2,
+   "tp": 0,
+   "fp": 2,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3049013",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3049411",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 1,
+   "fp": 2,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3050196",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3050407",
+   "mfg_cps": 3,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 3
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3060270",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3060306",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3060319",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3060500",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3060555",
+   "mfg_cps": 1,
+   "pred": 3,
+   "tp": 1,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3060571",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3060584",
+   "mfg_cps": 1,
+   "pred": 3,
+   "tp": 1,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3061762",
+   "mfg_cps": 1,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3062744",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3070134",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3070300",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3070338",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3070354",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3071356",
+   "mfg_cps": 4,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3071359",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3072817",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 1,
+   "fp": 2,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3073050",
+   "mfg_cps": 4,
+   "pred": 6,
+   "tp": 4,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3073063",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 3,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3073270",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3073296",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3073856",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3073869",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3073995",
+   "mfg_cps": 3,
+   "pred": 7,
+   "tp": 2,
+   "fp": 5,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3074460",
+   "mfg_cps": 4,
+   "pred": 6,
+   "tp": 4,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3100059",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3100075",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3100101",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3121012",
+   "mfg_cps": 4,
+   "pred": 6,
+   "tp": 4,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3121025",
+   "mfg_cps": 4,
+   "pred": 6,
+   "tp": 4,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3205035",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3206555",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3208155",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3208197",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3208511",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3209517",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 1,
+   "fp": 2,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3209578",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3209594",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3209595",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3209604",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3209612",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3209636",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210156",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210230",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210251",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210282",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210302",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210312",
+   "mfg_cps": 3,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210321",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210341",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210542",
+   "mfg_cps": 7,
+   "pred": 6,
+   "tp": 3,
+   "fp": 3,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210545",
+   "mfg_cps": 5,
+   "pred": 5,
+   "tp": 5,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210567",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3210596",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211022",
+   "mfg_cps": 4,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211254",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211431",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211757",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211760",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211766",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211771",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211797",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211809",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211813",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211819",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211822",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211861",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 1,
+   "fp": 2,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211903",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211909",
+   "mfg_cps": 4,
+   "pred": 5,
+   "tp": 4,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211913",
+   "mfg_cps": 4,
+   "pred": 5,
+   "tp": 4,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211929",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211991",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211999",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212002",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212064",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212066",
+   "mfg_cps": 2,
+   "pred": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212075",
+   "mfg_cps": 8,
+   "pred": 8,
+   "tp": 6,
+   "fp": 2,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212131",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212133",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212138",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212139",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212142",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212145",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212147",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212148",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212169",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212201",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212363",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3213601",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3213603",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3213605",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3213945",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3214048",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3214259",
+   "mfg_cps": 6,
+   "pred": 5,
+   "tp": 3,
+   "fp": 2,
+   "fn": 3
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3214368",
+   "mfg_cps": 4,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3214709",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3216066",
+   "mfg_cps": 3,
+   "pred": 4,
+   "tp": 3,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3244300",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 0,
+   "fp": 3,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3244410",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3244517",
+   "mfg_cps": 5,
+   "pred": 5,
+   "tp": 5,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3244559",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3245969",
+   "mfg_cps": 4,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3248101",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3248117",
+   "mfg_cps": 1,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3260050",
+   "mfg_cps": 2,
+   "pred": 6,
+   "tp": 2,
+   "fp": 4,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3260057",
+   "mfg_cps": 6,
+   "pred": 8,
+   "tp": 6,
+   "fp": 2,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3260060",
+   "mfg_cps": 10,
+   "pred": 5,
+   "tp": 4,
+   "fp": 1,
+   "fn": 6
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3260100",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3260139",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3260142",
+   "mfg_cps": 2,
+   "pred": 5,
+   "tp": 2,
+   "fp": 3,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3270082",
+   "mfg_cps": 3,
+   "pred": 3,
+   "tp": 3,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3270085",
+   "mfg_cps": 4,
+   "pred": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3270106",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3270121",
+   "mfg_cps": 16,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 15
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3270137",
+   "mfg_cps": 32,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 32
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3270230",
+   "mfg_cps": 32,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 32
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273024",
+   "mfg_cps": 12,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 11
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273046",
+   "mfg_cps": 18,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 17
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273070",
+   "mfg_cps": 7,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 6
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273092",
+   "mfg_cps": 13,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 12
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273110",
+   "mfg_cps": 19,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 19
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273112",
+   "mfg_cps": 19,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 19
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273136",
+   "mfg_cps": 6,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273176",
+   "mfg_cps": 18,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 18
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273178",
+   "mfg_cps": 18,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 18
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273224",
+   "mfg_cps": 13,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 11
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273246",
+   "mfg_cps": 19,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 19
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273278",
+   "mfg_cps": 6,
+   "pred": 4,
+   "tp": 3,
+   "fp": 1,
+   "fn": 3
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273382",
+   "mfg_cps": 19,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 19
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273388",
+   "mfg_cps": 19,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 19
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273658",
+   "mfg_cps": 6,
+   "pred": 3,
+   "tp": 2,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273724",
+   "mfg_cps": 7,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 6
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273726",
+   "mfg_cps": 7,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 6
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3273748",
+   "mfg_cps": 13,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 11
+  }
+ ]
+}

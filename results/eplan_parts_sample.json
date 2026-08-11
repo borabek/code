@@ -1,0 +1,1991 @@
+{
+ "meta": {
+  "facets_counts": [],
+  "facets_available": [
+   "data_type",
+   "standard",
+   "eclass_catalog",
+   "eplan_catalog",
+   "manufacturers",
+   "configurator",
+   "eplan_data_standard"
+  ],
+  "page": {
+   "offset": 0,
+   "limit": 10,
+   "total": 2392354
+  }
+ },
+ "data": [
+  {
+   "type": "parts",
+   "id": "2325240",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.UCD-CA01B-1512-HAY0-2RV",
+    "order_number": "UCD-CA01B-1512-HAY0-2RV",
+    "type_number": "UCD-CA01B-1512-HAY0-2RV",
+    "designation": {
+     "en_US": "POSITAL IXARC UCD-CA01B-1512-HAY0-2RV CANopen Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 1,
+    "part_type": "component",
+    "version": "0",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-01-16",
+    "suppress_in_bom": false,
+    "eds_version": "2024.1.4",
+    "eds_level": "3",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10036426.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19730610"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9147476"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "145556028"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "393255805"
+      },
+      {
+       "type": "function_template",
+       "id": "393255806"
+      },
+      {
+       "type": "function_template",
+       "id": "393255807"
+      },
+      {
+       "type": "function_template",
+       "id": "393255808"
+      },
+      {
+       "type": "function_template",
+       "id": "393255809"
+      },
+      {
+       "type": "function_template",
+       "id": "393255810"
+      },
+      {
+       "type": "function_template",
+       "id": "393255804"
+      },
+      {
+       "type": "function_template",
+       "id": "393255811"
+      },
+      {
+       "type": "function_template",
+       "id": "393255812"
+      },
+      {
+       "type": "function_template",
+       "id": "393255803"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45214649"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2024"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2325240"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2057124",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.UCD-S3C1B-1212-HAY0-ARW",
+    "order_number": "UCD-S3C1B-1212-HAY0-ARW",
+    "type_number": "UCD-S3C1B-1212-HAY0-ARW",
+    "designation": {
+     "en_US": "POSITAL IXARC UCD-S3C1B-1212-HAY0-ARW SSI with Preset and Incr. Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 1,
+    "part_type": "component",
+    "version": "0",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": null,
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2024-11-08",
+    "suppress_in_bom": false,
+    "eds_version": "2024",
+    "eds_level": "3",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10042885.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19440590"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "8997115"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "143991317"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "384722629"
+      },
+      {
+       "type": "function_template",
+       "id": "384722630"
+      },
+      {
+       "type": "function_template",
+       "id": "384722631"
+      },
+      {
+       "type": "function_template",
+       "id": "384722632"
+      },
+      {
+       "type": "function_template",
+       "id": "384722633"
+      },
+      {
+       "type": "function_template",
+       "id": "384722634"
+      },
+      {
+       "type": "function_template",
+       "id": "384722635"
+      },
+      {
+       "type": "function_template",
+       "id": "384722636"
+      },
+      {
+       "type": "function_template",
+       "id": "384722637"
+      },
+      {
+       "type": "function_template",
+       "id": "384722638"
+      },
+      {
+       "type": "function_template",
+       "id": "384722639"
+      },
+      {
+       "type": "function_template",
+       "id": "384722640"
+      },
+      {
+       "type": "function_template",
+       "id": "384722641"
+      },
+      {
+       "type": "function_template",
+       "id": "384722628"
+      },
+      {
+       "type": "function_template",
+       "id": "384722642"
+      },
+      {
+       "type": "function_template",
+       "id": "384722643"
+      },
+      {
+       "type": "function_template",
+       "id": "384722644"
+      },
+      {
+       "type": "function_template",
+       "id": "384722645"
+      },
+      {
+       "type": "function_template",
+       "id": "384722646"
+      },
+      {
+       "type": "function_template",
+       "id": "384722647"
+      },
+      {
+       "type": "function_template",
+       "id": "384722648"
+      },
+      {
+       "type": "function_template",
+       "id": "384722649"
+      },
+      {
+       "type": "function_template",
+       "id": "384722650"
+      },
+      {
+       "type": "function_template",
+       "id": "384722651"
+      },
+      {
+       "type": "function_template",
+       "id": "384722652"
+      },
+      {
+       "type": "function_template",
+       "id": "384722653"
+      },
+      {
+       "type": "function_template",
+       "id": "384722654"
+      },
+      {
+       "type": "function_template",
+       "id": "384722627"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "44512620"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2024"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2057124"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2324384",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.UCD-CA01B-1416-HAY0-5RV",
+    "order_number": "UCD-CA01B-1416-HAY0-5RV",
+    "type_number": "UCD-CA01B-1416-HAY0-5RV",
+    "designation": {
+     "en_US": "POSITAL IXARC UCD-CA01B-1416-HAY0-5RV CANopen Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 1,
+    "part_type": "component",
+    "version": "0",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-01-16",
+    "suppress_in_bom": false,
+    "eds_version": "2024.1.4",
+    "eds_level": "3",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10036426.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19730610"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9147476"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "145555155"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "393247189"
+      },
+      {
+       "type": "function_template",
+       "id": "393247190"
+      },
+      {
+       "type": "function_template",
+       "id": "393247191"
+      },
+      {
+       "type": "function_template",
+       "id": "393247192"
+      },
+      {
+       "type": "function_template",
+       "id": "393247193"
+      },
+      {
+       "type": "function_template",
+       "id": "393247194"
+      },
+      {
+       "type": "function_template",
+       "id": "393247188"
+      },
+      {
+       "type": "function_template",
+       "id": "393247195"
+      },
+      {
+       "type": "function_template",
+       "id": "393247196"
+      },
+      {
+       "type": "function_template",
+       "id": "393247187"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45213780"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2024"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2324384"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2322038",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.UCD-CA01B-1413-HAY0-ARV",
+    "order_number": "UCD-CA01B-1413-HAY0-ARV",
+    "type_number": "UCD-CA01B-1413-HAY0-ARV",
+    "designation": {
+     "en_US": "POSITAL IXARC UCD-CA01B-1413-HAY0-ARV CANopen Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 1,
+    "part_type": "component",
+    "version": "0",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-01-16",
+    "suppress_in_bom": false,
+    "eds_version": "2024.1.4",
+    "eds_level": "3",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10036426.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19730610"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9147476"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "145552716"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "393223828"
+      },
+      {
+       "type": "function_template",
+       "id": "393223829"
+      },
+      {
+       "type": "function_template",
+       "id": "393223830"
+      },
+      {
+       "type": "function_template",
+       "id": "393223831"
+      },
+      {
+       "type": "function_template",
+       "id": "393223832"
+      },
+      {
+       "type": "function_template",
+       "id": "393223833"
+      },
+      {
+       "type": "function_template",
+       "id": "393223827"
+      },
+      {
+       "type": "function_template",
+       "id": "393223834"
+      },
+      {
+       "type": "function_template",
+       "id": "393223835"
+      },
+      {
+       "type": "function_template",
+       "id": "393223826"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45211370"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2024"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2322038"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2455875",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.OCF-DPC1B-0012-9A70-H3E",
+    "order_number": "OCF-DPC1B-0012-9A70-H3E",
+    "type_number": "OCF-DPC1B-0012-9A70-H3E",
+    "designation": {
+     "en_US": "POSITAL IXARC OCF-DPC1B-0012-9A70-H3E Profibus DP Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 0,
+    "part_type": "component",
+    "version": "2025.0.139.23645",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-07-02",
+    "suppress_in_bom": false,
+    "eds_version": "2025.0.0",
+    "eds_level": "",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10025399.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19768642"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9166053"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "146517306"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "394893952"
+      },
+      {
+       "type": "function_template",
+       "id": "394893953"
+      },
+      {
+       "type": "function_template",
+       "id": "394893948"
+      },
+      {
+       "type": "function_template",
+       "id": "394893949"
+      },
+      {
+       "type": "function_template",
+       "id": "394893950"
+      },
+      {
+       "type": "function_template",
+       "id": "394893951"
+      },
+      {
+       "type": "function_template",
+       "id": "394893947"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45426846"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2025"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2455875"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2455885",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.OCF-DPC1B-0012-B10V-H3E",
+    "order_number": "OCF-DPC1B-0012-B10V-H3E",
+    "type_number": "OCF-DPC1B-0012-B10V-H3E",
+    "designation": {
+     "en_US": "POSITAL IXARC OCF-DPC1B-0012-B10V-H3E Profibus DP Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 0,
+    "part_type": "component",
+    "version": "2025.0.139.23645",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-07-02",
+    "suppress_in_bom": false,
+    "eds_version": "2025.0.0",
+    "eds_level": "",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10025399.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19768642"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9166055"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "146517316"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "394894022"
+      },
+      {
+       "type": "function_template",
+       "id": "394894023"
+      },
+      {
+       "type": "function_template",
+       "id": "394894018"
+      },
+      {
+       "type": "function_template",
+       "id": "394894019"
+      },
+      {
+       "type": "function_template",
+       "id": "394894020"
+      },
+      {
+       "type": "function_template",
+       "id": "394894021"
+      },
+      {
+       "type": "function_template",
+       "id": "394894017"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45426856"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2025"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2455885"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2455899",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.OCF-DPC1B-0012-C06V-H3E",
+    "order_number": "OCF-DPC1B-0012-C06V-H3E",
+    "type_number": "OCF-DPC1B-0012-C06V-H3E",
+    "designation": {
+     "en_US": "POSITAL IXARC OCF-DPC1B-0012-C06V-H3E Profibus DP Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 0,
+    "part_type": "component",
+    "version": "2025.0.139.23645",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-07-02",
+    "suppress_in_bom": false,
+    "eds_version": "2025.0.0",
+    "eds_level": "",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10025399.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19768642"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9166057"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "146517330"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "394894120"
+      },
+      {
+       "type": "function_template",
+       "id": "394894121"
+      },
+      {
+       "type": "function_template",
+       "id": "394894116"
+      },
+      {
+       "type": "function_template",
+       "id": "394894117"
+      },
+      {
+       "type": "function_template",
+       "id": "394894118"
+      },
+      {
+       "type": "function_template",
+       "id": "394894119"
+      },
+      {
+       "type": "function_template",
+       "id": "394894115"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45426870"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2025"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2455899"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2455914",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.OCF-DPC1B-0012-S120-H3E",
+    "order_number": "OCF-DPC1B-0012-S120-H3E",
+    "type_number": "OCF-DPC1B-0012-S120-H3E",
+    "designation": {
+     "en_US": "POSITAL IXARC OCF-DPC1B-0012-S120-H3E Profibus DP Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 0,
+    "part_type": "component",
+    "version": "2025.0.139.23645",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-07-02",
+    "suppress_in_bom": false,
+    "eds_version": "2025.0.0",
+    "eds_level": "",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10025399.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19768642"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9166058"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "146517345"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "394894225"
+      },
+      {
+       "type": "function_template",
+       "id": "394894226"
+      },
+      {
+       "type": "function_template",
+       "id": "394894221"
+      },
+      {
+       "type": "function_template",
+       "id": "394894222"
+      },
+      {
+       "type": "function_template",
+       "id": "394894223"
+      },
+      {
+       "type": "function_template",
+       "id": "394894224"
+      },
+      {
+       "type": "function_template",
+       "id": "394894220"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45426885"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2025"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2455914"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2455920",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.OCF-DPC1B-0013-B060-H3E",
+    "order_number": "OCF-DPC1B-0013-B060-H3E",
+    "type_number": "OCF-DPC1B-0013-B060-H3E",
+    "designation": {
+     "en_US": "POSITAL IXARC OCF-DPC1B-0013-B060-H3E Profibus DP Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 0,
+    "part_type": "component",
+    "version": "2025.0.139.23645",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-07-02",
+    "suppress_in_bom": false,
+    "eds_version": "2025.0.0",
+    "eds_level": "",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10025399.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19768642"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9166054"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "146517351"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "394894267"
+      },
+      {
+       "type": "function_template",
+       "id": "394894268"
+      },
+      {
+       "type": "function_template",
+       "id": "394894263"
+      },
+      {
+       "type": "function_template",
+       "id": "394894264"
+      },
+      {
+       "type": "function_template",
+       "id": "394894265"
+      },
+      {
+       "type": "function_template",
+       "id": "394894266"
+      },
+      {
+       "type": "function_template",
+       "id": "394894262"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45426891"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2025"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2455920"
+   }
+  },
+  {
+   "type": "parts",
+   "id": "2455926",
+   "attributes": {
+    "highlight": [],
+    "part_number": "FBA.OCF-DPC1B-0013-B100-H3E",
+    "order_number": "OCF-DPC1B-0013-B100-H3E",
+    "type_number": "OCF-DPC1B-0013-B100-H3E",
+    "designation": {
+     "en_US": "POSITAL IXARC OCF-DPC1B-0013-B100-H3E Profibus DP Rotary Encoder"
+    },
+    "description": [],
+    "languages": [
+     "en_US"
+    ],
+    "download_count": 0,
+    "part_type": "component",
+    "version": "2025.0.139.23645",
+    "identcode": "",
+    "basketable": true,
+    "deviceplaceable": true,
+    "adapter_data": "",
+    "lifecycle": {
+     "value": 0,
+     "name": "Active"
+    },
+    "update_date": "2025-07-02",
+    "suppress_in_bom": false,
+    "eds_version": "2025.0.0",
+    "eds_level": "",
+    "eds_compliant": true,
+    "eds_logo": true,
+    "group_symbol_macro_path": "FBA\\10025399.ema",
+    "graphic_macro_path": null,
+    "is_part_standalone": true
+   },
+   "relationships": {
+    "manufacturer": {
+     "data": {
+      "type": "manufacturers",
+      "id": "495"
+     }
+    },
+    "product_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130000"
+     }
+    },
+    "product_top_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200000000"
+     }
+    },
+    "product_sub_group": {
+     "data": {
+      "type": "eplan_catalog_entries",
+      "id": "200130002"
+     }
+    },
+    "eclass_level1": {
+     "data": null
+    },
+    "eclass_level2": {
+     "data": null
+    },
+    "eclass_level3": {
+     "data": null
+    },
+    "eclass_level4": {
+     "data": null
+    },
+    "data_types": {
+     "data": [
+      {
+       "type": "data_types",
+       "id": "commercial_data"
+      },
+      {
+       "type": "data_types",
+       "id": "function_template"
+      },
+      {
+       "type": "data_types",
+       "id": "logic_macro"
+      },
+      {
+       "type": "data_types",
+       "id": "dxf_data"
+      }
+     ]
+    },
+    "graphic_macro": {
+     "data": null
+    },
+    "group_symbol_macro": {
+     "data": {
+      "type": "macros",
+      "id": "19768642"
+     }
+    },
+    "picture_file": {
+     "data": {
+      "type": "picturefile",
+      "id": "9166054"
+     }
+    },
+    "adapters": {
+     "data": []
+    },
+    "accessories": {
+     "data": []
+    },
+    "dependent_parts": {
+     "data": []
+    },
+    "accessory_parents": {
+     "data": []
+    },
+    "dependent_part_parents": {
+     "data": []
+    },
+    "external_documents": {
+     "data": [
+      {
+       "type": "external_document",
+       "id": "146517357"
+      }
+     ]
+    },
+    "function_templates": {
+     "data": [
+      {
+       "type": "function_template",
+       "id": "394894309"
+      },
+      {
+       "type": "function_template",
+       "id": "394894310"
+      },
+      {
+       "type": "function_template",
+       "id": "394894305"
+      },
+      {
+       "type": "function_template",
+       "id": "394894306"
+      },
+      {
+       "type": "function_template",
+       "id": "394894307"
+      },
+      {
+       "type": "function_template",
+       "id": "394894308"
+      },
+      {
+       "type": "function_template",
+       "id": "394894304"
+      }
+     ]
+    },
+    "variants": {
+     "data": [
+      {
+       "type": "variant",
+       "id": "45426897"
+      }
+     ]
+    },
+    "partmacros": {
+     "data": []
+    },
+    "eplan_data_standard": {
+     "data": {
+      "type": "eplan_data_standard",
+      "id": "2025"
+     }
+    }
+   },
+   "links": {
+    "self": "/parts/2455926"
+   }
+  }
+ ]
+}

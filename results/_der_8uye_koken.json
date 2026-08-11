@@ -1,0 +1,34 @@
+{
+ "ckpt": [
+  "results/seg_extra/recall_hard_s2.pt",
+  "results/seg_extra/recall_hard_keig96_s0.pt",
+  "results/seg_extra/recall_hard_keig96_s1.pt",
+  "results/seg_extra/recall_hard_keig96_s2.pt",
+  "results/seg_extra/fb2_aux_s0.pt",
+  "results/seg_extra/fb2_aux_s1.pt",
+  "results/seg_extra/fb2_aux_s2.pt",
+  "results/seg_extra/fb2_aux_s3.pt"
+ ],
+ "n_parca": 194,
+ "X_yok": 0,
+ "XR_yok": 0,
+ "hata": 0,
+ "postproc": {
+  "comment": "urun v2.1 (2026-07-29). min_v10/vc0.30/cluster3.0 -- CC-D olcumu: cok-CP +0.221, dusuk-CP -0.0025 (gurultu), korpus-temsili +0.021; kilitli holdout cok-CP 0.212->0.635 ile DOGRULADI. Onceki 30/0.5/5.0 degerleri _superseded_2026_07_24_values altinda duruyor. conn_promote current_product.params altinda ve SADECE yonlendirici cok-CP dedigi parcalarda uygulanir.",
+  "min_vertices": 4,
+  "vertex_confidence_mask": 0.3,
+  "cluster_mm": 3.0,
+  "sweep_receipt": "results/cp_precision_sweep.json",
+  "outward_min_CANDIDATE": 0.0,
+  "outward_min_note": "OFF by default (0.0). Physically-motivated precision gate (drop a CP whose entry sits in the INNER body along its outward ray). Measured on 18 CPs; must be confirmed HELD-OUT before flipping on. cp_openings.connection_points(outward_min=...).",
+  "retune_note_2026_07_23": "RE-TUNED on the 1811-CP two-manufacturer arbiter: min_v 45->30, vertex_conf 0.7->0.5 (PXC unchanged, WEI +0.089). Then min_v 30->10 improved both, but min_v_30_robot: for the ROBOT product goal min_v raised back to 30 (min_v 10's small fragments are mostly noise: 10-30v precision <0.31), trading a little raw F1 for reliability since the robot PHYSICALLY acts on each CP. cluster_mm harmless at 5/3/0; vertex_conf converged at 0.5.",
+  "vc_035_REVERTED_2026_07_25": "vc0.35 REJECTED: sweep suggested +0.01 both mfg but FULL-arbiter deploy OOF showed WEI 0.641->0.629 (DOWN). Second time a sweep misled vs the full deploy run (like k_eig128). Product stays min_v30/vc0.5.",
+  "_superseded_2026_07_24_values": {
+   "min_vertices": 30,
+   "vertex_confidence_mask": 0.5,
+   "cluster_mm": 5.0
+  }
+ },
+ "robot_min_votes": 1,
+ "conn_promote": 0.25
+}

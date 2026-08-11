@@ -1,0 +1,41 @@
+{
+ "per_mfg_gate": {
+  "WEI": {
+   "best_thr": 0.35,
+   "P": 0.627,
+   "R": 0.655,
+   "F1": 0.641
+  },
+  "PXC": {
+   "best_thr": 0.35,
+   "P": 0.735,
+   "R": 0.675,
+   "F1": 0.704
+  }
+ },
+ "cp_count_prior": {
+  "HEPSI": {
+   "P": 0.781,
+   "R": 0.708,
+   "F1": 0.742
+  },
+  "WEI": {
+   "P": 0.684,
+   "R": 0.671,
+   "F1": 0.678
+  },
+  "PXC": {
+   "P": 0.799,
+   "R": 0.714,
+   "F1": 0.754
+  }
+ },
+ "taxonomy": {
+  "n_gt": 2837,
+  "kept_tp": 1906,
+  "tool_fp_dropped": 1740,
+  "kept_fp_unlisted_or_residual": 753,
+  "dropped_real_wire": 386,
+  "total_fn": 931
+ }
+}

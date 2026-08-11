@@ -1,0 +1,23 @@
+# NOT terminal blocks: parts whose longest edge exceeds 200mm.
+# Justified by the corpus's OWN distribution (measured 2026-07-14):
+#   longest edge: median 69mm, p95 115mm, p99 150mm.
+# Everything above 200mm is a DIN rail, busbar, cable duct, comb bridge or
+# marking strip -- e.g. 1000 x 20 x 0.8mm (a flat strip) and 1007 x 16.5 x
+# 14.7mm with 56 'CPs' (a busbar's contacts, not wire entries).
+# A terminal-block detector must not be trained OR scored on these.
+# NOTE: removing them changes the headline number by ~nothing -- they are
+# 13 parts / 260 CPs = 1.0% of GT. This is a CORRECTNESS fix, not a lever.
+# Pass via --exclude-parts-file (full-string match; these names match exactly).
+wscaduniverse_3009299_2026-07-13-15-01-44
+wscaduniverse_3058017_2026-07-13-15-05-30
+wscaduniverse_3059139_2026-07-13-15-06-24
+wscaduniverse_3191699_2026-07-13-15-06-11
+wscaduniverse_3009341_2026-07-13-15-01-47
+wscaduniverse_3009354_2026-07-13-15-01-50
+wscaduniverse_1029700000_2026-07-13-15-09-34
+wscaduniverse_1029600000_2026-07-13-15-09-16
+wscaduniverse_1067400000_2026-07-13-15-09-28
+wscaduniverse_1067300000_2026-07-13-15-09-09
+wscaduniverse_1029500000_2026-07-13-15-08-57
+wscaduniverse_3191039_2026-07-13-15-05-53
+wscaduniverse_3191013_2026-07-13-15-05-46

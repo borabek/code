@@ -1,0 +1,43 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "kayit": "results/_der_yeni_G7BIRLESIK.pkl",
+ "kume": "results/d7_sinav_kumesi.json",
+ "yon_yaricapi": 10.0,
+ "n_gt": 3087,
+ "sayim": {
+  "YON HICBIR KAYNAKTA YOK": 301,
+  "K1 komsu adayin yonu": 268,
+  "K0 kendi yonu": 1249,
+  "KONUM YOK": 1133,
+  "K3 baskin yon": 6,
+  "K2 B-rep ekseni": 130
+ },
+ "robot_recall_tavani": 0.5354713313896987,
+ "robot_f1_tavani": 0.6974683544303798,
+ "genisletilmis_havuz": true,
+ "not": "Konum havuzdan, YON yakin kaynaklardan secilebilse tavan. Mukemmel secici varsayimi -- gercek secici ALTINDA kalir."
+}

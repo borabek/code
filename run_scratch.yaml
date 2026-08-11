@@ -1,0 +1,50 @@
+# From-scratch base model (NO synth pretrain) — diagnostic + real base model.
+# Identical to run_finetune.yaml EXCEPT: no init_from, lr 0.001, own run_name.
+# Usage: python train_cp.py "C:\Users\DE00024082\Desktop\JSON" --config run_scratch.yaml
+
+backbone: knngraph
+run_name: cp_knn_scratch
+# NO init_from — trains from random init (this is the whole point of the diagnostic)
+
+epochs: 120
+eval_every: 5
+patience: 12
+
+knn_normals: true
+knn_curvature: true
+knn_concavity: true
+knn_edge_dist: false
+
+device: cuda
+max_gpu_verts: 7000
+
+max_bbox_mm: 250
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+augment: 6
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.15
+aug_cable_frac: 0.3
+
+hard_mining: true
+
+heat_loss: centernet
+centernet_alpha: 1.8
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+
+lr: 0.001            # from-scratch needs the higher LR (v3's effective LR)
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0
+
+heatmap_thresh: 0.30      # 0.50 clipped ALL detections (model peaks top out ~0.4 early); 0.30 matches encoding design (diag_encoding GT ceiling 0.97 @ 0.3)
+min_votes: 1
+nms_clearance_mm: 5.0
+
+knn_cache_dir: knn_cache_real

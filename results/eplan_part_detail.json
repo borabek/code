@@ -1,0 +1,107 @@
+{
+ "id": "398880",
+ "attrs": {
+  "highlight": {
+   "order_number": "<em>031</em><em>1</em><em>0</em><em>8</em><em>7</em>",
+   "part_number": "<em>PXC.031</em><em>1</em><em>0</em><em>8</em><em>7</em>",
+   "manufacturer.short_name": "<em>PXC</em>"
+  },
+  "part_number": "PXC.0311087",
+  "type_number": "URTK/S",
+  "designation": {
+   "en_US": "Measuring transformer disconnect terminal / Test disconnect terminal block",
+   "cs_CZ": "Odpojovací svorka měřicího transformátoru / Rozpojovací svornice měřicího převodníku",
+   "de_DE": "Messwandlertrennklemme / Messwandler-Trennklemme",
+   "es_ES": "Borne de desconexión del transformador de medida / Borne interrump. para circ. medida",
+   "fr_FR": "Borne de déconnexion du transformateur de mesure / Bloc de jonction de sectionnement pour essais",
+   "it_IT": "Terminale di disconnessione del trasformatore di misura / Morsetto sezionatore per conv. misura",
+   "ja_JP": "測定用変圧器切り離し端子 / 回路テスト断路端子台",
+   "ko_KR": "변압기 분리 단자 측정 / 테스트 분리 단자대",
+   "nl_NL": "Scheidingsklem voor meettransformator / Meettransformator-scheidingsklem",
+   "pl_PL": "Zacisk odłączenia transformatora pomiarowego / Złącze rozłączalne do przekładników pomiarowych",
+   "pt_PT": "Terminal de desconexão do transformador de medição / Borne de seccionamento de teste",
+   "ru_RU": "Клемма отключения измерительного трансформатора / Измерительная клемма с ползунковым размыкателем",
+   "tr_TR": "Ölçüm transformatörü bağlantı kesme terminali / Ölçme-ayırma klemensi",
+   "zh_CN": "测量变压器隔离端子 / 分断测试端子"
+  },
+  "download_count": 4165,
+  "basketable": true,
+  "deviceplaceable": true,
+  "update_date": "2026-02-13",
+  "suppress_in_bom": false,
+  "is_part_standalone": true
+ },
+ "rels": {
+  "manufacturer": {
+   "data": {
+    "type": "manufacturers",
+    "id": "55"
+   }
+  },
+  "data_types": {
+   "data": [
+    {
+     "type": "data_types",
+     "id": "commercial_data"
+    },
+    {
+     "type": "data_types",
+     "id": "function_template"
+    },
+    {
+     "type": "data_types",
+     "id": "2d_graphical_data"
+    },
+    {
+     "type": "data_types",
+     "id": "connection_point_pattern"
+    },
+    {
+     "type": "data_types",
+     "id": "3d_graphical_data"
+    },
+    {
+     "type": "data_types",
+     "id": "dxf_data"
+    }
+   ]
+  },
+  "graphic_macro": {
+   "data": {
+    "type": "macros",
+    "id": "19738632"
+   }
+  },
+  "group_symbol_macro": {
+   "data": null
+  },
+  "picture_file": {
+   "data": {
+    "type": "picturefile",
+    "id": "9052184"
+   }
+  },
+  "adapters": {
+   "data": []
+  },
+  "partmacros": {
+   "data": []
+  },
+  "eplan_data_standard": {
+   "data": {
+    "type": "eplan_data_standard",
+    "id": "2025"
+   }
+  }
+ },
+ "GET_398880": {
+  "s": 200,
+  "l": 14001,
+  "b": "{\"data\":{\"type\":\"parts\",\"id\":\"398880\",\"attributes\":{\"highlight\":[],\"part_number\":\"PXC.0311087\",\"order_number\":\"0311087\",\"type_number\":\"URTK\\/S\",\"designation\":{\"en_US\":\"Measuring transformer disconnect terminal \\/ Test disconnect terminal block\",\"cs_CZ\":\"Odpojovac\\u00ed svorka m\\u011b\\u0159ic\\u00edho"
+ },
+ "GET_398880?include=partmacros,data_types": {
+  "s": 200,
+  "l": 14292,
+  "b": "{\"data\":{\"type\":\"parts\",\"id\":\"398880\",\"attributes\":{\"highlight\":[],\"part_number\":\"PXC.0311087\",\"order_number\":\"0311087\",\"type_number\":\"URTK\\/S\",\"designation\":{\"en_US\":\"Measuring transformer disconnect terminal \\/ Test disconnect terminal block\",\"cs_CZ\":\"Odpojovac\\u00ed svorka m\\u011b\\u0159ic\\u00edho"
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "id": "24164484-b5f9-4cba-9540-2d8bb7331ca9",
+ "partId": "63_0_0311087",
+ "partNumber": "0311087",
+ "norms": [
+  0,
+  1
+ ],
+ "manufacturerId": 63,
+ "manufacturerName": "Phoenix Contact",
+ "partTypes": [
+  0,
+  3,
+  2
+ ],
+ "technology": 1,
+ "categoryId": 2,
+ "subcategoryId": 1,
+ "typeName": "URTK/S",
+ "searchDe": "Phoenix Contact 0311087 Messwandler-Trennklemme URTK/S",
+ "searchEn": "Phoenix Contact 0311087 Test disconnect terminal block URTK/S",
+ "searchFr": "Phoenix Contact 0311087 URTK/S",
+ "searchPl": "Phoenix Contact 0311087 Złącze rozłączalne do przekładników pomiarowych URTK/S",
+ "searchNl": "Phoenix Contact 0311087 URTK/S",
+ "searchHu": "Phoenix Contact 0311087 Vizsgáló bontókapocs URTK/S",
+ "searchEs": "Phoenix Contact 0311087 URTK/S",
+ "searchTr": "Phoenix Contact 0311087 URTK/S",
+ "image": "Phoenix/images/21381_1000_int_04.jpg",
+ "status": 0,
+ "partLexicon": {
+  "translatePartName": {
+   "de": "Messwandler-Trennklemme",
+   "en": "Test disconnect terminal block",
+   "hu": "Vizsgáló bontókapocs",
+   "pl": "Złącze rozłączalne do przekładników pomiarowych"
+  },
+  "translatePartDescription": {
+   "de": "Messwandler-Trennklemme, mit zwei Prüfbuchsen für 4-mm-Prüfstecker oder zur Aufnahme von Schalt- oder Schraubbrücken, Anschlussart: Schraubanschluss, Querschnitt: 0,5 mm² - 10 mm² , AWG: 20 - 10, Breite: 8,2 mm, Montageart: NS 35/7,5,  NS 35/15,  NS 32, Farbe: grau",
+   "en": "Test disconnect terminal block, with two test sockets for 4 mm test plugs, or for receiving bridge bars or screw bridges, connection method: Screw connection, cross section: 0.5 mm² - 10 mm² , AWG: 20 - 10, width: 8.2 mm, mounting type: NS 35/7,5,  NS 35/15,  NS 32, color: gray",
+   "hu": "Vizsgáló bontókapocs, két vizsgálódugasz-aljzattal 4 mm-es vizsgálódugaszhoz, vagy kapcsoló-, illetve csavaros áthidalókhoz, csatlakozási mód: Csavaros csatlakozás, keresztmetszet: 0,5 mm² - 10 mm² , AWG: 20 - 10, szélesség: 8,2 mm, szerelési mód: NS 35/7,5,  NS 35/15,  NS 32, szín: szürke",
+   "pl": "Złącze rozłączalne do przekładników pomiarowych, z dwoma gniazdami pomiarowymi na wtyki pomiarowe 4 mm lub na mostki przełączane lub przykręcane, rodzaj przyłącza: Złączki śrubowe, przekrój: 0,5 mm² - 10 mm² , AWG: 20 - 10, szerokość: 8,2 mm, rodzaj montażu: NS 35/7,5,  NS 35/15,  NS 32, kolor: szary"
+  }
+ },
+ "partDetail": {
+  "weight": "0,03551",
+  "externalDocuments": "http://www.phoenixcontact.net/product/0311087",
+  "isCombiPart": false,
+  "voltage": "400 V",
+  "current": "41 A",
+  "powerLoss": 1.31,
+  "currency": "EUR",
+  "partTypes": [
+   {
+    "partType": 3,
+    "filePath": "Phoenix/DWG/0311087-dwg.zip",
+    "dateCreated": "2021-09-24T11:48:50.33Z",
+    "dateUpdated": "2023-11-16T09:07:24.099Z"
+   },
+   {
+    "partType": 0,
+    "symbolsPath": {
+     "Ee1Pol": "02_01_Klemmen (Standard)_1pol\\Klemme (allgemein)",
+     "Ee": "02_01_Klemmen (Standard)\\Klemme (allgemein)",
+     "Ce": "Phoenix Terminal block URTK cabinet\\0311087 Test disconnect terminal block"
+    },
+    "filePath": "Phoenix/Wscad/PIX.0311087.wspak",
+    "dateCreated": "2023-04-12T10:26:27.22Z",
+    "dateUpdated": "2026-01-15T12:03:26.719Z"
+   },
+   {
+    "partType": 2,
+    "filePath": "Phoenix/Step/pxc_0311087_07_URTK-S_3D.stp"
+   }
+  ],
+  "partCabinet": {
+   "pinPosition": "##True#1|42.8|122|0|1|30|0|0|,##False#1|42.8|487.6|0|2|30|0|0|",
+   "width": 8.15,
+   "height": 61,
+   "length": 57.4
+  },
+  "partCombis": [],
+  "partTypeDetail3D": {
+   "obj3DPath": "Phoenix/3DObjects/pxc_0311087_07_URTK-S_3D.obj",
+   "mtl3DPath": "Phoenix/3DObjects/pxc_0311087_07_URTK-S_3D.mtl",
+   "mirrorX": 0,
+   "mirrorY": 0,
+   "mirrorZ": 0,
+   "rotateX": 0,
+   "rotateY": 0,
+   "rotateZ": 180
+  }
+ },
+ "normDetails": {
+  "IEC": {
+   "norm": 0,
+   "symbolsPath": {
+    "Ee1Pol": "02_01_Klemmen (Standard)_1pol\\Klemme (allgemein)",
+    "Ee": "02_01_Klemmen (Standard)\\Klemme (allgemein)",
+    "Ce": "Phoenix Terminal block URTK cabinet\\0311087 Test disconnect terminal block"
+   },
+   "macrosPath": {},
+   "thumbnailsPath": {
+    "Ee1Pol": "Phoenix/Thumbnails/Klemme (allgemein)/0_Klemme (allgemein)_6_768x768.jpg",
+    "Ee": "Phoenix/Thumbnails/Klemme (allgemein)/0_Klemme (allgemein)_1_768x768.jpg",
+    "Ce": "Phoenix/Thumbnails/0311087 Test disconnect terminal block/0_0311087 Test disconnect terminal block_2_768x768.jpg"
+   }
+  },
+  "NFPA": {
+   "norm": 1,
+   "symbolsPath": {
+    "Ee1Pol": "NFPA_02_01_Terminal (Standard)_1pol\\Terminal 1",
+    "Ee": "NFPA_02_01_Terminal (Standard)\\Terminal 1",
+    "Ce": "Phoenix Terminal block URTK cabinet\\0311087 Test disconnect terminal block"
+   },
+   "macrosPath": {},
+   "thumbnailsPath": {
+    "Ee1Pol": "Phoenix/Thumbnails/Terminal 1/1_Terminal 1_6_768x768.jpg",
+    "Ee": "Phoenix/Thumbnails/Terminal 1/1_Terminal 1_1_768x768.jpg",
+    "Ce": "Phoenix/Thumbnails/0311087 Test disconnect terminal block/0_0311087 Test disconnect terminal block_2_768x768.jpg"
+   }
+  }
+ },
+ "has3DData": true,
+ "hasEclass": false,
+ "accessoryParts": [],
+ "isPremium": true
+}

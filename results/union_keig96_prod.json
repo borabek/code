@@ -1,0 +1,20 @@
+{
+ "tag": "keig96_prod",
+ "ckpts": [
+  "results/seg_extra/recall_hard_s2.pt",
+  "results/seg_extra/recall_hard_keig96_s2.pt"
+ ],
+ "sweep": {
+  "vote1": {
+   "f1": 0.6006191950464396,
+   "p": 0.5359116022099447,
+   "r": 0.6830985915492958
+  },
+  "vote2": {
+   "f1": 0.5186385737439221,
+   "p": 0.837696335078534,
+   "r": 0.3755868544600939
+  }
+ },
+ "best_vote": 1
+}

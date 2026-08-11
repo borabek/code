@@ -1,0 +1,127 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "4b163aec3b7aba99",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "9c42853b08b790b5",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "SUPU": {
+   "n": 165,
+   "ic_esik": [
+    0.3,
+    0.4
+   ],
+   "tespit_taban": 0.4576013429613059,
+   "tespit": 0.46900276122962337,
+   "robot_taban": 0.1318295916093023,
+   "robot": 0.19521466759442987,
+   "tespit_gate": 0.45173361288369873,
+   "robot_gate": 0.2438011192064714,
+   "robot_gate_MIKRO": 0.29028571428571426,
+   "tespit_gate_MIKRO": 0.5691428571428572,
+   "robot_taban_MIKRO": 0.12845953002610966,
+   "robot_MIKRO": 0.22349869451697127,
+   "tespit_fark": 0.011401418268317476,
+   "robot_fark": 0.06338507598512758
+  },
+  "UPUN": {
+   "n": 117,
+   "ic_esik": [
+    0.3,
+    0.3
+   ],
+   "tespit_taban": 0.3613242547729408,
+   "tespit": 0.3695690134560396,
+   "robot_taban": 0.0844074434334476,
+   "robot": 0.17825202395052817,
+   "tespit_gate": 0.5976979959354859,
+   "robot_gate": 0.29817675408745187,
+   "robot_gate_MIKRO": 0.3214723926380368,
+   "tespit_gate_MIKRO": 0.6380368098159509,
+   "robot_taban_MIKRO": 0.1245753114382786,
+   "robot_MIKRO": 0.22310305775764439,
+   "tespit_fark": 0.008244758683098818,
+   "robot_fark": 0.09384458051708057
+  },
+  "MOR": {
+   "n": 80,
+   "ic_esik": [
+    0.5,
+    0.2
+   ],
+   "tespit_taban": 0.23833893633609018,
+   "tespit": 0.25205168264917527,
+   "robot_taban": 0.06797665952278872,
+   "robot": 0.1122290851566124,
+   "tespit_gate": 0.2838969404613289,
+   "robot_gate": 0.10750259954635039,
+   "robot_gate_MIKRO": 0.12009237875288684,
+   "tespit_gate_MIKRO": 0.2471131639722864,
+   "robot_taban_MIKRO": 0.06067544361763022,
+   "robot_MIKRO": 0.0755580995993131,
+   "tespit_fark": 0.013712746313085084,
+   "robot_fark": 0.04425242563382367
+  },
+  "NIT": {
+   "n": 50,
+   "ic_esik": [
+    0.3,
+    0.4
+   ],
+   "tespit_taban": 0.5672684536376976,
+   "tespit": 0.5794892840306365,
+   "robot_taban": 0.0762860619947717,
+   "robot": 0.06817827720289259,
+   "tespit_gate": 0.6156118864918685,
+   "robot_gate": 0.09596603472715676,
+   "robot_gate_MIKRO": 0.06521739130434782,
+   "tespit_gate_MIKRO": 0.5606407322654462,
+   "robot_taban_MIKRO": 0.061016949152542375,
+   "robot_MIKRO": 0.056174334140435836,
+   "tespit_fark": 0.012220830392938864,
+   "robot_fark": -0.00810778479187911
+  },
+  "UTL": {
+   "n": 31,
+   "ic_esik": [
+    0.3,
+    0.4
+   ],
+   "tespit_taban": 0.3491142536731862,
+   "tespit": 0.3578861834977476,
+   "robot_taban": 0.03567694968732774,
+   "robot": 0.09297485316758852,
+   "tespit_gate": 0.4483091787439613,
+   "robot_gate": 0.0789855072463768,
+   "robot_gate_MIKRO": 0.0784313725490196,
+   "tespit_gate_MIKRO": 0.3790849673202614,
+   "robot_taban_MIKRO": 0.036885245901639344,
+   "robot_MIKRO": 0.09016393442622951,
+   "tespit_fark": 0.008771929824561375,
+   "robot_fark": 0.05729790348026078
+  }
+ },
+ "robot_fark_ort": 0.0501344401648827,
+ "tespit_fark_ort": 0.010870336696400324,
+ "taban": "secim YOK, hep MEVCUT (v_o)"
+}

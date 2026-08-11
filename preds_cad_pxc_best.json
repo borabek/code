@@ -1,0 +1,109 @@
+{
+  "detector": "step_cylinders_gmsh",
+  "params": {
+    "rmin": 1.3,
+    "rmax": 3.0,
+    "merge_tol": 4.0,
+    "auto": true,
+    "drop_corner": 0.0,
+    "slot_pairs": true,
+    "rect_clusters": false,
+    "include_cones": true,
+    "dir_consensus": true
+  },
+  "parts": [
+    {
+      "part_nr": "wscaduniverse_3031238_2026-06-21-22-27-09",
+      "n_detected": 1,
+      "connection_points": [
+        {
+          "entry_point": [
+            2.575000000000043,
+            48.26758049216117,
+            17.20042131428422
+          ],
+          "approach_vector": [
+            0.0,
+            0.0,
+            -1.0
+          ],
+          "radius_mm": 1.6006550238369583,
+          "n_faces": 1,
+          "kind": "hole"
+        }
+      ]
+    },
+    {
+      "part_nr": "wscaduniverse_3211813_2026-06-21-22-25-47",
+      "n_detected": 2,
+      "connection_points": [
+        {
+          "entry_point": [
+            3.7443581443005165,
+            7.01845314712784,
+            36.48641931444605
+          ],
+          "approach_vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "radius_mm": 2.7728546131915097,
+          "n_faces": 2,
+          "kind": "slot"
+        },
+        {
+          "entry_point": [
+            3.744358005681285,
+            50.70654679984018,
+            36.48642951068973
+          ],
+          "approach_vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "radius_mm": 2.772854613168574,
+          "n_faces": 2,
+          "kind": "slot"
+        }
+      ]
+    },
+    {
+      "part_nr": "wscaduniverse_3211822_2026-06-21-22-25-51",
+      "n_detected": 2,
+      "connection_points": [
+        {
+          "entry_point": [
+            3.7443580056817147,
+            50.70654679984004,
+            36.4864295106911
+          ],
+          "approach_vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "radius_mm": 2.772854613168572,
+          "n_faces": 2,
+          "kind": "slot"
+        },
+        {
+          "entry_point": [
+            3.7443581443008718,
+            7.018453147127937,
+            36.48641931444472
+          ],
+          "approach_vector": [
+            0.0,
+            0.0,
+            1.0
+          ],
+          "radius_mm": 2.7728546131915044,
+          "n_faces": 2,
+          "kind": "slot"
+        }
+      ]
+    }
+  ]
+}

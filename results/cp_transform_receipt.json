@@ -1,0 +1,930 @@
+{
+ "frozen": "2026-07-18",
+ "transform": "identity (OBJ frame == STEP frame)",
+ "max_center_residual_mm": 2.0,
+ "n_parts": 102,
+ "n_same_frame": 102,
+ "worst_center_residual_mm": 0.312,
+ "worst_extent_residual_mm": 1.575,
+ "flagged_for_manual_review": [],
+ "rows": [
+  {
+   "part_id": "0444048",
+   "split": "test_locked",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.477,
+   "same_frame": true,
+   "obj_sha16": "c71a8dff3164a2e7",
+   "step_sha16": "eb1d3edff5b776dd"
+  },
+  {
+   "part_id": "0446017",
+   "split": "test_locked",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.475,
+   "same_frame": true,
+   "obj_sha16": "dd99e93b83a45489",
+   "step_sha16": "1720b81b25d0dc2d"
+  },
+  {
+   "part_id": "0452027",
+   "split": "test_locked",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.364,
+   "same_frame": true,
+   "obj_sha16": "dc85a0c825ac3133",
+   "step_sha16": "b24aa0504fd44a0c"
+  },
+  {
+   "part_id": "0461034",
+   "split": "test_locked",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.697,
+   "same_frame": true,
+   "obj_sha16": "c3c808a00539e4e5",
+   "step_sha16": "a70840bf0aae41a5"
+  },
+  {
+   "part_id": "0701082",
+   "split": "test_locked",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.668,
+   "same_frame": true,
+   "obj_sha16": "6ac0024d183fee94",
+   "step_sha16": "b882b542913d378c"
+  },
+  {
+   "part_id": "0790491",
+   "split": "test_locked",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.654,
+   "same_frame": true,
+   "obj_sha16": "f90843017e5b09ea",
+   "step_sha16": "ff8c30b7cede3880"
+  },
+  {
+   "part_id": "3001373",
+   "split": "test_locked",
+   "center_residual_mm": 0.242,
+   "extent_residual_mm": 0.747,
+   "same_frame": true,
+   "obj_sha16": "686f86b57bee965f",
+   "step_sha16": "7322ddc8d80a7266"
+  },
+  {
+   "part_id": "3005688",
+   "split": "test_locked",
+   "center_residual_mm": 0.01,
+   "extent_residual_mm": 1.29,
+   "same_frame": true,
+   "obj_sha16": "def2a8b2748d5e11",
+   "step_sha16": "85aefcc14e276f23"
+  },
+  {
+   "part_id": "3033168",
+   "split": "test_locked",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.841,
+   "same_frame": true,
+   "obj_sha16": "df1f857f559e180e",
+   "step_sha16": "e766b4a86de9f0c1"
+  },
+  {
+   "part_id": "3047413",
+   "split": "test_locked",
+   "center_residual_mm": 0.009,
+   "extent_residual_mm": 1.037,
+   "same_frame": true,
+   "obj_sha16": "c5a37765f2829244",
+   "step_sha16": "d512906d3ff1913c"
+  },
+  {
+   "part_id": "3209635",
+   "split": "test_locked",
+   "center_residual_mm": 0.241,
+   "extent_residual_mm": 0.626,
+   "same_frame": true,
+   "obj_sha16": "06b3f152e6e8c69f",
+   "step_sha16": "9859f59a7a3fda59"
+  },
+  {
+   "part_id": "0271017",
+   "split": "train",
+   "center_residual_mm": 0.006,
+   "extent_residual_mm": 0.468,
+   "same_frame": true,
+   "obj_sha16": "6257f695c754cf92",
+   "step_sha16": "51320fd84e818196"
+  },
+  {
+   "part_id": "0309112",
+   "split": "train",
+   "center_residual_mm": 0.005,
+   "extent_residual_mm": 0.638,
+   "same_frame": true,
+   "obj_sha16": "28c09f5f16ae7740",
+   "step_sha16": "1dc1590e5d75d6f7"
+  },
+  {
+   "part_id": "0311126",
+   "split": "train",
+   "center_residual_mm": 0.006,
+   "extent_residual_mm": 1.029,
+   "same_frame": true,
+   "obj_sha16": "3fb2fea108b1cfdc",
+   "step_sha16": "2284a27b5811468f"
+  },
+  {
+   "part_id": "0313085",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.637,
+   "same_frame": true,
+   "obj_sha16": "b39426c29ce95c7d",
+   "step_sha16": "fedaf991ea9c70d9"
+  },
+  {
+   "part_id": "0441025",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.442,
+   "same_frame": true,
+   "obj_sha16": "eb655f8ed28b8182",
+   "step_sha16": "bfa823fe6f6bed84"
+  },
+  {
+   "part_id": "0441106",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.476,
+   "same_frame": true,
+   "obj_sha16": "af9031e06c49db62",
+   "step_sha16": "052382c138f30a1d"
+  },
+  {
+   "part_id": "0441504",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.474,
+   "same_frame": true,
+   "obj_sha16": "d013fcfac4a85b7e",
+   "step_sha16": "2a485f09d098c94e"
+  },
+  {
+   "part_id": "0443010",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.546,
+   "same_frame": true,
+   "obj_sha16": "9b8c46782adb64df",
+   "step_sha16": "e5d9735b9223fbf2"
+  },
+  {
+   "part_id": "0443023",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.543,
+   "same_frame": true,
+   "obj_sha16": "188ce3eefa179b0a",
+   "step_sha16": "5a23be9c3fe32690"
+  },
+  {
+   "part_id": "0443049",
+   "split": "train",
+   "center_residual_mm": 0.008,
+   "extent_residual_mm": 0.84,
+   "same_frame": true,
+   "obj_sha16": "6a8cb3814e8875ef",
+   "step_sha16": "a66316011e1fc07f"
+  },
+  {
+   "part_id": "0443078",
+   "split": "train",
+   "center_residual_mm": 0.014,
+   "extent_residual_mm": 0.784,
+   "same_frame": true,
+   "obj_sha16": "ca496254edbc95b1",
+   "step_sha16": "76cffadb1ce8bc40"
+  },
+  {
+   "part_id": "0443081",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.476,
+   "same_frame": true,
+   "obj_sha16": "8eb3a6982e6388ad",
+   "step_sha16": "7e925fa2b75a14a8"
+  },
+  {
+   "part_id": "0444019",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.628,
+   "same_frame": true,
+   "obj_sha16": "fababed7b541b2c2",
+   "step_sha16": "f072290e4a13ff70"
+  },
+  {
+   "part_id": "0452014",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.392,
+   "same_frame": true,
+   "obj_sha16": "ad03260da7739c34",
+   "step_sha16": "34dc63abb9cace3e"
+  },
+  {
+   "part_id": "0501059",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.459,
+   "same_frame": true,
+   "obj_sha16": "d0e3371723c1d95d",
+   "step_sha16": "8c8b88f0e69ef49e"
+  },
+  {
+   "part_id": "0503057",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.531,
+   "same_frame": true,
+   "obj_sha16": "cd7a589820db5268",
+   "step_sha16": "85bf0291be4ca168"
+  },
+  {
+   "part_id": "0505055",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.643,
+   "same_frame": true,
+   "obj_sha16": "57ea15ba2621c229",
+   "step_sha16": "c6119a6de59b7777"
+  },
+  {
+   "part_id": "0531210",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.472,
+   "same_frame": true,
+   "obj_sha16": "0cdfef54baae8dbf",
+   "step_sha16": "41774ddf0dbe39ad"
+  },
+  {
+   "part_id": "0552024",
+   "split": "train",
+   "center_residual_mm": 0.012,
+   "extent_residual_mm": 0.366,
+   "same_frame": true,
+   "obj_sha16": "c2d222b762e3d1d0",
+   "step_sha16": "22b91d389af77edf"
+  },
+  {
+   "part_id": "0561002",
+   "split": "train",
+   "center_residual_mm": 0.013,
+   "extent_residual_mm": 0.388,
+   "same_frame": true,
+   "obj_sha16": "5706d6d08d7bbfda",
+   "step_sha16": "9e92b4a8a3aafe75"
+  },
+  {
+   "part_id": "0561028",
+   "split": "train",
+   "center_residual_mm": 0.013,
+   "extent_residual_mm": 0.388,
+   "same_frame": true,
+   "obj_sha16": "69e0472332e5a36d",
+   "step_sha16": "4337ba9331c12964"
+  },
+  {
+   "part_id": "0701011",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.506,
+   "same_frame": true,
+   "obj_sha16": "dae1f98e7eb8119d",
+   "step_sha16": "5ef837800f968790"
+  },
+  {
+   "part_id": "0701024",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.508,
+   "same_frame": true,
+   "obj_sha16": "59f002641dd2f051",
+   "step_sha16": "7b42ab136fd92df9"
+  },
+  {
+   "part_id": "0711344",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.479,
+   "same_frame": true,
+   "obj_sha16": "4cb3a43f81b14915",
+   "step_sha16": "24d2fbf1067f64c7"
+  },
+  {
+   "part_id": "0711580",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.905,
+   "same_frame": true,
+   "obj_sha16": "58a938c6fc2761e3",
+   "step_sha16": "717abe9248aabc61"
+  },
+  {
+   "part_id": "0719074",
+   "split": "train",
+   "center_residual_mm": 0.004,
+   "extent_residual_mm": 0.44,
+   "same_frame": true,
+   "obj_sha16": "1eef7edca125fe6c",
+   "step_sha16": "ba0bfa0f04d75075"
+  },
+  {
+   "part_id": "0790446",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.717,
+   "same_frame": true,
+   "obj_sha16": "1d067ae8875bb79b",
+   "step_sha16": "07f4634e8d9ecb52"
+  },
+  {
+   "part_id": "0790462",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.717,
+   "same_frame": true,
+   "obj_sha16": "2b4a0b876c98e3c0",
+   "step_sha16": "9ddd2e048b9f7963"
+  },
+  {
+   "part_id": "0790527",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.525,
+   "same_frame": true,
+   "obj_sha16": "ecea593072003d1d",
+   "step_sha16": "6020d48b5e700ae8"
+  },
+  {
+   "part_id": "0790530",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.456,
+   "same_frame": true,
+   "obj_sha16": "c94eb83f5d4a1ae5",
+   "step_sha16": "952e6ce1c8e7d95e"
+  },
+  {
+   "part_id": "0790543",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.454,
+   "same_frame": true,
+   "obj_sha16": "43eeef34cb2f14ad",
+   "step_sha16": "661da6e6de0379fe"
+  },
+  {
+   "part_id": "0920083",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.623,
+   "same_frame": true,
+   "obj_sha16": "d13131a81b74a3df",
+   "step_sha16": "d039622ed85912da"
+  },
+  {
+   "part_id": "2200-1407",
+   "split": "train",
+   "center_residual_mm": 0.053,
+   "extent_residual_mm": 0.65,
+   "same_frame": true,
+   "obj_sha16": "84a265a6676aa7fd",
+   "step_sha16": "7a49be2e4816e31e"
+  },
+  {
+   "part_id": "2210-1307",
+   "split": "train",
+   "center_residual_mm": 0.034,
+   "extent_residual_mm": 0.846,
+   "same_frame": true,
+   "obj_sha16": "ba86022e366626cd",
+   "step_sha16": "f18ee3973033980a"
+  },
+  {
+   "part_id": "2250-1207",
+   "split": "train",
+   "center_residual_mm": 0.046,
+   "extent_residual_mm": 0.536,
+   "same_frame": true,
+   "obj_sha16": "52ab68f0f33ccade",
+   "step_sha16": "48d986afafecf78c"
+  },
+  {
+   "part_id": "3000608",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.597,
+   "same_frame": true,
+   "obj_sha16": "38791bba9f1e32ec",
+   "step_sha16": "fc0ce48214e8627b"
+  },
+  {
+   "part_id": "3000715",
+   "split": "train",
+   "center_residual_mm": 0.24,
+   "extent_residual_mm": 0.706,
+   "same_frame": true,
+   "obj_sha16": "f4657b58b8deb0fc",
+   "step_sha16": "5e87188275a5a882"
+  },
+  {
+   "part_id": "3000716",
+   "split": "train",
+   "center_residual_mm": 0.234,
+   "extent_residual_mm": 1.052,
+   "same_frame": true,
+   "obj_sha16": "4e4049fe460123cd",
+   "step_sha16": "81f73b881c593b31"
+  },
+  {
+   "part_id": "3001369",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 1.039,
+   "same_frame": true,
+   "obj_sha16": "1dea1b5dca36a0a3",
+   "step_sha16": "b01bac26547757d3"
+  },
+  {
+   "part_id": "3001501",
+   "split": "train",
+   "center_residual_mm": 0.004,
+   "extent_residual_mm": 0.959,
+   "same_frame": true,
+   "obj_sha16": "58c2272d7ba80f69",
+   "step_sha16": "cae4407e2c5ced59"
+  },
+  {
+   "part_id": "3002389",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.932,
+   "same_frame": true,
+   "obj_sha16": "925946c7e009a221",
+   "step_sha16": "f24d9146d457df3d"
+  },
+  {
+   "part_id": "3002652",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.626,
+   "same_frame": true,
+   "obj_sha16": "689a6d5bf1007267",
+   "step_sha16": "f7be8e7012d1ce6a"
+  },
+  {
+   "part_id": "3003091",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.959,
+   "same_frame": true,
+   "obj_sha16": "ec115a3ba4ee26b1",
+   "step_sha16": "8eab414727ffd88c"
+  },
+  {
+   "part_id": "3004058",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 1.061,
+   "same_frame": true,
+   "obj_sha16": "54dc13309f3f2ff9",
+   "step_sha16": "08448c9bbea562eb"
+  },
+  {
+   "part_id": "3004524",
+   "split": "train",
+   "center_residual_mm": 0.004,
+   "extent_residual_mm": 0.959,
+   "same_frame": true,
+   "obj_sha16": "14a9ce43b0af7112",
+   "step_sha16": "3f4848f2552440d3"
+  },
+  {
+   "part_id": "3005099",
+   "split": "train",
+   "center_residual_mm": 0.005,
+   "extent_residual_mm": 0.959,
+   "same_frame": true,
+   "obj_sha16": "4f479493ca7f56be",
+   "step_sha16": "11ead9ec312d7dc4"
+  },
+  {
+   "part_id": "3005837",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.439,
+   "same_frame": true,
+   "obj_sha16": "9e6789a5b8e14f65",
+   "step_sha16": "664524b6c7539b4f"
+  },
+  {
+   "part_id": "3006043",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 1.098,
+   "same_frame": true,
+   "obj_sha16": "7a59f646f78e060a",
+   "step_sha16": "58aea1af7069ad04"
+  },
+  {
+   "part_id": "3006179",
+   "split": "train",
+   "center_residual_mm": 0.005,
+   "extent_residual_mm": 1.091,
+   "same_frame": true,
+   "obj_sha16": "98779c8929e7b2b2",
+   "step_sha16": "d8d0628106b20fed"
+  },
+  {
+   "part_id": "3007042",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.833,
+   "same_frame": true,
+   "obj_sha16": "0163b9257374d6e0",
+   "step_sha16": "42bfc60f21d53f4d"
+  },
+  {
+   "part_id": "3009053",
+   "split": "train",
+   "center_residual_mm": 0.065,
+   "extent_residual_mm": 1.575,
+   "same_frame": true,
+   "obj_sha16": "d714d94accc636c5",
+   "step_sha16": "7745c4050ee879ac"
+  },
+  {
+   "part_id": "3031681",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.664,
+   "same_frame": true,
+   "obj_sha16": "c9a10aa9dc9d91c0",
+   "step_sha16": "767a2ea5db955612"
+  },
+  {
+   "part_id": "3035693",
+   "split": "train",
+   "center_residual_mm": 0.019,
+   "extent_residual_mm": 1.039,
+   "same_frame": true,
+   "obj_sha16": "beb2f1e8b5149f93",
+   "step_sha16": "b5d9d904b417a544"
+  },
+  {
+   "part_id": "3036084",
+   "split": "train",
+   "center_residual_mm": 0.007,
+   "extent_residual_mm": 1.036,
+   "same_frame": true,
+   "obj_sha16": "f4e230461ffa55c0",
+   "step_sha16": "531a6a7d1f46302a"
+  },
+  {
+   "part_id": "3044076",
+   "split": "train",
+   "center_residual_mm": 0.0,
+   "extent_residual_mm": 1.001,
+   "same_frame": true,
+   "obj_sha16": "39b0b0b246f2ca59",
+   "step_sha16": "cb425866c34fcf36"
+  },
+  {
+   "part_id": "3044160",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 1.0,
+   "same_frame": true,
+   "obj_sha16": "7bc65b48907a3fe2",
+   "step_sha16": "9d80f8dbd82fe8f2"
+  },
+  {
+   "part_id": "3044238",
+   "split": "train",
+   "center_residual_mm": 0.016,
+   "extent_residual_mm": 1.365,
+   "same_frame": true,
+   "obj_sha16": "839f9f846b443b3f",
+   "step_sha16": "74ed49d7306f0f91"
+  },
+  {
+   "part_id": "3044555",
+   "split": "train",
+   "center_residual_mm": 0.009,
+   "extent_residual_mm": 0.696,
+   "same_frame": true,
+   "obj_sha16": "dac0f5e349d13894",
+   "step_sha16": "17b1834f548916d3"
+  },
+  {
+   "part_id": "3046485",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 1.217,
+   "same_frame": true,
+   "obj_sha16": "a710eb7257ef5a55",
+   "step_sha16": "0fd94fd934f095e7"
+  },
+  {
+   "part_id": "3046566",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.603,
+   "same_frame": true,
+   "obj_sha16": "b3ec3d77e385aa82",
+   "step_sha16": "35512eaa9c7bd685"
+  },
+  {
+   "part_id": "3048823",
+   "split": "train",
+   "center_residual_mm": 0.006,
+   "extent_residual_mm": 0.679,
+   "same_frame": true,
+   "obj_sha16": "c5fe90e9254377c2",
+   "step_sha16": "b03c08cce7654742"
+  },
+  {
+   "part_id": "3072803",
+   "split": "train",
+   "center_residual_mm": 0.0,
+   "extent_residual_mm": 1.391,
+   "same_frame": true,
+   "obj_sha16": "51e826648e1953fc",
+   "step_sha16": "576669db983f2619"
+  },
+  {
+   "part_id": "3073018",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.675,
+   "same_frame": true,
+   "obj_sha16": "c3e8962dbe8bcd8a",
+   "step_sha16": "956af98e632c2508"
+  },
+  {
+   "part_id": "3100318",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.469,
+   "same_frame": true,
+   "obj_sha16": "9c75e72ef8b43a50",
+   "step_sha16": "f1d9cb7bf9684fcf"
+  },
+  {
+   "part_id": "3208746",
+   "split": "train",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.927,
+   "same_frame": true,
+   "obj_sha16": "cdcb250bea2ff75d",
+   "step_sha16": "ed134e68026f5dca"
+  },
+  {
+   "part_id": "3209511",
+   "split": "train",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.504,
+   "same_frame": true,
+   "obj_sha16": "c4e1448013e23564",
+   "step_sha16": "51faea2afc617452"
+  },
+  {
+   "part_id": "3209606",
+   "split": "train",
+   "center_residual_mm": 0.24,
+   "extent_residual_mm": 0.803,
+   "same_frame": true,
+   "obj_sha16": "00adbe1733347324",
+   "step_sha16": "e0af7898f5134270"
+  },
+  {
+   "part_id": "3210499",
+   "split": "train",
+   "center_residual_mm": 0.237,
+   "extent_residual_mm": 1.052,
+   "same_frame": true,
+   "obj_sha16": "75486039a45fb9b9",
+   "step_sha16": "4ec84bd5878b19bb"
+  },
+  {
+   "part_id": "3212154",
+   "split": "train",
+   "center_residual_mm": 0.312,
+   "extent_residual_mm": 0.733,
+   "same_frame": true,
+   "obj_sha16": "29d657162f152488",
+   "step_sha16": "4e0817ad92cd197b"
+  },
+  {
+   "part_id": "3215928",
+   "split": "train",
+   "center_residual_mm": 0.026,
+   "extent_residual_mm": 1.296,
+   "same_frame": true,
+   "obj_sha16": "f8d57c8d067ab64b",
+   "step_sha16": "bcdb2fc08eca6c05"
+  },
+  {
+   "part_id": "3248037",
+   "split": "train",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.709,
+   "same_frame": true,
+   "obj_sha16": "5740ba788ad1be46",
+   "step_sha16": "f5534d265c311e80"
+  },
+  {
+   "part_id": "0311087",
+   "split": "val",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.742,
+   "same_frame": true,
+   "obj_sha16": "985b8a8de91da770",
+   "step_sha16": "085be6748ac24737"
+  },
+  {
+   "part_id": "0311142",
+   "split": "val",
+   "center_residual_mm": 0.007,
+   "extent_residual_mm": 1.031,
+   "same_frame": true,
+   "obj_sha16": "05c44d77527c46d7",
+   "step_sha16": "700a8d55cd355047"
+  },
+  {
+   "part_id": "0441517",
+   "split": "val",
+   "center_residual_mm": 0.001,
+   "extent_residual_mm": 0.475,
+   "same_frame": true,
+   "obj_sha16": "c4c5682807165e63",
+   "step_sha16": "c600e7b3f4be41a0"
+  },
+  {
+   "part_id": "0452043",
+   "split": "val",
+   "center_residual_mm": 0.0,
+   "extent_residual_mm": 0.314,
+   "same_frame": true,
+   "obj_sha16": "10b639c00b117c34",
+   "step_sha16": "6fc63c22f193c652"
+  },
+  {
+   "part_id": "0461018",
+   "split": "val",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.696,
+   "same_frame": true,
+   "obj_sha16": "af96dfdd8b05cd9b",
+   "step_sha16": "73154ba8bbc955f7"
+  },
+  {
+   "part_id": "0701008",
+   "split": "val",
+   "center_residual_mm": 0.004,
+   "extent_residual_mm": 0.703,
+   "same_frame": true,
+   "obj_sha16": "9ade0c2b0bb2c83c",
+   "step_sha16": "02dbefbd569c92c7"
+  },
+  {
+   "part_id": "0701095",
+   "split": "val",
+   "center_residual_mm": 0.004,
+   "extent_residual_mm": 0.67,
+   "same_frame": true,
+   "obj_sha16": "84fe8183ee642a02",
+   "step_sha16": "7232a6151924257c"
+  },
+  {
+   "part_id": "0719016",
+   "split": "val",
+   "center_residual_mm": 0.0,
+   "extent_residual_mm": 0.443,
+   "same_frame": true,
+   "obj_sha16": "1ffd541e18e523b6",
+   "step_sha16": "281e042bee89d1e2"
+  },
+  {
+   "part_id": "0719113",
+   "split": "val",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.478,
+   "same_frame": true,
+   "obj_sha16": "2b28ec4d9e195147",
+   "step_sha16": "77208aca0428bf0c"
+  },
+  {
+   "part_id": "2002-2941",
+   "split": "val",
+   "center_residual_mm": 0.069,
+   "extent_residual_mm": 1.011,
+   "same_frame": true,
+   "obj_sha16": "d2d2d7166a7a7ce5",
+   "step_sha16": "fc57eab12c0ad97d"
+  },
+  {
+   "part_id": "2002-7214",
+   "split": "val",
+   "center_residual_mm": 0.166,
+   "extent_residual_mm": 0.636,
+   "same_frame": true,
+   "obj_sha16": "0455b4cb805072a8",
+   "step_sha16": "0bc950d7fe9e04e9"
+  },
+  {
+   "part_id": "3001035",
+   "split": "val",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.89,
+   "same_frame": true,
+   "obj_sha16": "9936f657c625a2ba",
+   "step_sha16": "93044ac2e2c715c0"
+  },
+  {
+   "part_id": "3001381",
+   "split": "val",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 1.106,
+   "same_frame": true,
+   "obj_sha16": "f581b5ffe9489a8a",
+   "step_sha16": "525fa1795ecc4fe7"
+  },
+  {
+   "part_id": "3001695",
+   "split": "val",
+   "center_residual_mm": 0.002,
+   "extent_residual_mm": 0.701,
+   "same_frame": true,
+   "obj_sha16": "7c7692c41c6c7ecc",
+   "step_sha16": "546ca5ad3c0fe44c"
+  },
+  {
+   "part_id": "3002602",
+   "split": "val",
+   "center_residual_mm": 0.099,
+   "extent_residual_mm": 1.229,
+   "same_frame": true,
+   "obj_sha16": "d1875538027dffe2",
+   "step_sha16": "ddce271dc5420b39"
+  },
+  {
+   "part_id": "3008025",
+   "split": "val",
+   "center_residual_mm": 0.0,
+   "extent_residual_mm": 1.268,
+   "same_frame": true,
+   "obj_sha16": "b82e94ddb14bcefe",
+   "step_sha16": "f631a982b312f32d"
+  },
+  {
+   "part_id": "3011041",
+   "split": "val",
+   "center_residual_mm": 0.03,
+   "extent_residual_mm": 0.864,
+   "same_frame": true,
+   "obj_sha16": "58a3686554b47ceb",
+   "step_sha16": "4d24371046d5d94d"
+  },
+  {
+   "part_id": "3044364",
+   "split": "val",
+   "center_residual_mm": 0.007,
+   "extent_residual_mm": 0.607,
+   "same_frame": true,
+   "obj_sha16": "017a83174d9a8b37",
+   "step_sha16": "8438bb2332e64d74"
+  },
+  {
+   "part_id": "3100062",
+   "split": "val",
+   "center_residual_mm": 0.005,
+   "extent_residual_mm": 0.964,
+   "same_frame": true,
+   "obj_sha16": "9a720cf7e8ed6b57",
+   "step_sha16": "f29ac987bc2cca1d"
+  },
+  {
+   "part_id": "3214602",
+   "split": "val",
+   "center_residual_mm": 0.003,
+   "extent_residual_mm": 0.527,
+   "same_frame": true,
+   "obj_sha16": "d59aae3b2f4c1314",
+   "step_sha16": "74219b5381e566d3"
+  }
+ ]
+}

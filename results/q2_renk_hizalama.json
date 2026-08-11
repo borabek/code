@@ -1,0 +1,113 @@
+{
+ "n": 15,
+ "gercek_oran": 0.0,
+ "null_oran": 0.0,
+ "kayit": [
+  {
+   "pid": "1561750000",
+   "eslesme": 384,
+   "artik": "38.586mm",
+   "null": "39.233mm",
+   "gecti": false
+  },
+  {
+   "pid": "2534520000",
+   "eslesme": 199,
+   "artik": "31.324mm",
+   "null": "32.500mm",
+   "gecti": false
+  },
+  {
+   "pid": "3213961",
+   "eslesme": 48,
+   "artik": "34.431mm",
+   "null": "36.724mm",
+   "gecti": false
+  },
+  {
+   "pid": "3076042",
+   "eslesme": 13,
+   "artik": "11.216mm",
+   "null": "27.072mm",
+   "gecti": false
+  },
+  {
+   "pid": "3100075",
+   "eslesme": 18,
+   "artik": "14.657mm",
+   "null": "9.009mm",
+   "gecti": false
+  },
+  {
+   "pid": "280-905",
+   "eslesme": 27,
+   "artik": "25.063mm",
+   "null": "21.651mm",
+   "gecti": false
+  },
+  {
+   "pid": "3031429",
+   "eslesme": 31,
+   "artik": "32.198mm",
+   "null": "34.618mm",
+   "gecti": false
+  },
+  {
+   "pid": "3248030",
+   "eslesme": 12,
+   "artik": "14.803mm",
+   "null": "11.717mm",
+   "gecti": false
+  },
+  {
+   "pid": "279-685",
+   "eslesme": 27,
+   "artik": "27.918mm",
+   "null": "25.388mm",
+   "gecti": false
+  },
+  {
+   "pid": "1088740",
+   "eslesme": 26,
+   "artik": "39.079mm",
+   "null": "37.209mm",
+   "gecti": false
+  },
+  {
+   "pid": "3037012",
+   "eslesme": 19,
+   "artik": "19.961mm",
+   "null": "28.067mm",
+   "gecti": false
+  },
+  {
+   "pid": "3208524",
+   "eslesme": 47,
+   "artik": "24.107mm",
+   "null": "23.496mm",
+   "gecti": false
+  },
+  {
+   "pid": "1029800000",
+   "eslesme": 107,
+   "artik": "26.427mm",
+   "null": "36.147mm",
+   "gecti": false
+  },
+  {
+   "pid": "3213944",
+   "eslesme": 45,
+   "artik": "33.019mm",
+   "null": "30.846mm",
+   "gecti": false
+  },
+  {
+   "pid": "1050070000",
+   "eslesme": 24,
+   "artik": "31.626mm",
+   "null": "33.435mm",
+   "gecti": false
+  }
+ ],
+ "karar": "KAPAT"
+}

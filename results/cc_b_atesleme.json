@@ -1,0 +1,44 @@
+{
+ "n2.0": {
+  "found_median": 10.0,
+  "missed_median": 9.0
+ },
+ "conn_max2.0": {
+  "found_median": 0.4952385313808918,
+  "missed_median": 0.39884781499858946
+ },
+ "cecT_frac2.0": {
+  "found_median": 0.0,
+  "missed_median": 0.0
+ },
+ "n3.0": {
+  "found_median": 23.0,
+  "missed_median": 21.0
+ },
+ "conn_max3.0": {
+  "found_median": 0.5048731024144217,
+  "missed_median": 0.41581282395054586
+ },
+ "cecT_frac3.0": {
+  "found_median": 0.03508771929824561,
+  "missed_median": 0.0
+ },
+ "n4.0": {
+  "found_median": 48.0,
+  "missed_median": 41.0
+ },
+ "conn_max4.0": {
+  "found_median": 0.5392319655511528,
+  "missed_median": 0.42762833106098697
+ },
+ "cecT_frac4.0": {
+  "found_median": 0.04195804195804196,
+  "missed_median": 0.0
+ },
+ "n_found": 329,
+ "n_missed": 862,
+ "frac_missed_with_signal": 0.7111368909512761,
+ "found_conn_max3_median": 0.5048731024144217,
+ "missed_conn_max3_median": 0.41581282395054586,
+ "verdict": "ATESLIYOR -> engel POST-ISLEME/COZUNURLUK"
+}

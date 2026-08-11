@@ -1,0 +1,657 @@
+{
+ "n": 115,
+ "requests": [
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/en/",
+   "type": "document"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-PW6TD4JP.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-TO6WOVSV.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-H6GHIGUH.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-XHDBY44F.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-WDDGX47I.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-63JEDW6M.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-5M2I4WGA.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-KIB7565S.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-Z72ZBOM3.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-VJFUAJEM.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/main-Q4GGXCBK.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/styles-BPUDWPIC.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-GHAJBEPN.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-UCRSTW74.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-UUJJGKNM.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-ZBRUQ6BT.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-JDA4A6LG.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-RFTWX5LH.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-2SBNTQ3J.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-B253JRU2.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-4GU44VJZ.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/site.webmanifest",
+   "type": "manifest"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/i18n/en.json",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/i18n/en.json",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/BaseInfo",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/fonts/roboto-v49-latin_latin-ext-regular.woff2",
+   "type": "font"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/BaseInfo",
+   "type": "fetch"
+  },
+  {
+   "method": "OPTIONS",
+   "url": "https://bff.wscaduniverse.com/api/BaseInfo",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/ngsw.json?ngsw-cache-bust=0.1864888610388099",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/icons/fav/apple-touch-icon.png",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/cart/current",
+   "type": "fetch"
+  },
+  {
+   "method": "OPTIONS",
+   "url": "https://bff.wscaduniverse.com/api/cart/current",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/cart/current",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/fonts/roboto-v49-latin_latin-ext-500.woff2",
+   "type": "font"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/fonts/MaterialSymbolsRounded.woff2",
+   "type": "font"
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&_gaz=1&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {}
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/fonts/roboto-v49-latin_latin-ext-600.woff2",
+   "type": "font"
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=19.0.0",
+   "type": "fetch",
+   "post_data": "en=APP_INIT_LANGUAGE&_ee=1&ep.event_category=UI_ACTION&ep.event_label=en&epn.value=1&_et=4\r\nen=INIT_APP_WIDTH&_ee=1&ep.event_category=UI_ACTION&ep.event_label=1912&epn.value=1&_et=1",
+   "headers": {
+    "content-type": "text/plain;charset=UTF-8"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&_gaz=1&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {
+    "accept": "*/*"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=19.0.0",
+   "type": "fetch",
+   "post_data": "en=APP_INIT_LANGUAGE&_ee=1&ep.event_category=UI_ACTION&ep.event_label=en&epn.value=1&_et=4\r\nen=INIT_APP_WIDTH&_ee=1&ep.event_category=UI_ACTION&ep.event_label=1912&epn.value=1&_et=1",
+   "headers": {
+    "accept": "*/*",
+    "content-type": "text/plain;charset=UTF-8"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEAAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=1",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {
+    "accept": "*/*"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEAAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=1",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {
+    "accept": "*/*"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEAAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=1",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {}
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEAAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=1",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {}
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/ngsw.json?ngsw-cache-bust=0.3090103878070608",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/ngsw.json?ngsw-cache-bust=0.7928829300040969",
+   "type": "fetch"
+  },
+  {
+   "method": "POST",
+   "url": "https://bff.wscaduniverse.com/api/search/autocomplete",
+   "type": "fetch",
+   "post_data": "{\"search\":\"1010100000\",\"norms\":[0]}",
+   "headers": {
+    "authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InByb2QiLCJ0eXAiOiJKV1QifQ.eyJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJjbGllbnRfaWQiOiI1ZmoyZmhwcW",
+    "accept": "application/json",
+    "content-type": "application/json"
+   }
+  },
+  {
+   "method": "OPTIONS",
+   "url": "https://bff.wscaduniverse.com/api/search/autocomplete",
+   "type": "other"
+  },
+  {
+   "method": "POST",
+   "url": "https://bff.wscaduniverse.com/api/search/autocomplete",
+   "type": "fetch",
+   "post_data": "{\"search\":\"1010100000\",\"norms\":[0]}",
+   "headers": {
+    "authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InByb2QiLCJ0eXAiOiJKV1QifQ.eyJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJjbGllbnRfaWQiOiI1ZmoyZmhwcW",
+    "accept": "application/json",
+    "content-type": "application/json"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&_gaz=1&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEEAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {
+    "accept": "*/*"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&_gaz=1&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEEAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {}
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-H7F56YWV.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-NJ5NBCUJ.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-CDUAXOBG.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-QEZ2HWDR.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-DM22NPIV.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-VLL2XWUV.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-3NB2WYJG.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-DFZ5BFGZ.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-ZV5MDBNI.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-4DJXVYNV.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-B5VIXFCD.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-LYQEGT2D.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/chunk-SB47N3A6.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "http://localhost:10384/api/v1/universe",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/search?searchText=1010100000&norms=0&searchType=0&limit=96&offset=0",
+   "type": "fetch"
+  },
+  {
+   "method": "OPTIONS",
+   "url": "https://bff.wscaduniverse.com/api/search?searchText=1010100000&norms=0&searchType=0&limit=96&offset=0",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/search?searchText=1010100000&norms=0&searchType=0&limit=96&offset=0",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/fonts/saira-v22-latin_latin-ext-800.woff2",
+   "type": "font"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/statistics/getSearchHighlights?searchText=1010100000&norms=0&searchType=0&limit=96&offset=0",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://bff.wscaduniverse.com/api/statistics/getSearchHighlights?searchText=1010100000&norms=0&searchType=0&limit=96&offset=0",
+   "type": "fetch"
+  },
+  {
+   "method": "OPTIONS",
+   "url": "https://bff.wscaduniverse.com/api/statistics/getSearchHighlights?searchText=1010100000&norms=0&searchType=0&limit=96&offset=0",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/assets/icons/premium-part/badgepremium_star_min.svg",
+   "type": "image"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/data/Weidmueller%2FWeidmueller-logo.png",
+   "type": "image"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/data/Weidmueller%2FWeidmueller-logo.png",
+   "type": "fetch"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/data/Weidmueller%2Fimages%2F1010100000.jpg",
+   "type": "image"
+  },
+  {
+   "method": "GET",
+   "url": "https://www.wscaduniverse.com/data/Weidmueller%2Fimages%2F1010100000.jpg",
+   "type": "fetch"
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=19.0.0",
+   "type": "fetch",
+   "post_data": "en=INIT_SEARCH_FROM_FIELD&_ee=1&ep.event_category=SEARCH&ep.event_label=1010100000&epn.value=1&_et=6&dl=https%3A%2F%2Fwww.wscaduniverse.com%2Fen&dt=WSCAD%20Universe%20%E2%80%93%20Electrical%20CAD%20Parts%20Library%20(2.2M%2B)\r\nen=INIT_SEARCH&_ee=1&ep.event_category=SEARCH&ep.event_label=searchText%3D1010100000%26norms%3D0%26searchType%3D0%26limit%3D96%26offset%3D0&epn.value=1&_et=44\r\nen=SEARCH_APP_WIDTH&_ee=1&ep.event_category=UI_ACTION&ep.event_label=1912&epn.value=1&_et=2\r\nen=SEARCH_VIEW_INIT&_ee=1&ep.event_category=USER_ACTION&ep.event_label=list&epn.value=1&_et=2",
+   "headers": {
+    "accept": "*/*",
+    "content-type": "text/plain;charset=UTF-8"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEAAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=1",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {
+    "accept": "*/*"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=19.0.0",
+   "type": "fetch",
+   "post_data": "en=INIT_SEARCH_FROM_FIELD&_ee=1&ep.event_category=SEARCH&ep.event_label=1010100000&epn.value=1&_et=6&dl=https%3A%2F%2Fwww.wscaduniverse.com%2Fen&dt=WSCAD%20Universe%20%E2%80%93%20Electrical%20CAD%20Parts%20Library%20(2.2M%2B)\r\nen=INIT_SEARCH&_ee=1&ep.event_category=SEARCH&ep.event_label=searchText%3D1010100000%26norms%3D0%26searchType%3D0%26limit%3D96%26offset%3D0&epn.value=1&_et=44\r\nen=SEARCH_APP_WIDTH&_ee=1&ep.event_category=UI_ACTION&ep.event_label=1912&epn.value=1&_et=2\r\nen=SEARCH_VIEW_INIT&_ee=1&ep.event_category=USER_ACTION&ep.event_label=list&epn.value=1&_et=2",
+   "headers": {
+    "content-type": "text/plain;charset=UTF-8"
+   }
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AEAAAGQ&ae=a&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=1",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {}
+  },
+  {
+   "method": "POST",
+   "url": "https://bff.wscaduniverse.com/api/download/part",
+   "type": "fetch",
+   "post_data": "{\"manufacturerId\":88,\"partNumber\":\"1010100000\",\"partType\":2,\"norm\":0,\"language\":\"en\"}",
+   "headers": {
+    "authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InByb2QiLCJ0eXAiOiJKV1QifQ.eyJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJjbGllbnRfaWQiOiI1ZmoyZmhwcW",
+    "accept": "application/json",
+    "content-type": "application/json"
+   }
+  },
+  {
+   "method": "OPTIONS",
+   "url": "https://bff.wscaduniverse.com/api/download/part",
+   "type": "other"
+  },
+  {
+   "method": "POST",
+   "url": "https://bff.wscaduniverse.com/api/download/part",
+   "type": "fetch",
+   "post_data": "{\"manufacturerId\":88,\"partNumber\":\"1010100000\",\"partType\":2,\"norm\":0,\"language\":\"en\"}",
+   "headers": {
+    "authorization": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6InByb2QiLCJ0eXAiOiJKV1QifQ.eyJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJjbGllbnRfaWQiOiI1ZmoyZmhwcW",
+    "accept": "application/json",
+    "content-type": "application/json"
+   }
+  },
+  {
+   "DOWNLOAD": "wscaduniverse_1010100000_2026-07-22-17-00-25.stp",
+   "url": "blob:https://www.wscaduniverse.com/79b8dc73-c820-47fa-b584-ad8016f2286a"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/",
+   "type": "document"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/downloads-hub-app.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/edge-hub-toolbar.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/downloads-list.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/download-item.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/text.styles.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/button.styles.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/text-input.styles.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/link.styles.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/progress-bar.styles.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/downloads-header.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/edge-hub-header.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/download-group.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://fileicon/?path=C%3A%5CUsers%5CDE0002~1%5CAppData%5CLocal%5CTemp%5Cplaywright-artifacts-ExWUsx%5C85c90552-8cf0-48e7-8507-fa9dcb8bce07",
+   "type": "image"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/downloads-modal-dialog.css",
+   "type": "stylesheet"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/hub.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/icons.svg",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/icons.svg",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/icons.svg",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/segoe-sans-variable",
+   "type": "font"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/chunk-PR3PBE4W.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/initial-state.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/icons.svg",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/edge_downloads.mojom-webui.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/edge_downloads_btr.mojom-webui.js",
+   "type": "script"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/icons.svg",
+   "type": "other"
+  },
+  {
+   "method": "GET",
+   "url": "edge://downloads-hub/icons.svg",
+   "type": "other"
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=19.0.0",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {}
+  },
+  {
+   "method": "POST",
+   "url": "https://region1.analytics.google.com/g/collect?v=2&tid=G-9M8030RET7&gtm=45je67k1h1v9166467571za200zd9166467571&_p=1784732349111&gcd=13l3l3l2l1l1&npa=1&dma_cps=a&dma=1&_eu=AAAAAGQ&are=1&cid=1454871229.1784730538&frm=0&pscdl=noapi&rcb=15&sr=1920x1080&uaa=x86&uab=64&uafvl=Not%253BA%253DBrand%3B8.0.0.0%7CChromium%3B150.0.7871.129%7CMicrosoft%2520Edge%3B150.0.4078.83&uam=&uamb=0&uap=Windows&uapv=19.0.0",
+   "type": "fetch",
+   "post_data": "",
+   "headers": {
+    "accept": "*/*"
+   }
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+# cp_real_nocurv — FEATURE ablation (E4), the strongest remaining lever. Identical to
+# run_real_v1.yaml but adds hp_no_curvature (keep normals, drop the PCA curvature/concavity/
+# edge_dist). NO cube-rotation (that crippled training in cp_real_rot: val 0.038). Rationale:
+# curvature = lambda-ratio, ~0 on the flat facets of a coarse JSON export mesh but non-zero
+# on a fine STEP tessellation -> the dominant JSON->STEP feature mismatch. Dropping it should
+# help transfer without hurting training (fewer features, not a harder task). Single variable
+# vs cp_real_v1 = curvature. Baseline: cp_real_v1 STEP native 0.093 / bridge-JSON 0.21.
+# NOTE: NO init_from -- init_from forces the pretrain ckpt's architecture (c_in=9),
+# silently ignoring hp_no_curvature. Must train from scratch for the ablation to take
+# effect. Compare against cp_real_scratch (scratch, c_in=9), not cp_real_v1 (init, c_in=9).
+backbone: hierpoint
+run_name: cp_real_nocurv_s
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 48000
+knn_cache_dir: _prep_cache_nc6
+
+epochs: 90
+eval_every: 5
+patience: 8
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+
+augment: 2
+aug_rotate: false
+hp_no_curvature: true
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

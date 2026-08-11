@@ -1,0 +1,14 @@
+{
+ "metal SILINDIR (mevcut)": {
+  "auc": 0.3421738145575355,
+  "null_p95": 0.539566344508205
+ },
+ "TUM metal yuzler (yeni)": {
+  "auc": 0.30068332829960737,
+  "null_p95": 0.5389578928823114
+ },
+ "fark": 0.041490486257928116,
+ "kabul_silindir": 28,
+ "kabul_tum": 32,
+ "n_parca": 70
+}

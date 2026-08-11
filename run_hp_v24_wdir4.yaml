@@ -1,0 +1,52 @@
+# v24: SINGLE-VARIABLE experiment vs run_hp_v22.yaml -- w_dir 2.0 -> 4.0.
+# Motivation (diag_direction.py on hp_v22 val, 125 matched TPs): only 25% of
+# matched direction predictions are axis-correct (|cos|>0.9), 25% are sign-
+# flipped, i.e. 75% genuinely OFF-AXIS -- the head is under-trained, not
+# sign-confused (ang was still falling when the cosine schedule ended at ep90).
+# Same split as v22 (split_seed pinned) so numbers are directly comparable.
+backbone: hierpoint
+run_name: cp_hp_v24_wdir4
+seed: 0
+extra_sources:
+  - wscad_corpus_v2
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+device: cuda
+# hierpoint at 14000 verts/patch peaks ~0.6 GB (probe: 556 MB solo, 1.06 GB for
+# a fused 2x14000 chunk) -- far under the 4 GB T1200's ~3.7 GB WDDM spill cliff,
+# and each patch sees 2x the context the 7000 cap allowed.
+max_gpu_verts: 14000
+fwd_verts: 28000
+# disk cache OFF: it re-filled the near-full C: drive (hier .npz + knn .npy).
+# RAM holds the graphs for the run; the cache only saved ~26s of prebuild.
+
+epochs: 90          # cold-start eats ~15-25 epochs before heat peaks cross the
+eval_every: 5       # 0.30 decode threshold (measured: peaks 0.26 & rising at ep5);
+patience: 10        # patience 10 survives that, epochs 90 leaves cosine room after.
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 4.0
+lr: 0.001          # v19's proven value; 5e-4 starved the centernet heat head
+lr_schedule: cosine  # (0 detections through epoch 10 on the knngraph control).
+weight_decay: 0.0005
+grad_clip: 1.0
+
+# same partition as v22/seed replicas
+split_seed: 0

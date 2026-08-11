@@ -1,0 +1,45 @@
+# cp_real_remesh12k_aug — push GENERALISATION (= the transfer metric). Like
+# run_real_remesh12k.yaml (12k corpus + alpha 1.0 recall-loss, which lifted STEP transfer
+# 0.148 -> 0.286) but augment 2 -> 4 and w_heat 1.0 -> 1.5. More rigid-clone augmentation is
+# the standard overfit brake and directly targets generalisation to UNSEEN STEP parts (the
+# bridge transfer test); stronger heatmap weight sharpens the CP signal for recall.
+backbone: hierpoint
+init_from: checkpoints/cp_hp_pretrain_synth_best.ckpt
+run_name: cp_real_remesh12k_aug
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 48000
+knn_cache_dir: _prep_cache_rm12
+
+epochs: 90
+eval_every: 5
+patience: 10
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+heatmap_thresh: 0.15
+
+augment: 4
+aug_rotate: false
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.0
+w_heat: 1.5
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

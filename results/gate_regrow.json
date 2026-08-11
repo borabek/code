@@ -1,0 +1,12 @@
+{
+ "deployed_oof_f1": 0.8318939546093592,
+ "regrown_oof_f1": 0.852206027830904,
+ "gain": 0.020312073221544824,
+ "manufacturer_out": {
+  "pxc_held": 0.6904257821689015,
+  "wei_held": 0.38733845289380026
+ },
+ "n_parts_deployed": 823,
+ "n_parts_regrown": 1910,
+ "kill_passed": true
+}

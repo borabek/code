@@ -1,0 +1,62 @@
+{
+ "marka": "SUPU",
+ "klar": [
+  12
+ ],
+ "cekilis": 2,
+ "epochs": 40,
+ "lr": 0.0002,
+ "taban_ckpt": "results/seg_g10/g10_s0.pt",
+ "kosumlar": {
+  "12": [
+   {
+    "cekilis": 0,
+    "adapt": [
+     "210927",
+     "215947",
+     "TC4-3-PE",
+     "TC6-3-GY",
+     "TCD2.5-2-PE",
+     "TP10-2-GY",
+     "TP2.5-2-2-PE",
+     "TP6-4-PE",
+     "TPA6_2.5-13-GY",
+     "TPS2.5-3-PE",
+     "TPS2.5-4-GY",
+     "TU95-2-GY"
+    ],
+    "n_olc": 153,
+    "k_gercek": 8,
+    "k_istenen": 12,
+    "ckpt": "results/seg_fs/SUPU_k12_c0.pt",
+    "ckpt_kullanilan": "results/seg_fs/SUPU_k12_c0_last.pt",
+    "onbellek": "results/_p1_olasilik_fs_SUPU_k12_c0"
+   },
+   {
+    "cekilis": 1,
+    "adapt": [
+     "225987",
+     "TCD2.5-2-PE",
+     "TP1.5-4-GY",
+     "TP2.5-2-2-GY",
+     "TP2.5-2-GY",
+     "TP2.5-3-1-PE",
+     "TP6-FSI-F-BK",
+     "TPA1.5-2-GY",
+     "TPA4-1.5-7-GY",
+     "TPD2.5-2-GY",
+     "TPV2.5-2-PE",
+     "TU6-2-PE"
+    ],
+    "n_olc": 153,
+    "k_gercek": 8,
+    "k_istenen": 12,
+    "ckpt": "results/seg_fs/SUPU_k12_c1.pt",
+    "ckpt_kullanilan": "results/seg_fs/SUPU_k12_c1_last.pt",
+    "onbellek": "results/_p1_olasilik_fs_SUPU_k12_c1"
+   }
+  ]
+ },
+ "uyari": "k_gercek < k_istenen olabilir: oto-boyayici INSAN etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri algilanan bir acikliga dusmez. Olculen egri, gercek insan etiketine gore bir ALT SINIRDIR.",
+ "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (sonda_k65b_olc.py) -- boylece egitim bir kez kosar, olcum tekrar tekrar kosulabilir."
+}

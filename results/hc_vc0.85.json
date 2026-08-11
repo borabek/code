@@ -1,0 +1,251 @@
+{
+ "ckpt": [
+  "results/seg_extra/human77c_s0.pt",
+  "results/seg_extra/human77c_s1.pt",
+  "results/seg_extra/human77c_s2.pt"
+ ],
+ "in_sample": false,
+ "outward_min": 0.0,
+ "n_parts": 26,
+ "n_human_cps": 82,
+ "precision": 0.706,
+ "recall": 0.439,
+ "f1": 0.541,
+ "dir_median_deg": 0.002562345262520059,
+ "per_part": [
+  {
+   "part_id": "280-510",
+   "human_cps": 0,
+   "pred_cps": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 0,
+   "tol_mm": 7.1
+  },
+  {
+   "part_id": "280-612",
+   "human_cps": 2,
+   "pred_cps": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2,
+   "tol_mm": 4.3
+  },
+  {
+   "part_id": "3031047",
+   "human_cps": 9,
+   "pred_cps": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 7,
+   "tol_mm": 9.0
+  },
+  {
+   "part_id": "3044649",
+   "human_cps": 4,
+   "pred_cps": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4,
+   "tol_mm": 5.7
+  },
+  {
+   "part_id": "3046703",
+   "human_cps": 6,
+   "pred_cps": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 5,
+   "tol_mm": 8.9
+  },
+  {
+   "part_id": "3076031",
+   "human_cps": 4,
+   "pred_cps": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 4,
+   "tol_mm": 6.4
+  },
+  {
+   "part_id": "3210280",
+   "human_cps": 4,
+   "pred_cps": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3212095",
+   "human_cps": 1,
+   "pred_cps": 2,
+   "tp": 0,
+   "fp": 2,
+   "fn": 1,
+   "tol_mm": 6.9
+  },
+  {
+   "part_id": "3212444",
+   "human_cps": 2,
+   "pred_cps": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3213713",
+   "human_cps": 6,
+   "pred_cps": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 2,
+   "tol_mm": 6.6
+  },
+  {
+   "part_id": "3213933",
+   "human_cps": 2,
+   "pred_cps": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3213971",
+   "human_cps": 2,
+   "pred_cps": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1,
+   "tol_mm": 4.7
+  },
+  {
+   "part_id": "3214291",
+   "human_cps": 6,
+   "pred_cps": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 6,
+   "tol_mm": 7.1
+  },
+  {
+   "part_id": "3214360",
+   "human_cps": 4,
+   "pred_cps": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4,
+   "tol_mm": 6.9
+  },
+  {
+   "part_id": "3244012",
+   "human_cps": 2,
+   "pred_cps": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 0,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3244149",
+   "human_cps": 2,
+   "pred_cps": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1,
+   "tol_mm": 3.3
+  },
+  {
+   "part_id": "3248100",
+   "human_cps": 2,
+   "pred_cps": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3248154",
+   "human_cps": 2,
+   "pred_cps": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3249017",
+   "human_cps": 2,
+   "pred_cps": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2,
+   "tol_mm": 3.0
+  },
+  {
+   "part_id": "3270065",
+   "human_cps": 3,
+   "pred_cps": 4,
+   "tp": 3,
+   "fp": 1,
+   "fn": 0,
+   "tol_mm": 4.8
+  },
+  {
+   "part_id": "3270275",
+   "human_cps": 4,
+   "pred_cps": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 2,
+   "tol_mm": 6.0
+  },
+  {
+   "part_id": "3271051",
+   "human_cps": 2,
+   "pred_cps": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1,
+   "tol_mm": 4.0
+  },
+  {
+   "part_id": "3271323",
+   "human_cps": 4,
+   "pred_cps": 4,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "tol_mm": 4.2
+  },
+  {
+   "part_id": "3280117",
+   "human_cps": 4,
+   "pred_cps": 4,
+   "tp": 2,
+   "fp": 2,
+   "fn": 2,
+   "tol_mm": 5.2
+  },
+  {
+   "part_id": "3281116",
+   "human_cps": 2,
+   "pred_cps": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1,
+   "tol_mm": 3.6
+  },
+  {
+   "part_id": "3281118",
+   "human_cps": 1,
+   "pred_cps": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 1,
+   "tol_mm": 3.7
+  }
+ ]
+}

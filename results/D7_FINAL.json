@@ -1,0 +1,118 @@
+{
+ "kume": "results/d7_sinav_kumesi.json",
+ "muhur": "4bdb5c2ed81fe89f",
+ "n": 835,
+ "tespit": {
+  "f1": 0.4645591634952307,
+  "kesinlik": 0.4687732342007435,
+  "recall": 0.40848720440557174
+ },
+ "robot": {
+  "f1": 0.22003457532195017,
+  "kesinlik": 0.20297397769516728,
+  "recall": 0.17687074829931973
+ },
+ "donusum": 0.473641664210137,
+ "rejim": {
+  "cok": {
+   "tespit": 0.3092917478882391,
+   "robot": 0.04808317089018843
+  },
+  "dusuk": {
+   "tespit": 0.4827748938178386,
+   "robot": 0.24020764511562054
+  }
+ },
+ "uretici": {
+  "A-B": {
+   "n": 124,
+   "tespit": 0.5559694950911641,
+   "robot": 0.23096774193548386
+  },
+  "EFX": {
+   "n": 34,
+   "tespit": 0.37936808340016037,
+   "robot": 0.04368297246725474
+  },
+  "CCD": {
+   "n": 47,
+   "tespit": 0.6227106227106227,
+   "robot": 0.5347985347985348
+  },
+  "DIN": {
+   "n": 57,
+   "tespit": 0.5766223811957077,
+   "robot": 0.34650655765627664
+  },
+  "ELMEX": {
+   "n": 27,
+   "tespit": 0.5680473372781065,
+   "robot": 0.43786982248520717
+  },
+  "WIE": {
+   "n": 169,
+   "tespit": 0.5522862985685073,
+   "robot": 0.40118609406952965
+  },
+  "KLM": {
+   "n": 65,
+   "tespit": 0.3430656934306569,
+   "robot": 0.0948905109489051
+  },
+  "CWT": {
+   "n": 226,
+   "tespit": 0.2517354793871706,
+   "robot": 0.019961886296330722
+  },
+  "DEG": {
+   "n": 19,
+   "tespit": 0.5205479452054794,
+   "robot": 0.27397260273972607
+  },
+  "WEG": {
+   "n": 58,
+   "tespit": 0.46808510638297873,
+   "robot": 0.028368794326241138
+  },
+  "CEM": {
+   "n": 4,
+   "tespit": 0.7868852459016391,
+   "robot": 0.09016393442622951
+  },
+  "C3": {
+   "n": 5,
+   "tespit": 0.27852068126520685,
+   "robot": 0.001532846715328467
+  }
+ },
+ "bootstrap": {
+  "alt": 0.09479064833652796,
+  "ust": 0.3438775905740681
+ },
+ "kabul": {
+  "robot >= 0.75": false,
+  "bootstrap alt >= 0.70": false,
+  "kesinlik >= 0.70": false,
+  "recall >= 0.70": false,
+  "dusuk-CP >= 0.80": false,
+  "cok-CP >= 0.50": false,
+  ">=20 parcali uretici < 0.50 YOK": false
+ },
+ "hash": {
+  "cp_config.json": "9c42853b08b7",
+  "wire_gate_v5.pkl": "e9539f3c4e57",
+  "p3c_eksen_secici.pkl": "ebc2190c6167",
+  "sina_kume.py": "5ae95338c0f9",
+  "wire_gate.py": "4b163aec3b7a",
+  "cp_openings.py": "d6bc011bd794",
+  "robot_cp.py": "af5706c6e7ff"
+ },
+ "yigin": {
+  "seg": "g7_s0",
+  "yaricap": "1/2/2",
+  "gate": "wire_gate_v6",
+  "esik": "0.4/0.3",
+  "secici": "p3c"
+ },
+ "sinirlilik": "eksen secici g5 aday dagiliminda egitildi; muhafazakar secim -- etkisi varsa sayiyi DUSURUR"
+}

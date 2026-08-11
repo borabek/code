@@ -1,0 +1,34 @@
+{
+ "n_cp": 1186,
+ "tp": 860,
+ "fp": 326,
+ "kusurlu": 505,
+ "kusurlu_tp": 399,
+ "bayraklar": {
+  "govde_ici": {
+   "toplam": 134,
+   "tp": 61,
+   "fp": 73
+  },
+  "onu_kapali": {
+   "toplam": 148,
+   "tp": 85,
+   "fp": 63
+  },
+  "duvara_yapisik": {
+   "toplam": 92,
+   "tp": 51,
+   "fp": 41
+  },
+  "eksenel_buyuk": {
+   "toplam": 330,
+   "tp": 330,
+   "fp": 0
+  }
+ },
+ "esikler": {
+  "ileri_min": 5.0,
+  "ic_cap_min": 0.8,
+  "eksen_max": 8.0
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "3002618": [
+  {
+   "point": [
+    4.397,
+    7.8215,
+    41.7334
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 19.11,
+   "depth_mm": 5.25,
+   "confidence": 0.906,
+   "kind": "Contact",
+   "n_verts": 153,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    4.1028,
+    95.3512,
+    41.2778
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 18.81,
+   "depth_mm": 8.54,
+   "confidence": 0.896,
+   "kind": "Contact",
+   "n_verts": 142,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    4.0651,
+    113.5413,
+    33.0917
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 18.95,
+   "depth_mm": 2.97,
+   "confidence": 0.789,
+   "kind": "Contact",
+   "n_verts": 144,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    3.8915,
+    24.3965,
+    50.9328
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 17.96,
+   "depth_mm": 14.26,
+   "confidence": 0.782,
+   "kind": "Contact",
+   "n_verts": 125,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    3.0475,
+    76.3915,
+    32.015
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 12.0,
+   "depth_mm": 6.76,
+   "confidence": 0.681,
+   "kind": "Contact",
+   "n_verts": 49,
+   "tier": "review"
+  },
+  {
+   "point": [
+    4.079,
+    68.2812,
+    51.0049
+   ],
+   "direction": [
+    1.0,
+    0.0,
+    0.0
+   ],
+   "size_mm": 15.33,
+   "depth_mm": 1.75,
+   "confidence": 0.669,
+   "kind": "Contact",
+   "n_verts": 124,
+   "tier": "review"
+  }
+ ]
+}

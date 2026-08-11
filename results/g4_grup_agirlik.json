@@ -1,0 +1,17 @@
+{
+ "G0 TABAN": {
+  "havuzlanmis": 0.7583943683019512,
+  "uretici_ort": 0.6324322955909609,
+  "robot": 0.5893431322317577
+ },
+ "G4 grup-agirlikli": {
+  "havuzlanmis": 0.7596124622617055,
+  "uretici_ort": 0.6246763288321002,
+  "robot": 0.5884080029920193
+ },
+ "G4 parca-agirlikli": {
+  "havuzlanmis": 0.7460457214737329,
+  "uretici_ort": 0.6217970448103263,
+  "robot": 0.5835286371611109
+ }
+}

@@ -1,0 +1,52 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "auc": {
+  "yaricap": 0.6176239187187214,
+  "derinlik": 0.3661589139738122,
+  "narinlik": 0.3347716279962041,
+  "girme": 0.37700678729896137,
+  "girme_kenar": 0.3794629536020097,
+  "erisim": 0.48052171972138885,
+  "es_eksen": 0.4430695630671735,
+  "aralik_duzeni": 0.6196924540261703,
+  "yaricap_yuzde": 0.604980373363444
+ },
+ "parca_ici_auc": {
+  "yaricap": 0.6898828570469134,
+  "derinlik": 0.4017917285730209,
+  "narinlik": 0.3168561190362243,
+  "girme": 0.3426962635774263,
+  "girme_kenar": 0.3306218545540348,
+  "erisim": 0.5612477675413188,
+  "es_eksen": 0.29344029408683653,
+  "aralik_duzeni": 0.533079913499516,
+  "yaricap_yuzde": 0.6898828570469134
+ },
+ "n_aday": 78655,
+ "pozitif_oran": 0.05886466213209586,
+ "not": "EGITIM YOK, saf ayrilabilirlik. D7 marka-disi. Etiket: B-rep onerisi GT'ye tespit toleransinda mi."
+}

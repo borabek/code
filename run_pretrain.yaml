@@ -1,0 +1,55 @@
+# Pretrain config on the same data scope as v19.
+# Usage:
+#   python train_cp.py "C:\Users\DE00024082\Desktop\JSON" --config run_pretrain.yaml
+
+backbone: knngraph
+run_name: cp_knn_tb_pretrain_v1
+extra_sources:
+  - wscad_corpus
+keep_prefixes: wscaduniverse,PXC
+
+epochs: 70
+eval_every: 5
+patience: 4
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+warmup_epochs: 2
+
+# Features must match any later init_from fine-tune config.
+knn_normals: true
+knn_curvature: true
+knn_concavity: true
+knn_edge_dist: false
+
+device: cuda
+max_gpu_verts: 7000
+knn_cache_dir: knn_cache_real
+
+# Same split style and scope as v19.
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+# Augmentation/regularization restored around the v19 data.
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+
+lr: 0.0005
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0
+
+heatmap_thresh: 0.30
+min_votes: 1
+nms_clearance_mm: 5.0

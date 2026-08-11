@@ -1,0 +1,45 @@
+{
+ "part": "WEI.1018640000",
+ "cps": [
+  {
+   "point": [
+    4.47,
+    46.5032,
+    26.5146
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 10.38,
+   "depth_mm": 4.82,
+   "confidence": 0.661,
+   "votes": 2,
+   "wire_score": 0.717,
+   "kind": "CableEntry",
+   "n_verts": 63,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    3.1937,
+    3.6519,
+    21.6352
+   ],
+   "direction": [
+    -0.0,
+    -0.0,
+    -1.0
+   ],
+   "size_mm": 8.26,
+   "depth_mm": 2.53,
+   "confidence": 0.547,
+   "votes": 1,
+   "wire_score": 0.545,
+   "kind": "Contact",
+   "n_verts": 35,
+   "tier": "auto"
+  }
+ ]
+}

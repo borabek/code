@@ -1,0 +1,41 @@
+{
+ "tablo": {
+  "HAM": {
+   "n": 1186,
+   "bayrak": [
+    142,
+    163,
+    126
+   ],
+   "herhangi": 249
+  },
+  "POZ": {
+   "n": 1186,
+   "bayrak": [
+    134,
+    143,
+    94
+   ],
+   "herhangi": 218
+  },
+  "TAM": {
+   "n": 1186,
+   "bayrak": [
+    134,
+    148,
+    92
+   ],
+   "herhangi": 222
+  }
+ },
+ "adlar": [
+  "govde_ici",
+  "onu_kapali",
+  "duvara_yapisik"
+ ],
+ "poz_kayma_medyan": 0.5632175846118401,
+ "esikler": {
+  "ileri_min": 5.0,
+  "ic_cap_min": 0.8
+ }
+}

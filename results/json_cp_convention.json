@@ -1,0 +1,20 @@
+{
+ "source": "manufacturer JSON (Desktop/JSON)",
+ "n_parts": 479,
+ "n_cps": 11907,
+ "insert_direction_axis_aligned_frac": 1.0,
+ "insert_direction_outward_frac": 0.9828,
+ "cp_on_mesh_surface_frac (<=2mm)": 0.2551,
+ "cp_to_surface_mm_median": 4.712,
+ "cps_per_part": {
+  "min": 1,
+  "median": 20,
+  "max": 53,
+  "zero_cp_parts": 0
+ },
+ "verdict": {
+  "cp-v2 direction convention (axis-aligned, outward)": "CONFIRMED",
+  "cp-v2 point-at-opening convention": "PARTIAL",
+  "note": "Manufacturer CPs are 1 per terminal/pole at the wire-entry opening with an axis-aligned outward insert direction -- exactly cp-v2's model. This validates the CONVENTION; it does NOT label the Scheffler parts (different families)."
+ }
+}

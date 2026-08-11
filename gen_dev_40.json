@@ -1,0 +1,298 @@
+{
+ "frozen": "2026-07-18",
+ "purpose": "NEW untouched human-CP benchmark candidates (UNLABELLED)",
+ "denylist": {
+  "scheffler_ids": 102,
+  "scheffler_step_shas": 102,
+  "TODO": "also denylist v28/v31 train IDs once their manifests are found"
+ },
+ "pool_unique_ids": 3642,
+ "pool_after_denylist_and_sha_dedup": 3535,
+ "n_selected": 40,
+ "overlap_with_denylist": 0,
+ "note": "labels NOT included; human point+direction labelling + 3-rater adjudication is the next (human) step",
+ "candidates": [
+  {
+   "part_id": "0270018",
+   "sha256": "4b42691d7c5d44e011ddfb1326fee62f47eb0668725fa834e9be2fc31227490b",
+   "step_file": "all_wscad_stp\\wscaduniverse_0270018_2026-07-13-15-40-44.stp",
+   "prefix": "02",
+   "bytes": 248726
+  },
+  {
+   "part_id": "0294380000",
+   "sha256": "306ba20278a729fbf411bbcf2989f1ee79bdc1a80f244ad3c3d3426539bcdd12",
+   "step_file": "all_wscad_stp\\wscaduniverse_0294380000_2026-07-13-15-40-50.stp",
+   "prefix": "02",
+   "bytes": 641384
+  },
+  {
+   "part_id": "0321019",
+   "sha256": "1ab2dc0c4cc0cf15e8bdeebee740a365b7782e78169d447a50a1634bcb041a3c",
+   "step_file": "all_wscad_stp\\wscaduniverse_0321019_2026-07-13-15-41-16.stp",
+   "prefix": "03",
+   "bytes": 326691
+  },
+  {
+   "part_id": "0443052",
+   "sha256": "538345924ad80532810107225e40677a4e58ad939df9179e7f8b74fc29ac38bf",
+   "step_file": "all_wscad_stp\\wscaduniverse_0443052_2026-07-13-15-43-06.stp",
+   "prefix": "04",
+   "bytes": 411379
+  },
+  {
+   "part_id": "0502058",
+   "sha256": "685e9e3afdec73913faaa85f2bb36ee01adcd907cf47bbd4cd7d4f3f7dff5d94",
+   "step_file": "all_wscad_stp\\wscaduniverse_0502058_2026-07-13-15-43-49.stp",
+   "prefix": "05",
+   "bytes": 249501
+  },
+  {
+   "part_id": "0711616",
+   "sha256": "b647bf9c54dbd0470043aa6536bedd9e3eea6f3452ae94b9fcad82a8c0ac4d64",
+   "step_file": "all_wscad_stp\\wscaduniverse_0711616_2026-07-13-15-44-41.stp",
+   "prefix": "07",
+   "bytes": 546644
+  },
+  {
+   "part_id": "0852067",
+   "sha256": "74728739da5646a9250f21ffac44dae7e16a0f527370c1d5208734e4120046d3",
+   "step_file": "all_wscad_stp\\wscaduniverse_0852067_2026-07-13-15-46-01.stp",
+   "prefix": "08",
+   "bytes": 224127
+  },
+  {
+   "part_id": "0920122",
+   "sha256": "0276d8581642c5f41ae32b471b52ff24293f25a4c750c9ff04224674bb4ab3b8",
+   "step_file": "all_wscad_stp\\wscaduniverse_0920122_2026-07-13-15-46-10.stp",
+   "prefix": "09",
+   "bytes": 285959
+  },
+  {
+   "part_id": "1019100000",
+   "sha256": "0e1a091174bda03f1b3b611e290fd969283fcb03983df72c880462317f4b9910",
+   "step_file": "all_wscad_stp\\wscaduniverse_1019100000_2026-07-13-15-09-26.stp",
+   "prefix": "10",
+   "bytes": 1771563
+  },
+  {
+   "part_id": "1119810000",
+   "sha256": "de17ae7785baf4bdbe1e72f92ff41489bfdf83a03fc51797d20b16eaa0b02d1f",
+   "step_file": "all_wscad_stp\\wscaduniverse_1119810000_2026-07-13-15-06-50.stp",
+   "prefix": "11",
+   "bytes": 664747
+  },
+  {
+   "part_id": "1231700",
+   "sha256": "e57a645db46cd56677fcebd863eea3c27fcb176b6befb4ac456f1ebe57b5cbdd",
+   "step_file": "all_wscad_stp\\wscaduniverse_1231700_2026-07-13-15-41-45.stp",
+   "prefix": "12",
+   "bytes": 577859
+  },
+  {
+   "part_id": "1393430000",
+   "sha256": "8246500629f644b9c6b50feacf49d34edb70ce3f00c771900d64720b1945f6ed",
+   "step_file": "all_wscad_stp\\wscaduniverse_1393430000_2026-07-13-15-43-41.stp",
+   "prefix": "13",
+   "bytes": 419984
+  },
+  {
+   "part_id": "1413010",
+   "sha256": "e597e63a45e3352f71b7a8d4a0d1d0530db275d9c5dea049a470c8e2c7ff3e64",
+   "step_file": "all_wscad_stp\\wscaduniverse_1413010_2026-07-13-15-44-20.stp",
+   "prefix": "14",
+   "bytes": 189339
+  },
+  {
+   "part_id": "1552680000",
+   "sha256": "5dd4983bef5d985bb4add22d36820f81644c590b19559428c99aeac3369729e9",
+   "step_file": "all_wscad_stp\\wscaduniverse_1552680000_2026-07-13-15-45-58.stp",
+   "prefix": "15",
+   "bytes": 949105
+  },
+  {
+   "part_id": "1683330000",
+   "sha256": "892146e50f3f7a946dcf4bacd03b27edb0a8ef50f66ec2449554307d67b7d271",
+   "step_file": "all_wscad_stp\\wscaduniverse_1683330000_2026-07-13-15-09-49.stp",
+   "prefix": "16",
+   "bytes": 597594
+  },
+  {
+   "part_id": "1772090000",
+   "sha256": "85ee95ff3d3cd296e365e20993bd670985ce583e715f0d87d2c3f712aee388b1",
+   "step_file": "all_wscad_stp\\wscaduniverse_1772090000_2026-07-13-15-48-41.stp",
+   "prefix": "17",
+   "bytes": 808758
+  },
+  {
+   "part_id": "1815120000",
+   "sha256": "f990b50741d54dfa373da0ed7cf0f308ac18e0c7a1a731baca8ebf6ca88d7488",
+   "step_file": "all_wscad_stp\\wscaduniverse_1815120000_2026-07-13-15-41-40.stp",
+   "prefix": "18",
+   "bytes": 1369769
+  },
+  {
+   "part_id": "1905060000",
+   "sha256": "1ac67963a92bd8ca2d83bdb2a3a3773b53fe3e8b86831e7ce453a40a76f1c501",
+   "step_file": "all_wscad_stp\\wscaduniverse_1905060000_2026-07-13-15-06-00.stp",
+   "prefix": "19",
+   "bytes": 824798
+  },
+  {
+   "part_id": "1SNA511003R0500",
+   "sha256": "b97f36be0e5faa119cf0e9fbc0ee704315f0ce1193c093e83a461adc4b3e5858",
+   "step_file": "all_wscad_stp\\wscaduniverse_1SNA511003R0500_2026-07-13-15-43-38.stp",
+   "prefix": "1S",
+   "bytes": 770679
+  },
+  {
+   "part_id": "2001-1307",
+   "sha256": "a28a1a8c2b0d2bc6607a45a38259d9ea3304544778ade6ab7fe47c2f0c304376",
+   "step_file": "all_wscad_stp\\wscaduniverse_2001-1307_2026-07-13-15-45-14.stp",
+   "prefix": "20",
+   "bytes": 438184
+  },
+  {
+   "part_id": "2102-1207",
+   "sha256": "d44e7bd49d00d7d410ffb9fb60d12c7bc6a1d17bbcfcc127d7580e452843760d",
+   "step_file": "all_wscad_stp\\wscaduniverse_2102-1207_2026-07-13-15-44-47.stp",
+   "prefix": "21",
+   "bytes": 679944
+  },
+  {
+   "part_id": "2202-1881",
+   "sha256": "90773a2e5fb82e8deec61ee78c10f714506158b856fde0e0e4948b68fcc3d627",
+   "step_file": "all_wscad_stp\\wscaduniverse_2202-1881_2026-07-13-15-43-32.stp",
+   "prefix": "22",
+   "bytes": 702627
+  },
+  {
+   "part_id": "2494000000",
+   "sha256": "c6cb3440df0813c6173562cb9424e0470e0b55f426e6dcb70d36d8f77450821d",
+   "step_file": "all_wscad_stp\\wscaduniverse_2494000000_2026-07-13-15-44-16.stp",
+   "prefix": "24",
+   "bytes": 810890
+  },
+  {
+   "part_id": "2562600000",
+   "sha256": "0d74279285e3aa261e10e29da92f7069012f1267c830a62f0d2ec4c0a73206ab",
+   "step_file": "all_wscad_stp\\wscaduniverse_2562600000_2026-07-13-15-45-00.stp",
+   "prefix": "25",
+   "bytes": 677216
+  },
+  {
+   "part_id": "2674770000",
+   "sha256": "aba53e4e11f20a413e78c9e8d7324d2456e2359cb02437645b20f5709dd4418a",
+   "step_file": "all_wscad_stp\\wscaduniverse_2674770000_2026-07-13-15-41-05.stp",
+   "prefix": "26",
+   "bytes": 1828954
+  },
+  {
+   "part_id": "2782550000",
+   "sha256": "ba3868f44a2da9ee2e1769b508f398bd0c2361bbbd829bb218b564d2d6c7d083",
+   "step_file": "all_wscad_stp\\wscaduniverse_2782550000_2026-07-13-15-46-12.stp",
+   "prefix": "27",
+   "bytes": 1930719
+  },
+  {
+   "part_id": "280-835",
+   "sha256": "15ef75168054ba8b8cf8219da904a00640d85ce7f93c07c410ffb9f3d5ced9b0",
+   "step_file": "all_wscad_stp\\wscaduniverse_280-835_2026-07-12-18-04-18.stp",
+   "prefix": "28",
+   "bytes": 155048
+  },
+  {
+   "part_id": "2941662",
+   "sha256": "2799dc562cf1d4703bc9a93cf216f84ebbff983411991be62215bf4d26ca9f63",
+   "step_file": "all_wscad_stp\\wscaduniverse_2941662_2026-07-13-15-45-40.stp",
+   "prefix": "29",
+   "bytes": 406984
+  },
+  {
+   "part_id": "3035519",
+   "sha256": "35ee93cb58eba81fdc3730994a33b3748cece36f647832803df165ba0342d005",
+   "step_file": "all_wscad_stp\\wscaduniverse_3035519_2026-07-10-16-45-16.stp",
+   "prefix": "30",
+   "bytes": 668533
+  },
+  {
+   "part_id": "3191026",
+   "sha256": "b781f02aa55d8e6c3fde8bffc7f8e085ad8db8abce2f326305584331b86d02a4",
+   "step_file": "all_wscad_stp\\wscaduniverse_3191026_2026-07-13-15-05-49.stp",
+   "prefix": "31",
+   "bytes": 72992
+  },
+  {
+   "part_id": "3214362",
+   "sha256": "1ea9276bcf15962b3c49b67a4e3791c7ec57ddab9c4247ea7b29e2be0c06ddb4",
+   "step_file": "all_wscad_stp\\wscaduniverse_3214362_2026-07-12-18-04-18.stp",
+   "prefix": "32",
+   "bytes": 554576
+  },
+  {
+   "part_id": "5043321",
+   "sha256": "1410afed583fc9269e5227eab6d21bd7d1b263759e509071c2cb89f10a98f0f0",
+   "step_file": "all_wscad_stp\\wscaduniverse_5043321_2026-07-13-15-40-46.stp",
+   "prefix": "50",
+   "bytes": 283239
+  },
+  {
+   "part_id": "711-194",
+   "sha256": "ee83706c5b13521a3b8b3c5f0831554a5d2790feeebf038bdc7c3eca565567cd",
+   "step_file": "all_wscad_stp\\wscaduniverse_711-194_2026-07-13-15-40-52.stp",
+   "prefix": "71",
+   "bytes": 197984
+  },
+  {
+   "part_id": "783-613",
+   "sha256": "d58c57c2db7781a8c6d788f916e5f5a70608488c0a8d75136fa50f9c3a01aa16",
+   "step_file": "all_wscad_stp\\wscaduniverse_783-613_2026-07-13-15-42-04.stp",
+   "prefix": "78",
+   "bytes": 302999
+  },
+  {
+   "part_id": "7904280000",
+   "sha256": "2b8d91e7206a69e88fba8e6425e396f5edad0b14b9aaac0123ec8c8a68e5781d",
+   "step_file": "all_wscad_stp\\wscaduniverse_7904280000_2026-07-13-15-42-25.stp",
+   "prefix": "79",
+   "bytes": 1455518
+  },
+  {
+   "part_id": "826-159",
+   "sha256": "f71e0a11b2c19384fa6a7b7ab29da61876a2c7e26444eea32bba305ff5404391",
+   "step_file": "all_wscad_stp\\wscaduniverse_826-159_000-016_2026-07-13-15-43-31.stp",
+   "prefix": "82",
+   "bytes": 131617
+  },
+  {
+   "part_id": "870-837",
+   "sha256": "33f932520ae21cfbe2581dd081528b079be3f24916a65692900f436b0995b4af",
+   "step_file": "all_wscad_stp\\wscaduniverse_870-837_2026-07-13-15-43-37.stp",
+   "prefix": "87",
+   "bytes": 279524
+  },
+  {
+   "part_id": "880-687",
+   "sha256": "2efeed349bae9464269f0fe933ac92a3c6da6ebd80ea3e83afa7533807271e28",
+   "step_file": "all_wscad_stp\\wscaduniverse_880-687_2026-07-13-15-43-49.stp",
+   "prefix": "88",
+   "bytes": 317026
+  },
+  {
+   "part_id": "9512190000",
+   "sha256": "711eadc251ec13382710ccdb71d2780f51dff8abe824cc42c2c2337ff6849a63",
+   "step_file": "all_wscad_stp\\wscaduniverse_9512190000_2026-07-13-15-44-11.stp",
+   "prefix": "95",
+   "bytes": 533384
+  },
+  {
+   "part_id": "DK4N",
+   "sha256": "5bce6753aa24f0b6a3b1705774e751abbda757a8357116b31dbed50c6b15ec00",
+   "step_file": "all_wscad_stp\\wscaduniverse_DK4N_2026-07-13-15-44-47.stp",
+   "prefix": "DK",
+   "bytes": 653828
+  }
+ ],
+ "role": "gen_dev_40",
+ "NOTE": "USED FOR MODEL SELECTION (120ep vs full-recipe) -> this is DEV, NOT a final benchmark. Final holdout = final_holdout_40.json (untouched)."
+}

@@ -1,0 +1,26 @@
+{
+ "aday": 44675,
+ "parca": 2596,
+ "uretici": 9,
+ "eski_parca": 1709,
+ "yeni_parca_eklendi": 2574,
+ "atlanan": {
+  "sinav_ureticisi": 2042,
+  "sinav_kumesi": 714,
+  "yasak_anahtar": 709,
+  "sinav_ikizi": 2,
+  "aday_yok": 2
+ },
+ "pozitif_oran": 0.3189927252378288,
+ "uretici_dagilimi": {
+  "PXC": 13171,
+  "SIE": 2373,
+  "WAGO": 20,
+  "WEI": 17426,
+  "ABB": 19,
+  "MDI": 38,
+  "TE": 862,
+  "TKM": 55,
+  "TOGI": 10711
+ }
+}

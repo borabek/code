@@ -1,0 +1,33 @@
+{
+ "taban": 0.618105610349686,
+ "sozlukler": {
+  "taban": 0.618105610349686,
+  "D1": {
+   "isaretli": 0.6579671875667136,
+   "isaretsiz": 0.5764220144314932
+  },
+  "C1": {
+   "isaretli": 0.6494837752444388,
+   "isaretsiz": 0.5936410913282951
+  },
+  "BIRLESIK": {
+   "isaretli": 0.6649603774390505,
+   "isaretsiz": 0.5781644891336836
+  }
+ },
+ "c1_katkisi": 0.00699318987233688,
+ "kapsam": {
+  "kanal": 2348,
+  "duzlem_A": 2294,
+  "duzlem_B": 2294,
+  "normal": 2294,
+  "uye0": 844,
+  "uye1": 549,
+  "uye2": 365,
+  "brep": 1798,
+  "uye3": 203,
+  "uye4": 41,
+  "uye5": 7
+ },
+ "hukum": "C1 sozlugu ISARETLI tavana anlamli katki VERMIYOR -- kill gecerli kalir"
+}

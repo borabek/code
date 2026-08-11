@@ -1,0 +1,20 @@
+{
+ "tag": "keig96_pxc",
+ "ckpts": [
+  "results/seg_extra/recall_hard_s2.pt",
+  "results/seg_extra/recall_hard_keig96_s2.pt"
+ ],
+ "sweep": {
+  "vote1": {
+   "f1": 0.6568185912448209,
+   "p": 0.5805732484076433,
+   "r": 0.7561177934467026
+  },
+  "vote2": {
+   "f1": 0.6303911735205617,
+   "p": 0.7970830691185796,
+   "r": 0.5213604313562837
+  }
+ },
+ "best_vote": 1
+}

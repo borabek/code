@@ -1,0 +1,655 @@
+{
+ "n": 40,
+ "clean": 18,
+ "noisy": 6,
+ "no_cableentry": 16,
+ "error": 0,
+ "clean_ids": [
+  "0270018",
+  "0321019",
+  "0443052",
+  "0502058",
+  "0711616",
+  "0852067",
+  "0920122",
+  "1019100000",
+  "1119810000",
+  "1393430000",
+  "1413010",
+  "1683330000",
+  "1905060000",
+  "2562600000",
+  "2941662",
+  "3035519",
+  "3214362",
+  "711-194"
+ ],
+ "noisy_ids": [
+  "1772090000",
+  "1815120000",
+  "2674770000",
+  "5043321",
+  "7904280000",
+  "9512190000"
+ ],
+ "no_cableentry_ids": [
+  "0294380000",
+  "1231700",
+  "1552680000",
+  "1SNA511003R0500",
+  "2001-1307",
+  "2102-1207",
+  "2202-1881",
+  "2494000000",
+  "2782550000",
+  "280-835",
+  "3191026",
+  "783-613",
+  "826-159",
+  "870-837",
+  "880-687",
+  "DK4N"
+ ],
+ "rows": [
+  {
+   "part_id": "0270018",
+   "verts": 8387,
+   "class_counts": {
+    "HOUSING": 7282,
+    "CONTACT": 531,
+    "SNAP_POINT": 216,
+    "CABLE_ENTRY": 273,
+    "LABEL_SURFACE": 85
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.86,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "0294380000",
+   "verts": 6240,
+   "class_counts": {
+    "HOUSING": 4456,
+    "CONTACT": 939,
+    "SNAP_POINT": 286,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 559
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "0321019",
+   "verts": 6107,
+   "class_counts": {
+    "HOUSING": 4687,
+    "CONTACT": 622,
+    "SNAP_POINT": 106,
+    "CABLE_ENTRY": 293,
+    "LABEL_SURFACE": 399
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.54,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "0443052",
+   "verts": 5794,
+   "class_counts": {
+    "HOUSING": 3848,
+    "CONTACT": 340,
+    "SNAP_POINT": 269,
+    "CABLE_ENTRY": 811,
+    "LABEL_SURFACE": 526
+   },
+   "cableentry_components": 4,
+   "largest_component_frac": 0.52,
+   "cp_count": 3,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "0502058",
+   "verts": 5834,
+   "class_counts": {
+    "HOUSING": 4008,
+    "CONTACT": 538,
+    "SNAP_POINT": 103,
+    "CABLE_ENTRY": 531,
+    "LABEL_SURFACE": 654
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.59,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "0711616",
+   "verts": 7476,
+   "class_counts": {
+    "HOUSING": 5077,
+    "CONTACT": 569,
+    "SNAP_POINT": 111,
+    "CABLE_ENTRY": 311,
+    "LABEL_SURFACE": 1408
+   },
+   "cableentry_components": 5,
+   "largest_component_frac": 0.29,
+   "cp_count": 4,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "0852067",
+   "verts": 6092,
+   "class_counts": {
+    "HOUSING": 4782,
+    "CONTACT": 507,
+    "SNAP_POINT": 133,
+    "CABLE_ENTRY": 465,
+    "LABEL_SURFACE": 205
+   },
+   "cableentry_components": 6,
+   "largest_component_frac": 0.46,
+   "cp_count": 4,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "0920122",
+   "verts": 6383,
+   "class_counts": {
+    "HOUSING": 4899,
+    "CONTACT": 328,
+    "SNAP_POINT": 115,
+    "CABLE_ENTRY": 662,
+    "LABEL_SURFACE": 379
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.89,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "1019100000",
+   "verts": 6661,
+   "class_counts": {
+    "HOUSING": 5048,
+    "CONTACT": 126,
+    "SNAP_POINT": 350,
+    "CABLE_ENTRY": 402,
+    "LABEL_SURFACE": 735
+   },
+   "cableentry_components": 1,
+   "largest_component_frac": 1.0,
+   "cp_count": 1,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "1119810000",
+   "verts": 6290,
+   "class_counts": {
+    "HOUSING": 4569,
+    "CONTACT": 429,
+    "SNAP_POINT": 178,
+    "CABLE_ENTRY": 169,
+    "LABEL_SURFACE": 945
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.52,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "1231700",
+   "verts": 8016,
+   "class_counts": {
+    "HOUSING": 5423,
+    "CONTACT": 1687,
+    "SNAP_POINT": 135,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 771
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "1393430000",
+   "verts": 5848,
+   "class_counts": {
+    "HOUSING": 4720,
+    "CONTACT": 235,
+    "SNAP_POINT": 124,
+    "CABLE_ENTRY": 70,
+    "LABEL_SURFACE": 699
+   },
+   "cableentry_components": 3,
+   "largest_component_frac": 0.59,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "1413010",
+   "verts": 6370,
+   "class_counts": {
+    "HOUSING": 4533,
+    "CONTACT": 637,
+    "SNAP_POINT": 258,
+    "CABLE_ENTRY": 478,
+    "LABEL_SURFACE": 464
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.53,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "1552680000",
+   "verts": 7163,
+   "class_counts": {
+    "HOUSING": 5205,
+    "CONTACT": 957,
+    "SNAP_POINT": 301,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 700
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "1683330000",
+   "verts": 7879,
+   "class_counts": {
+    "HOUSING": 5780,
+    "CONTACT": 1010,
+    "SNAP_POINT": 225,
+    "CABLE_ENTRY": 93,
+    "LABEL_SURFACE": 771
+   },
+   "cableentry_components": 1,
+   "largest_component_frac": 1.0,
+   "cp_count": 1,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "1772090000",
+   "verts": 6298,
+   "class_counts": {
+    "HOUSING": 5213,
+    "CONTACT": 357,
+    "SNAP_POINT": 132,
+    "CABLE_ENTRY": 7,
+    "LABEL_SURFACE": 589
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "noisy"
+  },
+  {
+   "part_id": "1815120000",
+   "verts": 6565,
+   "class_counts": {
+    "HOUSING": 5697,
+    "CONTACT": 501,
+    "SNAP_POINT": 113,
+    "CABLE_ENTRY": 19,
+    "LABEL_SURFACE": 235
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.53,
+   "cp_count": 0,
+   "verdict": "noisy"
+  },
+  {
+   "part_id": "1905060000",
+   "verts": 8219,
+   "class_counts": {
+    "HOUSING": 6053,
+    "CONTACT": 721,
+    "SNAP_POINT": 214,
+    "CABLE_ENTRY": 626,
+    "LABEL_SURFACE": 605
+   },
+   "cableentry_components": 3,
+   "largest_component_frac": 0.46,
+   "cp_count": 3,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "1SNA511003R0500",
+   "verts": 6352,
+   "class_counts": {
+    "HOUSING": 5991,
+    "CONTACT": 0,
+    "SNAP_POINT": 30,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 331
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "2001-1307",
+   "verts": 6457,
+   "class_counts": {
+    "HOUSING": 5409,
+    "CONTACT": 436,
+    "SNAP_POINT": 254,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 358
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "2102-1207",
+   "verts": 7271,
+   "class_counts": {
+    "HOUSING": 5841,
+    "CONTACT": 690,
+    "SNAP_POINT": 339,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 401
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "2202-1881",
+   "verts": 5641,
+   "class_counts": {
+    "HOUSING": 4405,
+    "CONTACT": 772,
+    "SNAP_POINT": 203,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 261
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "2494000000",
+   "verts": 6517,
+   "class_counts": {
+    "HOUSING": 4838,
+    "CONTACT": 784,
+    "SNAP_POINT": 167,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 728
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "2562600000",
+   "verts": 8145,
+   "class_counts": {
+    "HOUSING": 6180,
+    "CONTACT": 784,
+    "SNAP_POINT": 144,
+    "CABLE_ENTRY": 69,
+    "LABEL_SURFACE": 968
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.68,
+   "cp_count": 2,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "2674770000",
+   "verts": 6936,
+   "class_counts": {
+    "HOUSING": 5609,
+    "CONTACT": 641,
+    "SNAP_POINT": 103,
+    "CABLE_ENTRY": 2,
+    "LABEL_SURFACE": 581
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "noisy"
+  },
+  {
+   "part_id": "2782550000",
+   "verts": 5747,
+   "class_counts": {
+    "HOUSING": 3962,
+    "CONTACT": 871,
+    "SNAP_POINT": 65,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 849
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "280-835",
+   "verts": 5480,
+   "class_counts": {
+    "HOUSING": 4385,
+    "CONTACT": 492,
+    "SNAP_POINT": 261,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 342
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "2941662",
+   "verts": 7414,
+   "class_counts": {
+    "HOUSING": 5161,
+    "CONTACT": 571,
+    "SNAP_POINT": 124,
+    "CABLE_ENTRY": 571,
+    "LABEL_SURFACE": 987
+   },
+   "cableentry_components": 5,
+   "largest_component_frac": 0.27,
+   "cp_count": 4,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "3035519",
+   "verts": 7981,
+   "class_counts": {
+    "HOUSING": 4764,
+    "CONTACT": 2128,
+    "SNAP_POINT": 117,
+    "CABLE_ENTRY": 185,
+    "LABEL_SURFACE": 787
+   },
+   "cableentry_components": 1,
+   "largest_component_frac": 0.98,
+   "cp_count": 1,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "3191026",
+   "verts": 6183,
+   "class_counts": {
+    "HOUSING": 5180,
+    "CONTACT": 469,
+    "SNAP_POINT": 0,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 534
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "3214362",
+   "verts": 6794,
+   "class_counts": {
+    "HOUSING": 4529,
+    "CONTACT": 751,
+    "SNAP_POINT": 75,
+    "CABLE_ENTRY": 335,
+    "LABEL_SURFACE": 1104
+   },
+   "cableentry_components": 4,
+   "largest_component_frac": 0.31,
+   "cp_count": 4,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "5043321",
+   "verts": 5891,
+   "class_counts": {
+    "HOUSING": 4146,
+    "CONTACT": 452,
+    "SNAP_POINT": 125,
+    "CABLE_ENTRY": 598,
+    "LABEL_SURFACE": 570
+   },
+   "cableentry_components": 5,
+   "largest_component_frac": 0.23,
+   "cp_count": 5,
+   "verdict": "noisy"
+  },
+  {
+   "part_id": "711-194",
+   "verts": 6456,
+   "class_counts": {
+    "HOUSING": 6027,
+    "CONTACT": 35,
+    "SNAP_POINT": 26,
+    "CABLE_ENTRY": 28,
+    "LABEL_SURFACE": 340
+   },
+   "cableentry_components": 1,
+   "largest_component_frac": 1.0,
+   "cp_count": 1,
+   "verdict": "clean"
+  },
+  {
+   "part_id": "783-613",
+   "verts": 7006,
+   "class_counts": {
+    "HOUSING": 5660,
+    "CONTACT": 600,
+    "SNAP_POINT": 243,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 503
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "7904280000",
+   "verts": 6269,
+   "class_counts": {
+    "HOUSING": 5048,
+    "CONTACT": 324,
+    "SNAP_POINT": 69,
+    "CABLE_ENTRY": 1,
+    "LABEL_SURFACE": 827
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "noisy"
+  },
+  {
+   "part_id": "826-159",
+   "verts": 6943,
+   "class_counts": {
+    "HOUSING": 5261,
+    "CONTACT": 805,
+    "SNAP_POINT": 345,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 532
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "870-837",
+   "verts": 7185,
+   "class_counts": {
+    "HOUSING": 5744,
+    "CONTACT": 594,
+    "SNAP_POINT": 363,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 484
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "880-687",
+   "verts": 5925,
+   "class_counts": {
+    "HOUSING": 4784,
+    "CONTACT": 508,
+    "SNAP_POINT": 311,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 322
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  },
+  {
+   "part_id": "9512190000",
+   "verts": 5585,
+   "class_counts": {
+    "HOUSING": 4247,
+    "CONTACT": 283,
+    "SNAP_POINT": 121,
+    "CABLE_ENTRY": 14,
+    "LABEL_SURFACE": 920
+   },
+   "cableentry_components": 2,
+   "largest_component_frac": 0.64,
+   "cp_count": 0,
+   "verdict": "noisy"
+  },
+  {
+   "part_id": "DK4N",
+   "verts": 6121,
+   "class_counts": {
+    "HOUSING": 5445,
+    "CONTACT": 80,
+    "SNAP_POINT": 296,
+    "CABLE_ENTRY": 0,
+    "LABEL_SURFACE": 300
+   },
+   "cableentry_components": 0,
+   "largest_component_frac": 0.0,
+   "cp_count": 0,
+   "verdict": "no_cableentry"
+  }
+ ]
+}

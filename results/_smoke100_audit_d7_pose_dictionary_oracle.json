@@ -1,0 +1,3135 @@
+{
+ "audit_only": true,
+ "dataset": "D7 (spent DEV; not final)",
+ "metric": {
+  "lateral_axis": "GT direction",
+  "lateral_mm": 2.0,
+  "signed_angle_deg": 10.0,
+  "absolute_axial_mm": 40.0,
+  "matching": "maximum-cardinality one-to-one candidate<->GT (Hungarian)",
+  "oracle_null": "unmatched candidates may be suppressed",
+  "keep_all": "all input candidates survive"
+ },
+ "inputs": {
+  "manifest": "results/d7_sinav_kumesi.json",
+  "manifest_sha16": "20dabad23c74f980",
+  "records": "results/_der_yeni_G7BIRLESIK.pkl",
+  "records_sha16": "e9ea8bfb7c30bdc8",
+  "cylinders": "results/_d7_silindirler.pkl",
+  "cylinders_sha16": "8fb2425e558cb21f",
+  "planars": "results/_d7_acikliklar.pkl",
+  "planars_sha16": "629415126b206f4b",
+  "gate": "results/wire_gate_v6.pkl",
+  "gate_sha16": "f493788056ca02f8"
+ },
+ "coverage": {
+  "manifest_parts": 838,
+  "record_parts": 835,
+  "evaluated_parts": 100,
+  "missing_record_ids": [
+   "DB100-134",
+   "DB40-114",
+   "SPT95XL_GY"
+  ]
+ },
+ "parameters": {
+  "mm_max": 8.0,
+  "radius_min": 0.5,
+  "radius_max": 4.5,
+  "branches": [
+   "current",
+   "cylinder_endpoint",
+   "cylinder_projection",
+   "planar_center",
+   "cylinder_all",
+   "dictionary_all",
+   "cartesian_all"
+  ]
+ },
+ "result": {
+  "raw": {
+   "current": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 95,
+     "fp": 0,
+     "fn": 219,
+     "raw_precision": 1.0,
+     "raw_recall": 0.30254777070063693,
+     "raw_f1": 0.46454767726161367,
+     "weighted_f1": 0.4283375314861461,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 95,
+       "fp": 0,
+       "fn": 207,
+       "precision": 1.0,
+       "recall": 0.31456953642384106,
+       "f1": 0.47858942065491183
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 95,
+     "fp": 1243,
+     "fn": 219,
+     "raw_precision": 0.07100149476831091,
+     "raw_recall": 0.30254777070063693,
+     "raw_f1": 0.11501210653753027,
+     "weighted_f1": 0.10483970406905056,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 95,
+       "fp": 1225,
+       "fn": 207,
+       "precision": 0.07196969696969698,
+       "recall": 0.31456953642384106,
+       "f1": 0.11713933415536376
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 95
+    },
+    "n_options_total": 1338,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 86,
+       "fp": 0,
+       "fn": 206,
+       "raw_precision": 1.0,
+       "raw_recall": 0.2945205479452055,
+       "raw_f1": 0.455026455026455,
+       "weighted_f1": 0.42060109289617487,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 86,
+         "fp": 0,
+         "fn": 194,
+         "precision": 1.0,
+         "recall": 0.30714285714285716,
+         "f1": 0.46994535519125685
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 86,
+       "fp": 1143,
+       "fn": 206,
+       "raw_precision": 0.06997558991049634,
+       "raw_recall": 0.2945205479452055,
+       "raw_f1": 0.11308349769888232,
+       "weighted_f1": 0.10324614352783366,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 86,
+         "fp": 1125,
+         "fn": 194,
+         "precision": 0.07101568951279934,
+         "recall": 0.30714285714285716,
+         "f1": 0.11535881958417168
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 0,
+       "fn": 9,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5,
+       "raw_f1": 0.6666666666666666,
+       "weighted_f1": 0.6666666666666666,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 0,
+         "fn": 9,
+         "precision": 1.0,
+         "recall": 0.5,
+         "f1": 0.6666666666666666
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 82,
+       "fn": 9,
+       "raw_precision": 0.0989010989010989,
+       "raw_recall": 0.5,
+       "raw_f1": 0.1651376146788991,
+       "weighted_f1": 0.1651376146788991,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 82,
+         "fn": 9,
+         "precision": 0.0989010989010989,
+         "recall": 0.5,
+         "f1": 0.1651376146788991
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cylinder_endpoint": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 142,
+     "fp": 0,
+     "fn": 172,
+     "raw_precision": 1.0,
+     "raw_recall": 0.45222929936305734,
+     "raw_f1": 0.6228070175438596,
+     "weighted_f1": 0.5724774774774775,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 142,
+       "fp": 0,
+       "fn": 160,
+       "precision": 1.0,
+       "recall": 0.47019867549668876,
+       "f1": 0.6396396396396397
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 142,
+     "fp": 1196,
+     "fn": 172,
+     "raw_precision": 0.10612855007473841,
+     "raw_recall": 0.45222929936305734,
+     "raw_f1": 0.17191283292978207,
+     "weighted_f1": 0.15670776818742294,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 142,
+       "fp": 1178,
+       "fn": 160,
+       "precision": 0.10757575757575757,
+       "recall": 0.47019867549668876,
+       "f1": 0.1750924784217016
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 51,
+     "cylinder_endpoint": 91
+    },
+    "n_options_total": 11860,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 133,
+       "fp": 0,
+       "fn": 159,
+       "raw_precision": 1.0,
+       "raw_recall": 0.4554794520547945,
+       "raw_f1": 0.6258823529411764,
+       "weighted_f1": 0.5764406779661017,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 133,
+         "fp": 0,
+         "fn": 147,
+         "precision": 1.0,
+         "recall": 0.475,
+         "f1": 0.6440677966101694
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 133,
+       "fp": 1096,
+       "fn": 159,
+       "raw_precision": 0.10821806346623271,
+       "raw_recall": 0.4554794520547945,
+       "raw_f1": 0.17488494411571334,
+       "weighted_f1": 0.15967136150234743,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 133,
+         "fp": 1078,
+         "fn": 147,
+         "precision": 0.10982658959537572,
+         "recall": 0.475,
+         "f1": 0.1784037558685446
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 0,
+       "fn": 9,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5,
+       "raw_f1": 0.6666666666666666,
+       "weighted_f1": 0.6666666666666666,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 0,
+         "fn": 9,
+         "precision": 1.0,
+         "recall": 0.5,
+         "f1": 0.6666666666666666
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 82,
+       "fn": 9,
+       "raw_precision": 0.0989010989010989,
+       "raw_recall": 0.5,
+       "raw_f1": 0.1651376146788991,
+       "weighted_f1": 0.1651376146788991,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 82,
+         "fn": 9,
+         "precision": 0.0989010989010989,
+         "recall": 0.5,
+         "f1": 0.1651376146788991
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cylinder_projection": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 135,
+     "fp": 0,
+     "fn": 179,
+     "raw_precision": 1.0,
+     "raw_recall": 0.4299363057324841,
+     "raw_f1": 0.6013363028953229,
+     "weighted_f1": 0.5529748283752861,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 135,
+       "fp": 0,
+       "fn": 167,
+       "precision": 1.0,
+       "recall": 0.4470198675496689,
+       "f1": 0.6178489702517163
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 135,
+     "fp": 1203,
+     "fn": 179,
+     "raw_precision": 0.10089686098654709,
+     "raw_recall": 0.4299363057324841,
+     "raw_f1": 0.16343825665859565,
+     "weighted_f1": 0.1489827373612824,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 135,
+       "fp": 1185,
+       "fn": 167,
+       "precision": 0.10227272727272728,
+       "recall": 0.4470198675496689,
+       "f1": 0.16646115906288536
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 57,
+     "cylinder_projection": 78
+    },
+    "n_options_total": 5588,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 126,
+       "fp": 0,
+       "fn": 166,
+       "raw_precision": 1.0,
+       "raw_recall": 0.4315068493150685,
+       "raw_f1": 0.6028708133971292,
+       "weighted_f1": 0.5555172413793104,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 126,
+         "fp": 0,
+         "fn": 154,
+         "precision": 1.0,
+         "recall": 0.45,
+         "f1": 0.6206896551724138
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 126,
+       "fp": 1103,
+       "fn": 166,
+       "raw_precision": 0.10252237591537836,
+       "raw_recall": 0.4315068493150685,
+       "raw_f1": 0.16568047337278108,
+       "weighted_f1": 0.15126760563380284,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 126,
+         "fp": 1085,
+         "fn": 154,
+         "precision": 0.10404624277456648,
+         "recall": 0.45,
+         "f1": 0.16901408450704228
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 0,
+       "fn": 9,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5,
+       "raw_f1": 0.6666666666666666,
+       "weighted_f1": 0.6666666666666666,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 0,
+         "fn": 9,
+         "precision": 1.0,
+         "recall": 0.5,
+         "f1": 0.6666666666666666
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 82,
+       "fn": 9,
+       "raw_precision": 0.0989010989010989,
+       "raw_recall": 0.5,
+       "raw_f1": 0.1651376146788991,
+       "weighted_f1": 0.1651376146788991,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 82,
+         "fn": 9,
+         "precision": 0.0989010989010989,
+         "recall": 0.5,
+         "f1": 0.1651376146788991
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "planar_center": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 109,
+     "fp": 0,
+     "fn": 205,
+     "raw_precision": 1.0,
+     "raw_recall": 0.3471337579617834,
+     "raw_f1": 0.5153664302600472,
+     "weighted_f1": 0.474720194647202,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 109,
+       "fp": 0,
+       "fn": 193,
+       "precision": 1.0,
+       "recall": 0.3609271523178808,
+       "f1": 0.5304136253041363
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 109,
+     "fp": 1229,
+     "fn": 205,
+     "raw_precision": 0.08146487294469357,
+     "raw_recall": 0.3471337579617834,
+     "raw_f1": 0.13196125907990314,
+     "weighted_f1": 0.12028976572133168,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 109,
+       "fp": 1211,
+       "fn": 193,
+       "precision": 0.08257575757575758,
+       "recall": 0.3609271523178808,
+       "f1": 0.1344019728729963
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 83,
+     "planar_center": 26
+    },
+    "n_options_total": 2516,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 100,
+       "fp": 0,
+       "fn": 192,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3424657534246575,
+       "raw_f1": 0.5102040816326531,
+       "weighted_f1": 0.47105263157894733,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 100,
+         "fp": 0,
+         "fn": 180,
+         "precision": 1.0,
+         "recall": 0.35714285714285715,
+         "f1": 0.5263157894736842
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 100,
+       "fp": 1129,
+       "fn": 192,
+       "raw_precision": 0.08136696501220504,
+       "raw_recall": 0.3424657534246575,
+       "raw_f1": 0.13149243918474687,
+       "weighted_f1": 0.12005365526492288,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 100,
+         "fp": 1111,
+         "fn": 180,
+         "precision": 0.08257638315441784,
+         "recall": 0.35714285714285715,
+         "f1": 0.1341381623071764
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 0,
+       "fn": 9,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5,
+       "raw_f1": 0.6666666666666666,
+       "weighted_f1": 0.6666666666666666,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 0,
+         "fn": 9,
+         "precision": 1.0,
+         "recall": 0.5,
+         "f1": 0.6666666666666666
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 82,
+       "fn": 9,
+       "raw_precision": 0.0989010989010989,
+       "raw_recall": 0.5,
+       "raw_f1": 0.1651376146788991,
+       "weighted_f1": 0.1651376146788991,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 82,
+         "fn": 9,
+         "precision": 0.0989010989010989,
+         "recall": 0.5,
+         "f1": 0.1651376146788991
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cylinder_all": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 142,
+     "fp": 0,
+     "fn": 172,
+     "raw_precision": 1.0,
+     "raw_recall": 0.45222929936305734,
+     "raw_f1": 0.6228070175438596,
+     "weighted_f1": 0.5724774774774775,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 142,
+       "fp": 0,
+       "fn": 160,
+       "precision": 1.0,
+       "recall": 0.47019867549668876,
+       "f1": 0.6396396396396397
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 142,
+     "fp": 1196,
+     "fn": 172,
+     "raw_precision": 0.10612855007473841,
+     "raw_recall": 0.45222929936305734,
+     "raw_f1": 0.17191283292978207,
+     "weighted_f1": 0.15670776818742294,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 142,
+       "fp": 1178,
+       "fn": 160,
+       "precision": 0.10757575757575757,
+       "recall": 0.47019867549668876,
+       "f1": 0.1750924784217016
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 51,
+     "cylinder_endpoint": 90,
+     "cylinder_projection": 1
+    },
+    "n_options_total": 15832,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 133,
+       "fp": 0,
+       "fn": 159,
+       "raw_precision": 1.0,
+       "raw_recall": 0.4554794520547945,
+       "raw_f1": 0.6258823529411764,
+       "weighted_f1": 0.5764406779661017,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 133,
+         "fp": 0,
+         "fn": 147,
+         "precision": 1.0,
+         "recall": 0.475,
+         "f1": 0.6440677966101694
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 133,
+       "fp": 1096,
+       "fn": 159,
+       "raw_precision": 0.10821806346623271,
+       "raw_recall": 0.4554794520547945,
+       "raw_f1": 0.17488494411571334,
+       "weighted_f1": 0.15967136150234743,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 133,
+         "fp": 1078,
+         "fn": 147,
+         "precision": 0.10982658959537572,
+         "recall": 0.475,
+         "f1": 0.1784037558685446
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 0,
+       "fn": 9,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5,
+       "raw_f1": 0.6666666666666666,
+       "weighted_f1": 0.6666666666666666,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 0,
+         "fn": 9,
+         "precision": 1.0,
+         "recall": 0.5,
+         "f1": 0.6666666666666666
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 82,
+       "fn": 9,
+       "raw_precision": 0.0989010989010989,
+       "raw_recall": 0.5,
+       "raw_f1": 0.1651376146788991,
+       "weighted_f1": 0.1651376146788991,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 82,
+         "fn": 9,
+         "precision": 0.0989010989010989,
+         "recall": 0.5,
+         "f1": 0.1651376146788991
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "dictionary_all": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 148,
+     "fp": 0,
+     "fn": 166,
+     "raw_precision": 1.0,
+     "raw_recall": 0.4713375796178344,
+     "raw_f1": 0.6406926406926408,
+     "weighted_f1": 0.5887111111111112,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 148,
+       "fp": 0,
+       "fn": 154,
+       "precision": 1.0,
+       "recall": 0.4900662251655629,
+       "f1": 0.6577777777777778
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 148,
+     "fp": 1190,
+     "fn": 166,
+     "raw_precision": 0.11061285500747384,
+     "raw_recall": 0.4713375796178344,
+     "raw_f1": 0.17917675544794187,
+     "weighted_f1": 0.1633292231812577,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 148,
+       "fp": 1172,
+       "fn": 154,
+       "precision": 0.11212121212121212,
+       "recall": 0.4900662251655629,
+       "f1": 0.18249075215782984
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 47,
+     "planar_center": 22,
+     "cylinder_endpoint": 79
+    },
+    "n_options_total": 16434,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 139,
+       "fp": 0,
+       "fn": 153,
+       "raw_precision": 1.0,
+       "raw_recall": 0.476027397260274,
+       "raw_f1": 0.6450116009280743,
+       "weighted_f1": 0.59381861575179,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 139,
+         "fp": 0,
+         "fn": 141,
+         "precision": 1.0,
+         "recall": 0.49642857142857144,
+         "f1": 0.6634844868735084
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 139,
+       "fp": 1090,
+       "fn": 153,
+       "raw_precision": 0.11310008136696502,
+       "raw_recall": 0.476027397260274,
+       "raw_f1": 0.18277449046679817,
+       "weighted_f1": 0.16687458081824277,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 139,
+         "fp": 1072,
+         "fn": 141,
+         "precision": 0.1147811725846408,
+         "recall": 0.49642857142857144,
+         "f1": 0.18645204560697518
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 0,
+       "fn": 9,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5,
+       "raw_f1": 0.6666666666666666,
+       "weighted_f1": 0.6666666666666666,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 0,
+         "fn": 9,
+         "precision": 1.0,
+         "recall": 0.5,
+         "f1": 0.6666666666666666
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 82,
+       "fn": 9,
+       "raw_precision": 0.0989010989010989,
+       "raw_recall": 0.5,
+       "raw_f1": 0.1651376146788991,
+       "weighted_f1": 0.1651376146788991,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 82,
+         "fn": 9,
+         "precision": 0.0989010989010989,
+         "recall": 0.5,
+         "f1": 0.1651376146788991
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cartesian_all": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 156,
+     "fp": 0,
+     "fn": 158,
+     "raw_precision": 1.0,
+     "raw_recall": 0.4968152866242038,
+     "raw_f1": 0.6638297872340426,
+     "weighted_f1": 0.6345175438596492,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 154,
+       "fp": 0,
+       "fn": 148,
+       "precision": 1.0,
+       "recall": 0.5099337748344371,
+       "f1": 0.6754385964912281
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 2,
+       "fp": 0,
+       "fn": 10,
+       "precision": 1.0,
+       "recall": 0.16666666666666666,
+       "f1": 0.2857142857142857
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 156,
+     "fp": 1182,
+     "fn": 158,
+     "raw_precision": 0.11659192825112108,
+     "raw_recall": 0.4968152866242038,
+     "raw_f1": 0.188861985472155,
+     "weighted_f1": 0.18395067817509247,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 154,
+       "fp": 1166,
+       "fn": 148,
+       "precision": 0.11666666666666667,
+       "recall": 0.5099337748344371,
+       "f1": 0.18988902589395806
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 2,
+       "fp": 16,
+       "fn": 10,
+       "precision": 0.1111111111111111,
+       "recall": 0.16666666666666666,
+       "f1": 0.13333333333333333
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "cartesian:currentxcurrent": 46,
+     "cartesian:cylinder_endpointxcurrent": 44,
+     "cartesian:planar_centerxcurrent": 14,
+     "cartesian:cylinder_endpointxcylinder_endpoint": 32,
+     "cartesian:cylinder_projectionxcurrent": 6,
+     "cartesian:planar_centerxplanar_center": 1,
+     "cartesian:currentxcylinder_endpoint": 3,
+     "cartesian:planar_centerxcylinder_endpoint": 7,
+     "cartesian:cylinder_projectionxcylinder_endpoint": 3
+    },
+    "n_options_total": 31898,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 147,
+       "fp": 0,
+       "fn": 145,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5034246575342466,
+       "raw_f1": 0.6697038724373577,
+       "weighted_f1": 0.6407058823529413,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 145,
+         "fp": 0,
+         "fn": 135,
+         "precision": 1.0,
+         "recall": 0.5178571428571429,
+         "f1": 0.6823529411764707
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 2,
+         "fp": 0,
+         "fn": 10,
+         "precision": 1.0,
+         "recall": 0.16666666666666666,
+         "f1": 0.2857142857142857
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 147,
+       "fp": 1082,
+       "fn": 145,
+       "raw_precision": 0.11960943856794141,
+       "raw_recall": 0.5034246575342466,
+       "raw_f1": 0.19329388560157792,
+       "weighted_f1": 0.18807780013413816,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 145,
+         "fp": 1066,
+         "fn": 135,
+         "precision": 0.11973575557390587,
+         "recall": 0.5178571428571429,
+         "f1": 0.19450033534540576
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 2,
+         "fp": 16,
+         "fn": 10,
+         "precision": 0.1111111111111111,
+         "recall": 0.16666666666666666,
+         "f1": 0.13333333333333333
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 0,
+       "fn": 9,
+       "raw_precision": 1.0,
+       "raw_recall": 0.5,
+       "raw_f1": 0.6666666666666666,
+       "weighted_f1": 0.6666666666666666,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 0,
+         "fn": 9,
+         "precision": 1.0,
+         "recall": 0.5,
+         "f1": 0.6666666666666666
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 9,
+       "fp": 82,
+       "fn": 9,
+       "raw_precision": 0.0989010989010989,
+       "raw_recall": 0.5,
+       "raw_f1": 0.1651376146788991,
+       "weighted_f1": 0.1651376146788991,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 9,
+         "fp": 82,
+         "fn": 9,
+         "precision": 0.0989010989010989,
+         "recall": 0.5,
+         "f1": 0.1651376146788991
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 18,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 18,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "gate_before": {
+   "current": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 79,
+     "fp": 0,
+     "fn": 235,
+     "raw_precision": 1.0,
+     "raw_recall": 0.2515923566878981,
+     "raw_f1": 0.4020356234096692,
+     "weighted_f1": 0.3711548556430446,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 79,
+       "fp": 0,
+       "fn": 223,
+       "precision": 1.0,
+       "recall": 0.26158940397350994,
+       "f1": 0.41469816272965876
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 79,
+     "fp": 189,
+     "fn": 235,
+     "raw_precision": 0.2947761194029851,
+     "raw_recall": 0.2515923566878981,
+     "raw_f1": 0.2714776632302406,
+     "weighted_f1": 0.24984098939929333,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 79,
+       "fp": 185,
+       "fn": 223,
+       "precision": 0.29924242424242425,
+       "recall": 0.26158940397350994,
+       "f1": 0.27915194346289757
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 4,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 79
+    },
+    "n_options_total": 268,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 72,
+       "fp": 0,
+       "fn": 220,
+       "raw_precision": 1.0,
+       "raw_recall": 0.2465753424657534,
+       "raw_f1": 0.39560439560439553,
+       "weighted_f1": 0.3661363636363636,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 72,
+         "fp": 0,
+         "fn": 208,
+         "precision": 1.0,
+         "recall": 0.2571428571428571,
+         "f1": 0.40909090909090906
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 72,
+       "fp": 179,
+       "fn": 220,
+       "raw_precision": 0.2868525896414343,
+       "raw_recall": 0.2465753424657534,
+       "raw_f1": 0.2651933701657458,
+       "weighted_f1": 0.2445540796963947,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 72,
+         "fp": 175,
+         "fn": 208,
+         "precision": 0.291497975708502,
+         "recall": 0.2571428571428571,
+         "f1": 0.2732447817836812
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 4,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 0,
+       "fn": 11,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.56,
+       "weighted_f1": 0.56,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 0,
+         "fn": 11,
+         "precision": 1.0,
+         "recall": 0.3888888888888889,
+         "f1": 0.56
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 8,
+       "fn": 11,
+       "raw_precision": 0.4666666666666667,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.42424242424242425,
+       "weighted_f1": 0.42424242424242425,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 8,
+         "fn": 11,
+         "precision": 0.4666666666666667,
+         "recall": 0.3888888888888889,
+         "f1": 0.42424242424242425
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 2,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 2,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cylinder_endpoint": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 105,
+     "fp": 0,
+     "fn": 209,
+     "raw_precision": 1.0,
+     "raw_recall": 0.3343949044585987,
+     "raw_f1": 0.5011933174224343,
+     "weighted_f1": 0.46179361179361184,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 105,
+       "fp": 0,
+       "fn": 197,
+       "precision": 1.0,
+       "recall": 0.347682119205298,
+       "f1": 0.515970515970516
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 105,
+     "fp": 163,
+     "fn": 209,
+     "raw_precision": 0.3917910447761194,
+     "raw_recall": 0.3343949044585987,
+     "raw_f1": 0.3608247422680412,
+     "weighted_f1": 0.3320671378091873,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 105,
+       "fp": 159,
+       "fn": 197,
+       "precision": 0.3977272727272727,
+       "recall": 0.347682119205298,
+       "f1": 0.3710247349823321
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 4,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 37,
+     "cylinder_endpoint": 68
+    },
+    "n_options_total": 3306,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 98,
+       "fp": 0,
+       "fn": 194,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3356164383561644,
+       "raw_f1": 0.5025641025641026,
+       "weighted_f1": 0.4640740740740741,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 98,
+         "fp": 0,
+         "fn": 182,
+         "precision": 1.0,
+         "recall": 0.35,
+         "f1": 0.5185185185185185
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 98,
+       "fp": 153,
+       "fn": 194,
+       "raw_precision": 0.3904382470119522,
+       "raw_recall": 0.3356164383561644,
+       "raw_f1": 0.36095764272559855,
+       "weighted_f1": 0.33286527514231495,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 98,
+         "fp": 149,
+         "fn": 182,
+         "precision": 0.3967611336032389,
+         "recall": 0.35,
+         "f1": 0.3719165085388994
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 4,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 0,
+       "fn": 11,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.56,
+       "weighted_f1": 0.56,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 0,
+         "fn": 11,
+         "precision": 1.0,
+         "recall": 0.3888888888888889,
+         "f1": 0.56
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 8,
+       "fn": 11,
+       "raw_precision": 0.4666666666666667,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.42424242424242425,
+       "weighted_f1": 0.42424242424242425,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 8,
+         "fn": 11,
+         "precision": 0.4666666666666667,
+         "recall": 0.3888888888888889,
+         "f1": 0.42424242424242425
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 2,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 2,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cylinder_projection": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 102,
+     "fp": 0,
+     "fn": 212,
+     "raw_precision": 1.0,
+     "raw_recall": 0.3248407643312102,
+     "raw_f1": 0.49038461538461536,
+     "weighted_f1": 0.45193069306930694,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 102,
+       "fp": 0,
+       "fn": 200,
+       "precision": 1.0,
+       "recall": 0.33774834437086093,
+       "f1": 0.504950495049505
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 102,
+     "fp": 166,
+     "fn": 212,
+     "raw_precision": 0.3805970149253731,
+     "raw_recall": 0.3248407643312102,
+     "raw_f1": 0.3505154639175257,
+     "weighted_f1": 0.32257950530035334,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 102,
+       "fp": 162,
+       "fn": 200,
+       "precision": 0.38636363636363635,
+       "recall": 0.33774834437086093,
+       "f1": 0.3604240282685512
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 4,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 43,
+     "cylinder_projection": 59
+    },
+    "n_options_total": 1544,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 95,
+       "fp": 0,
+       "fn": 197,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3253424657534247,
+       "raw_f1": 0.4909560723514212,
+       "weighted_f1": 0.45346666666666663,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 95,
+         "fp": 0,
+         "fn": 185,
+         "precision": 1.0,
+         "recall": 0.3392857142857143,
+         "f1": 0.5066666666666666
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 95,
+       "fp": 156,
+       "fn": 197,
+       "raw_precision": 0.3784860557768924,
+       "raw_recall": 0.3253424657534247,
+       "raw_f1": 0.3499079189686925,
+       "weighted_f1": 0.3226755218216319,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 95,
+         "fp": 152,
+         "fn": 185,
+         "precision": 0.38461538461538464,
+         "recall": 0.3392857142857143,
+         "f1": 0.3605313092979127
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 4,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 0,
+       "fn": 11,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.56,
+       "weighted_f1": 0.56,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 0,
+         "fn": 11,
+         "precision": 1.0,
+         "recall": 0.3888888888888889,
+         "f1": 0.56
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 8,
+       "fn": 11,
+       "raw_precision": 0.4666666666666667,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.42424242424242425,
+       "weighted_f1": 0.42424242424242425,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 8,
+         "fn": 11,
+         "precision": 0.4666666666666667,
+         "recall": 0.3888888888888889,
+         "f1": 0.42424242424242425
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 2,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 2,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "planar_center": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 89,
+     "fp": 0,
+     "fn": 225,
+     "raw_precision": 1.0,
+     "raw_recall": 0.28343949044585987,
+     "raw_f1": 0.4416873449131513,
+     "weighted_f1": 0.40744245524296674,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 89,
+       "fp": 0,
+       "fn": 213,
+       "precision": 1.0,
+       "recall": 0.2947019867549669,
+       "f1": 0.45524296675191817
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 89,
+     "fp": 179,
+     "fn": 225,
+     "raw_precision": 0.332089552238806,
+     "raw_recall": 0.28343949044585987,
+     "raw_f1": 0.30584192439862545,
+     "weighted_f1": 0.28146643109540637,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 89,
+       "fp": 175,
+       "fn": 213,
+       "precision": 0.3371212121212121,
+       "recall": 0.2947019867549669,
+       "f1": 0.31448763250883394
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 4,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 68,
+     "planar_center": 21
+    },
+    "n_options_total": 510,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 82,
+       "fp": 0,
+       "fn": 210,
+       "raw_precision": 1.0,
+       "raw_recall": 0.2808219178082192,
+       "raw_f1": 0.4385026737967915,
+       "weighted_f1": 0.4054696132596685,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 82,
+         "fp": 0,
+         "fn": 198,
+         "precision": 1.0,
+         "recall": 0.29285714285714287,
+         "f1": 0.4530386740331492
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 82,
+       "fp": 169,
+       "fn": 210,
+       "raw_precision": 0.32669322709163345,
+       "raw_recall": 0.2808219178082192,
+       "raw_f1": 0.3020257826887662,
+       "weighted_f1": 0.2785199240986717,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 82,
+         "fp": 165,
+         "fn": 198,
+         "precision": 0.3319838056680162,
+         "recall": 0.29285714285714287,
+         "f1": 0.31119544592030357
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 4,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 0,
+       "fn": 11,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.56,
+       "weighted_f1": 0.56,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 0,
+         "fn": 11,
+         "precision": 1.0,
+         "recall": 0.3888888888888889,
+         "f1": 0.56
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 8,
+       "fn": 11,
+       "raw_precision": 0.4666666666666667,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.42424242424242425,
+       "weighted_f1": 0.42424242424242425,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 8,
+         "fn": 11,
+         "precision": 0.4666666666666667,
+         "recall": 0.3888888888888889,
+         "f1": 0.42424242424242425
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 2,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 2,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cylinder_all": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 105,
+     "fp": 0,
+     "fn": 209,
+     "raw_precision": 1.0,
+     "raw_recall": 0.3343949044585987,
+     "raw_f1": 0.5011933174224343,
+     "weighted_f1": 0.46179361179361184,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 105,
+       "fp": 0,
+       "fn": 197,
+       "precision": 1.0,
+       "recall": 0.347682119205298,
+       "f1": 0.515970515970516
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 105,
+     "fp": 163,
+     "fn": 209,
+     "raw_precision": 0.3917910447761194,
+     "raw_recall": 0.3343949044585987,
+     "raw_f1": 0.3608247422680412,
+     "weighted_f1": 0.3320671378091873,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 105,
+       "fp": 159,
+       "fn": 197,
+       "precision": 0.3977272727272727,
+       "recall": 0.347682119205298,
+       "f1": 0.3710247349823321
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 4,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 37,
+     "cylinder_endpoint": 68
+    },
+    "n_options_total": 4582,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 98,
+       "fp": 0,
+       "fn": 194,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3356164383561644,
+       "raw_f1": 0.5025641025641026,
+       "weighted_f1": 0.4640740740740741,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 98,
+         "fp": 0,
+         "fn": 182,
+         "precision": 1.0,
+         "recall": 0.35,
+         "f1": 0.5185185185185185
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 98,
+       "fp": 153,
+       "fn": 194,
+       "raw_precision": 0.3904382470119522,
+       "raw_recall": 0.3356164383561644,
+       "raw_f1": 0.36095764272559855,
+       "weighted_f1": 0.33286527514231495,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 98,
+         "fp": 149,
+         "fn": 182,
+         "precision": 0.3967611336032389,
+         "recall": 0.35,
+         "f1": 0.3719165085388994
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 4,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 0,
+       "fn": 11,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.56,
+       "weighted_f1": 0.56,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 0,
+         "fn": 11,
+         "precision": 1.0,
+         "recall": 0.3888888888888889,
+         "f1": 0.56
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 8,
+       "fn": 11,
+       "raw_precision": 0.4666666666666667,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.42424242424242425,
+       "weighted_f1": 0.42424242424242425,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 8,
+         "fn": 11,
+         "precision": 0.4666666666666667,
+         "recall": 0.3888888888888889,
+         "f1": 0.42424242424242425
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 2,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 2,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "dictionary_all": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 110,
+     "fp": 0,
+     "fn": 204,
+     "raw_precision": 1.0,
+     "raw_recall": 0.3503184713375796,
+     "raw_f1": 0.5188679245283019,
+     "weighted_f1": 0.4779126213592233,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 110,
+       "fp": 0,
+       "fn": 192,
+       "precision": 1.0,
+       "recall": 0.36423841059602646,
+       "f1": 0.5339805825242718
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 110,
+     "fp": 158,
+     "fn": 204,
+     "raw_precision": 0.41044776119402987,
+     "raw_recall": 0.3503184713375796,
+     "raw_f1": 0.3780068728522337,
+     "weighted_f1": 0.34787985865724386,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 110,
+       "fp": 154,
+       "fn": 192,
+       "precision": 0.4166666666666667,
+       "recall": 0.36423841059602646,
+       "f1": 0.3886925795053004
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 4,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "current": 34,
+     "planar_center": 18,
+     "cylinder_endpoint": 58
+    },
+    "n_options_total": 4758,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 103,
+       "fp": 0,
+       "fn": 189,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3527397260273973,
+       "raw_f1": 0.5215189873417722,
+       "weighted_f1": 0.4813838120104439,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 103,
+         "fp": 0,
+         "fn": 177,
+         "precision": 1.0,
+         "recall": 0.3678571428571429,
+         "f1": 0.5378590078328982
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 103,
+       "fp": 148,
+       "fn": 189,
+       "raw_precision": 0.4103585657370518,
+       "raw_recall": 0.3527397260273973,
+       "raw_f1": 0.3793738489871087,
+       "weighted_f1": 0.3498481973434535,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 103,
+         "fp": 144,
+         "fn": 177,
+         "precision": 0.41700404858299595,
+         "recall": 0.3678571428571429,
+         "f1": 0.3908918406072106
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 4,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 0,
+       "fn": 11,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.56,
+       "weighted_f1": 0.56,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 0,
+         "fn": 11,
+         "precision": 1.0,
+         "recall": 0.3888888888888889,
+         "f1": 0.56
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 8,
+       "fn": 11,
+       "raw_precision": 0.4666666666666667,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.42424242424242425,
+       "weighted_f1": 0.42424242424242425,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 8,
+         "fn": 11,
+         "precision": 0.4666666666666667,
+         "recall": 0.3888888888888889,
+         "f1": 0.42424242424242425
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 2,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 2,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   },
+   "cartesian_all": {
+    "oracle_null": {
+     "n_part": 100,
+     "tp": 112,
+     "fp": 0,
+     "fn": 202,
+     "raw_precision": 1.0,
+     "raw_recall": 0.35668789808917195,
+     "raw_f1": 0.5258215962441315,
+     "weighted_f1": 0.48425120772946856,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 112,
+       "fp": 0,
+       "fn": 190,
+       "precision": 1.0,
+       "recall": 0.3708609271523179,
+       "f1": 0.5410628019323671
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "keep_all": {
+     "n_part": 100,
+     "tp": 112,
+     "fp": 156,
+     "fn": 202,
+     "raw_precision": 0.417910447761194,
+     "raw_recall": 0.35668789808917195,
+     "raw_f1": 0.3848797250859106,
+     "weighted_f1": 0.3542049469964665,
+     "regime": {
+      "dusuk": {
+       "n_part": 99,
+       "tp": 112,
+       "fp": 152,
+       "fn": 190,
+       "precision": 0.42424242424242425,
+       "recall": 0.3708609271523179,
+       "f1": 0.39575971731448767
+      },
+      "cok": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 4,
+       "fn": 12,
+       "precision": 0.0,
+       "recall": 0.0,
+       "f1": 0.0
+      }
+     }
+    },
+    "chosen_witness_kind": {
+     "cartesian:currentxcurrent": 34,
+     "cartesian:planar_centerxcurrent": 14,
+     "cartesian:cylinder_endpointxcurrent": 41,
+     "cartesian:cylinder_endpointxcylinder_endpoint": 12,
+     "cartesian:currentxcylinder_endpoint": 3,
+     "cartesian:planar_centerxcylinder_endpoint": 4,
+     "cartesian:cylinder_projectionxcurrent": 3,
+     "cartesian:cylinder_projectionxcylinder_endpoint": 1
+    },
+    "n_options_total": 9657,
+    "manufacturer": {
+     "A-B": {
+      "oracle_null": {
+       "n_part": 91,
+       "tp": 105,
+       "fp": 0,
+       "fn": 187,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3595890410958904,
+       "raw_f1": 0.5289672544080605,
+       "weighted_f1": 0.48818181818181816,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 105,
+         "fp": 0,
+         "fn": 175,
+         "precision": 1.0,
+         "recall": 0.375,
+         "f1": 0.5454545454545454
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 91,
+       "tp": 105,
+       "fp": 146,
+       "fn": 187,
+       "raw_precision": 0.41832669322709165,
+       "raw_recall": 0.3595890410958904,
+       "raw_f1": 0.3867403314917127,
+       "weighted_f1": 0.3566413662239089,
+       "regime": {
+        "dusuk": {
+         "n_part": 90,
+         "tp": 105,
+         "fp": 142,
+         "fn": 175,
+         "precision": 0.4251012145748988,
+         "recall": 0.375,
+         "f1": 0.39848197343453506
+        },
+        "cok": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 4,
+         "fn": 12,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     },
+     "CCD": {
+      "oracle_null": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 0,
+       "fn": 11,
+       "raw_precision": 1.0,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.56,
+       "weighted_f1": 0.56,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 0,
+         "fn": 11,
+         "precision": 1.0,
+         "recall": 0.3888888888888889,
+         "f1": 0.56
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 8,
+       "tp": 7,
+       "fp": 8,
+       "fn": 11,
+       "raw_precision": 0.4666666666666667,
+       "raw_recall": 0.3888888888888889,
+       "raw_f1": 0.42424242424242425,
+       "weighted_f1": 0.42424242424242425,
+       "regime": {
+        "dusuk": {
+         "n_part": 8,
+         "tp": 7,
+         "fp": 8,
+         "fn": 11,
+         "precision": 0.4666666666666667,
+         "recall": 0.3888888888888889,
+         "f1": 0.42424242424242425
+        }
+       }
+      }
+     },
+     "KLM": {
+      "oracle_null": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 0,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 0,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      },
+      "keep_all": {
+       "n_part": 1,
+       "tp": 0,
+       "fp": 2,
+       "fn": 4,
+       "raw_precision": 0.0,
+       "raw_recall": 0.0,
+       "raw_f1": 0.0,
+       "weighted_f1": 0.0,
+       "regime": {
+        "dusuk": {
+         "n_part": 1,
+         "tp": 0,
+         "fp": 2,
+         "fn": 4,
+         "precision": 0.0,
+         "recall": 0.0,
+         "f1": 0.0
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

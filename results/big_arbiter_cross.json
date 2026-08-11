@@ -1,0 +1,81 @@
+{
+ "tag": "cross",
+ "ckpts": [
+  "results/seg_extra/human77c_s0.pt",
+  "results/seg_extra/human77c_s1.pt",
+  "results/seg_extra/human77c_s2.pt"
+ ],
+ "n_parts": 7,
+ "n_cps": 14,
+ "precision": 0.7857,
+ "recall": 0.7857,
+ "f1": 0.7857,
+ "cluster_mm": 5.0,
+ "min_v": 45,
+ "remesh_target": 6000,
+ "per_part": [
+  {
+   "mfg": "PXC",
+   "part_id": "3031238",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 0,
+   "fp": 2,
+   "fn": 2
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036550",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3036563",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211813",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211819",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3211822",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "PXC",
+   "part_id": "3212140",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1
+  }
+ ]
+}

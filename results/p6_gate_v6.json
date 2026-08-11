@@ -1,0 +1,24 @@
+{
+ "korpus": "results/zengin_parite_v6.npz",
+ "aday": 53036,
+ "parca": 2583,
+ "uretici": [
+  "ABB",
+  "MDI",
+  "PXC",
+  "SIE",
+  "TE",
+  "TKM",
+  "TOGI",
+  "WAGO",
+  "WEI"
+ ],
+ "uretici_disi_auc": {
+  "WEI": 0.7576594828994858,
+  "PXC": 0.9032303536514035,
+  "TOGI": 0.7856698667726523,
+  "SIE": 0.9200230196900564,
+  "TE": 0.8228964469575492
+ },
+ "ort_auc": 0.8378958339942294
+}

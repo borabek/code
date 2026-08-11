@@ -1,0 +1,109 @@
+{
+ "is_inside": {
+  "dolu_kutu_TAM": {
+   "dogru": 4,
+   "toplam": 4,
+   "yanlis": [],
+   "tepe": 8,
+   "watertight": true
+  },
+  "dolu_kutu_REMESH": {
+   "dogru": 4,
+   "toplam": 4,
+   "yanlis": [],
+   "tepe": 4709,
+   "watertight": true
+  },
+  "gecisli_delik_TAM": {
+   "dogru": 4,
+   "toplam": 4,
+   "yanlis": [],
+   "tepe": 72,
+   "watertight": true
+  },
+  "gecisli_delik_REMESH": {
+   "dogru": 4,
+   "toplam": 4,
+   "yanlis": [],
+   "tepe": 5139,
+   "watertight": true
+  },
+  "kor_cep_TAM": {
+   "dogru": 3,
+   "toplam": 3,
+   "yanlis": [],
+   "tepe": 73,
+   "watertight": true
+  },
+  "kor_cep_REMESH": {
+   "dogru": 3,
+   "toplam": 3,
+   "yanlis": [],
+   "tepe": 5557,
+   "watertight": true
+  },
+  "ince_yarik_TAM": {
+   "dogru": 2,
+   "toplam": 2,
+   "yanlis": [],
+   "tepe": 16,
+   "watertight": true
+  },
+  "ince_yarik_REMESH": {
+   "dogru": 2,
+   "toplam": 2,
+   "yanlis": [],
+   "tepe": 5197,
+   "watertight": true
+  }
+ },
+ "mouth_width": {
+  "gecisli_delik_TAM": {
+   "beklenen": 6.0,
+   "olcum": {
+    "12": 5.97,
+    "24": 5.97,
+    "48": 5.97
+   },
+   "sapma": 0.005000000000000042,
+   "isin_duyarliligi": 0.0
+  },
+  "gecisli_delik_REMESH": {
+   "beklenen": 6.0,
+   "olcum": {
+    "12": 5.96,
+    "24": 5.96,
+    "48": 5.96
+   },
+   "sapma": 0.006666666666666672,
+   "isin_duyarliligi": 0.0
+  },
+  "kor_cep_TAM": {
+   "beklenen": 5.0,
+   "olcum": {
+    "12": 4.98,
+    "24": 4.98,
+    "48": 4.98
+   },
+   "sapma": 0.003999999999999915,
+   "isin_duyarliligi": 0.0
+  },
+  "kor_cep_REMESH": {
+   "beklenen": 5.0,
+   "olcum": {
+    "12": 4.95,
+    "24": 4.95,
+    "48": 4.95
+   },
+   "sapma": 0.009999999999999964,
+   "isin_duyarliligi": 0.0
+  }
+ },
+ "kill": {
+  "is_inside_yanilma": 0.0,
+  "is_inside_gecti": true,
+  "mouth_width_max_sapma": 0.009999999999999964,
+  "mouth_width_gecti": true,
+  "sonuc": "RED KRITERI OLABILIR"
+ }
+}

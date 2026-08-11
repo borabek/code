@@ -1,0 +1,78 @@
+# -*- coding: utf-8 -*-
+"""T3 TEDAVI-1: SABIT esik yerine DAGILIMA UYARLANAN esik.
+
+T2 OLCTU: uretici-disi cokusun kalibrasyon payi uretici 0'da -0.0543, uretici 1'de -0.1949.
+Kanit: uretici 1'de model adaylarin %10.3'une pozitif diyor, gercek %24.1 -- sabit 0.40 o
+dagilimda cok yuksek kaliyor (orada en iyi esik 0.15).
+
+ADAY KURALLAR (hicbiri yeni ureticinin istatistigini BILMIYOR):
+  sabit        : mevcut urun (esik cp_config'den)
+  oran         : esigi, EGITIM korpusunun pozitif oranini yakalayacak sekilde test dagiliminda
+                 quantile ile sec (test etiketlerini KULLANMAZ, yalnizca skor dagilimini)
+  parca_orani  : her PARCA icinde, o parcanin en yuksek skorunun f katindan buyukleri tut
+  parca_z      : her PARCA icinde skorlari z-skorla, sabit z esigi uygula
+
+KILL (onceden yazili): bir kural, HER IKI uretici-disi bolmede de sabit esigi gecmezse
+ALINMAZ. Tek bolmede kazanip otekinde kaybeden kural kalibrasyon degil, sanstir.
+"""
+import json
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from t1_uretici_disi import f1_at
+
+
+def main():
+    d = np.load("results/gate_regrow_data_fiz.npz", allow_pickle=True)
+    X = d["X"][:, :18]; y = d["y"].astype(bool)
+    mfg = np.array([str(x) for x in d["mfg"]])
+    pids = np.array([str(x) for x in d["pids"]])
+    THR = float(json.load(open("cp_config.json", encoding="utf-8"))["robot_wire_gate_threshold"])
+
+    def parca_kural(s, p, fn):
+        """her parca icinde bagimsiz karar -> maske"""
+        m = np.zeros(len(s), bool)
+        for u in np.unique(p):
+            i = p == u
+            m[i] = fn(s[i])
+        return m
+
+    print(f"{'bolme':<22}{'kural':<16}{'F1':>8}{'kesin':>8}{'recall':>8}{'pozitif%':>10}")
+    out = {}
+    for u in sorted(set(mfg)):
+        te = mfg == u
+        egit_oran = float(y[~te].mean())          # EGITIM korpusunun pozitif orani (bilinir)
+        s = RandomForestClassifier(n_estimators=400, min_samples_leaf=3, n_jobs=-1,
+                                   random_state=0).fit(X[~te], y[~te]).predict_proba(X[te])[:, 1]
+        yy = y[te]; pp = pids[te]
+        kur = {
+            "sabit (mevcut)": s >= THR,
+            "oran-esleme": s >= np.quantile(s, 1.0 - egit_oran),
+            "parca_orani 0.5": parca_kural(s, pp, lambda v: v >= 0.5 * max(v.max(), 1e-9)),
+            "parca_orani 0.6": parca_kural(s, pp, lambda v: v >= 0.6 * max(v.max(), 1e-9)),
+            "parca_z >= 0.0": parca_kural(s, pp, lambda v: (v - v.mean()) / (v.std() + 1e-9) >= 0.0),
+        }
+        for ad, m in kur.items():
+            tp = int((yy & m).sum()); fp = int((~yy & m).sum()); fn_ = int((yy & ~m).sum())
+            pr = tp / max(tp + fp, 1); rc = tp / max(tp + fn_, 1)
+            f = 2 * pr * rc / max(pr + rc, 1e-9)
+            print(f"{'uretici ' + u + ' disarida':<22}{ad:<16}{f:>8.4f}{pr:>8.3f}{rc:>8.3f}"
+                  f"{float(m.mean()):>10.3f}")
+            out.setdefault(ad, {})[u] = f
+        print()
+
+    U = sorted(set(mfg))
+    taban = out["sabit (mevcut)"]
+    print(f"{'kural':<18}" + "".join(f"{'uretici ' + u:>12}" for u in U) + f"{'EN KOTU':>10}{'karar':>10}")
+    for ad, v in out.items():
+        dl = [v[u] - taban[u] for u in U]
+        gecti = all(x > 0 for x in dl)
+        print(f"{ad:<18}" + "".join(f"{v[u]:>12.4f}" for u in U)
+              + f"{min(v.values()):>10.4f}"
+              + f"{('GECTI' if gecti and ad != 'sabit (mevcut)' else '-'):>10}")
+    print("\nKILL: bir kural HER IKI bolmede de sabiti gecmezse ALINMAZ.")
+    json.dump(out, open("results/t3_kalibrasyon.json", "w"), indent=1)
+    print("makbuz -> results/t3_kalibrasyon.json")
+
+
+if __name__ == "__main__":
+    main()

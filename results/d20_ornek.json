@@ -1,0 +1,17 @@
+{
+ "n": 1496,
+ "marka": {
+  "ABB": 1,
+  "HORA": 1,
+  "MDI": 1,
+  "PXC": 465,
+  "SIE": 141,
+  "TE": 46,
+  "TKM": 1,
+  "TOGI": 370,
+  "WAGO": 2,
+  "WEI": 468
+ },
+ "N_hedef": 1500,
+ "olcut": "agiz orani (boyanan tepe / toplam tepe) DUSUK oncelikli"
+}

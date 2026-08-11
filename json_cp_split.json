@@ -1,0 +1,3849 @@
+{
+ "frozen": "2026-07-18",
+ "source": "manufacturer JSON (Desktop/JSON)",
+ "n_parts_deduped": 479,
+ "counts": {
+  "train": 341,
+  "val": 74,
+  "holdout": 64
+ },
+ "total_cps": 11927,
+ "match": {
+  "point_mm": 5.0,
+  "direction_deg": 15.0
+ },
+ "parts": [
+  {
+   "part_id": "A-B.100-C09EJ01",
+   "path": "A-B.100-C09EJ01.json",
+   "sha": "f6e7f1546e138e33dfc3c3c5070cdeafc672b4fdfcbdb13a5f1353734f3b81f2",
+   "n_cp": 10,
+   "n_verts": 1912,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.100-FA20",
+   "path": "A-B.100-FA20.json",
+   "sha": "08d97efd3b46b7bc800e37e3856cf6efd109a47bbb0e0b95c9736fe79ecda168",
+   "n_cp": 4,
+   "n_verts": 628,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.140F-D3C-C30",
+   "path": "A-B.140F-D3C-C30.json",
+   "sha": "4d8634eae4d9c6a934c82437a7fb180b7c09b52f7d6d42df6ff70504b1b6ce8c",
+   "n_cp": 6,
+   "n_verts": 6538,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.140M-C-AFA11",
+   "path": "A-B.140M-C-AFA11.json",
+   "sha": "df9b5f27848419455e53c991c0a1352983181b65ad5ff44025f094fecd4c9192",
+   "n_cp": 4,
+   "n_verts": 728,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.140M-C2E-B25",
+   "path": "A-B.140M-C2E-B25.json",
+   "sha": "38df87c05b476d284699fc7c3b624a511318d82059f8cd16a3310fde05b3228a",
+   "n_cp": 6,
+   "n_verts": 1691,
+   "role": "val"
+  },
+  {
+   "part_id": "A-B.140M-C2E-B40",
+   "path": "A-B.140M-C2E-B40.json",
+   "sha": "39d43b8cedec593f61d3916807f7e64be400a74bf3f318f1448795ee2fedd41b",
+   "n_cp": 6,
+   "n_verts": 1691,
+   "role": "holdout"
+  },
+  {
+   "part_id": "A-B.140M-C2E-B63",
+   "path": "A-B.140M-C2E-B63.json",
+   "sha": "79ed287c4c79f7e466ac440d77d1c70b3e67d1d7c7fbe42d264c38b942d0ed59",
+   "n_cp": 6,
+   "n_verts": 1691,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.1489-M2C100",
+   "path": "A-B.1489-M2C100.json",
+   "sha": "e0c9fc675c48bc4db78ca95c424cd4f3cbb8598446297e220b0c3b08bc2741d6",
+   "n_cp": 4,
+   "n_verts": 24988,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.1606-XLE120E-2",
+   "path": "A-B.1606-XLE120E-2.json",
+   "sha": "18c6f16fb43499cfec9b4b2e971012cf106b42bcba0a6940da5720b5489f7e9c",
+   "n_cp": 7,
+   "n_verts": 25646,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.194E-A63-1753",
+   "path": "A-B.194E-A63-1753.json",
+   "sha": "2a1c5c45067f8a163b98587d3bca0c42ec163ea5a248ce3acbf04f5952823c54",
+   "n_cp": 6,
+   "n_verts": 614,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.2080-LC30-16QWB",
+   "path": "A-B.2080-LC30-16QWB.json",
+   "sha": "e46b83ce41b6c7894126df8b1b0b44b308f51c9b032b14cca0ac2daa45f22bd2",
+   "n_cp": 26,
+   "n_verts": 9919,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.800F-N3R",
+   "path": "A-B.800F-N3R.json",
+   "sha": "e5a3799744d3c761033229b4277f6a1d77d911bea2830144279aabbda8e39e90",
+   "n_cp": 2,
+   "n_verts": 570,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.800F-N3W",
+   "path": "A-B.800F-N3W.json",
+   "sha": "98a126f531b29318a7bfdcff0420618957ec20cc65022ecd79a8ab28ff7f6478",
+   "n_cp": 2,
+   "n_verts": 570,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.800F-X01",
+   "path": "A-B.800F-X01.json",
+   "sha": "910fabc506ac502762f584c6824a6cf5428a5ec0c87d12abce8c0587b4845c72",
+   "n_cp": 12,
+   "n_verts": 1053,
+   "role": "train"
+  },
+  {
+   "part_id": "A-B.800F-X01S",
+   "path": "A-B.800F-X01S.json",
+   "sha": "f55064bda785d77b52bda2ccb48c43030b3da1c730171696350fa1ac700b1d8f",
+   "n_cp": 12,
+   "n_verts": 10509,
+   "role": "holdout"
+  },
+  {
+   "part_id": "A-B.800F-X10",
+   "path": "A-B.800F-X10.json",
+   "sha": "a337017a8a1d905804a3946025c982a1fdf6f48645873923424842d50fc20661",
+   "n_cp": 12,
+   "n_verts": 1160,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SAM250100R1001",
+   "path": "ABB.1SAM250100R1001.json",
+   "sha": "07fd19c049272164a2ef13fea0dbd22a450c20c3b005504a8f93e25ea238242d",
+   "n_cp": 6,
+   "n_verts": 6540,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH136001R2022",
+   "path": "ABB.1SBH136001R2022.json",
+   "sha": "6151ee86d7ee59a683bb5c5792e9800fc99524ebb8f745098f77f59f83ba4436",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH136001R2031",
+   "path": "ABB.1SBH136001R2031.json",
+   "sha": "7bf5314605079764fcac3e1b0d9be2739b586fad3daecad5037c3c01e0c11ae4",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH136001R2040",
+   "path": "ABB.1SBH136001R2040.json",
+   "sha": "12c0572ecd785e67e15b402fd206a1ed5adc2ca086be4765ba423c2dae297f24",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH136001R2122",
+   "path": "ABB.1SBH136001R2122.json",
+   "sha": "6f95671d742da8bf8982a9e44fed7a7321a581f77de51c3f03c2fd57a009c410",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH136001R2131",
+   "path": "ABB.1SBH136001R2131.json",
+   "sha": "2cc96b1f4c6128a5df4a9b8cbc30cefbf6b7fe345f47fefd7793e5376278f6df",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH136001R2140",
+   "path": "ABB.1SBH136001R2140.json",
+   "sha": "2b7e7907b4b2503a34e9b37a4ccffc94699a5d691718b52b2caaa68bffbb8fac",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH136005R2022",
+   "path": "ABB.1SBH136005R2022.json",
+   "sha": "7ca8a9d5c749a2289f084c0b9585af984e5a32203eaaafaf7b3dfa1b055d523e",
+   "n_cp": 20,
+   "n_verts": 8166,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH137001R1122",
+   "path": "ABB.1SBH137001R1122.json",
+   "sha": "880a9ec64e88cf2926df0d04baeb737e54e7ccb12e4d3f4d9171615f9b543b70",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SBH137001R1131",
+   "path": "ABB.1SBH137001R1131.json",
+   "sha": "d1aafeb3afaba544e51dc07c24b73714e018ce94d291a1c88174f0383985d829",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH137001R1140",
+   "path": "ABB.1SBH137001R1140.json",
+   "sha": "f530af3b21dde5c9d6d76279d389703541fddb831c6d37529d9e6e572f2a3529",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH137001R1322",
+   "path": "ABB.1SBH137001R1322.json",
+   "sha": "4870379e16892f123737423a651884ab174355d55e883bf1931083a53f47087d",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH137001R1331",
+   "path": "ABB.1SBH137001R1331.json",
+   "sha": "62c5fc56df2ec9a3e1f34c2fa5d08f9dd5aca7f01929425758a20955a44b79df",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBH137001R1340",
+   "path": "ABB.1SBH137001R1340.json",
+   "sha": "4a63c2ea96d3bf5b8c7d46ab64e4086e664352fbeb53254709c19a1b13cc471e",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL136001R2001",
+   "path": "ABB.1SBL136001R2001.json",
+   "sha": "6da1be08bb6c84fa84c09a913559d5eeb23783b62fe8bfa9dc6f9dddf4000e79",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SBL136001R2010",
+   "path": "ABB.1SBL136001R2010.json",
+   "sha": "55459a420bf0917f1343c1a770c4c4b7a1f18ff76612acf720c391171e99dc24",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL136001R2101",
+   "path": "ABB.1SBL136001R2101.json",
+   "sha": "f281b80213de7f932c4d24f3d0e6343d63d329046962061a146da962a83a579c",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL136001R2110",
+   "path": "ABB.1SBL136001R2110.json",
+   "sha": "d8e15e08c387cc2bd6ed764809e4f65c1979d44683d992960376fc01ceaccfbd",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL136005R2001",
+   "path": "ABB.1SBL136005R2001.json",
+   "sha": "5ac66f0f71b4f9b43344fe9b15e69c1687b5ebefba4034ddccc86b0e7c0cf906",
+   "n_cp": 20,
+   "n_verts": 8166,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SBL136005R2110",
+   "path": "ABB.1SBL136005R2110.json",
+   "sha": "933d78a6691c1476444bfa9a1b55c29daf41076c42d2fd25118eed275b0280f7",
+   "n_cp": 20,
+   "n_verts": 8166,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL136082R3022",
+   "path": "ABB.1SBL136082R3022.json",
+   "sha": "f530716bc6dad1d87bf06b6258f80716c44699cedf34a7cf69ac39264dac02bd",
+   "n_cp": 16,
+   "n_verts": 21309,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SBL137001R1101",
+   "path": "ABB.1SBL137001R1101.json",
+   "sha": "f6fed37ef34a49162dde642c99cb4010b2e251e04f5a6866024b8174071ae9b5",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137001R1110",
+   "path": "ABB.1SBL137001R1110.json",
+   "sha": "c5e3eb4b9a482c043e883cb105cf3ceb4b13f2b6551b4aeb522367cc328dddd8",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137001R1210",
+   "path": "ABB.1SBL137001R1210.json",
+   "sha": "16582790aa1dfb3afeb570351dcaaec2fad9b2f62cb8549a5c4faccef6ee031a",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137001R1301",
+   "path": "ABB.1SBL137001R1301.json",
+   "sha": "6971189aad448e99714db1ecaf75e21e6dc338ec279ba5c6e1e24e4c5653086d",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137001R1310",
+   "path": "ABB.1SBL137001R1310.json",
+   "sha": "43ebc792b4a46ad14867573109cf775721c50d00c8f897a5842aee8a83d3a5fe",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137001R1410",
+   "path": "ABB.1SBL137001R1410.json",
+   "sha": "cc22ca3ca83acb4f463de33b31159f20189e8e2dbba5d95575b15dad3f9bbbdb",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137082R1122",
+   "path": "ABB.1SBL137082R1122.json",
+   "sha": "380ffee8c7a711b39869eef52825086c10e45ec064d4b71cd8fe0af15c460a3a",
+   "n_cp": 16,
+   "n_verts": 14120,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SBL137201R1100",
+   "path": "ABB.1SBL137201R1100.json",
+   "sha": "fc5fd9d08fc5f101e52a9e155814bc4d5e7fcf8da00eda37e8ae8569a9e56c67",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137201R1300",
+   "path": "ABB.1SBL137201R1300.json",
+   "sha": "4015ffb9397f7ba2b50a8964d81aa8a96a09c12a60a644f01e090c69d4693527",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL137501R1300",
+   "path": "ABB.1SBL137501R1300.json",
+   "sha": "91be4d49aa82c2549d42c416b24fb140d4e14d58f7fb6446a15e1b7adc271c8b",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL156001R2101",
+   "path": "ABB.1SBL156001R2101.json",
+   "sha": "7a2bc1240f014cee50e60cdd8a05757536b2e7716f5adfaf67b17b5b5ab5675a",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL156001R2110",
+   "path": "ABB.1SBL156001R2110.json",
+   "sha": "eb4dbba79470c44061feea401a5a0eb421c15d69c5a5e6500008df0fb3664c42",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SBL157001R1101",
+   "path": "ABB.1SBL157001R1101.json",
+   "sha": "9c2e272c68523b8786ae66699c86f58157148cbbc8b8ba73960f998ef14ba3c5",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SBL157001R1110",
+   "path": "ABB.1SBL157001R1110.json",
+   "sha": "2043c987eaee9d1de727af913e550a4d89d520681271c874913713105594975a",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL157001R1301",
+   "path": "ABB.1SBL157001R1301.json",
+   "sha": "53722a07c6a51678a5fbb0b50f77e986c653dd7661940516dbf4a98956aa76bf",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SBL157001R1310",
+   "path": "ABB.1SBL157001R1310.json",
+   "sha": "8d1a4a657f056c1a0b13b948966f60bc08cb52c72339c12cf4ff93cc707c8e85",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL176001R2101",
+   "path": "ABB.1SBL176001R2101.json",
+   "sha": "4af4c050f5fbce07cb0ab69d9e6b3a807a604d53dbe6181c62e273da621ab10c",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL176001R2110",
+   "path": "ABB.1SBL176001R2110.json",
+   "sha": "87b4b6f9e02b40e41b3c5cdc2ac43df356e03b1ab0e69b98dc6aaea22603e90b",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SBL177001R1101",
+   "path": "ABB.1SBL177001R1101.json",
+   "sha": "721dd6e621c1208337b91689f2a25c5a7ea6d2a0c6c247705dcb1bbc25601980",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SBL177001R1110",
+   "path": "ABB.1SBL177001R1110.json",
+   "sha": "79cd1b1f4c93e35b41a0a44c67ec47a463df0a655280edb39e6f91a06fbd4e9f",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL177001R1301",
+   "path": "ABB.1SBL177001R1301.json",
+   "sha": "62a96ff4335e3b848a1bffc6b24edf781e31e94cbfa522f782dfaeb2babd62d9",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBL177001R1310",
+   "path": "ABB.1SBL177001R1310.json",
+   "sha": "9cfdfbd475c154164fd562a3cc2d3834518894584e97db3959e6a1999351000d",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SBL177201R1300",
+   "path": "ABB.1SBL177201R1300.json",
+   "sha": "365805b6904404a925bedb1a90b65d0a716d98d9d6d3af720244ee5f08c58502",
+   "n_cp": 10,
+   "n_verts": 5511,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SBL236005R2000",
+   "path": "ABB.1SBL236005R2000.json",
+   "sha": "31b9ddef62680e8a1ab61935bdf497893bcf73e743b1d87ec270566d6fa4779c",
+   "n_cp": 16,
+   "n_verts": 7302,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBN010134R1011",
+   "path": "ABB.1SBN010134R1011.json",
+   "sha": "c540063ac2621dffacc312d3c05845a4b6aafc3196bf65a2649a8e10ad53da6e",
+   "n_cp": 16,
+   "n_verts": 3292,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBN010146R1022",
+   "path": "ABB.1SBN010146R1022.json",
+   "sha": "14cea661247d4254e3ffa70b254245fd80c61688a32ce0c61af03b1b5c00a621",
+   "n_cp": 16,
+   "n_verts": 2724,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBN010146R1122",
+   "path": "ABB.1SBN010146R1122.json",
+   "sha": "f0977cca03021896f74b68d4207f0767385727e544c47c32997c1c7fc342fefb",
+   "n_cp": 16,
+   "n_verts": 2724,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBN010160R1001",
+   "path": "ABB.1SBN010160R1001.json",
+   "sha": "91ae89a098c28b55d345dfc91747d7aed7a1492a29c2636c75349c676834584d",
+   "n_cp": 4,
+   "n_verts": 1237,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SBN010160R1010",
+   "path": "ABB.1SBN010160R1010.json",
+   "sha": "b5e8b141de63984251370ef7fe264c1b7de611c880efbdaacb23e5373fe0ae58",
+   "n_cp": 4,
+   "n_verts": 1237,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1011",
+   "path": "ABB.1SFA619100R1011.json",
+   "sha": "94382282b9f1ff2009533e7998a9f8ba385b2855dfbcfb41ba1c84159e71129b",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1012",
+   "path": "ABB.1SFA619100R1012.json",
+   "sha": "98b136adc65846060c3b05f0f866d431f33eb449e7fda1f6ecfa3dc769033bf3",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1013",
+   "path": "ABB.1SFA619100R1013.json",
+   "sha": "8ad39158946481d846fe381fbcbd436df2fb452bf22c38819ad9eb2b55356a16",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1014",
+   "path": "ABB.1SFA619100R1014.json",
+   "sha": "403ed725cfafb706df73c404408790698d5b8192a9db49e3d829c09ff4bee040",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1015",
+   "path": "ABB.1SFA619100R1015.json",
+   "sha": "c9c85c52e39bd7ce52a2072b9776738b040bb1efd31d59444a3a9e87996cbad6",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1016",
+   "path": "ABB.1SFA619100R1016.json",
+   "sha": "e8e6d095037d9064e9fd8e332891b8a095720a7837ab940dbfbd2d261efd946a",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1021",
+   "path": "ABB.1SFA619100R1021.json",
+   "sha": "ef01e898759c569d684533d4d13c9175dc9676afad4a9cdb3fb11a195ae4f3f9",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1022",
+   "path": "ABB.1SFA619100R1022.json",
+   "sha": "a8261f7585bdd7d689ba00acf23f36fd217cdccd3d8122865e4ed7a6085cc5c5",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1026",
+   "path": "ABB.1SFA619100R1026.json",
+   "sha": "53a16d46156584ec969f01ee4b435cba334a928c7852dc95d7c855c83bf9202e",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1041",
+   "path": "ABB.1SFA619100R1041.json",
+   "sha": "f6a29dcafe6e602e7ad88438969bbeea25eddfc872abeb4a3b75876213b3bf7b",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1046",
+   "path": "ABB.1SFA619100R1046.json",
+   "sha": "bcaed9215f53c6d67e7726665812ec8597c6e83483346def56fadbb4f6bf2c7f",
+   "n_cp": 2,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1051",
+   "path": "ABB.1SFA619100R1051.json",
+   "sha": "051ee686006333f21a2205d3aa781367f2a741f6056243a629e8dd99063fb3bb",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1071",
+   "path": "ABB.1SFA619100R1071.json",
+   "sha": "5e64812015a62f0cd2e7e22a854b5c0609ad06825bcd4f215ad157842928ff27",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1072",
+   "path": "ABB.1SFA619100R1072.json",
+   "sha": "28680cd898358ef041fa43a22968e6d720a60d0f5c6e0366a8e9254d9dd29550",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1076",
+   "path": "ABB.1SFA619100R1076.json",
+   "sha": "b324fbf991491d51c6836ce0d1e75cf25450cc38e3f4d98563d40a3949974ac1",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1111",
+   "path": "ABB.1SFA619100R1111.json",
+   "sha": "d86ba2e49de761988e6cb071ac610b797ae6c2429cb63326ab6827ccae0c5226",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1112",
+   "path": "ABB.1SFA619100R1112.json",
+   "sha": "ad29acfed0c467324af769a55281048db50cb4544055120087f2dff06e87637b",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1113",
+   "path": "ABB.1SFA619100R1113.json",
+   "sha": "ee1b6650fb353e7c25216d105c0656573e40e7c61fb68b4329944e49348020b7",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1114",
+   "path": "ABB.1SFA619100R1114.json",
+   "sha": "e7b3d660db587057ed8efc1b70de71b6cbd562f555dc4732705c68c734c72a1b",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1118",
+   "path": "ABB.1SFA619100R1118.json",
+   "sha": "ce873e7595cfd0174fdd9b237c057ef1682481319c27f7271fbe826214af471a",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619100R1141",
+   "path": "ABB.1SFA619100R1141.json",
+   "sha": "fb238ccc38640e28c1866dadbffb398bf8eebb0dffb0888f497235b856046521",
+   "n_cp": 4,
+   "n_verts": 932,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619105R1021",
+   "path": "ABB.1SFA619105R1021.json",
+   "sha": "21e7504d04d12bb8450290f8d3acb1df1961e6edb60f5afce3996c00138a918c",
+   "n_cp": 4,
+   "n_verts": 1506,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619126R1071",
+   "path": "ABB.1SFA619126R1071.json",
+   "sha": "4131ab984979a6d3e976068b82ae05b1aa633a3b75349f386e1f9e195ad6c2a6",
+   "n_cp": 4,
+   "n_verts": 1780,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619200R1016",
+   "path": "ABB.1SFA619200R1016.json",
+   "sha": "96ec3c078729250f62fbb49d08e2c3bb2930ba615b12278a370b3cad69b5e4c6",
+   "n_cp": 2,
+   "n_verts": 1473,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619200R1026",
+   "path": "ABB.1SFA619200R1026.json",
+   "sha": "4f152a9cdb7faa4aa255da663e5bcd2c2bc77e3b3ddf512b2019e55c85d23103",
+   "n_cp": 4,
+   "n_verts": 1473,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619200R1046",
+   "path": "ABB.1SFA619200R1046.json",
+   "sha": "4fce057fc9730e5d88b0bb9356736ec4a5bd791dce5db84f636e66034aa8ee51",
+   "n_cp": 2,
+   "n_verts": 1473,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SFA619200R1076",
+   "path": "ABB.1SFA619200R1076.json",
+   "sha": "076973425306c8fc6d3a4695ca6e97e0f5273bc87a183f0067346af5f4fa516e",
+   "n_cp": 4,
+   "n_verts": 1473,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SFA619201R1016",
+   "path": "ABB.1SFA619201R1016.json",
+   "sha": "3bbbd6947572ac74e1761c3a7b68187415dbc6f836e73091d5b29e1d02ceacd7",
+   "n_cp": 2,
+   "n_verts": 1473,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619201R1026",
+   "path": "ABB.1SFA619201R1026.json",
+   "sha": "60d3c37c95455fc7c0807cac35e4897cb98795073363881c4e08870d7963ccf0",
+   "n_cp": 4,
+   "n_verts": 1473,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619201R1076",
+   "path": "ABB.1SFA619201R1076.json",
+   "sha": "7f22ca316d5118d82dae3d0df53e927568bbe368b0a0ccc59e3d705d6d7551d0",
+   "n_cp": 4,
+   "n_verts": 1473,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619204R3016",
+   "path": "ABB.1SFA619204R3016.json",
+   "sha": "f73827f92bc336a9f0383847c08f6ff8fd4aa96e4ece7db20ea78663c0559205",
+   "n_cp": 2,
+   "n_verts": 1466,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619204R3071",
+   "path": "ABB.1SFA619204R3071.json",
+   "sha": "9a68f8ad1a5e0440867a68ea286b75725129bda9cc4e80fc96c646f203bc5124",
+   "n_cp": 4,
+   "n_verts": 1466,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619210R1026",
+   "path": "ABB.1SFA619210R1026.json",
+   "sha": "581e4d33e52a80ffd618c43bca3952a43ddf4cd7f46c976f69fefecdfa56b545",
+   "n_cp": 4,
+   "n_verts": 1473,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619210R1076",
+   "path": "ABB.1SFA619210R1076.json",
+   "sha": "8de8027220242c7ed57e671e0a19ee509162c465c5cc553e7abb6b5b7f0acb6d",
+   "n_cp": 4,
+   "n_verts": 1473,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619211R1026",
+   "path": "ABB.1SFA619211R1026.json",
+   "sha": "568bbe1b85679b6c38d12faef5fa4f881bf64a9e7c688abdf9bc993ffa9d9bbf",
+   "n_cp": 4,
+   "n_verts": 1473,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619213R1026",
+   "path": "ABB.1SFA619213R1026.json",
+   "sha": "7b86970a1a89ba32e39ffe46d726ba8cef369297825390e791887f77b7c82df8",
+   "n_cp": 4,
+   "n_verts": 1466,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619402R1001",
+   "path": "ABB.1SFA619402R1001.json",
+   "sha": "027f446329fffe2c18d8216eeeb84d64fc470861f3394963b511864a9946e9fd",
+   "n_cp": 2,
+   "n_verts": 1287,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619402R1002",
+   "path": "ABB.1SFA619402R1002.json",
+   "sha": "b9cb672780b26d3de7a8ad0ec80dafd2ff79ddb5d8bffce404aa771199451b25",
+   "n_cp": 2,
+   "n_verts": 1287,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619402R1003",
+   "path": "ABB.1SFA619402R1003.json",
+   "sha": "88693b397951e2575a20db5aac811dde7163c85cbcf7342beaa4da8c0cb78673",
+   "n_cp": 2,
+   "n_verts": 1287,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619402R1004",
+   "path": "ABB.1SFA619402R1004.json",
+   "sha": "808a88d4ce153afa937add8a607c9139f30e0bc00c5d5419f53f97ccde771e79",
+   "n_cp": 2,
+   "n_verts": 1287,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619402R1005",
+   "path": "ABB.1SFA619402R1005.json",
+   "sha": "ea564fae104cdc0f1cfdddebfd0da82e2ef45d775487c9f0afa88010dbf2baa8",
+   "n_cp": 2,
+   "n_verts": 1287,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5011",
+   "path": "ABB.1SFA619403R5011.json",
+   "sha": "82cbe484cc0af20e3ea074850435f361b3f3d0f51d244a3d0a82222adb1d8368",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5012",
+   "path": "ABB.1SFA619403R5012.json",
+   "sha": "fe0a047a4971ba8b842abb8bcf906c5d9ec7454da6284ee7baa9f216b0f6e555",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5013",
+   "path": "ABB.1SFA619403R5013.json",
+   "sha": "63c144fb452b6fe7312aefde929bd831f5c12ef221760e15529be02b7a8a3d1f",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5021",
+   "path": "ABB.1SFA619403R5021.json",
+   "sha": "d6abb7b6152fa17f590df29cb2adbf6b172e62e647427ab5378a599f2b0bec99",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5022",
+   "path": "ABB.1SFA619403R5022.json",
+   "sha": "a96b269b312693394614e42fcfb02b9a5d099e6be1acdc579f9ed91799c48032",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5023",
+   "path": "ABB.1SFA619403R5023.json",
+   "sha": "3560c43357e2cc51ec3c562d20ebf93e148840fba2f1567f22244fac289016c2",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5024",
+   "path": "ABB.1SFA619403R5024.json",
+   "sha": "4b35eeab693488ae713ed79b378b6feca57ef20bb9c4bb7efd913015d72e5aa0",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5028",
+   "path": "ABB.1SFA619403R5028.json",
+   "sha": "e78a2f1a886ca03d0872d57fc3839f004bc52faafcde1cf41f5cff069d65d85a",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5131",
+   "path": "ABB.1SFA619403R5131.json",
+   "sha": "9099deeae457baed66f2b1cb62bea58c7f9835a9233eaa51b562b078ae78335b",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5132",
+   "path": "ABB.1SFA619403R5132.json",
+   "sha": "315da4bbd1f48706ba57055c94aa5f163c4f5c0da6e2b4602bbaf6985fb186b0",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5133",
+   "path": "ABB.1SFA619403R5133.json",
+   "sha": "7978f953544fadb61b23e3fa199115ab3ede3a6988bddeee2304707ad8fba872",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5151",
+   "path": "ABB.1SFA619403R5151.json",
+   "sha": "08adab0ae9880374169ab143400cd8123ecf2690fe2c95ce00a2b24fc642b23e",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5201",
+   "path": "ABB.1SFA619403R5201.json",
+   "sha": "c976241b424ad5bb520fbf3131225baff45d3a6f8061188a82b4b2dd789123af",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5202",
+   "path": "ABB.1SFA619403R5202.json",
+   "sha": "e557fd641205831b36716c769b9f317f3416eb045d42c1900c79fedf05d0a23c",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5231",
+   "path": "ABB.1SFA619403R5231.json",
+   "sha": "e496bbdf317fcaaada3c2dade5ca0a63b6ebbf3d966e553eabff50e0171c2d1b",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5232",
+   "path": "ABB.1SFA619403R5232.json",
+   "sha": "dd605b559655ef32ddde5465c4afa1df2a41ccef73c83c81de554733e4db63cb",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5233",
+   "path": "ABB.1SFA619403R5233.json",
+   "sha": "d14bba9859d8504a866d8e9865b2af42e5d130f5720f4f5b3266e9a1ac4bfd2a",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5234",
+   "path": "ABB.1SFA619403R5234.json",
+   "sha": "672f0273eefc9b01be03b0089f78766a892455f3159c8b76e72d79cfea300f8e",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619403R5238",
+   "path": "ABB.1SFA619403R5238.json",
+   "sha": "a2a01e2b21f4374fc65962638df45eefe70bc08e8c1e236498f595c1bfa67caf",
+   "n_cp": 2,
+   "n_verts": 923,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619500R1021",
+   "path": "ABB.1SFA619500R1021.json",
+   "sha": "284ba887a3c7b33dc64f3ecc22ce45a7a94c105a343cf29067a1211ebd3eccc3",
+   "n_cp": 4,
+   "n_verts": 1133,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619500R1041",
+   "path": "ABB.1SFA619500R1041.json",
+   "sha": "c0a7fa9399b8714d023d0629a81f540ca1ca8f0117c22f80a475e0201ade5aa0",
+   "n_cp": 2,
+   "n_verts": 1133,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619500R1051",
+   "path": "ABB.1SFA619500R1051.json",
+   "sha": "2fa653817f69fb71324908a7b1333d4cc1eda81974ae8852c427f3a90db16d35",
+   "n_cp": 4,
+   "n_verts": 1133,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619500R1071",
+   "path": "ABB.1SFA619500R1071.json",
+   "sha": "1d6a6591821db3240cbab70e1336174da62b31d9e0287b9893d2a0031b6af9d2",
+   "n_cp": 4,
+   "n_verts": 1133,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619550R1011",
+   "path": "ABB.1SFA619550R1011.json",
+   "sha": "2c2c90da5d64dea08776e6a5e1d339cb5af4e991df182751528831b25915345c",
+   "n_cp": 2,
+   "n_verts": 1352,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619550R1021",
+   "path": "ABB.1SFA619550R1021.json",
+   "sha": "311e0fea669fe2af5f34fdbe1ed33ef1c33fecaa9829590bd5537506fd6eb58d",
+   "n_cp": 4,
+   "n_verts": 1352,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619550R1041",
+   "path": "ABB.1SFA619550R1041.json",
+   "sha": "d35e721affa5850bb007fb026f64f10a8b6bbc0c28f63ebfd6cfc4b4ae5e15a3",
+   "n_cp": 2,
+   "n_verts": 1352,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619550R1051",
+   "path": "ABB.1SFA619550R1051.json",
+   "sha": "7ee749ec0ba3e24e393c5bc7dfaca8511d56945246205ca1c9df8c7afd086ef8",
+   "n_cp": 4,
+   "n_verts": 1352,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619550R1071",
+   "path": "ABB.1SFA619550R1071.json",
+   "sha": "abcf88481170b7d836c3790a8ebe3aa954fa8109e2e99ed022aa3722baf987a0",
+   "n_cp": 4,
+   "n_verts": 1352,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.1SFA619600R6002",
+   "path": "ABB.1SFA619600R6002.json",
+   "sha": "874aa1b7bfe6fe3216d41a5aa7061fef15b8205dd0c45ff1fa9e1df8fc0637e1",
+   "n_cp": 2,
+   "n_verts": 933,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619600R6101",
+   "path": "ABB.1SFA619600R6101.json",
+   "sha": "bde4d7fbe206151ccebcd20deae7526c636344d3df217e1efe09db4724882394",
+   "n_cp": 2,
+   "n_verts": 933,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.1SFA619600R6206",
+   "path": "ABB.1SFA619600R6206.json",
+   "sha": "848d8e58ef30b1b50d423c1e58c79d23082d806e49daac70f898791bfd22b6bf",
+   "n_cp": 2,
+   "n_verts": 933,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCF201112R0001",
+   "path": "ABB.2CCF201112R0001.json",
+   "sha": "305f43894b7f53ea5d44b09114091d0ac1377df100382d6715345c9aafcac283",
+   "n_cp": 4,
+   "n_verts": 352,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.2CCF201113R0001",
+   "path": "ABB.2CCF201113R0001.json",
+   "sha": "ad62fb50fd959b4323059ab304f9adb5197d7f2e444a7bbd6feb404a4827eac2",
+   "n_cp": 4,
+   "n_verts": 390,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCF201114R0001",
+   "path": "ABB.2CCF201114R0001.json",
+   "sha": "f3b2388b723f8883d84a7c9798a65e21ac8708cb509e9ddfd309319a3d45b350",
+   "n_cp": 4,
+   "n_verts": 352,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.2CCF201115R0001",
+   "path": "ABB.2CCF201115R0001.json",
+   "sha": "ddb22a75d47379d01faf6b103b8e65cf09100d7ada7f482cf2a46104d0c0bf86",
+   "n_cp": 4,
+   "n_verts": 390,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCF201162R0001",
+   "path": "ABB.2CCF201162R0001.json",
+   "sha": "165983d343287432188bd4dc1000eb9f86da5509ed85862bf2bca6d23ab9db27",
+   "n_cp": 4,
+   "n_verts": 352,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCF201163R0001",
+   "path": "ABB.2CCF201163R0001.json",
+   "sha": "7c714ada73b13ce2d0a98d2c9b6107fe95095bd7920fe35466b96db10291a88e",
+   "n_cp": 4,
+   "n_verts": 390,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCF201164R0001",
+   "path": "ABB.2CCF201164R0001.json",
+   "sha": "6911ef27892aff329ca969b6452fc7979b8da4c0fcceafe04a29787ca256e00c",
+   "n_cp": 4,
+   "n_verts": 352,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCF201165R0001",
+   "path": "ABB.2CCF201165R0001.json",
+   "sha": "fd7280d2836dea5e2e47177446aefd51850a3a1a5f6c01f24ab3ad1ddf38c115",
+   "n_cp": 4,
+   "n_verts": 390,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCF201212R0001",
+   "path": "ABB.2CCF201212R0001.json",
+   "sha": "560a0c462f2e84a32ac81baa12db489ef81ff135a8d28fececa3392f046d9496",
+   "n_cp": 2,
+   "n_verts": 352,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.2CCF201213R0001",
+   "path": "ABB.2CCF201213R0001.json",
+   "sha": "b87e70ac04392273c5d5167b4bc4b57718ffb05734000b8c989cf03ac1cc121c",
+   "n_cp": 2,
+   "n_verts": 390,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0011",
+   "path": "ABB.2CCS500900R0011.json",
+   "sha": "5a94003c23586b70b3b1d78341e3439f2e4dd5f8a936b1809ff5a034d54ee058",
+   "n_cp": 2,
+   "n_verts": 2072,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0021",
+   "path": "ABB.2CCS500900R0021.json",
+   "sha": "bba146f5e790d45dd8430c46bee5d67e698c750226d7dab7e5cfbc9c05fa20d2",
+   "n_cp": 2,
+   "n_verts": 1015,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0081",
+   "path": "ABB.2CCS500900R0081.json",
+   "sha": "e4379de21d0a8f8d4f9d16c1612668c0af9706fc4141148b92f161958a1cb69e",
+   "n_cp": 4,
+   "n_verts": 352,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0101",
+   "path": "ABB.2CCS500900R0101.json",
+   "sha": "6247e3e7dbb657aa59d9293bf6883f0391f66108476f592afa11d2321ddb9611",
+   "n_cp": 4,
+   "n_verts": 352,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0141",
+   "path": "ABB.2CCS500900R0141.json",
+   "sha": "72dec012739e790ee83f044159bdb380ccfdb4a464b6417d419ee0e90feadc22",
+   "n_cp": 2,
+   "n_verts": 352,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0214",
+   "path": "ABB.2CCS500900R0214.json",
+   "sha": "5bf0e6fe02eec467a9168f05fca4a3d5c7856d0e520ecd4f015494c1949e0c52",
+   "n_cp": 4,
+   "n_verts": 390,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0215",
+   "path": "ABB.2CCS500900R0215.json",
+   "sha": "74eaf62779e5c8cbb2f3fb8affecd0d7e77933e1bddc229b5bc1351cdbac7ee6",
+   "n_cp": 4,
+   "n_verts": 390,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.2CCS500900R0216",
+   "path": "ABB.2CCS500900R0216.json",
+   "sha": "cda018c3215ae5785dad38d862372a4e023cc287f844515db243e93b94ab5dbb",
+   "n_cp": 2,
+   "n_verts": 390,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.2CDS200912R0001",
+   "path": "ABB.2CDS200912R0001.json",
+   "sha": "5113ad14f62441ed4afb593a18416c3e7da8fc125489dd19e45c243733aba8c1",
+   "n_cp": 3,
+   "n_verts": 2289,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.2CDS200922R0001",
+   "path": "ABB.2CDS200922R0001.json",
+   "sha": "e928438aba2420f184ee7ee931d8774956015df2fde8e40360c0f2fee4240d1a",
+   "n_cp": 3,
+   "n_verts": 2681,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CDS200936R0001",
+   "path": "ABB.2CDS200936R0001.json",
+   "sha": "beaa12afca3826794acb55e54ae49536aec1ef7c4b66b21832def0040361e1e5",
+   "n_cp": 4,
+   "n_verts": 2596,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CDS200956R0001",
+   "path": "ABB.2CDS200956R0001.json",
+   "sha": "0df9198ce6485c09c16201ae5a6715ca201f84d8a347ed3ace17f1326fc3291d",
+   "n_cp": 4,
+   "n_verts": 27050,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CSF204568R1400",
+   "path": "ABB.2CSF204568R1400.json",
+   "sha": "a1efb2c8abbba4cbfb4df96a5221b1b4ce612fe69a019bc79a81e8e51ec925b2",
+   "n_cp": 8,
+   "n_verts": 44407,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CSR255180R1065",
+   "path": "ABB.2CSR255180R1065.json",
+   "sha": "7eb456cbe4db8f69bc0122ee7b7d5b681506c89649472b56ccabee521e4dedfe",
+   "n_cp": 4,
+   "n_verts": 89888,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CSR255180R1105",
+   "path": "ABB.2CSR255180R1105.json",
+   "sha": "6ee42d5fec0aebd1e3ede2bade99b8c2eb1d12d14b77a4985815a821a76d874a",
+   "n_cp": 4,
+   "n_verts": 89888,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.2CSR255180R1164",
+   "path": "ABB.2CSR255180R1164.json",
+   "sha": "234f4fe90a2b000835e05e96929afc6aeff7ccb498166c728e7440d506779583",
+   "n_cp": 4,
+   "n_verts": 89888,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CSR255180R1165",
+   "path": "ABB.2CSR255180R1165.json",
+   "sha": "4fbd212297cac3efe31bcf1b8237abace999700d32038444f56a028681ce6ceb",
+   "n_cp": 4,
+   "n_verts": 89888,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CSR256140R1164",
+   "path": "ABB.2CSR256140R1164.json",
+   "sha": "64141a3584794f5fcc957c713f07e76e3a621c265006dfbc89b0ed2f267ed1f1",
+   "n_cp": 8,
+   "n_verts": 31410,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.2CSR275180R1165",
+   "path": "ABB.2CSR275180R1165.json",
+   "sha": "30a0f8514ddf946987608fa161e8b00ecfce2c8f6c9e3982d3dc7613d7d32ff6",
+   "n_cp": 4,
+   "n_verts": 89888,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.3ABD00039811-D",
+   "path": "ABB.3ABD00039811-D.json",
+   "sha": "85dce67e8b39d151872db17c34be7ca3ebb3be5acdff5cf2cbc58db214b6d110",
+   "n_cp": 42,
+   "n_verts": 471736,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-017A-4+B056",
+   "path": "ABB.ACH580-01-017A-4+B056.json",
+   "sha": "751709db4529693604841e435be29c99e0f8206380ce5cfe9c085adb298a2f90",
+   "n_cp": 45,
+   "n_verts": 26611,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-017A-4",
+   "path": "ABB.ACH580-01-017A-4.json",
+   "sha": "5fb0210db69c9b3accbe995e3c739bb0e45d712ad92fec8f30ecd109bea3e397",
+   "n_cp": 45,
+   "n_verts": 6542,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-025A-4+B056",
+   "path": "ABB.ACH580-01-025A-4+B056.json",
+   "sha": "f6451ab850217bcdc22d88a99a32086b1071378f3273731edfbfd6cbb6e0b3f3",
+   "n_cp": 45,
+   "n_verts": 26611,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-025A-4",
+   "path": "ABB.ACH580-01-025A-4.json",
+   "sha": "aa683515fe0d286c67a74ca2da2709ccba22ed4e2b59a2a5aa4ae4fbc53c2b27",
+   "n_cp": 45,
+   "n_verts": 6542,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-02A6-4+B056",
+   "path": "ABB.ACH580-01-02A6-4+B056.json",
+   "sha": "c30e224597a83edd49620ac4cc133428afb6fc5d17191a20f6fa2b973fc13ceb",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-02A6-4",
+   "path": "ABB.ACH580-01-02A6-4.json",
+   "sha": "f518424bb39db92b77118bed1a3a7713d40e9518c7f0052ec0aad1799fb4c3bb",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-032A-4+B056",
+   "path": "ABB.ACH580-01-032A-4+B056.json",
+   "sha": "474692d67247e9188d761f66835a40d909d26a14ca31d318f4aacd334f5311a7",
+   "n_cp": 45,
+   "n_verts": 33632,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-032A-4",
+   "path": "ABB.ACH580-01-032A-4.json",
+   "sha": "c0895d444c2d4a7b669255dbd741f88cb9a8ffbec56963a9ffc2cf80b6686d4f",
+   "n_cp": 45,
+   "n_verts": 7797,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-038A-4+B056",
+   "path": "ABB.ACH580-01-038A-4+B056.json",
+   "sha": "2424b6baaecb51a7589b541751855f5347c95b4e67b6066121181567e189126a",
+   "n_cp": 45,
+   "n_verts": 33632,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-038A-4",
+   "path": "ABB.ACH580-01-038A-4.json",
+   "sha": "a8a7ca4f8f9e7c60a9292bf287d4160afb17e770751d238c42e9ced806ff9380",
+   "n_cp": 45,
+   "n_verts": 7797,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-03A3-4+B056",
+   "path": "ABB.ACH580-01-03A3-4+B056.json",
+   "sha": "0fb6b7194d6bd4f52b330744949496fbe29881bd6898d994bb2d0bbeaf2f1e10",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-03A3-4",
+   "path": "ABB.ACH580-01-03A3-4.json",
+   "sha": "7bd2b6086ea7025e352ababa29512e16881a8d0be03c04e6a0c49ab1b96c1a8f",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-045A-4+B056",
+   "path": "ABB.ACH580-01-045A-4+B056.json",
+   "sha": "f6ab359375ed5963afbbcab1c5e85dc1575512555f771e20a33d805be392213f",
+   "n_cp": 45,
+   "n_verts": 33632,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-045A-4",
+   "path": "ABB.ACH580-01-045A-4.json",
+   "sha": "3b4c24720ba633edbf15eccfd16b31b71bb865e10b59c1e1a1d0802356fcc735",
+   "n_cp": 45,
+   "n_verts": 7797,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-04A0-4+B056",
+   "path": "ABB.ACH580-01-04A0-4+B056.json",
+   "sha": "c68dd278730bb1401ad1b40e1ef36ce98acb9763faf44d0370fff9fc1741956d",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-04A0-4",
+   "path": "ABB.ACH580-01-04A0-4.json",
+   "sha": "cb22653107580061924304e6cc305c89e70f2a1898c36c99d6b80ad35e2a7568",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-05A6-4+B056",
+   "path": "ABB.ACH580-01-05A6-4+B056.json",
+   "sha": "badaecf64c5cb789adc7d8c03e8fea769be36dc44be6134db748b9bee9e01cef",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-05A6-4",
+   "path": "ABB.ACH580-01-05A6-4.json",
+   "sha": "2c8461363ea7d66e06a247cc789b7f60d02abc59f81dc743f0985bf32476dcd1",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-062A-4+B056",
+   "path": "ABB.ACH580-01-062A-4+B056.json",
+   "sha": "a9f71ff374949e42cc3e2a9537523b7d7c872ba5ce330854aa0d81d46fc6376b",
+   "n_cp": 45,
+   "n_verts": 64777,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-062A-4",
+   "path": "ABB.ACH580-01-062A-4.json",
+   "sha": "51b092b28362702e4cdb728ea2e099b90add4c14761fe94a5786914a2f7fe81b",
+   "n_cp": 45,
+   "n_verts": 78364,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-073A-4+B056",
+   "path": "ABB.ACH580-01-073A-4+B056.json",
+   "sha": "815c3fab7b805796d61fc9c60d53aee90a90205e507433aac911c000dcaec640",
+   "n_cp": 45,
+   "n_verts": 64777,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-073A-4",
+   "path": "ABB.ACH580-01-073A-4.json",
+   "sha": "60b967e3bd6415136a76ced04278126858df0cb62d799c49a81e79c90e4681c9",
+   "n_cp": 45,
+   "n_verts": 78364,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-07A2-4+B056",
+   "path": "ABB.ACH580-01-07A2-4+B056.json",
+   "sha": "2ee4f6e2e50fec5d1cef91cc856a2a2396eff718c58ee96b3ea62782516ee266",
+   "n_cp": 45,
+   "n_verts": 28538,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-07A2-4",
+   "path": "ABB.ACH580-01-07A2-4.json",
+   "sha": "4b32839d10e8f248ec653f02de5c68e48bbbb9bd947d1c441720eecc9e46b4fa",
+   "n_cp": 45,
+   "n_verts": 7268,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-088A-4+B056",
+   "path": "ABB.ACH580-01-088A-4+B056.json",
+   "sha": "4e8218749327fda57e7edbdd309c7fc84b0e82647b5c087c6a27f2b8dcbe02dd",
+   "n_cp": 45,
+   "n_verts": 56397,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-088A-4",
+   "path": "ABB.ACH580-01-088A-4.json",
+   "sha": "a8e8e6a4f9be032174ded8e5e2dad19451e6d0ed2dc91ffc88a50dc81a3ab460",
+   "n_cp": 45,
+   "n_verts": 136397,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-09A4-4+B056",
+   "path": "ABB.ACH580-01-09A4-4+B056.json",
+   "sha": "25481ae20f2963ff90685e3ecc728d5c942d695f6dbc78a4109c4a2579d41657",
+   "n_cp": 45,
+   "n_verts": 28538,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-09A4-4",
+   "path": "ABB.ACH580-01-09A4-4.json",
+   "sha": "f9182dce6b6548c688ba5cd5a7625615932ce291e4c59946cefdb40c7e6c551f",
+   "n_cp": 45,
+   "n_verts": 7268,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-106A-4+B056",
+   "path": "ABB.ACH580-01-106A-4+B056.json",
+   "sha": "22b6fa88003d4562b7cbea9701012c2eb6fc628584f793499ef10ed7b80c62b8",
+   "n_cp": 45,
+   "n_verts": 56397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-106A-4",
+   "path": "ABB.ACH580-01-106A-4.json",
+   "sha": "1ea9ea97f5c5559ab8af4c374d7ca29ce7c816d3ece79dcd993f4ca44c91003a",
+   "n_cp": 45,
+   "n_verts": 136397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-12A6-4+B056",
+   "path": "ABB.ACH580-01-12A6-4+B056.json",
+   "sha": "15918f816ff8f079e66ea4dce1c326b3de2032c0a406961c36fc6596011ea641",
+   "n_cp": 45,
+   "n_verts": 28538,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-12A6-4",
+   "path": "ABB.ACH580-01-12A6-4.json",
+   "sha": "1632cd331a4fa5f4c53c5fd9a42f8e4093baf80d31c284ba0806d18a28cba136",
+   "n_cp": 45,
+   "n_verts": 7268,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-145A-4+B056",
+   "path": "ABB.ACH580-01-145A-4+B056.json",
+   "sha": "0debc32a34cbdee5c9b366434a28317a4241d39026075b09943fb5af71e26f71",
+   "n_cp": 47,
+   "n_verts": 49759,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-145A-4",
+   "path": "ABB.ACH580-01-145A-4.json",
+   "sha": "6618fc2ad67b549f38026cdb6466e7b7acd15804cb682d2d965b39e06e5f5632",
+   "n_cp": 47,
+   "n_verts": 8497,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-169A-4+B056",
+   "path": "ABB.ACH580-01-169A-4+B056.json",
+   "sha": "fb9fa1822777a8a51603dcbcbbe3e63e34055f8d532139e7d7f167403e088a72",
+   "n_cp": 47,
+   "n_verts": 17172,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACH580-01-169A-4",
+   "path": "ABB.ACH580-01-169A-4.json",
+   "sha": "6dce42a8353e0f2457919f48259e0dc583387cf4ea48e9fcf7e6d3d5aac85967",
+   "n_cp": 47,
+   "n_verts": 10673,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-206A-4+B056",
+   "path": "ABB.ACH580-01-206A-4+B056.json",
+   "sha": "9f7ee3276bea024a46c2411c85f9c3d26ec7030a4e85f81b21915ae97accde1a",
+   "n_cp": 47,
+   "n_verts": 17172,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-206A-4",
+   "path": "ABB.ACH580-01-206A-4.json",
+   "sha": "6673f856dd9c7f00b5f409acd231ba5dca3e9c3764a8d958fb78fb08ca17800b",
+   "n_cp": 47,
+   "n_verts": 10673,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-246A-4+B056",
+   "path": "ABB.ACH580-01-246A-4+B056.json",
+   "sha": "36985ef318f3ead4f5f083463fb6a3c896016594ff913a92fe5d79aaca081871",
+   "n_cp": 47,
+   "n_verts": 56581,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-246A-4",
+   "path": "ABB.ACH580-01-246A-4.json",
+   "sha": "60e68f74206eb7ee391c093b613b9aa35355945678213dd8d904bc8134c40c55",
+   "n_cp": 47,
+   "n_verts": 59024,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-293A-4+B056",
+   "path": "ABB.ACH580-01-293A-4+B056.json",
+   "sha": "ec80b7c9ead8a3da7f8ef9bc08218dfb04fd0c094b717480abdb5e49d8be6609",
+   "n_cp": 47,
+   "n_verts": 56581,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-293A-4",
+   "path": "ABB.ACH580-01-293A-4.json",
+   "sha": "d848340bc874b9baf9db2c594ea6715a35fa5c0f7befbb73c1a83985820e7059",
+   "n_cp": 47,
+   "n_verts": 59024,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACH580-01-363A-4+B056",
+   "path": "ABB.ACH580-01-363A-4+B056.json",
+   "sha": "02727ce24b049de8c29eb78036b623f78c9d9ac26b3ee7d5082fd3f928dad443",
+   "n_cp": 47,
+   "n_verts": 11740,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-363A-4",
+   "path": "ABB.ACH580-01-363A-4.json",
+   "sha": "6ba0624a12df78ac4986b6de63d2338b147ce06bbcba3d4173b4942134b2799f",
+   "n_cp": 47,
+   "n_verts": 54446,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-430A-4+B056",
+   "path": "ABB.ACH580-01-430A-4+B056.json",
+   "sha": "7caabae04b6209154054968cdc5856b5bd57de11a5dd339629bc53632dad93e5",
+   "n_cp": 47,
+   "n_verts": 11740,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACH580-01-430A-4",
+   "path": "ABB.ACH580-01-430A-4.json",
+   "sha": "7a9f84bad97ac3d8c9077cd6adc49a3be4bb6e44d0d725163ab49268593b29e3",
+   "n_cp": 47,
+   "n_verts": 54446,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-017A-4+B056",
+   "path": "ABB.ACQ580-01-017A-4+B056.json",
+   "sha": "00a93a1734282c13fcef9bea512655a875e23ce7f085b11eafa485306be787a7",
+   "n_cp": 45,
+   "n_verts": 26611,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-017A-4",
+   "path": "ABB.ACQ580-01-017A-4.json",
+   "sha": "77ceaa7b9d2e6377785c26612031462fc740cb1ef4c356a40555836072538e9d",
+   "n_cp": 45,
+   "n_verts": 6542,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-025A-4+B056",
+   "path": "ABB.ACQ580-01-025A-4+B056.json",
+   "sha": "2005429f407d83e567ed1b0df56c4162a9a123ca2945d13a3e6ef248348f8e99",
+   "n_cp": 45,
+   "n_verts": 26611,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-025A-4",
+   "path": "ABB.ACQ580-01-025A-4.json",
+   "sha": "a1ebd72beafe0fb4cb9ef81e767055bfef7ec7861c2d701c478480d54bff071e",
+   "n_cp": 45,
+   "n_verts": 6542,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-02A6-4+B056",
+   "path": "ABB.ACQ580-01-02A6-4+B056.json",
+   "sha": "c66c870135c99535a1272b694862f73ddb3ba3b7be8f15f9a34455fd3787a7cf",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-02A6-4",
+   "path": "ABB.ACQ580-01-02A6-4.json",
+   "sha": "517818ad701e23615bcc59d3e6b922cb5325bdd60a1f20eca2977e89ed495c22",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-032A-4+B056",
+   "path": "ABB.ACQ580-01-032A-4+B056.json",
+   "sha": "5b9a8de4f48abb21c904d09b5bf3a244498a3a9d012032ea807cf3361f4b25d4",
+   "n_cp": 45,
+   "n_verts": 33632,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-032A-4",
+   "path": "ABB.ACQ580-01-032A-4.json",
+   "sha": "28e7f1b61c4333e915445410c128e12b61b9a7ad860ea4ac8ca96ecd7d7f5650",
+   "n_cp": 45,
+   "n_verts": 7797,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-038A-4+B056",
+   "path": "ABB.ACQ580-01-038A-4+B056.json",
+   "sha": "fe4221ee56c98edb5b62581437038e16257ab01508b07df36e68cc217a927ded",
+   "n_cp": 45,
+   "n_verts": 33632,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-038A-4",
+   "path": "ABB.ACQ580-01-038A-4.json",
+   "sha": "703c92f3a259abc9520bab96a17ec1da98409e0a5788b9c46d649a657d5b693e",
+   "n_cp": 45,
+   "n_verts": 7797,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-03A3-4+B056",
+   "path": "ABB.ACQ580-01-03A3-4+B056.json",
+   "sha": "929cec83344afae5c8ce945c58033b126de8d3872b6f9a53816c2c938b669e73",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-03A3-4",
+   "path": "ABB.ACQ580-01-03A3-4.json",
+   "sha": "5ec894c550acdb7305119e5d630acad53829296363ab14e4260a13f1fa14731b",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-045A-4+B056",
+   "path": "ABB.ACQ580-01-045A-4+B056.json",
+   "sha": "a05331237423a0c175032ad9cc9084c1fe9cef9e66de742f806c501c58a03831",
+   "n_cp": 45,
+   "n_verts": 33632,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-045A-4",
+   "path": "ABB.ACQ580-01-045A-4.json",
+   "sha": "03b2db64ef5514db5429fc9eab74b8c1f22b57e6253b179ad0ef04d419d27a05",
+   "n_cp": 45,
+   "n_verts": 7797,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-04A0-4+B056",
+   "path": "ABB.ACQ580-01-04A0-4+B056.json",
+   "sha": "73f6baf8e66fcf8c8b5b3ede90680c4ef5ff9fa7f31d025565316b14d63c2d91",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-04A0-4",
+   "path": "ABB.ACQ580-01-04A0-4.json",
+   "sha": "fd70ff8f48210410f8b3574fc46ffef8a81bbcf3a7927f1eaafbef2db9bf987f",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-05A6-4+B056",
+   "path": "ABB.ACQ580-01-05A6-4+B056.json",
+   "sha": "ef927af93a0dbbb8409530d04b83362022a4b4df110fa3a416a6b4fdf1de4999",
+   "n_cp": 45,
+   "n_verts": 28114,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-05A6-4",
+   "path": "ABB.ACQ580-01-05A6-4.json",
+   "sha": "ddccaa42f0422d786dc985e962d56aa4d1b29885d31c2d98cca2c1f9bc2a822c",
+   "n_cp": 45,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-062A-4+B056",
+   "path": "ABB.ACQ580-01-062A-4+B056.json",
+   "sha": "cb2f73ebeda4126c3c5486c2cbbeb5aff474e6cd25a3bf096b14835dc1ad8659",
+   "n_cp": 45,
+   "n_verts": 64777,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-062A-4",
+   "path": "ABB.ACQ580-01-062A-4.json",
+   "sha": "c25e7ba2c31bbf9e09326711dcaf1f35e675a33896df9e743138a8da34954884",
+   "n_cp": 45,
+   "n_verts": 78364,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-073A-4+B056",
+   "path": "ABB.ACQ580-01-073A-4+B056.json",
+   "sha": "a336f2f1836313aec7090c61d5116b932c720940b32afb023800e1257d6aa9d7",
+   "n_cp": 45,
+   "n_verts": 64777,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-073A-4",
+   "path": "ABB.ACQ580-01-073A-4.json",
+   "sha": "2968b883bbfd256aab1215400d5059fae7464ae61976058d35ecfe0a287e49c0",
+   "n_cp": 45,
+   "n_verts": 78364,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-07A2-4+B056",
+   "path": "ABB.ACQ580-01-07A2-4+B056.json",
+   "sha": "7fe7a66556b595bc591294f350ded3b5245c9f2e5d6976e5e952e24f96cef6db",
+   "n_cp": 45,
+   "n_verts": 28538,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-07A2-4",
+   "path": "ABB.ACQ580-01-07A2-4.json",
+   "sha": "30c026b5553e50f3febfc0b4fc3c0668d94ee0b97c84a2ee73a8885609349ab8",
+   "n_cp": 45,
+   "n_verts": 7268,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-088A-4+B056",
+   "path": "ABB.ACQ580-01-088A-4+B056.json",
+   "sha": "c9b17e40a3407daf1879908ec8191ea11a6dc5efe929e9725f63c9994ac365aa",
+   "n_cp": 45,
+   "n_verts": 56397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-088A-4",
+   "path": "ABB.ACQ580-01-088A-4.json",
+   "sha": "95ac0342c7150d4c30b8b049a9eafc873462628098abe12dfdb50a358a3c7861",
+   "n_cp": 45,
+   "n_verts": 136397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-09A4-4+B056",
+   "path": "ABB.ACQ580-01-09A4-4+B056.json",
+   "sha": "8656887e85786a8561d89fccb1db7081fb00baf39caaa8971955cf0ef6d4cd73",
+   "n_cp": 45,
+   "n_verts": 28538,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-09A4-4",
+   "path": "ABB.ACQ580-01-09A4-4.json",
+   "sha": "b4c3acb322c9aba171250829f229bc04de77b979ca3d3612b960ab5fbe3302de",
+   "n_cp": 45,
+   "n_verts": 7268,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-106A-4+B056",
+   "path": "ABB.ACQ580-01-106A-4+B056.json",
+   "sha": "4c9d185e4c62b372af51df42386acba3d318d04978cf845643f7408021ddf3cc",
+   "n_cp": 45,
+   "n_verts": 56397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-106A-4",
+   "path": "ABB.ACQ580-01-106A-4.json",
+   "sha": "17aa03e7ab140fbb0a944aef675c6a3e9fdbc2e8d33ade6b0ac2f7fe51dc1aef",
+   "n_cp": 45,
+   "n_verts": 136397,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-12A6-4+B056",
+   "path": "ABB.ACQ580-01-12A6-4+B056.json",
+   "sha": "a8a70a4b5a9e7803818ab78106cc80879c3da72e16c523bf00b26bc618b67d85",
+   "n_cp": 45,
+   "n_verts": 28538,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-12A6-4",
+   "path": "ABB.ACQ580-01-12A6-4.json",
+   "sha": "e6e068985eb40f5c5a91c2589813f146da7a8b7123ebd6d08ae6c22e0ce20451",
+   "n_cp": 45,
+   "n_verts": 7268,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-145A-4+B056",
+   "path": "ABB.ACQ580-01-145A-4+B056.json",
+   "sha": "62fa2ab734332ee02a39f5335ffe0688621a4b843b04880f2d1e7f83172d9e05",
+   "n_cp": 47,
+   "n_verts": 49759,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-145A-4",
+   "path": "ABB.ACQ580-01-145A-4.json",
+   "sha": "d773a4d0f20f1405918e6d051391ed637af67245201199852918b53c4a26d7d1",
+   "n_cp": 47,
+   "n_verts": 8497,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-169A-4+B056",
+   "path": "ABB.ACQ580-01-169A-4+B056.json",
+   "sha": "8a83922fcf789d7e6cee07f3e2525f5f396ab6eddf6ebd21f1c036601712ba91",
+   "n_cp": 47,
+   "n_verts": 17172,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-169A-4",
+   "path": "ABB.ACQ580-01-169A-4.json",
+   "sha": "002d9c65bce2ed1114e50890496f93faef6706cf383f5021d858c847ad3d0ab7",
+   "n_cp": 47,
+   "n_verts": 10673,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-206A-4+B056",
+   "path": "ABB.ACQ580-01-206A-4+B056.json",
+   "sha": "2460e783223ffcc87559f91ec0ec65fdcd56f0a2e3637749529ec45bf0b2886c",
+   "n_cp": 47,
+   "n_verts": 17172,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-206A-4",
+   "path": "ABB.ACQ580-01-206A-4.json",
+   "sha": "cac9f3fb06d03de0472bd339eb44a793f9df390bede38588941f6fbaaeece2cd",
+   "n_cp": 47,
+   "n_verts": 10673,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-246A-4+B056",
+   "path": "ABB.ACQ580-01-246A-4+B056.json",
+   "sha": "1f41a597f23179cd831a904cfb5cb41c935ac69bdf176d5977d42536429f646e",
+   "n_cp": 47,
+   "n_verts": 56581,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-246A-4",
+   "path": "ABB.ACQ580-01-246A-4.json",
+   "sha": "9a52a7bd507eb444c761a0420cbd25080963560829254839e2302f65d8898e0f",
+   "n_cp": 47,
+   "n_verts": 59024,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-293A-4+B056",
+   "path": "ABB.ACQ580-01-293A-4+B056.json",
+   "sha": "52087021eb8149101ca3a90367e925d9a72f2d3cbe5457a2eb0b3779dfb531dc",
+   "n_cp": 47,
+   "n_verts": 56581,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-293A-4",
+   "path": "ABB.ACQ580-01-293A-4.json",
+   "sha": "31248d327a9f08ca1517ed7694915a0452fe3286173611f17d2fe2f4693cb543",
+   "n_cp": 47,
+   "n_verts": 59024,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-363A-4+B056",
+   "path": "ABB.ACQ580-01-363A-4+B056.json",
+   "sha": "fb373975daf583a31bf9ff795d976cffc3585ea816c0dca739d223441b7d69fe",
+   "n_cp": 47,
+   "n_verts": 11740,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-363A-4",
+   "path": "ABB.ACQ580-01-363A-4.json",
+   "sha": "02ad411c114ec064fb1f29afb949ae3cbb83f14b90ded57d2a61ab96ef99386f",
+   "n_cp": 47,
+   "n_verts": 54446,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-430A-4+B056",
+   "path": "ABB.ACQ580-01-430A-4+B056.json",
+   "sha": "eafe1cf035073688ea8c3d9589ac67783e064ebc02796cbf212aa695aa0a17a0",
+   "n_cp": 47,
+   "n_verts": 11740,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACQ580-01-430A-4",
+   "path": "ABB.ACQ580-01-430A-4.json",
+   "sha": "9db504bf6a9298720084aee32e195ab577f812bed7c40a512b63f033b9aab922",
+   "n_cp": 47,
+   "n_verts": 54446,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-01A8-4",
+   "path": "ABB.ACS380-040C-01A8-4.json",
+   "sha": "f1c089c3b51c0fc670d11fa46341f9c0d1f259b7f67df5c2414e3cf61d6613e9",
+   "n_cp": 23,
+   "n_verts": 24284,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-02A4-1",
+   "path": "ABB.ACS380-040C-02A4-1.json",
+   "sha": "53962f641b45395125d966e6daafffcd137425d6088602e65642fe819d2759d1",
+   "n_cp": 22,
+   "n_verts": 25380,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-02A6-4",
+   "path": "ABB.ACS380-040C-02A6-4.json",
+   "sha": "5a5ca7ab1d9ab365983eb511e1b1b7a6e949e16ceaf3dba4867d0c3d1c851069",
+   "n_cp": 23,
+   "n_verts": 24415,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-03A3-4",
+   "path": "ABB.ACS380-040C-03A3-4.json",
+   "sha": "f25fc979e6800611b83ee2415f9357075f113baa9edcf3081a9900f95f9a2ddf",
+   "n_cp": 23,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-04A0-4",
+   "path": "ABB.ACS380-040C-04A0-4.json",
+   "sha": "15695c64b2fd84c22d7a3e374455dc1370f99985b813dc2e2a2455feae2cc3cf",
+   "n_cp": 23,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-04A8-1",
+   "path": "ABB.ACS380-040C-04A8-1.json",
+   "sha": "11053f288aff567fe931c2a5c8e96d3e0d26748aa0c3c985d55fcb0a7ea3f66b",
+   "n_cp": 22,
+   "n_verts": 23263,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-05A6-4",
+   "path": "ABB.ACS380-040C-05A6-4.json",
+   "sha": "00a64a85b438b174e13537a4fb4ea59bc80eef2e44ae71cf7df51715585dbb31",
+   "n_cp": 23,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-07A2-4",
+   "path": "ABB.ACS380-040C-07A2-4.json",
+   "sha": "f5ce688bab24830f9c65cae3447485d9fb6093ebc08ec8cb37f66cea43200975",
+   "n_cp": 23,
+   "n_verts": 24415,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-09A4-4",
+   "path": "ABB.ACS380-040C-09A4-4.json",
+   "sha": "dc389991b4e68ee8b112e18d62f1ae99b349b36760d1fb9697227a1cda6c94a4",
+   "n_cp": 23,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-09A8-1",
+   "path": "ABB.ACS380-040C-09A8-1.json",
+   "sha": "aea97e9f38f4c3211d14a3d2e431db89c189e817c5a475bbf5824852e856bf35",
+   "n_cp": 22,
+   "n_verts": 25601,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-12A6-4",
+   "path": "ABB.ACS380-040C-12A6-4.json",
+   "sha": "5d6f0ed6e1f00b2584ebc181136c5df2ae042222f77e1cfb9bb61822b7d4993f",
+   "n_cp": 23,
+   "n_verts": 25601,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-17A0-4",
+   "path": "ABB.ACS380-040C-17A0-4.json",
+   "sha": "4565a1c6db8aa56dc71829aaa4a4ed2a488710ad7087d568c3e63ea66ddc6c75",
+   "n_cp": 23,
+   "n_verts": 38807,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040C-25A0-4",
+   "path": "ABB.ACS380-040C-25A0-4.json",
+   "sha": "27f1394ec97d1accb1c2956ecb5e5c408ce613d6cb3bb9bab35a3d26ceb090ff",
+   "n_cp": 23,
+   "n_verts": 38807,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-01A8-4",
+   "path": "ABB.ACS380-040S-01A8-4.json",
+   "sha": "17bed438fcee3e03fbf523da7c3cd89e90f5f3efe91234c3462f27a04bc8be4c",
+   "n_cp": 41,
+   "n_verts": 24284,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-02A4-1",
+   "path": "ABB.ACS380-040S-02A4-1.json",
+   "sha": "345be7b7f0ec2984ad1d17aab8750996a77aed202b6391c6b24c1eb194fbec0b",
+   "n_cp": 40,
+   "n_verts": 25380,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-02A6-4",
+   "path": "ABB.ACS380-040S-02A6-4.json",
+   "sha": "278798f07d552881c7b5ce28db190828a6ce44d50cb0b4aa1a299b4742664f04",
+   "n_cp": 41,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-03A3-4",
+   "path": "ABB.ACS380-040S-03A3-4.json",
+   "sha": "b813afe965ccccb4f96fc4729904a3cc10e9fcccb44e4929d3fd95f2d74fbcad",
+   "n_cp": 41,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-04A0-4",
+   "path": "ABB.ACS380-040S-04A0-4.json",
+   "sha": "3df640304372166f46e095bb90c6ea7ae78fa9df93738380e6a2ec9a8d211465",
+   "n_cp": 41,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-04A8-1",
+   "path": "ABB.ACS380-040S-04A8-1.json",
+   "sha": "15523ae69a5dd131c80c2db918d85182d401ddce510bb3dfa93444b561dd32a1",
+   "n_cp": 40,
+   "n_verts": 23263,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-05A6-4",
+   "path": "ABB.ACS380-040S-05A6-4.json",
+   "sha": "a8d78a8ec6d26623e8317213bf847e2bd1b0ace6762eb7bc21ae0f3dd486d5ea",
+   "n_cp": 41,
+   "n_verts": 24415,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-07A2-4",
+   "path": "ABB.ACS380-040S-07A2-4.json",
+   "sha": "03d4104ebac5621d03902af5f68ff905414bec20dac9afb56a64e0d7fc0bb603",
+   "n_cp": 41,
+   "n_verts": 24415,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-09A4-4",
+   "path": "ABB.ACS380-040S-09A4-4.json",
+   "sha": "cf261326a22a8e0706479843388a9baa5298398e7c6b4c6a040f695717aadb58",
+   "n_cp": 41,
+   "n_verts": 24415,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-09A8-1",
+   "path": "ABB.ACS380-040S-09A8-1.json",
+   "sha": "c9da16416a3684f7794cd8fc4bdf9ac5cecb0ab06f197bc743a4ed75fa95ed4a",
+   "n_cp": 40,
+   "n_verts": 25601,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-12A6-4",
+   "path": "ABB.ACS380-040S-12A6-4.json",
+   "sha": "025e48515751d0793b95f7973726ed574d228c81bb602205db858beeaf52d8e4",
+   "n_cp": 41,
+   "n_verts": 25601,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-17A0-4",
+   "path": "ABB.ACS380-040S-17A0-4.json",
+   "sha": "d68e455c500218a4b97340f88d52572a9029cb4819c7b2bbecd1841eacdea865",
+   "n_cp": 41,
+   "n_verts": 38807,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS380-040S-25A0-4",
+   "path": "ABB.ACS380-040S-25A0-4.json",
+   "sha": "f9bfc7533ba6d9fb4b8b1d728310c020bc53394746ec4eba731278d3236f7f6f",
+   "n_cp": 41,
+   "n_verts": 38807,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS380-042C-01A8-4",
+   "path": "ABB.ACS380-042C-01A8-4.json",
+   "sha": "b6eda1351700fb12eb18342369177d6fee92bcd8e1139a9174f515cea2d86f03",
+   "n_cp": 23,
+   "n_verts": 24284,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-017A-4+B056",
+   "path": "ABB.ACS580-01-017A-4+B056.json",
+   "sha": "2c90bed797721c2d9c96ec55ca6c89a294107fb2672f54f2f85f999b6131d081",
+   "n_cp": 40,
+   "n_verts": 2235,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-017A-4",
+   "path": "ABB.ACS580-01-017A-4.json",
+   "sha": "59cf05026cd1fc0e3f45dd1a1adb61b4ee1c19ddf20ce5567dcea5d8b2f7f29c",
+   "n_cp": 40,
+   "n_verts": 6542,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-018A-4",
+   "path": "ABB.ACS580-01-018A-4.json",
+   "sha": "a20a463bc51caa3e59617e31e9bf2f8eec6f12dbe9b3b2cd27da66ce0b87b770",
+   "n_cp": 46,
+   "n_verts": 25399,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-025A-4+B056",
+   "path": "ABB.ACS580-01-025A-4+B056.json",
+   "sha": "0ad81cfeb4f7466e50a3847f197bbf135fbaf8c2fa1703ab4df816c97208696e",
+   "n_cp": 40,
+   "n_verts": 2235,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-025A-4",
+   "path": "ABB.ACS580-01-025A-4.json",
+   "sha": "59e459905f9e2d6623b55b063b20f6d17d16def6de92e364916702c557d94ad8",
+   "n_cp": 40,
+   "n_verts": 6542,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-026A-4",
+   "path": "ABB.ACS580-01-026A-4.json",
+   "sha": "b96fa63c298108ce71ea4688c3020146317a0409373064e5f846116731241103",
+   "n_cp": 46,
+   "n_verts": 25399,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-02A6-4+B056",
+   "path": "ABB.ACS580-01-02A6-4+B056.json",
+   "sha": "30057398b9cfe86e65edd53d10446ce0efb5171da820ca33eb34071f4869dcfc",
+   "n_cp": 40,
+   "n_verts": 2907,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-02A6-4",
+   "path": "ABB.ACS580-01-02A6-4.json",
+   "sha": "d3a1d3b227e5b30e3a897bd0e13f12561a553f63c4d9f113bb024607478dcdc5",
+   "n_cp": 40,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-032A-4+B056",
+   "path": "ABB.ACS580-01-032A-4+B056.json",
+   "sha": "76a3fc54d61d44037a13d077025f6051f3be1374e21360a748c161ec146cc5c6",
+   "n_cp": 40,
+   "n_verts": 3698,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-032A-4",
+   "path": "ABB.ACS580-01-032A-4.json",
+   "sha": "88a83dcbfc379842de9b54c100a326c36ba7d659ff046719630f3972d4a661fa",
+   "n_cp": 40,
+   "n_verts": 7796,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-033A-4",
+   "path": "ABB.ACS580-01-033A-4.json",
+   "sha": "63ef3472827bfb8d39f1f52c6bd9cb9fcc7253ce611e7b8856db4592c7585b88",
+   "n_cp": 46,
+   "n_verts": 22123,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-038A-4+B056",
+   "path": "ABB.ACS580-01-038A-4+B056.json",
+   "sha": "f1e84618e7a8ac4496fed42e775bcea108c44a83950d466da399cf82107f8af4",
+   "n_cp": 40,
+   "n_verts": 3698,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-038A-4",
+   "path": "ABB.ACS580-01-038A-4.json",
+   "sha": "508b875e39543119d3a9677414de770423f6770f1218c0a2da6425c671a25ad3",
+   "n_cp": 40,
+   "n_verts": 7796,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-03A3-4+B056",
+   "path": "ABB.ACS580-01-03A3-4+B056.json",
+   "sha": "25ade8738c1888eec690d55163228d2737859a1a09a4d2aa582ba95dcb102b79",
+   "n_cp": 40,
+   "n_verts": 2907,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-03A3-4",
+   "path": "ABB.ACS580-01-03A3-4.json",
+   "sha": "a66deb5f198013e94da6414dff7968a778439f90bfdea43fbe5a847c431bc654",
+   "n_cp": 40,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-045A-4+B056",
+   "path": "ABB.ACS580-01-045A-4+B056.json",
+   "sha": "5b26434b093c014d16de488d9fb3cc5ea49d4cbcdc772e4fd1bb144103374c30",
+   "n_cp": 40,
+   "n_verts": 3698,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-045A-4",
+   "path": "ABB.ACS580-01-045A-4.json",
+   "sha": "ed1f7c2709a42335eaf10364f3afb9889d2b6a8ee4468a42cee59ffece158509",
+   "n_cp": 40,
+   "n_verts": 7796,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS580-01-04A0-4+B056",
+   "path": "ABB.ACS580-01-04A0-4+B056.json",
+   "sha": "5c56ac9ccfe3b8665540c9a5e7c28efc5ab15ed993da166903ab3ccb6d8f6e7a",
+   "n_cp": 40,
+   "n_verts": 2907,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-04A0-4",
+   "path": "ABB.ACS580-01-04A0-4.json",
+   "sha": "cc9f81b1d6e9cc99c84cf8d96405378ba1f446e1a7bf782689168a86fefdba9d",
+   "n_cp": 40,
+   "n_verts": 7379,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS580-01-05A6-4+B056",
+   "path": "ABB.ACS580-01-05A6-4+B056.json",
+   "sha": "acac81b2e3082ee8fb6213c5c60cc9979b81fadee713e759660563474b5a4e12",
+   "n_cp": 40,
+   "n_verts": 2907,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-05A6-4",
+   "path": "ABB.ACS580-01-05A6-4.json",
+   "sha": "dd037960a2f19c5f0d3e0d4086c0024c8350f5d8d257f1838797458b4f404d20",
+   "n_cp": 40,
+   "n_verts": 7379,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-062A-4+B056",
+   "path": "ABB.ACS580-01-062A-4+B056.json",
+   "sha": "9ef37580968523c7e2099eb0425033da3b0bfb2cbf90012d398c386d812eec77",
+   "n_cp": 45,
+   "n_verts": 64777,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-062A-4",
+   "path": "ABB.ACS580-01-062A-4.json",
+   "sha": "bef04129da97088ebf09f314de700c5f84e089487d1015dd6159f6e8b81ab25e",
+   "n_cp": 45,
+   "n_verts": 78364,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-073A-4+B056",
+   "path": "ABB.ACS580-01-073A-4+B056.json",
+   "sha": "d43ca64b002908d9ae8b05109c81fa0081bc03045fd281e74a6ad29d3f82870d",
+   "n_cp": 45,
+   "n_verts": 64777,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-073A-4",
+   "path": "ABB.ACS580-01-073A-4.json",
+   "sha": "16c7daae2820cb6e819d1d1fd63a7013dd791000db78e0193feb9df85f30ca51",
+   "n_cp": 46,
+   "n_verts": 49544,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS580-01-07A2-4+B056",
+   "path": "ABB.ACS580-01-07A2-4+B056.json",
+   "sha": "55229508b763365846dd88e234838c1b5193453ffdeb3804faf2473b209e4f4f",
+   "n_cp": 40,
+   "n_verts": 2147,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-07A2-4",
+   "path": "ABB.ACS580-01-07A2-4.json",
+   "sha": "677bede6ca0934782f27a43be836dc2eaefb3ddc4d2d1bf3ec5b03bcbde08a22",
+   "n_cp": 40,
+   "n_verts": 7268,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-088A-4+B056",
+   "path": "ABB.ACS580-01-088A-4+B056.json",
+   "sha": "b3b7d416e439b1bddb4cac4200602985930baa2062510153fed69ee904b04fb2",
+   "n_cp": 45,
+   "n_verts": 56397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-088A-4",
+   "path": "ABB.ACS580-01-088A-4.json",
+   "sha": "330612ac685f35efba658954810d9a641da5425f3751328d4785a299fdd2154d",
+   "n_cp": 45,
+   "n_verts": 136397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-09A4-4+B056",
+   "path": "ABB.ACS580-01-09A4-4+B056.json",
+   "sha": "478902ca6b516ac802bc7b6a1f877f83910423838d9a27a0be38cd46bec2a09d",
+   "n_cp": 40,
+   "n_verts": 2147,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-09A4-4",
+   "path": "ABB.ACS580-01-09A4-4.json",
+   "sha": "ee7f3395d3ca45753368c72d8ebc5c8dc1a7caa5f1e3dde1ed86817ba46a5019",
+   "n_cp": 40,
+   "n_verts": 7268,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS580-01-105A-4+B056",
+   "path": "ABB.ACS580-01-105A-4+B056.json",
+   "sha": "237a805f2634d3b57d521d3a93e12cb51f10ab812cb2bd580d56617e5c270361",
+   "n_cp": 41,
+   "n_verts": 4204,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-105A-4",
+   "path": "ABB.ACS580-01-105A-4.json",
+   "sha": "22ff9666f8fc0d694f559d764024686abacd8313f0715c6273b146c359471c0d",
+   "n_cp": 41,
+   "n_verts": 4204,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-106A-4+B056",
+   "path": "ABB.ACS580-01-106A-4+B056.json",
+   "sha": "56551b18153dad8f27d1e8c7f3bbc2753226d558a6fb7f0aac5213e1ee38f187",
+   "n_cp": 45,
+   "n_verts": 56397,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-106A-4",
+   "path": "ABB.ACS580-01-106A-4.json",
+   "sha": "a6744de4c15173a8f70b5b47fb1b02ebca91abbd5fe114bf9bcd31547643b6ce",
+   "n_cp": 45,
+   "n_verts": 136397,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-12A6-4+B056",
+   "path": "ABB.ACS580-01-12A6-4+B056.json",
+   "sha": "19b1ac3d1660aa5d31f08b2ed47336f186313bbe9dcf04749fc8e307027a39c5",
+   "n_cp": 40,
+   "n_verts": 2147,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-12A6-4",
+   "path": "ABB.ACS580-01-12A6-4.json",
+   "sha": "6668ccb31c857912cd89d708537d647f429a4d8c801283e98b5c4ee1dfbd5e86",
+   "n_cp": 40,
+   "n_verts": 7268,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-12A7-4",
+   "path": "ABB.ACS580-01-12A7-4.json",
+   "sha": "d978a8e261410f9f75ae8243b8fcbc49b188243fc3537898041422e8f2e694b2",
+   "n_cp": 46,
+   "n_verts": 28419,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-145A-4+B056",
+   "path": "ABB.ACS580-01-145A-4+B056.json",
+   "sha": "3d19ff9fdda9ff70fb1ef9042da89df7ddce30c166d11d93bf1b0f15f70301c6",
+   "n_cp": 41,
+   "n_verts": 4204,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-145A-4",
+   "path": "ABB.ACS580-01-145A-4.json",
+   "sha": "32a5f8352aa542c0e227ce2a9408ca3eaaa6fcbe6afbb278174571e2c85f2b11",
+   "n_cp": 41,
+   "n_verts": 4204,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-169A-4+B056",
+   "path": "ABB.ACS580-01-169A-4+B056.json",
+   "sha": "ba27e9e9caa63c03dff3c0785fad949cf500720f2fb070c6d9ce4e25b47a2d69",
+   "n_cp": 41,
+   "n_verts": 4578,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-169A-4",
+   "path": "ABB.ACS580-01-169A-4.json",
+   "sha": "896efb025632f66c11fe5a2b78fc4e2115f5ffe13987ce745c5ecc4d9076d673",
+   "n_cp": 41,
+   "n_verts": 4578,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-206A-4+B056",
+   "path": "ABB.ACS580-01-206A-4+B056.json",
+   "sha": "ea704770be0007861743759bb97892dfcc227234422e314818425336e7313488",
+   "n_cp": 41,
+   "n_verts": 4578,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-206A-4",
+   "path": "ABB.ACS580-01-206A-4.json",
+   "sha": "64c8af9192402811d2692f3e340eaa789ab28c0905ec0a52524cd44f9aec2eaa",
+   "n_cp": 41,
+   "n_verts": 4578,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-246A-4+B056",
+   "path": "ABB.ACS580-01-246A-4+B056.json",
+   "sha": "72f1bdd77a3c6e40233805483deb3b91546bed659f41afb94fa0c47667461e2b",
+   "n_cp": 41,
+   "n_verts": 4503,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS580-01-246A-4",
+   "path": "ABB.ACS580-01-246A-4.json",
+   "sha": "6e875dfc15aba9c6e99f28d6438a124f6f8aacc24a5b346e59d0cce962f743e8",
+   "n_cp": 41,
+   "n_verts": 16590,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-293A-4+B056",
+   "path": "ABB.ACS580-01-293A-4+B056.json",
+   "sha": "d0d722c760783d4c664109d74e66b8a7551c68df92ef517d3e74d96afbcdc007",
+   "n_cp": 41,
+   "n_verts": 4503,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS580-01-293A-4",
+   "path": "ABB.ACS580-01-293A-4.json",
+   "sha": "71426593c706eb18b6184351360d57184ec61f4ad19403c6c427b88906d122d1",
+   "n_cp": 41,
+   "n_verts": 16590,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS580-01-363A-4+B056",
+   "path": "ABB.ACS580-01-363A-4+B056.json",
+   "sha": "2ab1e8c3e5c3cde74fe65efbf65b87a14eb160f0e085f1d3245d9e50ff7ebaab",
+   "n_cp": 41,
+   "n_verts": 5721,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-363A-4",
+   "path": "ABB.ACS580-01-363A-4.json",
+   "sha": "401ee1fd5a70a87d147569b3cc9a00c607f0ccc53db3e6c07e600e10c3a4473d",
+   "n_cp": 41,
+   "n_verts": 20312,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-430A-4+B056",
+   "path": "ABB.ACS580-01-430A-4+B056.json",
+   "sha": "f35e227c40d80868c667fe09cbcdbf257b913d7d5dd5719f03816b7089ed56f1",
+   "n_cp": 41,
+   "n_verts": 5721,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS580-01-430A-4",
+   "path": "ABB.ACS580-01-430A-4.json",
+   "sha": "2fd2cdc5d93cf0135d0f253a7b9202d1570c3b505293b0b72c223d0c39c30350",
+   "n_cp": 41,
+   "n_verts": 20312,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-014A-5+B056",
+   "path": "ABB.ACS880-01-014A-5+B056.json",
+   "sha": "649d903c0fe71d971f3bbb1e10f54ee32d27402cef06ee283e41175dd5f1c11c",
+   "n_cp": 53,
+   "n_verts": 12194,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-014A-5",
+   "path": "ABB.ACS880-01-014A-5.json",
+   "sha": "d24081e11965ef91a9aa5598e4a836df7db37d4c9d7bd4c9d6c41ba5f2e7fee2",
+   "n_cp": 53,
+   "n_verts": 13586,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-017A-3+B056",
+   "path": "ABB.ACS880-01-017A-3+B056.json",
+   "sha": "b430cce35cebb4b1a132035956ce2d24e8a5d80b127664b964fc35a4554d11fa",
+   "n_cp": 53,
+   "n_verts": 12194,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-017A-3",
+   "path": "ABB.ACS880-01-017A-3.json",
+   "sha": "498e5c9714d96ce94d9243f72760ba27101cc559d58e9dd837f854f56c2deb47",
+   "n_cp": 53,
+   "n_verts": 13586,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-018A-7",
+   "path": "ABB.ACS880-01-018A-7.json",
+   "sha": "cf572067a2d19967bda78e6cb0ef9f113d0acda253456dc9113795146700b8f3",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-021A-5",
+   "path": "ABB.ACS880-01-021A-5.json",
+   "sha": "0557fed3962909c81ff5de1426261f41151a941e217dbcc5c487e66ec8ce4d6f",
+   "n_cp": 53,
+   "n_verts": 13586,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-022A-7",
+   "path": "ABB.ACS880-01-022A-7.json",
+   "sha": "8f0c2309e35c2fd198ba06c555941eb57791850d1d6af0d2431014b820a7a01a",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-025A-3+B056",
+   "path": "ABB.ACS880-01-025A-3+B056.json",
+   "sha": "38110123371dfb54e0ed2b1923183d919f8935d9f417de3902508283cd67ec4d",
+   "n_cp": 53,
+   "n_verts": 12194,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-025A-3",
+   "path": "ABB.ACS880-01-025A-3.json",
+   "sha": "21a28e1907a55fe769b14f012e5bac96506ba851855dcfccc9fbd151fe6d4023",
+   "n_cp": 53,
+   "n_verts": 13586,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-026A-7",
+   "path": "ABB.ACS880-01-026A-7.json",
+   "sha": "3b1e7c65ab97e2d5f2d65bbb6c78bd94a660062bb71de09196ab738687ebdac1",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-027A-5",
+   "path": "ABB.ACS880-01-027A-5.json",
+   "sha": "677f8ad3572a442357edd70788970914148084bf9646c7ea573d12d3ab2d214d",
+   "n_cp": 53,
+   "n_verts": 9042,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-02A1-5",
+   "path": "ABB.ACS880-01-02A1-5.json",
+   "sha": "92257d18a8ab8f6688c2f0cd23aede7257cbca0b2dc93c6908b9e3c03faace84",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-02A4-3",
+   "path": "ABB.ACS880-01-02A4-3.json",
+   "sha": "f9a7394f8663aea331f139c1b624f024cea591ad8a088db3723a0f8b83d6038b",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-032A-3+B056",
+   "path": "ABB.ACS880-01-032A-3+B056.json",
+   "sha": "c13663332148b7a00275ae5072aefe6d92401fb51b75e24c3e6ddde7276c9f27",
+   "n_cp": 53,
+   "n_verts": 8951,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-032A-3",
+   "path": "ABB.ACS880-01-032A-3.json",
+   "sha": "02315df7a4e6b581f436fd8c1bebdade4436621bb0c4720528fa63bfc1f32e4f",
+   "n_cp": 53,
+   "n_verts": 9042,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-034A-5",
+   "path": "ABB.ACS880-01-034A-5.json",
+   "sha": "8c779e1e04173b9e3d9bcddf79bd0f1efad020e27cfa271e4ca7277283316082",
+   "n_cp": 53,
+   "n_verts": 9042,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-035A-7",
+   "path": "ABB.ACS880-01-035A-7.json",
+   "sha": "d0eccba257cddbe1f22783d70585e0d3a524b29c44c3a3d2f58601e63c29b95c",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-038A-3",
+   "path": "ABB.ACS880-01-038A-3.json",
+   "sha": "bd3a302e572025bc607a925cc7ac37b6eb73036499752de970ae100f9ab5ec69",
+   "n_cp": 53,
+   "n_verts": 9042,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-03A0-5",
+   "path": "ABB.ACS880-01-03A0-5.json",
+   "sha": "c49c06fdce4bba34c5b52c27dfc3c7cacee1dbd2d6f4ef61a7b0d16d4f09ebf7",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-03A3-3",
+   "path": "ABB.ACS880-01-03A3-3.json",
+   "sha": "2bb7a60f7b3c5d2935bd7bf39662814036f39d24e27f3bfd974cd37aef27abb0",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-03A4-5",
+   "path": "ABB.ACS880-01-03A4-5.json",
+   "sha": "2bee3771268fd6f5e01544cedecfc4226aadb63abff4bed4e954a4461497cb18",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-040A-5",
+   "path": "ABB.ACS880-01-040A-5.json",
+   "sha": "b9992775dae86652528ecfee3996e7cfbd244493c8e577005d8e3a3ebbdd364b",
+   "n_cp": 53,
+   "n_verts": 4708,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-042A-7",
+   "path": "ABB.ACS880-01-042A-7.json",
+   "sha": "f29013a6bcc59bfe4ae60d67e92a3a1aae484efa51bd5618ffc223907aefee4d",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-045A-3",
+   "path": "ABB.ACS880-01-045A-3.json",
+   "sha": "95eaa3e70217cc2b4b70da51c37d89ab0b25a02967fb5c4de75e8287a0e2e04e",
+   "n_cp": 53,
+   "n_verts": 4708,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-049A-7",
+   "path": "ABB.ACS880-01-049A-7.json",
+   "sha": "f08a5b378071ad86bd7c1807a6b7309d460964fbd28cd93dd1240d275661b138",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-04A0-3",
+   "path": "ABB.ACS880-01-04A0-3.json",
+   "sha": "69be2756b7db1fa402cfc2b55d4d94814c0ef8918a4ef80a15931dbe98b7849d",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-04A8-5",
+   "path": "ABB.ACS880-01-04A8-5.json",
+   "sha": "150fb93b31dd3aace027e98a912804dd3c0a60d27405730f8dcb35e559f9dacc",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-052A-5",
+   "path": "ABB.ACS880-01-052A-5.json",
+   "sha": "31f8d1117e7465170c13d1c941d1d648bc8c921afd1e013a79e1b89e42c4243d",
+   "n_cp": 53,
+   "n_verts": 4708,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-05A2-5",
+   "path": "ABB.ACS880-01-05A2-5.json",
+   "sha": "09ac968d3cf031cfc69b7708bd397d9c44bbf811a5336ca524345e02346508ee",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-05A6-3",
+   "path": "ABB.ACS880-01-05A6-3.json",
+   "sha": "3e613a94d7720e987b45daa473969da238f233f8998f67bb6b664acc10f48746",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-061A-3",
+   "path": "ABB.ACS880-01-061A-3.json",
+   "sha": "066e0b5371a7e181d02edac8cd651a24807c4e68fbae86a53313ec17d256176e",
+   "n_cp": 53,
+   "n_verts": 4708,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-061A-7",
+   "path": "ABB.ACS880-01-061A-7.json",
+   "sha": "6deb55ef182769e95210c01b64289df0c4e67258cb9ab78baee5f2a3b213f9e7",
+   "n_cp": 53,
+   "n_verts": 6360,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-065A-5",
+   "path": "ABB.ACS880-01-065A-5.json",
+   "sha": "5ee32b59f105663803a91e24b24ec16987a1caf8405f180569d8a211927e6807",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-072A-3",
+   "path": "ABB.ACS880-01-072A-3.json",
+   "sha": "51706ead0fe9513828d127d1430675652e27b61517d256675e247850b4e6f8ca",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-077A-5",
+   "path": "ABB.ACS880-01-077A-5.json",
+   "sha": "a217862703c6d089176baed9e09e9d9ef5d101ed1c75dc12a094d30de08356a5",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-07A2-3",
+   "path": "ABB.ACS880-01-07A2-3.json",
+   "sha": "9c49b7cf8eac6d92f3ab220d06fe508bfa6206a43ba5dcb71f4b5822539c7a7b",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-07A3-7",
+   "path": "ABB.ACS880-01-07A3-7.json",
+   "sha": "847c03e39375bc4d2e9d1be6f7a49a1c790e0d47ca711b99aea881349e949314",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-07A6-5",
+   "path": "ABB.ACS880-01-07A6-5.json",
+   "sha": "4ae2cde028678627244ab09cca2ac19e06eaf90257532adbec395cc02807e38b",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-087A-3",
+   "path": "ABB.ACS880-01-087A-3.json",
+   "sha": "0c2a8f97eccc6b726c4806e6d06f8f9d4b3c9855746aa8905a2cb7631ea8774b",
+   "n_cp": 53,
+   "n_verts": 8324,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-096A-5",
+   "path": "ABB.ACS880-01-096A-5.json",
+   "sha": "a6826beda7d98d34db6996ff7a1de8c98921e7fad0dcfa774f48e0addd939c9f",
+   "n_cp": 53,
+   "n_verts": 6360,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-09A4-3",
+   "path": "ABB.ACS880-01-09A4-3.json",
+   "sha": "77d608aada99283da156c087b6cb2b38d2755f123b6200beb5d7626ada8f719f",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-105A-3",
+   "path": "ABB.ACS880-01-105A-3.json",
+   "sha": "7df55340719ac3de56bc66ee845ff13c5f7b01b9ba0799c974b3f271405a7435",
+   "n_cp": 53,
+   "n_verts": 6360,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-11A0-5",
+   "path": "ABB.ACS880-01-11A0-5.json",
+   "sha": "78266f67d3836d27cf7e4b44176fe8c054386908fab2338cfa1490584d113a0d",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-124A-5",
+   "path": "ABB.ACS880-01-124A-5.json",
+   "sha": "6a26c310ce723e0d3dc31aca9d1cf39db37aef52c98fbde0c054b612a9400fad",
+   "n_cp": 53,
+   "n_verts": 6360,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-12A6-3",
+   "path": "ABB.ACS880-01-12A6-3.json",
+   "sha": "00b4f29f3f0213a46fa114df375d31dd9b17cdf83a32d2936b3cf1777df3161b",
+   "n_cp": 53,
+   "n_verts": 13566,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-145A-3",
+   "path": "ABB.ACS880-01-145A-3.json",
+   "sha": "d7d27816da39dec1ed0bba4d51dabe19c3b8b2d857ecead260ecbdf7b4ee1d65",
+   "n_cp": 53,
+   "n_verts": 6360,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-156A-5",
+   "path": "ABB.ACS880-01-156A-5.json",
+   "sha": "42d6044405b3a1e8004b402985871d1a18464f77062a2bd482d68b616317f12e",
+   "n_cp": 53,
+   "n_verts": 9108,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-169A-3",
+   "path": "ABB.ACS880-01-169A-3.json",
+   "sha": "dd386c9684a433372b6acf7b2b61734fec9582d03d067c81d116ddceecd9ed9d",
+   "n_cp": 53,
+   "n_verts": 9108,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-180A-5",
+   "path": "ABB.ACS880-01-180A-5.json",
+   "sha": "6ef1ad1926c84d6d62d321a04699cd844e9bccbdcd8821b6d11c6c5a67f0ad9e",
+   "n_cp": 53,
+   "n_verts": 9108,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-206A-3",
+   "path": "ABB.ACS880-01-206A-3.json",
+   "sha": "9419f94c62ba133b6b0d667fae4871bbab0b88ad64cfc31c18af158a54bb2915",
+   "n_cp": 53,
+   "n_verts": 9108,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-240A-5",
+   "path": "ABB.ACS880-01-240A-5.json",
+   "sha": "794062996467641cefe980f03d3e5d950e0c813d3da4a0b79bbe7ae282f0c73c",
+   "n_cp": 53,
+   "n_verts": 7526,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-246A-3",
+   "path": "ABB.ACS880-01-246A-3.json",
+   "sha": "3f56e1d19b7af03fc466dc90a59d30cc03351505ba3619a9bb423e7b07831729",
+   "n_cp": 53,
+   "n_verts": 7526,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-260A-5",
+   "path": "ABB.ACS880-01-260A-5.json",
+   "sha": "f3d61413a3fb26f8bd4685ee7c44ec00533be37b230c77e7296e19abbc5c3523",
+   "n_cp": 53,
+   "n_verts": 7526,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-293A-3",
+   "path": "ABB.ACS880-01-293A-3.json",
+   "sha": "e29718e222b7eda506d2509284a92dc4c3632562b2b6cb7e76e291529a093030",
+   "n_cp": 53,
+   "n_verts": 7526,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-361A-5",
+   "path": "ABB.ACS880-01-361A-5.json",
+   "sha": "c44f635abfd2338bc4bac32ab8435c85d32e89bd2c8baefc1514eae8a53bfa9f",
+   "n_cp": 53,
+   "n_verts": 13401,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.ACS880-01-363A-3",
+   "path": "ABB.ACS880-01-363A-3.json",
+   "sha": "e29e789aa7b5d3d40076204f39a0696d860420988642b185b0f469d6e6233f41",
+   "n_cp": 53,
+   "n_verts": 13401,
+   "role": "val"
+  },
+  {
+   "part_id": "ABB.ACS880-01-414A-5",
+   "path": "ABB.ACS880-01-414A-5.json",
+   "sha": "ef2cac2daeb61e9e295988bda2236928f21471e5137309622ff6bea62c203d3e",
+   "n_cp": 53,
+   "n_verts": 13401,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.ACS880-01-430A-3",
+   "path": "ABB.ACS880-01-430A-3.json",
+   "sha": "a51163a894130bfa4a5b6b2bebc9d4989368182c6b91304ad868137460c4adfe",
+   "n_cp": 53,
+   "n_verts": 13401,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.NOCH0016-60",
+   "path": "ABB.NOCH0016-60.json",
+   "sha": "fe06b28caafabb3175b774fc7d9e1f86b77c91509393a8f59c3dae8f542bb683",
+   "n_cp": 9,
+   "n_verts": 16151,
+   "role": "holdout"
+  },
+  {
+   "part_id": "ABB.NOCH0016-62",
+   "path": "ABB.NOCH0016-62.json",
+   "sha": "b7657c748c62b8fbf5c1c8332dc24641ef8d23b66b7fb9880dc640156cff8f74",
+   "n_cp": 8,
+   "n_verts": 14946,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.NOCH0030-62",
+   "path": "ABB.NOCH0030-62.json",
+   "sha": "99606935b0291d7e50ffd8c1bf9fe26250a851a07881bcd8cce493d4553047fc",
+   "n_cp": 8,
+   "n_verts": 18352,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.NOCH0070-60",
+   "path": "ABB.NOCH0070-60.json",
+   "sha": "1b8b4fcbacddd74eaa68480cf531c3762a26417ac5ebe4b4e1e7339577600bd0",
+   "n_cp": 9,
+   "n_verts": 26397,
+   "role": "train"
+  },
+  {
+   "part_id": "ABB.NOCH0070-62",
+   "path": "ABB.NOCH0070-62.json",
+   "sha": "ede02b22a89466d461545564febe296bd98f3bca15ea9b2cd9019acd80ab4f4c",
+   "n_cp": 8,
+   "n_verts": 21698,
+   "role": "holdout"
+  },
+  {
+   "part_id": "FES.130642",
+   "path": "FES.130642.json",
+   "sha": "aca634f3ee77bafe30dd77816ec35cf963f57a4a91292386ea3bfb395c8cb6b8",
+   "n_cp": 2,
+   "n_verts": 913,
+   "role": "val"
+  },
+  {
+   "part_id": "FES.130643",
+   "path": "FES.130643.json",
+   "sha": "283a95601344a7c106f47f24cdd6fbdb2a7ed12411d08c1b7f7a0cdda14b7529",
+   "n_cp": 2,
+   "n_verts": 918,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.130644",
+   "path": "FES.130644.json",
+   "sha": "792c099e375a49324256465b243b2849a3069737ab1d7ba995216aa16481333f",
+   "n_cp": 2,
+   "n_verts": 918,
+   "role": "val"
+  },
+  {
+   "part_id": "FES.132635",
+   "path": "FES.132635.json",
+   "sha": "809473cb16818275f33cba0a9c9ee03cd6b0d9486da25b92b00c4efa34c9343a",
+   "n_cp": 1,
+   "n_verts": 1515,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.132856",
+   "path": "FES.132856.json",
+   "sha": "25ddd558a1b790fa3554dea3eac95423494973d406d9f67e2760278b24d3156e",
+   "n_cp": 1,
+   "n_verts": 1697,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.132857",
+   "path": "FES.132857.json",
+   "sha": "ca5f2d93f17422bb7d3879e8495352cc21a07ba9c611c2e4687eafeb37850d58",
+   "n_cp": 1,
+   "n_verts": 1697,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.132946",
+   "path": "FES.132946.json",
+   "sha": "d035568712645e3ee7bc10524bef493623a7fe3c937fac4e9e4f702c26c08739",
+   "n_cp": 1,
+   "n_verts": 1609,
+   "role": "holdout"
+  },
+  {
+   "part_id": "FES.132947",
+   "path": "FES.132947.json",
+   "sha": "24bcbbb8eb5c23da9fe63cc1c24b4bd3c11c41efe3cfb11d266502feb8d8f485",
+   "n_cp": 1,
+   "n_verts": 1609,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.132950",
+   "path": "FES.132950.json",
+   "sha": "87c8651f040133899f1e5aa032a22497fe96b85fa1b4761f6e7df1bcabf431dc",
+   "n_cp": 1,
+   "n_verts": 1607,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.132951",
+   "path": "FES.132951.json",
+   "sha": "2b5cf1ef2565155d40bff05aa26b92e6eca5be0d03abfba1a1e8d76ac4146e92",
+   "n_cp": 1,
+   "n_verts": 1606,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.18527",
+   "path": "FES.18527.json",
+   "sha": "1d89dfa9f9c6fe8d8de76d421c711b530f79506e486a90328e1156a2672e6738",
+   "n_cp": 4,
+   "n_verts": 640,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.186104",
+   "path": "FES.186104.json",
+   "sha": "2a0a22ef84549d73bc47760717bc9fecbe4b6f2f70f1239894d2b8eb001803bb",
+   "n_cp": 1,
+   "n_verts": 803,
+   "role": "val"
+  },
+  {
+   "part_id": "FES.186112",
+   "path": "FES.186112.json",
+   "sha": "bc7035c1d90f1b967d4d03256cb047ede8b49c3091ba707b6a16d61dae54d66e",
+   "n_cp": 1,
+   "n_verts": 724,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.192488",
+   "path": "FES.192488.json",
+   "sha": "3c8986b32b6318843bf1aa1b9473e5d1058dd301850efdc4d2f3b685abe0db0e",
+   "n_cp": 4,
+   "n_verts": 660,
+   "role": "val"
+  },
+  {
+   "part_id": "FES.195704",
+   "path": "FES.195704.json",
+   "sha": "d09510a462d2e5f289a06b32a875a6012c2d1e5ee854aa27da2f056fb21c662f",
+   "n_cp": 20,
+   "n_verts": 1956,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.195716",
+   "path": "FES.195716.json",
+   "sha": "5740b786e9f08aa1242c83ed175d862f9ac225ea38eb8453a4b8ceb3934680b8",
+   "n_cp": 1,
+   "n_verts": 1206,
+   "role": "val"
+  },
+  {
+   "part_id": "FES.195746",
+   "path": "FES.195746.json",
+   "sha": "f1b43e9ff3142da25417c0412dd2ae352708876422d773f394f4e56f55f3b187",
+   "n_cp": 4,
+   "n_verts": 1293,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.529184",
+   "path": "FES.529184.json",
+   "sha": "30572eb3a781ba4b147b5ec263a8e2f528cca8c6ac0b407faab1747c7de80dca",
+   "n_cp": 1,
+   "n_verts": 846,
+   "role": "train"
+  },
+  {
+   "part_id": "FES.542582",
+   "path": "FES.542582.json",
+   "sha": "ee7a5871fd75f39105634e85eac9e412b8856d0fb7b41e8c4a8c44be8002971e",
+   "n_cp": 2,
+   "n_verts": 1217,
+   "role": "train"
+  },
+  {
+   "part_id": "HAR.09120073101",
+   "path": "HAR.09120073101.json",
+   "sha": "c9410af7d3065681593603d6e7a324212b568d17b1fda224cfa0b2e64d41b35f",
+   "n_cp": 8,
+   "n_verts": 3142,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2277019",
+   "path": "PXC.2277019.json",
+   "sha": "dac28cbe0987ad14e21491379d58e3759e6819155d77d6aba630917c5ba6529e",
+   "n_cp": 2,
+   "n_verts": 136,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2308027",
+   "path": "PXC.2308027.json",
+   "sha": "391413107deb0ccfe40c4e3d1d83ef879f7d9f6e5e4eb996444ff1105e590216",
+   "n_cp": 4,
+   "n_verts": 493,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2403107",
+   "path": "PXC.2403107.json",
+   "sha": "da4addaeea5722f9969d9d2360c95d8f4b0d465f1a50a423160c93d3f2dc70aa",
+   "n_cp": 22,
+   "n_verts": 2945,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2701290",
+   "path": "PXC.2701290.json",
+   "sha": "3965f77f26e20290ac89ff3ff82c20d2ddb2a477a8ef7396585cfda6ada9495a",
+   "n_cp": 13,
+   "n_verts": 2945,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2703994",
+   "path": "PXC.2703994.json",
+   "sha": "12078b5615fd14532559908d1fb6ea25faf3fe5be243d688b51acd4223c6e78d",
+   "n_cp": 32,
+   "n_verts": 10381,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2861250",
+   "path": "PXC.2861250.json",
+   "sha": "cbaf49b6df680d93ea6376cd85b572db461b6703a262bfb47eabd970ad5015cb",
+   "n_cp": 48,
+   "n_verts": 16680,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2861289",
+   "path": "PXC.2861289.json",
+   "sha": "89605d131925a22b3f2359586cd0ae27c5f6a64ac4a09ee1c4c5a39ac8fcbbe5",
+   "n_cp": 32,
+   "n_verts": 12904,
+   "role": "val"
+  },
+  {
+   "part_id": "PXC.2861344",
+   "path": "PXC.2861344.json",
+   "sha": "36b2259cf6e1c9c5f087e1d0908be5e35e422149afc6cc42ee9aa1f43c1c6268",
+   "n_cp": 8,
+   "n_verts": 2970,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2901362",
+   "path": "PXC.2901362.json",
+   "sha": "c6329aeaa56a461d755e533dad655034c024c5c306133ac0e28be1901d4abbd9",
+   "n_cp": 17,
+   "n_verts": 761,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2904622",
+   "path": "PXC.2904622.json",
+   "sha": "ebcec25ca8b16d02eb1dd84a3fef39b20280ab81308c851fa302f6b50fca810c",
+   "n_cp": 15,
+   "n_verts": 6650,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2985631",
+   "path": "PXC.2985631.json",
+   "sha": "6c68b7ce2a388df2376f4c2f1e13eb9a99a041d9b3f4f0461bd4653a23f03f64",
+   "n_cp": 32,
+   "n_verts": 7884,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.2985688",
+   "path": "PXC.2985688.json",
+   "sha": "d3d3b6a90bbd9e31be39b03d45ed142212d12e9d739fde02b38d60f78a4bce59",
+   "n_cp": 32,
+   "n_verts": 7884,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.3031238",
+   "path": "PXC.3031238.json",
+   "sha": "b37f86e9e0358b02753de9a01b825b5f05dc339bddb03626ee71648cba170ab6",
+   "n_cp": 2,
+   "n_verts": 639,
+   "role": "val"
+  },
+  {
+   "part_id": "PXC.3036550",
+   "path": "PXC.3036550.json",
+   "sha": "d843ab16f08b5503e6bc0ae38c283f4091247c35d5315686f46128243d6459e8",
+   "n_cp": 2,
+   "n_verts": 965,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.3036563",
+   "path": "PXC.3036563.json",
+   "sha": "64024c5ac85d8203a71a41c9aac36f25c35e0fe8b229a93b29fc7f4738b6b387",
+   "n_cp": 2,
+   "n_verts": 885,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.3048357",
+   "path": "PXC.3048357.json",
+   "sha": "b646b37e10e6a40e54c8222819eb5a707fa36095085bd82b1f0770a931e97415",
+   "n_cp": 2,
+   "n_verts": 157,
+   "role": "val"
+  },
+  {
+   "part_id": "PXC.3211813",
+   "path": "PXC.3211813.json",
+   "sha": "6c7aa980642a43048c26213bae14e33fb67b3f9e654c41d3779a546d93884587",
+   "n_cp": 2,
+   "n_verts": 762,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.3211814",
+   "path": "PXC.3211814.json",
+   "sha": "73a41518a09705c4324281b5d6a5ac778f1e195515f14590f3fbe8cea4ef964d",
+   "n_cp": 2,
+   "n_verts": 356,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.3211819",
+   "path": "PXC.3211819.json",
+   "sha": "0df6dd7b77223ebca8eceb21ad39294ca0d0218a4f6aa92112038760fa26ade6",
+   "n_cp": 2,
+   "n_verts": 622,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.3211822",
+   "path": "PXC.3211822.json",
+   "sha": "91a9e0db7cbb7b46a9fa5fdbe9e252a883bd5d1f0380ca28c2db81045420f027",
+   "n_cp": 2,
+   "n_verts": 752,
+   "role": "train"
+  },
+  {
+   "part_id": "PXC.3212140",
+   "path": "PXC.3212140.json",
+   "sha": "c3535d64e0fc830b778d7f4fe31b7c0bff4a4fb68e3fa446451cee4d6531eb9f",
+   "n_cp": 2,
+   "n_verts": 677,
+   "role": "train"
+  },
+  {
+   "part_id": "RIT.2500210",
+   "path": "RIT.2500210.json",
+   "sha": "f72e5fbf48225d21b56073421e619559539a09d6ac7082a37e2a0dcf02ecd20d",
+   "n_cp": 8,
+   "n_verts": 2618,
+   "role": "train"
+  },
+  {
+   "part_id": "RIT.2506100",
+   "path": "RIT.2506100.json",
+   "sha": "12dad9d0c5638fb969f73446e9f3e5332e8291bf1d180a28672857c4d738c5e5",
+   "n_cp": 3,
+   "n_verts": 712,
+   "role": "holdout"
+  },
+  {
+   "part_id": "RIT.3244100",
+   "path": "RIT.3244100.json",
+   "sha": "8bfdb7d1bf486e4d1e1a5b9c38aa33b76eaa21668534b0a33c86a2f8a015d8b8",
+   "n_cp": 3,
+   "n_verts": 2730,
+   "role": "holdout"
+  },
+  {
+   "part_id": "RIT.3304500",
+   "path": "RIT.3304500.json",
+   "sha": "807ed1c9454b570ea7e332ce82a9caf54c87fd493e3a382a3f65e8451654f92d",
+   "n_cp": 10,
+   "n_verts": 2022,
+   "role": "holdout"
+  },
+  {
+   "part_id": "RIT.3361500",
+   "path": "RIT.3361500.json",
+   "sha": "464bec7a5b97435c66d1cab17a7f3cb42df9d33e7a4ac73c01dfcb8d82a412a9",
+   "n_cp": 10,
+   "n_verts": 1994,
+   "role": "train"
+  },
+  {
+   "part_id": "RIT.3450500",
+   "path": "RIT.3450500.json",
+   "sha": "be45c04190f7b55657d800e16b0cf802521585d9bd1ca3a7f1eae48f9da107bd",
+   "n_cp": 10,
+   "n_verts": 362,
+   "role": "train"
+  },
+  {
+   "part_id": "RIT.3451500",
+   "path": "RIT.3451500.json",
+   "sha": "df1d182812238c061a90c1531ed14e8300afe218135dec423d00f33033d787e5",
+   "n_cp": 10,
+   "n_verts": 358,
+   "role": "holdout"
+  },
+  {
+   "part_id": "RIT.4127010",
+   "path": "RIT.4127010.json",
+   "sha": "d2535c5131e47e0bef1a224fc30f9cb525b86d6456400f0f781f0a7ad89fa581",
+   "n_cp": 4,
+   "n_verts": 1215,
+   "role": "val"
+  },
+  {
+   "part_id": "RIT.9677025",
+   "path": "RIT.9677025.json",
+   "sha": "176383b536c67df5f72dd129dd04af51510f6e1cfc09cc71e49119f59698ddf3",
+   "n_cp": 3,
+   "n_verts": 3243,
+   "role": "train"
+  },
+  {
+   "part_id": "RIT.9677100",
+   "path": "RIT.9677100.json",
+   "sha": "064206a4cbe19e4074c4209a30dc249a3157254e593905ec4681adeca91bcd01",
+   "n_cp": 3,
+   "n_verts": 2461,
+   "role": "val"
+  },
+  {
+   "part_id": "RIT.9677265",
+   "path": "RIT.9677265.json",
+   "sha": "73066cc25cb2b9ff137372ad27d4ed28cd81bb960951cf3695049d091958429d",
+   "n_cp": 3,
+   "n_verts": 3443,
+   "role": "holdout"
+  },
+  {
+   "part_id": "RIT.9677365",
+   "path": "RIT.9677365.json",
+   "sha": "535e6521633665e28959998e75471416050c36bd1ba1bb6dfb2f4de05ab5c45b",
+   "n_cp": 3,
+   "n_verts": 3443,
+   "role": "train"
+  },
+  {
+   "part_id": "SEW.MC07B0015-5A3-4-00",
+   "path": "SEW.MC07B0015-5A3-4-00.json",
+   "sha": "12b96bb38df6d45695edeef8a41b921a8f56b7be5beb636c09de902c60c7762a",
+   "n_cp": 32,
+   "n_verts": 1915,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RH2122-1HB40",
+   "path": "SIE.3RH2122-1HB40.json",
+   "sha": "2002d07470d5ed329f122041b11f51eb020d19a5924d4a7ad96af7456de74f08",
+   "n_cp": 10,
+   "n_verts": 2374,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RH2911-1FA22-0MA0",
+   "path": "SIE.3RH2911-1FA22-0MA0.json",
+   "sha": "c890a72060a61088cf2bbe3ceb98954aec64c6f21980ca4cf9bb5ec5354c2aa9",
+   "n_cp": 16,
+   "n_verts": 806,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RT2015-1BB41-1AA0",
+   "path": "SIE.3RT2015-1BB41-1AA0.json",
+   "sha": "8b3a37cf83e913d02712c08b8f84829acd04fa8643d3920aeae121f3a7a157d1",
+   "n_cp": 20,
+   "n_verts": 2374,
+   "role": "holdout"
+  },
+  {
+   "part_id": "SIE.3RV2011-1AA15",
+   "path": "SIE.3RV2011-1AA15.json",
+   "sha": "3d5c8be0a25d0606da6f3d7f8981be277614f365a6402addf05faf4eab827232",
+   "n_cp": 10,
+   "n_verts": 3275,
+   "role": "holdout"
+  },
+  {
+   "part_id": "SIE.3RV2011-1BA25",
+   "path": "SIE.3RV2011-1BA25.json",
+   "sha": "b59802a9534fe5ba2d3f7707d286dd6002797681c775e2b55ed2c5857fe66c0e",
+   "n_cp": 10,
+   "n_verts": 2437,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RV2011-1EA25-0BA0",
+   "path": "SIE.3RV2011-1EA25-0BA0.json",
+   "sha": "ac2c6ac107f8f9a9447d4bf06cd190d77d824d8bd7668f8db579c7a583ea4be0",
+   "n_cp": 10,
+   "n_verts": 2437,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RV2011-1EA25",
+   "path": "SIE.3RV2011-1EA25.json",
+   "sha": "df7d6af4146d0bf041744f114fea799f8ebff845a98a0ae8caeef90e9348195e",
+   "n_cp": 10,
+   "n_verts": 3360,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RV2011-1GA15",
+   "path": "SIE.3RV2011-1GA15.json",
+   "sha": "12418049db3a4d17141cae9529668d0cca5c1cd0ba2bad5351df16a3c63b0fad",
+   "n_cp": 4,
+   "n_verts": 5794,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RV2011-4AA10-0BA0",
+   "path": "SIE.3RV2011-4AA10-0BA0.json",
+   "sha": "7e5de25280ad01c9a25ca12d3d82754d88d13de668592c138f68cb19e1c503e7",
+   "n_cp": 6,
+   "n_verts": 4362,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RV2011-4AA10",
+   "path": "SIE.3RV2011-4AA10.json",
+   "sha": "b4c88c1d81507c0a3717b13ba85f88e5765d58699f4f7defbbfa80a5a6675f6b",
+   "n_cp": 6,
+   "n_verts": 4362,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3RV2901-1E",
+   "path": "SIE.3RV2901-1E.json",
+   "sha": "39f8b747ff071d3aa6b2cb890f1d3c9672d6c1a148b4039aebd72e37c638568f",
+   "n_cp": 4,
+   "n_verts": 812,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3SB3400-0B",
+   "path": "SIE.3SB3400-0B.json",
+   "sha": "e0f087dee4a6440a624b983c64d5173de2325055586f36ae29f43dd32b6f562d",
+   "n_cp": 2,
+   "n_verts": 526,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3SB3400-0C",
+   "path": "SIE.3SB3400-0C.json",
+   "sha": "1712e71321469e03e35ee9bf57e60992cc7304c554b02d4423da0aaf490103f6",
+   "n_cp": 2,
+   "n_verts": 526,
+   "role": "val"
+  },
+  {
+   "part_id": "SIE.3SU1401-1BB20-1AA0",
+   "path": "SIE.3SU1401-1BB20-1AA0.json",
+   "sha": "7ae59d12de98fe9d093edc6a9a479d39be6ae1d2c635c3a141f0a695e24dc9b2",
+   "n_cp": 2,
+   "n_verts": 1926,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3SU1401-1BB50-1AA0",
+   "path": "SIE.3SU1401-1BB50-1AA0.json",
+   "sha": "9100b81b77b326554228b78e10f3eb2db61188c2c90e53216aadfb3845bed337",
+   "n_cp": 2,
+   "n_verts": 1926,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.3SU1401-1BF60-1AA0",
+   "path": "SIE.3SU1401-1BF60-1AA0.json",
+   "sha": "aded41997fa2c53c7a3426f156d54d94ba4ad40d11cde5eb06b82f7c94ceb9f5",
+   "n_cp": 2,
+   "n_verts": 1926,
+   "role": "holdout"
+  },
+  {
+   "part_id": "SIE.3VA1032-2ED32-0AA0",
+   "path": "SIE.3VA1032-2ED32-0AA0.json",
+   "sha": "85e25b1062960f56e04901d5aa83c511bc3664574f6d2efad79a75c6dafe81f0",
+   "n_cp": 6,
+   "n_verts": 6465,
+   "role": "val"
+  },
+  {
+   "part_id": "SIE.5ST3010",
+   "path": "SIE.5ST3010.json",
+   "sha": "43bc14c07709dc92104a3adf93bb2a5dcf7c6a38d6ab3bfc08593f5fde3ed8de",
+   "n_cp": 4,
+   "n_verts": 1738,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.5SU1356-6KK16",
+   "path": "SIE.5SU1356-6KK16.json",
+   "sha": "8632033cee7227d68ad5853cfce761169efb4707f32060c2243fc74ed3b77cbd",
+   "n_cp": 4,
+   "n_verts": 5185,
+   "role": "val"
+  },
+  {
+   "part_id": "SIE.5SY4106-5",
+   "path": "SIE.5SY4106-5.json",
+   "sha": "8521516c8e70a07c77d0083e2d537580318f5315ac03f4173e3cd7a6593fd694",
+   "n_cp": 2,
+   "n_verts": 2247,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.5SY4106-7",
+   "path": "SIE.5SY4106-7.json",
+   "sha": "87f8c9d1fa46e085f46031b9c5eefd13e89d38690ea55806fb8ee4d6624d411b",
+   "n_cp": 2,
+   "n_verts": 2247,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.5SY4116-5",
+   "path": "SIE.5SY4116-5.json",
+   "sha": "a1cd8f3b5f51b0f6f18765978188ccd1810eae6499089f68e7da2483c7dac2ad",
+   "n_cp": 2,
+   "n_verts": 3492,
+   "role": "train"
+  },
+  {
+   "part_id": "SIE.5SY4116-6",
+   "path": "SIE.5SY4116-6.json",
+   "sha": "a90501e4983b3fef74dffba60566d46014c1279524cb07610bdf707bad9bd5cb",
+   "n_cp": 2,
+   "n_verts": 2294,
+   "role": "train"
+  }
+ ]
+}

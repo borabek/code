@@ -1,0 +1,132 @@
+{
+ "product_id": "vote1_union+wiregate0.35 (2026-07-24)",
+ "definition": {
+  "checkpoints": [
+   "results/seg_extra/recall_hard_s2.pt",
+   "results/seg_extra/recall_hard_keig96_s0.pt",
+   "results/seg_extra/recall_hard_keig96_s1.pt",
+   "results/seg_extra/recall_hard_keig96_s2.pt"
+  ],
+  "checkpoint_sha256_16": {
+   "recall_hard_s2.pt": "bab4a781235d7b76",
+   "recall_hard_keig96_s0.pt": "927b45470fe1bf60",
+   "recall_hard_keig96_s1.pt": "fdeb1459cccfcce8",
+   "recall_hard_keig96_s2.pt": "2a077724a4a2dee9"
+  },
+  "wire_gate": "results/wire_gate.pkl",
+  "wire_gate_sha256_16": "3082ec5ebab71bd7",
+  "robot_min_votes": 1,
+  "wire_gate_threshold": 0.35,
+  "min_v": 30,
+  "vertex_conf": 0.5,
+  "cluster_mm": 5.0,
+  "remesh_target": 6000,
+  "auto_tier": {
+   "conf_auto": 0.5,
+   "min_auto_votes": 3
+  },
+  "f1_sweep_data_sha256_16": "e9e6d1f4f2450218",
+  "gate_classifier": "RandomForest 400/leaf3"
+ },
+ "primary_metric": "AUTO+REVIEW F1 vs manufacturer ConnectionPoints (user decision 2026-07-24)",
+ "manufacturer_arbiter_OOF": {
+  "leakage_free": true,
+  "method": "GroupKFold-OOF (wire-gate scored out-of-fold)",
+  "source": "_f1full.log",
+  "n_parts": 823,
+  "part_set_sha256_16": "b1c080b16d2c7614",
+  "n_mfg_cps": 2837,
+  "ALL": {
+   "P": 0.771,
+   "R": 0.73,
+   "F1": 0.75
+  },
+  "WEI": {
+   "F1": 0.69
+  },
+  "PXC": {
+   "F1": 0.761
+  }
+ },
+ "metadata_assisted_mode_CPcount_prior": {
+  "ALL": {
+   "F1": 0.775
+  },
+  "WEI": {
+   "F1": 0.723
+  },
+  "PXC": {
+   "F1": 0.785
+  },
+  "gate": "RF"
+ },
+ "per_mfg_gate_optimal": {
+  "WEI": {
+   "best_thr": 0.35,
+   "P": 0.627,
+   "R": 0.655,
+   "F1": 0.641
+  },
+  "PXC": {
+   "best_thr": 0.35,
+   "P": 0.735,
+   "R": 0.675,
+   "F1": 0.704
+  }
+ },
+ "failure_taxonomy": {
+  "n_gt": 2837,
+  "kept_tp": 1906,
+  "tool_fp_dropped": 1740,
+  "kept_fp_unlisted_or_residual": 753,
+  "dropped_real_wire": 386,
+  "total_fn": 931
+ },
+ "human_heldout_STALE": {
+  "file": "results/hc_final.json",
+  "status": "INVALID -- do NOT use as a metric",
+  "reason_1": "old checkpoint human77c_s2.pt (no wire-gate)",
+  "reason_2": "LEAKED: all 26 parts are now in training (_label_targets*), so it is IN-SAMPLE for the current product, not held-out",
+  "clean_metric_instead": "manufacturer arbiter leakage-free OOF (0.693 ALL) = the ONLY valid product F1",
+  "to_rebuild": "a fresh human held-out needs parts SET ASIDE from future recall-painting (not trained on)"
+ },
+ "reporting_rule": "Report ONLY the OOF number as the F1 score. wire_gate.pkl is full-trained for DEPLOY; the OOF gate is for SCORING. Never quote a non-OOF (train=test) gate number as F1.",
+ "honest_notes": [
+  "Absolute F1 wobbles ~0.64-0.70 across measurement scripts; the leakage-free full-arbiter OOF (0.693) is the canonical number.",
+  "Old ~0.98 precision and ~0.80 robot-effective were INFLATED (counted tool openings as correct). Corrected by the wire-gate.",
+  "0.90 raw manufacturer F1 not realistic now; needs full human labels (recall) + wire/tool sub-labels (precision)."
+ ],
+ "night_2026_07_25": {
+  "k_eig128_union_expansion": "REJECTED (WEI 0.679->0.631, no gain)",
+  "vote_override": "REJECTED (gate-dropped vote>=4 are 95% tool, validates gate)",
+  "product_unchanged": "vote1_union+gate0.35, F1 0.693",
+  "infra": "per-k_eig op cache (no mixed-k_eig thrash)"
+ },
+ "restore_2026_07_25": "vc0.35 reverted -> vc0.5. Full-arbiter reconfirmed: ALL 0.694 / WEI 0.641 / PXC 0.704 (canonical 0.693). Gate + npz regenerated on vc0.5; hashes synced here.",
+ "RF_gate_win_2026_07_25": "RandomForest gate replaced GradientBoosting: base 0.693->0.750 (+0.057), metadata 0.742->0.775, WEI 0.641->0.690. Same candidates/folds, robust across hyperparams/seeds. Biggest legitimate lever.",
+ "mode_ladder_2026_07_25": {
+  "base_product": {
+   "F1": 0.75,
+   "needs": "nothing (RF gate)"
+  },
+  "metadata_assisted": {
+   "F1": 0.775,
+   "needs": "manufacturer CP count (top-N)"
+  },
+  "metadata_assisted+highCP_multires": {
+   "F1": 0.788,
+   "needs": "count + 9k multi-res candidates for high-CP(>=11) parts",
+   "note": "Op3: high-CP candidate recall 0.568->0.800, top-N F1 0.481->0.624; overall metadata 0.775->0.788, gap to 0.80 = +0.012"
+  },
+  "bottleneck": "SELECTION on high-CP: candidate recall 0.800 but top-N recall 0.570 -> Op4 lattice/row-consistency re-ranking targets this"
+ },
+ "mode_ladder_FINAL_2026_07_25": {
+  "base_product": 0.75,
+  "metadata_assisted (RF gate + top-N)": 0.775,
+  "metadata + high-CP 7model-multires + lattice-selector": 0.807,
+  "journey": "0.693 -> 0.807 (+0.114) pre-labeling, leakage-free OOF",
+  "0.80_VERDICT": "CROSSED, SEED-ROBUST: 5 seeds 0.807-0.808. All success criteria MET: ALL 0.807>=0.80, WEI ~0.723>=0.67, PXC high-CP recall 0.741>=0.65.",
+  "top_mode_needs": "manufacturer CP count + for high-CP(>=11) parts: 7-model (product 4 + keig128 3) inference at 6k+9k vc0.2 + lattice-augmented leave-one-out selector",
+  "stack": "Op1 RF gate (base+0.057) + Op3 high-CP multires (candidate recall 0.568->0.783) + Op5 lattice-augmented selector (high-CP recall 0.607->0.741)"
+ }
+}

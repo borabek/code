@@ -1,0 +1,16 @@
+{
+ "tespit_urun": 0.7583943683019512,
+ "tespit_kahin": 0.9370065470744999,
+ "robot_urun": 0.5893431322317577,
+ "robot_yon_kahin": 0.6089353144613808,
+ "robot_gate_kahin": 0.7715325580576645,
+ "yanal_ok": 0.8831615120274914,
+ "aci_ok": 0.8671248568155785,
+ "aci_kahin_ok": 0.8900343642611683,
+ "yalniz_yanal": 0.06414662084765177,
+ "yalniz_aci": 0.08018327605956473,
+ "ikisi_de": 0.052691867124856816,
+ "gate_kacirdigi": 201,
+ "urun_FP": 313,
+ "ulasilmaz_GT": 249
+}

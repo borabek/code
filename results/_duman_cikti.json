@@ -1,0 +1,72 @@
+{
+ "1001.2": [
+  {
+   "point": [
+    2.8444,
+    8.256,
+    38.1196
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 4.3,
+   "size_source": "brep",
+   "mouth_wide_mm": 3.97,
+   "depth_mm": 4.48,
+   "confidence": 0.85,
+   "votes": 3,
+   "wire_score": 0.371,
+   "kind": "Contact",
+   "n_verts": 105,
+   "tier": "review"
+  },
+  {
+   "point": [
+    2.3149,
+    17.5055,
+    19.0181
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 3.03,
+   "size_source": "measured",
+   "mouth_wide_mm": 7.37,
+   "depth_mm": 2.25,
+   "confidence": 0.729,
+   "votes": 2,
+   "wire_score": 0.34,
+   "kind": "Contact",
+   "n_verts": 129,
+   "tier": "review"
+  }
+ ],
+ "ElectricalTerminal": [
+  {
+   "point": [
+    2.8061,
+    6.5631,
+    12.9905
+   ],
+   "direction": [
+    1.0,
+    -0.0,
+    -0.0
+   ],
+   "size_mm": 2.0,
+   "size_source": "brep",
+   "mouth_wide_mm": 1.58,
+   "depth_mm": 1.26,
+   "confidence": 0.624,
+   "votes": 1,
+   "wire_score": 1.0,
+   "kind": "Contact",
+   "n_verts": 28,
+   "tier": "auto"
+  }
+ ]
+}

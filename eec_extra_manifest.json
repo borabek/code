@@ -1,0 +1,1197 @@
+{
+ "source_doi": "doi:10.7910/DVN/D3ODGT",
+ "n_parts": 132,
+ "total_verts": 790956,
+ "role": "ALL train-only; locked-11 stays sole test",
+ "category_note": "category_guess heuristic (id prefix) - verify before terminal-only ablation",
+ "parts": [
+  {
+   "part_id": "0804000",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "c8b285a26c31a65f147b269048e38e78",
+   "n_verts": 5997,
+   "has_cableentry": 1,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "0804003",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "445b97d59d0cffa72e74c633e7139c51",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "0804004",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "a0b3210926a9afb2636f9da21d2bf91c",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "0804005",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "e0490a7884d39a6bdbff4f827d7d4184",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "0914497",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "373b7e7abdf6bd063d3abfdde5a03172",
+   "n_verts": 5996,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "0915001",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "5264ab8ff993ece69490caf524e00bf9",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "0916611",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "451f0ca0483f636aee17880721c4ed22",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1127030000",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "b0954d65e9c2db37e74bfda937e52493",
+   "n_verts": 5990,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1521680000",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "82bcb1c0bc1f9f0aefd0245d3fad1bd0",
+   "n_verts": 5998,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1775580000",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "aedbc6124f7e855f8b1cf979fc392b8b",
+   "n_verts": 5986,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1992110000",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "ddf8f523b969e3fef2836ebee8959fcc",
+   "n_verts": 5996,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SAE231111R0140",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "c3521725fde6e49f40df824e90f97ff7",
+   "n_verts": 5882,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SAE342111R0140",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "862caf7f65214fffbe8c3995eca3608c",
+   "n_verts": 5835,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SAE351111R0140",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "2e09b73d276a6b8f3128c5945e50c504",
+   "n_verts": 5834,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SAE661111R0140",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "5221237dba5a2d2cfd4de7cd24823422",
+   "n_verts": 5838,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SBE111111R0120",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "bacfa40f52804286ce37d459c7a74578",
+   "n_verts": 5990,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SBE121111R0620",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "685d664d9afd607d1862c364d2a4b4b8",
+   "n_verts": 5990,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SNA645008R1200",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "a20ebea4c5759776d8e8f5f9b7589f7a",
+   "n_verts": 5926,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "1SVR630010R0200",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "7dfc708e9c92e51117839c17e0ac30c8",
+   "n_verts": 5968,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2000-1201",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "5d3066a1366186a6dc9bfb38db90f485",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2002-1208",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "1c8f0bbfd420fde6425f6586cb9229f8",
+   "n_verts": 6000,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2002-1401",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "7c836c71a183f4ecf76e17e356eddb22",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2002-1662",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "c8ed2c288a06ca646a87c7e8a90baea4",
+   "n_verts": 5994,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2002-1707",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "109b08fe266ddbaa60d008d1346c3a11",
+   "n_verts": 5986,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2002-2704",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "4c2d8eadf808bc4b5a6ceb912f73d2e1",
+   "n_verts": 5998,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2002-6302",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "c13c112ecfdaade3e998abc8f021413b",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2002-6405",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "234f322c11d8c9b15cfba8b6b4d557e4",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2004-1201",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "e374d4e96a9d22781cf5e5f05444070a",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2004-1301",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "6d0cce189c9d96365371109a85ed198d",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2006-1201",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "5e209a363c5f6eb4b955efcdf37cb018",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2006-1664",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "4f2c11a6a8f8cfce3f9ad0808d03e079",
+   "n_verts": 5994,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2010-1205",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "8ba53862e00785c6b4027efde22554c1",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2050-1201",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "a18801b7274095ebb80cb70ff72ac6fa",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2102-1204",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "584c92730aca858ec0a3d4a4e6949de5",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2200-1301",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "5da12095dc174dfcc6f5b664ea26f2ac",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2202-2704",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "b0e22d358fe1e1dbb596b2e5688303ab",
+   "n_verts": 5998,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2210-1204",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "34334a91c6ca28f7d638858a36bb88cd",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "terminal_block",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2817974",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "119970650509cb9bb672ba6475fe9041",
+   "n_verts": 5996,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2832124",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "d8afa8c9f6deafcb1fea75cd122e79a6",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2838160",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "5dee0f263836a63cc8cb4dda02436b8f",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2839130",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "119970650509cb9bb672ba6475fe9041",
+   "n_verts": 5996,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2839538",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "d8afa8c9f6deafcb1fea75cd122e79a6",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2858878",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "9ef390062bf27616df59df551b5d2105",
+   "n_verts": 5998,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2859181",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "0b69259e7e2555eaa496fdbbcb4f3a7a",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2864736",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "966390b5cb8f867d1e2e926098d7b1e3",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2864794",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "6cd06c02644de9d5da2d26d8ee002a57",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2866446",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "66f2f4ddf79f9be4e1f64465752abdaf",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2900326",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "7275b0a4c9f99cd4f3a6d3df25be711d",
+   "n_verts": 5998,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2900352",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "40abf2802e3a331d14553b43edaeca73",
+   "n_verts": 5992,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2900361",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "233fa6740f7949da42c5eb38ac21277e",
+   "n_verts": 5992,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2900381",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "db70be78430908cb4f046050287b57ca",
+   "n_verts": 5994,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2901485",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "12d5d1cb65697aed34f451869236331b",
+   "n_verts": 5990,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2901646",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "bc704895e6a140ad7b8195f0cccd534d",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2901873",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "50c7ad60c72ec2d87ce464ffe57b6c75",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2902964",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "083a823f9e129e3e5d5dfe8e078e2a4d",
+   "n_verts": 5994,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2903321",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "66a545706aec82220c578146b74e6075",
+   "n_verts": 5992,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2903327",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "cb950f060e2b0f3026d157d731355ee1",
+   "n_verts": 5994,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2903343",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "ad25f30d74a87c4a0e00d29c7154ef26",
+   "n_verts": 5994,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2903359",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "03733f4ffe19599ee36c57e6f703bb21",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2903368",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "8112fcf3cb1bb3a392e923ae7c9c5049",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2903373",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "d97a352155d9645dd40d342b115b8db0",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2904504",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "76cc5cb128ae720c947ed2009817b03f",
+   "n_verts": 5986,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2904952",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "dba049334de6e5473d8b0dbc3ecc7c9d",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2907560",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "116779ae6e413bf585445379d3a745dc",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2907810",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "51e254dd0ed62467065b12a1197262ca",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2907865",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "ebd56fa983d7bbc9b4643f04bc7d9918",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2907917",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "f4a43fadf8388159f6a53b8da6ed7368",
+   "n_verts": 5996,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2908193",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "4527a87e30eb403fe114e0a07466203d",
+   "n_verts": 5968,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2908438",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "b8d2ee5d5a71f56c9de63d24cb0c417e",
+   "n_verts": 5986,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2909512",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "008c04b293fd855e89f0c2e698dfc239",
+   "n_verts": 5984,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2909529",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "fae68db2cd1fc9c676d0609d5b1afabc",
+   "n_verts": 5992,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2909635",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "afd3696bcf199e12e393c0e0afb0f697",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2909680",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "23efd9fa0931591dcf406cca821782b0",
+   "n_verts": 5992,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2910345",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "1a42e2956b1d5e7d912cf001f5299538",
+   "n_verts": 5990,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2910352",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "acbc3b30411556c972fc7f8ab29f0e21",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2910354",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "b6aab839964c97bf4d29e47344057352",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2917382",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "a8e7eaa8c0acdb7735df10eb0aa34dfa",
+   "n_verts": 5990,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2920722",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "66519d0ea5c784885efdd80591a23adc",
+   "n_verts": 5992,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2921310",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "9ef390062bf27616df59df551b5d2105",
+   "n_verts": 5998,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2940087",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "72f55e57b9e3b684a863aa0790e3e695",
+   "n_verts": 5992,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2940207",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "1add863f9e014e1af457485009a90cdb",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2940294",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "563cf3858e3b4607a263bacebf9a24f1",
+   "n_verts": 5996,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2946793",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "3b88c48e5e946b7501903f25cb1eae2f",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "2964393",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "4beb6d3d2dadc2272125a79e6da36bce",
+   "n_verts": 5994,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3KD1630-2ME10-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "a68257a734717554a349bebe4b83b8f9",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3KD2244-2ME10-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "b368b0fd74cbdfe703ef9991656f199a",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3KD2260-2ME20-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "7169503000d8264d5c05a69f03e397ab",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3KD2632-2ME10-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "17acbbeaf0e4440dde014932e6cac5b9",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3KD2640-2ME10-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "01338472755d54ec735b917a2059eaaf",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3KD2830-2NE10-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "c78b5e4198c6a7a7811c6809907ed784",
+   "n_verts": 5996,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3RV2901-2A",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "4361e452b56d179e11609eccbc934a1b",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3RW3003-1CB54",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "e39766cff4ca122f4fd7e7ba35031b96",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3RW3026-1BB04",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "2ca4ecf74fa8bfe7530a20e44ed1e5b3",
+   "n_verts": 5992,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3UG4583-1CW30",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "9cce9c5fb38e7a1ba8dde47b983bdda1",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3UG4625-1CW30",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "76329f691488b0b8c1f065ea995b621c",
+   "n_verts": 6002,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "3UG4983-1A",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "44899deac66a440bc7a6092373fd14e5",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "440R-ENETR",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "8b7a40e684dabe39784f2a4e3ff9db3d",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "5TE8111",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "ddd9397d8ab6c0fddc6db221cb700b16",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "5TT5031-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "bfdd12f8e3791baac41afbfdb190b557",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "5TT5040-0",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "1d56014d4dad7de3f943fafbe28a3648",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "6EP1321-1SH03",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "14f1adff2d42791caac255d4d3134764",
+   "n_verts": 5984,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "900351",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "3f713f53eb73f497895b266fef82d400",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "900352",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "dd007b907bc05cf2d4a93d09019632c6",
+   "n_verts": 5992,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "908195",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "c02a713913fc6a51a940217bf2baced8",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "908219",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "64b6b6a1ac47267ab30b2bcf3061c557",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "908345",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "edd33a7226e059c2346ab6a8157a058a",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "908505",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "9724bb94a9862a72e6547559be50ac66",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "910631",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "c7c2821aae04719789f8ce4f58d3482a",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "910694",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "06d954eaaee6b783faa4925697ea3deb",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "910695",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "ec32276b36016f90a52868dbad11d9b1",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "910696",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "756cba91c5082b1eb04fd5b0d61a5f64",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "918400",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "e098954773044a08a2485f2648e096fb",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "918408",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "071105d5e9f5b1bb7b4595987f8d014e",
+   "n_verts": 6000,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "927408",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "56396c9da6ece2dd1bf0f02a7d619a3a",
+   "n_verts": 5998,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "941300",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "b3390bcf6ff46d378f54174ff1059039",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "950536",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "f2d0eee888b8a4d26acd8caf0ab32057",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "951300",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "466b7a6204761b3e4623811a064d0262",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "951315",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "550b57a1851dfba40539ad1d551570b4",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "952100",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "e85c2ca98a9c12b5b9407fe238e59faf",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "952305",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "63c156d545b6e375c5c2e17d504896f4",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "953229",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "155dfc287c1cfb0f69d1a2729654bc73",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "953400",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "8e2fe15c613bd2f3643d54232f2315e8",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "953406",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "a90b5813d023d2c94500c7a4322f3b22",
+   "n_verts": 5998,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "954115",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "ec741cd027b22dc7de7888ae32b36158",
+   "n_verts": 5994,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "955131",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "b20c3a0d04e53f63ee1ff8483f806e45",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "955329",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "dbf278b4252fe8bb95898bdab8c54478",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "961146",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "1edd48799d61c8b96a43a13037c527c2",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "961200",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "5ca03b16cc2baef2724828b3d16b4c6a",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "961205",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "24a4fe9b277abb0ddb60249caf663754",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "ELX9410",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "4035fa14db40892025668f38e2293091",
+   "n_verts": 6002,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "RGC2P60AA15C1",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "613f4be4ad6fa298acbe0938cc39c5ff",
+   "n_verts": 5974,
+   "has_cableentry": 0,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  },
+  {
+   "part_id": "RGC2P60AA40C1",
+   "source": "Harvard Dataverse doi:10.7910/DVN/D3ODGT (EEC)",
+   "md5": "10d242c2ee6a68c058075ede90f9aef6",
+   "n_verts": 5982,
+   "has_cableentry": 1,
+   "category_guess": "other_electrical",
+   "role": "extra_pretrain_train"
+  }
+ ]
+}

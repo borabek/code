@@ -1,0 +1,12 @@
+{
+ "say": {
+  "yazildi": 8,
+  "oz_tutarlilik_dustu": 4
+ },
+ "uretici": {
+  "SUPU": 8
+ },
+ "eksen_once": 0.5,
+ "eksen_sonra": 2.0,
+ "yaricap_payi": 1.15
+}

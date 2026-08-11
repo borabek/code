@@ -1,0 +1,57 @@
+{
+ "egri": {
+  "0.125": {
+   "grup": 119,
+   "havuzlanmis": 0.6853919561048745,
+   "sapma": 0.020347258583246514,
+   "uretici_ort": 0.5839590332800779,
+   "robot": 0.5281604838415644
+  },
+  "0.25": {
+   "grup": 238,
+   "havuzlanmis": 0.7139802854976501,
+   "sapma": 0.01044883580061154,
+   "uretici_ort": 0.5943934185077224,
+   "robot": 0.5574739948789009
+  },
+  "0.4": {
+   "grup": 381,
+   "havuzlanmis": 0.7232408174574645,
+   "sapma": 0.01365529290265786,
+   "uretici_ort": 0.6117946648713143,
+   "robot": 0.5595385155708451
+  },
+  "0.6": {
+   "grup": 572,
+   "havuzlanmis": 0.7409505545935776,
+   "sapma": 0.0023867810371478,
+   "uretici_ort": 0.6142619428856665,
+   "robot": 0.5745849165811837
+  },
+  "0.8": {
+   "grup": 762,
+   "havuzlanmis": 0.7464345681136811,
+   "sapma": 0.007560239756950833,
+   "uretici_ort": 0.6312857462456147,
+   "robot": 0.581880926301649
+  },
+  "1.0": {
+   "grup": 953,
+   "havuzlanmis": 0.7562584110287863,
+   "sapma": 0.0015232508812743724,
+   "uretici_ort": 0.6350147262306077,
+   "robot": 0.5878795266275008
+  }
+ },
+ "log_havuz": [
+  0.5294836588836782,
+  0.03300197391565841
+ ],
+ "log_uretici": [
+  0.4607302279424414,
+  0.025148612067609294
+ ],
+ "egim_son": 0.04392147125140035,
+ "simdiki_grup": 953,
+ "not": "Alt-ornekleme GRUP bazinda (ikizler birlikte). Ekstrapolasyon yalniz egri doymuyorsa anlamlidir; son iki noktanin egimi raporlanir."
+}

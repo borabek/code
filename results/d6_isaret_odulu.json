@@ -1,0 +1,45 @@
+{
+ "uretici": {
+  "MOR": [
+   42,
+   97
+  ],
+  "SE": [
+   12,
+   54
+  ],
+  "UTL": [
+   19,
+   61
+  ],
+  "S+S": [
+   10,
+   24
+  ],
+  "SUPU": [
+   92,
+   367
+  ],
+  "UPUN": [
+   49,
+   311
+  ],
+  "NIT": [
+   106,
+   229
+  ],
+  "ONV": [
+   5,
+   42
+  ]
+ },
+ "ceviri": {
+  "KURTULUR": 52,
+  "ikisi_de_kotu": 122,
+  "aci_hala_kotu": 86,
+  "yanal_hala_kotu": 75
+ },
+ "robot_gercek": 0.14752966708929674,
+ "robot_hepsi_cevrik": 0.03815936107323471,
+ "robot_mukemmel_isaret": 0.15593329893746566
+}

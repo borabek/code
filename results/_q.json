@@ -1,0 +1,148 @@
+{
+ "3211485": [
+  {
+   "point": [
+    6.2367,
+    7.1553,
+    39.0018
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 24.98,
+   "depth_mm": 13.82,
+   "confidence": 0.975,
+   "votes": 4,
+   "wire_score": 0.973,
+   "kind": "Contact",
+   "n_verts": 350,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.9738,
+    50.3557,
+    39.3429
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 25.64,
+   "depth_mm": 7.84,
+   "confidence": 0.967,
+   "votes": 4,
+   "wire_score": 0.974,
+   "kind": "Contact",
+   "n_verts": 376,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.6015,
+    66.2896,
+    39.5588
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 25.93,
+   "depth_mm": 5.49,
+   "confidence": 0.966,
+   "votes": 4,
+   "wire_score": 0.997,
+   "kind": "Contact",
+   "n_verts": 396,
+   "tier": "auto"
+  }
+ ],
+ "3211814": [
+  {
+   "point": [
+    5.9258,
+    7.1192,
+    38.9746
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 25.49,
+   "depth_mm": 14.46,
+   "confidence": 0.973,
+   "votes": 4,
+   "wire_score": 0.941,
+   "kind": "Contact",
+   "n_verts": 448,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    6.0525,
+    50.6911,
+    36.0581
+   ],
+   "direction": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "size_mm": 24.8,
+   "depth_mm": 9.18,
+   "confidence": 0.976,
+   "votes": 3,
+   "wire_score": 0.857,
+   "kind": "Contact",
+   "n_verts": 426,
+   "tier": "auto"
+  }
+ ],
+ "0270018": [
+  {
+   "point": [
+    3.0749,
+    10.2961,
+    21.7834
+   ],
+   "direction": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "size_mm": 11.88,
+   "depth_mm": 3.76,
+   "confidence": 0.934,
+   "votes": 4,
+   "wire_score": 0.563,
+   "kind": "CableEntry",
+   "n_verts": 213,
+   "tier": "review"
+  },
+  {
+   "point": [
+    1.0,
+    10.1647,
+    36.6497
+   ],
+   "direction": [
+    -1.0,
+    -0.0,
+    -0.0
+   ],
+   "size_mm": 5.47,
+   "depth_mm": 1.7,
+   "confidence": 0.601,
+   "votes": 1,
+   "wire_score": 0.5,
+   "kind": "Contact",
+   "n_verts": 57,
+   "tier": "review"
+  }
+ ]
+}

@@ -1,0 +1,63 @@
+{
+ "oznitelik": {
+  "13 taban [ham]": {
+   "havuzlanmis": 0.6485740793011752,
+   "uretici_ort": 0.5367907074636146,
+   "robot": 0.5068768588534162
+  },
+  "+5 B-rep fiziksel [ham]": {
+   "havuzlanmis": 0.7281997973421332,
+   "uretici_ort": 0.5786641069199243,
+   "robot": 0.5811308039957674
+  },
+  "+4 icbukey topoloji [ham]": {
+   "havuzlanmis": 0.7403462702903091,
+   "uretici_ort": 0.5924547560231612,
+   "robot": 0.5881398600678477
+  },
+  "+36 zengin [ham]": {
+   "havuzlanmis": 0.7668856868325583,
+   "uretici_ort": 0.586945069694671,
+   "robot": 0.6063194002477048
+  },
+  "13 taban [z-skor]": {
+   "havuzlanmis": 0.6678102662759997,
+   "uretici_ort": 0.560992292287832,
+   "robot": 0.513482355592762
+  },
+  "+5 B-rep fiziksel [z-skor]": {
+   "havuzlanmis": 0.7248478050921863,
+   "uretici_ort": 0.6050365266577362,
+   "robot": 0.5669882791922739
+  },
+  "+4 icbukey topoloji [z-skor]": {
+   "havuzlanmis": 0.742431995879957,
+   "uretici_ort": 0.6225564727138256,
+   "robot": 0.5791171169062221
+  },
+  "+36 zengin [z-skor]": {
+   "havuzlanmis": 0.7583943683019512,
+   "uretici_ort": 0.6324322955909609,
+   "robot": 0.5893431322317577
+  }
+ },
+ "karar": {
+  "gate (duzeltmesiz)": {
+   "robot": 0.44715281157935194,
+   "robot_isaretli": 0.4403652918321165
+  },
+  "+pose": {
+   "robot": 0.5350372528927031,
+   "robot_isaretli": 0.5297399555954058
+  },
+  "+pose +aci": {
+   "robot": 0.5593989368515434,
+   "robot_isaretli": 0.5541016395542461
+  },
+  "+pose +aci +uye": {
+   "robot": 0.5893431322317577,
+   "robot_isaretli": 0.5817988557277657
+  }
+ },
+ "not": "TEK kosu, AYNI olcum kumesi (194 parca/174 grup), AYNI korpus (zengin_parite_w2). Onceki gecelerin blok sayilari FARKLI tabanlardan geldigi icin TOPLANAMAZ; bu tablo toplanabilir."
+}

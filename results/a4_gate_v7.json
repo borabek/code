@@ -1,0 +1,30 @@
+{
+ "sonuc": {
+  "g7 + gate v5 (DAGITILAN)": {
+   "tespit": 0.5112758555704242,
+   "robot": 0.11135428809986687,
+   "onbellek": "results/_p1_olasilik_g7",
+   "gate": "results/wire_gate_v5.pkl",
+   "tespit_fark": 0.0,
+   "robot_fark": 0.0
+  },
+  "g10 + gate v5 (refit YOK)": {
+   "tespit": 0.5225431969683253,
+   "robot": 0.13384957656878116,
+   "onbellek": "results/_p1_olasilik_g10",
+   "gate": "results/wire_gate_v5.pkl",
+   "tespit_fark": 0.011267341397901087,
+   "robot_fark": 0.022495288468914285
+  },
+  "g10 + gate v7 (REFIT)": {
+   "tespit": 0.5315758455017159,
+   "robot": 0.13585058426781751,
+   "onbellek": "results/_p1_olasilik_g10",
+   "gate": "results/wire_gate_v7.pkl",
+   "tespit_fark": 0.020299989931291673,
+   "robot_fark": 0.02449629616795064
+  }
+ },
+ "n_parca": 468,
+ "not": "D6 = DEV. Muhurlu sinav DEGIL."
+}

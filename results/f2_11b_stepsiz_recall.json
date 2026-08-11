@@ -1,0 +1,154 @@
+{
+ "referans_eslestirilmis": {
+  "WEI": {
+   "step": 0.8764,
+   "json": 0.8858
+  },
+  "PXC": {
+   "step": 0.845,
+   "json": 0.2999
+  }
+ },
+ "eslestirilmemis_gosterge": {
+  "CEM": {
+   "recall": 0.11261261261261261,
+   "gt": 222,
+   "aday": 34,
+   "aday_per_gt": 0.15315315315315314,
+   "parca": 6,
+   "json_tepe_medyan": 44540.0
+  },
+  "PXC": {
+   "recall": 0.39316239316239315,
+   "gt": 117,
+   "aday": 107,
+   "aday_per_gt": 0.9145299145299145,
+   "parca": 12,
+   "json_tepe_medyan": 3194.0
+  },
+  "ABB": {
+   "recall": 0.3888888888888889,
+   "gt": 72,
+   "aday": 212,
+   "aday_per_gt": 2.9444444444444446,
+   "parca": 12,
+   "json_tepe_medyan": 6423.0
+  },
+  "RIT": {
+   "recall": 0.13114754098360656,
+   "gt": 61,
+   "aday": 43,
+   "aday_per_gt": 0.7049180327868853,
+   "parca": 9,
+   "json_tepe_medyan": 1994.0
+  },
+  "AL": {
+   "recall": 0.0,
+   "gt": 56,
+   "aday": 34,
+   "aday_per_gt": 0.6071428571428571,
+   "parca": 12,
+   "json_tepe_medyan": 1599.5
+  },
+  "C3": {
+   "recall": 0.4642857142857143,
+   "gt": 56,
+   "aday": 38,
+   "aday_per_gt": 0.6785714285714286,
+   "parca": 5,
+   "json_tepe_medyan": 23660.0
+  },
+  "CWT": {
+   "recall": 0.32075471698113206,
+   "gt": 53,
+   "aday": 52,
+   "aday_per_gt": 0.9811320754716981,
+   "parca": 12,
+   "json_tepe_medyan": 1226.0
+  },
+  "A-B_N": {
+   "recall": 1.0,
+   "gt": 41,
+   "aday": 157,
+   "aday_per_gt": 3.8292682926829267,
+   "parca": 12,
+   "json_tepe_medyan": 1437.5
+  },
+  "A-B": {
+   "recall": 0.675,
+   "gt": 40,
+   "aday": 131,
+   "aday_per_gt": 3.275,
+   "parca": 12,
+   "json_tepe_medyan": 1436.0
+  },
+  "EFX": {
+   "recall": 0.0,
+   "gt": 39,
+   "aday": 16,
+   "aday_per_gt": 0.41025641025641024,
+   "parca": 12,
+   "json_tepe_medyan": 3553.0
+  },
+  "WEI": {
+   "recall": 0.8648648648648649,
+   "gt": 37,
+   "aday": 185,
+   "aday_per_gt": 5.0,
+   "parca": 12,
+   "json_tepe_medyan": 1388.5
+  },
+  "ELMEX": {
+   "recall": 0.25,
+   "gt": 32,
+   "aday": 104,
+   "aday_per_gt": 3.25,
+   "parca": 12,
+   "json_tepe_medyan": 738.0
+  },
+  "SIE": {
+   "recall": 0.5483870967741935,
+   "gt": 31,
+   "aday": 60,
+   "aday_per_gt": 1.935483870967742,
+   "parca": 12,
+   "json_tepe_medyan": 802.5
+  },
+  "KLM": {
+   "recall": 0.25806451612903225,
+   "gt": 31,
+   "aday": 32,
+   "aday_per_gt": 1.032258064516129,
+   "parca": 12,
+   "json_tepe_medyan": 754.0
+  },
+  "DIN": {
+   "recall": 0.1724137931034483,
+   "gt": 29,
+   "aday": 11,
+   "aday_per_gt": 0.3793103448275862,
+   "parca": 12,
+   "json_tepe_medyan": 2570.0
+  },
+  "CCD": {
+   "recall": 0.7083333333333334,
+   "gt": 24,
+   "aday": 48,
+   "aday_per_gt": 2.0,
+   "parca": 12,
+   "json_tepe_medyan": 1231.0
+  },
+  "DEG": {
+   "recall": 0.20833333333333334,
+   "gt": 24,
+   "aday": 28,
+   "aday_per_gt": 1.1666666666666667,
+   "parca": 12,
+   "json_tepe_medyan": 1241.0
+  }
+ },
+ "wei_benzeri": [
+  "CCD"
+ ],
+ "uyari": "tanidiklikla karisik; tek basina kanit degil"
+}

@@ -1,0 +1,65 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "taban (58)": {
+   "esik": 0.3,
+   "robot": 0.15537346359911755,
+   "tespit": 0.3567601638827608,
+   "makro": 0.15397511299145766,
+   "sutun": 58
+  },
+  "+KAYNAK": {
+   "esik": 0.3,
+   "robot": 0.15752240213802862,
+   "tespit": 0.35843420845778967,
+   "makro": 0.14687681833563274,
+   "sutun": 59
+  },
+  "+YOGUNLUK": {
+   "esik": 0.3,
+   "robot": 0.15579882595589403,
+   "tespit": 0.3512613041408853,
+   "makro": 0.15210324175817783,
+   "sutun": 61
+  },
+  "+MERKEZ": {
+   "esik": 0.3,
+   "robot": 0.1602655286865813,
+   "tespit": 0.3549865655128813,
+   "makro": 0.15706621784488675,
+   "sutun": 61
+  },
+  "+HEPSI": {
+   "esik": 0.3,
+   "robot": 0.15095541401273885,
+   "tespit": 0.3538216560509554,
+   "makro": 0.14737810154525863,
+   "sutun": 65
+  }
+ },
+ "not": "D6-olcekli kiyas (egitim 468). Mutlak degerler tam olcekten DUSUK; aranan hangi oznitelik grubunun ise yaradigi. D7 marka-disi."
+}

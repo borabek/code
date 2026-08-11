@@ -1,0 +1,10 @@
+{
+ "best_route": {
+  "WEI": "SetNet",
+  "PXC": "SetNet",
+  "aggregate_ALL": 0.765743073047859,
+  "WEI_F1": 0.7322239031770047,
+  "PXC_F1": 0.7733516483516484
+ },
+ "single_model_rf_ALL": 0.7544113393115418
+}

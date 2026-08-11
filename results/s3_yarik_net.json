@@ -1,0 +1,25 @@
+{
+ "toplam": 872,
+ "dik_sinif": 107,
+ "yakin": 701,
+ "kurallar": {
+  "R1 her zaman": {
+   "duzelen": 41,
+   "bozulan": 228,
+   "degismeyen": 432
+  },
+  "R2 fark>45": {
+   "duzelen": 26,
+   "bozulan": 175,
+   "degismeyen": 500
+  },
+  "R3 fark>60": {
+   "duzelen": 26,
+   "bozulan": 175,
+   "degismeyen": 500
+  }
+ },
+ "en_iyi": null,
+ "net": 0,
+ "gecti": false
+}

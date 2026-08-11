@@ -1,0 +1,100 @@
+{
+ "sonuc": {
+  "58": {
+   "havuzlanmis": 0.7583943683019512,
+   "uretici_ort": 0.6324322955909609,
+   "robot": 0.5893431322317577
+  },
+  "45": {
+   "havuzlanmis": 0.7490911904909305,
+   "uretici_ort": 0.6236919168646995,
+   "robot": 0.5915400576811822
+  },
+  "35": {
+   "havuzlanmis": 0.7460799698988675,
+   "uretici_ort": 0.6011031543778508,
+   "robot": 0.5836593983444377
+  },
+  "28": {
+   "havuzlanmis": 0.7262717723355966,
+   "uretici_ort": 0.5972757917757918,
+   "robot": 0.557676585825882
+  },
+  "22": {
+   "havuzlanmis": 0.7123630655652702,
+   "uretici_ort": 0.5873215700415435,
+   "robot": 0.5426671154566877
+  },
+  "16": {
+   "havuzlanmis": 0.681500159083678,
+   "uretici_ort": 0.5730615821028124,
+   "robot": 0.5136708558701877
+  },
+  "12": {
+   "havuzlanmis": 0.6711330878597237,
+   "uretici_ort": 0.5058185347373432,
+   "robot": 0.5054466841610538
+  }
+ },
+ "kazanan": null,
+ "siralama_havuz": [
+  "kon_z",
+  "kon_y",
+  "yuz_loz",
+  "yuz_hix",
+  "r10_c4",
+  "gecen",
+  "r3_c2",
+  "r6_c2",
+  "r15_c2",
+  "yuz_hiz",
+  "r6_c4",
+  "yuz_lox",
+  "r10_c2",
+  "yuz_loy",
+  "r15_c0",
+  "depth",
+  "r3_c3",
+  "r15_c4",
+  "r6_c3",
+  "ce_frac",
+  "r15_c3",
+  "votes",
+  "nverts",
+  "r_orani",
+  "r10_c3",
+  "nstd_3",
+  "r3_yog",
+  "r10_c0",
+  "kon_cevre",
+  "kon_x",
+  "r6_yog",
+  "r15_c1",
+  "bos_derinlik",
+  "kon_sayi",
+  "r3_c4",
+  "r10_c1",
+  "kon_aci",
+  "r6_c0",
+  "r10_yog",
+  "r3_c0",
+  "nstd_6",
+  "r15_yog",
+  "nn_dist",
+  "nstd_10",
+  "r3_c1",
+  "r6_c1",
+  "ct_frac",
+  "yuz_hiy",
+  "kon_oran",
+  "brep_r",
+  "size",
+  "esesenli",
+  "aspect",
+  "chan_conn",
+  "flat",
+  "conf",
+  "outward",
+  "n_close"
+ ]
+}

@@ -1,0 +1,1032 @@
+{
+ "n_parts": 102,
+ "n_manufacturer_known": 4,
+ "n_match": 2,
+ "n_gt_incomplete": 2,
+ "n_needs_human": 100,
+ "total_cableentry_cp": 193,
+ "total_contact_components": 293,
+ "hypothesis": "CableEntry = physical CP (matches mfr on cleanly-labelled parts); Contact = auxiliary, not counted",
+ "rows": [
+  {
+   "part_id": "0271017",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 0,
+   "manufacturer_count": 8,
+   "status": "gt_incomplete",
+   "needs_human": true,
+   "note": "mfr 8 but 0 CableEntry AND 0 Contact -> human segmentation misses all connections"
+  },
+  {
+   "part_id": "0309112",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0311126",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0313085",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0441025",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0441106",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0441504",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0443010",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0443023",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0443049",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0443078",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0443081",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0444019",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0452014",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0501059",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0503057",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0505055",
+   "split": "train",
+   "cableentry_cp": 1,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0531210",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0552024",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0561002",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0561028",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0701011",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0701024",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0711344",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0711580",
+   "split": "train",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0719074",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0790446",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0790462",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0790527",
+   "split": "train",
+   "cableentry_cp": 1,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0790530",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0790543",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0920083",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "2200-1407",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "2210-1307",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "2250-1207",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3000608",
+   "split": "train",
+   "cableentry_cp": 3,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3000715",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3000716",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 6,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3001369",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 1,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3001501",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3002389",
+   "split": "train",
+   "cableentry_cp": 6,
+   "contact_components": 6,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3002652",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3003091",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3004058",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3004524",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3005099",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3005837",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3006043",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3006179",
+   "split": "train",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3007042",
+   "split": "train",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3009053",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3031681",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3035693",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3036084",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 6,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3044076",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3044160",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3044238",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3044555",
+   "split": "train",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3046485",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3046566",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3048823",
+   "split": "train",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3072803",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3073018",
+   "split": "train",
+   "cableentry_cp": 3,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3100318",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3208746",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3209511",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3209606",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3210499",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 6,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3212154",
+   "split": "train",
+   "cableentry_cp": 0,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3215928",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3248037",
+   "split": "train",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0311087",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0311142",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0441517",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0452043",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0461018",
+   "split": "val",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0701008",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0701095",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 6,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0719016",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0719113",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "2002-2941",
+   "split": "val",
+   "cableentry_cp": 0,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "2002-7214",
+   "split": "val",
+   "cableentry_cp": 0,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3001035",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3001381",
+   "split": "val",
+   "cableentry_cp": 3,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3001695",
+   "split": "val",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3002602",
+   "split": "val",
+   "cableentry_cp": 0,
+   "contact_components": 5,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3008025",
+   "split": "val",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3011041",
+   "split": "val",
+   "cableentry_cp": 7,
+   "contact_components": 7,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3044364",
+   "split": "val",
+   "cableentry_cp": 3,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3100062",
+   "split": "val",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3214602",
+   "split": "val",
+   "cableentry_cp": 0,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0444048",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": 2,
+   "status": "match",
+   "needs_human": false,
+   "note": "cp-v2 (2) matches mfr; Contact+CableEntry would give 5 -> over-count"
+  },
+  {
+   "part_id": "0446017",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": 2,
+   "status": "match",
+   "needs_human": false,
+   "note": "cp-v2 (2) matches mfr (Phoenix Contact page); Contact+CableEntry gives 5 -> over-count"
+  },
+  {
+   "part_id": "0452027",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 3,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0461034",
+   "split": "test_locked",
+   "cableentry_cp": 4,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0701082",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "0790491",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3001373",
+   "split": "test_locked",
+   "cableentry_cp": 0,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3005688",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3033168",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 4,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3047413",
+   "split": "test_locked",
+   "cableentry_cp": 2,
+   "contact_components": 2,
+   "manufacturer_count": null,
+   "status": "unknown",
+   "needs_human": true,
+   "note": ""
+  },
+  {
+   "part_id": "3209635",
+   "split": "test_locked",
+   "cableentry_cp": 0,
+   "contact_components": 2,
+   "manufacturer_count": 3,
+   "status": "gt_incomplete",
+   "needs_human": true,
+   "note": "mfr 3 but 0 CableEntry (2 Contact) -> CableEntry label missing; do NOT count Contact"
+  }
+ ]
+}

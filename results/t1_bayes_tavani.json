@@ -1,0 +1,23 @@
+{
+ "k": 15,
+ "n": 1186,
+ "sonuc": {
+  "MEVCUT (gate ozn.)": {
+   "uyusmazlik": 0.17015177065767287,
+   "ayrilamaz": 0.1281618887015177,
+   "tavan": 0.9149241146711635
+  },
+  "+ FIZIKSEL olcumler": {
+   "uyusmazlik": 0.16683530073074762,
+   "ayrilamaz": 0.1281618887015177,
+   "tavan": 0.9165823496346261
+  },
+  "YALNIZ fiziksel": {
+   "uyusmazlik": 0.20522765598650927,
+   "ayrilamaz": 0.12984822934232715,
+   "tavan": 0.8973861720067453
+  }
+ },
+ "goreli_azalma": 0.0,
+ "gecti": false
+}

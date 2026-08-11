@@ -1,0 +1,20 @@
+{
+ "f1_base": 0.7954406973151845,
+ "f1_brep": 0.8003437245602801,
+ "delta": 0.004903027245095615,
+ "sd_base": 0.000882448193258395,
+ "sd_brep": 0.0013380256254939306,
+ "standalone": {
+  "en_yakin_silindir_mm": 0.5560163213098813,
+  "silindir_yaricap": 0.4606413178429898,
+  "silindir_alan": 0.5008174522507061,
+  "silindir_sayisi_6mm": 0.39238327995679845,
+  "duzlem_sayisi_6mm": 0.29550690849527117,
+  "koni_torus_6mm": 0.3477460310209302,
+  "silindir_alan_toplam_6mm": 0.45886586147769526,
+  "duzlem_alan_toplam_6mm": 0.4944475079983228,
+  "silindir_orani_6mm": 0.4629437417304439,
+  "en_yakin_yuzey_tipi": 0.41555696225248434
+ },
+ "verdict": "OLU"
+}

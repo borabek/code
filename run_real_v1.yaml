@@ -1,0 +1,55 @@
+# cp_real_v1 — THE RESTART (2026-07-15). Single focus, agreed with the user:
+# find the CPs of the WSCAD models using ONLY the Desktop\JSON manufacturer labels
+# (479 parts, 11,927 ConnectionPoints with terminal names). No pseudo-labels, no
+# keep_prefixes (the root mistake: it silently dropped 458/479 real parts from
+# every v27-v31 run), no extra_sources. Honest zero point measured first:
+# v31-best scores F1 0.0085 on this corpus.
+#
+# Recipe = the proven v28 hierpoint recipe adapted to the small real corpus:
+#   - init_from synth pretrain (+8.8pp measured on the 136-part era, hp_v25)
+#   - augment 2: 334 train parts is SMALL; reflection+jitter+dropout+cable clones
+#     are the overfit brake (ROTATION OFF -- 98.1% axis-aligned; see aug_rotate)
+#   - fwd_verts 48000: the measured-safe speedup (GPU sat at 1.4/4.3GB on v31;
+#     chunked==fused gradient identity makes this bit-identical, just faster)
+#   - epochs 90 (small corpus converges/overfits differently than 3033 parts;
+#     patience 8 stale evals will stop it if it plateaus, and the FIXED min_delta
+#     logic now refreshes best.ckpt on EVERY improvement)
+backbone: hierpoint
+init_from: checkpoints/cp_hp_pretrain_synth_best.ckpt
+run_name: cp_real_v1
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt   # quarantine the 9 PXC bridge parts (the ONLY teacher->student probe) from BOTH fit and eval
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 48000
+knn_cache_dir: _prep_cache   # pay the pooling-hierarchy prebuild ONCE; every --resume reuses it instead of recomputing 2-6h
+
+epochs: 90
+eval_every: 5
+patience: 8
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+
+augment: 2
+aug_rotate: false      # 98.1% of teacher CP dirs are exactly +-X/+-Y/+-Z; continuous SO(3) erases that prior. Reflection below is axis-preserving, so it stays on.
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

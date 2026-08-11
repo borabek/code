@@ -1,0 +1,49 @@
+# v22: FIRST hierpoint run -- new backbone (hierarchical point U-Net, c_in=9),
+# corrected labels (wscad_corpus_v2: slot fusion + 110 mesh-verified direction
+# flips), SIGNED direction loss everywhere (sign_inv_prefixes default empty).
+# Compare against (a) the Phase-0 re-baseline of cp_knn_v19_best on corpus_v2
+# and (b) cp_knn_v21_seed0 (old arch + new labels) to separate label gains from
+# architecture gains.
+backbone: hierpoint
+run_name: cp_hp_v22
+seed: 0
+extra_sources:
+  - wscad_corpus_v2
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+device: cuda
+# hierpoint at 14000 verts/patch peaks ~0.6 GB (probe: 556 MB solo, 1.06 GB for
+# a fused 2x14000 chunk) -- far under the 4 GB T1200's ~3.7 GB WDDM spill cliff,
+# and each patch sees 2x the context the 7000 cap allowed.
+max_gpu_verts: 14000
+fwd_verts: 28000
+# disk cache OFF: it re-filled the near-full C: drive (hier .npz + knn .npy).
+# RAM holds the graphs for the run; the cache only saved ~26s of prebuild.
+
+epochs: 90          # cold-start eats ~15-25 epochs before heat peaks cross the
+eval_every: 5       # 0.30 decode threshold (measured: peaks 0.26 & rising at ep5);
+patience: 10        # patience 10 survives that, epochs 90 leaves cosine room after.
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001          # v19's proven value; 5e-4 starved the centernet heat head
+lr_schedule: cosine  # (0 detections through epoch 10 on the knngraph control).
+weight_decay: 0.0005
+grad_clip: 1.0

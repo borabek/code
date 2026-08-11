@@ -1,0 +1,32 @@
+{
+ "tag": "keig96_3seed",
+ "ckpts": [
+  "results/seg_extra/recall_hard_s2.pt",
+  "results/seg_extra/recall_hard_keig96_s0.pt",
+  "results/seg_extra/recall_hard_keig96_s1.pt",
+  "results/seg_extra/recall_hard_keig96_s2.pt"
+ ],
+ "sweep": {
+  "vote1": {
+   "f1": 0.5578124999999999,
+   "p": 0.4180327868852459,
+   "r": 0.8380281690140845
+  },
+  "vote2": {
+   "f1": 0.6651216685979142,
+   "p": 0.6567505720823799,
+   "r": 0.6737089201877934
+  },
+  "vote3": {
+   "f1": 0.5834542815674891,
+   "p": 0.7642585551330798,
+   "r": 0.47183098591549294
+  },
+  "vote4": {
+   "f1": 0.4071428571428571,
+   "p": 0.8507462686567164,
+   "r": 0.2676056338028169
+  }
+ },
+ "best_vote": 2
+}

@@ -1,0 +1,86 @@
+{
+ "n": 1186,
+ "rejim": {
+  "HAVUZLANMIS": {
+   "MEVCUT (gate ozn.)": {
+    "uyusmazlik": 0.17015177065767287,
+    "ayrilamaz": 0.1281618887015177,
+    "tavan": 0.9149241146711635
+   },
+   "+ YAPISAL/ILISKISEL": {
+    "uyusmazlik": 0.16975829117481733,
+    "ayrilamaz": 0.12984822934232715,
+    "tavan": 0.9151208544125913
+   },
+   "YALNIZ yapisal": {
+    "uyusmazlik": 0.20657672849915684,
+    "ayrilamaz": 0.13827993254637436,
+    "tavan": 0.8967116357504216
+   }
+  },
+  "YAPI TANIMLI (>=4 aday)": {
+   "MEVCUT (gate ozn.)": {
+    "uyusmazlik": 0.17166494312306102,
+    "ayrilamaz": 0.13650465356773525,
+    "tavan": 0.9141675284384695
+   },
+   "+ YAPISAL/ILISKISEL": {
+    "uyusmazlik": 0.17318166149603584,
+    "ayrilamaz": 0.140641158221303,
+    "tavan": 0.9134091692519821
+   },
+   "YALNIZ yapisal": {
+    "uyusmazlik": 0.21130644605308518,
+    "ayrilamaz": 0.14270941054808686,
+    "tavan": 0.8943467769734574
+   }
+  },
+  "yapi tanimsiz (<4)": {
+   "MEVCUT (gate ozn.)": {
+    "uyusmazlik": 0.1662100456621005,
+    "ayrilamaz": 0.1095890410958904,
+    "tavan": 0.9168949771689497
+   },
+   "+ YAPISAL/ILISKISEL": {
+    "uyusmazlik": 0.1598173515981735,
+    "ayrilamaz": 0.1095890410958904,
+    "tavan": 0.9200913242009132
+   },
+   "YALNIZ yapisal": {
+    "uyusmazlik": 0.18508371385083713,
+    "ayrilamaz": 0.1095890410958904,
+    "tavan": 0.9074581430745814
+   }
+  }
+ },
+ "karar": {
+  "HAVUZLANMIS": {
+   "goreli_azalma": -0.01315789473684209,
+   "gecti": false
+  },
+  "YAPI TANIMLI (>=4 aday)": {
+   "goreli_azalma": -0.030303030303030346,
+   "gecti": false
+  },
+  "yapi tanimsiz (<4)": {
+   "goreli_azalma": 0.0,
+   "gecti": false
+  }
+ },
+ "kapi": {
+  "goreli_azalma": -0.030303030303030346,
+  "gecti": false
+ },
+ "sutunlar": [
+  "adim_hata",
+  "kafes_uyum",
+  "esdogrusal_n",
+  "sira_rank",
+  "sira_boy",
+  "komsu_mesafe",
+  "komsu_mesafe_z",
+  "ayna_esi",
+  "yon_uyum",
+  "yogunluk"
+ ]
+}

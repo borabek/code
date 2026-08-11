@@ -1,0 +1,9 @@
+{
+ "n_parts": 1903,
+ "mae": 1.2974251182343668,
+ "baseline_mae": 6.044140830267998,
+ "within_1": 0.7651077246452969,
+ "exact": 0.4619022595901209,
+ "beats_baseline": true,
+ "usable_for_topn": true
+}

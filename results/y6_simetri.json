@@ -1,0 +1,3079 @@
+{
+ "tol_mm": 1.5,
+ "min_gt": 3,
+ "sonuc": [
+  {
+   "idx": 13,
+   "pid": "0443049",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 210,
+   "pid": "1010780000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 54,
+   "pid": "1010880000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 55,
+   "pid": "1010880000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 48,
+   "pid": "1016900000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 49,
+   "pid": "1016900000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 50,
+   "pid": "1016900000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 51,
+   "pid": "1016900000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 52,
+   "pid": "1016900000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 211,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 19.223322616431705,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 212,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 19.798378953301025,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 213,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 19.70555278569845,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 214,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 21.98320414535007,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 215,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 18.78521332667393,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 216,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 17.59498306379904,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 217,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 18.994490476380914,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 218,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 17.8186891298907,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 219,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 17.631445371477383,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 220,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 16.50986137199733,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 221,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 16.33236768461167,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 222,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 16.19715723888751,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 223,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 16.473757473732416,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 224,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 16.52124130083617,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 225,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 11.894483639127994,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 226,
+   "pid": "1020700000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 16.40699640270968,
+   "adim_mm": 10.199999999999994
+  },
+  {
+   "idx": 227,
+   "pid": "1042480000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 10.691575390613213,
+   "adim_mm": 12.003999999999998
+  },
+  {
+   "idx": 20,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 31.00407695807301,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 21,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 31.459863716191595,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 22,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 31.738253241736377,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 23,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 35.42697219246853,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 24,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 25.191735823277337,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 25,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 21.73948782783423,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 26,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 33.82455312143884,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 27,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 17.626438799063575,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 28,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 33.355635167211155,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 29,
+   "pid": "1045970000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 20.593640129918505,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 128,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 10,
+   "sapma": 3.789624149803444,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 129,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 17,
+   "sapma": 2.610909724530525,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 130,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -12,
+   "sapma": 4.161941145280137,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 131,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -7,
+   "sapma": 16.239004690335495,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 132,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -13,
+   "sapma": 17.478180331596043,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 133,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 12,
+   "sapma": 10.42306143738292,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 134,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -27,
+   "sapma": 35.85543424214005,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 135,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 9.94483452820647,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 136,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -5,
+   "sapma": 10.644844068244455,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 137,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 10.317913163171117,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 138,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -5,
+   "sapma": 6.282665758460472,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 139,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 7.975865024447386,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 140,
+   "pid": "1054738",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -9,
+   "sapma": 10.912937934036181,
+   "adim_mm": 2.6000062000047244
+  },
+  {
+   "idx": 30,
+   "pid": "1079006",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 10.016918512497053,
+   "adim_mm": 8.302694071605146
+  },
+  {
+   "idx": 31,
+   "pid": "1079006",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 4.1236399134180814,
+   "adim_mm": 8.302694071605146
+  },
+  {
+   "idx": 141,
+   "pid": "1088730",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 14,
+   "pid": "1164788",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 113,
+   "pid": "1173820000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 3.9597336362727296,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 77,
+   "pid": "1173840000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -9,
+   "sapma": 3.2537244699251917,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 228,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 2.7185492510095437,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 229,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 5,
+   "sapma": 2.6748324048861956,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 230,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -5,
+   "sapma": 8.291236941680355,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 231,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 5,
+   "sapma": 5.771519234662936,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 232,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 7.836116476255242,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 233,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 9.40869004101942,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 234,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 9.669975058527966,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 235,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -3,
+   "sapma": 10.52619454218167,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 236,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 6,
+   "sapma": 5.801420155987887,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 237,
+   "pid": "1208920000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 5.101704065687009,
+   "adim_mm": 18.8095320289209
+  },
+  {
+   "idx": 238,
+   "pid": "1267910000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 5.939840894400338,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 239,
+   "pid": "1267910000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 3.1071147733055358,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 240,
+   "pid": "1267910000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -8,
+   "sapma": 5.007724454221782,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 241,
+   "pid": "1267910000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -8,
+   "sapma": 4.200970504509711,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 242,
+   "pid": "1267910000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 9,
+   "sapma": 5.074705145880944,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 243,
+   "pid": "1267910000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 7.645336663142432,
+   "adim_mm": 6.252000000000006
+  },
+  {
+   "idx": 142,
+   "pid": "1336370",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 15.727691464772784,
+   "adim_mm": 18.123206848395096
+  },
+  {
+   "idx": 143,
+   "pid": "1336370",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 5.193094426531721,
+   "adim_mm": 18.123206848395096
+  },
+  {
+   "idx": 144,
+   "pid": "1336370",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 4.9556195004179475,
+   "adim_mm": 18.123206848395096
+  },
+  {
+   "idx": 145,
+   "pid": "1336370",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 5.911068142203295,
+   "adim_mm": 18.123206848395096
+  },
+  {
+   "idx": 146,
+   "pid": "1336387",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 4.663175052722119,
+   "adim_mm": 18.125911482453525
+  },
+  {
+   "idx": 147,
+   "pid": "1336387",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 3.654069182381016,
+   "adim_mm": 18.125911482453525
+  },
+  {
+   "idx": 148,
+   "pid": "1336387",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 5.003859332515323,
+   "adim_mm": 18.125911482453525
+  },
+  {
+   "idx": 149,
+   "pid": "1336387",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 8.574411816101142,
+   "adim_mm": 18.125911482453525
+  },
+  {
+   "idx": 244,
+   "pid": "1394040000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 7.03128128947816,
+   "adim_mm": 9.700000000000001
+  },
+  {
+   "idx": 245,
+   "pid": "1394040000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 15.414726073616166,
+   "adim_mm": 9.700000000000001
+  },
+  {
+   "idx": 246,
+   "pid": "1394040000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 8.288179217819366,
+   "adim_mm": 9.700000000000001
+  },
+  {
+   "idx": 247,
+   "pid": "1394040000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 14.268560049968636,
+   "adim_mm": 9.700000000000001
+  },
+  {
+   "idx": 248,
+   "pid": "1394040000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -6,
+   "sapma": 9.622778046920557,
+   "adim_mm": 9.700000000000001
+  },
+  {
+   "idx": 249,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 25.522829407295188,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 250,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 22.541864630665852,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 251,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 28.418730321416618,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 252,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 22.140028643807444,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 253,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 23.7820300804427,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 254,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 26.700052585141254,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 255,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 21.378597254303035,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 256,
+   "pid": "1561720000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 25.31463860231856,
+   "adim_mm": 9.220148855544675
+  },
+  {
+   "idx": 257,
+   "pid": "1561750000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 16.47928141336506,
+   "adim_mm": 8.26619662117957
+  },
+  {
+   "idx": 258,
+   "pid": "1561750000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 21.912091304080164,
+   "adim_mm": 8.26619662117957
+  },
+  {
+   "idx": 60,
+   "pid": "1561930000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 18.513896280389766,
+   "adim_mm": 6.875000129292927
+  },
+  {
+   "idx": 61,
+   "pid": "1561930000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 9.122201004718443,
+   "adim_mm": 6.875000129292927
+  },
+  {
+   "idx": 62,
+   "pid": "1561930000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 8.853427555087015,
+   "adim_mm": 6.875000129292927
+  },
+  {
+   "idx": 63,
+   "pid": "1561930000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 4.800735005962717,
+   "adim_mm": 6.875000129292927
+  },
+  {
+   "idx": 259,
+   "pid": "1562000000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 2,
+   "sapma": 19.31527842995453,
+   "adim_mm": 5.6522647468249465
+  },
+  {
+   "idx": 260,
+   "pid": "1562140000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 16.47928141336506,
+   "adim_mm": 8.26619662117957
+  },
+  {
+   "idx": 261,
+   "pid": "1562140000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 21.912091304080164,
+   "adim_mm": 8.26619662117957
+  },
+  {
+   "idx": 262,
+   "pid": "1562220000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 10.172972201780688,
+   "adim_mm": 7.29999989
+  },
+  {
+   "idx": 263,
+   "pid": "1562220000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 22.792380109370956,
+   "adim_mm": 7.29999989
+  },
+  {
+   "idx": 264,
+   "pid": "1562220000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 26.68829063096795,
+   "adim_mm": 7.29999989
+  },
+  {
+   "idx": 265,
+   "pid": "1562220000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 19.15440875163496,
+   "adim_mm": 7.29999989
+  },
+  {
+   "idx": 32,
+   "pid": "1616410000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 266,
+   "pid": "1712810000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 267,
+   "pid": "1720920000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 268,
+   "pid": "1753280000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 53,
+   "pid": "1768330000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -2,
+   "sapma": 23.424691652324586,
+   "adim_mm": 29.57999800000001
+  },
+  {
+   "idx": 269,
+   "pid": "1771960000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 270,
+   "pid": "1791190000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 58,
+   "pid": "1833340000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 1,
+   "pid": "1846040000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 271,
+   "pid": "1896140000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 272,
+   "pid": "1905310000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 2.311286933018596,
+   "adim_mm": 16.24065025907219
+  },
+  {
+   "idx": 273,
+   "pid": "1905310000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 5.1314709957651825,
+   "adim_mm": 16.24065025907219
+  },
+  {
+   "idx": 274,
+   "pid": "1905310000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 2.6687055399348147,
+   "adim_mm": 16.24065025907219
+  },
+  {
+   "idx": 275,
+   "pid": "1991800000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 276,
+   "pid": "1992220000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 9.291670945611342,
+   "adim_mm": 14.716402413633572
+  },
+  {
+   "idx": 277,
+   "pid": "1992220000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -2,
+   "sapma": 7.9743414963790675,
+   "adim_mm": 14.716402413633572
+  },
+  {
+   "idx": 278,
+   "pid": "2428520000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -4,
+   "sapma": 7.312399860742033,
+   "adim_mm": 20.132600000000004
+  },
+  {
+   "idx": 279,
+   "pid": "2428520000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -2,
+   "sapma": 4.377479277364807,
+   "adim_mm": 20.132600000000004
+  },
+  {
+   "idx": 280,
+   "pid": "2428520000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 1.896895151673414,
+   "adim_mm": 20.132600000000004
+  },
+  {
+   "idx": 40,
+   "pid": "2428950000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 41,
+   "pid": "2428950000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 33,
+   "pid": "2456000000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 5.550534069007659,
+   "adim_mm": 23.100000000000005
+  },
+  {
+   "idx": 34,
+   "pid": "2456000000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 6.4043105263621,
+   "adim_mm": 23.100000000000005
+  },
+  {
+   "idx": 35,
+   "pid": "2456000000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 9.762227213256308,
+   "adim_mm": 23.100000000000005
+  },
+  {
+   "idx": 45,
+   "pid": "2464690000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 34.4344249628687,
+   "adim_mm": 3.3990000000000005
+  },
+  {
+   "idx": 281,
+   "pid": "2503090000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 282,
+   "pid": "2506350000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 16.637903175266583,
+   "adim_mm": 11.400000125000005
+  },
+  {
+   "idx": 283,
+   "pid": "2506350000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 14.664064019279326,
+   "adim_mm": 11.400000125000005
+  },
+  {
+   "idx": 284,
+   "pid": "2506350000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 12.096956877094117,
+   "adim_mm": 11.400000125000005
+  },
+  {
+   "idx": 285,
+   "pid": "2506350000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 10.069777345754348,
+   "adim_mm": 11.400000125000005
+  },
+  {
+   "idx": 286,
+   "pid": "2506350000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 6.611755497316559,
+   "adim_mm": 11.400000125000005
+  },
+  {
+   "idx": 287,
+   "pid": "2506350000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 34.86857449730669,
+   "adim_mm": 11.400000125000005
+  },
+  {
+   "idx": 288,
+   "pid": "2506350000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 10.772021583338658,
+   "adim_mm": 11.400000125000005
+  },
+  {
+   "idx": 109,
+   "pid": "2521730000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 16.269965738968633,
+   "adim_mm": 7.300000280000001
+  },
+  {
+   "idx": 110,
+   "pid": "2521730000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 5.42373763157803,
+   "adim_mm": 7.300000280000001
+  },
+  {
+   "idx": 289,
+   "pid": "2522720000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 290,
+   "pid": "2522720000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 291,
+   "pid": "2522720000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 43,
+   "pid": "2540170000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 292,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 18.506119814232537,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 293,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 32.30740659034642,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 294,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 33.65541816741725,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 295,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 22.966126418127793,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 296,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 28.162995856824537,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 297,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 23.16565587668452,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 298,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 35.79905614037355,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 299,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 28.38148250657938,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 300,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 35.848786803465686,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 301,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 22.397132585257996,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 302,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 23.288238888111884,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 303,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 33.69064658946586,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 304,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 21.876971066717438,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 305,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 26.578840786460127,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 306,
+   "pid": "2551540000",
+   "mfg": "WEI",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 10.547388723996114,
+   "adim_mm": 16.0
+  },
+  {
+   "idx": 38,
+   "pid": "2579620000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -2,
+   "sapma": 4.019107002368639,
+   "adim_mm": 14.716402413633567
+  },
+  {
+   "idx": 39,
+   "pid": "2579620000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 13.715650115866328,
+   "adim_mm": 14.716402413633567
+  },
+  {
+   "idx": 3,
+   "pid": "2710080000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 4,
+   "pid": "2710080000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 5,
+   "pid": "2710080000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 6,
+   "pid": "2710080000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 7,
+   "pid": "2710080000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 307,
+   "pid": "2728630000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 44.536348685616765,
+   "adim_mm": 6.299999999999999
+  },
+  {
+   "idx": 150,
+   "pid": "3025176",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 151,
+   "pid": "3025176",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 15,
+   "pid": "3027006",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 16,
+   "pid": "3027006",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 17,
+   "pid": "3027006",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 18,
+   "pid": "3027006",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 44,
+   "pid": "3045046",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 46,
+   "pid": "3049929",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 47,
+   "pid": "3049929",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 36,
+   "pid": "3058172",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 37,
+   "pid": "3058172",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 152,
+   "pid": "3060306",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 153,
+   "pid": "3060306",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 154,
+   "pid": "3060319",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 155,
+   "pid": "3060319",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 156,
+   "pid": "3061994",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -3,
+   "sapma": 9.096278907098887,
+   "adim_mm": 7.000000033182232
+  },
+  {
+   "idx": 157,
+   "pid": "3061994",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 24.858716021908524,
+   "adim_mm": 7.000000033182232
+  },
+  {
+   "idx": 158,
+   "pid": "3061994",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 5,
+   "sapma": 12.27162648280993,
+   "adim_mm": 7.000000033182232
+  },
+  {
+   "idx": 159,
+   "pid": "3061994",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -3,
+   "sapma": 2.538894931257621,
+   "adim_mm": 7.000000033182232
+  },
+  {
+   "idx": 160,
+   "pid": "3061994",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 11.77225745284505,
+   "adim_mm": 7.000000033182232
+  },
+  {
+   "idx": 161,
+   "pid": "3061994",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -3,
+   "sapma": 11.714714384189456,
+   "adim_mm": 7.000000033182232
+  },
+  {
+   "idx": 162,
+   "pid": "3061994",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 10.984170863396647,
+   "adim_mm": 7.000000033182232
+  },
+  {
+   "idx": 56,
+   "pid": "3073034",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 57,
+   "pid": "3073034",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 163,
+   "pid": "3205226",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 164,
+   "pid": "3209015",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 21.647831065359547,
+   "adim_mm": 17.399996455034458
+  },
+  {
+   "idx": 165,
+   "pid": "3209015",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 4,
+   "sapma": 6.1391314993959165,
+   "adim_mm": 17.399996455034458
+  },
+  {
+   "idx": 166,
+   "pid": "3210542",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 12.671797450494534,
+   "adim_mm": 21.092373998585664
+  },
+  {
+   "idx": 167,
+   "pid": "3210542",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 2,
+   "sapma": 2.931703891438756,
+   "adim_mm": 21.092373998585664
+  },
+  {
+   "idx": 168,
+   "pid": "3210542",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 2,
+   "sapma": 3.224780394927109,
+   "adim_mm": 21.092373998585664
+  },
+  {
+   "idx": 169,
+   "pid": "3210542",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 17.026128990987484,
+   "adim_mm": 21.092373998585664
+  },
+  {
+   "idx": 170,
+   "pid": "3210542",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 8.303835590173653,
+   "adim_mm": 21.092373998585664
+  },
+  {
+   "idx": 171,
+   "pid": "3210542",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -2,
+   "sapma": 7.664414272881178,
+   "adim_mm": 21.092373998585664
+  },
+  {
+   "idx": 172,
+   "pid": "3212075",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 30.171901948463244,
+   "adim_mm": 16.000009348668485
+  },
+  {
+   "idx": 173,
+   "pid": "3212075",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 30.083035150579096,
+   "adim_mm": 16.000009348668485
+  },
+  {
+   "idx": 174,
+   "pid": "3212075",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 19.595603138573626,
+   "adim_mm": 16.000009348668485
+  },
+  {
+   "idx": 175,
+   "pid": "3212075",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 20.195031562615934,
+   "adim_mm": 16.000009348668485
+  },
+  {
+   "idx": 176,
+   "pid": "3214275",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 7.129652364746777,
+   "adim_mm": 23.95082028542065
+  },
+  {
+   "idx": 2,
+   "pid": "3214360",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -2,
+   "sapma": 7.6469027934576035,
+   "adim_mm": 18.940333115296163
+  },
+  {
+   "idx": 177,
+   "pid": "3244287",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 12.702919213859717,
+   "adim_mm": 4.599994550005146
+  },
+  {
+   "idx": 178,
+   "pid": "3244287",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 13.925043870324506,
+   "adim_mm": 4.599994550005146
+  },
+  {
+   "idx": 179,
+   "pid": "3244287",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 8.680645040742679,
+   "adim_mm": 4.599994550005146
+  },
+  {
+   "idx": 180,
+   "pid": "3244627",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 8,
+   "pid": "3260142",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 9,
+   "pid": "3260142",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 10,
+   "pid": "3260142",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 11,
+   "pid": "3260142",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 12,
+   "pid": "3260142",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 88,
+   "pid": "3270138",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 3.6265733102252167,
+   "adim_mm": 8.290737377109384
+  },
+  {
+   "idx": 89,
+   "pid": "3270138",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 5.14512995590926,
+   "adim_mm": 8.290737377109384
+  },
+  {
+   "idx": 59,
+   "pid": "3270246",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 12.100501846059522,
+   "adim_mm": 7.970784445087177
+  },
+  {
+   "idx": 101,
+   "pid": "3273024",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 2.314631980305205,
+   "adim_mm": 5.150004180000532
+  },
+  {
+   "idx": 102,
+   "pid": "3273024",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 11.664789149748769,
+   "adim_mm": 5.150004180000532
+  },
+  {
+   "idx": 181,
+   "pid": "3273076",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 3,
+   "sapma": 10.8287817228288,
+   "adim_mm": 5.150002500000518
+  },
+  {
+   "idx": 182,
+   "pid": "3273076",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 10.297962412837224,
+   "adim_mm": 5.150002500000518
+  },
+  {
+   "idx": 93,
+   "pid": "3273094",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 20.33760098806208,
+   "adim_mm": 5.1500033900006645
+  },
+  {
+   "idx": 94,
+   "pid": "3273094",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 15.417105060378908,
+   "adim_mm": 5.1500033900006645
+  },
+  {
+   "idx": 124,
+   "pid": "3273127",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 19.42045960796329,
+   "adim_mm": 10.059163790033907
+  },
+  {
+   "idx": 125,
+   "pid": "3273127",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 10.70377035107348,
+   "adim_mm": 10.059163790033907
+  },
+  {
+   "idx": 78,
+   "pid": "3273164",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 11.550871142768557,
+   "adim_mm": 5.15000329000049
+  },
+  {
+   "idx": 111,
+   "pid": "3273190",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 9.179863506381405,
+   "adim_mm": 5.150002918750634
+  },
+  {
+   "idx": 112,
+   "pid": "3273190",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 7.2856569521648495,
+   "adim_mm": 5.150002918750634
+  },
+  {
+   "idx": 84,
+   "pid": "3273234",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 9.457659710908741,
+   "adim_mm": 5.150002670000584
+  },
+  {
+   "idx": 95,
+   "pid": "3273262",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 13.198604129676355,
+   "adim_mm": 10.058846310346864
+  },
+  {
+   "idx": 96,
+   "pid": "3273262",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 12.662253227370474,
+   "adim_mm": 10.058846310346864
+  },
+  {
+   "idx": 97,
+   "pid": "3273262",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 12.281919045283495,
+   "adim_mm": 10.058846310346864
+  },
+  {
+   "idx": 98,
+   "pid": "3273262",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 9.565847260071514,
+   "adim_mm": 10.058846310346864
+  },
+  {
+   "idx": 99,
+   "pid": "3273262",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 8.10989636553277,
+   "adim_mm": 10.058846310346864
+  },
+  {
+   "idx": 85,
+   "pid": "3273306",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 13.31883201976523,
+   "adim_mm": 5.150003270000919
+  },
+  {
+   "idx": 86,
+   "pid": "3273306",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "orgude",
+   "k": 3,
+   "sapma": 0.9825551271067836,
+   "adim_mm": 5.150003270000919
+  },
+  {
+   "idx": 87,
+   "pid": "3273306",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 12.010123069701072,
+   "adim_mm": 5.150003270000919
+  },
+  {
+   "idx": 73,
+   "pid": "3273314",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 6,
+   "sapma": 12.929521428877822,
+   "adim_mm": 5.150003418750697
+  },
+  {
+   "idx": 74,
+   "pid": "3273314",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 5,
+   "sapma": 8.509008198715897,
+   "adim_mm": 5.150003418750697
+  },
+  {
+   "idx": 75,
+   "pid": "3273314",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 10.89659885081794,
+   "adim_mm": 5.150003418750697
+  },
+  {
+   "idx": 76,
+   "pid": "3273314",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 14.756306731667532,
+   "adim_mm": 5.150003418750697
+  },
+  {
+   "idx": 114,
+   "pid": "3273316",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 6,
+   "sapma": 12.929165603912859,
+   "adim_mm": 5.150003418750697
+  },
+  {
+   "idx": 115,
+   "pid": "3273316",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 5,
+   "sapma": 8.509008198704535,
+   "adim_mm": 5.150003418750697
+  },
+  {
+   "idx": 116,
+   "pid": "3273316",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 10.898534104020756,
+   "adim_mm": 5.150003418750697
+  },
+  {
+   "idx": 117,
+   "pid": "3273370",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 8.569296513287963,
+   "adim_mm": 5.150004800000507
+  },
+  {
+   "idx": 118,
+   "pid": "3273370",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 12.262141239213944,
+   "adim_mm": 5.150004800000507
+  },
+  {
+   "idx": 119,
+   "pid": "3273380",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 15.247124804771193,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 120,
+   "pid": "3273380",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 14.534398536599731,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 121,
+   "pid": "3273380",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 3.135252498312956,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 122,
+   "pid": "3273380",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 12.838166544466757,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 123,
+   "pid": "3273380",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 8.710871674582357,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 68,
+   "pid": "3273384",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 8.191044064010324,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 69,
+   "pid": "3273384",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 14.586200428923023,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 70,
+   "pid": "3273384",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 12.847966281690585,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 71,
+   "pid": "3273384",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 10.07187115291077,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 72,
+   "pid": "3273384",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 7.705505098034961,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 103,
+   "pid": "3273388",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 15.185109004151249,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 104,
+   "pid": "3273388",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 14.535353083304399,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 105,
+   "pid": "3273388",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 8.504308916658331,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 106,
+   "pid": "3273388",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 12.923131421848817,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 107,
+   "pid": "3273388",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 11.74834088420869,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 108,
+   "pid": "3273388",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 8.71315578022355,
+   "adim_mm": 10.058814160907314
+  },
+  {
+   "idx": 42,
+   "pid": "3273544",
+   "mfg": "PXC",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": -1,
+   "sapma": 14.538341163222094,
+   "adim_mm": 6.150003000000521
+  },
+  {
+   "idx": 183,
+   "pid": "3273556",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 6.621302021035685,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 184,
+   "pid": "3273556",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 14.898927211303919,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 185,
+   "pid": "3273556",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 13.016813772724381,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 126,
+   "pid": "3273558",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 6.57379104806218,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 127,
+   "pid": "3273558",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 12.62230059538673,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 90,
+   "pid": "3273562",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 6.573892843053219,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 91,
+   "pid": "3273562",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 14.899507649786102,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 92,
+   "pid": "3273562",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -4,
+   "sapma": 12.605690336842873,
+   "adim_mm": 6.149995700001177
+  },
+  {
+   "idx": 186,
+   "pid": "3273574",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -5,
+   "sapma": 12.264652924400918,
+   "adim_mm": 6.149995750001108
+  },
+  {
+   "idx": 187,
+   "pid": "3273574",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 8.348659205822141,
+   "adim_mm": 6.149995750001108
+  },
+  {
+   "idx": 188,
+   "pid": "3273586",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 12.263637167983108,
+   "adim_mm": 6.149995750001096
+  },
+  {
+   "idx": 189,
+   "pid": "3273586",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 8.222034335260089,
+   "adim_mm": 6.149995750001096
+  },
+  {
+   "idx": 79,
+   "pid": "3273704",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 15.579783724498986,
+   "adim_mm": 6.148753437501672
+  },
+  {
+   "idx": 80,
+   "pid": "3273704",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 13.78757759156732,
+   "adim_mm": 6.148753437501672
+  },
+  {
+   "idx": 81,
+   "pid": "3273704",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 6,
+   "sapma": 10.300906721201375,
+   "adim_mm": 6.148753437501672
+  },
+  {
+   "idx": 82,
+   "pid": "3273704",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 2,
+   "sapma": 10.58564912782928,
+   "adim_mm": 6.148753437501672
+  },
+  {
+   "idx": 83,
+   "pid": "3273704",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 6,
+   "sapma": 9.981599428152984,
+   "adim_mm": 6.148753437501672
+  },
+  {
+   "idx": 100,
+   "pid": "3273746",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 3,
+   "sapma": 9.72543879142878,
+   "adim_mm": 6.15200420000075
+  },
+  {
+   "idx": 64,
+   "pid": "3274142",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 9.628645112360607,
+   "adim_mm": 5.150002640000618
+  },
+  {
+   "idx": 65,
+   "pid": "3274142",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 7.009691210263364,
+   "adim_mm": 5.150002640000618
+  },
+  {
+   "idx": 66,
+   "pid": "3274142",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -3,
+   "sapma": 3.5573009102924904,
+   "adim_mm": 5.150002640000618
+  },
+  {
+   "idx": 67,
+   "pid": "3274142",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 8.972973744479791,
+   "adim_mm": 5.150002640000618
+  },
+  {
+   "idx": 190,
+   "pid": "3274212",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 10.170704739712095,
+   "adim_mm": 10.059162905582562
+  },
+  {
+   "idx": 191,
+   "pid": "3274212",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 7.2348180077847175,
+   "adim_mm": 10.059162905582562
+  },
+  {
+   "idx": 192,
+   "pid": "3274212",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.7166533697909612,
+   "adim_mm": 10.059162905582562
+  },
+  {
+   "idx": 193,
+   "pid": "3274212",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.9889489918203316,
+   "adim_mm": 10.059162905582562
+  },
+  {
+   "idx": 194,
+   "pid": "3274218",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 10.232030667215104,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 195,
+   "pid": "3274218",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 7.1545231902458095,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 196,
+   "pid": "3274218",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 2.179023738781718,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 197,
+   "pid": "3274218",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.7127956394912793,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 198,
+   "pid": "3274218",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.86801252852625,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 199,
+   "pid": "3274220",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 10.228988402734108,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 200,
+   "pid": "3274220",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 7.154523190245815,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 201,
+   "pid": "3274220",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 2.1790237387816975,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 202,
+   "pid": "3274220",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 4.738650772955205,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 203,
+   "pid": "3274220",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.7121436443599254,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 204,
+   "pid": "3274220",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -2,
+   "sapma": 2.8982655040320053,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 205,
+   "pid": "3274220",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.864392324327277,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 206,
+   "pid": "3274222",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 4,
+   "sapma": 10.232052571547959,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 207,
+   "pid": "3274222",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": 1,
+   "sapma": 2.1802603532779288,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 208,
+   "pid": "3274222",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.7129918290404895,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 209,
+   "pid": "3274222",
+   "mfg": "PXC",
+   "rejim": "cok",
+   "test": "degil",
+   "k": -1,
+   "sapma": 1.8625551199360402,
+   "adim_mm": 10.059162900326598
+  },
+  {
+   "idx": 0,
+   "pid": "8671080000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 5.810274032890041,
+   "adim_mm": 21.042731552961477
+  },
+  {
+   "idx": 308,
+   "pid": "8671120000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 7.075025396481319,
+   "adim_mm": 21.04273171548789
+  },
+  {
+   "idx": 309,
+   "pid": "8671120000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 10.656377136711907,
+   "adim_mm": 21.04273171548789
+  },
+  {
+   "idx": 310,
+   "pid": "8671120000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "degil",
+   "k": 1,
+   "sapma": 5.612260711238916,
+   "adim_mm": 21.04273171548789
+  },
+  {
+   "idx": 19,
+   "pid": "9203060000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 311,
+   "pid": "9512200000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  },
+  {
+   "idx": 312,
+   "pid": "9538090000",
+   "mfg": "WEI",
+   "rejim": "dusuk",
+   "test": "yok",
+   "k": null,
+   "sapma": null
+  }
+ ],
+ "test_edilen": 253,
+ "orgude": 1,
+ "not": "Bu test AGIN CIKTISINI KULLANMAZ: girdi yalniz uretici CP listesi + robot noktasinin KONUMU. Sonuc bir ALT SINIRDIR -- oruntude olmayan bir FP de gercek olabilir, bu test onu yakalamaz."
+}

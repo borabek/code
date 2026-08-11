@@ -1,0 +1,38 @@
+# Synthetic pretrain for hierpoint: 3000 procedural terminal blocks from the
+# FIXED generator (realistic recess mixture: ~90% near-surface + recessed tail,
+# matching the real corpus -- the OLD generator's all-at-surface labels are the
+# measured root cause of the previous pretrain->finetune failure, RESULTS/memory).
+# Goal: teach the recessed-CP concept generically; the finetune A/B
+# (run_hp_v25_finetune.yaml, --init-from this run's best) tests whether that
+# unlocks the PXC underfit (train recall 35% at 3x oversampling, while the
+# PXC-only GT ceiling is 0.965 -- a LEARNING failure, not encoding).
+backbone: hierpoint
+run_name: cp_hp_pretrain_synth
+seed: 0
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.0
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 28000
+
+epochs: 40          # synth is plentiful; convergence is faster than on 157 real
+eval_every: 5       # parts (no cold-start starvation with 2550 train parts)
+patience: 6
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 10
+
+augment: 0          # 3000 unique parts ARE the diversity; clones just slow epochs
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

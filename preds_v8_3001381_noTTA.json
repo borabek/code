@@ -1,0 +1,81 @@
+{
+  "backbone": "knngraph",
+  "decode": {
+    "heatmap_thresh": 0.2,
+    "min_votes": 1,
+    "nms_clearance_mm": 5.0,
+    "dist_thresh_mm": 5.0
+  },
+  "n_parts": 1,
+  "n_detected_total": 2,
+  "n_skipped": 0,
+  "parts": [
+    {
+      "part_nr": "wscaduniverse_3001381_2026-06-18-16-32-41",
+      "n_vertices": 44730,
+      "n_detected": 2,
+      "connection_points": [
+        {
+          "id": 0,
+          "robot_class": "TerminalContact",
+          "entry_point": [
+            7.01931,
+            1.71227,
+            37.08748
+          ],
+          "approach_vector": [
+            0.10411,
+            -0.91651,
+            0.38622
+          ],
+          "insertion_axis": [
+            -0.10411,
+            0.91651,
+            -0.38622
+          ],
+          "standoff_point": [
+            7.01931,
+            1.71227,
+            37.08748
+          ],
+          "approach_distance_mm": 0.0,
+          "confidence_score": 0.4917,
+          "surface_dist_mm": 1.5147,
+          "n_votes": 2,
+          "terminal_names": null,
+          "n_terminals": null
+        },
+        {
+          "id": 1,
+          "robot_class": "TerminalContact",
+          "entry_point": [
+            4.47855,
+            15.17504,
+            38.84325
+          ],
+          "approach_vector": [
+            0.38538,
+            0.13694,
+            0.91254
+          ],
+          "insertion_axis": [
+            -0.38538,
+            -0.13694,
+            -0.91254
+          ],
+          "standoff_point": [
+            4.47855,
+            15.17504,
+            38.84325
+          ],
+          "approach_distance_mm": 0.0,
+          "confidence_score": 0.2004,
+          "surface_dist_mm": 2.1283,
+          "n_votes": 1,
+          "terminal_names": null,
+          "n_terminals": null
+        }
+      ]
+    }
+  ]
+}

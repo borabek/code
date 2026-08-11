@@ -1,0 +1,48 @@
+# cp_real_rot_nocurv — frame + FEATURE fix. Builds on run_real_rot.yaml (cube-rotation)
+# and adds hp_no_curvature: drop the PCA curvature/concavity/edge_dist features (keep
+# normals). Rationale: curvature = lambda-ratio, ~0 on the flat facets of a coarse JSON
+# export mesh but non-zero on a fine STEP tessellation -> the dominant JSON->STEP feature
+# mismatch (verified: cp_real_v1 uses c_in=9 with curvature; STEP transfer ~0.09). Chain:
+# rot_nocurv vs rot = curvature effect; rot vs v1 = frame effect. Fresh cache because the
+# feature tensors change. Baseline: cp_real_v1 STEP native 0.093, cp_real_rot (frame) TBD.
+backbone: hierpoint
+init_from: checkpoints/cp_hp_pretrain_synth_best.ckpt
+run_name: cp_real_rot_nocurv
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 48000
+knn_cache_dir: _prep_cache_nc
+
+epochs: 90
+eval_every: 5
+patience: 8
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+
+augment: 2
+aug_rotate: false
+aug_cube_rotate: true
+hp_no_curvature: true
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

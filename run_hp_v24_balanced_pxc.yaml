@@ -1,0 +1,55 @@
+# v24_balanced_pxc: P0 'balanced' experiment vs run_hp_v22.yaml -- SINGLE change:
+# family_boost PXC:3 (PXC parts get 3x augmented clones on top of the automatic
+# sqrt count-balance). Motivation: hp_v22's PXC recall is ~0 (1 val part, 0
+# matched dets; 3-part human-GT eval shows blind/near-miss on push-in geometry)
+# while wscaduniverse dominates the loss. Same split (split_seed 0) -> directly
+# comparable to the v22 seed family. NOTE rect_slot_verified is NOT an extra
+# source yet: its only part (3031238) already lives in the main JSON corpus --
+# adding it would duplicate the part_nr; it becomes a real source when NEW
+# human-verified rect-slot parts (the 18 PXC downloads) land there.
+backbone: hierpoint
+run_name: cp_hp_v24_balanced_pxc
+seed: 0
+extra_sources:
+  - wscad_corpus_v2
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+device: cuda
+# hierpoint at 14000 verts/patch peaks ~0.6 GB (probe: 556 MB solo, 1.06 GB for
+# a fused 2x14000 chunk) -- far under the 4 GB T1200's ~3.7 GB WDDM spill cliff,
+# and each patch sees 2x the context the 7000 cap allowed.
+max_gpu_verts: 14000
+fwd_verts: 28000
+# disk cache OFF: it re-filled the near-full C: drive (hier .npz + knn .npy).
+# RAM holds the graphs for the run; the cache only saved ~26s of prebuild.
+
+epochs: 90          # cold-start eats ~15-25 epochs before heat peaks cross the
+eval_every: 5       # 0.30 decode threshold (measured: peaks 0.26 & rising at ep5);
+patience: 10        # patience 10 survives that, epochs 90 leaves cosine room after.
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001          # v19's proven value; 5e-4 starved the centernet heat head
+lr_schedule: cosine  # (0 detections through epoch 10 on the knngraph control).
+weight_decay: 0.0005
+grad_clip: 1.0
+
+split_seed: 0
+family_boost: "PXC:3"

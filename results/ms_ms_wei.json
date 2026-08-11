@@ -1,0 +1,8 @@
+{
+ "tag": "ms_wei",
+ "ckpt": "results/seg_extra/recall_hard_s2.pt",
+ "scales": [
+  6000,
+  9000
+ ]
+}

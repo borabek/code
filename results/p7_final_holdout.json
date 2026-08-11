@@ -1,0 +1,56 @@
+{
+ "ALL": {
+  "F1_mean": 0.7475979439849606,
+  "F1_std": 0.000827409058246673,
+  "P_mean": 0.8323577783254246,
+  "R_mean": 0.6785216178521618,
+  "n_parts": 129,
+  "n_gt": 478
+ },
+ "WEI": {
+  "F1_mean": 0.7058885969800706,
+  "F1_std": 0.01048322157358457,
+  "P_mean": 0.803864734299517,
+  "R_mean": 0.6292134831460674,
+  "n_parts": 26,
+  "n_gt": 89
+ },
+ "PXC": {
+  "F1_mean": 0.7569294718857001,
+  "F1_std": 0.0017439934601871639,
+  "P_mean": 0.8385768284106891,
+  "R_mean": 0.689802913453299,
+  "n_parts": 103,
+  "n_gt": 389
+ },
+ "high-CP(>=11)": {
+  "F1_mean": 0.21721681096681097,
+  "F1_std": 0.021235395401043588,
+  "P_mean": 0.8440476190476192,
+  "R_mean": 0.125,
+  "n_parts": 3,
+  "n_gt": 56
+ },
+ "bootstrap_CI95_ALL": [
+  0.6929304077472925,
+  0.8182912324824221
+ ],
+ "AUTO_precision": 0.826302729528536,
+ "AUTO_n": 403,
+ "AUTO_REVIEW": {
+  "P": 0.826302729528536,
+  "R": 0.696652719665272,
+  "F1": 0.7559591373439274
+ },
+ "config": {
+  "winner": "prob: RF+SetNet",
+  "WORK_ALL": 0.7739082365948038,
+  "WORK_WEI": 0.7420814479638008,
+  "WORK_PXC": 0.7733151803948263,
+  "locked_threshold": 0.34,
+  "deployability_rule": "rank-normalizasyonlu ensemble'lar ELENDI: rank tum korpustan hesaplanir, esik yuzdelige donusur, robot tek parca islerken TANIMSIZ. Sadece olasilik-uzayi birlesimleri aday alindi.",
+  "note": "SADECE WORK (541 parca) uzerinde secildi; kilitli holdout'a dokunulmadi."
+ },
+ "gate_passed": false,
+ "note": "KILITLI HOLDOUT TEK KEZ acildi; hicbir secim/tuning bu veride yapilmadi."
+}

@@ -1,0 +1,75 @@
+{
+ "marka": "NIT",
+ "klar": [
+  1,
+  5
+ ],
+ "cekilis": 2,
+ "epochs": 40,
+ "lr": 0.0002,
+ "taban_ckpt": "results/seg_g10/g10_s0.pt",
+ "kosumlar": {
+  "1": [
+   {
+    "cekilis": 0,
+    "adapt": [
+     "TBE-28"
+    ],
+    "n_olc": 49,
+    "k_gercek": 1,
+    "k_istenen": 1,
+    "ckpt": "results/seg_fs/NIT_k1_c0.pt",
+    "ckpt_kullanilan": "results/seg_fs/NIT_k1_c0_last.pt",
+    "onbellek": "results/_p1_olasilik_fs_NIT_k1_c0"
+   },
+   {
+    "cekilis": 1,
+    "adapt": [
+     "TBE-112"
+    ],
+    "n_olc": 49,
+    "k_gercek": 1,
+    "k_istenen": 1,
+    "ckpt": "results/seg_fs/NIT_k1_c1.pt",
+    "ckpt_kullanilan": "results/seg_fs/NIT_k1_c1_last.pt",
+    "onbellek": "results/_p1_olasilik_fs_NIT_k1_c1"
+   }
+  ],
+  "5": [
+   {
+    "cekilis": 0,
+    "adapt": [
+     "TBE-122",
+     "TBE-14",
+     "TBE-23",
+     "TBE-26",
+     "TBU-30RU"
+    ],
+    "n_olc": 45,
+    "k_gercek": 4,
+    "k_istenen": 5,
+    "ckpt": "results/seg_fs/NIT_k5_c0.pt",
+    "ckpt_kullanilan": "results/seg_fs/NIT_k5_c0_last.pt",
+    "onbellek": "results/_p1_olasilik_fs_NIT_k5_c0"
+   },
+   {
+    "cekilis": 1,
+    "adapt": [
+     "TBE-14",
+     "TBE-216",
+     "TBE-225",
+     "TBE-324",
+     "TBU-30RU"
+    ],
+    "n_olc": 45,
+    "k_gercek": 4,
+    "k_istenen": 5,
+    "ckpt": "results/seg_fs/NIT_k5_c1.pt",
+    "ckpt_kullanilan": "results/seg_fs/NIT_k5_c1_last.pt",
+    "onbellek": "results/_p1_olasilik_fs_NIT_k5_c1"
+   }
+  ]
+ },
+ "uyari": "k_gercek < k_istenen olabilir: oto-boyayici INSAN etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri algilanan bir acikliga dusmez. Olculen egri, gercek insan etiketine gore bir ALT SINIRDIR.",
+ "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (sonda_k65b_olc.py) -- boylece egitim bir kez kosar, olcum tekrar tekrar kosulabilir."
+}

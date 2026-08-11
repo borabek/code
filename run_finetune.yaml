@@ -1,0 +1,70 @@
+# Finetune config: transfer pretrained weights to 232 real terminal-block parts
+# Usage: python train_cp.py "C:\Users\DE00024082\Desktop\JSON" --config run_finetune.yaml
+#
+# Prerequisites:
+#   1. Pretrain must be done: checkpoints/cp_knn_pretrain_best.ckpt must exist
+#   2. c_in MUST match pretrain: knn_normals + knn_curvature + knn_concavity = c_in=8
+#
+# After training:
+#   python tune_thresholds.py checkpoints/cp_knn_v15_best.ckpt
+#          "C:\Users\DE00024082\Desktop\JSON" --write --split-group geometry
+#   python tta_eval.py checkpoints/cp_knn_v15_best.ckpt
+#          "C:\Users\DE00024082\Desktop\JSON" --batched --k 8 --device cuda
+
+backbone: knngraph
+run_name: cp_knn_v15
+init_from: checkpoints/cp_knn_pretrain_best.ckpt
+
+epochs: 120
+eval_every: 5
+patience: 12          # stop if no improvement for 12 evals = 60 epochs
+
+# Features: MUST match pretrain (c_in=8)
+knn_normals: true
+knn_curvature: true
+knn_concavity: true
+knn_edge_dist: false
+
+# GPU / vertex cap
+device: cuda
+max_gpu_verts: 7000
+
+# Scope: all terminal-block-sized parts (232 parts, 1452 CPs — 1.7x more than v14)
+max_bbox_mm: 250
+
+# Data split
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+# Augmentation: aggressive to compensate for smaller real corpus
+augment: 6
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.15
+aug_cable_frac: 0.3   # cable distractor: critical for FP reduction on real parts
+
+# Hard example mining: weight up parts the model keeps failing on
+hard_mining: true
+
+# Loss: precision-biased (alpha=2.0) for real data — pretrain was recall-biased
+# Real data has more FP pressure so tighten back to standard
+heat_loss: centernet
+centernet_alpha: 1.8  # slightly softer than standard 2.0 → balanced P/R
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+
+# Optimiser: lower LR for finetune (don't destroy pretrained weights)
+lr: 0.0003            # 3x lower than pretrain default
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0
+
+# Heatmap decode (monitoring during training)
+heatmap_thresh: 0.30      # 0.50 clipped ALL detections (peaks top out ~0.4 early); 0.30 matches encoding design
+min_votes: 1
+nms_clearance_mm: 5.0
+
+# kNN cache (separate from synth cache)
+knn_cache_dir: knn_cache_real

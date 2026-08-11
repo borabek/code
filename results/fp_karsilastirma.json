@@ -1,0 +1,731 @@
+[
+ {
+  "idx": 49,
+  "pid": "1016900000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1016900000_3.png",
+  "ref_var": true,
+  "gt_uzaklik": 14.398453528459862
+ },
+ {
+  "idx": 51,
+  "pid": "1016900000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1016900000_6.png",
+  "ref_var": true,
+  "gt_uzaklik": 16.031740915072533
+ },
+ {
+  "idx": 52,
+  "pid": "1016900000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1016900000_13.png",
+  "ref_var": true,
+  "gt_uzaklik": 17.63257112693091
+ },
+ {
+  "idx": 219,
+  "pid": "1020700000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1020700000_16.png",
+  "ref_var": true,
+  "gt_uzaklik": 17.631445371477383
+ },
+ {
+  "idx": 221,
+  "pid": "1020700000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1020700000_22.png",
+  "ref_var": true,
+  "gt_uzaklik": 16.33236768461167
+ },
+ {
+  "idx": 222,
+  "pid": "1020700000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1020700000_24.png",
+  "ref_var": true,
+  "gt_uzaklik": 16.19715723888751
+ },
+ {
+  "idx": 225,
+  "pid": "1020700000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1020700000_30.png",
+  "ref_var": true,
+  "gt_uzaklik": 11.894483639127994
+ },
+ {
+  "idx": 23,
+  "pid": "1045970000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1045970000_10.png",
+  "ref_var": true,
+  "gt_uzaklik": 35.42697219246854
+ },
+ {
+  "idx": 27,
+  "pid": "1045970000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1045970000_25.png",
+  "ref_var": true,
+  "gt_uzaklik": 17.62643879906358
+ },
+ {
+  "idx": 129,
+  "pid": "1054738",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1054738_3.png",
+  "ref_var": true,
+  "gt_uzaklik": 43.10714071810163
+ },
+ {
+  "idx": 131,
+  "pid": "1054738",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1054738_11.png",
+  "ref_var": true,
+  "gt_uzaklik": 21.62387979916394
+ },
+ {
+  "idx": 134,
+  "pid": "1054738",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1054738_25.png",
+  "ref_var": true,
+  "gt_uzaklik": 79.10634341060205
+ },
+ {
+  "idx": 31,
+  "pid": "1079006",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1079006_3.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.250903738407276
+ },
+ {
+  "idx": 141,
+  "pid": "1088730",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1088730_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 11.67022968140918
+ },
+ {
+  "idx": 229,
+  "pid": "1208920000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1208920000_7.png",
+  "ref_var": true,
+  "gt_uzaklik": 11.632430770304136
+ },
+ {
+  "idx": 230,
+  "pid": "1208920000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1208920000_14.png",
+  "ref_var": true,
+  "gt_uzaklik": 37.6761218420866
+ },
+ {
+  "idx": 233,
+  "pid": "1208920000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1208920000_21.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.641441232812932
+ },
+ {
+  "idx": 235,
+  "pid": "1208920000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1208920000_26.png",
+  "ref_var": true,
+  "gt_uzaklik": 48.47110346366438
+ },
+ {
+  "idx": 236,
+  "pid": "1208920000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1208920000_27.png",
+  "ref_var": true,
+  "gt_uzaklik": 4.532453540594706
+ },
+ {
+  "idx": 242,
+  "pid": "1267910000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1267910000_28.png",
+  "ref_var": true,
+  "gt_uzaklik": 5.175324434347596
+ },
+ {
+  "idx": 143,
+  "pid": "1336370",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1336370_1.png",
+  "ref_var": true,
+  "gt_uzaklik": 16.38863516397157
+ },
+ {
+  "idx": 144,
+  "pid": "1336370",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1336370_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 16.621585789975565
+ },
+ {
+  "idx": 148,
+  "pid": "1336387",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1336387_3.png",
+  "ref_var": true,
+  "gt_uzaklik": 16.56652966041122
+ },
+ {
+  "idx": 249,
+  "pid": "1561720000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1561720000_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 25.44877679744107
+ },
+ {
+  "idx": 250,
+  "pid": "1561720000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1561720000_3.png",
+  "ref_var": true,
+  "gt_uzaklik": 23.371213289091934
+ },
+ {
+  "idx": 254,
+  "pid": "1561720000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1561720000_15.png",
+  "ref_var": true,
+  "gt_uzaklik": 29.343841563504867
+ },
+ {
+  "idx": 256,
+  "pid": "1561720000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1561720000_42.png",
+  "ref_var": true,
+  "gt_uzaklik": 26.177762989305513
+ },
+ {
+  "idx": 63,
+  "pid": "1561930000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/1561930000_28.png",
+  "ref_var": true,
+  "gt_uzaklik": 4.658579163544457
+ },
+ {
+  "idx": 259,
+  "pid": "1562000000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1562000000_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 19.42058395075094
+ },
+ {
+  "idx": 266,
+  "pid": "1712810000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1712810000_1.png",
+  "ref_var": true,
+  "gt_uzaklik": 11.448176191146006
+ },
+ {
+  "idx": 269,
+  "pid": "1771960000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1771960000_4.png",
+  "ref_var": true,
+  "gt_uzaklik": 44.50028411721756
+ },
+ {
+  "idx": 58,
+  "pid": "1833340000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1833340000_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 14.179554764275945
+ },
+ {
+  "idx": 272,
+  "pid": "1905310000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1905310000_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.957042965781602
+ },
+ {
+  "idx": 274,
+  "pid": "1905310000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1905310000_9.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.229477579916365
+ },
+ {
+  "idx": 275,
+  "pid": "1991800000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/1991800000_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 14.063242695536537
+ },
+ {
+  "idx": 281,
+  "pid": "2503090000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/2503090000_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 11.801914562826939
+ },
+ {
+  "idx": 283,
+  "pid": "2506350000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/2506350000_10.png",
+  "ref_var": true,
+  "gt_uzaklik": 14.664064480854032
+ },
+ {
+  "idx": 285,
+  "pid": "2506350000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/2506350000_28.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.425893753666239
+ },
+ {
+  "idx": 286,
+  "pid": "2506350000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/2506350000_32.png",
+  "ref_var": true,
+  "gt_uzaklik": 28.360189328444747
+ },
+ {
+  "idx": 110,
+  "pid": "2521730000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/2521730000_23.png",
+  "ref_var": true,
+  "gt_uzaklik": 10.439495569342613
+ },
+ {
+  "idx": 292,
+  "pid": "2551540000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/2551540000_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 18.506119814232537
+ },
+ {
+  "idx": 303,
+  "pid": "2551540000",
+  "mfg": "WEI",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/2551540000_39.png",
+  "ref_var": true,
+  "gt_uzaklik": 33.69064658946586
+ },
+ {
+  "idx": 38,
+  "pid": "2579620000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/2579620000_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 14.45875800695789
+ },
+ {
+  "idx": 3,
+  "pid": "2710080000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/2710080000_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 24.05238874385765
+ },
+ {
+  "idx": 5,
+  "pid": "2710080000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/2710080000_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.087237483268389
+ },
+ {
+  "idx": 7,
+  "pid": "2710080000",
+  "mfg": "WEI",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/2710080000_14.png",
+  "ref_var": true,
+  "gt_uzaklik": 18.44592272696754
+ },
+ {
+  "idx": 150,
+  "pid": "3025176",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3025176_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 29.743805036987148
+ },
+ {
+  "idx": 151,
+  "pid": "3025176",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3025176_1.png",
+  "ref_var": true,
+  "gt_uzaklik": 9.724897892954667
+ },
+ {
+  "idx": 47,
+  "pid": "3049929",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3049929_1.png",
+  "ref_var": true,
+  "gt_uzaklik": 28.269916120909805
+ },
+ {
+  "idx": 36,
+  "pid": "3058172",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3058172_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 8.32532876334444
+ },
+ {
+  "idx": 155,
+  "pid": "3060319",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3060319_3.png",
+  "ref_var": true,
+  "gt_uzaklik": 5.646480143733929
+ },
+ {
+  "idx": 160,
+  "pid": "3061994",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3061994_22.png",
+  "ref_var": true,
+  "gt_uzaklik": 11.772259060454797
+ },
+ {
+  "idx": 166,
+  "pid": "3210542",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3210542_2.png",
+  "ref_var": true,
+  "gt_uzaklik": 15.329880611209404
+ },
+ {
+  "idx": 168,
+  "pid": "3210542",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3210542_8.png",
+  "ref_var": true,
+  "gt_uzaklik": 17.021377523874218
+ },
+ {
+  "idx": 173,
+  "pid": "3212075",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3212075_4.png",
+  "ref_var": true,
+  "gt_uzaklik": 30.08303734436584
+ },
+ {
+  "idx": 175,
+  "pid": "3212075",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3212075_17.png",
+  "ref_var": true,
+  "gt_uzaklik": 20.195033733195135
+ },
+ {
+  "idx": 179,
+  "pid": "3244287",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3244287_3.png",
+  "ref_var": true,
+  "gt_uzaklik": 8.68064754287669
+ },
+ {
+  "idx": 12,
+  "pid": "3260142",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3260142_18.png",
+  "ref_var": true,
+  "gt_uzaklik": 44.51006008021738
+ },
+ {
+  "idx": 89,
+  "pid": "3270138",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3270138_21.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.242320775028155
+ },
+ {
+  "idx": 59,
+  "pid": "3270246",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3270246_13.png",
+  "ref_var": true,
+  "gt_uzaklik": 7.5905376322341835
+ },
+ {
+  "idx": 94,
+  "pid": "3273094",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273094_1.png",
+  "ref_var": true,
+  "gt_uzaklik": 15.756338325537364
+ },
+ {
+  "idx": 124,
+  "pid": "3273127",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273127_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 20.208276139927897
+ },
+ {
+  "idx": 125,
+  "pid": "3273127",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273127_11.png",
+  "ref_var": true,
+  "gt_uzaklik": 10.474712597868258
+ },
+ {
+  "idx": 114,
+  "pid": "3273316",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273316_19.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.929167145590277
+ },
+ {
+  "idx": 118,
+  "pid": "3273370",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273370_17.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.262142428512881
+ },
+ {
+  "idx": 70,
+  "pid": "3273384",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273384_9.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.04227313726139
+ },
+ {
+  "idx": 108,
+  "pid": "3273388",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273388_28.png",
+  "ref_var": true,
+  "gt_uzaklik": 9.453055459934669
+ },
+ {
+  "idx": 42,
+  "pid": "3273544",
+  "mfg": "PXC",
+  "rejim": "dusuk",
+  "png": "results/fp_karsilastirma/3273544_1.png",
+  "ref_var": true,
+  "gt_uzaklik": 14.538340819459776
+ },
+ {
+  "idx": 127,
+  "pid": "3273558",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273558_11.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.62230083281182
+ },
+ {
+  "idx": 92,
+  "pid": "3273562",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273562_11.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.605690961507372
+ },
+ {
+  "idx": 188,
+  "pid": "3273586",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273586_14.png",
+  "ref_var": true,
+  "gt_uzaklik": 12.263638530994664
+ },
+ {
+  "idx": 81,
+  "pid": "3273704",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3273704_16.png",
+  "ref_var": true,
+  "gt_uzaklik": 10.301152262948953
+ },
+ {
+  "idx": 64,
+  "pid": "3274142",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274142_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 9.62864575168734
+ },
+ {
+  "idx": 66,
+  "pid": "3274142",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274142_11.png",
+  "ref_var": true,
+  "gt_uzaklik": 3.5573023355173494
+ },
+ {
+  "idx": 190,
+  "pid": "3274212",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274212_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.33981627290854
+ },
+ {
+  "idx": 191,
+  "pid": "3274212",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274212_1.png",
+  "ref_var": true,
+  "gt_uzaklik": 7.440812055910197
+ },
+ {
+  "idx": 194,
+  "pid": "3274218",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274218_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.288293738904292
+ },
+ {
+  "idx": 205,
+  "pid": "3274220",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274220_19.png",
+  "ref_var": true,
+  "gt_uzaklik": 9.413007560722773
+ },
+ {
+  "idx": 206,
+  "pid": "3274222",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274222_0.png",
+  "ref_var": true,
+  "gt_uzaklik": 13.288315945697274
+ },
+ {
+  "idx": 207,
+  "pid": "3274222",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274222_7.png",
+  "ref_var": true,
+  "gt_uzaklik": 2.250193795724017
+ },
+ {
+  "idx": 209,
+  "pid": "3274222",
+  "mfg": "PXC",
+  "rejim": "cok",
+  "png": "results/fp_karsilastirma/3274222_19.png",
+  "ref_var": true,
+  "gt_uzaklik": 9.39624188703179
+ }
+]

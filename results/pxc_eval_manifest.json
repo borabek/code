@@ -1,0 +1,297 @@
+{
+ "created": "2026-07-10",
+ "purpose": "PXC honest-eval asset inventory: which of the 21 human-GT PXC parts can be scored against CAD/ML (needs a STEP twin)",
+ "eval_ready_count": 9,
+ "download_needed": [],
+ "download_source_hint": "WSCAD Universe shows these catalogs as empty/blank (user-verified 2026-07-10). Download STEP from phoenixcontact.com product pages (search the article number -> Downloads/CAD -> STEP); fallbacks: traceparts.com, 3dcontentcentral.com.",
+ "wscad_missing_catalog_status": "reported_empty_by_user_2026-07-10",
+ "parts": [
+  {
+   "catalog": "2277019",
+   "gt_file": "PXC.2277019.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "PACT MCR-V1 bus-bar current transformer",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2308027",
+   "gt_file": "PXC.2308027.json",
+   "n_gt_cps_raw": 4,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "MCR-SL-CUC-100-I universal current transducer",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2403107",
+   "gt_file": "PXC.2403107.json",
+   "n_gt_cps_raw": 22,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "TP 5170S 17-inch touch panel",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2701290",
+   "gt_file": "PXC.2701290.json",
+   "n_gt_cps_raw": 13,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "VL BPC 1001 industrial box PC",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2703994",
+   "gt_file": "PXC.2703994.json",
+   "n_gt_cps_raw": 32,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "IL PN BK DI8 DO4 PROFINET bus coupler",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2861250",
+   "gt_file": "PXC.2861250.json",
+   "n_gt_cps_raw": 48,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "IB IL 24 DI 16 Inline digital input module",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2861289",
+   "gt_file": "PXC.2861289.json",
+   "n_gt_cps_raw": 32,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "IB IL 24 DO 8 Inline digital output module",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2861344",
+   "gt_file": "PXC.2861344.json",
+   "n_gt_cps_raw": 8,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "IB IL 24 SEG Inline segment terminal (I/O electronics)",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2901362",
+   "gt_file": "PXC.2901362.json",
+   "n_gt_cps_raw": 17,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "EEM-MA200 energy measuring instrument",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2904622",
+   "gt_file": "PXC.2904622.json",
+   "n_gt_cps_raw": 15,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "QUINT4-PS/3AC/24DC/20 power supply",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2985631",
+   "gt_file": "PXC.2985631.json",
+   "n_gt_cps_raw": 32,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "IB IL 24 PSDO 8 SafetyBridge output module",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "2985688",
+   "gt_file": "PXC.2985688.json",
+   "n_gt_cps_raw": 32,
+   "step_files": [],
+   "eval_ready": false,
+   "rect_slot_status": "out of scope (not a terminal block)",
+   "product": "IB IL 24 PSDI 8 SafetyBridge input module",
+   "terminal_block": false,
+   "in_scope": false
+  },
+  {
+   "catalog": "3031238",
+   "gt_file": "PXC.3031238.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3031238_2026-06-21-22-27-09.stp",
+    "all_connectors\\wscaduniverse_3031238_2026-06-21-22-27-09.stp",
+    "all_wscad_stp\\wscaduniverse_3031238_2026-06-21-22-27-09.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "CONFIRMED rect-slot (both GT CPs invisible to cylinder CAD path; ML near-miss 5-7mm)",
+   "product": "ST 2,5-PE spring-cage ground terminal block",
+   "terminal_block": true,
+   "in_scope": true
+  },
+  {
+   "catalog": "3036550",
+   "gt_file": "PXC.3036550.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3036550_2026-07-10-16-05-43.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "unknown until STEP available",
+   "product": "ST 4-HESILED 60 (5X20) fuse terminal block, spring-cage",
+   "terminal_block": true,
+   "in_scope": true,
+   "step_source": "downloaded by user 2026-07-10 (vendor)"
+  },
+  {
+   "catalog": "3036563",
+   "gt_file": "PXC.3036563.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3036563_2026-07-10-16-06-00.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "unknown until STEP available",
+   "product": "ST 4-HESILA 250 (5X20) fuse terminal block, spring-cage",
+   "terminal_block": true,
+   "in_scope": true,
+   "step_source": "downloaded by user 2026-07-10 (vendor)"
+  },
+  {
+   "catalog": "3048357",
+   "gt_file": "PXC.3048357.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3048357_2026-07-10-16-06-15.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "unknown until STEP available",
+   "product": "USEN 14 N fuse terminal block, screw",
+   "terminal_block": true,
+   "in_scope": true,
+   "step_source": "downloaded by user 2026-07-10 (vendor)"
+  },
+  {
+   "catalog": "3211813",
+   "gt_file": "PXC.3211813.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3211813_2026-06-21-22-25-47.stp",
+    "all_connectors\\wscaduniverse_3211813_2026-06-21-22-25-47.stp",
+    "all_wscad_stp\\wscaduniverse_3211813_2026-06-21-22-25-47.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "cylindrical/slot (CAD P=R=100%)",
+   "product": "PT 6 push-in feed-through terminal block",
+   "terminal_block": true,
+   "in_scope": true
+  },
+  {
+   "catalog": "3211814",
+   "gt_file": "PXC.3211814.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3211814_2026-07-10-16-06-26.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "unknown until STEP available",
+   "product": "PT 6 BK push-in feed-through terminal block",
+   "terminal_block": true,
+   "in_scope": true,
+   "step_source": "downloaded by user 2026-07-10 (vendor)"
+  },
+  {
+   "catalog": "3211819",
+   "gt_file": "PXC.3211819.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3211819_2026-07-10-16-06-41.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "unknown until STEP available",
+   "product": "PT 6 BU push-in feed-through terminal block",
+   "terminal_block": true,
+   "in_scope": true,
+   "step_source": "downloaded by user 2026-07-10 (vendor)"
+  },
+  {
+   "catalog": "3211822",
+   "gt_file": "PXC.3211822.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3211822_2026-06-21-22-25-51.stp",
+    "all_connectors\\wscaduniverse_3211822_2026-06-21-22-25-51.stp",
+    "all_wscad_stp\\wscaduniverse_3211822_2026-06-21-22-25-51.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "cylindrical/slot (CAD P=R=100%)",
+   "product": "PT 6-PE push-in ground terminal block",
+   "terminal_block": true,
+   "in_scope": true
+  },
+  {
+   "catalog": "3212140",
+   "gt_file": "PXC.3212140.json",
+   "n_gt_cps_raw": 2,
+   "step_files": [
+    "_cad_eval_pxc\\wscaduniverse_3212140_2026-07-10-16-06-54.stp"
+   ],
+   "eval_ready": true,
+   "rect_slot_status": "unknown until STEP available",
+   "product": "PTME 4 WH push-in test-disconnect terminal block",
+   "terminal_block": true,
+   "in_scope": true,
+   "step_source": "downloaded by user 2026-07-10 (vendor)"
+  }
+ ],
+ "scope_audit": "2026-07-10: every catalog number was identified against the Phoenix Contact catalog (web). 12 of 21 human-GT PXC parts are NOT terminal blocks and are OUT OF SCOPE (user decision: removed from project -- see pxc_out_of_scope.txt, excluded from training/eval via train_cp.py --exclude-parts-file). 9 are genuine DIN-rail terminal blocks and stay.",
+ "in_scope_terminal_blocks": [
+  "3031238",
+  "3036550",
+  "3036563",
+  "3048357",
+  "3211813",
+  "3211814",
+  "3211819",
+  "3211822",
+  "3212140"
+ ],
+ "out_of_scope_removed": [
+  "2277019",
+  "2308027",
+  "2403107",
+  "2701290",
+  "2703994",
+  "2861250",
+  "2861289",
+  "2861344",
+  "2901362",
+  "2904622",
+  "2985631",
+  "2985688"
+ ]
+}

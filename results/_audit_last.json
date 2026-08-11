@@ -1,0 +1,42 @@
+{
+ "n_files": 3,
+ "n_ok": 3,
+ "rows": [
+  {
+   "glb": "WEI_2506380000_CP25.glb",
+   "ok": true,
+   "violations": [],
+   "part": "2506380000",
+   "mfg": "WEI",
+   "mode": "robot_only",
+   "n_gt": 0,
+   "n_pred": 25,
+   "f1": null,
+   "markers": 25
+  },
+  {
+   "glb": "WEI_2464750000_CP4.glb",
+   "ok": true,
+   "violations": [],
+   "part": "2464750000",
+   "mfg": "WEI",
+   "mode": "robot_only",
+   "n_gt": 0,
+   "n_pred": 4,
+   "f1": null,
+   "markers": 4
+  },
+  {
+   "glb": "WEI_2669020000_CP5.glb",
+   "ok": true,
+   "violations": [],
+   "part": "2669020000",
+   "mfg": "WEI",
+   "mode": "robot_only",
+   "n_gt": 0,
+   "n_pred": 5,
+   "f1": null,
+   "markers": 5
+  }
+ ]
+}

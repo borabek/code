@@ -1,0 +1,164 @@
+# -*- coding: utf-8 -*-
+"""P1-GATE-B: gate v5'i egit ve TEMIZ sinavda olc.
+
+MERDIVEN (results/d6_tavan_merdiveni.json) gate'i EN BUYUK odul gosterdi:
+mevcut adaylarla mukemmel gate tespiti 0.4479 -> 0.9134 yapiyordu (+0.4655).
+
+UC KOL, hepsi AYNI temiz sinavda (468 parca / 8 uretici, hicbiri egitimde YOK):
+  TABAN    : dagitilan `results/wire_gate.pkl` (bugunku urun)          -> tespit 0.4479
+  v5-DUZ   : yeni korpusun tamami (34986 aday / 2584 parca / 9 uretici)
+  v5-DENGE : uretici basina TAVAN uygulanmis korpus
+
+DENGE NEDEN OLCULUYOR: yeni korpusun **%49.4'u TOGI**. Gate TOGI'ye ozellesirse
+gorulmemis ureticide coker -- [[gate-uretici-disi-cokusu]] tam bu desendi. G2
+(uretici-dengeli) daha once NULL cikmisti ama o zamanki bilesim bambaskaydi;
+tek bir uretici korpusun yarisi degildi.
+
+KILL: temiz sinavda tespit 0.4479'u GECMEZSE dagitma, `wire_gate.pkl` DOKUNULMAZ.
+"""
+import argparse
+import collections
+import glob
+import io
+import json
+import os
+import pickle
+import sys
+
+import numpy as np
+
+import d6_kayit
+
+os.environ.setdefault("BA_ALLOW_SEEN", "1")
+os.environ["WG_FIZ_FEATS"] = "1"; os.environ["WG_TOPO"] = "1"; os.environ["WG_ZENGIN"] = "1"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+V3 = "results/zengin_parite_v3.npz"
+KUME = "results/d6_sinav_kumesi.json"
+MAKBUZ = "results/p1_gate_v5.json"
+TABAN_TESPIT = 0.4479          # dagitilan gate, ayni kumede olculdu
+ROBOT_YANAL, ROBOT_ACI = 2.0, 10.0
+
+
+def egit(X, y, pid, tohum=0):
+    """DAGITILAN gate ile AYNI recete: RF 400 / leaf 3, ham -> parca-ici z-skor."""
+    import wire_gate
+    from sklearn.ensemble import RandomForestClassifier
+    Z = np.zeros((len(X), X.shape[1] * 2), float)
+    for p in np.unique(pid):
+        m = pid == p
+        Z[m] = wire_gate.parca_ici(X[m], "zskor")
+    clf = RandomForestClassifier(n_estimators=400, min_samples_leaf=3, n_jobs=-1,
+                                 random_state=tohum)
+    clf.fit(Z, y)
+    return {"clf": clf, "n_feat": Z.shape[1], "donusum": "zskor", "cols": None,
+            "feat_names": None}
+
+
+def dengele(mfg, pid, tavan_pay=0.25, rng=0):
+    """Hicbir uretici korpusun `tavan_pay` kadarindan fazlasini kaplamasin.
+
+    Aday degil PARCA duzeyinde ornekler -- parca-ici z-skor parcayi BOLUNMEZ kilar.
+    """
+    r = np.random.RandomState(rng)
+    parca_mfg = {}
+    for m, p in zip(mfg, pid):
+        parca_mfg.setdefault(p, m)
+    parcalar = collections.defaultdict(list)
+    for p, m in parca_mfg.items():
+        parcalar[m].append(p)
+    toplam = len(parca_mfg)
+    tavan = max(1, int(tavan_pay * toplam))
+    tut = set()
+    for m, ps in parcalar.items():
+        ps = sorted(ps)
+        if len(ps) > tavan:
+            ps = list(r.choice(ps, tavan, replace=False))
+        tut |= set(ps)
+    return np.isin(pid, sorted(tut))
+
+
+def olc(model, kayit, esle_detay, f1w):
+    import wire_gate
+    T, R = [], []
+    Tm = collections.defaultdict(list)
+    for pid, r in kayit.items():
+        G = np.asarray(r["G"], float); Gd = np.asarray(r["Gd"], float)
+        rj = "cok" if r["n"] >= 8 else "dusuk"
+        P = np.zeros((0, 3)); D = np.zeros((0, 3))
+        if r.get("X") is not None and r.get("P") is not None and len(r["P"]):
+            M = d6_kayit.x58(r)
+            if M is not None and M.shape[1] * 2 == model["n_feat"]:
+                k = wire_gate.karar_maskesi(wire_gate.karar_skoru(model, M))
+                if k.any():
+                    P = np.asarray(r["P"], float)[k]; D = np.asarray(r["Pd"], float)[k]
+        t = esle_detay(P, D, G, Gd, r["diag"], 0.0, 180.0, True)[:3]
+        T.append((rj,) + t); Tm[r["mfg"]].append((rj,) + t)
+        R.append((rj,) + esle_detay(P, D, G, Gd, r["diag"], ROBOT_YANAL, ROBOT_ACI,
+                                    False, isaretli=True)[:3])
+    return f1w(T), f1w(R), {m: f1w(v) for m, v in Tm.items()}
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--tavan-pay", type=float, default=0.25)
+    a = ap.parse_args()
+    import protokol
+    protokol.tez_dogrula()
+    from sina_kume import esle_detay, f1w
+
+    sv = json.load(io.open(KUME, encoding="utf-8"))
+    PID = set(sv["pidler"])
+    import d6_kayit
+    kayit = d6_kayit.yukle(PID)
+    print(f"TEMIZ SINAV: {len(kayit)} parca | muhur {sv['sha16']}\n")
+
+    d = np.load(V3, allow_pickle=True)
+    X = np.hstack([d["X22"], d["XR"]]).astype(float)
+    y = np.asarray(d["y"]); pid = np.asarray(d["pids"], str); mfg = np.asarray(d["mfg"], str)
+
+    kollar = {}
+    with open("results/wire_gate.pkl", "rb") as f:
+        kollar["TABAN (dagitilan)"] = pickle.load(f)
+    print("v5-DUZ egitiliyor...", flush=True)
+    kollar["v5-DUZ"] = egit(X, y, pid)
+    msk = dengele(mfg, pid, a.tavan_pay)
+    up = collections.Counter(mfg[msk])
+    print(f"v5-DENGE egitiliyor (uretici tavani %{100*a.tavan_pay:.0f}) -- "
+          f"{msk.sum()} aday / {len(np.unique(pid[msk]))} parca", flush=True)
+    print(f"  dagilim: {dict(up.most_common(6))}")
+    kollar["v5-DENGE"] = egit(X[msk], y[msk], pid[msk])
+
+    print(f"\n{'kol':<20}{'TESPIT':>9}{'ROBOT':>9}{'kill':>8}")
+    sonuc = {}
+    for ad, m in kollar.items():
+        tf, rf, um = olc(m, kayit, esle_detay, f1w)
+        kill = "" if ad.startswith("TABAN") else ("GECTI" if tf > TABAN_TESPIT else "KALDI")
+        print(f"{ad:<20}{tf:>9.4f}{rf:>9.4f}{kill:>8}")
+        sonuc[ad] = {"tespit": tf, "robot": rf, "uretici": um}
+
+    print(f"\n{'uretici':<8}" + "".join(f"{k[:12]:>14}" for k in kollar))
+    urs = sorted({u for k in sonuc for u in sonuc[k]["uretici"]})
+    for u in urs:
+        print(f"{u:<8}" + "".join(f"{sonuc[k]['uretici'].get(u, float('nan')):>14.4f}"
+                                 for k in kollar))
+
+    en_iyi = max((k for k in kollar if not k.startswith("TABAN")),
+                 key=lambda k: sonuc[k]["tespit"])
+    print(f"\nEN IYI YENI KOL: {en_iyi} tespit {sonuc[en_iyi]['tespit']:.4f} "
+          f"(taban {TABAN_TESPIT:.4f}, fark {sonuc[en_iyi]['tespit']-TABAN_TESPIT:+.4f})")
+    if sonuc[en_iyi]["tespit"] > TABAN_TESPIT:
+        with open("results/wire_gate_v5.pkl", "wb") as f:
+            pickle.dump(kollar[en_iyi], f)
+        print("  -> results/wire_gate_v5.pkl yazildi (DAGITILMADI; wire_gate.pkl dokunulmadi)")
+    else:
+        print("  -> KILL: hicbir kol tabani gecmedi, model YAZILMADI")
+    json.dump({k: {"tespit": v["tespit"], "robot": v["robot"], "uretici": v["uretici"]}
+               for k, v in sonuc.items()} | {"taban_tespit": TABAN_TESPIT,
+                                             "muhur": sv["sha16"], "tavan_pay": a.tavan_pay},
+              io.open(MAKBUZ, "w", encoding="utf-8"), indent=1)
+    print(f"makbuz -> {MAKBUZ}")
+
+
+if __name__ == "__main__":
+    main()

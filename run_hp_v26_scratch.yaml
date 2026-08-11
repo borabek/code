@@ -1,0 +1,48 @@
+# v26: clean-scope SCRATCH baseline -- the honest A/B partner for
+# run_hp_v25_finetune (synth-pretrain init). Identical v22 recipe and identical
+# clean scope (pxc_out_of_scope.txt excludes the 12 catalog-verified
+# non-terminal-block PXC parts, user decision 2026-07-10); the ONLY difference
+# vs v25 is no init_from. v22's 0.644 was measured WITH the 12 out-of-scope
+# parts in the pool, so this run replaces it as the scratch reference.
+# Verdict rule: pretrain helps iff v25 beats v26 beyond the +-0.03 seed noise
+# band, with the per-family PXC rows as the secondary check.
+backbone: hierpoint
+run_name: cp_hp_v26_scratch
+seed: 0
+split_seed: 0
+exclude_parts_file: pxc_out_of_scope.txt
+extra_sources:
+  - wscad_corpus_v2
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 28000
+
+epochs: 90
+eval_every: 5
+patience: 10
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

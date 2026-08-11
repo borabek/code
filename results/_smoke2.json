@@ -1,0 +1,64 @@
+{
+ "3001381": [
+  {
+   "point": [
+    5.0534,
+    8.2693,
+    23.8925
+   ],
+   "direction": [
+    -0.0,
+    -1.0,
+    -0.0
+   ],
+   "size_mm": 17.49,
+   "depth_mm": 6.18,
+   "confidence": 0.942,
+   "votes": 4,
+   "wire_score": 0.972,
+   "kind": "CableEntry",
+   "n_verts": 194,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.3031,
+    39.9376,
+    24.675
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 22.58,
+   "depth_mm": 4.84,
+   "confidence": 0.93,
+   "votes": 4,
+   "wire_score": 0.909,
+   "kind": "CableEntry",
+   "n_verts": 312,
+   "tier": "auto"
+  },
+  {
+   "point": [
+    5.1379,
+    45.4155,
+    33.3215
+   ],
+   "direction": [
+    0.0,
+    1.0,
+    0.0
+   ],
+   "size_mm": 14.16,
+   "depth_mm": 7.57,
+   "confidence": 0.908,
+   "votes": 4,
+   "wire_score": 0.938,
+   "kind": "CableEntry",
+   "n_verts": 136,
+   "tier": "auto"
+  }
+ ]
+}

@@ -1,0 +1,720 @@
+{
+ "tag": "wei0.7",
+ "ckpts": [
+  "results/seg_extra/human77c_s0.pt",
+  "results/seg_extra/human77c_s1.pt",
+  "results/seg_extra/human77c_s2.pt"
+ ],
+ "n_parts": 78,
+ "n_cps": 195,
+ "precision": 0.5,
+ "recall": 0.1385,
+ "f1": 0.2169,
+ "cluster_mm": 5.0,
+ "min_v": 45,
+ "remesh_target": 6000,
+ "per_part": [
+  {
+   "mfg": "WEI",
+   "part_id": "1010000000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1010100000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1010200000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1010300000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1010400000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1010500000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1011000000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1018400000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020000000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020080000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020100000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020180000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020200000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020280000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020300000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020380000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020400000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 0,
+   "fp": 2,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1020500000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 0,
+   "fp": 2,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1021500000",
+   "mfg_cps": 4,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1022360000",
+   "mfg_cps": 4,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1037820000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1040220000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1041950000",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1058520000",
+   "mfg_cps": 6,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 6
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1119790000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1119810000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1119820000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1119830000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1162920000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1162930000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1247290000",
+   "mfg_cps": 4,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1265990000",
+   "mfg_cps": 6,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 6
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1513890000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1521680000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1521850000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1521880000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1548160000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608510000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608520000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608540000",
+   "mfg_cps": 3,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608570000",
+   "mfg_cps": 4,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 3
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608620000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608640000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608660000",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1608670000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1616420000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1616460000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1616500000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1632050000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1632080000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1674300000",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1683620000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1712810000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1745230000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1745250000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1746750000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 1,
+   "fp": 0,
+   "fn": 1
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1746770000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1802810000",
+   "mfg_cps": 1,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 0
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1807090000",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1820840000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1886570000",
+   "mfg_cps": 2,
+   "pred": 3,
+   "tp": 0,
+   "fp": 3,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1905090000",
+   "mfg_cps": 4,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1905100000",
+   "mfg_cps": 4,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1905130000",
+   "mfg_cps": 4,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1966020000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1989890000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "1992110000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2000110000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2051180000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2051220000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2502280000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2668900000",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2668940000",
+   "mfg_cps": 5,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 5
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2668950000",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2669000000",
+   "mfg_cps": 4,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 4
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2674560000",
+   "mfg_cps": 2,
+   "pred": 0,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2694090000",
+   "mfg_cps": 2,
+   "pred": 1,
+   "tp": 0,
+   "fp": 1,
+   "fn": 2
+  },
+  {
+   "mfg": "WEI",
+   "part_id": "2710080000",
+   "mfg_cps": 2,
+   "pred": 2,
+   "tp": 1,
+   "fp": 1,
+   "fn": 1
+  }
+ ]
+}

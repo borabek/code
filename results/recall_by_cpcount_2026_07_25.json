@@ -1,0 +1,19 @@
+{
+ "analysis": "recall_by_cp_count (product config vote>=1+gate0.35, OOF)",
+ "WEI": {
+  "1-2": 0.734,
+  "3-5": 0.641,
+  "6-10": 0.515,
+  "total_lost": 147
+ },
+ "PXC": {
+  "1-2": 0.882,
+  "3-5": 0.813,
+  "6-10": 0.502,
+  "11-20": 0.201,
+  "21+": 0.047,
+  "total_lost": 784
+ },
+ "finding": "recall loss concentrated in HIGH-CP terminals; PXC 11+ CP (24 parts) carry 384/784 of PXC loss, recall craters to 0.05-0.20 (big marshalling/multi-pole, likely OOD)",
+ "implication": "next recall-labeling round should PRIORITIZE high-CP terminals (PXC 11+), not only WEI. Highest-ROI recall targets."
+}

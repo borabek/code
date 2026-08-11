@@ -1,0 +1,22 @@
+{
+ "n_cp": 1186,
+ "kusur_once": 222,
+ "kusur_sonra": 121,
+ "fp2tp": 9,
+ "tp2fp": 12,
+ "gecti": false,
+ "operator_dagilimi": {
+  "hicbiri": 976,
+  "KANAL_DEGIL": 29,
+  "merkez+KANAL_DEGIL": 7,
+  "govde+merkez": 41,
+  "govde+yon": 8,
+  "govde": 48,
+  "merkez": 39,
+  "yon": 10,
+  "govde+merkez+KANAL_DEGIL": 4,
+  "govde+merkez+yon": 15,
+  "merkez+yon": 3,
+  "govde+KANAL_DEGIL": 6
+ }
+}

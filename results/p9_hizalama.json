@@ -1,0 +1,34 @@
+{
+ "olcum": "P9 hizalama -- geometrik yonlendirme (CP_GEO_ORIENT) ACIK vs KAPALI, eslesen gate ile",
+ "kaynak": "results/p9.log (script son print'te KeyError ile coktu; OLCUM tamamlandi, makbuz logdan yeniden yazildi)",
+ "test": {
+  "parca": 100,
+  "dusuk_cp": 70,
+  "cok_cp": 30,
+  "sizinti": "100 test ailesi gate egitiminden CIKARILDI; esikler buyuk veride aile-disi OOF ile secildi"
+ },
+ "esikler": {
+  "dusuk": 0.4,
+  "cok": 0.35
+ },
+ "kollar": {
+  "A_MEVCUT_geoKAPALI": {
+   "dusuk": 0.802,
+   "cok": 0.6548,
+   "agirlikli": 0.7865
+  },
+  "B_HIZALI_geoACIK": {
+   "dusuk": 0.8168,
+   "cok": 0.6717,
+   "agirlikli": 0.8016
+  }
+ },
+ "fark": 0.0151,
+ "karar": "B URUNE ALINDI (cp_openings.USE_GEO_ORIENT varsayilan 1)",
+ "agirlik": {
+  "dusuk": 0.895,
+  "cok": 0.105,
+  "not": "korpus temsili agirlik"
+ },
+ "tarih": "2026-07-30"
+}

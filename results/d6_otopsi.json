@@ -1,0 +1,19 @@
+{
+ "kova": {
+  "GATE_REDDI": 281,
+  "ADAY_YOK": 863,
+  "ESLESTI": 1185,
+  "KALABALIK": 343
+ },
+ "robot_kirilim": {
+  "ROBOT_OK": 286,
+  "IKISI": 198,
+  "YANAL_FAIL": 170,
+  "TERS_ISARET": 335,
+  "ACI_FAIL": 196
+ },
+ "tespit": 0.4479197360927392,
+ "robot": 0.14752966708929674,
+ "kahin_gate_tespit": 0.9134478926157383,
+ "kahin_aci_robot": 0.30218402294917845
+}

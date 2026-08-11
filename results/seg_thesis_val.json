@@ -1,0 +1,85 @@
+{
+  "thesis_mean_jaccard": 0.514,
+  "val_parts": 20,
+  "checkpoints": [
+    [
+      "best_full.pt",
+      0.6812445538759679,
+      0.7899330470105147,
+      0.8637300872043413,
+      {
+        "Housing": 0.814,
+        "Contact": 0.677,
+        "SnapPoint": 0.532,
+        "CableEntry": 0.74,
+        "LabelSurface": 0.686
+      }
+    ],
+    [
+      "best.pt",
+      0.563992803644252,
+      0.6834806853330406,
+      0.7843344426497303,
+      {
+        "Housing": 0.723,
+        "Contact": 0.593,
+        "SnapPoint": 0.335,
+        "CableEntry": 0.648,
+        "LabelSurface": 0.567
+      }
+    ],
+    [
+      "adj_s0.pt",
+      0.6048861899578891,
+      0.7285249145189849,
+      0.8111392373351525,
+      {
+        "Housing": 0.745,
+        "Contact": 0.678,
+        "SnapPoint": 0.41,
+        "CableEntry": 0.614,
+        "LabelSurface": 0.599
+      }
+    ],
+    [
+      "eec_all132.pt",
+      0.6014358715224526,
+      0.7316464517319897,
+      0.8066396808155354,
+      {
+        "Housing": 0.726,
+        "Contact": 0.673,
+        "SnapPoint": 0.415,
+        "CableEntry": 0.617,
+        "LabelSurface": 0.601
+      }
+    ],
+    [
+      "human103c_s0.pt",
+      0.6378992958031551,
+      0.7520772545156923,
+      0.8359349691621418,
+      {
+        "Housing": 0.782,
+        "Contact": 0.661,
+        "SnapPoint": 0.496,
+        "CableEntry": 0.641,
+        "LabelSurface": 0.635
+      }
+    ],
+    [
+      "recall_hard_s2.pt",
+      0.6328937117801616,
+      0.7456242935423096,
+      0.8305281517117378,
+      {
+        "Housing": 0.773,
+        "Contact": 0.646,
+        "SnapPoint": 0.454,
+        "CableEntry": 0.688,
+        "LabelSurface": 0.642
+      }
+    ]
+  ],
+  "best": "best_full.pt"
+}

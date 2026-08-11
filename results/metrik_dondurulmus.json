@@ -1,0 +1,32 @@
+{
+ "surum": "metrik-v1-dondurulmus-2026-08-08",
+ "tespit": {
+  "yanal_mm": "max(3.0, 0.06*diag)",
+  "eksenel_mm": 40.0,
+  "aci": "SERBEST",
+  "eslestirme": "Macar (bire-bir)"
+ },
+ "robot_hazir": {
+  "yanal_mm": 2.0,
+  "aci_derece": 10.0,
+  "isaretli": true,
+  "eksenel_mm": 40.0,
+  "eslestirme": "Macar (bire-bir)"
+ },
+ "raporlama_kurallari": [
+  "TESPIT ve ROBOT AYRI raporlanir, ortalanmaz",
+  "IKI SENARYO AYRI: bilinen markanin yeni modeli / hic gorulmemis marka",
+  "REJIM AYRI: dusuk-CP (<8) ve cok-CP (>=8); duz ortalama verilmez",
+  "URETICI BOOTSTRAP %95 araligi ZORUNLU",
+  "mesafe raporlarken YANAL/EKSENEL AYRIMI zorunlu",
+  "aday ekleyen kolda ROBOT AYRICA olculur (recall kazanci robot kazanci degil)"
+ ],
+ "olculmus_tavanlar": {
+  "aci_kollari_carpani": 1.14,
+  "yanal_2mm_ulasilabilirlik": 0.981,
+  "silindir_eksen_ailesi": 0.39,
+  "bayes_tavani_tespit": 0.859
+ },
+ "not": "Tolerans degerleri DONDURULDU. Degistirmek icin FIZIKSEL gerekce + tum gecmis sayilarin yeniden olculmesi gerekir.",
+ "sha16": "e12c41fc7a10ecd7"
+}

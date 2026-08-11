@@ -1,0 +1,14 @@
+{
+ "base_f1": 0.7764298093587522,
+ "grown_f1": 0.787093056755978,
+ "delta": 0.010663247397225795,
+ "base_parts": 914,
+ "grown_parts": 1753,
+ "scored_parts": 541,
+ "protocol": "family-out GroupKFold(5), seen-excluded from scoring, locked holdout untouched",
+ "threshold_selection": "NESTED (family-out inner CV) -- in-sample secim +0.0166 gosteriyordu, sisirmeydi",
+ "in_sample_delta_for_reference": 0.0166,
+ "learning_curve_note": "+0.015/katlama ongorulmustu; 0.92 katlama icin +0.0107 gerceklesti -> egri hafif duzlesiyor",
+ "locked_holdout": "DOKUNULMADI (cp_config.locked_holdout_policy_2026_07_28)",
+ "corpus_recovered_by_gmsh_fix": "~415 parca; bu olcumdeki +839 parcanin buyuk kismi o kayip havuzdu"
+}

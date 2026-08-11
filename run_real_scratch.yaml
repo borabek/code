@@ -1,0 +1,43 @@
+# cp_real_scratch — ADIM 3 A/B arm B: identical to run_real_v1.yaml but with NO
+# init_from (train from random init instead of the synth pretrain). The ONLY
+# difference between the two arms is the initialisation, so their val gap is a
+# clean measurement of whether synth-pretrain still helps on THIS 479-part real
+# corpus (the +8.8pp was the old 136-part era -- must be re-measured, not assumed).
+backbone: hierpoint
+run_name: cp_real_scratch
+seed: 0
+split_seed: 0
+
+split_group: geometry
+val_frac: 0.15
+test_frac: 0.15
+exclude_parts_file: _bridge_test.txt
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 48000
+knn_cache_dir: _prep_cache
+
+epochs: 90
+eval_every: 5
+patience: 8
+min_delta: 0.005
+ckpt_every: 5
+snapshot_every: 10
+
+augment: 2
+aug_rotate: false
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

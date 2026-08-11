@@ -1,0 +1,23 @@
+# The 9 HUMAN-labelled PXC parts (_cad_eval_pxc + the ABB JSON human GT).
+# Measured 2026-07-14: ALL NINE were in the TRAIN split of v31, so the
+# 'independent human benchmark' was scored on parts the model had trained
+# on. Every human-GT number for an ML model so far is INFLATED.
+# Pass via --exclude-parts-file so they never enter fit OR the CAD-corpus
+# eval; score them ONLY through cad_eval.py against the human labels.
+PXC.3031238
+PXC.3036550
+PXC.3036563
+PXC.3048357
+PXC.3211813
+PXC.3211814
+PXC.3211819
+PXC.3211822
+PXC.3212140
+wscaduniverse_3031238_2026-06-21-22-27-09
+wscaduniverse_3036550_2026-07-13-15-06-10
+wscaduniverse_3036563_2026-07-13-15-10-02
+wscaduniverse_3048357_2026-07-13-15-04-54
+wscaduniverse_3211813_2026-06-21-22-25-47
+wscaduniverse_3211819_2026-07-13-15-03-30
+wscaduniverse_3211822_2026-06-21-22-25-51
+wscaduniverse_3212140_2026-07-13-15-47-25

@@ -1,0 +1,15 @@
+{
+ "metal-tonu mesafesi (eski)": {
+  "auc": 0.2870891856703227,
+  "null_p95": 0.5336338820721218,
+  "ayirt": 0.2129108143296773
+ },
+ "KONTRAST mesafesi (yeni)": {
+  "auc": 0.3014331649964491,
+  "null_p95": 0.5374884104000631,
+  "ayirt": 0.19856683500355088
+ },
+ "fark": -0.01434397932612641,
+ "kapsama_metal": 38,
+ "kapsama_kontrast": 52
+}

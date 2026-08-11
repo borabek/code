@@ -1,0 +1,65 @@
+{
+  "title": "RICH-FEATURE GATE — leakage-free measurement receipt",
+  "date": "2026-07-28",
+  "context": "Overnight autonomous Phase A (ROAD_TO_085_FBI.md). Goal: raise ML CP-F1 toward 0.85 without human labeling and without departing from the thesis (still 3D mesh + DiffusionNet segmentation probabilities; only the wire/tool GATE representation changed).",
+  "data": {
+    "source": "results/rich_feats.npz (built by build_rich_feats.py)",
+    "pipeline": "PRODUCT-faithful: STEP -> thesis_remesh(6000) -> 4-model product ensemble -> cp_openings (cp-v3, min_v30/vc0.5/cluster5) -> UNION(vote>=1)",
+    "parts": 823,
+    "candidates": 4785,
+    "manufacturer_GT_cps": 2837,
+    "matched_TP": 2292,
+    "wei_candidates": 854,
+    "pxc_candidates": 3931,
+    "sanity": "identical shape to canonical results/f1_sweep_data.npz (4785 union CPs / 2837 GT) -> directly comparable to the canonical ladder"
+  },
+  "features": {
+    "baseline_13": "wire_gate.FEAT_NAMES (size, depth, nn_dist, n_close, outward, nverts, ce_frac, ct_frac, aspect, flat, chan_conn, votes, conf)",
+    "added_41": {
+      "A_position_9": "position normalised inside the MESH bbox (3) + distances to the 6 bbox faces (6)",
+      "B_multiradius_24": "class-probability profile at radii 3/6/10/15mm (5 classes x 4) + local vertex density (4)",
+      "C_taper_5": "opening radius at depths 0/2/4/6/8mm along the insertion axis (mesh-based funnel test)",
+      "D_curvature_3": "std of vertex-normal projection on the axis at radii 3/6/10mm"
+    },
+    "block_attribution": {
+      "A_position": "REAL — the single biggest contributor. The 13 features contain NO 'where on the part' information (outward only measures along the candidate's OWN axis). Screws sit on top, wire entries on the front — this is the quantified form of the user-reported 'arrow comes out of the screw' defect.",
+      "B_multiradius": "REAL — close second",
+      "C_taper": "DEAD (negative). The funnel/Einfuehrtrichter hypothesis fails on the mesh too, consistent with the independent B-rep cone test (has_cone AUC 0.504).",
+      "D_curvature": "~0 part-out, small positive family-out"
+    }
+  },
+  "method": {
+    "cv": "GroupKFold(5); reported both PART-out (comparable to the canonical receipt) and FAMILY-out (stricter; family key = candidate-cloud bbox rounded to 1mm + log2(candidate count), label-free)",
+    "threshold": "NESTED-CV: threshold chosen on the training folds, applied to the held-out fold — no in-sample threshold optimism",
+    "classifier": "RandomForest(400, min_samples_leaf=3); also HistGradientBoosting and a 50/50 ensemble"
+  },
+  "results_nested_cv_threshold_F1": {
+    "PART_out": {
+      "baseline_13": {"ALL": 0.7535, "WEI": 0.6928, "PXC": 0.7684, "note": "reproduces canonical base 0.750"},
+      "rich_46d_rf": {"ALL": 0.7826, "WEI": 0.7048, "PXC": 0.7927},
+      "rich_46d_ensemble": {"ALL": 0.7886, "WEI": 0.7296, "PXC": 0.7984},
+      "gain_ALL": 0.0351
+    },
+    "FAMILY_out_STRICT": {
+      "baseline_13": {"ALL": 0.7204, "WEI": 0.6421, "PXC": 0.7337},
+      "rich_46d_ensemble": {"ALL": 0.7660, "WEI": 0.7100, "PXC": 0.7794},
+      "rich_61d_ensemble": {"ALL": 0.7693, "WEI": 0.7173, "PXC": 0.7762},
+      "gain_ALL": 0.0489,
+      "note": "the gain is LARGER under the stricter split -> the rich features improve generalisation, they are not family memorisation"
+    },
+    "AUC": {"baseline_13_part_out": 0.9275, "rich_part_out": 0.9549, "baseline_13_family_out": 0.8956, "rich_family_out": 0.9373}
+  },
+  "honest_caveats": [
+    "This measures the GATE only; candidate generation is unchanged (base 6k union).",
+    "The candidate recall ceiling (0.808 ALL) still caps F1 at 0.894 even with a perfect gate — so 0.85 additionally needs better candidates (aggressive multi-resolution, now re-opened because the gate finally got strong enough to carry them).",
+    "Context features (PCA coords, ranks, density, mirror-partner) added only ~+0.003 — marginal.",
+    "Not yet deployed: cp_config.json still defines the frozen 13-feature product. Deploying is a product decision for the user."
+  ],
+  "killed_this_session_honestly": {
+    "axis_clustering": "hypothesis TRUE (wire CPs share axes +0.058 above size-matched null, 78% of parts) but the 13 features already carry it (+0.0036 AUC)",
+    "score_pooling_sqrtN": "+0.011 AUC but only +0.002 top-N F1",
+    "zero_TP_cluster_FP_mass": "'60% of FP are structurally killable' was a BASE-RATE ARTIFACT — null-corrected excess only +0.031",
+    "funnel_taper": "dead in both B-rep (AUC 0.504) and mesh (negative contribution)"
+  },
+  "reproduce": ["build_rich_feats.py", "analyze_rich.py", "eval_rich_deploy.py", "push_085.py"]
+}

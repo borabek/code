@@ -1,0 +1,83 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "TEZ-SAF +TANIM": {
+   "kural": "mutlak 0.1",
+   "aday_per_parca": 13.465227817745804,
+   "D7": {
+    "robot": 0.22680842193037315,
+    "tespit": 0.42067959141129874,
+    "makro": 0.23639766569475903,
+    "en_kotu": 0.0,
+    "marka": {
+     "CCD": 0.6290322580645161,
+     "KLM": 0.08118081180811808,
+     "A-B": 0.34418604651162793,
+     "EFX": 0.06926406926406926,
+     "WIE": 0.46203208556149733,
+     "CWT": 0.01603206412825651,
+     "DIN": 0.41843971631205673,
+     "WEG": 0.022900763358778626,
+     "CEM": 0.0,
+     "DEG": 0.18181818181818182,
+     "ELMEX": 0.5294117647058824,
+     "C3": 0.08247422680412371
+    }
+   }
+  },
+  "TAM HAVUZ +TANIM": {
+   "kural": "mutlak 0.1",
+   "aday_per_parca": 279.9425149700599,
+   "D7": {
+    "robot": 0.23099054665022606,
+    "tespit": 0.42060556240580904,
+    "makro": 0.24765998026612837,
+    "en_kotu": 0.03529411764705882,
+    "marka": {
+     "CCD": 0.3925233644859813,
+     "KLM": 0.189873417721519,
+     "A-B": 0.44391971664698937,
+     "EFX": 0.12949640287769784,
+     "WIE": 0.3926293408929837,
+     "CWT": 0.04911993450675399,
+     "DIN": 0.4697674418604651,
+     "WEG": 0.056818181818181816,
+     "CEM": 0.06593406593406594,
+     "DEG": 0.3655913978494624,
+     "ELMEX": 0.38095238095238093,
+     "C3": 0.03529411764705882
+    }
+   }
+  }
+ },
+ "urun": {
+  "robot": 0.2029,
+  "tespit": 0.4523,
+  "makro": 0.2146
+ },
+ "not": "Esik D6'da secildi, D7'de yeniden taranmadi. Egitim D6'yi icermez. TAM URUN ZINCIRI (poz kafasi). MIKRO."
+}

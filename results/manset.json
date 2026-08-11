@@ -1,0 +1,296 @@
+{
+ "olcum_tarihi": "2026-08-01",
+ "gate": {
+  "n_feat": 116,
+  "yonlendirmeli": false,
+  "esik_cokus": null,
+  "topo_r": 6.0
+ },
+ "bolmeler": {
+  "  DEV": {
+   "grup": "tanidik",
+   "n_parca": 54,
+   "tespit_F1": 0.806,
+   "tespit_GA": [
+    0.7136,
+    0.8798
+   ],
+   "robot_hazir_F1": 0.7226,
+   "robot_GA": [
+    0.6043,
+    0.8266
+   ],
+   "robot_ISARETLI_F1": 0.7082,
+   "kesinlik": 0.792,
+   "recall": 0.824,
+   "ham_kesinlik": 0.809,
+   "ham_recall": 0.669,
+   "dusuk_CP_F1": 0.8163,
+   "n_dusuk": 24,
+   "cok_CP_F1": 0.7177,
+   "n_cok": 30
+  },
+  "  VAL": {
+   "grup": "tanidik",
+   "n_parca": 100,
+   "tespit_F1": 0.7535,
+   "tespit_GA": [
+    0.705,
+    0.8022
+   ],
+   "robot_hazir_F1": 0.5978,
+   "robot_GA": [
+    0.5118,
+    0.6811
+   ],
+   "robot_ISARETLI_F1": 0.5884,
+   "kesinlik": 0.74,
+   "recall": 0.768,
+   "ham_kesinlik": 0.687,
+   "ham_recall": 0.632,
+   "dusuk_CP_F1": 0.7717,
+   "n_dusuk": 70,
+   "cok_CP_F1": 0.5983,
+   "n_cok": 30
+  },
+  "  ATANMAMIS": {
+   "grup": "tanidik",
+   "n_parca": 40,
+   "tespit_F1": 0.7413,
+   "tespit_GA": [
+    0.6393,
+    0.8385
+   ],
+   "robot_hazir_F1": 0.6332,
+   "robot_GA": [
+    0.507,
+    0.7491
+   ],
+   "robot_ISARETLI_F1": 0.6178,
+   "kesinlik": 0.716,
+   "recall": 0.768,
+   "ham_kesinlik": 0.716,
+   "ham_recall": 0.768,
+   "dusuk_CP_F1": 0.7413,
+   "n_dusuk": 40,
+   "cok_CP_F1": null,
+   "n_cok": 0
+  },
+  "  HAVUZLANMIS": {
+   "grup": "tanidik",
+   "n_parca": 194,
+   "tespit_F1": 0.7584,
+   "tespit_GA": [
+    0.7145,
+    0.7992
+   ],
+   "robot_hazir_F1": 0.6303,
+   "robot_GA": [
+    0.572,
+    0.6885
+   ],
+   "robot_ISARETLI_F1": 0.6181,
+   "kesinlik": 0.745,
+   "recall": 0.774,
+   "ham_kesinlik": 0.736,
+   "ham_recall": 0.66,
+   "dusuk_CP_F1": 0.7701,
+   "n_dusuk": 134,
+   "cok_CP_F1": 0.6583,
+   "n_cok": 60
+  },
+  "  PXC disarida": {
+   "grup": "uretici_disi",
+   "n_parca": 90,
+   "tespit_F1": 0.668,
+   "tespit_GA": [
+    0.5962,
+    0.7394
+   ],
+   "robot_hazir_F1": 0.5591,
+   "robot_GA": [
+    0.4564,
+    0.6581
+   ],
+   "robot_ISARETLI_F1": 0.5528,
+   "kesinlik": 0.622,
+   "recall": 0.726,
+   "ham_kesinlik": 0.637,
+   "ham_recall": 0.576,
+   "dusuk_CP_F1": 0.6781,
+   "n_dusuk": 49,
+   "cok_CP_F1": 0.5824,
+   "n_cok": 41
+  },
+  "  WEI disarida": {
+   "grup": "uretici_disi",
+   "n_parca": 103,
+   "tespit_F1": 0.5968,
+   "tespit_GA": [
+    0.5334,
+    0.6538
+   ],
+   "robot_hazir_F1": 0.4078,
+   "robot_GA": [
+    0.3483,
+    0.4658
+   ],
+   "robot_ISARETLI_F1": 0.4029,
+   "kesinlik": 0.518,
+   "recall": 0.71,
+   "ham_kesinlik": 0.51,
+   "ham_recall": 0.596,
+   "dusuk_CP_F1": 0.61,
+   "n_dusuk": 84,
+   "cok_CP_F1": 0.4847,
+   "n_cok": 19
+  },
+  "  seri 10": {
+   "grup": "seri_disi",
+   "n_parca": 18,
+   "tespit_F1": 0.6196,
+   "tespit_GA": [
+    0.4598,
+    0.7968
+   ],
+   "robot_hazir_F1": 0.4658,
+   "robot_GA": [
+    0.2781,
+    0.7021
+   ],
+   "robot_ISARETLI_F1": 0.4282,
+   "kesinlik": 0.524,
+   "recall": 0.757,
+   "ham_kesinlik": 0.427,
+   "ham_recall": 0.638,
+   "dusuk_CP_F1": 0.6526,
+   "n_dusuk": 16,
+   "cok_CP_F1": 0.3377,
+   "n_cok": 2
+  },
+  "  seri 15": {
+   "grup": "seri_disi",
+   "n_parca": 10,
+   "tespit_F1": 0.6416,
+   "tespit_GA": [
+    0.3991,
+    0.9422
+   ],
+   "robot_hazir_F1": 0.4609,
+   "robot_GA": [
+    0.0322,
+    0.9316
+   ],
+   "robot_ISARETLI_F1": 0.4595,
+   "kesinlik": 0.837,
+   "recall": 0.52,
+   "ham_kesinlik": 0.559,
+   "ham_recall": 0.388,
+   "dusuk_CP_F1": 0.6667,
+   "n_dusuk": 3,
+   "cok_CP_F1": 0.4276,
+   "n_cok": 7
+  },
+  "  seri 16": {
+   "grup": "seri_disi",
+   "n_parca": 11,
+   "tespit_F1": 0.931,
+   "tespit_GA": [
+    0.8333,
+    1.0
+   ],
+   "robot_hazir_F1": 0.7931,
+   "robot_GA": [
+    0.6429,
+    0.9412
+   ],
+   "robot_ISARETLI_F1": 0.7586,
+   "kesinlik": 0.931,
+   "recall": 0.931,
+   "ham_kesinlik": 0.931,
+   "ham_recall": 0.931,
+   "dusuk_CP_F1": 0.931,
+   "n_dusuk": 11,
+   "cok_CP_F1": null,
+   "n_cok": 0
+  },
+  "  seri 17": {
+   "grup": "seri_disi",
+   "n_parca": 14,
+   "tespit_F1": 0.7297,
+   "tespit_GA": [
+    0.6557,
+    0.8108
+   ],
+   "robot_hazir_F1": 0.5946,
+   "robot_GA": [
+    0.4722,
+    0.7018
+   ],
+   "robot_ISARETLI_F1": 0.5946,
+   "kesinlik": 0.711,
+   "recall": 0.75,
+   "ham_kesinlik": 0.711,
+   "ham_recall": 0.75,
+   "dusuk_CP_F1": 0.7297,
+   "n_dusuk": 14,
+   "cok_CP_F1": null,
+   "n_cok": 0
+  },
+  "  seri 30": {
+   "grup": "seri_disi",
+   "n_parca": 20,
+   "tespit_F1": 0.6957,
+   "tespit_GA": [
+    0.5565,
+    0.8162
+   ],
+   "robot_hazir_F1": 0.6188,
+   "robot_GA": [
+    0.4733,
+    0.758
+   ],
+   "robot_ISARETLI_F1": 0.6021,
+   "kesinlik": 0.628,
+   "recall": 0.792,
+   "ham_kesinlik": 0.636,
+   "ham_recall": 0.683,
+   "dusuk_CP_F1": 0.7103,
+   "n_dusuk": 18,
+   "cok_CP_F1": 0.5714,
+   "n_cok": 2
+  },
+  "  seri 32": {
+   "grup": "seri_disi",
+   "n_parca": 61,
+   "tespit_F1": 0.7746,
+   "tespit_GA": [
+    0.6872,
+    0.8606
+   ],
+   "robot_hazir_F1": 0.6292,
+   "robot_GA": [
+    0.4717,
+    0.7793
+   ],
+   "robot_ISARETLI_F1": 0.6218,
+   "kesinlik": 0.758,
+   "recall": 0.792,
+   "ham_kesinlik": 0.734,
+   "ham_recall": 0.681,
+   "dusuk_CP_F1": 0.7843,
+   "n_dusuk": 25,
+   "cok_CP_F1": 0.692,
+   "n_cok": 36
+  }
+ },
+ "ozet": {
+  "uretici_disi_ORT": 0.6324,
+  "uretici_disi_EN_KOTU": 0.5968,
+  "uretici_disi_YAYILIM": 0.0712,
+  "seri_disi_ORT": 0.732,
+  "seri_disi_EN_KOTU": 0.6196,
+  "seri_disi_MEDYAN": 0.7127
+ },
+ "not": "Tum sayilar TEK kosudan; olcum urunun kendi karar yolunu (wire_gate.karar_skoru + karar_maskesi) kullanir, taklit etmez. LOCKED harcanmadi."
+}

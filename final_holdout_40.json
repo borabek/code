@@ -1,0 +1,296 @@
+{
+ "frozen": "2026-07-18",
+ "purpose": "NEW untouched human-CP benchmark candidates (UNLABELLED)",
+ "denylist": {
+  "scheffler_ids": 274,
+  "scheffler_step_shas": 142,
+  "TODO": "also denylist v28/v31 train IDs once their manifests are found"
+ },
+ "pool_unique_ids": 3642,
+ "pool_after_denylist_and_sha_dedup": 3492,
+ "n_selected": 40,
+ "overlap_with_denylist": 0,
+ "note": "labels NOT included; human point+direction labelling + 3-rater adjudication is the next (human) step",
+ "candidates": [
+  {
+   "part_id": "0305080",
+   "sha256": "f4024509c7fe8ac76f3b52bb97c2776341fd90c658e890c7050c4e42ab36d0a6",
+   "step_file": "all_wscad_stp\\wscaduniverse_0305080_2026-07-13-15-40-53.stp",
+   "prefix": "03",
+   "bytes": 327990
+  },
+  {
+   "part_id": "0311812",
+   "sha256": "28d0d9005bcedc648ece094f6c79cde956dd5877eaf4b8df69c52b04dd3b6ee0",
+   "step_file": "all_wscad_stp\\wscaduniverse_0311812_2026-07-13-15-41-10.stp",
+   "prefix": "03",
+   "bytes": 356299
+  },
+  {
+   "part_id": "0441012",
+   "sha256": "c4dd9c1eeaf16989328bfa28beaf90534501b1c1905ab0cda5d7996a71b44c29",
+   "step_file": "all_wscad_stp\\wscaduniverse_0441012_2026-07-13-15-42-32.stp",
+   "prefix": "04",
+   "bytes": 374368
+  },
+  {
+   "part_id": "0442011",
+   "sha256": "e03cff9a9852a32ab1364af5802178b26de78e998f6324c86b29a677189f68a3",
+   "step_file": "all_wscad_stp\\wscaduniverse_0442011_2026-07-13-15-42-54.stp",
+   "prefix": "04",
+   "bytes": 423645
+  },
+  {
+   "part_id": "0704076",
+   "sha256": "746c381da0873d97bda7f4a618906fb0570c41608bad518ac42e429c34f67006",
+   "step_file": "all_wscad_stp\\wscaduniverse_0704076_2026-07-13-15-44-26.stp",
+   "prefix": "07",
+   "bytes": 329673
+  },
+  {
+   "part_id": "0706058",
+   "sha256": "9cde6bb46c4a928c05370576729fa46a21b7087a6350a86bd046015d90d7fe7e",
+   "step_file": "all_wscad_stp\\wscaduniverse_0706058_2026-07-13-15-44-29.stp",
+   "prefix": "07",
+   "bytes": 393994
+  },
+  {
+   "part_id": "0852012",
+   "sha256": "2af12f9e67d0eb97ed6f7e41c6ba1a2245eb737ac7fb56534a17055285803f9a",
+   "step_file": "all_wscad_stp\\wscaduniverse_0852012_2026-07-13-15-45-58.stp",
+   "prefix": "08",
+   "bytes": 239495
+  },
+  {
+   "part_id": "0854010",
+   "sha256": "78c3a9209e41c5155c67693928f975587194ba2794a220f0e07e691a4f174ac2",
+   "step_file": "all_wscad_stp\\wscaduniverse_0854010_2026-07-13-15-46-04.stp",
+   "prefix": "08",
+   "bytes": 230774
+  },
+  {
+   "part_id": "1037085",
+   "sha256": "aa2bfb6ac2a0f43d3bf07006428b7f9775148462e2f9a00747612e985af50d24",
+   "step_file": "all_wscad_stp\\wscaduniverse_1037085_2026-07-13-15-41-30.stp",
+   "prefix": "10",
+   "bytes": 413738
+  },
+  {
+   "part_id": "1162920000",
+   "sha256": "c36eff07c65b08e39e882478b4eb3a5c4acd22328e5ba9e215b80098cd4e1fb4",
+   "step_file": "all_wscad_stp\\wscaduniverse_1162920000_2026-07-13-15-40-54.stp",
+   "prefix": "11",
+   "bytes": 1347660
+  },
+  {
+   "part_id": "1251104",
+   "sha256": "8853fec4df9e731e619799d9a1327b798e954ccb0ceddf7e307ff38330a24027",
+   "step_file": "all_wscad_stp\\wscaduniverse_1251104_2026-07-13-15-41-51.stp",
+   "prefix": "12",
+   "bytes": 857709
+  },
+  {
+   "part_id": "1322568",
+   "sha256": "b209e24784fa757e06c641a99b53e5c0ee49eb1c29400243ce5bb8c82f365aaf",
+   "step_file": "all_wscad_stp\\wscaduniverse_1322568_2026-07-13-15-42-40.stp",
+   "prefix": "13",
+   "bytes": 593878
+  },
+  {
+   "part_id": "1415092",
+   "sha256": "a717836bb749375652a4e490478aa1485fbc1450961e3cf58e2dd7de1b0fffae",
+   "step_file": "all_wscad_stp\\wscaduniverse_1415092_2026-07-13-15-44-57.stp",
+   "prefix": "14",
+   "bytes": 154195
+  },
+  {
+   "part_id": "1552670000",
+   "sha256": "b4bd2fc50f868fd41d1ad86a5bc400b1db45e4cb5e3e46616c68cf43af798673",
+   "step_file": "all_wscad_stp\\wscaduniverse_1552670000_2026-07-13-15-45-55.stp",
+   "prefix": "15",
+   "bytes": 1074224
+  },
+  {
+   "part_id": "1608520000",
+   "sha256": "3c1c619b617614d66eb0e5251f1484c20ded39150b58aec675a2ee10eac4a931",
+   "step_file": "all_wscad_stp\\wscaduniverse_1608520000_2026-07-13-15-09-12.stp",
+   "prefix": "16",
+   "bytes": 597892
+  },
+  {
+   "part_id": "1739650000",
+   "sha256": "7f8b2d06541f1ac822277847d4ab4402f1bcf3971707eaf2ec880385495c449a",
+   "step_file": "all_wscad_stp\\wscaduniverse_1739650000_2026-07-13-15-48-20.stp",
+   "prefix": "17",
+   "bytes": 1052275
+  },
+  {
+   "part_id": "1808300000",
+   "sha256": "625a65aae4f23a6f66d5958a042ed7a4427579f0a684e8971fea1385bb67afc5",
+   "step_file": "all_wscad_stp\\wscaduniverse_1808300000_2026-07-13-15-41-10.stp",
+   "prefix": "18",
+   "bytes": 519562
+  },
+  {
+   "part_id": "1989890000",
+   "sha256": "1147121c8dffb3b8712a527890e0cb2bf3282e0b82b3e1cb1da1a57da8440ff6",
+   "step_file": "all_wscad_stp\\wscaduniverse_1989890000_2026-07-13-15-43-10.stp",
+   "prefix": "19",
+   "bytes": 1579642
+  },
+  {
+   "part_id": "1SNK705321R0000",
+   "sha256": "cb128e47c4c4c3e06c40bcc079da71896718e23a12a1eecbbfd286fa02928e15",
+   "step_file": "all_wscad_stp\\wscaduniverse_1SNK705321R0000_2026-07-13-15-44-15.stp",
+   "prefix": "1S",
+   "bytes": 689612
+  },
+  {
+   "part_id": "2016-7111",
+   "sha256": "6c81741ab7be6e088211cac967d1b5da2c384326df349b3e48bc5612a3d5cc8f",
+   "step_file": "all_wscad_stp\\wscaduniverse_2016-7111_2026-07-13-15-43-52.stp",
+   "prefix": "20",
+   "bytes": 306752
+  },
+  {
+   "part_id": "2104-1207",
+   "sha256": "ae19e0078ecff3fded7ae459d2f22e2800b9fd44e09ab9cb7b4552380ae8b66a",
+   "step_file": "all_wscad_stp\\wscaduniverse_2104-1207_2026-07-13-15-45-00.stp",
+   "prefix": "21",
+   "bytes": 493504
+  },
+  {
+   "part_id": "2202-6307",
+   "sha256": "225eb7c073d8f5984ab1492bc07290b10e8a843bc1c9810490f970b5e303c994",
+   "step_file": "all_wscad_stp\\wscaduniverse_2202-6307_2026-07-13-15-44-32.stp",
+   "prefix": "22",
+   "bytes": 670297
+  },
+  {
+   "part_id": "2490440000",
+   "sha256": "e03d6c42f0d72a46857bb9aa3ab9d68666a7936d8f121573f87f216c9bfe2f80",
+   "step_file": "all_wscad_stp\\wscaduniverse_2490440000_2026-07-13-15-44-10.stp",
+   "prefix": "24",
+   "bytes": 997866
+  },
+  {
+   "part_id": "2548140000",
+   "sha256": "81462a473be94a3c8f2ed1ec364555344968fdc6bb00a4733f3174f8fb0f6f36",
+   "step_file": "all_wscad_stp\\wscaduniverse_2548140000_2026-07-13-15-44-54.stp",
+   "prefix": "25",
+   "bytes": 2673049
+  },
+  {
+   "part_id": "2675290000",
+   "sha256": "91077c8fb089aa3094459dfbe9a4feb94c53672e4367715641a7c9fda182dd8f",
+   "step_file": "all_wscad_stp\\wscaduniverse_2675290000_2026-07-13-15-42-00.stp",
+   "prefix": "26",
+   "bytes": 1806484
+  },
+  {
+   "part_id": "279-838",
+   "sha256": "39a8e5715028382206c54023704df47bd2820eb0565f991536bd2cfdc93db5a6",
+   "step_file": "all_wscad_stp\\wscaduniverse_279-838_2026-07-12-18-04-18.stp",
+   "prefix": "27",
+   "bytes": 256250
+  },
+  {
+   "part_id": "280-562",
+   "sha256": "1f0e7f4578e9dad9eb1110f456920ad383c2827ce9365a22b1f5ffd40d792cd2",
+   "step_file": "all_wscad_stp\\wscaduniverse_280-562_2026-07-12-18-04-18.stp",
+   "prefix": "28",
+   "bytes": 251260
+  },
+  {
+   "part_id": "2902520000",
+   "sha256": "0c707791c871ba696d44b084a783a5d3e91c40d57395c26a575218bcc6f07c94",
+   "step_file": "all_wscad_stp\\wscaduniverse_2902520000_2026-07-13-15-45-37.stp",
+   "prefix": "29",
+   "bytes": 2817692
+  },
+  {
+   "part_id": "3026489",
+   "sha256": "ef078df62635522db5f9a3ccf0791c525a0d7d14736fb2342af58a046cc05fb8",
+   "step_file": "all_wscad_stp\\wscaduniverse_3026489_2026-07-13-15-03-13.stp",
+   "prefix": "30",
+   "bytes": 359707
+  },
+  {
+   "part_id": "3100020",
+   "sha256": "c0d140e4a9b460822cf60d45ea095e030aead38d4e79b1168c304e9a2df65f69",
+   "step_file": "all_wscad_stp\\wscaduniverse_3100020_2026-07-13-15-03-37.stp",
+   "prefix": "31",
+   "bytes": 260171
+  },
+  {
+   "part_id": "3206474",
+   "sha256": "2e7f0f2578228ddb0e219380d082e8b4201444b2adaaf8c1848059defb8f35b7",
+   "step_file": "all_wscad_stp\\wscaduniverse_3206474_2026-07-10-17-07-20.stp",
+   "prefix": "32",
+   "bytes": 394325
+  },
+  {
+   "part_id": "5022106",
+   "sha256": "2b6d59ec0758b9c04dfa014d09536384164942c5028cd824baf1bbcd71aa635a",
+   "step_file": "all_wscad_stp\\wscaduniverse_5022106_2026-07-13-15-47-51.stp",
+   "prefix": "50",
+   "bytes": 317140
+  },
+  {
+   "part_id": "711-192",
+   "sha256": "46408289371d0248a2f34d5f72df9fdbe221d02dd94423ab3c56eb2c5800ee61",
+   "step_file": "all_wscad_stp\\wscaduniverse_711-192_2026-07-13-15-40-49.stp",
+   "prefix": "71",
+   "bytes": 197983
+  },
+  {
+   "part_id": "781-607",
+   "sha256": "4f8950608f6e821be7a0723e948a27df88361e4b5f1a2c2608fb9100f4025200",
+   "step_file": "all_wscad_stp\\wscaduniverse_781-607_2026-07-13-15-41-22.stp",
+   "prefix": "78",
+   "bytes": 387340
+  },
+  {
+   "part_id": "7907400000",
+   "sha256": "ac19ec3d9d1cb9a8f1f7eb8ae0db3b4809278d3bb6d6bb69d28fd8bfc90e62b1",
+   "step_file": "all_wscad_stp\\wscaduniverse_7907400000_2026-07-13-15-42-28.stp",
+   "prefix": "79",
+   "bytes": 752358
+  },
+  {
+   "part_id": "826-160",
+   "sha256": "94a6e2e207e0abd9384b4eab99b23819b0ba4cd37fdadbf742329b5de4b622ed",
+   "step_file": "all_wscad_stp\\wscaduniverse_826-160_000-016_2026-07-13-15-43-34.stp",
+   "prefix": "82",
+   "bytes": 131617
+  },
+  {
+   "part_id": "870-907",
+   "sha256": "52764b2b55652ab62cbd99a25c8ac84aa769a582772bd28337c70e80fe938863",
+   "step_file": "all_wscad_stp\\wscaduniverse_870-907_2026-07-13-15-43-40.stp",
+   "prefix": "87",
+   "bytes": 269856
+  },
+  {
+   "part_id": "880-837",
+   "sha256": "656da20825e4307d11bf8d384609f0852cbb7f79bb3b2a47c7d6b61e5f863095",
+   "step_file": "all_wscad_stp\\wscaduniverse_880-837_2026-07-13-15-43-55.stp",
+   "prefix": "88",
+   "bytes": 336282
+  },
+  {
+   "part_id": "9512200000",
+   "sha256": "097a248afd27f699aeca7d4c0f91039ca89984ef17e81b66b8e0cd68dc68c2e6",
+   "step_file": "all_wscad_stp\\wscaduniverse_9512200000_2026-07-13-15-44-14.stp",
+   "prefix": "95",
+   "bytes": 1179204
+  },
+  {
+   "part_id": "DKK4N",
+   "sha256": "861b6901ed32da990e06e440ea53ba6792ce455cc104d65774c50216332fe00d",
+   "step_file": "all_wscad_stp\\wscaduniverse_DKK4N_2026-07-13-15-45-02.stp",
+   "prefix": "DK",
+   "bytes": 841454
+  }
+ ]
+}

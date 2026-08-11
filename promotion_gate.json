@@ -1,0 +1,20 @@
+{
+  "name": "final-cp-promotion-gate",
+  "frozen": "2026-07-18",
+  "applies_to": "human physical CP metric (metric #3) on a NEW untouched, fully human-sealed, full-coverage benchmark ONLY",
+  "must_all_hold": {
+    "precision": ">= 0.90",
+    "recall": ">= 0.90",
+    "jaccard_true_set_accuracy": ">= 0.90",
+    "point_match_mm": "<= 5.0",
+    "direction_error_deg": "<= 15.0",
+    "coverage_fraction": "== 1.00"
+  },
+  "notes": [
+    "Jaccard >= 0.90 mathematically forces F1 >= 0.947, so an F1=0.90 target is NOT sufficient.",
+    "Thresholds are frozen BEFORE the benchmark is opened; no post-hoc tuning.",
+    "Semantic vertex accuracy/Dice (metric #1) is reported in a SEPARATE table and does not count toward this gate.",
+    "Region-derived CP consistency (metric #2) does NOT count toward this gate (GT is auto-derived, not human).",
+    "Disqualifiers: any pending/unsigned label, any train/test overlap (SHA), selective-coverage hiding, or final-set threshold tuning."
+  ]
+}

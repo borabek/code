@@ -1,0 +1,109 @@
+{
+ "config": {
+  "name": "urun_v2_2026_07_29",
+  "postproc": {
+   "min_vertices": 10,
+   "vertex_confidence_mask": 0.3,
+   "cluster_mm": 3.0,
+   "dedupe_mm": 6.0
+  },
+  "gate": {
+   "model": "ExtraTreesClassifier",
+   "n_estimators": 800,
+   "min_samples_leaf": 2
+  },
+  "conn_promote": {
+   "threshold": 0.25,
+   "applied": "only where the geometry router predicts high-CP",
+   "router_threshold": 0.3
+  },
+  "unchanged_from_thesis": [
+   "segmentation network",
+   "segmentation corpus + published split",
+   "isotropic remesh target 6000"
+  ]
+ },
+ "generated": "2026-07-29 01:56:33",
+ "work": {
+  "n_parts": 759,
+  "n_high_cp": 141,
+  "label": "WORK (kilitli haric, temiz)",
+  "seeds": [
+   {
+    "low": 0.8423098278734037,
+    "high": 0.8484130743723355,
+    "corpus_weighted": 0.8429506687557915
+   },
+   {
+    "low": 0.8423087544877107,
+    "high": 0.8493990101343389,
+    "corpus_weighted": 0.8430532313306066
+   },
+   {
+    "low": 0.8399778516057584,
+    "high": 0.8473372781065088,
+    "corpus_weighted": 0.8407505913883373
+   }
+  ],
+  "low": {
+   "mean": 0.8415321446556243,
+   "sd": 0.0010990512428712153
+  },
+  "high": {
+   "mean": 0.8483831208710612,
+   "sd": 0.0008419650221650387
+  },
+  "corpus_weighted": {
+   "mean": 0.8422514971582452,
+   "sd": 0.001062126285035559
+  }
+ },
+ "holdout": {
+  "n_work": 759,
+  "n_hold": 129,
+  "seeds": [
+   {
+    "low": 0.7814207650273224,
+    "high": 0.64,
+    "corpus_weighted": 0.7665715846994536
+   },
+   {
+    "low": 0.7696551724137931,
+    "high": 0.6262626262626262,
+    "corpus_weighted": 0.7545989550679206
+   },
+   {
+    "low": 0.7730398899587346,
+    "high": 0.64,
+    "corpus_weighted": 0.7590707015130675
+   }
+  ],
+  "low": {
+   "mean": 0.77470527579995,
+   "sd": 0.004945531645635565
+  },
+  "high": {
+   "mean": 0.6354208754208753,
+   "sd": 0.006475860083594013
+  },
+  "corpus_weighted": {
+   "mean": 0.7600804137601473,
+   "sd": 0.0049396763854792905
+  },
+  "label": "KILITLI HOLDOUT (tek atis, WORK'te egitildi)"
+ },
+ "holdout_spent": "2026-07-29 01:58:20",
+ "holdout_baseline": {
+  "low": 0.8039,
+  "high": 0.2124,
+  "corpus_weighted": 0.7418,
+  "config": "frozen product: min_v30 features + RandomForest(400,leaf3), no promote",
+  "protocol": "gate+threshold trained on 541 WORK parts, applied once to 129 locked parts"
+ },
+ "holdout_delta": {
+  "low": -0.0292,
+  "high": 0.423,
+  "corpus_weighted": 0.0183
+ },
+ "honest_note": "WORK OOF predicted +0.053; the locked holdout delivered +0.0183. All of it comes from high-CP (0.2124 -> 0.6354); low-CP REGRESSED (-0.0292), so the ExtraTrees low-CP gain measured on WORK (+0.016) did NOT transfer. Holdout is now SPENT -- no iteration."
+}

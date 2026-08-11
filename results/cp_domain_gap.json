@@ -1,0 +1,28 @@
+{
+ "json_wscad_id_overlap": {
+  "count": 0,
+  "ids": []
+ },
+ "vertex_counts": {
+  "json_mesh": {
+   "n": 479,
+   "min": 136,
+   "median": 5511,
+   "max": 471736
+  },
+  "scheffler_obj_remeshed": {
+   "n": 102,
+   "min": 5984,
+   "median": 6000,
+   "max": 6002
+  },
+  "raw_wscad_step_sample": {
+   "n": 8,
+   "min": 838,
+   "median": 1023,
+   "max": 1843
+  }
+ },
+ "density_ratio_raw_step_over_json": 0.19,
+ "note": "JSON and remeshed Scheffler OBJ are same order (~5-6k verts); RAW WSCAD STEP tessellation is far denser -> the thesis remesh to ~6000 is what closes the gap. A model must see the SAME (remeshed) distribution at train and inference."
+}

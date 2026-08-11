@@ -1,0 +1,102 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "SEG (kanonik)": {
+   "recall": 0.6653709102688694,
+   "aday_per_parca": 13.450299401197604,
+   "marka": {
+    "A-B": 0.8865435356200527,
+    "EFX": 0.7607361963190185,
+    "CCD": 0.9354838709677419,
+    "DIN": 0.869281045751634,
+    "ELMEX": 1.0,
+    "WIE": 0.8935361216730038,
+    "KLM": 0.5662650602409639,
+    "CWT": 0.35951134380453753,
+    "DEG": 0.75,
+    "WEG": 0.7134146341463414,
+    "CEM": 0.9636363636363636,
+    "C3": 1.0
+   }
+  },
+  "SEG + B-rep (tum)": {
+   "recall": 0.8464528668610302,
+   "aday_per_parca": 379.8706586826347,
+   "marka": {
+    "A-B": 0.9894459102902374,
+    "EFX": 0.9938650306748467,
+    "CCD": 0.967741935483871,
+    "DIN": 1.0,
+    "ELMEX": 1.0,
+    "WIE": 0.9809885931558935,
+    "KLM": 0.8313253012048193,
+    "CWT": 0.6579406631762653,
+    "DEG": 0.775,
+    "WEG": 0.8414634146341463,
+    "CEM": 1.0,
+    "C3": 1.0
+   }
+  },
+  "SEG + B-rep (r<=3mm)": {
+   "recall": 0.8344671201814059,
+   "aday_per_parca": 344.50538922155687,
+   "marka": {
+    "A-B": 0.9868073878627969,
+    "EFX": 0.950920245398773,
+    "CCD": 0.967741935483871,
+    "DIN": 0.9934640522875817,
+    "ELMEX": 1.0,
+    "WIE": 0.9809885931558935,
+    "KLM": 0.7409638554216867,
+    "CWT": 0.6492146596858639,
+    "DEG": 0.775,
+    "WEG": 0.823170731707317,
+    "CEM": 1.0,
+    "C3": 1.0
+   }
+  },
+  "B-rep TEK BASINA": {
+   "recall": 0.7482993197278912,
+   "aday_per_parca": 366.42035928143713,
+   "marka": {
+    "A-B": 0.9287598944591029,
+    "EFX": 0.9693251533742331,
+    "CCD": 0.8064516129032258,
+    "DIN": 1.0,
+    "ELMEX": 0.5833333333333334,
+    "WIE": 0.8631178707224335,
+    "KLM": 0.7650602409638554,
+    "CWT": 0.5392670157068062,
+    "DEG": 0.525,
+    "WEG": 0.7682926829268293,
+    "CEM": 1.0,
+    "C3": 1.0
+   }
+  }
+ },
+ "not": "HAVUZ RECALL. B-rep onerileri TEZ TURETMESI DEGIL, ek aday kaynagi -- ayri raporlanir. D7 marka-disi."
+}
