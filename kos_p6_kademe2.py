@@ -51,9 +51,14 @@ from sina_kume import esle_macar   # noqa: E402
 
 AB = p6_karar.AB
 C0 = AB
+# Esik izgarasi YUKARI acik tutulur. Mesh havuzu acilinca darbogaz recall'dan
+# KESINLIGE gecti (D6 on okumasi: recall 0.285 -> 0.523 ama kesinlik
+# 0.576 -> 0.322) ve secilen kural izgaranin en ust degeri cikti. Sinirda kalan
+# bir optimum, bulunmamis optimum demektir.
 KURALLAR = ([("mutlak", e) for e in (0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70,
-                                    0.80)] +
-            [("goreli", o, t) for o in (0.30, 0.50, 0.70) for t in (0.05, 0.20)])
+                                     0.80, 0.85, 0.90, 0.95, 0.97, 0.99)] +
+            [("goreli", o, t) for o in (0.30, 0.50, 0.70, 0.85, 0.95)
+             for t in (0.05, 0.20, 0.40, 0.60)])
 NMSLER = (2.5, 3.5, 5.0)
 # Kural aramasi kivrimin EGITIM parcalarinin bir ORNEKLEMINDE yapilir: her kural
 # tum parcalari gezip Macar eslemesi kosuyor ve 42 kural x 2000 parca bir kolu
@@ -62,6 +67,14 @@ NMSLER = (2.5, 3.5, 5.0)
 ARAMA_N = int(os.environ.get("P6_ARAMA_N", "600"))
 TOHUM_KURAL = ("mutlak", 0.60)     # tohum ESIGI ayrica taranmaz: yuksek tutulur
 TOHUM_NMS = 5.0
+# IKINCI KADEME = KISA LISTE UZERINDE FP REDDEDICI.
+# Ilk tasarimda ikinci kademe TUM secenekleri yeniden puanliyordu ve yalniz 8
+# kafes sutunu ekliyordu -- olculdu, ZARAR verdi (-0.0363): birinci kademenin
+# zaten cozdugu 2200 secenegin ezici cogunlugu apacik negatif ve model kapasitesi
+# oraya gidiyor. Dogru kurulum kaskad: birinci kademe RECALL icin genis tarar,
+# ikinci kademe yalniz KISA LISTEYE bakar, birinci kademe skorunu da OZNITELIK
+# olarak alir ve zor negatifleri ayirmaya odaklanir.
+KISA_ESIK = float(os.environ.get("P6_KISA_ESIK", "0.20"))
 NEG_KAT = int(os.environ.get("P6_NEG_KAT", "8"))
 KOLLAR = ("TABAN", "P6", "P6_KAFES")
 
@@ -147,35 +160,70 @@ def olc(veri, skor, kural, nms, kol):
             "recall": tp / max(tp + fn, 1), "kesinlik": tp / max(tp + fp, 1)}
 
 
-def oz(d, kol, kafes_blok=None):
+def oz(d, kol, kafes_blok=None, s1=None):
+    """Kolun oznitelik matrisi.
+
+    TABAN     : A+B, aday basina tek satir, mesh HARIC (dagitilan kural)
+    P6        : 92 + kaynak gostergesi (3)
+    P6_KAFES  : P6 + kafes (8) + birinci kademe skoru (1) -- YALNIZ kisa liste
+    """
     if kol == "TABAN":
-        # TABAN dagitilan kuralin ta kendisi: yalniz B-rep havuzu, kendi yonu.
-        # Mesh adaylari onun havuzunda YOK; haksiz kiyas olmasin diye burada da
-        # elenir.
-        k = kendi(d)
-        k = k[d["kaynak"][d["idx"][k]] != 2]
-        return p6_karar.donustur(d["X"][k][:, :AB], "hepsi")
+        return p6_karar.donustur(d["X"][taban_satir(d)][:, :AB], "hepsi")
     X = np.hstack([p6_karar.donustur(d["X"]),
                    p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
     if kol == "P6_KAFES":
-        return np.hstack([X, kafes_blok])
+        return np.hstack([X, kafes_blok, np.asarray(s1, float)[:, None]])
     return X
 
 
-def egit(tr, kol, kafes_bloklar=None):
-    M = np.vstack([oz(d, kol, None if kafes_bloklar is None else kafes_bloklar[i])
-                   for i, d in enumerate(tr)]).astype(np.float32)
-    Y = np.concatenate([d["y"][taban_satir(d)] if kol == "TABAN" else d["y"]
-                        for d in tr])
+def kisa(s1):
+    """Ikinci kademenin bakacagi satirlar."""
+    return np.where(np.asarray(s1, float) >= KISA_ESIK)[0]
+
+
+def kafes_matris(d, kb, s1, k):
+    """Ikinci kademe oznitelikleri, `k` satirlarinda.
+    [92 donusturulmus | kaynak 3 | kafes 8 | birinci kademe skoru 1]"""
+    X = np.hstack([p6_karar.donustur(d["X"]),
+                   p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
+    return np.hstack([X[k], np.asarray(kb)[k],
+                      np.asarray(s1, float)[k][:, None]])
+
+
+def egit(tr, kol, kafes_bloklar=None, s1ler=None):
+    Ms, Ys = [], []
+    for i, d in enumerate(tr):
+        if kol == "P6_KAFES":
+            k = kisa(s1ler[i])
+            if not len(k):
+                continue
+            Ms.append(kafes_matris(d, kafes_bloklar[i], s1ler[i], k))
+            Ys.append(d["y"][k])
+        else:
+            Ms.append(oz(d, kol))
+            Ys.append(d["y"][taban_satir(d)] if kol == "TABAN" else d["y"])
+    if not Ms:
+        return None
+    M = np.vstack(Ms).astype(np.float32)
+    Y = np.concatenate(Ys)
     M, Y = alt_ornekle(M, Y)
     return yap().fit(M, Y)
 
 
-def skorla(m, veri, kol, kafes_bloklar=None):
+def skorla(m, veri, kol, kafes_bloklar=None, s1ler=None):
+    """Kolun skorlari. P6_KAFES'te KISA LISTE DISI satirlar 0 kalir --
+    yani ikinci kademe birinci kademeyi EZEMEZ, yalniz icinden secer."""
     out = []
     for i, d in enumerate(veri):
-        X = oz(d, kol, None if kafes_bloklar is None else kafes_bloklar[i])
-        p = m.predict_proba(X.astype(np.float32))[:, 1]
+        if kol == "P6_KAFES":
+            s = np.zeros(len(d["X"]))
+            k = kisa(s1ler[i])
+            if len(k):
+                X = kafes_matris(d, kafes_bloklar[i], s1ler[i], k)
+                s[k] = m.predict_proba(X.astype(np.float32))[:, 1]
+            out.append(s)
+            continue
+        p = m.predict_proba(oz(d, kol).astype(np.float32))[:, 1]
         if kol == "TABAN":
             s = np.zeros(len(d["X"]))
             s[taban_satir(d)] = p
@@ -255,11 +303,19 @@ def main():
         TE = [tr[i] for i in dis]
         ayrinti[b] = {}
         for kol in KOLLAR:
-            kb_tr = [kafes_tr[i] for i in ic] if kol == "P6_KAFES" else None
-            kb_te = [kafes_tr[i] for i in dis] if kol == "P6_KAFES" else None
-            m = egit(TR, kol, kb_tr)
-            s_tr = skorla(m, TR, kol, kb_tr)
-            s_te = skorla(m, TE, kol, kb_te)
+            kf = (kol == "P6_KAFES")
+            kb_tr = [kafes_tr[i] for i in ic] if kf else None
+            kb_te = [kafes_tr[i] for i in dis] if kf else None
+            s1_tr = [oof[i] for i in ic] if kf else None
+            s1_te = [oof[i] for i in dis] if kf else None
+            m = egit(TR, kol, kb_tr, s1_tr)
+            if m is None:
+                ayrinti[b][kol] = {"robot": 0.0, "TP": 0, "FP": 0,
+                                   "FN": sum(len(d["G"]) for d in TE),
+                                   "kural": ["yok"], "nms": 0.0}
+                continue
+            s_tr = skorla(m, TR, kol, kb_tr, s1_tr)
+            s_te = skorla(m, TE, kol, kb_te, s1_te)
             ar = (np.random.default_rng(0).choice(len(TR), ARAMA_N, False)
                   if ARAMA_N and len(TR) > ARAMA_N else np.arange(len(TR)))
             AR = [TR[i] for i in ar]
@@ -300,9 +356,11 @@ def main():
     m1 = egit(tr, "P6")
     paket = {"kademe1": m1, "kol": en_kol, "kural": list(kural), "nms": nms,
              "zskor": "ab", "AB": AB, "tohum_kural": list(TOHUM_KURAL),
-             "tohum_nms": TOHUM_NMS}
+             "tohum_nms": TOHUM_NMS, "kisa_esik": KISA_ESIK}
     if en_kol == "P6_KAFES":
-        paket["kademe2"] = egit(tr, "P6_KAFES", kafes_tr)
+        # Ikinci kademe OOF skorlarindan egitilir: urunde birinci kademe skoru
+        # gorulmemis parcadan gelecek, egitimde de oyle gelmeli.
+        paket["kademe2"] = egit(tr, "P6_KAFES", kafes_tr, oof)
     with open("results/p6_kademe2_model.pkl", "wb") as f:
         pickle.dump(paket, f)
     json.dump({"damga": makbuz_hash.damga(), "toplam": son, "marka": ayrinti,

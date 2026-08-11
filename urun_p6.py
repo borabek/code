@@ -128,16 +128,24 @@ def cikti(V, F, probs, cps_seg, step_path, CE, CT):
                     p6_karar.kaynak_blok(kaynak[idx])])
     s = np.asarray(pk["kademe1"].predict_proba(Xd)[:, 1], float)
     if pk.get("kademe2") is not None:
-        # IKINCI KADEME: birinci gecisin YUKSEK GUVENLI secimleri TOHUM olur,
-        # periyodik yapi olculeri cikar, skor yeniden uretilir. Tohumlar
-        # yalnizca tahminden gelir -- GT bu yola HIC girmez.
+        # IKINCI KADEME = KISA LISTE UZERINDE FP REDDEDICI.
+        # Birinci gecisin YUKSEK GUVENLI secimleri TOHUM olur, periyodik yapi
+        # olculeri cikar; ikinci model yalniz `kisa_esik`i gecen secenekleri
+        # yeniden puanlar ve birinci kademe skorunu da OZNITELIK olarak alir.
+        # Kisa liste DISI satirlar 0 kalir -- ikinci kademe birinci kademeyi
+        # EZEMEZ, yalniz icinden secer. Tohumlar yalniz tahminden gelir; GT bu
+        # yola HIC girmez.
         import kafes
         Pt, Dt = p6_karar.sec_ayrintili(
             P, idx, YD, s, tuple(pk["tohum_kural"]),
             nms_mm=float(pk["tohum_nms"]))[:2]
         kb = kafes.oznitelik(P[idx], YD, Pt, Dt)
-        s = np.asarray(pk["kademe2"].predict_proba(
-            np.hstack([Xd, kb]).astype(np.float32))[:, 1], float)
+        k = np.where(s >= float(pk.get("kisa_esik", 0.20)))[0]
+        s2 = np.zeros(len(s))
+        if len(k):
+            X2 = np.hstack([Xd[k], kb[k], s[k][:, None]])
+            s2[k] = pk["kademe2"].predict_proba(X2.astype(np.float32))[:, 1]
+        s = s2
     P2, D2 = p6_karar.sec(P, idx, YD, s, tuple(pk["kural"]),
                           nms_mm=float(pk["nms"]))
     if ISARET and len(P2):

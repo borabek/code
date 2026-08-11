@@ -28,22 +28,36 @@ AD = ["yaricap", "derinlik", "narinlik", "girme", "girme_kenar", "erisim",
       "es_eksen", "aralik_duzeni", "yaricap_yuzde"]
 
 
+TOPAK = 1500        # tek cagrida atilacak en fazla isin
+
+
 def _ilk_mesafe(mesh, O, Dv, uzak):
     """Isin basina ilk carpisma mesafesi. trimesh imzasindan BAGIMSIZ.
 
     `intersects_location` (konum, isin_idx, ucgen_idx) dondurur; isin indeksini
     ACIKCA kullaniriz. `intersects_id`'nin donus sirasi surumler arasi degisiyor
     ve sessizce yanlis sutunu okumak bu projede daha once yasandi.
+
+    TOPAKLI (2026-08-11): `multiple_hits=True` her isin icin TUM kesisimleri
+    dondurur. Mesh tepesi havuzu acilinca parca basina secenek ~200'den ~5000'e
+    cikti ve tek cagri 14 MILYON kesisim uretip belleği patlatti (8 payin 4'u
+    MemoryError ile oldu). Topaklama sonucu DEGISTIRMEZ -- her isin icin en
+    kucuk mesafe alindigi icin bolerek hesaplamak ayni sayiyi verir.
     """
     out = np.full(len(O), float(uzak))
     if not len(O):
         return out
-    loc, ir, _tri = mesh.ray.intersects_location(O, Dv, multiple_hits=True)
-    if len(loc):
-        d = np.linalg.norm(loc - O[ir], axis=1)
-        for j, r in enumerate(ir):
-            if d[j] < out[r]:
-                out[r] = d[j]
+    for b in range(0, len(O), TOPAK):
+        s = slice(b, b + TOPAK)
+        loc, ir, _tri = mesh.ray.intersects_location(
+            O[s], Dv[s], multiple_hits=True)
+        if not len(loc):
+            continue
+        Ob = O[s]
+        d = np.linalg.norm(loc - Ob[ir], axis=1)
+        alt = out[s].copy()
+        np.minimum.at(alt, ir, d)      # dongu yerine vektorel
+        out[s] = alt
     return out
 
 
