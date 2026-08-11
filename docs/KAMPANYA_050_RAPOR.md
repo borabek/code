@@ -170,7 +170,10 @@ olculen mikro kazanc D7 icin KOTUMSER bir tahmindir.
 | `_tam_oz` onbellegi config'den eski | segmentasyon adaylari 7 vs 12 | dagitilan modelde de VAR, kiyas adil |
 | TABAN kolunda satir/aday indeksi karisik | mesh suzgeci gelince yanlis konum | duzeltildi |
 | kafes 1B sira olarak modellenmisti | GT'nin yalniz %5'i uyuyor | oteleme vektoru ile %90.8 |
-| kafes ara adim yok | 6mm adimli sirada tohumlar 12mm gorunce aradakiler hic ongorulmuyor | yarim adimlar eklendi |
+| kafes ara adim yok | 6mm adimli sirada tohumlar 12mm gorunce aradakiler hic ongorulmuyor | yarim VE ucte-bir adimlar eklendi |
+| `sec_ayrintili` erken cikis dali | normal dal 4 deger, erken cikis 3 -> D7 P6 kolu `expected 4, got 3` ile coktu | dal esitlendi + `tests/test_p6_karar_imza.py` |
+| iki kosu ayni dosyalara yazdi | duzeltme ONCESI baslamis paylar duzeltme SONRASI paylarla ayni makbuza yaziyordu | eski zincir durduruldu, temiz kosu |
+| yelpaze sondasi 64 yon | "kol OLU" hukmu verildi; oysa 64 yonun araligi 25 derece, tolerans 10 | 256 yonde +0.0676 -- **hukum SONDANIN kusuruydu** |
 
 ---
 
@@ -277,6 +280,23 @@ KARAR KURALLARI (okumadan ONCE yazildi):
   bir duzeltmeden sonra yapilir.
 * Taban altinda ya da geri-dusme sayaci yuksekse -> sayi RAPORLANIR, sebep
   bulunur; `geri_al.py` ile donus her an mumkun.
+
+---
+
+## 5d. Bu oturumun EN ONEMLI iki dersi
+
+**1. Gelistirme kumesinden okunan kazanc aldatir.** D6'da P6 kolu +0.1681
+veriyordu; `tam` korpusunun marka katlarinda gercek kazanc **+0.0230**. Sebep:
+D6'nin TABANI zayifti. Bir kol "kazandi" derken, tabanin o kumede ne kadar iyi
+oldugunu da yazmak zorunlu.
+
+**2. "KAPANDI" hukumleri sondanin kusuru olabilir.** Yon yelpazesi kolunu 64
+yonlu bir sondayla olcup OLU ilan ettim. Oysa 64 yonun kure uzerindeki araligi
+~25 derece, olcum toleransi 10 derece -- sonda metrigi FIZIKSEL OLARAK
+tutturamiyordu. 256 yonle ayni kol NIT'te **+0.0676 recall** verdi. Bu, hafizada
+"KAPANDI" diye duran kollarin bir kisminin da boyle kapanmis olabilecegi
+anlamina gelir; kapatma karari verirken "sonda bu etkiyi olcebilir miydi?"
+sorusu ONCE sorulmalidir.
 
 ---
 
