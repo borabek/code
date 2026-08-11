@@ -540,3 +540,103 @@ TOGI, D7'deki CWT ile ayni imzayi tasiyor: recall %10.5'e cokuyor ama kesinlik
 en yuksek deger (0.4240). Yani model TOGI'de "az ama dogru" buluyor --
 darbogaz SECIM degil, adayin havuza HIC GIRMEMESI. Bu, ADAY_YOK kovasinin
 (%36.5) marka duzeyindeki yuzu ve A1b tam-acik havuz kolunun hedefi.
+
+---
+
+## 8. KRITIK BULGU -- OLCTUGUMUZ ZINCIR GLB'YE GIRMIYOR
+
+**Robotun actigi GLB, bu kampanyada olculen zinciri KULLANMIYOR.**
+
+Kanit (2026-08-12, kod taramasi):
+
+| dosya | zincir |
+|---|---|
+| `export_robot_glb.py` | `robot_cp.extract` |
+| `robot_viz.py` | `robot_cp.extract` |
+| `robot_cp.py` icinde `kanonik_zincir` / `urun_p6` / `urun_genis` | **hicbiri gecmiyor** |
+| `kanonik_zincir`i cagiranlar | `urun_p6.py` + yalnizca SONDA/OLCUM betikleri |
+
+`robot_cp.extract` yolu: cikarim -> `adaylari_uret` -> `wire_gate.apply`.
+Kampanyanin butun kazanclari (`urun_p6` = yon bankasi + ortak siralayici,
+`urun_genis` = genisletilmis havuz) `kanonik_zincir.urun_cikti` icinde ve bu
+fonksiyon ihracatcilarin HICBIRI tarafindan cagrilmiyor.
+
+### Ne anlama geliyor
+
+- Bugun bir GLB acilsa, uzerindeki isaretler DAGITILAN TABANIN ciktisidir --
+  D7'de robot F1 **0.2980**. Kampanyanin olctugu **0.3115** (ve genis havuz
+  kolunun 0.2029 -> 0.3090'i) o dosyaya YANSIMIYOR.
+- Yani "gercek dunyada robot GLB'yi kullandiginda F1 ne olur?" sorusunun
+  bugunku yaniti, olctugumuz sayi degil TABAN sayisidir.
+
+### Entegrasyon icin gereken (YAPILMADI -- dogrulanmadan yapilmaz)
+
+1. `export_robot_glb.py` her model icin `pbs` listesini zaten uretiyor ama
+   yalnizca ortalamasini (`acc`) tutuyor; listeyi saklayip
+   `kanonik_zincir.urun_cikti(V, F, pbs, step_path, cfg)` cagrilmali.
+2. **TIER SORUNU:** `tier` alani `urun_cikti` icinde DEGIL, `robot_cp.extract`
+   icinde (satir ~404) atanir. `urun_cikti` ciktisi dogrudan verilirse
+   ihracatci `c["tier"]` okurken KeyError alir. Tier atamasi ortak bir yere
+   tasinmali.
+3. Dogrulama: ayni parca icin iki yolun CP sayisi/konumu karsilastirilmali;
+   entegrasyon "sessizce eski yola dusme" ile maskelenmemeli.
+
+**Bu gece YAPILMADI.** Robotun tukettigi ciktiyi dogrulamadan degistirmek,
+kampanyanin bastan beri kacindigi hatanin ta kendisi olurdu: olculmemis bir
+degisikligi urun diye teslim etmek.
+
+---
+
+## 9. SAHA TIER KURALI -- IKI OLCUM CELISIYOR GIBI, CELISMIYOR
+
+GLB'deki kirmizi/turuncu (auto/review) ayrimi, ihracatciya gecilen
+`robot_conf_auto` / `robot_min_auto_votes` ile YAPILMIYOR. Gercek kural
+`robot_cp.to_records` icinde:
+
+    AUTO = wire_score >= cp_config.robot_auto_gate_threshold (0.66)
+
+`conf_auto`/`min_auto_votes` yalnizca gate skoru YOKKEN (eski yol) devreye
+giriyor. Yani ihracatcinin gecirdigi o iki parametre pratikte ATIL.
+
+### Iki sayi, iki farkli soru
+
+| olcum | kosul | sonuc |
+|---|---|---|
+| Kodda yazili (2026-07-29) | kilitli holdout, **marka-ayrik DEGIL** | AUTO kesinligi **0.9508**, CP'lerin %52'si otonom |
+| Bu kampanya (2026-08-11) | **D7, gorulmemis MARKA** | hicbir esikte kesinlik >= 0.90 yok; en yuksek **0.6429** |
+
+**Celismiyorlar; ayni soruyu sormuyorlar.** Ilki "gordugum markanin yeni
+modelinde", ikincisi "hic gormedigim markada". Kullanicinin saha akisi IKISINI
+DE iceriyor ("elimizdeki markalardan yeni model de gelir, bilmedigimiz markadan
+yenisi de").
+
+### Durust saha sozu
+
+- **Bilinen marka, yeni model:** AUTO katmani icin ~0.95 kesinlik iddiasi
+  savunulabilir, ama o rakam ESKI olcumdur ve bu korpusla YENIDEN dogrulanmali.
+- **Gorulmemis marka:** 0.90 SOZ VERILEMEZ. Olculen tavan 0.6429.
+- Bu yuzden `kos_saha_kapisi.py` yazildi: kesinlik-kapsama egrisini
+  GORULMEMIS MARKA katlarinda cikarir (D7'yi harcamadan) ve ONAYLI esigini
+  olcume baglar. Kuyrukta, korpus tamamlaninca kosacak.
+
+**Acik kalan is:** ayni egri `wire_score` icin de cikarilmali -- sahada tier'i
+belirleyen skor odur, benim olctugum P6 skoru DEGIL. Iki skor AYNI OLCEKTE
+DEGILDIR; birinde olculen esigi digerine takmak sessiz bir hata olurdu.
+
+### EK BULGU -- dagitilan esik, olculen esik DEGIL
+
+`cp_config.json`'daki gercek degerler:
+
+| anahtar | config | kodda/yorumda anilan |
+|---|---|---|
+| `robot_auto_gate_threshold` | **0.6** | 0.66 ("esik 0.66 -> AUTO kesinligi 0.9508") |
+| `robot_wire_gate_threshold` | **0.4** | 0.30 (kod varsayilani) |
+| `robot_conf_auto` / `robot_min_auto_votes` | 0.5 / 3 | pratikte ATIL (gate skoru varken okunmuyor) |
+
+Yani sahada calisan AUTO esigi **0.6**, oysa 0.9508 kesinlik **0.66** icin
+olculmustu. Daha DUSUK esik daha COK isareti otonom yapar ve kesinligi
+DUSURUR -- bugunku AUTO kesinligi 0.9508'den az olmalidir, ne kadar az oldugu
+OLCULMEMISTIR.
+
+Bu, "0.90 saha sozu" tartismasinin sessiz kalmis parcasidir: sadece marka
+kosulu degil, ESIGIN KENDISI de olcumden kaymis durumda.
