@@ -1,0 +1,58 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "5e84bd141b4e0e61",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "WIE": {
+   "parca": 169,
+   "gt": 526,
+   "cp_parca": 3.1124260355029585,
+   "n01_parca": 141.15384615384616,
+   "mesh_parca": 149.42011834319527,
+   "mesh_ham_parca": 196.84615384615384,
+   "konum_recall_01": 0.8098859315589354,
+   "yon_recall_01": 0.6939163498098859,
+   "konum_recall_012": 0.8897338403041825,
+   "konum_recall_TAM_MESH": 0.8897338403041825,
+   "yon_recall_BANKA": 0.8536121673003803,
+   "secenek_parca": 2900.449704142012
+  },
+  "CWT": {
+   "parca": 226,
+   "gt": 1146,
+   "cp_parca": 5.070796460176991,
+   "n01_parca": 86.41592920353982,
+   "mesh_parca": 150.2566371681416,
+   "mesh_ham_parca": 180.6769911504425,
+   "konum_recall_01": 0.4144851657940663,
+   "yon_recall_01": 0.1631762652705061,
+   "konum_recall_012": 0.5497382198952879,
+   "konum_recall_TAM_MESH": 0.5532286212914486,
+   "yon_recall_BANKA": 0.44153577661431065,
+   "secenek_parca": 2321.433628318584
+  }
+ },
+ "not": "CWT/WIE cephe TESHISI. D7 SINAV kumesidir; buradan hicbir esik/kural/kol secimi YAPILMAZ, yalnizca nereye yatirim yapilacagi belirlenir."
+}
