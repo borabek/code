@@ -1,0 +1,146 @@
+# Robot CP kampanyasi -- 2026-08-11
+
+Hedef: gorulmemis markada **robot F1 = 0.50**, sisik olmayan bir olcumle.
+Sart: her an kampanya oncesi duruma donebilmek.
+
+---
+
+## 1. Geri donus (sart 1) -- KANITLANDI
+
+| | |
+|---|---|
+| kontrol noktasi | git etiketi `KONTROL_NOKTASI_2026-08-11`, commit `68a6e856` |
+| kod | 1678 dosya (750 `.py`, 729 makbuz `.json`, 83 `.md`) commit'te |
+| model | `_KN_2026-08-11/dosyalar/` -- 11 dosya / 643 MB fiziksel kopya |
+| damga | 280 model dosyasi + 4 dizin parmak izi SHA-256 ile |
+| geri donus | **`python geri_al.py`** |
+
+**Tatbikat yapildi:** `urun_genis.py`'ye sahte satir eklendi, `cp_config.json`
+bozuldu (esik 0.99 + sahte anahtar), `results/kazanan_hgb_derin.pkl` SILINDI,
+iki sahte dosya olusturuldu. `geri_al.py` sonrasi tam kanonik zincir:
+
+| | kampanya oncesi | hasar + geri donus sonrasi |
+|---|---|---|
+| robot | 0.297956 | **0.297956** |
+| tespit | 0.476022 | **0.476022** |
+| makro | 0.293380 | **0.293380** |
+| 12 markanin hepsi | -- | **birebir ayni** |
+
+`master` dali hep kontrol noktasinda; kampanya isi `kampanya_050` dalinda.
+Geri donmek yapilan isi de SILMEZ.
+
+---
+
+## 2. Olcum protokolu -- sayinin neden sisik olmadigi
+
+### 2.1 Uc kume MARKA-AYRIK
+
+| kume | marka | parca | rol |
+|---|---|---|---|
+| `tam` | TOGI, PXC, WEI, SIE, TE, TKM, WAGO, MDI, ABB | 2583 | egitim + kural secimi |
+| `d6` | SUPU, UPUN, MOR, NIT, UTL, S+S, SE, ONV | 468 | gelistirme (TEMIZ DEGIL) |
+| `d7` | CCD, KLM, A-B, EFX, WIE, CWT, DIN, WEG, CEM, DEG, ELMEX, C3 | 835 | **SINAV** |
+
+Denetim (`results/bolme_denetimi.json`):
+
+| olcek | tam∩d7 | tam∩d6 | d6∩d7 |
+|---|---|---|---|
+| parca kimligi | 0 | 0 | 0 |
+| marka | 0 | 0 | 0 |
+| TAM geometri (tepe+yuz+kutu 0.1mm) | 0 | 0 | 0 |
+| kaba iz (kutu 0.5mm + GT sayisi) | 94 iz / 132 parca | 66 | 14 |
+
+Gercek sizinti alt sinir (tam geometri) ile ust sinir (kaba iz) ARASINDADIR.
+Kaba iz DIN klemenslerinin standart olculu olmasindan FAZLA sayar. Bu yuzden
+manset yaninda **kaba iz eslesmesi olmayan 703 parcalik D7 alt kumesi** de
+raporlanir.
+
+### 2.2 Kurallarin nerede secildigi
+* Esik / NMS / kol secimi YALNIZ `tam` korpusunun MARKA KATLARINDA.
+* Kural secim olcutu **makro** (marka basina esit agirlik) -- mikro, GT'si cok
+  olan markanin kuralini secip diger markalari cokertiyordu.
+* D7 sinav; ona bakarak HICBIR ayar secilmedi.
+
+### 2.3 Olcumun urunun kendisi olmasi
+Her sayi `kanonik_zincir.urun_cikti` uzerinden, yani **urunun TEK zincirinden**
+gecer. Karar kodu tek modulde (`p6_karar`) ve hem egitim hem urun ONU cagirir.
+Havuz kurulumu (`havuz_seyrelt`), mesh esigi ve dedupe degerleri egitimdekiyle
+BIREBIR ayni; `ppos` tanimi (`pb[:,CE]+pb[:,CT]`) korpusu ureten betikle ayni.
+
+### 2.4 Makbuz
+Her olcum `makbuz_hash.damga()` ile kod/model/config SHA-256'larini yazar.
+Damgasiz sayi sayi degildir.
+
+---
+
+## 3. Teshis zinciri -- hangi sirayla ne bulundu
+
+1. **Yon bir SECIM problemiydi ve cozuldu.**
+   Dagitilan urun her konuma TEK yon bagliyordu. `yon_bankasi` (kendi / komsu /
+   silindir ekseni / ana eksenler) eklendi. Tavan D6'da 0.4497 -> 0.6889.
+   *Kalan yon kaybi: +0.0052* (secilen adaylarda mukemmel yon secici ile fark).
+   Yani yon artik darbogaz DEGIL.
+
+2. **NMS hipotezi CURUDU.** D6 GT'lerinin %16.1'inin komsusu 5mm'den yakin
+   olmasina ragmen esik x NMS taramasi her kivrimda 5.0'i sectti.
+
+3. **Asil darbogaz KONUM havuzuydu.**
+
+   | D6 havuzu | yalniz KONUM | konum + YON |
+   |---|---|---|
+   | B-rep (dagitilan) | 0.5371 | 0.2900 |
+   | + mesh tepeleri | 0.9768 | 0.4854 |
+   | + mesh + yon bankasi | 0.8713 (seyreltilmis) | **0.7264** |
+
+   Mesh tepeleri tarihte UC kez zarar vermisti; sebep anlasildi: yon bankasi
+   olmadan eklendiklerinde yalnizca FP uretiyorlardi. Konum ve yon AYRI iki
+   eksik, ikisi birden kapanmali.
+
+4. **Seyreltmede KAPSAMA, GUVENI yeniyor.** "En yuksek olasilikli 60 tepe"
+   yerine "2.5mm uzamsal seyreltme" ayni maliyette konum recall'unu
+   0.6362 -> 0.8713 yapiyor.
+
+5. **Ikinci kademe KASKAD olmali.** Tum secenekleri yeniden puanlayan ikinci
+   model ZARAR verdi (-0.0363). Kisa listeye (birinci kademe skoru >= 0.20)
+   odaklanan, birinci kademe skorunu da oznitelik alan surum kazandi.
+
+6. **Periyodik yapi gercek.** D6'da >=6 CP'li 1096 parcada GT'lerin **%90.8'i**
+   parcanin en sik OTELEME VEKTORUYLE baska bir GT'ye ulasiyor. `kafes`
+   modulu bunu oznitelik olarak verir; tohumlar HER ZAMAN tahminden gelir,
+   GT'den ASLA.
+
+---
+
+## 4. Yakalanan tuzaklar
+
+| tuzak | belirti | sonuc |
+|---|---|---|
+| `KAYNAKLAR` iki kez tanimli | `P6_KAYNAK=012` hicbir sey yapmiyor, hata YOK | mesh havuzu hic acilmamis |
+| isin kesisimi tek cagrida | 8 payin 4'u `MemoryError` | topaklandi, sonuc bit duzeyinde ayni |
+| `_tam_oz` onbellegi config'den eski | segmentasyon adaylari 7 vs 12 | dagitilan modelde de VAR, kiyas adil |
+| TABAN kolunda satir/aday indeksi karisik | mesh suzgeci gelince yanlis konum | duzeltildi |
+| kafes 1B sira olarak modellenmisti | GT'nin yalniz %5'i uyuyor | oteleme vektoru ile %90.8 |
+| kafes ara adim yok | 6mm adimli sirada tohumlar 12mm gorunce aradakiler hic ongorulmuyor | yarim adimlar eklendi |
+
+---
+
+## 5. Sonuclar
+
+*(D7 okumasi sonrasi doldurulacak)*
+
+---
+
+## 6. Durustluk notlari -- neyin temiz OLMADIGI
+
+1. **D6 temiz okuma degildir.** Teshis, kol secimi ve seyreltme kurali orada
+   olculdu. Temiz okuma yalnizca D7'dir.
+2. **Seyreltme kurali D6'ya bakilarak secildi.** Ayni olcum egitim markalarinda
+   tekrarlandi: kurallar orada birbirine cok yakin (0.9254-0.9571) ve secilen
+   kural en iyiden 0.0107 geride, %25 daha ucuz. Fark ancak D6'nin YOGUN
+   parcalarinda aciliyor.
+3. **`_tam_oz` onbellegi `cp_config.json`'un eski halinde uretildi.** Ayni
+   durum dagitilan modelde de var, dolayisiyla kiyas adil; ama iki taraf da
+   bugunku segmentasyon ayariyla YENIDEN turetilse sayilar degisebilir.
+4. **D7 bootstrap araligi parca birimlidir.** D7 icinde kaba-iz ikiz orani
+   %22.3 ve ikizler ayni markada; grup bootstrap'i ayrica gerekli gorulmedi,
+   ama bu bir tercihtir.

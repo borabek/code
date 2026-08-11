@@ -59,7 +59,12 @@ KURALLAR = ([("mutlak", e) for e in (0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70,
                                      0.80, 0.85, 0.90, 0.95, 0.97, 0.99)] +
             [("goreli", o, t) for o in (0.30, 0.50, 0.70, 0.85, 0.95)
              for t in (0.05, 0.20, 0.40, 0.60)])
-NMSLER = (2.5, 3.5, 5.0)
+NMSLER = tuple(float(x) for x in
+               os.environ.get("P6_NMSLER", "2.5,3.5,5.0").split(","))
+# KURAL KAHINI teshisi (disarida birakilan markada EN IYI kural) tarama
+# maliyetini IKIYE katlar. D6'da gerekliydi (NIT cokusunun sebebini ayirmak
+# icin); `tam` kosusunda varsayilan KAPALI.
+KAHIN = os.environ.get("P6_KAHIN", "0") == "1"
 # Kural aramasi kivrimin EGITIM parcalarinin bir ORNEKLEMINDE yapilir: her kural
 # tum parcalari gezip Macar eslemesi kosuyor ve 42 kural x 2000 parca bir kolu
 # dakikalarca bekletiyor. Ornekleme SECIMI degistirmez (kurallar arasi sira
@@ -80,9 +85,12 @@ NEG_KAT = int(os.environ.get("P6_NEG_KAT", "8"))
 KOLLAR = ("TABAN", "P6", "P6_KAFES")
 
 
+ITER = int(os.environ.get("P6_ITER", "400"))
+
+
 def yap(tohum=0):
     return HistGradientBoostingClassifier(
-        max_iter=400, learning_rate=0.06, max_leaf_nodes=63,
+        max_iter=ITER, learning_rate=0.06, max_leaf_nodes=63,
         l2_regularization=1.0, random_state=tohum)
 
 
@@ -346,8 +354,8 @@ def main():
             # KURAL KAHINI (TESHIS, dagitilamaz): disarida birakilan markada EN
             # IYI kural ne verirdi? Fark buyukse kayip KURAL SECIMINDE, kucukse
             # MODELDE demektir.
-            kah = max((olc(TE, s_te, x, n, kol)["robot"]
-                       for x in KURALLAR for n in NMSLER))
+            kah = (max(olc(TE, s_te, x, n, kol)["robot"]
+                       for x in KURALLAR for n in NMSLER) if KAHIN else 0.0)
             for k in ("TP", "FP", "FN"):
                 top[kol][k] += r[k]
             ayrinti[b][kol] = dict(r, kural=list(en[0]), nms=en[1],
