@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# EK BLOK KUYRUGU -- orkestratorun DISINDA, bellek korumali.
+#
+# NEDEN AYRI: `kos_gece.sh` kosarken duzenlenemez (bash betigi bayt konumundan
+# okur; ortasindan degistirmek yurutmeyi bozar). Gece basladiktan SONRA yazilan
+# bloklar bu yuzden oraya eklenmedi, yanina zincirlendi.
+#
+# IKI KAPI (ikisi de saglanmadan hicbir blok baslamaz):
+#   1) korpus TAM        -- eksik korpusta olculen sayi gecersizdir
+#   2) bos RAM >= 10 GB  -- her EK kosusu ~6 GB yukluyor. Bu gece UC surec
+#                           bellek tukendigi icin SESSIZCE oldu (cikis kodu 0,
+#                           hicbir hata satiri yok) -- teshis edilmesi zor.
+#
+# SIRA: once KANONIK (en ucuz + en guclu tek degiskenli ayrim), sonra TOPOLOJI.
+set -u
+cd "$(dirname "$0")"
+G=results/_gece
+mkdir -p "$G"
+BLOKLAR=${EK_KUYRUK:-"kanonik topoloji"}
+ANA="$G/EK_KUYRUK.log"
+say() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$ANA"; }
+
+GEREK_DOSYA=3040
+GEREK_RAM=10
+
+bos_ram() {
+  # DIKKAT: FreePhysicalMemory KB cinsindendir; GB icin dogru bolen /1MB.
+  powershell.exe -NoProfile -Command \
+    "[math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1MB,1)" \
+    2>/dev/null | tr -d '\r'
+}
+
+kapilari_bekle() {
+  local bek=0
+  while [ $bek -lt $((10 * 3600)) ]; do
+    local n r
+    n=$(ls results/_p6_oz_tam3 2>/dev/null | wc -l)
+    r=$(bos_ram); r=${r:-0}
+    if [ "$n" -ge $GEREK_DOSYA ] && [ "${r%%.*}" -ge $GEREK_RAM ]; then
+      say "KAPILAR ACIK: $n dosya, ${r}GB bos"
+      return 0
+    fi
+    say "bekliyor: $n/$GEREK_DOSYA dosya, ${r}GB bos (gereken ${GEREK_RAM}GB)"
+    sleep 600
+    bek=$((bek + 600))
+  done
+  say "ZAMAN ASIMI"
+  return 1
+}
+
+say "=== EK KUYRUGU BASLADI: $BLOKLAR ==="
+for b in $BLOKLAR; do
+  kapilari_bekle || exit 1
+  say "BASLIYOR: $b"
+  t0=$(date +%s)
+  if EK_BLOK="$b" P6_DIZIN=results/_p6_oz_tam3 P6_KUME=tam,d6 \
+       P6_KAT_MIN=200 P6_ARAMA_N=200 P6_ITER=200 P6_NEG_KAT=6 \
+       python kos_ek_oznitelik.py > "$G/EK_$b.log" 2>&1; then
+    say "BITTI: $b ($(( $(date +%s) - t0 ))s) -- $(tail -3 "$G/EK_$b.log" | head -2 | tr '\n' ' ')"
+  else
+    say "DUSTU: $b ($(( $(date +%s) - t0 ))s)"
+    tail -4 "$G/EK_$b.log" | sed 's/^/    /' | tee -a "$ANA"
+  fi
+done
+say "=== EK KUYRUGU BITTI ==="

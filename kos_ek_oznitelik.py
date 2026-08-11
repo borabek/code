@@ -93,6 +93,20 @@ def ek_blok(d, s1):
         bek = uzanim / adim + 1.0
         n_tohum = float(len(Pt))
         return np.tile([bek, n_tohum, bek - n_tohum], (len(P), 1))
+    if BLOK == "kanonik":
+        # PARCANIN KENDI EKSEN SISTEMI: gorulmemis markada modelleme ekseni
+        # bizimkiyle ayni olmak zorunda degil; dunya koordinati ogrenilen her
+        # konumsal kalibi bozuyor.
+        import kanonik_hizalama as KH
+        mf = f"{MESH_DIZ[d['_kume']]}/{d['pid']}.npz"
+        V = (np.asarray(np.load(mf)["V"], float)
+             if os.path.exists(mf) else d["P"])
+        return KH.oznitelik(P, YD, V)
+    if BLOK == "topoloji":
+        # ES-EKSENLI AILE: aday bir dizinin uyesi mi, yalniz mi. Mesh/isin
+        # GEREKMEZ -- yalnizca aday konumlari ve secenek yonu.
+        import topoloji_ailesi as TA
+        return TA.oznitelik(P, YD, d["P"], d["diag"])
     if BLOK == "ozkalib":
         # PARCA-ICI OZ-KALIBRASYON: skorun parca icindeki yuzdeligi, en
         # yuksekten farki ve yerel komsulukta kacinci oldugu
@@ -103,6 +117,35 @@ def ek_blok(d, s1):
         return np.stack([sira, s / max(s.max(), 1e-9),
                          s - float(np.median(s))], axis=1)
     raise ValueError(BLOK)
+
+
+# ---------------------------------------------------------------- PARALEL
+# `derinlik` blogu parca basina ~10 s (aday x 6 derinlik x 8 isin). 3051
+# parcada 8.5 SAAT -> tek basina butun geceyi yer. Blok parca basina bagimsiz
+# oldugu icin havuza dagitilir.
+#
+# ISCILERE TAM PARCA SOZLUGU GONDERILMEZ: `X` tek basina parca basina
+# yuzbinlerce float ve 3051 parcayi pickle'lamak gigabaytlar demek. `ek_blok`
+# yalnizca su bes alani okuyor; slim yuk onlari tasir.
+ISCI = int(os.environ.get("EK_ISCI", "1"))
+
+
+def _slim(d):
+    return {"pid": d["pid"], "_kume": d["_kume"], "P": d["P"],
+            "idx": d["idx"], "YD": d["YD"], "diag": d["diag"]}
+
+
+def _ek_bir(a):
+    return ek_blok(a[0], a[1])
+
+
+def ek_hepsi(veri, oof):
+    isler = [(_slim(d), np.asarray(s, float)) for d, s in zip(veri, oof)]
+    if ISCI <= 1:
+        return [_ek_bir(a) for a in isler]
+    import multiprocessing as mp
+    with mp.Pool(ISCI) as p:
+        return p.map(_ek_bir, isler, chunksize=2)
 
 
 def puanla(veri, skor, kural):
@@ -160,8 +203,8 @@ def main():
         if s is None:
             oof[i] = np.full(len(veri[i]["X"]), 0.5)
 
-    print("ek blok hesaplaniyor...", flush=True)
-    EK = [ek_blok(d, s) for d, s in zip(veri, oof)]
+    print(f"ek blok hesaplaniyor ({ISCI} isci)...", flush=True)
+    EK = ek_hepsi(veri, oof)
     print(f"blok {np.vstack(EK).shape} ({time.time() - t0:.0f} s)", flush=True)
 
     top = {"YOK": collections.Counter(), "VAR": collections.Counter()}
