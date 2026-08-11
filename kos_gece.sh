@@ -10,6 +10,14 @@ set -u
 cd "$(dirname "$0")"
 G=results/_gece
 mkdir -p "$G"
+# TEK ORNEK KILIDI: iki orkestrator ayni anda kosunca cikarim iscileri
+# ikiye katlandi ve makine asiri yuklenip her sey yavasladi.
+KILIT="$G/.kilit"
+if [ -e "$KILIT" ] && kill -0 "$(cat "$KILIT" 2>/dev/null)" 2>/dev/null; then
+  echo "ZATEN KOSUYOR (pid $(cat "$KILIT")) -- cikiliyor"; exit 0
+fi
+echo $$ > "$KILIT"
+
 ANA="$G/ANA.log"
 
 log() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$ANA"; }
@@ -17,7 +25,8 @@ log() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$ANA"; }
 KORU="$G/paket_baslangic.pkl"
 cp -f results/p6_kademe2_model.pkl "$KORU" 2>/dev/null || true
 paket_geri() { [ -f "$KORU" ] && cp -f "$KORU" results/p6_kademe2_model.pkl; }
-trap paket_geri EXIT
+temizle() { paket_geri; rm -f "$KILIT"; }
+trap temizle EXIT
 
 faz() {                     # faz <ad> <komut...>
   local ad="$1"; shift
