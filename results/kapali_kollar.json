@@ -24,35 +24,18 @@
   },
   "python": "3.12.10"
  },
- "n_tahmin": 8015,
- "ham_kesinlik": 0.29619463505926386,
- "ham_maks_kesinlik": 1.0,
- "kalibre_maks_kesinlik": 1.0,
- "kapsama": {
-  "0.6": {
-   "ham_kapsama": 0.22993995633187772,
-   "kalibre_kapsama": 0.3022652838427948
+ "sonuc": {
+  "gt": 1170,
+  "banka": {
+   "recall": 0.5145299145299145,
+   "secenek_parca": 5204.525
   },
-  "0.7": {
-   "ham_kapsama": 0.10070960698689957,
-   "kalibre_kapsama": 0.15843340611353712
+  "eksen": {
+   "recall": 0.517948717948718,
+   "secenek_parca": 9106.025
   },
-  "0.8": {
-   "ham_kapsama": 0.04025655021834061,
-   "kalibre_kapsama": 0.09047489082969433
-  },
-  "0.9": {
-   "ham_kapsama": 0.004093886462882096,
-   "kalibre_kapsama": 0.0035480349344978166
-  }
+  "k21_isaretli_secenek_parca": 62.25
  },
- "katlar": [
-  "WEI",
-  "PXC",
-  "SIE",
-  "TOGI",
-  "UPUN",
-  "SUPU"
- ],
- "not": "Guven kalibrasyonu: secilmis tahminler uzerinde ikinci model. Kat-disi olcum; D7'ye BAKILMADI."
+ "marka": "NIT",
+ "not": "Kapanan kollarin TAVAN yoklamasi. D6; D7'ye BAKILMADI. K21 satiri temsili capalarla uretilmistir -- gercek hatta capalar tahminden gelir."
 }
