@@ -51,7 +51,9 @@ CIK = os.environ.get("P6_CIK", "results/_p6_oz")
 # (0 = sinirsiz); boylece secenek sayisi patlamaz.
 _ks = os.environ.get("P6_KAYNAK", "01")
 KAYNAKLAR = tuple(int(c) for c in _ks)
-MESH_MAX = int(os.environ.get("P6_MESH_MAX", "0"))
+MESH_MAX = int(os.environ.get("P6_MESH_MAX", "250"))   # taban ust sinir
+MESH_KAT = int(os.environ.get("P6_MESH_KAT", "4"))     # kaynak0+1 sayisinin kati
+MESH_R = float(os.environ.get("P6_MESH_R", "2.5"))     # uzamsal seyreltme (mm)
 
 # on -> (silindir onbellegi, aciklik onbellegi, mesh onbellegi)
 KUME = {
@@ -83,6 +85,14 @@ def main():
     ac = pickle.load(open(ack_y, "rb"))
     dosyalar = sorted(f for f in os.listdir(OZ)
                       if f.startswith(on + "_") and f.endswith(".npz"))
+    # PARCALI KOSU: `P6_SHARD=i/n` -> yalniz indeksi n'e bolumunden kalani i olan
+    # dosyalar. Cikti parca basina tek dosya oldugu ve VAR OLAN ATLANDIGI icin
+    # paylar birbirinin isini bozmaz; 16 cekirdegi kullanmanin en ucuz yolu.
+    sh = os.environ.get("P6_SHARD")
+    if sh:
+        i_, n_ = (int(x) for x in sh.split("/"))
+        dosyalar = [f for k, f in enumerate(dosyalar) if k % n_ == i_]
+        print(f"  PAY {i_}/{n_}", flush=True)
     print(f"{on}: {len(dosyalar)} parca | cikti {CIK}", flush=True)
 
     t0 = time.time()
@@ -111,26 +121,43 @@ def main():
         zz = np.load(mf)
         V = np.ascontiguousarray(zz["V"], np.float64)
         Fc = np.ascontiguousarray(zz["F"], np.int64)
-        if MESH_MAX and 2 in KAYNAKLAR and int((kay == 2).sum()) > MESH_MAX:
-            # Mesh adaylarini SEGMENTASYON OLASILIGINA gore ust sinira indir.
-            # Mesh adaylari zaten birer TEPE oldugu icin olasilik en yakin
-            # tepeden BIREBIR okunur; yaklasiklik yok. Kaynak 0/1 ASLA elenmez --
-            # tezin cevabi ve B-rep onerileri havuzda kalir.
+        if 2 in KAYNAKLAR and int((kay == 2).sum()) > 0:
+            # MESH ADAYLARINI SEYRELT. Kaynak 0/1 ASLA elenmez.
+            #
+            # OLCULDU (D6, 468 parca, YALNIZ KONUM recall'u / aday-parca):
+            #   en yuksek olasilik 60     0.6362 / 160
+            #   en yuksek olasilik 150    0.7163 / 214
+            #   uzamsal 4.0mm, 2x120      0.8091 / 178
+            #   uzamsal 2.5mm, 4x250      0.8713 / 251   <- SECILEN (diz)
+            #   uzamsal 2.0mm, sinirsiz   0.9768 / 458
+            # Yani KAPSAMA, GUVENI yeniyor: olasiligi en yuksek tepeler ayni
+            # agiz cevresinde kumeleniyor ve digerleri bos kaliyor. Seyreltme
+            # yuksek olasilikli tepeden baslar, MESH_R yaricapinda bastirir.
             import connector3d
             pb = np.mean([np.asarray(q, float) for q in zz["pbs"]], axis=0)
             ppos = (pb[:, int(connector3d.CABLE_ENTRY)] +
                     pb[:, int(connector3d.CONTACT)])
+            i2 = np.where(kay == 2)[0]
             Pm = np.asarray(z["P"], float)
-            tree_i = np.argmin(np.linalg.norm(
-                Pm[kay == 2][:, None, :] - V[None, :, :], axis=-1), axis=1) \
-                if int((kay == 2).sum()) * len(V) < 4e7 else None
-            if tree_i is not None:
-                s2 = ppos[tree_i]
-                tut = np.zeros(int((kay == 2).sum()), bool)
-                tut[np.argsort(-s2)[:MESH_MAX]] = True
-                m2 = m.copy()
-                m2[kay == 2] = tut & m[kay == 2]
-                m = m2
+            P2 = Pm[i2]
+            s2 = (ppos[np.argmin(np.linalg.norm(
+                P2[:, None, :] - V[None, :, :], axis=-1), axis=1)]
+                if len(P2) * len(V) < 6e7 else np.zeros(len(P2)))
+            n01 = int(np.isin(kay, [k for k in KAYNAKLAR if k != 2]).sum())
+            cap = max(MESH_MAX, MESH_KAT * n01)
+            tut, sec = [], []
+            for j in np.argsort(-s2):
+                if len(sec) >= cap:
+                    break
+                if sec and float(np.min(np.linalg.norm(
+                        P2[sec] - P2[j], axis=1))) < MESH_R:
+                    continue
+                sec.append(int(j))
+            tut = np.zeros(len(i2), bool)
+            tut[sec] = True
+            m2 = m.copy()
+            m2[i2] = tut
+            m = m2
         A = np.asarray(z["X"], float)[m]
         B = T[m]
         P = np.asarray(z["P"], float)[m]

@@ -47,7 +47,11 @@ import wire_gate                   # noqa: E402
 import yon_bankasi as YB           # noqa: E402
 from sina_kume import esle_macar   # noqa: E402
 
-P6 = "results/_p6_oz"
+P6 = os.environ.get("P6_DIZIN", "results/_p6_oz")
+# HAVUZ KAYNAGI SUZGECI: onbellek `kaynak` alanini tasir (0 seg / 1 B-rep /
+# 2 mesh tepesi), boylece TEK cikarimdan farkli havuz kollari egitilebilir.
+_KS = os.environ.get("P6_KAYNAK_EGIT", "")
+KAYNAK_SUZ = tuple(int(c) for c in _KS) if _KS else None
 AB = p6_karar.AB              # A(58) + B(9) -- z-skorlanan blok
 ZSKOR = os.environ.get("P6_ZSKOR", "ab")
 ESIKLER = (0.02, 0.05, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50)
@@ -91,6 +95,19 @@ def yukle(on, sinir=0):
         idx = np.asarray(z["idx"], int)
         YD = np.asarray(z["YD"], float)
         P = np.asarray(z["P"], float)
+        if KAYNAK_SUZ is not None and "kaynak" in z:
+            kay = np.asarray(z["kaynak"], int)
+            tut = np.isin(kay, KAYNAK_SUZ)
+            # secenekler ADAY indeksine bagli; once secenekleri suz, sonra
+            # aday indekslerini YENIDEN NUMARALA (aksi halde `idx` bos adaylara
+            # isaret eder ve secim sessizce yanlis konumu doner).
+            ysec = tut[idx]
+            yeni = -np.ones(len(P), int)
+            yeni[np.where(tut)[0]] = np.arange(int(tut.sum()))
+            X, YD = X[ysec], YD[ysec]
+            idx = yeni[idx[ysec]]
+            P = P[tut]
+            z = {"D": np.asarray(z["D"], float)[tut]}
         G = np.asarray(r["G"], float)
         Gd = np.asarray(r["Gd"], float)
         y, _ = YB.etiketle(P[idx], YD, G, Gd)
