@@ -134,27 +134,20 @@ def main():
             # agiz cevresinde kumeleniyor ve digerleri bos kaliyor. Seyreltme
             # yuksek olasilikli tepeden baslar, MESH_R yaricapinda bastirir.
             import connector3d
+
+            import havuz_seyrelt
             pb = np.mean([np.asarray(q, float) for q in zz["pbs"]], axis=0)
-            ppos = (pb[:, int(connector3d.CABLE_ENTRY)] +
-                    pb[:, int(connector3d.CONTACT)])
+            pp = havuz_seyrelt.ppos(pb, connector3d.CABLE_ENTRY,
+                                    connector3d.CONTACT)
             i2 = np.where(kay == 2)[0]
-            Pm = np.asarray(z["P"], float)
-            P2 = Pm[i2]
-            s2 = (ppos[np.argmin(np.linalg.norm(
+            P2 = np.asarray(z["P"], float)[i2]
+            s2 = (pp[np.argmin(np.linalg.norm(
                 P2[:, None, :] - V[None, :, :], axis=-1), axis=1)]
                 if len(P2) * len(V) < 6e7 else np.zeros(len(P2)))
             n01 = int(np.isin(kay, [k for k in KAYNAKLAR if k != 2]).sum())
-            cap = max(MESH_MAX, MESH_KAT * n01)
-            tut, sec = [], []
-            for j in np.argsort(-s2):
-                if len(sec) >= cap:
-                    break
-                if sec and float(np.min(np.linalg.norm(
-                        P2[sec] - P2[j], axis=1))) < MESH_R:
-                    continue
-                sec.append(int(j))
             tut = np.zeros(len(i2), bool)
-            tut[sec] = True
+            tut[havuz_seyrelt.seyrelt(P2, s2, n01, MESH_R, MESH_MAX,
+                                      MESH_KAT)] = True
             m2 = m.copy()
             m2[i2] = tut
             m = m2

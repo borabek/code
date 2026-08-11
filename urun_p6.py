@@ -22,9 +22,10 @@ import p6_karar
 import urun_genis
 import yon_bankasi as YB
 
-MODEL_YOL = "results/p6_ortak_model.pkl"
+MODEL_YOL = os.environ.get("P6_MODEL", "results/p6_kademe2_model.pkl")
 _MODEL = None
 ISARET = os.environ.get("P6_ISARET", "0") == "1"
+MESH_HAVUZ = os.environ.get("P6_MESH_HAVUZ", "1") == "1"
 
 
 def _cfg(ad, cevre, vars_):
@@ -43,14 +44,17 @@ ACIK = _cfg("robot_p6_ortak", "URUN_P6", False)
 
 
 def model_yukle(yol=MODEL_YOL):
-    """Doner: (model, esik, zskor) ya da None."""
+    """Egitimin yazdigi PAKETI oku. Doner: sozluk ya da None.
+
+    Paket: kademe1 (+ istege bagli kademe2), karar kurali, NMS, tohum kurali.
+    Tek bir yerden okunur ki urun ile egitim AYNI kurali kullansin.
+    """
     global _MODEL
     if _MODEL is None:
         if not os.path.exists(yol):
             return None
         import pickle
-        d = pickle.load(open(yol, "rb"))
-        _MODEL = (d["model"], float(d["esik"]), d.get("zskor", "ab"))
+        _MODEL = pickle.load(open(yol, "rb"))
     return _MODEL
 
 
@@ -62,6 +66,8 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
     """
     import trimesh
 
+    import brep_havuz
+    import havuz_seyrelt
     import wire_gate
     cyl, acik = urun_genis.brep_cikar(step_path)
     if cyl is None:
@@ -71,6 +77,27 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
     P, D, _kay = urun_genis.havuz(Ps, Ds, cyl, acik)
     if len(P) < 2:
         return None
+    if MESH_HAVUZ:
+        # MESH TEPESI HAVUZU. Olculdu (D6): yalniz-konum recall 0.5371 -> 0.9768.
+        # Tarihte UC kez zarar vermisti cunku yon bankasi yoktu; tek basina
+        # yalniz FP uretiyor. Burada yonu ortak siralayici seciyor.
+        # Seyreltme kurali `havuz_seyrelt` -- EGITIMDEKIYLE AYNI FONKSIYON.
+        pp = havuz_seyrelt.ppos(probs, CE, CT)
+        Pm, Dm = brep_havuz.mesh_adaylari(V, F, pp, brep_havuz.MESH_ESIK,
+                                          brep_havuz.MESH_DEDUPE_MM)
+        if len(Pm):
+            uz = np.linalg.norm(Pm[:, None] - P[None], axis=-1).min(1)
+            k = uz >= brep_havuz.MESH_DEDUPE_MM
+            Pm, Dm = Pm[k], Dm[k]
+        if len(Pm):
+            sm = pp[np.argmin(np.linalg.norm(
+                Pm[:, None, :] - np.asarray(V, float)[None, :, :],
+                axis=-1), axis=1)] if len(Pm) * len(V) < 6e7 \
+                else np.zeros(len(Pm))
+            s_ = havuz_seyrelt.seyrelt(Pm, sm, len(P))
+            if len(s_):
+                P = np.vstack([P, Pm[s_]])
+                D = np.vstack([D, Dm[s_]])
     V = np.asarray(V, float)
     diag = float(np.linalg.norm(V.max(0) - V.min(0)))
     mesh = trimesh.Trimesh(V, np.asarray(F, np.int64), process=False)
@@ -87,17 +114,29 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
 
 
 def cikti(V, F, probs, cps_seg, step_path, CE, CT):
-    m = model_yukle()
-    if m is None or not cps_seg:
+    pk = model_yukle()
+    if pk is None or not cps_seg:
         return None
-    model, esik, zskor = m
     tab = secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT)
     if tab is None:
         return None
     P, idx, YD, X = tab
-    s = np.asarray(model.predict_proba(
-        p6_karar.donustur(X, zskor))[:, 1], float)
-    P2, D2 = p6_karar.sec(P, idx, YD, s, esik)
+    zskor = pk.get("zskor", "ab")
+    Xd = p6_karar.donustur(X, zskor)
+    s = np.asarray(pk["kademe1"].predict_proba(Xd)[:, 1], float)
+    if pk.get("kademe2") is not None:
+        # IKINCI KADEME: birinci gecisin YUKSEK GUVENLI secimleri TOHUM olur,
+        # periyodik yapi olculeri cikar, skor yeniden uretilir. Tohumlar
+        # yalnizca tahminden gelir -- GT bu yola HIC girmez.
+        import kafes
+        Pt, Dt = p6_karar.sec_ayrintili(
+            P, idx, YD, s, tuple(pk["tohum_kural"]),
+            nms_mm=float(pk["tohum_nms"]))[:2]
+        kb = kafes.oznitelik(P[idx], YD, Pt, Dt)
+        s = np.asarray(pk["kademe2"].predict_proba(
+            np.hstack([Xd, kb]).astype(np.float32))[:, 1], float)
+    P2, D2 = p6_karar.sec(P, idx, YD, s, tuple(pk["kural"]),
+                          nms_mm=float(pk["nms"]))
     if ISARET and len(P2):
         T2 = urun_genis.tanimlayici(P2, D2, *_mesh_arg(V, F))
         D2 = urun_genis.isaret_duzelt(D2, T2)

@@ -80,9 +80,15 @@ def ongorulen(P_tohum, D_tohum, tler, k_maks=K_MAKS):
     """
     P = np.asarray(P_tohum, float).reshape(-1, 3)
     D = _birim(D_tohum)
+    # ARA ADIMLAR (k = 0.5, 1.5, ...) ZORUNLU. Birim test: 6mm adimli bir sirada
+    # tohumlar bir atlayarak dususe, en sik oteleme 12mm cikar ve ARADAKI
+    # kontaklar hicbir zaman ongorulmez -- yani ozniteligin en cok gerektigi
+    # durumda tam olarak susar. Yarim adimlar bu bosluga bakar; yanlis olduklari
+    # yerde modele yalnizca "uzak" bilgisi verirler.
+    adimlar = [k / 2.0 for k in range(1, 2 * k_maks + 1)]
     S, Sd, ds, ad, kk = [], [], [], [], []
     for t, n in tler:
-        for k in range(1, k_maks + 1):
+        for k in adimlar:
             for sg in (1.0, -1.0):
                 S.append(P + sg * k * t)
                 Sd.append(D)
