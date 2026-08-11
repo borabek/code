@@ -51,9 +51,15 @@ from sina_kume import esle_macar   # noqa: E402
 
 AB = p6_karar.AB
 C0 = AB
-KURALLAR = ([("mutlak", e) for e in (0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70)] +
+KURALLAR = ([("mutlak", e) for e in (0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70,
+                                    0.80)] +
             [("goreli", o, t) for o in (0.30, 0.50, 0.70) for t in (0.05, 0.20)])
 NMSLER = (2.5, 3.5, 5.0)
+# Kural aramasi kivrimin EGITIM parcalarinin bir ORNEKLEMINDE yapilir: her kural
+# tum parcalari gezip Macar eslemesi kosuyor ve 42 kural x 2000 parca bir kolu
+# dakikalarca bekletiyor. Ornekleme SECIMI degistirmez (kurallar arasi sira
+# birkac yuz parcada zaten kararli), yalniz maliyeti dusurur.
+ARAMA_N = int(os.environ.get("P6_ARAMA_N", "600"))
 TOHUM_KURAL = ("mutlak", 0.60)     # tohum ESIGI ayrica taranmaz: yuksek tutulur
 TOHUM_NMS = 5.0
 NEG_KAT = int(os.environ.get("P6_NEG_KAT", "8"))
@@ -181,7 +187,11 @@ def skorla(m, veri, kol, kafes_bloklar=None):
 
 def main():
     t0 = time.time()
-    tr = yukle("tam", int(os.environ.get("P6_TR", "0")))
+    # KUME SECIMI. `tam` = 9 marka / 2583 parca (asil egitim ve kural secimi).
+    # `d6` = 8 marka / 468 parca -- HIZLI YINELEME icin. D6 bu oturumda teshis
+    # ve kol secimi icin YOGUN kullanildi, dolayisiyla TEMIZ OKUMA DEGILDIR;
+    # temiz okuma yalnizca D7'dir ve ona 3 okumalik butce ile bakilir.
+    tr = yukle(os.environ.get("P6_KUME", "tam"), int(os.environ.get("P6_TR", "0")))
     for d in tr:
         d["y"] = np.asarray(d["y"], int)
     marka = collections.Counter(d["mfg"] for d in tr)
@@ -202,10 +212,33 @@ def main():
               flush=True)
     kucuk = [i for i, s in enumerate(oof) if s is None]
     if kucuk:                       # kat olusturamayan kucuk markalar
-        m1 = egit([tr[i] for i in range(len(tr)) if i not in set(kucuk)], "P6")
-        for i, s in zip(kucuk, skorla(m1, [tr[i] for i in kucuk], "P6")):
-            oof[i] = s
-        print(f"  OOF kucuk markalar: {len(kucuk)} parca", flush=True)
+        ic = [i for i in range(len(tr)) if i not in set(kucuk)]
+        if not ic:                  # (yalniz kucuk kosularda olur)
+            rng = np.random.default_rng(0)
+            pay = rng.permutation(len(tr)) % 3
+            for f_ in range(3):
+                d_ = [i for i in range(len(tr)) if pay[i] == f_]
+                i_ = [i for i in range(len(tr)) if pay[i] != f_]
+                m1 = egit([tr[i] for i in i_], "P6")
+                for i, s in zip(d_, skorla(m1, [tr[i] for i in d_], "P6")):
+                    oof[i] = s
+            print("  OOF: marka kati kurulamadi, 3 RASTGELE kat kullanildi "
+                  "(yalniz kucuk kosularda olur)", flush=True)
+        else:
+            m1 = egit([tr[i] for i in ic], "P6")
+            for i, s in zip(kucuk, skorla(m1, [tr[i] for i in kucuk], "P6")):
+                oof[i] = s
+            print(f"  OOF kucuk markalar: {len(kucuk)} parca", flush=True)
+    if not katlar:                  # kiyas katlari da yoksa rastgele boluruz
+        rng = np.random.default_rng(1)
+        pay = rng.permutation(len(tr)) % 3
+        for i, d in enumerate(tr):
+            d["_kat"] = f"kat{pay[i]}"
+        katlar = [f"kat{i}" for i in range(3)]
+        print(f"  KIYAS katlari rastgele: {katlar}", flush=True)
+    else:
+        for d in tr:
+            d["_kat"] = d["mfg"]
 
     kafes_tr = [kafes_bloku(d, s) for d, s in zip(tr, oof)]
     kv = np.vstack(kafes_tr)
@@ -216,8 +249,8 @@ def main():
     top = {k: collections.Counter() for k in KOLLAR}
     ayrinti = {}
     for b in katlar:
-        ic = [i for i, d in enumerate(tr) if d["mfg"] != b]
-        dis = [i for i, d in enumerate(tr) if d["mfg"] == b]
+        ic = [i for i, d in enumerate(tr) if d["_kat"] != b]
+        dis = [i for i, d in enumerate(tr) if d["_kat"] == b]
         TR = [tr[i] for i in ic]
         TE = [tr[i] for i in dis]
         ayrinti[b] = {}
@@ -227,8 +260,12 @@ def main():
             m = egit(TR, kol, kb_tr)
             s_tr = skorla(m, TR, kol, kb_tr)
             s_te = skorla(m, TE, kol, kb_te)
+            ar = (np.random.default_rng(0).choice(len(TR), ARAMA_N, False)
+                  if ARAMA_N and len(TR) > ARAMA_N else np.arange(len(TR)))
+            AR = [TR[i] for i in ar]
+            AS = [s_tr[i] for i in ar]
             en = max(((r, n) for r in KURALLAR for n in NMSLER),
-                     key=lambda x: olc(TR, s_tr, x[0], x[1], kol)["robot"])
+                     key=lambda x: olc(AR, AS, x[0], x[1], kol)["robot"])
             r = olc(TE, s_te, en[0], en[1], kol)
             for k in ("TP", "FP", "FN"):
                 top[kol][k] += r[k]

@@ -1,0 +1,201 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "5e84bd141b4e0e61",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "toplam": {
+  "TABAN": {
+   "robot": 0.5255474452554745,
+   "recall": 0.4675324675324675,
+   "kesinlik": 0.6,
+   "TP": 36,
+   "FP": 24,
+   "FN": 41
+  },
+  "P6": {
+   "robot": 0.4131455399061033,
+   "recall": 0.5714285714285714,
+   "kesinlik": 0.3235294117647059,
+   "TP": 44,
+   "FP": 92,
+   "FN": 33
+  },
+  "P6_KAFES": {
+   "robot": 0.3761467889908257,
+   "recall": 0.5324675324675324,
+   "kesinlik": 0.2907801418439716,
+   "TP": 41,
+   "FP": 100,
+   "FN": 36
+  }
+ },
+ "marka": {
+  "kat0": {
+   "TABAN": {
+    "robot": 0.64,
+    "tespit": 0.76,
+    "TP": 16,
+    "FP": 8,
+    "FN": 10,
+    "recall": 0.6153846153846154,
+    "kesinlik": 0.6666666666666666,
+    "kural": [
+     "mutlak",
+     0.6
+    ],
+    "nms": 2.5
+   },
+   "P6": {
+    "robot": 0.3902439024390244,
+    "tespit": 0.5365853658536586,
+    "TP": 16,
+    "FP": 40,
+    "FN": 10,
+    "recall": 0.6153846153846154,
+    "kesinlik": 0.2857142857142857,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 5.0
+   },
+   "P6_KAFES": {
+    "robot": 0.38095238095238093,
+    "tespit": 0.5238095238095238,
+    "TP": 16,
+    "FP": 42,
+    "FN": 10,
+    "recall": 0.6153846153846154,
+    "kesinlik": 0.27586206896551724,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 5.0
+   }
+  },
+  "kat1": {
+   "TABAN": {
+    "robot": 0.4864864864864865,
+    "tespit": 0.4864864864864865,
+    "TP": 9,
+    "FP": 3,
+    "FN": 16,
+    "recall": 0.36,
+    "kesinlik": 0.75,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 2.5
+   },
+   "P6": {
+    "robot": 0.4528301886792453,
+    "tespit": 0.7547169811320755,
+    "TP": 12,
+    "FP": 16,
+    "FN": 13,
+    "recall": 0.48,
+    "kesinlik": 0.42857142857142855,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 5.0
+   },
+   "P6_KAFES": {
+    "robot": 0.4444444444444444,
+    "tespit": 0.7407407407407407,
+    "TP": 12,
+    "FP": 17,
+    "FN": 13,
+    "recall": 0.48,
+    "kesinlik": 0.41379310344827586,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 5.0
+   }
+  },
+  "kat2": {
+   "TABAN": {
+    "robot": 0.44,
+    "tespit": 0.72,
+    "TP": 11,
+    "FP": 13,
+    "FN": 15,
+    "recall": 0.4230769230769231,
+    "kesinlik": 0.4583333333333333,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 2.5
+   },
+   "P6": {
+    "robot": 0.41025641025641024,
+    "tespit": 0.6410256410256411,
+    "TP": 16,
+    "FP": 36,
+    "FN": 10,
+    "recall": 0.6153846153846154,
+    "kesinlik": 0.3076923076923077,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 5.0
+   },
+   "P6_KAFES": {
+    "robot": 0.325,
+    "tespit": 0.6,
+    "TP": 13,
+    "FP": 41,
+    "FN": 13,
+    "recall": 0.5,
+    "kesinlik": 0.24074074074074073,
+    "kural": [
+     "mutlak",
+     0.8
+    ],
+    "nms": 5.0
+   }
+  }
+ },
+ "n_egitim": 40,
+ "katlar": [
+  "kat0",
+  "kat1",
+  "kat2"
+ ],
+ "secilen": "TABAN",
+ "kural": [
+  "mutlak",
+  0.8
+ ],
+ "nms": 2.5,
+ "dizin": "results/_p6_oz_u25",
+ "not": "tam korpusunun MARKA KATLARINDA kural secimi + kol kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
+}

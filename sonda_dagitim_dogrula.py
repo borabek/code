@@ -44,6 +44,15 @@ def main():
     secili = [p for p in pids if p in kay and len(kay[p].get("G", []))]
     if N:
         secili = secili[:N]
+    # PAYLI KOSU: `DOG_SHARD=i/n`. P6 kolu parca basina saniyeler suruyor
+    # (B-rep + ~2000 secenek icin isin atisi); 835 parca tek islemde saatler
+    # alir. Paylar `birlestir_makbuz.py` ile birlestirilir; mikro F1 parca
+    # basina TP/FP/FN toplami oldugu icin birlestirme KAYIPSIZDIR.
+    sh = os.environ.get("DOG_SHARD")
+    if sh:
+        i_, n_ = (int(x) for x in sh.split("/"))
+        secili = [p for k, p in enumerate(secili) if k % n_ == i_]
+        print(f"PAY {i_}/{n_}", flush=True)
     print(f"D7 {len(secili)} parca | genis kol {'ACIK' if urun_genis.ACIK else 'KAPALI'}",
           flush=True)
     rob = collections.defaultdict(lambda: [0, 0, 0])
