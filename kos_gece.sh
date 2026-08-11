@@ -69,12 +69,15 @@ faz B6_ensemble env P6_DIZIN=results/_p6_oz_tam3 P6_TOHUM_N=3 \
     P6_KUME=tam,d6 P6_KAT_MIN=200 P6_KOLLAR=P6 P6_NMSLER=5.0 \
     P6_ARAMA_N=250 P6_NEG_KAT=6 P6_ITER=200 python kos_p6_kademe2.py
 
-[ -f kos_b3_kafes_adedi.py ]  && faz B3_kafes_adedi  python kos_b3_kafes_adedi.py
-[ -f kos_b4_ozkalibrasyon.py ] && faz B4_ozkalibrasyon python kos_b4_ozkalibrasyon.py
-[ -f kos_b5_simetri.py ]      && faz B5_simetri      python kos_b5_simetri.py
+# EK OZNITELIK BLOKLARI -- hepsi TEK cerceveden, tek degiskenli.
+# Ucuzdan pahaliya sirali: dusen bir blok sonrakini engellemez.
+for blok in ozkalib kafes_adet simetri derinlik; do
+  faz "EK_$blok" env EK_BLOK="$blok" P6_DIZIN=results/_p6_oz_tam3 \
+      P6_KUME=tam,d6 P6_KAT_MIN=200 P6_ARAMA_N=200 P6_ITER=200 \
+      P6_NEG_KAT=6 python kos_ek_oznitelik.py
+done
 
 # ---------------------------------------------------------------- FAZ C
-[ -f kos_c1_derinlik_profili.py ] && faz C1_derinlik_profili python kos_c1_derinlik_profili.py
 [ -f kos_c2_brep_topoloji.py ]    && faz C2_brep_topoloji    python kos_c2_brep_topoloji.py
 
 # ---------------------------------------------------------------- FAZ D
