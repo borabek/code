@@ -43,7 +43,14 @@ FAN_K = int(os.environ.get("YB_FAN_K", "3"))    # aday basina kac yon onerisi
 
 KOMSU_R = 10.0          # komsu yonu toplama yaricapi (mm)
 DEDUPE_DER = 8.0        # bu aciyla ayni sayilan yonler tek temsilciye iner
-MAX_SEC = 12            # aday basina secenek tavani (kendi HARIC siralanir)
+# ADAY BASINA SECENEK TAVANI. OLCULDU (2026-08-12, 30 parca, yelpaze 256):
+#   tavan 12 -> yonlu recall 0.8462 (maliyet 1.00x)   <- bugunku
+#   tavan 24 -> yonlu recall 0.9077 (maliyet 1.20x)   <- DIZ NOKTASI
+#   tavan 40 -> yonlu recall 0.9077 (maliyet 1.23x)   kazanc yok
+# Tavan BAGLIYOR: 256 isinlik yelpaze onlarca yon uretiyor ama cogu bu tavanda
+# eleniyor -- yelpaze yeni yon EKLEMIYOR, mevcut kaynaklarin yerini ALIYOR.
+# Sabit oldugu icin yeniden cikarimla denenemiyordu; artik cevreden ayarlanir.
+MAX_SEC = int(os.environ.get("YB_MAX_SEC", "12"))
 DESTEK_DER = 10.0       # "bu yonu destekliyor" esigi -- olcumun ACI'siyla ayni
 
 KAYNAK_AD = ["kendi", "komsu", "silindir", "ana"]
