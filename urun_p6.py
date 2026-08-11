@@ -193,7 +193,12 @@ def cikti(V, F, probs, cps_seg, step_path, CE, CT):
         k = np.where(s >= float(pk.get("kisa_esik", 0.20)))[0]
         s2 = np.zeros(len(s))
         if len(k):
-            X2 = np.hstack([Xd[k], kb[k], s[k][:, None]])
+            par = [Xd[k], kb[k]]
+            if pk.get("sira"):        # EGITIMDEKI sutun sirasiyla AYNI
+                import sira_damgala
+                par.append(sira_damgala.oznitelik(P[idx], YD, Pt, Dt)[k])
+            par.append(s[k][:, None])
+            X2 = np.hstack(par)
             s2[k] = pk["kademe2"].predict_proba(X2.astype(np.float32))[:, 1]
         s = s2
     P2, D2, _ai, S2 = p6_karar.sec_ayrintili(P, idx, YD, s, tuple(pk["kural"]),

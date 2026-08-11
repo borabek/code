@@ -44,6 +44,7 @@ sys.path.insert(0, ".")
 import kafes                       # noqa: E402
 import kanonik_d7 as K             # noqa: E402
 import p6_karar                    # noqa: E402
+import sira_damgala                # noqa: E402
 import urun_genis                  # noqa: E402
 import yon_bankasi as YB           # noqa: E402
 from kos_p6_ortak import yukle     # noqa: E402
@@ -207,13 +208,28 @@ def kisa(s1):
     return np.where(np.asarray(s1, float) >= KISA_ESIK)[0]
 
 
+SIRA = os.environ.get("P6_SIRA", "1") == "1"
+
+
 def kafes_matris(d, kb, s1, k):
     """Ikinci kademe oznitelikleri, `k` satirlarinda.
-    [92 donusturulmus | kaynak 3 | kafes 8 | birinci kademe skoru 1]"""
+
+    [92 donusturulmus | kaynak 3 | kafes 8 | (sira 3) | birinci kademe skoru 1]
+
+    `sira` blogu (`sira_damgala`): birinci gecisin CAPALARINDAN sirayi uzatip
+    havuzda karsiligi olan adaylari "sira uzerinde" diye isaretler. `kafes`
+    blogu bir MESAFE olcusu verir; bu ise KABUL EDILMIS sira uyeligi bayragidir
+    -- iki farkli soru, birlikte kullanilirlar. `P6_SIRA=0` ile kapatilir.
+    """
     X = np.hstack([p6_karar.donustur(d["X"]),
                    p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
-    return np.hstack([X[k], np.asarray(kb)[k],
-                      np.asarray(s1, float)[k][:, None]])
+    par = [X[k], np.asarray(kb)[k]]
+    if SIRA:
+        Pt, Dt = tohumla(d, s1)
+        par.append(sira_damgala.oznitelik(d["P"][d["idx"]], d["YD"],
+                                          Pt, Dt)[k])
+    par.append(np.asarray(s1, float)[k][:, None])
+    return np.hstack(par)
 
 
 def egit(tr, kol, kafes_bloklar=None, s1ler=None):
@@ -421,7 +437,7 @@ def main():
     m1 = egit(tr, "P6")
     paket = {"kademe1": m1, "kol": en_kol, "kural": list(kural), "nms": nms,
              "zskor": "ab", "AB": AB, "tohum_kural": list(TOHUM_KURAL),
-             "tohum_nms": TOHUM_NMS, "kisa_esik": KISA_ESIK}
+             "tohum_nms": TOHUM_NMS, "kisa_esik": KISA_ESIK, "sira": SIRA}
     if en_kol == "P6_KAFES":
         # Ikinci kademe OOF skorlarindan egitilir: urunde birinci kademe skoru
         # gorulmemis parcadan gelecek, egitimde de oyle gelmeli.
