@@ -1,4 +1,4 @@
-# SABAH RAPORU -- 2026-08-12 01:16
+# SABAH RAPORU -- 2026-08-12 01:31
 
 Butun sayilar `tam` MARKA KATLARINDA (LOMO). D7 SINAVINA BAKILMADI. Manset metrik MIKRO robot F1.
 
@@ -16,6 +16,13 @@ Henuz makbuz yok.
 
 ## 4. GECE FAZLARI
 - [00:14:14] BITTI: A1b -- 141 dosya
+
+## 4b. SAHA -- AUTO KATMANI (tier cokusu)
+Dagitilan AUTO esigi = **0.6**
+- `d7_p6`: AUTO payi **1.0000**, kesinlik **0.3471**  <- REVIEW KATMANI BOS
+- `d7_taban`: **OLCULMEMIS_varsayilan_dolgu** (2001 isaretin hepsi ayni skor)
+
+> Gorulmemis markada robot HER isarete otonom guveniyor. Esigi yukseltmek kurtarmiyor (0.95'te bile kesinlik ~0.47). Oneri: gorulmemis marka icin AUTO katmani KAPATILSIN.
 
 ## 5. D7 OKUMA #2 KARARI
 - kapiyi gecen blok sayisi: **0**

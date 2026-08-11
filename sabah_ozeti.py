@@ -151,6 +151,27 @@ def main():
     L.extend(f"- {s}" for s in fz) if fz else L.append("- log yok")
     L.append("")
 
+    L.append("## 4b. SAHA -- AUTO KATMANI (tier cokusu)")
+    tc = oku(os.path.join(KOK, "results", "tier_cokusu_d7.json"))
+    if not tc:
+        L.append("- olcum yok (`python sonda_tier_cokusu.py`)")
+    else:
+        L.append(f"Dagitilan AUTO esigi = **{tc.get('dagitilan_esik')}**")
+        for ad, k in tc.get("kumeler", {}).items():
+            if k.get("durum"):
+                L.append(f"- `{ad}`: **{k['durum']}** "
+                         f"({k['n_isaret']} isaretin hepsi ayni skor)")
+                continue
+            de = k.get("dagitilan_esikte", {})
+            L.append(f"- `{ad}`: AUTO payi **{de.get('auto_pay', 0):.4f}**, "
+                     f"kesinlik **{de.get('kesinlik') or 0:.4f}**"
+                     + ("  <- REVIEW KATMANI BOS" if de.get("review_bos") else ""))
+        L.append("")
+        L.append("> Gorulmemis markada robot HER isarete otonom guveniyor. "
+                 "Esigi yukseltmek kurtarmiyor (0.95'te bile kesinlik ~0.47). "
+                 "Oneri: gorulmemis marka icin AUTO katmani KAPATILSIN.")
+    L.append("")
+
     L.append("## 5. D7 OKUMA #2 KARARI")
     kaz = [f for _, _, _, f, k in eb if f is not None and k == "GECTI"]
     top = sum(kaz)
