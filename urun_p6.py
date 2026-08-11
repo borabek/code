@@ -114,13 +114,26 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
     return P, idx, YD, np.hstack([A[idx], B[idx], C, Dblok]), kaynak
 
 
+# SESSIZ GERI DUSME SAYACI. Kol calisamazsa `None` doner ve cagiran ESKI yola
+# duser -- bu dogru davranis, ama SIK olursa "P6 sonucu" aslinda taban sonucudur
+# ve bu SESSIZ olur. Olcum betikleri bu sayaci makbuza yazar.
+SAYAC = {"cagri": 0, "p6": 0, "model_yok": 0, "aday_yok": 0, "tablo_yok": 0}
+
+
 def cikti(V, F, probs, cps_seg, step_path, CE, CT):
+    SAYAC["cagri"] += 1
     pk = model_yukle()
-    if pk is None or not cps_seg:
+    if pk is None:
+        SAYAC["model_yok"] += 1
+        return None
+    if not cps_seg:
+        SAYAC["aday_yok"] += 1
         return None
     tab = secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT)
     if tab is None:
+        SAYAC["tablo_yok"] += 1
         return None
+    SAYAC["p6"] += 1
     P, idx, YD, X, kaynak = tab
     zskor = pk.get("zskor", "ab")
     # EGITIMDEKI SUTUN SIRASI: [donusturulmus 92] + [kaynak gostergesi 3]

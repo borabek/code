@@ -94,6 +94,7 @@ def main():
            "en_kotu": float(min(pm.values())), "marka": pm,
            "n_parca": len(secili), "genis_acik": bool(urun_genis.ACIK),
            "p6_acik": bool(urun_p6.ACIK), "poz_kafasi": bool(POZ),
+           "p6_sayac": dict(urun_p6.SAYAC),
            "parca_tp_fp_fn": {p: v for p, v in parca_kirilim.items()}}
     print(f"\nURUN ZINCIRI robot {mi:.4f} | tespit {out['tespit']:.4f} | "
           f"makro {out['makro']:.4f} | en kotu {out['en_kotu']:.4f}")

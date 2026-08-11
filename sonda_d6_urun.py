@@ -98,6 +98,7 @@ def main():
            "FP": sum(v[1] for v in rob.values()),
            "FN": sum(v[2] for v in rob.values()),
            "n_parca": len(secili), "p6_acik": bool(urun_p6.ACIK),
+           "p6_sayac": dict(urun_p6.SAYAC),
            "genis_acik": bool(urun_genis.ACIK), "poz_kafasi": bool(POZ),
            "parca_kirilim": kirilim}
     print(f"\nD6 URUN ZINCIRI robot {mi:.4f} | tespit {out['tespit']:.4f} | "

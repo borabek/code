@@ -27,6 +27,7 @@ def main():
     cakisan = []
     damga = None
     bayrak = {}
+    sayac = collections.Counter()
     for y in paylar:
         m = json.load(open(y))
         damga = damga or m.get("damga")
@@ -36,6 +37,7 @@ def main():
                 bayrak.setdefault(k, s[k])
                 if bayrak[k] != s[k]:
                     sys.exit(f"PAYLAR FARKLI AYARDA: {k} {bayrak[k]} vs {s[k]}")
+        sayac.update(s.get("p6_sayac") or {})
         for p, v in (s.get("parca_kirilim") or s.get("parca_tp_fp_fn") or
                      {}).items():
             if p in kir:
@@ -58,7 +60,8 @@ def main():
            "makro": float(np.mean(list(pm.values()))),
            "en_kotu": float(min(pm.values())), "marka": pm,
            "TP": T[0], "FP": T[1], "FN": T[2],
-           "n_parca": len(kir), "parca_kirilim": kir, **bayrak}
+           "n_parca": len(kir), "parca_kirilim": kir,
+           "p6_sayac": dict(sayac), **bayrak}
     json.dump({"damga": damga, "sonuc": out,
                "not": f"{len(paylar)} paydan birlestirildi. Mikro F1 parca "
                       "basina toplam oldugu icin birlestirme kayipsizdir."},
@@ -66,6 +69,14 @@ def main():
     print(f"{len(kir)} parca | robot {out['robot']:.4f} | tespit "
           f"{out['tespit']:.4f} | makro {out['makro']:.4f} | "
           f"TP {T[0]} FP {T[1]} FN {T[2]}")
+    if sayac.get("cagri"):
+        p6 = sayac.get("p6", 0)
+        print(f"P6 kolu: {p6}/{sayac['cagri']} parcada CALISTI "
+              f"({100 * p6 / sayac['cagri']:.1f}%)"
+              + (f" | dusenler: {dict((k, v) for k, v in sayac.items() if k.endswith('_yok') and v)}"
+                 if p6 < sayac["cagri"] else ""))
+        if p6 == 0 and bayrak.get("p6_acik"):
+            print("!! P6 ACIK ama HIC CALISMAMIS -- bu sayi TABAN sayisidir.")
     print(f"makbuz -> {cik}")
 
 
