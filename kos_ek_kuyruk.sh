@@ -62,4 +62,22 @@ for b in $BLOKLAR; do
     tail -4 "$G/EK_$b.log" | sed 's/^/    /' | tee -a "$ANA"
   fi
 done
+# SAHA GUVEN KAPISI -- "robot hangi isaretlere kendi basina guvenebilir?"
+# GLB'deki kirmizi/turuncu ayrimi bugun keyfi bir esikle (robot_conf_auto=0.5,
+# 3 oy) yapiliyor. Bu olcum esigi OLCULMUS kesinlige baglar ve bunu GORULMEMIS
+# marka katlarinda yapar -- yani D7 sinavini HARCAMADAN.
+if kapilari_bekle; then
+  say "BASLIYOR: saha_kapisi"
+  t0=$(date +%s)
+  if P6_DIZIN=results/_p6_oz_tam3 P6_KUME=tam,d6 P6_KAT_MIN=200 \
+       P6_ITER=200 P6_NEG_KAT=6 \
+       python kos_saha_kapisi.py > "$G/SAHA_KAPISI.log" 2>&1; then
+    say "BITTI: saha_kapisi ($(( $(date +%s) - t0 ))s)"
+    tail -8 "$G/SAHA_KAPISI.log" | sed 's/^/    /' | tee -a "$ANA"
+  else
+    say "DUSTU: saha_kapisi ($(( $(date +%s) - t0 ))s)"
+    tail -4 "$G/SAHA_KAPISI.log" | sed 's/^/    /' | tee -a "$ANA"
+  fi
+fi
+
 say "=== EK KUYRUGU BITTI ==="

@@ -504,3 +504,39 @@ sorusu ONCE sorulmalidir.
 4. **D7 bootstrap araligi parca birimlidir.** D7 icinde kaba-iz ikiz orani
    %22.3 ve ikizler ayni markada; grup bootstrap'i ayrica gerekli gorulmedi,
    ama bu bir tercihtir.
+
+---
+
+## 7. GECE 2026-08-11/12 -- SIRA DAMGALAMA KAPANDI
+
+`tam` marka katlari (WEI, PXC, SIE, TOGI), korpus `_p6_oz_u25`, 3051 parca.
+Makbuzlar: `results/p6_kademe2_sira0.json` (kapali) / `sira1.json` (acik).
+
+| kol | SIRA kapali | SIRA acik | fark |
+|---|---|---|---|
+| **P6** (urun kolu) | 0.309114 | 0.309114 | **0.000000** |
+| P6_KAFES | 0.293754 | 0.304059 | +0.010305 |
+
+**KARAR: KAPANDI.** Iki gerekce:
+
+1. P6 kolunda sonuc BASAMAK BASAMAK ayni. SIRA damgalama urun koluna hic
+   dokunmuyor -- damgalama yalnizca kafes kolundan giriyor.
+2. Kafes kolundaki +0.0103'luk kazanc kolu P6'nin onune GECIREMIYOR
+   (0.3041 < 0.3091). Yani en iyi haliyle bile urunde bir sey degistirmez.
+
+Bu, "kazanc var ama yanlis kolda" durumunun ders niteliginde ornegi: bir kolun
+kendi icinde iyilesmesi, o kol zaten geride oldugu surece urun kazanci DEGILDIR.
+
+### Marka kirilimi (P6 kolu, disarida birakilan marka)
+
+| marka | robot F1 | recall | kesinlik |
+|---|---|---|---|
+| SIE | 0.4681 | 0.8300 | 0.3259 |
+| PXC | 0.3972 | 0.5981 | 0.2973 |
+| WEI | 0.3795 | 0.4879 | 0.3105 |
+| **TOGI** | **0.1689** | **0.1054** | 0.4240 |
+
+TOGI, D7'deki CWT ile ayni imzayi tasiyor: recall %10.5'e cokuyor ama kesinlik
+en yuksek deger (0.4240). Yani model TOGI'de "az ama dogru" buluyor --
+darbogaz SECIM degil, adayin havuza HIC GIRMEMESI. Bu, ADAY_YOK kovasinin
+(%36.5) marka duzeyindeki yuzu ve A1b tam-acik havuz kolunun hedefi.
