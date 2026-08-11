@@ -688,3 +688,30 @@ durumu ayirt edip `OLCULMEMIS` diye isaretliyor.
 Gorulmemis marka icin AUTO katmani KAPATILMALI (her sey REVIEW), ta ki
 parcalar arasi kalibre bir skor cikana kadar. Bugunku hali, olculmemis bir
 guvenle otonom davranmaktir.
+
+---
+
+## 11. DUZELTME -- "sessiz olum" teshisi yanlisti
+
+Gece boyunca uc surec cikis kodu 0 ile, tek satir hata yazmadan oldu. Ilk
+teshisim **BELLEK** idi: o sirada tek bir surec 16.6 GB tutuyordu ve bos RAM
+2.6 GB'a dusmustu, teshis makul gorunuyordu.
+
+**Yanlisti.** Dorduncu vaka (NIT max_sec sondasi) 17.1 GB BOS RAM varken ayni
+sekilde oldu. Ortak payda bellek degil, BASLATMA BICIMI:
+
+| baslatma | sonuc |
+|---|---|
+| `run_in_background: true` olan kabuk cagrisi ICINDE `nohup ... &` | dis gorev bitince surec KAPANIYOR |
+| ON PLAN kabuk cagrisindan `nohup ... & disown` | YASIYOR (kos_gece.sh, kos_ek_kuyruk.sh boyle) |
+
+Kural: uzun kosan is ON PLAN cagrisindan ve `disown` ile baslatilir.
+
+**Ders.** Makul bir mekanizma (bellek) ile o an gozlenen bir olgu (dusuk RAM)
+ust uste geldiginde teshis "acikliyor" gibi gorunuyor. Ama aciklama ancak
+KARSI ORNEKLE sinanirsa teshistir. Bu, projedeki "kapali kol" denetimiyle ayni
+ders: bir aciklamayi kabul etmeden once onu YANLISLAYACAK durumu aramak gerek.
+
+Bellek yine de gercek bir kisittir (her EK kosusu ~6 GB, makinede 31 GB) --
+`kos_ek_kuyruk.sh`'nin 10 GB kapisi yerinde kaliyor. Ama gece yasanan
+olumlerin sebebi o degildi.

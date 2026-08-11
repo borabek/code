@@ -102,6 +102,20 @@ def main():
     print(f"{'TOPLAM':<7}{top['parca']:>6}{top['gt']:>7}"
           f"{T['konum_recall']:>9.4f}{ry:>9.4f}{T['f1_tavani']:>11.4f}"
           f"{T['aday_parca']:>8.0f}{T['secenek_parca']:>8.0f}")
+    # TAVAN DOYGUNLUGU UYARISI (2026-08-12). Aday basina secenek sayisi
+    # `yon_bankasi.MAX_SEC` tavanina dayanmissa, yon KAYNAKLARINI zenginlestirmek
+    # (ornegin yelpaze cozunurlugunu artirmak) recall'u ARTIRAMAZ: yeni yonler
+    # tavana takilip mevcutlarin yerine geciyordur. Bu, olcumu yorumlarken
+    # kolayca gozden kacan bir kisittir -- once tavan buyutulmelidir.
+    try:
+        import yon_bankasi as _YB
+        _sp = T["secenek_parca"] / max(T["aday_parca"], 1e-9)
+        if _sp >= 0.9 * _YB.MAX_SEC:
+            print(f"\n!! TAVAN DOYGUN: aday basina {_sp:.1f} secenek, "
+                  f"MAX_SEC={_YB.MAX_SEC}. Yon kaynagi eklemek recall'u "
+                  f"ARTIRMAZ; once tavan buyutulmeli (sonda_max_sec.py).")
+    except Exception:
+        pass
     print(f"\nKAPI A: yonlu recall >= 0.85 mi -> "
           f"{'GECTI' if ry >= 0.85 else 'GECMEDI'} ({ry:.4f})")
     json.dump({"damga": makbuz_hash.damga(), "dizin": DIZ, "kume": ONLER,

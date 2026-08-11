@@ -49,10 +49,27 @@ def main():
     n_parca = int(os.environ.get("MS_N", "40"))
     sil_y, ob = KUME[on]
     cy = pickle.load(open(sil_y, "rb"))
-    fs = sorted(f for f in os.listdir(OZ)
-                if f.startswith(on + "_") and f.endswith(".npz"))[:n_parca]
-    pidler = [f[len(on) + 1:-4] for f in fs]
-    kay_gt = kayitlar(pidler)
+    # MARKA SUZGECI SART: dosyalar pid'e gore sirali oldugu icin ilk N dosya
+    # TEK MARKADAN gelir. Ilk kosuda orneklem UPUN/SUPU idi -- oysa tavani
+    # asagi ceken marka NIT (D6 GT'sinin %45.7'si, yonlu recall 0.5254 ve
+    # kaybi tam olarak YON kaybi: konum 0.7807 -> yonlu 0.5254). Yanlis
+    # kumede olculen bir sonda, kolu haksiz yere "olu" ilan ettirir.
+    hepsi = sorted(f for f in os.listdir(OZ)
+                   if f.startswith(on + "_") and f.endswith(".npz"))
+    tum_pid = [f[len(on) + 1:-4] for f in hepsi]
+    kay_hepsi = kayitlar(tum_pid)
+    hedef = os.environ.get("MS_MARKA", "").strip()
+    if hedef:
+        cift_ = [(f, p) for f, p in zip(hepsi, tum_pid)
+                 if (kay_hepsi.get(p) or {}).get("mfg") == hedef]
+        print(f"MARKA SUZGECI '{hedef}': {len(cift_)} parca bulundu",
+              flush=True)
+    else:
+        cift_ = list(zip(hepsi, tum_pid))
+    cift_ = cift_[:n_parca]
+    fs = [a for a, _ in cift_]
+    pidler = [b for _, b in cift_]
+    kay_gt = kay_hepsi
 
     os.environ["YB_FAN"] = os.environ.get("YB_FAN", "256")
     YB.FAN_N = int(os.environ["YB_FAN"])
