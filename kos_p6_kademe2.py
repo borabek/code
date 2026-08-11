@@ -394,8 +394,14 @@ def main():
         son[kol] = {"robot": f1, "recall": rc, "kesinlik": pr, **dict(c)}
         print(f"{kol:<12} {f1:>8.4f} {rc:>8.4f} {pr:>9.4f} {c['TP']:>7} "
               f"{c['FP']:>7} {c['FN']:>7}")
-    print(f"\nP6      - TABAN = {son['P6']['robot'] - son['TABAN']['robot']:+.4f}")
-    print(f"P6KAFES - P6    = {son['P6_KAFES']['robot'] - son['P6']['robot']:+.4f}")
+    # Farklar KOL LISTESINE gore uretilir; sabit kol adi yazmak liste
+    # kisaldiginda KeyError veriyordu (iki kez oldu).
+    if "TABAN" in son:
+        for k in KOLLAR:
+            if k != "TABAN":
+                print(f"\n{k:<9} - TABAN = "
+                      f"{son[k]['robot'] - son['TABAN']['robot']:+.4f}", end="")
+        print()
 
     # --- 3) NIHAI MODELLER (tum tam) ---------------------------------------
     en_kol = max(KOLLAR, key=lambda k: son[k]["robot"])
