@@ -167,10 +167,15 @@ def main():
         X = np.hstack([A[idx], B[idx], C, Dblok]).astype(np.float32)
         # `kaynak` DE YAZILIR: boylece TEK cikarimdan hem (0,1) hem (0,1,2)
         # kolu egitilebilir ve iki kolu ayri ayri cikarmak gerekmez.
-        np.savez_compressed(hedef, X=X, idx=idx.astype(np.int32),
+        # ATOMIK YAZIM: gecici dosyaya yaz, sonra yerine tasi. Iki isci ayni
+        # parcaya denk gelirse (yuk dengesizligi yuzunden yardimci isci
+        # eklendiginde olur) yarim yazilmis npz kalmaz.
+        gec = f"{hedef}.{os.getpid()}.tmp"
+        np.savez_compressed(gec, X=X, idx=idx.astype(np.int32),
                             YD=YD.astype(np.float32), P=P.astype(np.float32),
                             D=D.astype(np.float32),
                             kaynak=kay[m].astype(np.int8))
+        os.replace(gec + ".npz" if os.path.exists(gec + ".npz") else gec, hedef)
         yazilan += 1
         if i % 25 == 0:
             hz = (time.time() - t0) / max(yazilan, 1)

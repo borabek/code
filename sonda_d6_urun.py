@@ -50,6 +50,11 @@ def main():
               and S.get(p)]
     if N:
         secili = secili[:N]
+    sh = os.environ.get("DOG_SHARD")     # `birlestir_makbuz.py` ile birlesir
+    if sh:
+        i_, n_ = (int(x) for x in sh.split("/"))
+        secili = [p for k, p in enumerate(secili) if k % n_ == i_]
+        print(f"PAY {i_}/{n_}", flush=True)
     print(f"D6 {len(secili)} parca | P6 {'ACIK' if urun_p6.ACIK else 'KAPALI'}"
           f" | genis {'ACIK' if urun_genis.ACIK else 'KAPALI'}"
           f" | poz kafasi {'ACIK' if POZ else 'KAPALI'}", flush=True)

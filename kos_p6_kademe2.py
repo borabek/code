@@ -223,14 +223,17 @@ def egit(tr, kol, kafes_bloklar=None, s1ler=None):
             k = kisa(s1ler[i])
             if not len(k):
                 continue
-            Ms.append(kafes_matris(d, kafes_bloklar[i], s1ler[i], k))
+            # float32'ye PARCA BASINA cevir: 2583 parca x ~2000 secenek x 95
+            # sutun float64 birikince vstack tepe bellegi 10 GB'a cikiyor.
+            Ms.append(kafes_matris(d, kafes_bloklar[i], s1ler[i],
+                                   k).astype(np.float32))
             Ys.append(d["y"][k])
         else:
-            Ms.append(oz(d, kol))
+            Ms.append(oz(d, kol).astype(np.float32))
             Ys.append(d["y"][taban_satir(d)] if kol == "TABAN" else d["y"])
     if not Ms:
         return None
-    M = np.vstack(Ms).astype(np.float32)
+    M = np.vstack(Ms)
     Y = np.concatenate(Ys)
     M, Y = alt_ornekle(M, Y)
     return yap().fit(M, Y)
