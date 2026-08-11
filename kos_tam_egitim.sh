@@ -10,7 +10,9 @@
 # D6 ve D7'ye BAKILMAZ.
 set -u
 cd "$(dirname "$0")"
-export P6_KUME=tam
+# EGITIM KORPUSU: `tam` + `d6`. D6 SINAV DEGIL -- gelistirme kumesi; egitime
+# katmak D7 icin mesru ve marka cesitliligini 9 -> 17 yapar. D7'ye DOKUNULMAZ.
+export P6_KUME=${P6_KUME:-tam,d6}
 export P6_DIZIN=results/_p6_oz_u25
 export P6_KAT_MIN=${P6_KAT_MIN:-200}
 export P6_OLCUT=${P6_OLCUT:-makro}

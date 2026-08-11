@@ -268,7 +268,14 @@ def main():
     # `d6` = 8 marka / 468 parca -- HIZLI YINELEME icin. D6 bu oturumda teshis
     # ve kol secimi icin YOGUN kullanildi, dolayisiyla TEMIZ OKUMA DEGILDIR;
     # temiz okuma yalnizca D7'dir ve ona 3 okumalik butce ile bakilir.
-    tr = yukle(os.environ.get("P6_KUME", "tam"), int(os.environ.get("P6_TR", "0")))
+    # `P6_KUME` virgulle birden fazla korpus alabilir: "tam,d6".
+    # NEDEN: D6 SINAV DEGIL, benim gelistirme kumem. Onu EGITIME katmak D7 icin
+    # tamamen mesru ve marka cesitliligini 9 -> 17'ye cikarir. Bu projede
+    # olculmustu: ayni parca sayisinda KARISIK veri tek ureticiyi +0.0443 yener.
+    # Kural secimi yine `tam` markalarinin katlarinda yapilir.
+    tr = []
+    for _k in os.environ.get("P6_KUME", "tam").split(","):
+        tr += yukle(_k.strip(), int(os.environ.get("P6_TR", "0")))
     for d in tr:
         d["y"] = np.asarray(d["y"], int)
     marka = collections.Counter(d["mfg"] for d in tr)
