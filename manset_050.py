@@ -87,7 +87,16 @@ def main():
     print(f"kol     P6 {m['sonuc'].get('p6_acik')} | genis "
           f"{m['sonuc'].get('genis_acik')} | poz kafasi "
           f"{m['sonuc'].get('poz_kafasi')}")
-    print(f"parca   {len(kir)}\n")
+    print(f"parca   {len(kir)}")
+    sy = m["sonuc"].get("p6_sayac") or {}
+    if sy.get("cagri"):
+        p6 = sy.get("p6", 0)
+        print(f"P6 kolu {p6}/{sy['cagri']} parcada CALISTI "
+              f"({100 * p6 / sy['cagri']:.1f}%) | rejim disi "
+              f"{sy.get('rejim_disi', 0)} | tablo yok {sy.get('tablo_yok', 0)}")
+        if p6 == 0:
+            print("!! P6 HIC CALISMAMIS -- bu sayi TABAN sayisidir.")
+    print()
 
     for alan, ad in (("rob", "ROBOT (yanal<=2mm, isaretli aci<=10)"),
                      ("tes", "TESPIT (konum, yon serbest)")):
