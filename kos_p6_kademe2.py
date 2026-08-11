@@ -243,9 +243,14 @@ def main():
     for d in tr:
         d["y"] = np.asarray(d["y"], int)
     marka = collections.Counter(d["mfg"] for d in tr)
-    katlar = [m for m, n in marka.items() if n >= 60]
+    # KAT ESIGI. D6'da 60 esigi NIT'i (50 parca) disarida birakiyordu -- oysa
+    # NIT D6 GT'sinin %46'si ve havuzun EN ZOR oldugu marka. Bir markanin hic
+    # kat olmamasi, kiyas sayilarinin o markayi HIC olcmemesi demek.
+    KAT_MIN = int(os.environ.get("P6_KAT_MIN", "60"))
+    katlar = [m for m, n in marka.items() if n >= KAT_MIN]
     print(f"tam {len(tr)} parca | markalar {dict(marka)}", flush=True)
-    print(f"marka katlari (n>=60): {katlar}  ({time.time() - t0:.0f} s)",
+    print(f"marka katlari (n>={KAT_MIN}): {katlar}  ({time.time() - t0:.0f} s)"
+          f" | kapsanan parca {sum(marka[m] for m in katlar)}/{len(tr)}",
           flush=True)
 
     # --- 1) BIRINCI KADEME: marka-katli OOF skorlari -----------------------
