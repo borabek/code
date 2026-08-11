@@ -372,10 +372,13 @@ def main():
             ayrinti[b][kol] = dict(r, kural=list(en[0]), nms=en[1],
                                    kural_kahini=kah)
         a = ayrinti[b]
-        print(f"  {b:<6} n={len(TE):<4} TABAN {a['TABAN']['robot']:.4f} | "
-              f"P6 {a['P6']['robot']:.4f} | P6+KAFES {a['P6_KAFES']['robot']:.4f}"
-              f"   [kural kahini P6 {a['P6'].get('kural_kahini', 0):.4f}]"
-              f"   ({time.time() - t0:.0f} s)", flush=True)
+        # KOLLAR cevre degiskeniyle degisebiliyor; satiri SABIT kol adlariyla
+        # yazmak kol listesi kisaldiginda KeyError veriyordu.
+        oz_ = " | ".join(f"{k} {a[k]['robot']:.4f}" for k in KOLLAR if k in a)
+        kh = a.get("P6", {}).get("kural_kahini", 0.0)
+        print(f"  {b:<6} n={len(TE):<4} {oz_}"
+              + (f"   [kural kahini P6 {kh:.4f}]" if kh else "")
+              + f"   ({time.time() - t0:.0f} s)", flush=True)
 
     print(f"\n{'kol':<12} {'robot':>8} {'recall':>8} {'kesinlik':>9} "
           f"{'TP':>7} {'FP':>7} {'FN':>7}")
