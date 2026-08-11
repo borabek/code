@@ -85,7 +85,10 @@ def ongorulen(P_tohum, D_tohum, tler, k_maks=K_MAKS):
     # kontaklar hicbir zaman ongorulmez -- yani ozniteligin en cok gerektigi
     # durumda tam olarak susar. Yarim adimlar bu bosluga bakar; yanlis olduklari
     # yerde modele yalnizca "uzak" bilgisi verirler.
-    adimlar = [k / 2.0 for k in range(1, 2 * k_maks + 1)]
+    # 1/2 VE 1/3: capalar 18mm arayla dususe en sik oteleme 18mm cikar; yarim
+    # adim 9mm verir ama gercek adim 6mm olabilir ve aradakiler hic ongorulmez.
+    adimlar = sorted({x / b for b in (1, 2, 3)
+                      for x in range(1, b * k_maks + 1)})
     S, Sd, ds, ad, kk = [], [], [], [], []
     for t, n in tler:
         for k in adimlar:
