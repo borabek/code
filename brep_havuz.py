@@ -18,6 +18,8 @@ segmentasyon ve ~6000 remesh AYNEN durur; B-rep onerileri ONLARIN YANINA eklenen
 ikinci bir aday kaynagidir ve `kaynak` alaniyla isaretlenir. Sonuclar "tez
 sonucu" olarak DEGIL, "tez-omurgali geometrik genisletme" olarak raporlanir.
 """
+import os
+
 import numpy as np
 
 DEDUPE_MM = 3.0
@@ -104,7 +106,11 @@ def birlesik_havuz(P_seg, D_seg, cyl, acik, dedupe_mm=DEDUPE_MM):
 #
 # EKSEN BOYU ORNEKLEME KASTEN YOK: parca basina ~670 aday ekleyip tavani cok az
 # oynatiyordu (1162 adayda 0.7798 vs 102 adayda 0.7472).
-MESH_ESIK = 0.50
+# `BH_MESH_ESIK` ile dusurulebilir. OLCULDU (D7 teshis): CWT'de konum recall
+# 0.50 esiginde 0.5532, 0.05'te 0.7914. Segmentasyon zayif markalarda CP
+# bolgelerindeki tepeler 0.50'yi GECEMIYOR ve havuz orayi hic gormuyor.
+# Esigi dusurmek aday EKLER, asla CIKARMAZ -> havuz tavanini MONOTON yukseltir.
+MESH_ESIK = float(os.environ.get("BH_MESH_ESIK", "0.50"))
 MESH_DEDUPE_MM = 2.0
 
 

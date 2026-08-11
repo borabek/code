@@ -113,6 +113,40 @@ def taban_satir(d):
     return k[d["kaynak"][d["idx"][k]] != 2]
 
 
+ZORNEG = os.environ.get("P6_ZORNEG", "0") == "1"
+TOHUM_N = int(os.environ.get("P6_TOHUM_N", "1"))
+
+
+def alt_ornekle_zor(M, Y, s1, kat=NEG_KAT, tohum=0):
+    """ZOR NEGATIF madenciligi: negatiflerin yarisi EN YUKSEK SKORLU olanlardan.
+
+    Varsayilan ornekleme negatifleri RASTGELE seciyor; %98'i apacik negatif
+    oldugu icin model kolay ornekle doluyor ve karar sinirini zor bolgede
+    ogrenemiyor. Burada negatif butcesinin yarisi birinci kademe skoruna gore
+    EN YUKSEK negatiflerden, yarisi rastgeleden gelir -- boylece hem zor sinir
+    hem taban dagilimi temsil edilir.
+    """
+    if kat <= 0:
+        return M, Y
+    rng = np.random.default_rng(tohum)
+    poz = np.where(Y == 1)[0]
+    neg = np.where(Y == 0)[0]
+    n = min(len(neg), kat * max(len(poz), 1))
+    if s1 is None or not len(neg):
+        sec_neg = rng.choice(neg, n, replace=False) if len(neg) else neg
+    else:
+        yari = n // 2
+        sira = neg[np.argsort(-np.asarray(s1, float)[neg])]
+        zor = sira[:yari]
+        kalan = np.setdiff1d(neg, zor, assume_unique=False)
+        rast = (rng.choice(kalan, min(n - yari, len(kalan)), replace=False)
+                if len(kalan) else np.zeros(0, int))
+        sec_neg = np.concatenate([zor, rast])
+    sec = np.concatenate([poz, sec_neg]).astype(int)
+    rng.shuffle(sec)
+    return M[sec], Y[sec]
+
+
 def alt_ornekle(M, Y, kat=NEG_KAT, tohum=0):
     """Tum pozitifler + `kat` katı negatif. 3M satirlik egitimi kaldirilabilir
     kilar; esik zaten sonradan taraniyor, taban oran degismesi zararsiz."""
@@ -262,8 +296,24 @@ def egit(tr, kol, kafes_bloklar=None, s1ler=None, sira_bloklar=None):
         return None
     M = np.vstack(Ms)
     Y = np.concatenate(Ys)
-    M, Y = alt_ornekle(M, Y)
-    return yap().fit(M, Y)
+    if ZORNEG and kol != "TABAN" and s1ler is not None:
+        S1 = np.concatenate([np.asarray(s, float)[kisa(s)] if kol == "P6_KAFES"
+                             else np.asarray(s, float) for s in s1ler])
+        M2, Y2 = alt_ornekle_zor(M, Y, S1 if len(S1) == len(Y) else None)
+    else:
+        M2, Y2 = alt_ornekle(M, Y)
+    if TOHUM_N <= 1:
+        return yap().fit(M2, Y2)
+    # UC TOHUM ENSEMBLE: ayni veri, farkli rastgelelik; skor ORTALAMASI alinir
+    return [yap(t).fit(*alt_ornekle(M, Y, tohum=t)) for t in range(TOHUM_N)]
+
+
+def _pp(m, X):
+    """Tek model ya da ENSEMBLE listesi -- ikisi de calisir."""
+    X = X.astype(np.float32)
+    if isinstance(m, list):
+        return np.mean([mm.predict_proba(X)[:, 1] for mm in m], axis=0)
+    return m.predict_proba(X)[:, 1]
 
 
 def skorla(m, veri, kol, kafes_bloklar=None, s1ler=None, sira_bloklar=None):
@@ -278,10 +328,10 @@ def skorla(m, veri, kol, kafes_bloklar=None, s1ler=None, sira_bloklar=None):
                 X = kafes_matris(
                     d, kafes_bloklar[i], s1ler[i], k,
                     None if sira_bloklar is None else sira_bloklar[i])
-                s[k] = m.predict_proba(X.astype(np.float32))[:, 1]
+                s[k] = _pp(m, X)
             out.append(s)
             continue
-        p = m.predict_proba(oz(d, kol).astype(np.float32))[:, 1]
+        p = _pp(m, oz(d, kol))
         if kol == "TABAN":
             s = np.zeros(len(d["X"]))
             s[taban_satir(d)] = p
