@@ -147,7 +147,8 @@ def yelpaze_yonleri(P, mesh, diag, n_yon=None, k=None):
 
 
 def secenekler(P, D, cyl, V, gate_s=None, votes=None,
-               komsu_r=KOMSU_R, max_sec=MAX_SEC, mesh=None, diag=None):
+               komsu_r=KOMSU_R, max_sec=MAX_SEC, mesh=None, diag=None,
+               fan_maske=None):
     """Aday basina yon secenekleri.
 
     Doner: (idx, YD, OZ)
@@ -168,9 +169,20 @@ def secenekler(P, D, cyl, V, gate_s=None, votes=None,
     votes = np.zeros(n) if votes is None else np.asarray(votes, float)
     Ysil, Yana = parca_yonleri(cyl, V)
     cos_destek = np.cos(np.radians(DESTEK_DER))
-    # YELPAZE: aday basina en derin serbest yonler (kaynak 4)
-    Yfan = (yelpaze_yonleri(P, mesh, diag) if FAN_N > 0 and mesh is not None
-            else np.zeros((n, 0, 3)))
+    # YELPAZE: aday basina en derin serbest yonler.
+    # `fan_maske` verilirse YALNIZ o adaylara uygulanir. Mesh tepelerine
+    # yelpaze atmak cok pahali (600 aday x 256 isin) ve gereksiz: mesh adayi
+    # zaten kendi TEPE NORMALINI tasiyor ve parca duzeyi yonleri bankadan
+    # aliyor. Yelpazenin olculen degeri B-REP AGIZLARINDA idi.
+    Yfan = np.zeros((n, 0, 3))
+    if FAN_N > 0 and mesh is not None:
+        if fan_maske is None:
+            Yfan = yelpaze_yonleri(P, mesh, diag)
+        else:
+            fm = np.asarray(fan_maske, bool)
+            Yfan = np.zeros((n, FAN_K, 3))
+            if fm.any():
+                Yfan[fm] = yelpaze_yonleri(P[fm], mesh, diag)
 
     # komsuluk: her aday icin 10mm icindeki adaylarin indeksleri
     d2 = np.linalg.norm(P[:, None, :] - P[None, :, :], axis=-1)
@@ -187,8 +199,9 @@ def secenekler(P, D, cyl, V, gate_s=None, votes=None,
             aday.append((y, 3))
         if Yfan.shape[1]:
             for y in Yfan[i]:
-                aday.append((y, 3))     # ana eksenlerle AYNI kaynak kodu:
-                                        # C blogunun genisligi degismesin
+                if float(np.dot(y, y)) > 0.5:   # maske disi adayda sifir vektor
+                    aday.append((y, 3))         # ana eksenlerle AYNI kaynak kodu:
+                                                # C blogunun genisligi degismesin
 
         Y, KY = dedupe(np.asarray([a[0] for a in aday], float),
                        np.asarray([a[1] for a in aday], int))

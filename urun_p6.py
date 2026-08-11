@@ -107,7 +107,9 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
                       for i in range(len(P))], CE, CT, step_path=step_path),
         float)
     B = urun_genis.tanimlayici(P, D, cyl, mesh, diag)
-    idx, YD, C = YB.secenekler(P, D, cyl, V, mesh=mesh, diag=diag)
+    # YELPAZE yalniz mesh OLMAYAN adaylara -- egitimdekiyle AYNI kural.
+    idx, YD, C = YB.secenekler(P, D, cyl, V, mesh=mesh, diag=diag,
+                               fan_maske=(np.asarray(kaynak, int) != 2))
     if not len(idx):
         return None
     Dblok = urun_genis.tanimlayici(P[idx], YD, cyl, mesh, diag)

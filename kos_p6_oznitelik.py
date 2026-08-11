@@ -161,7 +161,12 @@ def main():
         # BIR ONCEKI PARCANIN mesh'ini kullanmak demekti -- sessiz yanlis.
         diag = float(np.linalg.norm(V.max(0) - V.min(0)))
         mesh = trimesh.Trimesh(V, Fc, process=False)
-        idx, YD, C = YB.secenekler(P, D, cyl, V, mesh=mesh, diag=diag)
+        # YELPAZE yalniz MESH OLMAYAN adaylara: mesh tepesine 256 isin
+        # atmak parca basina yuz binlerce isin demek ve o adaylar zaten
+        # kendi tepe normalini tasiyor.
+        fmask = (kay[m] != 2)
+        idx, YD, C = YB.secenekler(P, D, cyl, V, mesh=mesh, diag=diag,
+                                   fan_maske=fmask)
         if not len(idx):
             bos += 1
             continue
