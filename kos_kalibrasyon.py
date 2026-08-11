@@ -131,7 +131,11 @@ def main():
     print(f"tahmin {len(Y)} | ham kesinlik {Y.mean():.4f}", flush=True)
 
     marka = collections.Counter(M)
-    katlar = [m for m, n in marka.items() if n >= 400]
+    KAT_MIN = int(os.environ.get("KAL_KAT_MIN", "400"))
+    katlar = [m for m, n in marka.items() if n >= KAT_MIN]
+    if not katlar:                     # kucuk kosularda olur
+        katlar = [m for m, _ in marka.most_common(3)]
+        print(f"  (kat esigi {KAT_MIN} kimseyi gecmedi -> en buyuk 3 marka)")
     print(f"katlar: {katlar}", flush=True)
 
     # HAM SKOR ile kiyas (ilk sutun)
@@ -147,7 +151,13 @@ def main():
             l2_regularization=1.0, random_state=0).fit(X[ic], Y[ic])
         Sk[dis] = m.predict_proba(X[dis])[:, 1]
     kd = np.isin(M, katlar)
+    if not kd.any():
+        sys.exit("kat-disi tahmin YOK -- daha buyuk kume ile kos")
     ks, kk, kc = egri(Sk[kd], Y[kd])
+    # HAM SKOR kiyasi AYNI kat-disi altkumede yapilmali; tum veride yapmak
+    # kalibre modeli haksiz avantajli/dezavantajli gosterirdi.
+    hs, hk, hc = egri(X[kd, 0], Y[kd])
+    print(f"HAM SKOR (ayni altkume): en yuksek kesinlik {hk.max():.4f}")
     print(f"KALIBRE  : en yuksek kesinlik {kk.max():.4f}")
 
     print(f"\n{'hedef':>7}{'ham kapsama':>14}{'kalibre kapsama':>18}")
