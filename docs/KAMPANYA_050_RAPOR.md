@@ -214,7 +214,51 @@ en kotu marka, recall/kesinlik, ve kaba-iz eslesmesi olmayan 703 parcalik
 TEMIZ ALT KUME sayisi. Manset ile temiz alt kume arasindaki fark buyukse sayi
 supheli sayilir.
 
-### 5b. Sonuclar
+### 5b. `tam` MARKA KATLARINDA GERCEK KAZANC (D7'den ONCE, sinav DEGIL)
+
+3051 parca (tam+d6), 4 marka kati (WEI/PXC/SIE/TOGI), esik/kol katta secildi:
+
+| kol | robot | recall | kesinlik | TP | FP | FN |
+|---|---|---|---|---|---|---|
+| TABAN | 0.2861 | 0.1868 | 0.6108 | 2671 | 1702 | 11629 |
+| **P6** | **0.3091** | 0.2935 | 0.3265 | 4197 | 8658 | 10103 |
+| P6_KAFES | 0.3045 | 0.2587 | 0.3698 | 3700 | 6305 | 10600 |
+| P6_GEO | 0.2707 | 0.2566 | 0.2864 | 3670 | 9146 | 10630 |
+
+**P6 - TABAN = +0.0230.** D6'nin vaat ettigi +0.1681 GERCEK DEGILDI.
+
+Kat kirilimi deseni acikliyor:
+
+| kat | n | TABAN | P6 | fark |
+|---|---|---|---|---|
+| TOGI | 810 | 0.0597 | 0.1689 | **+0.1092** |
+| WEI | 686 | 0.2797 | 0.3795 | **+0.0998** |
+| PXC | 713 | 0.5850 | 0.3972 | **-0.1878** |
+| SIE | 262 | 0.6226 | 0.4681 | **-0.1545** |
+
+**P6, tabanin ZAYIF oldugu yerde kazanir; GUCLU oldugu yerde kaybeder.** D6'nin
+tabani zayifti, o yuzden orada her sey iyi gorunuyordu. Bu, gelistirme
+kumesinden okunan kazancin neden aldatabilecegini gosteren somut ornektir.
+
+**REJIM KAPISI** (bu bulgunun cevabi): `n01 >= 90 -> P6, altinda TABAN`.
+Yonlendirme istatistigi taramasi (kat-disi esik secimi, MAKRO olcut):
+
+| istatistik | kat-disi robot | secilen esikler |
+|---|---|---|
+| **n01** | **0.5269** | 90 / 90 / 90 / 90 |
+| n_aday | 0.5139 | 114 x4 |
+| n_secenek | 0.5137 | 1628/1344/1344/1628 |
+| mesh_oran | 0.5025 | 0.42 x4 |
+| taban_ort3 | 0.3660 | -0.51 x4 |
+| taban_maks | 0.3515 | -0.75 x3, -0.55 |
+
+Iki not: (1) "tabanin kendi guvenine gore yonlendir" hipotezi CURUDU -- taban
+skoru parcalar arasi kalibre degil. (2) **Bu tablodaki sayilar ORNEKLEM-ICIDIR**
+(nihai model bu parcalari egitimde gordu); yalnizca hangi KURALIN secildigini
+gosterirler, kuralin degerini DEGIL. Esigin dort katta da ayni cikmasi kuralin
+kararli oldugunu gosterir.
+
+### 5c. D7 SINAV SONUCU
 
 *(okuma yapilinca doldurulacak)*
 
