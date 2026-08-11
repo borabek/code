@@ -174,9 +174,42 @@ olculen mikro kazanc D7 icin KOTUMSER bir tahmindir.
 
 ---
 
-## 5. Sonuclar
+## 5. D7 OKUMA #1 -- KARAR KURALLARI (okumadan ONCE yazildi)
 
-*(D7 okumasi sonrasi doldurulacak)*
+Bu bolum D7'ye BAKILMADAN once dolduruldu. Sayiya bakip kural secmek sismenin
+ta kendisidir; asagidakiler baglayicidir.
+
+**Okunacak yapilandirma (tek, onceden sabit):**
+* model: `results/p6_kademe2_model.pkl` -- `tam`+`d6` (3051 parca / 17 marka)
+  ile egitilmis; kol ve karar kurali `tam`in MARKA KATLARINDA (WEI/PXC/SIE/TOGI)
+  MAKRO olcutle secilmis.
+* poz kafasi (`DOG_POZ`): D7'den ONCE D6 alt kumesinde acik/kapali olculur ve
+  kazanan sabitlenir. (Gerekce: `yon_sozluk_sec` yon bankasinin sectigi yonu
+  EZEBILIR; bu belirsizlikle sinav okumasi harcanmaz.)
+* iki kol AYNI kosuda: `URUN_P6=0` (dagitilan urun) ve `URUN_P6=1`.
+* 8 pay + `birlestir_makbuz.py`; mikro F1 icin birlestirme kayipsizdir.
+
+**Manset tanimi:** MIKRO robot F1 (yanal <=2mm, ISARETLI aci <=10, eksenel
+<=40mm, Macar bire-bir eslesme), 835 parca, urunun TEK kanonik zincirinden.
+`f1w` KULLANILMAZ.
+
+**Onceden ilan edilen kesmeler:**
+| durum | karar |
+|---|---|
+| `p6_sayac`: P6 kolu parcalarin <%90'inda calisti | manset GECERSIZ; sebep bulunur, okuma tekrarlanir (butceden sayilir) |
+| P6 robot < TABAN robot | KOL DAGITILMAZ; taban korunur, sonuc oyle raporlanir |
+| P6 robot >= 0.50 | hedef TUTTU; temiz-703 alt kumesinde de raporlanir |
+| 0.35 <= P6 robot < 0.50 | hedef TUTMADI; kazanc dagitilir, kalan yol 0.75 paketiyle surer |
+| P6 robot < 0.35 | kazanc D6'dan D7'ye TASINMADI; sebep analizi (marka kirilimi) sart |
+
+**Ayrica her okumada raporlanir:** %95 bootstrap GA, marka kirilimi, makro,
+en kotu marka, recall/kesinlik, ve kaba-iz eslesmesi olmayan 703 parcalik
+TEMIZ ALT KUME sayisi. Manset ile temiz alt kume arasindaki fark buyukse sayi
+supheli sayilir.
+
+### 5b. Sonuclar
+
+*(okuma yapilinca doldurulacak)*
 
 ### 5.1 Okuma plani (onceden ilan)
 
