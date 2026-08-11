@@ -640,3 +640,51 @@ OLCULMEMISTIR.
 
 Bu, "0.90 saha sozu" tartismasinin sessiz kalmis parcasidir: sadece marka
 kosulu degil, ESIGIN KENDISI de olcumden kaymis durumda.
+
+---
+
+## 10. TIER COKUSU -- "kirmizi isaretlerin kaci dogru?" (olculdu)
+
+Makbuz: `results/tier_cokusu_d7.json` · sonda: `sonda_tier_cokusu.py`
+**Yeni bir D7 okumasi DEGIL** -- harcanmis olcumun yeniden analizi; model
+secimi ya da ayar yapilmadi.
+
+### P6 zinciri, D7 (gorulmemis marka), 835 parca / 2512 isaret
+
+| esik | AUTO | AUTO payi | kesinlik | GT kapsama |
+|---|---|---|---|---|
+| **0.60 (DAGITILAN)** | 2512 | **1.0000** | **0.3471** | 0.2825 |
+| 0.80 | 2290 | 0.9116 | 0.3694 | 0.2741 |
+| 0.90 | 1714 | 0.6823 | 0.4312 | 0.2394 |
+| 0.95 | 1395 | 0.5553 | 0.4652 | 0.2102 |
+
+Skor dagilimi: **min 0.6006**, medyan 0.9621, maks 1.0000.
+
+**Dagitilan esik (0.6) skor tabaninin ALTINDA.** Bu yuzden esik hicbir seyi
+elemiyor: REVIEW katmani BOS, isaretlerin %100'u AUTO isaretleniyor. Robot
+gorulmemis bir marka parcasinda her isarete kendi basina guvenir, oysa
+isaretlerin ancak **%34.7'si** dogrudur.
+
+**Neden cokuyor:** secim kurali ile tier esigi AYNI skoru kullaniyor. Secim
+zaten goreli (parca-maksimumunun %85'i) oldugundan hayatta kalan her tahminin
+skoru yuksek; esik "baglamiyor". Ayni cokus 2026-07-29'da bir kez yasanmisti
+(o zaman tier segmentasyon guvenine bakiyordu, REVIEW yine bos, kesinlik
+0.7735). Skor degisti, COKUS BICIMI geri geldi.
+
+**Esigi yukseltmek kurtarmiyor:** 0.95'te bile kesinlik 0.4652.
+
+### DAGITILAN TABAN ICIN OLCUM YOK (duzeltme)
+
+Raporun 9. bolumunde "ayni egri `wire_score` icin de cikarilmali" yazmistim;
+bu YANLISTI -- P6 makbuzu zaten `wire_score` tasiyor. Ama TABAN icin gercekten
+olcum yok: `d7_taban.json`'daki 2001 skorun **hepsi tam 1.0**. Sebep
+`sonda_dagitim_dogrula.py`'nin `c.get("wire_score", 1.0)` varsayilani -- taban
+zinciri wire_score uretmemis, sonda 1.0 yazmis. Ilk bakista "her esikte %100
+AUTO" gibi gorunuyordu; bu bir BULGU DEGIL, OLCUM BOSLUGUDUR. Sonda artik bu
+durumu ayirt edip `OLCULMEMIS` diye isaretliyor.
+
+### Urun onerisi (uygulanmadi)
+
+Gorulmemis marka icin AUTO katmani KAPATILMALI (her sey REVIEW), ta ki
+parcalar arasi kalibre bir skor cikana kadar. Bugunku hali, olculmemis bir
+guvenle otonom davranmaktir.
