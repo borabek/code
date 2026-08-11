@@ -35,16 +35,20 @@ faz() {                     # faz <ad> <komut...>
 log "=========== GECE PROGRAMI BASLADI ==========="
 
 # ---------------------------------------------------------------- FAZ A
-# A1b: UC KALDIRAC ACIK korpus (yelpaze + dusuk mesh esigi + gevsek seyreltme)
+# A1b: UC KALDIRAC ACIK korpus (yelpaze + dusuk mesh esigi + seyreltme)
+# UST SINIR 600 -> 350: 600'de cikarim 6.3 dosya/dk (7.7 SAAT, gece yetmez).
+# Olculen diz noktasi zaten 251 adaydaydi (konum recall 0.8713); 350 onun
+# uzerinde kalir ama maliyeti yariya iner. ASIL KALDIRAC mesh ESIGI (0.05),
+# aday SAYISI degil -- CWT'de konum recall'u acan oydu.
 if [ "$(ls results/_p6_oz_tam3 2>/dev/null | wc -l)" -lt 3040 ]; then
   log "BASLIYOR: A1b tam-acik korpus cikarimi (6 pay)"
   for i in 0 1 2 3 4 5; do
     ( BH_MESH_ESIK=0.05 YB_FAN=256 P6_KAYNAK=012 \
-      P6_MESH_R=2.0 P6_MESH_MAX=600 P6_MESH_KAT=8 \
+      P6_MESH_R=2.5 P6_MESH_MAX=350 P6_MESH_KAT=5 \
       P6_CIK=results/_p6_oz_tam3 P6_SHARD="$i/6" \
       python kos_p6_oznitelik.py d6 > "$G/A1b_d6_$i.log" 2>&1
       BH_MESH_ESIK=0.05 YB_FAN=256 P6_KAYNAK=012 \
-      P6_MESH_R=2.0 P6_MESH_MAX=600 P6_MESH_KAT=8 \
+      P6_MESH_R=2.5 P6_MESH_MAX=350 P6_MESH_KAT=5 \
       P6_CIK=results/_p6_oz_tam3 P6_SHARD="$i/6" \
       python kos_p6_oznitelik.py tam > "$G/A1b_tam_$i.log" 2>&1 ) &
   done
