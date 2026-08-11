@@ -27,16 +27,38 @@ done
 wait
 python birlestir_makbuz.py results/d7_taban.json results/d7_taban_*.json
 
+# P6 kolu ILAN EDILEN yapilandirmayla kosar: poz kafasi KAPALI.
+# Gerekce: model ve karar kurali marka katlarinda POZ KAFASI OLMADAN secildi;
+# uzerine dogrulanmamis bir son islem koymak, olculen seyden baska bir sey
+# dagitmak olurdu.
 echo
-echo "=== KOL 2/2: P6 (URUN_P6=1) ==="
+echo "=== KOL 2/3: P6 (URUN_P6=1, poz kafasi KAPALI -- ILAN EDILEN) ==="
 for i in $(seq 0 $((N-1))); do
-  ( URUN_P6=1 DOG_SHARD="$i/$N" \
+  ( URUN_P6=1 DOG_POZ=0 DOG_SHARD="$i/$N" \
     DOG_CIKTI="results/d7_p6_$i.json" \
     python sonda_dagitim_dogrula.py > "results/_d7p_$i.log" 2>&1 ) &
 done
 wait
 python birlestir_makbuz.py results/d7_p6.json results/d7_p6_*.json
 
+# UCUNCU KOL yalnizca GOZLEMDIR: poz kafasi P6'nin sectigi yonu eziyor mu?
+# Manset bu koldan SECILMEZ -- sinava bakip yapilandirma secmek, sinavdan ayar
+# cekmektir.
 echo
-echo "=== MANSET ==="
+echo "=== KOL 3/3: P6 + poz kafasi (GOZLEM, manset DEGIL) ==="
+rm -f results/d7_p6poz_*.json
+for i in $(seq 0 $((N-1))); do
+  ( URUN_P6=1 DOG_POZ=1 DOG_SHARD="$i/$N" \
+    DOG_CIKTI="results/d7_p6poz_$i.json" \
+    python sonda_dagitim_dogrula.py > "results/_d7pp_$i.log" 2>&1 ) &
+done
+wait
+python birlestir_makbuz.py results/d7_p6poz.json results/d7_p6poz_*.json
+
+echo
+echo "=== MANSET (ILAN EDILEN kol) ==="
 python manset_050.py results/d7_p6.json results/d7_taban.json
+
+echo
+echo "=== GUVEN KAPISI (kalibrasyon D7'de DEGIL: egri raporlanir) ==="
+python kos_guven_kapisi.py results/d7_p6.json || true

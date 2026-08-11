@@ -183,9 +183,16 @@ ta kendisidir; asagidakiler baglayicidir.
 * model: `results/p6_kademe2_model.pkl` -- `tam`+`d6` (3051 parca / 17 marka)
   ile egitilmis; kol ve karar kurali `tam`in MARKA KATLARINDA (WEI/PXC/SIE/TOGI)
   MAKRO olcutle secilmis.
-* poz kafasi (`DOG_POZ`): D7'den ONCE D6 alt kumesinde acik/kapali olculur ve
-  kazanan sabitlenir. (Gerekce: `yon_sozluk_sec` yon bankasinin sectigi yonu
-  EZEBILIR; bu belirsizlikle sinav okumasi harcanmaz.)
+* poz kafasi: **P6 kolunda KAPALI** (ilan edilen). Gerekce ILKESEL, olcume
+  bakilarak degil: model ve karar kurali marka katlarinda poz kafasi OLMADAN
+  secildi; uzerine dogrulanmamis bir son islem koymak, olculen seyden baska bir
+  sey dagitmak olurdu. TABAN kolu kendi DAGITILAN hali olan poz-kafasi-ACIK ile
+  kosar. Ucuncu bir kol (P6 + poz kafasi) yalnizca GOZLEM olarak raporlanir;
+  manset ondan SECILMEZ.
+  (D6 uzerinden karar verilmedi cunku D6 egitime katildi ve ayrica D6'nin
+  `_tam_oz` onbellegi `_p1_olasilik_g7`'den, benim betiklerim `_p1_olasilik`'ten
+  besleniyor -- D6 artik urunu temsil etmiyor. D7 ve `tam` icin bu uyusmazlik
+  YOK, ikisi de kendi onbellegiyle tutarli.)
 * iki kol AYNI kosuda: `URUN_P6=0` (dagitilan urun) ve `URUN_P6=1`.
 * 8 pay + `birlestir_makbuz.py`; mikro F1 icin birlestirme kayipsizdir.
 
