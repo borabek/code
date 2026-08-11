@@ -1,10 +1,10 @@
-# SABAH RAPORU -- 2026-08-12 01:53
+# SABAH RAPORU -- 2026-08-12 01:58
 
 Butun sayilar `tam` MARKA KATLARINDA (LOMO). D7 SINAVINA BAKILMADI. Manset metrik MIKRO robot F1.
 
 ## 1. KAPI A -- tam-acik havuzun yonlu recall'u
 Henuz olculmedi (A2 fazi kosmadi).
-- ONCEKI havuz (u25): yonlu recall 0.7352, F1 tavani 0.8474 -> kapi GECMEMISTI
+- ONCEKI havuz (u25): yonlu recall 0.7264, F1 tavani 0.8415 -> kapi GECMEMISTI
 
 ## 2. EK OZNITELIK BLOKLARI (kapi +0.01)
 Henuz makbuz yok.
@@ -13,9 +13,6 @@ Henuz makbuz yok.
 - **taban (u25)** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.2938
 - **SIRA kapali** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.2938
 - **SIRA acik** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.3041
-
-## 4. GECE FAZLARI
-- [00:14:14] BITTI: A1b -- 141 dosya
 
 ## 3b. SECICI VERIMLILIGI -- 0.50 nereden gelebilir?
 - havuz F1 TAVANI (`tam`, mukemmel secici): **0.8474**
@@ -27,6 +24,9 @@ Henuz makbuz yok.
 2. **Seciciyle:** tavan sabit kalirsa verimliligin **59.0%** olmasi gerekir (1.62x iyilesme)
 
 > Havuz kolu tek basina hedefe goturmuyor; SECICI kolu zorunlu. Bu, EK bloklarina ve aday-kumesi modeline (D2) verilen onceligi belirler.
+
+## 4. GECE FAZLARI
+- [00:14:14] BITTI: A1b -- 141 dosya
 
 ## 4b. SAHA -- AUTO KATMANI (tier cokusu)
 Dagitilan AUTO esigi = **0.6**

@@ -153,11 +153,6 @@ def main():
         L.append(f"- **{ad}** ({dz}) secilen={sec} -> {ks}")
     L.append("")
 
-    L.append("## 4. GECE FAZLARI")
-    fz = gece_fazlari()
-    L.extend(f"- {s}" for s in fz) if fz else L.append("- log yok")
-    L.append("")
-
     L.append("## 3b. SECICI VERIMLILIGI -- 0.50 nereden gelebilir?")
     tv = havuz("_p6_oz_u25", "tam") or havuz("_p6_oz_tam3", "tam")
     ger = None
@@ -189,6 +184,11 @@ def main():
     else:
         L.append("- `tam` kumesinde tavan olcumu henuz yok "
                  "(`HT_ONLER=tam python sonda_havuz_tavani.py`)")
+    L.append("")
+
+    L.append("## 4. GECE FAZLARI")
+    fz = gece_fazlari()
+    L.extend(f"- {s}" for s in fz) if fz else L.append("- log yok")
     L.append("")
 
     L.append("## 4b. SAHA -- AUTO KATMANI (tier cokusu)")
