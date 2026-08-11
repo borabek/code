@@ -124,8 +124,8 @@ def puanla(d, s, esik, nms, kol):
         T = d["X"][k][m][:, AB + len(YB.OZ_AD):]
         n = _nms(P, sk[m], nms)
         return P[n], urun_genis.isaret_duzelt(D[n], T[n])
-    P, D, ai = p6_karar.sec_ayrintili(d["P"], d["idx"], d["YD"], s, esik,
-                                      nms_mm=nms)
+    P, D, ai, _sc = p6_karar.sec_ayrintili(d["P"], d["idx"], d["YD"], s, esik,
+                                           nms_mm=nms)
     if kol == "P6_KAHIN":
         return P, yon_kahini(d, ai)
     return P, D

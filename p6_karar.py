@@ -91,7 +91,7 @@ def sec_ayrintili(P, idx, YD, s, esik, nms_mm=NMS_MM):
     if not len(k):
         return np.zeros((0, 3)), np.zeros((0, 3)), np.zeros(0, int)
     sira = k[np.argsort(-s[k])]
-    ap, ad, ai, kapali = [], [], [], set()
+    ap, ad, ai, asc, kapali = [], [], [], [], set()
     for j in sira:
         i = int(idx[j])
         if i in kapali:
@@ -104,9 +104,11 @@ def sec_ayrintili(P, idx, YD, s, esik, nms_mm=NMS_MM):
         ap.append(p)
         ad.append(YD[j])
         ai.append(i)
+        asc.append(float(s[j]))        # GUVEN KAPISI icin: secilen secenegin skoru
         kapali.add(i)
     return (np.asarray(ap, float).reshape(-1, 3),
-            np.asarray(ad, float).reshape(-1, 3), np.asarray(ai, int))
+            np.asarray(ad, float).reshape(-1, 3), np.asarray(ai, int),
+            np.asarray(asc, float))
 
 
 def sec(P, idx, YD, s, esik, nms_mm=NMS_MM):
@@ -117,28 +119,9 @@ def sec(P, idx, YD, s, esik, nms_mm=NMS_MM):
     en fazla bir tahmin uretir.
 
     Doner: (P_sec, D_sec)
+
+    GOVDE YOK -- `sec_ayrintili`ye devreder. Onceden ayni acgozlu dongu IKI KEZ
+    yazilmisti; bu projede karar kodunun iki yerde durmasi tam iki kez sessiz
+    ayrisma uretti. Tek govde, iki imza.
     """
-    P = np.asarray(P, float).reshape(-1, 3)
-    idx = np.asarray(idx, int)
-    YD = np.asarray(YD, float).reshape(-1, 3)
-    s = np.asarray(s, float)
-    kural = ("mutlak", float(esik)) if np.isscalar(esik) else tuple(esik)
-    k = np.where(kabul_maskesi(s, kural))[0]
-    if not len(k):
-        return np.zeros((0, 3)), np.zeros((0, 3))
-    sira = k[np.argsort(-s[k])]
-    ap, ad, kapali = [], [], set()
-    for j in sira:
-        i = int(idx[j])
-        if i in kapali:
-            continue
-        p = P[i]
-        if ap and float(np.min(np.linalg.norm(
-                np.asarray(ap) - p, axis=1))) < nms_mm:
-            kapali.add(i)
-            continue
-        ap.append(p)
-        ad.append(YD[j])
-        kapali.add(i)
-    return (np.asarray(ap, float).reshape(-1, 3),
-            np.asarray(ad, float).reshape(-1, 3))
+    return sec_ayrintili(P, idx, YD, s, esik, nms_mm)[:2]

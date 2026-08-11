@@ -163,12 +163,15 @@ def cikti(V, F, probs, cps_seg, step_path, CE, CT):
             X2 = np.hstack([Xd[k], kb[k], s[k][:, None]])
             s2[k] = pk["kademe2"].predict_proba(X2.astype(np.float32))[:, 1]
         s = s2
-    P2, D2 = p6_karar.sec(P, idx, YD, s, tuple(pk["kural"]),
-                          nms_mm=float(pk["nms"]))
+    P2, D2, _ai, S2 = p6_karar.sec_ayrintili(P, idx, YD, s, tuple(pk["kural"]),
+                                             nms_mm=float(pk["nms"]))
     if ISARET and len(P2):
         T2 = urun_genis.tanimlayici(P2, D2, *_mesh_arg(V, F))
         D2 = urun_genis.isaret_duzelt(D2, T2)
-    return [{"point": P2[i], "direction": D2[i], "wire_score": 1.0}
+    # `wire_score` GERCEK skordur (eskiden sabit 1.0 idi). Guven kapili GLB
+    # bunun uzerine kurulur: kesinlik >=0.90 verecek esik kalibre edilir,
+    # ustundekiler ONAYLI, altindakiler ONERI olur.
+    return [{"point": P2[i], "direction": D2[i], "wire_score": float(S2[i])}
             for i in range(len(P2))]
 
 

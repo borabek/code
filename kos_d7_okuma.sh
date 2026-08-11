@@ -15,9 +15,12 @@ cd "$(dirname "$0")"
 N=${N:-8}
 rm -f results/d7_p6_*.json results/d7_taban_*.json
 
-echo "=== KOL 1/2: TABAN (URUN_P6=0) ==="
+# TABAN kolu HER ZAMAN poz kafasi ACIK kosar -- dagitilan urunun hali budur.
+# `DOG_POZ` yalniz P6 kolu icindir; tabana uygulamak onu kendi dagitilan
+# yapilandirmasindan zayiflatir ve kiyasi haksiz kilar.
+echo "=== KOL 1/2: TABAN (URUN_P6=0, poz kafasi ACIK) ==="
 for i in $(seq 0 $((N-1))); do
-  ( URUN_P6=0 URUN_GENIS=1 DOG_SHARD="$i/$N" \
+  ( URUN_P6=0 URUN_GENIS=1 DOG_POZ=1 DOG_SHARD="$i/$N" \
     DOG_CIKTI="results/d7_taban_$i.json" \
     python sonda_dagitim_dogrula.py > "results/_d7t_$i.log" 2>&1 ) &
 done

@@ -59,8 +59,13 @@ def recall(P, D, G, Gd):
 def main():
     import trimesh
     kay = d6_kayit.yukle()
-    fs = sorted(f for f in os.listdir(P6D)
-                if f.startswith("d6_") and f.endswith(".npz"))[:N]
+    # MARKA SUZGECI: kaldirac BOSLUGUN OLDUGU yerde sinanmali. Ilk 100 D6
+    # parcasinda banka zaten 0.9293 veriyor ve olculecek pay yok; NIT'te banka
+    # 0.5254 -- yeni bir yon kaynagi ancak orada anlam tasir.
+    _m = os.environ.get("FAN_MARKA")
+    fs = [f for f in sorted(os.listdir(P6D))
+          if f.startswith("d6_") and f.endswith(".npz")
+          and (not _m or (kay.get(f[3:-4]) or {}).get("mfg") == _m)][:N]
     FAN = fibonacci_kure(NFAN)
     n_gt = 0
     t_bank = t_fan = t_ikisi = 0
