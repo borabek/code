@@ -76,6 +76,9 @@ def main():
         P, idx, YD, X, kaynak = tab
         Xd = np.hstack([p6_karar.donustur(X, pk.get("zskor", "ab")),
                         p6_karar.kaynak_blok(kaynak[idx])])
+        if pk.get("kol") == "P6_GEO":      # urun yolundakiyle AYNI dilim
+            ab = int(pk.get("AB", 67))
+            Xd = np.hstack([Xd[:, 58:ab], Xd[:, ab:]])
         bek = pk["kademe1"].n_features_in_
         if Xd.shape[1] != bek:
             sys.exit(f"HATA: sutun sayisi {Xd.shape[1]}, model {bek} bekliyor.")
