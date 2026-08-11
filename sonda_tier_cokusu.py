@@ -41,16 +41,21 @@ def cift(y):
     if not kir:
         return None
     S, Y, gt = [], [], 0
+    gercek = True
     for v in kir.values():
         gt += v["rob"][0] + v["rob"][2]
         sk = v.get("skor") or []
         dg = v.get("dogru") or []
+        # `skor_gercek` yeni makbuzlarda var; eski makbuzlarda YOK ve orada
+        # dejenere dagilim kontrolu devreye girer.
+        if sk and not v.get("skor_gercek", True):
+            gercek = False
         if sk and len(sk) == len(dg):
             S += list(sk)
             Y += list(dg)
     if not S:
         return None
-    return np.asarray(S, float), np.asarray(Y, bool), gt, len(kir)
+    return np.asarray(S, float), np.asarray(Y, bool), gt, len(kir), gercek
 
 
 def tablo(ad, S, Y, gt):
@@ -81,8 +86,15 @@ def main():
         r = cift(y)
         if not r:
             continue
-        S, Y, gt, npar = r
+        S, Y, gt, npar, gercek = r
         ad = os.path.basename(y).replace(".json", "")
+        if not gercek:
+            print(f"\n### {ad}  ({npar} parca) -- OLCULMEMIS")
+            print("  makbuz `skor_gercek=false` diyor: zincir wire_score "
+                  "uretmemis.")
+            out["kumeler"][ad] = {"n_parca": npar, "n_isaret": int(len(S)),
+                                  "durum": "OLCULMEMIS_skor_gercek_false"}
+            continue
         # VARSAYILAN DOLGU TUZAGI: `sonda_dagitim_dogrula` skoru
         # `c.get("wire_score", 1.0)` ile okuyor. Zincir wire_score URETMIYORSA
         # her tahmine 1.0 yazilir ve tablo "her esikte %100 AUTO" gibi gorunur.

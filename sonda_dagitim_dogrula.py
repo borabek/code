@@ -72,7 +72,14 @@ def main():
         # TAHMIN BASINA SKOR: guven kapili GLB'nin kalibrasyonu bu makbuzdan
         # cikar. Boylece kesinlik-kapsama egrisi icin AYRI bir D7 okumasi
         # gerekmez -- tek okuma iki cevap verir.
+        # !! VARSAYILAN DOLGU TUZAGI (2026-08-12'de yakalandi): asagidaki
+        # `1.0` varsayilani, zincir wire_score URETMEDIGINDE her tahmine 1.0
+        # yazar. Sonuc makbuzda gercek skor gibi durur ve kesinlik-kapsama
+        # analizinde "her esikte %100 AUTO" diye okunur -- yani OLCUM BOSLUGU
+        # BULGU sanilir. (d7_taban.json'da 2001 skorun hepsi tam 1.0 boyle
+        # olusmustu.) Skorun GERCEK olup olmadigi artik ayrica yaziliyor.
         skor = [float(c.get("wire_score", 1.0)) for c in (cps or [])]
+        skor_gercek = bool(cps) and all("wire_score" in c for c in cps)
         if len(P) and POZ:
             P, D = urun_zinciri.tam_poz(V, F, np.mean(pbs, axis=0), P, D,
                                         step_path=S.get(pid))
@@ -91,6 +98,7 @@ def main():
             "tes": [int(x) for x in t_],
             # (skor, dogru_mu) ciftleri -> kesinlik-kapsama egrisi
             "skor": [round(s, 5) for s in skor[:len(P)]],
+            "skor_gercek": skor_gercek,
             "dogru": [int(j in eslesen) for j in range(len(P))]}
         if i % 100 == 0:
             print(f"  {i}/{len(secili)}", flush=True)
