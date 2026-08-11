@@ -156,12 +156,15 @@ def main():
         P = np.asarray(z["P"], float)[m]
         D = np.asarray(z["D"], float)[m]
         cyl = cy.get(str(pid))
-        idx, YD, C = YB.secenekler(P, D, cyl, V)
+        # SIRA ONEMLI: `mesh`/`diag` yelpaze icin `secenekler`e giriyor.
+        # Once cagirip sonra tanimlamak ilk parcada NameError, sonrakilerde
+        # BIR ONCEKI PARCANIN mesh'ini kullanmak demekti -- sessiz yanlis.
+        diag = float(np.linalg.norm(V.max(0) - V.min(0)))
+        mesh = trimesh.Trimesh(V, Fc, process=False)
+        idx, YD, C = YB.secenekler(P, D, cyl, V, mesh=mesh, diag=diag)
         if not len(idx):
             bos += 1
             continue
-        diag = float(np.linalg.norm(V.max(0) - V.min(0)))
-        mesh = trimesh.Trimesh(V, Fc, process=False)
         # D blogu: agiz tanimlayicilari SECENEK YONUYLE
         Dblok = urun_genis.tanimlayici(P[idx], YD, cyl, mesh, diag)
         X = np.hstack([A[idx], B[idx], C, Dblok]).astype(np.float32)

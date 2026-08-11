@@ -28,7 +28,18 @@ KAYNAKLAR (hepsi +/- ciftli -- olcum ISARETLI aci kullanir):
 TEZ: `v_o` turetmesi, 5 sinif ve remesh DEGISMEDI. Bu modul yalniz PUANLANACAK
 secenekleri cogaltir; tezin cevabi her zaman kaynak 0 ile havuzda.
 """
+import os
+
 import numpy as np
+
+# SERBEST-DERINLIK YELPAZESI (`YB_FAN` ile acilir).
+# OLCULDU: 64 yonlu sonda NIT'te +0.0000 verdi ve kolu "OLU" ilan etmistim.
+# Oysa 64 yonun kure uzerindeki komsuluk araligi ~25 derece, olcum toleransi
+# 10 derece -- sonda etkiyi FIZIKSEL OLARAK olcemezdi. 256 yonle ayni kol
+# NIT'te +0.0676 recall verdi (BANKA 0.5676 -> 0.6351).
+# Fizik: gercek giris yonu, agizdan DISARI en uzun bos yolu olan yondur.
+FAN_N = int(os.environ.get("YB_FAN", "0"))      # 0 = kapali, 256 onerilen
+FAN_K = int(os.environ.get("YB_FAN_K", "3"))    # aday basina kac yon onerisi
 
 KOMSU_R = 10.0          # komsu yonu toplama yaricapi (mm)
 DEDUPE_DER = 8.0        # bu aciyla ayni sayilan yonler tek temsilciye iner
@@ -99,8 +110,44 @@ def _silindir_olcu(cyl, p, y):
     return en
 
 
+def fibonacci_kure(n):
+    """n yonun kure uzerinde MUMKUN OLDUGUNCA ESIT dagilimi."""
+    i = np.arange(n, dtype=float)
+    phi = np.pi * (3.0 - np.sqrt(5.0))
+    y = 1.0 - 2.0 * (i + 0.5) / n
+    r = np.sqrt(np.maximum(1.0 - y * y, 0.0))
+    th = phi * i
+    return np.stack([np.cos(th) * r, y, np.sin(th) * r], axis=1)
+
+
+def yelpaze_yonleri(P, mesh, diag, n_yon=None, k=None):
+    """`n_yon`/`k` None ise MODUL GLOBALLERI okunur.
+
+    Varsayilan argumanlari `FAN_N`'e baglamak, `YB.FAN_N = 256` yazan bir
+    cagriyi SESSIZCE etkisiz birakiyordu (varsayilan tanim aninda baglanir).
+    """
+    n_yon = FAN_N if n_yon is None else n_yon
+    k = FAN_K if k is None else k
+    """Her aday icin EN DERIN `k` serbest yon. Doner: (n_aday, k, 3).
+
+    Isinlar TEK cagrida topluca atilir; `agiz_tanimlayici._ilk_mesafe` zaten
+    topakli oldugu icin bellek patlamaz.
+    """
+    if n_yon <= 0 or mesh is None or not len(P):
+        return np.zeros((len(P), 0, 3))
+    import agiz_tanimlayici as AT
+    F = fibonacci_kure(n_yon)
+    eps = max(1e-3, 1e-4 * diag)
+    nc = len(P)
+    O = np.repeat(P, n_yon, axis=0) + eps * np.tile(F, (nc, 1))
+    Dv = np.tile(F, (nc, 1))
+    der = AT._ilk_mesafe(mesh, O, Dv, diag).reshape(nc, n_yon)
+    top = np.argsort(-der, axis=1)[:, :k]
+    return F[top]
+
+
 def secenekler(P, D, cyl, V, gate_s=None, votes=None,
-               komsu_r=KOMSU_R, max_sec=MAX_SEC):
+               komsu_r=KOMSU_R, max_sec=MAX_SEC, mesh=None, diag=None):
     """Aday basina yon secenekleri.
 
     Doner: (idx, YD, OZ)
@@ -121,6 +168,9 @@ def secenekler(P, D, cyl, V, gate_s=None, votes=None,
     votes = np.zeros(n) if votes is None else np.asarray(votes, float)
     Ysil, Yana = parca_yonleri(cyl, V)
     cos_destek = np.cos(np.radians(DESTEK_DER))
+    # YELPAZE: aday basina en derin serbest yonler (kaynak 4)
+    Yfan = (yelpaze_yonleri(P, mesh, diag) if FAN_N > 0 and mesh is not None
+            else np.zeros((n, 0, 3)))
 
     # komsuluk: her aday icin 10mm icindeki adaylarin indeksleri
     d2 = np.linalg.norm(P[:, None, :] - P[None, :, :], axis=-1)
@@ -135,6 +185,11 @@ def secenekler(P, D, cyl, V, gate_s=None, votes=None,
             aday.append((y, 2))
         for y in Yana:
             aday.append((y, 3))
+        if Yfan.shape[1]:
+            for y in Yfan[i]:
+                aday.append((y, 3))     # ana eksenlerle AYNI kaynak kodu:
+                                        # C blogunun genisligi degismesin
+
         Y, KY = dedupe(np.asarray([a[0] for a in aday], float),
                        np.asarray([a[1] for a in aday], int))
         if len(Y) > max_sec:                 # kendi (0. sira) HER ZAMAN kalir
