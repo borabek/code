@@ -1,0 +1,316 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "5e84bd141b4e0e61",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "toplam": {
+  "TABAN": {
+   "robot": 0.2092951677439212,
+   "recall": 0.12724550898203593,
+   "kesinlik": 0.5892547660311959,
+   "TP": 340,
+   "FP": 237,
+   "FN": 2332
+  },
+  "P6": {
+   "robot": 0.2695156695156695,
+   "recall": 0.17702095808383234,
+   "kesinlik": 0.5644391408114559,
+   "TP": 473,
+   "FP": 365,
+   "FN": 2199
+  },
+  "P6_KAHIN": {
+   "robot": 0.27521367521367524,
+   "recall": 0.1807634730538922,
+   "kesinlik": 0.5763723150357996,
+   "TP": 483,
+   "FP": 355,
+   "FN": 2189
+  }
+ },
+ "marka": {
+  "UPUN": {
+   "TABAN": {
+    "robot": 0.55,
+    "tespit": 0.65,
+    "TP": 154,
+    "FP": 36,
+    "FN": 216,
+    "esik": 0.4,
+    "nms": 5.0
+   },
+   "P6": {
+    "robot": 0.6419400855920114,
+    "tespit": 0.6733238231098431,
+    "TP": 225,
+    "FP": 106,
+    "FN": 145,
+    "esik": 0.5,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.6619115549215406,
+    "tespit": 0.6733238231098431,
+    "TP": 232,
+    "FP": 99,
+    "FN": 138,
+    "esik": 0.5,
+    "nms": 5.0
+   }
+  },
+  "SUPU": {
+   "TABAN": {
+    "robot": 0.3490304709141274,
+    "tespit": 0.3988919667590028,
+    "TP": 126,
+    "FP": 49,
+    "FN": 421,
+    "esik": 0.15,
+    "nms": 5.0
+   },
+   "P6": {
+    "robot": 0.45409429280397023,
+    "tespit": 0.48883374689826303,
+    "TP": 183,
+    "FP": 76,
+    "FN": 364,
+    "esik": 0.5,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.4640198511166253,
+    "tespit": 0.48883374689826303,
+    "TP": 187,
+    "FP": 72,
+    "FN": 360,
+    "esik": 0.5,
+    "nms": 5.0
+   }
+  },
+  "NIT": {
+   "TABAN": {
+    "robot": 0.0,
+    "tespit": 0.012965964343598054,
+    "TP": 0,
+    "FP": 12,
+    "FN": 1222,
+    "esik": 0.1,
+    "nms": 5.0
+   },
+   "P6": {
+    "robot": 0.0,
+    "tespit": 0.0,
+    "TP": 0,
+    "FP": 0,
+    "FN": 1222,
+    "esik": 0.5,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.0,
+    "tespit": 0.0,
+    "TP": 0,
+    "FP": 0,
+    "FN": 1222,
+    "esik": 0.5,
+    "nms": 5.0
+   }
+  },
+  "MOR": {
+   "TABAN": {
+    "robot": 0.18271604938271604,
+    "tespit": 0.291358024691358,
+    "TP": 37,
+    "FP": 94,
+    "FN": 237,
+    "esik": 0.2,
+    "nms": 3.5
+   },
+   "P6": {
+    "robot": 0.18448637316561844,
+    "tespit": 0.26834381551362685,
+    "TP": 44,
+    "FP": 159,
+    "FN": 230,
+    "esik": 0.3,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.18029350104821804,
+    "tespit": 0.26834381551362685,
+    "TP": 43,
+    "FP": 160,
+    "FN": 231,
+    "esik": 0.3,
+    "nms": 5.0
+   }
+  },
+  "SE": {
+   "TABAN": {
+    "robot": 0.0,
+    "tespit": 0.0,
+    "TP": 0,
+    "FP": 1,
+    "FN": 82,
+    "esik": 0.15,
+    "nms": 5.0
+   },
+   "P6": {
+    "robot": 0.023809523809523808,
+    "tespit": 0.023809523809523808,
+    "TP": 1,
+    "FP": 1,
+    "FN": 81,
+    "esik": 0.4,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.023809523809523808,
+    "tespit": 0.023809523809523808,
+    "TP": 1,
+    "FP": 1,
+    "FN": 81,
+    "esik": 0.4,
+    "nms": 5.0
+   }
+  },
+  "UTL": {
+   "TABAN": {
+    "robot": 0.19548872180451127,
+    "tespit": 0.42105263157894735,
+    "TP": 13,
+    "FP": 36,
+    "FN": 71,
+    "esik": 0.1,
+    "nms": 5.0
+   },
+   "P6": {
+    "robot": 0.1981981981981982,
+    "tespit": 0.32432432432432434,
+    "TP": 11,
+    "FP": 16,
+    "FN": 73,
+    "esik": 0.3,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.1981981981981982,
+    "tespit": 0.32432432432432434,
+    "TP": 11,
+    "FP": 16,
+    "FN": 73,
+    "esik": 0.3,
+    "nms": 5.0
+   }
+  },
+  "S+S": {
+   "TABAN": {
+    "robot": 0.22857142857142856,
+    "tespit": 0.34285714285714286,
+    "TP": 4,
+    "FP": 5,
+    "FN": 22,
+    "esik": 0.4,
+    "nms": 5.0
+   },
+   "P6": {
+    "robot": 0.34285714285714286,
+    "tespit": 0.4,
+    "TP": 6,
+    "FP": 3,
+    "FN": 20,
+    "esik": 0.3,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.34285714285714286,
+    "tespit": 0.4,
+    "TP": 6,
+    "FP": 3,
+    "FN": 20,
+    "esik": 0.3,
+    "nms": 5.0
+   }
+  },
+  "ONV": {
+   "TABAN": {
+    "robot": 0.15584415584415584,
+    "tespit": 0.23376623376623376,
+    "TP": 6,
+    "FP": 4,
+    "FN": 61,
+    "esik": 0.4,
+    "nms": 5.0
+   },
+   "P6": {
+    "robot": 0.08108108108108109,
+    "tespit": 0.16216216216216217,
+    "TP": 3,
+    "FP": 4,
+    "FN": 64,
+    "esik": 0.4,
+    "nms": 5.0
+   },
+   "P6_KAHIN": {
+    "robot": 0.08108108108108109,
+    "tespit": 0.16216216216216217,
+    "TP": 3,
+    "FP": 4,
+    "FN": 64,
+    "esik": 0.4,
+    "nms": 5.0
+   }
+  }
+ },
+ "n_parca": 468,
+ "kivrim": [
+  "UPUN",
+  "SUPU",
+  "NIT",
+  "MOR",
+  "SE",
+  "UTL",
+  "S+S",
+  "ONV"
+ ],
+ "esikler": [
+  0.02,
+  0.05,
+  0.1,
+  0.15,
+  0.2,
+  0.3,
+  0.4,
+  0.5
+ ],
+ "nmsler": [
+  0.0,
+  1.5,
+  2.5,
+  3.5,
+  5.0
+ ],
+ "not": "D6-ICI LOMO on okumasi. Esik VE NMS her kol/kivrim icin EGITIM markalarinda secildi. Onbellek havuzu -- urunun canli havuzu DEGIL."
+}

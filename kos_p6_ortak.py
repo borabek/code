@@ -41,15 +41,15 @@ os.environ["WG_ZENGIN"] = "1"
 sys.path.insert(0, ".")
 import d6_kayit                    # noqa: E402
 import kanonik_d7 as K             # noqa: E402
+import p6_karar                    # noqa: E402
 import urun_genis                  # noqa: E402
 import wire_gate                   # noqa: E402
 import yon_bankasi as YB           # noqa: E402
 from sina_kume import esle_macar   # noqa: E402
 
 P6 = "results/_p6_oz"
-AB = 67                       # A(58) + B(9) -- z-skorlanan blok
+AB = p6_karar.AB              # A(58) + B(9) -- z-skorlanan blok
 ZSKOR = os.environ.get("P6_ZSKOR", "ab")
-NMS_MM = 5.0                  # dagitilan `kalabalik_maskesi` ile ayni olcek
 ESIKLER = (0.02, 0.05, 0.10, 0.15, 0.20, 0.30, 0.40, 0.50)
 _D6 = None
 
@@ -75,9 +75,16 @@ def yukle(on, sinir=0):
     pidler = [f[len(on) + 1:-4] for f in fs]
     kay = kayitlar(pidler)
     out = []
+    # SESSIZ KORPUS DARALMASI bu projede iki kez oldu (X genisligi 58-vs-22,
+    # birlestir globu). Atlanan parca sayisi HER ZAMAN basilir.
+    yok_kayit = yok_gt = 0
     for f, pid in zip(fs, pidler):
         r = kay.get(pid)
-        if r is None or not len(r.get("G", [])):
+        if r is None:
+            yok_kayit += 1
+            continue
+        if not len(r.get("G", [])):
+            yok_gt += 1
             continue
         z = np.load(f"{P6}/{f}")
         X = np.asarray(z["X"], float)
@@ -90,46 +97,21 @@ def yukle(on, sinir=0):
         out.append({"pid": pid, "mfg": r["mfg"], "X": X, "idx": idx, "YD": YD,
                     "P": P, "D": np.asarray(z["D"], float), "y": y,
                     "G": G, "Gd": Gd, "diag": float(r["diag"])})
+    print(f"  {on}: {len(fs)} dosya -> {len(out)} parca "
+          f"(kayit yok {yok_kayit}, GT yok {yok_gt})", flush=True)
     return out
 
 
 def donustur(X):
-    if ZSKOR == "hepsi":
-        return wire_gate.parca_ici(X, "zskor")
-    return np.hstack([wire_gate.parca_ici(X[:, :AB], "zskor"), X[:, AB:]])
-
-
-def sec(d, s, esik, nms_mm=NMS_MM):
-    """Acgozlu secim: skor sirasi + konum NMS. Bir konuma EN IYI yon.
-
-    Bir konum kabul edilince o konumun diger yon secenekleri de elenir; bu,
-    "bir agza tek tahmin" kisitinin konum tarafidir.
-    """
-    k = np.where(s >= esik)[0]
-    if not len(k):
-        return np.zeros((0, 3)), np.zeros((0, 3))
-    sira = k[np.argsort(-s[k])]
-    alinan_p, alinan_d, kapali = [], [], set()
-    for j in sira:
-        i = int(d["idx"][j])
-        if i in kapali:
-            continue
-        p = d["P"][i]
-        if alinan_p and np.min(np.linalg.norm(
-                np.asarray(alinan_p) - p, axis=1)) < nms_mm:
-            kapali.add(i)
-            continue
-        alinan_p.append(p)
-        alinan_d.append(d["YD"][j])
-        kapali.add(i)
-    return np.asarray(alinan_p, float), np.asarray(alinan_d, float)
+    """URUNLE AYNI donusum -- `p6_karar` tek kaynaktir, burada kopyalanmaz."""
+    return p6_karar.donustur(X, ZSKOR)
 
 
 def olc(veri, skorlar, esik):
     rob = collections.defaultdict(lambda: [0, 0, 0])
     tes = []
     for d, s in zip(veri, skorlar):
-        P, D = sec(d, s, esik)
+        P, D = p6_karar.sec(d["P"], d["idx"], d["YD"], s, esik)
         tp, fp, fn = esle_macar(P, D, d["G"], d["Gd"], d["diag"], K.YANAL,
                                 K.ACI, False, isaretli=True)[:3]
         a = rob[d["mfg"]]

@@ -29,6 +29,17 @@ def urun_cikti(V, F, pbs, step_path, cfg=None, cp_count=None):
     # Kol calisamazsa (model/STEP/B-rep yok) None doner ve ESKI yol surer --
     # sessiz bozuk cikti YOK. Kapatmak: cp_config `robot_genis_havuz=false`
     # ya da `URUN_GENIS=0`.
+    # P6 ORTAK YOL (2026-08-11). Her adaya `yon_bankasi` secenekleri takilir ve
+    # (konum, yon) cifti TEK skorla siralanir -- yon artik SECILIR. Genis yoldan
+    # ONCE denenir; kol calisamazsa (model yok / STEP yok) None doner ve
+    # ASAGIDAKI genis yol aynen surer. Kapatmak: `robot_p6_ortak=false` ya da
+    # `URUN_P6=0`.
+    import urun_p6
+    if urun_p6.ACIK:                      # cevre degiskeni VE config, tek yerde
+        _p = urun_p6.cikti(V, F, avg, cps, step_path,
+                           robot_cp.CE, robot_cp.CT)
+        if _p is not None:
+            return _p
     if _cfg.get("robot_genis_havuz", False):
         import urun_genis
         if urun_genis.ACIK:

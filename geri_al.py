@@ -134,10 +134,16 @@ def main():
         for l in silinecek.splitlines()[:15]:
             print(f"      {l}")
     if not kuru:
+        # `master` HER ZAMAN kontrol noktasindadir; kampanya isi `kampanya_*`
+        # dalinda durur. Geri donus = master'a gecmek. Boylece kampanya
+        # commit'leri KAYBOLMAZ, yalniz calisma agacindan cikar.
+        subprocess.run(["git", "checkout", "-qf", "master"], cwd=KOK,
+                       check=False)
         subprocess.run(["git", "reset", "-q", "--hard", man["git"]], cwd=KOK,
                        check=True)
         subprocess.run(["git", "clean", "-fdq"], cwd=KOK, check=False)
-        print("      -> kod geri alindi (veri dizinleri .gitignore'da, ELLENMEDI)")
+        print("      -> master'a donuldu (veri dizinleri .gitignore'da, ELLENMEDI;"
+              " kampanya dali duruyor)")
 
     # --- 2) MODEL -------------------------------------------------------
     print(f"\n-- 2) MODEL --  {len(man['kopya'])} dosya")

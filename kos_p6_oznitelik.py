@@ -38,7 +38,20 @@ sys.path.insert(0, ".")
 
 OZ = "results/_tam_oz"
 TAN = "results/_tan_hizali"
-CIK = "results/_p6_oz"
+CIK = os.environ.get("P6_CIK", "results/_p6_oz")
+
+# HAVUZ KAYNAKLARI. Onbellek uc kaynagi da tasiyor:
+#   0 segmentasyon (tezin `v_o`'su)   ~15 aday/parca
+#   1 B-rep agzi                      ~85
+#   2 MESH TEPESI                    ~354   <- ADAY_YOK kovasinin cevabi burada
+# Mesh tepeleri uctan uca UC kez ZARAR vermisti, ama o olcumlerde secici tek
+# yonlu ve zayifti. Yon bankasi + ortak siralayici ile yeniden acilir; kararı
+# LOMO verir. `P6_KAYNAK=012` ile acilir.
+# `P6_MESH_MAX` mesh adaylarini SEGMENTASYON OLASILIGINA gore ust sinira indirir
+# (0 = sinirsiz); boylece secenek sayisi patlamaz.
+_ks = os.environ.get("P6_KAYNAK", "01")
+KAYNAKLAR = tuple(int(c) for c in _ks)
+MESH_MAX = int(os.environ.get("P6_MESH_MAX", "0"))
 
 # on -> (silindir onbellegi, aciklik onbellegi, mesh onbellegi)
 KUME = {
@@ -49,7 +62,9 @@ KUME = {
     "d7": ("results/_d7_silindirler.pkl", "results/_d7_acikliklar.pkl",
            "results/_p1_olasilik_d7"),
 }
-KAYNAKLAR = (0, 1)          # havuz kaynagi: 0 = tez `v_o`, 1 = B-rep agzi
+# (KAYNAKLAR yukarida cevre degiskeninden kuruluyor. Burada IKINCI bir tanim
+#  vardi ve onu SESSIZCE eziyordu: `P6_KAYNAK=012` verilmesine ragmen mesh
+#  adaylari havuza girmiyordu ve hicbir hata cikmiyordu.)
 
 
 def main():
@@ -89,10 +104,6 @@ def main():
             print(f"  ! {pid}: HIZALAMA BOZUK, atlandi", flush=True)
             bos += 1
             continue
-        A = np.asarray(z["X"], float)[m]
-        B = T[m]
-        P = np.asarray(z["P"], float)[m]
-        D = np.asarray(z["D"], float)[m]
         mf = f"{ob}/{pid}.npz"
         if not os.path.exists(mf):
             bos += 1
@@ -100,6 +111,30 @@ def main():
         zz = np.load(mf)
         V = np.ascontiguousarray(zz["V"], np.float64)
         Fc = np.ascontiguousarray(zz["F"], np.int64)
+        if MESH_MAX and 2 in KAYNAKLAR and int((kay == 2).sum()) > MESH_MAX:
+            # Mesh adaylarini SEGMENTASYON OLASILIGINA gore ust sinira indir.
+            # Mesh adaylari zaten birer TEPE oldugu icin olasilik en yakin
+            # tepeden BIREBIR okunur; yaklasiklik yok. Kaynak 0/1 ASLA elenmez --
+            # tezin cevabi ve B-rep onerileri havuzda kalir.
+            import connector3d
+            pb = np.mean([np.asarray(q, float) for q in zz["pbs"]], axis=0)
+            ppos = (pb[:, int(connector3d.CABLE_ENTRY)] +
+                    pb[:, int(connector3d.CONTACT)])
+            Pm = np.asarray(z["P"], float)
+            tree_i = np.argmin(np.linalg.norm(
+                Pm[kay == 2][:, None, :] - V[None, :, :], axis=-1), axis=1) \
+                if int((kay == 2).sum()) * len(V) < 4e7 else None
+            if tree_i is not None:
+                s2 = ppos[tree_i]
+                tut = np.zeros(int((kay == 2).sum()), bool)
+                tut[np.argsort(-s2)[:MESH_MAX]] = True
+                m2 = m.copy()
+                m2[kay == 2] = tut & m[kay == 2]
+                m = m2
+        A = np.asarray(z["X"], float)[m]
+        B = T[m]
+        P = np.asarray(z["P"], float)[m]
+        D = np.asarray(z["D"], float)[m]
         cyl = cy.get(str(pid))
         idx, YD, C = YB.secenekler(P, D, cyl, V)
         if not len(idx):
@@ -110,9 +145,12 @@ def main():
         # D blogu: agiz tanimlayicilari SECENEK YONUYLE
         Dblok = urun_genis.tanimlayici(P[idx], YD, cyl, mesh, diag)
         X = np.hstack([A[idx], B[idx], C, Dblok]).astype(np.float32)
+        # `kaynak` DE YAZILIR: boylece TEK cikarimdan hem (0,1) hem (0,1,2)
+        # kolu egitilebilir ve iki kolu ayri ayri cikarmak gerekmez.
         np.savez_compressed(hedef, X=X, idx=idx.astype(np.int32),
                             YD=YD.astype(np.float32), P=P.astype(np.float32),
-                            D=D.astype(np.float32))
+                            D=D.astype(np.float32),
+                            kaynak=kay[m].astype(np.int8))
         yazilan += 1
         if i % 25 == 0:
             hz = (time.time() - t0) / max(yazilan, 1)

@@ -24,24 +24,38 @@
   },
   "python": "3.12.10"
  },
- "sonuc": {
-  "n_gt": 2672,
-  "n_parca": 468,
-  "aday_basina_secenek": 8.893551499722843,
-  "parca_basina_secenek": 925.6324786324786,
-  "parca_basina_aday": 104.07905982905983,
-  "kol": {
-   "Y0": {
-    "recall": 0.29004491017964074,
-    "f1_tavani": 0.44966637655932695,
-    "tutan": 775
-   },
-   "BANK": {
-    "recall": 0.5254491017964071,
-    "f1_tavani": 0.6889106967615308,
-    "tutan": 1404
-   }
+ "kume": "d6",
+ "rapor": [
+  {
+   "pid": "016029",
+   "urun_aday": 38,
+   "onbellek_aday": 35,
+   "urun_secenek": 228,
+   "onbellek_secenek": 210
+  },
+  {
+   "pid": "016030",
+   "urun_aday": 38,
+   "onbellek_aday": 37,
+   "urun_secenek": 254,
+   "onbellek_secenek": 230
+  },
+  {
+   "pid": "016031",
+   "urun_aday": 38,
+   "onbellek_aday": 33,
+   "urun_secenek": 318,
+   "onbellek_secenek": 264
+  },
+  {
+   "pid": "204921",
+   "urun_aday": 72,
+   "onbellek_aday": 70,
+   "urun_secenek": 450,
+   "onbellek_secenek": 435
   }
- },
- "not": "Yon bankasi TAVANI, dagitilan havuz uzerinde. MUKEMMEL secici. D6 -- D7'ye BAKILMADI."
+ ],
+ "birebir": 0,
+ "bakilan": 4,
+ "not": "Egitim onbellegi ile urun yolunun oznitelik paritesi."
 }
