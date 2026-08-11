@@ -467,6 +467,29 @@ sorusu ONCE sorulmalidir.
 
 ---
 
+## 5h. D7 SONRASI CALISMA -- ne denendi, ne cikti
+
+| is | sonuc | karar |
+|---|---|---|
+| Ogrenilmis rejim yonlendirici (13 oznitelik) | kat-disi **-0.0624** | REDDEDILDI, tek esik kaliyor |
+| Rejim esigi kararlilik egrisi | 50-110 bandi tepeden 0.01 icinde | esik 90 -> **60** (tepe) |
+| CWT cephe teshisi | her iki kol da cokuyor; havuz p>=0.5 esiginin ALTINDA | mesh esigi kolu acildi |
+| Mesh esigi taramasi | CWT konum recall 0.5532 -> **0.7914** (p>=0.05) | ilkesel gerekce yazildi, korpus yeniden cikarimi bekliyor |
+| Guven kalibrasyon modeli | 0.80'de kapsama %4 -> **%9**; 0.90'da %0.35 | dagitildi; 0.90 sozu VERILEMEZ |
+| Eksen boyu ornekleme (kapali kol yoklamasi) | NIT'te **+0.0034**, maliyet 1.75x | hukum DOGRUYMUS, kapali kaliyor |
+| Yon yelpazesi (256 yon) | NIT'te **+0.0676** recall | hatta baglandi (`YB_FAN`), uctan uca olcum bekliyor |
+| Sira damgalama (kademe2) | kosuyor | — |
+
+**Duzeltilen uc sessiz hata:**
+1. `sira` blogu her KAT x KOL icin yeniden hesaplaniyordu -> bir kosu 70
+   dakikada ilerlemedi (70 dk -> 13 sn).
+2. `yelpaze_yonleri` varsayilan argumani modul sabitine bagliydi; `FAN_N`
+   degistirmek SESSIZCE etkisizdi.
+3. `kos_p6_oznitelik`de `mesh`/`diag` kullanildiktan SONRA tanimlaniyordu --
+   ilk parcada NameError, sonrakilerde BIR ONCEKI PARCANIN mesh'i.
+
+---
+
 ## 6. Durustluk notlari -- neyin temiz OLMADIGI
 
 1. **D6 temiz okuma degildir.** Teshis, kol secimi ve seyreltme kurali orada
