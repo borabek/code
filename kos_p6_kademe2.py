@@ -65,6 +65,7 @@ NMSLER = (2.5, 3.5, 5.0)
 # dakikalarca bekletiyor. Ornekleme SECIMI degistirmez (kurallar arasi sira
 # birkac yuz parcada zaten kararli), yalniz maliyeti dusurur.
 ARAMA_N = int(os.environ.get("P6_ARAMA_N", "600"))
+OLCUT = os.environ.get("P6_OLCUT", "makro")     # kural secim olcutu
 TOHUM_KURAL = ("mutlak", 0.60)     # tohum ESIGI ayrica taranmaz: yuksek tutulur
 TOHUM_NMS = 5.0
 # IKINCI KADEME = KISA LISTE UZERINDE FP REDDEDICI.
@@ -147,17 +148,23 @@ def puanla(d, s, kural, nms, kol):
 def olc(veri, skor, kural, nms, kol):
     tp = fp = fn = 0
     tes = []
+    per = collections.defaultdict(lambda: [0, 0, 0])
     for d, s in zip(veri, skor):
         P, D = puanla(d, s, kural, nms, kol)
         a, b, c = esle_macar(P, D, d["G"], d["Gd"], d["diag"], K.YANAL, K.ACI,
                              False, isaretli=True)[:3]
         tp += a; fp += b; fn += c
+        q = per[d["mfg"]]
+        q[0] += a; q[1] += b; q[2] += c
         tes.append((len(d["G"]),) + esle_macar(
             P, D, d["G"], d["Gd"], d["diag"], max(3.0, 0.06 * d["diag"]),
             180.0, True)[:3])
+    pm = {m: 2 * q[0] / max(2 * q[0] + q[1] + q[2], 1) for m, q in per.items()}
     return {"robot": 2 * tp / max(2 * tp + fp + fn, 1), "tespit": K.mikro(tes),
             "TP": int(tp), "FP": int(fp), "FN": int(fn),
-            "recall": tp / max(tp + fn, 1), "kesinlik": tp / max(tp + fp, 1)}
+            "recall": tp / max(tp + fn, 1), "kesinlik": tp / max(tp + fp, 1),
+            "makro": float(np.mean(list(pm.values()))) if pm else 0.0,
+            "en_kotu": float(min(pm.values())) if pm else 0.0, "marka": pm}
 
 
 def oz(d, kol, kafes_blok=None, s1=None):
@@ -325,15 +332,30 @@ def main():
                   if ARAMA_N and len(TR) > ARAMA_N else np.arange(len(TR)))
             AR = [TR[i] for i in ar]
             AS = [s_tr[i] for i in ar]
-            en = max(((r, n) for r in KURALLAR for n in NMSLER),
-                     key=lambda x: olc(AR, AS, x[0], x[1], kol)["robot"])
+            # KURAL SECIM OLCUTU: egitim markalarinin MAKRO ortalamasi.
+            # NEDEN MIKRO DEGIL: mikro, GT'si cok olan markanin kuralini secer.
+            # D6'da NIT GT'nin %46'si ve NIT'te secilen esik (0.97) HER SEYI
+            # eliyor -> o markada F1 0.0016. Havuzda NIT'in cevabinin YARISI
+            # (yonlu recall 0.5254) VAR; kaybeden kural, model degil. Makro
+            # olcut, tek bir markada COKMEYEN kurali tercih eder.
+            def _puan(x):
+                r_ = olc(AR, AS, x[0], x[1], kol)
+                return r_["makro"] if OLCUT == "makro" else r_["robot"]
+            en = max(((r, n) for r in KURALLAR for n in NMSLER), key=_puan)
             r = olc(TE, s_te, en[0], en[1], kol)
+            # KURAL KAHINI (TESHIS, dagitilamaz): disarida birakilan markada EN
+            # IYI kural ne verirdi? Fark buyukse kayip KURAL SECIMINDE, kucukse
+            # MODELDE demektir.
+            kah = max((olc(TE, s_te, x, n, kol)["robot"]
+                       for x in KURALLAR for n in NMSLER))
             for k in ("TP", "FP", "FN"):
                 top[kol][k] += r[k]
-            ayrinti[b][kol] = dict(r, kural=list(en[0]), nms=en[1])
+            ayrinti[b][kol] = dict(r, kural=list(en[0]), nms=en[1],
+                                   kural_kahini=kah)
         a = ayrinti[b]
         print(f"  {b:<6} n={len(TE):<4} TABAN {a['TABAN']['robot']:.4f} | "
               f"P6 {a['P6']['robot']:.4f} | P6+KAFES {a['P6_KAFES']['robot']:.4f}"
+              f"   [kural kahini P6 {a['P6'].get('kural_kahini', 0):.4f}]"
               f"   ({time.time() - t0:.0f} s)", flush=True)
 
     print(f"\n{'kol':<12} {'robot':>8} {'recall':>8} {'kesinlik':>9} "
