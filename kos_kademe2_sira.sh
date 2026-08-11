@@ -21,6 +21,16 @@ export P6_ARAMA_N=250
 export P6_NEG_KAT=6
 export P6_ITER=200
 
+# DAGITILAN PAKETI KORU. `kos_p6_kademe2.py` cikti yolunu sabit yaziyor ve
+# `rejim` alanini URETMIYOR; korumasiz kosarsak D7'de olculen paketin rejim
+# kapisi SESSIZCE kaybolurdu.
+KORU=results/_paket_koruma_$(date +%s).pkl
+cp results/p6_kademe2_model.pkl "$KORU"
+echo "dagitilan paket korundu -> $KORU"
+geri() { cp -f "$KORU" results/p6_kademe2_model.pkl
+         echo "dagitilan paket GERI YUKLENDI"; }
+trap geri EXIT
+
 for s in 1 0; do
   echo "=== P6_SIRA=$s ==="
   P6_SIRA=$s python kos_p6_kademe2.py 2>&1 | tail -12
