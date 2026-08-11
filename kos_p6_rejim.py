@@ -56,15 +56,29 @@ from sina_kume import esle_macar   # noqa: E402
 AB = p6_karar.AB
 C0 = AB
 PAKET = os.environ.get("P6_MODEL", "results/p6_kademe2_model.pkl")
-ISTATISTIKLER = ("n01", "mesh_oran", "n_aday", "n_secenek")
+# YONLENDIRME ISTATISTIKLERI -- hepsi cikarim aninda, ETIKETSIZ bilinir.
+# Ilk dordu havuz buyuklugu (zayif vekil). Son ucu TABANIN KENDI GUVENI:
+# desen "P6, tabanin ZAYIF oldugu yerde kazanir" oldugu icin en dogrudan
+# yonlendirme sinyali tabanin skorlaridir -- parca uzerinde yuksek guvenli
+# tespit uretiyorsa ona dokunma, uretmiyorsa P6'ya gec.
+ISTATISTIKLER = ("n01", "mesh_oran", "n_aday", "n_secenek",
+                 "taban_maks_ters", "taban_ort3_ters", "taban_sayi_ters")
 
 
-def istatistik(d):
+def istatistik(d, s_tb):
     k = d["kaynak"]
     n01 = int((k != 2).sum())
     nm = int((k == 2).sum())
+    s = np.sort(np.asarray(s_tb, float))[::-1] if len(s_tb) else np.zeros(1)
+    top3 = float(s[:3].mean())
+    # "_ters": kural HER ZAMAN `deger >= esik -> P6` seklinde; tabanin guveni
+    # DUSUKKEN P6 istedigimiz icin isareti ters ceviriyoruz.
     return {"n01": float(n01), "mesh_oran": nm / max(n01, 1),
-            "n_aday": float(len(d["P"])), "n_secenek": float(len(d["idx"]))}
+            "n_aday": float(len(d["P"])), "n_secenek": float(len(d["idx"])),
+            "taban_maks_ters": -float(s[0]),
+            "taban_ort3_ters": -top3,
+            "taban_sayi_ters": -float((np.asarray(s_tb, float) >=
+                                       urun_genis.ESIK).sum())}
 
 
 def taban_cikti(d, model):
@@ -75,21 +89,22 @@ def taban_cikti(d, model):
     """
     k = np.where(d["X"][:, C0] == 1.0)[0]
     k = k[d["kaynak"][d["idx"][k]] != 2]
+    bos = (np.zeros((0, 3)), np.zeros((0, 3)))
     if not len(k):
-        return np.zeros((0, 3)), np.zeros((0, 3))
+        return bos, np.zeros(0)
     ci = d["idx"][k]
     X = d["X"][k][:, :AB]
     s = np.asarray(model.predict_proba(
         wire_gate.parca_ici(X, "zskor"))[:, 1], float)
     m = s >= urun_genis.ESIK
     if not m.any():
-        return np.zeros((0, 3)), np.zeros((0, 3))
+        return bos, s
     P, D = d["P"][ci[m]], d["D"][ci[m]]
     T = d["X"][k][m][:, AB + len(YB.OZ_AD):]
     if len(P) > 1:
         nm = wire_gate.kalabalik_maskesi(P, s[m])
         P, D, T = P[nm], D[nm], T[nm]
-    return P, urun_genis.isaret_duzelt(D, T)
+    return (P, urun_genis.isaret_duzelt(D, T)), s
 
 
 def p6_cikti(d, pk):
@@ -148,9 +163,9 @@ def main():
     print(f"{len(veri)} parca yuklendi ({time.time() - t0:.0f} s)", flush=True)
 
     for i, d in enumerate(veri, 1):
-        d["_tb"] = taban_cikti(d, tb_model)
+        d["_tb"], s_tb = taban_cikti(d, tb_model)
         d["_p6"] = p6_cikti(d, pk)
-        d["_ist"] = istatistik(d)
+        d["_ist"] = istatistik(d, s_tb)
         if i % 400 == 0:
             print(f"  cikti {i}/{len(veri)} ({time.time() - t0:.0f} s)",
                   flush=True)
