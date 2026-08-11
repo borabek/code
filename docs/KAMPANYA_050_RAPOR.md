@@ -263,7 +263,44 @@ kararli oldugunu gosterir.
 
 ### 5c. D7 SINAV SONUCU
 
-*(okuma yapilinca doldurulacak)*
+**TABAN kolu (dagitilan urun, poz kafasi ACIK) -- payli kosuyla yeniden uretildi:**
+
+| | deger |
+|---|---|
+| robot MIKRO | **0.2980** %95 GA [0.2670, 0.3293] |
+| tespit MIKRO | 0.4760 %95 GA [0.4476, 0.5046] |
+| TP / FP / FN | 758 / 1243 / 2329 (recall 0.2455, kesinlik 0.3788) |
+| makro / en kotu | 0.2934 / 0.0000 |
+| **temiz alt kume (703 parca)** | **0.2558** -- manset farki **-0.0422** |
+
+Iki not:
+1. Sekiz paya bolunup birlestirilen olcum, tek islemde kosulan bilinen degeri
+   BIREBIR verdi (0.2980 / 0.4760). Birlestirme kayipsiz.
+2. **Manset, egitim parcalariyla kaba geometri benzerliginden 0.042 kadar
+   besleniyor.** Temiz alt kume daha dusuk; bu fark her iki kol icin de
+   raporlanir.
+
+Marka kirilimi (taban):
+
+| marka | n | GT payi | robot F1 |
+|---|---|---|---|
+| CWT | 226 | %37.1 | **0.0370** |
+| WIE | 169 | %17.0 | 0.5712 |
+| A-B | 124 | %12.3 | 0.4815 |
+| CCD | 47 | %4.0 | 0.5496 |
+| ELMEX | 27 | %1.9 | 0.4885 |
+| DIN | 57 | %5.0 | 0.4667 |
+| DEG | 19 | %1.3 | 0.4348 |
+| EFX | 34 | %5.3 | 0.1688 |
+| KLM | 65 | %5.4 | 0.1441 |
+| CEM | 4 | %3.6 | 0.1313 |
+| WEG | 58 | %5.3 | 0.0471 |
+| C3 | 5 | %1.8 | 0.0000 |
+
+D7'nin mikro sayisini CWT tasiyor (GT'nin %37'si, F1 0.0370). Rejim kapisi
+"taban zayifsa P6" dedigine gore asil fark orada gorulecek.
+
+**P6 kolu:** *(okuma devam ediyor)*
 
 ### 5.1 Okuma plani (onceden ilan)
 
