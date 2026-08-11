@@ -178,6 +178,22 @@ olculen mikro kazanc D7 icin KOTUMSER bir tahmindir.
 
 *(D7 okumasi sonrasi doldurulacak)*
 
+### 5.1 Okuma plani (onceden ilan)
+
+D7 butcesi 3 okuma; bu birincisi. Ayni kosuda iki kol olculur (taban URUN_P6=0,
+P6 URUN_P6=1), ikisi de urunun TEK kanonik zincirinden gecer, 8 pay paralel.
+Manset = MIKRO robot F1 + %95 parca-bootstrap araligi + marka tablosu + temiz
+alt kume (703) duyarliligi + P6 geri-dusme sayaci.
+
+KARAR KURALLARI (okumadan ONCE yazildi):
+* P6 >= 0.50 ve temiz alt kume farki kucukse -> hedefe ulasildi; dagitim karari
+  ayri konusulur.
+* 0.50'nin altinda ama taban (0.2980) uzerinde anlamli artis varsa -> kazanc
+  raporlanir, kalan fark hata bankasiyla aciklanir; ikinci okuma ancak SOMUT
+  bir duzeltmeden sonra yapilir.
+* Taban altinda ya da geri-dusme sayaci yuksekse -> sayi RAPORLANIR, sebep
+  bulunur; `geri_al.py` ile donus her an mumkun.
+
 ---
 
 ## 6. Durustluk notlari -- neyin temiz OLMADIGI
