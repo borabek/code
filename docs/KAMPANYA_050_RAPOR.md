@@ -38,8 +38,19 @@ Geri donmek yapilan isi de SILMEZ.
 | kume | marka | parca | rol |
 |---|---|---|---|
 | `tam` | TOGI, PXC, WEI, SIE, TE, TKM, WAGO, MDI, ABB | 2583 | egitim + kural secimi |
-| `d6` | SUPU, UPUN, MOR, NIT, UTL, S+S, SE, ONV | 468 | gelistirme (TEMIZ DEGIL) |
+| `d6` | SUPU, UPUN, MOR, NIT, UTL, S+S, SE, ONV | 468 | gelistirme, sonra EGITIME katildi |
 | `d7` | CCD, KLM, A-B, EFX, WIE, CWT, DIN, WEG, CEM, DEG, ELMEX, C3 | 835 | **SINAV** |
+
+Nihai model **`tam` + `d6` = 3051 parca / 17 marka** ile egitilir. D6 sinav
+degildir; teshis ve kol secimi icin zaten yogun kullanildi, dolayisiyla ondan
+sonra "temiz D6 sayisi" diye bir sey YOKTUR ve raporlanmaz. Egitime katilmasi
+D7 icin mesrudur ve marka cesitliligini 9 -> 17 yapar. **Kural secimi yine
+yalniz `tam` markalarinin katlarinda** (TOGI/PXC/WEI/SIE) yapilir.
+
+Referans olarak D6'da dagitilan urunun sayisi (egitime katilmadan ONCE, urunun
+canli zincirinden): **robot 0.2815 / tespit 0.4215**, 468 parca, %95 GA
+[0.2399, 0.3285]. D7'deki dagitilan sayi 0.2980 -- yani iki kume dagitilan urun
+icin benzer zorlukta.
 
 Denetim (`results/bolme_denetimi.json`):
 

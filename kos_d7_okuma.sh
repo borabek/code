@@ -12,7 +12,7 @@
 # ONCE `python sonda_p6_hazir.py` GECMELIDIR.
 set -u
 cd "$(dirname "$0")"
-N=${N:-6}
+N=${N:-8}
 rm -f results/d7_p6_*.json results/d7_taban_*.json
 
 echo "=== KOL 1/2: TABAN (URUN_P6=0) ==="
