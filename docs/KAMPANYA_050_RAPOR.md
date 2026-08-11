@@ -300,7 +300,77 @@ Marka kirilimi (taban):
 D7'nin mikro sayisini CWT tasiyor (GT'nin %37'si, F1 0.0370). Rejim kapisi
 "taban zayifsa P6" dedigine gore asil fark orada gorulecek.
 
-**P6 kolu:** *(okuma devam ediyor)*
+**P6 kolu (yon bankasi + mesh havuzu + rejim kapisi, poz kafasi KAPALI):**
+
+| | TABAN | **P6** | fark |
+|---|---|---|---|
+| **robot MIKRO** | 0.2980 | **0.3115** | **+0.0135** |
+| %95 GA | [0.2670, 0.3293] | [0.2854, 0.3375] | ortusuyor |
+| tespit | 0.4760 | 0.4619 | -0.0141 |
+| makro | 0.2934 | **0.3265** | **+0.0331** |
+| **en kotu marka** | 0.0000 | **0.0466** | **+0.0466** |
+| TP / FP / FN | 758/1243/2329 | 872/1640/2215 | — |
+| recall / kesinlik | 0.2455 / 0.3788 | 0.2825 / 0.3471 | — |
+| temiz-703 | 0.2558 | 0.2766 | +0.0208 |
+
+P6 kolu 835 parcanin **385'inde (%46.1)** calisti; sessiz geri dusme YOK
+(`tablo_yok` 0, `model_yok` 0). Rejim kapisi 450 parcada tabana yonlendirdi --
+kalibrasyonun ongordugu ~yari oranla uyumlu, yani esik urune DOGRU tasindi.
+
+Marka kirilimi (8/12 markada ARTI):
+
+| marka | taban | P6 | fark |
+|---|---|---|---|
+| C3 | 0.0000 | 0.1373 | **+0.1373** |
+| CEM | 0.1313 | 0.3038 | **+0.1725** |
+| EFX | 0.1688 | 0.2988 | **+0.1300** |
+| DIN | 0.4667 | 0.5275 | +0.0608 |
+| ELMEX | 0.4885 | 0.5191 | +0.0306 |
+| DEG | 0.4348 | 0.4507 | +0.0159 |
+| CWT | 0.0370 | 0.0466 | +0.0096 |
+| WEG | 0.0471 | 0.0486 | +0.0015 |
+| KLM | 0.1441 | 0.1191 | -0.0250 |
+| A-B | 0.4815 | 0.4530 | -0.0285 |
+| CCD | 0.5496 | 0.5220 | -0.0276 |
+| WIE | 0.5712 | 0.4910 | **-0.0802** |
+
+### 5e. KARAR (onceden ilan edilen kurala gore)
+
+**HEDEF TUTMADI.** Ilan edilen kural "P6 >= 0.50 -> tuttu; 0.35-0.50 -> tutmadi
+ama dagitilir; < 0.35 -> kazanc tasinmadi, sebep analizi sart" diyordu.
+Sonuc **0.3115**, yani en alt bantta.
+
+Ne oldugu durustce:
+* Kazanc GERCEK ama KUCUK: +0.0135, ve iki kolun guven araliklari ORTUSUYOR.
+  Tek basina bu fark istatistiksel olarak zayiftir.
+* Buna karsilik **makro +0.0331 ve en kotu marka 0.0000 -> 0.0466**: sistem
+  markalar arasi daha DENGELI. Sifirdan cikan bir marka (C3) ve iki katina
+  cikan uc marka (CEM, EFX, C3) var.
+* Kaybedilen yer WIE (-0.0802) ve A-B/CCD/KLM: rejim kapisi bu markalarda
+  yanlis tarafa yonlendiriyor. Kapi tek bir esik (n01>=90) ve bu markalarda
+  taban gucluyken P6'ya gecmis olmali.
+* **CWT hala 0.0466** ve D7 GT'sinin %37'si orada. Asil duvar CWT'de ve bu
+  duvar NIT'le AYNI: yogun parcada temsil yetersizligi. 0.50'nin onundeki
+  tek en buyuk engel budur.
+
+### 5f. GUVEN KAPISI -- saha 0.90 sozu VERILEMEZ
+
+D7'nin 2512 tahmini uzerinde olculdu:
+
+```
+ham kesinlik 0.3471
+kesinlik hicbir esikte >= 0.90 OLMUYOR -- en yuksek 0.6429
+```
+
+Dahasi egri tepe noktasindan sonra GERI DONUYOR (pay0'da esik 0.95'te 0.5025,
+0.99'da 0.4700). Sebep: karar kurali GORELI (`0.85 x parca-maks`), yani secilen
+tahminlerin hepsi zaten parca-maksimumuna yakin; mutlak skor parcalar arasi
+kalibre bir guven olcusu DEGIL.
+
+**Sonuc:** "robotun kullandigi isaretler >=0.90 kesinliktedir" sozu BU
+SKORLAYICIYLA verilemez. Guven kapisi AYRI bir kalibrasyon modeli ister
+(parca-ici goreli konum + kafes tutarliligi + aday mutabakati gibi sinyaller).
+Kapsama sayisi uydurmak yerine bu boyle kaydedildi.
 
 ### 5.1 Okuma plani (onceden ilan)
 
