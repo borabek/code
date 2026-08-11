@@ -39,7 +39,7 @@ os.environ.setdefault("BA_ALLOW_SEEN", "1")
 os.environ["WG_FIZ_FEATS"] = "1"
 os.environ["WG_TOPO"] = "1"
 os.environ["WG_ZENGIN"] = "1"
-os.environ.setdefault("P6_DIZIN", "results/_p6_oz_m60")
+os.environ.setdefault("P6_DIZIN", "results/_p6_oz_u25")
 sys.path.insert(0, ".")
 import kafes                       # noqa: E402
 import kanonik_d7 as K             # noqa: E402
@@ -211,28 +211,37 @@ def kisa(s1):
 SIRA = os.environ.get("P6_SIRA", "1") == "1"
 
 
-def kafes_matris(d, kb, s1, k):
+def sira_bloku(d, s1):
+    """Sira damgalama blogu (3 sutun). PARCA BASINA BIR KEZ hesaplanir.
+
+    ONCE `kafes_matris` icinde hesaplaniyordu ve her KAT x KOL icin YENIDEN
+    kosuyordu; bir kosu 70 dakikada ilerlemedi. `kafes` blogu gibi bir kez
+    hesaplanip tasinir.
+    """
+    Pt, Dt = tohumla(d, s1)
+    return sira_damgala.oznitelik(d["P"][d["idx"]], d["YD"], Pt, Dt)
+
+
+def kafes_matris(d, kb, s1, k, sb=None):
     """Ikinci kademe oznitelikleri, `k` satirlarinda.
 
     [92 donusturulmus | kaynak 3 | kafes 8 | (sira 3) | birinci kademe skoru 1]
 
-    `sira` blogu (`sira_damgala`): birinci gecisin CAPALARINDAN sirayi uzatip
-    havuzda karsiligi olan adaylari "sira uzerinde" diye isaretler. `kafes`
-    blogu bir MESAFE olcusu verir; bu ise KABUL EDILMIS sira uyeligi bayragidir
-    -- iki farkli soru, birlikte kullanilirlar. `P6_SIRA=0` ile kapatilir.
+    `sira` blogu: birinci gecisin CAPALARINDAN sirayi uzatip havuzda karsiligi
+    olan adaylari "sira uzerinde" diye isaretler. `kafes` blogu bir MESAFE
+    olcusu verir; bu ise KABUL EDILMIS sira uyeligi bayragidir -- iki farkli
+    soru, birlikte kullanilirlar. `P6_SIRA=0` ile kapatilir.
     """
     X = np.hstack([p6_karar.donustur(d["X"]),
                    p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
     par = [X[k], np.asarray(kb)[k]]
-    if SIRA:
-        Pt, Dt = tohumla(d, s1)
-        par.append(sira_damgala.oznitelik(d["P"][d["idx"]], d["YD"],
-                                          Pt, Dt)[k])
+    if SIRA and sb is not None:
+        par.append(np.asarray(sb)[k])
     par.append(np.asarray(s1, float)[k][:, None])
     return np.hstack(par)
 
 
-def egit(tr, kol, kafes_bloklar=None, s1ler=None):
+def egit(tr, kol, kafes_bloklar=None, s1ler=None, sira_bloklar=None):
     Ms, Ys = [], []
     for i, d in enumerate(tr):
         if kol == "P6_KAFES":
@@ -241,8 +250,10 @@ def egit(tr, kol, kafes_bloklar=None, s1ler=None):
                 continue
             # float32'ye PARCA BASINA cevir: 2583 parca x ~2000 secenek x 95
             # sutun float64 birikince vstack tepe bellegi 10 GB'a cikiyor.
-            Ms.append(kafes_matris(d, kafes_bloklar[i], s1ler[i],
-                                   k).astype(np.float32))
+            Ms.append(kafes_matris(
+                d, kafes_bloklar[i], s1ler[i], k,
+                None if sira_bloklar is None else sira_bloklar[i]
+            ).astype(np.float32))
             Ys.append(d["y"][k])
         else:
             Ms.append(oz(d, kol).astype(np.float32))
@@ -255,7 +266,7 @@ def egit(tr, kol, kafes_bloklar=None, s1ler=None):
     return yap().fit(M, Y)
 
 
-def skorla(m, veri, kol, kafes_bloklar=None, s1ler=None):
+def skorla(m, veri, kol, kafes_bloklar=None, s1ler=None, sira_bloklar=None):
     """Kolun skorlari. P6_KAFES'te KISA LISTE DISI satirlar 0 kalir --
     yani ikinci kademe birinci kademeyi EZEMEZ, yalniz icinden secer."""
     out = []
@@ -264,7 +275,9 @@ def skorla(m, veri, kol, kafes_bloklar=None, s1ler=None):
             s = np.zeros(len(d["X"]))
             k = kisa(s1ler[i])
             if len(k):
-                X = kafes_matris(d, kafes_bloklar[i], s1ler[i], k)
+                X = kafes_matris(
+                    d, kafes_bloklar[i], s1ler[i], k,
+                    None if sira_bloklar is None else sira_bloklar[i])
                 s[k] = m.predict_proba(X.astype(np.float32))[:, 1]
             out.append(s)
             continue
@@ -346,6 +359,7 @@ def main():
             d["_kat"] = d["mfg"]
 
     kafes_tr = [kafes_bloku(d, s) for d, s in zip(tr, oof)]
+    sira_tr = ([sira_bloku(d, s) for d, s in zip(tr, oof)] if SIRA else None)
     kv = np.vstack(kafes_tr)
     print(f"kafes blogu {kv.shape} | kafes bulunan secenek orani "
           f"{kv[:, 0].mean():.3f} ({time.time() - t0:.0f} s)", flush=True)
@@ -365,14 +379,16 @@ def main():
             kb_te = [kafes_tr[i] for i in dis] if kf else None
             s1_tr = [oof[i] for i in ic] if kf else None
             s1_te = [oof[i] for i in dis] if kf else None
-            m = egit(TR, kol, kb_tr, s1_tr)
+            sb_tr = ([sira_tr[i] for i in ic] if kf and sira_tr else None)
+            sb_te = ([sira_tr[i] for i in dis] if kf and sira_tr else None)
+            m = egit(TR, kol, kb_tr, s1_tr, sb_tr)
             if m is None:
                 ayrinti[b][kol] = {"robot": 0.0, "TP": 0, "FP": 0,
                                    "FN": sum(len(d["G"]) for d in TE),
                                    "kural": ["yok"], "nms": 0.0}
                 continue
-            s_tr = skorla(m, TR, kol, kb_tr, s1_tr)
-            s_te = skorla(m, TE, kol, kb_te, s1_te)
+            s_tr = skorla(m, TR, kol, kb_tr, s1_tr, sb_tr)
+            s_te = skorla(m, TE, kol, kb_te, s1_te, sb_te)
             ar = (np.random.default_rng(0).choice(len(TR), ARAMA_N, False)
                   if ARAMA_N and len(TR) > ARAMA_N else np.arange(len(TR)))
             AR = [TR[i] for i in ar]
@@ -441,7 +457,7 @@ def main():
     if en_kol == "P6_KAFES":
         # Ikinci kademe OOF skorlarindan egitilir: urunde birinci kademe skoru
         # gorulmemis parcadan gelecek, egitimde de oyle gelmeli.
-        paket["kademe2"] = egit(tr, "P6_KAFES", kafes_tr, oof)
+        paket["kademe2"] = egit(tr, "P6_KAFES", kafes_tr, oof, sira_tr)
     with open("results/p6_kademe2_model.pkl", "wb") as f:
         pickle.dump(paket, f)
     json.dump({"damga": makbuz_hash.damga(), "toplam": son, "marka": ayrinti,
