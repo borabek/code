@@ -31,6 +31,22 @@ def donustur(X, zskor="ab"):
     return np.hstack([wire_gate.parca_ici(X[:, :AB], "zskor"), X[:, AB:]])
 
 
+KAYNAK_AD = ["kay_seg", "kay_brep", "kay_mesh"]
+
+
+def kaynak_blok(kaynak):
+    """Aday kaynagi -> 3 sutunluk gosterge (0 seg / 1 B-rep / 2 mesh tepesi).
+
+    NEDEN GEREKLI: mesh tepeleri havuzun cogunlugunu olusturur (parca basina
+    ~250 aday) ve buyuk cogunlugu yanlistir; B-rep agizlari cok daha az ama cok
+    daha zengindir; segmentasyonun `v_o` adayi en azdir. Bu ON OLASILIK farkini
+    modele soylememek, ona ayni isi ogrenmeyi oznitelikler uzerinden zorlamak
+    demek. Onbellek `kaynak` alanini zaten tasiyor -- yeniden cikarim gerekmez.
+    """
+    k = np.asarray(kaynak, int).reshape(-1)
+    return np.stack([(k == 0), (k == 1), (k == 2)], axis=1).astype(float)
+
+
 def kabul_maskesi(s, kural):
     """Skorlardan KABUL maskesi. `kural` = ("mutlak", e) ya da ("goreli", oran, taban).
 

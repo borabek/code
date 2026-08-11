@@ -67,7 +67,19 @@ def yap(tohum=0):
 
 
 def kendi(d):
+    """Aday basina TEK satir: kendi yon secenegi (C blogunun k_kendi=1 satiri)."""
     return np.where(d["X"][:, C0] == 1.0)[0]
+
+
+def taban_satir(d):
+    """TABAN kolunun satirlari: kendi yonu VE mesh OLMAYAN adaylar.
+
+    Dagitilan urunun havuzunda mesh tepeleri YOK. Mesh'i taban kolunda da
+    birakmak, "yeni havuz + yeni siralayici" kazancini tabana da yazmak olurdu
+    ve kiyas tek degiskenli olmaktan cikardi.
+    """
+    k = kendi(d)
+    return k[d["kaynak"][d["idx"][k]] != 2]
 
 
 def alt_ornekle(M, Y, kat=NEG_KAT, tohum=0):
@@ -97,12 +109,13 @@ def kafes_bloku(d, s):
 
 def puanla(d, s, kural, nms, kol):
     if kol == "TABAN":
-        k = kendi(d)
+        k = taban_satir(d)
+        ci = d["idx"][k]                     # aday indeksleri
         sk = s[k]
         m = p6_karar.kabul_maskesi(sk, kural)
         if not m.any():
             return np.zeros((0, 3)), np.zeros((0, 3))
-        P, D = d["P"][m], d["D"][m]
+        P, D = d["P"][ci[m]], d["D"][ci[m]]
         T = d["X"][k][m][:, AB + len(YB.OZ_AD):]
         n = np.ones(len(P), bool)
         if nms > 0 and len(P) > 1:
@@ -130,8 +143,14 @@ def olc(veri, skor, kural, nms, kol):
 
 def oz(d, kol, kafes_blok=None):
     if kol == "TABAN":
-        return p6_karar.donustur(d["X"][kendi(d)][:, :AB], "hepsi")
-    X = p6_karar.donustur(d["X"])
+        # TABAN dagitilan kuralin ta kendisi: yalniz B-rep havuzu, kendi yonu.
+        # Mesh adaylari onun havuzunda YOK; haksiz kiyas olmasin diye burada da
+        # elenir.
+        k = kendi(d)
+        k = k[d["kaynak"][d["idx"][k]] != 2]
+        return p6_karar.donustur(d["X"][k][:, :AB], "hepsi")
+    X = np.hstack([p6_karar.donustur(d["X"]),
+                   p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
     if kol == "P6_KAFES":
         return np.hstack([X, kafes_blok])
     return X
@@ -140,7 +159,7 @@ def oz(d, kol, kafes_blok=None):
 def egit(tr, kol, kafes_bloklar=None):
     M = np.vstack([oz(d, kol, None if kafes_bloklar is None else kafes_bloklar[i])
                    for i, d in enumerate(tr)]).astype(np.float32)
-    Y = np.concatenate([d["y"][kendi(d)] if kol == "TABAN" else d["y"]
+    Y = np.concatenate([d["y"][taban_satir(d)] if kol == "TABAN" else d["y"]
                         for d in tr])
     M, Y = alt_ornekle(M, Y)
     return yap().fit(M, Y)
@@ -153,7 +172,7 @@ def skorla(m, veri, kol, kafes_bloklar=None):
         p = m.predict_proba(X.astype(np.float32))[:, 1]
         if kol == "TABAN":
             s = np.zeros(len(d["X"]))
-            s[kendi(d)] = p
+            s[taban_satir(d)] = p
         else:
             s = p
         out.append(np.asarray(s, float))

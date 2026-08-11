@@ -74,7 +74,7 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
         return None
     Ps = np.asarray([c["point"] for c in cps_seg], float)
     Ds = np.asarray([c["direction"] for c in cps_seg], float)
-    P, D, _kay = urun_genis.havuz(Ps, Ds, cyl, acik)
+    P, D, kaynak = urun_genis.havuz(Ps, Ds, cyl, acik)
     if len(P) < 2:
         return None
     if MESH_HAVUZ:
@@ -98,6 +98,7 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
             if len(s_):
                 P = np.vstack([P, Pm[s_]])
                 D = np.vstack([D, Dm[s_]])
+                kaynak = np.concatenate([kaynak, np.full(len(s_), 2, int)])
     V = np.asarray(V, float)
     diag = float(np.linalg.norm(V.max(0) - V.min(0)))
     mesh = trimesh.Trimesh(V, np.asarray(F, np.int64), process=False)
@@ -110,7 +111,7 @@ def secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT):
     if not len(idx):
         return None
     Dblok = urun_genis.tanimlayici(P[idx], YD, cyl, mesh, diag)
-    return P, idx, YD, np.hstack([A[idx], B[idx], C, Dblok])
+    return P, idx, YD, np.hstack([A[idx], B[idx], C, Dblok]), kaynak
 
 
 def cikti(V, F, probs, cps_seg, step_path, CE, CT):
@@ -120,9 +121,11 @@ def cikti(V, F, probs, cps_seg, step_path, CE, CT):
     tab = secenek_tablosu(V, F, probs, cps_seg, step_path, CE, CT)
     if tab is None:
         return None
-    P, idx, YD, X = tab
+    P, idx, YD, X, kaynak = tab
     zskor = pk.get("zskor", "ab")
-    Xd = p6_karar.donustur(X, zskor)
+    # EGITIMDEKI SUTUN SIRASI: [donusturulmus 92] + [kaynak gostergesi 3]
+    Xd = np.hstack([p6_karar.donustur(X, zskor),
+                    p6_karar.kaynak_blok(kaynak[idx])])
     s = np.asarray(pk["kademe1"].predict_proba(Xd)[:, 1], float)
     if pk.get("kademe2") is not None:
         # IKINCI KADEME: birinci gecisin YUKSEK GUVENLI secimleri TOHUM olur,

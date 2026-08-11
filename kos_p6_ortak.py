@@ -95,8 +95,11 @@ def yukle(on, sinir=0):
         idx = np.asarray(z["idx"], int)
         YD = np.asarray(z["YD"], float)
         P = np.asarray(z["P"], float)
+        Dham = np.asarray(z["D"], float)
+        kayn = (np.asarray(z["kaynak"], int) if "kaynak" in z
+                else np.zeros(len(P), int))
         if KAYNAK_SUZ is not None and "kaynak" in z:
-            kay = np.asarray(z["kaynak"], int)
+            kay = kayn
             tut = np.isin(kay, KAYNAK_SUZ)
             # secenekler ADAY indeksine bagli; once secenekleri suz, sonra
             # aday indekslerini YENIDEN NUMARALA (aksi halde `idx` bos adaylara
@@ -107,12 +110,13 @@ def yukle(on, sinir=0):
             X, YD = X[ysec], YD[ysec]
             idx = yeni[idx[ysec]]
             P = P[tut]
-            z = {"D": np.asarray(z["D"], float)[tut]}
+            Dham = Dham[tut]
+            kayn = kayn[tut]
         G = np.asarray(r["G"], float)
         Gd = np.asarray(r["Gd"], float)
         y, _ = YB.etiketle(P[idx], YD, G, Gd)
         out.append({"pid": pid, "mfg": r["mfg"], "X": X, "idx": idx, "YD": YD,
-                    "P": P, "D": np.asarray(z["D"], float), "y": y,
+                    "P": P, "D": Dham, "y": y, "kaynak": kayn,
                     "G": G, "Gd": Gd, "diag": float(r["diag"])})
     print(f"  {on}: {len(fs)} dosya -> {len(out)} parca "
           f"(kayit yok {yok_kayit}, GT yok {yok_gt})", flush=True)
