@@ -69,20 +69,29 @@ def main():
         pbs = [np.asarray(q, float) for q in z["pbs"]]
         cps = kanonik_zincir.urun_cikti(V, F, pbs, S.get(pid))
         P, D = kanonik_zincir.poz_ver(cps)
+        # TAHMIN BASINA SKOR: guven kapili GLB'nin kalibrasyonu bu makbuzdan
+        # cikar. Boylece kesinlik-kapsama egrisi icin AYRI bir D7 okumasi
+        # gerekmez -- tek okuma iki cevap verir.
+        skor = [float(c.get("wire_score", 1.0)) for c in (cps or [])]
         if len(P) and POZ:
             P, D = urun_zinciri.tam_poz(V, F, np.mean(pbs, axis=0), P, D,
                                         step_path=S.get(pid))
         G = np.asarray(r["G"], float)
         Gd = np.asarray(r["Gd"], float)
         dg = float(r["diag"])
-        tp, fp, fn = esle_macar(P, D, G, Gd, dg, K.YANAL, K.ACI, False,
-                                isaretli=True)[:3]
+        tp, fp, fn, bilgi = esle_macar(P, D, G, Gd, dg, K.YANAL, K.ACI, False,
+                                       isaretli=True)
         a = rob[r["mfg"]]
         a[0] += tp; a[1] += fp; a[2] += fn
         t_ = esle_macar(P, D, G, Gd, dg, max(3.0, 0.06 * dg), 180.0, True)[:3]
         tes.append((len(G),) + t_)
-        parca_kirilim[pid] = {"mfg": r["mfg"], "rob": [tp, fp, fn],
-                              "tes": [int(x) for x in t_]}
+        eslesen = {int(e[0]) for e in bilgi.get("eslesme", [])}
+        parca_kirilim[pid] = {
+            "mfg": r["mfg"], "rob": [tp, fp, fn],
+            "tes": [int(x) for x in t_],
+            # (skor, dogru_mu) ciftleri -> kesinlik-kapsama egrisi
+            "skor": [round(s, 5) for s in skor[:len(P)]],
+            "dogru": [int(j in eslesen) for j in range(len(P))]}
         if i % 100 == 0:
             print(f"  {i}/{len(secili)}", flush=True)
     pm = {m: 2 * v[0] / max(2 * v[0] + v[1] + v[2], 1) for m, v in rob.items()}
