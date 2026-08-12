@@ -591,3 +591,51 @@ konumda yon secmekten** geciyor. Uc aday:
 **0.75 hedefi acisindan:** yapisal tavan 0.9474 duruyor, ama ona ulasmanin
 onunde artik tek somut engel var ve adi konmus durumda: **uretilen konumda
 yon secimi.**
+
+---
+
+# III. KOL SONUCU -- YON HESAPLANABILIR, AMA ISARET MARKAYA GORE DEGISIYOR
+
+Makbuz `results/analitik_yon.json`. B-rep agzi + ANALITIK silindir ekseni.
+
+| marka | KONUM | +eksen (ISARETSIZ) | merkez->agiz | agiz->merkez |
+|---|---|---|---|---|
+| SUPU | 0.777 | 0.612 | **0.514** | 0.208 |
+| MOR | 0.738 | 0.700 | **0.586** | 0.536 |
+| UPUN | 0.950 | 0.793 | 0.130 | **0.743** |
+| **NIT** | **0.011** | 0.000 | 0.000 | 0.000 |
+
+## Bulgu 1 -- YON PROBLEMI TEK BIR BITE INIYOR
+
+Analitik eksen ZATEN dogru: isaretsiz tavan 0.612-0.793. Geriye kalan tek
+karar **parca basina BIR ISARET BITI**. Bu, secenek basina yon secmekten
+(bugun 24 secenek arasindan) kat kat kolay ve model skoruyla oylanabilir.
+
+Kiyas: yayilim kolunda yon secimi 0.527 -> 0.077 dusuruyordu. Burada dogru
+isaretle 0.61-0.79 dogrudan elde ediliyor.
+
+## Bulgu 2 -- GT'NIN YON SOZLESMESI MARKALAR ARASINDA TUTARSIZ
+
+SUPU ve MOR'da GT yonu DISARI, UPUN'da ICERI bakiyor. Tek bir kuresel
+sozlesme YOK. Bu, yon kullanan HER yaklasimi etkiler ve bugune kadar kayda
+gecmemis bir olgudur.
+
+Ihtimaller: (a) uretici JSON'larinda tanim farkli, (b) fiziksel olarak farkli
+(bazi klemenslerde tel girisi karsi yuzden), (c) GT uretim hatasi. **Hangisi
+oldugu arastirilmali** -- eger (c) ise D7 dahil butun yon olcumleri etkilenir.
+
+## Bulgu 3 -- NIT'te B-rep AGIZLARI CP'lerin UZERINDE DEGIL
+
+KONUM 0.011. Yani analitik yon NIT'e HIC yardim edemez; oradaki darbogaz
+temsil (B-rep agzi yok), yon degil. NIT icin tek yol mesh tabanli kalir.
+
+Bu, ayni acigin UCUNCU bagimsiz olcumu (daha once: GT'ye oklit ortanca
+2.44mm; kafes cipasi 0.099).
+
+## Kolun degeri
+
+SUPU/MOR/UPUN icin analitik yon, dogru isaretle **0.61-0.79 recall** veriyor
+-- bugunku F1'leri 0.449/0.178/0.536. NIT icin degeri YOK.
+
+**Sonraki adim:** parca basina isaret bitini SEC (model skoru oyu / kanonik
+cerceve / kafes tutarliligi) ve uctan uca olc.

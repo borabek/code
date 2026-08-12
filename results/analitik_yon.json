@@ -1,0 +1,40 @@
+{
+ "yanal": 2.0,
+ "eksenel": 40.0,
+ "aci": 10.0,
+ "marka": {
+  "NIT": {
+   "gt": 1222,
+   "konum": 0.011456628477905073,
+   "eksen": 0.0,
+   "isaretli": 0.0,
+   "isaret_kaybi": 0.0,
+   "agiz_parca": 133.08
+  },
+  "SUPU": {
+   "gt": 533,
+   "konum": 0.776735459662289,
+   "eksen": 0.6116322701688556,
+   "isaretli": 0.20825515947467166,
+   "isaret_kaybi": 0.4033771106941839,
+   "agiz_parca": 269.41104294478527
+  },
+  "UPUN": {
+   "gt": 362,
+   "konum": 0.9502762430939227,
+   "eksen": 0.7928176795580111,
+   "isaretli": 0.7430939226519337,
+   "isaret_kaybi": 0.04972375690607733,
+   "agiz_parca": 232.75652173913045
+  },
+  "MOR": {
+   "gt": 263,
+   "konum": 0.7376425855513308,
+   "eksen": 0.6996197718631179,
+   "isaretli": 0.5361216730038023,
+   "isaret_kaybi": 0.16349809885931554,
+   "agiz_parca": 397.6376811594203
+  }
+ },
+ "not": "B-rep agzi + ANALITIK eksen yonu (merkezden agza isaretlenmis). 'isaret kaybi' = isaretsiz - isaretli. D7'ye BAKILMADI."
+}
