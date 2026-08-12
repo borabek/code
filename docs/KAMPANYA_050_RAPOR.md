@@ -787,3 +787,47 @@ kumesinde olculur.
 
 **Not:** bu gece kosan butun B fazi olcumleri tavan-12 korpusu (`tam3`)
 uzerindedir; gecerlidirler ama DAHA DUSUK bir tavanin altinda alinmislardir.
+
+---
+
+## 13. SONRAKI KAMPANYA -- gecenin sayilarindan cikan sira
+
+Butun oncelikler tek bir aritmetikten cikiyor (bolum 12): **secici
+verimliligi %36.5** ve havuz kolu tek basina 0.50'ye MATEMATIKSEL OLARAK
+yetmiyor. Sira buna gore:
+
+**1. Tavan-24 korpusu (KOSUYOR).** `_p6_oz_tam4`, `YB_MAX_SEC=24`. Bitince
+KAPI A hem `d6` hem `tam` kumesinde olculur. Beklenti: NIT yonlu recall
+0.5409 -> ~0.87, toplam 0.7347 -> ~0.88, yani KAPI A GECER. **Beklenti VAAT
+DEGILDIR** -- sonda 18 parcalik bir NIT orneklemiydi.
+
+**2. Tavan-24'un UCTAN UCA kazanci.** Tavan yalnizca TAVANI yukseltir; gercek
+kazanc ancak `kos_p6_kademe2.py` tam4 uzerinde kosunca bilinir. tam3 ile
+BIREBIR ayni ayarla kosulmali (tek degisken korpus).
+
+**3. EK bloklari tam4 uzerinde tekrarlanmali.** Bu gece olculen bloklar
+tavan-12 korpusundadir; gecerlidirler ama daha dusuk bir tavanin altinda.
+Kapiyi gecen bloklar en iyi korpusta yeniden dogrulanmali.
+
+**4. SECICI KAPASITESI (asil is).** %36.5 -> %59 icin 1.62x gerekiyor; bunu
+oznitelik bloklari (blok basina +0.01..+0.03) tek basina veremez. Aday-kumesi
+modeli (D2) tek gercek aday: adaylar ARASI baglami (kafes, dizi, rekabet)
+noktasal bir siniflandirici gormuyor. Kapisi onceden ilan edildi: LOMO'da
+HGB'ye **+0.05**.
+
+**5. SAHA (urunun dogrudan isi).** Iki is birbirinden bagimsiz:
+   - GLB'yi `kanonik_zincir.urun_cikti`ya baglamak (bolum 8; tier alani ortak
+     yere tasinmali).
+   - AUTO katmani: gorulmemis markada kesinlik 0.3471 ve REVIEW BOS. Kalibre
+     bir skor cikana kadar AUTO **kapatilmali**; bugunku hali, olculmemis bir
+     guvenle otonom davranmaktir.
+
+### Gecenin ozeti -- ne DEGISTI, ne DEGISMEDI
+
+**Degismedi:** manset robot F1 hala **0.3091** (`tam` katlari). Bu gece
+dagitilan urune giren bir iyilestirme YOK.
+
+**Degisti:** artik hedefin nereden gelebilecegi OLCULU. Havuz kolunun tek
+basina yetmedigi, tavanin nerede bagladigi, sahadaki guven katmaninin atil
+oldugu ve olculen zincirin GLB'ye hic girmedigi -- dordu de bu gece olculdu.
+Bunlarin ucu (bolum 8, 10, 12) sayi degil, YON degistiren bulgulardir.
