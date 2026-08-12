@@ -348,3 +348,58 @@ artik varsayim degil olcum:
 adimlarindan (3.5-7.5 mm) buyuk** -- sonda muhtemelen 2x harmonigi buluyor.
 Kol kurulurken adim, katalog degerlerine ve alt harmoniklere karsi
 sinanmali; yoksa uretilen izgara her ikinci CP'yi atlar.
+
+---
+
+# VII.0 SONUCU -- 0.70 YAPISAL OLARAK MUMKUN (tavan degil, ULASIM sorunu)
+
+Makbuz `results/coklu_kafes.json`. **Model yok, yalnizca GT geometrisi.**
+
+| marka | 1 kafes | **2 kafes** | 3 kafes | adim1 | F1 TAVANI |
+|---|---|---|---|---|---|
+| NIT | 0.500 | **0.983** | 0.983 | 10.50 mm | **0.9914** |
+| SUPU | 0.623 | 0.861 | 0.864 | 10.00 mm | 0.9270 |
+| MOR | 0.498 | 0.799 | 0.811 | 6.37 mm | 0.8956 |
+| UPUN | 0.689 | 0.810 | 0.810 | 15.30 mm | 0.8950 |
+
+**TEK OTELEME OLCUMUM YANILTICIYDI.** NIT'i 0.557 diye olcmustum; gercekte
+IKI kafesle **0.983**. NIT parcalari IKI SIRALI yapilar (on/arka ya da iki
+kat) ve tek kafesle bakmak yarisini goruyordu.
+
+Adimlar 6.37-15.30 mm, hepsi fiziksel olarak makul -- dejenere kucuk adim yok,
+yani bu bir arama artefakti degil.
+
+## Yeni aritmetik
+
+| | GT agirlikli F1 |
+|---|---|
+| bugun | 0.1985 |
+| **YAPISAL TAVAN (2-3 kafes)** | **0.9474** |
+| tavanin %50'si yakalanirsa | 0.4852 |
+| tavanin %60'i | 0.5685 |
+| **tavanin %70'i** | **0.6632** |
+| **tavanin %80'i** | **0.7580** |
+
+**0.70, tavanin ~%74'unu yakalamak demek.** Artik "yapisal olarak imkansiz"
+degil; **ulasim sorunu**.
+
+## AMA -- kritik durustluk kaydi
+
+Bu bir **KAHIN TAVANIDIR**: "GERCEK CP'ler verildiginde, 2-3 kafesle
+tanimlanabilirler mi?" sorusunun cevabi EVET. Urun ise kafesi **GT'yi
+bilmeden, gurultulu adaylardan** bulmak zorunda. Asil zorluk orada.
+
+Yani bu olcum sunu kanitlar: **yapi VAR ve GUCLU.** Bu, gerekli bir kosuldu
+ve artik saglandi. Yeterli oldugunu gostermez.
+
+## 0.70 icin revize edilmis cevap
+
+- **Yapisal tavan:** 0.9474 (engel DEGIL)
+- **0.70 icin gereken:** tavanin ~%74'u
+- **Kiyas:** bugun tavanin %21'ini yakaliyoruz
+- **Karar:** 0.70 **konusulabilir** ama ucurumu kapatan sey kafesi VERIDEN
+  bulma basarisi olacak. Onu olcmeden sayi vermem.
+
+**Sonraki olcum (VII.0b):** kafes, GT yerine ADAYLARDAN bulunabiliyor mu?
+Ayni acgozlu arama, girdi olarak model skorunun en yuksek N adayini alsin.
+Kapsama orani duserse, dusus miktari "ulasim acigi"nin dogrudan olcusudur.

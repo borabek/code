@@ -33,8 +33,8 @@
  ],
  "n_parca": 3051,
  "hgb": 0.312436883399363,
- "kume": 0.29302823907553377,
- "fark": -0.019408644323829216,
+ "kume": 0.27447406394774815,
+ "fark": -0.03796281945161484,
  "gecti": false,
  "kat": {
   "WEI": {
@@ -47,11 +47,11 @@
     ]
    },
    "KUME": {
-    "robot": 0.3475897064153679,
+    "robot": 0.33361847733105215,
     "kural": [
      "goreli",
-     0.85,
-     0.4
+     0.95,
+     0.05
     ]
    }
   },
@@ -64,7 +64,7 @@
     ]
    },
    "KUME": {
-    "robot": 0.4316765465876273,
+    "robot": 0.4057082203089987,
     "kural": [
      "goreli",
      0.85,
@@ -81,11 +81,10 @@
     ]
    },
    "KUME": {
-    "robot": 0.4579985390796202,
+    "robot": 0.4746280045784052,
     "kural": [
-     "goreli",
-     0.7,
-     0.4
+     "mutlak",
+     0.9
     ]
    }
   },
@@ -99,11 +98,10 @@
     ]
    },
    "KUME": {
-    "robot": 0.14567660854942915,
+    "robot": 0.0931994695965145,
     "kural": [
-     "goreli",
-     0.95,
-     0.4
+     "mutlak",
+     0.95
     ]
    }
   }
@@ -113,7 +111,8 @@
   "lr": 0.003,
   "lam": 1.0,
   "d": 128,
-  "egit_maks": 3000
+  "egit_maks": 3000,
+  "neg_kat": 6
  },
  "not": "S4: aday-kumesi modeli vs noktasal HGB, AYNI protokol (ayni katlar, oznitelikler, kural aramasi, kabul kutusu). Tek degisken MODEL SINIFI. D7'ye BAKILMADI."
 }
