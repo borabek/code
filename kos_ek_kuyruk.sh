@@ -21,7 +21,12 @@ ANA="$G/EK_KUYRUK.log"
 say() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$ANA"; }
 
 GEREK_DOSYA=3040
-GEREK_RAM=10
+# 10 -> 12: agir is kapisi yalnizca `kademe2` sayiyor (asil bellek canavari o).
+# Orkestratorun kendi EK bloklariyla ES ZAMANLI kosmaya IZIN VERILIYOR, cunku
+# aksi halde orkestratorun son blogu (`derinlik`, tek cekirdekte ~8.5 saat)
+# bu kuyrugu ogleye kadar ac birakirdi. Iki EK isi ~8'er GB; 12 GB esigi
+# ikisinin ust uste binmesini guvenli kilar.
+GEREK_RAM=12
 
 bos_ram() {
   # DIKKAT: FreePhysicalMemory KB cinsindendir; GB icin dogru bolen /1MB.
@@ -36,7 +41,7 @@ bos_ram() {
 # RAM kapisi yalnizca BASLANGICTA bakiyordu; agir isin kendisini sormak gerek.
 agir_is() {
   powershell.exe -NoProfile -Command \
-    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'kademe2|kos_ek_oznitelik' } | Measure-Object).Count" \
+    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'kademe2' } | Measure-Object).Count" \
     2>/dev/null | tr -d '\r'
 }
 
