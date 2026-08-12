@@ -346,6 +346,34 @@ def extract(models, step_path, dev, conf_auto, min_auto_votes=1, cp_count=None, 
     return _format_cps(cps, conf_auto, min_auto_votes)
 
 
+def tier_ata(c, conf_auto, min_auto_votes, auto_thr=None):
+    """TEK CP icin tier: "auto" | "review".
+
+    ORTAK YERE TASINDI (2026-08-12). Bu kural `_format_cps` govdesine gomuluydu
+    ve yalnizca `extract` yolundan gecen ciktilar tier alani aliyordu. Oysa
+    olculen zincir `kanonik_zincir.urun_cikti`; GLB ihracatcisini oraya
+    baglamak icin tier'in AYRI cagrilabilmesi gerekiyor (bkz. rapor bolum 8:
+    "olculen zincir GLB'ye girmiyor", 2. madde TIER TUZAGI).
+
+    DAVRANIS DEGISMEDI -- govde birebir tasindi:
+      * gate hatasi varsa       -> review (ham birlesimin kesinligi ~0.40)
+      * gate skoru varsa        -> wire_score >= auto_thr ise auto
+      * gate skoru YOKSA (eski) -> confidence >= conf_auto VE votes >= min_votes
+
+    OLCULEN GERCEK (D7, gorulmemis marka): dagitilan esikte (0.6) isaretlerin
+    %100'u AUTO cikiyor ve kesinlik 0.3471 -- REVIEW katmani BOS. Skor tabani
+    0.6006, yani esik dagilimin ALTINDA kaliyor ve hicbir seyi elemiyor.
+    Bu fonksiyon o kusuru DUZELTMEZ, yalnizca tek yere toplar.
+    """
+    if auto_thr is not None and "wire_score" in c:
+        if c.get("_gate_hata"):
+            return "review"
+        return "auto" if float(c.get("wire_score", 1.0)) >= auto_thr else "review"
+    conf = float(c.get("confidence", 0.0))
+    votes = int(c.get("_votes", 1))
+    return "auto" if (conf >= conf_auto and votes >= min_auto_votes) else "review"
+
+
 def _format_cps(cps, conf_auto, min_auto_votes):
     """CP dict list -> machine-readable output records (STEP frame), sorted by (votes, confidence).
 
@@ -401,10 +429,7 @@ def _format_cps(cps, conf_auto, min_auto_votes):
             "n_verts": int(c.get("n_verts", 0)),
             # GATE HATASI -> ASLA auto. Gate calismadiysa elimizdeki HAM BIRLESIMDIR ve
             # onun kesinligi ~0.40; robot buna dayanarak tel takmamali.
-            "tier": ("review" if c.get("_gate_hata") else
-                     ("auto" if float(c.get("wire_score", 1.0)) >= _auto_thr else "review"))
-                    if (_auto_thr is not None and "wire_score" in c)
-                    else ("auto" if (conf >= conf_auto and votes >= min_auto_votes) else "review"),
+            "tier": tier_ata(c, conf_auto, min_auto_votes, _auto_thr),
         })
     out.sort(key=lambda r: (-r["votes"], -r["confidence"]))
     return out
