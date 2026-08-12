@@ -158,6 +158,12 @@ def ek_blok(d, s1):
 # ISCILERE TAM PARCA SOZLUGU GONDERILMEZ: `X` tek basina parca basina
 # yuzbinlerce float ve 3051 parcayi pickle'lamak gigabaytlar demek. `ek_blok`
 # yalnizca su bes alani okuyor; slim yuk onlari tasir.
+# DOGRULANDI (2026-08-12): paralel yol seri yolla BIT-AYNI sonuc veriyor
+# (kanonik ve topoloji bloklarinda maks fark 0). Once "paralel yol oluyor"
+# sanilmisti; o olumlerin sebebi havuz DEGIL, arka plan gorevi kapaninca
+# cocuk surecin de kapanmasiydi -- test ON PLAN cagrisindan kosunca gecti.
+# YALNIZ `derinlik` icin acin: ucuz bloklarda surec acma maliyeti kazanci
+# yiyor (kanonik 0.0s -> 1.9s). derinlik ~10 s/parca, orada kazanc gercek.
 ISCI = int(os.environ.get("EK_ISCI", "1"))
 
 
