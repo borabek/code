@@ -30,17 +30,29 @@ bos_ram() {
     2>/dev/null | tr -d '\r'
 }
 
+# UCUNCU KAPI: BASKA AGIR IS KOSUYORSA BASLAMA.
+# 04:26'da bos RAM 0.8 GB'a dustu: B fazi (kademe2) ve EK blogu AYNI ANDA
+# korpusun tamamini belleğe aliyor (~6'sar GB) ve ustune 5 cikarim iscisi.
+# RAM kapisi yalnizca BASLANGICTA bakiyordu; agir isin kendisini sormak gerek.
+agir_is() {
+  powershell.exe -NoProfile -Command \
+    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'kademe2|kos_ek_oznitelik' } | Measure-Object).Count" \
+    2>/dev/null | tr -d '\r'
+}
+
 kapilari_bekle() {
   local bek=0
   while [ $bek -lt $((10 * 3600)) ]; do
-    local n r
+    local n r a
     n=$(ls results/_p6_oz_tam3 2>/dev/null | wc -l)
     r=$(bos_ram); r=${r:-0}
-    if [ "$n" -ge $GEREK_DOSYA ] && [ "${r%%.*}" -ge $GEREK_RAM ]; then
-      say "KAPILAR ACIK: $n dosya, ${r}GB bos"
+    a=$(agir_is); a=${a:-0}
+    if [ "$n" -ge $GEREK_DOSYA ] && [ "${r%%.*}" -ge $GEREK_RAM ] \
+       && [ "$a" -eq 0 ]; then
+      say "KAPILAR ACIK: $n dosya, ${r}GB bos, agir is yok"
       return 0
     fi
-    say "bekliyor: $n/$GEREK_DOSYA dosya, ${r}GB bos (gereken ${GEREK_RAM}GB)"
+    say "bekliyor: $n/$GEREK_DOSYA dosya, ${r}GB bos (gereken ${GEREK_RAM}GB), agir is $a"
     sleep 600
     bek=$((bek + 600))
   done
