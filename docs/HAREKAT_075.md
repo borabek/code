@@ -684,3 +684,61 @@ Bu, III. KOL'un tasarimini belirler:
 NIT'in yon sozlesmesi KUSURSUZ tutarli (disari 1.000, baskinlik 1.000).
 Yani NIT'teki sorun YON DEGIL, tamamen TEMSIL: B-rep agizlari CP'lerin
 uzerinde yok (KONUM 0.011). Bu, ayni acigin DORDUNCU bagimsiz olcumu.
+
+---
+
+# YON, MESH GEOMETRISINDEN OKUNUYOR -- 0.70'i menzile sokan bulgu
+
+Makbuz `results/mesh_yon.json`. Model yok, B-rep yok; yalniz mesh.
+
+| marka | KONUM | **tepe normali** | komsu ort. | kipsel | duzlem |
+|---|---|---|---|---|---|
+| NIT | 1.000 | **0.800** | 0.000 | 0.002 | 0.002 |
+| SUPU | 0.996 | **0.936** | 0.035 | 0.035 | 0.035 |
+| UPUN | 1.000 | **0.878** | 0.032 | 0.030 | 0.032 |
+| MOR | 0.825 | **0.617** | 0.000 | 0.000 | 0.022 |
+
+**Mesh tepesinin KENDI normali GT yonunu ISARETLI olarak NIT'te %80,
+SUPU'da %93.6 tutuyor.** Fizik basit: bir deligin agzinda dis yuzeyin normali
+zaten delik eksenidir.
+
+**Komsuluk ortalamalari COKUYOR** (0.000-0.035) cunku 2mm'lik komsuluk dis yuz
+normaliyle DELIK DUVARININ normallerini karistirip sinyali yok ediyor. Dogru
+sinyal TEK TEPENIN kendi normali -- ortalama almak zarar veriyor.
+
+## Neden bu, 0.70 tartismasini degistiriyor
+
+| | bugun | mesh normali |
+|---|---|---|
+| secenek / parca | 4857 | **~350** |
+| yon / aday | 24 | **1** |
+| NIT yonlu recall | 0.8429 | 0.800 |
+
+Secicinin isi:
+* bugun : 4857 secenek icinden ~24 dogruyu bul -> pozitif yogunlugu **1/202**
+* yeni  :  350 aday icinden ~24 dogruyu bul   -> pozitif yogunlugu **1/15**
+
+**Pozitif yogunlugu 13.5 KAT artiyor, recall bedeli yalnizca 0.04.**
+
+Ve S7'nin teshisi hatirlanirsa: cokusun sebebi POZ-NEG SKOR AYRIMIYDI
+(NIT'te 0.050). Ayrim, sinif dengesizligi 13.5 kat azalinca DOGRUDAN
+iyilesmeli -- cunku model artik 202 celdiriciyle degil 15 celdiriciyle
+yarisiyor.
+
+## DURUSTLUK KAYDI
+
+Olcu "kutuda EN AZ BIR tepe" seklinde (havuz recall olcumleriyle AYNI
+mantik, dolayisiyla 0.8429 ile kiyaslanabilir). Ama eksenel tolerans 40mm
+oldugu icin kutu UZUN bir silindir; icinde cok tepe var. Bu sayi bir
+TAVANDIR -- secici o tepeyi SECEBILMELI.
+
+Yine de kritik fark su: bugun secici hem KONUMU hem YONU secmek zorunda;
+mesh normaliyle yon KARAR OLMAKTAN CIKIYOR, geriye yalnizca konum secimi
+kaliyor.
+
+## SONRAKI OLCUM (belirleyici)
+
+Yon-bankasini KALDIR, her adaya TEK yon ver (kendi mesh normali), kademe2'yi
+tek degiskenli kos. Kapi: **uctan uca robot F1 >= bugunku 0.3124.** Recall
+bedeli 0.04 iken pozitif yogunlugu 13.5 kat artiyorsa kesinlik cok daha
+fazla artmali.

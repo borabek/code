@@ -1,0 +1,38 @@
+{
+ "komsu_r": 2.0,
+ "marka": {
+  "NIT": {
+   "konum": 1.0,
+   "n_tepe": 0.7995090016366612,
+   "n_komsu": 0.0,
+   "n_kipsel": 0.0016366612111292963,
+   "n_duzlem": 0.0016366612111292963,
+   "gt": 1222
+  },
+  "SUPU": {
+   "konum": 0.9963436928702011,
+   "n_tepe": 0.9360146252285192,
+   "n_komsu": 0.03473491773308958,
+   "n_kipsel": 0.03473491773308958,
+   "n_duzlem": 0.03473491773308958,
+   "gt": 547
+  },
+  "UPUN": {
+   "konum": 1.0,
+   "n_tepe": 0.8783783783783784,
+   "n_komsu": 0.032432432432432434,
+   "n_kipsel": 0.02972972972972973,
+   "n_duzlem": 0.032432432432432434,
+   "gt": 370
+  },
+  "MOR": {
+   "konum": 0.8248175182481752,
+   "n_tepe": 0.6167883211678832,
+   "n_komsu": 0.0,
+   "n_kipsel": 0.0,
+   "n_duzlem": 0.021897810218978103,
+   "gt": 274
+  }
+ },
+ "not": "Yon, MESH yuzey normalinden (ISARETLI aci). Dort turetme: tepe normali / komsu ortalamasi / KIPSEL normal / PCA duzlem normali. D7'ye BAKILMADI."
+}
