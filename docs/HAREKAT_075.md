@@ -403,3 +403,32 @@ ve artik saglandi. Yeterli oldugunu gostermez.
 **Sonraki olcum (VII.0b):** kafes, GT yerine ADAYLARDAN bulunabiliyor mu?
 Ayni acgozlu arama, girdi olarak model skorunun en yuksek N adayini alsin.
 Kapsama orani duserse, dusus miktari "ulasim acigi"nin dogrudan olcusudur.
+
+---
+
+# VII.2 SONUCU -- ADET GEOMETRIDEN OKUNAMIYOR (bu haliyle)
+
+Makbuz `results/adet_geometri.json` (397 parca, model yok).
+
+| marka | gercek adet | n_kipsel | ortanca hata | isabet(<=1) |
+|---|---|---|---|---|
+| NIT | 24.4 | 104.5 | 75 | 0.00 |
+| SUPU | 3.3 | 82.9 | 52 | 0.00 |
+| UPUN | 3.1 | 51.8 | 25 | 0.00 |
+| MOR | 3.8 | 97.3 | 84 | 0.00 |
+
+Uc tahmincinin ucu de AGIR bicimde FAZLA sayiyor; tam-isabete yakin oran her
+yerde **0.00**.
+
+**Sebep:** B-rep'te yuzlerce silindir var (orneklerde 474 / 266 / 34) ve cogu
+vida deligi, ic yapi, pah. Kipsel yaricap kovasi bile ~50-100 silindir
+tutuyor. "Kipsel yaricap = CP yaricapi" varsayimi YANLIS.
+
+**Hipotez bu haliyle KAPANDI.** Kurtarma yolu var ama olcmeden varsayilmaz:
+silindirleri AGZI OLAN (disaridan erisilebilir) olanlarla sinirlamak
+(`mouth_a`/`mouth_b` alanlari onbellekte VAR). Ayri madde olarak eklendi.
+
+**Onemli sonuc:** ust-k deneyinin gosterdigi +0.1533'luk adet kazanci
+GERCEKTIR, ama adet KOLAY elde edilmiyor. Adet tahmini artik ogrenmeli bir
+alt problem (parca ozniteliklerinden regresyon) ya da kafes adimindan
+turetme (govde uzunlugu / adim) olarak ele alinmali.
