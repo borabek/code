@@ -294,3 +294,50 @@ derinlik) gercekci beklenti 1-2 tanesinin +0.01..+0.03 vermesi.
 
 **Bugun 0.50'yi vaat eden hicbir olcum YOK.** Elimizde olan, 0.50'ye giden tek
 yolun hangisi oldugunu gosteren bir TESHIS var (S7: poz-neg skor ayrimi).
+
+---
+
+# S4 v1 SONUCU + `kume` BLOGU: BAGLAM HIPOTEZI ZAYIFLADI
+
+## Uc bagimsiz kol, ayni yon
+
+| kol | ne dener | sonuc |
+|---|---|---|
+| `ozkalib` | skoru parca icinde YENIDEN OLCEKLE | **-0.0482** |
+| `kume` | adaylar arasi baglami ELLE ver (8 sutun) | **-0.0270** |
+| S4 DeepSets | baglami OGRENEREK kullan | WEI -0.0100 · SIE -0.0336 · TOGI -0.0456 |
+
+**Muhtemel sebep:** karar kurali ZATEN GORELI (parca-maksimumunun %85'i), yani
+parca-ici normalizasyonu KURAL yapiyor. Baglami bir kez daha vermek ya tekrar
+oluyor ya da gurultu/asiri uyum ekliyor.
+
+**En can sikici ayrinti:** TOGI (coken marka, S4'un asil hedefi) DeepSets ile
+DAHA DA KOTU (-0.0456). Yani kol, tasarlandigi yerde de calismadi.
+
+## v2: TEK ve SON deneme (onceden ilan)
+
+v1'de iki kol ESIT SINIF DENGESINDE yarismadi: HGB pozitif basina 6 negatifle
+egitiliyor, DeepSets parcanin tamamini goruyordu (~300:1). BCE ortalama oldugu
+icin negatifler kaybi boguyor. Bu **adalet kusuru**, metrige gore ayar degil.
+
+Duzeltme: BCE yalnizca dengeli alt kumeden hesaplanir; ileri gecis ve listwise
+TUM parca uzerinde kalir (baglam korunur).
+
+**KURAL: v2 son denemedir.** Kapiyi (+0.05) gecmezse S4 KAPANIR. Gecene kadar
+denemek, bu kampanyanin bastan beri kacindigi seydir.
+
+## Eger S4 kapanirsa -- durust sonuc
+
+0.50 icin gereken 1.45x'lik secici sicramasinin tek yapisal adayi S4 idi.
+Kapanirsa elde kalan:
+
+| kol | katki |
+|---|---|
+| kanonik (GECTI) | +0.0151 |
+| zor negatif (dogrulanacak) | ~+0.01 |
+| kalan bloklar (simetri/derinlik/kafes_adet) | belirsiz, tarihsel taban orani dusuk |
+
+**Beklenen varis: 0.34-0.38.** 0.50'ye bu yoldan ULASILAMAZ ve bunu soylemek,
+ulasilacakmis gibi davranmaktan iyidir. O noktada secenekler: (a) daha fazla
+ve daha CESITLI veri, (b) farkli bir problem kurgusu (ornegin dogrudan
+tepe-basi ag), (c) hedefi olculen gercege gore revize etmek.
