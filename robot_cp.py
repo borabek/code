@@ -365,6 +365,22 @@ def tier_ata(c, conf_auto, min_auto_votes, auto_thr=None):
     0.6006, yani esik dagilimin ALTINDA kaliyor ve hicbir seyi elemiyor.
     Bu fonksiyon o kusuru DUZELTMEZ, yalnizca tek yere toplar.
     """
+    # GUVENLI ANAHTAR: `cp_config.robot_auto_kapali = true` ise HICBIR isaret
+    # otonom isaretlenmez, hepsi REVIEW olur.
+    #
+    # NEDEN VAR (olculdu, D7 gorulmemis marka, makbuz tier_cokusu_d7.json):
+    # dagitilan esikte (0.6) isaretlerin %100'u AUTO ve kesinlik 0.3471 --
+    # REVIEW katmani BOS. Skor tabani 0.6006, yani esik dagilimin ALTINDA ve
+    # hicbir seyi elemiyor. Robot ucte ikisi yanlis isarete kendi basina
+    # guveniyor. Esigi yukseltmek KURTARMIYOR (0.95'te bile kesinlik 0.4652).
+    #
+    # VARSAYILAN FALSE: urunun bugunku davranisi DEGISMEZ. Anahtar, kalibre
+    # bir skor cikana kadar sahada guvenli tarafa gecmek isteyen icin.
+    try:
+        if bool(_load_cfg().get("robot_auto_kapali", False)):
+            return "review"
+    except Exception:
+        pass
     if auto_thr is not None and "wire_score" in c:
         if c.get("_gate_hata"):
             return "review"

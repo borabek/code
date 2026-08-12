@@ -59,6 +59,36 @@ def test_format_cps_ayni_sonucu_verir():
     assert tierler[0.9] == "auto" or tierler[0.1] == "review"
 
 
+
+
+def test_guvenli_anahtar_hepsini_review_yapar(monkeypatch=None):
+    """`robot_auto_kapali=true` -> hicbir isaret otonom olmaz.
+
+    Olculen gerekce: D7'de dagitilan esikte isaretlerin %100'u AUTO ve
+    kesinlik 0.3471. Anahtarin VARSAYILANI False -- urun davranisi degismez.
+    """
+    import json
+    import robot_cp as R
+    ger = R._load_cfg
+
+    def sahte(*a, **k):
+        d = dict(ger())
+        d["robot_auto_kapali"] = True
+        return d
+
+    R._load_cfg = sahte
+    try:
+        assert R.tier_ata({"wire_score": 0.99}, 0.5, 3, auto_thr=0.6) == "review"
+        assert R.tier_ata({"confidence": 1.0, "_votes": 9}, 0.5, 3,
+                          auto_thr=None) == "review"
+    finally:
+        R._load_cfg = ger
+    # VARSAYILAN kapali degil: davranis korunuyor
+    cfg = json.load(open("cp_config.json", encoding="utf-8"))
+    assert not cfg.get("robot_auto_kapali", False), \
+        "cp_config'te anahtar ACIK -- urun davranisi sessizce degismis olur"
+
+
 if __name__ == "__main__":
     for ad, f in sorted(globals().items()):
         if ad.startswith("test_"):
