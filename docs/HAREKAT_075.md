@@ -214,3 +214,82 @@ bunun kahin surumuydu; urun surumu skor dagiliminin bicimi olabilir).
 
 II. KOL'u bu haliyle kur: parca basina rejim (guven) + adet tahmini + ilk-k.
 Kapi: havuzlanmis MIKRO'da +0.03, VE coken markalarda kayip olmamasi.
+
+---
+
+# DAHA DERIN: BIRLESTIRICI ILKE -- "PARCA KENDI SABLONUNU TANIMLAR"
+
+## Teshisimdeki kusur (once bunu duzeltmek gerek)
+
+S7'de "dogru secenegin sira yuzdeligi 0.005" diye olctugum sey, parcadaki
+**EN IYI siralanmis** dogru secenegin sirasiydi. 24 CP'li bir parcada
+**24.'sunun nerede oldugu hakkinda hicbir sey soylemiyor.** "Siralama iyi"
+cikarimim fazla iyimserdi.
+
+Dogru soru: **k'inci dogru secenek kacinci sirada?** Ve bu soruyu sorunca
+butun basarisizliklar tek cumleyle aciklaniyor:
+
+> **Model ILK CP'yi bulabiliyor, TEKRARLARI bulamiyor.**
+
+Gozlenen deseni birebir aciklar: az CP'li marka (UPUN 3.2) calisiyor, cok
+CP'li (NIT 24.4) cokuyor -- cunku bugun HER CP kendi basina markalar-arasi
+bir karar gerektiriyor. (`sonda_tekrar.py` bunu olcuyor.)
+
+## Felsefi kirilma
+
+Simdiye kadar hep **MARKALAR ARASI TRANSFER** yapmaya calistik. Dusen uc kol
+(ozkalib, kume, S4) da bunu yapiyordu: parca-ici baglami, markalar-arasi bir
+siniflandiriciyi iyilestirmek icin kullanmak.
+
+Ama en guclu sinyal transferde degil, **PARCANIN KENDI ICINDE**. Hic
+gormedigimiz bir markanin klemensinde de 24 delik BIRBIRININ AYNISIDIR.
+Bu bilgi hicbir markadan tasinmaz -- parcanin kendisinden gelir.
+
+**Kendine-benzerlik, TANIMI GEREGI marka-bagimsizdir.**
+
+Bu, "24 zor markalar-arasi karar"i -> "1 markalar-arasi karar + 23 parca-ici
+esleştirme"ye indirir. Model o 1 kararda zaten iyi (NIT parcalarinin %76'sinda
+dogru bir secenek ilk 50'de).
+
+## Ilke KONUMLA SINIRLI DEGIL
+
+Bir klemenste CP'ler yalnizca dizilişte degil, HER NITELIKTE aynidir:
+
+| nitelik | parca-ici tutarlilik |
+|---|---|
+| delik yaricapi | hepsi ayni bore capinda |
+| derinlik | hepsi ayni |
+| yon | hepsi paralel |
+| adim | sabit kafes araligi |
+| agiz bicimi | ayni huni profili |
+
+**Sonuc 1 -- ADET GEOMETRIDEN OKUNUR.** Bir klemensteki CP sayisi ~ B-rep'teki
+KIPSEL YARICAPLI silindir sayisi. Ust-k deneyinde +0.1533 kazandiran "adet",
+buyuk olcude OGRENMEYE GEREK OLMADAN elde edilebilir.
+
+**Sonuc 2 -- KIPSEL IMZA SUZGECI.** Parcanin kipsel yaricapina/derinligine
+UYMAYAN aday supheli. Bu, markalar-arasi bir siniflandiriciya hic ihtiyac
+duymadan yanlis pozitifleri kirpar.
+
+**Sonuc 3 -- KATALOG ONCELI (bedava saglamlik).** Klemens adimlari
+STANDARTTIR (3.5 / 5.0 / 5.08 / 7.5 / 10.16 mm). Olculen adimi en yakin
+katalog degerine oturtmak, gurultuye karsi bedava bir duzeltmedir.
+
+## VII. KOL (YENI, ONCELIK 1) -- PARCA-ICI SABLON
+
+**VII.1** Parcanin kipsel imzasini cikar (yaricap, derinlik, yon, adim).
+**VII.2** Adet = kipsel yaricapli silindir sayisi (geometrik, ogrenmesiz).
+**VII.3** Kipsel imzaya uymayan adaylari kirp.
+**VII.4** En guvenli tohumdan otelemeyle uret; her uretilen konumda YONU
+YENIDEN sec (K2.1'in cokme sebebi yon kopyalamaydi).
+**VII.5 Kapi:** coken markada F1 >= 0.30, calisan markada kayip YOK.
+
+**Neden bu kol digerlerinden farkli:** hicbir markadan bilgi tasimiyor.
+Gorulmemis marka sinavinda BOZULMASI icin bir sebep yok -- oysa bugune kadar
+dusen her kol, tam da o sinavda bozuldugu icin dustu.
+
+## Bu ilke, DUSEN kollari da acikliyor
+
+`ozkalib` / `kume` / S4 parca-ici bilgiyi SKORA katti; ama karar kurali zaten
+goreli oldugu icin bu tekrar oldu ve gurultu ekledi. Parca-ici bilginin dogru
+kullanimi skoru duzeltmek DEGIL, **URETMEK ve KIRPMAK**.

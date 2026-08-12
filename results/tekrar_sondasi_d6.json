@@ -1,0 +1,43 @@
+{
+ "dizin": "results/_p6_oz_tam4",
+ "kume": "d6",
+ "marka": {
+  "NIT": {
+   "cp_parca": 24.44,
+   "ilk_gt_sira": 18.0,
+   "ortanca_gt_sira": 156.75,
+   "son_gt_sira": 1065.0,
+   "ilkk_icinde": 0.05254831162354046,
+   "tekrar_tavani": 0.5566666666666666,
+   "adim_mm": 10.5
+  },
+  "MOR": {
+   "cp_parca": 3.425,
+   "ilk_gt_sira": 7.0,
+   "ortanca_gt_sira": 28.0,
+   "son_gt_sira": 89.0,
+   "ilkk_icinde": 0.15157232704402515,
+   "tekrar_tavani": 0.6732704402515722,
+   "adim_mm": 13.001115799001562
+  },
+  "SUPU": {
+   "cp_parca": 3.315151515151515,
+   "ilk_gt_sira": 0.0,
+   "ortanca_gt_sira": 3.0,
+   "son_gt_sira": 8.0,
+   "ilkk_icinde": 0.4675436015926813,
+   "tekrar_tavani": 0.7958404581103968,
+   "adim_mm": 12.00001144200137
+  },
+  "UPUN": {
+   "cp_parca": 3.1623931623931623,
+   "ilk_gt_sira": 0.0,
+   "ortanca_gt_sira": 2.0,
+   "son_gt_sira": 5.0,
+   "ilkk_icinde": 0.590600414078675,
+   "tekrar_tavani": 0.7806625258799172,
+   "adim_mm": 21.02974603508197
+  }
+ },
+ "not": "GT sirasi = o GT'yi tutan seceneklerin EN IYI sirasi. TEKRAR tavani = en iyi TEK oteleme izgarasina dusen GT orani (kendine-benzerlik yayiliminin ust siniri). D7'ye BAKILMADI."
+}
