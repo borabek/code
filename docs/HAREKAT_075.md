@@ -293,3 +293,58 @@ dusen her kol, tam da o sinavda bozuldugu icin dustu.
 `ozkalib` / `kume` / S4 parca-ici bilgiyi SKORA katti; ama karar kurali zaten
 goreli oldugu icin bu tekrar oldu ve gurultu ekledi. Parca-ici bilginin dogru
 kullanimi skoru duzeltmek DEGIL, **URETMEK ve KIRPMAK**.
+
+---
+
+# TEKRAR SONDASI SONUCU -- HIPOTEZ DOGRULANDI
+
+Makbuz `results/tekrar_sondasi_d6.json`.
+
+| marka | CP/p | ILK GT sirasi | ortanca | SON GT sirasi | ilk-k icinde | **tekrar tavani** | adim mm |
+|---|---|---|---|---|---|---|---|
+| NIT | 24.4 | **18** | 157 | **1065** | 0.053 | **0.557** | 10.50 |
+| MOR | 3.4 | 7 | 28 | 89 | 0.152 | 0.673 | 13.00 |
+| SUPU | 3.3 | 0 | 3 | 8 | 0.468 | 0.796 | 12.00 |
+| UPUN | 3.2 | 0 | 2 | 5 | 0.591 | 0.781 | 21.03 |
+
+## "Model ilkini buluyor, tekrarlari bulamiyor" -- KANITLANDI
+
+NIT'te ILK dogru secenek **18. sirada** (gayet iyi), SONUNCUSU **1065.**
+Siralama ilkten sonuncuya ~60 KAT bozuluyor; gercek adet kadar secim yapilsa
+GT'nin yalnizca **%5.3'u** yakalanir.
+
+UPUN/SUPU'da ilk 0., son 5-8. sirada -- neredeyse kusursuz. **Calisan ve
+coken marka arasindaki fark TAM OLARAK BUDUR.**
+
+Bu ayni zamanda ust-k deneyindeki celiskiyi de acikliyor: UPUN'da adet vermek
++0.1533 kazandiriyor cunku siralama zaten dogru; NIT'te kazandirmiyor cunku
+24. dogru secenek 1065. sirada -- ilk 24'e hicbir zaman giremez.
+
+## Yayilim kolunun tavani ve aritmetigi
+
+Tek bir otelemeyle uretilebilen GT orani: NIT **0.557**, MOR 0.673,
+SUPU 0.796, UPUN 0.781. **Bu bir ALT SINIR** -- sonda TEK oteleme denedi,
+klemenslerde cogu zaman 2 sira/2 kat vardir.
+
+| senaryo | GT agirlikli F1 (D6) |
+|---|---|
+| bugun | **0.2088** |
+| yayilim tavanin %60'ini alirsa | **0.4750** |
+| yayilim tavanin tamamini alirsa | ~0.78 (kesinlik mukemmel varsayimiyla) |
+
+NIT tek basina 0.0089 -> 0.7155 tavanina sahip ve D6 GT'sinin %45.7'si.
+
+## Karar
+
+**VII. KOL (parca-ici sablon + yayilim) ONCELIK 1'e alindi.** Gerekcesi
+artik varsayim degil olcum:
+ * kayip yeri kesin (tekrarlar, ilk degil)
+ * tavani olculu (NIT 0.557, alt sinir)
+ * mekanizmasi marka-bagimsiz (parcanin kendi otelemesi)
+ * bugune kadar dusen her kolun dustugu yerde (gorulmemis marka) bozulmasi
+   icin YAPISAL bir sebep yok
+
+**Adim degerleri (10.5 / 13.0 / 12.0 / 21.0 mm) standart klemens
+adimlarindan (3.5-7.5 mm) buyuk** -- sonda muhtemelen 2x harmonigi buluyor.
+Kol kurulurken adim, katalog degerlerine ve alt harmoniklere karsi
+sinanmali; yoksa uretilen izgara her ikinci CP'yi atlar.
