@@ -24,50 +24,17 @@
   },
   "python": "3.12.10"
  },
- "toplam": {
-  "P6": {
-   "robot": 0.25,
-   "recall": 0.17045454545454544,
-   "kesinlik": 0.46875,
-   "TP": 30,
-   "FP": 34,
-   "FN": 146
-  }
- },
- "marka": {
-  "UPUN": {
-   "P6": {
-    "robot": 0.25,
-    "tespit": 0.39166666666666666,
-    "TP": 30,
-    "FP": 34,
-    "FN": 146,
-    "recall": 0.17045454545454544,
-    "kesinlik": 0.46875,
-    "makro": 0.25,
-    "en_kotu": 0.25,
-    "marka": {
-     "UPUN": 0.25
-    },
-    "kural": [
-     "mutlak",
-     0.6
-    ],
-    "nms": 5.0,
-    "kural_kahini": 0.0
-   }
-  }
- },
- "n_egitim": 80,
+ "blok": "kafes_adet",
+ "yok": 0.312436883399363,
+ "var": 0.30935369959760206,
+ "fark": -0.0030831838017609248,
+ "gecti": false,
  "katlar": [
-  "UPUN"
+  "WEI",
+  "PXC",
+  "SIE",
+  "TOGI"
  ],
- "secilen": "P6",
- "kural": [
-  "mutlak",
-  0.6
- ],
- "nms": 5.0,
- "dizin": "results/_p6_oz_u25",
- "not": "tam korpusunun MARKA KATLARINDA kural secimi + kol kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
+ "n_parca": 3051,
+ "not": "Tek degiskenli ek-oznitelik kiyasi. tam marka katlari, MAKRO kural secimi. D7'ye BAKILMADI."
 }

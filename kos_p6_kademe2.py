@@ -427,8 +427,19 @@ def main():
             kf = (kol == "P6_KAFES")
             kb_tr = [kafes_tr[i] for i in ic] if kf else None
             kb_te = [kafes_tr[i] for i in dis] if kf else None
-            s1_tr = [oof[i] for i in ic] if kf else None
-            s1_te = [oof[i] for i in dis] if kf else None
+            # ZOR NEGATIF SESSIZ NO-OP'U (2026-08-12'de yakalandi):
+            # `s1_tr` yalnizca kf (P6_KAFES) icin doluyordu. `egit` icindeki
+            # sart `ZORNEG and kol != "TABAN" and s1ler is not None` oldugu
+            # icin P6 kolunda ZORNEG HIC DEVREYE GIRMIYORDU -- bayrak
+            # aciliyor, hicbir sey degismiyordu. Kontrollu testte
+            # ZORNEG=0 ve =1 TP/FP/FN'e kadar BIREBIR AYNI cikti.
+            #
+            # Skorlar her kol icin ZATEN var; `egit`/`skorla` onlari yalnizca
+            # P6_KAFES dalinda oznitelik kurmak icin kullaniyor, digerlerinde
+            # dokunmuyor. Bu yuzden hepsine gecirmek GUVENLI ve zor-negatif
+            # yolunu ACAR.
+            s1_tr = [oof[i] for i in ic]
+            s1_te = [oof[i] for i in dis]
             sb_tr = ([sira_tr[i] for i in ic] if kf and sira_tr else None)
             sb_te = ([sira_tr[i] for i in dis] if kf and sira_tr else None)
             m = egit(TR, kol, kb_tr, s1_tr, sb_tr)

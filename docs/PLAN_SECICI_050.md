@@ -341,3 +341,62 @@ Kapanirsa elde kalan:
 ulasilacakmis gibi davranmaktan iyidir. O noktada secenekler: (a) daha fazla
 ve daha CESITLI veri, (b) farkli bir problem kurgusu (ornegin dogrudan
 tepe-basi ag), (c) hedefi olculen gercege gore revize etmek.
+
+---
+
+# S3 SONUCU + DORDUNCU SESSIZ NO-OP: ZOR NEGATIF HIC DENENMEMIS
+
+## Tek degiskenli taban kosusu ne buldu
+
+| kosu | robot | recall | kesinlik | TP | FP | FN |
+|---|---|---|---|---|---|---|
+| u25 taban | 0.3091 | - | - | - | - | - |
+| **tam3 TABAN (duz)** | **0.3195** | 0.2771 | 0.3772 | 3962 | 6543 | 10338 |
+| **B1 (zor negatif)** | **0.3195** | 0.2771 | 0.3772 | 3962 | 6543 | 10338 |
+
+**BIREBIR AYNI** -- TP/FP/FN'e kadar. Yani:
+
+    KORPUS etkisi (u25 -> tam3) = +0.0104
+    ZOR NEGATIF etkisi          =  0.0000
+
+Daha once "B1 +0.0104" diye raporladigim kazanc **tamamen korpus
+degisikligindendi**. Tek degiskenli taban kosusu olmasaydi bir NO-OP'u
+kazanc diye urune yazacaktik.
+
+## Kok neden (kod duzeyinde)
+
+`kos_p6_kademe2.py` satir 430:
+
+    s1_tr = [oof[i] for i in ic] if kf else None     # kf = (kol == "P6_KAFES")
+
+`egit` icindeki sart ise:
+
+    if ZORNEG and kol != "TABAN" and s1ler is not None:
+
+**P6 kolunda `s1ler` HER ZAMAN None**, dolayisiyla ZORNEG hicbir zaman
+devreye girmedi. Bayrak aciliyor, hicbir sey degismiyordu. Kontrollu testte
+(80 parca, ayni tohum) ZORNEG=0 ve =1 **TP/FP/FN'e kadar birebir ayni** cikti.
+
+**DUZELTME:** skorlar her kol icin zaten var ve `egit`/`skorla` onlari yalnizca
+P6_KAFES dalinda oznitelik kurmak icin kullaniyor. Hepsine gecirmek guvenli.
+Duzeltmeden sonra ayni testte ZORNEG=0 -> 0.4214, =1 -> 0.2500: **bayrak artik
+etkili.**
+
+## Durum
+
+**Zor negatif CURUTULMEDI, HIC DENENMEDI.** Simdi gercekten olculebilir;
+tam korpusta tek degiskenli kosu ile sinanmali. (Minik testteki dusus
+baglayici degil: 80 parca, 30 iterasyon.)
+
+## Bugunun dersi -- ayni sinif hata DORT kez
+
+| # | sessiz no-op | nasil yakalandi |
+|---|---|---|
+| 1 | `str.replace` eslesmedi, sessizce hicbir sey yapmadi | grep ile dogrulama |
+| 2 | bash fonksiyonu CAGRILDI ama TANIMLANMADI (koruma delindi) | bos RAM 0.9 GB'a dustu |
+| 3 | yeni test `if __name__` blogundan SONRA tanimlandi, hic kosmadi | cikti hala 6 test gosteriyordu |
+| 4 | `P6_ZORNEG` bayragi okundu ama kosul hep False | tek degiskenli taban kosusu |
+
+**Ortak ders:** bir degisikligin ETKI ETTIGINI dogrulamadan "yapildi" deme.
+Dordunun da maliyeti farkliydi ama dorduncusu en pahalisiydi: bir NO-OP'u
++0.0104 kazanc diye raporlamistim.
