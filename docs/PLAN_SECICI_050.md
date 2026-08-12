@@ -85,6 +85,21 @@ seyreltme yaricapi ve aday ust siniri bu kayba gore YENIDEN taranmali
 
 - **Kapi:** konum recall **>= 0.95** (bugun 0.8989).
 
+**Bu kolun tavani ZATEN OLCULU** (seyreltme taramasi, D6):
+
+| seyreltme | konum recall | aday/parca |
+|---|---|---|
+| uzamsal 2.5mm, ust sinir 350 (BUGUNKU) | 0.8713 | 251 |
+| **uzamsal 2.0mm, SINIRSIZ** | **0.9768** | 458 |
+
+Yani konum kaybinin buyuk kismi ayarla kapanabiliyor. **Ama bedeli S1'i
+ZORUNLU kiliyor:** 458 aday x ~17 secenek = parca basina ~7800 secenek
+(bugun 4857). Budama olmadan bu kol celdirici sayisini patlatir.
+
+**S1 -> S5 sirasi bu yuzden onemli:** once budama, sonra konum genisletme.
+Ters sirada yapilirsa S5 muhtemelen NEGATIF olcer ve haksiz yere kapanir --
+bu kampanyada "kapali kol aslinda sondanin kusuruydu" hatasi bir kez yasandi.
+
 ## S6. SAHA -- olculen zinciri urune bagla
 
 Bunlar F1'i degistirmez ama URUNE deger tasir; F1 kollarindan BAGIMSIZ.
