@@ -248,3 +248,49 @@ kullaniyor gorunuyor; fark aciklanmadi. Ihtimaller: (a) `yukle` ile
 `sonda_havuz_tavani`in GT kayitlarini farkli okumasi, (b) eksen toleransinin
 yuzdelik (`0.06 x diag`) vs sabit (40mm) uygulanmasi. **Cozulmeden MOR'un
 havuz sayisi bu tablodan alintilanmamali.**
+
+---
+
+# S2 ILK SONUC: `ozkalib` COKTU (-0.0482)
+
+Makbuz `results/ek_blok_ozkalib.json` (3051 parca, `tam` marka katlari).
+
+| blok | bloksuz | blokla | fark | karar |
+|---|---|---|---|---|
+| ozkalib | 0.3124 | 0.2642 | **-0.0482** | **GECMEDI** |
+
+`ozkalib` = parca-ici skor yuzdeligi + en yuksekten fark + medyandan fark.
+
+**S8'IN UCUZ SONDASI BUYDU VE DUSTU.** "Marka-ici skor normalizasyonu"
+hipotezi zayifladi: skoru parca icinde yeniden olceklendirmek modeli
+IYILESTIRMIYOR, belirgin sekilde BOZUYOR. Muhtemel sebep: mutlak skor
+duzeyinin kendisi bilgi tasiyor (kolay parca = yuksek skor) ve normalizasyon
+bu bilgiyi siliyor.
+
+**S8 kapatilmiyor ama onceligi DUSTU:** farkli bir normalizasyon (ornegin
+yalniz olcek, konum degil) denenebilir; ancak once daha guclu kollar.
+
+## KOL SAYIMI (bugune kadar, `tam` katlari)
+
+| kol | sonuc |
+|---|---|
+| SIRA damgalama | 0.0000 (kapandi) |
+| B6 topluluk | -0.0011 (kazandirmadi) |
+| **ozkalib** | **-0.0482 (coktu)** |
+| tavan-24 uctan uca | -0.0092 (d6, kapi gecmedi) |
+| B1 zor negatif | +0.0104 (tek degiskenli DEGIL) |
+
+**Bes koldan dordu negatif.** Bu, projenin taban oranina uygun: kollarin cogu
+duser. Kalan bloklardan (kanonik, kume, topoloji, kafes_adet, simetri,
+derinlik) gercekci beklenti 1-2 tanesinin +0.01..+0.03 vermesi.
+
+## SON HEDEF TAHMINI (durust)
+
+- **S4 olmadan:** 0.32 -> **~0.35-0.38**. Kalan bloklar bu tabloyu degistirmez.
+- **S4 cokmeyi cozerse:** **0.45-0.50 mumkun.** Aritmetigi: D7'de CWT tek
+  basina GT'nin %37'si ve F1'i 0.0466; calisan markalar ~0.45. Coken markalar
+  calisan seviyeye cikarsa mikro F1 kollarin TOPLAMIYLA degil SICRAYARAK gelir.
+- S4'un basari olasiligi durustce **%30-40**; kapisi +0.05.
+
+**Bugun 0.50'yi vaat eden hicbir olcum YOK.** Elimizde olan, 0.50'ye giden tek
+yolun hangisi oldugunu gosteren bir TESHIS var (S7: poz-neg skor ayrimi).
