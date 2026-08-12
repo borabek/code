@@ -16,7 +16,7 @@ set -u
 cd "$(dirname "$0")"
 G=results/_gece
 mkdir -p "$G"
-BLOKLAR=${EK_KUYRUK:-"kanonik topoloji"}
+BLOKLAR=${EK_KUYRUK:-"kanonik kume topoloji"}
 ANA="$G/EK_KUYRUK.log"
 say() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$ANA"; }
 

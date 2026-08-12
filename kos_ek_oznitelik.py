@@ -118,6 +118,12 @@ def ek_blok(d, s1):
         bek = uzanim / adim + 1.0
         n_tohum = float(len(Pt))
         return np.tile([bek, n_tohum, bek - n_tohum], (len(P), 1))
+    if BLOK == "kume":
+        # ADAYLAR ARASI BAGLAM: noktasal secici "ayni delige bakan digerleri"
+        # ve "5mm otedeki daha guclu rakip" bilgisini HIC gormuyor. D2
+        # (aday-kumesi transformer) kolunun ucuz yaklasimidir.
+        import kume_baglami as KM
+        return KM.oznitelik(P, YD, d["idx"], s1, d["diag"])
     if BLOK == "kanonik":
         # PARCANIN KENDI EKSEN SISTEMI: gorulmemis markada modelleme ekseni
         # bizimkiyle ayni olmak zorunda degil; dunya koordinati ogrenilen her
