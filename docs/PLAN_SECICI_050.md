@@ -141,3 +141,59 @@ olmadan ulasilmasi olasi degil**, S4 ile de garanti degil.
 
 **Kural degismedi:** D7 OKUMA #2 ancak `tam` katlarinda kumulatif **+0.10**
 birikirse yapilir. Bugun birikim +0.0104 (ve o bile tek degiskenli degil).
+
+---
+
+# S0 SONUCU (2026-08-12 06:20) -- KAPI GECMEDI, PLAN DEGISTI
+
+`results/_gece/UCTAN_UCA.log` · d6 marka katlari, tek degisken korpus.
+
+| | tavan 12 | tavan 24 | fark |
+|---|---|---|---|
+| **robot** | 0.2991 | **0.2898** | **-0.0092** |
+| recall | 0.2027 | 0.1915 | -0.0112 |
+| kesinlik | 0.5706 | 0.5961 | +0.0255 |
+
+Kat kat: UPUN +0.0227 · SUPU -0.0119 · NIT +0.0016 · MOR **-0.0506**.
+
+**Tavan kazanci F1'e DONMUYOR.** Celdirici etkisi gercek: kesinlik yukseliyor
+ama recall daha cok dusuyor. Onceden ilan edilen kural geregi **once S1
+(budama), tavan ondan sonra**.
+
+**KAYIT:** bu deney d6-only LOMO'dur; her kat yalnizca ~400 parca uzerinde
+egitiliyor (gercek kurulumda 3051). Zayif model ek celdiricilerden DAHA COK
+zarar gorur, yani -0.0092 tavan-24 aleyhine YANLI olabilir. Kol
+KAPATILMIYOR; `tam` korpusunda tekrarlanacak (S0b).
+
+## ASIL BULGU: secici verimliligi IKI KUTUPLU
+
+| marka | havuz tavani | gerceklesen | **verimlilik** |
+|---|---|---|---|
+| UPUN | 0.9807 | 0.6422 | **%65.5** |
+| SUPU | 0.9591 | 0.4560 | **%47.5** |
+| MOR | 0.9297 | 0.0533 | **%5.7** |
+| NIT | 0.9147 | 0.0049 | **%0.5** |
+
+Markalar ya CALISIYOR (%47-66) ya da COKUYOR (%0.5-6). Arada bir sey yok.
+NIT'te havuz cevabi TASIYOR (tavan 0.9147) ama secici bulamiyor.
+
+**Ayni imza baska kumelerde de var:** `tam` katlarinda TOGI 0.1689 (recall
+0.1054, kesinlik 0.4240 -- yani "az ama dogru"), D7'de CWT 0.0466. Yani bu,
+d6'nin kucuk egitim kumesine bagli bir artefakt DEGIL; sistemin sureklilesen
+kor noktasi.
+
+## PLANIN CERCEVESI DEGISTI
+
+Hedef **"ortalama verimliligi 1.45x artirmak" DEGIL**, "coken markalardaki
+COKUSU durdurmak". Aritmetik bunu destekliyor: NIT d6 GT'sinin %46'si ve
+bugun 0.005'te. NIT tek basina calisan markalarin seviyesine (%47) ciksaydi,
+mikro F1 0.29'dan ~0.60'a cikardi -- tek bir markadan.
+
+**Yeni birinci soru:** COKEN MARKA ile CALISAN MARKA arasindaki fark NE?
+Bu, sonraki adimlarin (S1/S4) neye gore tasarlanacagini belirler ve
+olculmeden hicbiri dogru hedeflenemez.
+
+**S7 (YENI, ONCELIKLI): COKUS TESHISI.** NIT/MOR ile UPUN/SUPU arasinda
+sistematik farki olc: parca basina CP sayisi, aday yogunlugu, skor dagilimi,
+kural secimi, GT'nin havuzdaki skor sirasi. Kapi yok -- bu bir TESHIS, kol
+degil; ciktisi sonraki kollarin hedefini belirler.
