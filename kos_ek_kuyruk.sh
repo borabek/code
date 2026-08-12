@@ -97,4 +97,29 @@ if kapilari_bekle; then
   fi
 fi
 
+# TAM3 TABAN KOSUSU -- B1/B6'yi YORUMLANABILIR kilar.
+#
+# SORUN: orkestrator B1'i `tam3` korpusunda VE zor-negatif acikken kosuyor;
+# elimizdeki referans (0.3091) ise `u25` korpusunda ve zor-negatif KAPALI.
+# Iki degisken birden degisince B1'in kazanci KORPUSA mi YONTEME mi ait,
+# ayirt edilemez. Bu kosu tam3 uzerinde DUZ ayarla taban uretir; boylece
+#   taban(u25) -> taban(tam3)  = KORPUS etkisi
+#   taban(tam3) -> B1(tam3)    = ZOR NEGATIF etkisi
+# ikisi ayri ayri okunur.
+if kapilari_bekle; then
+  say "BASLIYOR: tam3_taban (kademe2, duz ayar)"
+  t0=$(date +%s)
+  if P6_DIZIN=results/_p6_oz_tam3 P6_KUME=tam,d6 P6_KAT_MIN=200 \
+       P6_KOLLAR=P6 P6_NMSLER=5.0 P6_ARAMA_N=250 P6_NEG_KAT=6 P6_ITER=200 \
+       python kos_p6_kademe2.py > "$G/TAM3_TABAN.log" 2>&1; then
+    say "BITTI: tam3_taban ($(( $(date +%s) - t0 ))s)"
+    cp -f results/p6_kademe2_tam.json results/p6_kademe2_tam3_taban.json \
+      2>/dev/null || true
+    tail -6 "$G/TAM3_TABAN.log" | sed 's/^/    /' | tee -a "$ANA"
+  else
+    say "DUSTU: tam3_taban ($(( $(date +%s) - t0 ))s)"
+    tail -4 "$G/TAM3_TABAN.log" | sed 's/^/    /' | tee -a "$ANA"
+  fi
+fi
+
 say "=== EK KUYRUGU BITTI ==="

@@ -846,3 +846,24 @@ Aradaki **0.244**, tamamen yon kaybidir. Ve yon secenekleri aday basina 12
 ile sinirli, doygun halde (bkz. tavan doygunlugu uyarisi). Havuzu genisletmek
 bu farki kapatmaz -- nitekim tavan-12 tam-acik havuzda konum 0.8713 -> 0.8997
 cikarken yon yalnizca 0.7264 -> 0.7347 oynadi.
+
+---
+
+## 14. OLCUM TASARIMI UYARISI -- B1/B6 tek degiskenli DEGIL
+
+Orkestrator `B1_zor_negatif`i **`tam3` korpusunda VE zor-negatif acikken**
+kosuyor. Elimizdeki referans (0.3091) ise **`u25` korpusunda ve zor-negatif
+KAPALI**. Iki degisken ayni anda degisiyor: bir fark cikarsa KORPUSA mi
+YONTEME mi ait, ayirt edilemez.
+
+Bu, projenin defalarca yakalandigi hatanin ta kendisidir (bkz. bolum 5d:
+"gelistirme kumesi aldatir" -- orada da tabanin ne verdigi yazilmamisti).
+
+**Cozum (kuyruga eklendi):** `tam3` uzerinde DUZ ayarla bir taban kosusu
+(`results/p6_kademe2_tam3_taban.json`). Boylece:
+
+    taban(u25)  -> taban(tam3)   = KORPUS etkisi
+    taban(tam3) -> B1(tam3)      = ZOR NEGATIF etkisi
+
+iki etki AYRI okunur. Taban kosusu olmadan B1/B6 sayilari raporlanabilir ama
+**yorumlanamaz**; makbuzlari o yuzden "tek degiskenli degil" notuyla okunmali.
