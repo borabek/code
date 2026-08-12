@@ -532,3 +532,62 @@ Kol ancak COKEN markalarda devreye girmeli -- bu zaten VII.5 kapisinin sarti.
    ogrenmeli regresyon (VII.2d).
 3. **REJIM KAPISI**: kol yalnizca coken markalarda. Ayirt edici olcu S7'de
    var (poz-neg skor ayrimi) ama urun surumu gerekiyor.
+
+---
+
+# VII SONUCU -- KOL CANLI AMA DARBOGAZ YINE AYNI YERDE
+
+## Suzgec olcumu (uretilen noktalari model skoruyla sirala, ilk k)
+
+| marka | bugun | KOL (ilk k) | KAHIN yon | kol/kahin |
+|---|---|---|---|---|
+| **NIT** | 0.009 | **0.077** | 0.527 | **%15** |
+| MOR | 0.178 | 0.120 | 0.495 | %24 |
+| SUPU | 0.449 | 0.155 | 0.415 | %37 |
+| UPUN | 0.536 | 0.204 | 0.333 | %61 |
+
+| uygulama | GT agirlikli F1 (d6) |
+|---|---|
+| taban | 0.1789 |
+| kol KURESEL uygulanirsa | **0.1129** (TABANDAN KOTU) |
+| **kol yalniz NIT'te (rejim kapili)** | **0.2184** (**+0.0394**) |
+
+## Iki asamali darbogaz
+
+**Asama 1 -- konum uretimi CALISIYOR.** Kafes GT'siz bulunuyor, NIT'te
+kapsama 0.676; yon KAHIN gibi secilirse 0.527.
+
+**Asama 2 -- yon SECIMI cokuyor.** Gercek secici kullanildiginda 0.527 ->
+0.122 (kipsel yon) -> 0.077 (ilk k). Yani **dogru yon MEVCUT ama model onu
+SECEMIYOR.**
+
+Bu, S7'nin bulgusunun aynisi: NIT'te poz-neg skor ayrimi 0.05. Yani yayilim
+kolu konum sorununu cozuyor, **ama yon secimi ayni zayif skora geri
+bagimli** ve orada tikaniyor.
+
+**KIPSEL YON denendi** (parcadaki butun CP'ler paralel; yonu nokta basina
+degil parca basina oy birligiyle sec): NIT'i 0.054 -> 0.122 ile IKI KATINA
+cikardi ama MOR'u 0.221 -> 0.139 dusurdu. Net etki sinirli.
+
+## Durust bilanco
+
+- Kol **kuresel uygulanamaz** (0.1129 < 0.1789).
+- **Rejim kapili** haliyle **+0.0394** getiriyor (0.1789 -> 0.2184). Bu
+  gercek ama mutevazi bir kazanc.
+- Kolun TAVANI (0.527 NIT) ile GERCEKLESENI (0.077) arasindaki 7 kat fark,
+  tamamen YON SECIMINDEN geliyor.
+
+## Bundan sonrasi
+
+Yayilim kolunu buyutmenin yolu daha iyi kafes aramasindan DEGIL, **uretilen
+konumda yon secmekten** geciyor. Uc aday:
+1. **III. KOL (analitik yon)** -- B-rep agzinda yon hesaplanabilir,
+   ogrenilmesi gerekmez. Simdi cok daha degerli: yayilim kolunun darbogazi
+   dogrudan bu.
+2. **Isin/mesh dogrulamasi** -- uretilen konumda hangi yonde gercekten delik
+   var? Bu da yonu GEOMETRIDEN verir.
+3. Yon icin ayri, kucuk bir siniflandirici (mevcut skorun zayif oldugu yer).
+
+**0.75 hedefi acisindan:** yapisal tavan 0.9474 duruyor, ama ona ulasmanin
+onunde artik tek somut engel var ve adi konmus durumda: **uretilen konumda
+yon secimi.**
