@@ -742,3 +742,54 @@ Yon-bankasini KALDIR, her adaya TEK yon ver (kendi mesh normali), kademe2'yi
 tek degiskenli kos. Kapi: **uctan uca robot F1 >= bugunku 0.3124.** Recall
 bedeli 0.04 iken pozitif yogunlugu 13.5 kat artiyorsa kesinlik cok daha
 fazla artmali.
+
+---
+
+# MESH NORMALI MEKANIZMASI OLDU -- ve 0.800 tahminim SISIKTI
+
+Makbuz `results/aday_normal_tavan.json`.
+
+| marka | KONUM | **adayin KENDI normali** | banka (24 secenek) |
+|---|---|---|---|
+| NIT | 0.843 | **0.029** | 0.843 |
+| SUPU | 0.951 | 0.631 | 0.921 |
+| UPUN | 0.965 | 0.546 | 0.962 |
+| MOR | 0.869 | 0.635 | 0.869 |
+| **TOPLAM** | — | **0.334** | **0.893** |
+
+## Kusur nerede
+
+"Mesh normali yonu NIT'te %80 tutuyor" olcumum, kutudaki **6000 TEPENIN
+HERHANGI BIRINI** kabul ediyordu. Mekanizma ise ~490 SECILMIS aday uzerinde
+calisacakti. O adaylar cogunlukla deligin DIS DUZ YUZUNDE degil BORU
+DUVARINDA oturuyor ve oradaki normal eksene DIKTIR.
+
+Yani dogru normali tasiyan tepeler aday havuzunda YOK. Sonda olcutu
+mekanizmayla UYUSMUYORDU.
+
+Ara adim da ayni yone isaret etmisti: banka-yaklasimli suzgec korpusunda
+yonlu recall 0.8926 -> 0.3679 dusmustu. Iki bagimsiz olcum ayni sonucu
+veriyor.
+
+## Bugunun BESINCI olcum kusuru -- ve tek IYIMSER olani
+
+| # | kusur | yon |
+|---|---|---|
+| 1 | kafes aramasinda KAHIN hedef | kotumser (kolu olu gosterdi) |
+| 2 | OKLIT kutu (urun kutusu yerine) | kotumser |
+| 3 | B-rep cipasi (mesh yerine) | kotumser |
+| 4 | tek oteleme (coklu kafes yerine) | kotumser |
+| **5** | **"herhangi bir tepe" olcutu** | **IYIMSER** |
+
+Ilk dordu kolu haksiz yere OLU gosteriyordu; besincisi haksiz yere CANLI.
+Ders ayni: **olcutun MEKANIZMAYLA birebir ayni olmasi gerekir.**
+
+## 0.70 tahminine etkisi
+
+Mesh-normal rotasi KAPANDI. Tahmin ~0.42'de kaliyor; 0.70 icin NIT tipi
+markalarda TEMSIL acigini kapatan baska bir sey gerekiyor.
+
+**Kapanmayan tek somut aday:** deligin DIS YUZ tepelerini aday havuzuna
+sokmak. Bugun havuz segmentasyon olasiligina gore seyreltiliyor ve o tepeler
+eleniyor olabilir. Bu, "aday uretimi" kolunun yeni ve olculebilir bir alt
+maddesi.
