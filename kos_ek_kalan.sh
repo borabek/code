@@ -28,6 +28,29 @@ bos_ram() {
     2>/dev/null | tr -d '\r'
 }
 
+# BASKA AGIR EK ISI VAR MI?
+# 10:02 ve 10:05'te iki bagimsiz hat (bu betik + kos_ek_kuyruk.sh) kapilarini
+# ayni saniyede gecti, ucu birden ~6'sar GB yukledi ve bos RAM 0.9 GB'a dustu.
+# RAM kapisi TEK BASINA yetmiyor -- isin KENDISI sorulmali.
+#
+# NOT: bu fonksiyon bir kez CAGRILDI ama TANIMLANMAMISTI (python str.replace
+# eslesmeyi bulamayinca SESSIZCE hicbir sey yapmamisti). Bash'te tanimsiz
+# fonksiyon bos doner, `${a:-0}` onu 0 yapar ve kapi ACILIR -- yani koruma
+# varmis gibi gorunup hic calismaz.
+baska_ek() {
+  powershell.exe -NoProfile -Command \
+    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'kos_ek_oznitelik|kos_s4_kume' } | Measure-Object).Count" \
+    2>/dev/null | tr -d '\r'
+}
+
+# KENDI KENDINI DOGRULA: fonksiyon sayi dondurmuyorsa koruma YOK demektir.
+_t=$(baska_ek)
+case "${_t:-x}" in
+  ''|*[!0-9]*) say "!! KORUMA CALISMIYOR (baska_ek '$_t' dondu) -- cikiliyor"
+               exit 1 ;;
+esac
+say "koruma dogrulandi (baska_ek -> $_t)"
+
 say "=== KALAN EK BLOKLARI ==="
 for blok in kafes_adet simetri derinlik; do
   if [ -f "results/ek_blok_$blok.json" ]; then
@@ -36,10 +59,15 @@ for blok in kafes_adet simetri derinlik; do
   fi
   # bellek kapisi: iki agir EK isi ust uste binmesin
   bek=0
-  while [ $bek -lt 7200 ]; do
+  while [ $bek -lt 14400 ]; do
     r=$(bos_ram); r=${r:-0}
-    [ "${r%%.*}" -ge 10 ] && break
-    say "  $blok bekliyor: ${r}GB bos"
+    a=$(baska_ek); a=${a:-0}
+    if [ "${r%%.*}" -ge 10 ] && [ "$a" -eq 0 ]; then
+      sleep 20                       # yaris kirici: kisa bekleyip TEKRAR bak
+      a=$(baska_ek); a=${a:-0}
+      [ "$a" -eq 0 ] && break
+    fi
+    say "  $blok bekliyor: ${r}GB bos, baska EK isi $a"
     sleep 300; bek=$((bek + 300))
   done
 
