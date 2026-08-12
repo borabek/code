@@ -761,3 +761,29 @@ mevcut kaynaklarin yerini ALIYOR.
 GT'sinin %45.7'si, yonlu recall 0.5254, kaybi tam olarak YON kaybi) da var mi?
 Orneklem markaya gore secilmeli -- ilk kosu dosya sirasi yuzunden yalnizca
 UPUN/SUPU'yu ornekliyordu.
+
+### NIT'te tavan cok daha sert bagliyor (olculdu)
+
+Makbuz `results/max_sec_sondasi.json` (NIT, 18 parca, 482 GT, yelpaze 256):
+
+| secenek tavani | NIT yonlu recall | secenek maliyeti |
+|---|---|---|
+| 12 (BUGUNKU) | 0.5913 | 1.00x |
+| **24** | **0.8755** | 1.33x |
+| 48 | 0.8755 | 1.35x |
+
+Kolay markalarda kazanc **+0.0615**; tavani asagi ceken NIT'te **+0.2842**.
+Yani tavan tam da en cok kanayan yerde bagliyor -- yogun parcada bir adayin
+dogru yonu, 12 kisilik listeye giremiyor.
+
+**Kaba yansima:** NIT D6 GT'sinin %45.7'si ve bugun 0.5254'te. 0.8755'e
+cikarsa D6 toplam yonlu recall **0.7264 -> ~0.886**, F1 tavani
+**0.8415 -> ~0.94**. Yani KAPI A (>= 0.85) **GECMEMEKTEN GECMEYE** doner.
+
+**Yapilan:** `_p6_oz_tam4` korpusu tavan 24 ile cikariliyor (`kos_tam4.sh`,
+5 pay). Diger butun ayarlar `_p6_oz_tam3` ile birebir ayni -- tek degisken
+tavan, yoksa kazanc neye ait bilinemez. Bitiminde KAPI A hem `d6` hem `tam`
+kumesinde olculur.
+
+**Not:** bu gece kosan butun B fazi olcumleri tavan-12 korpusu (`tam3`)
+uzerindedir; gecerlidirler ama DAHA DUSUK bir tavanin altinda alinmislardir.

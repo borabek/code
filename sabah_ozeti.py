@@ -134,6 +134,31 @@ def main():
                  "VAAT DEGIL, UST SINIR.")
     L.append("")
 
+    L.append("## 1b. SECENEK TAVANI (MAX_SEC) BAGLIYOR MU?")
+    ms = sorted(glob.glob(os.path.join(KOK, "results",
+                                       "max_sec_sondasi*.json")))
+    if not ms:
+        L.append("- olcum yok (`MS_MARKA=NIT python sonda_max_sec.py`)")
+    for y in ms:
+        d = oku(y)
+        if not d:
+            continue
+        L.append(f"**orneklem: {d.get('marka', '?')} / {d.get('n_parca')} "
+                 f"parca, yelpaze {d.get('yelpaze')}**")
+        L.append("")
+        L.append("| tavan | yonlu recall | secenek maliyeti |")
+        L.append("|---|---|---|")
+        for t, v in sorted(d.get("sonuc", {}).items(), key=lambda kv: int(kv[0])):
+            L.append(f"| {t} | {v['yonlu_recall']:.4f} | "
+                     f"{v['maliyet_kat']:.2f}x |")
+        L.append("")
+    if ms:
+        L.append("> Bugunku tavan **12**. Tavan bagliyorsa yon kaynagi "
+                 "eklemek (yelpaze cozunurlugu) recall'u ARTIRMAZ -- yeni "
+                 "yonler tavana takilip mevcutlarin yerini alir. "
+                 "`YB_MAX_SEC` ile ayarlanir.")
+    L.append("")
+
     L.append("## 2. EK OZNITELIK BLOKLARI (kapi +0.01)")
     eb = ek_bloklar()
     if not eb:

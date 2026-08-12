@@ -1,28 +1,28 @@
 {
  "on": "d6",
- "n_parca": 30,
+ "n_parca": 18,
  "yelpaze": 256,
  "sonuc": {
   "12": {
-   "gt": 65,
-   "yakalanan": 55,
-   "yonlu_recall": 0.8461538461538461,
-   "secenek": 43066,
+   "gt": 482,
+   "yakalanan": 285,
+   "yonlu_recall": 0.5912863070539419,
+   "secenek": 113287,
    "maliyet_kat": 1.0
   },
   "24": {
-   "gt": 65,
-   "yakalanan": 59,
-   "yonlu_recall": 0.9076923076923077,
-   "secenek": 51893,
-   "maliyet_kat": 1.204964473134259
+   "gt": 482,
+   "yakalanan": 422,
+   "yonlu_recall": 0.8755186721991701,
+   "secenek": 151030,
+   "maliyet_kat": 1.3331626753290315
   },
-  "40": {
-   "gt": 65,
-   "yakalanan": 59,
-   "yonlu_recall": 0.9076923076923077,
-   "secenek": 52996,
-   "maliyet_kat": 1.230576324710909
+  "48": {
+   "gt": 482,
+   "yakalanan": 422,
+   "yonlu_recall": 0.8755186721991701,
+   "secenek": 153189,
+   "maliyet_kat": 1.3522204666025228
   }
  },
  "not": "Yonlu TAVAN (mukemmel secici). Kabul kutusu urun metrigiyle ayni. D7'ye BAKILMADI."
