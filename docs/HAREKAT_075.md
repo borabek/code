@@ -155,3 +155,62 @@ guclenir.
 
 **Kural:** her kol TEK DEGISKENLI olculur, kapisi ONCEDEN ilan edilir, D7'ye
 kumulatif +0.10 birikmeden BAKILMAZ.
+
+---
+
+# FAZ 0 SONUCU -- AGIRLIK MERKEZI BELIRLENDI (ve hipotezim KISMEN CURUDU)
+
+Makbuz `results/ustk_kahin_d6.json`.
+
+| marka | GT | KURAL | USTK_KAHIN | TAVAN | kazanc |
+|---|---|---|---|---|---|
+| NIT | 1222 | 0.0089 | 0.0434 | 0.9147 | +0.0344 |
+| SUPU | 547 | 0.4494 | 0.4808 | 0.9591 | +0.0314 |
+| **UPUN** | 370 | 0.5359 | **0.6892** | 0.9807 | **+0.1533** |
+| MOR | 274 | 0.1783 | 0.1861 | 0.9297 | +0.0078 |
+| **TOPLAM** | 2413 | **0.2954** | **0.2578** | 0.9372 | **-0.0376** |
+
+## Dort markanin DORDU kazaniyor, TOPLAM kaybediyor
+
+Hata degil, MIKRO metrigin dogasi: NIT'te gercek adet kadar (parca basina
+~24) tahmin uretince yuzlerce YANLIS POZITIF ekleniyor. NIT kendi icinde
+kazaniyor (cunku FN yigini devasa, recall artisi kesinlik kaybini yeniyor)
+ama HAVUZLANMIS toplami batiriyor.
+
+**Bu, projedeki MIKRO/MAKRO tuzaklar ailesinin yeni bir uyesi:** marka basina
+iyilesme, havuzlanmis metrikte KOTULESME olarak gorunebilir. Kol kararlari
+HER ZAMAN havuzlanmis mikro uzerinden verilmeli -- ama TESHIS marka basina
+okunmali, yoksa bu ayrim kacar.
+
+## ASIL BULGU: iki AYRI hastalik
+
+**1. Siralamanin CALISTIGI markada, baglayici kisit ADET/ESIK.**
+UPUN: 0.5359 -> **0.6892** yalnizca dogru adedi bilmekle. Bu, tek bir
+degisiklikten gelen en buyuk kazanc (+0.1533) -- bugune kadar olctugum
+her seyden buyuk.
+
+**2. Siralamanin COKTUGU markada, adet KURTARMIYOR.**
+NIT: gercek adet verilse bile 0.0434 (tavan 0.9147). Yani NIT'te siralama
+GERCEKTEN bozuk; esik/adet duzeltmesi ise yaramaz.
+
+## PLANIN GUNCELLENMIS AGIRLIK MERKEZI
+
+| kol | hedef kitle | dayanak |
+|---|---|---|
+| **II. KOL (ogrenilen karar/adet)** | siralamanin CALISTIGI markalar | UPUN +0.1533 OLCULDU |
+| **I. KOL (kafes ile yapisal uretim)** | siralamanin COKTUGU markalar | NIT'te adet kurtarmiyor -> yapi sart |
+
+**Ve kritik tasarim kisiti:** adet-kisitli secim KURESEL uygulanamaz --
+NIT'te FP patlamasi yaratir. Parca basina, modelin O PARCADA guvenilir olup
+olmadigina gore uygulanmali. Yani II. KOL'un ic mekanizmasi:
+
+    guven yuksek -> ilk-k (k = tahmini adet)
+    guven dusuk  -> mevcut esik kurali (muhafazakar)
+
+"Guven"in kendisi olculebilir: parca ici skor ayrimi (S7'nin poz-neg olcusu
+bunun kahin surumuydu; urun surumu skor dagiliminin bicimi olabilir).
+
+## Sonraki adim
+
+II. KOL'u bu haliyle kur: parca basina rejim (guven) + adet tahmini + ilk-k.
+Kapi: havuzlanmis MIKRO'da +0.03, VE coken markalarda kayip olmamasi.
