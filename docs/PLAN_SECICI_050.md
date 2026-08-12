@@ -45,6 +45,16 @@ indirsin, pahali secici yalniz onlari gorsun.
 - **Neden simdi:** bu kol tavan-24 OLMADAN anlamsizdi; celdirici sorunu yeni
   dogdu.
 
+**Budamanin F1'e hangi YOLDAN dokundugu onemli.** Karar kurali GORELI
+(parca-maksimumunun %85'i), yani DUSUK skorlu secenekleri atmak secimi
+degistirmez -- onlar zaten secilmiyordu. Budamanin gercek mekanizmasi
+EGITIMDEDIR: negatifler `NEG_KAT=6` ile rastgele orneklenıyor ve secenek
+havuzu buyudukce ornek daha KOLAY negatiflerden olusuyor, model zayifliyor.
+
+Bu, B1'in (zor negatif madenciligi) mekanizmasiyla **AYNI**. Dolayisiyla
+S1 ve S3'un kazanclari BUYUK OLCUDE ORTUSUR; ikisini toplamak yanlis olur.
+S1'in ayirt edici degeri, S5'i (konum genisletme) mumkun kilmasidir.
+
 ## S2. EK OZNITELIK BLOKLARI (kuyrukta, kismen kosuyor)
 
 Tek degiskenli cerceve, kapi **+0.01**. Sirasiyla: `kanonik` (parcanin kendi
