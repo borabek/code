@@ -56,6 +56,31 @@ def temel(d):
                       p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
 
 
+def yigin_f32(ogeler, uret, satir):
+    """float64 ARA YIGIN OLMADAN float32 matris kur.
+
+    `np.vstack([...]).astype(np.float32)` once HEPSINI float64 birlestirir:
+    tam-acik korpusta 8.414.677 satir x 162 sutun = **10.2 GiB** ve
+    MemoryError -- gece 04:15'te `kanonik` blogu tam boyle dustu. Satir sayisi
+    onceden bilindigi icin dizi DOGRUDAN float32 ayrilir ve parca parca
+    doldurulur: tepe bellek yariya iner, ara kopya kalmaz.
+
+    `uret(oge)` matris, `satir(oge)` o ogenin satir sayisini verir.
+    """
+    n_satir = sum(satir(o) for o in ogeler)
+    ilk = np.asarray(uret(ogeler[0]), np.float32)
+    M = np.empty((n_satir, ilk.shape[1]), np.float32)
+    M[:len(ilk)] = ilk
+    y = len(ilk)
+    for o in ogeler[1:]:
+        b = uret(o)
+        M[y:y + len(b)] = b
+        y += len(b)
+    if y != n_satir:                       # SESSIZ UYUMSUZLUK OLMASIN
+        raise ValueError(f"satir sayisi tutmadi: {y} != {n_satir}")
+    return M
+
+
 def ek_blok(d, s1):
     """Secilen blogu SECENEK BASINA uret. Tohumlar HER ZAMAN tahminden."""
     P = d["P"][d["idx"]]
@@ -185,7 +210,8 @@ def main():
     for b in katlar:
         ic = [i for i, d in enumerate(veri) if d["mfg"] != b]
         dis = [i for i, d in enumerate(veri) if d["mfg"] == b]
-        M = np.vstack([temel(veri[i]) for i in ic]).astype(np.float32)
+        M = yigin_f32(ic, lambda i: temel(veri[i]),
+                      lambda i: len(veri[i]["y"]))
         Y = np.concatenate([veri[i]["y"] for i in ic])
         rng = np.random.default_rng(0)
         poz = np.where(Y == 1)[0]
@@ -215,7 +241,7 @@ def main():
             def mat(i):
                 return (np.hstack([temel(veri[i]), EK[i]]) if ad == "VAR"
                         else temel(veri[i])).astype(np.float32)
-            M = np.vstack([mat(i) for i in ic])
+            M = yigin_f32(ic, mat, lambda i: len(veri[i]["y"]))
             Y = np.concatenate([veri[i]["y"] for i in ic])
             rng = np.random.default_rng(0)
             poz = np.where(Y == 1)[0]

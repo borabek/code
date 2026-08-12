@@ -58,6 +58,24 @@ def temel(d):
                       p6_karar.kaynak_blok(d["kaynak"][d["idx"]])])
 
 
+def yigin_f32(ogeler, uret, satir):
+    """float64 ara yigin OLMADAN float32 matris. `kos_ek_oznitelik` ile ayni
+    gerekce: tam-acik korpusta `vstack(...).astype(float32)` once float64
+    birlestirip 10.2 GiB istiyor ve MemoryError veriyor."""
+    n_satir = sum(satir(o) for o in ogeler)
+    ilk = np.asarray(uret(ogeler[0]), np.float32)
+    M = np.empty((n_satir, ilk.shape[1]), np.float32)
+    M[:len(ilk)] = ilk
+    y = len(ilk)
+    for o in ogeler[1:]:
+        b = uret(o)
+        M[y:y + len(b)] = b
+        y += len(b)
+    if y != n_satir:
+        raise ValueError(f"satir sayisi tutmadi: {y} != {n_satir}")
+    return M
+
+
 def main():
     t0 = time.time()
     veri = []
@@ -77,7 +95,8 @@ def main():
     for b in katlar:
         ic = [i for i, d in enumerate(veri) if d["mfg"] != b]
         dis = [i for i, d in enumerate(veri) if d["mfg"] == b]
-        M = np.vstack([temel(veri[i]) for i in ic]).astype(np.float32)
+        M = yigin_f32(ic, lambda i: temel(veri[i]),
+                      lambda i: len(veri[i]["y"]))
         Y = np.concatenate([veri[i]["y"] for i in ic])
         rng = np.random.default_rng(0)
         poz = np.where(Y == 1)[0]
