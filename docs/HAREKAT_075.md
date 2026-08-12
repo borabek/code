@@ -639,3 +639,48 @@ SUPU/MOR/UPUN icin analitik yon, dogru isaretle **0.61-0.79 recall** veriyor
 
 **Sonraki adim:** parca basina isaret bitini SEC (model skoru oyu / kanonik
 cerceve / kafes tutarliligi) ve uctan uca olc.
+
+---
+
+# GT YON SOZLESMESI COZULDU -- isaret YEREL bir ozellik
+
+Makbuz `results/gt_yon_sozlesmesi.json`. Olcu: GT yonu, parcanin agirlik
+merkezinden DISARI mi bakiyor?
+
+| marka | GT | disari orani | **parca ici baskinlik** |
+|---|---|---|---|
+| NIT | 1222 | 1.000 | **1.000** |
+| CWT | 2758 | 0.836 | 0.981 |
+| A-B | 1587 | 0.653 | 0.972 |
+| MOR | 586 | 0.937 | 0.945 |
+| WEI | 3765 | 0.623 | 0.935 |
+| SE | 244 | 0.167 | 1.000 |
+| EFX | 198 | 0.148 | 0.880 |
+| **UPUN** | 433 | 0.589 | **0.597** |
+| **DIN** | 155 | 0.515 | **0.540** |
+
+## Uc olgu
+
+1. **Cogu markada isaret PARCA ICINDE TUTARLI** (baskinlik 0.88-1.00).
+   "Parca basina bir bit" fikri cogunluk icin gecerli.
+2. **Yon MARKAYA gore degisiyor:** NIT tamamen DISARI (1.000), SE/EFX
+   agirlikla ICERI (0.167/0.148). Kuresel sozlesme gercekten YOK.
+3. **UPUN ve DIN parca ICINDE BILE karisik** (0.597/0.540). Fiziksel olarak
+   anlamli: iki yuzunde de giris olan klemensler.
+
+## Tasarim sonucu
+
+Isaret, **kuresel agirlik merkezinden DEGIL, YEREL DIS NORMALDEN** turetilmeli.
+Iki yuzlu bir parcada her agzin kendi dis normali dogru isareti verir; tek bir
+parca biti onlari ayiramaz.
+
+Bu, III. KOL'un tasarimini belirler:
+- yon = analitik silindir ekseni (zaten dogru: isaretsiz tavan 0.61-0.79)
+- isaret = agiz noktasindaki YEREL dis normal (mesh yuzeyinden)
+- artik "marka sozlesmesi" diye bir sey aramaya gerek yok
+
+## NIT icin ek kanit
+
+NIT'in yon sozlesmesi KUSURSUZ tutarli (disari 1.000, baskinlik 1.000).
+Yani NIT'teki sorun YON DEGIL, tamamen TEMSIL: B-rep agizlari CP'lerin
+uzerinde yok (KONUM 0.011). Bu, ayni acigin DORDUNCU bagimsiz olcumu.

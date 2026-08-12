@@ -1,0 +1,155 @@
+{
+ "marka": {
+  "TOGI": {
+   "parca": 787,
+   "gt": 8685,
+   "disari_orani": 0.6388563342182547,
+   "parca_ici_baskinlik": 0.8766472104276025
+  },
+  "PXC": {
+   "parca": 987,
+   "gt": 5795,
+   "disari_orani": 0.7651233960474827,
+   "parca_ici_baskinlik": 0.8032813542662313
+  },
+  "WEI": {
+   "parca": 970,
+   "gt": 3765,
+   "disari_orani": 0.6225048399144821,
+   "parca_ici_baskinlik": 0.9354364868000405
+  },
+  "CWT": {
+   "parca": 780,
+   "gt": 2758,
+   "disari_orani": 0.8361914890874168,
+   "parca_ici_baskinlik": 0.9810632839592116
+  },
+  "A-B": {
+   "parca": 514,
+   "gt": 1587,
+   "disari_orani": 0.6525616083009078,
+   "parca_ici_baskinlik": 0.9722762645914397
+  },
+  "NIT": {
+   "parca": 50,
+   "gt": 1222,
+   "disari_orani": 1.0,
+   "parca_ici_baskinlik": 1.0
+  },
+  "WIE": {
+   "parca": 265,
+   "gt": 882,
+   "disari_orani": 0.6955091861077547,
+   "parca_ici_baskinlik": 0.889219877931654
+  },
+  "SIE": {
+   "parca": 298,
+   "gt": 864,
+   "disari_orani": 0.6476909555768616,
+   "parca_ici_baskinlik": 0.7268855864493449
+  },
+  "SUPU": {
+   "parca": 171,
+   "gt": 663,
+   "disari_orani": 0.5368547631705526,
+   "parca_ici_baskinlik": 0.7427330953646744
+  },
+  "MOR": {
+   "parca": 130,
+   "gt": 586,
+   "disari_orani": 0.9371794871794873,
+   "parca_ici_baskinlik": 0.944871794871795
+  },
+  "ONV": {
+   "parca": 109,
+   "gt": 502,
+   "disari_orani": 0.9587155963302753,
+   "parca_ici_baskinlik": 0.9587155963302753
+  },
+  "UPUN": {
+   "parca": 132,
+   "gt": 433,
+   "disari_orani": 0.5892857142857142,
+   "parca_ici_baskinlik": 0.5968614718614718
+  },
+  "WEG": {
+   "parca": 122,
+   "gt": 311,
+   "disari_orani": 0.8175253708040594,
+   "parca_ici_baskinlik": 0.8216237314597971
+  },
+  "TE": {
+   "parca": 101,
+   "gt": 299,
+   "disari_orani": 0.4834983498349835,
+   "parca_ici_baskinlik": 0.7145214521452146
+  },
+  "KLM": {
+   "parca": 97,
+   "gt": 247,
+   "disari_orani": 0.9237849779086893,
+   "parca_ici_baskinlik": 0.9237849779086893
+  },
+  "SE": {
+   "parca": 18,
+   "gt": 244,
+   "disari_orani": 0.16666666666666666,
+   "parca_ici_baskinlik": 1.0
+  },
+  "CCD": {
+   "parca": 81,
+   "gt": 224,
+   "disari_orani": 0.7782480893592004,
+   "parca_ici_baskinlik": 0.7831863609641387
+  },
+  "CEM": {
+   "parca": 6,
+   "gt": 222,
+   "disari_orani": 0.625,
+   "parca_ici_baskinlik": 0.625
+  },
+  "EFX": {
+   "parca": 42,
+   "gt": 198,
+   "disari_orani": 0.14787196930054072,
+   "parca_ici_baskinlik": 0.8799058084772369
+  },
+  "DIN": {
+   "parca": 58,
+   "gt": 155,
+   "disari_orani": 0.5148604269293925,
+   "parca_ici_baskinlik": 0.5403119868637111
+  },
+  "UTL": {
+   "parca": 37,
+   "gt": 98,
+   "disari_orani": 0.30405405405405406,
+   "parca_ici_baskinlik": 0.7274774774774774
+  },
+  "ELMEX": {
+   "parca": 31,
+   "gt": 72,
+   "disari_orani": 0.967741935483871,
+   "parca_ici_baskinlik": 1.0
+  },
+  "C3": {
+   "parca": 5,
+   "gt": 56,
+   "disari_orani": 1.0,
+   "parca_ici_baskinlik": 1.0
+  },
+  "S+S": {
+   "parca": 23,
+   "gt": 56,
+   "disari_orani": 1.0,
+   "parca_ici_baskinlik": 1.0
+  },
+  "DEG": {
+   "parca": 19,
+   "gt": 40,
+   "disari_orani": 0.7894736842105263,
+   "parca_ici_baskinlik": 0.7894736842105263
+  }
+ },
+ "not": "disari_orani = GT yonunun parca merkezinden DISARI bakma orani. parca_ici_baskinlik = her parcada cogunluk yonun payi (1.0 = parca icinde tam tutarli). D7'ye BAKILMADI."
+}
