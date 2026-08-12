@@ -36,6 +36,11 @@ TOL = float(os.environ.get("KV_TOL", "1.0"))       # kahinle AYNI
 N_KAFES = int(os.environ.get("KV_N", "6"))
 MIN_ADIM = float(os.environ.get("KV_MIN_ADIM", "2.0"))
 MARKALAR = set(os.environ.get("KV_MARKA", "NIT,MOR,SUPU,UPUN").split(","))
+# KAYNAK: "aday" = mesh+brep aday bulutu | "brep" = YALNIZ B-rep silindir
+# merkezleri. Mesh tepeleri ~6000'e DUZGUN yeniden orneklendigi icin KENDILERI
+# periyodiktir; GT'siz arama CP kafesini degil MESH'IN ORNEKLEME kafesini
+# buluyor (olculdu: kapsama 0.001-0.115). B-rep merkezleri analitik ve az.
+KAYNAK = os.environ.get("KV_KAYNAK", "aday")
 
 
 def _izgara(P, tohum, adim, n_max=80):
@@ -111,8 +116,17 @@ def kafes_ara(P, n_kafes=N_KAFES, rng=None):
     return bulunan
 
 
+_CY = {}
+
+
 def main():
     t0 = time.time()
+    if KAYNAK == "brep":
+        import pickle
+        global _CY
+        _CY = pickle.load(open(os.environ.get(
+            "KV_SIL", "results/_d6_silindirler.pkl"), "rb"))
+        print(f"B-rep silindir onbellegi: {len(_CY)} parca", flush=True)
     veri = yukle(KUME, int(os.environ.get("P6_TR", "0")))
     ist = collections.defaultdict(lambda: collections.defaultdict(list))
     n = 0
@@ -122,7 +136,15 @@ def main():
         G = np.asarray(d["G"], float)
         if len(G) < 3:
             continue
-        P = np.unique(np.round(np.asarray(d["P"], float), 3), axis=0)
+        if KAYNAK == "brep":
+            sil = _CY.get(str(d["pid"])) or []
+            if len(sil) < 3:
+                continue
+            P = np.unique(np.round(
+                np.array([np.asarray(c["center"], float) for c in sil]), 3),
+                axis=0)
+        else:
+            P = np.unique(np.round(np.asarray(d["P"], float), 3), axis=0)
         bulunan = kafes_ara(P)
         a = ist[d["mfg"]]
         a["gt"].append(len(G))

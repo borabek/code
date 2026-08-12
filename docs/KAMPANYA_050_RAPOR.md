@@ -989,3 +989,28 @@ korpus 24 ile kurulmustu -- 17.1, 24'un %71'i, doygun degil. Korpusun
 kuruldugu tavan npz'de yazili olmadigi icin artik `HT_KORPUS_MAXSEC` ile
 verilir ve uyari hangi tavana gore konustugunu YAZAR. Bir makbuz logundaki
 yaniltici uyari, sonradan yanlis kola yatirim yaptirir.
+
+---
+
+## 18. SAHA KAPISI, `tam` KATLARINDA -- 0.70 KESINLIK BILE YOK
+
+Makbuz `results/saha_kapisi_tam.json` (3051 parca, `tam` marka katlari =
+gorulmemis marka kosulu, 35326 tahmin / 14300 GT).
+
+| hedef kesinlik | ulasilan esik |
+|---|---|
+| 0.70 | **ULASILMIYOR** |
+| 0.80 | ULASILMIYOR |
+| 0.90 | ULASILMIYOR |
+| 0.95 | ULASILMIYOR |
+
+Ham kesinlik **0.1711** (kural `goreli 0.50/0.05` -- bilerek GENIS tutuldu,
+daraltmayi esigin yapmasi icin).
+
+**D7'deki bulguyu bagimsiz bir kumede dogruluyor:** orada en yuksek kesinlik
+0.6429 idi; burada 0.70'e bile ulasilamiyor (kural daha genis oldugu icin
+tahmin sayisi 2.5 kat).
+
+**Sonuc:** gorulmemis markada "robotun otonom davranabilecegi" bir isaret alt
+kumesi BU SKORLAYICIYLA YOK. `robot_auto_kapali` anahtarinin (S6b) gerekcesi
+artik IKI bagimsiz kumede olculu.
