@@ -55,14 +55,31 @@ class KumeSkorlayici(nn.Module):
         return self.rho(torch.cat([h, ort, mak, h - ort], 1)).squeeze(-1)
 
 
-def kayip(logit, y, lam=0.5):
+def kayip(logit, y, lam=0.5, bce_maske=None):
     """BCE + LISTWISE.
 
     Listwise: parca icinde pozitiflerin log-softmax'i. Cok pozitifli parcalar
     icin pozitiflerin ORTALAMASI alinir; boylece 24 CP'li NIT parcasi ile 3
     CP'li UPUN parcasi ayni agirligi tasir.
+
+    `bce_maske`: BCE'nin HANGI seceneklerden hesaplanacagi.
+
+    NEDEN VAR (2026-08-12, S4 v1 olcumunden sonra). HGB kolu pozitif basina 6
+    negatifle DENGELENMIS bir orneklemde egitiliyor; DeepSets ise parcanin
+    tamamini goruyordu (~3000 secenek, ~10 pozitif = 300:1). BCE ortalama
+    oldugu icin negatifler kaybi boguyor ve model her seye ~0 demeyi
+    ogreniyor. Iki kol EGITIM DENGESI bakimindan esit degildi -- haksiz kiyas.
+
+    KRITIK AYRIM: maske yalnizca KAYBI daraltir. Ileri gecis (ve dolayisiyla
+    parca ozeti/baglam) HER ZAMAN TUM parca uzerinde hesaplanir; aksi halde
+    modelin varlik sebebi olan baglam yok olurdu. LISTWISE de tum parca
+    uzerinde kalir -- siralama ancak tam kume uzerinde anlamlidir.
     """
-    bce = F.binary_cross_entropy_with_logits(logit, y)
+    if bce_maske is None:
+        bce = F.binary_cross_entropy_with_logits(logit, y)
+    else:
+        bce = F.binary_cross_entropy_with_logits(logit[bce_maske],
+                                                 y[bce_maske])
     if y.sum() > 0 and len(y) > 1:
         ls = -F.log_softmax(logit, dim=0)[y > 0].mean()
     else:
@@ -71,8 +88,14 @@ def kayip(logit, y, lam=0.5):
 
 
 def egit(parcalar, n_giris, d=128, devir=8, lr=1e-3, lam=0.5,
-         cihaz=None, tohum=0, ilerle=None):
-    """`parcalar`: [(X_np, y_np), ...] her biri BIR parca. Doner: model."""
+         cihaz=None, tohum=0, ilerle=None, neg_kat=0):
+    """`parcalar`: [(X_np, y_np), ...] her biri BIR parca. Doner: model.
+
+    `neg_kat > 0` ise BCE her devirde pozitif basina `neg_kat` negatiften
+    hesaplanir (HGB kolunun dengesiyle ESITLENIR). Negatifler her devirde
+    YENIDEN cekilir, boylece zamanla hepsi gorulur. Ileri gecis ve listwise
+    HER ZAMAN tum parca uzerindedir -- bkz. `kayip` aciklamasi.
+    """
     cihaz = cihaz or ("cuda" if torch.cuda.is_available() else "cpu")
     torch.manual_seed(tohum)
     m = KumeSkorlayici(n_giris, d).to(cihaz)
@@ -89,7 +112,16 @@ def egit(parcalar, n_giris, d=128, devir=8, lr=1e-3, lam=0.5,
                 continue
             Xt = torch.as_tensor(X, dtype=torch.float32, device=cihaz)
             yt = torch.as_tensor(y, dtype=torch.float32, device=cihaz)
-            L, _, _ = kayip(m(Xt), yt, lam)
+            mask = None
+            if neg_kat > 0:
+                p_ = np.where(y > 0)[0]
+                n_ = np.where(y == 0)[0]
+                if len(n_) > neg_kat * len(p_):
+                    n_ = rng.choice(n_, neg_kat * len(p_), replace=False)
+                mask = torch.zeros(len(y), dtype=torch.bool, device=cihaz)
+                mask[torch.as_tensor(np.concatenate([p_, n_]),
+                                     device=cihaz)] = True
+            L, _, _ = kayip(m(Xt), yt, lam, bce_maske=mask)
             opt.zero_grad(set_to_none=True)
             L.backward()
             torch.nn.utils.clip_grad_norm_(m.parameters(), 1.0)

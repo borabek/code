@@ -55,6 +55,9 @@ BOYUT = int(os.environ.get("S4_D", "128"))
 # Cok buyuk parcalar GPU belleğini zorlar; egitimde secenek ORNEKLENIR
 # (pozitifler HER ZAMAN tutulur, negatifler seyreltilir). Tahminde TAM kume.
 EGIT_MAKS = int(os.environ.get("S4_EGIT_MAKS", "3000"))
+# BCE'yi HGB koluyla AYNI sinif dengesinde hesapla (pozitif basina N negatif).
+# 0 = kapali (v1 davranisi: tum secenekler, ~300:1 dengesizlik).
+S4_NEG_KAT = int(os.environ.get("S4_NEG_KAT", "0"))
 
 
 def temel(d):
@@ -148,7 +151,7 @@ def main():
                 X, y = X[se], y[se]
             egitim.append((X, y))
         m = KM.egit(egitim, n_giris, d=BOYUT, devir=DEVIR, lr=LR, lam=LAM,
-                    tohum=0)
+                    tohum=0, neg_kat=S4_NEG_KAT)
         s_ic_k = [KM.tahmin(m, veri[i]["_M"]) for i in ic]
         s_dis_k = [KM.tahmin(m, veri[i]["_M"]) for i in dis]
         print(f"  {b} KUME egitildi ({time.time() - t0:.0f} s)", flush=True)
@@ -182,7 +185,7 @@ def main():
                "hgb": son["HGB"], "kume": son["KUME"], "fark": fark,
                "gecti": bool(fark >= 0.05), "kat": kat_sonuc,
                "ayar": {"devir": DEVIR, "lr": LR, "lam": LAM, "d": BOYUT,
-                        "egit_maks": EGIT_MAKS},
+                        "egit_maks": EGIT_MAKS, "neg_kat": S4_NEG_KAT},
                "not": "S4: aday-kumesi modeli vs noktasal HGB, AYNI protokol "
                       "(ayni katlar, oznitelikler, kural aramasi, kabul "
                       "kutusu). Tek degisken MODEL SINIFI. D7'ye BAKILMADI."},
