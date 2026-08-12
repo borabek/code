@@ -197,3 +197,54 @@ olculmeden hicbiri dogru hedeflenemez.
 sistematik farki olc: parca basina CP sayisi, aday yogunlugu, skor dagilimi,
 kural secimi, GT'nin havuzdaki skor sirasi. Kapi yok -- bu bir TESHIS, kol
 degil; ciktisi sonraki kollarin hedefini belirler.
+
+---
+
+# S7 SONUCU -- COKUSUN SEBEBI: SKOR AYRIMI
+
+Makbuz `results/cokus_teshisi_d6.json` · sonda `sonda_cokus.py` (OOF, d6).
+
+| marka | CP/p | aday/p | secenek/p | havuzda | ilk10 | ilk50 | sira% | **poz-neg** | skor araligi | verimlilik |
+|---|---|---|---|---|---|---|---|---|---|---|
+| UPUN | 3.2 | 198 | 3074 | 0.949 | 0.939 | 0.974 | 0.001 | **0.847** | 0.981 | %65.5 |
+| SUPU | 3.3 | 152 | 2248 | 0.934 | 0.804 | 0.908 | 0.016 | **0.665** | 0.901 | %47.5 |
+| MOR | 3.4 | 453 | 9421 | 0.653 | 0.604 | 0.868 | 0.008 | **0.277** | 0.853 | %5.7 |
+| NIT | 24.4 | 492 | 7470 | 0.898 | 0.380 | 0.760 | 0.005 | **0.050** | 0.651 | %0.5 |
+
+## Cevap: POZITIF-NEGATIF SKOR AYRIMI
+
+`poz-neg` (dogru seceneklerin medyan skoru eksi yanlislarinki) verimlilikle
+**birebir ayni sirada** iniyor: 0.847 -> 0.665 -> 0.277 -> 0.050.
+
+**NIT'te dogru secenek yanlistan yalnizca 0.05 daha yuksek puan aliyor.**
+Model orada pratikte ayrim YAPMIYOR. Havuz cevabi tasiyor (0.898) ama skor
+onu gostermiyor.
+
+## Yogunluk SEBEP degil, CARPAN
+
+`sira%` hepsinde cok kucuk (0.001-0.016): dogru secenek NIT'te bile ilk ~40
+icinde. Ama NIT'te parca basina **24.4 CP** var -- bir tanesini tepede bulmak
+yetmez, ~24'unu bulmak gerekir. Zayif ayrim + yuksek yogunluk carpimi cokusu
+uretiyor. MOR yogun DEGIL (3.4) ama ayrimi da zayif (0.277) ve havuzu dusuk
+(0.653) -- iki farkli yoldan ayni yere.
+
+## Bunun kollara etkisi
+
+- **S1 (budama) bu sorunu COZMEZ.** Dogru secenek zaten ilk ~40'ta; celdirici
+  atmak ayrimi buyutmez. S1'in gerekcesi S5'i mumkun kilmakla sinirli kaldi.
+- **S4 (aday-kumesi modeli) DOGRU HEDEFTE:** parca icinde secenekleri
+  BIRBIRIYLE karsilastirmak, tam da zayif mutlak ayrimin oldugu yerde
+  goreli bilgi uretir.
+- **YENI S8: MARKA-ICI SKOR NORMALIZASYONU.** `skor araligi` NIT'te 0.651,
+  UPUN'da 0.981 -- dagilimlar marka basina farkli olcekte. Goreli kural
+  (%85 x parca-maks) bu olcege duyarli. Parca-ici z-skor / yuzdelik
+  donusumu ucuz bir sondadir (`ozkalib` blogu tam bunu deniyor, kuyrukta).
+
+## OLCUM TUTARSIZLIGI (acik, kapatilmadi)
+
+Bu sondada MOR'un `havuzda` degeri **0.653**, oysa KAPI A olcumu ayni korpusta
+MOR icin yonlu recall **0.8686** demisti. Iki olcum ayni kabul kutusunu
+kullaniyor gorunuyor; fark aciklanmadi. Ihtimaller: (a) `yukle` ile
+`sonda_havuz_tavani`in GT kayitlarini farkli okumasi, (b) eksen toleransinin
+yuzdelik (`0.06 x diag`) vs sabit (40mm) uygulanmasi. **Cozulmeden MOR'un
+havuz sayisi bu tablodan alintilanmamali.**

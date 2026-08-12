@@ -1,0 +1,55 @@
+{
+ "dizin": "results/_p6_oz_tam4",
+ "kume": "d6",
+ "marka": {
+  "UPUN": {
+   "parca": 117,
+   "cp_parca": 3.1623931623931623,
+   "aday_parca": 197.97435897435898,
+   "secenek_parca": 3073.6581196581196,
+   "havuzda": 0.9494301994301994,
+   "ilk10": 0.9391304347826087,
+   "ilk50": 0.9739130434782609,
+   "sira_yuzdelik": 0.0010602683726285212,
+   "poz_neg_fark": 0.8467688700338739,
+   "skor_araligi": 0.9806243641289445
+  },
+  "SUPU": {
+   "parca": 165,
+   "cp_parca": 3.315151515151515,
+   "aday_parca": 152.23636363636365,
+   "secenek_parca": 2248.29696969697,
+   "havuzda": 0.9338383838383837,
+   "ilk10": 0.803680981595092,
+   "ilk50": 0.9079754601226994,
+   "sira_yuzdelik": 0.016211754846921902,
+   "poz_neg_fark": 0.6648699594382115,
+   "skor_araligi": 0.9013016064554861
+  },
+  "MOR": {
+   "parca": 80,
+   "cp_parca": 3.425,
+   "aday_parca": 453.2,
+   "secenek_parca": 9420.6125,
+   "havuzda": 0.653125,
+   "ilk10": 0.6037735849056604,
+   "ilk50": 0.8679245283018868,
+   "sira_yuzdelik": 0.00791258203588038,
+   "poz_neg_fark": 0.2767576149678198,
+   "skor_araligi": 0.852994851341544
+  },
+  "NIT": {
+   "parca": 50,
+   "cp_parca": 24.44,
+   "aday_parca": 491.78,
+   "secenek_parca": 7470.26,
+   "havuzda": 0.8976984848484848,
+   "ilk10": 0.38,
+   "ilk50": 0.76,
+   "sira_yuzdelik": 0.005158359766506009,
+   "poz_neg_fark": 0.049994890398058024,
+   "skor_araligi": 0.6510004957065837
+  }
+ },
+ "not": "S7 cokus teshisi. `havuzda` = GT'nin kabul kutusunda en az bir secenegi olma orani (havuz tavani). `ilk10/ilk50` = DOGRU secenegin parca icinde ilk 10/50'ye girme orani. `sira%` = dogru secenegin ortalama sira yuzdeligi (0 = tepe). D7'ye BAKILMADI."
+}
