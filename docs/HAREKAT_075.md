@@ -432,3 +432,50 @@ silindirleri AGZI OLAN (disaridan erisilebilir) olanlarla sinirlamak
 GERCEKTIR, ama adet KOLAY elde edilmiyor. Adet tahmini artik ogrenmeli bir
 alt problem (parca ozniteliklerinden regresyon) ya da kafes adimindan
 turetme (govde uzunlugu / adim) olarak ele alinmali.
+
+---
+
+# VII.0m -- KAFES GT OLMADAN BULUNABILIYOR (mesh havuzu + urun kutusu)
+
+Makbuz `results/kafes_v2_d6.json`. Arama olcutu **GT'SIZ** (izgaraya dusen
+ADAY sayisi x doluluk); GT yalnizca degerlendirmede.
+
+| marka | 1k | 2k | 3k | 4k | 5k | **6 kafes** | KAHIN | acik |
+|---|---|---|---|---|---|---|---|---|
+| **NIT** | 0.097 | 0.316 | 0.450 | 0.565 | 0.623 | **0.676** | 0.983 | 0.307 |
+| MOR | 0.144 | 0.163 | 0.385 | 0.447 | 0.466 | 0.510 | 0.811 | 0.301 |
+| SUPU | 0.165 | 0.244 | 0.326 | 0.369 | 0.440 | 0.494 | 0.864 | 0.370 |
+| UPUN | 0.093 | 0.183 | 0.247 | 0.308 | 0.351 | 0.394 | 0.810 | 0.416 |
+
+**NIT'te kapsama 0.001 -> 0.099 -> 0.676** (oklit / B-rep+urun kutusu /
+mesh+urun kutusu) ve 6 kafeste HALA TIRMANIYOR (0.623 -> 0.676).
+
+Uc kusurun ucu de duzeltildikten sonra kol CANLI:
+1. arama olcutu GT'siz oldu
+2. degerlendirme URUN KUTUSUNA cevrildi (oklit degil)
+3. cipa B-rep degil MESH havuzu (B-rep NIT'te CP'lerin uzerinde durmuyor)
+
+## Aritmetik -- uretilen nokta sayisina gore
+
+| senaryo | GT agirlikli F1 (d6) |
+|---|---|
+| bugun | 0.1789 |
+| **izgaradan TAM ADET kadar uret** | **0.5876** |
+| adedin 1.5 kati | 0.4701 |
+| 2 kati | 0.3917 |
+| 3 kati (kotu adet kontrolu) | 0.2938 |
+
+**Adet kontrolu berbat olsa bile (3x fazla uretim) bugunku tabanin USTUNDE.**
+
+## KRITIK EKSIK -- yon hesaba KATILMADI
+
+Bu kapsama olcumu yalnizca KONUMU kontrol ediyor (yanal 2mm / eksenel 40mm).
+Robot metrigi ayrica **ISARETLI ACI <= 10 derece** istiyor. Yani yukaridaki
+sayilar, uretilen her konumda YONUN DE dogru secilebildigini VARSAYIYOR.
+
+Bu tam olarak VII.4 maddesi ve K2.1'in coktugu yer: onceki deneme yonu
+KOPYALAMIS ve robot metrigi -0.0100 dusmustu (tespit +0.0126 iken).
+
+**Sonraki belirleyici olcum:** uretilen konumlarda yon-bankasi secenekleri
+arasindan yon YENIDEN secilirse, kapsamanin ne kadari ISARETLI ACI kutusundan
+da gecer? O sayi gelmeden yukaridaki F1 tahminleri VAAT DEGILDIR.
