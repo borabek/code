@@ -116,13 +116,28 @@ def main():
     # (ornegin yelpaze cozunurlugunu artirmak) recall'u ARTIRAMAZ: yeni yonler
     # tavana takilip mevcutlarin yerine geciyordur. Bu, olcumu yorumlarken
     # kolayca gozden kacan bir kisittir -- once tavan buyutulmelidir.
+    # KORPUSUN KURULDUGU TAVAN, BU SURECIN TAVANI DEGILDIR. Onbellek hangi
+    # `YB_MAX_SEC` ile cikarildiysa doygunluk ona gore olculur; surecin kendi
+    # varsayilanina (12) bakmak tavan-24 korpusunda YANLIS ALARM uretir
+    # (17.2 secenek/aday "doygun" sanilir, oysa 24'un %72'si). Korpus tavani
+    # npz'de yazili olmadigi icin cevreden verilir.
     try:
-        import yon_bankasi as _YB
         _sp = T["secenek_parca"] / max(T["aday_parca"], 1e-9)
-        if _sp >= 0.9 * _YB.MAX_SEC:
+        _cap = os.environ.get("HT_KORPUS_MAXSEC")
+        if _cap is None:
+            import yon_bankasi as _YB
+            _cap = _YB.MAX_SEC
+            _kaynak = f"surec varsayilani {_cap} (HT_KORPUS_MAXSEC verilmedi)"
+        else:
+            _cap = int(_cap)
+            _kaynak = f"korpus tavani {_cap}"
+        if _sp >= 0.9 * _cap:
             print(f"\n!! TAVAN DOYGUN: aday basina {_sp:.1f} secenek, "
-                  f"MAX_SEC={_YB.MAX_SEC}. Yon kaynagi eklemek recall'u "
-                  f"ARTIRMAZ; once tavan buyutulmeli (sonda_max_sec.py).")
+                  f"{_kaynak}. Yon kaynagi eklemek recall'u ARTIRMAZ; "
+                  f"once tavan buyutulmeli (sonda_max_sec.py).")
+        else:
+            print(f"\n   tavan doygun DEGIL: aday basina {_sp:.1f} secenek, "
+                  f"{_kaynak}")
     except Exception:
         pass
     print(f"\nKAPI A: yonlu recall >= 0.85 mi -> "

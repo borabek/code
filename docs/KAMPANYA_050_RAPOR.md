@@ -954,3 +954,38 @@ Bu bir TAVAN olcumu; **uctan uca kazanc DEGIL**. Tavan yukselmesi ancak
 secici o yonleri SECEBILIRSE F1'e doner. Sirasiyla: (1) tam4 korpusunu
 tamamla, (2) KAPI A'yi tam korpusta olc, (3) `kos_p6_kademe2.py`'yi tam4 ve
 tam3 uzerinde AYNI ayarla kosup uctan uca farki al.
+
+---
+
+## 17. KAPI A GECTI -- tavan-24 korpusunda yonlu recall 0.8926
+
+Makbuz `results/havuz_tavani__p6_oz_tam4_d6.json` (464/468 d6 parcasi).
+
+| marka | GT | konum | **yonlu (t12)** | **yonlu (t24)** | F1 tavani |
+|---|---|---|---|---|---|
+| **NIT** | 1222 | 0.8429 | 0.5409 | **0.8429** | 0.9147 |
+| SUPU | 547 | 0.9506 | 0.8921 | 0.9214 | 0.9591 |
+| UPUN | 370 | 0.9649 | 0.8811 | 0.9622 | 0.9807 |
+| MOR | 274 | 0.8686 | 0.8686 | 0.8686 | 0.9297 |
+| UTL/SE/ONV/S+S | 238 | 1.0000 | 0.92-1.00 | 1.0000 | 1.0000 |
+| **TOPLAM** | 2651 | 0.8989 | **0.7347** | **0.8926** | **0.9432** |
+
+**KAPI A GECTI (0.8926 >= 0.85).** Havuz F1 tavani **0.8470 -> 0.9432**.
+
+### En anlamli satir NIT
+
+NIT'in yonlu recall'u **konum recall'una ESITLENDI** (0.8429 = 0.8429). Yani
+tavan 24 iken, havuzda konumu bulunan HER GT'nin dogru yonu de havuzda.
+NIT'te yon darbogazi **tamamen kapandi** -- gecen olcumde bu marka 0.5409'da
+ve toplam tavani tek basina asagi cekiyordu.
+
+Geriye kalan kayip artik saf KONUM kaybi (%10.1) ve o baska bir kol.
+
+### Duzeltilen yaniltici uyari
+
+Ilk kosuda "TAVAN DOYGUN" uyarisi tetiklendi (17.1 secenek/aday). YANLIS
+ALARMDI: uyari surecin kendi `MAX_SEC` varsayilanina (12) bakiyordu, oysa
+korpus 24 ile kurulmustu -- 17.1, 24'un %71'i, doygun degil. Korpusun
+kuruldugu tavan npz'de yazili olmadigi icin artik `HT_KORPUS_MAXSEC` ile
+verilir ve uyari hangi tavana gore konustugunu YAZAR. Bir makbuz logundaki
+yaniltici uyari, sonradan yanlis kola yatirim yaptirir.
