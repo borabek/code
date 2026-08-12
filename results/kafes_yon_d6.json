@@ -1,0 +1,37 @@
+{
+ "yanal": 2.0,
+ "eksenel": 40.0,
+ "aci": 10.0,
+ "yakin_r": 2.0,
+ "marka": {
+  "NIT": {
+   "gt": 1210,
+   "konum": 0.6760330578512397,
+   "konum_yon": 0.5272727272727272,
+   "yon_kaybi": 0.14876033057851246,
+   "uret_parca": 179.20454545454547
+  },
+  "SUPU": {
+   "gt": 393,
+   "konum": 0.49363867684478374,
+   "konum_yon": 0.41475826972010177,
+   "yon_kaybi": 0.07888040712468197,
+   "uret_parca": 100.56976744186046
+  },
+  "UPUN": {
+   "gt": 279,
+   "konum": 0.3942652329749104,
+   "konum_yon": 0.3333333333333333,
+   "yon_kaybi": 0.06093189964157708,
+   "uret_parca": 87.1
+  },
+  "MOR": {
+   "gt": 208,
+   "konum": 0.5096153846153846,
+   "konum_yon": 0.4951923076923077,
+   "yon_kaybi": 0.014423076923076872,
+   "uret_parca": 107.87878787878788
+  }
+ },
+ "not": "Uretilen izgara noktalarinda YON, cevredeki adaylarin yon-bankasi seceneklerinden KAHIN gibi secilir. TAVAN olcumudur: dogru yon MEVCUT MU? D7'ye BAKILMADI."
+}

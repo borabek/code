@@ -479,3 +479,56 @@ KOPYALAMIS ve robot metrigi -0.0100 dusmustu (tespit +0.0126 iken).
 **Sonraki belirleyici olcum:** uretilen konumlarda yon-bankasi secenekleri
 arasindan yon YENIDEN secilirse, kapsamanin ne kadari ISARETLI ACI kutusundan
 da gecer? O sayi gelmeden yukaridaki F1 tahminleri VAAT DEGILDIR.
+
+---
+
+# VII.4 SONUCU -- YON KURTARILIYOR (kol CANLI, ama SUZGEC sart)
+
+Makbuz `results/kafes_yon_d6.json`. TAM kabul kutusu: yanal <=2mm, eksenel
+<=40mm, **ISARETLI aci <=10 derece**.
+
+| marka | yalniz KONUM | **KONUM+YON** | yon kaybi | uret/parca |
+|---|---|---|---|---|
+| **NIT** | 0.676 | **0.527** | 0.149 | 179 |
+| MOR | 0.510 | **0.495** | 0.014 | 108 |
+| SUPU | 0.494 | 0.415 | 0.079 | 101 |
+| UPUN | 0.394 | 0.333 | 0.061 | 87 |
+
+**Yon kaybi kucuk (0.014-0.149).** K2.1'in coktugu yer buydu ve orada yon
+KOPYALANIYORDU; uretilen konumda yon-bankasi seceneklerinden YENIDEN secilince
+kayip kuculuyor.
+
+## Aritmetik -- SUZGEC olmadan kol ISE YARAMAZ
+
+| senaryo | GT agirlikli F1 (d6) |
+|---|---|
+| bugun | 0.1789 |
+| **suzgecsiz** (179 nokta/parca yayinla) | **0.0845** |
+| adet kadar uret (n=k) | **0.4769** |
+| 2 kati uret (n=2k) | 0.3179 |
+
+**Kritik:** ham haliyle kol bugunku tabandan KOTU (0.0845 < 0.1789), cunku
+parca basina 179 nokta yayinlamak kesinligi oldururyor. Kolun butun degeri
+SUZGECTE:
+
+| marka | suzgecsiz | n=k | bugun |
+|---|---|---|---|
+| NIT | 0.126 | **0.527** | 0.009 |
+| MOR | 0.034 | **0.495** | 0.178 |
+| SUPU | 0.026 | 0.415 | 0.449 |
+| UPUN | 0.023 | 0.333 | 0.536 |
+
+**Ve rejim ayrimi SART:** NIT/MOR'da kol muazzam kazandiriyor (0.009->0.527,
+0.178->0.495) ama SUPU/UPUN'da KAYBETTIRIYOR (0.449->0.415, 0.536->0.333).
+Kol ancak COKEN markalarda devreye girmeli -- bu zaten VII.5 kapisinin sarti.
+
+## Sonraki adimlar (oncelik sirasi)
+
+1. **SUZGEC**: uretilen 179 noktayi ~k'ya indir. Uc mekanizma: (a) izgara
+   noktasinda GERCEKTEN delik var mi (isin/mesh dogrulamasi, VII.0l),
+   (b) kipsel imza uyumu (VII.1), (c) mevcut model skoru.
+2. **ADET (k)**: n=k senaryosu adedin bilindigini varsayiyor. VII.2 curudu
+   (silindir sayimi); kalan yollar kafes adimindan turetme (VII.2c) ve
+   ogrenmeli regresyon (VII.2d).
+3. **REJIM KAPISI**: kol yalnizca coken markalarda. Ayirt edici olcu S7'de
+   var (poz-neg skor ayrimi) ama urun surumu gerekiyor.
