@@ -56,11 +56,29 @@ def _izgara(P, tohum, adim, n_max=80):
 
 
 def _yakin(A, B, tol):
-    """A'nin her satiri B'ye tol icinde mi."""
+    """A'nin her satiri B'ye tol icinde mi (OKLIT) -- ADAY tarafi icin."""
     if not len(A) or not len(B):
         return np.zeros(len(A), bool)
     return (np.linalg.norm(A[:, None, :] - B[None, :, :], axis=-1).min(1)
             <= tol)
+
+
+def _gt_kapsandi(G, Gd, uretilen, yanal=2.0, eksenel=40.0):
+    """GT, uretilen izgara noktalarindan biriyle URUN KABUL KUTUSUNDA mi?
+
+    ONEMLI DUZELTME (2026-08-12): butun kafes sondalarini OKLIT 1mm ile
+    degerlendirmistim. Urun metrigi ise YANAL <= 2mm, EKSENEL <= 40mm --
+    yani GT yonunde 10mm kaymis bir nokta KABUL EDILIR. B-rep silindir
+    merkezi/agzi tam da eksende kayik oldugu icin (olculdu: GT'ye oklit
+    ortanca 2.4-12mm) Oklit olcut kolu HAKSIZ YERE olu gosteriyordu.
+    """
+    if not len(G) or not len(uretilen):
+        return np.zeros(len(G), bool)
+    Gn = Gd / np.maximum(np.linalg.norm(Gd, axis=1, keepdims=True), 1e-12)
+    v = uretilen[:, None, :] - G[None, :, :]          # (uret, gt, 3)
+    al = (v * Gn[None, :, :]).sum(-1)
+    yan = np.linalg.norm(v - al[..., None] * Gn[None, :, :], axis=-1)
+    return ((yan <= yanal) & (np.abs(al) <= eksenel)).any(0)
 
 
 def kafes_ara(P, n_kafes=N_KAFES, rng=None):
@@ -149,10 +167,11 @@ def main():
         a = ist[d["mfg"]]
         a["gt"].append(len(G))
         a["aday"].append(len(P))
+        Gd = np.asarray(d["Gd"], float)
         kalan = np.ones(len(G), bool)
         for i in range(N_KAFES):
             if i < len(bulunan):
-                kalan = kalan & ~_yakin(G, bulunan[i][2], TOL)
+                kalan = kalan & ~_gt_kapsandi(G, Gd, bulunan[i][2])
             a[f"k{i + 1}"].append(int((~kalan).sum()))
         if bulunan:
             a["adim1"].append(float(np.linalg.norm(bulunan[0][0][1])))
