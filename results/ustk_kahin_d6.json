@@ -1,0 +1,37 @@
+{
+ "dizin": "results/_p6_oz_tam4",
+ "kume": "d6",
+ "marka": {
+  "NIT": {
+   "gt": 1222,
+   "kural": 0.008935219657483246,
+   "ustk_kahin": 0.04337152209492635,
+   "tavan": 0.9147424511545293
+  },
+  "SUPU": {
+   "gt": 547,
+   "kural": 0.44938271604938274,
+   "ustk_kahin": 0.48080438756855576,
+   "tavan": 0.9590865842055186
+  },
+  "UPUN": {
+   "gt": 370,
+   "kural": 0.5359361135758651,
+   "ustk_kahin": 0.6891891891891891,
+   "tavan": 0.9807162534435263
+  },
+  "MOR": {
+   "gt": 274,
+   "kural": 0.17834394904458598,
+   "ustk_kahin": 0.18613138686131386,
+   "tavan": 0.9296875000000001
+  }
+ },
+ "toplam": {
+  "kural": 0.295386042198006,
+  "ustk_kahin": 0.2577704102776627,
+  "tavan": 0.9372384937238494,
+  "gt": 2413
+ },
+ "not": "USTK_KAHIN: ayni skorla ilk k, k = GERCEK CP sayisi. KAHIN'dir, urun degil. Amac SIRALAMA ile ADET/ESIK sorununu ayirmak. D7'ye BAKILMADI."
+}
