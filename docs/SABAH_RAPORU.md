@@ -38,7 +38,7 @@ Henuz makbuz yok.
 ## 3. KADEME2 KOL KIYASLARI
 - **SIRA kapali (u25 taban)** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.2938
 - **SIRA acik (u25)** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.3041
-- ****B1 zor negatif** (tam3)** (results/_p6_oz_tam3) secilen=P6 -> P6 0.3195
+- **B1 zor negatif (tam3)** (results/_p6_oz_tam3) secilen=P6 -> P6 0.3195
 - **son kosu (uzerine yazilan)** (results/_p6_oz_tam3) secilen=P6 -> P6 0.3195
 
 ## 3b. SECICI VERIMLILIGI -- 0.50 nereden gelebilir?
