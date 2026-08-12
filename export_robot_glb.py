@@ -127,11 +127,32 @@ def main():
         V = np.ascontiguousarray(V, np.float64); F = np.ascontiguousarray(F, np.int64)
         # modelin segmentasyonu (vote>=2 uyeleri ortalama) -> baglanti vertekslerini boya
         acc = None
+        pbs = []                       # <- LISTE de saklaniyor (asagida gerekli)
         for model, meta in models:
             _, pb = D.predict(model, meta, V, F, device=dev, op_cache_dir=OP, return_probs=True)
-            pb = np.asarray(pb, float); acc = pb if acc is None else acc + pb
+            pb = np.asarray(pb, float); pbs.append(pb)
+            acc = pb if acc is None else acc + pb
         probs = acc / len(models); conn = probs[:, CE] + probs[:, CT]
-        cps = robot_cp.extract(models, STEP[pid], dev, ca, mav)
+        # OLCULEN ZINCIR (2026-08-12). `robot_cp.extract` KAMPANYANIN
+        # KAZANCLARINI TASIMIYOR: `urun_p6` (yon bankasi + ortak siralayici) ve
+        # `urun_genis` yalnizca `kanonik_zincir.urun_cikti` icinden cagriliyor
+        # ve ihracatcilarin HICBIRI orayi cagirmiyordu. Yani bugune kadar
+        # GLB'deki isaretler TABANIN ciktisiydi (D7 0.2980), olctugumuz 0.3115
+        # degil (rapor bolum 8).
+        #
+        # VARSAYILAN KAPALI: urunun bugunku ciktisi degismez. Acmak icin
+        # cp_config `glb_kanonik_zincir=true`. Acikken ayrica CIFT CIKARIM da
+        # kalkar (extract kendi icinde ayni modelleri yeniden kosuyordu).
+        if cfg.get("glb_kanonik_zincir", False):
+            import kanonik_zincir
+            ham = kanonik_zincir.urun_cikti(V, F, pbs, STEP[pid])
+            # `urun_cikti` tier ATAMAZ (o kural `extract` icindeydi, artik
+            # ortak `tier_ata`). Atanmazsa asagidaki c["tier"] KeyError verir;
+            # `_format_cps` hem kayitlari kurar hem tier'i atar.
+            cps = robot_cp._format_cps(ham, ca, mav)
+            print(f"  {pid}: KANONIK ZINCIR ({len(cps)} CP)", flush=True)
+        else:
+            cps = robot_cp.extract(models, STEP[pid], dev, ca, mav)
         scene = trimesh.Scene()
         ctr = V.mean(0)
         # MESH: gri gövde; modelin "baglanti" dedigi verteksler MAVI (koyulugu olasilikla)
