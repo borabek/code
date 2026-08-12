@@ -167,14 +167,25 @@ def main():
     L.append("")
 
     L.append("## 2. EK OZNITELIK BLOKLARI (kapi +0.01)")
+    ACIKLAMA = {
+        "kanonik": "parcayi KENDI ana eksenlerine oturtur (marka bagimsizlik)",
+        "kume": "adaylar arasi rekabet: ayni adayin obur yonleri, 5mm rakip",
+        "topoloji": "es-eksenli aile / dizi duzenliligi (yalniz mi, uye mi)",
+        "simetri": "ayna simetri esi var mi (klemensler simetriktir)",
+        "derinlik": "eksen boyu yaricap profili (tel / vida / alet ayrimi)",
+        "kafes_adet": "kafes adimindan BEKLENEN CP sayisi -> secim baskisi",
+        "ozkalib": "parca-ici oz-kalibrasyon (skor yuzdeligi, en iyiye fark)",
+    }
     eb = ek_bloklar()
     if not eb:
         L.append("Henuz makbuz yok.")
     else:
-        L.append("| blok | bloksuz | blokla | fark | karar |")
-        L.append("|---|---|---|---|---|")
-        for ad, y0, v0, f, k in eb:
-            L.append(f"| {ad} | {'-' if y0 is None else f'{y0:.4f}'} | "
+        L.append("| blok | ne olcer | bloksuz | blokla | fark | karar |")
+        L.append("|---|---|---|---|---|---|")
+        for ad, y0, v0, f, k in sorted(
+                eb, key=lambda r: (-(r[3] if r[3] is not None else -9))):
+            L.append(f"| **{ad}** | {ACIKLAMA.get(ad, '?')} | "
+                     f"{'-' if y0 is None else f'{y0:.4f}'} | "
                      f"{'-' if v0 is None else f'{v0:.4f}'} | "
                      f"{'-' if f is None else f'{f:+.4f}'} | {k} |")
     L.append("")
