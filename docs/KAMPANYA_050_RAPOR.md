@@ -904,3 +904,53 @@ Iki degisken ayni anda degisti: **korpus** (u25 -> tam3, tam-acik havuz) ve
 
 Taban kosusu gelene kadar B1 **raporlanabilir ama kola sayilamaz**. Bu
 kampanyanin kurali: bir kol ancak TEK DEGISKENLI olcumle acilir.
+
+---
+
+## 16. BELIRLEYICI OLCUM -- tavan 24, YONLU recall +0.1665 (esli kiyas)
+
+Makbuz `results/esli_tavan_d6.json` · sonda `sonda_esli_tavan.py`.
+**359 ORTAK parca**, tek degisken `YB_MAX_SEC` (12 -> 24).
+
+| | tavan 12 | tavan 24 | fark |
+|---|---|---|---|
+| konum recall | 0.8988 | 0.8988 | **+0.0000** |
+| **yonlu recall** | 0.7270 | **0.8935** | **+0.1665** |
+| F1 tavani | 0.8419 | 0.9437 | **+0.1018** |
+| secenek/parca | 3217 | 4857 | 1.51x |
+
+**Konum recall'un BASAMAK BASAMAK ayni cikmasi**, bu olcumun en guclu yani:
+tavan konumlara dokunmuyor, kazancin TAMAMI yonden geliyor. Teorinin
+ongordugu tam olarak buydu.
+
+**0.8935 > 0.85 -> KAPI A GECER.**
+
+### Neden ESLI kiyas sart oldu
+
+tam4 korpusu yarim (359/468) ve biten parcalar RASTGELE DEGIL -- once biten,
+yani daha kucuk/kolay parcalar. Yarim tam4'un ham olcumu 0.8952 idi; bunu tam
+korpusun 0.7347'siyle kiyaslamak farkin ne kadari TAVANDAN ne kadari KOLAY
+ALT KUMEDEN geldigini gizlerdi. Esli kiyas iki korpusu da AYNI 359 parcada
+olcer, alt kume etkisi ikisinde de ayni olur ve geriye yalniz tavan kalir.
+
+(Yarim korpusta yazilmis makbuzlar `KISMI_` onekiyle ayrildi; sabah raporunun
+tarama desenine artik girmiyorlar.)
+
+### Karar aritmetigi GUNCELLENDI
+
+| | onceki | tavan 24 ile |
+|---|---|---|
+| havuz F1 tavani | 0.8474 | **~0.94** |
+| 0.50 icin gereken secici verimliligi | %59.0 | **%53.2** |
+| gereken iyilesme carpani | 1.62x | **1.46x** |
+
+Havuz kolu hala TEK BASINA yetmiyor (0.94 x %36.5 = 0.343), ama gereken
+secici iyilesmesini 1.62x'ten 1.46x'e indiriyor. **Oncelik hala SECICI**,
+fakat tavan-24 artik dagitilmasi gereken bir kazanc.
+
+### Kalan is
+
+Bu bir TAVAN olcumu; **uctan uca kazanc DEGIL**. Tavan yukselmesi ancak
+secici o yonleri SECEBILIRSE F1'e doner. Sirasiyla: (1) tam4 korpusunu
+tamamla, (2) KAPI A'yi tam korpusta olc, (3) `kos_p6_kademe2.py`'yi tam4 ve
+tam3 uzerinde AYNI ayarla kosup uctan uca farki al.
