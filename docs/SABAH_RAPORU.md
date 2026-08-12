@@ -1,10 +1,36 @@
-# SABAH RAPORU -- 2026-08-12 01:58
+# SABAH RAPORU -- 2026-08-12 04:37
 
 Butun sayilar `tam` MARKA KATLARINDA (LOMO). D7 SINAVINA BAKILMADI. Manset metrik MIKRO robot F1.
 
 ## 1. KAPI A -- tam-acik havuzun yonlu recall'u
-Henuz olculmedi (A2 fazi kosmadi).
-- ONCEKI havuz (u25): yonlu recall 0.7264, F1 tavani 0.8415 -> kapi GECMEMISTI
+| havuz | kume | konum | **yonlu** | F1 tavani | aday/parca | KAPI A |
+|---|---|---|---|---|---|---|
+| tam-acik, tavan 12 | d6 | 0.8997 | **0.7347** | 0.8470 | 266 | gecmedi |
+| onceki havuz | d6 | 0.8713 | **0.7264** | 0.8415 | 251 | gecmedi |
+| onceki havuz | tam | 0.9789 | **0.7352** | 0.8474 | 239 | gecmedi |
+
+KAPI A esigi: yonlu recall >= 0.85.
+
+Kapi gecmezse havuz genisletme kolu KAPANIR: tavan yetmiyorsa secici ne kadar iyilesirse iyilessin hedefe ulasilamaz. TAVAN, mukemmel bir secicinin alacagi F1'dir -- VAAT DEGIL, UST SINIR.
+
+## 1b. SECENEK TAVANI (MAX_SEC) BAGLIYOR MU?
+**orneklem: ? / 18 parca, yelpaze 256**
+
+| tavan | yonlu recall | secenek maliyeti |
+|---|---|---|
+| 12 | 0.5913 | 1.00x |
+| 24 | 0.8755 | 1.33x |
+| 48 | 0.8755 | 1.35x |
+
+**orneklem: ? / 30 parca, yelpaze 256**
+
+| tavan | yonlu recall | secenek maliyeti |
+|---|---|---|
+| 12 | 0.8462 | 1.00x |
+| 24 | 0.9077 | 1.20x |
+| 40 | 0.9077 | 1.23x |
+
+> Bugunku tavan **12**. Tavan bagliyorsa yon kaynagi eklemek (yelpaze cozunurlugu) recall'u ARTIRMAZ -- yeni yonler tavana takilip mevcutlarin yerini alir. `YB_MAX_SEC` ile ayarlanir.
 
 ## 2. EK OZNITELIK BLOKLARI (kapi +0.01)
 Henuz makbuz yok.
@@ -27,6 +53,8 @@ Henuz makbuz yok.
 
 ## 4. GECE FAZLARI
 - [00:14:14] BITTI: A1b -- 141 dosya
+- [04:12:23] BITTI: A1b -- 3051 dosya
+- [04:12:31] BITTI: A2_havuz_tavani (8s)
 
 ## 4b. SAHA -- AUTO KATMANI (tier cokusu)
 Dagitilan AUTO esigi = **0.6**

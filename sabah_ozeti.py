@@ -106,27 +106,34 @@ def main():
     L.append("")
 
     L.append("## 1. KAPI A -- tam-acik havuzun yonlu recall'u")
-    yeni = havuz("_p6_oz_tam3")
-    eski = havuz("_p6_oz_u25")
-    if yeni is None:
+    # TUM havuz makbuzlari tek tabloda: yeni bir korpus (ornegin tavan-24
+    # `tam4`) olculunce elle kod degistirmeden raporda gorunsun.
+    ETIKET = {"_p6_oz_u25": "onceki havuz",
+              "_p6_oz_tam3": "tam-acik, tavan 12",
+              "_p6_oz_tam4": "tam-acik, TAVAN 24"}
+    sat = []
+    for y in sorted(glob.glob(os.path.join(KOK, "results",
+                                           "havuz_tavani_*.json"))):
+        d = oku(y)
+        if not d:
+            continue
+        t = d.get("toplam", {})
+        ad = os.path.basename(y)[len("havuz_tavani_"):-len(".json")]
+        dz, _, km = ad.rpartition("_")
+        sat.append((ETIKET.get(dz, dz), km, t, bool(d.get("kapi_a_gecti"))))
+    if not sat:
         L.append("Henuz olculmedi (A2 fazi kosmadi).")
-        if eski:
-            L.append(f"- ONCEKI havuz (u25): yonlu recall {eski[1]:.4f}, "
-                     f"F1 tavani {eski[2]:.4f} -> kapi GECMEMISTI")
     else:
-        L.append("| havuz | konum recall | yonlu recall | F1 tavani | aday/parca |")
-        L.append("|---|---|---|---|---|")
-        for ad, h in (("onceki (u25)", eski), ("**tam-acik (tam3)**", yeni)):
-            if h:
-                L.append(f"| {ad} | {h[0]:.4f} | {h[1]:.4f} | {h[2]:.4f} | "
-                         f"{h[3]:.0f} |")
+        L.append("| havuz | kume | konum | **yonlu** | F1 tavani | aday/parca | KAPI A |")
+        L.append("|---|---|---|---|---|---|---|")
+        for ad, km, t, gec in sat:
+            L.append(f"| {ad} | {km} | {t.get('konum_recall', 0):.4f} | "
+                     f"**{t.get('yonlu_recall', 0):.4f}** | "
+                     f"{t.get('f1_tavani', 0):.4f} | "
+                     f"{t.get('aday_parca', 0):.0f} | "
+                     f"{'GECTI' if gec else 'gecmedi'} |")
         L.append("")
-        L.append(f"- KAPI A (yonlu recall >= {KAPI_HAVUZ}) -> "
-                 f"**{'GECTI' if yeni[4] else 'GECMEDI'}** ({yeni[1]:.4f})")
-        if eski:
-            L.append(f"- onceki havuza gore yonlu recall farki: "
-                     f"**{yeni[1] - eski[1]:+.4f}**, tavan farki: "
-                     f"**{yeni[2] - eski[2]:+.4f}**")
+        L.append(f"KAPI A esigi: yonlu recall >= {KAPI_HAVUZ}.")
         L.append("")
         L.append("Kapi gecmezse havuz genisletme kolu KAPANIR: tavan "
                  "yetmiyorsa secici ne kadar iyilesirse iyilessin hedefe "

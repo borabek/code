@@ -831,3 +831,18 @@ dagitilan urune giren bir iyilestirme YOK.
 basina yetmedigi, tavanin nerede bagladigi, sahadaki guven katmaninin atil
 oldugu ve olculen zincirin GLB'ye hic girmedigi -- dordu de bu gece olculdu.
 Bunlarin ucu (bolum 8, 10, 12) sayi degil, YON degistiren bulgulardir.
+
+### Tek satirda tez: kayip KONUM degil YON
+
+`tam` kumesi, onceki havuz (makbuz `havuz_tavani__p6_oz_u25_tam.json`):
+
+| olcu | deger |
+|---|---|
+| konum recall | **0.9789** |
+| yonlu recall | **0.7352** |
+
+GT'nin %97.9'unun KONUMU havuzda; yalnizca %73.5'inin dogru YONU da var.
+Aradaki **0.244**, tamamen yon kaybidir. Ve yon secenekleri aday basina 12
+ile sinirli, doygun halde (bkz. tavan doygunlugu uyarisi). Havuzu genisletmek
+bu farki kapatmaz -- nitekim tavan-12 tam-acik havuzda konum 0.8713 -> 0.8997
+cikarken yon yalnizca 0.7264 -> 0.7347 oynadi.
