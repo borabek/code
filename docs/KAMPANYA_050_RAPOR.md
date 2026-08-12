@@ -867,3 +867,40 @@ Bu, projenin defalarca yakalandigi hatanin ta kendisidir (bkz. bolum 5d:
 
 iki etki AYRI okunur. Taban kosusu olmadan B1/B6 sayilari raporlanabilir ama
 **yorumlanamaz**; makbuzlari o yuzden "tek degiskenli degil" notuyla okunmali.
+
+---
+
+## 15. B1 (ZOR NEGATIF) SONUCU -- +0.0104 ama TEK DEGISKENLI DEGIL
+
+Makbuz `results/p6_kademe2_B1_zorneg.json` (korpus `tam3`, `tam` marka katlari).
+
+| | u25 taban | B1 (tam3 + zor negatif) | fark |
+|---|---|---|---|
+| **robot (MIKRO)** | 0.3091 | **0.3195** | **+0.0104** |
+| recall | 0.2935 | 0.2771 | -0.0164 |
+| kesinlik | 0.3265 | 0.3772 | +0.0507 |
+
+Kirilim, zor-negatif egitiminin BEKLENEN imzasini tasiyor: kesinlik belirgin
+yukseliyor (+0.0507), recall bir miktar dusuyor -- daha az ama daha isabetli
+tahmin.
+
+### Marka kirilimi (P6 kolu)
+
+| marka | u25 taban | B1 | fark |
+|---|---|---|---|
+| PXC | 0.3972 | 0.4433 | **+0.0461** |
+| TOGI | 0.1689 | 0.1856 | +0.0167 |
+| WEI | 0.3795 | 0.3726 | -0.0069 |
+| SIE | 0.4681 | 0.4504 | -0.0177 |
+
+### UYARI -- bu sayi henuz YORUMLANAMAZ
+
+Iki degisken ayni anda degisti: **korpus** (u25 -> tam3, tam-acik havuz) ve
+**yontem** (zor negatif). +0.0104'un hangisinden geldigi bilinmiyor. Kuyruktaki
+`tam3` TABAN kosusu (duz ayar, ayni korpus) ikisini ayiracak:
+
+    taban(u25) -> taban(tam3)  = KORPUS etkisi
+    taban(tam3) -> B1(tam3)    = ZOR NEGATIF etkisi
+
+Taban kosusu gelene kadar B1 **raporlanabilir ama kola sayilamaz**. Bu
+kampanyanin kurali: bir kol ancak TEK DEGISKENLI olcumle acilir.

@@ -1,4 +1,4 @@
-# SABAH RAPORU -- 2026-08-12 05:23
+# SABAH RAPORU -- 2026-08-12 05:24
 
 Butun sayilar `tam` MARKA KATLARINDA (LOMO). D7 SINAVINA BAKILMADI. Manset metrik MIKRO robot F1.
 
@@ -36,18 +36,19 @@ Kapi gecmezse havuz genisletme kolu KAPANIR: tavan yetmiyorsa secici ne kadar iy
 Henuz makbuz yok.
 
 ## 3. KADEME2 KOL KIYASLARI
-- **taban (u25)** (results/_p6_oz_tam3) secilen=P6 -> P6 0.3195
-- **SIRA kapali** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.2938
-- **SIRA acik** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.3041
+- **SIRA kapali (u25 taban)** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.2938
+- **SIRA acik (u25)** (results/_p6_oz_u25) secilen=P6 -> P6 0.3091, P6_KAFES 0.3041
+- ****B1 zor negatif** (tam3)** (results/_p6_oz_tam3) secilen=P6 -> P6 0.3195
+- **son kosu (uzerine yazilan)** (results/_p6_oz_tam3) secilen=P6 -> P6 0.3195
 
 ## 3b. SECICI VERIMLILIGI -- 0.50 nereden gelebilir?
 - havuz F1 TAVANI (`tam`, mukemmel secici): **0.8474**
-- GERCEKLESEN (P6 kolu): **0.3195**
-- **secici verimliligi = 37.7%**
+- GERCEKLESEN (P6 kolu): **0.3091**
+- **secici verimliligi = 36.5%**
 
 0.50'ye iki yoldan gidilebilir:
-1. **Havuzla:** verimlilik sabit kalirsa tavanin **1.3263** olmasi gerekir  -> 1.0'i asiyor, TEK BASINA IMKANSIZ
-2. **Seciciyle:** tavan sabit kalirsa verimliligin **59.0%** olmasi gerekir (1.57x iyilesme)
+1. **Havuzla:** verimlilik sabit kalirsa tavanin **1.3707** olmasi gerekir  -> 1.0'i asiyor, TEK BASINA IMKANSIZ
+2. **Seciciyle:** tavan sabit kalirsa verimliligin **59.0%** olmasi gerekir (1.62x iyilesme)
 
 > Havuz kolu tek basina hedefe goturmuyor; SECICI kolu zorunlu. Bu, EK bloklarina ve aday-kumesi modeline (D2) verilen onceligi belirler.
 

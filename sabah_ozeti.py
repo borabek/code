@@ -74,10 +74,12 @@ def havuz(dizin="_p6_oz_tam3", kume=None):
 
 def kademe2():
     out = []
-    for ad, y in (("taban (u25)", "p6_kademe2_tam.json"),
-                  ("SIRA kapali", "p6_kademe2_sira0.json"),
-                  ("SIRA acik", "p6_kademe2_sira1.json"),
-                  ("tam3 korpus", "p6_kademe2_tam3.json")):
+    for ad, y in (("SIRA kapali (u25 taban)", "p6_kademe2_sira0.json"),
+                  ("SIRA acik (u25)", "p6_kademe2_sira1.json"),
+                  ("**tam3 TABAN** (duz ayar)", "p6_kademe2_tam3_taban.json"),
+                  ("**B1 zor negatif** (tam3)", "p6_kademe2_B1_zorneg.json"),
+                  ("**B6 ensemble** (tam3)", "p6_kademe2_B6_ensemble.json"),
+                  ("son kosu (uzerine yazilan)", "p6_kademe2_tam.json")):
         d = oku(os.path.join(KOK, "results", y))
         if not d:
             continue
