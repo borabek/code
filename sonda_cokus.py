@@ -56,6 +56,11 @@ def dogru_maske(d):
     P = d["P"][d["idx"]]
     YD = d["YD"]
     G, Gd = np.asarray(d["G"], float), np.asarray(d["Gd"], float)
+    # GT YONU BIRIM OLMAYABILIR: 6074 kayittan 27'sinde degil ve EN KUCUGU
+    # TAM SIFIR. Birimlestirmeden eksenel/yanal ayristirma bozulur.
+    # (`sonda_havuz_tavani` bunu `YB.birim` ile zaten yapiyordu.)
+    if len(Gd):
+        Gd = Gd / np.maximum(np.linalg.norm(Gd, axis=1, keepdims=True), 1e-12)
     if not len(P) or not len(G):
         return np.zeros(len(P), bool), np.zeros((0,), bool)
     v = P[:, None, :] - G[None, :, :]
@@ -114,7 +119,13 @@ def main():
         a["cp"].append(len(d["G"]))
         a["aday"].append(len(np.unique(d["idx"])))
         a["secenek"].append(n)
-        a["havuzda"].append(float(ulasilan.mean()) if len(ulasilan) else 0.0)
+        # MIKRO topla (parca oranlarinin ORTALAMASI DEGIL). Ilk surumde
+        # `ulasilan.mean()` parca basina oran biriktiriyordu; bu MAKRO'dur ve
+        # KAPI A'nin MIKRO sayisiyla kiyaslanamaz. MOR'da 0.653 vs 0.8686
+        # farki tam buydu -- celiski degil, BIRIM UYUSMAZLIGI. Bu projede
+        # manset her zaman MIKRO.
+        a["gt_ulasilan"].append(int(ulasilan.sum()))
+        a["gt_toplam"].append(int(len(ulasilan)))
         if not n or not dg.any():
             continue
         # DOGRU secenegin parca ICINDEKI sira yuzdeligi (0 = en tepe)
@@ -140,7 +151,8 @@ def main():
         r = {"parca": len(a["parca"]), "cp_parca": float(np.mean(a["cp"])),
              "aday_parca": float(np.mean(a["aday"])),
              "secenek_parca": float(np.mean(a["secenek"])),
-             "havuzda": float(np.mean(a["havuzda"])),
+             "havuzda": float(sum(a["gt_ulasilan"]) /
+                              max(sum(a["gt_toplam"]), 1)),   # MIKRO
              "ilk10": float(np.mean(a["ilk10"])),
              "ilk50": float(np.mean(a["ilk50"])),
              "sira_yuzdelik": float(np.mean(a["en_iyi_yuzdelik"])),
