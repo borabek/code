@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """URUN P6 YOLU: (konum x direction) ortak siralayici.
 
-`product_genis.output` with AYNI imza -- `canonical_chain.product_output` bunu a config
+`product_wide.output` with AYNI imza -- `canonical_chain.product_output` bunu a config
 anahtariyla cagirabilsin diye. Kol calisamazsa (model/STEP/B-rep absent) None returns
 and cagiran BIR ONCEKI yola duser; sessizce bozuk output URETILMEZ.
 
-FARKI (single cumleyle): `product_genis` each adayi havuzun verdigi TEK yonle puanlar;
+FARKI (single cumleyle): `product_wide` each adayi havuzun verdigi TEK yonle puanlar;
 this modul each adaya `direction_bank` seceneklerini takar and (konum, direction) ciftini TEK
 skorla siralar. Yon residual SECILIR.
 
-ISARET DUZELTME YOK -- and this kasten. `product_genis.isaret_duzelt` fiziksel a
+ISARET DUZELTME YOK -- and this kasten. `product_wide.isaret_duzelt` fiziksel a
 kuralla yonu ters cevirir (+0.0316 olculmustu); here +u and -u ZATEN ayri two
 secenek as bankada and siralayici hangisinin correct oldugunu ogrenir. Kurali
 ustune koymak, ogrenilen karari eziyor. `P6_ISARET=1` with acilir (ablasyon).
@@ -19,7 +19,7 @@ import os
 import numpy as np 
 
 import p6_decision 
-import product_genis 
+import product_wide 
 import direction_bank as YB 
 
 MODEL_YOL =os .environ .get ("P6_MODEL","results/p6_kademe2_model.pkl")
@@ -69,12 +69,12 @@ def secenek_tablosu (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     import brep_pool 
     import thin_pool 
     import wire_gate 
-    cyl ,acik =product_genis .brep_cikar (step_path )
+    cyl ,acik =product_wide .brep_cikar (step_path )
     if cyl is None :
         return None 
     Ps =np .asarray ([c ["point"]for c in cps_seg ],float )
     Ds =np .asarray ([c ["direction"]for c in cps_seg ],float )
-    P ,D ,src_ =product_genis .pool (Ps ,Ds ,cyl ,acik )
+    P ,D ,src_ =product_wide .pool (Ps ,Ds ,cyl ,acik )
     if len (P )<2 :
         return None 
     if MESH_HAVUZ :
@@ -105,13 +105,13 @@ def secenek_tablosu (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     V ,F ,probs ,[{"point":P [i ],"direction":D [i ]}
     for i in range (len (P ))],CE ,CT ,step_path =step_path ),
     float )
-    B =product_genis .tanimlayici (P ,D ,cyl ,mesh ,diag )
+    B =product_wide .tanimlayici (P ,D ,cyl ,mesh ,diag )
     # YELPAZE only mesh OLMAYAN adaylara -- egitimdekiyle AYNI rule.
     idx ,YD ,C =YB .secenekler (P ,D ,cyl ,V ,mesh =mesh ,diag =diag ,
     fan_maske =(np .asarray (src_ ,int )!=2 ))
     if not len (idx ):
         return None 
-    Dblok =product_genis .tanimlayici (P [idx ],YD ,cyl ,mesh ,diag )
+    Dblok =product_wide .tanimlayici (P [idx ],YD ,cyl ,mesh ,diag )
     return P ,idx ,YD ,np .hstack ([A [idx ],B [idx ],C ,Dblok ]),src_ 
 
 
@@ -132,7 +132,7 @@ def _rejim_gecer (pk ,P ,src_ ):
     Mesh havuzu HER PARCADA correct arac not: tabanin already guclu oldugu
     sparse/temiz parcalarda havuzu uce katlamak kesinligi boguyor. Kapi,
     inference aninda gorulebilen a istatistige (candidate sayilari) bakar; threshold
-    `run_p6_rejim.py` with MARKA KATLARINDA secilir, sinavda taranmaz.
+    `run_p6_regime.py` with MARKA KATLARINDA secilir, sinavda taranmaz.
 
     Kapiyi gecemeyen parcada `output` None returns and `canonical_chain` ZATEN VAR
     OLAN geri-dusmeyle old yola gecer -- new a kod yolu acilmaz.
@@ -205,8 +205,8 @@ def out_ (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     P2 ,D2 ,_ai ,S2 =p6_decision .sec_ayrintili (P ,idx ,YD ,s ,tuple (pk ["rule"]),
     nms_mm =float (pk ["nms"]))
     if ISARET and len (P2 ):
-        T2 =product_genis .tanimlayici (P2 ,D2 ,*_mesh_arg (V ,F ))
-        D2 =product_genis .isaret_duzelt (D2 ,T2 )
+        T2 =product_wide .tanimlayici (P2 ,D2 ,*_mesh_arg (V ,F ))
+        D2 =product_wide .isaret_duzelt (D2 ,T2 )
         # `wire_score` GERCEK skordur (eskiden sabit 1.0 idi). Guven kapili GLB
         # bunun uzerine kurulur: precision >=0.90 verecek threshold kalibre edilir,
         # ustundekiler ONAYLI, altindakiler ONERI becomes.

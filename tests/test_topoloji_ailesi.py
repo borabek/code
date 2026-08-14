@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""topoloji_ailesi: sentetik klemens dizisi on elle dogrulama."""
+"""topology_family: sentetik klemens dizisi on elle dogrulama."""
 import os 
 import sys 
 
@@ -7,7 +7,7 @@ import numpy as np
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
 
-import topoloji_ailesi as TA # noqa: E402
+import topology_family as TA # noqa: E402
 
 
 def _sahne ():

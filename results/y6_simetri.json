@@ -3075,5 +3075,5 @@
  ],
  "test_edilen": 253,
  "orgude": 1,
- "not": "Bu test AGIN CIKTISINI KULLANMAZ: girdi yalniz manufacturer CP listesi + robot noktasinin KONUMU. Sonuc bir ALT SINIRDIR -- oruntude olmayan bir FP de gercek olabilir, bu test onu yakalamaz."
+ "not": "Bu test AGIN CIKTISINI KULLANMAZ: girdi only manufacturer CP listesi + robot noktasinin KONUMU. Sonuc a ALT SINIRDIR -- oruntude olmayan a FP de gercek olabilir, this test onu yakalamaz."
 }

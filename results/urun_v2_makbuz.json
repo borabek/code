@@ -98,7 +98,7 @@
   "high": 0.2124,
   "corpus_weighted": 0.7418,
   "config": "frozen product: min_v30 features + RandomForest(400,leaf3), no promote",
-  "protocol": "gate+threshold trained on 541 WORK parts, applied once to 129 locked parts"
+  "protocol": "gate+threshold trained on 541 WORK parts, applied before to 129 locked parts"
  },
  "holdout_delta": {
   "low": -0.0292,

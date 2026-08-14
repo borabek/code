@@ -4,7 +4,7 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
@@ -71,6 +71,6 @@
   }
  },
  "artan_marka": 7,
- "sizinti_denetimi": "g10 training dizini _label_auto_obj_TR ile D7 kesisimi: part 0, brand 0 (12/12 brand temiz)",
- "not": "AYNI harness (canonical_d7), yalniz yigin degisti. Tam zincir, MIKRO, D7=DEV brand-disi."
+ "sizinti_denetimi": "g10 training dizini _label_auto_obj_TR with D7 kesisimi: part 0, brand 0 (12/12 brand temiz)",
+ "not": "AYNI harness (canonical_d7), only yigin degisti. Tam zincir, MIKRO, D7=DEV brand-disi."
 }

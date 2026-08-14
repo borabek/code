@@ -4,7 +4,7 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
@@ -38,5 +38,5 @@
  "robot_recall": 0.20699708454810495,
  "yalniz_yanal_tavani": 0.3482345319080013,
  "yalniz_aci_tavani": 0.34175574991901525,
- "not": "GT basina EN IYI adayin ihlali. 'IKISI AYRI ADAYDA' = lateral bir adayda, aci baskasinda saglaniyor -> tek adayda birlestirmek kazanc olurdu."
+ "not": "GT basina EN IYI candidate's ihlali. 'IKISI AYRI ADAYDA' = lateral a adayda, aci baskasinda saglaniyor -> tek adayda birlestirmek kazanc olurdu."
 }

@@ -7,15 +7,15 @@
 ## ✅ CURRENT PRODUCT (2026-08-02) = `vote1_union + 116-sütunlu gate + pose head + açı seçici`
 
 **Pipeline:** STEP → `thesis_remesh(6000)` → 4-model segmentasyon →
-**`robot_cp.derive_candidates`** (tek kaynak; gate eğitimi de aynı fonksiyonu çağırır) →
+**`robot_cp.derive_candidates`** (tek source; gate eğitimi de aynı fonksiyonu çağırır) →
 **wire-gate** → **göreli eşik** → **POSE HEAD** (lateral düzeltme) → **SEÇİCİ AÇI DÜZELTMESİ** →
 iki katman.
 
 **Gate:** `results/wire_gate.pkl` — **58 ham × 2 (parça-içi z-skor) = 116 sütun**
  (13 baseline + 5 B-rep fiziksel + 4 içbükey topoloji + **36 zengin**: konum9 + çok-yarıçap24 + normal-std3)
-**Pose head:** `results/pose_head.pkl` — gate kararından sonra lateral düzeltme, ≤3mm, axial depth sabit
-**Açı seçici:** `results/aci_secici.pkl` — önce "bu açı yanlış mı", yalnız öyleyse düzelt
-Hepsi MD5 damgalı ve `tests/test_artifact.py` ile doğrulanıyor.
+**Pose head:** `results/pose_head.pkl` — gate kararından after lateral düzeltme, ≤3mm, axial depth sabit
+**Açı seçici:** `results/aci_secici.pkl` — önce "this açı yanlış mı", yalnız öyleyse düzelt
+Hepsi MD5 damgalı ve `tests/test_artifact.py` with doğrulanıyor.
 
 ### 📊 MANŞET — `headline.py --yaz` ÜRETİR (194 parça / 171 grup, **grup** bootstrap)
 
@@ -34,7 +34,7 @@ Hepsi MD5 damgalı ve `tests/test_artifact.py` ile doğrulanıyor.
 
 | arm | etki | kanıt |
 |---|---|---|
-| **zengin bloklar** (+36 sütun) | tespit **+0.0233** | GA(WEI) [+0.0005, +0.0697] · `karar_olcutu` 5/5 şart |
+| **zengin bloklar** (+36 sütun) | tespit **+0.0233** | GA(WEI) [+0.0005, +0.0697] · `decision_criterion` 5/5 şart |
 | **pose head** (lateral) | robot **+0.0428** | GA [+0.0220, +0.0680] · tespit +0.0001 |
 | **seçici açı** | robot **+0.0126** | GA [+0.0002, +0.0325] · tespit bedeli **yapısal sıfır** |
 | **üye yön seçici** | robot **+0.0278** | GA [+0.0105, +0.0490] · kâhin +0.0536'nın %52'si
@@ -42,7 +42,7 @@ Hepsi MD5 damgalı ve `tests/test_artifact.py` ile doğrulanıyor.
 **Pose head'in dersi:** aynı fikir 1068 satırla **kanıtsızdı** (+0.0222, GA sıfırı içeriyor),
 6330 satırla **kanıtlı** (+0.0428). Veri, ölçüm belirsizliğini kapattı.
 
-**Neden öğrenme, kural değil:** 2026-08-01'de kural tabanlı dört konum/yön kolu denendi, dördü
+**Neden öğrenme, rule değil:** 2026-08-01'de rule tabanlı dört konum/yön arm denendi, dördü
 de öldü (izdüşüm −0.045, axis uzlaşısı −110 nokta, yarık yönü −187, B-rep kapısı 0.000).
 Ortak kusur: düzeltme herkese aynı uygulanıyordu.
 
@@ -51,7 +51,7 @@ Ortak kusur: düzeltme herkese aynı uygulanıyordu.
 9 bölmede (7 seri-dışı + 2 üretici-dışı) desen tekdüze — **baseline zayıfken kazanıyor,
 sağlıklıyken kaybediyor**:
 
-| bölme | baseline | her parçaya z-skorun farkı |
+| bölme | baseline | each parçaya z-skorun farkı |
 |---|---|---|
 | WEI dışarıda | 0.4832 (çöküş) | **+0.0869** |
 | seri 25 | 0.5654 | **+0.0639** |
@@ -59,29 +59,29 @@ sağlıklıyken kaybediyor**:
 | seri 17 / 30 / 15 / 32 / 16 | 0.66–0.78 | −0.060 … −0.008 |
 | PXC dışarıda | 0.7203 (sağlıklı) | **−0.0375** |
 
-Bu yüzden **her parçaya uygulanmıyor.** Yönlendirme, gate'in kendi skor dağılımından çöküşü
+Bu yüzden **each parçaya uygulanmıyor.** Yönlendirme, gate'in kendi skor dağılımından çöküşü
 sezer (ölçülmüş teşhis: çöküşte model adayların %10.3'üne pozitif diyor, gerçek %24.1) ve
 kazancın **%98'ini** korurken PXC vergisinin **yarısını**, seri vergisinin **%60'ını** geri alır.
 Metadata gerektirmez.
 
-> **Dürüst not (kendi çubuğum):** *"yönlendirmeli arm her eksende en az z-skor kadar iyi olmalı"*
+> **Dürüst not (kendi çubuğum):** *"yönlendirmeli arm each eksende en az z-skor up to iyi olmalı"*
 > testim WEI'de kıl payı düştü — fark −0.0020, %95 GA [−0.0066, **+0.0000**], üst uç tam sıfır.
-> Ürün kararını bir `>0`/`>=0` sınır artefaktına bırakmadım: yönlendirme WEI'de 0.0020 verip
+> Ürün kararını a `>0`/`>=0` sınır artefaktına bırakmadım: yönlendirme WEI'de 0.0020 verip
 > PXC'de 0.0201 ve tanıdıkta 0.0049 alıyor (10'a 1) ve üretici ortalamasında en iyisi.
 > Gerekçe budur, artefakt gizlenmedi.
 
 ### 🚪 KAPANAN DAL: topoloji yarıçapı
 
 Aday düzeyi R=12'yi kazanan gösterdi (+0.0100). **Uçtan uca çürüdü:** R=12 tanıdıkta −0.0109;
-R=8'in kazancı **gürültü** (WEI +0.018, GA [−0.007, +0.044]) ama bedeli **gerçek**
-(PXC −0.024, GA [−0.044, −0.006]). **R=6.0 kalır.** Aday düzeyi bu araştırmada **dördüncü kez**
+R=8'in kazancı **gürültü** (WEI +0.018, GA [−0.007, +0.044]) but bedeli **gerçek**
+(PXC −0.024, GA [−0.044, −0.006]). **R=6.0 kalır.** Aday düzeyi this araştırmada **dördüncü kez**
 yanılttı — eleme kapısıdır, karar kapısı değildir.
 
 **Ölçüm protokolü:** bölme **keskin geometri anahtarıyla** (bbox 0.5 mm + B-rep silindir/düzlem
-imzası); `family_key` bu korpusta parça numarasını döndürüyordu ve **parçaların %80'inin ikizi var**.
+imzası); `family_key` this korpusta parça numarasını döndürüyordu ve **parçaların %80'inin ikizi present**.
 DEV (karar) / VAL (sınav) / **LOCKED (harcanmadı)**.
 
-**Kazançların kaynağı (sırayla):** 5 B-rep fiziksel özellik (`brep_r` ile `size` korelasyonu
+**Kazançların kaynağı (sırayla):** 5 B-rep fiziksel özellik (`brep_r` with `size` korelasyonu
 −0.009 = yeni bilgi) → 4 içbükey topoloji sütunu (`kon_cevre` AUC 0.709; gerçek açıklıklarda
 medyan 1.000 = tam tur halka) → göreli eşik (kalibrasyon) → parça-içi z-skor (sıralama).
 
@@ -417,7 +417,7 @@ the conservative, higher-quality model is the better product.
    (CableEntry IoU on human-GT val) as the selector; locked-11 is the one-shot final benchmark.
 2. **A wrong CP is worse than an abstention** for a robot — prefer the conservative model.
 3. **gen_dev_40 is DEV (model selection), NOT a benchmark.** `final_holdout_40.json` is the untouched
-   final set (unlabelled → score only once a human labels it).
+   final set (unlabelled → score only before a human labels it).
 4. **Axis-snapped CP direction is a MANUFACTURER-CONVENTION output**, not a fit to a human angle.
 5. **Don't over-train / don't chase heuristics.** More diverse real human-labelled DATA is the lever.
 6. `train_seg_extra.py` requires `--checkpoint-out` (never clobber a model implicitly).

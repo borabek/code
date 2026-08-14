@@ -5,7 +5,7 @@
 set -e
 PAINT="$1"; MFG="${2:-WEI}"
 PY=".venv/Scripts/python.exe"; export PYTHONPATH=_diffusion_net_repo/src
-[ -f "$PAINT" ] || { echo "HATA: paint JSON yok: $PAINT"; exit 1; }
+[ -f "$PAINT" ] || { echo "HATA: paint JSON none: $PAINT"; exit 1; }
 
 if [ "$MFG" = "WEI" ]; then OUTDIR=_label_targets_recall; else OUTDIR=_label_targets_recall_pxc; fi
 
@@ -28,4 +28,4 @@ $PY big_arbiter.py --ckpts results/seg_extra/recall_v2_s0.pt results/seg_extra/r
    2>&1 | grep -iE "WEI|PXC|ALL|F1" | grep -v "cache\|construct"
 
 echo "=== BITTI. recall_v2_s{0,1,2}.pt egitildi. Yeni WEI/ALL F1 yukarida. ==="
-echo "Kalkarsa: cp_config robot_vote2_checkpoints'i recall_v2 ile guncelle."
+echo "Kalkarsa: cp_config robot_vote2_checkpoints'i recall_v2 with guncelle."

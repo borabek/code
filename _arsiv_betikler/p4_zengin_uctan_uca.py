@@ -3,14 +3,14 @@
 
 P2 candidate duzeyinde: konum9 +0.0114, cokyaricap24 +0.0169, all of them +0.0231 (ucu de HER IKI
 ureticide pozitif). Aday duzeyi this arastirmada ALTI KEZ yaniltti; that is why karar uctan uca,
-kilitli measurement kumesinde (194 part / 171 grup), GRUP bootstrap with, `karar_olcutu` uzerinden.
+kilitli measurement kumesinde (194 part / 171 grup), GRUP bootstrap with, `decision_criterion` uzerinden.
 
 EGITIM VERISI: results/zengin_parite.npz (1599 part; parite-sadik candidates, votes<=4)
 OLCUM: results/_der_zengin.pkl (same candidates + 33 zengin column)
 
 DONUSUM: dagitilan yapinin part-ici z-skoru each kolda uygulanir (urunle same).
 
-KILL: karar_olcutu -- tanidik >= -0.01, split ORTALAMASI >= +0.01, most kotu split kotulesmesin,
+KILL: decision_criterion -- tanidik >= -0.01, split ORTALAMASI >= +0.01, most kotu split kotulesmesin,
 no bolmede > 0.05 loss, VE GA with KANITLI kazanc.
 """
 import collections 
@@ -31,7 +31,7 @@ DERZ ="results/_der_zengin.pkl"
 
 
 def main ():
-    import karar_olcutu 
+    import decision_criterion 
     import measure_set 
     import wire_gate 
     from big_arbiter import eligible 
@@ -123,7 +123,7 @@ def main ():
     for ad in KOL :
         if ad .startswith ("A"):
             continue 
-        k =karar_olcutu .degerlendir (SON ["A 22 temel"],SON [ad ],ga =ga ("A 22 temel",ad ))
+        k =decision_criterion .degerlendir (SON ["A 22 temel"],SON [ad ],ga =ga ("A 22 temel",ad ))
         gecen [ad ]=bool (k )
         print (f"\nA -> {ad }:  {k }")
     kazanan =max ((a for a in gecen if gecen [a ]),

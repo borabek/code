@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""kanonik_hizalama: cercevenin donme/oteleme/scale under DEGISMEDIGI.
+"""canonical_alignment: cercevenin donme/oteleme/scale under DEGISMEDIGI.
 
 Modulun tum varlik sebebi this: same klemens baska a eksende modellenmisse
 features AYNI cikmali. Test bunu dogrudan olcer.
@@ -11,7 +11,7 @@ import numpy as np
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
 
-import kanonik_hizalama as KH # noqa: E402
+import canonical_alignment as KH # noqa: E402
 
 
 def _donme (seed =0 ):

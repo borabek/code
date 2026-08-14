@@ -11,9 +11,9 @@ cd "c:/Users/DE00024082/Desktop/code"
 
 echo "=== 1) YENI DOSYALARI TESPIT ET ==="
 ls all_wscad_stp/*.stp | sort > _pool_now.txt
-# corpus'ta zaten etiketli olanlarin adlari
+# corpus'ta already etiketli olanlarin adlari
 ls wscad_corpus_v5/*.json 2>/dev/null | xargs -n1 basename 2>/dev/null | sed 's/\.json$//' | sort > _labelled.txt
-# havuzdaki her STEP icin part_nr (dosya adi) cikar, etiketli olmayanlari sec
+# havuzdaki each STEP for part_nr (dosya adi) cikar, etiketli olmayanlari sec
 : > _new_steps.txt
 while read -r f; do
   pn=$(basename "$f" .stp)
@@ -22,7 +22,7 @@ done < _pool_now.txt
 n_new=$(grep -c . _new_steps.txt || echo 0)
 echo "yeni/etiketsiz STEP: $n_new"
 if [ "$n_new" -lt 50 ]; then
-  echo "HATA: yeni dosya yok/az ($n_new) -- dosyalari all_wscad_stp/ icine attin mi?"
+  echo "HATA: yeni dosya none/az ($n_new) -- dosyalari all_wscad_stp/ icine attin mi?"
   exit 1
 fi
 
@@ -59,7 +59,7 @@ powershell -NoProfile -Command "compact /c '/s:c:\Users\DE00024082\Desktop\code\
   wscad_corpus_new_p5 --out wscad_corpus_v6 --move 2>&1 | tee _v6_merge.log
 n6=$(ls wscad_corpus_v6 | wc -l)
 echo "corpus v6: $n6 part"
-if [ "$n6" -lt 2500 ]; then echo "HATA: corpus v6 eksik ($n6) -- v31 BASLATILMADI"; exit 1; fi
+if [ "$n6" -lt 2500 ]; then echo "HATA: corpus v6 missing ($n6) -- v31 BASLATILMADI"; exit 1; fi
 rm -rf wscad_corpus_new_p* _nshard_dir_* _nshard_0* wscad_corpus_v5
 
 echo "=== 5) ETIKET TAVANI ==="

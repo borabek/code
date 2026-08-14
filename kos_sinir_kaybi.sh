@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Y13 — SINIR-FARKINDALI KAYIP
-# CP fiziksel olarak bir SINIRDIR (mouth cemberi) ama mevcut loss
-# (NLL + Tversky) BOLGEYI hedefler. Ek terim, komsusu farkli sinifta olan
+# CP fiziksel as a SINIRDIR (mouth cemberi) but mevcut loss
+# (NLL + Tversky) BOLGEYI hedefler. Ek terim, komsusu different sinifta which
 # tepelere odaklanir. Taban: hafif augmentasyon 0.15 (0.6528).
 set -u
 cd "$(dirname "$0")"

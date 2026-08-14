@@ -9,7 +9,7 @@ Bu paket that eksigin **2391 parcasini / 8410 CP'sini** kapatiyor + 403 tamamen 
 DOGRULANDI (entegrasyondan ONCE): 8 different ureticiden rastgele part -- STEP'ler
 ayristi, JSON mesh'i with STEP mesh'inin boundary kutusu <=0.11mm ortusuyor, i.e. same part.
 
-ADLANDIRMA: `eligible()` STEP'i `korpus_kimlik.step_kimlik` with reads and
+ADLANDIRMA: `eligible()` STEP'i `corpus_identity.step_kimlik` with reads and
 `wscaduniverse_<pid>_<zaman>.stp` kalibini bekler. DataSet5 dosyalari JSON with AYNI ada
 sahip (`A-B.1492-H4_ElectricalTerminal_ElectricalTerminal.stp`) -- oldugu like kopyalanirsa
 kimlik "ElectricalTerminal_ElectricalTerminal" cikar. Bu yuzden KOPYALARKEN yeniden adlandirilir.
@@ -25,7 +25,7 @@ import sys
 import time 
 
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-from korpus_kimlik import kimlik ,step_kimlik 
+from corpus_identity import kimlik ,step_kimlik 
 
 KAYNAK ="_ds5_stage/DataSet"
 STEP_DIZIN ="all_wscad_stp"

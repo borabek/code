@@ -16,7 +16,7 @@ Uretilen kayit alanlari, mevcut `_der_tam.pkl` with BIREBIR same sozlesmedir:
     pid, mfg, geo, cluster, diag, n           part kimligi and regime
     P, Pd                                  candidate point and yonleri (URUNUN yolundan)
     X   (22 column)  wire_gate.feats_for    gate'in baseline ozellikleri
-    XR  (36 column)  build_zengin_parite.zengin   zengin blok
+    XR  (36 column)  build_rich_parity.zengin   zengin blok
     G, Gd                                  manufacturer GT (STEP cercevesine tasinmis)
     UYE                                    birlestirmede atilan uye listeleri
 
@@ -54,7 +54,7 @@ def main ():
     import thesis_remesh 
     import wire_gate 
     from big_arbiter import eligible 
-    from build_zengin_parite import _normaller ,zengin 
+    from build_rich_parity import _normaller ,zengin 
     from connector_constants import CABLE_ENTRY as CE ,CONTACT as CT 
     from infer_step_cp import load_any ,step_to_mesh 
 

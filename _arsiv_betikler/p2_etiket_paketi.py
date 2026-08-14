@@ -29,7 +29,7 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 import diffusionnet as D_ # noqa: E402
 import thesis_remesh # noqa: E402
 from infer_step_cp import load_any ,step_to_mesh # noqa: E402
-from korpus_kimlik import step_kimlik as SK # noqa: E402
+from corpus_identity import step_kimlik as SK # noqa: E402
 
 CIK ="_p2_etiket"
 CKPT ="results/seg_g7/g7_s0.pt"

@@ -2,7 +2,7 @@
 """E2 -- SAHAYA INEN ZINCIRIN DOGRULANMASI
 
 SORUN (memory: glb-olculen-zinciri-kullanmiyor). Ihracatcilar
-`robot_cp.extract` cagiriyor; kampanyada olculen `product_p6`/`product_genis`
+`robot_cp.extract` cagiriyor; kampanyada olculen `product_p6`/`product_wide`
 sahaya HIC girmiyor. Yani olctugum each kazanc robota ULASMIYOR.
 Olculmus difference: baseline 0.2980 vs olculen zincir 0.3115.
 

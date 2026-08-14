@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# 0.75/B: ikinci kademeyi SIRA DAMGALAMA blogu ile yeniden egit ve olc.
+# 0.75/B: ikinci kademeyi SIRA DAMGALAMA blogu with yeniden egit ve olc.
 #
 # Onceki kosuda kademe2 (P6_KAFES) 0.3045, kademe1 (P6) 0.3091 verdi -- kaskad
 # 0.0046 GERIDEYDI. Sira damgalama blogu (3 sutun) tam da kaskadin zayif oldugu
-# yeri hedefler: dense parcada sira uyeligi, candidate-basina skorun goremedigi
+# yeri hedefler: dense parts sira uyeligi, candidate-basina skorun goremedigi
 # part-duzeyi bilgidir.
 #
-# TEK DEGISKEN: `P6_SIRA`. Ayni corpus, ayni katlar, ayni kurallar.
+# TEK DEGISKEN: `P6_SIRA`. Ayni corpus, same katlar, same kurallar.
 # Cikti ayri dosyaya yazilir; mevcut model paketi EZILMEZ.
 set -u
 cd "$(dirname "$0")"
@@ -38,11 +38,11 @@ for s in 1 0; do
   cp results/p6_kademe2_model.pkl "results/p6_kademe2_model_sira$s.pkl"
 done
 echo
-echo "KIYAS: results/p6_kademe2_sira1.json (sira ACIK) vs sira0.json (KAPALI)"
+echo "KIYAS: results/p6_kademe2_sira1.json (sira OPEN) vs sira0.json (KAPALI)"
 python - <<'PY'
 import json
 for s in (1, 0):
-    d = json.load(open(f"results/p6_kademe2_sira{s}.json"))["toplam"]
+    d = json.load(open(f"results/p6_kademe2_sira{s}.json"))["total"]
     print(f"  SIRA={s}: " + " | ".join(
         f"{k} {v['robot']:.4f}" for k, v in d.items()))
 PY

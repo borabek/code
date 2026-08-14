@@ -40,7 +40,7 @@ def detect (step_path ,V ,F ,r_min =R_MIN ,r_max =R_MAX ,min_depth =MIN_DEPTH ):
     (V, F) only isin testleri for is required; candidate URETIMI tamamen B-rep'ten gelir.
     """
     from cp_geometry import ray_hits 
-    import tel_g_brep as B 
+    import wire_g_brep as B 
 
     surf =B .read_brep (step_path )
     mesh =(np .asarray (V ,float ),np .asarray (F ,np .int64 ))

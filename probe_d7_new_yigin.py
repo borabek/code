@@ -15,10 +15,10 @@ import makbuz_hash
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
-import d6_record ,robot_cp ,wire_gate ,product_zinciri ,p5v2_secenek as PS ,p5v2_egit as PE 
+import d6_record ,robot_cp ,wire_gate ,product_chain ,p5v2_secenek as PS ,p5v2_egit as PE 
 from p1c_threshold import maske 
 from sina_cluster import match_hungarian ,f1w 
-from korpus_kimlik import step_kimlik as SK 
+from corpus_identity import step_kimlik as SK 
 
 YANAL ,ACI =2.0 ,10.0 
 sv =json .load (open ("results/d7_sinav_kumesi.json"))
@@ -57,7 +57,7 @@ def kos (ob ,gate ,p5 =None ):
             k =maske (gs ,0.40 ,0.30 )
             if k .any ():
                 P ,D =P [k ],D [k ]
-            P ,D =product_zinciri .tam_poz (V ,F ,avg ,P ,D ,step_path =S .get (pid ))
+            P ,D =product_chain .tam_poz (V ,F ,avg ,P ,D ,step_path =S .get (pid ))
         else :
             komsu =None 
             if len (D )>1 :

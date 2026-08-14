@@ -35,5 +35,5 @@
    "ulasim_acigi": 0.2821538461538462
   }
  },
- "not": "Kafes GT'den DEGIL, model skorunun en yuksek N adayindan araniyor. ULASIM ACIGI = kahin tavani - adaydan bulunan. D7'ye BAKILMADI."
+ "not": "Kafes GT'den DEGIL, model skorunun en high N adayindan araniyor. ULASIM ACIGI = kahin tavani - adaydan bulunan. D7'ye BAKILMADI."
 }

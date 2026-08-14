@@ -70,6 +70,6 @@
    }
   ]
  },
- "uyari": "k_gercek < k_istenen olabilir: oto-boyayici INSAN etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri algilanan bir acikliga dusmez. Olculen egri, gercek insan etiketine gore bir ALT SINIRDIR.",
- "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (probe_k65b_olc.py) -- boylece training bir kez kosar, measurement tekrar tekrar kosulabilir."
+ "uyari": "k_gercek < k_istenen olabilir: oto-boyayici INSAN etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri algilanan a acikliga dusmez. Olculen egri, gercek insan etiketine per a ALT SINIRDIR.",
+ "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (probe_k65b_measure.py) -- so training a kez kosar, measurement tekrar tekrar kosulabilir."
 }

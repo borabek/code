@@ -2,10 +2,10 @@
 # Y1b — AUGMENTASYON ACISI TARAMASI
 #
 # OLCULEN: 0.3 rad kazandiriyor (seg IoU +0.0197, uctan uca robot ISARETLI
-# +0.0696). 1.05 rad ZATEN denenmis ve DUSURMUS. Optimum 0.3 ile 1.05
-# arasinda bir yerde ve 0.3'un ALTINDA da olabilir -- taranmadi.
-# Iki uc denenir: 0.15 (cok hafif) ve 0.5 (orta).
-# Tek degisken: augment-maxang. Diger her sey A recetesi.
+# +0.0696). 1.05 rad ZATEN denenmis ve DUSURMUS. Optimum 0.3 with 1.05
+# arasinda a yerde ve 0.3'un ALTINDA da olabilir -- taranmadi.
+# Iki uc denenir: 0.15 (very hafif) ve 0.5 (orta).
+# Tek degisken: augment-maxang. Diger each sey A recetesi.
 set -u
 cd "$(dirname "$0")"
 export PYTHONPATH=_diffusion_net_repo/src PYTHONWARNINGS=ignore

@@ -53,5 +53,5 @@
  ],
  "egim_son": 0.04392147125140035,
  "simdiki_grup": 953,
- "not": "Alt-ornekleme GRUP bazinda (ikizler birlikte). Ekstrapolasyon yalniz egri doymuyorsa anlamlidir; son iki noktanin egimi raporlanir."
+ "not": "Alt-ornekleme GRUP bazinda (ikizler birlikte). Ekstrapolasyon only egri doymuyorsa anlamlidir; son iki noktanin egimi raporlanir."
 }

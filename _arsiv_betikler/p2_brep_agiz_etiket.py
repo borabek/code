@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """P2 OTOMATIK: mouth etiketini B-rep'in GERCEK SINIRINDAN uret (insan gerekmez).
 
-WHY ONCEKI OTO-ETIKET COKTU: `g5_agiz_etiket` GT noktasi etrafina SABIT
+WHY ONCEKI OTO-ETIKET COKTU: `g5_mouth_label` GT noktasi etrafina SABIT
 yaricapli disk boyuyordu. Olculdu ki that yolla egitilen g10, gorulmemis markada
 DAHA AZ candidate uretiyor (pool recall 0.6654 -> 0.5847,
 [[g10-zinciri-d7de-gerileme]]). Once h3 de r=2mm diskle atesleme oranini

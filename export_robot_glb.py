@@ -18,7 +18,7 @@ dev ="cuda"if torch .cuda .is_available ()else "cpu"
 # Eski hali `basename.split("_")[1]` idi and JSON sozlesmeli dosyalarda ("UPUN.016029_
 # ElectricalTerminal_...stp") parcayi BULAMIYORDU -> "STEP absent" deyip CIZIM URETMIYORDU.
 # Yani musteriye gosterilecek gorsel never olusmuyordu.
-from korpus_kimlik import step_kimlik as _sk 
+from corpus_identity import step_kimlik as _sk 
 STEP ={_sk (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 OUTDIR ="results/robot_glb"
 SADE =False 
@@ -140,7 +140,7 @@ def main ():
         probs =acc /len (models );conn =probs [:,CE ]+probs [:,CT ]
         # OLCULEN ZINCIR (2026-08-12). `robot_cp.extract` KAMPANYANIN
         # KAZANCLARINI TASIMIYOR: `product_p6` (direction bankasi + ortak siralayici) and
-        # `product_genis` only `canonical_chain.product_output` icinden cagriliyor
+        # `product_wide` only `canonical_chain.product_output` icinden cagriliyor
         # and ihracatcilarin HICBIRI orayi cagirmiyordu. Yani bugune up to
         # GLB'deki isaretler TABANIN ciktisiydi (D7 0.2980), olctugumuz 0.3115
         # not (rapor bolum 8).

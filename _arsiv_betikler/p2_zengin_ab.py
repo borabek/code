@@ -6,7 +6,7 @@ PART_out +0.0351, FAMILY_out_STRICT +0.0489, AUC 0.9275->0.9549 / 0.8956->0.9373
 Gate that gunden beri 22 sutuna output (B-rep fiziksel + icbukey topoloji). Zengin bloklarin
 KATTIGI SEY still present mi?
 
-TASARIM: `build_zengin_parite.py` HEM 22 temel HEM 33 zengin sutunu AYNI candidates for uretti.
+TASARIM: `build_rich_parity.py` HEM 22 temel HEM 33 zengin sutunu AYNI candidates for uretti.
 Yani A/B'de single degisken feature kumesi. (Ayri kosularda uretilmis two npz'yi karsilastirmak
 this projede more before yaniltmisti.)
 
@@ -20,7 +20,7 @@ TAPER YOK -- olculmus olu, denetim de "ekleme" dedi.
 Dagitilan yapinin DONUSUMU (part-ici z-skor) each kolda uygulanir -- urunle same.
 
 KUME: measure_set (split3, dedup, LOCKED disarida). BOOTSTRAP: geometri grubu.
-DECISION: karar_olcutu (GA karara katilir).
+DECISION: decision_criterion (GA karara katilir).
 """
 import collections 
 import io 
@@ -38,7 +38,7 @@ ZEN ="results/zengin_parite.npz"
 
 
 def main ():
-    import karar_olcutu 
+    import decision_criterion 
     import measure_set 
     import wire_gate 
     from big_arbiter import eligible 

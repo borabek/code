@@ -149,7 +149,7 @@ def main ():
     RX =np .array (RX ,float );RY =np .array (RY );RG =np .array (RG );RP =np .array (RP )
     print (f"\n{len (RY )} candidate | pozitif {RY .mean ():.1%}",flush =True )
 
-    from t1_uretici_disi import auc_mw 
+    from t1_manufacturer_out import auc_mw 
     AD =["mr_var","mr_mes","mr_aci","mr_conf","mr_n","mr_oy"]
     print (f"\n{'column':<10}{'AUC':>8}{'TP ort':>10}{'FP ort':>10}")
     for j ,a in enumerate (AD ):

@@ -26,7 +26,7 @@ $env:PYTHONPATH = "_diffusion_net_repo/src"
 ```
 
 > ⚠️ `PYTHONPATH=... komut` yazımı **bash'e özeldir, PowerShell'de çalışmaz.**
-> PowerShell'de önce `$env:PYTHONPATH = "..."` ile ayarlanmalı. `viz.ps1` bunu senin yerine yapıyor.
+> PowerShell'de önce `$env:PYTHONPATH = "..."` with ayarlanmalı. `viz.ps1` bunu senin yerine yapıyor.
 
 **Ekran çıktısı:**
 
@@ -50,7 +50,7 @@ Sonra `results\robot_glb\` klasöründeki `.glb` dosyasına **çift tıkla** →
 | 🟣 mor iğne | robot tahmini — **fazladan** (FP) |
 | 🔵 mavi çizgi | eşleşme (ağız ↔ yuva farkı) |
 
-İğneler gövdeden dışarı taşar, döndürünce her açıdan görünür.
+İğneler gövdeden dışarı taşar, döndürünce each açıdan görünür.
 
 ---
 
@@ -91,7 +91,7 @@ Her CP için dönen alanlar:
 | Alan | Anlamı |
 |---|---|
 | `point` | robot buraya gidecek (x, y, z mm) |
-| `direction` | teli bu yöne sokacak |
+| `direction` | teli this yöne sokacak |
 | `size_mm` / `depth_mm` | açıklık çapı / derinliği |
 | `confidence`, `votes` | güven, kaç model hemfikir |
 | `wire_score` | 1 = tel girişi, 0 = alet deliği |
@@ -102,14 +102,14 @@ Her CP için dönen alanlar:
 ## 5. Bilmen gereken tek kavram: **yuva ≠ ağız**
 
 Üreticinin verdiği CP genelde **kontak yuvasındadır** — parçanın **içinde**, katı malzemede.
-Ama bu **parçaya göre değişir** (ölçüldü: 3270115'te 16/16 içeride, 3273112'de 0/19 zaten yüzeyde).
-Görselleştirme bunu her CP için tek tek sınar; içerideyse ağza taşır, değilse yerinde bırakır.
+Ama this **parçaya göre değişir** (ölçüldü: 3270115'te 16/16 içeride, 3273112'de 0/19 already yüzeyde).
+Görselleştirme bunu each CP için tek tek sınar; içerideyse ağza taşır, değilse yerinde bırakır.
 
-Delik (**ağız**) oradan **5–25 mm** ötede, yüzeydedir. **Robot ağzı tahmin eder.**
+Delik (**ağız**) oradan **5–25 mm** ötede, yüzeydedir. **Robot ağzı prediction eder.**
 
-Bu yüzden raporda `axis +8.4mm` gibi bir sayı görürsün — o **error değil**, ağız ile yuva arasındaki
-mesafedir. Görselde de GT iğnesi ağza taşınmış çizilir (`cp_geometry.seat_to_mouth`), yoksa gövdenin
-içinde kalıp görünmezdi — senin "bu dosyalarda CP yok gibi" demenin sebebi tam olarak buydu.
+Bu yüzden raporda `axis +8.4mm` gibi a sayı görürsün — o **error değil**, ağız with yuva arasındaki
+mesafedir. Görselde de GT iğnesi ağza taşınmış çizilir (`cp_geometry.seat_to_mouth`), otherwise gövdenin
+içinde kalıp görünmezdi — senin "this dosyalarda CP none gibi" demenin sebebi tam as buydu.
 
 ---
 

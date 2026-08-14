@@ -4,15 +4,15 @@
 # DENETIM BULGUSU: dagitilan 4 checkpoint yalnizca 189 mesh gordu. Diskte 257 manufacturer-etiketli
 # part (_mfg_labels 142 + _mfg_labels_highcp 115) duruyor ve HIC kullanilmadi.
 #
-# "Daha cok veri" IKI KEZ denenmis, IKISI DE KAYBETMIS -- ama IKISI DE KARISTIRILMIS deneydi:
-#   H3: ayni anda (a) +257 manufacturer etiketi, (b) +132 EEC, (c) 4 INSAN DIZINI DUSURULDU
-#       (yani urunun insan etiketlerinin %77'si atildi). Kaybin kaynagi olculmedi.
-#   G : bambaska bir ag (ikili tespit basi, width128/blocks4/dropout0 -- tezin "asiri ogrenme"
+# "Daha very veri" IKI KEZ denenmis, IKISI DE KAYBETMIS -- but IKISI DE KARISTIRILMIS deneydi:
+#   H3: same anda (a) +257 manufacturer etiketi, (b) +132 EEC, (c) 4 INSAN DIZINI DUSURULDU
+#       (i.e. urunun insan etiketlerinin %77'si atildi). Kaybin kaynagi olculmedi.
+#   G : bambaska a ag (ikili tespit basi, width128/blocks4/dropout0 -- tezin "asiri ogrenme"
 #       diye isaretledigi yapilandirma), sifirdan, 26/40 epoch'ta kesildi.
 #
-# BU KOSU TEK DEGISKEN OYNATIR: dagitilan tarifin AYNISI + manufacturer etiketleri EK olarak.
+# BU KOSU TEK DEGISKEN OYNATIR: dagitilan tarifin AYNISI + manufacturer etiketleri EK as.
 #
-# SIZINTI KORUMASI (measured, bu yuzden TEMIZ kopyalar kullaniliyor):
+# LEAKAGE KORUMASI (measured, this yuzden TEMIZ kopyalar kullaniliyor):
 #   _mfg_labels/train        142 parcanin 12'si LOCKED GRUBUNDA -> atildi (130 kaldi)
 #   _mfg_labels_highcp/train 115 parcanin 19'u LOCKED GRUBUNDA -> atildi ( 96 kaldi)
 #   Filtresiz training 95 LOCKED grubunun 31'ini yakardi = exam biterdi.

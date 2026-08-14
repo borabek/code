@@ -9,7 +9,7 @@ Kova aritmetigi (`results/kazanan_hata_bankasi.json`): TP 710 / FN 2377 / FP 132
 417 kurtarilirsa F1 0.2773 -> **0.407**. Kol candidate EKLEMEZ -> FP artamaz,
 tespit metrigi (angle serbest) DEGISMEZ; this, olcumun own kontrolu becomes.
 
-ONCEKI YON KOLU WHY BASARISIZDI: `yon_odunc.py` secenekleri komsu ADAY
+ONCEKI YON KOLU WHY BASARISIZDI: `direction_borrow.py` secenekleri komsu ADAY
 yonleri + silindir eksenleri + baskin yondu; **mesh normali YOKTU**. B2 olcumu
 missing kaynagin full da that oldugunu showed.
 
@@ -36,7 +36,7 @@ import brep_pool # noqa: E402
 import connector3d # noqa: E402
 import d6_record # noqa: E402
 import canonical_d7 as K # noqa: E402
-import product_zinciri # noqa: E402
+import product_chain # noqa: E402
 import wire_gate # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
@@ -206,7 +206,7 @@ def main ():
                     if b !=0 and s2 [b ]>s2 [0 ]:
                         D [a ]=V_ [b ]
             if len (P ):
-                P ,D =product_zinciri .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
+                P ,D =product_chain .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
                 step_path =S .get (pid ))
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
             dg =float (r ["diag"])

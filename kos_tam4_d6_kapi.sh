@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# TAVAN-24 KAPI A'sini d6 TAMAMLANIR TAMAMLANMAZ olc -- `tam` korpusunu bekleme.
+# CEILING-24 GATE A'sini d6 TAMAMLANIR TAMAMLANMAZ olc -- `tam` korpusunu bekleme.
 #
-# NEDEN: KAPI A'nin kritik sorusu "tavani 24 yapmak YONLU recall'u aciyor mu?"
+# WHY: GATE A'nin kritik sorusu "tavani 24 yapmak YONLU recall'u aciyor mu?"
 # ve bunun cevabi d6'da yatiyor -- pool tavanini asagi ceken NIT orada
 # (D6 GT'sinin %45.7'si, yonlu recall 0.5254). d6 yalnizca 468 part; 2583
 # parcalik `tam` korpusunu beklemek cevabi saatlerce geciktirir.
 #
-# `kos_tam4.sh` zaten sonunda hem d6 hem tam icin KAPI A olcuyor; bu betik
+# `kos_tam4.sh` already sonunda hem d6 hem tam for GATE A olcuyor; this betik
 # onun yerine gecmez, ERKEN CEVAP verir. Ayni receipt adina yazar (cluster adi
-# dosyada) -- sonraki measurement ayni sayiyi uretir.
+# dosyada) -- sonraki measurement same sayiyi uretir.
 set -u
 cd "$(dirname "$0")"
 G=results/_gece
@@ -19,10 +19,10 @@ BEK=0
 while [ $BEK -lt $((8 * 3600)) ]; do
   n=$(ls results/_p6_oz_tam4 2>/dev/null | grep -c '^d6_')
   if [ "$n" -ge 460 ]; then
-    say "d6 TAMAM ($n/468) -- KAPI A olculuyor"
-    HT_ONLER=d6 P6_DIZIN=results/_p6_oz_tam4 python probe_pool_tavani.py \
+    say "d6 TAMAM ($n/468) -- GATE A olculuyor"
+    HT_ONLER=d6 P6_DIZIN=results/_p6_oz_tam4 python probe_pool_ceiling.py \
       >> "$LOG" 2>&1
-    say "--- SONUC ---"
+    say "--- RESULT ---"
     tail -18 "$LOG" | sed 's/^/    /'
     exit 0
   fi

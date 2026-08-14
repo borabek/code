@@ -186,7 +186,7 @@ def _topo_feats (V ,F ,cps ):
     #
     # MEASURED (p2 candidate duzeyi, 19631 candidate / 1599 part, grup-capraz OOF):
     #   +konum9 +0.0114 | +cokyaricap24 +0.0169 | +all of them(33) +0.0231  (ucu de HER IKI ureticide +)
-    # UCTAN UCA (p4, kilitli cluster 194 part / 171 grup, GRUP bootstrap, karar_olcutu):
+    # UCTAN UCA (p4, kilitli cluster 194 part / 171 grup, GRUP bootstrap, decision_criterion):
     #   tanidik 0.7301 -> 0.7534 (+0.0233) | WEI-disi 0.5593 -> 0.5946 | PXC-disi 0.6619 -> 0.6743
     #   GA(WEI) [+0.0005, +0.0697] = KANITLI. Bes sartin BESI de saglandi -> DEPLOYED.
     # TAPER (huni profili) BILEREK YOK: more before measured and OLU output.
@@ -201,12 +201,12 @@ USE_ZENGIN_FEATS =str (_cfg_get ("gate_zengin_feats","WG_ZENGIN","0")).lower ()n
 def _zengin_feats (V ,F ,probs ,cps ):
     """36 column: konum(3) + bbox-face uzakligi(6) + very-radius sinif profili(24) + normal-std(3).
 
-    `build_zengin_parite.zengin` with AYNI hesap -- training and inference single kaynaktan olsun diye
+    `build_rich_parity.zengin` with AYNI hesap -- training and inference single kaynaktan olsun diye
     oradan cagriliyor (kopyalanmiyor)."""
     import numpy as _np 
     n =len (cps )
     try :
-        from build_zengin_parite import _normaller ,zengin as _z 
+        from build_rich_parity import _normaller ,zengin as _z 
         return _z (_np .asarray (V ,float ),_np .asarray (F ),_np .asarray (probs ,float ),cps ,
         _normaller (V ,F ))
     except Exception as _e :
@@ -766,7 +766,7 @@ def within_part (X ,donusum ):
     # oldugu for fazlasi ZORUNLU FP. Gate skoru most high which is tutulur.
     #
     # MEASURED -- TAM URUN ZINCIRI (poz kafasi dahil), D7 brand-disi 835 part, MIKRO
-    # (`probe_product_nms_uctan_uca.py`, `results/urun_nms_uctan_uca*.json`):
+    # (`probe_product_nms_end_to_end.py`, `results/urun_nms_uctan_uca*.json`):
     #   r     robot            tespit           makro   artan brand   yikilan
     #   0   0.1956           0.4314           0.2051      -
     #   3   0.1974 (+0.0018) 0.4399 (+0.0085) 0.2062     8/12         CEM
@@ -861,7 +861,7 @@ step_path =None ):
     # "most yuksegin yarisi"ni kabul edip garanti wrong uretirdi (korpusta sifir-CP part present).
     #
     # MEASURED (goreli 0.5 + baseline 0.20): tanidik veride -0.0074, most kotu manufacturer-disi bolmede
-    # 0.2799 -> 0.4402 (+0.160). Makbuz: results/t6_goreli_taban.json
+    # 0.2799 -> 0.4402 (+0.160). Makbuz: results/t6_relative_taban.json
         _m =decision_mask ([c ["wire_score"]for c in cps ])
         return suppress_crowd ([c for c ,k in zip (cps ,_m )if k ])
     _m =decision_mask ([c ["wire_score"]for c in cps ],threshold =threshold )# base: sabit threshold

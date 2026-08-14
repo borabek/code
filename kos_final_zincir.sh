@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# FINAL ZINCIR -- training bitiminden D7 mansetine kadar, elle mudahalesiz.
+# FINAL ZINCIR -- training bitiminden D7 mansetine up to, elle mudahalesiz.
 #
 #  1. egitimin model paketini yazmasini bekle
 #  2. POZ KAFASI karari: D6 alt kumesinde URUN_P6=1 iken POZ acik/kapali olc,
-#     KAZANANI sabitle  (rationale: `pick_direction_from_dictionary` direction bankasinin sectigi yonu
-#     ezebilir; bu belirsizlikle SINAV okumasi harcanmaz)
+#     KAZANANI sabitle  (rationale: `pick_direction_from_dictionary` direction bankasinin sectigi direction
+#     ezebilir; this belirsizlikle SINAV okumasi harcanmaz)
 #  3. hazirlik kontrolu -- urun yolu calisiyor mu, sutun sayisi tutuyor mu,
 #     skorlar dejenere mi
-#  4. D7 OKUMA #1: baseline + P6 ayni kosuda, 8 pay
+#  4. D7 OKUMA #1: baseline + P6 same kosuda, 8 pay
 #  5. headline: bootstrap GA + brand kirilimi + temiz-703 duyarliligi
 #
 # Karar kurallari `docs/KAMPANYA_050_RAPOR.md` bolum 5'te OKUMADAN ONCE ilan
@@ -19,8 +19,8 @@ ISARET=results/_zincir_baslangic
 
 date +%s > "$ISARET"
 echo "=== 1/5 EGITIM BEKLENIYOR ==="
-# Model dosyasinin ISARET'ten YENI olmasini bekle. `pgrep` Git Bash'te yok;
-# bunun yerine bir SURE SINIRI konur -- zincir sonsuza kadar beklemez.
+# Model dosyasinin ISARET'ten YENI olmasini bekle. `pgrep` Git Bash'te none;
+# bunun yerine a SURE SINIRI konur -- zincir sonsuza up to beklemez.
 BEKLE_MAKS=${BEKLE_MAKS:-7200}
 t0=$(date +%s)
 while true; do
@@ -38,12 +38,12 @@ echo "model yazildi: $(date)"
 python - <<'PY'
 import json, pickle
 d = pickle.load(open("results/p6_kademe2_model.pkl", "rb"))
-print("  arm", d.get("arm"), "| kural", d.get("kural"), "| nms", d.get("nms"),
+print("  arm", d.get("arm"), "| rule", d.get("rule"), "| nms", d.get("nms"),
       "| 2.kademe", "VAR" if d.get("kademe2") is not None else "YOK")
 PY
 
 echo
-echo "=== 2/5 POZ KAFASI KARARI (D6 alt kumesi, 150 part) ==="
+echo "=== 2/5 POZ KAFASI KARARI (D6 alt set, 150 part) ==="
 for poz in 1 0; do
   for i in 0 1 2 3; do
     ( URUN_P6=1 DOG_N=150 DOG_POZ=$poz DOG_SHARD="$i/4" \
@@ -57,8 +57,8 @@ POZ=$(python - <<'PY'
 import json
 a = json.load(open("results/poz_1.json"))["sonuc"]["robot"]
 b = json.load(open("results/poz_0.json"))["sonuc"]["robot"]
-print(f"  POZ ACIK {a:.4f} | POZ KAPALI {b:.4f} -> secilen "
-      f"{'ACIK' if a >= b else 'KAPALI'}", file=__import__('sys').stderr)
+print(f"  POZ OPEN {a:.4f} | POZ KAPALI {b:.4f} -> secilen "
+      f"{'OPEN' if a >= b else 'KAPALI'}", file=__import__('sys').stderr)
 print(1 if a >= b else 0)
 PY
 )

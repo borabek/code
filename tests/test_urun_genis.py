@@ -14,7 +14,7 @@ import trimesh
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
 import mouth_descriptor as AT # noqa: E402
-import product_genis as UG # noqa: E402
+import product_wide as UG # noqa: E402
 
 
 def sil (c =(0 ,0 ,0 ),a =(-9 ,0 ,0 ),b =(9 ,0 ,0 ),axis =(1 ,0 ,0 ),r =1.5 ):

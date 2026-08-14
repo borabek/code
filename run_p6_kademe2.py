@@ -45,7 +45,7 @@ import lattice # noqa: E402
 import canonical_d7 as K # noqa: E402
 import p6_decision # noqa: E402
 import order_stamp # noqa: E402
-import product_genis # noqa: E402
+import product_wide # noqa: E402
 import direction_bank as YB # noqa: E402
 from run_p6_ortak import yukle # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
@@ -197,7 +197,7 @@ def puanla (d ,s ,rule_ ,nms ,arm ):
         if nms >0 and len (P )>1 :
             import wire_gate 
             n =wire_gate .crowd_mask (P ,sk [m ])
-        return P [n ],product_genis .isaret_duzelt (D [n ],T [n ])
+        return P [n ],product_wide .isaret_duzelt (D [n ],T [n ])
     return p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =nms )
 
 
@@ -246,7 +246,7 @@ def canonical_block (d ):
     noktalarinin kendisi cerceve as is used (arm sessizce BOZULMAZ,
     only zayiflar).
     """
-    import kanonik_hizalama as KH 
+    import canonical_alignment as KH 
     P =np .asarray (d ["P"],float )
     idx =np .asarray (d ["idx"],int )
     V =None 

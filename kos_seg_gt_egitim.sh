@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # SEG-2 — SEGMENTASYONU GT KORPUSUYLA YENIDEN EGIT (A/B)
 #
-# NEDEN. Canli seg kontrol noktalari 27 Temmuz tarihli. Kontrol kolu yalnizca
+# WHY. Canli seg kontrol noktalari 27 Temmuz tarihli. Kontrol arm yalnizca
 # **189 part** (118 kismi insan etiketi) goruyor. Kampanya boyunca SECICI
 # optimize edildi, segmentasyon DONDURULMUS kaldi ve NIT'te zincirin EN BASI
 # bilgi uretmiyor (GT 0.5244 / rastgele 0.4394 = 1.19x; SUPU'da 83x).
 #
 # TEK DEGISKEN: `_label_targets_gt` (1556 part, URETICI GT'sinden boyanmis,
-# d6/d7 bekciyle DISARIDA). B kolu 189 -> ~1745 part, yani 9 KAT veri.
+# d6/d7 bekciyle DISARIDA). B arm 189 -> ~1745 part, i.e. 9 KAT veri.
 #
 # EPOCH SECIMI -- DURUSTCE ASIMETRIK. B'yi de 200 epoch kosmak ~16 saat
 # surerdi. B 40 epoch kosuyor: 40 x 1745 = 69.800 ornek, A'nin
 # 200 x 189 = 37.800 ornegiyle kiyasla ~1.85 fold. Yani B kendi recetesine
-# gore AZ egitilmis; kiyas B'nin ALEYHINE egimli. B yine de kazanirsa evidence
+# per AZ egitilmis; kiyas B'nin ALEYHINE egimli. B yine de kazanirsa evidence
 # guclu, kaybederse BELIRSIZ -- rapora oyle yazilir.
 #
 # k-eig 96: canli kontrol noktalari `recall_hard_keig96_*`.

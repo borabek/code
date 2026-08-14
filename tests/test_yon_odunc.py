@@ -11,7 +11,7 @@ import numpy as np
 import pytest 
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
-import yon_odunc as YO # noqa: E402
+import direction_borrow as YO # noqa: E402
 
 
 def sil (c =(0 ,0 ,0 ),axis =(1 ,0 ,0 )):

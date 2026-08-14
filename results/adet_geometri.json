@@ -79,5 +79,5 @@
    }
   }
  },
- "not": "Ogrenmesiz adet tahmini: kipsel yaricapli silindir sayisi. |error| = ortanca mutlak error, <=1 = tam isabete yakin ratio. D7'ye BAKILMADI."
+ "not": "Ogrenmesiz adet tahmini: kipsel yaricapli silindir sayisi. |error| = median mutlak error, <=1 = tam isabete yakin ratio. D7'ye BAKILMADI."
 }

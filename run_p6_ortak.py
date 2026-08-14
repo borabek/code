@@ -2,7 +2,7 @@
 """P6 ORTAK SIRALAYICI: (konum x direction) seceneklerini TEK skorla puanla.
 
 BUGUNKU URUN two ayri karar veriyor:
-  1. gate  -> this candidate CP mi?           (`product_genis.sec`, HGB-derin, threshold 0.05)
+  1. gate  -> this candidate CP mi?           (`product_wide.sec`, HGB-derin, threshold 0.05)
   2. direction   -> havuzun verdigi direction + sign duzeltmesi + poz kafasi
 Yon no zaman SECILMIYOR; havuzdan ne geldiyse that.
 
@@ -42,7 +42,7 @@ sys .path .insert (0 ,".")
 import d6_record # noqa: E402
 import canonical_d7 as K # noqa: E402
 import p6_decision # noqa: E402
-import product_genis # noqa: E402
+import product_wide # noqa: E402
 import wire_gate # noqa: E402
 import direction_bank as YB # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
@@ -154,10 +154,10 @@ def olc (data_ ,skorlar ,threshold ):
 def baseline (data_ ):
     """DAGITILAN path, same onbellekten yeniden kurulmus.
 
-    `product_genis.sec` with same: X = A+B, part-ici z-skor, HGB-derin, threshold 0.05,
+    `product_wide.sec` with same: X = A+B, part-ici z-skor, HGB-derin, threshold 0.05,
     kalabalik NMS, sign correction. Tek difference: here onbellekten okunuyor.
     """
-    model =product_genis .model_yukle ()
+    model =product_wide .model_yukle ()
     if model is None :
         return None 
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
@@ -167,13 +167,13 @@ def baseline (data_ ):
         AB_ =d ["X"][kendi ,:AB ]
         s =np .asarray (model .predict_proba (
         wire_gate .within_part (AB_ ,"zskor"))[:,1 ],float )
-        k =s >=product_genis .ESIK 
+        k =s >=product_wide .ESIK 
         P ,D =(d ["P"][k ],d ["D"][k ])if k .any ()else (d ["P"][:0 ],d ["D"][:0 ])
         T =d ["X"][kendi ][k ][:,AB +len (YB .OZ_AD ):]
         if len (P )>1 :
             nm =wire_gate .crowd_mask (P ,s [k ])
             P ,D ,T =P [nm ],D [nm ],T [nm ]
-        D =product_genis .isaret_duzelt (D ,T )if len (D )else D 
+        D =product_wide .isaret_duzelt (D ,T )if len (D )else D 
         tp ,fp ,fn =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,
         K .ACI ,False ,signed =True )[:3 ]
         a =rob [d ["mfg"]]

@@ -1,12 +1,12 @@
 # Kazanç kolları ve Bayes tavanını yükseltme — tasarım (2026-08-04)
 
-## Neden bu tasarım var
+## Neden this tasarım present
 
 Tespit F1 günlerdir 0.7584'te duruyor. Dokuz gate mekanizması, fiziksel skalerler ve
 profil öznitelikleri kapandı. Bugün T1 ölçümü fiziksel ölçümlerin ayrılamaz payı
 %12.8 → %12.8 (göreli azalma %0.0) bıraktığını gösterdi.
 
-Kod tabanına bakınca sebep göründü:
+Kod tabanına bakınca reason göründü:
 
 ```
 scheffler_dataset.EXPECTED_COUNTS = {'train': 71, 'val': 20, 'test_locked': 11}
@@ -15,7 +15,7 @@ diffusionnet.predict               → gate'e giden tek şey: 5 sınıf olasıl�
 ```
 
 **Öğrenilen temsil 71 parçayla eğitildi; türetme korpusu 4432.** Kapanan dokuz kolun
-hepsi bu 71 parçanın ürettiği beş olasılığın *üstünde* oynuyordu. Bayes tavanı modelin
+hepsi this 71 parçanın ürettiği beş olasılığın *üstünde* oynuyordu. Bayes tavanı modelin
 değil öznitelik uzayının özelliğidir; uzay beş olasılık + el yapımı skalerlerse ceiling
 oradan gelir.
 
@@ -26,85 +26,85 @@ Bu tasarım üç arm açar. Üçü de **tez-değişmezlerine dokunmaz**: Diffusi
 
 ### C — Ağı derinden oku (gate'e gizli öznitelik)
 
-Gate şu an adayı beş olasılıkla tanıyor. Ağın son difüzyon bloğunun çıktısı çok daha
-zengin bir geometri kodlaması taşıyor ve hiç kullanılmadı.
+Gate şu an adayı beş olasılıkla tanıyor. Ağın son difüzyon bloğunun çıktısı çok more
+zengin a geometri kodlaması taşıyor ve hiç kullanılmadı.
 
-- **Nasıl:** son bloğa forward hook. Adayın `UYE` tepelerinde ortalama + maksimum
-  havuzlama → 2·c_width boyut. TRAIN üzerinde fit edilen PCA ile ~16 boyuta indirilir
+- **Nasıl:** son bloğa forward hook. Adayın `UYE` tepelerinde mean + maksimum
+  havuzlama → 2·c_width boyut. TRAIN üzerinde fit edilen PCA with ~16 boyuta indirilir
   (PCA'nın VAL/LOCKED görmesi sızıntıdır; fit yalnız TRAIN'de).
-- **Tez etkisi:** yok. Ağırlık, mimari, sınıf sayısı, kayıp fonksiyonu değişmez;
-  checkpoint'ler yeniden eğitilmez. Sadece zaten hesaplanan bir ara tensör okunur.
-- **Tavan sondası T2:** T1 ile aynı kNN protokolü, bu sütunlar eklenmiş halde.
+- **Tez etkisi:** none. Ağırlık, mimari, sınıf sayısı, kayıp fonksiyonu değişmez;
+  checkpoint'ler yeniden eğitilmez. Sadece already hesaplanan a ara tensör okunur.
+- **Tavan sondası T2:** T1 with aynı kNN protokolü, this sütunlar eklenmiş halde.
 - **GO:** ayrılamaz pay ≥%20 göreli azalsın **ve** üretici-dışı ≥ +0.010.
 - **Risk:** [[extratrees-does-not-transfer]] deseni — havuzlanmışı iyileştirip görülmemiş
   üreticide çökebilir. Bu yüzden üretici-dışı şartı GO'nun içinde, sonradan bakılacak
-  bir kontrol değil.
+  a kontrol değil.
 
 ### B — Skaler yerine yapı (lattice / periyodiklik / komşuluk)
 
-`wire_gate`'de komşu özniteliği yok: her candidate tek başına karar veriliyor. Ama klemens
-blokları düzenli dizidir. On kutbun sekizi ateşlediyse eksik ikisinin nerede olduğu
+`wire_gate`'de komşu özniteliği none: each candidate tek başına karar veriliyor. Ama klemens
+blokları düzenli dizidir. On kutbun sekizi ateşlediyse missing ikisinin nerede olduğu
 komşularından bellidir.
 
 - **Öznitelikler (candidate başına, ilişkisel):** baskın adımın (pitch) ana axis
   izdüşümünden tespiti; adayın en yakın lattice düğümüne uzaklığı; aynı sırada eş-doğrusal
   komşu sayısı; sıra içi rank; ayna simetrisi tutarlılığı.
-- **Tez etkisi:** yok. Yalnız gate/son-işlem katmanı; `v_o` türetmesi ve candidate üretici
+- **Tez etkisi:** none. Yalnız gate/son-işlem katmanı; `v_o` türetmesi ve candidate üretici
   aynen kalır.
 - **Tavan sondası T3:** aynı kNN protokolü. **Bedava** — `_der_tam.pkl` içindeki `P`/`Pd`
   yeterli, ağ çıkarımı gerekmez.
 - **GO:** ayrılamaz pay ≥%20 göreli azalsın **ve** havuzlanmış ≥ +0.015.
 - **Yan ürün (AYRI ölçülür): lattice tamamlama.** Komşuları ateşlemiş boş lattice
   düğümlerine candidate öner. 366 yüksek-CP FN'nin doğal hedefi. Ayrı GO: yüksek-CP
-  ≥ +0.020 ve düşük-CP ≥ -0.005. C/B ile karıştırılmaz.
+  ≥ +0.020 ve düşük-CP ≥ -0.005. C/B with karıştırılmaz.
 
 ### A — Temsili büyüt (ağız-çevrimi oto-etiket)
 
 En yüksek tavanlı, en pahalı arm. Seg korpusu 71 → ~1500+.
 
-- **Nasıl:** her üretici CP'sinden ekleme yönü boyunca ışın; yüzeye çarptığı açıklığın
+- **Nasıl:** each üretici CP'sinden ekleme yönü boyunca ışın; yüzeye çarptığı açıklığın
   **sınır çevrimi** CableEntry boyanır.
 - **h3 dersi:** [[h3-highcp-finetune-dead]] aynı fikirde çöktü çünkü CP çevresine
   **r=2mm disk** boyadı ve ateşlemeyi %78 → %24 düşürdü. Disk gövde yüzeyini de
   boyuyordu; ağız *çevrimi* o hatanın düzeltmesidir.
-- **Tez etkisi:** yok. 5 sınıf ve `v_o` değişmez; yalnız etiketli parça sayısı artar.
-  Eğitim `train_seg_extra.py --train-dir` ile, üç seed.
+- **Tez etkisi:** none. 5 sınıf ve `v_o` değişmez; yalnız etiketli parça sayısı artar.
+  Eğitim `train_seg_extra.py --train-dir` with, üç seed.
 - **KILL (bağlayıcı):** ateşleme oranı %78'in altına düşerse **veya** görülmemiş üretici
   F1'i -0.005'ten fazla düşerse **geri al**.
-  - Neden bu ölçüt: h3'ün gerçek çöküşü ateşlemeydi ve F1 o çökerken bir süre sabit
-    görünür — "sadece F1" geç yakalar. Seg IoU ise zayıf etiketle doğal olarak
-    düşebileceği için yanlış negatif üretir, iyi kolu boşuna öldürür.
+  - Neden this ölçüt: h3'ün gerçek çöküşü ateşlemeydi ve F1 o çökerken a süre sabit
+    görünür — "sadece F1" geç yakalar. Seg IoU ise zayıf etiketle doğal as
+    düşebileceği için yanlış negatif üretir, iyi arm boşuna öldürür.
 
 ## Sıra ve gerekçesi
 
 ```
 ŞİMDİ    T3  yapısal ceiling ölçümü          bedava, önbellekten, GPU kullanmaz
-~3 saat  türetme biter → D5-3 → F2-12      ölçülmüş kazancı olan tek arm (veri)
-sonra    T2  gizli öznitelik ceiling ölçümü   ağ boşalınca
-         geçen kolu TEK BAŞINA dağıt        atıf korunur
+~3 saat  türetme biter → D5-3 → F2-12      ölçülmüş kazancı which tek arm (veri)
+after    T2  gizli öznitelik ceiling ölçümü   ağ boşalınca
+         geçen arm TEK BAŞINA dağıt        atıf korunur
 GECE     A   oto-etiket + seg eğitimi       uzun eğitim uykuya
 ```
 
-İki kolu aynı anda **ölçmek** sorunsuz (ölçüm dağıtım değildir); aynı anda **dağıtmak**
+İki arm aynı anda **ölçmek** sorunsuz (ölçüm dağıtım değildir); aynı anda **dağıtmak**
 atfı bozar. Bu yüzden ölçümler paralel, dağıtımlar sıralı.
 
-Kritik yol aç bırakılır: veri kolu şu an koşuyor ve ölçülmüş kazancı olan tek şey o
+Kritik yol aç bırakılır: veri arm şu an koşuyor ve ölçülmüş kazancı which tek şey o
 ([[ogrenme-egrisi-fiyat-etiketi]]: hacimden +0.030, [[cesitlilik-ve-fn-profili]]:
 çeşitlilikten ayrıca +0.0443).
 
 ## Dürüst beklenti
 
-- Veri kolu: +0.03 ~ +0.05 (eğriden, ölçülmüş)
+- Veri arm: +0.03 ~ +0.05 (eğriden, ölçülmüş)
 - B: havuzlanmış katkısı sınırlı olabilir — yüksek-CP rejiminin ağırlığı %10.5
 - C: ölçülmemiş; ceiling sorusunun gerçek cevabı burada
-- A: ölçülmemiş; düşük-CP'de candidate tavanında +0.129 alınmamış pay var ve ona **yalnız
+- A: ölçülmemiş; düşük-CP'de candidate tavanında +0.129 alınmamış pay present ve ona **yalnız
   temsil** dokunabiliyor
 
-0.85'i gören senaryo: veri + A + C. B tek başına 0.85 getirmez ama FN kovasını açar.
+0.85'i gören senaryo: veri + A + C. B tek başına 0.85 getirmez but FN kovasını açar.
 
 ## Doğrulama
 
-- Her arm için önce ceiling sondası; ≥%20 göreli azalma yoksa **kurulmaz**
-- Dağıtım kararları grup-bootstrap ile, `protocol.dogrula()` zorunlu
+- Her arm için önce ceiling sondası; ≥%20 göreli azalma otherwise **kurulmaz**
+- Dağıtım kararları grup-bootstrap with, `protocol.dogrula()` zorunlu
 - LOCKED'e dokunulmaz; [[locked-exam-kirliligi-yakalandi]] bekçisi açık kalır
 - `pytest tests/` yeşil kalır

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Y1 — HAFIF AUGMENTASYON (agresif olan ZATEN denenmis ve dusurmus)
+# Y1 — HAFIF AUGMENTASYON (agresif which ZATEN denenmis ve dusurmus)
 #
 # `--augment` bayraginin kendi yardim metni: "1.05 = aggressive (the
 # heuristic-tuned one that hurt quality)". Yani AGRESIF donme (~60 derece)
 # denenmis ve kaliteyi dusurmus. Egitim logu hala `augment=False` diyor,
-# yani su an HIC augmentasyon yok. Denenmemis olan HAFIF ayar.
+# i.e. su an HIC augmentasyon none. Denenmemis which HAFIF ayar.
 #
 # TEK DEGISKEN: augment (0.3 rad ~ 17 derece). Etiket dizinleri, seed,
 # k-eig, epoch, girdi ozniteligi AYNI.
-# Taban = A kolu: 189 part, 200 epoch, val Conn_IoU 0.6232.
+# Taban = A arm: 189 part, 200 epoch, val Conn_IoU 0.6232.
 set -u
 cd "$(dirname "$0")"
 export PYTHONPATH=_diffusion_net_repo/src PYTHONWARNINGS=ignore

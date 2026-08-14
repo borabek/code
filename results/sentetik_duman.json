@@ -3,5 +3,5 @@
  "gt_olasilik": 0.0003112503780001337,
  "zemin": 0.0003385066309881266,
  "ratio": 0.9194808890200177,
- "not": "Sentetik corpus duman testi. Oran ~1 ise korpusun training degeri yok. D7'ye BAKILMADI."
+ "not": "Sentetik corpus duman testi. Oran ~1 ise korpusun training degeri none. D7'ye BAKILMADI."
 }

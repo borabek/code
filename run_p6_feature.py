@@ -77,7 +77,7 @@ def main ():
     import trimesh 
 
     import mouth_descriptor 
-    import product_genis 
+    import product_wide 
     import direction_bank as YB 
 
     os .makedirs (CIK ,exist_ok =True )
@@ -171,7 +171,7 @@ def main ():
             empty_ +=1 
             continue 
             # D blogu: mouth tanimlayicilari SECENEK YONUYLE
-        Dblok =product_genis .tanimlayici (P [idx ],YD ,cyl ,mesh ,diag )
+        Dblok =product_wide .tanimlayici (P [idx ],YD ,cyl ,mesh ,diag )
         X =np .hstack ([A [idx ],B [idx ],C ,Dblok ]).astype (np .float32 )
         # `source` DE YAZILIR: so TEK cikarimdan hem (0,1) hem (0,1,2)
         # kolu egitilebilir and two kolu ayri ayri cikarmak gerekmez.

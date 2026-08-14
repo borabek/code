@@ -1,5 +1,5 @@
 {
- "not": "REJIM-KOSULLU GORELI ORAN measured ve ALINMADI. Teknik olarak kill'i gecti ama kazanc +0.0012..+0.0018 = gece boyunca olculen noise tabaninin ONDA BIRI.",
+ "not": "REJIM-KOSULLU GORELI ORAN measured ve ALINMADI. Teknik as kill'i gecti but kazanc +0.0012..+0.0018 = gece boyunca olculen noise tabaninin ONDA BIRI.",
  "en_iyiler": {
   "0.5/0.4": {
    "tanidik": -0.0019,
@@ -15,5 +15,5 @@
    "not": "tanidik butcesini asti"
   }
  },
- "ders": "Kill olcutum ISARET istemis, BUYUKLUK istememisti. +0.0018 bir kazanc degil; bundan sonra kill'lere magnitude yazilacak (orn. >= +0.01)."
+ "ders": "Kill olcutum ISARET istemis, BUYUKLUK istememisti. +0.0018 a kazanc not; bundan after kill'lere magnitude yazilacak (orn. >= +0.01)."
 }

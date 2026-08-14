@@ -164,7 +164,7 @@ def parca_adaylari (r ,model ,ob ,ratio =0.40 ,baseline =0.30 ):
 
 def silindir_onbellek (pidler ,yol ):
     import brep_snap 
-    from korpus_kimlik import step_kimlik as SK 
+    from corpus_identity import step_kimlik as SK 
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     ob ={}
     if os .path .exists (yol ):

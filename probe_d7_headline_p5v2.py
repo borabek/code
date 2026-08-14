@@ -2,7 +2,7 @@
 """D7 MANSET YOLUNDA p5-v2 -- 0.2344 with AYNI OLCEKTE single number.
 
 MANSET YOLU (0.2344'u ureten): kayittaki candidates (r["P"], r["Pd"]) -> gate maskesi
--> `product_zinciri.tam_poz` -> Macar. Bu betik AYNI yolu kullanir, single difference
+-> `product_chain.tam_poz` -> Macar. Bu betik AYNI yolu kullanir, single difference
 p5-v2'nin araya girmesi.
 
   A) MANSET: gate maskesi -> tam_poz                      (beklenen ~0.2344)
@@ -18,10 +18,10 @@ import makbuz_hash
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
-import d6_record ,wire_gate ,product_zinciri ,p5v2_secenek as PS ,p5v2_egit as PE 
+import d6_record ,wire_gate ,product_chain ,p5v2_secenek as PS ,p5v2_egit as PE 
 from p1c_threshold import maske 
 from sina_cluster import match_hungarian ,f1w 
-from korpus_kimlik import step_kimlik as SK 
+from corpus_identity import step_kimlik as SK 
 
 YANAL ,ACI =2.0 ,10.0 
 gate =pickle .load (open ("results/wire_gate_v5.pkl","rb"))
@@ -83,7 +83,7 @@ for d in te :
     f =f"{OB }/{d ['pid']}.npz"
     if len (P )and os .path .exists (f ):
         z =np .load (f )
-        P ,D =product_zinciri .tam_poz (
+        P ,D =product_chain .tam_poz (
         np .ascontiguousarray (z ["V"],np .float64 ),
         np .ascontiguousarray (z ["F"],np .int64 ),
         np .asarray (z ["pbs"],float ).mean (0 ),P ,D ,step_path =S .get (d ["pid"]))

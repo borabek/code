@@ -5,7 +5,7 @@
 | dizin | icerik |
 |---|---|
 | **kok** | urun cekirdegi (60 modul, calisma aninda import edilen) + measurement araclari (`sonda_*`, `kos_*`) + `cp_config.json` |
-| `results/` | **makbuzlar** -- raporlanan her sayinin kaynagi (JSON) |
+| `results/` | **makbuzlar** -- raporlanan each sayinin kaynagi (JSON) |
 | `docs/` | kampanya raporu, sunum paketi, otopsiler, devam notlari |
 | `tests/` | birim testler |
 | `ayarlar/` | training/kosum yapilandirmalari (YAML) |
@@ -14,7 +14,7 @@
 | `_arsiv_betikler/` | eski deney betikleri -- kampanya tarihi, urun bunlari IMPORT ETMEZ |
 
 **Giris noktalari:** `robot_cp.py` (urun), `export_robot_glb.py` (GLB ciktisi),
-`robot_viz.py --compare` (GT ile karsilastirmali gorsel), `smoke_test.py`
+`robot_viz.py --compare` (GT with karsilastirmali gorsel), `smoke_test.py`
 (uctan uca saglik kontrolu), `rollback.py --kontrol` (durum denetimi),
 `headline.py` (headline metrikleri).
 
@@ -147,7 +147,7 @@ python run_on_file.py part.off part.labels --out graph.json --no-scene
 python run_on_file.py part.off part.labels --config my_config.json
 ```
 
-**Batch (multiple files at once):**
+**Batch (multiple files at before):**
 ```bash
 # file_list.txt: one "mesh.off labels.labels" pair per line
 python run_on_file.py --batch file_list.txt
@@ -431,7 +431,7 @@ unlike `mlp`.
 ```bash
 # corpus = a directory of per-part JSON files (the 479-file folder) OR one big JSON array
 # production backbone (DiffusionNet, WSL + GPU); cache the eigenbasis per part
-# (the expensive step) so it is built once and reused across epochs/runs:
+# (the expensive step) so it is built before and reused across epochs/runs:
 python train_cp.py /path/to/abb_corpus --backbone diffusionnet --device cuda \
     --op-cache-dir ./op_cache --epochs 200 \
     --eval-every 10 --patience 6 --out results.json
@@ -628,7 +628,7 @@ run_wsl.bat
 ```
 or manually:
 ```bash
-wsl --install -d Ubuntu                 # once (no reboot if the WSL feature is on)
+wsl --install -d Ubuntu                 # before (no reboot if the WSL feature is on)
 wsl -d Ubuntu -e bash -lc 'bash /mnt/c/Users/<you>/Desktop/code/setup_wsl.sh'
 ```
 `setup_wsl.sh` apt-installs `python3-venv`/`pip`/build tools, creates `~/cpenv`,

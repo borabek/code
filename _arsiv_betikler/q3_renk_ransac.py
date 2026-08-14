@@ -20,7 +20,7 @@ import os ,sys ,json ,glob
 import numpy as np 
 
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-from q2_renk_alignment import parse ,yerel_silindirler ,kabsch 
+from q2_colour_alignment import parse ,yerel_silindirler ,kabsch 
 
 
 def ransac (lc ,lr ,la ,gc ,gr ,ga ,tol =0.5 ,iters =4000 ,rng =None ,karistir =False ):

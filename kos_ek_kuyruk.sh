@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # EK BLOK KUYRUGU -- orkestratorun DISINDA, bellek korumali.
 #
-# NEDEN AYRI: `kos_gece.sh` kosarken duzenlenemez (bash betigi bayt konumundan
+# WHY AYRI: `kos_gece.sh` kosarken duzenlenemez (bash betigi bayt konumundan
 # okur; ortasindan degistirmek yurutmeyi bozar). Gece basladiktan SONRA yazilan
-# bloklar bu yuzden oraya eklenmedi, yanina zincirlendi.
+# bloklar this yuzden oraya eklenmedi, yanina zincirlendi.
 #
-# IKI KAPI (ikisi de saglanmadan hicbir blok baslamaz):
-#   1) corpus TAM        -- eksik korpusta olculen sayi gecersizdir
-#   2) bos RAM >= 10 GB  -- her EK kosusu ~6 GB yukluyor. Bu gece UC surec
-#                           bellek tukendigi icin SESSIZCE oldu (cikis kodu 0,
-#                           hicbir error satiri yok) -- teshis edilmesi zor.
+# IKI GATE (ikisi de saglanmadan hicbir blok baslamaz):
+#   1) corpus TAM        -- missing korpusta olculen number gecersizdir
+#   2) bos RAM >= 10 GB  -- each EK kosusu ~6 GB yukluyor. Bu gece UC surec
+#                           bellek tukendigi for SESSIZCE oldu (cikis kodu 0,
+#                           hicbir error satiri none) -- teshis edilmesi zor.
 #
-# SIRA: once KANONIK (en ucuz + en guclu tek degiskenli ayrim), sonra TOPOLOJI.
+# SIRA: before KANONIK (en ucuz + en guclu tek degiskenli ayrim), after TOPOLOJI.
 set -u
 cd "$(dirname "$0")"
 G=results/_gece
@@ -22,20 +22,20 @@ say() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$ANA"; }
 
 GEREK_DOSYA=3040
 # 10 -> 12: agir is kapisi yalnizca `kademe2` sayiyor (asil bellek canavari o).
-# Orkestratorun kendi EK bloklariyla ES ZAMANLI kosmaya IZIN VERILIYOR, cunku
+# Orkestratorun kendi EK bloklariyla ES ZAMANLI kosmaya IZIN VERILIYOR, because
 # aksi halde orkestratorun son blogu (`depth`, tek cekirdekte ~8.5 saat)
-# bu kuyrugu ogleye kadar ac birakirdi. Iki EK isi ~8'er GB; 12 GB esigi
+# this kuyrugu ogleye up to ac birakirdi. Iki EK isi ~8'er GB; 12 GB esigi
 # ikisinin ust uste binmesini guvenli kilar.
 GEREK_RAM=12
 
 bos_ram() {
-  # DIKKAT: FreePhysicalMemory KB cinsindendir; GB icin dogru bolen /1MB.
+  # NOTE: FreePhysicalMemory KB cinsindendir; GB for correct bolen /1MB.
   powershell.exe -NoProfile -Command \
     "[math]::Round((Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory/1MB,1)" \
     2>/dev/null | tr -d '\r'
 }
 
-# UCUNCU KAPI: BASKA AGIR IS KOSUYORSA BASLAMA.
+# UCUNCU GATE: BASKA AGIR IS KOSUYORSA BASLAMA.
 # 04:26'da bos RAM 0.8 GB'a dustu: B fazi (kademe2) ve EK blogu AYNI ANDA
 # korpusun tamamini belleğe aliyor (~6'sar GB) ve ustune 5 inference iscisi.
 # RAM kapisi yalnizca BASLANGICTA bakiyordu; agir isin kendisini sormak gerek.
@@ -54,7 +54,7 @@ kapilari_bekle() {
     a=$(agir_is); a=${a:-0}
     if [ "$n" -ge $GEREK_DOSYA ] && [ "${r%%.*}" -ge $GEREK_RAM ] \
        && [ "$a" -eq 0 ]; then
-      say "KAPILAR ACIK: $n dosya, ${r}GB bos, agir is yok"
+      say "KAPILAR OPEN: $n dosya, ${r}GB bos, agir is none"
       return 0
     fi
     say "bekliyor: $n/$GEREK_DOSYA dosya, ${r}GB bos (gereken ${GEREK_RAM}GB), agir is $a"
@@ -80,9 +80,9 @@ for b in $BLOKLAR; do
   fi
 done
 # SAHA GUVEN KAPISI -- "robot hangi isaretlere kendi basina guvenebilir?"
-# GLB'deki kirmizi/turuncu ayrimi bugun keyfi bir esikle (robot_conf_auto=0.5,
+# GLB'deki kirmizi/turuncu ayrimi bugun keyfi a esikle (robot_conf_auto=0.5,
 # 3 oy) yapiliyor. Bu measurement esigi OLCULMUS kesinlige baglar ve bunu GORULMEMIS
-# brand katlarinda yapar -- yani D7 sinavini HARCAMADAN.
+# brand katlarinda yapar -- i.e. D7 sinavini HARCAMADAN.
 if kapilari_bekle; then
   say "BASLIYOR: saha_kapisi"
   t0=$(date +%s)
@@ -97,12 +97,12 @@ if kapilari_bekle; then
   fi
 fi
 
-# TAM3 TABAN KOSUSU -- B1/B6'yi YORUMLANABILIR kilar.
+# TAM3 BASELINE KOSUSU -- B1/B6'yi YORUMLANABILIR kilar.
 #
 # SORUN: orkestrator B1'i `tam3` korpusunda VE zor-negatif acikken kosuyor;
 # elimizdeki referans (0.3091) ise `u25` korpusunda ve zor-negatif KAPALI.
 # Iki degisken birden degisince B1'in kazanci KORPUSA mi YONTEME mi ait,
-# ayirt edilemez. Bu kosu tam3 uzerinde DUZ ayarla baseline uretir; boylece
+# ayirt edilemez. Bu kosu tam3 uzerinde DUZ ayarla baseline uretir; so
 #   baseline(u25) -> baseline(tam3)  = KORPUS etkisi
 #   baseline(tam3) -> B1(tam3)    = ZOR NEGATIF etkisi
 # ikisi ayri ayri okunur.

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Y16 — REMESH-VARYANT TOPLULUGU (training GEREKTIRMEZ)
 #
-# Zincir her parcayi 6000 tepeye remesh eder. Remesh KENDISI bir noise
-# kaynagidir: farkli hedef cozunurluk farkli ucgenleme, farkli tahmin.
+# Zincir each parcayi 6000 tepeye remesh eder. Remesh KENDISI a noise
+# kaynagidir: different hedef cozunurluk different ucgenleme, different prediction.
 # Ayni model, FARKLI remesh hedefleriyle kosulup ciktilar birlestirilirse
-# bu noise stabilize olabilir.
+# this noise stabilize olabilir.
 #
-# Yeni training YOK; yalniz inference. `EZ_REMESH` cevre degiskeni ile hedef
+# Yeni training YOK; only inference. `EZ_REMESH` cevre degiskeni with hedef
 # tepe sayisi verilir.
 set -u
 cd "$(dirname "$0")"

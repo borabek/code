@@ -11,7 +11,7 @@ import sys
 import pytest 
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
-import karar_olcutu as K 
+import decision_criterion as K 
 
 
 def test_gecenin_kararlarini_YENIDEN_URETIYOR ():

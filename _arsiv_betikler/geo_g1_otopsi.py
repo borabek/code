@@ -27,7 +27,7 @@ OUT ="results/geo070_g1_otopsi.json"
 
 
 def main (n_parts =60 ):
-    import thesis_remesh ,geo_brep_cp ,tel_g_brep as B 
+    import thesis_remesh ,geo_brep_cp ,wire_g_brep as B 
     from cad_eval import align_frames 
     from infer_step_cp import step_to_mesh 
     from big_arbiter import eligible 

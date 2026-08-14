@@ -24,7 +24,7 @@ CIFT GECISLI: sutunlar mevcut gate skorunu kullaniyor, i.e. before a gecis is do
 uzamsal sutunlara beslenir, ikinci gate karar gives. Bu, tezdeki no seyi degistirmez --
 network, remesh, sinif tanimi and CP turetmesi aynen kalir.
 
-KILL: karar_olcutu five sarti (tanidik >= -0.01, split ortalamasi >= +0.01, most kotu split
+KILL: decision_criterion five sarti (tanidik >= -0.01, split ortalamasi >= +0.01, most kotu split
 kotulesmesin, no bolmede > 0.05 loss, GA with KANITLI kazanc).
 """
 import collections 
@@ -43,7 +43,7 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
 
 def main ():
-    import karar_olcutu 
+    import decision_criterion 
     import measure_set 
     import wire_gate 
     from big_arbiter import eligible 
@@ -156,7 +156,7 @@ def main ():
         _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (da ,db )),g ,fn ,n =2000 )
         ga [b ]=(lo ,hi )
     print ("\n=== DECISION ===")
-    k =karar_olcutu .degerlendir (SON ["A 58"],SON ["B 58+uzamsal"],ga =ga )
+    k =decision_criterion .degerlendir (SON ["A 58"],SON ["B 58+uzamsal"],ga =ga )
     print (k )
     with io .open ("results/v2_uzamsal.json","w",encoding ="utf-8")as f :
         json .dump ({"kollar":SON ,"gecti":bool (k )},f ,indent =1 )

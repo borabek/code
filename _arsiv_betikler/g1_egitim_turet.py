@@ -51,7 +51,7 @@ def main ():
     import thesis_remesh 
     import wire_gate 
     from big_arbiter import eligible 
-    from build_zengin_parite import _normaller ,zengin 
+    from build_rich_parity import _normaller ,zengin 
     from connector_constants import CABLE_ENTRY as CE ,CONTACT as CT 
     from infer_step_cp import load_any ,step_to_mesh 
 

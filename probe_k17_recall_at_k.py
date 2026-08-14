@@ -22,12 +22,12 @@ sys .path .insert (0 ,".")
 
 import d6_record # noqa: E402
 import wire_gate # noqa: E402
-import product_zinciri # noqa: E402
+import product_chain # noqa: E402
 import p3c_axis_selector as P3C # noqa: E402
 import brep_snap # noqa: E402
 from p1c_threshold import maske # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
-from korpus_kimlik import step_kimlik as SK # noqa: E402
+from corpus_identity import step_kimlik as SK # noqa: E402
 
 ACI =10.0 # correct sayilma esigi (urun robot toleransi)
 KOMSU_MM =10.0 
@@ -61,7 +61,7 @@ for pid ,r in rec_ .items ():
     d =np .load (f )
     V =np .ascontiguousarray (d ["V"],np .float64 )
     F =np .ascontiguousarray (d ["F"],np .int64 )
-    P ,D =product_zinciri .tam_poz (
+    P ,D =product_chain .tam_poz (
     V ,F ,np .asarray (d ["pbs"],float ).mean (0 ),P ,D ,step_path =S .get (pid )
     )
     G =np .asarray (r ["G"],float )

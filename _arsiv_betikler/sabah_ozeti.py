@@ -146,7 +146,7 @@ def main ():
     ms =sorted (glob .glob (os .path .join (KOK ,"results",
     "max_sec_sondasi*.json")))
     if not ms :
-        L .append ("- measurement absent (`MS_MARKA=NIT python probe_max_sec.py`)")
+        L .append ("- measurement absent (`MS_MARKA=NIT python probe_max_select.py`)")
     for y in ms :
         d =oku (y )
         if not d :
@@ -227,7 +227,7 @@ def main ():
         "(D2) verilen onceligi belirler.")
     else :
         L .append ("- `full` kumesinde ceiling olcumu yet absent "
-        "(`HT_ONLER=full python probe_pool_tavani.py`)")
+        "(`HT_ONLER=full python probe_pool_ceiling.py`)")
     L .append ("")
 
     L .append ("## 4. GECE FAZLARI")

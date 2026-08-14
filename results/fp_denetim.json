@@ -6349,5 +6349,5 @@
   292,
   303
  ],
- "not": "Ornek TABAKALI RASTGELE (manufacturer x regime). 'En emin FP'leri secmek sismedir; yansiz tahmin + confidence araligi tek durust yol."
+ "not": "Ornek TABAKALI RASTGELE (manufacturer x regime). 'En emin FP'leri secmek sismedir; yansiz prediction + confidence araligi tek durust yol."
 }

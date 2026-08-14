@@ -69,7 +69,7 @@ def dogrula (n =300 ,seed =0 ):
     """YENI anahtar, ESKI gruplamayi yeniden uretiyor mu? (old parcalarda sinanir)"""
     import glob 
     from infer_step_cp import step_to_mesh 
-    from korpus_kimlik import step_kimlik 
+    from corpus_identity import step_kimlik 
     old_ =json .load (io .open ("results/_strict_geometry_keys.json",encoding ="utf-8"))
     sm ={step_kimlik (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     ortak =[p for p in old_ if p in sm ]

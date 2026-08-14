@@ -95,7 +95,7 @@ def main ():
             out ["kumeler"][ad ]={"n_parca":npar ,"n_isaret":int (len (S )),
             "durum":"OLCULMEMIS_skor_gercek_false"}
             continue 
-            # VARSAYILAN DOLGU TUZAGI: `probe_dagitim_dogrula` skoru
+            # VARSAYILAN DOLGU TUZAGI: `probe_dagitim_verify` skoru
             # `c.get("wire_score", 1.0)` with okuyor. Zincir wire_score URETMIYORSA
             # each tahmine 1.0 yazilir and tablo "each esikte %100 AUTO" like gorunur.
             # Bu a FINDING DEGIL, measurement bosllugudur -- ayirt edilmezse tier cokusu

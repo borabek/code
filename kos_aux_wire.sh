@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Y5 — YARDIMCI GOREV (aux-wire): TEL/ALET etiketiyle cok-gorevli ogrenme
+# Y5 — YARDIMCI GOREV (aux-wire): TEL/ALET etiketiyle very-gorevli ogrenme
 #
-# `--aux-wire` bayragi kodda VARDI ama bu kampanyada HIC acilmadi.
-# 53 parcada TEL/ALET yardimci etiketi mevcut. Cok-gorevli ogrenme
-# temsili guclendirebilir: ayni govdeden iki farkli sinyal.
+# `--aux-wire` bayragi kodda VARDI but this kampanyada HIC acilmadi.
+# 53 parts TEL/ALET yardimci etiketi mevcut. Cok-gorevli ogrenme
+# temsili guclendirebilir: same govdeden iki different sinyal.
 #
 # TEK DEGISKEN: aux-wire. Taban = hafif augmentasyon 0.15 (0.6528).
 set -u

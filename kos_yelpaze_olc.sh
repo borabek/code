@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# 0.75/A: YELPAZE uctan uca. Tek degisken -- ayni corpus, ayni katlar, ayni
-# kurallar; fark yalniz `P6_DIZIN` (yelpazesiz `_p6_oz_u25` vs yelpazeli
+# 0.75/A: YELPAZE uctan uca. Tek degisken -- same corpus, same katlar, same
+# kurallar; fark only `P6_DIZIN` (yelpazesiz `_p6_oz_u25` vs yelpazeli
 # `_p6_oz_fan`).
 #
-# Yelpaze havuza yeni YON secenekleri katar (secenek +%30) ama SUTUN SAYISINI
-# degistirmez, yani kiyas dogrudan yapilabilir.
+# Yelpaze havuza yeni YON secenekleri katar (secenek +%30) but SUTUN SAYISINI
+# degistirmez, i.e. kiyas dogrudan yapilabilir.
 #
 # Dagitilan model paketi KORUNUR/GERI YUKLENIR.
 set -u
@@ -36,7 +36,7 @@ echo
 python - <<'PY'
 import json
 for d in ("_p6_oz_u25", "_p6_oz_fan"):
-    t = json.load(open(f"results/p6_yelpaze_{d}.json"))["toplam"]
+    t = json.load(open(f"results/p6_yelpaze_{d}.json"))["total"]
     ad = "YELPAZESIZ" if d.endswith("u25") else "YELPAZELI "
     print(f"  {ad}: " + " | ".join(f"{k} {v['robot']:.4f}" for k, v in t.items()))
 PY

@@ -151,5 +151,5 @@
    "parca_ici_baskinlik": 0.7894736842105263
   }
  },
- "not": "disari_orani = GT yonunun part merkezinden DISARI bakma orani. parca_ici_baskinlik = her parcada cogunluk yonun payi (1.0 = part icinde tam tutarli). D7'ye BAKILMADI."
+ "not": "disari_orani = GT yonunun part merkezinden DISARI bakma ratio. parca_ici_baskinlik = each parts cogunluk yonun payi (1.0 = part icinde tam tutarli). D7'ye BAKILMADI."
 }

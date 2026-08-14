@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""D6 URUN YOLU OLCUMU -- `probe_dagitim_dogrula.py`'nin D6 ikizi.
+"""D6 URUN YOLU OLCUMU -- `probe_dagitim_verify.py`'nin D6 ikizi.
 
 WHY SEPARATE BIR BETIK: gate kararlari D6'da veriliyor but D6 olcumlerim
 ONBELLEKTEN (`_tam_oz`) kosuyordu. Onbellek `cp_config.json`'un old halinde
@@ -38,9 +38,9 @@ def main ():
     import canonical_d7 as K 
     import canonical_chain 
     import robot_cp 
-    import product_genis 
+    import product_wide 
     import product_p6 
-    import product_zinciri 
+    import product_chain 
     from sina_cluster import match_hungarian 
 
     S =K .step_map ()
@@ -56,7 +56,7 @@ def main ():
         secili =[p for k ,p in enumerate (secili )if k %n_ ==i_ ]
         print (f"PAY {i_ }/{n_ }",flush =True )
     print (f"D6 {len (secili )} part | P6 {'ACIK'if product_p6 .ACIK else 'KAPALI'}"
-    f" | genis {'ACIK'if product_genis .ACIK else 'KAPALI'}"
+    f" | genis {'ACIK'if product_wide .ACIK else 'KAPALI'}"
     f" | poz kafasi {'ACIK'if POZ else 'KAPALI'}",flush =True )
 
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
@@ -72,7 +72,7 @@ def main ():
         cps =canonical_chain .product_output (V ,F ,pbs ,S .get (pid ),cfg =cfg )
         P ,D =canonical_chain .poz_ver (cps )
         if len (P )and POZ :
-            P ,D =product_zinciri .tam_poz (V ,F ,np .mean (pbs ,axis =0 ),P ,D ,
+            P ,D =product_chain .tam_poz (V ,F ,np .mean (pbs ,axis =0 ),P ,D ,
             step_path =S .get (pid ))
         G =np .asarray (r ["G"],float )
         Gd =np .asarray (r ["Gd"],float )
@@ -99,7 +99,7 @@ def main ():
     "FN":sum (v [2 ]for v in rob .values ()),
     "n_parca":len (secili ),"p6_acik":bool (product_p6 .ACIK ),
     "p6_sayac":dict (product_p6 .SAYAC ),
-    "genis_acik":bool (product_genis .ACIK ),"poz_kafasi":bool (POZ ),
+    "genis_acik":bool (product_wide .ACIK ),"poz_kafasi":bool (POZ ),
     "parca_kirilim":kirilim }
     print (f"\nD6 URUN ZINCIRI robot {mi :.4f} | tespit {out ['tespit']:.4f} | "
     f"makro {out ['makro']:.4f} | TP {out ['TP']} FP {out ['FP']} "

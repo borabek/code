@@ -17,7 +17,7 @@ sys .path .insert (0 ,".")
 import d6_record ,wire_gate ,canonical_d7 as K ,p5v2_secenek as PS ,p5v2_egit as PE 
 from p1c_threshold import maske 
 from sina_cluster import match_hungarian 
-from korpus_kimlik import step_kimlik as SK 
+from corpus_identity import step_kimlik as SK 
 
 gate =K .gate_yukle ();S =K .step_map ()
 cy6 =pickle .load (open ("results/_d6_silindirler.pkl","rb"))

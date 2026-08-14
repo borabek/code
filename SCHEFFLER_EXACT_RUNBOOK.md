@@ -78,7 +78,7 @@ Only 57/71 train, 16/20 validation, and 9/11 test parts contain a CableEntry
 region. The remaining 14/4/2 parts are **not zero-CP negatives**. They require
 connection-method-aware or manual annotation.
 
-## 5. Open the locked semantic benchmark once
+## 5. Open the locked semantic benchmark before
 
 First verify the final 91-refit receipt without reading a test label:
 

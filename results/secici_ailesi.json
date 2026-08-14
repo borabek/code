@@ -4,7 +4,7 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
@@ -133,5 +133,5 @@
  },
  "en_iyi": "HGB-derin",
  "urun": 0.2029,
- "not": "Ayni pool (B-rep + tanimlayici), ayni etiket; TEK DEGISKEN siniflandirici. Esik her model icin D6'da ayri secildi. D7 brand-disi, TAM ZINCIR, MIKRO."
+ "not": "Ayni pool (B-rep + tanimlayici), same etiket; TEK DEGISKEN siniflandirici. Esik each model for D6'da ayri secildi. D7 brand-disi, TAM ZINCIR, MIKRO."
 }

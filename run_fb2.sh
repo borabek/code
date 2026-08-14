@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # FB-2: TEL/ALET yardimci supervizyonuyla 4 uyeli ensemble.
 #
-# TESHIS: tezin Contact sinifi "Kontaktierung bzw. Werkzeugeinschub" -- tel girisi ve alet
-# agzi TEK SINIF. Backbone, bizim ayirmak istedigimiz iki seyi BIRLESTIRMEK uzere egitildi.
+# DIAGNOSIS: tezin Contact sinifi "Kontaktierung bzw. Werkzeugeinschub" -- tel girisi ve alet
+# mouth TEK SINIF. Backbone, bizim ayirmak istedigimiz iki seyi BIRLESTIRMEK about to egitildi.
 # Adli tip raporu: "DENENMEMIS tek yapisal ML duzeltmesi".
-# TEZ IHLALI YOK: ana 5-sinif kafasi ve kaybi diff ile dogrulandi, BIT DUZEYINDE ayni.
+# TEZ IHLALI YOK: ana 5-sinif kafasi ve kaybi diff with dogrulandi, BIT DUZEYINDE same.
 #
 # IZLEME UYARISI (2026-08-03'te saatler kaybettirdi): Git Bash `ps` komut satirini
 # GOSTERMEZ -> `ps aux | grep train_seg_extra` HER ZAMAN 0 doner ve `pkill -f` hicbir sey
-# oldurmez. Bu yuzden kosan bir egitimi 3 kez yeniden baslattim ve 5 surec ayni anda CPU
-# icin kavga etti. DURUM KONTROLU ICIN: PowerShell Get-CimInstance Win32_Process.
+# oldurmez. Bu yuzden kosan a egitimi 3 kez yeniden baslattim ve 5 surec same anda CPU
+# for kavga etti. DURUM KONTROLU ICIN: PowerShell Get-CimInstance Win32_Process.
 # Bu betik ilerlemeyi DISKE yazar (results/_fb2_ilerleme.txt) ki kontrol surece bagli olmasin.
 set -u
 export PYTHONWARNINGS=ignore PYTHONPATH=_diffusion_net_repo/src PYTHONIOENCODING=utf-8

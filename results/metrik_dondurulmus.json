@@ -4,22 +4,22 @@
   "yanal_mm": "max(3.0, 0.06*diag)",
   "eksenel_mm": 40.0,
   "aci": "SERBEST",
-  "eslestirme": "Macar (bire-bir)"
+  "eslestirme": "Macar (bire-a)"
  },
  "robot_hazir": {
   "yanal_mm": 2.0,
   "aci_derece": 10.0,
   "signed": true,
   "eksenel_mm": 40.0,
-  "eslestirme": "Macar (bire-bir)"
+  "eslestirme": "Macar (bire-a)"
  },
  "raporlama_kurallari": [
   "TESPIT ve ROBOT AYRI raporlanir, ortalanmaz",
-  "IKI SENARYO AYRI: bilinen markanin yeni modeli / hic gorulmemis brand",
-  "REJIM AYRI: dusuk-CP (<8) ve cok-CP (>=8); duz ortalama verilmez",
+  "IKI SENARYO AYRI: bilinen markanin yeni modeli / no gorulmemis brand",
+  "REJIM AYRI: low-CP (<8) ve very-CP (>=8); duz mean verilmez",
   "URETICI BOOTSTRAP %95 araligi ZORUNLU",
   "mesafe raporlarken YANAL/EKSENEL AYRIMI zorunlu",
-  "candidate ekleyen kolda ROBOT AYRICA olculur (recall kazanci robot kazanci degil)"
+  "candidate ekleyen kolda ROBOT AYRICA olculur (recall kazanci robot kazanci not)"
  ],
  "olculmus_tavanlar": {
   "aci_kollari_carpani": 1.14,
@@ -27,6 +27,6 @@
   "silindir_eksen_ailesi": 0.39,
   "bayes_tavani_tespit": 0.859
  },
- "not": "Tolerans degerleri DONDURULDU. Degistirmek icin FIZIKSEL rationale + tum gecmis sayilarin yeniden olculmesi gerekir.",
+ "not": "Tolerans degerleri DONDURULDU. Degistirmek for FIZIKSEL rationale + tum gecmis sayilarin yeniden olculmesi gerekir.",
  "sha16": "e12c41fc7a10ecd7"
 }

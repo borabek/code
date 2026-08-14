@@ -2,16 +2,16 @@
 # GECE ORKESTRATORU -- docs/GECE_PLANI_080.md'yi bastan sona kosar.
 #
 # Ilkeler:
-#  * Her faz KENDI logunu yazar; bir faz duserse zincir DURMAZ, sonraki faza gecer.
-#  * Dagitilan model paketi her fazdan once korunur, sonra geri yuklenir.
+#  * Her faz KENDI logunu yazar; a faz duserse zincir DURMAZ, sonraki faza gecer.
+#  * Dagitilan model paketi each fazdan before korunur, after geri yuklenir.
 #  * D7'ye HIC BAKILMAZ. Butun olcumler `tam` brand katlarinda.
-#  * Her fazin ciktisi results/gece_<faz>.json olarak birikir.
+#  * Her fazin ciktisi results/gece_<faz>.json as birikir.
 set -u
 cd "$(dirname "$0")"
 G=results/_gece
 mkdir -p "$G"
-# TEK ORNEK KILIDI: iki orkestrator ayni anda kosunca inference iscileri
-# ikiye katlandi ve makine asiri yuklenip her sey yavasladi.
+# TEK ORNEK KILIDI: iki orkestrator same anda kosunca inference iscileri
+# ikiye katlandi ve makine asiri yuklenip each sey yavasladi.
 KILIT="$G/.kilit"
 if [ -e "$KILIT" ] && kill -0 "$(cat "$KILIT" 2>/dev/null)" 2>/dev/null; then
   echo "ZATEN KOSUYOR (pid $(cat "$KILIT")) -- cikiliyor"; exit 0
@@ -44,11 +44,11 @@ faz() {                     # faz <ad> <komut...>
 log "=========== GECE PROGRAMI BASLADI ==========="
 
 # ---------------------------------------------------------------- FAZ A
-# A1b: UC KALDIRAC ACIK corpus (yelpaze + dusuk mesh esigi + seyreltme)
+# A1b: UC KALDIRAC OPEN corpus (yelpaze + low mesh esigi + seyreltme)
 # UST SINIR 600 -> 350: 600'de inference 6.3 dosya/dk (7.7 SAAT, gece yetmez).
-# Olculen diz noktasi zaten 251 adaydaydi (konum recall 0.8713); 350 onun
-# uzerinde kalir ama maliyeti yariya iner. ASIL KALDIRAC mesh ESIGI (0.05),
-# candidate SAYISI degil -- CWT'de konum recall'u acan oydu.
+# Olculen diz noktasi already 251 adaydaydi (konum recall 0.8713); 350 onun
+# uzerinde kalir but maliyeti yariya iner. ASIL KALDIRAC mesh ESIGI (0.05),
+# candidate SAYISI not -- CWT'de konum recall'u acan oydu.
 if [ "$(ls results/_p6_oz_tam3 2>/dev/null | wc -l)" -lt 3040 ]; then
   log "BASLIYOR: A1b tam-acik corpus cikarimi (6 pay)"
   for i in 0 1 2 3 4 5; do
@@ -65,8 +65,8 @@ if [ "$(ls results/_p6_oz_tam3 2>/dev/null | wc -l)" -lt 3040 ]; then
   log "BITTI: A1b -- $(ls results/_p6_oz_tam3 | wc -l) dosya"
 fi
 
-# A2: yeni havuzun tavani (KAPI A)
-faz A2_havuz_tavani env P6_DIZIN=results/_p6_oz_tam3 python probe_pool_tavani.py
+# A2: yeni havuzun tavani (GATE A)
+faz A2_havuz_tavani env P6_DIZIN=results/_p6_oz_tam3 python probe_pool_ceiling.py
 
 # A3: yelpaze uctan uca (yelpazeli corpus hazirsa)
 if [ "$(ls results/_p6_oz_fan 2>/dev/null | wc -l)" -ge 3040 ]; then
@@ -83,7 +83,7 @@ faz B6_ensemble env P6_DIZIN=results/_p6_oz_tam3 P6_TOHUM_N=3 \
     P6_ARAMA_N=250 P6_NEG_KAT=6 P6_ITER=200 python run_p6_kademe2.py
 
 # EK OZNITELIK BLOKLARI -- hepsi TEK cerceveden, tek degiskenli.
-# Ucuzdan pahaliya sirali: dusen bir blok sonrakini engellemez.
+# Ucuzdan pahaliya sirali: dusen a blok sonrakini engellemez.
 for blok in ozkalib kafes_adet simetri depth; do
   faz "EK_$blok" env EK_BLOK="$blok" P6_DIZIN=results/_p6_oz_tam3 \
       P6_KUME=tam,d6 P6_KAT_MIN=200 P6_ARAMA_N=200 P6_ITER=200 \

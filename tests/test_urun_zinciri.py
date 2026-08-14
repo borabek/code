@@ -12,23 +12,23 @@ import sys
 import numpy as np 
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
-import product_zinciri 
+import product_chain 
 
 
 def test_bos_girdi_bos_doner ():
     P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
-    P2 ,D2 =product_zinciri .tam_poz (None ,None ,None ,P ,D )
+    P2 ,D2 =product_chain .tam_poz (None ,None ,None ,P ,D )
     assert len (P2 )==0 and len (D2 )==0 
 
 
 def test_adim_duserse_GIRDI_aynen_doner ():
     """Uydurma YOK: a step patlarsa input degismeden geri gelmeli."""
     P =np .array ([[1. ,2 ,3 ]]);D =np .array ([[0. ,0 ,1 ]])
-    P2 ,D2 =product_zinciri .tam_poz (None ,None ,None ,P ,D )# feats_for patlar
+    P2 ,D2 =product_chain .tam_poz (None ,None ,None ,P ,D )# feats_for patlar
     assert np .allclose (P2 ,P )and np .allclose (D2 ,D )
 
 
 def test_zincir_sirasi_pose_sonra_yon ():
     import inspect 
-    src =inspect .getsource (product_zinciri .tam_poz )
+    src =inspect .getsource (product_chain .tam_poz )
     assert src .index ("pose_correct")<src .index ("pick_direction_from_dictionary"),"direction sozlugu, poz duzeltmesinin CIKTISI uzerine calismali"

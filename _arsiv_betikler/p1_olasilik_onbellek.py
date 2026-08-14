@@ -50,7 +50,7 @@ def main ():
     import diffusionnet as D_ 
     import thesis_remesh 
     from infer_step_cp import load_any ,step_to_mesh 
-    from korpus_kimlik import step_kimlik as SK 
+    from corpus_identity import step_kimlik as SK 
 
     kok =ONBELLEK +a .ek 
     os .makedirs (kok ,exist_ok =True )

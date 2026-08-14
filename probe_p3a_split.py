@@ -16,7 +16,7 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
 import d6_record ,robot_cp ,cp_openings 
 from sina_cluster import match_hungarian ,f1w 
-from korpus_kimlik import step_kimlik as SK 
+from corpus_identity import step_kimlik as SK 
 
 OB ="results/_p1_olasilik_g10"
 sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))

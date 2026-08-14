@@ -23,8 +23,8 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 
 @pytest .fixture (scope ="module")
 def K ():
-    import korpus_kimlik 
-    return korpus_kimlik 
+    import corpus_identity 
+    return corpus_identity 
 
 
 @pytest .mark .parametrize ("file_,bek_mfg,bek_pid",[

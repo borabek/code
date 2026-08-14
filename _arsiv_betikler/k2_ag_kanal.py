@@ -145,7 +145,7 @@ def main ():
     print (f"\n{len (RY )} candidate | mg kapsami {float ((MG !=0 ).any (1 ).mean ()):.1%} "
     f"(B-rep grafinin kapsami {float ((BG !=0 ).any (1 ).mean ()):.1%})")
 
-    from t1_uretici_disi import auc_mw 
+    from t1_manufacturer_out import auc_mw 
     print (f"\n{'column':<14}{'AUC tum':>9}{'AUC zayif':>11}{'sifir-disi':>11}")
     for j ,a in enumerate (AD ):
         v =MG [:,j ]

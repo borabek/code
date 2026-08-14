@@ -25,7 +25,7 @@ os .environ ["WG_FIZ_FEATS"]="1"
 os .environ ["WG_TOPO"]="1"
 os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
-import agiz_derin_tanim as ADT # noqa: E402
+import mouth_deep_definition as ADT # noqa: E402
 import d6_record # noqa: E402
 import canonical_d7 as K # noqa: E402
 import wire_gate # noqa: E402

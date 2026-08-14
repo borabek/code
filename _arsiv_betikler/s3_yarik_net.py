@@ -36,7 +36,7 @@ KURAL ={"R1 always":0.0 ,"R2 difference>45":45.0 ,"R3 difference>60":60.0 }
 
 def main ():
     import geo_g2_yarik 
-    import tel_g_brep as B 
+    import wire_g_brep as B 
     import wire_gate 
     from big_arbiter import eligible 
     from sklearn .ensemble import RandomForestClassifier 

@@ -33,5 +33,5 @@
   "ceiling": 0.9372384937238494,
   "gt": 2413
  },
- "not": "USTK_KAHIN: ayni skorla ilk k, k = GERCEK CP sayisi. KAHIN'dir, urun degil. Amac SIRALAMA ile ADET/ESIK sorununu ayirmak. D7'ye BAKILMADI."
+ "not": "USTK_KAHIN: same skorla ilk k, k = GERCEK CP sayisi. KAHIN'dir, urun not. Amac SIRALAMA with ADET/THRESHOLD sorununu ayirmak. D7'ye BAKILMADI."
 }

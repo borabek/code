@@ -45,7 +45,7 @@ os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
 import canonical_d7 as K # noqa: E402
 import p6_decision # noqa: E402
-import product_genis # noqa: E402
+import product_wide # noqa: E402
 import wire_gate # noqa: E402
 import direction_bank as YB # noqa: E402
 from run_p6_ortak import yukle # noqa: E402
@@ -123,7 +123,7 @@ def puanla (d ,s ,threshold ,nms ,arm ):
         P ,D =d ["P"][m ],d ["D"][m ]
         T =d ["X"][k ][m ][:,AB +len (YB .OZ_AD ):]
         n =_nms (P ,sk [m ],nms )
-        return P [n ],product_genis .isaret_duzelt (D [n ],T [n ])
+        return P [n ],product_wide .isaret_duzelt (D [n ],T [n ])
     P ,D ,ai ,_sc =p6_decision .sec_ayrintili (d ["P"],d ["idx"],d ["YD"],s ,threshold ,
     nms_mm =nms )
     if arm =="P6_KAHIN":

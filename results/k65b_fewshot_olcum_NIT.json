@@ -23,5 +23,5 @@
   }
  },
  "baseline": "results/_p1_olasilik_g10",
- "not": "k=0 tabani AYNI parcalarda measured; adaptasyon parcalari her iki kolda da DISARIDA. Son-epoch ckpt kullanildi (genel val'e gore secim adaptasyonu cezalandirir)."
+ "not": "k=0 tabani AYNI parcalarda measured; adaptasyon parcalari each iki kolda da DISARIDA. Son-epoch ckpt kullanildi (genel val'e per secim adaptasyonu cezalandirir)."
 }

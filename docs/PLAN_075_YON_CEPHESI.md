@@ -9,9 +9,9 @@
 > |---|---|---|
 > | NIT | **0.7053** | **0.8899** |
 >
-> Model dense parcada **yonu biliyor, hangi acikligin kablo girisi oldugunu
+> Model dense parts **direction biliyor, hangi acikligin kablo girisi oldugunu
 > bilmiyor**. Yon kollari (A1 isin, B1 bimodal) measured: A1 dustu, B1 gercek
-> ama uctan uca ~+0.002. Gecerli guzergah asagidaki **CEPHE C** (pool
+> but uctan uca ~+0.002. Gecerli guzergah asagidaki **CEPHE C** (pool
 > kucultme) ve **CEPHE D** (veri); CEPHE A ve B closed.
 >
 > Ders: secenek sayisindan konum/direction payini TAHMIN ETME, OLC.
@@ -22,7 +22,7 @@
 Tarih: 2026-08-12 · Hedef: gorulmemis brand **robot F1 = 0.75**
 Bugunku en iyi gercek measurement: **D7 0.2773** · d6 0.3012
 
-> Bu plan bir vaat degil, bir GUZERGAHTIR. Her madde ONCE ilan edilmis bir
+> Bu plan a vaat not, a GUZERGAHTIR. Her madde ONCE ilan edilmis a
 > kapiya baglidir. Kapiyi gecmeyen arm yazilmaz, urune girmez, mansete
 > cikmaz. D7 butcesinde **2 okuma** kaldi.
 
@@ -32,14 +32,14 @@ Bugunku en iyi gercek measurement: **D7 0.2773** · d6 0.3012
 
 `docs/OTOPSI_YOGUN_PARCA.md` — candidate duzeyinde measured:
 
-| brand | GT | n_aday | auc_secici | ilk-k orani | gereken auc |
+| brand | GT | n_aday | auc_secici | ilk-k ratio | gereken auc |
 |---|---|---|---|---|---|
 | NIT | 1222 | 6322 | 0.8854 | 0.049 | 0.9968 |
 | MOR | 240 | 11555 | 0.9657 | 0.202 | 0.9997 |
 | SUPU | 539 | 1600 | 0.9696 | 0.561 | 0.9981 |
 | UPUN | 366 | 2098 | 0.9877 | 0.800 | 0.9986 |
 
-Ilk-k'nin dolmasi icin gereken candidate sayisi ≈ `k / (1 − AUC)`:
+Ilk-k'nin dolmasi for gereken candidate sayisi ≈ `k / (1 − AUC)`:
 
 | brand | su anki | gereken | ratio |
 |---|---|---|---|
@@ -57,7 +57,7 @@ Ilk-k'nin dolmasi icin gereken candidate sayisi ≈ `k / (1 − AUC)`:
 Yon konum basina TEK olsaydi: NIT 260/24 = 11:1 → gereken AUC **0.9968 → 0.91**.
 Konum duzeyinde AUC muhtemelen orada.
 
-> **0.75 sorusu konum sorusu degil. Tamamen YON sorusuna indirgenir.**
+> **0.75 sorusu konum sorusu not. Tamamen YON sorusuna indirgenir.**
 
 Bugun olculen 22 kolun 20'si skoru iyilestirmeye calisiyordu. Yanlis cephe.
 
@@ -67,13 +67,13 @@ Bugun olculen 22 kolun 20'si skoru iyilestirmeye calisiyordu. Yanlis cephe.
 
 NIT'te: direction **kahini 0.593**, gerceklesen **0.150**.
 
-| alt problem | olcu | deger | anlam |
+| alt problem | olcu | value | anlam |
 |---|---|---|---|
-| **(A) BULUNURLUK** | dogru direction 24 secenek arasinda var mi | **0.593** | %41'inde HIC YOK |
+| **(A) BULUNURLUK** | correct direction 24 secenek arasinda present mi | **0.593** | %41'inde HIC YOK |
 | **(B) SECIM** | varken bulabiliyor muyuz | 0.150/0.593 = **0.25** | 4'te 3'unu kaciriyoruz |
 
 Ikisi ayri cephedir ve ayri kollarla dovusulur. **(A) cozulurse (B) kendiliginden
-kucuur**, cunku secenek sayisi duser.
+kucuur**, because secenek sayisi duser.
 
 ---
 
@@ -81,48 +81,48 @@ kucuur**, cunku secenek sayisi duser.
 
 ### A1 ★ ISIN ATMA / SERBEST YOL — en guclu denenmemis arm
 
-**Fizik.** Bir kablo girisi bir DELIKTIR. Ekseni boyunca uzun ve engelsiz bir
-kanal vardir; diger her yonde birkac mm'de duvara carpilir. O halde:
+**Fizik.** Bir kablo girisi a DELIKTIR. Ekseni boyunca uzun ve engelsiz a
+kanal vardir; diger each yonde birkac mm'de duvara carpilir. O halde:
 
 ```
   axis = body icine EN DERIN nufuz eden direction
 ```
 
-**Neden bugune kadar denenmedi:** direction hep bir SINIFLANDIRMA problemi gibi ele
-alindi (24 secenek uret, skorla). Bir OLCUM problemi oldugu hic denenmedi.
+**Neden bugune up to denenmedi:** direction hep a SINIFLANDIRMA problemi gibi ele
+alindi (24 secenek uret, skorla). Bir OLCUM problemi oldugu no denenmedi.
 
-**Neden diger direction kollarindan farkli:**
-- B-rep agzi CP'de bulunma 0.011 → B-rep'e bagimli DEGIL
+**Neden diger direction kollarindan different:**
+- B-rep mouth CP'de bulunma 0.011 → B-rep'e bagimli DEGIL
 - mesh normali secili adaylarda 0.334 → yerel normale bagimli DEGIL
 - yalnizca mesh ucgenleri ve isin-ucgen kesisimi gerekir (trimesh/embree)
 
 **Cikti:** konum basina **1–3** direction. Havuz 24× kuculur.
 
-**Kapi:** NIT'te tek-isin yonunun GT ile 10 derece icinde olma orani
+**Kapi:** NIT'te tek-isin yonunun GT with 10 derece icinde olma ratio
 **≥ 0.40** (bugunku secim 0.150). Sonda: `probe_ray_axis.py`
 
 **Riskler ve on tedbirler:**
 - Mesh su gecirmez olmayabilir → `trimesh` `is_watertight` kontrolu, degilse
-  cift yonlu isin (ileri+geri) ile depth
+  cift yonlu isin (ileri+geri) with depth
 - rtree sessiz hatasi (bkz. `trimesh-rtree-silent-failure`) → duman testi SART
-- Klemens govdesi ic bosluklu → depth **ilk carpma** degil, **toplam serbest
-  yol** olarak olculur
+- Klemens govdesi ic bosluklu → depth **ilk carpma** not, **total serbest
+  yol** as olculur
 
 ### A2 SILINDIR OTURTMA (yerel)
 
-Adayin cevresindeki 3–8 mm mesh yamasina silindir/koni oturt; ekseni al.
-Delik duvari silindiriktir, en kucuk-kare axis dogrudan cevaptir.
-**Kapi:** A1 ile ayni. A1 dusrse bu kosulur (bagimsiz mekanizma).
+Adayin cevresindeki 3–8 mm mesh yamasina silindir/koni oturt; axis al.
+Delik duvari silindiriktir, en small-kare axis dogrudan cevaptir.
+**Kapi:** A1 with same. A1 dusrse this kosulur (independent mekanizma).
 
 ### A3 DERINLIK ALANI GRADYANI
 
 Isaretli mesafe alaninin adaydaki gradyani; delik icinde gradyan eksene
-paraleldir. `depth` EK blogu zaten kosuyor — ciktisi direction icin de okunur.
+paraleldir. `depth` EK blogu already kosuyor — ciktisi direction for de okunur.
 
 ### A4 MAX_SEC ARTIRIMI (kontrollu)
 
-24 → 48 bulunurlugu yukseltir ama orani bozar. **Yalniz A1 gecerse ve yalniz
-A1'in dusuk guvenli oldugu konumlarda** backup olarak acilir. Tek basina
+24 → 48 bulunurlugu yukseltir but ratio bozar. **Yalniz A1 gecerse ve only
+A1'in low guvenli oldugu konumlarda** backup as acilir. Tek basina
 ACILMAZ — measured, tavani acip gerceklesenı acmiyor.
 
 ---
@@ -132,17 +132,17 @@ ACILMAZ — measured, tavani acip gerceklesenı acmiyor.
 ### B1 ISARETSIZ EKSEN + DISARI ISARETI  *(KOSUYOR)*
 
 Klemens girisleri tek yonlu degildir; signed acida 180 derece TAM
-basarisizliktir. Modal oylama parcanin yarisini ters isaretler. Cozum: ekseni
+basarisizliktir. Modal oylama parcanin yarisini ters isaretler. Cozum: axis
 unsigned sec, isareti "govdeden disari"dan turet (GT sozlesmesi 1.000 disari).
 Iki olculmus cokusu birlikte aciklar: K2.1 `robot −0.0100`, `dik_kipsel` 0.064.
 **Kapi:** NIT'te bugunkuyu +0.05 asmak. Sonda: `probe_bimodal_direction.py`
 
 ### B2 YON'E OZEL SECICI (iki kademeli karar)
 
-Bugun tek model hem konumu hem yonu puanliyor. Ayirmak:
+Bugun tek model hem konumu hem direction puanliyor. Ayirmak:
 1. konum modeli → konumlari sirala (candidate/GT 11:1)
-2. direction modeli → SECILEN konumlarda yonu sec
-Ikinci modelin training dagilimi cok daha temiz olur.
+2. direction modeli → SECILEN konumlarda direction sec
+Ikinci modelin training dagilimi very more temiz olur.
 **Kapi:** +0.01 mikro.
 
 ### B3 KOMSU TUTARLILIGI
@@ -161,25 +161,25 @@ A1 gecerse `MAX_SEC` 24 → 1–3 iner. Beklenen etki, otopsi denklemiyle:
 | NIT | 6322 | ~260 | 0.9968 → **0.908** |
 | MOR | 11555 | ~480 | 0.9997 → **0.981** |
 
-NIT icin gereken AUC elimizdekine (0.885) **cok yaklasiyor**. MOR icin hala
-acik var → C2 gerekir.
+NIT for gereken AUC elimizdekine (0.885) **very yaklasiyor**. MOR for hala
+acik present → C2 gerekir.
 
-### C2 KONUM ON-SUZGECI (yuksek recall)
+### C2 KONUM ON-SUZGECI (high recall)
 
-MOR'da 480 konum / 9 GT = 53:1. Ucuz, yuksek recall'lu bir on-suzgec
+MOR'da 480 konum / 9 GT = 53:1. Ucuz, high recall'lu a on-suzgec
 (orn. yuzey disa bakma + minimum delik capi + `kanonik` blogu) konumlari
 yariya indirirse gereken AUC 0.981 → 0.963'e iner.
 **Kapi:** recall kaybi ≤ 0.01 karsiliginda konum sayisinda ≥ 2× kucultme.
 
 ---
 
-## 5. CEPHE D — VERI (paralel, bagimsiz)
+## 5. CEPHE D — VERI (paralel, independent)
 
 ### D1 ★ SENTETIK KLEMENS URETECI
-Marka kavrami tanimaz. Yogun part ailesini (asil duvar) istenildigi kadar
+Marka kavrami tanimaz. Yogun part ailesini (asil duvar) istenildigi up to
 uretir: kutup sayisi, adim, delik capi, giris acisi, iki-sirali/tek-sirali.
 GT insaattan gelir, etiketleme hatasi sifirdir.
-**Kapi:** +0.03 mikro. En buyuk tek veri kaldiraci.
+**Kapi:** +0.03 mikro. En large tek veri kaldiraci.
 
 ### D2 SIE +310 PARCA
 Ucuncu manufacturer stogunda kullanilabilir tek brand (A-B/KLM/CWT/EFX = D7 exam
@@ -187,17 +187,17 @@ markalari, DOKUNULMAZ). Olculmus veri kaldiraci: +110 WEI → +0.0391.
 **Kapi:** +0.01.
 
 ### D3 CESITLILIK AGIRLIKLANDIRMA
-Egitimde part basina agirlik: dense parts CP sayilariyla dogru orantili
+Egitimde part basina agirlik: dense parts CP sayilariyla correct orantili
 agirlik aliyor ve seyrekleri ezyor. Parca-esitleyici agirlik olculmedi.
 **Kapi:** +0.01.
 
 ---
 
-## 6. CEPHE E — OLCUM BUTUNLUGU (kapiyi acan degil, YANLIS ACMAYI onleyen)
+## 6. CEPHE E — OLCUM BUTUNLUGU (kapiyi acan not, YANLIS ACMAYI onleyen)
 
-- **E1 YON SOZLESMESI DENETIMI** — GT yonu markalar arasi tutarli mi. D7 dahil
+- **E1 YON SOZLESMESI DENETIMI** — GT direction markalar arasi tutarli mi. D7 dahil
   TUM direction olcumlerini etkiler. A1/B1 sonuclarini yorumlamadan ONCE bitmeli.
-- **E2 GLB dogrulamasi** — `product_p6`/`product_genis` sahaya girmiyor
+- **E2 GLB dogrulamasi** — `product_p6`/`product_wide` sahaya girmiyor
   (`glb-olculen-zinciri-kullanmiyor`). Kazanc olculse bile sahaya inmez.
 - **E3 Sismis siralama altinda kapanan kollar** — S4, lattice yayilimi, adet
   kisiti, zor negatif, dik-direction. A1 gecerse **yeniden acilir**.
@@ -218,21 +218,21 @@ agirlik aliyor ve seyrekleri ezyor. Parca-esitleyici agirlik olculmedi.
   B1/B2 secim kollari (kismi kazanc, 0.75'e YETMEZ)
 ```
 
-**Paralel yurur (A'dan bagimsiz):** D1 sentetik uretec, D2 SIE, E1 sozlesme
+**Paralel yurur (A'dan independent):** D1 sentetik uretec, D2 SIE, E1 sozlesme
 denetimi.
 
-**FINAL KAPI:** `tam` katlarinda kumulatif kazanc **≥ +0.10** olmadan D7
+**FINAL GATE:** `tam` katlarinda kumulatif kazanc **≥ +0.10** olmadan D7
 okunmaz. Bugunku birikim: **+0.0151**.
 
 ---
 
-## 8. 0.75 HAKKINDA DURUST HUKUM
+## 8. 0.75 HAKKINDA DURUST VERDICT
 
 Elimdeki hicbir measurement bugun 0.75'i desteklemiyor. Bugun 22 arm measured,
 en iyisi +0.0151. Ogrenme egrisi olcumu (`ogrenme-egrisi-fiyat-etiketi`)
-0.80 icin **3.8×**, 0.85 icin **17.3×** corpus istiyor.
+0.80 for **3.8×**, 0.85 for **17.3×** corpus istiyor.
 
-0.75'in gerceklesmesi icin **hepsi birden** dogru cikmali:
+0.75'in gerceklesmesi for **hepsi birden** correct cikmali:
 1. A1 (veya A2) direction olcumu calisir → pool 24× kuculur
 2. C2 konum on-suzgeci MOR tipini de menzile sokar
 3. D1 sentetik uretec dense aileyi doyurur
@@ -240,5 +240,5 @@ en iyisi +0.0151. Ogrenme egrisi olcumu (`ogrenme-egrisi-fiyat-etiketi`)
    ise yarar
 
 Bu dortlunun tamaminin tutmasi olasi degildir. **Ama A1 tutarsa denklemin
-sekli ilk kez 0.75'e izin verir** — bu sabah izin vermiyordu. Guzergah budur;
+sekli ilk kez 0.75'e izin verir** — this sabah izin vermiyordu. Guzergah budur;
 sonuc kapilarda belli olacak.

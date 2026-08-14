@@ -9,7 +9,7 @@ B-rep havuzu 98 candidate / ceiling 0.5761.
 Yeniden baslatilabilir: each part own npz'sine yazilir, present which is atlanir.
 Diske `X` (58 column), `y` (PROJENIN label tanimi), `P`, `D`, `source` yazilir.
 
-ETIKET: `build_zengin_parite.py` with BIREBIR -- lateral distance + axial 40mm
+ETIKET: `build_rich_parity.py` with BIREBIR -- lateral distance + axial 40mm
 kapisi + acgozlu BIRE-BIR eslesme. (Oklid + coka-a etiketi gate'i 0.08
 bozuyordu, see. gate-label-tanimi-hatasi-and-v6-kunyesi.)
 """

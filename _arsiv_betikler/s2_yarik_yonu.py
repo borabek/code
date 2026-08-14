@@ -119,7 +119,7 @@ def main ():
             continue 
         V ,F =VF [pid ]
         try :
-            import tel_g_brep as B 
+            import wire_g_brep as B 
             surf =B .read_brep (stp_of .get (pid ))
             slots =geo_g2_yarik .detect_slots (surf ,(V ,F ))
         except Exception as e :

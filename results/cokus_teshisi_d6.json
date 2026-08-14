@@ -51,5 +51,5 @@
    "skor_araligi": 0.6510004957065837
   }
  },
- "not": "S7 cokus teshisi. `havuzda` = GT'nin kabul kutusunda en az bir secenegi olma orani (pool tavani). `ilk10/ilk50` = DOGRU secenegin part icinde ilk 10/50'ye girme orani. `sira%` = dogru secenegin ortalama sira yuzdeligi (0 = tepe). D7'ye BAKILMADI."
+ "not": "S7 cokus teshisi. `havuzda` = GT'nin kabul kutusunda en az a secenegi olma ratio (pool tavani). `ilk10/ilk50` = DOGRU secenegin part icinde ilk 10/50'ye girme ratio. `sira%` = correct secenegin mean sira yuzdeligi (0 = tepe). D7'ye BAKILMADI."
 }

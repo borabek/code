@@ -1069,7 +1069,7 @@ was done about them:
 - **A2 label-convention split:** CAD-corpus CPs sit at the bore's centre of mass
   (mid-depth, `step_openings.py:132`), human GT marks the mouth. Measured
   CP-to-nearest-surface distance: **human 3.05mm mean vs CAD-corpus 0.62mm**. The
-  model is being taught two conventions at once; the 5mm match radius hides it in
+  model is being taught two conventions at before; the 5mm match radius hides it in
   F1 but it puts a floor under loc error. Fix belongs in corpus v5.
 - **B1:** the F1 gates are **blind to direction** -- an all-180-degrees-flipped model
   scores F1=1.0 and passes every acceptance gate (angle is reported, never gated).

@@ -72,7 +72,7 @@ def main ():
     a =ap .parse_args ()
     import protocol 
     protocol .tez_dogrula ()
-    from korpus_kimlik import step_kimlik as SK 
+    from corpus_identity import step_kimlik as SK 
     from sina_cluster import f1w 
 
     sv =d6_record .exam ()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""kume_baglami: elle hesaplanabilir small sahnede dogrulama."""
+"""cluster_context: elle hesaplanabilir small sahnede dogrulama."""
 import os 
 import sys 
 
@@ -7,7 +7,7 @@ import numpy as np
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
 
-import kume_baglami as KB # noqa: E402
+import cluster_context as KB # noqa: E402
 
 A ={a :i for i ,a in enumerate (KB .OZ_AD )}
 

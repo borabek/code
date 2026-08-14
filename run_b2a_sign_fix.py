@@ -26,7 +26,7 @@ import makbuz_hash
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
-import d6_record ,canonical_d7 as K ,product_zinciri ,wire_gate 
+import d6_record ,canonical_d7 as K ,product_chain ,wire_gate 
 from sina_cluster import match_hungarian 
 
 OZ ="results/_tam_oz";TAN ="results/_tan_hizali"
@@ -82,7 +82,7 @@ def olc (arm ,clf =None ):
             f =f"{OB ['d7']}/{pid }.npz"
             if os .path .exists (f ):
                 z =np .load (f )
-                P ,D =product_zinciri .tam_poz (np .ascontiguousarray (z ["V"],np .float64 ),
+                P ,D =product_chain .tam_poz (np .ascontiguousarray (z ["V"],np .float64 ),
                 np .ascontiguousarray (z ["F"],np .int64 ),
                 np .asarray (z ["pbs"],float ).mean (0 ),P ,D ,step_path =S .get (pid ))
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float );dg =float (r ["diag"])

@@ -28,7 +28,7 @@ CIKTI ="results/_der_zengin.pkl"
 
 
 def main ():
-    from build_zengin_parite import _normaller ,zengin 
+    from build_rich_parity import _normaller ,zengin 
 
     with open (GIRDI ,"rb")as f :
         DER =pickle .load (f )

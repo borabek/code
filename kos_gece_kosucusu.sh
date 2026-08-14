@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # GECE KOSUCUSU — karar gerektirmeyen adimlari kendi kendine zincirler.
 #
-# 1) `_p6_oz_tam4` cikarimi bitene kadar bekler (var olani atlar, guvenli)
-# 2) URETIM modelini TAM corpus + neg=12 ile yeniden egitir
-# 3) Uctan uca olcer ve receipt birakir
+# 1) `_p6_oz_tam4` cikarimi bitene up to bekler (present olani atlar, guvenli)
+# 2) URETIM modelini TAM corpus + neg=12 with yeniden egitir
+# 3) Uctan uca measures ve receipt birakir
 #
 # Her adim kendi logunu yazar; hicbiri onceki adimin ciktisini VARSAYMAZ,
-# eksikse yuksek sesle durur (bu projede sessiz no-op defalarca yandi).
+# eksikse high sesle durur (this projede sessiz no-op defalarca yandi).
 set -u
 cd "$(dirname "$0")"
 PY=".venv/Scripts/python.exe"
@@ -28,7 +28,7 @@ while true; do
     DURGUN=0; ONCE=$N
     say "   inference $N/2583"
   fi
-  # 40 dakika hic ilerlemezse inference olmustur; elimizdekiyle devam et
+  # 40 dakika no ilerlemezse inference olmustur; elimizdekiyle devam et
   if [ "${DURGUN:-0}" -ge 8 ]; then
     say "   inference DURDU ($N dosya) -- elimizdekiyle devam"; break
   fi
@@ -37,7 +37,7 @@ done
 
 N=$(ls results/_p6_oz_tam4/tam_*.npz 2>/dev/null | wc -l)
 if [ "$N" -lt 1500 ]; then
-  say "!! inference cok eksik ($N) -- training ATLANDI"; exit 1
+  say "!! inference very missing ($N) -- training ATLANDI"; exit 1
 fi
 
 # --- 2) URETIM modelini yeniden egit (tam corpus + neg=12)

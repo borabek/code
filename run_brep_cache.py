@@ -11,15 +11,15 @@ opening present, that yuzden training tarafinda da IKISI de uretilir.
 import glob ,json ,os ,pickle ,sys ,time 
 sys .path .insert (0 ,".")
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
-import brep_snap ,brep_aciklik 
-from korpus_kimlik import step_kimlik as SK 
+import brep_snap ,brep_opening 
+from corpus_identity import step_kimlik as SK 
 
 KUME =os .environ .get ("BREP_KUME","results/brep_egitim_kumesi.json")
 ON =os .environ .get ("BREP_ON","_brepegit")
 ISLER =[("silindir",f"results/{ON }_silindirler.pkl",
 lambda p :brep_snap .exact_cylinders (p )),
 ("opening",f"results/{ON }_acikliklar.pkl",
-lambda p :brep_aciklik .acikliklar (p ))]
+lambda p :brep_opening .acikliklar (p ))]
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 pidler =[str (p )for p in json .load (open (KUME ))["pidler"]]
 print (f"cluster {len (pidler )} | STEP eslesen {sum (1 for p in pidler if p in S )}",flush =True )

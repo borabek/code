@@ -41,9 +41,9 @@ def product_output (V ,F ,pbs ,step_path ,cfg =None ,cp_count =None ):
         if _p is not None :
             return _p 
     if _cfg .get ("robot_genis_havuz",False ):
-        import product_genis 
-        if product_genis .ACIK :
-            _g =product_genis .out_ (V ,F ,avg ,cps ,step_path ,
+        import product_wide 
+        if product_wide .ACIK :
+            _g =product_wide .out_ (V ,F ,avg ,cps ,step_path ,
             robot_cp .CE ,robot_cp .CT )
             if _g is not None :
                 return _g 

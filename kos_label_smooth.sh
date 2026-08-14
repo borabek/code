@@ -3,10 +3,10 @@
 #
 # Kismi etiketli maskeli BCE'de hedef 1.0 yerine (1-eps) kullanilir.
 # Gerekce: kismi etiketler ELLE isaretlendi ve kenar tepelerinde
-# belirsizdir; kesin 1.0 hedefi modeli asiri kendine guvenli yapar.
-# Augmentasyon kazandi (+0.0197..+0.0649) -- ayni aileden bir duzenleyici.
+# belirsizdir; conclusive 1.0 hedefi modeli asiri kendine guvenli yapar.
+# Augmentasyon kazandi (+0.0197..+0.0649) -- same aileden a duzenleyici.
 #
-# TEK DEGISKEN: label smoothing. Diger her sey A recetesi + hafif augment
+# TEK DEGISKEN: label smoothing. Diger each sey A recetesi + hafif augment
 # (bugunun kazanani) uzerine biner.
 set -u
 cd "$(dirname "$0")"

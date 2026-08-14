@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # Y19 — GIRDI OZNITELIGI: xyz (dissal) vs hks (icsel)
 #
-# BULGU. `train_seg_extra.py` cfg'yi SABIT `input_features="xyz"` yaziyordu;
-# `hks` secenegi DiffusionNet'te destekli oldugu halde hic denenemiyordu.
+# FINDING. `train_seg_extra.py` cfg'yi SABIT `input_features="xyz"` yaziyordu;
+# `hks` secenegi DiffusionNet'te destekli oldugu halde no denenemiyordu.
 # Canli kontrol noktalari da xyz.
 #
-# NEDEN ONEMLI. `xyz` DISSALDIR -- model MUTLAK KONUMA baglanir. `hks`
+# WHY IMPORTANT. `xyz` DISSALDIR -- model MUTLAK KONUMA baglanir. `hks`
 # (isi cekirdegi imzasi, 16 kanal) ICSELDIR: donme ve otelemeye duyarsiz,
 # yalnizca yuzeyin kendi geometrisini tasir. Gorulmemis brand kosulunda
-# istenen tam olarak budur.
+# istenen tam as budur.
 #
 # TEK DEGISKEN: input_features. Etiket dizinleri, seed, k-eig, epoch AYNI.
-# Taban = A kolu receteси (189 part, 200 epoch, val Conn_IoU 0.6232).
+# Taban = A arm receteси (189 part, 200 epoch, val Conn_IoU 0.6232).
 set -u
 cd "$(dirname "$0")"
 export PYTHONPATH=_diffusion_net_repo/src PYTHONWARNINGS=ignore

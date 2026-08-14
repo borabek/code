@@ -18,7 +18,7 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
 import thesis_remesh 
-from g5_agiz_etiket import agiz_etiketle # AYNI boyama fonksiyonu
+from g5_mouth_label import agiz_etiketle # AYNI boyama fonksiyonu
 import connector3d 
 CE =int (connector3d .CABLE_ENTRY )# urunun own sinif tanimi
 

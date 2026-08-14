@@ -10,7 +10,7 @@ Her measurement betigi ciktisina `damga()` eklemeli.
 """
 import hashlib ,io ,json ,os ,sys 
 
-KOD =["robot_cp.py","wire_gate.py","cp_openings.py","product_zinciri.py",
+KOD =["robot_cp.py","wire_gate.py","cp_openings.py","product_chain.py",
 "p3c_axis_selector.py","p5v2_secenek.py","p5v2_egit.py",
 "sina_cluster.py","p1c_threshold.py"]
 MODEL =["results/wire_gate_v5.pkl","results/wire_gate_v7.pkl",

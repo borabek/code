@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # TAM4 CIKARIMINI, AGIR ISLER BITINCE OTOMATIK SURDUR.
 #
-# NEDEN DURDURULDU (2026-08-12 10:32): S4 (~6 GB) + EK blogu (~6 GB) + 6
+# WHY DURDURULDU (2026-08-12 10:32): S4 (~6 GB) + EK blogu (~6 GB) + 6
 # inference iscisi (~6 GB) 31 GB RAM'i zorladi; Windows `pagefile.sys`'i
 # 23.9 GB'a buyuttu ve C: bos alani 7.28 -> 3.34 GB'a dustu. Cikarim
-# durdurulunca disk 13.11 GB'a FIRLADI -- yani disk sorunu bir veri sismesi
-# degil, BELLEK BASKISININ yan etkisiydi.
+# durdurulunca disk 13.11 GB'a FIRLADI -- i.e. disk sorunu a veri sismesi
+# not, BELLEK BASKISININ yan etkisiydi.
 #
-# Cikarim atla-var-olani calistigi icin kaldigi yerden devam eder.
+# Cikarim atla-present-olani calistigi for kaldigi yerden devam eder.
 set -u
 cd "$(dirname "$0")"
 G=results/_gece; mkdir -p "$G"
@@ -25,7 +25,7 @@ bos() {
     2>/dev/null | tr -d '\r'
 }
 
-# KENDI KENDINI DOGRULA (bugun uc kez "koruma var sanildi ama yoktu")
+# KENDI KENDINI DOGRULA (bugun uc kez "koruma present sanildi but yoktu")
 _t=$(agir)
 case "${_t:-x}" in
   ''|*[!0-9]*) say "!! KORUMA CALISMIYOR (agir '$_t') -- cikiliyor"; exit 1 ;;

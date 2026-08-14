@@ -59,7 +59,7 @@ def local_frame (d ):
 
 
 def main ():
-    import karar_olcutu 
+    import decision_criterion 
     import measure_set 
     import wire_gate 
     from big_arbiter import eligible 

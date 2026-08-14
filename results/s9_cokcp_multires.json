@@ -12,5 +12,5 @@
   0.0085,
   0.0453
  ],
- "not": "GA ilk yazildiginda f1w TUZAGINA dusuldu: tek rejimli (cok-CP) alt kumede f1w sonucu W[cok]=0.105 ile CARPAR. Duzeltilmis GA sifiri DISLIYOR = kazanc GERCEK. Korpus agirligiyla genel tespit etkisi 0.105 x 0.0283 = +0.0030. Bar +0.03 -> GECMEDI (kil payi), dusuk-CP bedeli YAPISAL SIFIR."
+ "not": "GA ilk yazildiginda f1w TUZAGINA dusuldu: tek rejimli (very-CP) alt kumede f1w sonucu W[very]=0.105 with CARPAR. Duzeltilmis GA sifiri DISLIYOR = kazanc GERCEK. Korpus agirligiyla genel tespit etkisi 0.105 x 0.0283 = +0.0030. Bar +0.03 -> GECMEDI (kil payi), low-CP bedeli YAPISAL SIFIR."
 }

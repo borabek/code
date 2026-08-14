@@ -33,5 +33,5 @@
    "uret_parca": 107.87878787878788
   }
  },
- "not": "Uretilen izgara noktalarinda YON, cevredeki adaylarin direction-bankasi seceneklerinden KAHIN gibi secilir. TAVAN olcumudur: dogru direction MEVCUT MU? D7'ye BAKILMADI."
+ "not": "Uretilen izgara noktalarinda YON, cevredeki adaylarin direction-bankasi seceneklerinden KAHIN gibi secilir. CEILING olcumudur: correct direction MEVCUT MU? D7'ye BAKILMADI."
 }

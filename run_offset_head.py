@@ -7,7 +7,7 @@ literaturde bunun bilinen kusuru degen same nesneleri ayiramamak.
 Onerilen: each TEPE own CP merkezine a offset vektoru prediction etsin,
 vertices kaydirilip kumelensin.
 
-TAVAN MEASURED (`probe_offset_tavani.py`, training YOK): clustering bandi
+TAVAN MEASURED (`probe_offset_ceiling.py`, training YOK): clustering bandi
 4 mm iken **1.0 mm** offset hatasinda tespit F1 **0.9933**. Yani gereken
 hassasiyet ~1 mm. Kiyas: pose head'in bugun ulastigi residual 0.67 mm.
 

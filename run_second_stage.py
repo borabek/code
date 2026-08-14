@@ -7,7 +7,7 @@ B2a sign correction (+0.0316, saf rule) and C3 tanimlayici tutarliligi
 HICBIR kolda whereas yaramadi. Demek ki missing which is MODEL not OLCU.
 
 Kademe 1: mevcut gate (58 + 9 tanimlayici, HGB-derin), threshold 0.05 -> kisa list
-Kademe 2: kisa listeye 9 PAHALI olcu (`agiz_derin_tanim`) + kademe-1 skoru
+Kademe 2: kisa listeye 9 PAHALI olcu (`mouth_deep_definition`) + kademe-1 skoru
           -> ikinci HGB. Esik D6'da secilir.
 Sonra: NMS -> sign correction -> poz kafasi (urun zinciri).
 
@@ -32,7 +32,7 @@ os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
 import d6_record # noqa: E402
 import canonical_d7 as K # noqa: E402
-import product_zinciri # noqa: E402
+import product_chain # noqa: E402
 import wire_gate # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
@@ -151,7 +151,7 @@ def olc (data_ ,s2clf ,e2 ,S ,tam =False ):
         if len (P ):
             D =np .where ((T [:,ERISIM ]<T [:,GIRME ])[:,None ],-D ,D )
         if tam and len (P ):
-            P ,D =product_zinciri .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
+            P ,D =product_chain .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
             step_path =S .get (d ["pid"]))
         tp ,fp ,fn =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],YANAL ,ACI ,
         False ,signed =True )[:3 ]

@@ -18,7 +18,7 @@ HIGH_CP =8
 
 
 def main ():
-    import tel_g_brep as B 
+    import wire_g_brep as B 
     from cad_eval import align_frames 
     from infer_step_cp import step_to_mesh 
     from big_arbiter import eligible 
@@ -56,7 +56,7 @@ def main ():
             Vj =np .array ([[a [c ]for c in "XYZ"]for a in j ["Graphic3d"]["Points"]],float )
             Vr ,Fr =step_to_mesh (stp )
             R ,t ,_ =align_frames (Vr ,Vj )
-            P =(pos [pid ==q ]-t )@R # JSON -> STEP cercevesi (see tel_g_brep)
+            P =(pos [pid ==q ]-t )@R # JSON -> STEP cercevesi (see wire_g_brep)
             S =B .read_brep (stp )
             feats [q ]=B .feats_for_points (S ,P )
         except Exception as e :

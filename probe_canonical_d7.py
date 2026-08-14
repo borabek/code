@@ -10,9 +10,9 @@ import makbuz_hash
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
-import d6_record ,product_zinciri ,canonical_chain as KZ 
+import d6_record ,product_chain ,canonical_chain as KZ 
 from sina_cluster import match_hungarian ,f1w 
-from korpus_kimlik import step_kimlik as SK 
+from corpus_identity import step_kimlik as SK 
 
 YANAL ,ACI =2.0 ,10.0 
 d7p =set (map (str ,json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]))
@@ -35,7 +35,7 @@ for pid in pidler :
     cps =KZ .product_output (V ,F ,pbs ,S .get (pid ))
     P ,D =KZ .poz_ver (cps )
     if len (P ):
-        P ,D =product_zinciri .tam_poz (V ,F ,np .asarray (d ["pbs"],float ).mean (0 ),
+        P ,D =product_chain .tam_poz (V ,F ,np .asarray (d ["pbs"],float ).mean (0 ),
         P ,D ,step_path =S .get (pid ))
     T .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],0. ,180. ,True )[:3 ])
     R .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],YANAL ,ACI ,

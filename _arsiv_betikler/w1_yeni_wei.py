@@ -46,7 +46,7 @@ OUT ="results/yeni_wei.npz"
 
 
 def main ():
-    from build_zengin_parite import _normaller ,zengin 
+    from build_rich_parity import _normaller ,zengin 
     import measure_set 
 
     with io .open ("cp_config.json",encoding ="utf-8")as f :
@@ -152,7 +152,7 @@ def main ():
             if not cps :
                 atlanan +=1 ;continue 
             xb =wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ,step_path =stp )
-            # zengin sutunlar TEK KAYNAKTAN (build_zengin_parite.zengin)
+            # zengin sutunlar TEK KAYNAKTAN (build_rich_parity.zengin)
             xr =zengin (V ,F ,probs ,cps ,_normaller (V ,F ))
             P =np .array ([c ["point"]for c in cps ],float )
             Pd =np .array ([c ["direction"]for c in cps ],float )

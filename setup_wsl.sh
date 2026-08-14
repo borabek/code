@@ -3,7 +3,7 @@
 # potpourri3d import cleanly (they SEGFAULT on native Windows).
 #
 # Run from Windows:
-#   wsl --install -d Ubuntu          # once, if WSL has no distro (no reboot if the
+#   wsl --install -d Ubuntu          # before, if WSL has no distro (no reboot if the
 #                                    # WSL feature is already enabled)
 #   wsl -d Ubuntu -e bash -lc 'bash /mnt/c/Users/DE00024082/Desktop/code/setup_wsl.sh'
 #

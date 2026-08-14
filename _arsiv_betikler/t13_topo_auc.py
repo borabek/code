@@ -12,7 +12,7 @@ import numpy as np
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-from t1_uretici_disi import auc_mw 
+from t1_manufacturer_out import auc_mw 
 
 
 def main ():

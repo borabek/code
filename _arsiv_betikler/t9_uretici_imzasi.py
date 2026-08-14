@@ -22,7 +22,7 @@ sutunlarin transferi +0.047 iyilestirdigini olctu.
 import json 
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
-from t1_uretici_disi import auc_mw 
+from t1_manufacturer_out import auc_mw 
 
 
 def main ():

@@ -3,31 +3,31 @@
 #
 #   bash resume_v31.sh
 #
-# Neden bu 3 env degiskeni: corpus v8 (3033 part) 12.556 training grafigine
+# Neden this 3 env degiskeni: corpus v8 (3033 part) 12.556 training grafigine
 # yamalaniyor ve varsayilan yol 31GB'a SIGMIYOR -- commit %99'a yapisir, Windows
-# pagefile'i buyutur, disk biter. Ikisi de matematiksel olarak notr (ayni tohumla
-# kayiplar birebir ayni olcüldü):
+# pagefile'i buyutur, disk biter. Ikisi de matematiksel as notr (same tohumla
+# kayiplar birebir same olcüldü):
 #   CP_LAZY_HIER=1        hiyerarsileri RAM yerine prep_cache'ten batch basina okur
-#                         (--prep-cache-dir SART; onbelleksiz her batch sifirdan kurar)
-#   CP_FREE_TRAIN_SOURCE  modelin bir daha okumadigi ham verts/faces/target'i birakir
-#                         (augment 0 oldugu icin kodun kendi bosaltmasi hic calismiyor)
-#   CP_PREP_WORKERS=6     KANITLANMIS deger. 12 yapma: ucustaki bellek ikiye katlanir
+#                         (--prep-cache-dir SART; onbelleksiz each batch sifirdan kurar)
+#   CP_FREE_TRAIN_SOURCE  modelin a more okumadigi ham verts/faces/target'i birakir
+#                         (augment 0 oldugu for kodun kendi bosaltmasi no calismiyor)
+#   CP_PREP_WORKERS=6     KANITLANMIS value. 12 yapma: ucustaki bellek ikiye katlanir
 #                         ve prep commit'i patlatir.
 #
 # --resume: checkpoints/cp_hp_v31_ftc6_last.ckpt'ten devam eder ve DONMUS split
-# manifest'ini geri oynatir (corpus'a part eklense bile egitilmis bir part val'e
+# manifest'ini geri oynatir (corpus'a part eklense bile egitilmis a part val'e
 # kayamaz).
 #
 # Beklenen: hazirlik ~40dk (hiyerarsiler onbellekli; kNN + oznitelik yeniden kurulur,
-# onlar bilerek diske yazilmiyor -- 6.4GB tutardi), sonra ~14.5dk/epoch.
+# onlar bilerek diske yazilmiyor -- 6.4GB tutardi), after ~14.5dk/epoch.
 set -u
 cd "c:/Users/DE00024082/Desktop/code"
 
 if [ ! -d prep_cache ]; then
-  echo "UYARI: prep_cache YOK -- hazirlik 40dk yerine ~55dk surer (hiyerarsiler yeniden kurulur)"
+  echo "WARNING: prep_cache YOK -- hazirlik 40dk yerine ~55dk surer (hiyerarsiler yeniden kurulur)"
 fi
 if [ ! -f checkpoints/cp_hp_v31_ftc6_last.ckpt ]; then
-  echo "checkpoint yok -> BASTAN baslatiliyor (--resume atlaniyor)"
+  echo "checkpoint none -> BASTAN baslatiliyor (--resume atlaniyor)"
   RESUME=""
 else
   echo "checkpoint bulundu -> epoch $(grep -ao '"epoch": [0-9]*' checkpoints/cp_hp_v31_ftc6_history.json 2>/dev/null | tail -1 | grep -o '[0-9]*' || echo 5)'ten devam"

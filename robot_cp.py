@@ -693,8 +693,8 @@ def main ():
             # kullaniliyordu; this YALNIZCA `wscaduniverse_<pid>_<ts>.stp` sozlesmesinde correct.
             # JSON sozlesmeli dosyalarda (`UPUN.016029_ElectricalTerminal_...stp`) part adi
             # **"ElectricalTerminal"** cikiyordu -- i.e. TESLIM EDILEN JSON'da part adi YANLIS.
-            # Duman testinde goruldu. `korpus_kimlik.step_kimlik` two sozlesmeyi de bilir.
-    from korpus_kimlik import step_kimlik as _sk 
+            # Duman testinde goruldu. `corpus_identity.step_kimlik` two sozlesmeyi de bilir.
+    from corpus_identity import step_kimlik as _sk 
     pool ={_sk (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 
     results ={}

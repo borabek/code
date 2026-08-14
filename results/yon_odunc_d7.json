@@ -4,7 +4,7 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
@@ -69,5 +69,5 @@
  "artan_marka": 2,
  "n_secenek_egitim": 15937,
  "pozitif": 0.2949112129007969,
- "not": "Konum DEGISMEZ, yalnizca direction secilir -> candidate sayisi ve FP riski artmaz. D7 brand-disi, MIKRO. Tez `v_o` konumu ve yonu 0. secenek, esitlikte kazanir."
+ "not": "Konum DEGISMEZ, yalnizca direction secilir -> candidate sayisi ve FP riski artmaz. D7 brand-disi, MIKRO. Tez `v_o` konumu ve direction 0. secenek, esitlikte kazanir."
 }

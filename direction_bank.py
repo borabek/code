@@ -2,7 +2,7 @@
 """YON SECENEK BANKASI -- a konuma BIRDEN COK direction onerir.
 
 WHY. Dagitilan urun each konuma TEK direction bagliyor: havuzdan gelen `D`, uzerine
-sign duzeltmesi (`product_genis.sec`). Oysa ceiling merdiveni (`results/tavan_085.json`,
+sign duzeltmesi (`product_wide.sec`). Oysa ceiling merdiveni (`results/tavan_085.json`,
 D7 brand-disi, mukemmel selector) sunu says:
 
     P2+Y0  only adayin own yonu     recall 0.4820   F1 tavani 0.6505
@@ -14,7 +14,7 @@ yapilandirmanin error bankasinda (`results/kazanan_hata_bankasi_v2.json`) buna
 karsilik gelen kova `YON_YOK = 539`. Iki bagimsiz sayim same yeri gosteriyor.
 
 BU MODUL that seceneklerin DAGITILABILIR halini produces. Tavan betigi
-(`probe_tavan_085.py`) "bilgi present mi" diye soruyordu and part basina binlerce
+(`probe_ceiling_085.py`) "bilgi present mi" diye soruyordu and part basina binlerce
 konum kullaniyordu; here secenek count candidate basina `MAX_SEC` with sinirli and
 each secenek FIZIKSEL a kaynaktan geliyor.
 

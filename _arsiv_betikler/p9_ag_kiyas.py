@@ -2,7 +2,7 @@
 """g9 (sig 2mm boyama) vs g7 (derin 6mm) -- D6'da ADAY KAHINI + real tespit/robot.
 
 KILL: g9 candidate kahininde g7'yi GECMEZSE sig boyama GERI ALINIR
-(`_label_auto_derin6` duruyor, `g5_agiz_etiket._ESKI_DERINLIK` = (1.0, 6.0)).
+(`_label_auto_derin6` duruyor, `g5_mouth_label._ESKI_DERINLIK` = (1.0, 6.0)).
 
 Aday kahini gate'ten BAGIMSIZ oldugu for agin TEMSIL gucunu dogrudan olcer;
 real tespit/robot whereas dagitilan gate with uctan uca sonucu gives.
@@ -24,7 +24,7 @@ def main ():
     import protocol ;protocol .tez_dogrula ()
     import torch ,thesis_remesh ,robot_cp as RC ,diffusionnet as D_ 
     from infer_step_cp import load_any ,step_to_mesh 
-    from korpus_kimlik import step_kimlik as SK 
+    from corpus_identity import step_kimlik as SK 
     from sina_cluster import match_hungarian ,f1w 
 
     sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))

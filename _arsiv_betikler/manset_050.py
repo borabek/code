@@ -19,7 +19,7 @@ each seyi yan yana koyar:
   5. TABAN verilirse FARK and markalarin kaci artida.
 
 Makbuz `parca_kirilim` alanini icermelidir (pid -> {mfg, rob:[tp,fp,fn],
-tes:[tp,fp,fn]}). `probe_dagitim_dogrula.py` and `probe_d6_product.py` writes.
+tes:[tp,fp,fn]}). `probe_dagitim_verify.py` and `probe_d6_product.py` writes.
 """
 import json 
 import os 

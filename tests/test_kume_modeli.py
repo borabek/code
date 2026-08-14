@@ -25,7 +25,7 @@ import torch .nn as nn
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
 
-import kume_modeli as KM # noqa: E402
+import cluster_model as KM # noqa: E402
 
 
 def _veri (n_parca =300 ,seed =0 ):

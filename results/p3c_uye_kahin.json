@@ -4,7 +4,7 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "4b163aec3b7aba99",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "32c8b3276d723329",
    "p5v2_egit.py": "9d00521d3d1823f5",
@@ -29,5 +29,5 @@
  "birlesim": 0.43950041482405455,
  "kazanc": -0.0067680044507871795,
  "n_parca": 468,
- "not": "g7+g10 birlesimi, IKI SEED birlesimi icin ALT SINIR"
+ "not": "g7+g10 birlesimi, IKI SEED birlesimi for ALT SINIR"
 }

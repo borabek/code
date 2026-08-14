@@ -9,7 +9,7 @@ Bu betik two training verisini AYNI protokolde karsilastirir:
     YENI   results/gate_regrow_data_parite.npz    (urunun own candidate ureticisi)
 
 Beklenti a "kazanc" DEGIL, TUTARLILIK: gate residual gercekte gordugu adaylarla egitiliyor.
-Ama beklenti with measurement ayri seyler -- karar `karar_olcutu` with, GA'li.
+Ama beklenti with measurement ayri seyler -- karar `decision_criterion` with, GA'li.
 
 KUME: `measure_set` (split3, dedup, LOCKED disarida). BOOTSTRAP: geometri grubu.
 """
@@ -30,7 +30,7 @@ YENI ="results/gate_regrow_data_parite.npz"
 
 
 def main ():
-    import karar_olcutu 
+    import decision_criterion 
     import measure_set 
     import wire_gate 
     from big_arbiter import eligible 
@@ -124,7 +124,7 @@ def main ():
         ga [b ]=(lo ,hi )
 
     print ("\n=== DECISION (ESKI -> YENI) ===")
-    k =karar_olcutu .degerlendir (SON ["ESKI"],SON ["YENI"],ga =ga )
+    k =decision_criterion .degerlendir (SON ["ESKI"],SON ["YENI"],ga =ga )
     print (k )
     print (f"\nNOT: parite duzeltmesi bir KAZANC vaadi degil, TUTARLILIK duzeltmesidir. Kural")
     print (f"gecmese bile YENI veri dogru olandir; kural burada 'zarar var mi' sorusunu yanitlar.")

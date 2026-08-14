@@ -4,7 +4,7 @@
    "robot_cp.py": "81bced9a2b2a5466",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
@@ -47,5 +47,5 @@
   "0.9": null,
   "0.95": null
  },
- "not": "GORULMEMIS MARKA katlarinda (LOMO) precision-kapsama. ONAYLI katmani esigi buradan secilir. D7'ye BAKILMADI. Kapsama = ONAYLI sign / toplam GT."
+ "not": "GORULMEMIS MARKA katlarinda (LOMO) precision-kapsama. ONAYLI katmani esigi buradan secilir. D7'ye BAKILMADI. Kapsama = ONAYLI sign / total GT."
 }

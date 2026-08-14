@@ -141,12 +141,12 @@
   }
  ],
  "DUZELTME": {
-  "neden": "ilk karar ic-nokta ORANI ile verildi; 19680 candidate ciftin cogu insaat geregi yanlis oldugu icin bu ratio hicbir zaman yuksek cikamaz -- criterion yanlisti (AUC formulu dersinin ayni hali). Dogru criterion: donusum sonrasi en-yakin-silindir ARTIGI.",
+  "neden": "ilk karar ic-nokta ORANI with verildi; 19680 candidate ciftin cogu insaat geregi wrong oldugu for this ratio hicbir zaman high cikamaz -- criterion yanlisti (AUC formulu dersinin same hali). Dogru criterion: donusum sonrasi en-yakin-silindir ARTIGI.",
   "artik<0.5mm": 5,
   "artik 0.5-1.5mm": 2,
   "n": 15,
   "duzeltilmis_oran": 0.333,
-  "tekil_yaricap_ciftleri": "15 parcanin 9'unda >=3 TEKIL yaricap cifti var -> dogrudan cozulebilir",
-  "karar": "PARK. Hizalama teknik olarak yapilabilir gorunuyor (5/15 zaten <0.5mm, tekil-yaricap tohumlamasiyla ~9/15 beklenir) ama AYIRT EDICI DEGERI KANITSIZ: tel kelepcesi de metal, vida da metal. Once daha ucuz ve olculmus kanal denenir: B-rep FIZIKSEL ozellikler (FP otopsisi yanlislarin %86'sini uc fiziksel imzaya bagliyor)."
+  "tekil_yaricap_ciftleri": "15 parcanin 9'unda >=3 TEKIL yaricap cifti present -> dogrudan cozulebilir",
+  "karar": "PARK. Hizalama teknik as yapilabilir gorunuyor (5/15 already <0.5mm, tekil-yaricap tohumlamasiyla ~9/15 beklenir) but AYIRT EDICI DEGERI KANITSIZ: tel kelepcesi de metal, vida da metal. Once more ucuz ve olculmus kanal denenir: B-rep FIZIKSEL ozellikler (FP otopsisi yanlislarin %86'sini uc fiziksel imzaya bagliyor)."
  }
 }

@@ -41,5 +41,5 @@
  },
  "uretici_disi_ort": 0.6848374819692697,
  "gecti": false,
- "serh": "yeni training korpusu 1179 part (eski 1709) -- fark LOCKED ve measurement gruplarinin DOGRU cikarilmasindan; ogrenme egrisine gore ~-0.008 bedel, yani olculen fark gercek katkidan KUCUK"
+ "serh": "yeni training korpusu 1179 part (eski 1709) -- fark LOCKED ve measurement gruplarinin DOGRU cikarilmasindan; ogrenme egrisine per ~-0.008 bedel, i.e. olculen fark gercek katkidan KUCUK"
 }

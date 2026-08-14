@@ -65,7 +65,7 @@ def test_gercek_parcada_OCC_gmsh_ile_AYNI_KATIYI_verir ():
     """Kalibrasyon testi: two path da calisan a parcada bbox and hacim ortusmeli."""
     import glob 
     import trimesh 
-    from korpus_kimlik import step_kimlik as SK 
+    from corpus_identity import step_kimlik as SK 
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     if "3024407"not in S :
         pytest .skip ("kalibrasyon parcasi none")

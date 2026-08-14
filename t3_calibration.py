@@ -18,7 +18,7 @@ ALINMAZ. Tek bolmede kazanip otekinde kaybeden rule kalibrasyon not, sanstir.
 import json 
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
-from t1_uretici_disi import f1_at 
+from t1_manufacturer_out import f1_at 
 
 
 def main ():

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """G5-b: OTO-ETIKETLERI `load_extra` BICIMINE CEVIR + SESSIZ DUSMEYI IMKANSIZ KIL.
 
-`g5_agiz_etiket.py` each parcayi `_label_auto/<pid>.npz` as yaziyor (V/F/labels).
+`g5_mouth_label.py` each parcayi `_label_auto/<pid>.npz` as yaziyor (V/F/labels).
 Ama `train_seg_extra.load_extra` **part-basina-KLASOR** bekliyor:
     <kok>/<pid>/<pid>.obj  +  <kok>/<pid>.labels.txt
 
@@ -28,7 +28,7 @@ KAYNAK_VARSAYILAN ="_label_auto"
 HEDEF_VARSAYILAN ="_label_auto_obj"
 # FEW-SHOT (K6.5-b): each kosum KENDI directory ciftini kullanir. Sabit kalsaydi
 # onceki kosumlarin parcalari birikir and fine-tune k part instead of yuzlercesiyle
-# egitilirdi -- error vermeden. (Ayni tuzak g5_agiz_etiket.py'de de vardi.)
+# egitilirdi -- error vermeden. (Ayni tuzak g5_mouth_label.py'de de vardi.)
 # NOT: modul sabitini fonksiyon inside ATAMAYIN; Python onu YEREL yapar and
 # argparse default'u UnboundLocalError gives (this gece a times yasandi).
 KAYNAK =KAYNAK_VARSAYILAN 

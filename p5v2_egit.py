@@ -22,7 +22,7 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
 import d6_record ,robot_cp ,wire_gate ,p5v2_secenek as PS 
-from korpus_kimlik import step_kimlik as SK 
+from corpus_identity import step_kimlik as SK 
 from scipy .optimize import linear_sum_assignment 
 from sklearn .ensemble import RandomForestClassifier 
 

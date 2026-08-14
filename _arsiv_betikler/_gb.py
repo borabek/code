@@ -1,8 +1,8 @@
 import glob ,os ,pickle ,sys ,time ,json 
 sys .path .insert (0 ,".")
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
-import brep_aciklik 
-from korpus_kimlik import step_kimlik as SK 
+import brep_opening 
+from corpus_identity import step_kimlik as SK 
 # VARSAYILAN ARGUMAN TUZAGI: `acikliklar(..., esd_min=ESD_MIN)` varsayilani
 # TANIM ANINDA baglar; modul sabitini sonradan degistirmek ETKISIZ. Bu yuzden
 # parametreler ACIKCA gecirilir. (Ilk denemede etkisiz kalmisti and candidate count
@@ -15,7 +15,7 @@ for i ,p in enumerate (pids ,1 ):
     if p not in S :
         continue 
     try :
-        ob [p ]=brep_aciklik .acikliklar (S [p ],esd_min =0.3 ,esd_max =25.0 )
+        ob [p ]=brep_opening .acikliklar (S [p ],esd_min =0.3 ,esd_max =25.0 )
     except Exception as e :
         ob [p ]=[];error +=1 
     if i %100 ==0 :

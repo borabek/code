@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """B4: ACIKLIK-SEKILLI OTO-ETIKET -- disk instead of GERCEK kesit.
 
-SORUN: `g5_agiz_etiket.agiz_etiketle` each CP'ye axis along DISK boyar (olculen
+SORUN: `g5_mouth_label.agiz_etiketle` each CP'ye axis along DISK boyar (olculen
 yaricapla). Kare / yarik / push-in girislerde this YANLIS geometridir: disk ya agzin
 kosMelerini kacirir ya da cevresindeki govdeyi boyar. Sonuc, oz-tutarlilik kapisinin
 that parcalari elemesi -- and full da that morfolojiler (SE %95 silindirsiz, NIT silindirleri

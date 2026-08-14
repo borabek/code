@@ -52,5 +52,5 @@
   "note": "SADECE WORK (541 part) uzerinde secildi; kilitli holdout'a dokunulmadi."
  },
  "gate_passed": false,
- "note": "KILITLI HOLDOUT TEK KEZ acildi; hicbir secim/tuning bu veride yapilmadi."
+ "note": "KILITLI HOLDOUT TEK KEZ acildi; hicbir secim/tuning this veride yapilmadi."
 }

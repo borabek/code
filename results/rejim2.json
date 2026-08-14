@@ -4,7 +4,7 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
@@ -58,5 +58,5 @@
  ],
  "n_parca": 3051,
  "p6_daha_iyi_orani": 0.40937397574565715,
- "not": "Ogrenilmis regime router. Etiket EGITIM verisinden (part basina F1 farki); urun yalniz istatistikleri gorur. D7'ye BAKILMADI. HEPSI/v1 satirlari ORNEKLEM-ICI."
+ "not": "Ogrenilmis regime router. Etiket EGITIM verisinden (part basina F1 farki); urun only istatistikleri gorur. D7'ye BAKILMADI. HEPSI/v1 satirlari ORNEKLEM-ICI."
 }

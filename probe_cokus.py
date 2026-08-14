@@ -58,7 +58,7 @@ def dogru_maske (d ):
     G ,Gd =np .asarray (d ["G"],float ),np .asarray (d ["Gd"],float )
     # GT YONU BIRIM OLMAYABILIR: 6074 kayittan 27'sinde not and EN KUCUGU
     # TAM SIFIR. Birimlestirmeden axial/lateral ayristirma bozulur.
-    # (`probe_pool_tavani` bunu `YB.unit` with already yapiyordu.)
+    # (`probe_pool_ceiling` bunu `YB.unit` with already yapiyordu.)
     if len (Gd ):
         Gd =Gd /np .maximum (np .linalg .norm (Gd ,axis =1 ,keepdims =True ),1e-12 )
     if not len (P )or not len (G ):

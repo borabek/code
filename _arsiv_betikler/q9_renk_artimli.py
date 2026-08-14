@@ -20,7 +20,7 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-from q7_renk_degeri import auc_mw 
+from q7_colour_degeri import auc_mw 
 
 
 def main ():

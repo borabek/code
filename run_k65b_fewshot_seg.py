@@ -9,7 +9,7 @@ WHY SEG, WHY GATE DEGIL: gate ayagi measured and TAMAMEN NULL output (3 markada
 ogretirsen ogret URETILMEMIS adayi geciremez. Adaptasyon TEMSIL katmaninda must be.
 
 ZINCIR:
-  1. k parcayi GT CP'lerinden boya      g5_agiz_etiket.py --pids-file
+  1. k parcayi GT CP'lerinden boya      g5_mouth_label.py --pids-file
   2. that boyamayla fine-tune              train_seg_extra.py --init-from
   3. olasilik onbellegi                 p1_olasilik_onbellek.py --ckpt <ft> --ek
   4. candidate turet + gate + TAM zincir     this betik
@@ -128,7 +128,7 @@ def main ():
             #  * that k part OLCUMDEN CIKARILIR (`olc` listesinde absent)
             #  * uretilen ckpt ATILIKTIR, urune girmez
             # Senaryo already "this k parcayi sisteme VERIYORUZ" demek; dislama bunu bloke eder.
-            kos ([PY ,"-u","g5_agiz_etiket.py","--pids-file",pf ,
+            kos ([PY ,"-u","g5_mouth_label.py","--pids-file",pf ,
             "--oz-tut-threshold","0.0","--cikti",boya_dir ],
             f"results/_fs_{label_ }_boya.log",ek_env ={"ETIKET_DISLA":""})
             # 1b) NPZ -> OBJ+labels.txt. train_seg_extra.load_extra YALNIZ directory
@@ -193,10 +193,10 @@ def main ():
         "algilanan a acikliga dusmez. Olculen egri, gercek "
         "insan etiketine according to a ALT SINIRDIR.",
         "not":"Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM "
-        "ayri adimdir (probe_k65b_olc.py) -- thus training a kez "
+        "ayri adimdir (probe_k65b_measure.py) -- thus training a kez "
         "kosar, measurement tekrar tekrar kosulabilir."},f ,indent =1 )
     print (f"\nmakbuz -> {CIKTI }")
-    print ("SIRADAKI: probe_k65b_olc.py (uctan uca measurement, k=0 tabaniyla birlikte)")
+    print ("SIRADAKI: probe_k65b_measure.py (uctan uca measurement, k=0 tabaniyla birlikte)")
 
 
 if __name__ =="__main__":

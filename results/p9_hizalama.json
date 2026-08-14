@@ -1,11 +1,11 @@
 {
- "measurement": "P9 hizalama -- geometrik yonlendirme (CP_GEO_ORIENT) ACIK vs KAPALI, eslesen gate ile",
- "kaynak": "results/p9.log (script son print'te KeyError ile coktu; OLCUM tamamlandi, receipt logdan yeniden yazildi)",
+ "measurement": "P9 hizalama -- geometrik yonlendirme (CP_GEO_ORIENT) OPEN vs KAPALI, eslesen gate with",
+ "kaynak": "results/p9.log (script son print'te KeyError with coktu; OLCUM tamamlandi, receipt logdan yeniden yazildi)",
  "test": {
   "part": 100,
   "dusuk_cp": 70,
   "cok_cp": 30,
-  "leakage": "100 test ailesi gate egitiminden CIKARILDI; esikler buyuk veride aile-disi OOF ile secildi"
+  "leakage": "100 test ailesi gate egitiminden CIKARILDI; esikler large veride aile-disi OOF with secildi"
  },
  "esikler": {
   "dusuk": 0.4,

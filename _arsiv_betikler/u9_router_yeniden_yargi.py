@@ -8,7 +8,7 @@ degistirildi. Bu betik karari SIFIRDAN, duzeltilmis protokolle gives:
 
   * KUME: `measure_set` (split3.json'dan DEV/VAL, PID dedup, dogrudan LOCKED CIKARILMIS)
   * BOOTSTRAP: GEOMETRI GRUBU birimli (part not -- ikizler bagimsiz sayilmaz)
-  * DECISION: `karar_olcutu.degerlendir` (GA residual KARARA KATILIYOR; kanitsiz arm GECMEZ)
+  * DECISION: `decision_criterion.degerlendir` (GA residual KARARA KATILIYOR; kanitsiz arm GECMEZ)
 
 UC KOL (dagitim merdiveninin tamami):
   A  ham 22 column                    -> results/wire_gate.pkl.pre_parca_ici
@@ -44,7 +44,7 @@ def _egitim_verisi ():
 
 
 def main ():
-    import karar_olcutu 
+    import decision_criterion 
     import measure_set 
     import wire_gate 
     from big_arbiter import eligible 
@@ -135,10 +135,10 @@ def main ():
             out [b ]=(lo ,hi )
         return out 
 
-    print ("\n=== DECISION (karar_olcutu, GA KARARA KATILIYOR) ===")
+    print ("\n=== DECISION (decision_criterion, GA KARARA KATILIYOR) ===")
     kararlar ={}
     for taban_kol ,aday_kol in (("A","D"),("A","R"),("D","R")):
-        k =karar_olcutu .degerlendir (SON [taban_kol ],SON [aday_kol ],
+        k =decision_criterion .degerlendir (SON [taban_kol ],SON [aday_kol ],
         ga =ga (taban_kol ,aday_kol ))
         kararlar [f"{taban_kol }->{aday_kol }"]=bool (k )
         print (f"\n{taban_kol } -> {aday_kol }:  {k }")

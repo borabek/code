@@ -13,7 +13,7 @@
    0.5,
    4.5
   ],
-  "planar_position": "brep_aciklik inner planar-wire centroid",
+  "planar_position": "brep_opening inner planar-wire centroid",
   "spatial_dedupe_mm": 0.5,
   "resource_rule": "one deduped spatial cluster = one candidate row = at most one GT",
   "oracle_rule": "maximum-cardinality bipartite match; FP forced to zero",

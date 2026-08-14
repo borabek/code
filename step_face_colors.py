@@ -99,7 +99,7 @@ def read_by_order (step_path ,dogrula =True ):
     from OCP .TopAbs import TopAbs_FACE 
     from OCP .TopoDS import TopoDS 
     from OCP .BRepAdaptor import BRepAdaptor_Surface 
-    import q7_renk_degeri as _Q 
+    import q7_colour_degeri as _Q 
 
     _REF =_re .compile (rb"#(\d+)")
     d =_Q .parse (step_path )
@@ -219,7 +219,7 @@ def read_all_by_order (step_path ,max_shift =4 ):
     from OCP .BRepAdaptor import BRepAdaptor_Surface 
     from OCP .BRepGProp import BRepGProp 
     from OCP .GProp import GProp_GProps 
-    import q7_renk_degeri as _Q 
+    import q7_colour_degeri as _Q 
 
     _REF =_re .compile (rb"#(\d+)")
     d =_Q .parse (step_path )

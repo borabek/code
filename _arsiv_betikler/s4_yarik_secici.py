@@ -45,7 +45,7 @@ OZ =["distance","aralik","depth","alan","fark_aci","brep_r","n_slot","yakinlik_o
 
 def main ():
     import geo_g2_yarik 
-    import tel_g_brep as B 
+    import wire_g_brep as B 
     import wire_gate 
     from big_arbiter import eligible 
     from sklearn .ensemble import RandomForestClassifier 

@@ -35,7 +35,7 @@ import brep_pool # noqa: E402
 import connector3d # noqa: E402
 import d6_record # noqa: E402
 import canonical_d7 as K # noqa: E402
-import product_zinciri # noqa: E402
+import product_chain # noqa: E402
 import wire_gate # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
@@ -210,7 +210,7 @@ def main ():
                     if b !=0 and s2 [b ]>s2 [0 ]:
                         D [a ]=V_ [b ]
             if len (P ):
-                P ,D =product_zinciri .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
+                P ,D =product_chain .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
                 step_path =S .get (pid ))
             G =np .asarray (r ["G"],float )
             Gd =np .asarray (r ["Gd"],float )

@@ -1,6 +1,6 @@
 #!/bin/sh
 # Egitim sirasinda disk kritige inerse SUREC TEMIZ DURDURULUR.
-# Gerekce: bu makinede disk dolunca is yarim kalip bozuk durum birakiyor
+# Gerekce: this makinede disk dolunca is yarim kalip bozuk durum birakiyor
 # (bkz. disk-dolunca-gmsh-donuyor). Nobetci 30s araliklidir; 145s GEC KALIYOR.
 ESIK_MB=700
 while true; do

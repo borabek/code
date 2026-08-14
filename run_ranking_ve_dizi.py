@@ -52,7 +52,7 @@ os .environ ["WG_ZENGIN"]="1"
 os .environ .setdefault ("P6_DIZIN","results/_p6_oz_tam4")
 sys .path .insert (0 ,".")
 import canonical_d7 as K # noqa: E402
-import kanonik_hizalama as KH # noqa: E402
+import canonical_alignment as KH # noqa: E402
 import p6_decision # noqa: E402
 from run_p6_ortak import yukle # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402

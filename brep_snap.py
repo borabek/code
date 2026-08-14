@@ -125,7 +125,7 @@ def snap_exact (cyls ,point ,direction ,max_mm =MAX_SNAP_MM ):
 
 def snap_cps (step_path ,cps ,max_mm =MAX_SNAP_MM ):
     """cp_openings/robot_cp ciktisini yerinde duzelt. Doner: (yeni_liste, istatistik)."""
-    import tel_g_brep as B 
+    import wire_g_brep as B 
     surf =B .read_brep (step_path )
     out ,moved ,hit =[],[],0 
     for c in cps :

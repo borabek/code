@@ -13,8 +13,8 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-import wire_gate ,product_zinciri 
-from korpus_kimlik import step_kimlik as SK 
+import wire_gate ,product_chain 
+from corpus_identity import step_kimlik as SK 
 
 KAYIT ="results/_der_yeni_G7BIRLESIK.pkl"
 GATE ="results/wire_gate_v6.pkl"
@@ -112,7 +112,7 @@ p3c_esik =0.0 ,cyl =None ):
         f =f"{OB }/{r ['pid']}.npz"
         if os .path .exists (f ):
             z =np .load (f )
-            P ,D =product_zinciri .tam_poz (
+            P ,D =product_chain .tam_poz (
             np .ascontiguousarray (z ["V"],np .float64 ),
             np .ascontiguousarray (z ["F"],np .int64 ),
             np .asarray (z ["pbs"],float ).mean (0 ),P ,D ,

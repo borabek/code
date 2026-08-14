@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# A1b: DAGITILABILIR version -- training korpusu buyur AMA measurement kumesi BOZULMAZ.
+# A1b: DAGITILABILIR version -- training korpusu buyur AMA measurement set BOZULMAZ.
 #
-# A1a (415 mesh) "daha cok veri ise yariyor mu" sorusunu SABIT val kumesinde cevaplar,
-# ama etiketlerinin 52 measurement grubuyla cakismasi yuzunden UCTAN UCA olculemez
-# (measurement kumesi 171 -> 119 gruba duserdi = mevcut sayilarla karsilastirilamaz).
+# A1a (415 mesh) "more very veri ise yariyor mu" sorusunu SABIT val kumesinde cevaplar,
+# but etiketlerinin 52 measurement grubuyla cakismasi yuzunden UCTAN UCA olculemez
+# (measurement set 171 -> 119 gruba duserdi = mevcut sayilarla karsilastirilamaz).
 #
 # A1b etiketleri hem LOCKED hem OLCUM gruplarindan arindirir:
 #   _mfg_labels        142 -> 97 part
 #   _mfg_labels_highcp 115 ->  7 part  (96'sinin 89'u measurement grubunda -- neredeyse tamami
 #                                        olcumu yiyor, karsiliginda hicbir sey vermiyor)
-# Egitim 189 -> 293 mesh (1.55x); measurement kumesi 171 grup DEGISMEZ.
+# Egitim 189 -> 293 mesh (1.55x); measurement set 171 grup DEGISMEZ.
 #
 # KILL: val Conn-IoU dagitilanlarin araligini (0.6378-0.6629) gecmezse arm kapanir.
 set -u

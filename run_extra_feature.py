@@ -122,13 +122,13 @@ def ek_blok (d ,s1 ):
     # ADAYLAR ARASI BAGLAM: noktasal selector "same delige bakan digerleri"
     # and "5mm otedeki more guclu rakip" bilgisini HIC gormuyor. D2
     # (candidate-kumesi transformer) kolunun ucuz yaklasimidir.
-        import kume_baglami as KM 
+        import cluster_context as KM 
         return KM .oznitelik (P ,YD ,d ["idx"],s1 ,d ["diag"])
     if BLOK =="kanonik":
     # PARCANIN KENDI EKSEN SISTEMI: gorulmemis markada modelleme ekseni
     # bizimkiyle same olmak zorunda not; dunya koordinati ogrenilen each
     # konumsal kalibi bozuyor.
-        import kanonik_hizalama as KH 
+        import canonical_alignment as KH 
         mf =f"{MESH_DIZ [d ['_kume']]}/{d ['pid']}.npz"
         V =(np .asarray (np .load (mf )["V"],float )
         if os .path .exists (mf )else d ["P"])
@@ -136,7 +136,7 @@ def ek_blok (d ,s1 ):
     if BLOK =="topoloji":
     # ES-EKSENLI AILE: candidate a dizinin uyesi mi, only mi. Mesh/isin
     # GEREKMEZ -- only candidate konumlari and secenek yonu.
-        import topoloji_ailesi as TA 
+        import topology_family as TA 
         return TA .oznitelik (P ,YD ,d ["P"],d ["diag"])
     if BLOK =="ozkalib":
     # PARCA-ICI OZ-KALIBRASYON: skorun part icindeki yuzdeligi, most

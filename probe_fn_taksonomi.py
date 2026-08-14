@@ -15,10 +15,10 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
-import d6_record ,robot_cp ,wire_gate ,product_zinciri 
+import d6_record ,robot_cp ,wire_gate ,product_chain 
 from p1c_threshold import maske 
 from sina_cluster import match_hungarian 
-from korpus_kimlik import step_kimlik as SK 
+from corpus_identity import step_kimlik as SK 
 
 OB ="results/_p1_olasilik_g10";GATE ="results/wire_gate_v7.pkl"
 sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))
@@ -46,7 +46,7 @@ for pid in pidler :
     k =maske (np .asarray (wire_gate .decision_score (gate ,Xp ),float ),0.40 ,0.30 )
     P1 ,D1 =(P0 [k ],D0 [k ])if k .any ()else (P0 [:0 ],D0 [:0 ])
     if len (P1 ):
-        P1 ,D1 =product_zinciri .tam_poz (V ,F ,avg ,P1 ,D1 ,step_path =S .get (pid ))
+        P1 ,D1 =product_chain .tam_poz (V ,F ,avg ,P1 ,D1 ,step_path =S .get (pid ))
     tol =max (3.0 ,0.06 *r ["diag"])
     es_rob =set ()
     if len (P1 ):

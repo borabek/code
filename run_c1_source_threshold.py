@@ -28,7 +28,7 @@ os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
 import d6_record # noqa: E402
 import canonical_d7 as K # noqa: E402
-import product_zinciri # noqa: E402
+import product_chain # noqa: E402
 import wire_gate # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
@@ -79,7 +79,7 @@ def kos (gate ,data_ ,e0 ,e1 ,S ,tam =False ):
                 P ,D ,T =P [nm ],D [nm ],T [nm ]
             D =np .where ((T [:,ERISIM ]<T [:,GIRME ])[:,None ],-D ,D )
         if tam and len (P ):
-            P ,D =product_zinciri .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
+            P ,D =product_chain .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
             step_path =S .get (d ["pid"]))
         tp ,fp ,fn =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],YANAL ,ACI ,
         False ,signed =True )[:3 ]

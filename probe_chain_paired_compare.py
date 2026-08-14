@@ -2,7 +2,7 @@
 """E2 — SAHAYA INEN ZINCIR vs OLCULEN ZINCIR, ESLI KIYAS
 
 SORUN. Ihracatcilar `robot_cp.extract` cagiriyor; kampanyada olculen
-`product_p6`/`product_genis` sahaya HIC girmiyor. `export_robot_glb.py` icine
+`product_p6`/`product_wide` sahaya HIC girmiyor. `export_robot_glb.py` icine
 `cp_config.glb_kanonik_zincir` bayragi kondu but ACILMADI: saglamlik
 denetimi gecti (40/40 part, cokme/NaN absent, yonler unit) fakat olculen
 zincir **181 GT for 309 CP** uretiyordu. Fonksiyonel karsiligi robotun

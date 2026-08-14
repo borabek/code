@@ -45,7 +45,7 @@ ROBOT_YANAL ,ROBOT_ACI =2.0 ,10.0
 def silindir_onbellek (rec_ ,yenile =False ):
     """Parca basina B-rep silindirlerini BIR KEZ cikar, diske yaz."""
     import brep_snap 
-    from korpus_kimlik import step_kimlik as SK 
+    from corpus_identity import step_kimlik as SK 
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     ob ={}
     if os .path .exists (ONBELLEK )and not yenile :

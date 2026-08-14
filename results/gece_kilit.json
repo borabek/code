@@ -113,7 +113,7 @@
   "router": false,
   "tarih": "2026-08-02",
   "evidence": "results/w2_veri_etkisi.json",
-  "not": "W2: +110 yeni WEI parcasi. Prospektif 109 part (results/yeni_wei.npz split=='test') EGITIME GIRMEDI, harcanmamis test kumesidir."
+  "not": "W2: +110 yeni WEI part. Prospektif 109 part (results/yeni_wei.npz split=='test') EGITIME GIRMEDI, harcanmamis test kumesidir."
  },
  "egitim_verisi": "results/zengin_parite_w2.npz",
  "locked_temiz": 95,
@@ -125,8 +125,8 @@
   }
  ],
  "dogrulanan_denetim_bulgulari": {
-  "s7_brep_graf_eksik": "g_agiz_cev ve g_yuz_alan HIC hesaplanmiyor (graf_ozellik 10 slot acip yalniz 0-7'yi dolduruyor) ve gercek yuz-kenar komsulugu YOK -> BOSLUK GRAFI DENENMEMIS",
-  "yon_sozlesmesi_bozuk": "robot_cp docstring 'the way the wire goes in' diyor ama measured: candidate yonleri DISARI bakiyor ((p-merkez).d=+3.99), manufacturer InsertDirection ICERI (-4.8). sina_cluster abs() kullandigi icin metrik bunu GOREMIYOR."
+  "s7_brep_graf_eksik": "g_agiz_cev ve g_yuz_alan HIC hesaplanmiyor (graf_ozellik 10 slot acip only 0-7'yi dolduruyor) ve gercek yuz-kenar komsulugu YOK -> BOSLUK GRAFI DENENMEMIS",
+  "yon_sozlesmesi_bozuk": "robot_cp docstring 'the way the wire goes in' diyor but measured: candidate yonleri DISARI bakiyor ((p-merkez).d=+3.99), manufacturer InsertDirection ICERI (-4.8). sina_cluster abs() kullandigi for metrik bunu GOREMIYOR."
  },
- "prospektif_109_durumu": "EGITIME GIRMEDI ama W2'yi dagitma KARARINDA kullanildi -> model secimi acisindan HARCANMISTIR. Bakir exam yalniz 95 LOCKED."
+ "prospektif_109_durumu": "EGITIME GIRMEDI but W2'yi dagitma KARARINDA kullanildi -> model secimi acisindan HARCANMISTIR. Bakir exam only 95 LOCKED."
 }

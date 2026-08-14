@@ -85,7 +85,7 @@ min_depth =MIN_DEPTH ,min_overlap =MIN_OVERLAP ):
 
 def detect (step_path ,V ,F ,**kw ):
     """Silindir adaylari (geo_brep_cp) + YARIK adaylari -> birlesik, tekillestirilmis."""
-    import geo_brep_cp ,tel_g_brep as B 
+    import geo_brep_cp ,wire_g_brep as B 
     surf =B .read_brep (step_path )
     mesh =(np .asarray (V ,float ),np .asarray (F ,np .int64 ))
     cyl =geo_brep_cp .detect (step_path ,V ,F )

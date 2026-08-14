@@ -119,7 +119,7 @@ def eligible ():
     # ETKI MEASURED and NOTR: eslesme 1926 -> 1926, measurement kumesi 194/194 korundu, only
     # ELMEX.KUDD4D1_GY'nin kimligi "KUDD4D1" -> "KUDD4D1_GY" became (same file).
     # Bugun kazanc sifir because lower cizgili parcalarin STEP'i absent; value ILERIDE.
-    from korpus_kimlik import kimlik as _kimlik ,step_kimlik as _skimlik 
+    from corpus_identity import kimlik as _kimlik ,step_kimlik as _skimlik 
     step ={_skimlik (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     seen =set ()
     for d in ("_label_targets","_label_targets_2","_label_targets_3","_label_targets_4"):

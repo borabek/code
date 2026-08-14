@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # YALNIZ MAKBUZU OLMAYAN EK BLOKLARINI KOS.
 #
-# NEDEN: `kos_gece.sh` faz duzeyinde DEVAM EDEMIYOR. Makine kapanip acilinca
+# WHY: `kos_gece.sh` faz duzeyinde DEVAM EDEMIYOR. Makine kapanip acilinca
 # zincirin BASINDAN basliyor ve biten fazlari (B1 46 dk, B6 60 dk, ozkalib
-# 27 dk) YENIDEN kosuyor -- ~2.2 saat mukerrer is. Bu betik her blogun
+# 27 dk) YENIDEN kosuyor -- ~2.2 saat mukerrer is. Bu betik each blogun
 # makbuzuna bakar ve VAR OLANI ATLAR.
 #
-# `depth` icin EK_ISCI=4: paralel yol bit-ayni sonuc verdigi DOGRULANDI
+# `depth` for EK_ISCI=4: paralel yol bit-same sonuc verdigi DOGRULANDI
 # (tests/test_ek_paralel_esdeger.py). Tek cekirdekte ~8.5 saat, 4 iscide ~2.
 set -u
 cd "$(dirname "$0")"
@@ -29,21 +29,21 @@ bos_ram() {
 }
 
 # BASKA AGIR EK ISI VAR MI?
-# 10:02 ve 10:05'te iki bagimsiz hat (bu betik + kos_ek_kuyruk.sh) kapilarini
-# ayni saniyede gecti, ucu birden ~6'sar GB yukledi ve bos RAM 0.9 GB'a dustu.
+# 10:02 ve 10:05'te iki independent hat (this betik + kos_ek_kuyruk.sh) kapilarini
+# same saniyede gecti, ucu birden ~6'sar GB yukledi ve bos RAM 0.9 GB'a dustu.
 # RAM kapisi TEK BASINA yetmiyor -- isin KENDISI sorulmali.
 #
-# NOT: bu fonksiyon bir kez CAGRILDI ama TANIMLANMAMISTI (python str.replace
+# NOT: this fonksiyon a kez CAGRILDI but TANIMLANMAMISTI (python str.replace
 # eslesmeyi bulamayinca SESSIZCE hicbir sey yapmamisti). Bash'te tanimsiz
-# fonksiyon bos doner, `${a:-0}` onu 0 yapar ve gate ACILIR -- yani koruma
-# varmis gibi gorunup hic calismaz.
+# fonksiyon bos doner, `${a:-0}` onu 0 yapar ve gate ACILIR -- i.e. koruma
+# varmis gibi gorunup no calismaz.
 baska_ek() {
   powershell.exe -NoProfile -Command \
     "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'run_extra_feature|kos_s4_kume' } | Measure-Object).Count" \
     2>/dev/null | tr -d '\r'
 }
 
-# KENDI KENDINI DOGRULA: fonksiyon sayi dondurmuyorsa koruma YOK demektir.
+# KENDI KENDINI DOGRULA: fonksiyon number dondurmuyorsa koruma YOK demektir.
 _t=$(baska_ek)
 case "${_t:-x}" in
   ''|*[!0-9]*) say "!! KORUMA CALISMIYOR (baska_ek '$_t' dondu) -- cikiliyor"
@@ -54,7 +54,7 @@ say "koruma dogrulandi (baska_ek -> $_t)"
 say "=== KALAN EK BLOKLARI ==="
 for blok in kafes_adet simetri depth; do
   if [ -f "results/ek_blok_$blok.json" ]; then
-    say "ATLANDI: $blok (makbuzu var)"
+    say "ATLANDI: $blok (makbuzu present)"
     continue
   fi
   # bellek kapisi: iki agir EK isi ust uste binmesin

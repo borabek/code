@@ -23,7 +23,7 @@ import collections
 
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
-from korpus_kimlik import kimlik ,step_kimlik 
+from corpus_identity import kimlik ,step_kimlik 
 
 ARSIV_JSON ="_arsiv/json_stepsiz"
 ARSIV_STEP ="_arsiv/step_kopya"

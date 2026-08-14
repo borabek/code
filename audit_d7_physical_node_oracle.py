@@ -11,7 +11,7 @@ Node sources
 * ``base``: G7BIRLESIK segmentation candidates.
 * ``cylinder``: both finite endpoints of every exact OCP cylinder with radius in
   [0.5, 4.5] mm.  Both axis signs are pose choices of the same position node.
-* ``planar``: centres of inner planar wires from ``brep_aciklik``.  Both normal
+* ``planar``: centres of inner planar wires from ``brep_opening``.  Both normal
   signs are pose choices of the same position node.
 
 Positions within ``DEDUPE_MM`` are single-linkage clustered.  A cluster remains
@@ -545,7 +545,7 @@ def run_audit (dedupe_mm :float =DEDUPE_MM )->dict :
     "contract":{
     "cylinder_position":"OCP exact finite cylinder mouth_a/mouth_b",
     "cylinder_radius_mm":[RADIUS_MIN_MM ,RADIUS_MAX_MM ],
-    "planar_position":"brep_aciklik inner planar-wire centroid",
+    "planar_position":"brep_opening inner planar-wire centroid",
     "spatial_dedupe_mm":float (dedupe_mm ),
     "resource_rule":"one deduped spatial cluster = one candidate row = at most one GT",
     "oracle_rule":"maximum-cardinality bipartite match; FP forced to zero",

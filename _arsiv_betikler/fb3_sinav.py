@@ -173,7 +173,7 @@ def main ():
             P =np .array ([c ["point"]for c in cps ],float )
             X =wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ,step_path =stp [r ["pid"]])
             try :
-                from build_zengin_parite import _normaller ,zengin 
+                from build_rich_parity import _normaller ,zengin 
                 XR =zengin (V ,F ,probs ,cps ,_normaller (V ,F ))
                 X =np .hstack ([X ,XR ])
             except Exception :

@@ -15,8 +15,8 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
 import d6_record 
-from probe_k65b_olc import olc 
-from korpus_kimlik import step_kimlik as SK 
+from probe_k65b_measure import olc 
+from corpus_identity import step_kimlik as SK 
 
 KOLLAR =[("g7 + gate v5 (DAGITILAN)","results/_p1_olasilik_g7","results/wire_gate_v5.pkl"),
 ("g10 + gate v5 (refit YOK)","results/_p1_olasilik_g10","results/wire_gate_v5.pkl"),

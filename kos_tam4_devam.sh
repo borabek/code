@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# TAVAN-24 KORPUSUNUN `tam` BOLUMUNU SURDUR (d6 ayri iscilerle tamamlaniyor).
+# CEILING-24 KORPUSUNUN `tam` BOLUMUNU SURDUR (d6 ayri iscilerle tamamlaniyor).
 #
 # ONCEKI KOSUDA IKI SORUN CIKTI, ikisi de burada kapatildi:
-#  1) BELLEK: 04:26'da B fazi ile cakisip bes paydan UCU MemoryError ile oldu.
-#     Artik her pay baslamadan once bos RAM kapisi var ve pay sayisi 5 -> 4.
+#  1) BELLEK: 04:26'da B fazi with cakisip bes paydan UCU MemoryError with oldu.
+#     Artik each pay baslamadan before bos RAM kapisi present ve pay sayisi 5 -> 4.
 #  2) ERKEN OLCUM: isciler durunca `wait` donuyor ve betik EKSIK korpusta
-#     KAPI A olcup receipt yaziyordu (355/468 parcayla 0.8952 gibi yaniltici
-#     bir sayi). Artik measurement yalnizca corpus TAM ise yapilir.
+#     GATE A olcup receipt yaziyordu (355/468 parcayla 0.8952 gibi yaniltici
+#     a number). Artik measurement yalnizca corpus TAM ise yapilir.
 #
-# Var olan dosyalar atlandigi icin bu betik kaldigi yerden devam eder.
+# Var which dosyalar atlandigi for this betik kaldigi yerden devam eder.
 set -u
 cd "$(dirname "$0")"
 G=results/_gece
@@ -29,7 +29,7 @@ bos_ram() {
     2>/dev/null | tr -d '\r'
 }
 
-# Agir is (kademe2) bitene ve RAM acilana kadar bekle
+# Agir is (kademe2) bitene ve RAM acilana up to bekle
 bek=0
 while [ $bek -lt $((6 * 3600)) ]; do
   r=$(bos_ram); r=${r:-0}
@@ -38,7 +38,7 @@ while [ $bek -lt $((6 * 3600)) ]; do
   sleep 300; bek=$((bek + 300))
 done
 
-say "=== TAVAN-24 `tam` BOLUMU SURUYOR (4 pay) ==="
+say "=== CEILING-24 `tam` BOLUMU SURUYOR (4 pay) ==="
 for i in 0 1 2 3; do
   ( BH_MESH_ESIK=0.05 YB_FAN=256 P6_KAYNAK=012 YB_MAX_SEC=24 \
     P6_MESH_R=2.5 P6_MESH_MAX=350 P6_MESH_KAT=5 \
@@ -51,18 +51,18 @@ n_d6=$(ls results/_p6_oz_tam4 2>/dev/null | grep -c '^d6_')
 n_tam=$(ls results/_p6_oz_tam4 2>/dev/null | grep -c '^tam_')
 say "inference durdu -- d6 $n_d6/468, tam $n_tam/2583"
 
-# KAPI A: YALNIZCA corpus TAM ise. Eksik korpusta olculen sayi yaniltici olur
-# (biten parts rastgele degil, once biten yani kolay parcalardir).
+# GATE A: YALNIZCA corpus TAM ise. Eksik korpusta olculen number yaniltici olur
+# (biten parts rastgele not, before biten i.e. kolay parcalardir).
 for k in d6 tam; do
   if [ "$k" = "d6" ]; then n=$n_d6; hedef=460; else n=$n_tam; hedef=2570; fi
   if [ "$n" -ge "$hedef" ]; then
-    say "KAPI A olcumu ($k, $n part)"
-    HT_ONLER=$k P6_DIZIN=results/_p6_oz_tam4 python probe_pool_tavani.py \
+    say "GATE A olcumu ($k, $n part)"
+    HT_ONLER=$k P6_DIZIN=results/_p6_oz_tam4 python probe_pool_ceiling.py \
       > "$G/TAM4_kapiA_$k.log" 2>&1
     tail -4 "$G/TAM4_kapiA_$k.log" | sed 's/^/    /' | tee -a "$ANA"
   else
-    say "KAPI A ATLANDI ($k): corpus EKSIK ($n < $hedef) -- eksik korpusta"
-    say "  olculen sayi yaniltici olurdu. Esli kiyas icin: probe_paired_tavan.py"
+    say "GATE A ATLANDI ($k): corpus EKSIK ($n < $hedef) -- missing korpusta"
+    say "  olculen number yaniltici olurdu. Esli kiyas for: probe_paired_ceiling.py"
   fi
 done
 say "=== TAM4 DEVAM BITTI ==="

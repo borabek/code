@@ -23,5 +23,5 @@
  },
  "aci_p90": 18.719950888202437,
  "aci_60_ustu": 43,
- "not": "A1 axis 40->15, A2 belirsiz bayragi, A3 aci gorunurlugu"
+ "not": "A1 axis 40->15, A2 ambiguous bayragi, A3 aci gorunurlugu"
 }

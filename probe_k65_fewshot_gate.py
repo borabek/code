@@ -12,7 +12,7 @@ Protokol notlari:
   - Ayni part hem adaptasyona hem olcume GIRMEZ.
   - Her k for R different cekilis; mean +- std raporlanir (single cekilis gurultulu).
   - k=0 single times (cekilis absent).
-  - Olcum urunun TAM zincirini runs (product_zinciri.tam_poz).
+  - Olcum urunun TAM zincirini runs (product_chain.tam_poz).
 """
 import os 
 import sys 
@@ -31,10 +31,10 @@ sys .path .insert (0 ,".")
 
 import d6_record # noqa: E402
 import wire_gate # noqa: E402
-import product_zinciri # noqa: E402
+import product_chain # noqa: E402
 from p1c_threshold import maske # noqa: E402
 from sina_cluster import match_hungarian ,f1w # noqa: E402
-from korpus_kimlik import step_kimlik as SK # noqa: E402
+from corpus_identity import step_kimlik as SK # noqa: E402
 from sklearn .ensemble import RandomForestClassifier # noqa: E402
 
 MARKALAR =["SUPU","UPUN","NIT"]
@@ -157,7 +157,7 @@ def main ():
                     P =np .asarray (r ["P"],float )[kk ]
                     D =np .asarray (r ["Pd"],float )[kk ]
                     V ,F ,pb =ob [p ]
-                    P ,D =product_zinciri .tam_poz (V ,F ,pb ,P ,D ,step_path =S .get (p ))
+                    P ,D =product_chain .tam_poz (V ,F ,pb ,P ,D ,step_path =S .get (p ))
                     G =np .asarray (r ["G"],float )
                     Gd =np .asarray (r ["Gd"],float )
                     if not len (G ):

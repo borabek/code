@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# #11 TEMIZ A/B: 95 WEI etiketinin ETKISINI confound'suz olc. Ayni seed, ayni recete, TEK fark = _recall_v2.
+# #11 TEMIZ A/B: 95 WEI etiketinin ETKISINI confound'suz olc. Ayni seed, same recete, TEK fark = _recall_v2.
 # Her ikisi de best-corpus-val + last-epoch kaydeder (#8 fix). Sonra 4 checkpoint WEI arbiter'da karsilastirilir.
-# Kullanim: bash run_clean_ab.sh   (#10 integrity GECTIKTEN sonra)
+# Kullanim: bash run_clean_ab.sh   (#10 integrity GECTIKTEN after)
 set -e
 cd /c/Users/DE00024082/Desktop/code
 PY=".venv/Scripts/python.exe"; export PYTHONPATH=_diffusion_net_repo/src PYTHONWARNINGS=ignore
@@ -22,6 +22,6 @@ for CK in ab_A_s0 ab_A_s0_last ab_B_s0 ab_B_s0_last; do
   BA_ALLOW_SEEN=1 $PY big_arbiter.py --ckpts results/seg_extra/$CK.pt --only-mfg WEI --only-parts $HELD \
      --axis-aware --cluster-mm 5 --min-v 30 --vertex-conf 0.5 --tag ab_$CK 2>&1 | grep -E "WEI:|ARBITER" | tail -2
 done
-echo "############ KARAR ############"
+echo "############ DECISION ############"
 echo "B (best VEYA last) > A > baseline 0.563 ise -> 95 etiket CALISTI (confound'suz evidence)"
-echo "B <= A ise -> etiket bu recete/secimle yardim etmiyor (daha cok etiket/aux-head)"
+echo "B <= A ise -> etiket this recete/secimle yardim etmiyor (more very etiket/aux-head)"

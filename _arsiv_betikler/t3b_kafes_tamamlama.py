@@ -31,7 +31,7 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
 import tezgah2 as T2 
 import wire_gate 
-from t3_structural_tavan import _baskin_adim 
+from t3_structural_ceiling import _baskin_adim 
 
 ESIK =1.0 # mm -- lattice dugumune oturma toleransi
 

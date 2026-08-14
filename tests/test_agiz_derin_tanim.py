@@ -12,7 +12,7 @@ import pytest
 import trimesh 
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
-import agiz_derin_tanim as AD # noqa: E402
+import mouth_deep_definition as AD # noqa: E402
 
 
 def kutu (k =20.0 ):

@@ -10,7 +10,7 @@ import os
 import sys 
 
 sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))))
-from korpus_kimlik import kimlik ,step_kimlik 
+from corpus_identity import kimlik ,step_kimlik 
 
 
 def test_indirme_sozlesmesi_zaman_damgali ():

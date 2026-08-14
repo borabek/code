@@ -34,7 +34,7 @@ os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
 import d6_record # noqa: E402
 import canonical_d7 as K # noqa: E402
-import product_zinciri # noqa: E402
+import product_chain # noqa: E402
 import wire_gate # noqa: E402
 from p1c_threshold import maske # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
@@ -126,7 +126,7 @@ def olc (model ,data_ ,tip ,e ,tam_zincir =False ,S =None ):
             f =f"{OB }/{d ['pid']}.npz"
             if os .path .exists (f ):
                 z =np .load (f )
-                P ,D =product_zinciri .tam_poz (
+                P ,D =product_chain .tam_poz (
                 np .ascontiguousarray (z ["V"],np .float64 ),
                 np .ascontiguousarray (z ["F"],np .int64 ),
                 np .asarray (z ["pbs"],float ).mean (0 ),P ,D ,

@@ -25,7 +25,7 @@ sys .path .insert (0 ,".")
 import d6_record # noqa: E402
 import robot_cp # noqa: E402
 from sina_cluster import match_hungarian ,f1w # noqa: E402
-from korpus_kimlik import step_kimlik as SK # noqa: E402
+from corpus_identity import step_kimlik as SK # noqa: E402
 
 KOLLAR ={"g7":"results/_p1_olasilik_g7","g10":"results/_p1_olasilik_g10"}
 CIKTI ="results/g10_kill_kapisi.json"

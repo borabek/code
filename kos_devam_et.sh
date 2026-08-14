@@ -4,10 +4,10 @@
 # Kullanim:  bash kos_devam_et.sh
 #
 # Hepsi GUVENLE tekrar baslatilabilir:
-#  * inference  -> var olan npz'ler ATLANIR (pid anahtarli)
+#  * inference  -> present which npz'ler ATLANIR (pid anahtarli)
 #  * orkestrator -> A1b dosya sayisini gorur ve atlar, faz zincirine devam eder
-#  * EK kuyrugu -> makbuzu olan blok yeniden olculur (zarar yok, sadece sure)
-#  * hepsinin kendi kilidi var; iki ornek ayni anda kosmaz
+#  * EK kuyrugu -> makbuzu which blok yeniden olculur (zarar none, sadece sure)
+#  * hepsinin kendi kilidi present; iki ornek same anda kosmaz
 set -u
 cd "$(dirname "$0")"
 mkdir -p results/_gece
@@ -36,7 +36,7 @@ bas kos_ek_kuyruk.sh bash kos_ek_kuyruk.sh
 # 4) receipt koruma gozcusu
 bas kos_makbuz_koru.sh bash kos_makbuz_koru.sh
 
-# 5) S7 cokus teshisi (makbuzu yoksa)
+# 5) S7 cokus teshisi (makbuzu otherwise)
 if [ ! -f results/cokus_teshisi_d6.json ]; then
   bas probe_cokus.py env P6_DIZIN=results/_p6_oz_tam4 CK_KUME=d6 \
       CK_KAT_MIN=40 python probe_cokus.py

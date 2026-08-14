@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # ORKESTRATOR HER KADEME2 KOSUSUNU AYNI DOSYAYA YAZIYOR
 # (results/p6_kademe2_tam.json). B1'in makbuzu B6 tarafindan, B6'nin makbuzu
-# da sonraki kosu tarafindan EZILIR. Bu gozcu her faz bitiminde makbuzu ayri
-# ada kopyalar -- yoksa gecenin sonunda elde yalnizca EN SON kosu kalir.
+# da sonraki kosu tarafindan EZILIR. Bu gozcu each faz bitiminde makbuzu ayri
+# ada kopyalar -- otherwise gecenin sonunda elde yalnizca EN SON kosu kalir.
 set -u
 cd "$(dirname "$0")"
 LOG=results/_gece/MAKBUZ_KORU.log

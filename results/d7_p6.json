@@ -4,7 +4,7 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "product_chain.py": "79be7a2ca2ca2e21",
    "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
@@ -18852,5 +18852,5 @@
   "genis_acik": true,
   "poz_kafasi": false
  },
- "not": "8 paydan birlestirildi. Mikro F1 part basina toplam oldugu icin birlestirme kayipsizdir."
+ "not": "8 paydan birlestirildi. Mikro F1 part basina total oldugu for birlestirme kayipsizdir."
 }

@@ -14,7 +14,7 @@ Kapsama %96.6.
 TASARIM: same candidates, single degisken feature kumesi. Once candidate duzeyi (ucuz eleme), gecerse
 UCTAN UCA (this arastirmada candidate duzeyi ALTI KEZ yaniltti).
 
-KILL: uctan uca tespit >= +0.01 VE karar_olcutu five sarti.
+KILL: uctan uca tespit >= +0.01 VE decision_criterion five sarti.
 """
 import collections 
 import io 
@@ -33,7 +33,7 @@ BOS =("g_agiz_cev","g_yuz_alan")# yazilmadi, hep sifir -> dusuruldu
 
 
 def main ():
-    import karar_olcutu 
+    import decision_criterion 
     import measure_set 
     import wire_gate 
     from big_arbiter import eligible 
@@ -158,7 +158,7 @@ def main ():
         _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (da ,db )),g ,fn ,n =2000 )
         ga [b ]=(lo ,hi )
     print ("\n=== DECISION ===")
-    k =karar_olcutu .degerlendir (SON ["A 58"],SON ["B 58+graf"],ga =ga )
+    k =decision_criterion .degerlendir (SON ["A 58"],SON ["B 58+graf"],ga =ga )
     print (k )
     with io .open ("results/s8_brep_graf_ab.json","w",encoding ="utf-8")as f :
         json .dump ({"aday_58":float (a58 ),"aday_68":float (a68 ),
