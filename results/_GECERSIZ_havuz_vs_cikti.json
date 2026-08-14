@@ -1,0 +1,12 @@
+{
+ "yol": "saha",
+ "n_parca": 100,
+ "recall": {
+  "hav_konum": 0.593939393939394,
+  "hav_yonlu": 0.42424242424242425,
+  "cik_konum": 0.6272727272727273,
+  "cik_yonlu": 0.4681818181818182
+ },
+ "gate_attigi": -0.04393939393939394,
+ "not": "Havuz recall vs cikti recall. Kacanlarin sebebini AYIRIR. D7'ye BAKILMADI."
+}

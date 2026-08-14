@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Y1-TOPLULUK — augmentasyonlu EK TOHUMLAR
+#
+# OLCULDU (VAL 100 parca, TAM zincir, tek-vs-tek adil kiyas, `olculen` yolu):
+#   A kontrol (tek ckpt) : tespit 0.5430 | robot isaretsiz 0.4792 | ISARETLI 0.4135
+#   Y1 augment (tek ckpt): tespit 0.5808 | robot isaretsiz 0.5293 | ISARETLI 0.4831
+#   fark                 : +0.0378       | +0.0501               | **+0.0696**
+#
+# Ve TEK augmentasyonlu ckpt, DAGITILMIS DORT ckpt'lik toplulugun sahasina
+# (0.4839) denk. Oyleyse augmentasyonlu bir TOPLULUK ikisini de gecmeli.
+# Bu betik tohum 1 ve 2'yi ekler (tohum 0 = y1_aug03_s0.pt zaten var).
+set -u
+cd "$(dirname "$0")"
+export PYTHONPATH=_diffusion_net_repo/src PYTHONWARNINGS=ignore
+INSAN="_label_targets _label_targets_2 _label_targets_3 _label_targets_recall _label_targets_recall_hard"
+for S in 1 2; do
+  echo "############ augment tohum $S ############"
+  .venv/Scripts/python.exe train_seg_extra.py --no-extra --partial-dir $INSAN \
+    --partial-target connection --seed $S --k-eig 96 --epochs 200 \
+    --augment --augment-maxang 0.3 \
+    --checkpoint-out "results/seg_extra/y1_aug03_s$S.pt"
+done

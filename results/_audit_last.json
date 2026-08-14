@@ -1,42 +1,128 @@
 {
- "n_files": 3,
- "n_ok": 3,
+ "n_files": 10,
+ "n_ok": 9,
  "rows": [
   {
-   "glb": "WEI_2506380000_CP25.glb",
+   "glb": "PXC_3061994_F1_0.82.glb",
    "ok": true,
    "violations": [],
-   "part": "2506380000",
-   "mfg": "WEI",
-   "mode": "robot_only",
-   "n_gt": 0,
-   "n_pred": 25,
-   "f1": null,
-   "markers": 25
+   "part": "3061994",
+   "mfg": "PXC",
+   "mode": "compare",
+   "n_gt": 24,
+   "n_pred": 20,
+   "f1": 0.818182,
+   "markers": 44
   },
   {
-   "glb": "WEI_2464750000_CP4.glb",
+   "glb": "WEI_1020700000_F1_0.84.glb",
    "ok": true,
    "violations": [],
-   "part": "2464750000",
+   "part": "1020700000",
    "mfg": "WEI",
-   "mode": "robot_only",
-   "n_gt": 0,
+   "mode": "compare",
+   "n_gt": 20,
+   "n_pred": 18,
+   "f1": 0.842105,
+   "markers": 38
+  },
+  {
+   "glb": "WEI_1208920000_F1_0.78.glb",
+   "ok": true,
+   "violations": [],
+   "part": "1208920000",
+   "mfg": "WEI",
+   "mode": "compare",
+   "n_gt": 8,
+   "n_pred": 10,
+   "f1": 0.777778,
+   "markers": 18
+  },
+  {
+   "glb": "WEI_1058680000_F1_1.00.glb",
+   "ok": true,
+   "violations": [],
+   "part": "1058680000",
+   "mfg": "WEI",
+   "mode": "compare",
+   "n_gt": 4,
    "n_pred": 4,
-   "f1": null,
+   "f1": 1.0,
+   "markers": 8
+  },
+  {
+   "glb": "PXC_3025176_F1_0.00.glb",
+   "ok": true,
+   "violations": [],
+   "part": "3025176",
+   "mfg": "PXC",
+   "mode": "compare",
+   "n_gt": 1,
+   "n_pred": 3,
+   "f1": 0.0,
    "markers": 4
   },
   {
-   "glb": "WEI_2669020000_CP5.glb",
+   "glb": "WEI_2506350000_F1_0.55.glb",
    "ok": true,
    "violations": [],
-   "part": "2669020000",
+   "part": "2506350000",
    "mfg": "WEI",
-   "mode": "robot_only",
-   "n_gt": 0,
+   "mode": "compare",
+   "n_gt": 22,
+   "n_pred": 11,
+   "f1": 0.545455,
+   "markers": 33
+  },
+  {
+   "glb": "WEI_1562140000_F1_0.62.glb",
+   "ok": false,
+   "violations": [
+    "M8: dosya adi F1 0.62 vs makbuz 0.625"
+   ],
+   "part": "1562140000",
+   "mfg": "WEI",
+   "mode": "compare",
+   "n_gt": 20,
+   "n_pred": 12,
+   "f1": 0.625,
+   "markers": 32
+  },
+  {
+   "glb": "PXC_3273556_F1_0.88.glb",
+   "ok": true,
+   "violations": [],
+   "part": "3273556",
+   "mfg": "PXC",
+   "mode": "compare",
+   "n_gt": 12,
+   "n_pred": 13,
+   "f1": 0.88,
+   "markers": 25
+  },
+  {
+   "glb": "WEI_2669030000_F1_1.00.glb",
+   "ok": true,
+   "violations": [],
+   "part": "2669030000",
+   "mfg": "WEI",
+   "mode": "compare",
+   "n_gt": 5,
    "n_pred": 5,
-   "f1": null,
-   "markers": 5
+   "f1": 1.0,
+   "markers": 10
+  },
+  {
+   "glb": "PXC_3212160_F1_1.00.glb",
+   "ok": true,
+   "violations": [],
+   "part": "3212160",
+   "mfg": "PXC",
+   "mode": "compare",
+   "n_gt": 2,
+   "n_pred": 2,
+   "f1": 1.0,
+   "markers": 4
   }
  ]
 }

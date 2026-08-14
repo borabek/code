@@ -1,0 +1,42 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "81bced9a2b2a5466",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "58a1cb216cd11d36",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "kume": "d6",
+ "cok_esik": 8,
+ "n_cok": 64,
+ "yonlendirici_dogruluk": 0.9615384615384616,
+ "toplam": {
+  "taban": 0.5491218918448966,
+  "uzman_gt": 0.5226550744022739,
+  "uzman": 0.5178273908697101,
+  "agirlik2": 0.5503472222222222,
+  "agirlik4": 0.5426032409827496,
+  "agirlik8": 0.533774373259053,
+  "ince_ayar_gt": 0.5290193462308206,
+  "ince_ayar": 0.5315013404825737
+ },
+ "not": "Yogun-parca UZMANI + ogrenilmis yonlendirici. TANIDIK marka kosulu (rastgele katlar). uzman_gt UST SINIRDIR. D7'ye BAKILMADI."
+}

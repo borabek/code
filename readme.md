@@ -1,5 +1,27 @@
 # WiringRobot.ConnectionPointDetector (`wiringrobot-cpd`)
 
+## Depo yapisi (2026-08-14 duzenlemesi)
+
+| dizin | icerik |
+|---|---|
+| **kok** | urun cekirdegi (60 modul, calisma aninda import edilen) + olcum araclari (`sonda_*`, `kos_*`) + `cp_config.json` |
+| `results/` | **makbuzlar** -- raporlanan her sayinin kaynagi (JSON) |
+| `docs/` | kampanya raporu, sunum paketi, otopsiler, devam notlari |
+| `tests/` | birim testler |
+| `ayarlar/` | egitim/kosum yapilandirmalari (YAML) |
+| `listeler/` | parca listeleri (TXT) |
+| `veri/` | koddan okunmayan yardimci JSON'lar |
+| `_arsiv_betikler/` | eski deney betikleri -- kampanya tarihi, urun bunlari IMPORT ETMEZ |
+
+**Giris noktalari:** `robot_cp.py` (urun), `export_robot_glb.py` (GLB ciktisi),
+`robot_viz.py --compare` (GT ile karsilastirmali gorsel), `duman_testi.py`
+(uctan uca saglik kontrolu), `geri_al.py --kontrol` (durum denetimi),
+`manset.py` (manset metrikleri).
+
+**Onemli:** kokteki araclar `sys.path.insert(dirname(__file__))` kullanir --
+alt klasore tasinirlarsa urun modullerini bulamazlar. Bu yuzden kod duz
+tutuldu; yalnizca veri/ayar dosyalari gruplandi.
+
 Production-oriented pipeline that turns a connector mesh into **robot-ready
 connection points** for an automated wiring robot.
 

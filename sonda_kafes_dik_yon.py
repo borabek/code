@@ -1,0 +1,188 @@
+# -*- coding: utf-8 -*-
+"""KAFES ADIMI YONU KISITLAR: eksen, siraya DIKTIR
+
+FIKIR (denenmemis). Bir sira deligin ekseni, siranin uzandigi yone DIKTIR.
+Kafes aramasi zaten adim vektorunu (siranin yonunu) veriyor. O halde:
+
+    dogru yon, adim vektorune DIK olan duzlemde yatar
+
+Bu, yonu 3 boyutlu bir secim olmaktan cikarip 1 boyutlu bir cembere indirir.
+Ustune "govdeden disari" ve "parca ici paralellik" eklenince neredeyse
+tekleser.
+
+NEDEN ONEMLI. Yayilim kolunu 0.527'den 0.077'ye dusuren sey YON SECIMIYDI.
+Bu kisit hic kullanilmadi.
+
+OLCULEN (uretilen konumlarda, TAM kabul kutusu):
+  hepsi       : yakin seceneklerin en yuksek skorlusu (bugunku, 0.077)
+  dik_suzgec  : once adima DIK olanlari suz, sonra en yuksek skorlu
+  dik_kipsel  : dik olanlar icinde parca-ici KIPSEL yon
+  kahin       : dogru yon MEVCUT mu (ust sinir, 0.527)
+
+D7'ye BAKILMAZ.
+"""
+import collections
+import json
+import os
+import sys
+import time
+
+import numpy as np
+from sklearn.ensemble import HistGradientBoostingClassifier
+
+os.environ.setdefault("BA_ALLOW_SEEN", "1")
+os.environ["WG_FIZ_FEATS"] = "1"
+os.environ["WG_TOPO"] = "1"
+os.environ["WG_ZENGIN"] = "1"
+os.environ.setdefault("P6_DIZIN", "results/_p6_oz_tam4")
+sys.path.insert(0, ".")
+import kanonik_d7 as K                 # noqa: E402
+import p6_karar                        # noqa: E402
+from kos_p6_ortak import yukle         # noqa: E402
+from sonda_kafes_v2 import kafes_ara   # noqa: E402
+
+KUME = os.environ.get("KY_KUME", "d6")
+KAT_MIN = int(os.environ.get("KY_KAT_MIN", "40"))
+ITER = int(os.environ.get("P6_ITER", "200"))
+NEG_KAT = int(os.environ.get("P6_NEG_KAT", "6"))
+YANAL, EKSENEL = 2.0, 40.0
+YAKIN_R = 2.0
+DIK_TOL = float(os.environ.get("KY_DIK", "15.0"))   # 90 dereceden sapma
+
+
+def temel(d):
+    return np.hstack([p6_karar.donustur(d["X"]),
+                      p6_karar.kaynak_blok(d["kaynak"][d["idx"]])]).astype(
+                          np.float32)
+
+
+def _birim(v):
+    v = np.asarray(v, float)
+    return v / np.maximum(np.linalg.norm(v, axis=-1, keepdims=True), 1e-12)
+
+
+def main():
+    t0 = time.time()
+    veri = yukle(KUME, int(os.environ.get("P6_TR", "0")))
+    for d in veri:
+        d["y"] = np.asarray(d["y"], int)
+        d["_M"] = temel(d)
+    marka = collections.Counter(d["mfg"] for d in veri)
+    katlar = [m for m, n in marka.items() if n >= KAT_MIN]
+    print(f"{len(veri)} parca | katlar {katlar} | dik tol {DIK_TOL}",
+          flush=True)
+
+    oof = [None] * len(veri)
+    for b in katlar:
+        ic = [i for i, d in enumerate(veri) if d["mfg"] != b]
+        dis = [i for i, d in enumerate(veri) if d["mfg"] == b]
+        n_s = sum(len(veri[i]["y"]) for i in ic)
+        M = np.empty((n_s, veri[0]["_M"].shape[1]), np.float32)
+        o = 0
+        for i in ic:
+            m_ = veri[i]["_M"]
+            M[o:o + len(m_)] = m_
+            o += len(m_)
+        Y = np.concatenate([veri[i]["y"] for i in ic])
+        rng = np.random.default_rng(0)
+        poz, neg = np.where(Y == 1)[0], np.where(Y == 0)[0]
+        sec = np.concatenate([poz, rng.choice(
+            neg, min(len(neg), NEG_KAT * max(len(poz), 1)), replace=False)])
+        m = HistGradientBoostingClassifier(
+            max_iter=ITER, learning_rate=0.06, max_leaf_nodes=63,
+            l2_regularization=1.0, random_state=0).fit(M[sec], Y[sec])
+        del M
+        for i in dis:
+            oof[i] = m.predict_proba(veri[i]["_M"])[:, 1]
+        print(f"  OOF {b} ({time.time() - t0:.0f} s)", flush=True)
+
+    ist = collections.defaultdict(lambda: collections.defaultdict(list))
+    n = 0
+    for d, s in zip(veri, oof):
+        if s is None:
+            continue
+        G = np.asarray(d["G"], float)
+        if len(G) < 3:
+            continue
+        Gn = _birim(np.asarray(d["Gd"], float))
+        P = np.asarray(d["P"], float)
+        idx = np.asarray(d["idx"], int)
+        YD = _birim(np.asarray(d["YD"], float))
+        s = np.asarray(s, float)
+        Pu = np.unique(np.round(P, 3), axis=0)
+        bul = kafes_ara(Pu)
+        if not bul:
+            continue
+
+        say = {a: 0 for a in ("hepsi", "dik_suzgec", "dik_kipsel", "kahin")}
+        for (tohum, adim), _puan, uret in bul:
+            u = _birim(adim.reshape(1, 3))[0]
+            v = uret[:, None, :] - G[None, :, :]
+            al = (v * Gn[None, :, :]).sum(-1)
+            yan = np.linalg.norm(v - al[..., None] * Gn[None, :, :], axis=-1)
+            konum = (yan <= YANAL) & (np.abs(al) <= EKSENEL)
+            if not konum.any():
+                continue
+            d_ua = np.linalg.norm(uret[:, None, :] - P[None, :, :], axis=-1)
+            for j in range(len(G)):
+                u_ler = np.where(konum[:, j])[0]
+                if not len(u_ler):
+                    continue
+                ad = np.where((d_ua[u_ler] <= YAKIN_R).any(0))[0]
+                if not len(ad):
+                    continue
+                m_ = np.isin(idx, ad)
+                if not m_.any():
+                    continue
+                Yo, So = YD[m_], s[m_]
+                aci_gt = np.degrees(np.arccos(np.clip(Yo @ Gn[j], -1, 1)))
+                # KAHIN: dogru yon mevcut mu
+                if (aci_gt <= K.ACI).any():
+                    say["kahin"] += 1
+                # BUGUNKU: en yuksek skorlu
+                if aci_gt[int(np.argmax(So))] <= K.ACI:
+                    say["hepsi"] += 1
+                # DIK SUZGEC: adima dik olanlar
+                sapma = np.abs(90.0 - np.degrees(
+                    np.arccos(np.clip(np.abs(Yo @ u), -1, 1))))
+                dik = sapma <= DIK_TOL
+                if dik.any():
+                    Yd, Sd, Ad = Yo[dik], So[dik], aci_gt[dik]
+                    if Ad[int(np.argmax(Sd))] <= K.ACI:
+                        say["dik_suzgec"] += 1
+                    # KIPSEL: dik olanlar icinde en cok oy alan yon
+                    cos = np.clip(Yd @ Yd.T, -1, 1)
+                    oy = (np.degrees(np.arccos(cos)) <= K.ACI).sum(1)
+                    if Ad[int(np.argmax(oy))] <= K.ACI:
+                        say["dik_kipsel"] += 1
+        a = ist[d["mfg"]]
+        a["gt"].append(len(G))
+        for k_, v_ in say.items():
+            a[k_].append(min(v_, len(G)))
+        n += 1
+        if n % 40 == 0:
+            print(f"  {n} parca ({time.time() - t0:.0f} s)", flush=True)
+
+    print(f"\n{'marka':<7}{'GT':>7}{'BUGUNKU':>10}{'DIK suzgec':>12}"
+          f"{'DIK kipsel':>12}{'KAHIN':>9}")
+    out = {}
+    for m_ in sorted(ist, key=lambda x: -sum(ist[x]["gt"])):
+        a = ist[m_]
+        g = max(sum(a["gt"]), 1)
+        r = {k: sum(a[k]) / g for k in ("hepsi", "dik_suzgec", "dik_kipsel",
+                                        "kahin")}
+        r["gt"] = g
+        out[m_] = r
+        print(f"{m_:<7}{g:>7}{r['hepsi']:>10.3f}{r['dik_suzgec']:>12.3f}"
+              f"{r['dik_kipsel']:>12.3f}{r['kahin']:>9.3f}")
+    json.dump({"dik_tol": DIK_TOL, "marka": out,
+               "not": "Kafes adimi yonu kisitlar: eksen siraya DIKTIR. "
+                      "Uretilen konumlarda yon secimi. D7'ye BAKILMADI."},
+              open(f"results/kafes_dik_yon_{KUME}.json", "w"), indent=1)
+    print(f"\nmakbuz -> results/kafes_dik_yon_{KUME}.json")
+    print("OKUMA: DIK suzgec BUGUNKUyu asiyorsa kisit ise yariyor;")
+    print("       KAHIN'e yaklasiyorsa yon secimi COZULMUS demektir.")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,66 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "81bced9a2b2a5466",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "urun_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_kume.py": "5ae95338c0f94024",
+   "p1c_esik.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "5e84bd141b4e0e61",
+   "results/metrik_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "kume": "d6",
+ "ayrim_esik": 0.3,
+ "toplam": {
+  "taban": 0.295386042198006,
+  "kanonik": 0.30468046804680465,
+  "yayilim": 0.23087869085734614,
+  "birlesik": 0.2383128295254833
+ },
+ "marka": {
+  "NIT": {
+   "taban": 0.008935219657483246,
+   "kanonik": 0.012084592145015106,
+   "yayilim": 0.07954545454545454,
+   "birlesik": 0.061124694376528114,
+   "gt": 1222
+  },
+  "SUPU": {
+   "taban": 0.44938271604938274,
+   "kanonik": 0.45161290322580644,
+   "yayilim": 0.35408852213053266,
+   "birlesik": 0.37806637806637805,
+   "gt": 547
+  },
+  "UPUN": {
+   "taban": 0.5359361135758651,
+   "kanonik": 0.5129490392648287,
+   "yayilim": 0.48154657293497366,
+   "birlesik": 0.4717775905644482,
+   "gt": 370
+  },
+  "MOR": {
+   "taban": 0.17834394904458598,
+   "kanonik": 0.23006134969325154,
+   "yayilim": 0.11935953420669577,
+   "birlesik": 0.18401206636500755,
+   "gt": 274
+  }
+ },
+ "not": "Gecen iki kaldirac BIRLIKTE: kanonik blogu + rejim kapili kafes yayilimi. D7'ye BAKILMADI."
+}

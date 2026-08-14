@@ -299,7 +299,8 @@ def _forward(model, ops, x):
 # with ~70% housing. the Tversky term directly optimizes region overlap and
 # boosts rare classes (snap-points).
 
-def tversky_loss(probs, target, alpha=0.3, beta=0.7, class_w=None, eps=1e-6):
+def tversky_loss(probs, target, alpha=0.3, beta=0.7, class_w=None, eps=1e-6,
+                 gamma=1.0):
     """Multi-class Tversky loss on probabilities (probs: (V, C)).
 
     alpha weights false-positives, beta false-negatives. beta>alpha penalizes
@@ -315,22 +316,66 @@ def tversky_loss(probs, target, alpha=0.3, beta=0.7, class_w=None, eps=1e-6):
     tv = (tp + eps) / (tp + alpha * fp + beta * fn + eps)   # (C,)
     if class_w is not None:
         tv = tv * (class_w / class_w.sum() * len(class_w))
-    return 1.0 - tv.mean()
+    # Y14 FOCAL-TVERSKY (2026-08-13). gamma>1 kolay orneklerin katkisini
+    # bastirir, zor (dusuk ortusme) siniflara odaklanir. gamma=1 KLASIK
+    # Tversky'dir, yani varsayilan davranis DEGISMEZ.
+    kayip = 1.0 - tv.mean()
+    if gamma != 1.0:
+        kayip = kayip.clamp_min(1e-6) ** gamma
+    return kayip
 
 
-def _compute_loss(out, lab, w, meta, cfg):
+def sinir_kaybi(probs, target, kenar, eps=1e-6):
+    """Y13 -- SINIR-FARKINDALI KAYIP.
+
+    CP fiziksel olarak bir SINIRDIR (delik agiz cemberi), ama mevcut kayip
+    (NLL + Tversky) BOLGEYI hedefler. Bu terim, sinif SINIRINDAKI tepelere
+    ek agirlik verir: `kenar` maskesi, komsulari FARKLI sinifta olan
+    tepeleri isaretler.
+
+    Uygulama: sinir tepelerinde dogru sinifin olasiligina odaklanan
+    ek bir odak terimi. Sinir kumesi bossa 0 doner (kayip DEGISMEZ).
+    """
+    torch = _require("torch", "pip install torch")
+    if kenar is None or not bool(kenar.any()):
+        return probs.sum() * 0.0
+    import torch.nn.functional as Fnn
+    t = Fnn.one_hot(target, probs.shape[-1]).to(probs.dtype)
+    p_dogru = (probs * t).sum(-1).clamp(eps, 1.0)
+    return -(torch.log(p_dogru[kenar])).mean()
+
+
+def _kenar_maskesi(lab, F):
+    """komsusu FARKLI sinifta olan tepeler (sinif siniri)."""
+    torch = _require("torch", "pip install torch")
+    if F is None or not len(F):
+        return None
+    e = torch.cat([F[:, [0, 1]], F[:, [1, 2]], F[:, [2, 0]]], 0)
+    farkli = lab[e[:, 0]] != lab[e[:, 1]]
+    m = torch.zeros_like(lab, dtype=torch.bool)
+    m[e[farkli][:, 0]] = True
+    m[e[farkli][:, 1]] = True
+    return m
+
+
+def _compute_loss(out, lab, w, meta, cfg, faces=None):
     """Base loss (weighted NLL or CE) + optional Tversky term."""
     torch = _require("torch", "pip install torch")
     import torch.nn.functional as Fnn
     base = (Fnn.cross_entropy(out, lab, weight=w) if meta["use_ce"]
             else Fnn.nll_loss(out, lab, weight=w))
     tw = float(cfg.get("tversky_weight", 0.0))
+    tg = float(cfg.get("tversky_gamma", 1.0))
     if tw > 0.0:
         # `out` is log-softmax (NLL) or logits (CE) -> convert to probabilities
         probs = out.softmax(dim=-1) if meta["use_ce"] else out.exp()
         base = base + tw * tversky_loss(
             probs, lab, alpha=float(cfg.get("tversky_alpha", 0.3)),
-            beta=float(cfg.get("tversky_beta", 0.7)), class_w=w)
+            beta=float(cfg.get("tversky_beta", 0.7)), class_w=w, gamma=tg)
+    sw = float(cfg.get("sinir_weight", 0.0))
+    if sw > 0.0 and faces is not None:
+        probs2 = out.softmax(dim=-1) if meta["use_ce"] else out.exp()
+        base = base + sw * sinir_kaybi(probs2, lab, _kenar_maskesi(lab, faces))
     return base
 
 
@@ -597,7 +642,7 @@ def load_checkpoint(path, device="cpu", n_classes=N_CLASSES):
 
 # §5.3.7 / Abb.45 – per-vertex segmentation: (V, 5) probability -> argmax -> 1D label tensor
 def predict(model, meta, verts, faces, device="cpu", return_probs=False,
-            op_cache_dir=None):
+            op_cache_dir=None, mc_dropout=0):
     """Per-vertex segmentation of a single part (§5.3.7 / Figure 45).
 
     Runs forward pass and reduces the (V, 5) probability distribution via
@@ -610,14 +655,41 @@ def predict(model, meta, verts, faces, device="cpu", return_probs=False,
     model.eval()
     ops = precompute_operators(verts, faces, meta["k_eig"], op_cache_dir)
     ops = {k: (v.to(device) if hasattr(v, "to") else v) for k, v in ops.items()}
+    # Y22 MC DROPOUT (2026-08-14). `model.eval()` yukarida dropout'u KAPATIR;
+    # bu yuzden MC dropout'u disaridan acmaya calismak SESSIZ NO-OP olur --
+    # bu gece ayni tuzak baska bir kolda `+0.0000` uretmisti. Katmanlar
+    # eval()'den SONRA, burada aciliyor ve sayilari DOGRULANIYOR.
+    _mc = int(mc_dropout or 0)
+    if _mc > 0:
+        _n_do = 0
+        for _m in model.modules():
+            if _m.__class__.__name__ == "Dropout":
+                _m.train()
+                _n_do += 1
+        assert _n_do > 0, "MC dropout istendi ama modelde Dropout katmani YOK"
     with torch.no_grad():
-        out = _forward(model, ops, _model_input(ops, meta))
+        if _mc > 0:
+            _gir = _model_input(ops, meta)
+            _yig = None
+            for _t in range(_mc):
+                torch.manual_seed(1000 + _t)
+                _o = _forward(model, ops, _gir)
+                _p = (_o.exp() if not meta.get("use_ce")
+                      else _o.softmax(dim=-1))
+                _yig = _p if _yig is None else _yig + _p
+            probs = _yig / float(_mc)
+            out = probs                       # argmax olasilik uzerinden
+        else:
+            out = _forward(model, ops, _model_input(ops, meta))
         labels = out.argmax(dim=-1).cpu().numpy()
         probs_np = None
         if return_probs:
             # for NLL, out is log-softmax -> convert back to probability
-            probs = (out.exp() if not meta.get("use_ce") else out.softmax(dim=-1))
-            probs_np = probs.cpu().numpy()
+            if _mc > 0:
+                probs_np = probs.cpu().numpy()
+            else:
+                probs = (out.exp() if not meta.get("use_ce") else out.softmax(dim=-1))
+                probs_np = probs.cpu().numpy()
     # free the per-part operators/activations before the next stage (segmentation
     # of large meshes is the main VRAM consumer in the pipeline).
     del ops, out

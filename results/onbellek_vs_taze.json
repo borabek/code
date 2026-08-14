@@ -1,0 +1,39 @@
+{
+ "onbellek_model": 2,
+ "canli_model": 4,
+ "marka": {
+  "NIT": {
+   "onbellek_oran": 1.128332995683274,
+   "onbellek_auc": 0.7429092045454545,
+   "taze_oran": 1.739713697305161,
+   "taze_auc": 0.7059660795454545,
+   "gt": 176,
+   "auc_farki": -0.036943124999999966
+  },
+  "SUPU": {
+   "onbellek_oran": 32.723255605648944,
+   "onbellek_auc": 0.8132214912280701,
+   "taze_oran": 39.27511250072059,
+   "taze_auc": 0.5613947368421053,
+   "gt": 61,
+   "auc_farki": -0.2518267543859648
+  },
+  "MOR": {
+   "onbellek_oran": 2.50422855215312,
+   "onbellek_auc": 0.5638854166666666,
+   "taze_oran": 1.967232087969903,
+   "taze_auc": 0.618029356060606,
+   "gt": 51,
+   "auc_farki": 0.054143939393939466
+  },
+  "UPUN": {
+   "onbellek_oran": 25.753423066762018,
+   "onbellek_auc": 0.8485611111111111,
+   "taze_oran": 42.5621991938348,
+   "taze_auc": 0.5639194444444443,
+   "gt": 44,
+   "auc_farki": -0.2846416666666668
+  }
+ },
+ "not": "Onbellekteki pbs vs canli modellerle taze cikarim, AYNI parcalarda. D7'ye BAKILMADI."
+}

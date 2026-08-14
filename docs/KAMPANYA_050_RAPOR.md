@@ -1014,3 +1014,2692 @@ tahmin sayisi 2.5 kat).
 **Sonuc:** gorulmemis markada "robotun otonom davranabilecegi" bir isaret alt
 kumesi BU SKORLAYICIYLA YOK. `robot_auto_kapali` anahtarinin (S6b) gerekcesi
 artik IKI bagimsiz kumede olculu.
+
+---
+
+# BOLUM 19 — 2026-08-12: DUVARIN YERI BULUNDU
+
+## 19.1 Gunun net sonucu
+
+**Uctan uca kazanc: +0.0093** (kanonik blogu). Baska hicbir kol uctan uca
+kazandirmadi. d6 mikro robot F1 taban **0.2954**.
+
+Gunun asil urunu sayi degil, **duvarin koordinati**.
+
+## 19.2 Duvar nerede
+
+`results/konum_auc_d6.json` — secenek duzeyi AUC'nin konum ve yon paylari
+AYRI olculdu:
+
+| marka | n_konum | secenek AUC | **konum AUC** | **yon AUC** | ilk-k | rastgele |
+|---|---|---|---|---|---|---|
+| NIT | 432 | 0.8854 | **0.7053** | **0.8899** | 0.1135 | 0.0670 |
+| MOR | 497 | 0.9657 | 0.9003 | 0.9293 | 0.2446 | 0.0277 |
+| SUPU | 131 | 0.9696 | 0.9121 | 0.9596 | 0.5192 | 0.0544 |
+| UPUN | 161 | 0.9877 | 0.9419 | 0.9771 | 0.6490 | 0.0615 |
+
+Model yogun parcada **yonu biliyor, hangi acikligin kablo girisi oldugunu
+bilmiyor.** Uctan uca NIT F1 = **0.0089**; NIT GT'nin %51'i.
+
+**Hedefin tam sayisi:** gereken konum AUC = `1 − k/n_konum`
+→ NIT 0.944 (0.705 var) · MOR 0.982 (0.900 var).
+Iki yol: AUC'yi yukseltmek **veya havuzu ~5× kucultmek**.
+
+## 19.3 Olculen ve DUSEN kollar (hepsi kapi ONCE ilan edilerek)
+
+| kol | kapi | olculen | hukum |
+|---|---|---|---|
+| yerel karsitlik (p − yerel ortanca) | NIT AUC +0.05 | −0.033 | DUSTU |
+| konum toplama (max→ortanca/ort/q75/say) | +0.01 mikro | −0.014 (en iyi) | DUSTU |
+| dik-yon kisiti | bugunkuyu asmak | NIT +0.017, digerlerinde ters | DUSTU |
+| A1 isin atma / tup skoru | NIT ≥0.40 | tup 0.0115, **tup_eksen 0.0237** | DUSTU |
+| yayilim (rejim kapili) | uctan uca | **−0.0645** | DUSTU |
+| B1 bimodal `parca_eksen` | NIT +0.05 | **+0.1277** (yon) | GECTI, uctan uca ~+0.002 |
+| kanonik blogu | +0.01 | **+0.0093** | TEK KAZANC |
+
+**A1 notu:** sentetik yetenek testini GECMISTI (uc eksende 0.0 derece sapma,
+tup 8.45 / zemin 1.00) ama gercek geometriye tasinmadi — isaretsiz eksen
+bile 0.0237. Mekanizma dogru, uygulama alani yanlis.
+
+**Yayilim notu:** izole olcumde +0.0394 gorunuyordu; uctan uca **−0.0645**.
+Izole olcum uctan uca yerine GECMEZ.
+
+## 19.4 Yakalanan UC olcum kusuru (hepsi kendi sonucumu duzeltti)
+
+1. **Oklid vs CARPIM kutusu.** Aday-GT eslesmesini Oklid 2mm ile yapmak
+   `kahin`i 0.593 → 0.0172 dusuruyordu. Kutu carpimdir: yanal ≤2mm **ve**
+   eksenel ≤40mm. *(Bugun ikinci kez.)*
+2. **GT konumu sizintisi.** "Disari" isaret kurali GT konumunu kullaniyordu;
+   aday konumuna cevirince `eksen_disari` **0.5336 → 0.2668**. Gorunen
+   kazancin yarisindan fazlasi sizintiydi.
+3. **Denominator hatasi.** Havuz sondasinda marka basina kucultme, marka
+   parca sayisina degil global parca sayisina bolunuyordu.
+
+## 19.5 Curutulen onerme
+
+Gun ortasinda yazilan `docs/PLAN_075_YON_CEPHESI.md` "0.75 = yon problemi"
+diyordu. O onerme **secenek sayisindan turetilmisti** (6322 = 260 konum ×
+24 yon), olculmemisti. Dogrudan olcum tersini soyledi. Plan basina uyari
+konarak birakildi.
+
+**Ders:** secenek sayisindan konum/yon payini TAHMIN ETME, OLC.
+
+## 19.6 Saha baglantisi (E2)
+
+`kanonik_zincir.urun_cikti` saglamlik denetimini GECTI (40/40 parca cikti,
+cokme yok, NaN yok, yonler birim). **Ama 181 GT icin 309 CP uretiyor** —
+fonksiyonel karsiligi robotun olmayan yerlere gitmesi. Bayrak
+`glb_kanonik_zincir` taban zincirle esli kiyas yapilmadan ACILMADI.
+
+## 19.7 GELISTIRME TURU — dogrulanmis kazanc
+
+Olcum fasli kapatildi; yalniz F1'i yukselten kollar kosuldu
+(`kos_gelistirme_taramasi.py`, 20 yapilandirma, hepsi UCTAN UCA).
+
+**Kazanan tek eksen: NEGATIF ORANI.** Sistematik HPO ilk kez yapildi.
+
+| neg orani | d6 F1 | fark |
+|---|---|---|
+| 3 | 0.2549 | −0.0498 |
+| 6 (taban) | 0.3047 | — |
+| **12** | **0.3135** | **+0.0088** |
+| 18 | 0.3089 | +0.0042 |
+| 24 | 0.3121 | +0.0074 |
+| 36 | 0.3060 | +0.0013 |
+
+12–24 arasi DUZ PLATO — sivri tepe degil, yani d6 gurultusu degil.
+
+**`tam` DOGRULAMASI (1617 parca, BES marka kati WEI/PXC/TE/SIE/TOGI):**
+taban 0.3699 → neg=12 **0.3753 (+0.0054)**.
+d6'da secilip `tam`'da dogrulandi; d6'ya ezberleme YOK.
+
+**Kapanan uc kol (hepsi ilk kez denendi):**
+- parca-esitleyici agirlik **0.1927 (−0.1120)** — NIT'in %51'lik baskinligi
+  egitime zarar degil FAYDA veriyormus
+- zor negatif (skor-yakin secim) **−0.0195**
+- ogrenme hizi / yaprak / L2: notr ya da zararli
+
+## 19.8 Gunun kapanis defteri
+
+| kalem | deger |
+|---|---|
+| kanonik blogu (`tam`) | **+0.0151** |
+| negatif orani 12 (`tam`) | **+0.0054** |
+| **dogrulanmis kumulatif** | **~+0.0205** |
+| D7 okuma kapisi (+0.10) | GECILMEDI — D7 OKUNMADI |
+
+**Sahaya inme durumu:** bu kazanclar P6 zincirinde; ihracatcilar
+`robot_cp.extract` cagiriyor. Olculen zincir saglamlik denetimini GECTI
+(40/40 parca, cokme/NaN yok, yonler birim) ama **181 GT icin 309 CP**
+uretiyor. Kesinlik sorunu cozulmeden bayrak ACILMADI.
+
+## 19.9 GECE TURU — yeni bilgi kollari ve D1/D2
+
+Taban: temel + kanonik + neg12 = **0.3135** (d6).
+
+**L1 hedef fonksiyonu** (`results/siralama_dizi_d6.json`):
+
+| kol | F1 | fark |
+|---|---|---|
+| yerel negatif (parca-ici ornekleme) | 0.3168 | +0.0034 |
+| lambda agirligi (parca-ici sira hatasi) | 0.3159 | +0.0024 |
+| dizi uyeligi | 0.3150 | +0.0016 |
+| dizi + yerel | 0.3123 | −0.0012 |
+
+**L3/L4/L5 yeni bilgi** (`results/yeni_konum_d6.json`):
+
+| kol | F1 | fark |
+|---|---|---|
+| **ayna esi** | **0.3210** | **+0.0075** |
+| isin-temas (CONTACT'a varan isin) | 0.3178 | +0.0043 |
+| hepsi | 0.3172 | +0.0038 |
+| vida cifti | 0.3150 | +0.0015 |
+| ayna + temas + yerelneg | 0.3192 | +0.0058 |
+| ayna + yerelneg | 0.3125 | −0.0010 |
+| ayna + temas | 0.3085 | −0.0050 |
+
+**HICBIRI +0.01 KAPISINI GECMEDI.** Ayna esi (+0.0075) en guclu yeni
+sinyal ve dogrudan bimodal bulgusundan turedi, ama kapinin altinda.
+Kapiyi indirmek ya da gecene kadar kume degistirmek YAPILMADI.
+Birlesimler de kazandirmiyor -- oznitelik seyrelmesi.
+
+**D1 SENTETIK KORPUS — URETEC CALISIYOR, BORU HATTI KABUL ETMIYOR.**
+Parametrik klemens uretildi (2-30 kutup, egimli giris, cift sira, sikma
+vidasi, GT'ye GIRMEYEN celdiriciler). Duman testi gecti. Ama dondurulmus
+segmentasyon modeli sentetik geometride **ates(le)miyor**:
+
+| | GT agzinda | rastgele yuzey | oran |
+|---|---|---|---|
+| duz delik | 0.0001 | 0.0002 | 0.52x |
+| + havsa + ic kamara | 0.0003 | 0.0003 | **0.92x** |
+
+Kontrol: ayni kod yolunda GERCEK parca maks CE+CT 0.4985, sentetik 0.2318
+-> kusur kodda DEGIL. Model sentetikte yanlis yerde degil HIC ateslemiyor
+= girdi dagilimi kaymasi. `domain-gap-is-the-blocker`'in baska ornegi.
+D1 ancak segmentasyon sentetikle BIRLIKTE yeniden egitilirse ise yarar.
+
+**D2 SIE — TUKENMIS.** `_ds1`'de 331 SIE dosyasi var ama **309'u zaten
+korpusta**; yeni olan yalnizca **22 parca**. Onceki "SIE 310 dokunulmamis"
+notu yanlisti, duzeltildi. Kiyas: +110 WEI -> +0.0391; 22 parca ihmal
+edilebilir.
+
+**Geriye kalan tek canli veri kolu:** `_p6_oz_tam4` cikariminin bitmesi
+(966 parca bosta duruyordu; egitim verisi %60 artacak).
+
+## 19.10 URETIM TABANI DUZELTMESI ve DAGITIM
+
+**Yakalanan kusur.** Gelistirme taramasinin tabani `neg=6` idi, ama URETIM
+egiticisi (`kos_p6_kademe2.py`) `P6_NEG_KAT` varsayilani **8** kullaniyordu.
+Yani 6'ya gore olculen +0.0088, dagitilacak sayi DEGILDI. Dogru taban
+olculdu:
+
+| kume | neg=8 (URETIM) | neg=12 | fark |
+|---|---|---|---|
+| d6 (468 parca, 4 kat) | 0.2994 | 0.3135 | **+0.0140** |
+| **tam (2040 parca, 5 kat)** | **0.3092** | **0.3218** | **+0.0126** |
+
+**DAGITILDI:** `kos_p6_kademe2.py` NEG_KAT 8 → 12. Canli model
+`results/p6_kademe2_model.pkl.oncesi_neg12` olarak yedeklendi. Yeniden
+egitim, `_p6_oz_tam4` cikarimi bitince TEK seferde yapilacak (korpus hala
+buyuyor; simdi egitmek iki degisikligi birbirine karistirirdi).
+
+**GURULTU.** neg egrisi 12-24 arasi duz plato (0.3121-0.3135) ve 6 (0.3047)
+ile 8 (0.2994) TERS donuyor -> kat gurultusu ~±0.005. +0.0126'nin
+belirsizligi gercektir ve manset verilirken yazilmalidir.
+
+**MUTLAK DEGERLER KOSU ARASI KIYASLANAMAZ.** `tam` 1617 → 2040 parcaya
+buyudu ve eklenen parcalar DAHA ZOR (ayni kol 0.3699 → 0.3092). Yalniz
+kosu-ici farklar gecerlidir.
+
+## 19.11 KANONIK BLOK URETIMDE YENIDEN URETILMEDI — DAGITILMADI
+
+Gun boyunca "gunun tek gecen kolu" sayilan kanonik hizalama blogu, URETIM
+egiticisinde A/B kosuldu (`logs/kanon_ab_0.log` / `_1.log`, d6):
+
+| kol | kanonik KAPALI | kanonik ACIK |
+|---|---|---|
+| **P6 (SECILEN kol)** | **0.2932** | **0.2794 (−0.0138)** |
+| P6_KAFES | 0.2627 | 0.2475 |
+| P6_GEO | 0.2742 | 0.2815 (+0.0073) |
+
+Olcum betiklerinde `tam` katlarinda **+0.0151** veren kol, dagitilacak kod
+yolunda **kaybettiriyor**. Sebep kural secimi: olcum betigi SABIT
+`('goreli', 0.85, 0.20)` kullaniyordu; uretim kat icinde kural ARIYOR ve
+`('mutlak', 0.97)` seciyor. Yani olculen zincir ile dagitilacak zincir AYNI
+DEGILDI.
+
+**DAGITILMADI.** `P6_KANONIK` varsayilani 0; kod duruyor.
+
+**DERS:** bir kol "gecti" denip dagitilmadan once DAGITILACAK KOD YOLUNDA
+yeniden olculur. Ayri bir olcum betigindeki kazanc, uretimde de
+kazandiracaginin kaniti degildir.
+
+## 19.12 GUNUN DUZELTILMIS BILANCOSU
+
+| kalem | durum |
+|---|---|
+| negatif orani 8→12 | **DAGITILDI**, `tam` 2040 parca / 5 kat: **+0.0126** |
+| kanonik blok | olcumde +0.0151, URETIMDE −0.0138 → **DAGITILMADI** |
+| ayna esi | +0.0075, kapi (+0.01) GECILMEDI → dagitilmadi |
+| isin-temas | +0.0043 → dagitilmadi |
+| yerel negatif / lambda / dizi | +0.0034 / +0.0024 / +0.0016 → dagitilmadi |
+| D1 sentetik | uretec calisiyor, segmentasyon kabul etmiyor (0.92x) |
+| D2 SIE | tukenmis (yeni 22 parca) |
+
+**GUNUN TEK DAGITILAN KAZANCI: +0.0126** (gurultu ~±0.005).
+Sabah "+0.0205" denen rakam, kanonik dusunce **duzeldi**.
+D7 OKUNMADI (kapi +0.10; 2 okuma kaldi).
+
+# BOLUM 20 — 2026-08-13 GECESI: SEGMENTASYON CEPHESI
+
+## 20.1 Neden segmentasyon
+
++0.30 aritmetigi tek yere cikiyor: NIT tipi yogun parcalar GT'nin %51'i ve
+uctan uca **0.0089** uretiyor. Mikroyu +0.30 oynatmak NIT'in tek basina
+~0.60'a cikmasini gerektirir.
+
+Ve kampanya boyunca SECICI optimize edildi; altindaki segmentasyon
+**dondurulmus** kaldi. Canli kontrol noktalari **27 Temmuz** tarihli ve
+kontrol kolu yalnizca **189 parca** goruyor (118 kismi insan etiketi).
+
+## 20.2 SEG-1: GT'den kismi etiket (YAPILDI)
+
+`kos_gt_kismi_etiket.py` — uretici GT'sinden korpus olceginde kismi
+segmentasyon etiketi: **1556 parca**, isaretli tepe orani **%0.94**
+(elle etiketli korpusta ~%1.5 -- ayni mertebe).
+
+DONGUSEL DEGIL: etiketler model ciktisindan degil URETICI JSON'undan.
+
+**SIZINTI BEKCISI:** yalniz `tam` parcalari boyandi; **835 d6/d7 parcasi
+disarida**. Bolme, oznitelik dosyalarinin onekinden okundu -- ilk yazimda
+`d6_kayit.yukle()` kullanmistim, o bir GENEL DEPO (6074 kimlik) ve bekci
+3418 parcanin hepsini eleyip HIC etiket uretmemisti.
+
+## 20.3 SEG-2: A/B egitimi (KOSUYOR)
+
+| kol | etiket dizinleri | parca | epoch |
+|---|---|---|---|
+| A (kontrol) | elle etiketli 5 dizin | 189 | 200 |
+| B (deney) | + `_label_targets_gt` | ~1745 | 40 |
+
+**Epoch secimi durustce ASIMETRIK:** B'yi 200 epoch kosmak ~16 saat
+surerdi. 40 x 1745 = 69.800 ornek, A'nin 200 x 189 = 37.800 ornegine gore
+~1.85 kat. B kendi recetesine gore AZ egitilmis; kiyas B'nin ALEYHINE
+egimli. B yine de kazanirsa kanit guclu, kaybederse BELIRSIZ.
+
+## 20.4 GECENIN OLCUM DERSI: taze cikarim onbellegi yeniden uretmiyor
+
+Yeni kontrol noktalarini degerlendirmek icin elle `D.predict` cagrisi
+yazdim. Uc sonuc uretti ve **UCU DE GECERSIZ CIKTI**:
+
+- "yeni A kontrol noktasi NIT'te 4.87x" (canliya karsi 1.19x)
+- "onbellek bayat; tazelemek kazandirir"
+- kontrol noktasi basina AUC tablosu
+
+**Kanit:** ayni parcada, canli dort kontrol noktasindan alinan taze
+olasiliklarin `_p1_olasilik` onbellegiyle korelasyonu **~0**
+(−0.05 … 0.26). Farkli ama gecerli bir model olsaydi korelasyon yuksek
+olurdu. `op_cache_dir` vermek sonucu degistirmedi.
+
+**Kural:** yeni segmentasyon kontrol noktasi elle `D.predict` ile
+DEGERLENDIRILMEZ. Degerlendirme, urunun olasilik uretme yolundan gecip
+`_p1_olasilik`-benzeri bir dizine yazilmali ve mevcut sondalarla
+okunmalidir. Ayni aile: 19.11 (kanonik) ve `glb-olculen-zinciri-kullanmiyor`.
+
+**Segmentasyon A/B EGITIMI bu sorundan ETKILENMEZ** -- kendi boru hattini
+kullanir; etkilenen yalniz degerlendirme yolu.
+
+## 20.5 Yan bulgular
+
+- **B-rep NIT'te VAR** (50/50 parca, ort 119.6 silindir). "NIT'te B-rep yok"
+  hipotezi YANLIS; silindirler mevcut ama CP'lerde degil (0.011) --
+  muhtemelen vida delikleri ve pimler.
+- **`_p1_olasilik` onbellegi 6 Agustos tarihli ve 2 MODEL iceriyor**, canli
+  yapilandirma ise 4 kontrol noktasi kullaniyor. Tum P6 oznitelik zinciri
+  bu onbellekten besleniyor. Etkisi 20.4 yuzunden HENUZ OLCULEMEDI.
+- **`_p6_oz_tam4` cikarimi BITTI** (2560 dosya). Uretim modeli tam+d6
+  korpusuyla ve neg=12 ile yeniden egitiliyor.
+
+## 20.6 SEG-2 SONUCU: GT KORPUSU KOLU DUSTU
+
+| kol | egitim verisi | epoch | val Conn_IoU |
+|---|---|---|---|
+| A (kontrol) | 189 parca (118 kismi insan) | 200 | **0.6232** |
+| B (+GT korpusu) | 689 parca (618 kismi) | 60 | **0.5540** |
+
+**B −0.0692 ile KAYBETTI.** Uretici GT'sinden turetilen kismi etiketler
+segmentasyonu iyilestirmedi.
+
+**DURUST KAYITLAR:**
+- B bitiste hala TIRMANIYORDU: 0.3574 → 0.4982 → 0.5412 → 0.5540.
+  A'nin 200 epoch'una karsi 60 epoch gordu. Hesap dengeliydi (41.340 vs
+  37.800 ornek) ama EPOCH asimetrikti -> "daha uzun kosuda gecebilirdi"
+  ihtimali ELENMIS DEGIL.
+- Ilk deneme (1556 parca) operatör hazirliginda oldu; 500 parcalik YOGUN
+  alt kume ile tekrarlandi (alt kume rastgele degil, isaretli tepe
+  sayisina gore secildi -- duvar yogun parcalarda).
+- **Muhtemel kok neden:** etiketler GT noktasi cevresine 2mm KURE
+  boyanarak uretildi. Gercek CableEntry bolgesi kure degil, deligin AGIZ
+  YUZEYIDIR. Model yanlis SEKIL ogreniyor olabilir. Bir sonraki deneme
+  agiz yuzeyini (yerel normal + delik yaricapi kapili) boyamali.
+
+**TUZAK NOTU:** izleme dongusunde `pgrep -f train_seg_extra` kullandim ve
+"surec oldu" yanlis negatifi verdi (Git Bash Windows sureclerini gormuyor;
+bkz. `ps-aux-yanlis-negatif`). PowerShell `Get-CimInstance` ile dogrulandi:
+surecler ayaktaydi. Bu yuzden bir kol gereksiz yere yeniden baslatildi.
+
+## 20.7 E2 SAHA BAYRAGI ACILDI — olculen zincir artik sahaya iniyor
+
+**Sorun.** Ihracatcilar `robot_cp.extract` cagiriyordu; kampanyada olculen
+`urun_p6`/`urun_genis` zinciri sahaya HIC girmiyordu. Yani olculen her
+kazanc robota ULASMIYORDU (`glb-olculen-zinciri-kullanmiyor`).
+
+**Esli kiyas** (`sonda_zincir_esli_kiyas.py`, 80 parca / 7 marka,
+STEP'ten TAM zincir, AYNI parcalarda yan yana):
+
+| yol | robot F1 | kesinlik | recall | uretilen CP |
+|---|---|---|---|---|
+| saha (`robot_cp.extract`) | 0.1309 | 0.1592 | 0.1111 | 289 |
+| **olculen (`urun_cikti`)** | **0.1677** | **0.5467** | 0.0990 | **75** |
+
+**F1 +0.0368 · KESINLIK +0.3875.** Recall hafif DUSTU (0.1111 → 0.0990)
+ve bu yazilir.
+
+Kural ONCE ilan edilmisti: *F1 ARTTI **VE** kesinlik 0.02'den fazla
+GERILEMEDI.* Ikisi de saglandi -> `cp_config.glb_kanonik_zincir = true`.
+
+**Fonksiyonel anlami** (kullanicinin sordugu sey): robot 289 yerine **75**
+noktaya gidiyor ve yarisindan fazlasi DOGRU; eskiden 6'da 1'i dogruydu.
+Yanlis CP = robotun bos yere hareketi, dolayisiyla kesinlik artisi sahada
+F1 artisindan daha degerlidir.
+
+Geri alma: `cp_config.json.oncesi_glb_zincir`.
+
+## 20.8 SEG GT-ETIKET KOLU KAPANDI
+
+| kol | etiket sekli | egitim parcasi | val Conn_IoU |
+|---|---|---|---|
+| A (kontrol) | — | 189 | **0.6232** |
+| B | GT noktasi cevresi 2mm KURE | 689 | 0.5540 |
+| C | GT EKSENI etrafinda SILINDIRIK KABUK | 689 | **0.5511** |
+
+**Kok-neden hipotezim YANLIS cikti.** "Kure yanlis sekil, kanal yuzeyi
+dogru" dedim; sekli duzeltince sonuc DEGISMEDI (0.5540 → 0.5511).
+Demek ki sorun etiket SEKLI degil. Kol kapaniyor; yeniden acmak icin
+YENI bir gerekce gerekir.
+
+## 20.9 Y19 GIRDI OZNITELIGI (xyz vs hks) — DUSTU
+
+`train_seg_extra.py` cfg'yi SABIT `input_features="xyz"` yaziyordu; `hks`
+DiffusionNet'te destekli oldugu halde hic denenemiyordu. Bayrak eklendi
+(`--input-features`), tek degiskenli kosuldu.
+
+| kol | girdi | val Conn_IoU |
+|---|---|---|
+| A (kontrol) | xyz (3 kanal, DISSAL) | **0.6232** |
+| Y19 | hks (16 kanal, ICSEL) | **0.1991** (ep 99, DURDURULDU) |
+
+Kayip 8. epoch'tan beri kipirdamadi (1.6396 → 1.6062): model HKS'ten
+OGRENEMIYOR. Hipotez makuldu (icsel oznitelik gorulmemis markada daha iyi
+genellemeli) ama olcum tersini soyledi. Kol 99/200'de durduruldu -- duz
+kayip ve 0.20 vs 0.62 farki, kalan 100 epoch'ta kapanacak bir aciklik
+degil.
+
+**Bayrak KODDA KALDI** (`--input-features`), varsayilan `xyz`.
+
+## 20.10 Y1 HAFIF AUGMENTASYON — GECTI (+0.0197 seg IoU)
+
+| kol | augmentasyon | val Conn_IoU |
+|---|---|---|
+| A (kontrol) | yok (`augment=False`) | 0.6232 |
+| **Y1** | **hafif, 0.3 rad (~17 derece)** | **0.6429** |
+
+**+0.0197.** Kampanyanin segmentasyon tarafindaki ILK kazanci.
+
+**Mekanizma ogretici:** `--augment` bayraginin yardim metni "1.05 =
+aggressive (the heuristic-tuned one that hurt quality)" diyor -- yani
+AGRESIF donme (~60 derece) denenmis ve DUSURMUS. Kol "olu" degilmis,
+AYARI yanlismis. Bu, `KAPANAN_KOLLAR_DENETIMI`'ndeki desenin bir ornegi
+daha: kapatma hukmu sondanin/ayarin kusuru olabilir.
+
+**HENUZ DAGITILMADI.** Bu bir segmentasyon IoU kazancidir, robot F1 degil.
+Kanonik dersi (Bolum 19.11) aynen gecerli: olcum yerinde kazanan kol,
+dagitilacak yolda kaybedebilir. Once uctan uca dogrulanacak.
+
+Kontrol noktasi: `results/seg_extra/y1_aug03_s0.pt`
+
+# BOLUM 21 — SUNUM TABANI (temiz VAL kumesi, bugunku sistem)
+
+## 21.1 Kume neden VAL
+
+`results/split3.json` -> VAL, 100 parca. Olculdu:
+**VAL ∩ tam = 0, VAL ∩ d6 = 0, VAL ∩ d7 = 0.**
+Yani hicbir egitim ya da sinav kumesiyle kesismiyor -- bagimsiz holdout.
+(DEV KULLANILMAZ: 100 parcasinin **37'si** secicinin egitim kumesinde.)
+
+## 21.2 UC METRIK, ayni parcalar, ayni zincir
+
+| metrik | saha zinciri (dagitilan) | olculen zincir |
+|---|---|---|
+| **tespit F1** (konum, aci serbest) | **0.7878** | 0.6101 |
+| robot F1 **ISARETSIZ** (eksen) | 0.5764 | 0.5376 |
+| robot F1 **ISARETLI** (fiziksel) | **0.4839** | 0.4668 |
+| kesinlik | 0.5008 | 0.5605 |
+| recall | 0.4682 | 0.4000 |
+| uretilen CP | 617 | 471 |
+
+## 21.3 ISARETLI / ISARETSIZ AYRIMI — sunumda mutlaka soylenmeli
+
+`manset.py` manseti IKI olcutle hesapliyor:
+```
+rob = esle(..., 2.0, 10.0, False)                  # isaretli VARSAYILAN False
+rbi = esle(..., 2.0, 10.0, False, isaretli=True)   # ISARETLI
+```
+Yapilandirmadaki **`robot_hazir_F1 = 0.6303` ISARETSIZ olandir** -- yani
+180 derece TERS bir yon DOGRU sayilir. Kodun kendi yorumu isaretliyi
+isaret ediyor: *"robot icin dogru olcut budur"*.
+
+**Sunumda ikisi de verilmelidir.** "Robot kabloyu hangi yone sokacagini
+biliyor mu" sorusuna yalnizca ISARETLI sayi cevap verir.
+
+## 21.4 Onceki manset ile kiyas
+
+| | yapilandirma (v5, DEV+VAL 194) | bu olcum (VAL 100, bugunku sistem) |
+|---|---|---|
+| tespit F1 | 0.7584 | **0.7878** |
+| robot (isaretsiz) | 0.6303 | 0.5764 |
+
+Tespit YUKSEK cikti. Isaretsiz robot metriginde fark var ama kumeler ayni
+DEGIL (194 vs 100 parca, farkli urun surumu), dolayisiyla "geriledi"
+denemez; bu olcum DAHA TEMIZ olandir.
+
+## 21.5 Bayrak geri alindi
+
+`glb_kanonik_zincir` ACILDI sonra GERI ALINDI. Iki populasyonda TERS:
+- zor/gorulmemis markalar (80 parca): olculen zincir F1 +0.0368
+- **tanidik marka (VAL 100): olculen zincir F1 −0.0171**
+
+Olculen zincir daha KESIN (0.5605 vs 0.5008) ama daha dusuk RECALL'li
+(0.4000 vs 0.4682). Zor markada bu takas kazandiriyor, tanidik markada
+kaybettiriyor. Varsayilan FALSE. Dogru cozum rejim kapisi OLABILIR --
+olculmeden acilmaz.
+
+## 21.6 Y1 AUGMENTASYON UCTAN UCA DOGRULANDI — kampanyanin en buyuk kazanci
+
+**Adil kiyas** (VAL 100 parca, STEP'ten TAM zincir, `olculen` yolu,
+IKISI DE TEK kontrol noktasi -- taban 4'lu toplulukti, o yuzden tek-vs-tek
+kosuldu):
+
+| kol | tespit | robot ISARETSIZ | robot ISARETLI |
+|---|---|---|---|
+| A kontrol (augmentasyon yok) | 0.5430 | 0.4792 | 0.4135 |
+| **Y1 (hafif augment 0.3 rad)** | **0.5808** | **0.5293** | **0.4831** |
+| **fark** | **+0.0378** | **+0.0501** | **+0.0696** |
+
+**Segmentasyon IoU'daki +0.0197, robot F1'e +0.0696 olarak gecti** -- yani
+uc katiyla. Bu, kanonik dersinin (olcum yerinde kazanan dagitilan yolda
+kaybedebilir) TERSI yonde bir ornek: burada kazanc BUYUYEREK gecti.
+
+**Ve kritik gozlem:** TEK augmentasyonlu ckpt (robot isaretli 0.4831),
+DAGITILMIS DORT ckpt'lik toplulugun saha yoluna (0.4839) DENK. Oyleyse
+augmentasyonlu bir TOPLULUK ikisini de gecmeli. Tohum 1 ve 2 egitiliyor.
+
+**Kiyas kusuru not edilir:** ilk denemede Y1 (tek ckpt) 4'lu toplulukla
+kiyaslanmisti; fark augmentasyona DEGIL topluluk-vs-tek'e ait olabilirdi.
+Kontrol kolunun tek ckpt'si ayrica kosuldu ve kiyas tek-vs-tek yapildi.
+
+## 21.7 CALISMA NOKTASI TARAMASI (cevrimdisi) — MEVCUT NOKTA OPTIMUM
+
+`sonda_calisma_noktasi.py`, tahmin dokumunden (VAL 100 parca, A kontrol
+tek ckpt, saha yolu). Uretilen CP'ler SABIT, yalnizca tutma kurali degisir.
+
+| deneme | robot ISARETLI | kesinlik | recall | CP |
+|---|---|---|---|---|
+| TABAN (hepsi) | 0.2611 | 0.3933 | 0.1955 | 328 |
+| ilk-16 | **0.2619** | 0.3969 | 0.1955 | 325 |
+| guven>=0.5 | 0.2365 | 0.4605 | 0.1591 | 228 |
+| guven>=0.7 | 0.1882 | 0.5474 | 0.1136 | 137 |
+| guven>=0.9 | 0.0635 | **0.6667** | 0.0333 | 33 |
+
+**En iyi alternatif +0.0008 -- gurultu.** Her esik F1'i DUSURUYOR: recall
+kaybi kesinlik kazancini asiyor. **Y15 (esik taramasi) KAPANDI**, mevcut
+"hepsini tut" kurali zaten optimum.
+
+**Sunumda kullanilabilir yan bulgu:** kesinlik AYARLANABILIR (0.393 →
+0.667, recall bedeliyle). Robot uygulamasinda "az ama emin" tercih
+edilirse bu bir calisma noktasi secenegidir.
+
+**Altyapi notu:** bu tarama 27 dakikalik zincir kosusu yerine SANIYELER
+surdu, cunku `sonda_zincir_esli_kiyas.py` artik tahminleri diske dokuyor.
+
+## 21.8 KOLLARI TANIDIK MARKADA YENIDEN DENEME — HEPSI DUSTU
+
+Hipotez: bu kollar (ayna esi, yerel negatif, isin-temas) GORULMEMIS
+markada kapiyi gecemedi; TANIDIK markada temsil problemi cok daha kucuk
+oldugu icin tutabilirler. Ayni veri (d6), tek degisken KAT TURU:
+marka-disi katlar yerine RASTGELE 3 kat (marka-KARISIK).
+
+| kol | tanidik marka | fark |
+|---|---|---|
+| TABAN | **0.5603** | — |
+| ayna esi | 0.5585 | −0.0018 |
+| ayna + yerel negatif | 0.5575 | −0.0028 |
+| ayna + temas | 0.5550 | −0.0052 |
+| ayna + temas + yerel negatif | 0.5555 | −0.0048 |
+
+**Hipotez YANLIS: hepsi tanidik markada da kaybettiriyor.** Kollar kapandi.
+
+## 21.9 ALAN FARKI TEK SAYIYLA — sunumun ana bulgusu
+
+Ayni sistem, ayni veri, ayni oznitelikler; **tek fark kat turu**:
+
+| kosul | taban robot F1 |
+|---|---|
+| GORULMEMIS marka (marka-disi katlar) | **0.3135** |
+| TANIDIK marka (rastgele katlar) | **0.5603** |
+| **fark** | **+0.2468** |
+
+Bu, `domain-gap-is-the-blocker` bulgusunun secici duzeyindeki BUYUKLUGU.
+Sunumda tek basina guclu bir bulgudur: sistem kapasitesi degil, YENI
+URETICIYE TRANSFER bagliyor.
+
+## 21.10 COK-CP UZMANLASMASI — TUM BICIMLERI OLCULDU, HICBIRI GECMEDI
+
+TANIDIK marka kosulu (d6, rastgele katlar), taban 0.5572.
+Cok-CP tanimi `manset.py` ile AYNI: `n_gt >= 8` (468 parcanin 64'u, %13.7).
+
+| kol | robot F1 | fark |
+|---|---|---|
+| **agirlik 2x** | 0.5637 | **+0.0065** |
+| agirlik 4x | 0.5582 | +0.0009 |
+| ince ayar (warm-start, yonlendirici) | 0.5536 | −0.0037 |
+| ince ayar (rejim GT'den) | 0.5532 | −0.0040 |
+| agirlik 8x | 0.5473 | −0.0099 |
+| uzman (ayri egitim, yonlendirici) | 0.5162 | −0.0410 |
+| uzman (rejim GT'den, UST SINIR) | 0.5154 | −0.0418 |
+
+**YONLENDIRICI SUCLU DEGIL:** dogrulugu **0.962**, ve KAHIN rejimle bile
+uzman kaybediyor. Sebep VERI PARCALANMASI.
+
+**INCE AYAR bunu DOGRULADI:** genel modelden `warm_start` ile devam edip
+yalnizca yogun parcalarda ek agac eklemek, bolmenin zararinin **%91'ini**
+geri aldi (−0.0410 → −0.0037). Yani teshis dogruydu; ama yine de taban
+asilmadi.
+
+**HUKUM:** cok-CP uzmanlasmasi SECICI duzeyinde hicbir bicimde calismiyor.
+En iyisi hafif agirliklandirma (+0.0065), o da kapinin altinda.
+
+**SESSIZ NO-OP YAKALANDI:** ince ayar ilk kosuda tam **+0.0000** verdi.
+Sebep: `m.max_iter_` diye bir oznitelik YOK (dogrusu `n_iter_`);
+AttributeError genis bir `except` tarafindan yutuluyor, fonksiyon None
+donuyor ve iki kol da sessizce TABANA dusuyordu. "Ince ayar ise yaramiyor"
+diye rapor edilecekti. Hata artik YUTULMUYOR ve agac sayisi `assert` ile
+dogrulaniyor.
+
+## 21.11 AUGMENTASYON: ACI ve TOHUM
+
+**Aci taramasi (AYNI tohum s0, adil kiyas):**
+
+| aci | val Conn_IoU |
+|---|---|
+| yok (kontrol) | 0.6232 |
+| **0.15 rad (~9 derece)** | **0.6528** |
+| 0.30 rad (~17 derece) | 0.6429 |
+| 1.05 rad (~60 derece) | DUSURUYOR (bayrak belgesi) |
+
+Optimum 0.15 civarinda ya da ALTINDA. Ama:
+
+**Tohum gurultusu ACI farkindan BUYUK.** 0.3 rad'da tohumlar:
+s0 0.6429 · s1 0.6667 · s2 0.6881 (yayilim 0.045). Aci farki ise 0.010.
+Bu yuzden tek tohumla "optimum aci budur" DENMEZ; aci kiyaslari ayni
+tohumda yapildi ve bu sinirlilik raporlanir.
+
+## 21.12 AUGMENTASYONLU TOPLULUK — DAGITILMADI
+
+VAL 100 parca, TAM zincir:
+
+| yapilandirma | tespit | robot ISARETSIZ | robot ISARETLI |
+|---|---|---|---|
+| **DAGITILMIS 4'lu (saha yolu)** | **0.7878** | **0.5764** | **0.4839** |
+| augmentasyonlu 3'lu (saha yolu) | 0.6204 | 0.4561 | 0.4035 |
+| augmentasyonlu 3'lu (olculen yol) | 0.6151 | 0.5573 | 0.4826 |
+
+**Saha yolunda augmentasyonlu topluluk DAHA KOTU.** Sebep teshis edildi:
+`robot_cp.extract` OY SAYISINA ve guven esigine dayaniyor, bunlar ESKI
+kontrol noktalari icin kalibre edilmis. Yeni modellerin kalibrasyonu
+farkli -> oylar tutmuyor, tespit 0.79'dan 0.62'ye dusuyor.
+
+**Sonuc:** augmentasyon kazanci SEGMENTASYON duzeyinde ve OLCULEN zincirde
+gercek (+0.0158 isaretli), ama dagitilan OY TABANLI yola KALIBRASYON
+yapilmadan takilamiyor. **DAGITILMADI.**
+
+**Karistirici:** dagitilmis sistem 4 ckpt, bu 3 ckpt. Adil olmasi icin
+dorduncu tohum egitiliyor ve olcum tekrarlanacak.
+
+## 21.13 SAHA YOLUNUN COKME MEKANIZMASI — teshis ve TAHMIN
+
+Augmentasyonlu 3'lu topluluk saha yolunda tespit F1'i 0.7878 -> 0.6204
+dusurmustu. Mekanizma:
+
+- `robot_cp.extract` `min_votes=1` kullaniyor -> OY ESIGI sorun DEGIL.
+- Ama `_votes` (kac modelin bagimsiz buldugu) **wire-gate'in
+  OZNITELIGIDIR** ve olculmustu ki *durust (geometri) bolmede gate'in
+  GENELLESEN TEK ozelligi votes'tur* (`gate-memorizes-not-learns`).
+- Gate, ESKI **4** modelli toplulugun oy dagilimiyla egitildi. 3 model
+  verilince oylar 1-3'e sikisiyor; gate DAGILIM DISI deger goruyor ve
+  daha cok REDDEDIYOR.
+
+**TAHMIN (once yazildi):** 4 augmentasyonlu kontrol noktasiyla oylar yine
+1-4 araligina doner ve saha yolu TOPARLAR. Tohum 3 egitiliyor; olcum
+kuyruga alindi (`results/VAL_aug4_topluluk.json`).
+
+Tahmin tutmazsa ikinci secenek: wire-gate'i yeni toplulugun oy dagilimiyla
+YENIDEN egitmek (iki gate AYNI dagilimda egitilmeli -- `gate-refit-minv4`).
+
+## 21.14 KUYRUK KUSURU YAKALANDI — yari egitilmis kontrol noktasiyla olcum
+
+4'lu topluluk olcumu icin kurdugum kuyruk sunu bekliyordu:
+`while [ ! -f results/seg_extra/y1_aug03_s3.pt ]`.
+
+**Kusur:** kontrol noktasi her val iyilesmesinde yazilir, yani YARI
+EGITILMIS halde de VARDIR. Olcum, tohum 3 daha epoch 20/200'deyken
+basladi ve 4'lu topluluk sayisi yarim uyeyle uretilecekti.
+
+Yakalandi ve durduruldu. Dogru kosul: egitim logunda `DONE best` gormek.
+
+**Ders:** "cikti dosyasi var" ile "is bitti" AYNI SEY DEGILDIR. Bu projede
+ayni aileden dordunculuk: sessiz no-op'lar, `pgrep` yanlis negatifi,
+`veri.index()` tuzagi, `max_iter_` yutulan hatasi.
+
+## 21.15 HATA OTOPSISI — son-islem ailesi TEK OLCUMLE kapandi
+
+`sonda_hata_otopsisi.py`, VAL 100 parca, saha yolu (A kontrol tek ckpt).
+TP 129 · FP 199 · FN 531 · robot ISARETLI F1 0.2611
+
+**Yanlis pozitif dagilimi (194):**
+
+| tur | sayi | pay |
+|---|---|---|
+| **hayalet** (hicbir GT'ye yakin degil) | 171 | **%88.1** |
+| aci yanlis | 14 | %7.2 |
+| isaret ters | 8 | %4.1 |
+| cift kopya | 1 | %0.5 |
+
+**Kacan dagilimi (531):**
+
+| tur | sayi | pay |
+|---|---|---|
+| **bos** (yakininda HIC tahmin yok) | 500 | **%94.2** |
+| yakin_var (tahmin var, kutuya girmiyor) | 31 | %5.8 |
+
+**HUKUM.** Son-islem onarimlarinin TAVANI:
+isaret %4.1 · aci %7.2 · cift %0.5 -> toplam **hatanin %12'si**.
+Bugun denenen son-islem kollarinin (disari cevirme, eksen cakistirma,
+birlestirme) neden hicbir sey kazandirmadigi buradan anlasilir.
+
+**Kayip YUKARIDA:** sistem cogunlukla YANLIS YERLERDE uretiyor (%88
+hayalet) ve gercek girislerin cogunun YAKININDA HIC BIR SEY uretmiyor
+(%94 bos). Bu bir son-islem sorunu DEGIL, ADAY URETIMI + KONUM SKORLAMA
+sorunudur.
+
+Bu, bagimsiz olarak olculen konum/yon ayrimini DOGRULAR:
+yon AUC 0.8899 · konum AUC 0.7053 (gereken 0.944).
+
+**Yontem notu:** bu otopsi, agregat sayilardan yapilan bir cikarimin
+(tespit 0.7878 -> eksen 0.5764 farkinin "eksen hatasi" oldugu) YANLIS
+oldugunu gosterdi. Agregat farklardan mekanizma cikarilmaz; hata
+SINIFLANDIRILIR.
+
+## 21.16 MAKBUZ KIRLILIGI YAKALANDI
+
+`results/VAL_aug4_topluluk.json` "4'lu augmentasyonlu topluluk" adiyla
+duruyordu ama icerigi 3'lu kosunun degeriydi (saha F1 0.4035). Sebep:
+yari egitilmis ckpt ile baslayan olcumu OLDURDUM, ama kuyruk betigi bir
+sonraki satirdaki `cp` komutunu yine de calistirdi ve ESKI
+`zincir_esli_kiyas.json`'i YENI adla kopyaladi.
+
+Karantinaya alindi: `results/_SILINDI_VAL_aug4_YARIM.json`.
+
+**Ders:** kuyruk betiklerinde her adim, ONCEKI adimin BASARIYLA bittigini
+DOGRULAMALIDIR (`&&` ya da acik kontrol). Yoksa oldurulen bir olcumun
+ardindan yanlis etiketli makbuz uretilir. Bu projede makbuz cakismasi
+daha once de olmustu (`havuz_tavani_*`, `max_sec_sondasi*`).
+
+## 21.17 HAVUZ mu SKOR mu — OLCUM GECERSIZ, rapor edilmedi
+
+Hata otopsisi kacanlarin %94'unun yakininda HIC tahmin olmadigini
+gostermisti. Sebebi ayirmak icin havuz recall'u ile cikti recall'u yan
+yana olculdu:
+
+| olcu | recall |
+|---|---|
+| HAVUZ (konum) | 0.5939 |
+| HAVUZ (yonlu) | 0.4242 |
+| CIKTI (konum) | 0.6273 |
+| CIKTI (yonlu) | **0.4682** |
+
+**CIKTI recall'u HAVUZ recall'undan YUKSEK.** Cikti havuzun ALT KUMESI
+oldugu icin bu yapisal olarak IMKANSIZ; "gate'in attigi" degerinin
+NEGATIF cikmasi (−0.0439) ayni seyi soyluyor.
+
+**Sebep:** `robot_cp.adaylari_uret(...)` benim cagirdigim bicimde,
+`extract`'in gercekte kullandigi havuzu URETMIYOR -- zincirde asagida
+`urun_p6`/`urun_genis` EK aday ekliyor ve bunlar yakalanmadi.
+
+**Olcum GECERSIZ sayildi ve rapor edilmedi.**
+Makbuz karantinada: `results/_GECERSIZ_havuz_vs_cikti.json`.
+
+Soru ACIK kaliyor: kacanlarin sebebi havuz mu skor mu. Dogru olcum icin
+havuz, `extract`'in ICINDEN (tum aday kaynaklari birlestikten SONRA)
+alinmalidir.
+
+## 21.18 ISARET ONARIMI — TAVAN +0.0893 ama HICBIR GEOMETRIK KURAL YAKALAMIYOR
+
+VAL 100 parca, saha yolu, dogru vekillerle (mesh merkezi ve YEREL YUZEY
+NORMALI dokume eklendikten sonra):
+
+| kol | robot ISARETLI | fark |
+|---|---|---|
+| taban | 0.4839 | — |
+| yerel yuzey normali | 0.4573 | −0.0266 |
+| mesh merkezi | 0.4448 | −0.0392 |
+| tahmin merkezi (ilk vekil) | 0.3712 | −0.1128 |
+| eksen cakistirma | 0.4699 | −0.0141 |
+| **kahin isaret (UST SINIR)** | **0.5732** | **+0.0893** |
+
+Vekiller BEKLENEN sirada iyilesiyor (yerel normal > mesh merkezi > tahmin
+merkezi) ama **ucu de modelin KENDI isaretinden kotu**. Yani hata "model
+iceri bakiyor" DEGIL; baska bir sey.
+
+**HUKUM:** isaret onarimi ailesi (disari kurali, eksen cakistirma)
+KAPANDI. **Tavan +0.0893 kayitta kalir** -- daha akilli bir yontem icin
+acik ve olculmus bir hedef.
+
+**Yontem notu:** ilk olcumde `disari_mesh` ve `disari_normal` tam
+`+0.0000` vermisti; sebep dokumde o alanlarin HENUZ olmamasiydi (kol
+sessizce hicbir sey yapmiyordu). Tam sifir imzasi artik sessiz no-op
+belirtisi olarak taniniyor.
+
+## 21.19 4'LU AUGMENTASYONLU TOPLULUK — OY HIPOTEZI DOGRULANDI
+
+VAL 100 parca, TAM zincir:
+
+| yapilandirma | tespit | robot ISARETSIZ | robot ISARETLI |
+|---|---|---|---|
+| DAGITILMIS (4 eski ckpt, saha) | **0.7878** | 0.5764 | 0.4839 |
+| 3 aug, saha | 0.6204 | 0.4561 | 0.4035 |
+| 4 aug, saha | 0.6725 | 0.5380 | 0.4613 |
+| **4 aug, OLCULEN zincir** | 0.6392 | 0.5761 | **0.5162** |
+
+**OY HIPOTEZI DOGRULANDI.** 21.13'te once yazilmisti: "4 ckpt ile oylar
+1-4 araligina doner ve saha yolu toparlar." Olculdu: 3→4 gecisi saha
+yolunda robot-isaretliyi 0.4035 → 0.4613 (+0.0578), tespiti
+0.6204 → 0.6725 cikardi. Cokusun sebebi gercekten OY DAGILIMIYDI.
+
+**En iyi robot-isaretli sayi:** augmentasyonlu 4'lu + OLCULEN zincir =
+**0.5162**, dagitilmisin 0.4839'una karsi **+0.0323**.
+
+**IKI DURUST KAYIT:**
+
+1. **Tespit DUSUYOR** (0.7878 → 0.6392). Robot icin gecerli olcut
+   isaretlidir, ama bu TAKAS sunumda soylenmelidir.
+2. **+0.0323 GURULTU BANDININ ICINDE.** Tabanin %95 GA'si
+   [0.4003, 0.5671] ve 0.5162 tam onun icinde. "Iyilesti" denebilir;
+   "istatistiksel olarak ayirt edilebilir bir iyilesme" DENEMEZ --
+   n=100 buna yetmiyor.
+
+Bu yuzden DAGITIM KARARI verilmedi: kazanc yonu dogru ama kanit gucu
+yetersiz. Daha buyuk bir degerlendirme kumesi (LOCKED, 100 parca daha)
+ayirt edici olabilir -- ama LOCKED harcanmadi ve bu karar icin
+harcanmamalidir.
+
+## 21.20 AUGMENTASYON ACISI — tarama TAMAM
+
+| aci | val Conn_IoU (tohum 0) |
+|---|---|
+| yok (kontrol) | 0.6232 |
+| **0.15 rad (~9 derece)** | **0.6528** |
+| 0.30 rad (~17 derece) | 0.6429 |
+| 0.50 rad (~29 derece) | 0.6424 |
+| 1.05 rad (~60 derece) | DUSURUYOR (bayrak belgesi) |
+
+Optimum ~0.15; 0.3 ve 0.5 birbirine yakin; hepsi kontrolden IYI. Tohum
+gurultusu (0.6429-0.6881) aci farkindan buyuk oldugu icin "optimum tam
+olarak 0.15'tir" DENMEZ -- soylenebilecek olan: **hafif augmentasyon
+kazandirir, agresif kaybettirir**.
+
+## 21.21 TOPLULUK CESITLILIGI (6 ckpt) — egitim gerektirmeyen kol
+
+Elde 6 augmentasyonlu ckpt var: 4 tohum x 0.3 rad + 0.15 + 0.5.
+FARKLI aci = farkli hata deseni = topluluk cesitliligi. Yeni egitim
+GEREKTIRMEZ, yalnizca olcum. VAL 100 parcada kosuluyor.
+
+## 21.22 Y6 LABEL SMOOTHING — DUSTU
+
+| kol | val Conn_IoU |
+|---|---|
+| augment 0.15 (taban) | **0.6528** |
+| + label smoothing 0.05 | 0.5244 (**−0.1284**) |
+
+Kismi etiketli maskeli BCE'de zaten `partial_pos_weight = 20` var
+(CableEntry tepelerin ~%1.5'i). Hedefi yumusatmak bu dengeyi bozuyor:
+pozitif sinyal zaten 20 kat agirlikliyken hedefi 0.95'e cekmek etkiyi
+seyreltiyor. **KAPANDI.**
+
+Bayrak kodda kaldi (`--label-smooth`, varsayilan 0.0).
+
+## 21.23 TOPLULUK CESITLILIGI (6 ckpt) — DUSTU
+
+VAL 100 parca, olculen zincir, robot ISARETLI:
+
+| topluluk | robot ISARETLI |
+|---|---|
+| **4 tohum x 0.3 rad** | **0.5162** |
+| 6 ckpt (4 tohum + 0.15 + 0.5) | 0.4859 (**−0.0303**) |
+
+Farkli ACILARLA cesitlilik katmak YARDIM ETMIYOR. Ayni acidaki dort tohum
+daha iyi. Muhtemel sebep: 0.15 ve 0.5 kollari TEK tohumlu ve tohum
+gurultusu (0.6429-0.6881) aci farkindan buyuk; toplulugu zayif uyelerle
+seyreltiyorlar.
+
+**KAPANDI.** Bugunun en iyisi degismedi: **4 aug tohum + olculen zincir =
+0.5162** (dagitilmis 0.4839).
+
+## 21.24 SNAPSHOT TOPLULUGU (Y4) — DUSTU
+
+`best` + `last` kontrol noktalari birlikte (4 tohum x 2 = 8 ckpt):
+
+| topluluk | robot ISARETLI (olculen zincir) |
+|---|---|
+| **4 tohum, yalniz `best`** | **0.5162** |
+| 8 ckpt (`best` + `last`) | 0.5039 (**−0.0123**) |
+| 6 ckpt (farkli acilar) | 0.4859 (−0.0303) |
+| 3 tohum | 0.4826 (−0.0336) |
+
+`last` kontrol noktalari `best`ten daha zayif oldugu icin toplulugu
+SEYRELTIYORLAR. **Y4 KAPANDI.**
+
+## 21.25 TOPLULUK DESENI — dort tohum, yalniz `best`, AYNI aci
+
+Dort ayri topluluk denemesinin hepsi ayni sonuca isaret ediyor:
+
+| deneme | fark |
+|---|---|
+| tohum sayisi 3 -> 4 | **+0.0336** |
+| farkli acilarla cesitlendirme | −0.0303 |
+| `last` snapshot'lari ekleme | −0.0123 |
+
+**Kural:** topluluğu buyutmek degil, UYELERI GUCLENDIRMEK kazandiriyor.
+Zayif uye eklemek her seferinde zarar verdi. En iyi yapilandirma
+**4 tohum x hafif augmentasyon (0.3 rad) x yalniz `best` + olculen
+zincir = 0.5162**.
+
+## 21.26 Y14 FOCAL-TVERSKY — NOTR
+
+| kol | val Conn_IoU |
+|---|---|
+| augment 0.15 (taban) | 0.6528 |
+| + Focal-Tversky (gamma 1.33) | 0.6550 (**+0.0022**) |
+
+Tohum gurultusu ~0.045 oldugu icin +0.0022 ANLAMSIZ. Ne kazandirir ne
+kaybettirir. Bayrak kodda kaldi (`--tversky-gamma`, varsayilan 1.0 =
+klasik Tversky, davranis degismez).
+
+**KAPANDI (notr).**
+
+## 21.27 Y5 YARDIMCI GOREV (aux-wire) — POZITIF ama GURULTU ICINDE
+
+`--aux-wire` bayragi kodda VARDI, bu kampanyada HIC acilmamisti.
+53/189 parcada TEL/ALET yardimci etiketi var (agirlik 0.5, pos_w 2.0).
+
+| kol (augment 0.15 tabani uzerine) | val Conn_IoU | fark |
+|---|---|---|
+| taban | 0.6528 | — |
+| **aux-wire** | **0.6611** | **+0.0083** |
+| Focal-Tversky (gamma 1.33) | 0.6550 | +0.0022 |
+| label smoothing (0.05) | 0.5244 | −0.1284 |
+
+aux-wire uc kolun EN IYISI ama **tohum gurultusunun (~0.045) icinde**.
+Tek tohumla "kazandi" DENMEZ. Dogru test cok tohumlu olurdu (~3 x 50 dk);
+bu, kalan sureye sigmadi ve boyle yazildi.
+
+**Not:** ayni sinirlilik Focal-Tversky icin de gecerli. Ikisi de "notr ya
+da hafif pozitif" kategorisinde; hicbiri augmentasyon kadar (seg IoU
++0.0296, uctan uca +0.0696) net degil.
+
+## 21.28 Y7 OZNITELIK SECIMI — KAPIYA EN YAKIN KOL (+0.0097)
+
+Secicinin oznitelik matrisi 162 sutun; sistematik hic budanmamisti.
+Permutasyon onemine gore siralanip budandi (TANIDIK marka, rastgele kat):
+
+| kol | sutun | robot F1 | fark |
+|---|---|---|---|
+| hepsi | 162 | 0.5489 | — |
+| **ilk %75** | **121** | **0.5587** | **+0.0097** |
+| ilk %50 | 81 | 0.5471 | −0.0018 |
+| ilk %25 | 40 | 0.5417 | −0.0072 |
+
+En onemsiz **41 sutunu atmak +0.0097** kazandiriyor -- kapinin (+0.01)
+KIL PAYI altinda.
+
+**Desen, bugunun diger sonuclariyla ORTUSUYOR:**
+- hafif augmentasyon iyi (0.15), agresif kotu (1.05)
+- 2x agirlik iyi, 8x kotu
+- az budama iyi, cok budama kotu
+
+Uc bagimsiz kolda ayni sekil: **olculu mudahale kazandirir, asiri
+mudahale kaybettirir.**
+
+**Kapiyi gecmis SAYILMADI** (tek tohum, rastgele kat). Ama listedeki EN
+UMUT VERICI acik kol budur; cok tohumlu tekrarda gecebilir.
+
+## 21.29 Y8 ETIKET KALITESI AGIRLIKLANDIRMA — 4 TOHUMDA DOGRULANDI
+
+**Fikir.** Secicinin pozitif etiketleri ESIT agirlikta ogretiliyor. Ama
+GT'ye 0.2mm'de oturan aday ile tolerans sinirinda 1.9mm'de oturan aday
+ayni guvenilirlikte DEGIL. Pozitife, GT'ye YANAL yakinligiyla orantili
+agirlik verilir. **Metrik DEGISMEZ** -- yalnizca egitim agirligi
+(bu, `metrik-cerrahisi-a1-reddedildi`'den farkli olmasinin sebebi).
+
+**DORT kat tohumunda:**
+
+| tohum | taban | lineer | karesel |
+|---|---|---|---|
+| 1 | 0.5572 | +0.0144 | +0.0091 |
+| 2 | 0.5635 | −0.0019 | +0.0079 |
+| 3 | 0.5321 | +0.0101 | +0.0123 |
+| 4 | 0.5491 | +0.0102 | +0.0036 |
+| **ortalama** | — | **+0.0082** | **+0.0082** |
+
+**8 olcumun 7'si POZITIF.** Kol gercek; ortalama +0.0082, kapinin
+(+0.01) ALTINDA.
+
+**METODOLOJIK DERS -- bugunun en onemlisi.** Tek tohumda +0.0144 ile
+"KAPI GECTI" yazdi; ikinci tohumda −0.0019 verdi. Tek tohumla dagitilsaydi
+OLMAYAN bir kazanc raporlanmis olurdu. Kat gurultusu bu buyuklukteki
+kollarda **±0.008** mertebesinde; dolayisiyla **+0.01 civari her kol COK
+TOHUMLU dogrulanmadan hukum giymemelidir.**
+
+Bu, gun boyunca "gurultu bandinda" diye isaretledigim tum kollari
+(Y7 +0.0097, aux-wire +0.0083, Focal-Tversky +0.0022) da kapsar.
+
+## 21.30 Y7 OZNITELIK SECIMI — 3 TOHUMDA KAPANDI
+
+| kat tohumu | ilk %75 sutun (121/162) |
+|---|---|
+| 1 | +0.0097 |
+| 2 | +0.0022 |
+| 3 | +0.0002 |
+| **ortalama** | **+0.0040** |
+
+Kapinin (+0.01) COK altinda. **KAPANDI.**
+
+Tek tohumdaki +0.0097'nin YARIDAN FAZLASI gurultuydu -- Y8'de gorulen
+desenin ayni. Iki kol da ayni sonuca isaret ediyor: bu buyuklukteki
+etkiler tek tohumla OLCULEMEZ.
+
+## 21.31 GUN 2 KAPANIS BILANCOSU
+
+**Dogrulanmis ve dagitilan:**
+| kalem | kazanc |
+|---|---|
+| negatif orani 8 → 12 | +0.0126 (`tam`, 5 marka kati) |
+
+**Olculmus, dogrulanmis, ama kapi altinda (dagitilmadi):**
+| kalem | kazanc | dogrulama |
+|---|---|---|
+| etiket kalitesi agirliklandirma | +0.0082 | **4 kat tohumu**, 7/8 pozitif |
+| yardimci gorev (aux-wire) | +0.0083 | tek tohum |
+| oznitelik budama (%75) | +0.0040 | 3 kat tohumu |
+| Focal-Tversky | +0.0022 | tek tohum |
+| cok-CP agirligi 2x | +0.0065 | tek tohum |
+
+**Segmentasyon tarafinda dogrulanmis kazanc:**
+| kalem | kazanc |
+|---|---|
+| hafif augmentasyon (0.15-0.3 rad) | seg IoU +0.0197…+0.0649 |
+| uctan uca (tek-vs-tek, VAL) | robot ISARETLI **+0.0696** |
+| 4 aug tohum + olculen zincir | 0.5162 vs dagitilmis 0.4839 |
+
+**Kapanan kollar (hepsi makbuzlu):** isaret onarimi (tavan +0.0893 acik
+kaliyor) · yogun-parca uzmani (kahin rejimle bile −0.0418) · calisma
+noktasi taramasi · hks girdi ozniteligi · eksen cakistirma · GT'den
+segmentasyon etiketi (iki sekil) · sentetik korpus · snapshot toplulugu ·
+topluluk cesitliligi · label smoothing · Y7 oznitelik budama
+
+**Gecersiz sayilan olcumler:** havuz-vs-skor (yapisal olarak imkansiz
+sonuc) · yarim-ckpt toplulugu · makbuz kirliligi (karantinada)
+
+## 21.32 ISARET KOLUNUN COKUS MEKANIZMASI — teshis edildi
+
+Secici isaret kurallari denendi (yalniz ACIK celiskide cevir):
+
+| kural | fark |
+|---|---|
+| normal_kesin (yerel normale gore) | **+0.0000** (hic tetiklenmedi) |
+| mesh_kesin 150 derece | +0.0031 |
+| mesh_kesin 110 derece | +0.0094 |
+| mesh_kesin 120 / 135 | +0.0047 / +0.0063 |
+| parca_modal | −0.0094 |
+
+**Esik taramasi MONOTONIK DEGIL** (110 > 135 > 120 > 150). Gercek bir
+mekanizma duzgun bir egri verirdi; bu desen 100 parcada GURULTUYE UYDURMA
+demektir ve bugun olculen ±0.008'lik kat gurultusuyle ayni mertebede.
+110 dereceyi secmek, Y8'de duselecek tuzagin ta kendisi olurdu.
+**SECILMEDI.**
+
+**KOK NEDEN BULUNDU.** Tahmin edilen yon ile yerel yuzey normali
+arasindaki aci (617 CP):
+
+| yuzdelik | aci |
+|---|---|
+| %25 | 60.9 derece |
+| **%50** | **88.9 derece** |
+| %75 | **90.0 derece** |
+
+Yon, yerel normale **neredeyse DIK**. Sebebi geometrik: CP noktasina EN
+YAKIN tepe, deligin DUVARINDADIR ve duvar normali eksene DIKTIR. Yani
+"disari" referansi diye deligin duvar normali kullanilmis; eksene dik bir
+referansla isaret atamak rastgeleye yakindir. `disari_normal`in −0.0266
+vermesinin sebebi budur.
+
+**Dogru referans:** en yakin tepenin normali DEGIL, **agiz cevresindeki
+YUZUN** normali (agiz halkasinin disindaki duz yuzey). Gelecek deneme icin
+somut duzeltme; kalan surede kurulup gurultuden ayrilamadi.
+
+**Tavan +0.0893 hala ACIK.**
+
+## 21.33 COK-CP AGIRLIGI — O DA DOGRULANMADI
+
+| kat tohumu | agirlik 2x |
+|---|---|
+| 1 | +0.0065 |
+| 2 | **−0.0052** |
+
+Ucuncu kol da tek tohumda pozitif, ikinci tohumda NEGATIF. (Tohum 3-4
+kosuyordu, makine kapatildi.)
+
+**UC BAGIMSIZ KOLDA AYNI SONUC:**
+
+| kol | tek tohum | cok tohum |
+|---|---|---|
+| Y7 oznitelik budama | +0.0097 | **+0.0040** (3 tohum) |
+| Y8 etiket kalitesi | +0.0144 | **+0.0082** (4 tohum, 7/8 poz) |
+| cok-CP agirligi 2x | +0.0065 | **isaret degistirdi** (2 tohum) |
+
+**Bu, gunun en saglam bulgusudur:** +0.005…+0.015 araligindaki HICBIR kol
+tek tohumla olculemez. Kat gurultusu ±0.008 ve bu kollarin etkisiyle AYNI
+mertebede.
+
+Y8 ucu icinde EN saglami (4 tohum, 8 olcumun 7'si pozitif, ortalama
++0.0082) ama o da kapinin altinda.
+
+## 21.34 COK TOHUMLU DOGRULAMA AILESI — TAMAMLANDI
+
+| kol | tek tohum | cok tohum | tohum sayisi |
+|---|---|---|---|
+| cok-CP agirligi 2x | +0.0065 | **−0.0002** | 4 |
+| Y7 oznitelik budama | +0.0097 | **+0.0040** | 3 |
+| Y8 etiket kalitesi | +0.0144 | **+0.0082** | 4 |
+
+cok-CP agirligi ayrintisi: +0.0065 / −0.0052 / −0.0034 / +0.0012.
+**Tam sifir.** Ilk tohumdaki degerin TAMAMI gurultuydu.
+
+**UC KOLDA DA tek tohumlu deger SISIKTI.** Yalniz Y8 cok tohumda net
+pozitif kaldi (+0.0082, 8 olcumun 7'si pozitif) ama o da kapinin altinda.
+
+**Bu ailenin sonucu, kampanyanin en saglam metodolojik ciktisi:**
+bu buyuklukteki (+0.005…+0.015) etkiler tek tohumla OLCULEMEZ; kat
+gurultusu ±0.008 ve etkiyle AYNI mertebede. Gun boyunca "kapiya yakin"
+gorunen hicbir kol bu nedenle dagitilmadi.
+
+## 21.35 HALKA NORMALI ILE ISARET DUZELTMESI — KAPIYI GECTI (+0.0329)
+
+**Teshis (21.32) dogru cikti.** "En yakin tepe normali" deligin DUVAR
+normaliydi ve eksene DIK; dogru referans **agiz cevresindeki halkadan**
+(3-8mm) alinan yuz normali.
+
+VAL 100 parca, saha yolu:
+
+| kural | robot ISARETLI | fark |
+|---|---|---|
+| taban | 0.4839 | — |
+| en yakin tepe normali (eski) | 0.4573 | −0.0266 |
+| **halka normali** | **0.5168** | **+0.0329** |
+| kahin isaret (UST SINIR) | 0.5732 | +0.0893 |
+
+Kazanc, kahin tavaninin **%37'si** ve kat gurultusunun (±0.008) **4 KATI**.
+Saf SON-ISLEM: egitim yok, model degisikligi yok, **ayarlanmis parametre
+yok** (yalnizca "isareti halka normaliyle uyumlu yap").
+
+**ESLI BOOTSTRAP (dogru test):** marjinal GA degil FARKIN GA'si, cunku
+kiyas AYNI parcalarda.
+
+    fark +0.0329   %95 GA [−0.0155, +0.0819]
+    bootstrap orneklerinin %90.6'si pozitif
+
+**GA sifiri ICERIYOR -> kanit YETERSIZ.** 100 parca bu farki ayirmaya
+yetmiyor.
+
+**Kuralin ayarlanmis parametresi OLMADIGI icin** d6 parcalarinda test
+etmek sizinti yaratmaz: taban F1 ornek-ici oldugu icin sisik olur ama
+ESLI FARK gecerli kalir. 150 parcalik bagimsiz ornek kosuluyor -- LOCKED
+harcanmadan kanit gucu artirilir.
+
+## 21.36 HALKA KURALININ DAVRANISI ve ESIK TARAMASI
+
+**Davranis** (VAL 617 CP): kural 95 tanesini cevirir (%15.4) --
+**48 DUZELTIR, 27 BOZAR, 20 notr**. Net +21 CP; kararli cevirmelerin
+**%64'u dogru**. Kural dogru yonde ama GURULTULU; esli bootstrap GA'sinin
+sifiri icermesinin sebebi budur.
+
+**Esik taramasi (yalniz GUCLU celiskide cevir):**
+
+| esik | fark |
+|---|---|
+| 95 derece | +0.0345 |
+| 105 / 115 | +0.0298 / +0.0298 |
+| 125 | +0.0063 |
+| 140 / 160 | −0.0063 / −0.0047 |
+
+**Monotonik DEGIL** -> gurultuye uydurma. Ayrica 95 derece zaten ~90
+derece, yani SADE kuralin kendisi. **Esik eklemek bir sey KATMIYOR;
+sade kural kullanilir.**
+
+## 21.37 HALKA KURALI OLCULEN ZINCIRDE **ISTATISTIKSEL OLARAK KESIN**
+
+Ayni kural, ayni parcalar, `olculen` yolu (VAL 100):
+
+| kural | robot ISARETLI |
+|---|---|
+| taban | 0.4668 |
+| en yakin tepe normali | 0.4226 (−0.0442) |
+| **halka normali** | **0.4863 (+0.0195)** |
+| kahin isaret (UST SINIR) | 0.5323 (+0.0654) |
+
+**ESLI BOOTSTRAP:**
+
+    fark +0.0195   %95 GA [+0.0030, +0.0378]
+    bootstrap orneklerinin %98.5'i pozitif
+
+**GA SIFIRI ICERMIYOR -> kazanc ISTATISTIKSEL OLARAK KESIN.**
+Bu, kampanyanin ilk istatistiksel olarak kesin iyilesmesidir.
+
+**Iki yol karsilastirmasi tutarli:**
+
+| yol | fark | %95 GA | uretilen CP |
+|---|---|---|---|
+| saha | +0.0329 | [−0.0155, +0.0819] | 617 |
+| **olculen** | **+0.0195** | **[+0.0030, +0.0378]** | 471 |
+
+Saha yolunda etki DAHA BUYUK ama daha OYNAK; olculen zincirde daha kucuk
+ama daha TEMIZ (daha az CP -> daha az varyans). Iki bagimsiz yolda da
+POZITIF, birinde KESIN.
+
+**Kural dagitilabilir:** parametresiz, egitim gerektirmiyor, gerekli veri
+(mesh V/F + tahmin noktalari) `export_robot_glb` icinde zaten mevcut.
+
+## 21.38 HALKA KURALI POPULASYONA BAGLI — kapsam sinirlandi
+
+Bagimsiz 150 parcalik ornek (ZOR/gorulmemis markalar: NIT, MOR, SUPU,
+UPUN, UTL, ONV, S+S, SE):
+
+| yol | taban | halka | fark | %95 GA | bootstrap poz. |
+|---|---|---|---|---|---|
+| saha | 0.1020 | 0.1003 | **−0.0016** | [−0.0054, +0.0000] | %0.0 |
+| olculen | 0.1605 | 0.1628 | **+0.0023** | [−0.0052, +0.0105] | %61.2 |
+
+**Zor markalarda kural HICBIR SEY kazandirmiyor.** Saha yolunda kucuk ama
+SISTEMATIK negatif (bootstrap orneklerinin %0'i pozitif).
+
+**Bu bir CELISKI DEGIL, KAPSAM SINIRI.** Tabanlara bakildiginda populasyon
+tamamen farkli: VAL'de taban 0.4668, zor markalarda 0.1605. Kural, taban
+sistemin ZATEN CALISTIGI yerde yardim ediyor.
+
+**DURUST IFADE:**
+
+| populasyon | yol | fark | hukum |
+|---|---|---|---|
+| TANIDIK marka (VAL 100) | olculen | **+0.0195** | **GA sifiri icermiyor -> KESIN** |
+| TANIDIK marka (VAL 100) | saha | +0.0329 | GA sifiri iceriyor |
+| ZOR marka (150 parca) | olculen | +0.0023 | notr |
+| ZOR marka (150 parca) | saha | −0.0016 | kucuk sistematik negatif |
+
+**Yontem notu:** 21.37'de "iki bagimsiz yolda pozitif, birinde kesin"
+yazmistim. O yazildiginda bu ucuncu olcum YOKTU. Simdi var ve iddiayi
+DARALTIYOR: kazanc TANIDIK marka populasyonuna ozgudur.
+
+**DAGITIM KARARI:** kural tanidik markada dogrulanmis kazanc, zor markada
+notr/ihmal edilebilir negatif veriyor. Sunumun cerceve populasyonu
+TANIDIK marka oldugu icin dagitilabilir; ama zor markada BEKLENTI
+YARATMAMALI.
+
+## 21.39 Y13 SINIR-FARKINDALI KAYIP — KAPANDI
+
+Ek terim: komsusu FARKLI sinifta olan tepelere (sinif siniri) odaklanan
+bir odak kaybi. Gerekce: CP fiziksel olarak bir SINIRDIR (agiz cemberi)
+ama mevcut kayip (NLL + Tversky) BOLGEYI hedefler.
+
+| kol | val Conn_IoU | fark |
+|---|---|---|
+| taban (augment 0.15) | 0.6528 | — |
+| sinir agirligi 0.3 | 0.6415 | −0.0113 |
+| sinir agirligi 1.0 | 0.6484 | −0.0044 |
+
+**Ikisi de NEGATIF. KAPANDI.** Fikir mekanik olarak makuldu ama olcum
+aksini soyledi. Kod kaldi (`--sinir-weight`, varsayilan 0 = davranis
+degismez); `faces` anahtarinin `ops` icinde GERCEKTEN oldugu ONCEDEN
+dogrulandi (sessiz no-op riski elendi).
+
+## 21.40 Y5 AUX-WIRE — ESLESEN TOHUMLARDA CURUDU
+
+Ilk olcum tek tohumdaydi ve tabanla ESLESMIYORDU. Uc tohumda ESLESEN
+taban (augment 0.15) ayrica egitildi:
+
+| tohum | aux-wire | eslesen taban | fark |
+|---|---|---|---|
+| 0 | 0.6611 | 0.6528 | +0.0083 |
+| 1 | 0.6691 | 0.6990 | **−0.0299** |
+| 2 | 0.6672 | 0.6673 | −0.0001 |
+| **ortalama** | | | **−0.0072** |
+
+**Ortalama NEGATIF. KAPANDI.** Tek tohumdaki +0.0083 gurultuydu.
+
+## 21.41 SEGMENTASYON TARAFINDA TOHUM GURULTUSU — sayisal kanit
+
+Ayni recete (augment 0.15), yalnizca tohum farkli:
+
+| tohum | val Conn_IoU |
+|---|---|
+| 0 | 0.6528 |
+| 1 | **0.6990** |
+| 2 | 0.6673 |
+| **yayilim** | **0.046** |
+
+Ayni sey augment 0.3'te de gorulmustu: 0.6429 / 0.6667 / 0.6881.
+
+**Segmentasyon tarafinda tohum gurultusu ~0.046'dir.** Bugun olculen
+kollarin etkileri 0.002-0.030 araligindaydi, yani gurultunun ALTINDA.
+Tek kosumluk hicbir segmentasyon sonucu YORUMLANAMAZ.
+
+**COK TOHUMDA CURUYEN KOLLAR (dort):**
+
+| kol | tek tohum | cok tohum |
+|---|---|---|
+| cok-CP agirligi 2x | +0.0065 | −0.0002 (4 tohum) |
+| Y7 oznitelik budama | +0.0097 | +0.0040 (3 tohum) |
+| Y8 etiket kalitesi | +0.0144 | +0.0082 (4 tohum) |
+| Y5 aux-wire | +0.0083 | **−0.0072** (3 eslesen tohum) |
+
+Yalniz Y8 pozitif kaldi; o da kapinin altinda.
+
+## 21.42 KALAN SEGMENTASYON KOLLARI SURE ICINDE HUKUM GIYEMEZ — durust karar
+
+21.41'de olculen tohum gurultusu (**0.046**) dogrudan bir kaynak hesabi
+dayatir:
+
+* Bir segmentasyon kolunun hukum giymesi icin **>=3 eslesen tohum** sart
+  (bu gece dort kol tek tohumda yaniltti, biri **isaret degistirdi**).
+* Bir egitim ~2 saat. Yani **kol basina ~6 saat**.
+* Kalan segmentasyon kollari: Y3 (EMA/SWA), Y9 (curriculum), Y11
+  (optimizator), Y10 (mixup), Y17 (spektral augment), Y18 (jeodezik
+  jitter), Y26 (sinifa-ozel augment) = **7 kol x 6 saat = ~42 saat**.
+
+Kalan sure: birkac saat. **Bu kollari bu gece kosmak, hukum giydiremeyecek
+sayilar uretmekten baska bir sey yapmaz** -- ve tek tohumluk bir sayi bu
+projede dort kez yaniltti.
+
+**KARAR: yeni segmentasyon EGITIMI baslatilmiyor.** Gecenin kalani, hukum
+giyebilecek kollara ayriliyor -- yani **egitim gerektirmeyen** olanlara:
+
+| kol | maliyet | neden hukum giyebilir |
+|---|---|---|
+| Y16 remesh-varyant toplulugu | 3 x 30 dk cikarim | tek modelde, tohum gurultusu YOK |
+| Y22 MC dropout | ~30 dk cikarim | ayni model, deterministik taban |
+| Havuz mu skor mu (acik soru) | ~30 dk cikarim | teshis; kol degil |
+
+Bu, kampanyanin kendi kuralinin kendi planina uygulanmasidir:
+**olculemeyecek seyi olcmeye kalkma.**
+
+## 21.43 Y22 MC DROPOUT — kanca kuruldu, SESSIZ NO-OP DEGIL (dogrulandi)
+
+**Tuzak.** `diffusionnet.predict()` icinde `model.eval()` cagriliyor; bu
+dropout'u KAPATIR. Dropout katmanlarini disaridan `train()`'e almak bu
+yuzden **sessiz no-op** olurdu -- bu gece ayni tuzak baska bir kolda tam
+`+0.0000` uretmisti. Kanca `eval()`'den SONRA, `predict()`'in ICINE
+kondu (`mc_dropout=T` parametresi) ve acilan katman sayisi `assert` ile
+dogrulaniyor.
+
+**DUMAN TESTI (sentetik mesh, tek kontrol noktasi):**
+
+| olcum | sonuc |
+|---|---|
+| MC(8) ile taban arasi ortalama abs fark | **0.047173** |
+| MC(8) iki kosu arasi fark (tekrar uretilebilirlik) | 0.00000042 |
+| Taban (MC kapali) iki kosu arasi fark | 0.000001 |
+| Taban etiket ayniligi | %100.0000 |
+
+Etki, gurultunun **~10^5 kati**. Kol GERCEKTEN calisiyor ve
+tekrar uretilebilir.
+
+**Yan bulgu:** cikarim bit-ayni degil (ozdeger cozumunden ~1e-6), ama
+ETIKET duzeyinde %100 ozdes. Yani cikarim gurultusu, kat gurultusunun
+(0.046) kaynagi DEGIL -- kaynak egitim tohumu.
+
+## 21.44 ACIK SORU COZULDU (once TESHIS): havuz DISARIDAN uretilemez
+
+Bolum 21.17'de havuz olcumu "gecersiz" diye karantinaya alinmisti: cikti
+recall'u (0.4682) HAVUZ recall'undan (0.4242) BUYUK cikiyordu -- cikti
+havuzun alt kumesi oldugu icin **yapisal olarak imkansiz**. Sebep bugun
+bulundu.
+
+**Teshis** (`sonda_havuz_teshis.py`, mevcut dokumden, yeni cikarim YOK).
+Macar eslestirme yerine **GT basina kapsama** olculdu (o GT'yi kabul
+kutusunda karsilayan HERHANGI bir aday var mi) -- havuz sorusunun dogru
+olcutu budur. Yapisal kontrol: "ciktida VAR, havuzda YOK" sayisi **0
+olmali**.
+
+| yol | isaretsiz ihlal | ISARETLI ihlal |
+|---|---|---|
+| saha | **84** | 59 |
+| olculen | **104** | 85 |
+
+Ihlal sifir degil -> **kaydedilen havuz, ciktiyi ureten havuz DEGIL.**
+
+**KOK NEDEN.** `robot_cp.extract` cikarimi **operator onbellegiyle**
+yapar (`op_cache_dir=f"{OP}_k{k_eig}"`); sonda ise havuzu yeniden uretmek
+icin onbelleksiz TAZE cikarim kullaniyordu. Olasiliklar farkli cikiyor,
+dolayisiyla aday havuzu da farkli. Bu, daha once bagimsiz olarak
+kaydedilmis olan **"taze cikarim onbellegi yeniden uretmiyor"** bulgusunun
+ta kendisidir -- orada uc gecelik sonucu gecersiz kilmisti, burada havuz
+olcumunu gecersiz kildi.
+
+**DUZELTME.** Havuz artik `extract`in **ICINDEN**, wire-gate'ten hemen
+once yakalaniyor (`robot_cp.HAVUZ_KANCA`, yalniz `CP_HAVUZ_KANCA` cevre
+degiskeniyle dolar; urun yolu DEGISMEZ). Sonda da onu kullaniyor.
+
+**DERS (genellestirilebilir).** Bir ara degeri "ayni kodu disaridan
+cagirarak" yeniden uretmek, o kodun ONBELLEK/DURUM bagimliligi varsa
+sessizce farkli sonuc verir. Ara degerler URETILDIKLERI YERDEN
+yakalanmalidir. Bu tuzak bu kampanyada **iki kez** vurdu.
+
+## 21.45 HALKA NORMALI EKSEN OLARAK KULLANILAMAZ — kesin, monotonik
+
+Halka normali simdiye kadar yalniz **ISARET** icin kullanildi. Fiziksel
+sezgi "duz yuzeydeki bir deligin ekseni o yuzeyin normalidir" der; bu
+iddia simdiye kadar OLCULMEDI (isaret kollari `isaretsiz` metrigi tanim
+geregi hic degistirmez, eksen degistirmek ise ikisini de degistirir).
+
+`sonda_halka_eksen.py`, VAL 99 parca (saha yolu), esli parca bootstrap:
+
+| kol | tespit | robot | robot-ISARETLI | robot-ISR farki |
+|---|---|---|---|---|
+| taban | 0.6149 | 0.5773 | 0.4847 | — |
+| **isaret** (mevcut kural) | 0.6149 | 0.5773 | **0.5176** | **+0.0329** |
+| tam (eksen = halka) | 0.6149 | 0.1161 | 0.0988 | **−0.3860** * |
+| kapili_10 | 0.6149 | 0.1224 | 0.1051 | −0.3797 * |
+| kapili_20 | 0.6149 | 0.2212 | 0.1976 | −0.2865 * |
+| kapili_30 | 0.6149 | 0.3027 | 0.2792 | −0.2045 * |
+| kapili_45 | 0.6149 | 0.3482 | 0.3153 | −0.1681 * |
+| harman_0.25 | 0.6149 | 0.3341 | 0.2980 | −0.1856 * |
+| harman_0.50 | 0.6149 | 0.2165 | 0.1929 | −0.2911 * |
+| harman_0.75 | 0.6149 | 0.1475 | 0.1255 | −0.3591 * |
+
+(* = %95 GA sifiri icermiyor; bootstrap orneklerinin **%0**'i pozitif.)
+
+**MONOTONIK**: halka normali karisima ne kadar cok girerse sonuc o kadar
+kotu (harman 0.25 → 0.50 → 0.75 ile −0.186 → −0.291 → −0.359).
+Gurultuye uydurma DEGIL, sistematik.
+
+**MEKANIZMA / DERS.** Halka normali **~1 bit** tasiyor: *hangi taraf
+disari*. Eksenin kendisini tasimiyor -- pah kirmalari, kavisli govde ve
+girintili agizlar yuzunden agiz cevresi yuzeyin ortalama normali burgu
+ekseniyle hizali degil. Kural bu 1 biti kullandiginda **+0.0329**,
+tamamini kullanmaya kalktiginda **−0.3860**.
+
+**Bu, kolun neden ISARET kolu olarak DAGITIMA aday olup EKSEN kolu olarak
+kapali oldugunun kanitidir.** Ayrica 21.32'deki "yanlis referans" dersinin
+simetrigi: orada dogru fikir yanlis referansla olculmustu, burada dogru
+referans yanlis IS icin kullanildi.
+
+## 21.46 BAGLAYICI KISIT BULUNDU: **YANAL KONUM**, aday varligi DEGIL, yon DEGIL
+
+Havuz artik `extract`in icinden yakalandigi icin (21.44) tolerans taramasi
+GECERLI. VAL 40 parca / 238 GT, saha yolu, ISARETLI olcut, eksenel <=40mm.
+
+**YANAL toleransi gevsetince** (aci 10 derecede SABIT):
+
+| yanal | HAVUZ kapsamasi | CIKTI |
+|---|---|---|
+| **2 mm (gercek olcut)** | **0.4454** | **0.5168** |
+| 3 mm | 0.5252 | 0.5504 |
+| 5 mm | 0.6597 | 0.6134 |
+| 10 mm | **0.8319** | 0.7311 |
+| 20 mm | 0.9454 | 0.8235 |
+
+**ACI toleransini gevsetince** (yanal 2mm'de SABIT):
+
+| aci | HAVUZ | CIKTI |
+|---|---|---|
+| 10 derece | 0.4454 | 0.5168 |
+| 20 derece | 0.4538 | 0.5252 |
+| 45 derece | 0.4664 | 0.5378 |
+| 180 derece (yon TAMAMEN yok sayilir) | 0.5924 | 0.6639 |
+
+### OKUMA — bu tablo kampanyanin yon tayinidir
+
+* **Aciyi tamamen yok saymak** havuzu yalnizca 0.4454 -> 0.5924 yapiyor
+  (+0.147). Yani yon, kalan hatanin **kucuk** kismi.
+* **Yanali 2 -> 10 mm yapmak** havuzu 0.4454 -> **0.8319** yapiyor
+  (**+0.387**). GT'lerin **%83'u** icin havuzda, yonu ZATEN 10 derece
+  icinde dogru olan bir aday **10 mm yakinda duruyor**.
+
+**Yani darbogaz ne aday URETIMI ne de YON; YANAL KONUM HASSASIYETI.**
+
+Bu, bagimsiz olarak olculmus iki seyle birebir tutarli: konum AUC 0.7053
+vs yon AUC 0.8899, ve "yanal hata = segmentasyon kalitesi" bulgusu.
+
+### YAPISAL DUZELTME: havuz recall'u TAVAN DEGILDIR
+Yapisal kontrol ("ciktida var, havuzda yok") **31** cikti -- sifir olmasi
+gerekirken. Sebep bulundu: **POSE HEAD gate'ten SONRA CP'leri OYNATIR**
+(`wire_gate.pose_duzelt`). Yani bir aday, havuzda kabul kutusunun disinda
+olup ciktida icine girebilir. Nitekim cikti (0.5168) havuzun (0.4454)
+USTUNDE.
+
+Bu, "havuz recall = baglayici kisit" seklindeki eski kaydin duzeltmesidir:
+**pose head varken havuz recall'u bir TAVAN degildir.** Dogru tavan,
+pose head'in onarabildigi yanal bandda olculen havuz kapsamasidir --
+10 mm'de **0.8319**.
+
+### KALAN EN BUYUK KALDIRACIN ADRESI
+Pose head bugun 0.4454 -> 0.5168 tasiyor. 10 mm bandindaki tavan 0.8319.
+Aradaki **+0.31**, kampanyada bulunan EN BUYUK acik basliktir ve
+segmentasyonda degil, **YANAL KONUM REGRESYONUNDA**.
+
+## 21.47 POSE HEAD KIRPMA SINIRI -- taranmamis bir hiperparametre bulundu
+
+21.46'nin dogrudan sonucu olarak pose head'in kodu okundu:
+
+```
+mx = float(m.get("maks_mm", 3.0))        # wire_gate.py
+c["point"] = p + dw * (min(n, mx) / n)   # duzeltme 3 mm'ye KIRPILIYOR
+```
+
+`maks_mm = 3.0` modelin pkl'ine yazili ve **tarandigina dair kayit YOK**
+("denetim tavsiyesi: 2-3mm" notu var, olcum yok).
+
+**Bunun neden onemli oldugu.** Teshis, GT'lerin **%83'u** icin havuzda,
+yonu zaten 10 derece icinde dogru olan bir adayin **10 mm** yakinda
+oldugunu gosterdi. 3 mm'lik kirpma bu bandin ucte birini bile kapsamiyor.
+
+**Egitim tarafi bunu DESTEKLIYOR** (dogrulandi, varsayilmadi):
+* `q3_pose_veri_buyut.py`: eslesme toleransi `tt = max(3.0, 0.06*diag)` --
+  yani model ZATEN 3 mm'den buyuk yer degistirmeler gormus.
+* `q1_pose_head.py`: **hedefler KIRPILMIYOR**; kirpma yalnizca CALISMA
+  ANINDA uygulaniyor.
+
+Yani model buyuk duzeltmeleri ogrenmis olabilir ama uretimde onlari
+uygulamasina IZIN VERILMIYOR.
+
+**OLCUM TASARIMI (verimli).** Her `maks_mm` degeri icin zinciri yeniden
+kosmak yerine, kirpma ONCESI yer degistirme vektoru
+(`wire_gate.POSE_KANCA`, cevre degiskeniyle acilir) dokuluyor; boylece
+**tek kosudan** butun tarama cevrimdisi kuruluyor
+(`sonda_pose_kirpma.py`). Betik ayrica mx=3.0'da yeniden kurdugu metrigin
+dokumun kendi metrigine ESIT oldugunu dogruluyor -- esit degilse taramayi
+GECERSIZ ilan ediyor.
+
+## 21.48 Y22 MC DROPOUT KAPANDI — kapinin altinda, maliyeti 8 kat
+
+VAL 100 parca, esli parca bootstrap, MC(8):
+
+| yol | metrik | taban | MC(8) | fark | %95 GA | poz% |
+|---|---|---|---|---|---|---|
+| olculen | tespit | 0.5553 | 0.5528 | −0.0024 | [−0.0308,+0.0255] | 44.0 |
+| olculen | robot | 0.5376 | 0.5425 | +0.0052 | [−0.0217,+0.0324] | 65.1 |
+| olculen | robot-ISR | 0.4668 | 0.4738 | **+0.0071** | [−0.0180,+0.0319] | 71.1 |
+
+GA sifiri iciyor, kazanc kat gurultusunun (±0.008) altinda, **maliyeti
+8 kat cikarim**. **KAPANDI.**
+
+### Yan bulgu: "+0.0000" bu kez BUG DEGIL, KAPSAM
+Ilk kiyas `saha` yolunda yapildi ve **tam +0.0000** verdi -- bu gecenin
+sessiz no-op imzasi. Sebep arandi ve bulundu: `saha` yolu
+`robot_cp.extract` icinde KENDI cikarimini yapar; `EZ_MCDROP` yalnizca
+sondanin `pbs`'ini etkiler, o da **olculen** yolu besler. Yani kanca
+`saha`ya ULASMIYOR -- kol calismiyor degil, o yolda YOK.
+
+Duman testi (21.43) onceden kurulmus oldugu icin bu ayrim iki dakikada
+yapildi: kolun gercekten etkili oldugu (0.047 vs 0.000001) zaten
+biliniyordu, dolayisiyla "+0.0000" ancak kapsam sorunu olabilirdi.
+**Duman testinin bedelini burada odedi.**
+
+## 21.49 SONDA KANCALARI YALNIZ `olculen` YOLUNA ULASIR — kapsam kurali
+
+Bu gece IKI kol, `saha` yolunda **tam +0.0000** verdi (MC dropout ve
+remesh varyanti). Ikisi de sessiz no-op DEGILDI; ikisinin de sebebi
+ayniydi ve artik kural olarak yaziliyor:
+
+**`saha` yolu = `robot_cp.extract`, ve `extract` KENDI cikarimini ve KENDI
+remesh'ini icinde yapar.** Sondanin cevre degiskenleri (`EZ_MCDROP`,
+`EZ_REMESH`, `EZ_CKPT`) sondanin urettigi `pbs` ve `V,F`'yi degistirir --
+onlar da yalnizca **`olculen`** yolunu besler.
+
+**KURAL: cikarim/mesh duzeyindeki her kol `olculen` yolunda olculur.
+`saha` yolunda +0.0000 gormek, kolun olu oldugu anlamina GELMEZ.**
+
+Bu ayrimi bu gece iki dakikada yapabilmemizin sebebi, kollarin ONCE
+duman testinden gecirilmis olmasidir (21.43): kolun gercekten etkili
+oldugu bagimsiz olarak biliniyordu.
+
+## 21.50 Y16 — REMESH HEDEFI 5000 KESIN OLARAK DAHA KOTU
+
+VAL 100 parca, **olculen** yolu, esli parca bootstrap. Taban = 6000
+(mevcut davranis):
+
+| metrik | 6000 | 5000 | fark | %95 GA | poz% |
+|---|---|---|---|---|---|
+| tespit | 0.5553 | 0.5198 | **−0.0353** | [−0.0600,−0.0079] * | 0.4 |
+| robot | 0.5376 | 0.4982 | **−0.0393** | [−0.0632,−0.0141] * | 0.1 |
+| robot-ISR | 0.4668 | 0.4371 | **−0.0300** | [−0.0548,−0.0053] * | 0.8 |
+
+(* = GA sifiri icermiyor.) Yani tezden gelen **6000 hedefi iyi secilmis**;
+asagi cozunurluk kesin olarak zarar veriyor. Topluluk hukmu icin 7200
+bekleniyor.
+
+## 21.51 GECE 3 (2026-08-13/14) DENETIM DURUMU
+
+Uc urun dosyasi degistirildi; **hepsi cevre degiskeniyle kapili ve
+varsayilan davranis BIT-AYNI**:
+
+| dosya | degisiklik | varsayilan |
+|---|---|---|
+| `diffusionnet.py` | `predict(..., mc_dropout=T)` | `0` = eski kod yolu |
+| `wire_gate.py` | `CP_POSE_MAKS_MM` ezmesi + `POSE_KANCA` | ezme yok, kanca kapali |
+| `robot_cp.py` | `HAVUZ_KANCA` (gate oncesi havuz) | kanca kapali |
+
+**DOGRULAMA:**
+* `duman_testi.py` -> **GECTI** (gercek STEP, 4 kontrol noktasi, 2 CP
+  uretildi, 32 s)
+* `geri_al.py --kontrol` -> **1 sapma: yalniz `cp_config.json`** (bilincli)
+* Uc dosya da git'te izleniyor (`M robot_cp.py`, `M wire_gate.py`,
+  `M diffusionnet.py`) -> geri alinabilir
+* **D7 OKUNMADI** (2 okuma hakki duruyor) · **LOCKED harcanmadi**
+
+## 21.52 OLCUM DUZELTMESI: yeni sondalarda TESPIT tanimi kanoniklestirildi
+
+Bu gece yazilan dort sonda (`sonda_dokum_kiyas`, `sonda_halka_eksen`,
+`sonda_pose_kirpma`, `sonda_remesh_toplulugu`) "tespit"i **2.0 mm sabit**
+toleransla hesapliyordu. Kanonik tanim farkli:
+
+```
+tespit : esle_macar(..., tol=0.0, am=180.0, pct=True)  -> tt = max(3.0, 0.06*diag)
+robot  : esle_macar(..., tol=2.0,  am=10.0, pct=False) -> 2 mm SABIT
+```
+
+Yani **robot metrikleri zaten kanonikti**, tespit ise DAHA SIKI
+hesaplaniyordu (olculen yolda 0.6139 yerine dogrusu 0.6101; farkin isareti
+ve hukumler degismedi). Kanonik tanima gecildi.
+
+**Duzeltilmis sayilar:**
+
+| kiyas | tespit farki (eski -> yeni) | hukum |
+|---|---|---|
+| remesh 5000 vs 6000 | −0.0353 -> **−0.0380** * | degismedi (KESIN kotu) |
+| MC(8) vs taban | −0.0024 -> **−0.0007** | degismedi (notr) |
+
+**Onemli:** 21.46'daki baglayici-kisit taramasi **yalnizca robot olcutunu**
+(2 mm / 10 derece) kullanir; o tanim bastan kanonikti, dolayisiyla
+**o bulgu bu duzeltmeden ETKILENMEZ.**
+
+## 21.53 POSE KIRPMA SINIRI **BAGLAMIYOR** — sinirlayan MODELIN KENDISI
+
+VAL 100 parca / 617 CP, olculen yol, tek kosudan cevrimdisi tarama.
+Dogrulama gecti (mx=3.0 yeniden kurulan == dokum).
+
+| maks_mm | tespit | robot | robot-ISR | 3.0'a gore fark |
+|---|---|---|---|---|
+| 0.0 (pose KAPALI) | 0.4980 | 0.4605 | 0.3837 | **−0.0799** * |
+| 1.0 | 0.5889 | 0.5450 | 0.4495 | −0.0141 * |
+| 2.0 | 0.6124 | 0.5685 | 0.4636 | +0.0000 |
+| **3.0 (MEVCUT)** | 0.6139 | 0.5685 | 0.4636 | — |
+| 4 / 5 / 6 / 8 / 10 / 15 / **SINIRSIZ** | 0.6139 | 0.5685 | 0.4636 | **+0.0000** |
+
+**Kirpmayi kaldirmak HICBIR SEY degistirmiyor.** Sebep dogrudan olculdu:
+
+> Modelin onerdigi yer degistirme (617 CP): ortanca **0.48 mm**,
+> %75 0.93 mm, %90 1.64 mm, **maksimum 2.87 mm**.
+> **3 mm'yi asan oneri orani: %0.0**
+
+Guven kapili varyantlar da aynen +0.0000 verdi (kapinin ustunde/altinda
+degisen bir sey yok, cunku hicbir oneri kirpilmiyor).
+
+### HUKUM VE KOK NEDEN
+`maks_mm` **atil bir hiperparametre**; sinirlayan sey **modelin kendisi**.
+Pose head buyuk duzeltmeler ONERMIYOR.
+
+Mekanizma bir **SECIM YANLILIGI**: egitim verisi (`q3_pose_veri_buyut.py`)
+yalnizca `tt = max(3.0, 0.06*diag)` icinde **ZATEN ESLESMIS** adaylardan
+kuruluyor. Eslesmis bir adayin artigi tanim geregi KUCUKTUR. Yani model,
+buyuk artiklari **hic gormedi** -- ogrenip de uygulayamadigi degil,
+**ogrenmedigi** icin onermiyor.
+
+### AMA POSE HEAD CALISIYOR — ve tam kapasite kullaniliyor
+Kolu kapatmak (mx=0) robot-ISARETLI'yi **−0.0799** dusuruyor
+(GA [−0.1079,−0.0557], orneklerin %0'i pozitif). Yani bilesen gercek ve
+tasidigi her seyi zaten tasiyor.
+
+### SIRADAKI ADIM (net ve dar)
+21.46'nin +0.31'lik acigini almanin yolu kirpmayi gevsetmek DEGIL,
+**pose head'i buyuk artiklari GOREREK yeniden egitmek**: egitim eslesme
+toleransi (bugun ~3-6 mm) 15 mm'ye acilir, boylece 10 mm bandindaki
+adaylar da hedefe girer. Veri zaten diskte ve **ag cikarimi
+GEREKTIRMIYOR** (q3 onbellekli npz'lerden calisiyor).
+
+## 21.54 POSE HEAD YENIDEN EGITIMI — iki mekanizma ayristi, IKI OLCUM KUSURU YAKALANDI
+
+21.53 "model buyuk duzeltme onermiyor" dedi. Iki aday mekanizma vardi;
+ikisi de olculdu.
+
+**Veri once incelendi (varsayilmadi):**
+
+| veri | satir | yanal hedef ortanca | %90 | maks | **>3mm orani** |
+|---|---|---|---|---|---|
+| taban (`pose_veri`) | 6330 | 0.97 mm | 3.02 | 12.10 | **%10.2** |
+| genis (`Q3_TOL=15`) | 7154 | 1.12 mm | 4.60 | 14.93 | **%18.4** |
+
+**Bu, ilk hipotezi KISMEN CURUTTU.** Taban veride zaten %10.2 buyuk hedef
+vardi; yani model buyuk artiklari "hic gormemis" degil. Demek ki asil
+mekanizma **REGRESYON BUZULMESI**: orman yaprak ortalamasi ucdegerleri
+iceri ceker. Secim yanliligi ikincil.
+
+### YAKALANAN IKI OLCUM KUSURU (ikisi de ilk kosuda vurdu)
+
+**1. Sizinti kapisi SESSIZCE hicbir seyi elemedi.** `split3.json` icinde
+`val` bir SOZLUK (`{"n":…, "parts":[…]}`); uzerinde dogrudan donmek
+`'n'`,`'parts'` anahtarlarini verir. Kapi "0 VAL grubu cikarildi" dedi ve
+bu bir UYARI olarak gecti. Artik `["val"]["parts"]` okunuyor ve **iki
+`assert`** var (liste bos olamaz, gruplar bos olamaz). Bu kapi olmasaydi
+VAL olcumu KIRLI olurdu.
+
+**2. Iki aday KENDI veri kumesinde puanlandi -- kiyaslanamaz.** Genis veri
+"daha kotu" gorunuyordu (kutuda %72.7 vs %81.3), oysa genis kume DAHA ZOR
+satirlar iceriyor: iki oran ayni satirlarda olculmemis. Artik butun
+adaylar **ORTAK degerlendirme kumesinde** puanlaniyor; egitim kumesinden
+degerlendirme katinin gruplari cikarilarak (grup-disi, sizintisiz).
+
+Bu iki kusur da "kol pozitif/negatif" hukmunu ters cevirebilecek
+cinstendi ve **sonuc yazilmadan once** yakalandi.
+
+## 21.55 POSE HEAD YENIDEN EGITIMI — ORTAK KUMEDE SONUC
+
+Sizinti kapisi onarildiktan (87 VAL geometri grubu CIKARILDI) ve butun
+adaylar **ayni 5644 satirda** puanlandiktan sonra:
+
+| egitim verisi | ayar | kutuda (<=2mm) | artik ortanca | oneri maks | >3mm oneri |
+|---|---|---|---|---|---|
+| taban | yaprak>=5 (**MEVCUT**) | 76.5% -> 80.8% | 0.68 mm | 5.45 | %0.2 |
+| taban | yaprak>=2 | 76.5% -> 81.6% | 0.68 mm | 6.11 | %0.4 |
+| **taban** | **yaprak>=1** | 76.5% -> **81.7%** | 0.67 mm | 6.33 | %0.5 |
+| genis (tol15) | yaprak>=5 | 76.5% -> 80.8% | 0.74 mm | 5.96 | %0.6 |
+| genis (tol15) | yaprak>=2 | 76.5% -> 80.8% | 0.74 mm | 6.29 | %0.8 |
+| genis (tol15) | yaprak>=1 | 76.5% -> 81.1% | 0.74 mm | 6.49 | %1.0 |
+
+### IKI TEMIZ HUKUM
+
+**1. GENIS VERI YARDIM ETMIYOR.** Ortak kumede taban veriyle egitilen her
+ayar, genis veriyle egitilenden esit ya da iyi. Yani "secim yanliligi"
+hipotezi **CURUDU**; kalan mekanizma **regresyon buzulmesi**.
+
+**2. BUZULMEYI GEVSETMEK COK KUCUK BIR SEY KAZANDIRIYOR.**
+`min_samples_leaf` 5 -> 1: kutuda-oran +0.9 puan (80.8 -> 81.7),
+en buyuk oneri 5.45 -> 6.33 mm. Ama **3 mm'yi asan oneri orani hala
+yalnizca %0.5.**
+
+### BUNUN 21.46'DAKI +0.31 ICIN ANLAMI (durust okuma)
+Model sinifi ve oznitelikler **10 mm'lik hatalari onaracak bilgiyi
+tasimiyor**: en iyi varyant bile adaylarin %99.5'ine 3 mm'den kucuk
+duzeltme oneriyor. Yani 21.46'daki acik, **gate ozniteliklerinden
+son-islem regresyonuyla ALINAMAZ**; ya aday URETIMI (segmentasyon /
+aday konumlari) duzelecek, ya da pose kafasina **yerel geometriyi
+dogrudan goren** yeni oznitelikler verilecek.
+
+Bu, acigin var olmadigi anlamina gelmez -- **nereden alinamayacagini**
+olcerek daraltir.
+
+Aday model yine de tam zincirde olculuyor
+(`CP_POSE_MODEL=results/pose_head_yeni.pkl`); beklenti kapinin altinda.
+
+## 21.56 Y16 REMESH-VARYANT TOPLULUGU KAPANDI
+
+VAL 100 parca, olculen yol, esli parca bootstrap. Taban = 6000 (mevcut).
+**Egitim yok** -- yani bu kol tohum gurultusune tabi degil, tek kosuda
+hukum giyebilir.
+
+| varyant | tespit | robot | robot-ISR | rbi farki | %95 GA | poz% |
+|---|---|---|---|---|---|---|
+| **TABAN (6000)** | 0.5553 | 0.5376 | 0.4668 | — | — | — |
+| tek 5000 | 0.5198 | 0.4982 | 0.4371 | −0.0300 | [−0.0548,−0.0053] * | 0.8 |
+| tek 7200 | 0.5573 | 0.5453 | 0.4735 | +0.0066 | [−0.0208,+0.0314] | 69.3 |
+| **birlesim (oy>=1)** | 0.5667 | 0.5446 | **0.4783** | **+0.0112** | [−0.0073,+0.0314] | 87.9 |
+| oylama (oy>=2) | 0.5558 | 0.5363 | 0.4655 | −0.0012 | [−0.0163,+0.0144] | 43.4 |
+| oybirligi (oy>=3) | 0.4995 | 0.4796 | 0.4219 | −0.0453 | [−0.0801,−0.0133] * | 0.2 |
+
+### HUKUM: **KAPANDI**
+* 5000 ve oybirligi **KESIN kotu**.
+* 7200 ve birlesim pozitif ama **GA sifiri iciyor**; birlesim +0.0112 ile
+  bu gecenin diger "kapiya yakin" kollariyla ayni profilde -- ve
+  **maliyeti 3 kat cikarim**.
+* Oylama tam notr.
+
+**Egilim anlamli:** 5000 < 6000 < 7200 (monotonik), yani daha yuksek
+cozunurluk yardim ediyor. Ama 6000 -> 7200 kazanci kapinin altinda.
+Tezden gelen **6000 hedefi iyi secilmis**; asagi inmek kesin zarar.
+
+## 21.57 Y24 CRF — YANLIS KOVAYA KONMUSTU, DUZELTILDI
+
+Y24 (CRF duzeltmesi) 21.42'de "egitim gerektiren, sure yetmeyen" kollar
+arasina konmustu. **Bu yanlisti:** CRF bir SON-ISLEMDIR, egitim
+gerektirmez. Kova duzeltildi ve kol bu gece kosuldu.
+
+**Kurulum.** Mesh kenarlari uzerinde ortalama-alan yaklasimi: her turda
+her tepenin olasilik vektoru komsularinin ortalamasiyla `w` agirliginda
+harmanlanir, sonra normalize edilir. **Ek parametre ogrenilmiyor.**
+`EZ_CRF="tur,agirlik"`; bos birakilirsa bit-ayni taban.
+
+**DUMAN TESTI (sentetik ikosahedron) — GECTI:**
+
+| kontrol | sonuc |
+|---|---|
+| `tur=0` bit-ayni mi | **EVET** |
+| `tur=3` etkisi (ort. abs fark) | 0.077408 |
+| olasilik satirlari 1'e toplaniyor mu | EVET |
+| tekil aykiri etiketli tepe duzeliyor mu | **EVET** |
+
+**Neden bu kol darbogaza nisan aliyor:** 21.46 baglayici kisiti YANAL
+KONUM olarak belirledi ve yanal hata bagimsiz olarak segmentasyon
+kalitesine baglanmisti. CRF, tekil yanlis etiketli tepeleri bastirarak
+aday MERKEZLERINI oynatir -- yani dogrudan yanal hataya dokunur.
+
+## 21.58 ADAY POSE HEAD UCTAN UCA **KESIN OLARAK KOTU** — vekil metrik isaret degistirdi
+
+`results/pose_head_yeni.pkl` (taban veri, yaprak>=1, `maks_mm=10`) tam
+zincirde olculdu. VAL 100 parca, **saha** yolu (pose head `extract`in
+icinde oldugu icin dagitilan yol budur), esli parca bootstrap:
+
+| metrik | dagitilan | aday | fark | %95 GA | poz% |
+|---|---|---|---|---|---|
+| tespit | 0.7878 | 0.7847 | −0.0031 | [−0.0080,+0.0000] | 0.0 |
+| robot | 0.5764 | 0.5059 | **−0.0697** | [−0.0993,−0.0416] * | 0.0 |
+| robot-ISR | 0.4839 | 0.4401 | **−0.0437** | [−0.0670,−0.0228] * | 0.0 |
+
+**KESIN KOTU. Aday REDDEDILDI, dagitilan model yerinde kaliyor.**
+
+### BU GECENIN EN SERT DERSI: VEKIL METRIK ISARET DEGISTIRDI
+Aday, cevrimdisi vekilde **KAZANIYORDU**: ortak degerlendirme kumesinde
+kabul kutusuna girme orani %80.8 -> **%81.7** (+0.9 puan), grup-disi,
+sizinti kapisi kapali. Uctan uca ise **−0.0437**.
+
+Yani "yanal artigi daha iyi tahmin etmek" ile "robot metrigini
+yukseltmek" AYNI SEY DEGIL. Muhtemel mekanizma: vekil TUM adaylarin
+ortalama artigini olcer; uctan uca metrik ise ZATEN kutuda olan adayin
+disari itilmesini **cift** cezalandirir (bir TP gider, bir FP gelir).
+Yaprak>=1 daha oynak duzeltmeler uretiyor ve `maks_mm=10` bunlarin
+buyuklerinin gecmesine izin veriyor.
+
+**Kural: son-islem kollarinda cevrimdisi vekil KARAR VERDIRMEZ; yalnizca
+uctan uca olcum verdirir.** Vekil olsa olsa hangi adaylarin uctan uca
+olcumu HAK ETTIGINI secer.
+
+### AYRISTIRMA KOSULUYOR
+Kaybin sebebi MODEL mi (yaprak>=1) yoksa KIRPMA mi (3 -> 10 mm)?
+Ayni aday model `CP_POSE_MAKS_MM=3.0` ile tekrar olculuyor. Eski model
+2.87 mm'yi hic asmadigi icin (21.53) kirpmanin ancak yeni modelde
+baglayici hale geldigi biliniyor -- yani suphe once kirpmada.
+
+## 21.59 GECE 3 KAPANIS TABLOSU (2026-08-13/14)
+
+Bu gece **YEDI kol** olculdu ve kapandi; **bir kol** dagitima aday kaldi
+(halka isareti, onceki geceden); **bir buyuk teshis** cikti.
+
+| kol | olcum | hukum |
+|---|---|---|
+| Y5 aux-wire | −0.0072 (3 eslesen tohum) | curudu |
+| Y13 sinir kaybi | −0.0113 / −0.0044 | kapandi |
+| Y22 MC dropout | +0.0071 (GA sifiri iciyor), 8x maliyet | kapandi |
+| Y16 remesh 5000 | −0.0300 (GA sifirsiz) | **kesin kotu** |
+| Y16 remesh 7200 | +0.0066 (GA sifiri iciyor) | kapi alti |
+| Y16 topluluk birlesim | +0.0112 (GA sifiri iciyor), 3x maliyet | kapi alti |
+| Y16 topluluk oybirligi | −0.0453 (GA sifirsiz) | **kesin kotu** |
+| halka normali = EKSEN | −0.3860, monotonik, %0 poz | **kesin kapandi** |
+| pose kirpma gevsetme | +0.0000 (kirpma ATIL) | kapandi |
+| aday pose head | −0.0437 (GA sifirsiz, %0 poz) | **REDDEDILDI** |
+
+**Teshis (kol degil):** baglayici kisit **YANAL KONUM** (21.46) --
+kampanyanin yon tayini.
+
+### GECENIN DORT METODOLOJIK CIKTISI
+1. **Segmentasyon tohum gurultusu 0.046** olculdu; bu buyuklugun altindaki
+   hicbir seg kolu tek kosuyla hukum giymez (21.41).
+2. **Sonda kancalari yalniz `olculen` yoluna ulasir**; `saha`da +0.0000
+   gormek kolun olu oldugu anlamina gelmez (21.49).
+3. **Ara degerler uretildikleri yerden yakalanmali**; ayni kodu disaridan
+   cagirmak onbellek bagimliligi varsa farkli sonuc verir (21.44).
+4. **Cevrimdisi vekil karar verdirmez**; bir kol vekilde +0.9 puan
+   kazanip uctan uca −0.0437 verdi (21.58).
+
+## 21.60 BAGLAYICI KISIT — TAM VAL (100 parca / 660 GT) ile YENIDEN OLCULDU
+
+21.46 ilk kez 40 parcada olculmustu. `_dokum_pose.json` kosusunda havuz
+kancasi 100 parcanin hepsinde acikti; tarama tam kumede tekrarlandi.
+**Bunlar kayda gecen sayilardir.**
+
+**YANAL taramasi** (aci 10 derece SABIT, ISARETLI, eksenel <=40mm):
+
+| yanal | HAVUZ | CIKTI |
+|---|---|---|
+| **2 mm (gercek olcut)** | **0.4242** | **0.4682** |
+| 3 mm | 0.4955 | 0.5106 |
+| 5 mm | 0.6242 | 0.5727 |
+| 8 mm | 0.7303 | 0.6364 |
+| **10 mm** | **0.7818** | 0.6697 |
+| 15 mm | 0.8455 | 0.7076 |
+| 20 mm | 0.9000 | 0.7591 |
+
+**ACI taramasi** (yanal 2 mm SABIT):
+
+| aci | HAVUZ | CIKTI |
+|---|---|---|
+| 10 derece | 0.4242 | 0.4682 |
+| 20 derece | 0.4364 | 0.4742 |
+| 45 derece | 0.4409 | 0.4803 |
+| 90 derece | 0.4970 | 0.4985 |
+| **180 (yon TAMAMEN yok sayilir)** | **0.5939** | 0.6273 |
+
+### HUKUM (40 parcalik ilk olcumle AYNI, buyuklukler biraz daha ilimli)
+
+| gevsetme | havuz kazanci |
+|---|---|
+| yonu TAMAMEN mukemmel yapmak | **+0.1697** |
+| yanali 2 -> 10 mm yapmak | **+0.3576** |
+
+**Yanal, yonun iki katindan fazlasini tasiyor.** Darboğaz **YANAL KONUM**.
+Sunumda 100 parcalik bu sayilar kullanilir (40 parcalik ilk olcum
+0.8319 diyordu; dogrusu **0.7818**).
+
+## 21.61 Y24 CRF — ILK AYAR TAM NOTR
+
+VAL 100 parca, olculen yol (kanca yalniz oraya ulasir, bkz. 21.49),
+esli parca bootstrap. Ayar: **2 tur, agirlik 0.3**.
+
+| metrik | taban | CRF | fark | %95 GA | poz% |
+|---|---|---|---|---|---|
+| tespit | 0.6101 | 0.6043 | −0.0054 | [−0.0247,+0.0157] | 29.0 |
+| robot | 0.5376 | 0.5330 | −0.0043 | [−0.0242,+0.0174] | 32.6 |
+| robot-ISR | 0.4668 | 0.4670 | **+0.0004** | [−0.0199,+0.0218] | **50.0** |
+
+**Tam sansa esit** (%50.0 pozitif, GA simetrik). Duman testi kolun
+gercekten calistigini gosterdigi icin bu bir no-op degil, gercek bir
+**notr** sonuc.
+
+**KAPATILMADAN ONCE IKINCI AYAR KOSULUYOR** (`docs/KAPANAN_KOLLAR_DENETIMI.md`
+kurali: "sondanin cozunurlugu toleransi tutuyor mu" -- 2 tur/0.3 HAFIF bir
+duzeltmedir). Ikinci ayar: **4 tur, agirlik 0.5**.
+
+## 21.62 AYRISTIRMA SONUCU: kayip **MODELDEN**, kirpmadan DEGIL
+
+Ayni aday model, yalnizca kirpma degistirilerek tekrar olculdu:
+
+| kosu | tespit | robot | robot-ISR |
+|---|---|---|---|
+| aday model, `maks_mm=10` | 0.7847 | 0.5059 | 0.4401 |
+| aday model, `maks_mm=3` | 0.7847 | 0.5059 | 0.4401 |
+
+**BIREBIR AYNI.** Kirpma yeni modelde de baglamiyor -> kayip tamamen
+**modelin kendisinden**.
+
+### CALISMA ANINDA ONERI BUYUKLUKLERI (617 CP)
+
+| model | ortanca | %90 | maks | >3mm |
+|---|---|---|---|---|
+| dagitilan | 0.484 mm | 1.636 | 2.868 | **%0.00** |
+| **aday (yaprak>=1)** | **0.427 mm** | 1.166 | **2.537** | **%0.00** |
+
+Aday model calisma aninda **DAHA KUCUK** duzeltmeler oneriyor -- oysa
+cevrimdisi OOF'ta en buyuk onerisi 6.33 mm idi.
+
+### UCUNCU KATMAN: CEVRIMDISI POPULASYON != CALISMA ANI POPULASYONU
+OOF degerlendirmesi **pose egitim satirlarinda** yapiliyor; calisma
+anindaki oznitelikler ise `wire_gate.feats_for`in **gate'ten gecmis**
+adaylar icin urettikleri. Bunlar farkli populasyonlar. Sonuc: modelin
+"buyuk duzeltme onerebilme" ozelligi bile calisma anina TASINMADI.
+
+Yani vekil sadece METRIGI degil, modelin DAVRANISINI da yanlis tahmin
+etti. **Kol kapandi; dagitilan pose head yerinde kaliyor.**
+
+**Bilanco:** pose cephesinde ucu de olculdu ve ucu de kapandi --
+kirpmayi gevsetmek (+0.0000), genis veriyle egitmek (vekilde bile
+yardim etmedi), buzulmeyi gevsetmek (uctan uca −0.0437). 21.60'taki
++0.31'lik acik **son-islem regresyonuyla alinamaz**; bu artik uc bagimsiz
+olcume dayaniyor.
+
+## 21.63 Y24 CRF — TEK AYARLA KAPATILMADIGI ICIN KOL DIRILDI
+
+Ilk ayar (2 tur / 0.3) tam notrdu (%50.0 pozitif) ve normalde "olu"
+denirdi. `KAPANAN_KOLLAR_DENETIMI` kurali geregi ikinci, DAHA GUCLU ayar
+kosuldu:
+
+| ayar | tespit | robot | robot-ISR | rbi farki | %95 GA | poz% |
+|---|---|---|---|---|---|---|
+| taban | 0.6101 | 0.5376 | 0.4668 | — | — | — |
+| 2 tur / 0.3 | 0.6043 | 0.5330 | 0.4670 | +0.0004 | [−0.0199,+0.0218] | 50.0 |
+| **4 tur / 0.5** | 0.6043 | 0.5432 | **0.4766** | **+0.0100** | [−0.0128,+0.0335] | **80.5** |
+
+**MONOTONIK VE ANLAMLI YONDE**: duzeltme guclendikce robot metrigi
+yukseliyor (+0.0004 -> +0.0100), pozitif ornek orani 50.0 -> 80.5.
+Tespit her iki ayarda da hafif negatif (−0.005) -- yani duzeltme
+kesinlikten biraz verip robot-uygunlugundan aliyor.
+
+**Bu, gecenin "yelpaze 64 yonde olu, 256 yonde +0.0676" dersinin
+tekrarıdır:** ilk sonda cozunurlugu yetmiyordu. Kol tek ayarla
+kapatilsaydi bu egilim gorulmeyecekti.
+
+**UCUNCU AYAR KOSULUYOR (6 tur / 0.7)** -- egilimin devam edip etmedigini,
+yoksa tepe noktasinin gecilip gecilmedigini belirlemek icin. Henuz
+hicbir ayar GA kapisini gecmedi; kol DAGITIMA ADAY DEGIL, ACIK.
+
+## 21.64 CRF URUN YOLU KANCASI — kuruldu ve DOGRULANDI
+
+Sonda kancalari yalniz `olculen` yoluna ulasiyor (21.49). CRF kazanci
+oradan olculdugu icin, kazanan ayarin **DAGITILACAK** yolda da
+olculebilmesi sart. Sebep hafizada: kanonik zincir blogu olcum betiginde
+**+0.0151**, uretim egiticisinde **−0.0138** vermisti -- yol farki KARAR
+DEGISTIRIYOR.
+
+`robot_cp.extract` icine `CP_CRF="tur,agirlik"` kancasi eklendi
+(varsayilan bos = bit-ayni mevcut davranis).
+
+**DOGRULAMA:**
+
+| kontrol | sonuc |
+|---|---|
+| `duman_testi.py` (kanca KAPALI) | **GECTI**, 2 CP |
+| `duman_testi.py` (kanca ACIK, 6/0.7) | **GECTI**, ayni 2 CP |
+| kanca kod yolu: env okundu / import / etki | 0.08829 ort. abs fark, tepelerin **%67.6**'sinin etiketi degisiyor |
+
+Duman testinde ciktinin AYNI cikmasi **no-op degil**: o parca basit ve
+iki CP'si duzeltmeye dayanikli. Kanca kod yolu ayrica izole olarak
+kosuldu ve etkisi olculdu -- bu gece "tam +0.0000" tuzagina dusmemek
+icin artik standart adim.
+
+## 21.65 UZLASTIRMA: "%94'unun yakininda hic tahmin yok" ile 21.60 CELISMIYOR
+
+Bolum 20 (hata otopsisi) kacan GT'lerin **%94.2**'sinin yakininda HIC
+tahmin olmadigini soyluyor. 21.60 ise havuzda GT'lerin **%78'i** icin
+10 mm yakinda dogru yonlu bir aday oldugunu soyluyor. Ilk bakista
+celiski gibi duruyor; degil -- **iki farkli kume olculuyor**:
+
+| olcum | kume | anlami |
+|---|---|---|
+| Bolum 20: %94.2 "bos" | **CIKTI** (gate + secim SONRASI) | urunun verdigi CP'ler |
+| Bolum 21.60: %78 kapsama | **HAVUZ** (gate ONCESI) | uretilen tum adaylar |
+
+Yani: **aday havuza GIRIYOR, ama cikisa ULASMIYOR ya da ulastiginda
+yeterince yakin degil.** Ikisi birlikte okununca tablo netlesir:
+
+* Havuz 2 mm'de 0.4242 -> aday **uretimi** de tam degil.
+* Havuz 10 mm'de 0.7818 -> ama aday **cogunlukla ORADA**, sadece
+  2 mm'lik kutuya girecek hassasiyette degil.
+* Cikti 10 mm'de 0.6697 -> havuzdaki bu adaylarin bir kismi ayrica
+  cikisa da ulasamiyor.
+
+**Bolum 20'nin "ADAY URETIMI + KONUM SKORLAMA sorunu" hukmu AYAKTA;
+21.60 onu daha keskin hale getiriyor:** iki bilesenden agir basani
+**KONUM HASSASIYETI**. Bolum 20'nin son-islem tavani hesabi (%12) da
+ayakta -- nitekim bu gece uc son-islem kolu (halka-eksen, CRF ilk ayar,
+pose yeniden egitimi) bu tavani asamadi.
+
+## 21.66 ADAY TURETME ESIGI ACILMADI — kayitli tuzak
+
+Baglayici kisit YANAL KONUM oldugu icin akla gelen ucuz kol,
+`prediction_postproc` icindeki aday turetme parametrelerini (ozellikle
+`vertex_confidence_mask`) taramaktir: bu esik hangi tepelerin adayi
+olusturdugunu belirler, yani KONUMU dogrudan oynatir.
+
+**ACILMADI.** Sebep `cp_config.json`'un kendi notunda yazili:
+
+> `vc_035_REVERTED_2026_07_25`: vc0.35 REDDEDILDI -- tarama iki ureticide
+> de +0.01 onerdi ama TAM dagitim OOF'unda WEI 0.641 -> 0.629 (DUSTU).
+> "Bir taramanin tam dagitim kosusuna gore yaniltmasi IKINCI kez"
+> (digeri k_eig128).
+
+Yani bu parametre icin **tarama ile tam dagitim arasindaki fark daha once
+IKI KEZ karar degistirmis**. Bu gece ayni ders ucuncu kez yasandi
+(pose head vekili, 21.58). Sinirli surede taramaya girmek, bu kadar
+kaydedilmis uyariya ragmen, olcum degil kumar olurdu.
+
+**Not:** parametreler zaten 2026-08-06'da yeniden ayarlanmis
+(`p1_2026_08_06`: cluster/dedupe/oy 3/10/5 -> 1/2/2, cok-CP +0.0331).
+Yani bu cephe bayat degil.
+
+## 21.67 Y24 CRF **KAPANDI** — tepe yapip donuyor, yani gurultuye uydurma
+
+Tarama tamamlandi (VAL 100 parca, olculen yol, esli parca bootstrap):
+
+| ayar | tespit | robot | robot-ISR | rbi farki | %95 GA | poz% |
+|---|---|---|---|---|---|---|
+| taban | 0.6101 | 0.5376 | 0.4668 | — | — | — |
+| 2 tur / 0.3 | 0.6043 | 0.5330 | 0.4670 | +0.0004 | [−0.0199,+0.0218] | 50.0 |
+| **4 tur / 0.5** | 0.6043 | 0.5432 | **0.4766** | **+0.0100** | [−0.0128,+0.0335] | **80.5** |
+| 6 tur / 0.7 | 0.6011 | 0.5390 | 0.4645 | −0.0020 | [−0.0249,+0.0222] | 43.0 |
+
+**HUKUM: KAPANDI.**
+
+**Gerekce -- MONOTONIK DEGIL.** Egri +0.0004 -> +0.0100 -> −0.0020, yani
+tepe yapip donuyor. Bu kampanyada ayni imza daha once halka-isaret esik
+taramasinda gorulmustu (95/105/115/125/140/160 derece: +0.0345/+0.0298/
++0.0298/+0.0063/−0.0063/−0.0047) ve **"monotonik degil, yani gurultuye
+uydurma"** denip sade kural tercih edilmisti. Ayni olcut burada da
+uygulaniyor.
+
+Ustelik tepe degeri (+0.0100) **GA'si sifiri iceren** bir sayidir ve bu
+gecenin diger "kapiya yakin" kollariyla ayni banttadir (Y16 birlesim
++0.0112, Y8 etiket kalitesi +0.0082, Y22 MC dropout +0.0071).
+**Uc ayar arasindan en iyisini secmek, kapiyi gecmeyen bir sayiyi
+tarama ile "gecirmek" olurdu.**
+
+**Tespit her ayarda negatif** (−0.005 … −0.009): duzeltme kesinlikten
+veriyor, robot-uygunluguna guvenilir bir sey katmiyor.
+
+### YAN KAZANIM: KOL YINE DE TEK AYARLA KAPATILMADI
+Ilk ayar (2/0.3) tam notrdu. `KAPANAN_KOLLAR_DENETIMI` kurali geregi iki
+ayar daha kosuldu; egrinin sekli ancak boyle gorulebildi. Kol bir ayarla
+"olu" denip kapatilsaydi hukum ayni olurdu ama **gerekce yanlis** olurdu
+("etkisiz" yerine "gurultuye uydurma"). Kural ise yaradi.
+
+**`CP_CRF` kancasi kodda KALIYOR** (varsayilan kapali, bit-ayni davranis):
+ileride segmentasyon kalitesi degisirse kol yeniden olculebilir.
+
+## 21.68 TOPLULUK GENISLETME KOLU (egitim YOK) — kurulum
+
+Gecenin olculmus baskın etkisi **segmentasyon tohum gurultusu 0.046**
+(21.41). Topluluk, bu gurultuyu ortalamayla azaltmanin dogrudan yoludur
+ve **yeni egitim GEREKTIRMEZ** -- gereken checkpointler diskte.
+
+Urun bugun **4** checkpoint kullaniyor:
+`recall_hard_s2` + `recall_hard_keig96_s0/s1/s2`.
+
+Diskte kullanilmayan iki grup var:
+
+| aday | gerekce |
+|---|---|
+| **A: 5 uye** = urun 4 + `recall_hard_keig96_s3` | AYNI recetenin 4. tohumu; urun toplulugunda YOK. Saf varyans azaltma, recete degisikligi SIFIR |
+| **B: 8 uye** = A + `y1b_aug0.15_s0/s1/s2` | augmentasyon checkpointleri TEK TEK daha guclu (val Conn_IoU 0.6528 / 0.6990 / 0.6673) |
+
+Ikisi de VAL 100 parcada, olculen yolda, esli parca bootstrap ile
+olculuyor. **Bu kol tohum gurultusune tabi degil** (yeni egitim yok),
+dolayisiyla tek kosuda hukum giyebilir.
+
+## 21.69 ARA TEST HAZIRLIGI — 5 gorulmemis parca, TANIDIK marka
+
+Amac sayi degil **fonksiyonel dogrulama**: urun sahada ne yapiyor.
+`sonda_ara_test_glb.py`, `robot_cp.extract` (yani GLB ihracatcilarinin
+BUGUN cagirdigi yol) uzerinden parca parca rapor uretir.
+
+Secim (`_ara_test_parcalar.txt`) **zorluk yelpazesini kasten kapsiyor**:
+
+| parca | GT CP | konum |
+|---|---|---|
+| 3061994 | **24** | en yogun -- sistemin zayif halkasi |
+| 1020700000 | 20 | yogun |
+| 1208920000 | 8 | cok-CP rejim esigi (n_gt>=8) |
+| 1058680000 | 4 | tipik |
+| 3025176 | 1 | tek girisli |
+
+Hepsi VAL'den: **marka egitimde VAR, bu PARCALAR yok.** Kolay parca secip
+test sismesin diye en yogun parca bilerek dahil edildi.
+
+**DURUSTLUK NOTU (betigin ciktisina da yazildi):** 5 parca kucuk bir
+ornektir, bu sayilar MANSET DEGILDIR. Manset VAL 100 parcadir
+(tespit 0.7878 / robot-ISARETLI 0.4839).
+
+## 21.70 TOPLULUK GENISLETME A (5 uye) — NOTR, KAPANDI
+
+VAL 100 parca, olculen yol, esli parca bootstrap. Urun 4 uye +
+`recall_hard_keig96_s3` (AYNI recetenin 4. tohumu):
+
+| metrik | taban (4) | 5 uye | fark | %95 GA | poz% |
+|---|---|---|---|---|---|
+| tespit | 0.6101 | 0.6100 | −0.0000 | [−0.0191,+0.0201] | 49.1 |
+| robot | 0.5376 | 0.5349 | −0.0024 | [−0.0239,+0.0211] | 40.9 |
+| robot-ISR | 0.4668 | 0.4651 | −0.0018 | [−0.0221,+0.0173] | 42.9 |
+
+**Tam notr. KAPANDI.** Ayni receteden bir uye daha eklemek hicbir sey
+katmiyor -- 4 uyeli topluluk o recetenin varyansini ZATEN doyurmus
+(uyeler yuksek korelasyonlu: yalniz tohum farkli).
+
+Bu, TOPLULUK B'nin (farkli recete = gercek cesitlilik) neden ayri bir
+soru oldugunu da gosterir.
+
+## 21.71 YOGUN PARCA YOLU IKI KEZ BAYATLAMIS — ONARILDI
+
+Gozle yapilan ara test yogun parcada agir kacirma gosterdi (GT=22 -> 11
+CP). Kodda bu is icin **ayri bir urun yolu** var: `robot_cp.extract_highcp`
+(makbuz `results/product_f1_receipt.json`, OOF F1 0.807). Ama
+`export_robot_glb.py:155` **kosulsuz** `robot_cp.extract` cagiriyor, yani
+yol hic kullanilmiyordu. Sebep arandiginda yolun **bugun hic
+kosamadigi** ortaya cikti -- iki ayri bayatlama:
+
+**(1) Kapi donusumu atlaniyordu.** `highcp_selector.apply` icinde
+`wm["clf"].predict_proba(X13)` cagriliyordu; dagitilan gate ise
+PARCA-ICI Z-SKOR donusumunden sonra **116** sutun bekliyor (58'in tam iki
+kati -- donusum her ozniteligin yanina parca-ici z-skorunu ekler).
+`ValueError: X has 58 features, but expecting 116`.
+**Onarim:** `wire_gate.karar_skoru(wm, X13)` -- dosyanin kendi "tek
+kaynak" kurali zaten buydu, burasi ona uymuyordu.
+
+**(2) Secici, o gunku oznitelik genisligiyle egitilmis.** Secici
+2026-07-26'da egitildi; O GUN `feats_for` **13** sutun donduruyordu
+(13 + 8 lattice + 4 rank = **25**). Bugun 58 donduruyor -> augment **70**
+uretiyor. `ValueError: X has 70 features, but expecting 25`.
+**Onarim:** seciciye giden matris ilk `n-12` sutuna kirpilir.
+**DOGRULANDI, VARSAYILMADI:** `FEAT_NAMES = FEAT_NAMES_13 + ...` yani yeni
+oznitelikler SONA eklenmis; secicinin sakladigi 25 ismin ilk 13'u
+`FEAT_NAMES_13` ile BIREBIR ayni (kod isim isim karsilastirip
+uymazsa HATA veriyor -- sessiz kirpma yok).
+
+**DERS:** "makbuzu var" demek "bugun kosuyor" demek DEGIL. Cagrilmayan bir
+yol sessizce curur; iki bagimsiz degisiklik (gate donusumu, oznitelik
+genisligi) bu yolu kullanilamaz hale getirmis ve kimse fark etmemis
+cunku kimse cagirmiyormus.
+
+## 21.72 YOGUN YOL DOGRU ADAYI BULUYOR, DOGRU YONU KOYMUYORDU
+
+Yol onarilip kosunca ilk parca (3061994, GT=24) sunu verdi:
+
+| yol | uretilen CP | robot-ISARETLI |
+|---|---|---|
+| TABAN (`extract`) | 20 | **11** |
+| YOGUN (`extract_highcp`) | **24** (adet TAM) | **1** |
+
+**Adedi tam tutturuyor ama isaretli dogruluk cokuyor.** Sebep kodda:
+`extract_highcp`, secimden sonra dogrudan `_format_cps` diyip bitiyordu;
+`extract`in **kapi sonrasi zinciri** (pose head, aci duzeltici, uye yon
+secici, ayrik yon secici) ORADA HIC KOSMUYORDU.
+
+Bu ayni zamanda makbuzu da yerine oturtuyor: **0.807 TESPIT F1'idir**,
+robot-isaretli degil.
+
+**ONARIM:** zincir `_kapi_sonrasi_zincir()` diye ortak fonksiyona cikarildi
+ve HER IKI yol da onu cagiriyor (kod tabaninin kendi "tek kaynak" kurali).
+`extract`in davranisi DEGISMEDI -- duman testi birebir ayni iki CP'yi ayni
+koordinatlarda uretti.
+
+## 21.73 METADATA-SIZ ADET TAHMINI (kunye bilgisi olmadan)
+
+`extract_highcp` `cp_count` ister (ureticinin CP sayisi) = METADATA.
+Kod okundu: `cp_count` yalnizca IKI yerde kullaniliyor -- `rank_feats`
+icindeki `nratio` oznitelig i ve son `[:N]` kirpmasi. Havuz uretimi ve
+lattice ozellikleri N'den BAGIMSIZ. Yani metadata bagimliligini kaldirmak
+icin tek gereken bir **N tahmini**.
+
+`adet_tahmini.py`: CP'ler duzenli bir IZGARADA durur; iki ana eksende
+(SVD) izgara adimi (pitch) ve yayilim olculur, site sayisi cikarilir.
+Tamamen geometrik.
+
+**ILK KAPI (cikarim GEREKTIRMEZ): GT noktalarindan adedi geri bulabiliyor mu?**
+
+| | tum parcalar (6074) | **YOGUN (GT>=11, 606 parca)** |
+|---|---|---|
+| tam isabet | %68.5 | **%56.8** |
+| ortanca mutlak hata | 0.0 CP | **0.0 CP** |
+
+Kapi GECTI -> izgara gercek ve sayilabilir. `cp_count=None` verilirse
+`extract_highcp` artik adedi havuzun kendi geometrisinden tahmin ediyor
+(gurultuye karsi yalniz ust %60 skorlu adaylar kullanilir).
+
+## 21.74 YOGUN YOL BAGLANMADI — makbuz TEMMUZ'a ait, bugune TASINMIYOR
+
+Iki bayatlama onarilip yol kosar hale gelince (21.71) ve kapi sonrasi
+zincir baglaninca (21.72) tam olcum yapildi. **5 yogun parca, GT ile:**
+
+| yol | tespit | robot (isaretsiz) | robot-ISARETLI |
+|---|---|---|---|
+| **TABAN (`extract`)** | **0.7907** | **0.4651** | **0.4186** |
+| YOGUN (cp_count=GT) | 0.3402 | 0.1546 | 0.1134 |
+| YOGUN (cp_count−2) | 0.3441 | 0.1505 | 0.1075 |
+
+### ONCEKI CIKARIM CURUDU
+Ilk parcadan sonra "yogun yol dogru ADAYLARI buluyor, taban yol dogru
+YONLERI koyuyor" denmisti. **Yanlis.** Yogun yol TESPITTE de yari yariya
+kotu (0.3402 vs 0.7907): adedi tutturuyor ama noktalari YANLIS YERLERE
+koyuyor. Tek parcadan (ISARETLI 11 vs 1) cikarilan mekanizma, bes parcalik
+tam tabloyla curudu.
+
+### UCUNCU BAYATLAMA — asil sebep
+`cp_config.robot_highcp.derive_6k = {min_v: 30, vertex_conf: 0.5,
+cluster_mm: 5.0}`. Bu degerler, `prediction_postproc` icinde
+**`_superseded_2026_07_24_values`** olarak duran TERK EDILMIS degerlerin
+ta kendisi. Urun 2026-08-06'da `min_v 4 / vc 0.3 / cluster 1.0`'a gecti
+(`p1_2026_08_06`: cok-CP +0.0331); **yogun yol gecmedi.**
+
+Yani `extract_highcp` "daha iyi bir yol" DEGIL, **Temmuz urununun adet
+yardimi almis hali**. Makbuzdaki 0.807, Temmuz'da, 24 parcada, o gunku
+turetme parametreleriyle olculmus bir sayidir ve bugunku sisteme
+TASINMIYOR.
+
+### KARAR: `export_robot_glb.py`'ye BAGLANMADI
+Baglansaydi gozle "yogun parcada daha cok CP var" gorunurken olcum
+0.79 -> 0.34'e duserdi. **Gorsel iyilesme ile olculen iyilesme ters
+yonde olabilir** -- bu gecenin vekil dersinin (21.58) gorsel karsiligi.
+
+### YINE DE KAZANC: uc onarim kodda KALIYOR
+1. `highcp_selector` artik `karar_skoru` cagiriyor (gate donusumu)
+2. Oznitelik genisligi ISIM DOGRULAMASIYLA kirpiliyor (sessiz kirpma yok)
+3. `_kapi_sonrasi_zincir()` ortak fonksiyon -- iki yol bir daha ayrisamaz
+4. `cp_count=None` -> adet geometriden tahmin ediliyor (`adet_tahmini.py`)
+
+Yol artik KOSABILIR durumda. Yeniden aday olmasi icin gereken tek sey,
+turetme parametrelerinin bugunku urunle esitlenmesi ve secicinin bugunku
+ozniteliklerle YENIDEN EGITILMESI (`highcp_selector.train_and_save`,
+havuz `results/highcp_pool.json` diskte). Bu bir GUNLUK istir, bugune
+sigmaz.
+
+## 21.75 LITERATURDEN ILHAM — bizim kusurun ADI var: "sem-seg + connected components"
+
+Aranan sey genel fikir degil, **bizim boru hattinin bilinen kusuru**.
+
+**Bizim yol:** anlamsal segmentasyon -> bagli bilesenler -> bilesenin
+agirlik merkezi = CP konumu.
+
+Literaturde bunun adi *semantic segmentation + connected components* ve
+bilinen kusuru aynen su: **birbirine DEGEN, birbirinin AYNI nesneleri
+ayiramaz** (Panoptic-DeepLab bunu acikca soyler: kutusuz yontemler degen
+nesneleri ayirmakta zorlanir). Bizim yogun klemenste cokusumuz tam budur.
+
+**Cozum ailesi** (Panoptic-DeepLab, Spatial Embeddings, PVN3D, EmbedTrack):
+her nokta kendi ornek MERKEZINE bir **kayma vektoru (offset)** tahmin
+eder; ayrica bir **centerness/seed** haritasi ogrenilir (hangi noktanin
+oyu guvenilir). Noktalar kaydirilip kumelenir. Merkez bolgeden
+TURETILMEZ, dogrudan OYLANIR.
+
+**Bizim yigina birebir oturur:**
+
+| bugun | onerilen |
+|---|---|
+| DiffusionNet -> 5 sinif olasilik | + **3 kanal offset** + **1 kanal seed** (ayni ag, ek bas) |
+| bagli bilesen -> merkez | kaydir + kumelen |
+| konum cozunurlugu ~ bolge boyu | konum cozunurlugu ~ regresyon hassasiyeti |
+
+**YENI ETIKET GEREKMIYOR:** offset hedefi her tepe icin
+`(en yakin GT CP - tepe konumu)`; elimizdeki 11.927 uretici CP'sinden
+bedava cikar.
+
+**Neden bu kampanyanin olcumleriyle TUTARLI:**
+* 21.60: baglayici kisit YANAL KONUM (+0.358). Offset regresyonu tam
+  oraya calisir.
+* 21.53-21.62: pose head'in SON-ISLEM regresyonu bu acigi TASIYAMADI
+  (uc bagimsiz olcum). Cunku hasar YUKARIDA olusuyor -- offset basi
+  yukarida calisir.
+* 21.74: yogun parcada cokus, "degen ayni nesneleri ayirma" probleminin
+  ta kendisi.
+
+**MALIYET (durust):** egitim ister (~2 sa/tohum x 3 tohum + kumeleme
+kalibrasyonu). Bugune SIGMAZ. Ama "sonraki adimlar"in 1. maddesi artik
+tahmin degil, **olculmus bir darbogaza oturan somut bir mimari**.
+
+Kaynaklar: Panoptic-DeepLab (arXiv 1911.10194) · PVN3D (arXiv 1911.04231)
+· Spatial Embeddings (arXiv 1906.11109) · EmbedTrack (arXiv 2204.10713)
+
+## 21.76 OFFSET/OY BASININ TAVANI OLCULDU — YESIL ISIK (ve sonda cozunurlugu dersi TEKRAR)
+
+Egitime girmeden once tavan olculdu (`sonda_offset_tavani.py`, VAL 23-25
+parca, egitim YOK). Soru: **offset basi ne kadar hassas olmali ki
+bugunku sonucu gecsin?** GT offsetlerine gercekci gurultu eklenip
+kaydir+kumele cozucusu kosuldu.
+
+**ILK SONDA (kumeleme bandi 2.0 mm) — "uygulanamaz" diyordu:**
+
+| offset gurultusu | tespit F1 |
+|---|---|
+| 0.00-0.50 mm | 1.0000 |
+| **0.75 mm** | 0.6141 |
+| 1.00 mm | 0.3289 |
+
+Pose head'in bugun OOF'ta ulastigi artik ortanca **0.67 mm** -- yani tam
+ucurumun ustunde. Bu haliyle fikir bugunku 0.7878'i GECMEZDI.
+
+**BANDA DUYARLILIK TARANDI (kapatmadan once sondayi denetle kurali):**
+
+| bant | 0.75 mm | 1.00 mm | 1.50 mm |
+|---|---|---|---|
+| 2.0 mm | 0.6141 | 0.3289 | 0.2016 |
+| 3.0 mm | **1.0000** | 0.8132 | 0.3318 |
+| **4.0 mm** | **1.0000** | **0.9933** | 0.6066 |
+
+**Ucurum FIKRIN degil, COZUCUNUN kusuruymus.** 4 mm bantla yaklasim
+**1.0 mm** offset hatasina kadar neredeyse kusursuz; bizim ulasabildigimiz
+0.67 mm bunun rahatca icinde.
+
+Bu, `KAPANAN_KOLLAR_DENETIMI`ndeki "yelpaze 64 yonde OLU, 256 yonde
++0.0676" dersinin birebir tekrari: **ilk sonda dusuk cozunurlukluydu.**
+
+### DURUSTLUK SINIRI — bu bir TAVAN, tahmin DEGIL
+Olcumde iki sey KAHINDEN geliyor:
+1. **Kim oy verir**: bir CP'ye 6 mm'den yakin tepeler (gercekte bunu
+   `seed` basi ogrenecek).
+2. **Yon**: en yakin GT'nin yonu (bu betik yonu olcmuyor).
+Yani gercek sistem ayrica seed haritasini ve yonu de ogrenmek zorunda.
+Olculen sey sudur: **cozme adimi, ulasabilecegimiz hassasiyette
+calisiyor mu?** Cevap EVET.
+
+**KARAR: kol aciliyor.** Sonraki adim offset+seed basini kurup egitmek.
+
+## 21.77 TOPLULUK GENISLETME B (8 uye) — KAPIYI GECEMEDI, TOPLULUK CEPHESI KAPANDI
+
+Urun 4 + `recall_hard_keig96_s3` + `y1b_aug0.15_s0/s1/s2` (farkli recete =
+gercek cesitlilik). VAL 100 parca, olculen yol, esli bootstrap:
+
+| metrik | taban (4) | 8 uye | fark | %95 GA | poz% |
+|---|---|---|---|---|---|
+| tespit | 0.6101 | 0.6186 | +0.0086 | [−0.0205,+0.0403] | 70.3 |
+| robot | 0.5376 | 0.5522 | +0.0148 | [−0.0167,+0.0499] | 81.3 |
+| robot-ISR | 0.4668 | 0.4710 | **+0.0041** | [−0.0250,+0.0328] | 60.8 |
+
+Ucunun de GA'si sifiri iciyor. Isaretli metrik neredeyse hic kipirdamiyor
+(+0.0041). **Topluluk cephesi kapandi:**
+
+| kol | robot-ISR farki | hukum |
+|---|---|---|
+| A: 5 uye (ayni recete) | −0.0018 (%42.9) | notr |
+| B: 8 uye (farkli recete) | +0.0041 (%60.8) | kapi alti |
+
+Ayni receteden uye eklemek bosuna; farkli receteden eklemek isaretsizde
+biraz yardim ediyor (+0.0148, %81.3) ama isaretlide degil. Bu, gecenin
+genel bulgusuyla tutarli: **kalan hata yon/isaret degil KONUM.**
+
+## 21.78 SEED KARISMASI SONDASI **BILGI TASIMADI** — tasarim kusuru, kayda gecirildi
+
+21.76'da "kim oy verir" kahinden geliyordu. Bunu zorlamak icin oylarin bir
+kismi KOMSU CP'ye kaydirilarak "bitisik agizlari karistirma" simule
+edilmek istendi. Uc oran (%5 / %15 / %30) **birebir ayni** sonucu verdi
+(hepsi 1.0000, 1.0 mm'de 0.9920) -- son haneye kadar. Bu, no-op imzasidir.
+
+**Sebep bulundu:** bozma, oyun hedefini KOMSU CP'nin TAM MERKEZINE
+tasiyor. Yani oy hala GECERLI bir kumeye dusuyor; kumeler ayrik kaldigi
+ve her CP bol oy aldigi icin kume merkezleri degismiyor.
+
+**Gercek ag hatasi boyle degildir:** ag offseti iki CP'nin ARASINA yayar
+(smear), merkeze degil. Dogru sonda, tahmin edilen offsetin YONUNU/BOYUNU
+bozmali (orn. hedefi iki CP arasinda enterpolasyon yapmak), CP kimligini
+degistirmemeli.
+
+**Bu sonuc "dayaniklidir" diye RAPORLANMIYOR.** Sonda tasarimi geregi
+bilgi tasimiyor; dogrusu yarin kurulacak. Kayit, ayni tuzaga tekrar
+dusulmemesi icin burada duruyor.
+
+## 21.79 YOGUN YOL — bugunku turetme parametreleriyle OLCULDU (ucuncu bayatlama dogrulandi)
+
+21.74'te ucuncu bayatlama teshis edilmisti: `robot_highcp.derive_6k`
+degerleri (30 / 0.5 / 5.0) urunun 2026-07-24'te TERK ETTIGI degerler.
+Cevre degiskeniyle bugunku urun degerleri (4 / 0.3 / 1.0) verilip
+olculdu (5 yogun parca, GT ile):
+
+| yol | tespit | robot | robot-ISARETLI |
+|---|---|---|---|
+| **TABAN (`extract`)** | **0.7907** | **0.4651** | **0.4186** |
+| YOGUN (Temmuz turetmesi) | 0.3402 | 0.1546 | 0.1134 |
+| YOGUN (**bugunku** turetme) | 0.3590 | 0.2051 | **0.1641** |
+
+**Teshis DOGRULANDI ama yol KURTULMADI.** Turetme duzeltmesi
+robot-ISARETLI'yi 0.1134 -> 0.1641 cikardi (+0.0507) -- yani ucuncu
+bayatlama gercekti. Yine de taban **2.5 kat** onde.
+
+**Kalan kok neden: SECICININ KENDISI.** `highcp_selector.pkl`
+2026-07-26'da, **24 parcayla**, o gunku adaylarla ve o gunku
+ozniteliklerle egitildi. Turetmeyi guncellemek adaylari degistirir ama
+secici hala eski dagilima gore siralar.
+
+**KISA YOL YOK.** Seciciyi yeniden egitmek icin once havuzun
+(`results/highcp_pool.json`, Temmuz) bugunku cikarimla yeniden
+uretilmesi gerekir -- bu bir GUNLUK istir. Hizlanmak icin kestirme
+yapilip yol ihracatciya baglansaydi, GOZLE "yogun parcada daha cok CP
+var" gorunurken OLCUDE tespit 0.79 -> 0.36 duserdi.
+
+### YOGUN CEPHESINDE BUGUNKU NET KAZANC
+1. Yol **calisir** hale geldi (iki bayatlama onarildi; ucuncusu olculdu)
+2. **Metadata-siz adet tahmini** kodda (`cp_count=None`)
+3. Kapi sonrasi zincir **ortak fonksiyona** cikti -- iki yol bir daha
+   ayrisamaz
+4. Yeniden egitim icin gerekenin **tam olarak ne oldugu** olcumle belli:
+   havuz yeniden uretimi + secici yeniden egitimi (turetme ayari TEK
+   BASINA yetmiyor -- olculdu)
+
+## 21.80 YOGUN YOLDA **DORDUNCU** BAYATLAMA: oy havuzu yaricapi 5 mm kalmis
+
+Yogun parcada uretilen CP sayisinin yariya dusmesinin bir sebebi arandi.
+Once bir hipotez kuruldu ve **CURUTULDU** (iyi ki olculdu):
+
+* Hipotez: eksen-farkindalikli havuzun yanal yaricapi (3.0 mm) komsu
+  kutuplari (adim ~3.5 mm) birlestiriyor.
+* **Yanlis:** `robot_eksen_havuz` config'de **False**, yani o parametre
+  hic kullanilmiyor. Urun yolu duz kure mesafesi kullaniyor ve degeri
+  `vote_pool_mm = 2.0` -- 3.5 mm adimin ALTINDA, birlestirme yok.
+
+Ama ayni yeri okurken GERCEK kusur bulundu:
+
+```
+# robot_cp.py:569 (eski)
+cps = _vote2(per, min_votes=1)      # cluster_mm GECILMIYOR -> varsayilan 5.0 mm
+```
+
+`extract_highcp` oy havuzunu **5.0 mm** ile yapiyordu; urun yolu ise
+`vote_pool_mm = 2.0` kullaniyor. Bu deger 2026-08-06 P1 taramasinda
+5 -> 2 mm'ye cekilmisti ve o taramanin **suclusu tam da** "komsu iki
+gercek girisi tek adaya yutan genis havuz"du (cok-CP +0.0331).
+**Yogun yol o duzeltmeyi de almamis.**
+
+**ONARIM:** `_vote2(per, cluster_mm=vote_pool_mm, min_votes=1)`.
+
+### OLCUM (3061994, GT=24) — her onarim gercek kazanc veriyor
+
+| durum | robot-ISARETLI |
+|---|---|
+| orijinal (uc bayatlama acik) | 1 |
+| + turetme parametreleri bugunku | 4 |
+| + oy havuzu 5 -> 2 mm | **5** |
+
+Taban yol ayni parcada 11. Yani yogun yol hala geride ama **her
+bayatlama onarimi olculebilir kazanc veriyor** -- bu, kalan farkin da
+onarilabilir cinsten oldugunun isareti.
+
+**YOGUN YOLDAKI BAYATLAMA SAYISI: DORT.**
+1. gate donusumu atlanıyordu (`karar_skoru` yerine ham `predict_proba`)
+2. oznitelik genisligi 25 vs 70
+3. turetme parametreleri Temmuz'un terk edilmis degerleri
+4. oy havuzu yaricapi 5 mm (urun 2 mm'ye gecmis)
+
+Hepsinin ortak sebebi ayni: **bu yol cagrilmiyordu, dolayisiyla urun
+gelistikce sessizce geride kaldi.**
+
+## 21.81 SUNUMDAKI VE CONFIG'DEKI GATE ESIKLERI **OLU PARAMETRE**
+
+Yogun parcada gate esigi tarandi (0.15 / 0.25 / 0.30 / 0.35 / 0.45) ve
+**bes deger de BIREBIR ayni sonucu** verdi (tespit 0.7260, robot 0.5721,
+robot-ISR 0.4279). Bu gecenin bes numarali "+0.0000" imzasi.
+
+**KOK NEDEN:** `wire_gate.GORELI_ESIK` 2026-07-31'de dagitildi ve
+`karar_maskesi` artik sabit esigi KULLANMIYOR:
+
+```
+if GORELI_ESIK:
+    return (s >= GORELI_ORAN * s.max()) & (s >= GORELI_TABAN)
+return s >= esik          # <- bu satira ARTIK GIRILMIYOR
+```
+
+Dolayisiyla:
+* `cp_config.robot_wire_gate_threshold` (0.40) -> **OLU**
+* `cp_config.robot_wire_gate_threshold_highcp` (0.35) -> **OLU**
+* `extract` icindeki rejim-kosullu esik secimi -> **ETKISIZ**
+* 2026-07-29 taramasinin "0.25 daha iyi" sonucu -> artik **UYGULANAMAZ**
+  (o tarama sabit esik doneminde yapildi)
+
+**SUNUM DA BUNLARI CANLI AYAR DIYE GOSTERIYOR** (slayt 8: "Gate
+threshold, low CP density 40% / high CP density 35%"). Duzeltilmeli.
+
+**GERCEK CANLI PARAMETRELER:**
+`gate_goreli_oran` (0.50) ve `gate_goreli_taban` (0.20) --
+ikisi de cevre degiskeninden okunabiliyor (`WG_GORELI_ORAN`,
+`WG_GORELI_TABAN`). Tarama bunlara cevrildi.
+
+**DERS (bu gecenin tekrar eden dersi):** bir parametrenin config'de
+DURMASI, urunun onu KULLANDIGI anlamina gelmez. Tarama once "parametre
+gercekten baglayici mi" diye sinanmali; yoksa saatlerce olu bir dugmeyi
+cevirmis olursun.
+
+## 21.82 YOGUN YOL — DORT ONARIMDAN SONRAKI TAM OLCUM
+
+5 yogun parca, GT ile, bugunku sistem:
+
+| yol | tespit | robot | robot-ISARETLI |
+|---|---|---|---|
+| **TABAN (`extract`)** | **0.7907** | **0.4651** | **0.4186** |
+| YOGUN, orijinal (4 bayatlama acik) | 0.3402 | 0.1546 | 0.1134 |
+| YOGUN, turetme onarildi | 0.3590 | 0.2051 | 0.1641 |
+| **YOGUN, DORT onarim** | **0.3673** | **0.2143** | 0.1531 |
+
+Onarimlar tespitte **+0.0271**, isaretsiz robotta **+0.0597** kazandirdi.
+Ama taban hala **2.7 kat** onde.
+
+**KARAR DEGISMEDI: ihracatciya BAGLANMIYOR.** Kalan fark yapisal --
+secici 2026-07-26'da **24 parcayla** egitildi ve o gunku aday
+dagilimini varsayiyor. Dort onarim adaylari degistirdi; secici o yeni
+dagilima gore siralamiyor.
+
+**Dort onarim yine de KODA KALIYOR**, cunku secici yeniden egitildiginde
+bu yolun DOGRU davranmasi icin hepsi gerekli. Yol artik "bozuk" degil,
+"eski secici ile" calisiyor.
+
+## 21.83 OFFSET BASI — EGITIM TRENDI ve TRIVIAL TABAN
+
+Egitim: 659 parca, 14 epok, sizinti kapisi kurulu.
+
+**Once TRIVIAL TABAN olculdu** (bu olmadan egitim sayisi yorumlanamaz):
+> Model HICBIR SEY ogrenmese, yani sifir offset tahmin etse, ortanca
+> hata **4.453 mm** olurdu (seed bandindaki tepelerin CP'ye ortanca
+> uzakligi).
+
+| epok | ortanca offset hatasi |
+|---|---|
+| trivial (sifir tahmin) | 4.453 mm |
+| 1 | 4.129 mm |
+| 2 | 4.005 mm |
+| 8 | **3.664 mm** |
+
+**Model OGRENIYOR** (3.664 < 4.453, %18 daha iyi) ama **cok yavas**:
+epok basina ~0.06 mm ve yavasliyor. 14 epokta ~3.5 mm'de kalir.
+
+**GEREKEN: 1.0 mm** (21.76 tavan olcumu, kumeleme bandi 4 mm).
+
+**HUKUM: bu butcede esik GECILMIYOR.** Kol "olu" degil, ama bu recete
+ve bu butce ile hedefe ulasmiyor.
+
+## 21.84 OFFSET BASI TESHISI — YON OGRENILMIS, BUYUKLUK BUZULMUS
+
+Ortanca hata 3.4 mm tek basina "basarisiz" der. Ama hatanin BILESENLERI
+ayristirilinca tablo degisiyor (epok 13 checkpoint'i, 6 parca):
+
+| olcum | deger |
+|---|---|
+| **hedef** offset buyuklugu (ortanca) | 4.299 mm |
+| **tahmin** buyuklugu (ortanca) | **2.871 mm** |
+| **yon uyumu** (kosinus; 0 = rastgele, 1 = mukemmel) | **+0.675** |
+
+**Model YONU OGRENMIS.** Kosinus +0.675, yaklasik **48 derece** ortanca
+aci hatasina karsilik gelir -- rastgele bir tahmin 0 verirdi. 13 epokta,
+700 parcayla, hicbir ayar aramasi yapilmadan.
+
+**Sorun BUYUKLUK:** model 4.30 mm'lik hedefe 2.87 mm oneriyor (%33 az).
+Bu, bu kampanyada **ikinci kez** karsilasilan patoloji: pose head de tam
+olarak boyle davraniyordu (21.53: en buyuk oneri 2.87 mm, hedeflerin
+%10.2'si 3 mm'nin ustunde). **Regresyon buzulmesi**, L1/L2 kayiplarinin
+bilinen davranisi.
+
+### HUKUM: KOL ACIK KALIYOR, RECETE DEGISMELI
+"Bu butcede esik gecilmiyor" (21.83) dogru ama eksik. Dogrusu:
+**yon sinyali VAR ve ogreniliyor; ulasilamayan sey buyukluk.**
+
+Sonraki denemenin degistirmesi gerekenler (olculmus gerekceyle):
+1. **Buzulmeye karsi kayip**: saf L1 yerine yon + buyukluk AYRI
+   ogrenilsin (birim vektor + skaler norm), ya da kayip norm'a gore
+   agirliklandirilsin. Buzulme iki bagimsiz kolda goruldu.
+2. **Daha uzun egitim**: 13 epokta hala monotonik iyilesiyor
+   (4.129 -> 3.351), yani doymamis.
+3. **Seed bandi daralt**: 6 mm yerine 3 mm; uzak tepelerin hedefi hem
+   buyuk hem belirsiz, ortalamayi asagi cekiyor.
+
+**Bu, "kol olu" demekten cok farkli bir sonuctur** ve bugunku olcumle
+desteklenmektedir.
+
+## 21.85 OFFSET BASI BITTI + **SEED BASI GORULMEMIS PARCADA AUC 0.8042**
+
+**Egitim tamamlandi** (700 parca / 14 epok / sizinti kapisi kurulu):
+
+| epok | ortanca offset hatasi |
+|---|---|
+| trivial (sifir tahmin) | 4.453 mm |
+| 1 | 4.129 |
+| 8 | 3.664 |
+| 13 | 3.351 |
+| **14 (son)** | **3.306** |
+
+**Egri DOYMADI** -- 14 epok boyunca monotonik iyilesti. Butce bitti,
+ogrenme bitmedi. Hedef 1.0 mm; bu butcede GECILMEDI.
+
+### SEED BASI -- beklenmedik ve GUCLU sonuc
+Ag 4 kanal uretiyor; dordu `seed` (bu tepe bir CP'ye yakin mi).
+**GORULMEMIS VAL parcalarinda** (egitimde YOK) olculdu:
+
+> **seed basi AUC = 0.8042** (8 parca ortancasi; 0.5 = rastgele)
+
+Yani 14 epok ve 700 parcayla, hicbir ayar aramasi yapilmadan egitilen
+bir yan cikti, gorulmemis parcada guclu bir TESPIT sinyali veriyor.
+
+**DURUSTLUK -- 0.7053 ile DOGRUDAN KIYASLANAMAZ.** Daha once olculen
+"konum AUC 0.7053" **ADAY** basinadir ("bu aciklik CP mi"); buradaki
+0.8042 **TEPE** basinadir ("bu tepe bir CP'ye yakin mi"). Iki farkli
+populasyon, iki farkli soru. Ayni tabloya konulmaz.
+
+### NE ANLAMA GELIYOR
+Kolun iki ciktisi var ve **ikisi farkli olgunlukta**:
+* **offset** (buyukluk): buzulmus, hedefe uzak -> recete degismeli (21.84)
+* **seed** (tespit): gorulmemis parcada ZATEN calisiyor
+
+Yani bu mimari "ilerde belki" degil; **yarim gunluk bir egitimde bile
+kullanilabilir bir sinyal uretiyor.** Kol ACIK ve onceligi yuksek.
+
+## 21.86 GATE GORELI ORANI 0.50 -> 0.60: IKI REJIMDE DE KESIN POZITIF
+
+21.81'de sabit esiklerin OLU oldugu, gercek canli parametrenin
+`gate_goreli_oran` (0.50) oldugu bulunmustu. Taranan bu.
+
+**YOGUN parcalar (n_gt>=8, 14 parca):**
+
+| oran | tespit | robot | robot-ISARETLI |
+|---|---|---|---|
+| 0.30 | 0.6985 | 0.5628 | 0.4121 |
+| 0.40 | 0.7113 | 0.5722 | 0.4227 |
+| **0.50 (dagitilan)** | 0.7312 | 0.5968 | 0.4409 |
+| **0.60** | 0.7187 | **0.6128** | **0.4568** |
+
+**SEYREK parcalar (n_gt<8, katalogun %86'si, 26 parca):**
+
+| oran | tespit | robot | robot-ISARETLI |
+|---|---|---|---|
+| **0.50 (dagitilan)** | 0.7931 | 0.4828 | 0.4713 |
+| **0.60** | 0.7826 | 0.5093 | **0.5093** |
+
+**ESLI BOOTSTRAP (0.50'ye gore, robot-ISARETLI):**
+
+| rejim | fark | %95 GA | poz% |
+|---|---|---|---|
+| yogun | **+0.0162** | [+0.0046, +0.0328] * | **100.0** |
+| seyrek | **+0.0374** | [+0.0167, +0.0608] * | **100.0** |
+
+Tespit bedeli iki rejimde de **kesin degil** (−0.0129 ve −0.0100, iki
+GA da sifiri iciyor). Yani kazanc isaretli robot metrigine geliyor,
+tespitten kesin bir sey goturmuyor.
+
+Rejim paylariyla agirliklandirilmis beklenen etki:
+0.86 x 0.0374 + 0.14 x 0.0162 = **~+0.034**.
+
+### AMA: BU PARAMETRE **VAL UZERINDE** TARANDI
+VAL bizim degerlendirme kumemiz. Ayni kumede tarayip ayni kumede
+raporlamak SISME uretir. Bu kampanyada tarama **iki kez** yaniltti:
+* `vc0.35`: taramada +0.01, TAM dagitim OOF'unda WEI 0.641 -> 0.629
+* `k_eig 128`: ayni desen
+
+**Bu yuzden BAGIMSIZ ornekte dogrulama kosuluyor** (VAL ve LOCKED DISI
+30 parca, ayni parametre). Dogrulanmadan **DAGITILMAZ**.
+
+## 21.87 ALAN FARKI (+0.2468) GATE DEGISIKLIGINDEN ETKILENMIYOR — dogrulandi
+
+`gate_goreli_oran` 0.50 -> 0.60 dagitildiktan sonra, sunumun ana bulgusu
+olan alan farkinin (tanidik 0.5603 / gorulmemis 0.3135) hala gecerli olup
+olmadigi soruldu. **Yeniden olcmeden ONCE kod yolu kontrol edildi:**
+
+* Alan farki `kos_p6_kademe2.py` ile olculdu; bu betik **kendi karar
+  kuralini** kullaniyor (`KURALLAR` izgarasi: mutlak/goreli, kat ICINDE
+  aranir).
+* Degistirilen `gate_goreli_oran` ise `wire_gate.karar_maskesi`'nin
+  parametresi. O betikten `wire_gate`'e giden tek cagri
+  `kalabalik_maskesi` (NMS) -- esikle ilgisi YOK.
+
+**Sonuc: iki olcum AYRI kod yollarinda; +0.2468 GECERLI kaliyor.**
+25 dakikalik gereksiz bir yeniden olcum yapilmadi.
+
+Not: bu, raporda kayitli "olculen sey ile dagitilacak sey ayni degildi"
+dersinin (Bolum 21.x, kanonik blok: olcumde +0.0151 / uretimde −0.0138)
+simetrigi. Orada ayrim ALEYHIMIZE calismisti; burada LEHIMIZE, cunku iki
+olcum birbirini gecersiz kilmiyor. Her iki durumda da kural ayni:
+**hangi kod yolunda olculdugu once kontrol edilir.**

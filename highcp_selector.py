@@ -104,9 +104,44 @@ def apply(cps, V, probs, CE, CT, N, base_ws=None, model_path=MODEL_PATH):
     X13 = wire_gate.feats_for(V, None, np.asarray(probs, float), cps, CE, CT)
     if base_ws is None:
         wm = wire_gate._load()
-        base_ws = wm["clf"].predict_proba(X13)[:, 1] if wm is not None else np.ones(len(cps))
+        # DUZELTME 2026-08-14: burada `wm["clf"].predict_proba(X13)` cagriliyordu,
+        # yani gate'in PARCA-ICI Z-SKOR donusumu ATLANIYORDU. Gate o donusumle
+        # yeniden egitildikten sonra (58 -> 116 sutun) bu yol ValueError verir
+        # hale geldi: **yogun-parca yolu bugun HIC KOSAMIYOR**. `karar_skoru`
+        # zaten "tek kaynak" olarak yazilmis ve donusumu kendi icinde yapiyor;
+        # dosyanin kendi kurali buydu, burasi ona uymuyordu.
+        base_ws = (wire_gate.karar_skoru(wm, X13) if wm is not None
+                   else np.ones(len(cps)))
     P = np.array([np.asarray(c["point"], float) for c in cps])
-    Xa = augment(X13, P, base_ws, int(N))
+    # IKINCI BAYATLAMA (2026-08-14). Secici 2026-07-26'da egitildi; O GUN
+    # `feats_for` **13** sutun donduruyordu (13 + 8 lattice + 4 rank = 25).
+    # Bugun 58 sutun donduruyor (fizik/topoloji/zengin sonradan eklendi) ->
+    # augment 70 uretiyor ve secici ValueError veriyordu. Yani bu yol
+    # BUGUN HIC KOSAMIYORDU.
+    # DOGRULANDI (varsayilmadi): `FEAT_NAMES = FEAT_NAMES_13 + ...`, yani
+    # yeni oznitelikler SONA eklenmis; secicinin sakladigi 25 ismin ilk 13'u
+    # `FEAT_NAMES_13` ile BIREBIR ayni. Dolayisiyla ilk 13 sutunu almak,
+    # secicinin egitildigi girdiyi TAM olarak yeniden kurar.
+    # NOT: `base_ws` YUKARIDA TAM ozellik matrisiyle hesaplanir -- kapi 58
+    # (-> z-skorla 116) bekler; kirpma YALNIZ seciciye giden yola aittir.
+    _bek = getattr(m["clf"], "n_features_in_", None)
+    _X = np.asarray(X13, float)
+    if _bek is not None and _X.shape[1] + 12 != _bek:
+        _eski = _bek - 12                       # 8 lattice + 4 rank
+        if _eski < 1 or _eski > _X.shape[1]:
+            raise ValueError(
+                f"highcp_selector: {_bek} sutun bekliyor, ozellik matrisi "
+                f"{_X.shape[1]} genisliginde -- uyumlu kirpma YOK")
+        _ad = list(m.get("feat_names") or [])
+        if _ad:
+            import wire_gate as _wg
+            _simdi = list(_wg.FEAT_NAMES)[:_eski]
+            if _ad[:_eski] != _simdi:
+                raise ValueError(
+                    "highcp_selector: ilk sutunlarin ISIMLERI egitimdekiyle "
+                    f"uyusmuyor -- {_ad[:3]} vs {_simdi[:3]}")
+        _X = _X[:, :_eski]
+    Xa = augment(_X, P, base_ws, int(N))
     s = m["clf"].predict_proba(Xa)[:, 1]
     for c, sc in zip(cps, s):
         c["wire_score"] = float(sc); c["_highcp_selected"] = True

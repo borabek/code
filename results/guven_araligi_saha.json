@@ -1,0 +1,29 @@
+{
+ "yol": "saha",
+ "n_parca": 100,
+ "n_boot": 2000,
+ "sonuc": {
+  "tespit": {
+   "f1": 0.7810945273631841,
+   "ga": [
+    0.7377492626295078,
+    0.8228842148713811
+   ]
+  },
+  "isaretsiz": {
+   "f1": 0.5903814262023217,
+   "ga": [
+    0.52409341696506,
+    0.6537247946228528
+   ]
+  },
+  "isaretli": {
+   "f1": 0.5041459369817579,
+   "ga": [
+    0.41673331966092425,
+    0.5886298840147736
+   ]
+  }
+ },
+ "not": "Parca duzeyi bootstrap %95 GA. Geometrik ikiz sizintisi nedeniyle gercek GA daha genis olabilir."
+}

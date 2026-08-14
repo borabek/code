@@ -176,6 +176,21 @@ def main():
     ap.add_argument("--epochs", type=int, default=200); ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--train-limit", type=int, default=0, help="learning-curve: train on a seed-fixed subset of N train parts, val kept FULL")
     ap.add_argument("--k-eig", type=int, default=64); ap.add_argument("--lr", type=float, default=1e-3)
+    # GIRDI OZNITELIGI (2026-08-13). `cfg` bunu SABIT "xyz" yaziyordu, yani
+    # modele YALNIZCA HAM KOORDINAT veriliyordu ve `hks` secenegi hic
+    # denenemiyordu. Fark mekanik olarak onemli: `xyz` DISSALDIR (model
+    # mutlak konuma baglanir), `hks` ICSELDIR (donme/otelemeye duyarsiz) --
+    # gorulmemis marka kosulunda istenen tam olarak budur.
+    ap.add_argument("--input-features", choices=("xyz", "hks"), default="xyz",
+                    help="xyz = ham koordinat (dissal) | hks = isi cekirdegi "
+                         "imzasi (icsel, donme/oteleme duyarsiz)")
+    ap.add_argument("--sinir-weight", type=float, default=0.0,
+                    help="Y13 sinir-farkindali kayip agirligi. CP fiziksel "
+                         "olarak bir SINIRDIR (agiz cemberi) ama mevcut kayip "
+                         "BOLGEYI hedefler. 0 = kapali (davranis degismez).")
+    ap.add_argument("--tversky-gamma", type=float, default=1.0,
+                    help="Y14 Focal-Tversky ussu. 1.0 = klasik Tversky "
+                         "(varsayilan, davranis degismez). 0.75/1.33 tipik.")
     ap.add_argument("--tversky", type=float, default=0.25)  # thesis overlap term for rare classes
     ap.add_argument("--lr-decay-every", type=int, default=100); ap.add_argument("--lr-decay-rate", type=float, default=0.75)
     ap.add_argument("--checkpoint-out", required=True, help="where to save best-by-val-mIoU (no default -> cannot clobber the product model)")
@@ -209,6 +224,10 @@ def main():
     ap.add_argument("--aux-w", type=float, default=0.5, help="yardimci kaybin agirligi")
     ap.add_argument("--aux-pos-weight", type=float, default=2.0,
                     help="ALET pozitif agirligi (olculdu: alet/tel tepe orani ~0.46)")
+    ap.add_argument("--label-smooth", type=float, default=0.0,
+                    help="Y6: kismi BCE hedefini yumusatir (0.05 tipik). "
+                         "Kismi etiketler aciklik kenarinda belirsiz; kesin "
+                         "1.0 hedefi asiri guven uretir.")
     ap.add_argument("--partial-pos-weight", type=float, default=20.0, help="positive weight for the masked CableEntry BCE (CableEntry is ~1.5% of vertices)")
     ap.add_argument("--partial-target", choices=["connection", "cableentry"], default="connection",
                     help="which channel the human partial marks supervise. connection = CableEntry+Contact (default; the annotator marks wire openings, and MEASURED the corpus calls ~half of them Contact -- supervising CableEntry alone fights the corpus). cableentry = the literal channel (kept to reproduce the 0.586/0.584 runs)")
@@ -314,8 +333,10 @@ def main():
     tr_d = prep(train_samples, a.k_eig) + prep(partial, a.k_eig); va_d = prep(va, a.k_eig)
     npart = sum(1 for d in tr_d if d.get("partial_ce"))
     print(f"prepared train {len(tr_d)} ({npart} partial-human) val {len(va_d)}", flush=True)
-    cfg = {"input_features": "xyz", "loss": "nll", "n_diffusion_blocks": 3, "width": 64, "n_eig": a.k_eig,
-           "dropout": 0.3, "tversky_weight": a.tversky, "tversky_alpha": 0.3, "tversky_beta": 0.7}
+    cfg = {"input_features": a.input_features, "loss": "nll", "n_diffusion_blocks": 3, "width": 64, "n_eig": a.k_eig,
+           "dropout": 0.3, "tversky_weight": a.tversky, "tversky_alpha": 0.3, "tversky_beta": 0.7,
+           "tversky_gamma": a.tversky_gamma,
+           "sinir_weight": a.sinir_weight}
     model, meta = D.build_diffusionnet(cfg, n_classes=NCLS); model = model.to(dev)
     # FEW-SHOT / FINE-TUNE: sifirdan degil, verilen ckpt'ten basla (K6.5-b).
     # Mimari AYNI olmak zorunda (k_eig dahil) -- strict=True bilerek, sessiz kismi
@@ -379,6 +400,13 @@ def main():
                 p_pos = (sm[:, NCLS_CE] + sm[:, NCLS_CT] if a.partial_target == "connection"
                          else sm[:, NCLS_CE]).clamp(1e-6, 1 - 1e-6)
                 y = (lab == NCLS_CE).float()
+                # Y6 LABEL SMOOTHING (2026-08-13). Kismi etiketler ELLE
+                # isaretlendi ve aciklik KENARINDA belirsizdir; kesin 1.0/0.0
+                # hedefi modeli asiri kendine guvenli yapar. eps ile hedef
+                # (1-eps)/eps'e cekilir. Augmentasyon (bugunun kazanani)
+                # ile ayni aileden bir DUZENLEYICIDIR.
+                if a.label_smooth > 0:
+                    y = y * (1.0 - a.label_smooth) +                         (1.0 - y) * a.label_smooth
                 pw = a.partial_pos_weight
                 per_v = -(pw * y * torch.log(p_pos) + (1 - y) * torch.log(1 - p_pos))
                 ig = d.get("ignore")
@@ -388,7 +416,10 @@ def main():
                 else:
                     loss = per_v.mean()
             else:
-                loss = D._compute_loss(out, lab, w, meta, cfg)
+                # Y13: `faces` verilirse sinir-farkindali terim devreye
+                # girer (agirlik `sinir_weight`, varsayilan 0 = degismez).
+                loss = D._compute_loss(out, lab, w, meta, cfg,
+                                       faces=ops.get("faces"))
             # FB-2 YARDIMCI KAYIP: ana kayip yukarida hesaplandi ve DEGISMEDI;
             # burada yalnizca USTUNE ekleniyor. Maskeli: -1 olan tepeler sinyal vermez.
             if aux_lin is not None and d.get("aux") is not None and "z" in _gizli:

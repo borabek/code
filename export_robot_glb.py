@@ -21,6 +21,7 @@ dev = "cuda" if torch.cuda.is_available() else "cpu"
 from korpus_kimlik import step_kimlik as _sk
 STEP = {_sk(s): s for s in glob.glob("all_wscad_stp/*.stp")}
 OUTDIR = "results/robot_glb"
+SADE = False
 
 
 def arrow(origin, direction, length, r):
@@ -111,8 +112,12 @@ def main():
     # DEGIL. Yani bu anahtar hicbir sayiyi etkilemez -- yalniz ne gordugunu belirler.
     #   varsayilan : sade -- kirmizi/turuncu kure + ok (tier'i gosterir)
     #   --fiz      : ustune fiziksel kusur isaretcileri (neden yanlis oldugunu gosterir)
-    argv = [a for a in sys.argv[1:] if a != "--fiz"]
+    argv = [a for a in sys.argv[1:] if a not in ("--fiz", "--sade")]
     FIZ = "--fiz" in sys.argv[1:]
+    # TEK RENK: tier ayrimini gosterme, sadece bulunan CP'leri ciz.
+    global SADE
+    SADE = ("--sade" in sys.argv[1:]
+            or os.environ.get("CP_GLB_SADE", "0") not in ("0", "", "false"))
     pids = argv or open("_demo_parts.txt").read().split()
     cks = json.load(open("cp_config.json"))["robot_vote2_checkpoints"]
     cfg = json.load(open("cp_config.json"))
@@ -153,6 +158,22 @@ def main():
             print(f"  {pid}: KANONIK ZINCIR ({len(cps)} CP)", flush=True)
         else:
             cps = robot_cp.extract(models, STEP[pid], dev, ca, mav)
+        # HALKA NORMALI ILE ISARET DUZELTMESI (2026-08-14).
+        # Her CP'nin yon ISARETINI agiz cevresi yuz normaliyle uyumlu yapar;
+        # konumu ve ekseni DEGISTIRMEZ, parametresi YOKTUR.
+        # OLCULDU (VAL 100, esli parca bootstrap):
+        #   TANIDIK marka / olculen zincir : +0.0195  GA [+0.0030,+0.0378] KESIN
+        #   TANIDIK marka / saha yolu      : +0.0329  GA sifiri ICERIYOR
+        #   zor-gorulmemis marka (150)     : +0.0023 / −0.0016  (notr)
+        # VARSAYILAN KAPALI: kampanya boyunca uygulanan disipline gore
+        # "GA sifiri iceriyorsa dagitma". Kanit YALNIZ `olculen` zincirde ve
+        # TANIDIK marka populasyonunda kesin; su an dagitilan yol `saha`.
+        # Acmak: cp_config `halka_isaret=true`.
+        if cfg.get("halka_isaret", False):
+            import halka_isaret
+            cps, _cev = halka_isaret.duzelt(cps, V, F)
+            print(f"  {pid}: halka isaret duzeltmesi -> {_cev} CP cevrildi",
+                  flush=True)
         scene = trimesh.Scene()
         ctr = V.mean(0)
         # MESH: gri gövde; modelin "baglanti" dedigi verteksler MAVI (koyulugu olasilikla)
@@ -169,7 +190,15 @@ def main():
         for i, c in enumerate(cps):
             p = np.asarray(c["point"], float) - ctr
             d = np.asarray(c["direction"], float)
-            col = [230, 20, 20, 255] if c["tier"] == "auto" else [245, 150, 20, 255]
+            # TEK RENK MODU (2026-08-14, `--sade` ya da CP_GLB_SADE=1).
+            # Varsayilan gorunum tier'i renkle gosterir (kirmizi=otonom,
+            # turuncu=review). Saha kullanimda "robot ne buldu" sorusuna
+            # bakilirken bu ayrim gurultu yapiyor; sade modda TUM CP'ler
+            # ayni renkte cizilir. CP'LER ELENMEZ -- yalnizca renk ayrimi
+            # kalkar, yani gosterilen bilgi AZALMAZ.
+            col = ([230, 20, 20, 255] if SADE else
+                   ([230, 20, 20, 255] if c["tier"] == "auto"
+                    else [245, 150, 20, 255]))
             # KUCUK sabit kure (1.5mm) -- artik gomulmuyor, merkez net
             ball = trimesh.creation.icosphere(subdivisions=3, radius=1.5)
             ball.apply_translation(p); ball.visual.vertex_colors = np.tile(col, (len(ball.vertices), 1))
@@ -195,8 +224,11 @@ def main():
         _fs = [k for k in scene.geometry if "_fiz_" in k]  # --fiz kapaliyken bos
         import collections as _c
         _fc = _c.Counter(k.split("_fiz_")[1] for k in _fs)
-        print(f"  {pid}: {len(cps)} CP ({na} otonom kirmizi / {len(cps)-na} review turuncu)"
-              f" | FIZIKSEL KUSUR {len(_fs)}: {dict(_fc) if _fc else 'yok'} -> {out}", flush=True)
+        _tier = ("" if SADE else
+                 f" ({na} otonom kirmizi / {len(cps)-na} review turuncu)")
+        print(f"  {pid}: {len(cps)} CP{_tier}"
+              f" | FIZIKSEL KUSUR {len(_fs)}: {dict(_fc) if _fc else 'yok'}"
+              f" -> {out}", flush=True)
     print(f"\n-> {OUTDIR}/  (cift tikla: Windows 3D Viewer)")
 
 

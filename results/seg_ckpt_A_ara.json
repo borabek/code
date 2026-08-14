@@ -1,0 +1,32 @@
+{
+ "ckpt": [
+  "results/seg_extra/gt_A_kontrol_s0.pt"
+ ],
+ "marka": {
+  "SUPU": {
+   "gt": 28,
+   "gt_olasilik": 0.1026068490630887,
+   "zemin": 0.003626642863082452,
+   "oran": 28.292515402489446
+  },
+  "NIT": {
+   "gt": 18,
+   "gt_olasilik": 0.21725186428056986,
+   "zemin": 0.04460820723670622,
+   "oran": 4.87022182101509
+  },
+  "UPUN": {
+   "gt": 9,
+   "gt_olasilik": 0.10232134588205889,
+   "zemin": 0.013460669375490397,
+   "oran": 7.601505023841441
+  },
+  "MOR": {
+   "gt": 3,
+   "gt_olasilik": 1.1477504522918615e-19,
+   "zemin": 1.4650919738180402e-22,
+   "oran": 1.1477504522918615e-13
+  }
+ },
+ "not": "Yeni kontrol noktasiyla segmentasyon ayrimi. Olcum d6 parcalarinda; d6 egitime GIRMEDI. D7'ye BAKILMADI."
+}

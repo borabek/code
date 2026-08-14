@@ -1,0 +1,36 @@
+{
+ "ckpt": [
+  "results/seg_extra/recall_hard_keig96_s2.pt"
+ ],
+ "marka": {
+  "NIT": {
+   "gt": 104,
+   "gt_olasilik": 0.4876315216824878,
+   "zemin": 0.4022071751387557,
+   "oran": 1.2123889175131248,
+   "auc": 0.5935984848484848
+  },
+  "SUPU": {
+   "gt": 37,
+   "gt_olasilik": 0.013814218575134873,
+   "zemin": 9.200783733831486e-05,
+   "oran": 150.1417593844716,
+   "auc": 0.5268030303030303
+  },
+  "MOR": {
+   "gt": 34,
+   "gt_olasilik": 1.0026606876323285e-05,
+   "zemin": 2.8804956627936917e-05,
+   "oran": 0.34808616467760384,
+   "auc": 0.4739583333333333
+  },
+  "UPUN": {
+   "gt": 18,
+   "gt_olasilik": 0.02011477533960715,
+   "zemin": 0.00014703102510793542,
+   "oran": 136.8063327099903,
+   "auc": 0.5263541666666666
+  }
+ },
+ "not": "Yeni kontrol noktasiyla segmentasyon ayrimi. Olcum d6 parcalarinda; d6 egitime GIRMEDI. D7'ye BAKILMADI."
+}

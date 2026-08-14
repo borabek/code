@@ -48,6 +48,9 @@ KIND = {CE: "CableEntry", CT: "Contact"}
 _CFG_ONBELLEK = {}
 # Gate hatasi olan parcalar. Bos DEGILSE kosu sifir olmayan cikis kodu doner (fail-safe).
 _GATE_HATA = []
+# GATE ONCESI ADAY HAVUZU -- yalniz `CP_HAVUZ_KANCA` set edilince dolar.
+# Teshis icindir; urun yolunu DEGISTIRMEZ.
+HAVUZ_KANCA = []
 
 
 def _load_cfg():
@@ -94,7 +97,12 @@ def _vote2(cp_lists, cluster_mm=5.0, min_votes=1):
     except Exception:
         _c2 = {}
     _eks = bool(_c2.get("robot_eksen_havuz", False))
-    _yan = float(_c2.get("robot_eksen_havuz_yanal_mm", 3.0))
+    # YANAL YARICAP CEVREDEN TARANABILIR (2026-08-14). Hipotez: yogun
+    # klemenste komsu kutup adimi ~3.5 mm; 3.0 mm yaricap IKI GERCEK
+    # komsuyu tek adaya BIRLESTIRIYOR olabilir. Yogun parcada GT=22 iken
+    # 11 CP uretilmesi bununla aciklanabilir. Olculmeden hukum YOK.
+    _yan = float(os.environ.get("CP_HAVUZ_YANAL",
+                                _c2.get("robot_eksen_havuz_yanal_mm", 3.0)))
     kept = []
     for c in allc:
         p = np.asarray(c["point"], float)
@@ -262,7 +270,33 @@ def extract(models, step_path, dev, conf_auto, min_auto_votes=1, cp_count=None, 
         probs = np.asarray(probs, float)
         acc = probs if acc is None else acc + probs
         pbs.append(probs)
+    # Y24 CRF (2026-08-14, VARSAYILAN KAPALI). Mesh kenarlari uzerinde
+    # ortalama-alan olasilik duzeltmesi. Sonda yalniz `olculen` yolunu
+    # olcebiliyor; bu kanca, kazanan ayarin DAGITILACAK yolda da
+    # olculebilmesi icin. Kanonik zincir dersi: olcum betiginde +0.0151
+    # veren blok uretim yolunda −0.0138 vermisti -- yol farki KARAR
+    # DEGISTIRIR. Bos = bit-ayni mevcut davranis.
+    _crf = os.environ.get("CP_CRF", "").strip()
+    if _crf:
+        import sonda_zincir_esli_kiyas as _sz
+        _t, _w = (float(x) for x in _crf.split(","))
+        pbs = [_sz._graf_duzelt(pb, F, int(_t), _w) for pb in pbs]
+        acc = None
+        for _p in pbs:
+            acc = _p if acc is None else acc + _p
     cps, avg_probs, _is_highcp, _uyeler = adaylari_uret(V, F, pbs, step_path, cfg=_cfg)
+    # HAVUZ KANCASI (2026-08-14). Havuzu DISARIDAN yeniden uretmek GECERSIZ:
+    # `extract` operator onbellegini (`op_cache_dir`) kullanir, disaridan
+    # yapilan taze cikarim kullanmaz -- olasiliklar, dolayisiyla adaylar
+    # FARKLI cikar. Nitekim disaridan uretilen havuz, ciktinin ust kumesi
+    # BILE degildi (84 GT ciktida var/havuzda yok; yapisal olarak imkansiz).
+    # Bu yuzden havuz GATE'ten hemen once, TAM BURADA yakalanir.
+    if os.environ.get("CP_HAVUZ_KANCA"):
+        HAVUZ_KANCA.append({
+            "step": step_path,
+            "P": [list(map(float, c["point"])) for c in cps],
+            "D": [list(map(float, c["direction"])) for c in cps],
+        })
     per_model = pbs          # asagidaki uzunluk kontrolleri icin
     # WIRE/TOOL GATE: drop tool/actuator openings (Werkzeugeinschub), keep real wire entries.
     # The Contact segmentation class merges contact+tool by thesis design (line 1303), and neither the
@@ -284,8 +318,19 @@ def extract(models, step_path, dev, conf_auto, min_auto_votes=1, cp_count=None, 
                 # Dusuk-CP'de yuksek esik iyi (precision), cok-CP'de dusuk esik iyi (recall).
                 # Rejimi zaten yonlendirici belirliyor; ayni karari burada da kullan.
                 _thr = float(_cfg.get("robot_wire_gate_threshold", 0.30))
+                # ESIK CEVREDEN TARANABILIR (2026-08-14). Dagitilan yogun-parca
+                # esigi 0.35; ama 2026-07-29 taramasi 10 cok-CP parcasinda
+                # 0.25 -> F1 0.634, 0.35 -> 0.587 demis (yani DAHA IYISI
+                # olculmus ama dagitilmamis). O tarama ESKI sistemde yapildi;
+                # bugunku sistemde YENIDEN olculmeden hukum verilmez.
+                _ez = os.environ.get("CP_GATE_THR")
+                _ezh = os.environ.get("CP_GATE_THR_HIGHCP")
                 if _is_highcp:
                     _thr = float(_cfg.get("robot_wire_gate_threshold_highcp", _thr))
+                    if _ezh:
+                        _thr = float(_ezh)
+                elif _ez:
+                    _thr = float(_ez)
                 cps = wire_gate.apply(V, F, avg_probs, cps, CE, CT,
                                       threshold=_thr, top_n=cp_count,
                                       step_path=step_path)
@@ -299,6 +344,25 @@ def extract(models, step_path, dev, conf_auto, min_auto_votes=1, cp_count=None, 
             for _c in cps:
                 _c["_gate_hata"] = str(e)
 
+    cps = _kapi_sonrasi_zincir(cps, V, F, avg_probs, step_path, _cfg, _uyeler)
+    # the remesh keeps the STEP coordinate frame (thesis_remesh does not recentre), so points are
+    # already in STEP coordinates -- the robot cell can use them as-is.
+    return _format_cps(cps, conf_auto, min_auto_votes)
+
+
+def _kapi_sonrasi_zincir(cps, V, F, avg_probs, step_path, _cfg, _uyeler):
+    """KAPI SONRASI DUZELTME ZINCIRI -- TEK KAYNAK.
+
+    NEDEN AYRI FONKSIYON (2026-08-14): bu zincir yalnizca `extract` icinde
+    duruyordu. `extract_highcp` secimden sonra dogrudan `_format_cps` diyip
+    bitiyordu, yani pose head / aci duzeltici / uye ve ayrik yon secici
+    ORADA HIC KOSMUYORDU. Sonuc olculdu (VAL yogun parca 3061994, GT=24):
+    yogun yol ADEDI tam tutturuyor (24/24) ama robot-ISARETLI 11 -> 1'e
+    cokuyordu. Yani yogun yol dogru ADAYLARI buluyor, taban yol dogru
+    YONLERI koyuyordu; ikisi ayri durdukca ikisi de eksik kaliyordu.
+    `extract_highcp`in makbuzundaki 0.807 TESPIT F1'idir, robot-isaretli
+    degil -- bu ayrim da bu olcumle netlesti.
+    """
     # POSE HEAD: gate KARARINDAN SONRA, kabul edilmis CP'lerin YANAL sapmasini duzelt.
     # Tavan olcumu (results/t_tavan.json): kahin gate robot-haziri yalniz +0.059 tasiyor,
     # KONUM +0.325. Yani gate'in otesindeki tek gercek kaldirac buydu.
@@ -341,9 +405,7 @@ def extract(models, step_path, dev, conf_auto, min_auto_votes=1, cp_count=None, 
                 c["_mouth_min_mm"], c["_mouth_mean_mm"] = ic, ort
     except Exception as e:
         print(f"  [agiz olcumu atlandi: {e}]", file=sys.stderr)
-    # the remesh keeps the STEP coordinate frame (thesis_remesh does not recentre), so points are
-    # already in STEP coordinates -- the robot cell can use them as-is.
-    return _format_cps(cps, conf_auto, min_auto_votes)
+    return cps
 
 
 def tier_ata(c, conf_auto, min_auto_votes, auto_thr=None):
@@ -457,11 +519,32 @@ def extract_highcp(models7, step_path, dev, conf_auto, min_auto_votes, cp_count)
     (highcp_selector.pkl) -> top-N by cp_count. OOF F1 0.807 part-out / 0.799 family-out (receipt:
     results/product_f1_receipt.json). cp_count REQUIRED. ~14 forward passes/part -- heavy, opt-in only."""
     import highcp_selector
-    if cp_count is None or cp_count < 1:
-        raise ValueError("extract_highcp needs cp_count (manufacturer CP count)")
+    # METADATA-SIZ MOD (2026-08-14). `cp_count` yalniz IKI yerde kullanilir:
+    # `rank_feats`teki `nratio` oznitelig i ve son `[:N]` kirpmasi. Havuz ve
+    # lattice ozellikleri N'den BAGIMSIZ. Dolayisiyla kunye bilgisi yoksa
+    # N, adayin KENDI GEOMETRISINDEN tahmin edilebilir (izgara adimi x
+    # yayilim). `cp_count=None` verilirse bu yol kosar.
+    # ILK KAPI (adet_tahmini._kapi): GT noktalarindan tam isabet yogun
+    # parcalarda %56.8, ortanca mutlak hata 0 CP.
+    _tahmini = False
+    if cp_count is None:
+        _tahmini = True
+    elif cp_count < 1:
+        raise ValueError("extract_highcp: cp_count >= 1 olmali (ya da None)")
     _cfg = _load_cfg(); hc = _cfg.get("robot_highcp", {})
     d6 = hc.get("derive_6k", {"min_v": 30, "vertex_conf": 0.5, "cluster_mm": 5.0})
     d9 = hc.get("derive_9k", {"min_v": 12, "vertex_conf": 0.20, "cluster_mm": 0.0})
+    # TURETME PARAMETRELERI CEVREDEN EZILEBILIR (2026-08-14). Bolum 21.74:
+    # `derive_6k` degerleri (30/0.5/5.0) `prediction_postproc` icinde
+    # `_superseded_2026_07_24_values` olarak duran TERK EDILMIS degerlerin
+    # ta kendisi; urun 2026-08-06'da 4/0.3/1.0'a gecti, bu yol GECMEDI.
+    # DIKKAT: secici o gunku adaylarla egitildi, yani bu degisiklik
+    # seciciyi de etkiler -- VARSAYILMAZ, OLCULUR.
+    _ez = os.environ.get("CP_HIGHCP_DERIVE6")
+    if _ez:
+        _mv, _vc, _cl = (float(x) for x in _ez.split(","))
+        d6 = {"min_v": int(_mv), "vertex_conf": _vc, "cluster_mm": _cl}
+        print(f"  [highcp derive_6k EZILDI: {d6}]", flush=True)
 
     def derive(V, F, pb, dd):
         return cp_openings.connection_points(V, F, pb.argmax(-1), min_v=int(dd["min_v"]), classes=(CE, CT),
@@ -483,11 +566,41 @@ def extract_highcp(models7, step_path, dev, conf_auto, min_auto_votes, cp_count)
         _, pb = D.predict(model, meta, V9, F9, device=dev,
                           op_cache_dir=f"{OP}_k{int(meta.get('k_eig', 64))}_9k", return_probs=True)
         per.append(derive(V9, F9, np.asarray(pb, float), d9))
-    cps = _vote2(per, min_votes=1)                          # union of all 6k+9k candidates
+    # OY HAVUZU YARICAPI (2026-08-14 duzeltmesi -- DORDUNCU bayatlama).
+    # Burada `cluster_mm` GECILMIYORDU, yani fonksiyon varsayilani **5.0 mm**
+    # kullaniliyordu. Urun yolu ise `prediction_postproc.vote_pool_mm` = 2.0
+    # kullaniyor (2026-08-06 P1 taramasi: 5 -> 2 mm, cok-CP +0.0331; suclu
+    # tam da "komsu iki gercek girisi tek adaya yutan" genis havuzdu).
+    # YOGUN klemenste komsu kutup adimi ~3.5 mm -> 5 mm havuz komsulari
+    # BIRLESTIRIR. Urunle ayni degere cekiliyor.
+    _oy = float(_cfg.get("prediction_postproc", {}).get("vote_pool_mm", 5.0))
+    _oy = float(os.environ.get("CP_HIGHCP_OY", _oy))
+    cps = _vote2(per, cluster_mm=_oy, min_votes=1)          # union of all 6k+9k candidates
     if not cps:
         return []
+    if _tahmini:
+        # ADET, ADAYIN KENDI GEOMETRISINDEN. Havuz gurultuludur, bu yuzden
+        # tahmin YALNIZ yuksek skorlu adaylar uzerinden yapilir (izgarayi
+        # hayalet adaylar bozmasin).
+        import adet_tahmini
+        _ws = np.asarray([float(c.get("wire_score",
+                                      c.get("confidence", 0.0)))
+                          for c in cps], float)
+        _P = np.asarray([c["point"] for c in cps], float).reshape(-1, 3)
+        _esik = np.percentile(_ws, 40) if len(_ws) >= 5 else -np.inf
+        _sec = _ws >= _esik
+        cp_count, _tesh = adet_tahmini.tahmin_et(_P[_sec] if _sec.sum() >= 2
+                                                 else _P)
+        print(f"  [adet TAHMIN EDILDI: {cp_count} "
+              f"(nu={_tesh.get('nu')} x nv={_tesh.get('nv')}, "
+              f"havuz {len(cps)})]", flush=True)
     cps = highcp_selector.apply(cps, V6, avg, CE, CT, int(cp_count),
                                 model_path=hc.get("selector", "results/highcp_selector.pkl"))
+    # KAPI SONRASI ZINCIR (2026-08-14). Burasi eskiden dogrudan
+    # `_format_cps` diyordu; pose head ve yon seciciler KOSMUYORDU.
+    # `_uyeler` bu yolda tutulmuyor (birlesim 6k+9k uzerinden `_vote2` ile
+    # kuruluyor) -> uye-yon secici icin bos gecilir, digerleri kosar.
+    cps = _kapi_sonrasi_zincir(cps, V6, F6, avg, step_path, _cfg, None)
     return _format_cps(cps, conf_auto, min_auto_votes)
 
 

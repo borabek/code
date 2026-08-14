@@ -82,7 +82,18 @@ TOHUM_NMS = 5.0
 # ikinci kademe yalniz KISA LISTEYE bakar, birinci kademe skorunu da OZNITELIK
 # olarak alir ve zor negatifleri ayirmaya odaklanir.
 KISA_ESIK = float(os.environ.get("P6_KISA_ESIK", "0.20"))
-NEG_KAT = int(os.environ.get("P6_NEG_KAT", "8"))
+# NEGATIF ORANI 8 -> 12 (2026-08-12). Sistematik HPO ilk kez yapildi
+# (`kos_gelistirme_taramasi.py`, 20 yapilandirma, hepsi UCTAN UCA robot F1,
+# marka-disi katlar). Negatif orani TEK kazanan eksendi; ogrenme hizi,
+# yaprak sayisi ve L2 notr ya da zararli cikti.
+#   d6  (468 parca, 4 kat) : 0.2994 -> 0.3135  (+0.0140)
+#   tam (2040 parca, 5 kat): 0.3092 -> 0.3218  (+0.0126)   <- DOGRULAMA
+# Taban KASITLI olarak 8 secildi: taramanin ilk turu 6'dan olcuyordu ve
+# +0.0088 veriyordu; URETIM 8 kullandigi icin dagitilan sayi 8'e gore
+# olculdu. Egri 12-24 arasi duz bir plato (0.3121-0.3135); 6 (0.3047) ile
+# 8 (0.2994) arasindaki ters donus kat gurultusunun ~+/-0.005 oldugunu
+# gosteriyor, yani +0.0126'nin belirsizligi gercek.
+NEG_KAT = int(os.environ.get("P6_NEG_KAT", "12"))
 KOLLAR = tuple(os.environ.get("P6_KOLLAR",
                               "TABAN,P6,P6_KAFES,P6_GEO").split(","))
 A_SUT = 58        # havuz oznitelikleri (segmentasyon agindan turer)
@@ -212,6 +223,50 @@ def olc(veri, skor, kural, nms, kol):
             "en_kotu": float(min(pm.values())) if pm else 0.0, "marka": pm}
 
 
+# VARSAYILAN KAPALI (2026-08-12). Kanonik blok BASKA bir betikte
+# (`kos_birlesik_kol.py` / EK cercevesi) `tam` marka-disi katlarinda
+# **+0.0151** vermisti. URETIM egiticisinde A/B kosuldu ve TERSI cikti:
+#   d6, secilen kol P6:  kanonik KAPALI 0.2932 -> ACIK 0.2794  (**-0.0138**)
+# Fark muhtemelen kural secimi: uretim kat icinde kural ariyor ve
+# ('mutlak', 0.97) seciyor; olcum betigim sabit ('goreli', 0.85, 0.20)
+# kullaniyordu. Yani olculen sey ile dagitilacak sey AYNI DEGILDI.
+# DERS: bir kolu, DAGITILACAK kod yolunda yeniden olcmeden dagitma.
+# Kod duruyor; `P6_KANONIK=1` ile acilir.
+KANONIK = os.environ.get("P6_KANONIK", "0") == "1"
+
+
+def kanonik_bloku(d):
+    """KANONIK HIZALAMA blogu (10 sutun): parcayi KENDI PCA cercevesine oturtur.
+
+    Olculdu 2026-08-12 (`tam` marka-disi katlari): **+0.0151** -- o gun tek
+    degiskenli olculen 25 kolun UCTAN UCA gecen tekiydi. Donme/oteleme/olcek
+    degismezligi birim testli (`tests/test_kanonik_hizalama.py`).
+
+    Mesh dizini kumeye gore degisir; ikisi de denenir ve bulunamazsa aday
+    noktalarinin kendisi cerceve olarak kullanilir (kol sessizce BOZULMAZ,
+    yalnizca zayiflar).
+    """
+    import kanonik_hizalama as KH
+    P = np.asarray(d["P"], float)
+    idx = np.asarray(d["idx"], int)
+    V = None
+    for kok in ("results/_p1_olasilik_brepegit", "results/_p1_olasilik"):
+        mf = f"{kok}/{d['pid']}.npz"
+        if os.path.exists(mf):
+            V = np.asarray(np.load(mf)["V"], float)
+            break
+    if V is None:
+        V = P
+    return KH.oznitelik(P[idx], d["YD"], V).astype(np.float32)
+
+
+def _kan(d, n):
+    """kanonik blok ya da (n,0) -- kapaliysa hicbir sutun eklenmez."""
+    if not KANONIK or "_kan" not in d:
+        return np.zeros((n, 0), np.float32)
+    return np.asarray(d["_kan"], np.float32)
+
+
 def oz(d, kol, kafes_blok=None, s1=None):
     """Kolun oznitelik matrisi.
 
@@ -231,10 +286,13 @@ def oz(d, kol, kafes_blok=None, s1=None):
         # NIT'e aktarilmiyorsa, ona dayanmayan bir model DAHA IYI genellesebilir.
         # Kalan: agiz olculeri (9) + yon bankasi (16) + secenek yonuyle agiz
         # olculeri (9) + kaynak (3) = 37 sutun, hepsi GEOMETRIK/FIZIKSEL.
-        return np.hstack([X[:, A_SUT:AB], X[:, AB:]])
+        # KANONIK blok SONA eklenir: P6_GEO sutunlari INDEKSLE diliyor
+        # (A_SUT:AB ve AB:), araya girmek o dilimleri sessizce bozardi.
+        return np.hstack([X[:, A_SUT:AB], X[:, AB:], _kan(d, len(X))])
     if kol == "P6_KAFES":
-        return np.hstack([X, kafes_blok, np.asarray(s1, float)[:, None]])
-    return X
+        return np.hstack([X, kafes_blok, np.asarray(s1, float)[:, None],
+                          _kan(d, len(X))])
+    return np.hstack([X, _kan(d, len(X))])
 
 
 def kisa(s1):
@@ -272,6 +330,7 @@ def kafes_matris(d, kb, s1, k, sb=None):
     if SIRA and sb is not None:
         par.append(np.asarray(sb)[k])
     par.append(np.asarray(s1, float)[k][:, None])
+    par.append(_kan(d, len(X))[k])
     return np.hstack(par)
 
 
@@ -407,6 +466,17 @@ def main():
     else:
         for d in tr:
             d["_kat"] = d["mfg"]
+
+    if KANONIK:
+        for d in tr:
+            d["_kan"] = kanonik_bloku(d)
+        _kw = tr[0]["_kan"].shape[1] if tr else 0
+        # BOS BLOK SESSIZ NO-OP'A KARSI: bu projede bir blok "eklendi"
+        # sanilip hic dolmadan kosmustu. Genislik burada YUKSEK SESLE
+        # dogrulanir.
+        assert _kw > 0, "kanonik blok BOS -- oznitelik uretilmedi"
+        print(f"kanonik blok {_kw} sutun ({time.time() - t0:.0f} s)",
+              flush=True)
 
     kafes_tr = [kafes_bloku(d, s) for d, s in zip(tr, oof)]
     sira_tr = ([sira_bloku(d, s) for d, s in zip(tr, oof)] if SIRA else None)

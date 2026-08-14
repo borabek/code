@@ -539,6 +539,10 @@ def _dogrula_uyum(m):
 
 
 POSE_PATH = "results/pose_head.pkl"
+# POSE KIRPMA TESHISI -- yalniz `CP_POSE_KANCA` set edilince dolar.
+# Kirpma ONCESI yer degistirme vektorunu tutar; boylece tek kosudan her
+# `maks_mm` degeri cevrimdisi yeniden kurulabilir. Urun yolunu DEGISTIRMEZ.
+POSE_KANCA = []
 
 
 def _yerel_cerceve(d):
@@ -552,7 +556,7 @@ def _yerel_cerceve(d):
     return d, u, np.cross(d, u)
 
 
-def pose_duzelt(X, cps, model_path=POSE_PATH):
+def pose_duzelt(X, cps, model_path=None):
     """POST-GATE POSE DUZELTMESI -- kabul edilmis CP'lerin YANAL sapmasini duzelt.
 
     NEDEN (tavan olcumu, results/t_tavan.json): kahin gate robot-haziri yalniz +0.059 tasiyor;
@@ -571,7 +575,12 @@ def pose_duzelt(X, cps, model_path=POSE_PATH):
     YON duzeltmesi DAGITILMADI: zaten dogru olan yonleri bozuyordu (medyan 0.00 -> 2.36 derece).
 
     Duzeltme `maks_mm` ile sinirli. Model yoksa CP'ler DEGISMEDEN doner.
+
+    MODEL YOLU cevreden ezilebilir (`CP_POSE_MODEL`): aday bir pose head'i,
+    DAGITILANA dokunmadan tam zincirde olcebilmek icin. Varsayilan = dagitilan.
     """
+    if model_path is None:
+        model_path = os.environ.get("CP_POSE_MODEL", POSE_PATH)
     m = _load(model_path)
     if m is None or not len(cps):
         return cps
@@ -585,11 +594,25 @@ def pose_duzelt(X, cps, model_path=POSE_PATH):
     except Exception as _e:
         FALLBACK[f"pose:hata:{type(_e).__name__}"] += len(cps)
         return cps
-    mx = float(m.get("maks_mm", 3.0))
+    # KIRPMA SINIRI. Cevreden ezilebilir: `maks_mm` bir HIPERPARAMETRE ve
+    # tarandigina dair kayit yok. 2026-08-14 teshisi, GT'lerin %83'u icin
+    # havuzda 10 mm yakinda dogru yonlu bir aday olduğunu gosterdi -- 3 mm
+    # kirpma bu bandin ucte birini bile kapsamiyor.
+    mx = float(os.environ.get("CP_POSE_MAKS_MM", m.get("maks_mm", 3.0)))
+    _kanca = bool(os.environ.get("CP_POSE_KANCA"))
     for c, p in zip(cps, pr):
         d, u, v = _yerel_cerceve(c["direction"])
         dw = float(p[0]) * u + float(p[1]) * v
         n = float(np.linalg.norm(dw))
+        if _kanca:
+            # KIRPMA ONCESI durum: tek kosudan HERHANGI bir mx degeri icin
+            # cevrimdisi yeniden kurulabilsin diye.
+            POSE_KANCA.append({
+                "p0": list(map(float, np.asarray(c["point"], float))),
+                "dw": list(map(float, dw)),
+                "n": n,
+                "dir": list(map(float, np.asarray(c["direction"], float))),
+            })
         if n > 1e-9:
             c["point"] = np.asarray(c["point"], float) + dw * (min(n, mx) / n)
             c["_pose_mm"] = float(min(n, mx))
