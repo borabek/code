@@ -1,23 +1,23 @@
 """K6.5-b: FEW-SHOT SEGMENTASYON FINE-TUNE -- listenin most high beklenen degerli kolu.
 
-SENARYO (kullanicinin real is akisi): gorulmemis a markadan k part gelir, INSAN
-onlarin CP'lerini isaretler, sistem adapte becomes, AYNI markanin kalan parcalarinda
+SENARYO (kullanicinin real is akisi): unseen a markadan k part gelir, INSAN
+onlarin CP'lerini isaretler, sistem adapte becomes, AYNI markanin remaining parcalarinda
 olculur. k=0 = bugunku sifir-atis (robot 0.2344).
 
 WHY SEG, WHY GATE DEGIL: gate ayagi measured and TAMAMEN NULL output (3 markada
-+-0.005). Sebep gorulmemis markada FN'lerin %76.2'sinin ADAY_YOK olmasi -- gate'e ne
++-0.005). Sebep unseen markada FN'lerin %76.2'sinin ADAY_YOK olmasi -- gate'e ne
 ogretirsen ogret URETILMEMIS adayi geciremez. Adaptasyon TEMSIL katmaninda must be.
 
 ZINCIR:
-  1. k parcayi GT CP'lerinden boya      g5_mouth_label.py --pids-file
+  1. k parcayi GT CP'lerinden paint      g5_mouth_label.py --pids-file
   2. that boyamayla fine-tune              train_seg_extra.py --init-from
-  3. olasilik onbellegi                 p1_olasilik_onbellek.py --ckpt <ft> --ek
-  4. candidate turet + gate + TAM zincir     this betik
+  3. probability onbellegi                 p1_olasilik_cache.py --ckpt <ft> --ek
+  4. candidate derive + gate + TAM zincir     this betik
 
 IKI TRAP (ikisi de bilerek ele alindi):
-  * OZ-TUTARLILIK KAPISI KAPATILIR (--oz-tut-threshold 0). Kapi, urunun already beceremedigi
+  * OZ-TUTARLILIK KAPISI KAPATILIR (--feat-tut-threshold 0). Kapi, urunun already beceremedigi
     parcalari eler; few-shot'ta this DONGUSELDIR -- full da ogrenmek istedigimiz hard
-    parcalari atar. Gercek senaryoda etiketi INSAN koyar, oz-tutarlilik aranmaz.
+    parcalari atar. Gercek senaryoda etiketi INSAN koyar, feat-tutarlilik aranmaz.
   * ADAPTASYON PARCASI OLCUME GIRMEZ. Girerse numbers ornekleme-ici becomes.
 """
 import argparse 
@@ -68,10 +68,10 @@ def main ():
     rec_ =d6_record .yukle (set (sv ["pidler"]))
     pidler =sorted (p for p ,r in rec_ .items ()if r ["mfg"]==a .brand )
     if len (pidler )<max (a .klar )+10 :
-        raise SystemExit (f"{a .brand }: yalniz {len (pidler )} part, yetersiz")
+        raise SystemExit (f"{a .brand }: only {len (pidler )} part, yetersiz")
     kume_yolu =f"results/_fs_kume_{a .brand }.json"
     if not os .path .exists (kume_yolu ):
-        raise SystemExit (f"{kume_yolu } yok -- once brand alt kumesini uret")
+        raise SystemExit (f"{kume_yolu } none -- before brand alt kumesini uret")
     with open (kume_yolu )as _f :
         n_beklenen =len (json .load (_f )["pidler"])
     print (f"=== {a .brand }: {len (pidler )} part | cache beklentisi "
@@ -89,8 +89,8 @@ def main ():
             flush =True )
 
             # DEVAM EDILEBILIRLIK -- SIKI CHECK.
-            # ILK SURUMUM GEVSEKTI (">=10 npz varsa atla") and BAYAT a onbellegi
-            # gecerli saydi: that cache (a) `--cluster` eklenmeden before uretilmisti,
+            # ILK SURUMUM GEVSEKTI (">=10 npz varsa skip") and BAYAT a onbellegi
+            # valid saydi: that cache (a) `--cluster` eklenmeden before uretilmisti,
             # i.e. 468 parcalik TUM exam kumesini kapsiyordu, (b) "most iyi" ckpt'ten
             # geliyordu, "last"dan not, (c) yarida kesilmisti (327/468).
             # Olcum onunla kosulsaydi SESSIZCE wrong number verirdi.
@@ -122,27 +122,27 @@ def main ():
             ck =f"results/seg_fs/{label_ }.pt"
             os .makedirs ("results/seg_fs",exist_ok =True )
 
-            # 1) BOYA -- oz-tutarlilik kapisi KAPALI (dongusellik onlemi)
+            # 1) BOYA -- feat-tutarlilik kapisi KAPALI (dongusellik onlemi)
             # SINAV DISLAMASI KAPATILIR (ETIKET_DISLA=""). Guvenli, because:
             #  * only --pids-file'daki k part boyanir (baska no exam parcasi not)
             #  * that k part OLCUMDEN CIKARILIR (`olc` listesinde absent)
             #  * uretilen ckpt ATILIKTIR, urune girmez
             # Senaryo already "this k parcayi sisteme VERIYORUZ" demek; dislama bunu bloke eder.
             kos ([PY ,"-u","g5_mouth_label.py","--pids-file",pf ,
-            "--oz-tut-threshold","0.0","--cikti",boya_dir ],
+            "--feat-tut-threshold","0.0","--cikti",boya_dir ],
             f"results/_fs_{label_ }_boya.log",ek_env ={"ETIKET_DISLA":""})
             # 1b) NPZ -> OBJ+labels.txt. train_seg_extra.load_extra YALNIZ directory
             # bicimini reads; this step atlanirsa "0 part yuklendi" becomes and
             # --only-kismi olmasa training SESSIZCE korpusla kosardi.
             obj_dir =f"results/_fs_obj_{label_ }"
-            kos ([PY ,"-u","g5b_etiket_donustur.py","--source",boya_dir ,
+            kos ([PY ,"-u","g5b_label_donustur.py","--source",boya_dir ,
             "--hedef",obj_dir ],f"results/_fs_{label_ }_donus.log")
             n_boya =len ([x for x in os .listdir (boya_dir )if x .endswith (".npz")])
             # BOYANAN > ISTENEN olursa SESSIZ SISME demektir -> DUR.
             # BOYANAN < ISTENEN whereas: oto-boyayici INSAN ETIKETININ VEKILI and some
             # parcalarda vekil does not work (GT'nin none of them algilanan a acikliga
             # dusmuyor -> `oz_tutarlilik_dustu`). Insan that parcayi etiketleyebilirdi.
-            # Bu yuzden kosumu DURDURMUYORUZ, GERCEK k'yi KAYDEDIYORUZ; olculen
+            # Bu yuzden kosumu DURDURMUYORUZ, GERCEK k'yi KAYDEDIYORUZ; measured_path
             # egri so real insan etiketine according to a ALT SINIR becomes.
             if n_boya >len (adapt ):
                 raise RuntimeError (
@@ -165,17 +165,17 @@ def main ():
             # part (~25 dk); measurement already only this markada yapiliyor (~4 dk).
             cluster =f"results/_fs_kume_{a .brand }.json"
             if not os .path .exists (cluster ):
-                raise SystemExit (f"{cluster } yok -- once brand alt kumesini uret")
+                raise SystemExit (f"{cluster } none -- before brand alt kumesini uret")
                 # SON EPOCH KULLANILIR, "most iyi" DEGIL. Egitim betigi most iyiyi GENEL
                 # dogrulamaya according to seciyor; adaptasyon genel dogrulamayi DUSURDUGU for
                 # that secim EN AZ ADAPTE OLMUS modeli kaydeder -- i.e. few-shot'i olcmek
-                # isterken few-shot'i engeller. Few-shot'ta secim absent: sabit epoch butcesi,
+                # isterken few-shot'i engeller. Few-shot'ta secim absent: fixed epoch butcesi,
                 # last ckpt. (Hedef markadan ayri a secim kumesi ayirmak measurement kumesini
                 # kucultecegi for simdilik yapilmiyor; kayit altina alindi.)
             ck_son =ck .replace (".pt","_last.pt")
             if not os .path .exists (ck_son ):
-                raise RuntimeError (f"{ck_son } yok -- training son ckpt yazmadi")
-            kos ([PY ,"-u","p1_olasilik_onbellek.py","--ckpt",ck_son ,
+                raise RuntimeError (f"{ck_son } none -- training son ckpt yazmadi")
+            kos ([PY ,"-u","p1_olasilik_cache.py","--ckpt",ck_son ,
             "--cluster",cluster ,"--ek",f"_fs_{label_ }"],
             f"results/_fs_{label_ }_p1.log")
 

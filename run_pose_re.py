@@ -19,7 +19,7 @@ IKI OLASI MEKANIZMA -- ikisi de here test ediliyor:
 Bu betik EGITIP OLCMEZ; adaylari own between **grup-disi (OOF)**
 karsilastirir and only kazanani zincire sokmaya value kilar. Olcut,
 metrigin kendisi not but metrikle DOGRUDAN baglantili: kabul kutusuna
-(2 mm) giren candidate orani.
+(2 mm) entering candidate orani.
 """
 import json 
 import os 
@@ -107,9 +107,9 @@ def oof_degerlendir (X ,Y ,g ,ad ,Xd =None ,Yd =None ,gd =None ,**kw ):
 def main ():
     VG =val_gruplari ()
     print (f"leakage kapisi: {len (VG )} VAL geometri grubu egitimden CIKARILDI\n")
-    src_ =[("TABAN veri (tol ~3-6mm)","results/pose_veri_graf.npz"),
-    ("GENIS veri (tol 15mm)","results/pose_veri_tol15.npz")]
-    ayar =[("orman yaprak>=5 (MEVCUT)",dict (n_estimators =400 ,
+    src_ =[("TABAN data (tol ~3-6mm)","results/pose_veri_graf.npz"),
+    ("GENIS data (tol 15mm)","results/pose_veri_tol15.npz")]
+    setting =[("orman yaprak>=5 (MEVCUT)",dict (n_estimators =400 ,
     min_samples_leaf =5 )),
     ("orman yaprak>=2",dict (n_estimators =400 ,min_samples_leaf =2 )),
     ("orman yaprak>=1",dict (n_estimators =400 ,min_samples_leaf =1 ))]
@@ -130,27 +130,27 @@ def main ():
         tut =~np .isin (g ,list (VG ))
         X ,Y ,g =X [tut ],Y [tut ],g [tut ]
         print (f"--- EGITIM: {vad } -> {len (Y )} satir / {len (set (g ))} grup ---")
-        for aad ,kw in ayar :
+        for aad ,kw in setting :
             rapor [f"{vad } | {aad }"]=oof_degerlendir (
             X ,Y ,g ,"  "+aad ,Xd =Xd ,Yd =Yd ,gd =gd ,**kw )
         print ()
 
-    json .dump (rapor ,open ("results/pose_yeniden.json","w"),indent =1 )
-    print ("-> results/pose_yeniden.json")
+    json .dump (rapor ,open ("results/pose_re.json","w"),indent =1 )
+    print ("-> results/pose_re.json")
 
     # EN IYI ADAYI EGIT VE KAYDET (zincire sokulmak so as to)
     en =max (rapor ,key =lambda k :rapor [k ]["kutu_sonra"])
     print (f"\nEN IYI: {en }  (kutuda {100 *rapor [en ]['kutu_sonra']:.1f}%)")
     vad ,aad =[x .strip ()for x in en .split ("|")]
     vfp =dict (src_ )[vad ]
-    kw =dict (ayar )[aad ]
+    kw =dict (setting )[aad ]
     X ,Y ,g ,p =yukle (vfp )
     tut =~np .isin (g ,list (VG ))
     m =RandomForestRegressor (n_jobs =-1 ,random_state =0 ,**kw ).fit (
     X [tut ],Y [tut ])
     cik ={"model":m ,"n_feat":N_FEAT ,"maks_mm":10.0 ,"direction":False ,
     "hedef":"[w_perp.u, w_perp.v, g.u, g.v] -- YEREL cercevede",
-    "note":(f"2026-08-14 YENIDEN EGITIM. Kaynak={vad }, ayar={aad }. "
+    "note":(f"2026-08-14 YENIDEN EGITIM. Kaynak={vad }, setting={aad }. "
     f"VAL geometri gruplari ({len (VG )}) egitimden CIKARILDI. "
     f"maks_mm 3->10 (Bolum 21.53: eski model 2.87mm'yi "
     f"asmiyordu). OOF kutuda-ratio "

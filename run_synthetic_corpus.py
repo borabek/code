@@ -9,7 +9,7 @@ boru hattinin BIRINCI asamasindan gecirir:
 
 `P`/`Pd` (urun adaylari) segmentasyondan cikarilir; so sentetik part
 real parcayla AYNI candidate uretim yolunu kullanir. Aksi halde sentetik data
-"easy" becomes and olculen kazanc fake cikar.
+"easy" becomes and measured_path kazanc fake cikar.
 
 DUMAN TESTI ZORUNLU: uretilen npz'de segmentasyonun GT agizlarinda gercekten
 ateşleyip atesle(me)digine bakilir. Model sentetik geometride never ateslemiyorsa
@@ -59,13 +59,13 @@ def main ():
     if os .path .exists (KAYIT ):
         rec_ =pickle .load (open (KAYIT ,"rb"))
         print (f"cache: {len (rec_ )} kayit",flush =True )
-    yazilan =atlanan =empty_ =0 
+    written =skipped =empty_ =0 
     tani =[]
     for t in range (TOHUM0 ,TOHUM0 +N_PARCA ):
         pid =f"SYN{t }"
-        yol =f"{MESH_CIK }/{pid }.npz"
-        if os .path .exists (yol )and pid in rec_ :
-            atlanan +=1 
+        path =f"{MESH_CIK }/{pid }.npz"
+        if os .path .exists (path )and pid in rec_ :
+            skipped +=1 
             continue 
         try :
             m ,G ,Gd ,kun =SK .uret (t )
@@ -108,22 +108,22 @@ def main ():
             if not len (sec ):
                 sec =np .argsort (-ppos )[:50 ]
             P_ ,Pd_ =[],[]
-            kalan =list (sec )
+            remaining =list (sec )
             agac =cKDTree (V )
             import trimesh 
             N_ =np .asarray (trimesh .Trimesh (vertices =V ,faces =F ,
             process =False ).vertex_normals )
-            while kalan :
-                i0 =max (kalan ,key =lambda q :ppos [q ])
+            while remaining :
+                i0 =max (remaining ,key =lambda q :ppos [q ])
                 grp =agac .query_ball_point (V [i0 ],3.0 )
-                grp =[q for q in grp if q in set (kalan )]
+                grp =[q for q in grp if q in set (remaining )]
                 if not grp :
                     grp =[i0 ]
                 w =ppos [grp ]
                 P_ .append ((V [grp ]*w [:,None ]).sum (0 )/max (w .sum (),1e-9 ))
                 nv =(N_ [grp ]*w [:,None ]).sum (0 )
                 Pd_ .append (nv /max (np .linalg .norm (nv ),1e-9 ))
-                kalan =[q for q in kalan if q not in set (grp )]
+                remaining =[q for q in remaining if q not in set (grp )]
             P_ =np .asarray (P_ ,float ).reshape (-1 ,3 )
             Pd_ =np .asarray (Pd_ ,float ).reshape (-1 ,3 )
         else :
@@ -133,7 +133,7 @@ def main ():
         if len (P_ )<2 :
             empty_ +=1 
             continue 
-        np .savez_compressed (yol ,V =V .astype (np .float32 ),
+        np .savez_compressed (path ,V =V .astype (np .float32 ),
         F =F .astype (np .int32 ),
         pbs =np .asarray (pbs ,np .float32 ))
         rec_ [pid ]={"pid":pid ,"mfg":"SYN","geo":pid ,
@@ -142,36 +142,36 @@ def main ():
         "metadata":kun }
         # SILINDIRLER insaattan BILINIR (sentetikte B-rep kesindir)
         cyl [pid ]=[{"c":G [j ].tolist (),"a":Gd [j ].tolist (),
-        "r":kun ["cap"]/2.0 ,"h":kun ["derin"]}
+        "r":kun ["cap"]/2.0 ,"h":kun ["deep"]}
         for j in range (len (G ))]
         ack [pid ]=[]
-        yazilan +=1 
-        if yazilan %25 ==0 :
-            h =(time .time ()-t0 )/yazilan 
-            print (f"  {yazilan } yazildi {h :.2f}s/part "
-            f"kalan ~{h *(N_PARCA -yazilan )/60 :.0f}dk",flush =True )
+        written +=1 
+        if written %25 ==0 :
+            h =(time .time ()-t0 )/written 
+            print (f"  {written } yazildi {h :.2f}s/part "
+            f"remaining ~{h *(N_PARCA -written )/60 :.0f}dk",flush =True )
             pickle .dump (rec_ ,open (KAYIT ,"wb"))
     pickle .dump (rec_ ,open (KAYIT ,"wb"))
     pickle .dump (cyl ,open (CY_PKL ,"wb"))
     pickle .dump (ack ,open (AC_PKL ,"wb"))
 
-    print (f"\nBITTI: yazilan {yazilan } | cache {atlanan } | bos {empty_ } "
+    print (f"\nBITTI: written {written } | cache {skipped } | bos {empty_ } "
     f"({time .time ()-t0 :.0f} s)")
     if tani :
         a =np .asarray (tani )
         print (f"\n--- DUMAN TESTI: segmentasyon sentetikte calisiyor mu ---")
-        print (f"  GT agzinda olasilik (ortanca) : {np .median (a [:,0 ]):.4f}")
+        print (f"  GT agzinda probability (ortanca) : {np .median (a [:,0 ]):.4f}")
         print (f"  rastgele yuzeyde (ortanca)    : {np .median (a [:,1 ]):.4f}")
         ratio =np .median (a [:,0 ])/max (np .median (a [:,1 ]),1e-6 )
         print (f"  ratio                          : {ratio :.2f}x")
         print ("  OKUMA: ratio ~1 whereas model sentetik geometride AYIRT ETMIYOR,")
         print ("         korpusun training degeri yoktur -- SIMDI bilinmeli.")
-        json .dump ({"n":yazilan ,
+        json .dump ({"n":written ,
         "gt_olasilik":float (np .median (a [:,0 ])),
         "zemin":float (np .median (a [:,1 ])),"ratio":float (ratio ),
         "not":"Sentetik corpus duman testi. Oran ~1 ise korpusun "
         "training degeri none. D7'ye BAKILMADI."},
-        open ("results/sentetik_duman.json","w"),indent =1 )
+        open ("results/synthetic_smoke.json","w"),indent =1 )
 
 
 if __name__ =="__main__":

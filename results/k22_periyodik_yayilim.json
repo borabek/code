@@ -1,11 +1,11 @@
 {
  "yayilim YOK": {
-  "tespit": 0.5315758455017159,
+  "detection": 0.5315758455017159,
   "robot": 0.13585058426781751,
   "eklenen_nokta": 0
  },
  "yayilim VAR (+-1)": {
-  "tespit": 0.5441390650295201,
+  "detection": 0.5441390650295201,
   "robot": 0.1258547719828817,
   "eklenen_nokta": 716
  }

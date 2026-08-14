@@ -1,6 +1,6 @@
 #!/bin/bash
 # R3 plato testi + robot uctan-uca. Ikisi de _hw_r3.txt (145 leakage-siz WEI part) uzerinde.
-# BA_ALLOW_SEEN=1: --only-parts acik liste already leakage korumasi (liste egitilen part icermiyor).
+# BA_ALLOW_SEEN=1: --only-parts acik list already leakage korumasi (list egitilen part icermiyor).
 set -e
 cd /c/Users/DE00024082/Desktop/code
 PY=".venv/Scripts/python.exe"

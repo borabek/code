@@ -89,7 +89,7 @@ def main ():
     print (f"  6k standart:            {std_tp }/{std_gt } = {std_tp /max (std_gt ,1 ):.3f}")
     print (f"  6k+9k genisletilmis:    {exp_tp }/{exp_gt } = {exp_tp /max (exp_gt ,1 ):.3f}")
     print (f"  -> genisletme candidate recall'i {'YUKSELTTI'if exp_tp >std_tp else 'YUKSELTMEDI'} "
-    f"(+{exp_tp -std_tp } CP). >0.60 ise top-N ile F1 kazanci mumkun.")
+    f"(+{exp_tp -std_tp } CP). >0.60 ise top-N with F1 kazanci mumkun.")
 
 
 if __name__ =="__main__":

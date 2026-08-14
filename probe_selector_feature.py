@@ -6,7 +6,7 @@ probe, YENIDEN HESAP GEREKTIRMEYEN ek oznitelikleri onbellekli veriyle dener:
   K) KAYNAK   -- candidate segmentasyondan mi B-rep'ten mi geldi (1 column)
   Y) YOGUNLUK -- most yakin komsuya uzaklik, 5/10mm yaricapta komsu count (3)
   M) MERKEZ   -- part kutusuna according to konum + eksenlere hizalanma (3)
-Egitim D6 (468), exam D7 (835) -- brand kumeleri AYRIK. Tek degisken, same
+Egitim D6 (468), exam D7 (835) -- brand kumeleri AYRIK. Tek variable, same
 threshold taramasi, same RF ayarlari.
 
 WARNING: this D6-olcekli a kiyas; mutlak degerler full olcekli gate'ten DUSUK becomes.
@@ -14,7 +14,7 @@ Aranan sey MUTLAK DEGER DEGIL, hangi feature grubunun ISE YARADIGI.
 """
 import collections ,json ,os ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -98,20 +98,20 @@ for ad ,kul in (("baseline (58)",""),("+KAYNAK","K"),("+YOGUNLUK","Y"),
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
-        r ={"threshold":e ,"robot":mi ,"tespit":K .mikro (tes ),
+        r ={"threshold":e ,"robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ())))}
         if en is None or r ["robot"]>en ["robot"]:
             en =r 
     res_ [ad ]=dict (en ,col_ =int (X .shape [1 ]))
     print (f"{ad :<12} sutun {X .shape [1 ]:>3} | robot {en ['robot']:.4f} | "
-    f"tespit {en ['tespit']:.4f} | makro {en ['makro']:.4f} | threshold {en ['threshold']:.2f}",
+    f"detection {en ['detection']:.4f} | makro {en ['makro']:.4f} | threshold {en ['threshold']:.2f}",
     flush =True )
 t =res_ ["baseline (58)"]["robot"]
 print ()
 for ad in res_ :
     if ad !="baseline (58)":
         print (f"  {ad :<12} {res_ [ad ]['robot']-t :+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,
+json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,
 "not":"D6-olcekli kiyas (training 468). Mutlak degerler tam olcekten "
-"DUSUK; aranan hangi oznitelik grubunun ise yaradigi. D7 brand-disi."},
-open ("results/secici_oznitelik.json","w"),indent =1 )
+"DUSUK; sought hangi oznitelik grubunun ise yaradigi. D7 brand-disi."},
+open ("results/selector_feature.json","w"),indent =1 )

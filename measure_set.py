@@ -34,8 +34,8 @@ SPLIT ="results/split3.json"
 GEO ="results/_strict_geometry_keys.json"
 
 
-def _oku (yol ):
-    with io .open (yol ,encoding ="utf-8")as f :
+def _oku (path ):
+    with io .open (path ,encoding ="utf-8")as f :
         return json .load (f )
 
 
@@ -83,7 +83,7 @@ def cluster (der_yolu ="results/_u4_der.pkl",locked_cikar =True ,tekrar_cikar =T
         # Onceki version `kullanilan_geo`yu only KALAN parcalardan hesapliyordu; so
         # DOGRUDAN kullanilip cikarilan LOCKED parcalarin KENDI GRUBU "dokunulmamis" gorunuyor
         # and that parts yeniden TEMIZ sayiliyordu. Ama onlar KULLANILDI -- measurement onbelleginde
-        # varlar and tarihsel as puanlandilar. Bir times dokunulan part kalici as kirlidir.
+        # varlar and tarihsel as puanlandilar. Bir times dokunulan part persistent as kirlidir.
         # Etkisi: "temiz LOCKED 98" -> DOGRUSU 95.
     kullanilan_geo =({r ["geo"]for r in temiz }
     |{gk .get (p ,"none:"+p )for p in atilan_locked }
@@ -143,7 +143,7 @@ def rapor_bas (rapor ):
         print (f"  ATILAN LOCKED ({len (rapor ['atilan_locked'])}): {rapor ['atilan_locked']}")
     print (f"  LOCKED kirlenmesi: {len (rapor ['locked_kirli_grup'])} grup / "
     f"{len (rapor ['locked_kirli_parca'])} part -> {rapor ['locked_kirli_parca']}")
-    print (f"  GRUP-TEMIZ LOCKED: {rapor ['locked_temiz_n']} part (TEK ATIS icin saklanir)")
+    print (f"  GRUP-TEMIZ LOCKED: {rapor ['locked_temiz_n']} part (TEK ATIS for saklanir)")
 
 
 
@@ -158,7 +158,7 @@ def locked_gruplari ():
 def sinav_egitim_maskesi (pidler ):
     """FINAL SINAVI for training maskesi: LOCKED'in GEOMETRI GRUPLARINI disla.
 
-    2026-08-03 BULGUSU (q2_sinav_butunlugu.py): dagitilan training verisi
+    2026-08-03 BULGUSU (q2_exam_butunlugu.py): dagitilan training verisi
     `zengin_parite_w2.npz` 95 grup-temiz LOCKED parcasinin **77'sini** iceriyor
     (grup uzerinden 80). Sinav dagitilan gate'le kosulsaydi 95 parcanin 80'i KIRLI
     olurdu and sonuc SISIK cikardi.

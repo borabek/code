@@ -4,10 +4,10 @@
 # DENETIM BULGUSU: dagitilan 4 checkpoint yalnizca 189 mesh gordu. Diskte 257 manufacturer-etiketli
 # part (_mfg_labels 142 + _mfg_labels_highcp 115) duruyor ve HIC kullanilmadi.
 #
-# "Daha very veri" IKI KEZ denenmis, IKISI DE KAYBETMIS -- but IKISI DE KARISTIRILMIS deneydi:
+# "Daha very data" IKI KEZ denenmis, IKISI DE KAYBETMIS -- but IKISI DE KARISTIRILMIS deneydi:
 #   H3: same anda (a) +257 manufacturer etiketi, (b) +132 EEC, (c) 4 INSAN DIZINI DUSURULDU
 #       (i.e. urunun insan etiketlerinin %77'si atildi). Kaybin kaynagi olculmedi.
-#   G : bambaska a ag (ikili tespit basi, width128/blocks4/dropout0 -- tezin "asiri ogrenme"
+#   G : bambaska a ag (ikili detection basi, width128/blocks4/dropout0 -- tezin "asiri ogrenme"
 #       diye isaretledigi yapilandirma), sifirdan, 26/40 epoch'ta kesildi.
 #
 # BU KOSU TEK DEGISKEN OYNATIR: dagitilan tarifin AYNISI + manufacturer etiketleri EK as.

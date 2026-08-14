@@ -11,10 +11,10 @@ penceresi ters taraftaki agzi kacirir).
   baglidir and this ortamda rtree KURULU DEGIL -> each cagri ModuleNotFoundError atiyordu. Eski kodda
   `except Exception: continue` bunu SESSIZCE yutuyor, fonksiyonlar no sey yapmadan girdiyi geri
   donduruyordu. Sonuc: yuva->mouth tasimasi never olmadi, disari-direction secimi never calismadi, and two
-  fonksiyon da "basarili" gorundu. Ayrica remesh'lenmis govdeler WATERTIGHT DEGIL -- contains()
+  fonksiyon da "ok" gorundu. Ayrica remesh'lenmis govdeler WATERTIGHT DEGIL -- contains()
   correct arac olmazdi already.
   Bu yuzden here DIS BAGIMLILIK YOK: Moller-Trumbore isin-ucgen kesisimi saf numpy with yazildi.
-  Watertight olmayan meshlerde de works, sessizce basarisiz OLMAZ.
+  Watertight olmayan meshlerde de works, sessizce failed OLMAZ.
 """
 import numpy as np 
 
@@ -180,7 +180,7 @@ def channel_axis (mesh ,point ,fallback =None ,min_gain =1.6 ,n_dirs =None ):
     ROOT CAUSE BURADAYDI (2026-07-30): this fonksiyon only 3 koordinat eksenini deniyordu, i.e.
     EGIK a axis dondurmesi matematiksel as imkansizdi. Oysa manufacturer ConnectionPoint
     yonlerinin %19.1'i eksene 10 dereceden extra egik (8534 CP'de measured, most extra 43.1 derece;
-    PXC %16.9, WEI %21.7) -- klemenste tel acili a huniden girer. Bu yuzden eslesen CP'lerin
+    PXC %16.9, WEI %21.7) -- klemenste tel acili a huniden girer. Bu yuzden matched CP'lerin
     %18.2'sinde eksenimiz 15-90 derece sapiyordu. n_dirs > 3 verildiginde kure on real
     arama is done (kaba tarama + kazananin cevresinde ince tarama).
     """
@@ -270,7 +270,7 @@ def outward_along_axis (mesh ,point ,direction ,max_mm =None ,**_ ):
     if n_p !=n_m :
         return +d if n_p <n_m else -d 
 
-        # Hala beraberse (real hole-boyu gecen channel): deterministik last rule -- body
+        # Hala beraberse (real hole-boyu passing channel): deterministik last rule -- body
         # merkezinden UZAGA. Bu durumda two direction de fiziksel as gecerlidir.
     c =0.5 *(V .max (0 )+V .min (0 ))
     return +d if float ((p0 -c )@d )>=0 else -d 
@@ -284,7 +284,7 @@ def exit_length (mesh ,point ,direction ,margin =6.0 ,min_len =0.0 ,max_len =Non
     (Onceki cozum boyu prediction edip 1.6x'lik dongulerle buyutuyordu; 100mm'lik parcada 121mm igne
     uretti. Bu fonksiyon correct boyu TEK SEFERDE olcer.)
     """
-    h =ray_hits (mesh ,point ,direction ,_reach (mesh ,point ))# sabit span DEGIL: uzak point kirpilirdi
+    h =ray_hits (mesh ,point ,direction ,_reach (mesh ,point ))# fixed span DEGIL: uzak point kirpilirdi
     L =(float (h [-1 ])if len (h )else 0.0 )+margin 
     L =max (L ,min_len )
     return min (L ,max_len )if max_len else L 
@@ -354,8 +354,8 @@ flat_ratio =0.35 ):
 
     WHY BU YONTEM: channel_axis() ray atarak min(ileri,geri) serbest mesafeyi maksimize eder.
     Bu criterion, hole own koni acisindan (atan(r/L)) more iyi cozemez: r=2.5mm L=15mm a yuvada
-    eksenin +-9.5 derecelik konisi icindeki TUM yonler dibe same mesafede carpar, i.e. skor DUZDUR.
-    Sentetikte measured: egik kanalda kalan error 9.2 derece, hangi cozunurlukte taransa taransin.
+    eksenin +-9.5 derecelik konisi icindeki TUM yonler dibe same mesafede carpar, i.e. score DUZDUR.
+    Sentetikte measured: egik kanalda remaining error 9.2 derece, hangi cozunurlukte taransa taransin.
     Gercek terminalde r~2mm L~10mm -> ~11 derece baseline boundary. Yetmez.
 
     SILINDIRIK KANALDA axis, wall normallerine DIKTIR. Yani normal kovaryans matrisinin
@@ -412,7 +412,7 @@ max_turn_deg =90.0 ):
     terminalin DUZ ON YUZU orneklemeye girer, normaller three boyuta yayilir and fonksiyon
     "silindirik not" deyip REDDEDER. Red whereas wrong tohumu oldugu like birakir.
     Kendi kendini besleyen a loop: wrong seed -> red -> wrong seed. Cok-CP parcalarda
-    eslesen CP'lerin %22.3'u 45 dereceden extra sapiyordu and this ratio yaricaptan BAGIMSIZDI
+    matched CP'lerin %22.3'u 45 dereceden extra sapiyordu and this ratio yaricaptan BAGIMSIZDI
     (radius taramasi: %22.1-22.3 arasi never kipirdamadi) -- i.e. reason komsu hole kirliligi
     not, full as this loop.
 

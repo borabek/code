@@ -1,7 +1,7 @@
-"""K1.7 sondasi: p3c secenek havuzunda correct axis VAR MI, KACINCI SIRADA?
+"""K1.7 sondasi: p3c option havuzunda correct axis VAR MI, KACINCI SIRADA?
 
 Recall@k dusukse  -> TEMSIL sorunu (havuzda absent), new onerici is required.
-Recall@k high but rank kotu -> SIRALAMA sorunu, feature/skor duzeltilir.
+Recall@k high but rank kotu -> SIRALAMA sorunu, feature/score duzeltilir.
 
 Ayrica correct secenegin YEREL radius sirasini olcer: hipotez, correct secenegin
 komsulugundaki most large silindir olmasi.
@@ -85,35 +85,35 @@ for pid ,r in rec_ .items ():
         yak =np .where (np .linalg .norm (Mo -P [pi ],axis =1 )<=KOMSU_MM )[0 ]
         if not len (yak ):
             continue 
-            # secenek havuzu: each yakin silindirin +/- ekseni
+            # option havuzu: each yakin silindirin +/- ekseni
         ops =[]
         for j in yak :
             for s in (1.0 ,-1.0 ):
                 ops .append ((j ,s *A [j ]))
                 # correct which is(lar)
-        dogru =[
+        correct =[
         t for t ,(j ,a )in enumerate (ops )
         if np .degrees (np .arccos (np .clip (float (a @Gd [gi ]),-1 ,1 )))<=ACI 
         ]
-        if not dogru :
+        if not correct :
             continue 
         haviuzda =True 
         havuzda +=1 
         # p3c'nin fiilen sectigi direction D[pi]; onun havuzdaki sirasini,
         # "large radius before" siralamasina according to olc
-        skor =np .asarray ([R [j ]for (j ,a )in ops ],float )
-        sira_idx =np .argsort (-skor )
+        score =np .asarray ([R [j ]for (j ,a )in ops ],float )
+        sira_idx =np .argsort (-score )
         yer ={t :q for q ,t in enumerate (sira_idx )}
-        siralar .append (min (yer [t ]for t in dogru ))
+        siralar .append (min (yer [t ]for t in correct ))
         # correct secenegin yerel radius order
         rr =np .asarray ([R [j ]for j in yak ],float )
-        j_dogru =ops [dogru [0 ]][0 ]
+        j_dogru =ops [correct [0 ]][0 ]
         yaricap_sirasi .append (int ((rr >R [j_dogru ]).sum ()))
         yerel_n .append (len (yak ))
 
 siralar =np .asarray (siralar )
 yr =np .asarray (yaricap_sirasi )
-print (f"eslesme {n_es } | havuzda dogru axis VAR: {havuzda } (%{100 *havuzda /max (n_es ,1 ):.1f})\n")
+print (f"eslesme {n_es } | havuzda correct axis VAR: {havuzda } (%{100 *havuzda /max (n_es ,1 ):.1f})\n")
 print ("YARICAP-SIRALI havuzda correct eksenin recall@k:")
 for kk in (1 ,2 ,3 ,5 ,10 ):
     print (f"  recall@{kk :<3} = %{100 *(siralar <kk ).mean ():.1f}")
@@ -121,4 +121,4 @@ print (f"\ndogru secenegin YEREL yaricap sirasi (0 = komsulugun EN BUYUGU):")
 for q in (0 ,1 ,2 ):
     print (f"  sira {q }: %{100 *(yr ==q ).mean ():.1f}")
 print (f"  sira >2: %{100 *(yr >2 ).mean ():.1f}")
-print (f"komsulukta ortalama silindir: {np .mean (yerel_n ):.1f}")
+print (f"komsulukta average silindir: {np .mean (yerel_n ):.1f}")

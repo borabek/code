@@ -23,7 +23,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -112,9 +112,9 @@ def main ():
         p =max (a ["part"],1 )
         print (f"{m :<7}{'':>13}"+
         "".join (f"{a [f'n_{e }']/p :>12.0f}"for e in ESIKLER ))
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"esikler":ESIKLER ,
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"esikler":ESIKLER ,
     "sonuc":out ,
-    "not":"Mesh olasilik esigi taramasi (YALNIZ KONUM recall'u). "
+    "not":"Mesh probability esigi taramasi (YALNIZ KONUM recall'u). "
     "D7'de TESHIS amaclidir; threshold secimi `tam` korpusunda "
     "yapilir."},
     open (f"results/mesh_esigi_{KUME }.json","w"),indent =1 )

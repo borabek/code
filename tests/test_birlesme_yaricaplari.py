@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-"""P1: birlesme yaricaplari CONFIG'ten okunmali, sabit kodlu OLMAMALI.
+"""P1: birlesme yaricaplari CONFIG'ten okunmali, fixed kodlu OLMAMALI.
 
-`dedupe_mm` 10.0 sabit kodluydu and oy havuzu `_vote2`'nin varsayilanini (5.0)
+`dedupe_mm` 10.0 fixed kodluydu and oy havuzu `_vote2`'nin varsayilanini (5.0)
 kullaniyordu. P1 taramasi bunlarin KOMSU GERCEK GIRISLERI single adaya yuttugunu
-olctu (very-CP kahini +0.0331). Bu test sabit kodun geri gelmesini engeller.
+olctu (very-CP kahini +0.0331). Bu test fixed kodun geri gelmesini engeller.
 """
 import io 
 import json 
@@ -32,7 +32,7 @@ def _govde (ad ):
 
 def test_dedupe_config_ten ():
     body =_govde ("derive_candidates")
-    assert "dedupe_mm=dd"in body ,"dedupe yaricapi sabit kodlu"
+    assert "dedupe_mm=dd"in body ,"dedupe yaricapi fixed kodlu"
     assert '_pp.get("dedupe_mm"'in body 
 
 
@@ -59,8 +59,8 @@ def test_birlesme_yaricaplari_KILIT ():
     """P3-b: 1/2/2 KILIT. Eski 3/10/5 high-CP agizlarini BIRLESTIRIYOR.
 
     Olculdu (P1 taramasi, D6, candidate kahini bire-a Macar):
-      3/10/5 -> kahin 0.8808 | very-CP 0.4740
-      1/2/2  -> kahin 0.8966 | very-CP 0.5071 (+0.0331)
+      3/10/5 -> oracle 0.8808 | very-CP 0.4740
+      1/2/2  -> oracle 0.8966 | very-CP 0.5071 (+0.0331)
     Bu degerler DEGISTIRILMEZ; degistirilecekse ONCE very-CP kahini olculur.
     """
     import json ,io as _io 

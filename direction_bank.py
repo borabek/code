@@ -2,7 +2,7 @@
 """YON SECENEK BANKASI -- a konuma BIRDEN COK direction onerir.
 
 WHY. Dagitilan urun each konuma TEK direction bagliyor: havuzdan gelen `D`, uzerine
-sign duzeltmesi (`product_wide.sec`). Oysa ceiling merdiveni (`results/tavan_085.json`,
+sign duzeltmesi (`product_wide.sec`). Oysa ceiling merdiveni (`results/ceiling_085.json`,
 D7 brand-disi, mukemmel selector) sunu says:
 
     P2+Y0  only adayin own yonu     recall 0.4820   F1 tavani 0.6505
@@ -10,16 +10,16 @@ D7 brand-disi, mukemmel selector) sunu says:
 
 Yani konum ZATEN dogruyken only direction wrong oldugu for kaybedilen GT count
 D7'de **485** (Y1 komsu 197 + Y2 silindir 170 + Y3 ana axis 118). Kazanan
-yapilandirmanin error bankasinda (`results/kazanan_hata_bankasi_v2.json`) buna
-karsilik gelen kova `YON_YOK = 539`. Iki bagimsiz sayim same yeri gosteriyor.
+yapilandirmanin error bankasinda (`results/winner_error_bank_v2.json`) buna
+karsilik gelen bucket `YON_YOK = 539`. Iki bagimsiz sayim same yeri gosteriyor.
 
 BU MODUL that seceneklerin DAGITILABILIR halini produces. Tavan betigi
 (`probe_ceiling_085.py`) "bilgi present mi" diye soruyordu and part basina binlerce
-konum kullaniyordu; here secenek count candidate basina `MAX_SEC` with sinirli and
-each secenek FIZIKSEL a kaynaktan geliyor.
+konum kullaniyordu; here option count candidate basina `MAX_SEC` with sinirli and
+each option FIZIKSEL a kaynaktan geliyor.
 
 KAYNAKLAR (all of them +/- ciftli -- measurement ISARETLI angle kullanir):
-  0 KENDI     adayin own yonu. HER ZAMAN 0. secenek and real fallback.
+  0 KENDI     adayin own yonu. HER ZAMAN 0. option and real fallback.
   1 KOMSU     10mm icindeki komsu adaylarin yonleri (order mutabakati)
   2 SILINDIR  parcadaki B-rep silindir eksenleri
   3 ANA       parcanin ana eksenleri (SVD) -- klemenste giris yonu cogunlukla
@@ -42,7 +42,7 @@ FAN_N =int (os .environ .get ("YB_FAN","0"))# 0 = closed, 256 onerilen
 FAN_K =int (os .environ .get ("YB_FAN_K","3"))# candidate basina kac direction onerisi
 
 KOMSU_R =10.0 # komsu yonu toplama yaricapi (mm)
-DEDUPE_DER =8.0 # this aciyla same sayilan yonler single temsilciye iner
+DEDUPE_DER =8.0 # this aciyla same counted yonler single temsilciye iner
 # ADAY BASINA SECENEK TAVANI. MEASURED (2026-08-12, 30 part, yelpaze 256):
 #   ceiling 12 -> yonlu recall 0.8462 (maliyet 1.00x)   <- bugunku
 #   ceiling 24 -> yonlu recall 0.9077 (maliyet 1.20x)   <- DIZ NOKTASI
@@ -131,7 +131,7 @@ def yelpaze_yonleri (P ,mesh ,diag ,n_yon =None ,k =None ):
     """`n_yon`/`k` None whereas MODUL GLOBALLERI okunur.
 
     Varsayilan argumanlari `FAN_N`'e baglamak, `YB.FAN_N = 256` yazan a
-    cagriyi SESSIZCE etkisiz birakiyordu (varsayilan tanim aninda baglanir).
+    cagriyi SESSIZCE etkisiz birakiyordu (default tanim aninda baglanir).
     """
     n_yon =FAN_N if n_yon is None else n_yon 
     k =FAN_K if k is None else k 
@@ -153,14 +153,14 @@ def yelpaze_yonleri (P ,mesh ,diag ,n_yon =None ,k =None ):
     return F [top ]
 
 
-def secenekler (P ,D ,cyl ,V ,gate_s =None ,votes =None ,
+def options (P ,D ,cyl ,V ,gate_s =None ,votes =None ,
 komsu_r =KOMSU_R ,max_sec =MAX_SEC ,mesh =None ,diag =None ,
 fan_maske =None ):
     """Aday basina direction secenekleri.
 
     Doner: (idx, YD, OZ)
       idx (k,)   -> hangi adayin secenegi
-      YD  (k,3)  -> secenek yonu (unit)
+      YD  (k,3)  -> option yonu (unit)
       OZ  (k,K)  -> `OZ_AD` during features
 
     Konum DEGISMEZ: `P[idx[j]]`. Bu modul only YON cogaltir; konum havuzu
@@ -176,11 +176,11 @@ fan_maske =None ):
     votes =np .zeros (n )if votes is None else np .asarray (votes ,float )
     Ysil ,Yana =parca_yonleri (cyl ,V )
     cos_destek =np .cos (np .radians (DESTEK_DER ))
-    # YELPAZE: candidate basina most derin serbest yonler.
+    # YELPAZE: candidate basina most deep serbest yonler.
     # `fan_maske` verilirse YALNIZ that adaylara uygulanir. Mesh tepelerine
     # yelpaze atmak very pahali (600 candidate x 256 isin) and gereksiz: mesh adayi
     # already own TEPE NORMALINI tasiyor and part duzeyi yonleri bankadan
-    # aliyor. Yelpazenin olculen degeri B-REP AGIZLARINDA idi.
+    # aliyor. Yelpazenin measured_path degeri B-REP AGIZLARINDA idi.
     Yfan =np .zeros ((n ,0 ,3 ))
     if FAN_N >0 and mesh is not None :
         if fan_maske is None :
@@ -243,9 +243,9 @@ def etiketle (Pp ,Dd ,G ,Gd ,lateral =2.0 ,aci =10.0 ,axial =40.0 ):
     Kabul kutusu `sina_cluster.match_hungarian` with BIREBIR same: lateral <= 2mm,
     |axial| <= 40mm, ISARETLI angle <= 10 derece.
 
-    BIRE-BIR KISITI BURADA UYGULANMAZ. Sebep: same GT'ye uyan three gecerli direction
+    BIRE-BIR KISITI BURADA UYGULANMAZ. Sebep: same GT'ye uyan three valid direction
     varsa, Macar atamasi keyfi as birini pozitif digerlerini NEGATIF yapar
-    and model "gecerli poz" instead of "atama kurasini" ogrenmeye works. Bire-a
+    and model "valid poz" instead of "atama kurasini" ogrenmeye works. Bire-a
     SECIM aninda (bipartite) uygulanir -- nesne tespitinde standart ayrim.
     """
     Pp =np .asarray (Pp ,float ).reshape (-1 ,3 )

@@ -1,0 +1,31 @@
+{
+ "n_cift": 1034,
+ "n_aci_gecen": 831,
+ "n_av": 94,
+ "n_zaten": 864,
+ "n_kurtarma": 42,
+ "n_hasar_riski": 857,
+ "kurtaran_girisler": {
+  "kesit10": 4,
+  "kesit5": 6,
+  "acik": 13,
+  "kesit3": 5,
+  "kesit1": 4,
+  "cember": 2,
+  "kirpik": 4,
+  "mouth": 2,
+  "kesit7": 2
+ },
+ "doyma_medyan": 0.5454545454545454,
+ "doyma_tamami_pozitif": 0.006769825918762089,
+ "yanal_medyan": 0.36555112592438305,
+ "taban_robot": 0.618105610349686,
+ "kahin_robot": 0.640953780795013,
+ "d_robot": 0.022848170445326943,
+ "taban_tespit": 0.7583943683019512,
+ "kahin_tespit": 0.7556428845907518,
+ "d_tespit": -0.002751483711199376,
+ "verdict": [
+  "KOL OPEN: av sahasi present, dictionary kurtariyor, etiket ayirt edici, ceiling yeterli"
+ ]
+}

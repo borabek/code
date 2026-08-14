@@ -20,14 +20,14 @@
   },
   "config": {
    "cp_config.json": "e568da8fa71cdc57",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
  "sonuc": {
   "YON SABIT": {
    "robot": 0.27734375,
-   "tespit": 0.48125,
+   "detection": 0.48125,
    "makro": 0.28397989016515485,
    "en_kotu": 0.0,
    "brand": {
@@ -47,7 +47,7 @@
   },
   "MESH NORMALI": {
    "robot": 0.2796875,
-   "tespit": 0.48125,
+   "detection": 0.48125,
    "makro": 0.28607333838511945,
    "en_kotu": 0.0,
    "brand": {
@@ -66,6 +66,6 @@
    }
   }
  },
- "fark": 0.002343749999999978,
+ "diff": 0.002343749999999978,
  "not": "Yon secenekleri = mevcut + 2mm icindeki mesh tepelerinin +/- normalleri. Konum ve candidate sayisi DEGISMEZ. D7 brand-disi, TAM ZINCIR, MIKRO."
 }

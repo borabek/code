@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """T5: kesimi DURDURMA KARARI as kur (regresyonun coktugu yeri duzelt).
 
-T3/T4 kahin K'yi PARCA BASINA single a number as kestirmeye calisti and kaybetti:
+T3/T4 oracle K'yi PARCA BASINA single a number as kestirmeye calisti and kaybetti:
     dogrudan regresyon  -0.0148 | buzulme +0.0001 | selector -0.0005 | only-azalt +0.0089
 
 Iki yapisal kusuru vardi:
@@ -10,20 +10,20 @@ Iki yapisal kusuru vardi:
      F1'i most aza indiren prediction DEGIL.
 
 DOGRU KURULUM: kesim, part basina single number not, ADAY BASINA a DUR/DEVAM kararidir.
-Adaylar skora according to sirali; k. candidate for label "kahin K >= k mi" (i.e. this adayi almali miyiz).
+Adaylar skora according to sirali; k. candidate for label "oracle K >= k mi" (i.e. this adayi almali miyiz).
 Boylece training satiri 200 -> 3277 becomes and each satirin etiketi TEMIZ.
 
-CIKARIM: siradaki candidates for olasilik is computed, first P < threshold which is places DURULUR (onek
+CIKARIM: siradaki candidates for probability is computed, first P < threshold which is places DURULUR (onek
 kuralina saygi). Esik taranir.
 
 OZELLIKLER (all of them calisma aninda, GT'siz):
-  candidate: skor, skor/part-maks, order, order/n, onceki skorla difference, sonraki skorla difference,
-        that ana kadarki kumulatif skor
+  candidate: score, score/part-maks, order, order/n, onceki skorla difference, sonraki skorla difference,
+        that ana kadarki kumulatif score
   part: n_aday, maks, mean, std, kosegen, very-CP bayragi
   (+ istege bagli: adayin own 22 gate ozelligi)
 
-KILL (t3/t4 with AYNI, degistirilmedi): tespit >= +0.02 VE DEV with VAL same yonde VE
-gorulmemis manufacturer ortalamasi dusmeyecek.
+KILL (t3/t4 with AYNI, degistirilmedi): detection >= +0.02 VE DEV with VAL same yonde VE
+unseen manufacturer ortalamasi dusmeyecek.
 """
 import json 
 import os 
@@ -65,7 +65,7 @@ def main ():
     mfg_of ={p :m for m ,p ,jf ,s in eligible ()}
     with open ("results/_u4_der.pkl","rb")as f :
         DER =pickle .load (f )
-    with open ("results/_dev_val_kume.json",encoding ="utf-8")as f :
+    with open ("results/_dev_val_cluster.json",encoding ="utf-8")as f :
         kume_of =json .load (f )
     d =np .load ("results/gate_regrow_data_topo.npz",allow_pickle =True )
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
@@ -134,7 +134,7 @@ def main ():
         oof [te ]=RandomForestClassifier (n_estimators =500 ,min_samples_leaf =5 ,n_jobs =-1 ,
         random_state =0 ).fit (R [tr ],Y [tr ]).predict_proba (R [te ])[:,1 ]
 
-        # part basina olasilik dizisine geri dagit
+        # part basina probability dizisine geri dagit
     i0 =0 
     for p in PAR :
         n =len (p ["s"])
@@ -171,7 +171,7 @@ def main ():
         """P >= t olanlarin SAYISI (onek zorunlulugu absent)."""
         return int ((p ["pr"]>=t ).sum ())
 
-    print (f"\n{'arm':<26}{'tespit':>9}{'fark':>9}{'DEV':>9}{'VAL':>9}{'mfg ort':>10}{'KILL':>8}")
+    print (f"\n{'arm':<26}{'detection':>9}{'diff':>9}{'DEV':>9}{'VAL':>9}{'mfg ort':>10}{'KILL':>8}")
     KOL ={}
     for t in (0.3 ,0.4 ,0.5 ,0.6 ,0.7 ):
         KOL [f"A dur-ilk P<{t :.1f}"]=lambda p ,t =t :dur (p ,t )
@@ -186,19 +186,19 @@ def main ():
         ok =(v -a >=0.02 )and dv >0 and vl >0 and mf >=0 
         print (f"{ad :<26}{v :>9.4f}{v -a :>+9.4f}{dv :>+9.4f}{vl :>+9.4f}{mf :>+10.4f}"
         f"{'GECTI'if ok else '':>8}")
-        SON [ad ]={"tespit":float (v ),"fark":float (v -a ),"dev":float (dv ),
+        SON [ad ]={"detection":float (v ),"diff":float (v -a ),"dev":float (dv ),
         "val":float (vl ),"mfg":float (mf ),"gecti":bool (ok )}
         if ok and v >en :
             kazanan ,en =ad ,v 
     print (f"\nSONUC: {kazanan if kazanan else 'HICBIRI GECMEDI'}")
     if not kazanan :
-        iyi =max (SON ,key =lambda k :SON [k ]["fark"])
-        print (f"  en iyi arm {iyi }: {SON [iyi ]['fark']:+.4f} "
-        f"(kahinin {SON [iyi ]['fark']/max (kah -a ,1e-9 ):.0%}'i)")
-    with open ("results/t5_durdurma.json","w",encoding ="utf-8")as f :
-        json .dump ({"baseline":float (a ),"kahin":float (kah ),"kollar":SON ,
+        iyi =max (SON ,key =lambda k :SON [k ]["diff"])
+        print (f"  en iyi arm {iyi }: {SON [iyi ]['diff']:+.4f} "
+        f"(kahinin {SON [iyi ]['diff']/max (kah -a ,1e-9 ):.0%}'i)")
+    with open ("results/t5_stopping.json","w",encoding ="utf-8")as f :
+        json .dump ({"baseline":float (a ),"oracle":float (kah ),"kollar":SON ,
         "kazanan":kazanan ,"n_satir":int (len (Y ))},f ,indent =1 )
-    print ("receipt -> results/t5_durdurma.json")
+    print ("receipt -> results/t5_stopping.json")
 
 
 if __name__ =="__main__":

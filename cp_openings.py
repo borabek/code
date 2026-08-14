@@ -34,20 +34,20 @@ USE_CHANNEL_AXIS =_os .environ .get ("CP_CHANNEL_AXIS","1")not in ("0","false","
 # adaylarla egitildi; closed calistirmak gate'i uyumsuz birakiyordu.
 # Olculdu (same 100 part, sizintisiz): 0.7865 -> 0.8016 (+0.0151), two regime de yukseldi.
 USE_GEO_ORIENT =_os .environ .get ("CP_GEO_ORIENT","1")not in ("0","false","False")
-# Eksen ince ayari (normal-kovaryans). MEASURED VE URUNE ALINDI 2026-07-30 -> varsayilan OPEN.
-# Ayni 100 part, sizintisiz, single degisken: robot-hazir F1 (lateral <=2mm VE axis <=10 derece)
+# Eksen ince ayari (normal-kovaryans). MEASURED VE URUNE ALINDI 2026-07-30 -> default OPEN.
+# Ayni 100 part, sizintisiz, single variable: robot-hazir F1 (lateral <=2mm VE axis <=10 derece)
 # 0.4677 -> 0.4904 (+0.0227); <=5 derece kolunda +0.0210. Tespit F1 +0.0008 (zarar absent).
 # Eksen angle hatasi >15 derece which is CP orani %29.2 -> %24.9.
 USE_AXIS_NORMALS =_os .environ .get ("CP_AXIS_NORMALS","1")not in ("0","false","False")
-# B-rep analitik axis (gmsh/OCC). Olculdu and URUNE ALINDI 2026-07-30 -> varsayilan OPEN.
+# B-rep analitik axis (gmsh/OCC). Olculdu and URUNE ALINDI 2026-07-30 -> default OPEN.
 USE_BREP_AXIS =_os .environ .get ("CP_BREP_AXIS","1")not in ("0","false","False")
 # B-rep silindir eslestirme kapilari. Cember-oturtma duzeltmesi yaricaplari 3.5 fold buyuttu,
 # that is why ikisi de yeniden ayarlanabilir must be (see. asagidaki cagri yerindeki not).
 BREP_MAX_OFF =float (_os .environ .get ("CP_BREP_MAX_OFF","5.0"))
 # NOKTAYI analitik silindir eksenine izdusur (YON already oradan aliniyordu, NOKTA alinmiyordu).
 # Varsayilan KAPALI -- uctan uca olculmeden acilmaz.
-# MEASURED VE KAYBETTI 2026-08-01 (results/r6_izdusum_uctan_uca.json, 200 part, sizintisiz):
-#   tespit 0.7439 -> 0.6984 (-0.0454) | robot-hazir 0.4500 -> 0.4054 (-0.0445)
+# MEASURED VE KAYBETTI 2026-08-01 (results/r6_izdusum_end_to_end.json, 200 part, sizintisiz):
+#   detection 0.7439 -> 0.6984 (-0.0454) | robot-hazir 0.4500 -> 0.4054 (-0.0445)
 # Aday duzeyinde +2.1 score gorunuyordu. Sebep: noktayi oynatmak gate'in ozelliklerini
 # (nn_dist, n_close, clustering) degistiriyor and dagitilan gate IZDUSUMSUZ adaylarla egitildi.
 # Acmak for full corpus yeniden uretilip gate yeniden egitilmeli; candidate duzeyi kazanci (+2 score)
@@ -123,7 +123,7 @@ def _cluster_terminals (kept ,cluster_mm ):
     return out 
 
 
-    # Yuvarlama esigi: olculen axis a koordinat eksenine this aciDAN uzaksa egim GERCEK sayilir
+    # Yuvarlama esigi: measured_path axis a koordinat eksenine this aciDAN uzaksa egim GERCEK sayilir
     # and korunur. VARSAYILAN 90 = always yuvarla (old davranis) -- because 10 derece with MEASURED
     # and KAYBETTI (asagi bak). Knob duruyor: channel_axis egimi gorebilir hale gelirse single satirla acilir.
 SNAP_MAX_DEG =float (_os .environ .get ("CP_SNAP_MAX_DEG","90"))
@@ -138,17 +138,17 @@ def _snap_axis (d ,outward_ref ,snap_max_deg =None ):
     (most extra 43.1 derece), and this single ureticiye ozgu not (PXC %16.9, WEI %21.7). Klemenslerde
     tel girisi most zaman acili a huniden gecer -- egim gercektir.
 
-    Sonucu measured: eslesen CP'lerin %18.2'sinde eksenimiz manufacturer yonunden 15-90 derece
+    Sonucu measured: matched CP'lerin %18.2'sinde eksenimiz manufacturer yonunden 15-90 derece
     sapiyordu (most ~90), because 45 dereceye yaklasan real a egim YANLIS eksene yuvarlaniyor.
     Hata part basina ya hep ya never gorunuyordu (93 parcanin 19'u %100 wrong) -- single single hard
     opening not, sistematik a yuvarlama hatasi oldugunun isareti.
 
     MEASURED VE KAYBETTI (2026-07-30, same 100 part, sizintisiz): esigi 10 dereceye cekmek
-    robot-hazir F1'i 0.4677 -> 0.4429 (-0.0248) DUSURDU, tespit F1'ini de -0.0044.
+    robot-hazir F1'i 0.4677 -> 0.4429 (-0.0248) DUSURDU, detection F1'ini de -0.0044.
     Sebep tanida ortaya output: yuvarlama kalkinca axis angle hatasi neredeyse HIC degismedi
-    (>15 derece sapan double %29.2 -> %28.9). Yani olculen ham eksenler de already eksene hizali --
+    (>15 derece sapan double %29.2 -> %28.9). Yani measured_path ham eksenler de already eksene hizali --
     **channel_axis egimi GOREMIYOR**. Suclu yuvarlama not, a fold more derinde: axis olcumu.
-    Bu yuzden varsayilan 90 (always yuvarla) as REVERTED; knob duruyor ki axis olcumu
+    Bu yuzden default 90 (always yuvarla) as REVERTED; knob duruyor ki axis olcumu
     duzeldiginde single degiskenle acilabilsin.
     """
     d =np .asarray (d ,float )
@@ -292,13 +292,13 @@ outward_min =0.0 ,split_ratio =0.0 ,point_mode ="v_o"):
         labels =labels .copy ()
         labels [np .isin (labels ,classes )&(pc <vertex_conf )]=int (connector3d .HOUSING )
     if probs is not None and conn_promote >0.0 :
-    # YUKSELTME (2026-07-28, CC-B'den turedi): candidate olusumu argmax'tan basliyordu and vertex_conf
-    # SADECE dusuruyordu. Sonuc: baglanti olasiligi kayda value but Housing'in under kalan
+    # YUKSELTME (2026-07-28, CC-B'den turedi): candidate olusumu argmax'defn basliyordu and vertex_conf
+    # SADECE dusuruyordu. Sonuc: baglanti olasiligi kayda value but Housing'in under remaining
     # vertex ASLA candidate olamiyordu -- esigi ne up to dusursen dusur. CC-B olcumu: very-CP
     # parcalarinda KACIRILAN GT'lerin %76'sinda yakinda CE+CT olasiligi >= 0.30 present, but
     # argmax orani 0.00. Yani sinyal VARDI, gate kapaliydi.
     # Bu step TOPLAM baglanti olasiligi esigi asan vertexleri baskin baglanti sinifina carries.
-    # OPT-IN: varsayilan 0.0 -> mevcut urun davranisi BIREBIR korunur.
+    # OPT-IN: default 0.0 -> mevcut urun davranisi BIREBIR korunur.
         cls =list (classes )
         pconn =probs [:,cls ].sum (1 )
         promote =(~np .isin (labels ,classes ))&(pconn >=conn_promote )
@@ -409,7 +409,7 @@ outward_min =0.0 ,split_ratio =0.0 ,point_mode ="v_o"):
             # ~42mm demekti (fiilen filtresiz) and axis NOKTASI eksenden ~r up to kaymisti,
             # max_off_mm=5.0 that kaymayi tolere ediyordu. Cember oturtma duzeltmesinden
             # (metinle 327/327 dogrulandi) after ikisi de yeniden ayarlanmali -> P2 taramasi.
-            # P2 TARAMASI YAPILDI 2026-08-01 (results/r5_brep_kapi.json), RESULT: FARK YOK.
+            # P2 TARAMASI YAPILDI 2026-08-01 (results/r5_brep_gate.json), RESULT: FARK YOK.
             # Uctan uca max_off 5.0 / 3.0 / 2.0 -> robot-hazir 0.4500 / 0.4495 / 0.4492,
             # angle<=10 %75.8 / %76.0 / %76.1. Kapi degeri belirleyici DEGIL; 5.0 kaliyor.
             # (Aday duzeyinde this tarama devasa difference gosteriyordu -- that deney NOKTAYI da
@@ -440,7 +440,7 @@ outward_min =0.0 ,split_ratio =0.0 ,point_mode ="v_o"):
                 # DUZLEM duvarli channel (yuva/kelepce girisi); ekseni yine tum wall
                 # normallerine diktir. Olculdu (same 100 part): robot-hazir 0.5272 ->
                 # 0.5415, low-CP 0.5236 -> 0.5393, axis >15d %15.8 -> %15.2.
-                # SECICI olmak sart: more gevsek ayarlar more COK candidate kullanip more KOTU
+                # SECICI olmak sart: more gevsek settings more COK candidate kullanip more KOTU
                 # sonuc veriyor (134/154 kullanim -> 0.5136). Silindir kolunun dersi same.
                     _bp =_brep_axis_pl (p ,d ,_brep_pl ,max_dist_mm =6.0 ,min_faces =4 ,
                     flat_ratio =0.20 ,max_turn_deg =45.0 )
@@ -458,7 +458,7 @@ outward_min =0.0 ,split_ratio =0.0 ,point_mode ="v_o"):
                         # i.e. kill kriterinin (+0.02) ALTINDA. Dagitilan gate de ESKI yonlendirmeyle
                         # egitildi -- acmak gate'i uyumsuz birakir.
                         # Bu yuzden VARSAYILAN KAPALI. Acmak for: CP_GEO_ORIENT=1 (and gate yeniden uydurulmali,
-                        # eslesen model: results/wire_gate_regrow_rt2.pkl).
+                        # matched model: results/wire_gate_regrow_rt2.pkl).
             if _iz is not None :
                 _iz ["son"]=d .copy ();_iz ["nokta"]=np .asarray (p ,float ).copy ()
                 _ASAMA_IZ .append (_iz )

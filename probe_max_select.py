@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-"""MAX_SEC TAVANI BAGLIYOR MU? Aday basina secenek tavani yonlu recall'u kirpiyor mu?
+"""MAX_SEC TAVANI BAGLIYOR MU? Aday basina option tavani yonlu recall'u kirpiyor mu?
 
-FINDING (2026-08-12). Yeni korpusta candidate basina secenek ortalamalari
+FINDING (2026-08-12). Yeni korpusta candidate basina option ortalamalari
 seg 11.80 / B-rep 10.79 / mesh 11.17 -- all of them `direction_bank.MAX_SEC = 12`
 tavaninin DIBINDE. Yani 256 isinlik yelpaze new direction EKLEYEMIYOR, only
 mevcut yonleri ITIYOR. Oyleyse yelpaze cozunurlugunu artirmak KAPI A'yi
 gecirmeye yetmez; tavani artirmak is required.
 
-BU SONDA. Ayni parcalarda secenek tavanini degistirip YONLU RECALL'u olcer.
+BU SONDA. Ayni parcalarda option tavanini degistirip YONLU RECALL'u olcer.
 Kabul kutusu urun metrigiyle same: lateral <= K.YANAL, ISARETLI angle <= K.ACI.
 Secici YOK -- this a TAVAN olcumu (mukemmel selector varsayimi).
 
@@ -53,7 +53,7 @@ def main ():
     # TEK MARKADAN gelir. Ilk kosuda sample UPUN/SUPU idi -- oysa tavani
     # asagi ceken brand NIT (D6 GT'sinin %45.7'si, yonlu recall 0.5254 and
     # kaybi full as YON kaybi: konum 0.7807 -> yonlu 0.5254). Yanlis
-    # kumede olculen a probe, kolu haksiz yere "olu" ilan ettirir.
+    # kumede measured_path a probe, kolu haksiz yere "olu" ilan ettirir.
     hepsi =sorted (f for f in os .listdir (OZ )
     if f .startswith (on +"_")and f .endswith (".npz"))
     tum_pid =[f [len (on )+1 :-4 ]for f in hepsi ]
@@ -76,7 +76,7 @@ def main ():
     print (f"{on }: {len (fs )} part | yelpaze {YB .FAN_N } | tavanlar {TAVANLAR }",
     flush =True )
 
-    top ={t :[0 ,0 ,0 ]for t in TAVANLAR }# [gt, yakalanan, secenek]
+    top ={t :[0 ,0 ,0 ]for t in TAVANLAR }# [gt, yakalanan, option]
     t0 =time .time ()
     for i ,(f ,pid )in enumerate (zip (fs ,pidler ),1 ):
         r =kay_gt .get (pid )
@@ -118,13 +118,13 @@ def main ():
         Gd =np .asarray (r ["Gd"],float )
         dg =float (r ["diag"])
         for t in TAVANLAR :
-            idx ,YD ,_C =YB .secenekler (P ,D ,cy .get (str (pid )),V ,mesh =mesh ,
+            idx ,YD ,_C =YB .options (P ,D ,cy .get (str (pid )),V ,mesh =mesh ,
             diag =diag ,fan_maske =fmask ,max_sec =t )
             if not len (idx ):
                 top [t ][0 ]+=len (G )
                 continue 
             PO =P [idx ]
-            # YONLU TAVAN: each GT for kabul kutusuna giren BIR secenek present mi
+            # YONLU TAVAN: each GT for kabul kutusuna entering BIR option present mi
             d_ =PO [:,None ,:]-G [None ,:,:]
             al =(d_ *Gd [None ,:,:]).sum (-1 )
             pe =np .linalg .norm (d_ -al [...,None ]*Gd [None ,:,:],axis =-1 )
@@ -138,7 +138,7 @@ def main ():
             print (f"  {i }/{len (fs )} ({time .time ()-t0 :.0f} s)",flush =True )
 
     print (f"\n{'ceiling':>7}{'GT':>7}{'yakalanan':>11}{'yonlu recall':>14}"
-    f"{'secenek':>10}{'maliyet x':>11}")
+    f"{'option':>10}{'maliyet x':>11}")
     baseline =None 
     out ={}
     for t in TAVANLAR :
@@ -146,10 +146,10 @@ def main ():
         rec =ya /max (gt ,1 )
         baseline =se if baseline is None else baseline 
         out [str (t )]={"gt":gt ,"yakalanan":ya ,"yonlu_recall":rec ,
-        "secenek":se ,"maliyet_kat":se /max (baseline ,1 )}
+        "option":se ,"maliyet_kat":se /max (baseline ,1 )}
         print (f"{t :>7d}{gt :>7d}{ya :>11d}{rec :>14.4f}{se :>10d}"
         f"{se /max (baseline ,1 ):>11.2f}")
-        # RECEIPT ADI ORNEKLEMI TASIR: sabit name kullanilinca two different sample
+        # RECEIPT ADI ORNEKLEMI TASIR: fixed name kullanilinca two different sample
         # (UPUN/SUPU and NIT) same dosyayi ezip birbirinin sonucu sanildi.
     _yol =(f"results/max_sec_sondasi_{hedef or 'karisik'}"
     f"{len (fs )}.json")

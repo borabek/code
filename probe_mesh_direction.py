@@ -141,8 +141,8 @@ def main ():
     "not":"Yon, MESH yuzey normalinden (ISARETLI aci). Dort "
     "turetme: tepe normali / komsu ortalamasi / KIPSEL "
     "normal / PCA duzlem normali. D7'ye BAKILMADI."},
-    open ("results/mesh_yon.json","w"),indent =1 )
-    print ("\nmakbuz -> results/mesh_yon.json")
+    open ("results/mesh_direction.json","w"),indent =1 )
+    print ("\nmakbuz -> results/mesh_direction.json")
     print ("OKUMA: NIT'te high cikarsa direction darbogazi GEOMETRIYLE kapanir")
     print ("       and B-rep'e bagimlilik ortadan kalkar.")
 

@@ -6,12 +6,12 @@ and digerlerinin konumunu ATIYOR. Toplulugun most klasik faydasi -- bagimsiz hat
 sonmesi -- so never kullanilmiyor.
 
 WHY SIMDI: durust (geometri) bolmede ayrisim degisti:
-    tespit 0.6250 -> lateral<=2mm 0.4715 -> robot-hazir 0.4159
+    detection 0.6250 -> lateral<=2mm 0.4715 -> robot-hazir 0.4159
 i.e. KONUM kaybi -0.154, EKSEN kaybi -0.056. Eksen I with large olcude closed; asil kalem residual
 konum. B (silindir eksenine izdusurme) olculup became but that DIS a referansa tasima denemesiydi;
 this different: own uyelerimizin ortalamasi, dis referans absent.
 
-KILL: lateral<=2mm ya da tespit gerilerse duser.
+KILL: lateral<=2mm ya da detection gerilerse duser.
 """
 import os ,sys ,json ,pickle 
 import numpy as np 
@@ -138,7 +138,7 @@ def main ():
     for tr ,te in GroupKFold (n_splits =5 ).split (Xk ,yk ,gg ):
         o [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (Xk [tr ],yk [tr ]).predict_proba (Xk [te ])[:,1 ]
-        # PARITE: esikler DAGITILAN urunun okudugu yerden gelir. Kendi secmek, olculen urunu
+        # PARITE: esikler DAGITILAN urunun okudugu yerden gelir. Kendi secmek, measured_path urunu
         # dagitilandan different a isletim noktasinda calistirir (2026-07-31 denetimi: measurement
         # 0.35/0.20 secerken urun 0.40/0.35 kosuyordu).
     thr ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
@@ -216,7 +216,7 @@ def main ():
         return out ,(np .array (LAT )if LAT else np .array ([9.0 ]))
 
     print ()
-    print (f"{'arm':<26}{'tespit':>9}{'yanal2':>9}{'ROBOT':>9}{'lateral med':>11}{'<=2mm':>8}")
+    print (f"{'arm':<26}{'detection':>9}{'yanal2':>9}{'ROBOT':>9}{'lateral med':>11}{'<=2mm':>8}")
     out ={}
     for mode ,lab in ((("wmean","rep",4 ),"URUN (parite + benzersiz oy)"),):
         o_ ,L =run (mode )
@@ -224,7 +224,7 @@ def main ():
         print (f"{lab :<26}{o_ ['det']:>9.4f}{o_ ['lat']:>9.4f}{o_ ['rob']:>9.4f}"
         f"{np .median (L ):>11.2f}{100 *(L <=2 ).mean ():>7.0f}%",flush =True )
     json .dump (out ,open ("results/j_position_mean.json","w"),indent =1 )
-    print ("\nKILL: lateral<=2mm ya da tespit gerilerse duser.")
+    print ("\nKILL: lateral<=2mm ya da detection gerilerse duser.")
     print ("receipt -> results/j_position_mean.json")
 
 

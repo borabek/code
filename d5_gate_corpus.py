@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """D5-3b: GATE EGITIM KORPUSU v3 -- old corpus + new turetme, SIZINTI FILTRELI.
 
-YENIDEN TURETME YOK: `d5_turet_yeni.py` each parcanin `X` (22 column) and `XR` (36 column)
-matrislerini already sakladi; `d5_birlestir.py` de X'i 58 -> 22'ye normalize etti (kayipsiz
+YENIDEN TURETME YOK: `d5_derive_new.py` each parcanin `X` (22 column) and `XR` (36 column)
+matrislerini already sakladi; `d5_merge.py` de X'i 58 -> 22'ye normalize etti (kayipsiz
 oldugu 984/984 kayitta measured). Burada only ETIKET uretilir and two corpus birlestirilir.
 
 ETIKET (`y`) `build_rich_parity.py` with BIREBIR AYNI kuralla uretilir:
@@ -49,9 +49,9 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
 ESKI ="results/zengin_parite_w2.npz"
 YENI =os .environ .get ("D5_YENI","results/_der_yeni.pkl")
-GEO_YENI ="results/_geo_yeni.json"
+GEO_YENI ="results/_geo_new.json"
 GEO_YASAK ="results/_geo_yasak.json"
-SINAV ="results/d5_4_sinav_kumesi.json"# D5-4 gorulmemis manufacturer sinavi -- EGITIME GIRMEZ
+SINAV ="results/d5_4_exam_set.json"# D5-4 unseen manufacturer sinavi -- EGITIME GIRMEZ
 # CIKTI da ORTAM DEGISKENI (2026-08-08): g10 with yeniden turetilen corpus AYRI a
 # dosyaya yazilmali. Sabit kalsaydi `zengin_parite_v3` -- i.e. DAGITILAN gate'in
 # egitildigi corpus -- uzerine yazilir and A/B kiyasi imkansizlasirdi.
@@ -112,9 +112,9 @@ def main ():
     # part kimligi yetmez, IKIZI de girmemeli ([[geometry-twin-leakage]]).
     SINAV_PID ,SINAV_MFG =set (),set ()
     # IKI SINAV KUMESI birden dislanir (2026-08-05): old d5_4 kumesi karsilastirilabilirlik
-    # for duruyor, YENI d6 kumesi whereas real gorulmemis-manufacturer sinavi. Biri atlanirsa that
-    # kumede olculen each number sisik becomes.
-    for _sf in (SINAV ,"results/d6_sinav_kumesi.json"):
+    # for duruyor, YENI d6 kumesi whereas real unseen-manufacturer sinavi. Biri atlanirsa that
+    # kumede measured_path each number sisik becomes.
+    for _sf in (SINAV ,"results/d6_exam_set.json"):
         if not os .path .exists (_sf ):
             continue 
         _sv =json .load (io .open (_sf ,encoding ="utf-8"))
@@ -129,11 +129,11 @@ def main ():
         # (belirti: korpusta SE 74 / UTL 36 / SUPU 24 candidate). Atama DEGIL, BIRLESIM.
         #
         # URETICI DUZEYI DISLAMA (2026-08-05'te BULUNAN KIRLILIK):
-        # Dislama only PARCA + IKIZ duzeyindeydi. Sinav kumesi "gorulmemis URETICI"
+        # Dislama only PARCA + IKIZ duzeyindeydi. Sinav kumesi "unseen URETICI"
         # sinavi as tanimlandigi halde, corpus buyudukce same ureticilerin BASKA
         # parcalari egitime giriyordu. Olculdu: `zengin_parite_v3` exam ureticilerinden
         # **1502 tekil part** iceriyordu (CWT 691, A-B 358, WIE 226, ...). Sinav pid'leri
-        # temizdi, but URETICI residual gorulmemis DEGILDI -- i.e. kumenin ADI yalan olmustu.
+        # temizdi, but URETICI residual unseen DEGILDI -- i.e. kumenin ADI yalan olmustu.
         # ([[locked-exam-kirliligi-yakalandi]] with same desen.)
         SINAV_MFG |=set (sv .get ("manufacturer")or {})
         print (f"SINAV (iki cluster): {len (SINAV_PID )} part training disi")
@@ -141,30 +141,30 @@ def main ():
     print (f"YENI turetme: {len (R )} part | yasak anahtar {len (YASAK )}")
 
     SINAV_ANAH ={r ["geo"]for r in R if r ["pid"]in SINAV_PID and r .get ("geo")}
-    atlanan =collections .Counter ()
+    skipped =collections .Counter ()
     n_yeni =0 
     for r in R :
         if r .get ("X")is None or r .get ("XR")is None :
-            atlanan ["aday_yok"]+=1 ;continue 
+            skipped ["aday_yok"]+=1 ;continue 
         if r ["X"].shape [1 ]!=22 or r ["XR"].shape [1 ]!=36 :
-            atlanan ["width"]+=1 ;continue 
+            skipped ["width"]+=1 ;continue 
             # GT GECERLILIK (2026-08-04): `eligible()` kapisi turetmeden SONRA eklendi, i.e.
             # `_der_yeni.pkl` still dejenere GT'li parcalari iceriyor (AL vakasi: direction (0,0,0),
             # tum CP same noktada). Onlarda HICBIR candidate eslesemez -> all of them y=0 with egitime
-            # girer and gate'e "gecerli agizlari REDDET" ogretir. Burada da kapatilir.
+            # girer and gate'e "valid agizlari REDDET" ogretir. Burada da kapatilir.
         Gq =np .asarray (r ["G"],float );Dq =np .asarray (r ["Gd"],float )
         if (len (Dq )and (np .linalg .norm (Dq ,axis =1 )<1e-6 ).all ())or (len (Gq )>1 and float (np .abs (Gq .max (0 )-Gq .min (0 )).max ())<1e-6 ):
-            atlanan ["gt_dejenere"]+=1 ;continue 
+            skipped ["gt_dejenere"]+=1 ;continue 
         if r ["pid"]in SINAV_PID :
-            atlanan ["sinav_kumesi"]+=1 ;continue 
+            skipped ["sinav_kumesi"]+=1 ;continue 
         if str (r ["mfg"])in SINAV_MFG :
-            atlanan ["sinav_ureticisi"]+=1 ;continue 
+            skipped ["sinav_ureticisi"]+=1 ;continue 
         anah =r .get ("geo")or GY .get (r ["pid"])
         if anah in SINAV_ANAH :
-            atlanan ["sinav_ikizi"]+=1 ;continue 
+            skipped ["sinav_ikizi"]+=1 ;continue 
         if anah in YASAK :
         # OLCUM ya da LOCKED parcasinin IKIZI -- egitime GIREMEZ
-            atlanan ["yasak_anahtar"]+=1 ;continue 
+            skipped ["yasak_anahtar"]+=1 ;continue 
         P =np .asarray (r ["P"],float )
         y =etiketle (P ,np .asarray (r ["G"],float ),np .asarray (r ["Gd"],float ),r ["diag"])
         X22 .append (r ["X"]);XR .append (r ["XR"]);Y .append (y )
@@ -173,7 +173,7 @@ def main ():
         VOT .append (np .asarray (r ["X"],float )[:,VOTES_SUTUN ])
         n_yeni +=1 
 
-    print (f"\nATLANAN: {dict (atlanan )}")
+    print (f"\nATLANAN: {dict (skipped )}")
     print (f"  -> yasak_anahtar = measurement/LOCKED IKIZI, egitime ALINMADI")
 
     X22 =np .vstack (X22 );XR =np .vstack (XR );Y =np .concatenate (Y )
@@ -206,13 +206,13 @@ def main ():
         tb =len (set (np .load (CIKTI_TABAN ,allow_pickle =True )["pids"].tolist ()))
     print (f"  {len (Y )} candidate / {part } part / {len (c )} manufacturer")
     print (f"  buyume: filtresiz w2 ({eski_parca }) -> x{part /max (eski_parca ,1 ):.2f}  |  "
-    f"TABAN ({tb }) -> x{part /max (tb ,1 ):.2f}   <- F2-12 icin GECERLI olan bu")
+    f"TABAN ({tb }) -> x{part /max (tb ,1 ):.2f}   <- F2-12 for GECERLI which this")
     print (f"  pozitif %{100 *Y .mean ():.1f} | X22 {X22 .shape } | XR {XR .shape }")
     print (f"  manufacturer: {dict (c .most_common (10 ))}")
     with io .open (mak ,"w",encoding ="utf-8")as f :
         json .dump ({"candidate":int (len (Y )),"part":int (part ),"manufacturer":len (c ),
         "eski_parca":eski_parca ,"yeni_parca_eklendi":n_yeni ,
-        "atlanan":dict (atlanan ),"pozitif_oran":float (Y .mean ()),
+        "skipped":dict (skipped ),"pozitif_oran":float (Y .mean ()),
         "uretici_dagilimi":dict (c )},f ,indent =1 ,ensure_ascii =False )
     print (f"  receipt -> {mak }")
 

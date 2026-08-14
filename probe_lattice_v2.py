@@ -4,13 +4,13 @@
 VII.0b'DEKI DEFECT. Kafesi ararken hedef fonksiyon as **GT kapsamasini**
 kullanmistim. Yani arama KAHIN by yonlendiriliyordu; uretimde boyle
 a sey yapilamaz. O yuzden NIT'in 0.323'u "arama zayif" not, more kotusu:
-kahin yardimiyla bile skorla filtrelenmis candidate bulutundan iyi lattice cikmiyor.
+oracle yardimiyla bile skorla filtrelenmis candidate bulutundan iyi lattice cikmiyor.
 
 BU SURUMDE UC SEY DEGISTI:
   1. ARAMA OLCUTU GT'SIZ: lattice, uzerine dusen ADAY count and izgara
      DOLULUGU with puanlanir. GT only DEGERLENDIRMEDE is used.
   2. TAM HAVUZ: candidates skora according to filtrelenmez. Kafes GEOMETRIK a
-     ozelliktir; NIT'te GT'nin only %5.3'u first-k inside oldugu for skor
+     ozelliktir; NIT'te GT'nin only %5.3'u first-k inside oldugu for score
      filtresi kafesi YOK EDIYORDU.
   3. ADIL TOLERANS + DOYGUNLUK: kahinle same tolerans, and 6 kafese up to
      (NIT'te kapsama 3'te still tirmaniyordu: 0.161/0.255/0.323).
@@ -89,9 +89,9 @@ def kafes_ara (P ,n_kafes =N_KAFES ,rng =None ):
     """
     rng =rng or np .random .default_rng (0 )
     kalan_aday =np .ones (len (P ),bool )
-    bulunan =[]
+    found =[]
     if len (P )<3 :
-        return bulunan 
+        return found 
     for _ in range (n_kafes ):
         idx =np .where (kalan_aday )[0 ]
         if len (idx )<3 :
@@ -127,11 +127,11 @@ def kafes_ara (P ,n_kafes =N_KAFES ,rng =None ):
                     en =((seed ,step_ ),score_ ,uret )
         if en [0 ]is None :
             break 
-        bulunan .append (en )
+        found .append (en )
         # this kafesin uzerine dusen ADAYLARI cikar
         kapsanan =_yakin (P ,en [2 ],TOL )
         kalan_aday =kalan_aday &~kapsanan 
-    return bulunan 
+    return found 
 
 
 _CY ={}
@@ -163,18 +163,18 @@ def main ():
             axis =0 )
         else :
             P =np .unique (np .round (np .asarray (d ["P"],float ),3 ),axis =0 )
-        bulunan =kafes_ara (P )
+        found =kafes_ara (P )
         a =ist [d ["mfg"]]
         a ["gt"].append (len (G ))
         a ["candidate"].append (len (P ))
         Gd =np .asarray (d ["Gd"],float )
-        kalan =np .ones (len (G ),bool )
+        remaining =np .ones (len (G ),bool )
         for i in range (N_KAFES ):
-            if i <len (bulunan ):
-                kalan =kalan &~_gt_kapsandi (G ,Gd ,bulunan [i ][2 ])
-            a [f"k{i +1 }"].append (int ((~kalan ).sum ()))
-        if bulunan :
-            a ["adim1"].append (float (np .linalg .norm (bulunan [0 ][0 ][1 ])))
+            if i <len (found ):
+                remaining =remaining &~_gt_kapsandi (G ,Gd ,found [i ][2 ])
+            a [f"k{i +1 }"].append (int ((~remaining ).sum ()))
+        if found :
+            a ["adim1"].append (float (np .linalg .norm (found [0 ][0 ][1 ])))
         n +=1 
         if n %40 ==0 :
             print (f"  {n } part ({time .time ()-t0 :.0f} s)",flush =True )
@@ -194,7 +194,7 @@ def main ():
             r [f"lattice{i }"]=v 
             sat +=f"{v :>7.3f}"
         kh =oracle_ .get (m_ ,0.0 )
-        r ["kahin"]=kh 
+        r ["oracle"]=kh 
         r ["acik"]=kh -r [f"lattice{N_KAFES }"]
         r ["adim1_ortanca"]=float (np .median (a ["adim1"]))if a ["adim1"]else 0.0 
         out [m_ ]=r 

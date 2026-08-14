@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-"""B1b: mesh normallerini OZETLE -- secenek sayisini dusur, sinyali koru.
+"""B1b: mesh normallerini OZETLE -- option sayisini dusur, sinyali koru.
 
 B1 BASARISIZ OLDU (+0.0023) and sebebi measured: candidate basina 2mm icindeki HER
 tepenin +/- normali AYRI secenekti; 58582 secenekte pozitif orani only
-%6.4 -- selector samanlikta igne ariyordu. Sinyal VAR (results/b2_yon_isaret.json:
+%6.4 -- selector samanlikta igne ariyordu. Sinyal VAR (results/b2_direction_sign.json:
 normaller YON_YOK'un %59.1'ini tasiyor), GURULTULU which is SECENEK KUMESIYDI.
 
 DUZELTME: ham normaller instead of SUMMARY yonler --
   agirlikli : p_pos agirlikli mean normal
   pca       : normallerin birinci ana bileseni (sign-hizali)
   enyuksek  : most high p_pos'lu single tepenin normali
-Her biri +/- with; mevcut yonle birlikte candidate basina most extra ~7 secenek.
+Her biri +/- with; mevcut yonle birlikte candidate basina most extra ~7 option.
 
 TABAN ARTIK ISARET DUZELTMELI arm (B2a, 0.2773 -> 0.3090); B1b onun USTUNE gelir.
 TEZE SADIK: konum and candidate count does not change, only direction.
@@ -24,7 +24,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -108,13 +108,13 @@ def ozet_yonler (p ,V ,NV ,ppos ):
     return out 
 
 
-def secenekler (p ,d ,V ,NV ,ppos ,gs ,n ):
+def options (p ,d ,V ,NV ,ppos ,gs ,n ):
     d =birim ([d ])[0 ]
     ad =[(d ,1.0 ,0.0 ,0.0 )]
     for v in ozet_yonler (p ,V ,NV ,ppos ):
         for s in (1.0 ,-1.0 ):
             ad .append ((s *v ,0.0 ,float (s ),1.0 ))
-    sec ,oz =[],[]
+    sec ,feat =[],[]
     for v ,mev ,isr ,ozet in ad :
         v =birim ([v ])[0 ]
         if any (np .degrees (np .arccos (np .clip (abs (float (v @w )),-1 ,1 )))<AYIRT 
@@ -122,15 +122,15 @@ def secenekler (p ,d ,V ,NV ,ppos ,gs ,n ):
             continue 
         sec .append ((v ,mev ,isr ,ozet ))
     for v ,mev ,isr ,ozet in sec :
-        oz .append ([mev ,
+        feat .append ([mev ,
         float (np .degrees (np .arccos (np .clip (float (v @d ),-1 ,1 )))),
         isr ,ozet ,float (gs ),float (n ),
         float (np .max (np .abs (v ))),float (len (sec ))])
-    return [x [0 ]for x in sec ],np .asarray (oz ,float )
+    return [x [0 ]for x in sec ],np .asarray (feat ,float )
 
 
 def main ():
-    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     S =K .step_map ()
     d6 ={str (p ):r for p ,r in 
     d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
@@ -167,7 +167,7 @@ def main ():
                     break 
             if j <0 :
                 continue 
-            V_ ,F_ =secenekler (P [a ],D [a ],d ["V"],d ["NV"],d ["ppos"],
+            V_ ,F_ =options (P [a ],D [a ],d ["V"],d ["NV"],d ["ppos"],
             sk [a ],len (P ))
             if len (V_ )<2 :
                 continue 
@@ -178,8 +178,8 @@ def main ():
                 Y .append (int (ac <=ACI ))
     X =np .asarray (X ,float )
     Y =np .asarray (Y ,int )
-    print (f"OZET secenek {X .shape } | pozitif {Y .mean ():.4f}   "
-    f"(B1 ham: 58582 secenek, pozitif %6.4)",flush =True )
+    print (f"OZET option {X .shape } | pozitif {Y .mean ():.4f}   "
+    f"(B1 ham: 58582 option, pozitif %6.4)",flush =True )
     yc =HistGradientBoostingClassifier (max_iter =400 ,learning_rate =0.08 ,
     max_leaf_nodes =31 ,
     random_state =0 ).fit (X ,Y )
@@ -201,7 +201,7 @@ def main ():
             if kul and len (P ):
                 D =D .copy ()
                 for a in range (len (P )):
-                    V_ ,F_ =secenekler (P [a ],D [a ],d ["V"],d ["NV"],
+                    V_ ,F_ =options (P [a ],D [a ],d ["V"],d ["NV"],
                     d ["ppos"],sk [a ],len (P ))
                     if len (V_ )<2 :
                         continue 
@@ -227,20 +227,20 @@ def main ():
         for m ,v in rob .items ()}
         mi =float (2 *sum (v [0 ]for v in rob .values ())/
         max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-        out [ad ]={"robot":mi ,"tespit":K .mikro (tes ),
+        out [ad ]={"robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
-        print (f"{ad :<26} robot {mi :.4f} | tespit {out [ad ]['tespit']:.4f} | "
+        print (f"{ad :<26} robot {mi :.4f} | detection {out [ad ]['detection']:.4f} | "
         f"makro {out [ad ]['makro']:.4f} | en kotu {out [ad ]['en_kotu']:.4f}",
         flush =True )
     a =out ["TABAN (sign duzeltmeli)"]["robot"]
     b =out ["+OZET NORMAL"]["robot"]
     print (f"\nFARK {b -a :+.4f} | KAPI >= +0.02")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"fark":b -a ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"diff":b -a ,
     "not":"Mesh normalleri OZETLENDI (agirlikli/pca/en-yuksek). "
     "Taban ISARET DUZELTMELI arm. D7 brand-disi, TAM ZINCIR."},
-    open ("results/b1b_ozet_normal.json","w"),indent =1 )
-    print ("receipt -> results/b1b_ozet_normal.json")
+    open ("results/b1b_summary_normal.json","w"),indent =1 )
+    print ("receipt -> results/b1b_summary_normal.json")
 
 
 if __name__ =="__main__":

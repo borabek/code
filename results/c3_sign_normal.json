@@ -1,0 +1,79 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "HAM tanimlayici": {
+   "robot": 0.2920843415139993,
+   "detection": 0.4974075354303491,
+   "makro": 0.2980876258614737,
+   "en_kotu": 0.0,
+   "TP": 845,
+   "FP": 1854,
+   "brand": {
+    "CCD": 0.5197368421052632,
+    "KLM": 0.17624521072796934,
+    "A-B": 0.45530393325387364,
+    "EFX": 0.178743961352657,
+    "WIE": 0.5443583118001722,
+    "CWT": 0.044642857142857144,
+    "DIN": 0.46153846153846156,
+    "WEG": 0.06569343065693431,
+    "CEM": 0.20600858369098712,
+    "DEG": 0.44155844155844154,
+    "ELMEX": 0.48322147651006714,
+    "C3": 0.0
+   },
+   "threshold": 0.03,
+   "sutun": 134
+  },
+  "ISARET-NORMAL tanimlayici": {
+   "robot": 0.3095336359884441,
+   "detection": 0.46677672307057366,
+   "makro": 0.3150220280145934,
+   "en_kotu": 0.0,
+   "TP": 750,
+   "FP": 1009,
+   "brand": {
+    "CCD": 0.5843621399176955,
+    "KLM": 0.14349775784753363,
+    "A-B": 0.48409405255878285,
+    "EFX": 0.1910828025477707,
+    "WIE": 0.5923000987166831,
+    "CWT": 0.02932551319648094,
+    "DIN": 0.4659498207885305,
+    "WEG": 0.05982905982905983,
+    "CEM": 0.19653179190751446,
+    "DEG": 0.49230769230769234,
+    "ELMEX": 0.5409836065573771,
+    "C3": 0.0
+   },
+   "threshold": 0.05,
+   "sutun": 136
+  }
+ },
+ "diff": 0.017449294474444765,
+ "not": "Tek variable: tanimlayici sozlesmesi (ham vs isarete per normallesmis + ters bayragi). Esik D6'da. D7 brand-disi, TAM ZINCIR, MIKRO."
+}

@@ -1,0 +1,22 @@
+{
+ "sonuc": {
+  "g10": {
+   "kahin_F1": 0.44626841927484173,
+   "dusuk_CP": 0.3271600396990993,
+   "cok_CP": 0.49837833533922904,
+   "n_parca": 468,
+   "error": 0
+  },
+  "b9": {
+   "kahin_F1": 0.4347538379765476,
+   "dusuk_CP": 0.33409953081589766,
+   "cok_CP": 0.4787900973593318,
+   "n_parca": 468,
+   "error": 0
+  }
+ },
+ "diff": -0.011514581298294135,
+ "gecti": false,
+ "criterion": "candidate kahini, bire-a Macar, detection toleransi, aci serbest",
+ "not": "gate/p3c YENIDEN FIT EDILMEDI; uctan uca F1 this kapiyla olculmez"
+}

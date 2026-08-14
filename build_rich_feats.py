@@ -4,7 +4,7 @@ RATIONALE (this oturumda measured): 13 el-yapimi feature TEMSIL DARBOGAZI. Sadec
 eklemek WEI havuzunda top-N F1 +0.041 (part-out) / +0.031 (AILE-out, genellenir) getirdi.
 Bu script same urun yolunu (4-model union + avg probs) runs but each candidate for ZENGIN feature dumper:
   A konum (mesh-bbox normalize, 3) + bbox-face uzakliklari (6)
-  B very-radius sinif-olasilik profili (r=3,6,10,15 x 5 sinif = 20) + yogunluk (4)
+  B very-radius sinif-probability profili (r=3,6,10,15 x 5 sinif = 20) + yogunluk (4)
   C TAPER profili (depth 0..8mm'de mouth yaricapi, 5) -- mesh-tabanli huni testi (B-rep koni olmustu)
   D normal-degisim / egrilik proxy (3 radius)
 Cikti: results/rich_feats.npz (X13, XR, y, groups, mfg, ngt, pos) -> CPU analizinde AUC/F1 kazanci olculur."""
@@ -63,7 +63,7 @@ def main ():
     models =[load_any (c ,dev =dev )[:2 ]for c in CK ]
     oos =set (open ("pxc_out_of_scope.txt").read ().split ())if os .path .exists ("pxc_out_of_scope.txt")else set ()
     held =set (open ("_hw_r3.txt").read ().split ())
-    # FAZ2/P0: TEMIZ set = leakage-muhafizi OPEN (segmentasyon egitiminde gorulmemis parts).
+    # FAZ2/P0: TEMIZ set = leakage-muhafizi OPEN (segmentasyon egitiminde unseen parts).
     # Once temizi al, after BA_ALLOW_SEEN with tamamini al and FARKI 'seen' as isaretle ->
     # single kosuda hem temiz hem canonical-kiyaslanabilir number uretilebilir.
     def _filt (lst ):return [(m ,p ,jf ,s )for m ,p ,jf ,s in lst 
@@ -80,7 +80,7 @@ def main ():
     f" | TEMIZ (sizintisiz) {len (clean )} | seen-flagli {len (parts )-len (clean )}",flush =True )
     X13 ,XR ,YY ,GG ,MM ,POS ,NGT =[],[],[],[],[],[],{}
     PIDS ,SEEN =[],[]
-    # DEVAM-EDEBILIRLIK: onceki kismi kayittan yukle, islenmisleri atla (hang sonrasi is kaybi olmasin)
+    # DEVAM-EDEBILIRLIK: onceki kismi kayittan yukle, islenmisleri skip (hang sonrasi is kaybi olmasin)
     _done =set ()
     if os .path .exists (OUT_NPZ ):
         try :
@@ -90,7 +90,7 @@ def main ():
             GG =list (_p ["groups"]);MM =list (_p ["mfg"])
             PIDS =[str (x )for x in _p ["part_ids"]];SEEN =list (_p ["seen"])
             NGT ={int (g ):int (n )for g ,n in zip (_p ["grp_ids"],_p ["ngt"])}
-            print (f"  [devam] {len (_done )} part zaten islenmis, atlanacak",flush =True )
+            print (f"  [devam] {len (_done )} part already islenmis, atlanacak",flush =True )
         except Exception :
             _done =set ()
     _skip =set (open ("_skip_parts.txt").read ().split ())if os .path .exists ("_skip_parts.txt")else set ()

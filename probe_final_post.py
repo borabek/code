@@ -3,7 +3,7 @@
 
 WHY BURASI. Sunum sayilarindaki EN BUYUK single loss here:
 
-    tespit F1            0.7878     (deligi buldu)
+    detection F1            0.7878     (deligi buldu)
     robot, axis olcutu  0.5764     -> -0.2114  (axis 10 dereceden sapmis)
     robot, ISARETLI      0.4839     -> -0.0925  (180 derece TERS)
 
@@ -38,7 +38,7 @@ import canonical_d7 as K # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
 DOKUM =os .environ .get ("SI_DOKUM","results/_tahmin_dokumu.json")
-YOL =os .environ .get ("SI_YOL","saha")
+YOL =os .environ .get ("SI_YOL","field")
 
 
 def _birim (v ):
@@ -130,9 +130,9 @@ halka_n =None ):
 
 
 def main ():
-    d =[r for r in json .load (open (DOKUM ))if r ["yol"]==YOL ]
+    d =[r for r in json .load (open (DOKUM ))if r ["path"]==YOL ]
     if not d :
-        sys .exit (f"{DOKUM } icinde '{YOL }' yok")
+        sys .exit (f"{DOKUM } icinde '{YOL }' none")
         # YENI KOLLAR (2026-08-13): dokum residual GERCEK body bilgisi tasiyor.
         # `disari_mesh`  : mesh MERKEZINDEN disari (prediction ortalamasi not)
         # `disari_normal`: YEREL YUZEY NORMALIYLE same yone (most correct vekil)
@@ -171,14 +171,14 @@ def main ():
         return (2 *c [on +"_tp"]/
         max (2 *c [on +"_tp"]+c [on +"_fp"]+c [on +"_fn"],1 ))
 
-    print (f"{len (d )} part | yol={YOL }\n")
-    print (f"{'arm':<14}{'tespit':>9}{'unsigned':>11}{'ISARETLI':>10}"
-    f"{'fark':>9}")
+    print (f"{len (d )} part | path={YOL }\n")
+    print (f"{'arm':<14}{'detection':>9}{'unsigned':>11}{'ISARETLI':>10}"
+    f"{'diff':>9}")
     tab =f1 (agg ["baseline"],"signed")
     out ={}
     for arm in KOLLAR :
         c =agg [arm ]
-        r ={"tespit":f1 (c ,"tespit"),"unsigned":f1 (c ,"unsigned"),
+        r ={"detection":f1 (c ,"detection"),"unsigned":f1 (c ,"unsigned"),
         "signed":f1 (c ,"signed")}
         out [arm ]=r 
         et =""
@@ -186,9 +186,9 @@ def main ():
             et ="  (UST SINIR)"
         elif r ["signed"]>tab +0.01 :
             et ="  <- KAPI GECTI"
-        print (f"{arm :<14}{r ['tespit']:>9.4f}{r ['unsigned']:>11.4f}"
+        print (f"{arm :<14}{r ['detection']:>9.4f}{r ['unsigned']:>11.4f}"
         f"{r ['signed']:>10.4f}{r ['signed']-tab :>+9.4f}{et }")
-    json .dump ({"yol":YOL ,"n_parca":len (d ),"sonuc":out ,
+    json .dump ({"path":YOL ,"n_parca":len (d ),"sonuc":out ,
     "not":"Son-islem kollari, cevrimdisi. gt_isaret UST "
     "SINIRDIR (dagitilamaz). D7'ye BAKILMADI."},
     open (f"results/son_islem_{YOL }.json","w"),indent =1 )

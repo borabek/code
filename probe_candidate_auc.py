@@ -6,11 +6,11 @@ Ama ranking TEPELERDE not ADAYLAR on oluyor. Bugun full this farktan
 a times yanildim (mesh normali tepelerde 0.800, secili adaylarda 0.334).
 Bu yuzden same sey candidate duzeyinde AYRICA olculur.
 
-OLCULEN (brand disarida, gorulmemis brand kosulu):
+OLCULEN (brand disarida, unseen brand kosulu):
   auc_secici : egitilmis secicinin candidate duzeyinde AUC'si
   sira_ilk   : first correct adayin median order
   sira_son   : SON correct adayin median order   <- dense parcada belirleyici
-  n_aday     : part basina median secenek count
+  n_aday     : part basina median option count
   ustk_oran  : first-k (k = real CP count) inside correct orani
 
 VE TERSINDEN: ustk_oran'i 0.75'e cikarmak for gereken AUC.
@@ -30,7 +30,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -137,7 +137,7 @@ def main ():
     print ("\nOKUMA: 'gereken_auc' = ilk-k'nin dogrularla dolmasi for gereken")
     print ("       kaba AUC (buyukluk mertebesi). auc_secici with arasindaki")
     print ("       difference, 0.75'e giden mesafenin TEK sayilik ifadesidir.")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"brand":out ,
     "not":"ADAY duzeyinde ayirt edicilik (mesh tepesi DEGIL). "
     "Gorulmemis brand katlari. D7'ye BAKILMADI."},
     open (f"results/aday_auc_{KUME }.json","w"),indent =1 )

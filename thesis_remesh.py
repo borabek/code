@@ -20,11 +20,11 @@ def _cache_key (V ,F ,target ,iterations ):
     return hh .hexdigest ()[:24 ]
 
 
-ADAPTIVE_DENSITY =float (os .environ .get ("CP_ADAPTIVE_DENSITY","0"))# 0 = closed (sabit hedef)
+ADAPTIVE_DENSITY =float (os .environ .get ("CP_ADAPTIVE_DENSITY","0"))# 0 = closed (fixed hedef)
 
 
 def adaptive_target (V ,F ,density =0.790 ,lo =4000 ,hi =20000 ):
-    """Tezin izotropik kurali UNIFORM YOGUNLUK der; sabit vertex SAYISI parts different
+    """Tezin izotropik kurali UNIFORM YOGUNLUK der; fixed vertex SAYISI parts different
     boyuttayken bunu ihlal eder (measured: very-CP parcalari %51 more large but same 6000 vertex ->
     yogunluk 0.531 vs 0.790 /mm2). Hedef alanla olceklenir."""
     import trimesh as _tm 

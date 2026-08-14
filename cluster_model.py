@@ -2,9 +2,9 @@
 """S4: ADAY-KUMESI SKORLAYICI -- secenegi parcanin KENDI POPULASYONUNA according to puanla.
 
 WHY (S7 teshisi, 2026-08-12). Secici verimliligi two kutuplu: UPUN %65.5,
-NIT %0.5. Sebep POZITIF-NEGATIF SKOR AYRIMI: NIT'te correct secenek yanlistan
+NIT %0.5. Sebep POZITIF-NEGATIF SKOR AYRIMI: NIT'te correct option yanlistan
 only 0.05 more high score aliyor. Havuz cevabi tasiyor (ceiling 0.9147),
-skor gostermiyor.
+score gostermiyor.
 
 Bugunku model NOKTASAL: each secenegi TEK BASINA puanliyor, "same parcadaki
 digerlerine according to nasil" sorusunu goremiyor. Karar kurali whereas GORELI
@@ -13,13 +13,13 @@ digerlerine according to nasil" sorusunu goremiyor. Karar kurali whereas GORELI
 with COKTU: skoru SONRADAN normallestirmek islemiyor, model KARARI VERIRKEN
 baglami gormeli.
 
-WHY DEEPSETS, NOTE (ATTENTION) DEGIL. Parca basina 7800'e up to secenek
+WHY DEEPSETS, NOTE (ATTENTION) DEGIL. Parca basina 7800'e up to option
 present; full dikkat O(n^2) = 60M double and 4 GB VRAM'e sigmaz. DeepSets O(n) and
-ihtiyacimiz which is seyi full as gives: each secenek, parcanin ORTALAMA and
-EN YUKSEK temsiliyle birlikte puanlanir. "Bu secenek, this parcadaki digerlerine
+ihtiyacimiz which is seyi full as gives: each option, parcanin ORTALAMA and
+EN YUKSEK temsiliyle birlikte puanlanir. "Bu option, this parcadaki digerlerine
 according to iyi mi?" sorusu budur.
 
-KAYIP: BCE + LISTWISE. Yalniz BCE mutlak kalibrasyon ogretir but siralamayi
+KAYIP: BCE + LISTWISE. Yalniz BCE mutlak calibration ogretir but siralamayi
 zorlamaz; only listwise siralamayi ogretir but threshold kurali for gereken
 mutlak duzeyi breaks. Ikisi birlikte (lambda with) is used.
 """
@@ -30,7 +30,7 @@ import torch .nn .functional as F
 
 
 class KumeSkorlayici (nn .Module ):
-    """DeepSets: phi(secenek) -> part ozeti -> rho(secenek, ozet) -> logit."""
+    """DeepSets: phi(option) -> part summary -> rho(option, ozet) -> logit."""
 
     def __init__ (self ,n_giris ,d =128 ,p_drop =0.1 ):
         super ().__init__ ()
@@ -66,12 +66,12 @@ def loss (logit ,y ,lam =0.5 ,bce_maske =None ):
 
     WHY IT EXISTS (2026-08-12, S4 v1 olcumunden after). HGB kolu pozitif basina 6
     negatifle DENGELENMIS a orneklemde egitiliyor; DeepSets whereas parcanin
-    tamamini goruyordu (~3000 secenek, ~10 pozitif = 300:1). BCE mean
+    tamamini goruyordu (~3000 option, ~10 pozitif = 300:1). BCE mean
     oldugu for negatifler kaybi boguyor and model each seye ~0 demeyi
     ogreniyor. Iki arm EGITIM DENGESI bakimindan equal degildi -- haksiz kiyas.
 
     KRITIK AYRIM: maske only KAYBI daraltir. Ileri gecis (and therefore
-    part ozeti/baglam) HER ZAMAN TUM part ten is computed; aksi halde
+    part summary/baglam) HER ZAMAN TUM part ten is computed; aksi halde
     modelin varlik sebebi which is baglam absent olurdu. LISTWISE de tum part
     ten kalir -- ranking however full cluster ten anlamlidir.
     """
@@ -134,7 +134,7 @@ cihaz =None ,seed =0 ,ilerle =None ,neg_kat =0 ):
 
 @torch .no_grad ()
 def pred_ (m ,X ,cihaz =None ):
-    """Tek parcanin secenek olasiliklari."""
+    """Tek parcanin option olasiliklari."""
     cihaz =cihaz or next (m .parameters ()).device 
     m .eval ()
     Xt =torch .as_tensor (np .asarray (X ,np .float32 ),device =cihaz )

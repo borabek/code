@@ -1,13 +1,13 @@
 # CP F1 → 0.85 — FAZ 2 TO-DO (kullanıcı listesi, 2026-07-28)
-> Faz A bittikten SONRA otonom yürütülecek. Bu liste, benim ROAD_TO_085_FBI planımın üstüne gelen
-> metodolojik sıkılaştırmadır ve 3 noktada onu DÜZELTİR: (1) aile tanımı STEP PRODUCT'tan (benimki
-> bbox-proxy idi), (2) a kez açılan KİLİTLİ holdout (this gece aynı veride çok karar verildi =
+> Faz A bittikten SONRA otonom yürütülecek. Bu list, benim ROAD_TO_085_FBI planımın üstüne gelen
+> metodolojik sıkılaştırmadır ve 3 noktada onu DÜZELTİR: (1) aile tanımı STEP PRODUCT'defn (benimki
+> bbox-proxy idi), (2) a kez açılan KİLİTLİ holdout (this night aynı veride çok karar verildi =
 > seçim-aşırı-uyumu riski), (3) öğrenilmiş EMBEDDING'ler (benim feature'larım el-yapımıydı).
 
 ## P0 — Ölçümü Kilitle
 - [ ] `P` ve `direction` aynı koordinat frame'inde olacak şekilde candidate verisini doğrula.
 - [ ] Ürün ailelerini STEP `PRODUCT` bilgisinden belirle.
-- [ ] Geometry-hash tekrarlarını tespit et.
+- [ ] Geometry-hash tekrarlarını detection et.
 - [ ] Part-out, geometry-out ve family-out splitlerini sabitle.
 - [ ] Son değerlendirme için dokunulmayacak aile holdout'u ayır.
 - [ ] Baseline'ları yeniden doğrula: ALL `0.750`, metadata `0.775`, WEI `0.696`, PXC-tipik `0.823`.
@@ -20,7 +20,7 @@
 - [ ] Insert-channel boyunca sınıf olasılığı profili çıkar.
 - [ ] Global parça embedding'ini candidate özelliklerine ekle.
 - [ ] Linear probe, RF ve küçük MLP'yi aynı OOF splitlerinde karşılaştır.
-- [ ] GO: ALL en az `+0.015`, WEI en az `+0.020`, PXC kaybı en fazla `0.005`.
+- [ ] GO: ALL en az `+0.015`, WEI en az `+0.020`, PXC kaybı en excess `0.005`.
 - [ ] GO başarısızsa embedding kolunu kapat.
 
 ## P2 — Part-Level Set/Graph Seçici
@@ -28,7 +28,7 @@
 - [ ] Göreli konum, yön açısı, aynı yüz, aynı axis, pitch ve sıra ilişkilerini edge özelliği yap.
 - [ ] Eksen/yüz özelliklerini yalnız küçük yardımcı sinyal as kullan.
 - [ ] Binary sınıflandırma yerine part-içi listwise/top-N ranking loss dene.
-- [ ] CP-count bilinen ve bilinmeyen modları ayrı eğit ve ölç.
+- [ ] CP-count known ve unknown modları ayrı eğit ve ölç.
 - [ ] Part-out ve family-out sonuçlarını ayrı raporla.
 - [ ] GO: P1 sonucunun üstüne family-out en az `+0.010`.
 - [ ] Üç seed'de kararlı değilse set/graph kolunu kapat.
@@ -57,7 +57,7 @@
 
 ## P6 — İnsan Adımı, En Son
 - [ ] Kalan FP'lerin aile-açıklık tipi yoğunlaşmasını ölç.
-- [ ] FP'lerin en az `%60`ı en fazla 40 tipte toplanmıyorsa adjudication yapma.
+- [ ] FP'lerin en az `%60`ı en excess 40 tipte toplanmıyorsa adjudication yapma.
 - [ ] 50–100 hedefli `wire / tool / unsure` sorusu hazırla.
 - [ ] Eski "gerçek açıklık mı?" sorusunu kullanma.
 - [ ] İnsan etiketli ailelerle final test ailelerini ayır.
@@ -76,6 +76,6 @@
 ### Faz A'dan devralınan durum (this listeye girdi)
 - Ürün: base 0.750 → **zengin gate 0.789 (parça-out) / 0.769 (aile-out, bbox-proxy aile)**; WEI aile-out 0.717.
 - Baseline reprodüksiyonu: ALL 0.7535 ✓, metadata top-N 0.7757 ✓ (P0'ın doğrulama maddesi kısmen hazır).
-- Öldürülenler: axis-kümeleme, skor-havuzlama, huni/taper (B-rep+mesh), bağlam feature'ları, "%60 FP öldürülebilir" (artefakt).
+- Öldürülenler: axis-kümeleme, score-havuzlama, huni/taper (B-rep+mesh), bağlam feature'ları, "%60 FP öldürülebilir" (artefakt).
 - P6 ön-koşulu ÖLÇÜLDÜ: FP kütlesinin %86'sı 40 ailede, aile-içi std 0.001 (but bbox-proxy aile with — P0'da PRODUCT-ailesiyle YENİLENECEK).
 - P3 girdisi hazırlanıyor: `build_aggr_rich.py WEI` (agresif pool + zengin feature) koşuyor.

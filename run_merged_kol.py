@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""BIRLESIK KOL: gecen two kaldiraci BIRLIKTE kos and uctan uca olc
+"""BIRLESIK KOL: passing two kaldiraci BIRLIKTE kos and uctan uca olc
 
 Bugun 19 arm measured, ikisi whereas yaradi:
   kanonik blogu           +0.0151  (parcayi own PCA cercevesine oturtur)
@@ -14,7 +14,7 @@ DORT KOL:
   spread          : baseline + coken parcada lattice uretimi
   birlesik         : ikisi birden
 
-REJIM: spread only "coken" parcada devreye girer. Olcut, parcanin skor
+REJIM: spread only "coken" parcada devreye girer. Olcut, parcanin score
 ayrimi (S7'nin poz-neg olcusunun urun surumu): ayrim dusukse model that parcada
 sirala(ya)miyor demektir.
 
@@ -29,7 +29,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -90,18 +90,18 @@ def yayilim_sec (d ,s ,k_hedef ):
     oy =(np .degrees (np .arccos (cos ))<=K .ACI ).sum (1 )
     kipsel =Y0 [int (np .argmax (oy ))]
     d_ua =np .linalg .norm (uret [:,None ,:]-P [None ,:,:],axis =-1 )
-    skor =np .full (len (uret ),-1.0 )
+    score =np .full (len (uret ),-1.0 )
     for u in range (len (uret )):
         ad =np .where (d_ua [u ]<=YAKIN_R )[0 ]
         if not len (ad ):
             continue 
         m_ =np .isin (idx ,ad )
         if m_ .any ():
-            skor [u ]=s [m_ ].max ()
-    g =skor >=0 
+            score [u ]=s [m_ ].max ()
+    g =score >=0 
     if not g .any ():
         return np .zeros ((0 ,3 )),np .zeros ((0 ,3 ))
-    U ,S_ =uret [g ],skor [g ]
+    U ,S_ =uret [g ],score [g ]
     sp =[]
     for j in np .argsort (-S_ ):
         if len (sp )>=k_hedef :
@@ -130,7 +130,7 @@ def main ():
     print (f"{len (data_ )} part | katlar {katlar } | ayrim esigi {AYRIM_ESIK }",
     flush =True )
 
-    skor ={"baseline":[None ]*len (data_ ),"kanonik":[None ]*len (data_ )}
+    score ={"baseline":[None ]*len (data_ ),"kanonik":[None ]*len (data_ )}
     for b in katlar :
         ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
         dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
@@ -155,13 +155,13 @@ def main ():
             l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
             del M 
             for i in dis :
-                skor [ad ][i ]=m .predict_proba (mat (i ))[:,1 ]
+                score [ad ][i ]=m .predict_proba (mat (i ))[:,1 ]
         print (f"  {b } bitti ({time .time ()-t0 :.0f} s)",flush =True )
 
     KOLLAR =("baseline","kanonik","yayilim","birlesik")
     agg =collections .defaultdict (lambda :collections .Counter ())
     for d in data_ :
-        if skor ["baseline"][data_ .index (d )]is None :
+        if score ["baseline"][data_ .index (d )]is None :
             continue 
         i =data_ .index (d )
         G =np .asarray (d ["G"],float )
@@ -170,7 +170,7 @@ def main ():
         a =agg [d ["mfg"]]
         a ["gt"]+=len (G )
         for arm in KOLLAR :
-            s =skor ["kanonik"if arm in ("kanonik","birlesik")
+            s =score ["kanonik"if arm in ("kanonik","birlesik")
             else "baseline"][i ]
             ayrim =float (np .percentile (s ,99 )-np .median (s ))
             kafesli =arm in ("yayilim","birlesik")and ayrim <AYRIM_ESIK 
@@ -204,11 +204,11 @@ def main ():
     "".join (f"{last_ [k ]:>11.4f}"for k in KOLLAR ))
     print ("\n=== TABANA GORE ===")
     for arm in KOLLAR [1 :]:
-        fark =last_ [arm ]-last_ ["baseline"]
-        print (f"  {arm :<12}{last_ [arm ]:.4f}   {fark :+.4f}"
-        +("  <- KAZANC"if fark >0 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,
-    "ayrim_esik":AYRIM_ESIK ,"toplam":last_ ,"brand":out ,
+        diff =last_ [arm ]-last_ ["baseline"]
+        print (f"  {arm :<12}{last_ [arm ]:.4f}   {diff :+.4f}"
+        +("  <- KAZANC"if diff >0 else ""))
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,
+    "ayrim_esik":AYRIM_ESIK ,"total":last_ ,"brand":out ,
     "not":"Gecen iki kaldirac BIRLIKTE: kanonik blogu + regime "
     "kapili lattice yayilimi. D7'ye BAKILMADI."},
     open (f"results/birlesik_kol_{KUME }.json","w"),indent =1 )

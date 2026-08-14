@@ -1,0 +1,25 @@
+{
+ "on": "d6",
+ "n_ortak": 359,
+ "A": "results/_p6_oz_tam3",
+ "B": "results/_p6_oz_tam4",
+ "sonuc": {
+  "results/_p6_oz_tam3": {
+   "gt": 2066,
+   "konum_recall": 0.898838334946757,
+   "yonlu_recall": 0.7270087124878993,
+   "f1_tavani": 0.8419282511210762,
+   "secenek_parca": 3216.50139275766,
+   "aday_parca": 282.966573816156
+  },
+  "results/_p6_oz_tam4": {
+   "gt": 2066,
+   "konum_recall": 0.898838334946757,
+   "yonlu_recall": 0.89351403678606,
+   "f1_tavani": 0.943762781186094,
+   "secenek_parca": 4857.16713091922,
+   "aday_parca": 278.94707520891365
+  }
+ },
+ "not": "ESLI kiyas: only IKI korpusta da found parts. Yarim korpusu tam korpusla kiyaslamak alt cluster yanliligi uretir; this measurement onu kaldirir. D7'ye BAKILMADI."
+}

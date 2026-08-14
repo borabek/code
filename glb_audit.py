@@ -51,7 +51,7 @@ def audit_one (glb_path ):
     v =[]# ihlaller
     rp =receipt_path (glb_path )
     if not os .path .exists (rp ):
-        return False ,[f"DENETLENEMEDI: receipt yok ({os .path .basename (rp )})"],{}
+        return False ,[f"DENETLENEMEDI: receipt none ({os .path .basename (rp )})"],{}
     rec =json .load (open (rp ,encoding ="utf-8"))
 
     scene =trimesh .load (glb_path ,process =False )
@@ -80,7 +80,7 @@ def audit_one (glb_path ):
         # line BULUNMAMALIDIR -- denetci bunu gevsetmez, TERSINE cevirir (fazlasi da ihlaldir).
     mode =rec .get ("mode","compare")
     if mode not in MODES :
-        return False ,[f"DENETLENEMEDI: makbuzda bilinmeyen mod {mode !r }"],{}
+        return False ,[f"DENETLENEMEDI: makbuzda unknown mod {mode !r }"],{}
 
         # ---- M1/M2: isaretci sayilari ----
         # Okli isaretci = kure + body + koni (CPM bilesen). Yonu belirlenemeyen isaretci OK
@@ -122,7 +122,7 @@ def audit_one (glb_path ):
         tip =np .asarray (m ["tip"],float );base =np .asarray (m ["base"],float )
         d =np .asarray (m ["dir"],float )
         # M9: isaretci KENDI CP'sinin next to durmali. 2026-07-29'da oklar butun blogu delip
-        # karsi yuzeye firladi (306 isaretcinin 148'i, max 88.9mm) and denetim bunu GORMEDI --
+        # karsi yuzeye firladi (306 isaretcinin 148'i, max 88.9mm) and audit bunu GORMEDI --
         # because sayim, renk and direction dogruydu, only YER yanlisti. Artik olculuyor.
         if "cp"in m :
             if float (np .linalg .norm (base -np .asarray (m ["cp"],float )))>TOL_CP_MM :
@@ -142,8 +142,8 @@ def audit_one (glb_path ):
         if len (h_fwd )and float (h_fwd [0 ])<float (m ["len"]):
             n_baddir +=1 
     if n_in :v .append (f"M3: {n_in }/{len (rec ['markers'])} igne ucu GOVDE ICINDE")
-    if n_badbase :v .append (f"M4: {n_badbase } isaretcinin tabani CP noktasinda degil (>{TOL_BASE_MM }mm)")
-    if n_baddir :v .append (f"M5: {n_baddir } igne ucundan ILERIDE hala malzeme var (direction disari degil)")
+    if n_badbase :v .append (f"M4: {n_badbase } isaretcinin tabani CP noktasinda not (>{TOL_BASE_MM }mm)")
+    if n_baddir :v .append (f"M5: {n_baddir } igne ucundan ILERIDE hala malzeme present (direction disari not)")
     if n_far :v .append (f"M9: {n_far }/{len (rec ['markers'])} isaretci KENDI CP'sinden {TOL_CP_MM }mm den uzakta (ok parcadan kopuk)")
 
     # ---- M8: file adi = receipt (compare'de F1, robot_only'de CP count) ----
@@ -152,16 +152,16 @@ def audit_one (glb_path ):
         try :
             n_name =int (base_name .rsplit ("_CP",1 )[1 ].rsplit (".glb",1 )[0 ])
             if n_name !=rec ["n_pred"]:
-                v .append (f"M8: dosya adi CP{n_name } vs receipt {rec ['n_pred']}")
+                v .append (f"M8: file adi CP{n_name } vs receipt {rec ['n_pred']}")
         except Exception :
-            v .append (f"M8: dosya adindan CP sayisi okunamadi ({base_name })")
+            v .append (f"M8: file adindan CP sayisi okunamadi ({base_name })")
     else :
         try :
             f1_name =float (base_name .rsplit ("_F1_",1 )[1 ].rsplit (".glb",1 )[0 ])
             if abs (f1_name -rec ["f1"])>TOL_F1 :
-                v .append (f"M8: dosya adi F1 {f1_name } vs receipt {rec ['f1']:.3f}")
+                v .append (f"M8: file adi F1 {f1_name } vs receipt {rec ['f1']:.3f}")
         except Exception :
-            v .append (f"M8: dosya adindan F1 okunamadi ({base_name })")
+            v .append (f"M8: file adindan F1 okunamadi ({base_name })")
 
     info ={"part":rec .get ("part"),"mfg":rec .get ("mfg"),"mode":mode ,"n_gt":rec ["n_gt"],
     "n_pred":rec ["n_pred"],"f1":rec ["f1"],"markers":len (rec ["markers"])}

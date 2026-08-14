@@ -50,7 +50,7 @@ def test_bos_ve_bozuk_reddedilir (tmp_path ):
 
 
 def test_tek_cp_cakisik_sayilmaz (tmp_path ):
-    """Tek CP'li part 'all of them same noktada' sayilmamali -- otherwise gecerli parts dusar."""
+    """Tek CP'li part 'all of them same noktada' sayilmamali -- otherwise valid parts dusar."""
     from big_arbiter import gt_gecerli 
     assert gt_gecerli (_yaz (str (tmp_path ),[_cp (1 ,2 ,3 ,0 ,0 ,1 )]))
 
@@ -64,4 +64,4 @@ def test_genis_except_yok ():
     # test onu yakalayip wrong yere ates etti. Yalnizca KOD satirlarina bakilir.
     kod =[x .split ("#")[0 ]for x in inspect .getsource (gt_gecerli ).splitlines ()]
     kod ="\n".join (kod )
-    assert "except Exception"not in kod ,"genis except kendi yazim hatani veri bulgusu gosterir"
+    assert "except Exception"not in kod ,"genis except kendi yazim hatani data bulgusu gosterir"

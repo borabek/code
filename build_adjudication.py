@@ -67,7 +67,7 @@ def main ():
         f'<div class=q><b>#{i +1 }</b> <span class=meta>{html .escape (it ["source"])}, '
         f'{it ["n_verts"]}v, en yakin isaretin {it ["nearest_human_mm"]}mm</span>'
         f'<label><input type=radio name="{pid }_{i }" value="opening"> gercek opening (atlamisim)</label>'
-        f'<label><input type=radio name="{pid }_{i }" value="not_cp"> CP degil (vida/yuva/vs)</label>'
+        f'<label><input type=radio name="{pid }_{i }" value="not_cp"> CP not (vida/yuva/vs)</label>'
         f'<label><input type=radio name="{pid }_{i }" value="unsure"> emin degilim</label></div>'
         for i ,it in enumerate (items ))
         cards .append (f'<section><h3>{k }/{len (by_part )} &nbsp; {pid } '
@@ -89,9 +89,9 @@ button{{background:#3b82f6;color:#fff;border:0;padding:9px 16px;border-radius:8p
 #c{{color:#9aa3b2;font-size:13px;margin-left:12px}}
 </style>
 <header><h1>CP hakemleme &mdash; {d ['n_disagreements']} bolge / {len (by_part )} part</h1>
-<div class=sub>Kirmizi nokta: modelin CP dedigi ama senin isaretlemedigin yer. Her biri icin: gercekten
-bir kablo/klemens agzi mi, yoksa degil mi? &nbsp;<b>Emin degilsen "emin degilim" birak</b> &mdash;
-tahmin, yanlis etiketten iyidir degil.</div>
+<div class=sub>Kirmizi nokta: modelin CP dedigi but senin isaretlemedigin yer. Her biri for: gercekten
+a kablo/klemens agzi mi, yoksa not mi? &nbsp;<b>Emin degilsen "emin degilim" birak</b> &mdash;
+tahmin, wrong etiketten iyidir not.</div>
 <div style="margin-top:10px"><button onclick=dl()>JSON indir</button><span id=c></span></div></header>
 {''.join (cards )}
 <script>

@@ -14,7 +14,7 @@ KAYIP: maskeli, ISARETSIZ kosinus. 1 - |cos(prediction, hedef)|
   * unsigned: manufacturer sign konvansiyonu parcadan parcaya degisiyor; isareti already
     geometrik as (outward) belirliyoruz.
 
-BOLME: URETICI-DISI (varsayilan). json_dataset.family_key with "aile-disi" bolmeye kalkistim and
+BOLME: URETICI-DISI (default). json_dataset.family_key with "aile-disi" bolmeye kalkistim and
 OLCTUM: 1542 part -> 1542 aile, i.e. that fonksiyon part numarasinin KENDISINI donduruyor and
 no gruplama yapmiyor. O split gercekte PARCA-DISI olurdu and sizintili olurdu: bugun
 measured ki kardes varyantlarin geometrisi BIREBIR same (axis farki 0.000 derece, hizalama
@@ -22,7 +22,7 @@ residual 0.3mm) -- val'deki parcanin ikizi egitimde olabilirdi. Kardesler same u
 oldugu for URETICI-DISI split this sizintiyi tamamen keser and more hard a sinavdir.
 
 TABAN CIZGILERI (853 part / 272291 hedef kose on MEASURED, egitimden ONCE):
-    sabit +Z (most aptal prediction)          medyan 7.00d   >15d %43.2
+    fixed +Z (most aptal prediction)          medyan 7.00d   >15d %43.2
     korpusun most sik yonu (= +Z)         medyan 7.00d   >15d %43.2
     parcanin KENDI baskin yonu (KOPYA)  medyan 0.00d   >15d %10.2   <- ULASILABILIR TAVAN
     mevcut urun (B-rep + geometri)                     >15d %15.8
@@ -30,7 +30,7 @@ TABAN CIZGILERI (853 part / 272291 hedef kose on MEASURED, egitimden ONCE):
 Iki sey birden correct:
   * Gorev sanildigi up to hard DEGIL: parcalarin %89'u TEK YONLU (part basina medyan 1 different
     direction), i.e. is large olcude "this part hangi yonu kullaniyor" sorusuna iniyor.
-  * Ama onemsiz de not: sabit +Z %43.2 error veriyor. 11 parcalik duman testinde agin 0.96
+  * Ama onemsiz de not: fixed +Z %43.2 error veriyor. 11 parcalik duman testinde agin 0.96
     dereceye inmesi, "each yere +Z head" not "parcanin geometrisinden yonunu cikar" demek.
 
 KILL (olcumden ONCE yazildi):
@@ -48,16 +48,16 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 DS ="results/axis_dataset"
 OUTDIR ="results/axis_net"
 INFLIGHT ="results/axis_net/inflight.txt"# this an islenen part (zehirli-part korumasi)
-SKIPFILE ="results/axis_net/skip.txt"# kalici atlama listesi
+SKIPFILE ="results/axis_net/skip.txt"# persistent atlama listesi
 
 
 def _load_skip ():
-    """Bizi kilitleyen parcalari atla -- gate_regrow'da kanitlanmis desen.
+    """Bizi kilitleyen parcalari skip -- gate_regrow'da kanitlanmis desen.
 
     2026-07-30: training single a parcada 22 DAKIKA asili kaldi (op onbellegine new file
     yazilmadi, GPU %12). Ayni imza corpus betiklerinde de yasandi (spektral ayristirmada
     47 dakika donen WEI parcasi). Parca ISLENMEDEN ONCE adi INFLIGHT'a yazilir; run yeniden
-    baslatildiginda orada duran part "bizi olduren part"dir.
+    baslatildiginda orada stopped part "bizi olduren part"dir.
 
     ILK kesintide kara listeye ALINMAZ: mekanizma "part asildi" with "sureci ben oldurdum"u
     ayirt edemez. Gercekten asilan part IKINCI denemede de asilir.
@@ -74,10 +74,10 @@ def _load_skip ():
                 os .makedirs (os .path .dirname (SKIPFILE ),exist_ok =True )
                 with open (SKIPFILE ,"a")as fh :
                     fh .write (stuck +chr (10 ))
-                print (f"  [zehirli part] {stuck } IKI kez asti -> kalici atlama",flush =True )
+                print (f"  [zehirli part] {stuck } IKI kez asti -> persistent atlama",flush =True )
             else :
                 _RETRY [stuck ]=att +1 
-                print (f"  [yeniden dene] {stuck } bir kez yarim kaldi -> {att +1 }. deneme",
+                print (f"  [yeniden dene] {stuck } a kez yarim kaldi -> {att +1 }. deneme",
                 flush =True )
         os .remove (INFLIGHT )
     return skip 
@@ -101,7 +101,7 @@ def main ():
     ap .add_argument ("--k-eig",type =int ,default =96 )
     ap .add_argument ("--val-frac",type =float ,default =0.15 )
     ap .add_argument ("--split",choices =("mfg","part"),default ="mfg",
-    help ="mfg = URETICI-disi (varsayilan, sizintisiz); part = part-disi (zayif)")
+    help ="mfg = URETICI-disi (default, sizintisiz); part = part-disi (zayif)")
     ap .add_argument ("--val-mfg",default ="WEI",help ="mfg bolmesinde dogrulamaya ayrilan manufacturer")
     ap .add_argument ("--limit",type =int ,default =0 )
     ap .add_argument ("--seed",type =int ,default =20260730 )
@@ -175,7 +175,7 @@ def main ():
             except Exception :
                 pass 
         if len (V )!=int (z ["n_verts"]):
-            return None # remesh degismis -> hedef indeksleri gecersiz
+            return None # remesh degismis -> hedef indeksleri invalid
         out =(V ,F ,z ["idx"].astype (np .int64 ),z ["tgt"].astype (np .float32 ))
         if os .path .exists (INFLIGHT ):
             os .remove (INFLIGHT )# basariyla bitti -> isareti kaldir
@@ -208,7 +208,7 @@ def main ():
         return np .degrees (np .arccos (c ))
 
         # DEVAM ETME. Yalniz "most iyi" agirligi saklamak DEVAM for yetmez: Adam'in momentleri,
-        # epoch sayaci and most iyi skor da is required. Onlarsiz yeniden baslatma "sicak restart" becomes --
+        # epoch sayaci and most iyi score da is required. Onlarsiz yeniden baslatma "sicak restart" becomes --
         # first epochlar geriye gider and sifirlanan "best" kotu a epochun uzerine yazmasina izin
         # gives. Bugun process three times became; this yetenek olmadan each seferinde bastan baslanirdi.
     LAST =os .path .join (OUTDIR ,"last.pt")

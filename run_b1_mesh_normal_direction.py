@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """B1: adayin YONUNU yakin MESH NORMALLERINDEN sec (konum DEGISMEZ).
 
-DAYANAK (`results/b2_yon_isaret.json`, D7 brand-disi): YON_YOK kovasindaki 705
+DAYANAK (`results/b2_direction_sign.json`, D7 brand-disi): YON_YOK kovasindaki 705
 GT'nin **%59.1'inde (417)** adaya 2mm mesafedeki a mesh tepesinin normali
 correct yonu ZATEN tasiyor. Ayrica %44.3'u duz 180 derece ISARET hatasi.
 
-Kova aritmetigi (`results/kazanan_hata_bankasi.json`): TP 710 / FN 2377 / FP 1323.
+Kova aritmetigi (`results/winner_error_bank.json`): TP 710 / FN 2377 / FP 1323.
 417 kurtarilirsa F1 0.2773 -> **0.407**. Kol candidate EKLEMEZ -> FP artamaz,
-tespit metrigi (angle serbest) DEGISMEZ; this, olcumun own kontrolu becomes.
+detection metrigi (angle serbest) DEGISMEZ; this, olcumun own kontrolu becomes.
 
 ONCEKI YON KOLU WHY BASARISIZDI: `direction_borrow.py` secenekleri komsu ADAY
 yonleri + silindir eksenleri + baskin yondu; **mesh normali YOKTU**. B2 olcumu
 missing kaynagin full da that oldugunu showed.
 
 TEZE SADIK: `v_o` KONUMU and segmentasyon does not change; tezin own yonu HER ZAMAN
-0. secenek and esitlikte KAZANIR.
+0. option and esitlikte KAZANIR.
 """
 import collections 
 import json 
@@ -25,7 +25,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -47,8 +47,8 @@ OB ={"d7":"results/_p1_olasilik_d7","d6":"results/_p1_olasilik_g7",
 KAYNAKLAR =(0 ,1 )
 ESIK =0.05 
 YANAL ,ACI ,EKSENEL =2.0 ,10.0 ,40.0 
-NORMAL_R =2.0 # adaya this mesafedeki tepelerin normalleri secenek becomes
-AYIRT =5.0 # this aciya yakin secenekler AYNI sayilir
+NORMAL_R =2.0 # adaya this mesafedeki tepelerin normalleri option becomes
+AYIRT =5.0 # this aciya yakin options AYNI sayilir
 CE ,CT =int (connector3d .CABLE_ENTRY ),int (connector3d .CONTACT )
 _D6 =None 
 
@@ -58,7 +58,7 @@ def _birim (V ):
     return V /np .maximum (np .linalg .norm (V ,axis =1 ,keepdims =True ),1e-12 )
 
 
-def secenekler (p ,d ,V ,NV ,ppos ,gate_s ,n_aday ):
+def options (p ,d ,V ,NV ,ppos ,gate_s ,n_aday ):
     """Bu candidate for (direction, feature) listesi. 0. oge HER ZAMAN MEVCUT direction."""
     d =_birim ([d ])[0 ]
     V =np .asarray (V ,float )
@@ -71,7 +71,7 @@ def secenekler (p ,d ,V ,NV ,ppos ,gate_s ,n_aday ):
             for s in (1.0 ,-1.0 ):
                 candidates .append ((s *n ,float (uz [i ]),float (ppos [i ]),0.0 ,
                 float (s )))
-    secili ,oz =[],[]
+    secili ,feat =[],[]
     for v ,mes ,pp ,mevcut ,sign in candidates :
         v =_birim ([v ])[0 ]
         if any (float (np .degrees (np .arccos (np .clip (abs (float (v @w )),-1 ,1 ))))
@@ -80,10 +80,10 @@ def secenekler (p ,d ,V ,NV ,ppos ,gate_s ,n_aday ):
         secili .append ((v ,mes ,pp ,mevcut ,sign ))
     for v ,mes ,pp ,mevcut ,sign in secili :
         aci_mevcut =float (np .degrees (np .arccos (np .clip (float (v @d ),-1 ,1 ))))
-        oz .append ([mevcut ,aci_mevcut ,mes ,pp ,sign ,float (gate_s ),
+        feat .append ([mevcut ,aci_mevcut ,mes ,pp ,sign ,float (gate_s ),
         float (n_aday ),float (np .max (np .abs (v ))),
         float (len (secili ))])
-    return [x [0 ]for x in secili ],np .asarray (oz ,float )
+    return [x [0 ]for x in secili ],np .asarray (feat ,float )
 
 
 def parca_yukle (on ,pid ,r ):
@@ -129,7 +129,7 @@ def warn_position (p ,g ,gd ):
 
 
 def main ():
-    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     S =K .step_map ()
     global _D6 
     _D6 ={str (p ):r for p ,r in 
@@ -163,7 +163,7 @@ def main ():
                     break 
             if j <0 :
                 continue 
-            V_ ,F_ =secenekler (P [a ],D [a ],d ["V"],d ["NV"],d ["ppos"],
+            V_ ,F_ =options (P [a ],D [a ],d ["V"],d ["NV"],d ["ppos"],
             sk [a ],len (P ))
             if len (V_ )<2 :
                 continue 
@@ -172,7 +172,7 @@ def main ():
                 ac =float (np .degrees (np .arccos (np .clip (float (v @u ),-1 ,1 ))))
                 X .append (F_ [q ]);Y .append (int (ac <=ACI ))
         if (i +1 )%400 ==0 :
-            print (f"  training {i +1 }/{len (pid_tam )} secenek {len (X )}",flush =True )
+            print (f"  training {i +1 }/{len (pid_tam )} option {len (X )}",flush =True )
     X =np .asarray (X ,float );Y =np .asarray (Y ,int )
     print (f"YON SECENEGI {X .shape } | pozitif {Y .mean ():.4f}",flush =True )
     yc =HistGradientBoostingClassifier (max_iter =400 ,learning_rate =0.08 ,
@@ -197,7 +197,7 @@ def main ():
             if kullan and len (P ):
                 D =D .copy ()
                 for a in range (len (P )):
-                    V_ ,F_ =secenekler (P [a ],D [a ],d ["V"],d ["NV"],d ["ppos"],
+                    V_ ,F_ =options (P [a ],D [a ],d ["V"],d ["NV"],d ["ppos"],
                     sk [a ],len (P ))
                     if len (V_ )<2 :
                         continue 
@@ -220,16 +220,16 @@ def main ():
         for m ,v in rob .items ()}
         mi =float (2 *sum (v [0 ]for v in rob .values ())/
         max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-        out [ad ]={"robot":mi ,"tespit":K .mikro (tes ),
+        out [ad ]={"robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
-        print (f"{ad :<14} robot {mi :.4f} | tespit {out [ad ]['tespit']:.4f} | "
+        print (f"{ad :<14} robot {mi :.4f} | detection {out [ad ]['detection']:.4f} | "
         f"makro {out [ad ]['makro']:.4f} | en kotu {out [ad ]['en_kotu']:.4f}",
         flush =True )
     a ,b =out ["YON SABIT"]["robot"],out ["MESH NORMALI"]["robot"]
-    print (f"\nFARK {b -a :+.4f} | kova aritmetigi beklentisi ~0.407")
+    print (f"\nFARK {b -a :+.4f} | bucket aritmetigi beklentisi ~0.407")
     print ("KAPI: >= +0.02 whereas KABUL")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"fark":b -a ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"diff":b -a ,
     "not":"Yon secenekleri = mevcut + 2mm icindeki mesh tepelerinin "
     "+/- normalleri. Konum ve candidate sayisi DEGISMEZ. "
     "D7 brand-disi, TAM ZINCIR, MIKRO."},

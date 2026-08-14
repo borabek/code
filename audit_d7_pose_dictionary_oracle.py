@@ -8,7 +8,7 @@ finds a maximum-cardinality one-to-one matching.  Two ceilings are reported:
 * ``oracle_null``: unmatched candidates may be suppressed (ideal final selector);
 * ``keep_all``: all input candidates survive (isolates pose selection from precision).
 
-The metric matches ``results/metrik_dondurulmus.json`` / ``sina_cluster.match_hungarian``:
+The metric matches ``results/metric_dondurulmus.json`` / ``sina_cluster.match_hungarian``:
 lateral distance is measured around the GT axis, signed angle <= 10 degrees, absolute
 axial offset <= 40 mm.  It intentionally does *not* reuse p5-v2's label helper, whose
 lateral/axial decomposition currently uses the predicted direction.
@@ -434,7 +434,7 @@ def _print_summary (receipt :dict [str ,object ])->None :
 
 def main ()->None :
     parser =argparse .ArgumentParser ()
-    parser .add_argument ("--manifest",default ="results/d7_sinav_kumesi.json")
+    parser .add_argument ("--manifest",default ="results/d7_exam_set.json")
     parser .add_argument ("--records",default ="results/_der_yeni_G7BIRLESIK.pkl")
     parser .add_argument ("--cylinders",default ="results/_d7_silindirler.pkl")
     parser .add_argument ("--planars",default ="results/_d7_acikliklar.pkl")

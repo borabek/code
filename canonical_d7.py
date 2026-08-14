@@ -24,9 +24,9 @@ OB ="results/_p1_olasilik_d7"
 # headline that uclu with uretilir. Ama a baska segmentasyon agini AYNI measurement yoluyla
 # sinamak for ayri a betik yazmak, measurement yolunun urunden ayrismasi demekti
 # (this projede two times became). Bunun instead of same harness cevre degiskeniyle
-# yeniden hedeflenir; damga (`makbuz_hash`) hangi ucluyle olculdugunu carries.
+# yeniden hedeflenir; damga (`receipt_hash`) hangi ucluyle olculdugunu carries.
 #   KD7_KAYIT / KD7_GATE / KD7_OB
-_ov =lambda ad ,var :os .environ .get (ad )or var # noqa: E731
+_ov =lambda ad ,present :os .environ .get (ad )or present # noqa: E731
 KAYIT =_ov ("KD7_KAYIT",KAYIT )
 GATE =_ov ("KD7_GATE",GATE )
 OB =_ov ("KD7_OB",OB )
@@ -73,7 +73,7 @@ p3c_esik =0.0 ,cyl =None ):
     """URUNUN output pozlari. Doner: (P, D).
 
     `p3c` verilirse EKSEN SECICISI de runs -- headline yolunda kosuyordu and
-    bende yoktu (kalan farkin most guclu adayi).
+    bende yoktu (remaining farkin most guclu adayi).
     """
     from p1c_threshold import maske 
     M =x58 (r )
@@ -98,7 +98,7 @@ p3c_esik =0.0 ,cyl =None ):
         sk =s [k ]if k .any ()else s [:0 ]
         P2 ,D2 =P .copy (),D .copy ()
         for i in range (len (P )):
-            opt =P3 .secenekler (cy ,P [i ],D [i ],r ["diag"],float (sk [i ]),
+            opt =P3 .options (cy ,P [i ],D [i ],r ["diag"],float (sk [i ]),
             komsu ,len (P ))
             if len (opt )==1 :
                 continue 

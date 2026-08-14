@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-"""T3: PARCA BASINA KESIMI OGREN (tespit tavanina giden most ucuz path).
+"""T3: PARCA BASINA KESIMI OGREN (detection tavanina giden most ucuz path).
 
 T2 bosslugu ikiye boldu:
     ESIK kaybi   +0.0731 (%38) -- rule degisikligiyle alinabilir
     SIRALAMA     +0.1202 (%62) -- new bilgi is required
 
-Ve kritik ayrinti: TEK a sabit threshold no sey vermiyor (most iyi global threshold +0.0039,
+Ve kritik ayrinti: TEK a fixed threshold no sey vermiyor (most iyi global threshold +0.0039,
 most iyi goreli ratio +0.0000). Yani loss "esigi wrong sectik"ten DEGIL, "each parcada correct
 kesim different"dan geliyor. Kahin part-ici kesim +0.0731.
 
-Bugun same desen IKI KEZ whereas yaradi: kurali sabit a sayiya not, parcanin KENDI sinyaline
+Bugun same desen IKI KEZ whereas yaradi: kurali fixed a sayiya not, parcanin KENDI sinyaline
 baglamak (cokus yonlendirmesi) and ogrenilmis selector (yarik yonu). Burada da same sey:
 parcanin SKOR DAGILIMINDAN kac candidate tutulacagini ogren.
 
@@ -17,13 +17,13 @@ OZELLIKLER (all of them calisma aninda, GT'siz):
     n_aday, maks, mean, std, medyan
     first-ikinci farki, first-ucuncu farki  (vertex ne up to ayrik?)
     threshold ustu numbers (0.25/0.35/0.5/0.7)
-    skor dusus profili: sirali skorlarin ardisik farklarinin maksimumu and yeri (DOGAL KESIM)
+    score dusus profili: sirali skorlarin ardisik farklarinin maksimumu and yeri (DOGAL KESIM)
     kosegen, very-CP router bayragi
 
-TARGET: kahin K (F1'i at most yapan tutulan candidate count).
+TARGET: oracle K (F1'i at most yapan tutulan candidate count).
 DEGERLENDIRME: geometri anahtarina according to GroupKFold, FOLD DISI prediction.
 
-KILL (onceden yazili): tespit >= +0.02 VE DEV with VAL same yonde VE gorulmemis manufacturer
+KILL (onceden yazili): detection >= +0.02 VE DEV with VAL same yonde VE unseen manufacturer
 ortalamasi dusmeyecek. Ucu birden saglanmazsa DAGITILMAZ.
 """
 import json 
@@ -81,7 +81,7 @@ def main ():
     mfg_of ={p :m for m ,p ,jf ,s in eligible ()}
     with open ("results/_u4_der.pkl","rb")as f :
         DER =pickle .load (f )
-    with open ("results/_dev_val_kume.json",encoding ="utf-8")as f :
+    with open ("results/_dev_val_cluster.json",encoding ="utf-8")as f :
         kume_of =json .load (f )
     d =np .load ("results/gate_regrow_data_topo.npz",allow_pickle =True )
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
@@ -117,7 +117,7 @@ def main ():
         "diag":float (r ["diag"]),"hi":r ["n"]>=8 })
     print (f"{len (PAR )} part",flush =True )
 
-    # KAHIN K: F1'i at most yapan tutulan candidate count (skor sirasina according to first K)
+    # KAHIN K: F1'i at most yapan tutulan candidate count (score sirasina according to first K)
     for p in PAR :
         en ,enk =-1 ,1 
         for K in range (0 ,len (p ["s"])+1 ):
@@ -131,8 +131,8 @@ def main ():
     yk =np .array ([p ["kahin_K"]for p in PAR ],float )
     grp =np .array ([p ["geo"]for p in PAR ])
     su_K =np .array ([int (wire_gate .decision_mask (p ["s"]).sum ())for p in PAR ],float )
-    print (f"kahin K: medyan {np .median (yk ):.1f} | su anki kural K: medyan {np .median (su_K ):.1f} "
-    f"| ort fark {np .mean (yk -su_K ):+.2f}",flush =True )
+    print (f"oracle K: medyan {np .median (yk ):.1f} | su anki rule K: medyan {np .median (su_K ):.1f} "
+    f"| ort diff {np .mean (yk -su_K ):+.2f}",flush =True )
 
     oof =np .zeros (len (PAR ))
     for tr ,te in GroupKFold (n_splits =5 ).split (X ,yk ,grp ):
@@ -170,12 +170,12 @@ def main ():
     mfg_a =np .mean ([puanla (su_K ,"PXC"),puanla (su_K ,"WEI")])
     mfg_b =np .mean ([puanla (oof ,"PXC"),puanla (oof ,"WEI")])
     gecti =(d_ >=0.02 )and (dev_ok >0 )and (val_ok >0 )and (mfg_b >=mfg_a )
-    print (f"\nKILL: tespit >= +0.02 VE DEV/VAL ayni yonde VE manufacturer ort. dusmeyecek")
-    print (f"  tespit {d_ :+.4f} | DEV {dev_ok :+.4f} | VAL {val_ok :+.4f} | "
+    print (f"\nKILL: detection >= +0.02 VE DEV/VAL same yonde VE manufacturer ort. dusmeyecek")
+    print (f"  detection {d_ :+.4f} | DEV {dev_ok :+.4f} | VAL {val_ok :+.4f} | "
     f"manufacturer ort {mfg_b -mfg_a :+.4f} -> {'GECTI'if gecti else 'GECMEDI'}")
-    print (f"  kahinin {d_ /max (kah -a ,1e-9 ):.0%}'i yakalandi (kahin {kah -a :+.4f})")
+    print (f"  kahinin {d_ /max (kah -a ,1e-9 ):.0%}'i yakalandi (oracle {kah -a :+.4f})")
     with open ("results/t3_part_kesimi.json","w",encoding ="utf-8")as f :
-        json .dump ({"su_an":float (a ),"ogrenilmis":float (new_ ),"kahin":float (kah ),
+        json .dump ({"su_an":float (a ),"ogrenilmis":float (new_ ),"oracle":float (kah ),
         "dev":float (dev_ok ),"val":float (val_ok ),
         "uretici_ort_fark":float (mfg_b -mfg_a ),"gecti":bool (gecti )},f ,indent =1 )
     print ("\nmakbuz -> results/t3_part_kesimi.json")

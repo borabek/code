@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""KUME SINAVI: a kumede secilen kararlar BASKA geometrilerde de tutuyor mu?
+"""KUME SINAVI: a kumede selected kararlar BASKA geometrilerde de tutuyor mu?
 
 ZAAFIYET (kullanicinin sign ettigi): J (konum ortalamasi) and L2 (3 ezberci ozelligi at)
 kararlari 100 parcalik TEK a cluster on SECILDI and same cluster on MEASURED. Boyle a
@@ -20,7 +20,7 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 W ={"dusuk":0.895 ,"very":0.105 }
-# L2'nin attigi ozelliklerden SONRA kalan sutunlar. Uruna bakip okumuyoruz: L2 geri alindiktan
+# L2'nin attigi ozelliklerden SONRA remaining sutunlar. Uruna bakip okumuyoruz: L2 geri alindiktan
 # after dagitilan gate 13 sutunlu, that yuzden pkl'den okumak ablasyonu VAKUM yapardi (dev kosusunda
 # full as this became: "L2 closed" satiri "URUN" with birebir same output).
 L2COLS =[2 ,3 ,4 ,5 ,6 ,7 ,9 ,10 ,11 ,12 ]
@@ -29,13 +29,13 @@ L2COLS =[2 ,3 ,4 ,5 ,6 ,7 ,9 ,10 ,11 ,12 ]
 def esle (P ,Pd ,G ,Gd ,diag ,tol ,am ,pct ,signed =False ):
     """big_arbiter axis-farkindali esleme -> (TP, FP, FN).
 
-    `signed=False` (varsayilan, DAGITILAN davranis): angle `abs(Pd . Gd)` with olculur, i.e.
+    `signed=False` (default, DAGITILAN davranis): angle `abs(Pd . Gd)` with olculur, i.e.
     180 derece ters a prediction 0 derece sayilir. Bu a EKSEN metrigidir.
 
     `signed=True`: sign KORUNUR -- prediction, ureticinin `InsertDirection`'iyla AYNI yone
     bakmak zorundadir. Fiziksel robot for correct criterion budur.
 
-    MEASURED (2026-08-02, 194 part / 771 eslesen double): eslesen ciftlerin %89.8'inde
+    MEASURED (2026-08-02, 194 part / 771 matched double): matched ciftlerin %89.8'inde
     `Pd . Gd > 0` (medyan +1.000), i.e. dagitilan direction ZATEN takma yonudur and
     `robot_cp` docstring'i dogrudur. Isaretli metrik 0.5893 -> 0.5818, loss only 0.0075.
     (Ters sozlesme `-Pd` was tried: 0.0907 with COKUYOR -> sozlesme conclusive as `+Pd`.)
@@ -71,7 +71,7 @@ def match_greedy (P ,Pd ,G ,Gd ,diag ,tol ,am ,pct ,signed =False ,eksen_tol =EK
     `bilgi["ambiguous"]`: kac TP'nin KABUL KUTUSUNDA birden extra GT vardi (A2).
 
     BELIRSIZ ESLESME NEDIR (A2): a prediction, kabul kutusuna (lateral<=tt, |axial|<=eksen_tol,
-    angle<=am) BIRDEN FAZLA GT siginiyorsa, "correct" sayilan eslesme fiziksel as KOMSU
+    angle<=am) BIRDEN FAZLA GT siginiyorsa, "correct" counted eslesme fiziksel as KOMSU
     DELIGE ait may be. Olculdu (2026-08-04, 194 part): GT'lerin **%29.3'unun** tolerans
     kutusunda baska a GT present (low-CP %20.8, very-CP %33.0). Bu, F1'in UST SINIR
     sisintisidir; `F1_kesin` only single-adayli eslesmeleri sayar.
@@ -109,7 +109,7 @@ eksen_tol =EKSEN_TOL_ESKI ):
 
     WHY (2026-08-06): `match_greedy` acgozlu -- ciftleri mesafeye according to sirali gezip first
     uyani baglar. Kalabalik parcalarda this ATAMA KAYBI produces: a prediction, kendisine more
-    uygun a GT'yi baska (more yakin but already eslesmis) a tahmine kaptirabilir and GT
+    eligible a GT'yi baska (more yakin but already eslesmis) a tahmine kaptirabilir and GT
     empty kalir. Otopside "KALABALIK" kovasi GT'nin **%12.8'i** idi and this kovanin a kismi
     GERCEK bilgi eksigi not, ATAMA sirasinin artefaktidir.
 
@@ -197,12 +197,12 @@ def f1_rejim (rows ):
         p_ =T /max (T +Fp ,1 );rc =T /max (T +Fn ,1 )
         o [k ]=2 *p_ *rc /max (p_ +rc ,1e-9 )if say [k ]else None 
         pp [k ],rr [k ]=(p_ ,rc )if say [k ]else (None ,None )
-    var =[k for k in W if say [k ]]
-    top =sum (W [k ]for k in var )or 1.0 
+    present =[k for k in W if say [k ]]
+    top =sum (W [k ]for k in present )or 1.0 
     return {"F1":o ,"n":say ,
-    "agirlikli_F1":sum (W [k ]*(o [k ]or 0.0 )for k in var )/top ,
-    "agirlikli_kesinlik":sum (W [k ]*(pp [k ]or 0.0 )for k in var )/top ,
-    "agirlikli_recall":sum (W [k ]*(rr [k ]or 0.0 )for k in var )/top ,
+    "agirlikli_F1":sum (W [k ]*(o [k ]or 0.0 )for k in present )/top ,
+    "agirlikli_kesinlik":sum (W [k ]*(pp [k ]or 0.0 )for k in present )/top ,
+    "agirlikli_recall":sum (W [k ]*(rr [k ]or 0.0 )for k in present )/top ,
     "ham_kesinlik":pr (rows )[0 ],"ham_recall":pr (rows )[1 ]}
 
 
@@ -293,14 +293,14 @@ def main ():
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'yapilandirma':<26}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'yapilandirma':<26}{'detection':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
     PP ,res ={},{}
     for lab ,j_ ,l_ in (("URUN (J, 13 ozellik)",True ,False ),("J kapali",False ,False ),
     ("L2 acik",True ,True ),("J kapali + L2 acik",False ,True )):
         det ,rob =kos (j_ ,l_ )
         PP [lab ]=(det ,rob )
         p_ ,r_ =pr (det )
-        res [lab ]={"tespit":f1w (det ),"robot":f1w (rob ),"precision":p_ ,"recall":r_ }
+        res [lab ]={"detection":f1w (det ),"robot":f1w (rob ),"precision":p_ ,"recall":r_ }
         print (f"{lab :<26}{f1w (det ):>9.4f}{f1w (rob ):>9.4f}{p_ :>9.3f}{r_ :>9.3f}",flush =True )
 
     pickle .dump (PP ,open (f"results/sinav_{cluster }_parca.pkl","wb"))# sonraki analiz bedava
@@ -309,8 +309,8 @@ def main ():
     IX =[rng .randint (0 ,npart ,npart )for _ in range (2000 )]
 
     print (f"\nTEK YAPILANDIRMA %95 GA ({npart } part, 2000 tekrar) -- iki AYRI kumenin farki "
-    f"noise mu, bunun icin:")
-    for mi ,mn in ((0 ,"tespit"),(1 ,"robot ")):
+    f"noise mu, bunun for:")
+    for mi ,mn in ((0 ,"detection"),(1 ,"robot ")):
         rows =PP ["URUN (J, 13 ozellik)"][mi ]
         bs =np .array ([f1w ([rows [i ]for i in ix ])for ix in IX ])
         lo_ ,hi_ =np .percentile (bs ,[2.5 ,97.5 ])
@@ -318,9 +318,9 @@ def main ():
         res .setdefault ("GA",{})[mn .strip ()]=[float (f1w (rows )),float (lo_ ),float (hi_ )]
 
     print ("\nESLI BOOTSTRAP (same parts iki yapilandirmada da secilir):")
-    print (f"  {'karsilastirma':<38}{'fark':>9}{'%95 GA':>21}{'karar':>10}")
+    print (f"  {'comparison':<38}{'diff':>9}{'%95 GA':>21}{'karar':>10}")
     for lab in ("J kapali","L2 acik","J kapali + L2 acik"):
-        for mi ,mn in ((0 ,"tespit"),(1 ,"robot")):
+        for mi ,mn in ((0 ,"detection"),(1 ,"robot")):
             a =PP ["URUN (J, 13 ozellik)"][mi ];b =PP [lab ][mi ]
             ds =np .array ([f1w ([a [i ]for i in ix ])-f1w ([b [i ]for i in ix ])for ix in IX ])
             lo_ ,hi_ =np .percentile (ds ,[2.5 ,97.5 ])

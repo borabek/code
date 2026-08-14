@@ -87,7 +87,7 @@ def tup_skoru (isinci ,kok ,yonler ,theta =THETA ,k =N_HALKA ,cap =CAP ):
 def self_check ():
     """SENTETIK YETENEK TESTI: ekseni BILINEN a delikte bulabiliyor mu.
 
-    Bu step S4'te wrong negatiften kurtarmisti: mekanizma bilinen a
+    Bu step S4'te wrong negatiften kurtarmisti: mekanizma known a
     delikte ekseni bulamiyorsa real veride aramanin anlami absent.
     """
     import trimesh 
@@ -119,7 +119,7 @@ def self_check ():
         t =tup_skoru (isinci ,kok ,Y )
         sec =Y [int (np .argmax (t ))]
         aci =np .degrees (np .arccos (np .clip (abs (float (sec @axis )),-1 ,1 )))
-        print (f"  axis {np .round (axis ,2 )} -> secilen deviation {aci :5.1f} "
+        print (f"  axis {np .round (axis ,2 )} -> selected deviation {aci :5.1f} "
         f"derece | tup {t .max ():.2f} (ortanca {np .median (t ):.2f})")
         ok &=aci <=10.0 
     print ("SENTETIK YETENEK:","GECTI"if ok else "KALDI")

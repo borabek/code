@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Turetme kayitlarini TEK yerden yukle -- feature genisligi TUTARLI olsun.
 
-TRAP (2026-08-05, two times vurdu): `d5_birlestir.py` birlesik `_der_yeni.pkl`'i yazarken
+TRAP (2026-08-05, two times vurdu): `d5_merge.py` birlesik `_der_yeni.pkl`'i yazarken
 X'i **58 -> 22 sutuna KIRPAR** (old measurement korpusu 22 bekliyor). Shard dosyalari
 (`_der_yeni_0.pkl` ...) whereas 58 sutunla kalir.
 
@@ -14,7 +14,7 @@ Belirti aldatici: "gate very kotu" like gorunur, oysa gate never calismamistir. 
 kurbanlar: `p1_gate_v5.py` (three arm da 0.0000, TABAN dahil).
 
 COZUM: X22 with XR'nin BIRLESIMI already 58 sutundur and `X[:, 22:] == XR` oldugu
-`d5_birlestir.py` inside 984/984 kayitta dogrulanmistir. Yani 22'lik kayit KAYIPSIZ
+`d5_merge.py` inside 984/984 kayitta dogrulanmistir. Yani 22'lik kayit KAYIPSIZ
 sekilde 58'e geri kurulabilir.
 """
 import glob 
@@ -68,6 +68,6 @@ def yukle (pidler =None ,desen ="results/_der_yeni*.pkl"):
     return rec_ 
 
 
-def exam (yol ="results/d6_sinav_kumesi.json"):
-    with io .open (yol ,encoding ="utf-8")as f :
+def exam (path ="results/d6_exam_set.json"):
+    with io .open (path ,encoding ="utf-8")as f :
         return json .load (f )

@@ -1,0 +1,75 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "TEZ-SAF": {
+   "robot": 0.19887137575403774,
+   "detection": 0.44055263669974704,
+   "makro": 0.21571773248452994,
+   "en_kotu": 0.0,
+   "brand": {
+    "CCD": 0.5583333333333333,
+    "KLM": 0.06818181818181818,
+    "A-B": 0.33121019108280253,
+    "EFX": 0.045845272206303724,
+    "WIE": 0.44713656387665196,
+    "CWT": 0.019218449711723255,
+    "DIN": 0.4338235294117647,
+    "WEG": 0.03007518796992481,
+    "CEM": 0.0,
+    "DEG": 0.2,
+    "ELMEX": 0.445859872611465,
+    "C3": 0.008928571428571428
+   },
+   "rule": "goreli (0.5, 0.3)",
+   "poz_kafasiz": 0
+  },
+  "GENISLETILMIS": {
+   "robot": 0.22494831150930392,
+   "detection": 0.4518263266712612,
+   "makro": 0.23132455638297947,
+   "en_kotu": 0.0,
+   "brand": {
+    "CCD": 0.37383177570093457,
+    "KLM": 0.11363636363636363,
+    "A-B": 0.43896713615023475,
+    "EFX": 0.08630393996247655,
+    "WIE": 0.4351032448377581,
+    "CWT": 0.038651685393258424,
+    "DIN": 0.4722222222222222,
+    "WEG": 0.06303724928366762,
+    "CEM": 0.014925373134328358,
+    "DEG": 0.3764705882352941,
+    "ELMEX": 0.3627450980392157,
+    "C3": 0.0
+   },
+   "rule": "mutlak 0.15",
+   "poz_kafasiz": 0
+  }
+ },
+ "urun": 0.2029,
+ "not": "TAM URUN ZINCIRI (poz kafasi dahil). Esikler D6'da secildi, D7'de yeniden taranmadi. MIKRO."
+}

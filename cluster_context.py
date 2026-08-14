@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""KUME BAGLAMI: "this secenek, parcanin DIGER secenekleri between nerede duruyor?"
+"""KUME BAGLAMI: "this option, parcanin DIGER secenekleri between nerede duruyor?"
 
 SORUN. Bugunku selector NOKTASALDIR: each (konum, direction) secenegini single basina
 puanlar. Oysa karar kurali GORELI (part-maksimumunun %85'i) and real soru
@@ -14,11 +14,11 @@ instead of elle secilmis cluster ozetleri. Olculen selector verimliligi %36.5 an
 gerekcelenir; otherwise hipotez zayiflar.
 
 Sutunlar (8):
-  log_secenek   ln(1 + parcadaki secenek count)
+  log_secenek   ln(1 + parcadaki option count)
   log_aday      ln(1 + parcadaki AYRIK candidate count)
   aday_secenek  this adayin kac secenegi present
-  aday_sira     this secenegin AYNI ADAY icindeki skor order (0 = most iyi)
-  aday_fark     skor - (same adayin most high skoru)      [<= 0]
+  aday_sira     this secenegin AYNI ADAY icindeki score order (0 = most iyi)
+  aday_fark     score - (same adayin most high skoru)      [<= 0]
   en_iyi_uzak   parcanin EN IYI secenegine distance / kosegen
   en_iyi_aci    most iyi secenegin yonuyle angle (derece/180)
   rakip_5mm     5mm inside, skoru BUNDAN YUKSEK ayrik candidate count
@@ -52,7 +52,7 @@ def oznitelik (P ,D ,idx ,s ,diag ):
     ayrik =np .unique (idx )
     X [:,1 ]=np .log1p (len (ayrik ))
 
-    # --- ADAY ICI: same adaya ait secenekler between order and difference
+    # --- ADAY ICI: same adaya ait options between order and difference
     # `idx` ARDISIK OLMAYABILIR; sirali gruplama for yeniden etiketle.
     _ ,ters =np .unique (idx ,return_inverse =True )
     n_ad =ters .max ()+1 
@@ -81,7 +81,7 @@ def oznitelik (P ,D ,idx ,s ,diag ):
     X [:,6 ]=np .degrees (np .arccos (np .clip (D @D [b ],-1 ,1 )))/180.0 
 
     # --- YEREL REKABET: 5mm inside skoru more high AYRIK candidate count
-    # candidate basina most high skor and temsili konum
+    # candidate basina most high score and temsili konum
     ad_p =np .zeros ((n_ad ,3 ))
     ad_p [ters ]=P # same adayin secenekleri same konumda
     if n_ad <=4000 :

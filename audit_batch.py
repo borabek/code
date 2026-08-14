@@ -126,9 +126,9 @@ def main ():
         else :
             keep .append (p )
 
-    print (f"yeni dosya: {len (paths )}")
+    print (f"yeni file: {len (paths )}")
     print (f"  KAPSAM DISI (dagitim blogu vb): {len (drop_scope )}")
-    print (f"  YASAKLI LISTEDE (daha once elenmis): {len (drop_guard )}")
+    print (f"  YASAKLI LISTEDE (more before elenmis): {len (drop_guard )}")
     print (f"  BOS GEOMETRI: {len (drop_empty )}")
     print (f"  TEMIZ -> etiketlenecek: {len (keep )}")
     print ("\n  aile dagilimi (ilk 12):",
@@ -146,11 +146,11 @@ def main ():
                 os .remove (p )
             except OSError :
                 pass 
-        print (f"\n  {len (drop_scope )+len (drop_guard )+len (drop_empty )} dosya SILINDI "
+        print (f"\n  {len (drop_scope )+len (drop_guard )+len (drop_empty )} file SILINDI "
         f"(kapsam-disi olanlar koruma listesine yazildi)")
 
     if not keep :
-        sys .exit ("HATA: temiz dosya kalmadi")
+        sys .exit ("HATA: temiz file kalmadi")
 
 
 if __name__ =="__main__":

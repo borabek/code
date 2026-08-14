@@ -8,19 +8,19 @@ BIREBIR same (silindir 50/50, opening 0/0) -- i.e. difference tamamen segmentasy
 kolunda. Dagitilan `kazanan_hgb_derin` da AYNI onbellekten egitildi, i.e. this
 onceden present which is a state and kiyas adil kalir.
 
-RESULT: onbellekten olculen numbers URUNUN count DEGILDIR. Kapi olcumleri
-(`probe_d6_product.py`, `probe_dagitim_verify.py`) URUNUN CANLI YOLUNDAN gecer.
+RESULT: onbellekten measured_path numbers URUNUN count DEGILDIR. Kapi olcumleri
+(`probe_d6_product.py`, `probe_deploy_verify.py`) URUNUN CANLI YOLUNDAN gecer.
 Bu betik residual a PARITE KAPISI not, a AYRISMA OLCERIDIR.
 
 
 Egitim `run_p6_feature.py` with ONBELLEKTEN (silindir pkl, `_tam_oz` havuzu)
 uretiliyor; urun (`product_p6.secenek_tablosu`) same seyi STEP'ten YENIDEN
-hesapliyor. Ikisi ayrisirsa model egitildigi uzaydan different a uzayda skor
+hesapliyor. Ikisi ayrisirsa model egitildigi uzaydan different a uzayda score
 produces and this SESSIZ becomes -- this projede two times became.
 
 Bu betik birkac parcada two yolu yan yana runs and
   * pool boyutu / konumlari
-  * secenek count
+  * option count
   * 92 sutunun MAKSIMUM MUTLAK FARKI
 raporlar. Fark buyukse D7 OKUMASI YAPILMAZ.
 
@@ -32,7 +32,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -57,7 +57,7 @@ def main ():
     fs =sorted (f for f in os .listdir ("results/_p6_oz")
     if f .startswith (on +"_")and f .endswith (".npz"))
     if not fs :
-        sys .exit (f"cache yok: results/_p6_oz/{on }_*.npz")
+        sys .exit (f"cache none: results/_p6_oz/{on }_*.npz")
     rapor =[]
     bak =0 
     for f in fs :
@@ -91,20 +91,20 @@ def main ():
         if len (Pu )==len (Pc ):
             d ["konum_maks_fark_mm"]=float (np .abs (Pu -Pc ).max ())
         if Xu .shape ==Xc .shape :
-            fark =np .abs (Xu -Xc )
-            d ["oz_maks_fark"]=float (fark .max ())
-            d ["oz_maks_fark_sutun"]=int (fark .max (0 ).argmax ())
-            d ["oz_ort_fark"]=float (fark .mean ())
+            diff =np .abs (Xu -Xc )
+            d ["oz_maks_fark"]=float (diff .max ())
+            d ["oz_maks_fark_sutun"]=int (diff .max (0 ).argmax ())
+            d ["oz_ort_fark"]=float (diff .mean ())
         rapor .append (d )
         print (json .dumps (d ,ensure_ascii =False ),flush =True )
         bak +=1 
 
     same_ =[r for r in rapor if r .get ("oz_maks_fark")is not None 
     and r ["oz_maks_fark"]<1e-6 ]
-    print (f"\n{len (same_ )}/{len (rapor )} parcada oznitelikler BIREBIR ayni")
+    print (f"\n{len (same_ )}/{len (rapor )} parcada oznitelikler BIREBIR same")
     if len (same_ )!=len (rapor ):
         print ("!! AYRISMA VAR -- D7 OKUMASI YAPILMAZ, before sebebi bulunur.")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":on ,"rapor":rapor ,
+    json .dump ({"damga":receipt_hash .damga (),"cluster":on ,"rapor":rapor ,
     "birebir":len (same_ ),"bakilan":len (rapor ),
     "not":"Egitim onbellegi with urun yolunun oznitelik paritesi."},
     open (f"results/p6_parite_{on }.json","w"),indent =1 )

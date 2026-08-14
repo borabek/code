@@ -1,0 +1,20 @@
+{
+ "A_ESKI4_duz": {
+  "candidate": 2328,
+  "candidate_recall": 0.7566137566137566,
+  "detection": 0.6941304704374682,
+  "tespit_alet": 0.6939948409094708
+ },
+ "B_YENI4_eksen": {
+  "candidate": 2739,
+  "candidate_recall": 0.8299319727891157,
+  "detection": 0.6363790339157245,
+  "tespit_alet": 0.6416866748875671
+ },
+ "C_HEPSI8_eksen": {
+  "candidate": 4135,
+  "candidate_recall": 0.9145880574452003,
+  "detection": 0.6983498436845329,
+  "tespit_alet": 0.6929134680134679
+ }
+}

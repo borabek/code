@@ -2,17 +2,17 @@
 """p5-v2 SECENEK URETICI -- gate'ten ONCE, ORTAK secim for.
 
 MEASURED (`gate-before-poz-after-tavani-kirpiyor`): gate'i poz seciminden ONCE
-uygulamak ortak kahin tavanini 0.3781 -> 0.3155 kirpiyor. Bu modul, HAM candidate
+uygulamak ortak oracle tavanini 0.3781 -> 0.3155 kirpiyor. Bu modul, HAM candidate
 havuzu for secenekleri produces; secim and gate SONRA gelir.
 
-SECENEK TURLERI (tez sadakati: MEVCUT always 0 numarali secenek):
+SECENEK TURLERI (tez sadakati: MEVCUT always 0 numarali option):
   0 MEVCUT   : `v_o` -- tezin own turetmesi, GERCEK fallback
   1 SILINDIR : B-rep silindir agzi (+/- axis)
   2 PLANAR   : duzlemsel face ic halkasi (slot/kare giris) (+/- normal)
   3 NULL     : adayi AT (p5-v2 a adayi elemekte serbest)
 
 Bir FIZIKSEL AGIZ most extra a adaya verilir -- this kisit selector tarafinda
-(bipartite) uygulanir; here only secenekler and OZNITELIKLERI uretilir.
+(bipartite) uygulanir; here only options and OZNITELIKLERI uretilir.
 """
 import numpy as np 
 
@@ -29,8 +29,8 @@ OZ_AD =["tur_silindir","tur_planar","tur_null",
 # PARCA-ICI GORELI OZNITELIKLER: DENENDI, REVERTED (2026-08-09).
 # Gate tarihindeki most large single kazanc part-ici z-skordu
 # ([[part-ici-zskor-deployed]]) and same fikri buraya tasidim:
-# candidate-ici ranking (distance/angle/radius) + part genelinde z-skor, 6 column.
-# MEASURED (LOMO, same kurulum, single degisken):
+# candidate-ici ranking (distance/angle/radius) + part genelinde z-score, 6 column.
+# MEASURED (LOMO, same kurulum, single variable):
 #     ham 23 column -> secim +0.0391 | uctan uca 0.1465
 #     ham 17 column -> secim +0.0501 | uctan uca 0.1649   <- IYI OLAN
 # BOZDU. Muhtemel reason: gate'in oznitelikleri markalar arasi kiyaslanamaz
@@ -48,10 +48,10 @@ def _birim (v ):
     return v /n if n >1e-9 else np .array ([0.0 ,0.0 ,1.0 ])
 
 
-def secenekler (P ,D ,cyls ,acik ,diag ,gate_s =None ,votes =None ,komsu =None ):
-    """Her candidate for secenek listesi. Doner: list[list[(konum, direction, oz, agiz_id)]].
+def options (P ,D ,cyls ,acik ,diag ,gate_s =None ,votes =None ,komsu =None ):
+    """Her candidate for option listesi. Doner: list[list[(konum, direction, feat, agiz_id)]].
 
-    `agiz_id`: same fiziksel agzi kullanan secenekler AYNI kimligi carries; selector
+    `agiz_id`: same fiziksel agzi kullanan options AYNI kimligi carries; selector
     a agzi two adaya veremesin diye. MEVCUT and NULL for -1 (kisit disi).
     """
     P =np .asarray (P ,float );D =np .asarray (D ,float )
@@ -77,7 +77,7 @@ def secenekler (P ,D ,cyls ,acik ,diag ,gate_s =None ,votes =None ,komsu =None )
         o =[]
         u0 =_birim (D [i ])
 
-        def oz (mes ,aci ,yar ,uzn ,esd ,cev ,aln ,tur ,direction ,n_sec ):
+        def feat (mes ,aci ,yar ,uzn ,esd ,cev ,aln ,tur ,direction ,n_sec ):
             return [float (tur ==TUR_SILINDIR ),float (tur ==TUR_PLANAR ),
             float (tur ==TUR_NULL ),
             mes ,mes /max (diag ,1e-6 ),aci ,yar ,uzn ,esd ,cev ,aln ,
@@ -86,7 +86,7 @@ def secenekler (P ,D ,cyls ,acik ,diag ,gate_s =None ,votes =None ,komsu =None )
             float (gate_s [i ]),float (votes [i ]),float (n ),float (n_sec )]
 
             # 0) MEVCUT -- tezin cevabi, HER ZAMAN first
-        o .append ((P [i ],u0 ,oz (0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,
+        o .append ((P [i ],u0 ,feat (0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,
         TUR_MEVCUT ,u0 ,0 ),-1 ))
         for k ,(m ,a ,tur ,yar ,uzn ,esd ,cev ,aln )in enumerate (agizlar ):
             mes =float (np .linalg .norm (m -P [i ]))
@@ -95,9 +95,9 @@ def secenekler (P ,D ,cyls ,acik ,diag ,gate_s =None ,votes =None ,komsu =None )
             for sg in (1.0 ,-1.0 ):
                 y =sg *a 
                 aci =float (np .degrees (np .arccos (np .clip (abs (float (y @u0 )),-1 ,1 ))))
-                o .append ((m ,y ,oz (mes ,aci ,yar ,uzn ,esd ,cev ,aln ,tur ,y ,0 ),k ))
+                o .append ((m ,y ,feat (mes ,aci ,yar ,uzn ,esd ,cev ,aln ,tur ,y ,0 ),k ))
                 # 3) NULL -- adayi at
-        o .append ((None ,None ,oz (0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,
+        o .append ((None ,None ,feat (0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,0.0 ,
         TUR_NULL ,u0 ,0 ),-1 ))
         for t in o :# n_secenek'i geriye yaz
             t [2 ][-1 ]=float (len (o ))

@@ -1,0 +1,107 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "TEZ-SAF": {
+   "rule": "mutlak 0.1",
+   "aday_per_parca": 13.465227817745804,
+   "D7": {
+    "robot": 0.22129436325678498,
+    "detection": 0.39958246346555326,
+    "makro": 0.22520944933607523,
+    "en_kotu": 0.0,
+    "brand": {
+     "CCD": 0.6007905138339921,
+     "KLM": 0.08,
+     "A-B": 0.33488372093023255,
+     "EFX": 0.06926406926406926,
+     "WIE": 0.460196292257361,
+     "CWT": 0.017379679144385027,
+     "DIN": 0.4028268551236749,
+     "WEG": 0.0299625468164794,
+     "CEM": 0.0,
+     "DEG": 0.1875,
+     "ELMEX": 0.49645390070921985,
+     "C3": 0.023255813953488372
+    }
+   }
+  },
+  "B-REP": {
+   "rule": "mutlak 0.15",
+   "aday_per_parca": 101.69580838323353,
+   "D7": {
+    "robot": 0.2563121652639633,
+    "detection": 0.4269319051262433,
+    "makro": 0.25625304087111833,
+    "en_kotu": 0.0,
+    "brand": {
+     "CCD": 0.46808510638297873,
+     "KLM": 0.12121212121212122,
+     "A-B": 0.476878612716763,
+     "EFX": 0.054474708171206226,
+     "WIE": 0.49290060851926976,
+     "CWT": 0.022031823745410038,
+     "DIN": 0.4956772334293948,
+     "WEG": 0.05405405405405406,
+     "CEM": 0.0,
+     "DEG": 0.3888888888888889,
+     "ELMEX": 0.48,
+     "C3": 0.020833333333333332
+    }
+   }
+  },
+  "TAM HAVUZ": {
+   "rule": "mutlak 0.1",
+   "aday_per_parca": 279.9425149700599,
+   "D7": {
+    "robot": 0.23449094686850697,
+    "detection": 0.4197091124962897,
+    "makro": 0.23917586539610824,
+    "en_kotu": 0.011695906432748537,
+    "brand": {
+     "CCD": 0.3979848866498741,
+     "KLM": 0.12179487179487179,
+     "A-B": 0.46248462484624847,
+     "EFX": 0.0963855421686747,
+     "WIE": 0.4199395770392749,
+     "CWT": 0.03410705826622454,
+     "DIN": 0.46588235294117647,
+     "WEG": 0.06936416184971098,
+     "CEM": 0.011695906432748537,
+     "DEG": 0.3695652173913043,
+     "ELMEX": 0.40609137055837563,
+     "C3": 0.014814814814814815
+    }
+   }
+  }
+ },
+ "urun": {
+  "robot": 0.2029,
+  "detection": 0.4523,
+  "makro": 0.2146
+ },
+ "not": "Esik D6'da secildi, D7'de yeniden taranmadi. Egitim D6'yi icermez. TAM URUN ZINCIRI (poz kafasi). MIKRO."
+}

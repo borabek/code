@@ -98,7 +98,7 @@ def _kapi ():
     tah =np .array (tah ,float )
     yg =np .array (yogun_ger ,float )
     yt =np .array (yogun_tah ,float )
-    print (f"GT'den adet tahmini -- {len (ger )} part")
+    print (f"GT'den count tahmini -- {len (ger )} part")
     print (f"  TAM isabet        : {100 *(tah ==ger ).mean ():5.1f}%")
     print (f"  +/-1 icinde       : {100 *(np .abs (tah -ger )<=1 ).mean ():5.1f}%")
     print (f"  +/-2 icinde       : {100 *(np .abs (tah -ger )<=2 ).mean ():5.1f}%")

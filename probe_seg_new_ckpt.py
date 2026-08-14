@@ -7,7 +7,7 @@ onbellekten not VERILEN CHECK NOKTASINDAN hesaplanmasidir. Boylece A
 
 BUGUN OLCULEN TABAN (canli, 27 Temmuz kontrol noktalari):
 
-| brand | GT'de olasilik | rastgele surface | ratio |
+| brand | GT'de probability | rastgele surface | ratio |
 |---|---|---|---|
 | SUPU | 0.4815 | 0.0058 | 83x |
 | UPUN | 0.4448 | 0.0219 | 20x |
@@ -103,7 +103,7 @@ def main ():
         if i %20 ==0 :
             print (f"  {i }/{len (candidate )}",flush =True )
 
-    print (f"\n{'brand':<7}{'GT':>7}{'GT olasilik':>13}{'rastgele':>11}"
+    print (f"\n{'brand':<7}{'GT':>7}{'GT probability':>13}{'rastgele':>11}"
     f"{'ratio':>9}{'AUC':>9}")
     out ={}
     for m_ in sorted (ist ,key =lambda x :-sum (ist [x ]["gt"])):
@@ -119,7 +119,7 @@ def main ():
     if "NIT"in out :
         o =out ["NIT"]["ratio"]
         print (f"\nKAPI: NIT orani >= 2.0 (bugunku baseline 1.19x)")
-        print (f"  olculen {o :.2f}x -> "
+        print (f"  measured_path {o :.2f}x -> "
         f"{'GECTI'if o >=2.0 else 'KALDI'}")
     ad =a .label_ or os .path .basename (a .ckpt [0 ]).replace (".pt","")
     json .dump ({"ckpt":a .ckpt ,"brand":out ,

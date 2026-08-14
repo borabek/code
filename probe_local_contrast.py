@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """KALDIRAC SONDASI: kuresel seviye olu, YEREL karsitlik yasiyor mu?
 
-OTOPSI BULGUSU (results/otopsi_segmentasyon.json):
-  NIT'te GT'de olasilik 0.5244, RASTGELE yuzeyde 0.4394 -> ayrim 1.19x
+OTOPSI BULGUSU (results/autopsy_segmentation.json):
+  NIT'te GT'de probability 0.5244, RASTGELE yuzeyde 0.4394 -> ayrim 1.19x
   SUPU'da 0.4815 / 0.0058 -> 83x
 Yani dense parcada segmentasyon TUM govdeyi boyuyor. Zincirin most basindaki
 most guclu feature orada bilgi tasimiyor; asagidaki five mekanizmanin all of them
@@ -79,7 +79,7 @@ def main ():
     kay .update ({str (p ):r for p ,r in d6_record .yukle ().items ()
     if str (p )not in kay })
     ad =["ham"]+[f"{k }_{int (R )}"for R in YARICAP 
-    for k in ("fark","yuzdelik","tepe")]
+    for k in ("diff","yuzdelik","tepe")]
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
     for pid ,r in kay .items ():
@@ -138,8 +138,8 @@ def main ():
     json .dump ({"brand":out ,"yaricap":YARICAP ,
     "not":"Segmentasyon olasiliginin YEREL karsitligi. AUC = GT "
     "tepeleri vs >=4mm uzak tepeler. D7'ye BAKILMADI."},
-    open ("results/yerel_karsitlik.json","w"),indent =1 )
-    print ("receipt -> results/yerel_karsitlik.json")
+    open ("results/local_contrast.json","w"),indent =1 )
+    print ("receipt -> results/local_contrast.json")
 
 
 if __name__ =="__main__":

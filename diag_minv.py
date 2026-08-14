@@ -90,7 +90,7 @@ def main ():
             except Exception :
                 continue 
 
-    print (f"\nmin_v 10 -- tahmin CP'lerinin kaynak fragment boyutuna gore TP/FP dagilimi:")
+    print (f"\nmin_v 10 -- tahmin CP'lerinin source fragment boyutuna per TP/FP dagilimi:")
     print (f"  {'boyut':>10s}  {'TP':>4s} {'FP':>4s}  {'precision':>9s}")
     for b in BUCKETS :
         tp ,fp =counts [b ]

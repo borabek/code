@@ -1,0 +1,61 @@
+{
+ "cluster": "d6",
+ "muhur": "71364f2a1718bba4",
+ "bucket": {
+  "KALABALIK": 328,
+  "ESLESTI": 1077,
+  "ADAY_YOK": 856,
+  "GATE_REDDI": 411
+ },
+ "merdiven": {
+  "0 GERCEK": {
+   "agirlikli": 0.28069699239421014,
+   "dusuk": 0.3095051060487039,
+   "very": 0.03514211886304909
+  },
+  "1 +ISARET": {
+   "agirlikli": 0.3272077190546655,
+   "dusuk": 0.36135113904163396,
+   "very": 0.03617571059431525
+  },
+  "2 +ACI": {
+   "agirlikli": 0.4118584860276342,
+   "dusuk": 0.4516889238020424,
+   "very": 0.0723514211886305
+  },
+  "3 +YANAL": {
+   "agirlikli": 0.36531476034758886,
+   "dusuk": 0.3927729772191673,
+   "very": 0.131266149870801
+  },
+  "4 +IKISI(=TESPIT)": {
+   "agirlikli": 0.5717041414713459,
+   "dusuk": 0.6009426551453261,
+   "very": 0.3224806201550388
+  },
+  "5 +ATAMA(macar)": {
+   "agirlikli": 0.5717041414713459,
+   "dusuk": 0.6009426551453261,
+   "very": 0.3224806201550388
+  },
+  "6 +GATE": {
+   "agirlikli": 0.9134478926157383,
+   "dusuk": 0.941803642825411,
+   "very": 0.6717488789237669
+  },
+  "7 +ADAY(mutlak)": {
+   "agirlikli": 1.0,
+   "dusuk": 1.0,
+   "very": 1.0
+  }
+ },
+ "hash": {
+  "cp_config.json": "324844cda502",
+  "wire_gate_v5.pkl": "e9539f3c4e57",
+  "p3c_axis_selector.pkl": "ebc2190c6167",
+  "sina_cluster.py": "5ae95338c0f9",
+  "wire_gate.py": "4b163aec3b7a",
+  "cp_openings.py": "d6bc011bd794",
+  "robot_cp.py": "49678bc11bc6"
+ }
+}

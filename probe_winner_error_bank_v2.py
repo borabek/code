@@ -1,18 +1,18 @@
 # -*- coding: utf-8 -*-
 """KAZANAN yapilandirmanin HATA BANKASI: loss full as nerede?
 
-Kazanan (2026-08-11 gece): B-rep havuzu + mouth tanimlayicilari + HGB-derin,
-D7 brand-disi TAM ZINCIR robot **0.2773** / tespit 0.4813.
+Kazanan (2026-08-11 night): B-rep havuzu + mouth tanimlayicilari + HGB-deep,
+D7 brand-disi TAM ZINCIR robot **0.2773** / detection 0.4813.
 
 `error-bankasi-fn-taksonomisi` kaydindaki kovalar ESKI yigin for olculmustu
 (ADAY_YOK %57.0 / POZ %27.2 / KALABALIK %10.2 / GATE_REDDI %5.6). Havuz, label
-and selector DEGISTI -- that distribution residual gecerli olmayabilir. 0.40'a giden kolu
+and selector DEGISTI -- that distribution residual valid olmayabilir. 0.40'a giden kolu
 secmeden before yeniden olculur.
 
 KOVALAR (each kacirilan GT for, SIRAYLA sorulur):
   ADAY_YOK      havuzda 2mm lateral + 40mm axial inside HIC candidate absent
   YON_YOK       konum present but no adayin yonu 10 derece inside not
-  GATE_REDDI    robot-uygun candidate VARDI but gate esigi under kaldi
+  GATE_REDDI    robot-eligible candidate VARDI but gate esigi under kaldi
   NMS_YEDI      gate'i gecti but kalabalik bastirma sildi
   POZ_BOZDU     secildi, but poz kafasi ciktiyi tolerans disina tasidi
   ESLESME       all of them tamam but bire-a eslesmede baska GT'ye gitti
@@ -26,7 +26,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -42,13 +42,13 @@ OZ ="results/_tam_oz"
 TAN ="results/_tan_hizali"
 OB ="results/_p1_olasilik_d7"
 KAYNAKLAR =(0 ,1 )
-ESIK =0.05 # HGB-derin for D6'da secilmisti
+ESIK =0.05 # HGB-deep for D6'da secilmisti
 GIRME ,ERISIM =3 +58 ,5 +58 # mouth_descriptor sutunlari X'in SONUNDA
 ISARET =os .environ .get ("ISARET","1")not in ("0","")
 YANAL ,ACI ,EKSENEL =2.0 ,10.0 ,40.0 
 
 
-def uygun (P ,D ,g ,gd ):
+def eligible (P ,D ,g ,gd ):
     """Bu havuzda `g` for ROBOT olcutunu saglayan adaylarin maskesi."""
     n =np .linalg .norm (gd )
     if n <1e-9 or not len (P ):
@@ -64,9 +64,9 @@ def uygun (P ,D ,g ,gd ):
 
 
 def main ():
-    model =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    model =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     S =K .step_map ()
-    kova =collections .Counter ()
+    bucket =collections .Counter ()
     fp_kaynak =collections .Counter ()
     n_gt =n_fp =0 
     parts =[f [3 :-4 ]for f in sorted (os .listdir (OZ ))
@@ -90,7 +90,7 @@ def main ():
         kay0 =kayn [m ]
         if len (X )<2 :
             n_gt +=len (G )
-            kova ["ADAY_YOK"]+=len (G )
+            bucket ["ADAY_YOK"]+=len (G )
             continue 
         s =np .asarray (model .predict_proba (
         wire_gate .within_part (X ,"zskor"))[:,1 ],float )
@@ -124,43 +124,43 @@ def main ():
         if fp and len (k2 )==len (P3 ):
             _kon =np .zeros (len (P3 ),bool )
             for j in range (len (G )):
-                _kon |=uygun (P3 ,D3 ,G [j ],Gd [j ])[1 ]
+                _kon |=eligible (P3 ,D3 ,G [j ],Gd [j ])[1 ]
             for i in np .where (~_kon )[0 ]:
                 fp_kaynak ["seg"if k2 [i ]==0 else "B-rep"]+=1 
                 # kacirilanlari kovala
-        eslesen =set ()
+        matched =set ()
         for j in range (len (G )):
-            _k ,ok3 =uygun (P3 ,D3 ,G [j ],Gd [j ])
+            _k ,ok3 =eligible (P3 ,D3 ,G [j ],Gd [j ])
             if ok3 .any ():
-                eslesen .add (j )
+                matched .add (j )
         for j in range (len (G )):
-            if j in eslesen :
+            if j in matched :
                 continue 
-            _k0 ,ok0 =uygun (P0 ,D0 ,G [j ],Gd [j ])
+            _k0 ,ok0 =eligible (P0 ,D0 ,G [j ],Gd [j ])
             if not _k0 .any ():
-                kova ["ADAY_YOK"]+=1 
+                bucket ["ADAY_YOK"]+=1 
             elif not ok0 .any ():
-                kova ["YON_YOK"]+=1 
-            elif not uygun (P1 ,D1 ,G [j ],Gd [j ])[1 ].any ():
-                kova ["GATE_REDDI"]+=1 
-            elif not uygun (P2 ,D2 ,G [j ],Gd [j ])[1 ].any ():
-                kova ["NMS_YEDI"]+=1 
+                bucket ["YON_YOK"]+=1 
+            elif not eligible (P1 ,D1 ,G [j ],Gd [j ])[1 ].any ():
+                bucket ["GATE_REDDI"]+=1 
+            elif not eligible (P2 ,D2 ,G [j ],Gd [j ])[1 ].any ():
+                bucket ["NMS_YEDI"]+=1 
             else :
-                kova ["POZ_BOZDU"]+=1 
-                # eslesen but Macar'da kaybedilenler
-        kova ["ESLESME"]+=max (len (eslesen )-tp ,0 )
+                bucket ["POZ_BOZDU"]+=1 
+                # matched but Macar'da kaybedilenler
+        bucket ["ESLESME"]+=max (len (matched )-tp ,0 )
     print (f"D7 {n_gt } GT | FP {n_fp }\n")
-    print (f"{'kova':<14}{'number':>7}{'GT payi':>10}")
-    for k ,v in kova .most_common ():
+    print (f"{'bucket':<14}{'number':>7}{'GT payi':>10}")
+    for k ,v in bucket .most_common ():
         print (f"{k :<14}{v :>7}{v /max (n_gt ,1 ):>10.3f}")
     print (f"\nFP kaynagi: {dict (fp_kaynak )}")
-    json .dump ({"damga":makbuz_hash .damga (),"n_gt":n_gt ,"n_fp":int (n_fp ),
-    "kova":dict (kova ),"fp_kaynak":dict (fp_kaynak ),
-    "yigin":"B-rep havuzu + mouth tanimlayicilari + HGB-derin, threshold 0.05",
+    json .dump ({"damga":receipt_hash .damga (),"n_gt":n_gt ,"n_fp":int (n_fp ),
+    "bucket":dict (bucket ),"fp_kaynak":dict (fp_kaynak ),
+    "yigin":"B-rep havuzu + mouth tanimlayicilari + HGB-deep, threshold 0.05",
     "not":"KAZANAN yapilandirmanin error bankasi. D7 brand-disi, "
     "TAM ZINCIR. Kovalar SIRAYLA sorulur, ilk eslesende durur."},
-    open (os .environ .get ("HB_CIKTI","results/kazanan_hata_bankasi.json"),"w"),indent =1 )
-    print ("receipt -> results/kazanan_hata_bankasi.json")
+    open (os .environ .get ("HB_CIKTI","results/winner_error_bank.json"),"w"),indent =1 )
+    print ("receipt -> results/winner_error_bank.json")
 
 
 if __name__ =="__main__":

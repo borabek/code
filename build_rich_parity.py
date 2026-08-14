@@ -17,7 +17,7 @@ yaniltmisti.
 ZENGIN BLOKLAR (33):
     A1 konum          (3)  mesh-bbox'a normalize edilmis konum
     A2 face uzakligi   (6)  bbox yuzlerine kosegen-normalize uzakliklar
-    B  very-radius   (24)  r=3/6/10/15mm kurelerde sinif-olasilik profili (5) + yogunluk (1)
+    B  very-radius   (24)  r=3/6/10/15mm kurelerde sinif-probability profili (5) + yogunluk (1)
     D  normal-degisim (3)  r=3/6/10mm'de normallerin eksene izdusumunun std'si
 TAPER (5) BILEREK YOK -- olculmus olu.
 
@@ -102,17 +102,17 @@ def main ():
     parts =list (eligible ())
     print (f"{len (parts )} part",flush =True )
     X22 ,XR ,YY ,PID ,MFG ,VOT ,NGT =[],[],[],[],[],[],{}
-    t0 =time .time ();atlanan =0 
+    t0 =time .time ();skipped =0 
     for k ,(mfg ,pid ,jf ,stp )in enumerate (parts ,1 ):
         if k %50 ==0 :
-            print (f"  {k }/{len (parts )}  {time .time ()-t0 :.0f}s  (atlanan {atlanan })",flush =True )
+            print (f"  {k }/{len (parts )}  {time .time ()-t0 :.0f}s  (skipped {skipped })",flush =True )
         try :
             with io .open (jf ,encoding ="utf-8-sig")as f :
                 j =json .load (f )
             G =np .array ([[c ["Point"][q ]for q in "XYZ"]
             for c in (j .get ("ConnectionPoints")or [])],float )
             if not len (G ):
-                atlanan +=1 ;continue 
+                skipped +=1 ;continue 
             Gd =np .array ([[c ["InsertDirection"][q ]for q in "XYZ"]
             for c in j ["ConnectionPoints"]],float )
             Gd =Gd /(np .linalg .norm (Gd ,axis =1 ,keepdims =True )+1e-9 )
@@ -132,7 +132,7 @@ def main ():
                 # PARITE: urunun own candidate ureticisi
             cps ,probs ,_ ,_u =RC .derive_candidates (V ,F ,pbs ,stp ,cfg =cfg )
             if not cps :
-                atlanan +=1 ;continue 
+                skipped +=1 ;continue 
             xb =wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ,step_path =stp )
             xr =zengin (V ,F ,probs ,cps ,_normaller (V ,F ))
 
@@ -154,8 +154,8 @@ def main ():
             VOT +=[int (c .get ("_votes",1 ))for c in cps ]
             NGT [pid ]=len (Gm )
         except Exception as e :
-            atlanan +=1 
-            if atlanan <=5 :
+            skipped +=1 
+            if skipped <=5 :
                 print (f"    atlandi {pid }: {type (e ).__name__ }: {e }",flush =True )
         if k %200 ==0 and X22 :
             np .savez (OUT ,X22 =np .vstack (X22 ),XR =np .vstack (XR ),y =np .concatenate (YY ),
@@ -165,7 +165,7 @@ def main ():
     pids =np .array (PID ),mfg =np .array (MFG ),votes =np .array (VOT ),
     zengin_ad =np .array (ZENGIN_AD ))
     n =sum (len (a )for a in X22 )
-    print (f"\n-> {OUT }  ({n } candidate, {len (set (PID ))} part, atlanan {atlanan })")
+    print (f"\n-> {OUT }  ({n } candidate, {len (set (PID ))} part, skipped {skipped })")
     print (f"   X22 {np .vstack (X22 ).shape } | XR {np .vstack (XR ).shape } | "
     f"votes maks {max (VOT )} (urun tavani {len (models )})")
 

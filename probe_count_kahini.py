@@ -13,7 +13,7 @@ KANONIK girdiler (G7BIRLESIK + gate v6), MIKRO toplama, D7 (=DEV, 835 part).
 """
 import collections ,json ,os ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -22,7 +22,7 @@ from p1c_threshold import maske
 from sina_cluster import match_hungarian 
 
 gate =K .gate_yukle ()
-d7p =json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]
+d7p =json .load (open ("results/d7_exam_set.json"))["pidler"]
 k7 =K .yukle (d7p )
 
 arm =collections .defaultdict (list )
@@ -49,25 +49,25 @@ for pid ,r in k7 .items ():
     # 2) ADET KAHINI: real N, gate skoruna according to top-N
     o =np .zeros (len (gs ),bool )
     o [np .argsort (-gs )[:min (N ,len (gs ))]]=True 
-    arm ["adet kahini (top-N)"].append (ol (o ))
-    # 3) TAVAN UST SINIRI: count kahini + MUKEMMEL ranking (skor instead of
+    arm ["count kahini (top-N)"].append (ol (o ))
+    # 3) TAVAN UST SINIRI: count kahini + MUKEMMEL ranking (score instead of
     #    correct olanlari sec) -- count karari with SIRALAMA'yi separates
     tp_i =match_hungarian (P ,D ,G ,Gd ,dg ,K .YANAL ,K .ACI ,False ,signed =True )
     arm ["tum pool (esiksiz)"].append (ol (np .ones (len (gs ),bool )))
 
-print (f"D7 {len (arm ['threshold (urun)'])} part | adet MAE {np .mean (adet_hata ):.2f} "
+print (f"D7 {len (arm ['threshold (urun)'])} part | count MAE {np .mean (adet_hata ):.2f} "
 f"(medyan {np .median (adet_hata ):.0f})")
 res ={}
 for ad ,rows in arm .items ():
     res [ad ]=K .mikro (rows )
     print (f"  {ad :<22} MIKRO {res [ad ]:.4f}")
-d =res ["adet kahini (top-N)"]-res ["threshold (urun)"]
+d =res ["count kahini (top-N)"]-res ["threshold (urun)"]
 print (f"\nADET KAHININ KAZANCI: {d :+.4f}")
-print ("DECISION: "+("madde 4-5 ACIK -- yapisal adet karari insa edilir"
+print ("DECISION: "+("madde 4-5 ACIK -- yapisal count karari insa edilir"
 if d >=0.02 else 
-"madde 4-5 OLU -- MUKEMMEL adet bile esigi gecmiyor"))
-json .dump ({"damga":makbuz_hash .damga (),"mikro":res ,"kazanc":d ,
+"madde 4-5 OLU -- MUKEMMEL count bile esigi gecmiyor"))
+json .dump ({"damga":receipt_hash .damga (),"mikro":res ,"kazanc":d ,
 "adet_MAE":float (np .mean (adet_hata )),"n":len (adet_hata ),
-"not":"TAVAN olcumu: real count kahin as verildi. Gercek a "
-"adet tahmincisi bunun ALTINDA kalir. D7=DEV."},
-open ("results/adet_kahini.json","w"),indent =1 )
+"not":"TAVAN olcumu: real count oracle as verildi. Gercek a "
+"count tahmincisi bunun ALTINDA kalir. D7=DEV."},
+open ("results/count_kahini.json","w"),indent =1 )

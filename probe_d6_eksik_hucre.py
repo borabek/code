@@ -8,7 +8,7 @@ Bu betik that hucreyi doldurur: EGITIM GEREKMEZ, only gate maskesi + `v_o`.
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -33,7 +33,7 @@ for pid ,r in k6 .items ():
 
 P5 ={"SUPU":0.2903 ,"UPUN":0.3215 ,"MOR":0.1201 ,"NIT":0.0652 ,"UTL":0.0784 }
 ham ={"SUPU":0.1285 ,"UPUN":0.1246 ,"MOR":0.0607 ,"NIT":0.0610 ,"UTL":0.0369 }
-print (f"{'brand':<6} {'n':>4} {'ham v_o':>9} {'gate+v_o':>9} {'p5v2+gate':>10} {'fark':>8}")
+print (f"{'brand':<6} {'n':>4} {'ham v_o':>9} {'gate+v_o':>9} {'p5v2+gate':>10} {'diff':>8}")
 sat ={}
 for m in P5 :
     rows =per .get (m ,[])
@@ -44,7 +44,7 @@ for m in P5 :
 gv =float (np .mean (list (sat .values ())));pv =float (np .mean (list (P5 .values ())))
 print (f"\nORT   ham {np .mean (list (ham .values ())):.4f} | gate+v_o {gv :.4f} | "
 f"p5v2+gate {pv :.4f} | FARK {pv -gv :+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"gate_vo":sat ,"p5v2_gate":P5 ,
-"ham_vo":ham ,"ort":{"gate_vo":gv ,"p5v2_gate":pv ,"fark":pv -gv },
+json .dump ({"damga":receipt_hash .damga (),"gate_vo":sat ,"p5v2_gate":P5 ,
+"ham_vo":ham ,"ort":{"gate_vo":gv ,"p5v2_gate":pv ,"diff":pv -gv },
 "not":"MIKRO. Egitim none; gate maskesi + v_o. p5v2 sayilari LOMO."},
 open ("results/d6_eksik_hucre.json","w"),indent =1 )

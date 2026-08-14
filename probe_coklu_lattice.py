@@ -14,7 +14,7 @@ lattice removes and KUMULATIF kapsamayi olcer:
 EGER 3 kafesle NIT 0.80+'a cikiyorsa 0.70 KONUSULABILIR hale gelir.
 Cikmiyorsa 0.70 yapisal as closed demektir and bunu simdi bilmek iyidir.
 
-AYRICA HARMONIK TUZAGI SINANIR: bulunan step L for L/2 and L/3 de denenir.
+AYRICA HARMONIK TUZAGI SINANIR: found step L for L/2 and L/3 de denenir.
 Onceki probe NIT'te 10.50mm buldu, oysa standart klemens adimlari 3.5-7.5mm --
 i.e. muhtemelen 2x harmonik bulunuyor and URETILEN IZGARA HER IKINCI CP'YI
 ATLIYOR. Alt harmonik more very GT tutuyorsa ceiling YUKSELIR.
@@ -54,9 +54,9 @@ def _izgara_tut (G ,seed ,step_ ):
     return (dik <=TOL )&(error <=TOL )
 
 
-def _en_iyi_kafes (G ,kalan ):
+def _en_iyi_kafes (G ,remaining ):
     """Kalan GT'leri EN COK kapsayan (seed, step) ikilisi."""
-    idx =np .where (kalan )[0 ]
+    idx =np .where (remaining )[0 ]
     if len (idx )<3 :
         return None ,0 ,0.0 
     Gk =G [idx ]
@@ -76,7 +76,7 @@ def _en_iyi_kafes (G ,kalan ):
     en_maske ,en_n ,en_L =None ,0 ,0.0 
     for step_ in candidate :
         for seed in Gk [::max (1 ,len (Gk )//8 )]:
-            m =_izgara_tut (G ,seed ,step_ )&kalan 
+            m =_izgara_tut (G ,seed ,step_ )&remaining 
             n =int (m .sum ())
             if n >en_n :
                 en_maske ,en_n ,en_L =m ,n ,float (np .linalg .norm (step_ ))
@@ -86,14 +86,14 @@ def _en_iyi_kafes (G ,kalan ):
 def coklu (G ,n_kafes =N_KAFES ):
     """Acgozlu: most iyi kafesi bul, kapsananlari cikar, tekrarla."""
     G =np .asarray (G ,float )
-    kalan =np .ones (len (G ),bool )
+    remaining =np .ones (len (G ),bool )
     kapsam ,adimlar =[],[]
     for _ in range (n_kafes ):
-        m ,n ,L =_en_iyi_kafes (G ,kalan )
+        m ,n ,L =_en_iyi_kafes (G ,remaining )
         if m is None or n <=1 :
             break 
-        kalan =kalan &~m 
-        kapsam .append (1.0 -kalan .mean ())
+        remaining =remaining &~m 
+        kapsam .append (1.0 -remaining .mean ())
         adimlar .append (round (L ,2 ))
     while len (kapsam )<n_kafes :
         kapsam .append (kapsam [-1 ]if kapsam else 0.0 )
@@ -147,7 +147,7 @@ def main ():
     f1_tav =2 *k3 /(1 +k3 )if k3 else 0.0 
     print (f"\n0.70 KARARI -- NIT 3 kafeste kapsama {k3 :.3f} "
     f"-> F1 tavani {f1_tav :.4f}")
-    print (f"  0.70 icin NIT'te ~0.66 gerekiyordu.")
+    print (f"  0.70 for NIT'te ~0.66 gerekiyordu.")
     print (f"  {'KONUSULABILIR'if f1_tav >=0.75 else 'YAPISAL OLARAK ZOR'}"
     f" (ceiling {f1_tav :.3f})")
     json .dump ({"tol":TOL ,"n_kafes":N_KAFES ,"brand":out ,
@@ -155,8 +155,8 @@ def main ():
     "not":"Acgozlu coklu lattice: en iyi izgarayi bul, kapsananlari "
     "cikar, tekrarla. Alt harmonikler (L/2, L/3) de candidate. "
     "MODEL YOK -- yalnizca GT geometrisi. D7'ye BAKILMADI."},
-    open ("results/coklu_kafes.json","w"),indent =1 )
-    print ("receipt -> results/coklu_kafes.json")
+    open ("results/coklu_lattice.json","w"),indent =1 )
+    print ("receipt -> results/coklu_lattice.json")
 
 
 if __name__ =="__main__":

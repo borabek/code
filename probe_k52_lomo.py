@@ -3,10 +3,10 @@
 
 SORU: gate'in esigi/agirligi HAVUZLANMIS kumede secilirse wrong objektif for
 secilmis becomes ([[measurement-yolu-and-secim-kusurlari]] ucuncu ders). LOMO (leave-one-
-manufacturer-out) secim FARKLI a ayar mi seciyor, and EN KOTU manufacturer duzeliyor mu?
+manufacturer-out) secim FARKLI a setting mi seciyor, and EN KOTU manufacturer duzeliyor mu?
 
 KURULUM (corpus: g10 with yeniden turetilmis v4):
-  each manufacturer sirayla TEST, kalanlar EGITIM  -> manufacturer basina AUC + F1
+  each manufacturer sirayla TEST, rest EGITIM  -> manufacturer basina AUC + F1
   threshold izgarasi taranir; UC secim olcutu KIYASLANIR:
     (a) HAVUZLANMIS mean  (b) LOMO ORTALAMASI  (c) EN KOTU manufacturer (DRO)
 KILL: (b) and (c) with (a) AYNI ayari seciyorsa arm NULL.

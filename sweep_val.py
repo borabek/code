@@ -42,7 +42,7 @@ for p in jd .iter_parts (a .corpus ):
     arr =cpr .infer_knngraph (model ,meta ,Vn ,device =a .device ,max_gpu_verts =14000 ,
     offset_scale =scale ,patch =cpr .is_patch_part (pn ),part_nr =pn )
     cache .append ((V ,arr ,gt ,gd ))
-print (f"inferred {len (cache )} val parts once; sweeping {len (thrs )} thresholds\n")
+print (f"inferred {len (cache )} val parts before; sweeping {len (thrs )} thresholds\n")
 
 print (f"  {'thr':>5} {'F1':>8} {'accuracy':>9} {'prec':>7} {'recall':>7}   TP/FP/FN")
 best =None 

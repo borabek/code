@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """B2: YON_YOK kovasi (660 GT, %21.4) ISARET hatasi mi, EKSEN hatasi mi?
 
-Kova aritmetigi: only this kova kurtarilirsa F1 0.2773 -> 0.474. Ama nasil
+Kova aritmetigi: only this bucket kurtarilirsa F1 0.2773 -> 0.474. Ama nasil
 kurtarilacagi, hatanin TURUNE bagli:
   * ISARET (180 derece ters): single a ISARET siniflandiricisi yeter -- easy
   * EKSEN (gercekten baska direction): full direction secicisi is required -- hard, and that arm
@@ -11,7 +11,7 @@ normalin 'direction absent'u %23.0 -> %1.9 indirdigini soyluyordu (B1 kolunun da
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -54,7 +54,7 @@ for pid in pids :
         if (aci <=ACI ).any ():
             say ["YON TAMAM"]+=1 
             continue 
-        say ["YON_YOK toplam"]+=1 
+        say ["YON_YOK total"]+=1 
         # ISARET mi? yonu ters cevirince duzeliyor mu
         if (180.0 -aci <=ACI ).any ():
             say ["  ISARET (180 ters)"]+=1 
@@ -75,12 +75,12 @@ for pid in pids :
                 if (a2 <=ACI ).any ():
                     say ["  MESH NORMALI KURTARIR"]+=1 
                     break 
-t =say ["YON_YOK toplam"]
+t =say ["YON_YOK total"]
 print (f"YON TAMAM {say ['YON TAMAM']} | YON_YOK {t }\n")
 for k in ("  ISARET (180 ters)","  YAKIN (10-30 derece)","  EKSEN (>30 derece)",
 "  MESH NORMALI KURTARIR"):
     print (f"{k :<28} {say [k ]:>5}  %{100 *say [k ]/max (t ,1 ):.1f}")
-json .dump ({"damga":makbuz_hash .damga (),"sayim":dict (say ),
+json .dump ({"damga":receipt_hash .damga (),"sayim":dict (say ),
 "not":"YON_YOK kovasinin ic kirilimi. D7 brand-disi, B-rep havuzu."},
-open ("results/b2_yon_isaret.json","w"),indent =1 )
-print ("\nmakbuz -> results/b2_yon_isaret.json")
+open ("results/b2_direction_sign.json","w"),indent =1 )
+print ("\nmakbuz -> results/b2_direction_sign.json")

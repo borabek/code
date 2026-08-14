@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 """T2: gate'in +0.1933'luk bosslugu NEREDE -- SIRALAMADA mi, ESIKTE mi?
 
-Tavan merdiveni (t_tavan.json) sunu showed:
-    this an tespit 0.7439  ->  kahin GATE 0.9372   (+0.1933)
+Tavan merdiveni (t_ceiling.json) sunu showed:
+    this an detection 0.7439  ->  oracle GATE 0.9372   (+0.1933)
     candidate tavani da 0.9372  -> i.e. ADAYLAR ZATEN YETERLI, sorun SECIMDE.
 
 Ama "secim" two ayri seydir and tedavileri BAMBASKA:
-    SIRALAMA : gate correct adaylara high skor veriyor mu? (kotuyse -> new BILGI is required)
+    SIRALAMA : gate correct adaylara high score veriyor mu? (kotuyse -> new BILGI is required)
     ESIK     : skorlar iyi but kesme yeri mi kotu? (kotuyse -> UCUZ, rule degisir)
 
 Bu betik bosslugu ikiye boler:
     A) this anki rule            : goreli threshold (0.5 x part-maks, baseline 0.25)
-    B) EN IYI GLOBAL threshold       : tum korpusta single sabit threshold, most iyisi secilir
+    B) EN IYI GLOBAL threshold       : tum korpusta single fixed threshold, most iyisi secilir
     C) EN IYI GORELI ratio       : goreli ratio taranir
     D) KAHIN PARCA-ICI threshold     : each part for EN IYI kesim (skorlara bakip)
     E) KAHIN top-K              : parcadaki GT count bilinseydi, most high K candidate
@@ -119,7 +119,7 @@ def main ():
     SON [f"C en iyi GORELI ratio ({en_o :.2f})"]=en2 
 
     def kahin_esik (p ):
-        """Bu part for EN IYI kesim (skorlara according to) -- kahin, calisma aninda bilinemez."""
+        """Bu part for EN IYI kesim (skorlara according to) -- oracle, calisma aninda bilinemez."""
         candidate =sorted (set (p ["s"].tolist ())|{0.0 })
         en_k ,en_m =-1 ,np .zeros (len (p ["s"]),bool )
         for e in candidate :
@@ -162,9 +162,9 @@ def main ():
         print (f"{k :<34}{v :>11.4f}{(v -a ):>+12.4f}")
 
     d_ =SON ["D KAHIN part-ici threshold"];f_ =SON ["F KAHIN gate (tam secim)"]
-    print (f"\nBOSLUGUN AYRISTIRMASI (toplam {f_ -a :+.4f}):")
+    print (f"\nBOSLUGUN AYRISTIRMASI (total {f_ -a :+.4f}):")
     print (f"  ESIK kaybi   (A -> D) : {d_ -a :+.4f}  "
-    f"({(d_ -a )/max (f_ -a ,1e-9 ):.0%}) -- kural degisikligiyle alinabilir")
+    f"({(d_ -a )/max (f_ -a ,1e-9 ):.0%}) -- rule degisikligiyle alinabilir")
     print (f"  SIRALAMA kaybi (D -> F): {f_ -d_ :+.4f}  "
     f"({(f_ -d_ )/max (f_ -a ,1e-9 ):.0%}) -- YENI BILGI gerekir")
     print (f"\n  gercekci threshold kollari: B {SON [f'B en iyi GLOBAL threshold ({en_e :.2f})']-a :+.4f} | "

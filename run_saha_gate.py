@@ -6,20 +6,20 @@ Robotun otonom davranabilmesi for "this sign %X dogrudur" diyebilmek is required
 Bugun GLB'deki kirmizi/turuncu ayrimi `robot_conf_auto=0.5` + 3 oy like KEYFI
 a esikle yapiliyor -- olculmus a kesinlige BAGLI DEGIL.
 
-BU BETIK. `full` MARKA KATLARINDA (each fold: a brand disarida, gorulmemis
-brand kosulu) each SECILEN prediction for (skor, correct mu) kaydeder and
+BU BETIK. `full` MARKA KATLARINDA (each fold: a brand disarida, unseen
+brand kosulu) each SECILEN prediction for (score, correct mu) kaydeder and
 precision-kapsama egrisini removes. Boylece "ONAYLI" katmani for threshold, olculmus
 kesinlige according to secilir.
 
 WHY D7 DEGIL. D7 SINAV kumesidir and butcesi 2 okumadir. Isletme esigi ayarlamak
 a okumayi HARCAR and dahasi esigi sinava UYDURMAK becomes. Kat olcumu same soruyu
-(gorulmemis brand) sinavi harcamadan yanitlar.
+(unseen brand) sinavi harcamadan yanitlar.
 
 DURUSTLUK NOTU. Buradaki precision, SECILEN tahminler icindir. Kapsama = ONAYLI
 isaretlerin GT'ye orani (i.e. isin ne kadari otonom yapilabilir). Kesinligi
 yukseltmek kapsamayi DUSURUR; ikisi same anda buyumez.
 
-Cikti: results/saha_kapisi_tam.json + ekrana tablo.
+Cikti: results/saha_gate_full.json + ekrana tablo.
 """
 import collections 
 import json 
@@ -30,7 +30,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -47,7 +47,7 @@ NMS =5.0
 ITER =int (os .environ .get ("P6_ITER","200"))
 NEG_KAT =int (os .environ .get ("P6_NEG_KAT","6"))
 KAT_MIN =int (os .environ .get ("P6_KAT_MIN","200"))
-# Genis a rule: ONAYLI katmani already skor esigiyle daraltilacak, that is why
+# Genis a rule: ONAYLI katmani already score esigiyle daraltilacak, that is why
 # secim kurali GENIS tutulur (high recall) and daraltmayi threshold yapar.
 KURAL =("goreli",0.50 ,0.05 )
 HEDEFLER =(0.70 ,0.80 ,0.90 ,0.95 )
@@ -90,7 +90,7 @@ def main ():
     print (f"{len (data_ )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
     flush =True )
 
-    rec_ =[]# (skor, dogru_mu)
+    rec_ =[]# (score, dogru_mu)
     gt_top =0 
     for b in katlar :
         ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
@@ -116,10 +116,10 @@ def main ():
                 continue 
             tp ,fp ,fn ,bilgi =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],
             K .YANAL ,K .ACI ,False ,signed =True )
-            dogru =np .zeros (len (P ),bool )
+            correct =np .zeros (len (P ),bool )
             for e in bilgi ["eslesme"]:
-                dogru [e [0 ]]=True 
-            rec_ .extend (zip (np .asarray (sk ,float ).tolist (),dogru .tolist ()))
+                correct [e [0 ]]=True 
+            rec_ .extend (zip (np .asarray (sk ,float ).tolist (),correct .tolist ()))
         print (f"  {b :<6} biriken tahmin {len (rec_ )} ({time .time ()-t0 :.0f} s)",
         flush =True )
 
@@ -135,7 +135,7 @@ def main ():
     precision =kum_tp /n 
     kapsama =kum_tp /max (gt_top ,1 )
 
-    print (f"\ntoplam tahmin {len (sk )} | toplam GT {gt_top } | "
+    print (f"\ntoplam tahmin {len (sk )} | total GT {gt_top } | "
     f"ham precision {dg .mean ():.4f}")
     print (f"\n{'hedef':<8}{'threshold':>8}{'ONAYLI':>9}{'precision':>10}"
     f"{'kapsama':>9}")
@@ -156,15 +156,15 @@ def main ():
         print (f"{h :<8.2f}{sk_s [k ]:>8.3f}{k +1 :>9d}{precision [k ]:>10.4f}"
         f"{kapsama [k ]:>9.4f}")
 
-    json .dump ({"damga":makbuz_hash .damga (),"dizin":os .environ ["P6_DIZIN"],
+    json .dump ({"damga":receipt_hash .damga (),"dizin":os .environ ["P6_DIZIN"],
     "katlar":katlar ,"n_parca":len (data_ ),"n_tahmin":len (sk ),
     "gt_toplam":int (gt_top ),"ham_kesinlik":float (dg .mean ()),
     "rule":list (KURAL ),"nms":NMS ,"oneri":oneri ,
     "not":"GORULMEMIS MARKA katlarinda (LOMO) precision-kapsama. "
     "ONAYLI katmani esigi buradan secilir. D7'ye BAKILMADI. "
-    "Kapsama = ONAYLI sign / toplam GT."},
-    open ("results/saha_kapisi_tam.json","w"),indent =1 )
-    print ("\nmakbuz -> results/saha_kapisi_tam.json")
+    "Kapsama = ONAYLI sign / total GT."},
+    open ("results/saha_gate_full.json","w"),indent =1 )
+    print ("\nmakbuz -> results/saha_gate_full.json")
 
 
 if __name__ =="__main__":

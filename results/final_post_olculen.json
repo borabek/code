@@ -1,0 +1,37 @@
+{
+ "path": "measured_path",
+ "n_parca": 100,
+ "sonuc": {
+  "baseline": {
+   "detection": 0.610079575596817,
+   "unsigned": 0.537577365163572,
+   "signed": 0.46684350132625996
+  },
+  "disari_normal": {
+   "detection": 0.610079575596817,
+   "unsigned": 0.537577365163572,
+   "signed": 0.42263483642793986
+  },
+  "halka_disari": {
+   "detection": 0.610079575596817,
+   "unsigned": 0.537577365163572,
+   "signed": 0.48629531388152075
+  },
+  "halka_kesin": {
+   "detection": 0.610079575596817,
+   "unsigned": 0.537577365163572,
+   "signed": 0.47038019451812557
+  },
+  "mesh_kesin": {
+   "detection": 0.610079575596817,
+   "unsigned": 0.537577365163572,
+   "signed": 0.46861184792219274
+  },
+  "gt_isaret": {
+   "detection": 0.610079575596817,
+   "unsigned": 0.537577365163572,
+   "signed": 0.5322723253757736
+  }
+ },
+ "not": "Son-islem kollari, cevrimdisi. gt_isaret UST SINIRDIR (dagitilamaz). D7'ye BAKILMADI."
+}

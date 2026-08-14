@@ -2,7 +2,7 @@
 """SIRA DAMGALAMA: two-three capadan TUM SIRAYI head.
 
 RATIONALE. Yogun klemenste (NIT 24 CP/part) candidate-basina ranking 12x'te
-tikaniyor: 4467 secenek inside 24 dogruyu uste tasimak for ~50-100x gerek.
+tikaniyor: 4467 option inside 24 dogruyu uste tasimak for ~50-100x gerek.
 Ama measured ki GT'lerin **%90.8'i** parcanin most sik OTELEME VEKTORUYLE baska
 a GT'ye ulasiyor. Yani kontaklarin yeri BIRBIRINDEN cikarilabilir.
 
@@ -10,10 +10,10 @@ Aday-basina karar instead of SIRA-DUZEYI karar: birkac YUKSEK GUVENLI capa bul,
 onlardan oteleme vektorunu cikar, sirayi two yone correct uzat and each ongorulen
 noktayi UCUZ FIZIK TESTIYLE dogrula (mouth orada gercekten present mi). Kabul
 edilen noktanin YONU capadan KOPYALANMAZ -- direction always direction bankasindan
-secilir (K2.1 full here error yapmisti: tespit +0.0126 but robot -0.0100).
+secilir (K2.1 full here error yapmisti: detection +0.0126 but robot -0.0100).
 
 Bu modul a ONERI URETICIDIR; ciktisi mevcut secimin UZERINE eklenir and
-kabul/ret yine skor + NMS kurallarindan gecer.
+kabul/ret yine score + NMS kurallarindan gecer.
 """
 import numpy as np 
 

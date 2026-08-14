@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""T2: manufacturer-disi cokus SIRALAMA hatasi mi, ESIK (kalibrasyon) hatasi mi?
+"""T2: manufacturer-disi cokus SIRALAMA hatasi mi, ESIK (calibration) hatasi mi?
 
 T1 OLCTU: 18 sutunlu gate manufacturer-disi bolmede F1 0.7422 -> 0.6399 / 0.2799 (mean -0.282).
 Iki very different hastalik may be and tedavileri zit:
@@ -55,11 +55,11 @@ def main ():
         k =out [f"manufacturer{u }"]
         total_ =k ["f1_sabit"]-ref ["f1_sabit"]
         kalib =k ["kalibrasyon_bedeli"]
-        siralama =total_ +kalib # threshold duzeltilse bile kalan loss
-        print (f"  manufacturer {u }: toplam {total_ :+.4f} = KALIBRASYON {-kalib :+.4f} "
+        siralama =total_ +kalib # threshold duzeltilse bile remaining loss
+        print (f"  manufacturer {u }: total {total_ :+.4f} = KALIBRASYON {-kalib :+.4f} "
         f"+ SIRALAMA {siralama :+.4f}   (AUC {ref ['auc']:.3f} -> {k ['auc']:.3f})")
-    json .dump (out ,open ("results/t2_esik_siralama.json","w"),indent =1 )
-    print ("\nmakbuz -> results/t2_esik_siralama.json")
+    json .dump (out ,open ("results/t2_threshold_ranking.json","w"),indent =1 )
+    print ("\nmakbuz -> results/t2_threshold_ranking.json")
 
 
 if __name__ =="__main__":

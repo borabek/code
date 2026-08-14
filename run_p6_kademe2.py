@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """P6 IKI KADEMELI: birinci gecisin tohumlarindan PERIYODIK YAPI ozniteligi.
 
-RATIONALE. D6-ici LOMO'da measured: direction secimi cozuldu (kahin farki +0.0057) but
+RATIONALE. D6-ici LOMO'da measured: direction secimi cozuldu (oracle farki +0.0057) but
 recall 0.177 / pool tavani 0.525. Aday-basina bilgi tukendi. Kullanilmamis bilgi
 PARCA DUZEYINDE and measured: D6'da >=6 CP'li 1096 parcada GT'lerin **%90.8'i**
 parcanin most sik OTELEME VEKTORUYLE baska a GT'ye ulasiyor.
 
 KADEMELER
-  1. P6 ortak siralayici (92 column) -> skor
+  1. P6 ortak siralayici (92 column) -> score
   2. high skorlu secim = TOHUM -> `lattice` oznitelikleri (8 column)
-  3. ikinci siralayici (100 column) -> nihai skor -> secim
+  3. ikinci siralayici (100 column) -> nihai score -> secim
 
 SIZINTIYA KARSI IKI ONLEM
   * Tohumlar HER ZAMAN tahminden gelir, GT'den ASLA.
@@ -19,7 +19,7 @@ SIZINTIYA KARSI IKI ONLEM
 
 AYAR VE OLCUM AYRIMI
   * Butun rule/threshold secimi `full` korpusunun MARKA KATLARINDA is done.
-  * D6 (SUPU/UPUN/MOR/NIT/UTL/S+S/SE/ONV) TEMIZ OKUMADIR -- ayar for
+  * D6 (SUPU/UPUN/MOR/NIT/UTL/S+S/SE/ONV) TEMIZ OKUMADIR -- setting for
     KULLANILMAZ.
   * D7 sinavdir and this betik ONA HIC BAKMAZ.
 """
@@ -33,7 +33,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -54,7 +54,7 @@ AB =p6_decision .AB
 C0 =AB 
 # Esik izgarasi YUKARI open tutulur. Mesh havuzu acilinca darbogaz recall'dan
 # KESINLIGE gecti (D6 ten okumasi: recall 0.285 -> 0.523 but precision
-# 0.576 -> 0.322) and secilen rule izgaranin most upper degeri output. Sinirda kalan
+# 0.576 -> 0.322) and selected rule izgaranin most upper degeri output. Sinirda remaining
 # a optimum, bulunmamis optimum demektir.
 KURALLAR =([("mutlak",e )for e in (0.10 ,0.20 ,0.30 ,0.40 ,0.50 ,0.60 ,0.70 ,
 0.80 ,0.85 ,0.90 ,0.95 ,0.97 ,0.99 )]+
@@ -64,7 +64,7 @@ NMSLER =tuple (float (x )for x in
 os .environ .get ("P6_NMSLER","2.5,3.5,5.0").split (","))
 # RULE KAHINI teshisi (disarida birakilan markada EN IYI rule) tarama
 # maliyetini IKIYE katlar. D6'da gerekliydi (NIT cokusunun sebebini ayirmak
-# for); `full` kosusunda varsayilan KAPALI.
+# for); `full` kosusunda default KAPALI.
 KAHIN =os .environ .get ("P6_KAHIN","0")=="1"
 # Kural aramasi kivrimin EGITIM parcalarinin a ORNEKLEMINDE is done: each rule
 # tum parcalari gezip Macar eslemesi kosuyor and 42 rule x 2000 part a kolu
@@ -149,9 +149,9 @@ def alt_ornekle_zor (M ,Y ,s1 ,fold =NEG_KAT ,seed =0 ):
         yari =n //2 
         rank_ =neg [np .argsort (-np .asarray (s1 ,float )[neg ])]
         zor =rank_ [:yari ]
-        kalan =np .setdiff1d (neg ,zor ,assume_unique =False )
-        rast =(rng .choice (kalan ,min (n -yari ,len (kalan )),replace =False )
-        if len (kalan )else np .zeros (0 ,int ))
+        remaining =np .setdiff1d (neg ,zor ,assume_unique =False )
+        rast =(rng .choice (remaining ,min (n -yari ,len (remaining )),replace =False )
+        if len (remaining )else np .zeros (0 ,int ))
         sec_neg =np .concatenate ([zor ,rast ])
     sec =np .concatenate ([poz ,sec_neg ]).astype (int )
     rng .shuffle (sec )
@@ -201,11 +201,11 @@ def puanla (d ,s ,rule_ ,nms ,arm ):
     return p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =nms )
 
 
-def olc (data_ ,skor ,rule_ ,nms ,arm ):
+def olc (data_ ,score ,rule_ ,nms ,arm ):
     tp =fp =fn =0 
     tes =[]
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,s in zip (data_ ,skor ):
+    for d ,s in zip (data_ ,score ):
         P ,D =puanla (d ,s ,rule_ ,nms ,arm )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
@@ -216,7 +216,7 @@ def olc (data_ ,skor ,rule_ ,nms ,arm ):
         P ,D ,d ["G"],d ["Gd"],d ["diag"],max (3.0 ,0.06 *d ["diag"]),
         180.0 ,True )[:3 ])
     pm ={m :2 *q [0 ]/max (2 *q [0 ]+q [1 ]+q [2 ],1 )for m ,q in per .items ()}
-    return {"robot":2 *tp /max (2 *tp +fp +fn ,1 ),"tespit":K .mikro (tes ),
+    return {"robot":2 *tp /max (2 *tp +fp +fn ,1 ),"detection":K .mikro (tes ),
     "TP":int (tp ),"FP":int (fp ),"FN":int (fn ),
     "recall":tp /max (tp +fn ,1 ),"precision":tp /max (tp +fp ,1 ),
     "makro":float (np .mean (list (pm .values ())))if pm else 0.0 ,
@@ -226,10 +226,10 @@ def olc (data_ ,skor ,rule_ ,nms ,arm ):
     # VARSAYILAN KAPALI (2026-08-12). Kanonik blok BASKA a betikte
     # (`run_merged_kol.py` / EK cercevesi) `full` brand-disi katlarinda
     # **+0.0151** vermisti. URETIM egiticisinde A/B was run and TERSI output:
-    #   d6, secilen arm P6:  kanonik KAPALI 0.2932 -> OPEN 0.2794  (**-0.0138**)
+    #   d6, selected arm P6:  kanonik KAPALI 0.2932 -> OPEN 0.2794  (**-0.0138**)
     # Fark muhtemelen rule secimi: uretim fold inside rule ariyor and
-    # ('mutlak', 0.97) seciyor; measurement betigim sabit ('goreli', 0.85, 0.20)
-    # kullaniyordu. Yani olculen sey with dagitilacak sey AYNI DEGILDI.
+    # ('mutlak', 0.97) seciyor; measurement betigim fixed ('goreli', 0.85, 0.20)
+    # kullaniyordu. Yani measured_path sey with dagitilacak sey AYNI DEGILDI.
     # LESSON: a kolu, DAGITILACAK kod yolunda yeniden olcmeden dagitma.
     # Kod duruyor; `P6_KANONIK=1` with acilir.
 KANONIK =os .environ .get ("P6_KANONIK","0")=="1"
@@ -239,8 +239,8 @@ def canonical_block (d ):
     """KANONIK HIZALAMA blogu (10 column): parcayi KENDI PCA cercevesine oturtur.
 
     Olculdu 2026-08-12 (`full` brand-disi katlari): **+0.0151** -- that gun single
-    degiskenli olculen 25 kolun UCTAN UCA gecen tekiydi. Donme/oteleme/scale
-    degismezligi unit testli (`tests/test_kanonik_hizalama.py`).
+    degiskenli measured_path 25 kolun UCTAN UCA passing tekiydi. Donme/oteleme/scale
+    degismezligi unit testli (`tests/test_canonical_alignment.py`).
 
     Mesh dizini kumeye according to degisir; ikisi de denenir and bulunamazsa candidate
     noktalarinin kendisi cerceve as is used (arm sessizce BOZULMAZ,
@@ -267,7 +267,7 @@ def _kan (d ,n ):
     return np .asarray (d ["_kan"],np .float32 )
 
 
-def oz (d ,arm ,kafes_blok =None ,s1 =None ):
+def feat (d ,arm ,kafes_blok =None ,s1 =None ):
     """Kolun feature matrisi.
 
     TABAN     : A+B, candidate basina single row, mesh HARIC (dagitilan rule)
@@ -284,7 +284,7 @@ def oz (d ,arm ,kafes_blok =None ,s1 =None ):
     # DEGIL, skorda. Havuzun yonlu recall'u 0.5254 oldugu halde model that
     # markada bilgi uretemiyor. A blogu segmentasyon agindan turer and that network
     # NIT'e aktarilmiyorsa, ona dayanmayan a model DAHA IYI genellesebilir.
-    # Kalan: mouth olculeri (9) + direction bankasi (16) + secenek yonuyle mouth
+    # Kalan: mouth olculeri (9) + direction bankasi (16) + option yonuyle mouth
     # olculeri (9) + source (3) = 37 column, all of them GEOMETRIK/FIZIKSEL.
     # KANONIK blok SONA eklenir: P6_GEO sutunlari INDEKSLE diliyor
     # (A_SUT:AB and AB:), araya girmek that dilimleri sessizce bozardi.
@@ -341,7 +341,7 @@ def egit (tr ,arm ,kafes_bloklar =None ,s1ler =None ,sira_bloklar =None ):
             k =kisa (s1ler [i ])
             if not len (k ):
                 continue 
-                # float32'ye PARCA BASINA cevir: 2583 part x ~2000 secenek x 95
+                # float32'ye PARCA BASINA cevir: 2583 part x ~2000 option x 95
                 # column float64 birikince vstack vertex bellegi 10 GB'a cikiyor.
             Ms .append (kafes_matris (
             d ,kafes_bloklar [i ],s1ler [i ],k ,
@@ -349,7 +349,7 @@ def egit (tr ,arm ,kafes_bloklar =None ,s1ler =None ,sira_bloklar =None ):
             ).astype (np .float32 ))
             Ys .append (d ["y"][k ])
         else :
-            Ms .append (oz (d ,arm ).astype (np .float32 ))
+            Ms .append (feat (d ,arm ).astype (np .float32 ))
             Ys .append (d ["y"][taban_satir (d )]if arm =="TABAN"else d ["y"])
     if not Ms :
         return None 
@@ -363,7 +363,7 @@ def egit (tr ,arm ,kafes_bloklar =None ,s1ler =None ,sira_bloklar =None ):
         M2 ,Y2 =alt_ornekle (M ,Y )
     if TOHUM_N <=1 :
         return yap ().fit (M2 ,Y2 )
-        # UC TOHUM ENSEMBLE: same data, different rastgelelik; skor ORTALAMASI alinir
+        # UC TOHUM ENSEMBLE: same data, different rastgelelik; score ORTALAMASI alinir
     return [yap (t ).fit (*alt_ornekle (M ,Y ,seed =t ))for t in range (TOHUM_N )]
 
 
@@ -390,7 +390,7 @@ def skorla (m ,data_ ,arm ,kafes_bloklar =None ,s1ler =None ,sira_bloklar =None 
                 s [k ]=_pp (m ,X )
             out .append (s )
             continue 
-        p =_pp (m ,oz (d ,arm ))
+        p =_pp (m ,feat (d ,arm ))
         if arm =="TABAN":
             s =np .zeros (len (d ["X"]))
             s [taban_satir (d )]=p 
@@ -481,7 +481,7 @@ def main ():
     kafes_tr =[kafes_bloku (d ,s )for d ,s in zip (tr ,oof )]
     sira_tr =([sira_bloku (d ,s )for d ,s in zip (tr ,oof )]if SIRA else None )
     kv =np .vstack (kafes_tr )
-    print (f"lattice blogu {kv .shape } | lattice bulunan secenek orani "
+    print (f"lattice blogu {kv .shape } | lattice found option orani "
     f"{kv [:,0 ].mean ():.3f} ({time .time ()-t0 :.0f} s)",flush =True )
 
     # --- 2) KAT ICINDE rule secimi + arm kiyasi ---------------------------
@@ -526,7 +526,7 @@ def main ():
             AS =[s_tr [i ]for i in ar ]
             # RULE SECIM OLCUTU: training markalarinin MAKRO ortalamasi.
             # WHY MIKRO DEGIL: mikro, GT'si very which is markanin kuralini selects.
-            # D6'da NIT GT'nin %46'si and NIT'te secilen threshold (0.97) HER SEYI
+            # D6'da NIT GT'nin %46'si and NIT'te selected threshold (0.97) HER SEYI
             # eliyor -> that markada F1 0.0016. Havuzda NIT'in cevabinin YARISI
             # (yonlu recall 0.5254) VAR; kaybeden rule, model not. Makro
             # criterion, single a markada COKMEYEN kurali tercih eder.
@@ -550,7 +550,7 @@ def main ():
         oz_ =" | ".join (f"{k } {a [k ]['robot']:.4f}"for k in KOLLAR if k in a )
         kh =a .get ("P6",{}).get ("kural_kahini",0.0 )
         print (f"  {b :<6} n={len (TE ):<4} {oz_ }"
-        +(f"   [kural kahini P6 {kh :.4f}]"if kh else "")
+        +(f"   [rule kahini P6 {kh :.4f}]"if kh else "")
         +f"   ({time .time ()-t0 :.0f} s)",flush =True )
 
     print (f"\n{'arm':<12} {'robot':>8} {'recall':>8} {'precision':>9} "
@@ -564,7 +564,7 @@ def main ():
         last_ [arm ]={"robot":f1 ,"recall":rc ,"precision":pr ,**dict (c )}
         print (f"{arm :<12} {f1 :>8.4f} {rc :>8.4f} {pr :>9.4f} {c ['TP']:>7} "
         f"{c ['FP']:>7} {c ['FN']:>7}")
-        # Farklar KOL LISTESINE according to uretilir; sabit arm adi yazmak list
+        # Farklar KOL LISTESINE according to uretilir; fixed arm adi yazmak list
         # kisaldiginda KeyError veriyordu (two times became).
     if "TABAN"in last_ :
         for k in KOLLAR :
@@ -579,7 +579,7 @@ def main ():
     (tuple (ayrinti [b ][en_kol ]["rule"]),ayrinti [b ][en_kol ]["nms"])
     for b in katlar )
     rule_ ,nms =kural_sayim .most_common (1 )[0 ][0 ]
-    print (f"\nSECILEN arm {en_kol } | kural {rule_ } | nms {nms } "
+    print (f"\nSECILEN arm {en_kol } | rule {rule_ } | nms {nms } "
     f"(brand katlarinda en sik)")
     m1 =egit (tr ,"P6")
     paket ={"kademe1":m1 ,"arm":en_kol ,"rule":list (rule_ ),"nms":nms ,
@@ -587,18 +587,18 @@ def main ():
     "tohum_nms":TOHUM_NMS ,"kisa_esik":KISA_ESIK ,"sira":SIRA }
     if en_kol =="P6_KAFES":
     # Ikinci kademe OOF skorlarindan egitilir: urunde birinci kademe skoru
-    # gorulmemis parcadan gelecek, egitimde de oyle gelmeli.
+    # unseen parcadan gelecek, egitimde de oyle gelmeli.
         paket ["kademe2"]=egit (tr ,"P6_KAFES",kafes_tr ,oof ,sira_tr )
     with open ("results/p6_kademe2_model.pkl","wb")as f :
         pickle .dump (paket ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"toplam":last_ ,"brand":ayrinti ,
-    "n_egitim":len (tr ),"katlar":katlar ,"secilen":en_kol ,
+    json .dump ({"damga":receipt_hash .damga (),"total":last_ ,"brand":ayrinti ,
+    "n_egitim":len (tr ),"katlar":katlar ,"selected":en_kol ,
     "rule":list (rule_ ),"nms":nms ,"dizin":os .environ ["P6_DIZIN"],
     "not":"tam korpusunun MARKA KATLARINDA rule secimi + arm "
     "kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye "
     "BAKILMADI."},
-    open ("results/p6_kademe2_tam.json","w"),indent =1 )
-    print (f"receipt -> results/p6_kademe2_tam.json  ({time .time ()-t0 :.0f} s)")
+    open ("results/p6_kademe2_full.json","w"),indent =1 )
+    print (f"receipt -> results/p6_kademe2_full.json  ({time .time ()-t0 :.0f} s)")
 
 
 if __name__ =="__main__":

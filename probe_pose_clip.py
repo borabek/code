@@ -22,8 +22,8 @@ import numpy as np
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 from sina_cluster import match_hungarian # noqa: E402
 
-DOKUM =os .environ .get ("PK_DOKUM","results/_dokum_pose.json")
-YOL =os .environ .get ("PK_YOL","saha")
+DOKUM =os .environ .get ("PK_DOKUM","results/_dump_pose.json")
+YOL =os .environ .get ("PK_YOL","field")
 MEVCUT =3.0 
 
 
@@ -61,8 +61,8 @@ def kur (r ,mx ,guven_esik =None ,mx_dusuk =MEVCUT ):
 
 
 def olc (rec_ ,mx =None ,guven_esik =None ):
-    tot ={k :[0 ,0 ,0 ]for k in ("tespit","rob","rbi")}
-    part ,atlanan =[],0 
+    tot ={k :[0 ,0 ,0 ]for k in ("detection","rob","rbi")}
+    part ,skipped =[],0 
     for r in rec_ :
         G =np .asarray (r ["G"],float ).reshape (-1 ,3 )
         if not len (G ):
@@ -74,11 +74,11 @@ def olc (rec_ ,mx =None ,guven_esik =None ):
         else :
             P ,D =kur (r ,mx ,guven_esik )
             if P is None :
-                atlanan +=1 
+                skipped +=1 
                 P =np .asarray (r ["P"],float ).reshape (-1 ,3 )
                 D =_birim (r ["D"])if len (P )else np .zeros ((0 ,3 ))
         line_ ={}
-        for ad ,(tol ,am ,isr )in (("tespit",(2.0 ,180.0 ,False )),
+        for ad ,(tol ,am ,isr )in (("detection",(2.0 ,180.0 ,False )),
         ("rob",(2.0 ,10.0 ,False )),
         ("rbi",(2.0 ,10.0 ,True ))):
             tp ,fp ,fn ,_ =match_hungarian (P ,D ,G ,Gd ,float (r ["diag"]),
@@ -89,7 +89,7 @@ def olc (rec_ ,mx =None ,guven_esik =None ):
             line_ [ad ]=(tp ,fp ,fn )
         part .append (line_ )
     f1 =lambda t :2 *t [0 ]/max (2 *t [0 ]+t [1 ]+t [2 ],1 )# noqa: E731
-    return {k :f1 (v )for k ,v in tot .items ()},part ,atlanan 
+    return {k :f1 (v )for k ,v in tot .items ()},part ,skipped 
 
 
 def boot (pa ,pb ,ad ,n =4000 ,seed =0 ):
@@ -104,10 +104,10 @@ def boot (pa ,pb ,ad ,n =4000 ,seed =0 ):
 
 
 def main ():
-    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("yol")==YOL ]
-    print (f"{DOKUM } / yol={YOL } -> {len (rec_ )} part")
+    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("path")==YOL ]
+    print (f"{DOKUM } / path={YOL } -> {len (rec_ )} part")
     kanca_var =sum (1 for r in rec_ if r .get ("pose_dw"))
-    print (f"pose kancasi olan part: {kanca_var }")
+    print (f"pose kancasi which part: {kanca_var }")
     if not kanca_var :
         print ("POSE KANCASI BOS -- tarama yapilamaz")
         return 1 
@@ -116,26 +116,26 @@ def main ():
     kur3 ,kur3_p ,atl =olc (rec_ ,MEVCUT )
     print (f"\nDOGRULAMA (mx={MEVCUT } yeniden kurulan == dokum?)  "
     f"hizalanmayan part: {atl }")
-    print (f"  dokum       : tespit {dok ['tespit']:.4f} rob {dok ['rob']:.4f} "
+    print (f"  dokum       : detection {dok ['detection']:.4f} rob {dok ['rob']:.4f} "
     f"rbi {dok ['rbi']:.4f}")
-    print (f"  yeniden kur : tespit {kur3 ['tespit']:.4f} "
+    print (f"  yeniden kur : detection {kur3 ['detection']:.4f} "
     f"rob {kur3 ['rob']:.4f} rbi {kur3 ['rbi']:.4f}")
     ok =all (abs (dok [k ]-kur3 [k ])<1e-6 for k in dok )
     print (f"  -> {'GECERLI'if ok else 'UYUSMUYOR -- tarama SUPHELI'}")
 
     MX =[0.0 ,1.0 ,2.0 ,3.0 ,4.0 ,5.0 ,6.0 ,8.0 ,10.0 ,15.0 ,1e9 ]
     res_ ={}
-    print (f"\n{'maks_mm':>9s} {'tespit':>8s} {'rob':>8s} {'rob-ISR':>8s}")
+    print (f"\n{'maks_mm':>9s} {'detection':>8s} {'rob':>8s} {'rob-ISR':>8s}")
     for mx in MX :
         m ,p ,_ =olc (rec_ ,mx )
         res_ [mx ]=(m ,p )
         ad ="SINIRSIZ"if mx >1e8 else f"{mx :.1f}"
         yz ="  <- MEVCUT"if mx ==MEVCUT else ""
-        print (f"{ad :>9s} {m ['tespit']:8.4f} {m ['rob']:8.4f} "
+        print (f"{ad :>9s} {m ['detection']:8.4f} {m ['rob']:8.4f} "
         f"{m ['rbi']:8.4f}{yz }")
 
     print ("\n--- ESLI BOOTSTRAP (mevcut 3.0'a per) ---")
-    print (f"{'maks_mm':>9s} {'metrik':>7s} {'fark':>9s} {'%95 GA':>22s} "
+    print (f"{'maks_mm':>9s} {'metrik':>7s} {'diff':>9s} {'%95 GA':>22s} "
     f"{'poz%':>6s}")
     baseline =res_ [MEVCUT ][1 ]
     for mx in MX :
@@ -154,13 +154,13 @@ def main ():
     if en_iyi !=MEVCUT :
         print (f"\n--- GUVEN KAPILI KIRPMA (emin ise {en_iyi :.1f} mm, "
         f"degilse {MEVCUT :.1f} mm) ---")
-        print (f"{'threshold':>6s} {'tespit':>8s} {'rob':>8s} {'rob-ISR':>8s} "
-        f"{'fark(rbi)':>10s} {'%95 GA':>22s}")
+        print (f"{'threshold':>6s} {'detection':>8s} {'rob':>8s} {'rob-ISR':>8s} "
+        f"{'diff(rbi)':>10s} {'%95 GA':>22s}")
         for threshold in (0.3 ,0.4 ,0.5 ,0.6 ,0.7 ,0.8 ):
             m ,p ,_ =olc (rec_ ,en_iyi ,threshold )
             f ,lo ,hi ,_ =boot (baseline ,p ,"rbi")
             yz =" *"if (lo >0 or hi <0 )else ""
-            print (f"{threshold :6.2f} {m ['tespit']:8.4f} {m ['rob']:8.4f} "
+            print (f"{threshold :6.2f} {m ['detection']:8.4f} {m ['rob']:8.4f} "
             f"{m ['rbi']:8.4f} {f :+10.4f} "
             f"[{lo :+.4f},{hi :+.4f}]{yz :>3s}")
 
@@ -175,8 +175,8 @@ def main ():
 
     json .dump ({("SINIRSIZ"if k >1e8 else k ):v [0 ]
     for k ,v in res_ .items ()},
-    open ("results/pose_kirpma.json","w"),indent =1 )
-    print ("\n-> results/pose_kirpma.json")
+    open ("results/pose_clip.json","w"),indent =1 )
+    print ("\n-> results/pose_clip.json")
     return 0 
 
 

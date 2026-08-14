@@ -1,0 +1,111 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "5e84bd141b4e0e61",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "egri": {
+  "40": {
+   "robot": 0.5120821408550438,
+   "p6_orani": 0.7571833265884257
+  },
+  "50": {
+   "robot": 0.5246033216027659,
+   "p6_orani": 0.584783488466208
+  },
+  "60": {
+   "robot": 0.5309975607438148,
+   "p6_orani": 0.4912990692027519
+  },
+  "70": {
+   "robot": 0.5293966623876765,
+   "p6_orani": 0.43909348441926344
+  },
+  "80": {
+   "robot": 0.5271046228710462,
+   "p6_orani": 0.3982193443949818
+  },
+  "90": {
+   "robot": 0.5269138559558606,
+   "p6_orani": 0.3593686766491299
+  },
+  "100": {
+   "robot": 0.5273390842733908,
+   "p6_orani": 0.31930392553622017
+  },
+  "110": {
+   "robot": 0.5241133799032778,
+   "p6_orani": 0.2630513961958721
+  },
+  "120": {
+   "robot": 0.5197212637845883,
+   "p6_orani": 0.22662889518413598
+  },
+  "130": {
+   "robot": 0.5165553843519946,
+   "p6_orani": 0.18656414407122623
+  },
+  "140": {
+   "robot": 0.5142362912990832,
+   "p6_orani": 0.15985430999595304
+  },
+  "150": {
+   "robot": 0.5126100114794587,
+   "p6_orani": 0.1388101983002833
+  },
+  "160": {
+   "robot": 0.5092537522303467,
+   "p6_orani": 0.12302711452853096
+  },
+  "170": {
+   "robot": 0.5051983874389985,
+   "p6_orani": 0.10683933630109267
+  },
+  "180": {
+   "robot": 0.5014568971643807,
+   "p6_orani": 0.09550789154188588
+  },
+  "190": {
+   "robot": 0.4951230840687413,
+   "p6_orani": 0.08336705787130716
+  }
+ },
+ "en_iyi": 60,
+ "bant": [
+  50,
+  60,
+  70,
+  80,
+  90,
+  100,
+  110
+ ],
+ "katlar": [
+  "WEI",
+  "PXC",
+  "SIE",
+  "TOGI"
+ ],
+ "n_parca": 3051,
+ "not": "Rejim esigi kararlilik egrisi. Kat-disi measurement; D7'ye BAKILMADI. Esik secimi this egriden yapilir."
+}

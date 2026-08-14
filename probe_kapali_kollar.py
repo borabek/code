@@ -3,7 +3,7 @@
 
 Yelpaze ornegi (64 direction -> +0.0000 "OLU"; 256 direction -> +0.0676) showed ki
 kapatma kararlari sondanin cozunurluguyle sinirli. Bu betik hafizada KAPALI
-duran and `docs/KAPANAN_KOLLAR_DENETIMI.md`'de SUPHELI isaretlenen kollari
+stopped and `docs/KAPANAN_KOLLAR_DENETIMI.md`'de SUPHELI marked kollari
 UCUZ TAVAN SONDALARIYLA yeniden yoklar. Yoklama uctan uca not TAVAN
 duzeyindedir: "this arm havuza new DOGRU cevap katiyor mu?"
 
@@ -16,7 +16,7 @@ Yoklanan kollar:
             kopyalanmiyor, only HAVUZDA VAR OLAN candidate one cikariliyor.
 
 Olcut: yonlu recall (lateral<=2mm, signed angle<=10, axial<=40mm) and maliyet
-(secenek/part). D6 on runs; D7'ye BAKMAZ.
+(option/part). D6 on runs; D7'ye BAKMAZ.
 """
 import collections 
 import json 
@@ -26,7 +26,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -98,7 +98,7 @@ def main ():
         # --- EKSEN kolu: axis boyu ornek konumlar + AYNI direction bankasi ---
         Pe ,De =axis_sample (cy .get (pid ))
         if len (Pe ):
-            ie ,YDe ,_ =YB .secenekler (Pe ,De ,cy .get (pid ),np .zeros ((0 ,3 )))
+            ie ,YDe ,_ =YB .options (Pe ,De ,cy .get (pid ),np .zeros ((0 ,3 )))
             Pt =np .vstack ([Pb ,Pe [ie ]])
             Dt =np .vstack ([Db ,YDe ])
             top ["axis"]+=rec (Pt ,Dt ,G ,Gd )
@@ -125,7 +125,7 @@ def main ():
     "axis":{"recall":top ["axis"]/g ,"secenek_parca":top ["n_eksen"]/p },
     "k21_isaretli_secenek_parca":top ["k21_isaretli"]/p }
     print (f"\nGT {top ['gt']} | part {p }"+(f" | brand {MARKA }"if MARKA else ""))
-    print (f"{'arm':<10}{'yonlu recall':>14}{'secenek/part':>16}")
+    print (f"{'arm':<10}{'yonlu recall':>14}{'option/part':>16}")
     print (f"{'BANKA':<10}{out ['banka']['recall']:>14.4f}"
     f"{out ['banka']['secenek_parca']:>16.0f}")
     print (f"{'+EKSEN':<10}{out ['axis']['recall']:>14.4f}"
@@ -133,9 +133,9 @@ def main ():
     print (f"\nEKSEN KAZANCI: "
     f"{out ['axis']['recall']-out ['banka']['recall']:+.4f} recall, "
     f"maliyet x{out ['axis']['secenek_parca']/max (out ['banka']['secenek_parca'],1 ):.2f}")
-    print (f"K21: sira damgasi alan secenek/part "
+    print (f"K21: sira damgasi alan option/part "
     f"{out ['k21_isaretli_secenek_parca']:.0f}")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"brand":MARKA ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"brand":MARKA ,
     "not":"Kapanan kollarin TAVAN yoklamasi. D6; D7'ye BAKILMADI. "
     "K21 satiri temsili capalarla uretilmistir -- gercek "
     "hatta capalar tahminden gelir."},

@@ -14,7 +14,7 @@ TEZE SADIK: `v_o` each two kolda da havuzda and p5-v2'de GERCEK fallback.
 """
 import glob ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -30,7 +30,7 @@ OB ="results/_p1_olasilik_d7"# D7 onbellegi -- D6 verirsem tam_poz HIC KOSMAZ
 
 d6 =d6_record .exam ()
 k6 =d6_record .yukle (set (d6 ["pidler"]))
-d7p =set (map (str ,json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]))
+d7p =set (map (str ,json .load (open ("results/d7_exam_set.json"))["pidler"]))
 k7 =d6_record .yukle (d7p )
 cy6 =pickle .load (open ("results/_d6_silindirler.pkl","rb"))
 ac6 =pickle .load (open ("results/_d6_acikliklar.pkl","rb"))
@@ -54,7 +54,7 @@ def kur (rec_ ,cy ,ac ,etiketli ):
         if len (D )>1 :
             B =D *np .sign (D @D [0 ])[:,None ]
             komsu =B .mean (0 );komsu /=(np .linalg .norm (komsu )+1e-12 )
-        secs =PS .secenekler (P ,D ,cy .get (pid ),ac .get (pid ),r ["diag"],
+        secs =PS .options (P ,D ,cy .get (pid ),ac .get (pid ),r ["diag"],
         gate_s =gs ,komsu =komsu )
         d ={"pid":pid ,"mfg":r ["mfg"],"secs":secs ,"gate_skor":gs ,
         "G":G ,"Gd":np .asarray (r .get ("Gd",[]),float ),"diag":r ["diag"],
@@ -91,24 +91,24 @@ for d in te :
     R .append ((len (d ["G"]),)+match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],YANAL ,ACI ,
     False ,signed =True )[:3 ])
 tA ,rA =f1w (T ),f1w (R )
-print (f"\nA) MANSET (gate -> tam_poz)        tespit {tA :.4f} | robot {rA :.4f}",flush =True )
+print (f"\nA) MANSET (gate -> tam_poz)        detection {tA :.4f} | robot {rA :.4f}",flush =True )
 
 # B) p5-v2 KOLU
 T ,R =[],[]
 for d in te :
     if not len (d ["G"]):
         continue 
-    skor =[clf .predict_proba (np .asarray ([s [2 ]for s in o ],float ))[:,1 ]
+    score =[clf .predict_proba (np .asarray ([s [2 ]for s in o ],float ))[:,1 ]
     for o in d ["secs"]]
-    P ,D =PE .sec (d ["secs"],skor ,gate_skor =d ["gate_skor"],gate_esik =(0.40 ,0.30 ))
+    P ,D =PE .sec (d ["secs"],score ,gate_skor =d ["gate_skor"],gate_esik =(0.40 ,0.30 ))
     T .append ((len (d ["G"]),)+match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],0. ,180. ,True )[:3 ])
     R .append ((len (d ["G"]),)+match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],YANAL ,ACI ,
     False ,signed =True )[:3 ])
 tB ,rB =f1w (T ),f1w (R )
-print (f"B) p5-v2 (ortak secim -> gate)     tespit {tB :.4f} | robot {rB :.4f}")
-print (f"\nFARK: tespit {tB -tA :+.4f} | robot {rB -rA :+.4f} (goreli %{100 *(rB /max (rA ,1e-9 )-1 ):.0f})")
-json .dump ({"damga":makbuz_hash .damga (),"headline":{"tespit":tA ,"robot":rA },
-"p5v2":{"tespit":tB ,"robot":rB },"n_parca":len (te ),
+print (f"B) p5-v2 (ortak secim -> gate)     detection {tB :.4f} | robot {rB :.4f}")
+print (f"\nFARK: detection {tB -tA :+.4f} | robot {rB -rA :+.4f} (goreli %{100 *(rB /max (rA ,1e-9 )-1 ):.0f})")
+json .dump ({"damga":receipt_hash .damga (),"headline":{"detection":tA ,"robot":rA },
+"p5v2":{"detection":tB ,"robot":rB },"n_parca":len (te ),
 "not":"D7 = DEV, FINAL DEGIL. p5-v2 D6'da egitildi (brand-ayrik)."},
-open ("results/d7_manset_p5v2.json","w"),indent =1 )
-print ("receipt -> results/d7_manset_p5v2.json")
+open ("results/d7_headline_p5v2.json","w"),indent =1 )
+print ("receipt -> results/d7_headline_p5v2.json")

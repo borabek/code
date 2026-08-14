@@ -6,7 +6,7 @@ tanimliyor (NIT). Ama that a KAHIN tavaniydi. Urun kafesi **GT'yi bilmeden**,
 gurultulu candidate bulutundan bulmak zorunda.
 
 BU SONDA that acigi olcer. Ayni acgozlu coklu-lattice aramasi, input as
-GT instead of **model skorunun most high N adayini** takes. Sonra bulunan izgaranin
+GT instead of **model skorunun most high N adayini** takes. Sonra found izgaranin
 GERCEK GT'lerin ne kadarini yakaladigi olculur.
 
     kapsama(GT'den)   = yapisal ceiling        (VII.0'da measured)
@@ -73,7 +73,7 @@ def _kapsa (uretilen ,G ):
 
 def kafes_bul (P ,G ,n_kafes =N_KAFES ):
     """ADAY bulutundan acgozlu lattice; each turda GT kapsamasi olculur."""
-    kalan =np .ones (len (G ),bool )
+    remaining =np .ones (len (G ),bool )
     kaps =[]
     if len (P )<3 :
         return [0.0 ]*n_kafes 
@@ -93,14 +93,14 @@ def kafes_bul (P ,G ,n_kafes =N_KAFES ):
         for step_ in candidate :
             for seed in tohumlar :
                 uret =_izgara (P ,seed ,step_ )
-                m =_kapsa (uret ,G )&kalan 
+                m =_kapsa (uret ,G )&remaining 
                 n =int (m .sum ())
                 if n >en_n :
                     en_m ,en_n =m ,n 
         if en_m is None or en_n <1 :
             break 
-        kalan =kalan &~en_m 
-        kaps .append (1.0 -kalan .mean ())
+        remaining =remaining &~en_m 
+        kaps .append (1.0 -remaining .mean ())
     while len (kaps )<n_kafes :
         kaps .append (kaps [-1 ]if kaps else 0.0 )
     return kaps 
@@ -149,7 +149,7 @@ def main ():
         G =np .asarray (d ["G"],float )
         if len (G )<3 :
             continue 
-            # EN YUKSEK SKORLU adaylarin KONUMLARI (secenek -> candidate)
+            # EN YUKSEK SKORLU adaylarin KONUMLARI (option -> candidate)
         P =d ["P"][d ["idx"]]
         rank_ =np .argsort (-np .asarray (s ))[:UST_N ]
         Pu =np .unique (np .round (P [rank_ ],3 ),axis =0 )
@@ -162,7 +162,7 @@ def main ():
         if n %40 ==0 :
             print (f"  {n } part ({time .time ()-t0 :.0f} s)",flush =True )
 
-            # VII.0'daki KAHIN tavani (karsilastirma for)
+            # VII.0'daki KAHIN tavani (comparison for)
     oracle_ ={"NIT":0.983 ,"SUPU":0.864 ,"MOR":0.811 ,"UPUN":0.810 }
     print (f"\n{'brand':<7}{'GT':>7}{'1 lattice':>9}{'2 lattice':>9}{'3 lattice':>9}"
     f"{'KAHIN':>8}{'ULASIM ACIGI':>14}")
@@ -174,14 +174,14 @@ def main ():
         for i in (1 ,2 ,3 ):
             r [f"lattice{i }"]=sum (a [f"k{i }"])/max (g ,1 )
         kh =oracle_ .get (m_ ,0.0 )
-        r ["kahin"]=kh 
+        r ["oracle"]=kh 
         r ["ulasim_acigi"]=kh -r ["kafes3"]
         out [m_ ]=r 
         print (f"{m_ :<7}{g :>7}{r ['kafes1']:>9.3f}{r ['kafes2']:>9.3f}"
         f"{r ['kafes3']:>9.3f}{kh :>8.3f}{r ['ulasim_acigi']:>14.3f}")
     json .dump ({"tol":TOL ,"ust_n":UST_N ,"brand":out ,
     "not":"Kafes GT'den DEGIL, model skorunun en yuksek N adayindan "
-    "araniyor. ULASIM ACIGI = kahin tavani - adaydan bulunan. "
+    "araniyor. ULASIM ACIGI = oracle tavani - adaydan found. "
     "D7'ye BAKILMADI."},
     open (f"results/kafes_bulunabilir_{KUME }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/kafes_bulunabilir_{KUME }.json")

@@ -62,7 +62,7 @@ def greedy (P ,G ,tol ,Gdir =None ,axis_tol =None ):
 def gt_gecerli (jf ):
     """GT PUANLANABILIR MI? Degilse part korpusa GIRMEZ (2026-08-04'te eklendi).
 
-    WHY IT EXISTS -- AL VAKASI: gorulmemis manufacturer sinavinda AL ureticisinde canli urun de,
+    WHY IT EXISTS -- AL VAKASI: unseen manufacturer sinavinda AL ureticisinde canli urun de,
     TABAN da, v3 de TAM 0.000 aldi. Uc hipotez sirayla curutuldu:
       1. "align_frames bozuk"      -> HAYIR, AL residual 0.13mm (ELMEX 0.11 with same)
       2. "direction vektoru sifir"       -> filtrelenmis kumede oyle gorunmedi (AL already elenmisti)
@@ -110,7 +110,7 @@ def gt_gecerli (jf ):
 
 def eligible ():
     """Parts with STEP + manufacturer CPs that are NOT in training and NOT in the batch-4 held-out."""
-    gecersiz =[]
+    invalid =[]
     # KIMLIK AYRISTIRMASI (2026-08-04 duzeltmesi, H1): eskiden each two tarafta da
     # `basename.split("_")[<n>]` kullaniliyordu. Bu, ALT CIZGI iceren manufacturer kodlarinda
     # (`A-B_N.1492-H4_...` -> mfg "A-B", pid BOS) and lower cizgili part numaralarinda
@@ -162,14 +162,14 @@ def eligible ():
         if (pid ,step [pid ])in gorulen :# same fiziksel part, ikinci norm kaydi
             continue 
         if not gt_gecerli (f ):
-            gecersiz .append ((mfg ,pid ))
+            invalid .append ((mfg ,pid ))
             continue 
         gorulen .add ((pid ,step [pid ]))
         out .append ((mfg ,pid ,f ,step [pid ]))
-    if gecersiz :
+    if invalid :
         import collections as _c 
-        print (f"  [GT gecerlilik] {len (gecersiz )} part CIKARILDI (puanlanamaz GT): "
-        f"{dict (_c .Counter (m for m ,_ in gecersiz ))}",flush =True )
+        print (f"  [GT gecerlilik] {len (invalid )} part CIKARILDI (puanlanamaz GT): "
+        f"{dict (_c .Counter (m for m ,_ in invalid ))}",flush =True )
     return out 
 
 
@@ -190,7 +190,7 @@ def main ():
     ap .add_argument ("--vertex-conf",type =float ,default =0.7 )
     ap .add_argument ("--remesh-target",type =int ,default =6000 )
     ap .add_argument ("--icp",action ="store_true",help ="FAZ 1: ICP-refined hizalama with de eslestir; coarse vs ICP F1 karsilastir")
-    ap .add_argument ("--skip-parts",nargs ="+",default =[],help ="hang eden patolojik parcalari atla (step_to_mesh/remesh takilan)")
+    ap .add_argument ("--skip-parts",nargs ="+",default =[],help ="hang eden patolojik parcalari skip (step_to_mesh/remesh takilan)")
     ap .add_argument ("--verbose-parts",action ="store_true",help ="each parcayi islemeden before pid head (hang teshisi)")
     ap .add_argument ("--inward-mm",type =float ,default =0.0 ,
     help ="shift each predicted CP INWARD along its own insertion axis before matching. "
@@ -234,7 +234,7 @@ def main ():
     if a .shuffle :
         import random ;random .Random (0 ).shuffle (parts )
     if a .limit :parts =parts [:a .limit ]
-    print (f"{len (parts )} uygun part | {len (models )} model | remesh {a .remesh_target } "
+    print (f"{len (parts )} eligible part | {len (models )} model | remesh {a .remesh_target } "
     f"| cluster {a .cluster_mm } min_v {a .min_v }",flush =True )
 
     T =Fp =Fn =0 ;Ti =[0 ,0 ,0 ];rows =[];t0 =time .time ();skipped =0 

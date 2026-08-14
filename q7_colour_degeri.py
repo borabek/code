@@ -8,13 +8,13 @@ YOL (each step ayri dogrulanir):
  1) STEP metninden RENKLI silindirler: OVER_RIDING_STYLED_ITEM -> ADVANCED_FACE ->
     CYLINDRICAL_SURFACE (yerel centre/axis/radius) + stil zinciri -> COLOUR_RGB.
  2) gmsh'ten KURESEL silindirler (brep_axes; yaricaplar residual TAM DOGRU, metinle 327/327).
- 3) YEREL->KURESEL rijit donusum: TEKIL yaricapli (two tarafta da a times gecen) ciftlerle
+ 3) YEREL->KURESEL rijit donusum: TEKIL yaricapli (two tarafta da a times passing) ciftlerle
     tohumla, after RANSAC with rafine et. Kabul olcutu ARTIK (<0.5mm) -- ic-point ORANI DEGIL
     (q2/q3'te ratio wrong olcuttu: binlerce candidate double varken ratio no zaman high cikmaz).
  4) Kabul edilen parcalarda each ADAY for renk ozellikleri:
-      c_metal   : eslesen silindirin rengi gumusi metal tonunda mi
-      c_govde   : eslesen silindirin rengi body (metal olmayan) tonunda mi
-      c_yok     : eslesen silindire renk atanamadi
+      c_metal   : matched silindirin rengi gumusi metal tonunda mi
+      c_govde   : matched silindirin rengi body (metal olmayan) tonunda mi
+      c_yok     : matched silindire renk atanamadi
  5) TP/FP'ye karsi AUC (bag duzeltmeli Mann-Whitney) + permutasyon null.
 
 KILL (onceden yazili): no renk ozelligi null'un on AUC >= 0.60 vermezse RENK KANALI
@@ -112,7 +112,7 @@ def _renkli_silindirler (step ):
 
 
 def _eksen_artik (lc ,la ,R ,t ,gc ,ga ,gr ,lr ):
-    """Her yerel silindiri, DONUSTURULDUKTEN after most uygun kuresel silindirin EKSEN CIZGISINE
+    """Her yerel silindiri, DONUSTURULDUKTEN after most eligible kuresel silindirin EKSEN CIZGISINE
     which is dik uzakligiyla olc. Merkez-centre uzakligi DEGIL."""
     P =lc @R .T +t 
     A =la @R .T 
@@ -330,7 +330,7 @@ def main ():
         out [n ]={"auc":float (a ),"null_p95":p95 ,"tp_ort":float (X [Y ,i ].mean ()),
         "fp_ort":float (X [~Y ,i ].mean ()),"karar":kar }
     canli =[n for n in names if out [n ]["karar"]=="CANLI"]
-    print (f"\nKILL: AUC>=0.60 veren renk ozelligi yoksa RENK tel/vida ayrimi icin OLU -> "
+    print (f"\nKILL: AUC>=0.60 veren renk ozelligi yoksa RENK tel/vida ayrimi for OLU -> "
     f"{'CANLI ('+', '.join (canli )+')'if canli else 'OLU'}")
     json .dump (out |{"kabul":kabul ,"red":red ,"n_aday":len (Y ),
     "karar":"CANLI"if canli else "OLU"},

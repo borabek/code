@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""NIT COKUSU: ranking mi, kalibrasyon mi, temsil mi?
+"""NIT COKUSU: ranking mi, calibration mi, temsil mi?
 
 DURUM. NIT 50 part / 1222 GT (24.4 CP/part -- D6'nin most dense markasi).
 Dagitilan urun 1222 GT'den **2** tanesini buluyor (F1 0.0032). Yeni pool that
@@ -10,10 +10,10 @@ not, modelin SIRALAMASINDA.
 Bu betik three soruyu separates:
 
   1. SIRALAMA NE KADAR KOTU?  Esikten bagimsiz criterion: mean precision (AP) and
-     `recall@k` (part basina GT count up to secenek al). Rastgele siralamanin
+     `recall@k` (part basina GT count up to option al). Rastgele siralamanin
      beklenen degeriyle kiyaslanir.
   2. PARCA-ICI Z-SKOR MU BOZUYOR?  Egitim markalarinda part basina ~150 candidate
-     present, NIT'te 407. Z-skor each parcayi own ortalamasina according to kaydiriyor;
+     present, NIT'te 407. Z-score each parcayi own ortalamasina according to kaydiriyor;
      candidate count and dagilimi very different olunca NIT egitimin HIC GORMEDIGI a
      bolgeye dusebilir. `zskor=absent` (ham feature) kolu bunu sinar.
   3. HANGI OZNITELIK BLOGU?  A (segmentasyon, 58) / B+D (mouth olculeri, 18) /
@@ -31,7 +31,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -77,10 +77,10 @@ def blok (d ,ad ,zskor ):
     raise ValueError (ad )
 
 
-def ap_ve_recall_k (data_ ,skor ):
+def ap_ve_recall_k (data_ ,score ):
     """Esikten BAGIMSIZ ranking olcutleri. Doner: (AP, recall@k, rastgele)."""
     aps ,rk ,rnd =[],[],[]
-    for d ,s in zip (data_ ,skor ):
+    for d ,s in zip (data_ ,score ):
         y =np .asarray (d ["y"],int )
         if not y .any ():
             continue 
@@ -102,13 +102,13 @@ def main ():
     tr =[d for d in dev if d ["mfg"]!=HEDEF ]
     te =[d for d in dev if d ["mfg"]==HEDEF ]
     if not te :
-        sys .exit (f"{HEDEF } yok")
+        sys .exit (f"{HEDEF } none")
     print (f"training {len (tr )} part ({len (set (d ['mfg']for d in tr ))} brand) | "
     f"exam {HEDEF } {len (te )} part / "
     f"{sum (len (d ['G'])for d in te )} GT",flush =True )
     print (f"candidate/part: training {np .mean ([len (d ['P'])for d in tr ]):.0f} | "
     f"{HEDEF } {np .mean ([len (d ['P'])for d in te ]):.0f}")
-    print (f"secenek/part: training {np .mean ([len (d ['idx'])for d in tr ]):.0f} | "
+    print (f"option/part: training {np .mean ([len (d ['idx'])for d in tr ]):.0f} | "
     f"{HEDEF } {np .mean ([len (d ['idx'])for d in te ]):.0f}\n")
 
     out ={}
@@ -128,7 +128,7 @@ def main ():
             print (f"{label_ :<34}{ap :>8.4f}{rk :>10.4f}{rnd :>10.4f}"
             f"{rk /max (rnd ,1e-9 ):>7.1f}x",flush =True )
 
-    json .dump ({"damga":makbuz_hash .damga (),"brand":HEDEF ,"sonuc":out ,
+    json .dump ({"damga":receipt_hash .damga (),"brand":HEDEF ,"sonuc":out ,
     "not":"TESHIS. Esikten bagimsiz siralama olcutleri. `fold` = "
     "recall@k'nin rastgele siralamaya orani; 1.0x rastgele "
     "demektir."},

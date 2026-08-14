@@ -25,7 +25,7 @@ PRED_ROLES =("pred_ok","pred_fp")
 
 # --- IKI MOD ------------------------------------------------------------------------------------
 # "robot_only" (VARSAYILAN, urun gorunumu): SADECE robotun koydugu CP'ler cizilir, all of them same
-#   kirmizi. Uretici isaretcisi and eslesme cizgisi YOKTUR. Gercek kullanimda (gorulmemis WSCAD
+#   kirmizi. Uretici isaretcisi and eslesme cizgisi YOKTUR. Gercek kullanimda (unseen WSCAD
 #   parcasi) manufacturer CP'si already yoktur; this mod GT olmadan da works.
 # "compare" (teshis): yesil/sari/kirmizi/mor + mavi line -- only bizim error analizimiz for.
 MODES =("robot_only","compare")
@@ -44,9 +44,9 @@ COMPONENTS_PER_MARKER =3
 # agizdan 5-25 mm iceridedir (cp_geometry.seat_to_mouth, olculmus aralik). Yuva->mouth hareketi
 # that is why 25 mm'ye up to MESRUDUR. Ustune emniyet payi: 30 mm.
 #
-# Once 8.0 was tried and YANLISTI: mesru derin CP'lerin agza tasinmasini da engelledi, oklar
-# govdenin inside kaldi (measured: 4/19, 6/40, 6/17 three iceride). Sinir, gozle secilen a number
-# not, parcanin fiziginden okunan a number must be.
+# Once 8.0 was tried and YANLISTI: mesru deep CP'lerin agza tasinmasini da engelledi, oklar
+# govdenin inside kaldi (measured: 4/19, 6/40, 6/17 three iceride). Sinir, gozle selected a number
+# not, parcanin fiziginden read a number must be.
 #
 # Cizici bunu SINIR, denetci same sayiyi M9 TOLERANSI as kullanir -- single source, aksi halde
 # ikisi ayrisir and cizici denetcinin reddedecegi dosyayi uretmeye devam eder.
@@ -59,7 +59,7 @@ def classify_colors (colors ):
     """Nx4 (or Nx3) vertex rengi -> each vertex for rol adi ('body','gt_hit',... or None).
 
     Tam esitlik aranir; GLB'de renkler uint8 as korunur. Eslesmeyen vertex None takes and this
-    denetimde 'bilinmeyen renk' ihlali sayilir.
+    denetimde 'unknown renk' ihlali sayilir.
     """
     c =np .asarray (colors )[:,:3 ].astype (int )
     out =np .full (len (c ),None ,dtype =object )

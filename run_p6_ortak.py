@@ -2,20 +2,20 @@
 """P6 ORTAK SIRALAYICI: (konum x direction) seceneklerini TEK skorla puanla.
 
 BUGUNKU URUN two ayri karar veriyor:
-  1. gate  -> this candidate CP mi?           (`product_wide.sec`, HGB-derin, threshold 0.05)
+  1. gate  -> this candidate CP mi?           (`product_wide.sec`, HGB-deep, threshold 0.05)
   2. direction   -> havuzun verdigi direction + sign duzeltmesi + poz kafasi
 Yon no zaman SECILMIYOR; havuzdan ne geldiyse that.
 
 BU BETIK ikisini merges: each (konum, direction) secenegi single modelle puanlanir,
-secim skor sirasina according to acgozlu + NMS with is done. Boylece
+secim score sirasina according to acgozlu + NMS with is done. Boylece
   * YON_YOK kovasi (D7'de 539 GT) dogrudan hedeflenir,
-  * GATE_REDDI kovasi (580) da faydalanir: correct yonu bulunan a candidate more
-    high skor takes, esigi gecer.
+  * GATE_REDDI kovasi (580) da faydalanir: correct yonu found a candidate more
+    high score takes, esigi gecer.
 
 OLCUM: D6. D7'ye BAKILMAZ (butce 3 okuma, all of them kapida).
 
 BLOK AYRIMI (`within_part` z-skoru):
-  A+B (58+9) pool/mouth olculeri MUTLAK buyukluklerdir -> part-ici z-skor
+  A+B (58+9) pool/mouth olculeri MUTLAK buyukluklerdir -> part-ici z-score
              dagitilan gate'te most large single kazancti, KORUNUR.
   C+D (16+9) direction olculeri ZATEN goreli (aciya, destege, orana dayali) ->
              HAM birakilir. p5-v2'de goreli olculeri a more normalize etmek
@@ -32,7 +32,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -62,11 +62,11 @@ def kayitlar (pidler ):
     """pid -> kayit (G, Gd, diag, mfg). Once kanonik, after D6 yedegi."""
     global _D6 
     kay =K .yukle (pidler )
-    eksik =[p for p in pidler if p not in kay ]
-    if eksik :
+    missing =[p for p in pidler if p not in kay ]
+    if missing :
         if _D6 is None :
             _D6 ={str (p ):r for p ,r in d6_record .yukle ().items ()}
-        kay .update ({p :_D6 [p ]for p in eksik if p in _D6 })
+        kay .update ({p :_D6 [p ]for p in missing if p in _D6 })
     return kay 
 
 
@@ -101,7 +101,7 @@ def yukle (on ,bound_ =0 ):
         if KAYNAK_SUZ is not None and "source"in z :
             kay =kayn 
             tut =np .isin (kay ,KAYNAK_SUZ )
-            # secenekler ADAY indeksine bagli; before secenekleri suz, after
+            # options ADAY indeksine bagli; before secenekleri suz, after
             # candidate indekslerini YENIDEN NUMARALA (aksi halde `idx` empty adaylara
             # sign eder and secim sessizce wrong konumu returns).
             ysec =tut [idx ]
@@ -118,8 +118,8 @@ def yukle (on ,bound_ =0 ):
         out .append ({"pid":pid ,"mfg":r ["mfg"],"X":X ,"idx":idx ,"YD":YD ,
         "P":P ,"D":Dham ,"y":y ,"source":kayn ,
         "G":G ,"Gd":Gd ,"diag":float (r ["diag"])})
-    print (f"  {on }: {len (fs )} dosya -> {len (out )} part "
-    f"(kayit yok {yok_kayit }, GT yok {yok_gt })",flush =True )
+    print (f"  {on }: {len (fs )} file -> {len (out )} part "
+    f"(kayit none {yok_kayit }, GT none {yok_gt })",flush =True )
     return out 
 
 
@@ -144,7 +144,7 @@ def olc (data_ ,skorlar ,threshold ):
     return {"robot":float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]
     for a in rob .values ()),1 )),
-    "tespit":K .mikro (tes ),
+    "detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm ,
     "TP":sum (a [0 ]for a in rob .values ()),
@@ -154,7 +154,7 @@ def olc (data_ ,skorlar ,threshold ):
 def baseline (data_ ):
     """DAGITILAN path, same onbellekten yeniden kurulmus.
 
-    `product_wide.sec` with same: X = A+B, part-ici z-skor, HGB-derin, threshold 0.05,
+    `product_wide.sec` with same: X = A+B, part-ici z-score, HGB-deep, threshold 0.05,
     kalabalik NMS, sign correction. Tek difference: here onbellekten okunuyor.
     """
     model =product_wide .model_yukle ()
@@ -185,7 +185,7 @@ def baseline (data_ ):
     return {"robot":float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]
     for a in rob .values ()),1 )),
-    "tespit":K .mikro (tes ),
+    "detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm ,
     "TP":sum (a [0 ]for a in rob .values ()),
@@ -203,7 +203,7 @@ def main ():
 
     M =np .vstack ([donustur (d ["X"])for d in tr ])
     Y =np .concatenate ([d ["y"]for d in tr ])
-    print (f"secenek {M .shape } | pozitif {Y .mean ():.4f}",flush =True )
+    print (f"option {M .shape } | pozitif {Y .mean ():.4f}",flush =True )
 
     m =HistGradientBoostingClassifier (max_iter =600 ,learning_rate =0.06 ,
     max_leaf_nodes =63 ,l2_regularization =1.0 ,
@@ -212,25 +212,25 @@ def main ():
     for d in dev ]
 
     tb =baseline (dev )
-    print (f"\nTABAN (dagitilan yol, ayni parts): robot {tb ['robot']:.4f} | "
-    f"tespit {tb ['tespit']:.4f} | makro {tb ['makro']:.4f} | "
+    print (f"\nTABAN (dagitilan path, same parts): robot {tb ['robot']:.4f} | "
+    f"detection {tb ['detection']:.4f} | makro {tb ['makro']:.4f} | "
     f"TP {tb ['TP']} FP {tb ['FP']}",flush =True )
-    print (f"\n{'threshold':>6} {'robot':>8} {'tespit':>8} {'makro':>8} {'TP':>6} {'FP':>6}")
+    print (f"\n{'threshold':>6} {'robot':>8} {'detection':>8} {'makro':>8} {'TP':>6} {'FP':>6}")
     res_ ={}
     en =None 
     for e in ESIKLER :
         r =olc (dev ,sk ,e )
         res_ [f"{e :.2f}"]=r 
-        print (f"{e :>6.2f} {r ['robot']:>8.4f} {r ['tespit']:>8.4f} "
+        print (f"{e :>6.2f} {r ['robot']:>8.4f} {r ['detection']:>8.4f} "
         f"{r ['makro']:>8.4f} {r ['TP']:>6} {r ['FP']:>6}",flush =True )
         if en is None or r ["robot"]>en [1 ]["robot"]:
             en =(e ,r )
     e ,r =en 
     print (f"\nEN IYI threshold {e :.2f} -> robot {r ['robot']:.4f} "
-    f"(baseline {tb ['robot']:.4f}, fark {r ['robot']-tb ['robot']:+.4f})")
+    f"(baseline {tb ['robot']:.4f}, diff {r ['robot']-tb ['robot']:+.4f})")
     with open ("results/p6_ortak_model.pkl","wb")as f :
         pickle .dump ({"model":m ,"threshold":e ,"zskor":ZSKOR ,"AB":AB },f )
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":tb ,"esik_taramasi":res_ ,
+    json .dump ({"damga":receipt_hash .damga (),"baseline":tb ,"esik_taramasi":res_ ,
     "en_iyi_esik":e ,"zskor":ZSKOR ,"n_dev":len (dev ),
     "n_egitim":len (tr ),
     "not":"P6 ortak (konum x direction) siralayici. D6 DEV -- D7'ye "

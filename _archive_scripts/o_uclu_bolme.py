@@ -1,0 +1,111 @@
+# -*- coding: utf-8 -*-
+"""O: UC AYRI KUME kur -- gelistirme / dogrulama / KILITLI.
+
+ZAAFIYET: bugune up to TEK a 100-parcalik cluster hem DECISION VERMEK (J, L2, threshold, feature secimi)
+hem de OLCMEK for kullanildi. Bu, selected each seyin that kumeye a miktar uydurulmasi demek --
+"holdout" adi hak edilmiyor.
+
+COZUM: keskin geometri anahtariyla (bbox 0.5mm + B-rep silindir/duzlem imzasi) UC AYRIK grup:
+  DEV    -- kararlar here verilir (mevcut 100 parcanin devami)
+  VAL    -- verilen kararlar here SINANIR (asiri-uydurma yakalanir, kilitli harcanmaz)
+  LOCKED -- single atislik final. Ustunde HICBIR setting yapilmaz.
+
+Ek rule: LOCKED, segmentasyon training+val geometrileriyle de same grupta OLMAZ. Boylece
+"unseen geometri" iddiasi first times gercekten correct becomes.
+
+Cikti: results/split3.json
+"""
+import os ,sys ,json 
+import numpy as np 
+
+os .environ .setdefault ("BA_ALLOW_SEEN","1")
+sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
+KEYS ="results/_strict_geometry_keys.json"
+OUT ="results/split3.json"
+
+
+def main ():
+    from big_arbiter import eligible 
+
+    keys =json .load (open (KEYS ))
+    parts =[]
+    for m ,p ,jf ,s in eligible ():
+        try :
+            n =len (json .load (open (jf ,encoding ="utf-8-sig"))["ConnectionPoints"])
+        except Exception :
+            continue 
+        if n >0 and p in keys :
+            parts .append ((m ,p ,jf ,s ,n ))
+    seg =set ()
+    for sp in ("train","val"):
+        f =f"wscad_corpus_scheffler_exact/splits/{sp }.txt"
+        if os .path .exists (f ):
+            seg |={x .strip ()for x in open (f )if x .strip ()}
+    seg_groups ={keys [p ]for p in seg if p in keys }
+    print (f"{len (parts )} part | {len ({keys [p [1 ]]for p in parts })} keskin geometri grubu")
+    print (f"segmentasyonun kapladigi grup: {len (seg_groups )}")
+
+    # old 100'luk cluster (kararlar orada verildi) -> DEV'e sabitlenir
+    LOCK =set (json .load (open ("results/split_lock.json"))["locked_parts"])
+    pool =[p for p in parts if p [1 ]not in LOCK ]
+    rng =np .random .RandomState (202 )
+    lo =[x for x in pool if x [4 ]<8 ];hi =[x for x in pool if x [4 ]>=8 ]
+    old_ =([lo [i ]for i in rng .choice (len (lo ),70 ,replace =False )]+
+    [hi [i ]for i in rng .choice (len (hi ),30 ,replace =False )])
+    dev_groups ={keys [p [1 ]]for p in old_ }
+    kirli =sum (1 for p in old_ if keys [p [1 ]]in seg_groups )
+    print (f"\nESKI 100'luk cluster: {kirli }/100 part segmentasyon geometrisiyle same grupta")
+    print ("  -> this cluster DEV becomes; ten karar verilebilir, MANSET as kullanilamaz")
+
+    # remaining gruplar: segmentasyona and DEV'e degmeyenler
+    remaining =[p for p in pool 
+    if keys [p [1 ]]not in dev_groups and keys [p [1 ]]not in seg_groups ]
+    klo =[x for x in remaining if x [4 ]<8 ];khi =[x for x in remaining if x [4 ]>=8 ]
+    print (f"\ntemiz pool (ne DEV ne segmentasyon): {len (remaining )} part "
+    f"({len (klo )} dusuk / {len (khi )} very-CP)")
+
+    # gruplari ikiye bol: VAL and LOCKED (grup duzeyinde, part duzeyinde DEGIL)
+    grp =sorted ({keys [p [1 ]]for p in remaining })
+    r2 =np .random .RandomState (31071 )
+    r2 .shuffle (grp )
+    half =len (grp )//2 
+    val_g ,lock_g =set (grp [:half ]),set (grp [half :])
+
+    def pick (groups ,nlo ,nhi ,seed ):
+        c =[p for p in remaining if keys [p [1 ]]in groups ]
+        a =[x for x in c if x [4 ]<8 ];b =[x for x in c if x [4 ]>=8 ]
+        r =np .random .RandomState (seed )
+        s =([a [i ]for i in r .choice (len (a ),min (nlo ,len (a )),replace =False )]+
+        [b [i ]for i in r .choice (len (b ),min (nhi ,len (b )),replace =False )])
+        return s 
+
+    val =pick (val_g ,70 ,30 ,7 )
+    lock =pick (lock_g ,70 ,30 ,11 )
+    assert not ({keys [p [1 ]]for p in val }&{keys [p [1 ]]for p in lock }),"VAL and LOCKED cakisiyor"
+    assert not ({keys [p [1 ]]for p in lock }&dev_groups ),"LOCKED with DEV cakisiyor"
+    assert not ({keys [p [1 ]]for p in lock }&seg_groups ),"LOCKED with segmentasyon cakisiyor"
+
+    json .dump ({
+    "created":"2026-07-31",
+    "anahtar":"keskin geometri: bbox 0.5mm + B-rep silindir/duzlem imzasi + kose/face kovalari",
+    "rule":{
+    "DEV":"kararlar here verilir (J, L2, threshold, feature secimi). MANSET DEGIL.",
+    "VAL":"verilen kararlar here SINANIR. Asiri-uydurma buradan gorulur.",
+    "LOCKED":"TEK ATIS. Uzerinde no setting yapilmaz; gate egitimi this gruplari gormez.",
+    },
+    "dev":{"n":len (old_ ),"parts":[p [1 ]for p in old_ ],
+    "uyari":f"{kirli }/100 parcasi segmentasyon training geometrisiyle same grupta"},
+    "val":{"n":len (val ),"parts":[p [1 ]for p in val ],
+    "groups":sorted ({keys [p [1 ]]for p in val })},
+    "locked":{"n":len (lock ),"parts":[p [1 ]for p in lock ],
+    "groups":sorted ({keys [p [1 ]]for p in lock })},
+    },open (OUT ,"w"),indent =1 )
+    print (f"\nDEV {len (old_ )} | VAL {len (val )} | LOCKED {len (lock )}")
+    print (f"  VAL gruplari {len ({keys [p [1 ]]for p in val })} | "
+    f"LOCKED gruplari {len ({keys [p [1 ]]for p in lock })}")
+    print (f"  ucu de AYRIK dogrulandi (assert gecti)")
+    print (f"-> {OUT }")
+
+
+if __name__ =="__main__":
+    main ()

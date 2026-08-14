@@ -20,7 +20,7 @@
   },
   "config": {
    "cp_config.json": "9c42853b08b790b5",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
@@ -48,7 +48,7 @@
  "ort": {
   "gate_vo": 0.14279466889064601,
   "p5v2_gate": 0.1751,
-  "fark": 0.03230533110935399
+  "diff": 0.03230533110935399
  },
  "not": "MIKRO. Egitim none; gate maskesi + v_o. p5v2 sayilari LOMO."
 }

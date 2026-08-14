@@ -1,0 +1,116 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "5e84bd141b4e0e61",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "dizin": "results/_p6_oz_u25",
+ "cluster": [
+  "d6"
+ ],
+ "total": {
+  "part": 468,
+  "gt": 2672,
+  "konum_recall": 0.8712574850299402,
+  "yonlu_recall": 0.7264221556886228,
+  "f1_tavani": 0.8415347929763711,
+  "aday_parca": 250.9017094017094,
+  "secenek_parca": 2735.175213675214
+ },
+ "brand": {
+  "NIT": {
+   "part": 50,
+   "gt": 1222,
+   "konum_recall": 0.7806873977086743,
+   "yonlu_recall": 0.5253682487725041,
+   "f1_tavani": 0.6888412017167381,
+   "aday_parca": 407.24,
+   "secenek_parca": 4467.24
+  },
+  "SUPU": {
+   "part": 165,
+   "gt": 547,
+   "konum_recall": 0.9506398537477148,
+   "yonlu_recall": 0.8884826325411335,
+   "f1_tavani": 0.9409486931268151,
+   "aday_parca": 152.0848484848485,
+   "secenek_parca": 1524.9575757575758
+  },
+  "UPUN": {
+   "part": 117,
+   "gt": 370,
+   "konum_recall": 0.9648648648648649,
+   "yonlu_recall": 0.8810810810810811,
+   "f1_tavani": 0.9367816091954023,
+   "aday_parca": 197.97435897435898,
+   "secenek_parca": 2035.5128205128206
+  },
+  "MOR": {
+   "part": 80,
+   "gt": 274,
+   "konum_recall": 0.8686131386861314,
+   "yonlu_recall": 0.8686131386861314,
+   "f1_tavani": 0.9296875000000001,
+   "aday_parca": 441.125,
+   "secenek_parca": 5168.5625
+  },
+  "UTL": {
+   "part": 31,
+   "gt": 84,
+   "konum_recall": 1.0,
+   "yonlu_recall": 1.0,
+   "f1_tavani": 1.0,
+   "aday_parca": 202.93548387096774,
+   "secenek_parca": 2281.0
+  },
+  "SE": {
+   "part": 8,
+   "gt": 82,
+   "konum_recall": 1.0,
+   "yonlu_recall": 0.9146341463414634,
+   "f1_tavani": 0.9554140127388536,
+   "aday_parca": 239.75,
+   "secenek_parca": 2682.375
+  },
+  "ONV": {
+   "part": 8,
+   "gt": 67,
+   "konum_recall": 1.0,
+   "yonlu_recall": 0.9552238805970149,
+   "f1_tavani": 0.9770992366412213,
+   "aday_parca": 439.125,
+   "secenek_parca": 5269.5
+  },
+  "S+S": {
+   "part": 9,
+   "gt": 26,
+   "konum_recall": 1.0,
+   "yonlu_recall": 1.0,
+   "f1_tavani": 1.0,
+   "aday_parca": 199.0,
+   "secenek_parca": 2124.0
+  }
+ },
+ "kapi_a_gecti": false,
+ "not": "Havuz TAVANI (mukemmel selector). Kabul kutusu urun metrigiyle birebir. D7'ye BAKILMADI."
+}

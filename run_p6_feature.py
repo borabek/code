@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""P6 OZNITELIK CIKARIMI: (konum x direction) secenek tablosu.
+"""P6 OZNITELIK CIKARIMI: (konum x direction) option tablosu.
 
 Dagitilan urun a adayi TEK yonle puanliyor. Bu betik each adayi
-`direction_bank.secenekler` with cogaltir and HER SECENEK for feature satiri produces.
+`direction_bank.options` with cogaltir and HER SECENEK for feature satiri produces.
 
 OZNITELIK BLOKLARI (total 92 column):
   A  58  pool oznitelikleri (`_tam_oz`)      -- KONUM baglami, adayin own yonuyle
@@ -13,7 +13,7 @@ OZNITELIK BLOKLARI (total 92 column):
 D blogu isin atislari gerektirir (`girme` / `erisim` / `girme_kenar`); asil maliyet
 oradadir and a parcanin TUM secenekleri TEK cagrida toplu atilir.
 
-WHY A and B secenek yonuyle YENIDEN hesaplanmiyor: 58 sutunun most konumsal
+WHY A and B option yonuyle YENIDEN hesaplanmiyor: 58 sutunun most konumsal
 (segmentasyon olasiligi, topoloji, komsuluk) and yeniden uretimi part basina
 saniyeler suruyor. A/B konum baglamini, C/D direction kararini carries. Bu ayrim same
 zamanda modele "konum ne up to iyi" with "this direction correct mu" sorularini AYRI gives.
@@ -48,7 +48,7 @@ CIK =os .environ .get ("P6_CIK","results/_p6_oz")
 # yonlu and zayifti. Yon bankasi + ortak siralayici with yeniden acilir; kararı
 # LOMO gives. `P6_KAYNAK=012` with acilir.
 # `P6_MESH_MAX` mesh adaylarini SEGMENTASYON OLASILIGINA according to upper sinira indirir
-# (0 = sinirsiz); so secenek count patlamaz.
+# (0 = sinirsiz); so option count patlamaz.
 _ks =os .environ .get ("P6_KAYNAK","01")
 KAYNAKLAR =tuple (int (c )for c in _ks )
 MESH_MAX =int (os .environ .get ("P6_MESH_MAX","250"))# baseline upper boundary
@@ -72,7 +72,7 @@ KUME ={
 def main ():
     on =sys .argv [1 ]if len (sys .argv )>1 else "d6"
     if on not in KUME :
-        sys .exit (f"bilinmeyen cluster: {on }")
+        sys .exit (f"unknown cluster: {on }")
     sil_y ,ack_y ,ob =KUME [on ]
     import trimesh 
 
@@ -96,12 +96,12 @@ def main ():
     print (f"{on }: {len (dosyalar )} part | cikti {CIK }",flush =True )
 
     t0 =time .time ()
-    yazilan =atlanan =empty_ =0 
+    written =skipped =empty_ =0 
     for i ,f in enumerate (dosyalar ,1 ):
         pid =f [len (on )+1 :-4 ]
         hedef =f"{CIK }/{on }_{pid }.npz"
         if os .path .exists (hedef ):
-            atlanan +=1 
+            skipped +=1 
             continue 
         z =np .load (f"{OZ }/{f }")
         kay =np .asarray (z ["source"],int )
@@ -125,8 +125,8 @@ def main ():
         # MESH ADAYLARINI SEYRELT. Kaynak 0/1 ASLA elenmez.
         #
         # MEASURED (D6, 468 part, YALNIZ KONUM recall'u / candidate-part):
-        #   most high olasilik 60     0.6362 / 160
-        #   most high olasilik 150    0.7163 / 214
+        #   most high probability 60     0.6362 / 160
+        #   most high probability 150    0.7163 / 214
         #   uzamsal 4.0mm, 2x120      0.8091 / 178
         #   uzamsal 2.5mm, 4x250      0.8713 / 251   <- SECILEN (diz)
         #   uzamsal 2.0mm, sinirsiz   0.9768 / 458
@@ -156,7 +156,7 @@ def main ():
         P =np .asarray (z ["P"],float )[m ]
         D =np .asarray (z ["D"],float )[m ]
         cyl =cy .get (str (pid ))
-        # SIRA IMPORTANT: `mesh`/`diag` yelpaze for `secenekler`e giriyor.
+        # SIRA IMPORTANT: `mesh`/`diag` yelpaze for `options`e giriyor.
         # Once cagirip after tanimlamak first parcada NameError, sonrakilerde
         # BIR ONCEKI PARCANIN mesh'ini kullanmak demekti -- silent wrong.
         diag =float (np .linalg .norm (V .max (0 )-V .min (0 )))
@@ -165,7 +165,7 @@ def main ():
         # atmak part basina face binlerce isin demek and that candidates already
         # own vertex normalini tasiyor.
         fmask =(kay [m ]!=2 )
-        idx ,YD ,C =YB .secenekler (P ,D ,cyl ,V ,mesh =mesh ,diag =diag ,
+        idx ,YD ,C =YB .options (P ,D ,cyl ,V ,mesh =mesh ,diag =diag ,
         fan_maske =fmask )
         if not len (idx ):
             empty_ +=1 
@@ -175,7 +175,7 @@ def main ():
         X =np .hstack ([A [idx ],B [idx ],C ,Dblok ]).astype (np .float32 )
         # `source` DE YAZILIR: so TEK cikarimdan hem (0,1) hem (0,1,2)
         # kolu egitilebilir and two kolu ayri ayri cikarmak gerekmez.
-        # ATOMIK YAZIM: gecici dosyaya yaz, after instead of tasi. Iki isci same
+        # ATOMIK YAZIM: temp dosyaya yaz, after instead of tasi. Iki isci same
         # parcaya denk gelirse (yuk dengesizligi yuzunden yardimci isci
         # eklendiginde becomes) half yazilmis npz kalmaz.
         gec =f"{hedef }.{os .getpid ()}.tmp"
@@ -184,12 +184,12 @@ def main ():
         D =D .astype (np .float32 ),
         src_ =kay [m ].astype (np .int8 ))
         os .replace (gec +".npz"if os .path .exists (gec +".npz")else gec ,hedef )
-        yazilan +=1 
+        written +=1 
         if i %25 ==0 :
-            hz =(time .time ()-t0 )/max (yazilan ,1 )
-            print (f"  {i }/{len (dosyalar )}  yazilan {yazilan } atlanan {atlanan } "
+            hz =(time .time ()-t0 )/max (written ,1 )
+            print (f"  {i }/{len (dosyalar )}  written {written } skipped {skipped } "
             f"bos {empty_ }  {hz :.2f} s/part",flush =True )
-    print (f"\nBITTI: yazilan {yazilan } | atlanan {atlanan } | bos {empty_ } | "
+    print (f"\nBITTI: written {written } | skipped {skipped } | bos {empty_ } | "
     f"{time .time ()-t0 :.0f} s",flush =True )
     print (f"sutun: 58 (A) + 9 (B) + {len (YB .OZ_AD )} (C) + "
     f"{len (mouth_descriptor .AD )} (D)")

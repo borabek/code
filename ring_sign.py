@@ -4,16 +4,16 @@
 Her CP'nin direction ISARETINI, mouth cevresindeki yuzun normaliyle uyumlu hale
 getirir. Konumu and ekseni DEGISTIRMEZ, only isareti (yonun +/- olmasi).
 
-MEASURED (2026-08-13/14, VAL 100 part, esli part bootstrap):
+MEASURED (2026-08-13/14, VAL 100 part, paired part bootstrap):
 
 | populasyon | path | difference | %95 GA |
 |---|---|---|---|
-| **TANIDIK brand** | olculen | **+0.0195** | **[+0.0030, +0.0378]** KESIN |
-| TANIDIK brand | saha | +0.0329 | [−0.0155, +0.0819] |
-| hard/gorulmemis (150) | olculen | +0.0023 | notr |
-| hard/gorulmemis (150) | saha | −0.0016 | small negatif |
+| **TANIDIK brand** | measured_path | **+0.0195** | **[+0.0030, +0.0378]** KESIN |
+| TANIDIK brand | field | +0.0329 | [−0.0155, +0.0819] |
+| hard/unseen (150) | measured_path | +0.0023 | notr |
+| hard/unseen (150) | field | −0.0016 | small negatif |
 
-**Kazanc TANIDIK brand populasyonuna OZGUDUR**; gorulmemis markada notr.
+**Kazanc TANIDIK brand populasyonuna OZGUDUR**; unseen markada notr.
 Kural, baseline sistemin ZATEN CALISTIGI places yardim ediyor.
 
 WHY HALKA, EN YAKIN TEPE DEGIL. Ilk denemede referans as CP'ye EN
@@ -85,8 +85,8 @@ def duzelt (cps ,V ,F ):
     D =_birim (np .asarray ([c ["direction"]for c in cps ],
     float ).reshape (-1 ,3 ))
     H =ring_normals (V ,F ,P )
-    gecerli =np .linalg .norm (H ,axis =1 )>1e-9 
-    cevir =gecerli &(np .sum (D *H ,axis =1 )<0 )
+    valid =np .linalg .norm (H ,axis =1 )>1e-9 
+    cevir =valid &(np .sum (D *H ,axis =1 )<0 )
     for i in np .where (cevir )[0 ]:
         cps [i ]["direction"]=(-D [i ]).tolist ()
     return cps ,int (cevir .sum ())
@@ -101,18 +101,18 @@ def self_check ():
     V =np .asarray (part .vertices ,float )
     F =np .asarray (part .faces ,int )
     mouth =np .array ([0.0 ,0.0 ,15.0 ])# +z yuzundeki hole agzi
-    dogru =np .array ([0.0 ,0.0 ,1.0 ])# DISARI
-    cps =[{"point":mouth .tolist (),"direction":(-dogru ).tolist ()}]
+    correct =np .array ([0.0 ,0.0 ,1.0 ])# DISARI
+    cps =[{"point":mouth .tolist (),"direction":(-correct ).tolist ()}]
     cps ,n =duzelt (cps ,V ,F )
     new_ =np .asarray (cps [0 ]["direction"],float )
-    ok =float (new_ @dogru )>0.9 
+    ok =float (new_ @correct )>0.9 
     print (f"  ters verilen direction duzeltildi mi: {'EVET'if ok else 'HAYIR'} "
     f"(cevrilen {n })")
     # correct verilen direction BOZULMAMALI
-    cps2 =[{"point":mouth .tolist (),"direction":dogru .tolist ()}]
+    cps2 =[{"point":mouth .tolist (),"direction":correct .tolist ()}]
     cps2 ,n2 =duzelt (cps2 ,V ,F )
-    ok2 =float (np .asarray (cps2 [0 ]["direction"],float )@dogru )>0.9 
-    print (f"  dogru verilen direction korundu mu : {'EVET'if ok2 else 'HAYIR'} "
+    ok2 =float (np .asarray (cps2 [0 ]["direction"],float )@correct )>0.9 
+    print (f"  correct verilen direction korundu mu : {'EVET'if ok2 else 'HAYIR'} "
     f"(cevrilen {n2 })")
     print ("SENTETIK YETENEK:","GECTI"if (ok and ok2 )else "KALDI")
     return ok and ok2 

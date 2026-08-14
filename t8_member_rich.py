@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """T8: UYE SECICIYI guclendir -- kahinin kacan %48'i.
 
-DURUM: kahin (GT'ye bakip most iyi uye yonunu secmek) robot-haziri 0.5523 -> 0.6059 does.
+DURUM: oracle (GT'ye bakip most iyi uye yonunu secmek) robot-haziri 0.5523 -> 0.6059 does.
 Dagitilan ogrenilmis selector 0.5801'de, i.e. kahinin %52'si. Kalan %48 = +0.0258.
 
 SECICIDE EKSIK OLAN NE: this an each uye TEK BASINA degerlendiriliyor (own guveni, birlesime
@@ -162,7 +162,7 @@ def main ():
             det .append ((r ["rj"],)+esle (r ["P"],PD [ki ],r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((r ["rj"],)+esle (r ["P"],PD [ki ],r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         SON [ad ]=(float (f1w (det )),float (f1w (rob )),rob ,RX .shape [1 ])
-        print (f"{ad :<20} tespit {SON [ad ][0 ]:.4f} | ROBOT {SON [ad ][1 ]:.4f} "
+        print (f"{ad :<20} detection {SON [ad ][0 ]:.4f} | ROBOT {SON [ad ][1 ]:.4f} "
         f"({RX .shape [1 ]} sutun, {len (RY )} satir)",flush =True )
 
         # baseline: secicisiz
@@ -189,7 +189,7 @@ def main ():
     with io .open ("results/t8_member_rich.json","w",encoding ="utf-8")as f :
         json .dump ({"baseline":float (t0 ),
         "A":float (SON ["A mevcut (7+58)"][1 ]),"B":float (SON ["B zengin (12+58)"][1 ]),
-        "fark":float (dd ),"ga":[float (lo ),float (hi )]},f ,indent =1 )
+        "diff":float (dd ),"ga":[float (lo ),float (hi )]},f ,indent =1 )
     print ("receipt -> results/t8_member_rich.json")
 
 

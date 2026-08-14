@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # A1b: DAGITILABILIR version -- training korpusu buyur AMA measurement set BOZULMAZ.
 #
-# A1a (415 mesh) "more very veri ise yariyor mu" sorusunu SABIT val kumesinde cevaplar,
+# A1a (415 mesh) "more very data ise yariyor mu" sorusunu SABIT val kumesinde cevaplar,
 # but etiketlerinin 52 measurement grubuyla cakismasi yuzunden UCTAN UCA olculemez
 # (measurement set 171 -> 119 gruba duserdi = mevcut sayilarla karsilastirilamaz).
 #

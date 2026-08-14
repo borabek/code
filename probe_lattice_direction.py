@@ -9,12 +9,12 @@ BU SONDA full kabul kutusunu uygular. Uretilen each izgara noktasinin
 CEVRESINDEKI adaylarin direction-bankasi secenekleri toplanir and GT, however
 (konum kutusu) VE (direction kutusu) birlikte saglanirsa kapsanmis sayilir.
 
-Yon secimi KAHINDIR (mevcut secenekler icinden EN IYISI). Yani this a TAVAN:
+Yon secimi KAHINDIR (mevcut options icinden EN IYISI). Yani this a TAVAN:
 "uretilen konumda correct direction MEVCUT MU?" sorusunu yanitlar. Mevcut degilse
 no selector onu bulamaz -- arm orada becomes. Mevcutsa is seciciye kalir.
 
 WHY IMPORTANT: onceki lattice denemesi (K2.1) full here coktu -- yonu
-KOPYALAMISTI and robot metrigi -0.0100 dusmustu (tespit +0.0126 iken).
+KOPYALAMISTI and robot metrigi -0.0100 dusmustu (detection +0.0126 iken).
 
 D7'ye BAKILMAZ.
 """
@@ -53,13 +53,13 @@ def main ():
         Gd =np .asarray (d ["Gd"],float )
         Gn =Gd /np .maximum (np .linalg .norm (Gd ,axis =1 ,keepdims =True ),1e-12 )
         P =np .asarray (d ["P"],float )# ADAY konumlari
-        idx =np .asarray (d ["idx"],int )# secenek -> candidate
-        YD =np .asarray (d ["YD"],float )# secenek yonleri
+        idx =np .asarray (d ["idx"],int )# option -> candidate
+        YD =np .asarray (d ["YD"],float )# option yonleri
         Pu =np .unique (np .round (P ,3 ),axis =0 )
-        bulunan =kafes_ara (Pu )
-        if not bulunan :
+        found =kafes_ara (Pu )
+        if not found :
             continue 
-        uret =np .vstack ([b [2 ]for b in bulunan ])
+        uret =np .vstack ([b [2 ]for b in found ])
 
         # 1) YALNIZ KONUM (VII.0m with same olcu)
         v =uret [:,None ,:]-G [None ,:,:]
@@ -111,7 +111,7 @@ def main ():
     "yakin_r":YAKIN_R ,"brand":out ,
     "not":"Uretilen izgara noktalarinda YON, cevredeki adaylarin "
     "direction-bankasi seceneklerinden KAHIN gibi secilir. TAVAN "
-    "olcumudur: dogru direction MEVCUT MU? D7'ye BAKILMADI."},
+    "olcumudur: correct direction MEVCUT MU? D7'ye BAKILMADI."},
     open (f"results/kafes_yon_{KUME }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/kafes_yon_{KUME }.json")
     print ("OKUMA: direction kaybi KUCUKSE arm canli (direction uretilen konumda mevcut);")

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """T4: part kesimini SECICI degistir (t3'un dogrudan regresyonu dustu).
 
-T3 kahin K'yi dogrudan kestirdi and KAYBETTI (-0.0148; DEV/VAL/manufacturer all of them negatif). Sebep
+T3 oracle K'yi dogrudan kestirdi and KAYBETTI (-0.0148; DEV/VAL/manufacturer all of them negatif). Sebep
 hedefin gurultulu olmasi: same F1'i veren bircok K present, regresyon ortalamaya kaciyor and
 mevcut kuraldan HER PARCADA sapiyor.
 
@@ -11,9 +11,9 @@ uygulamak (cokus yonlendirmesi, yarik secicisi). Burada da same:
   A  mevcut rule (baseline)
   B  BUZULME: K = round(alfa*K_tahmin + (1-alfa)*K_mevcut)   -- alfa taranir
   C  SECICI : only |K_tahmin - K_mevcut| >= threshold ISE degistir, otherwise mevcut rule
-  D  TEK YON: only AZALTMA yonunde degistir (kahin K medyani mevcuttan KUCUK: 3 vs 4)
+  D  TEK YON: only AZALTMA yonunde degistir (oracle K medyani mevcuttan KUCUK: 3 vs 4)
 
-KILL (t3 with AYNI, degistirilmedi): tespit >= +0.02 VE DEV with VAL same yonde VE gorulmemis
+KILL (t3 with AYNI, degistirilmedi): detection >= +0.02 VE DEV with VAL same yonde VE unseen
 manufacturer ortalamasi dusmeyecek.
 """
 import json 
@@ -69,7 +69,7 @@ def main ():
     mfg_of ={p :m for m ,p ,jf ,s in eligible ()}
     with open ("results/_u4_der.pkl","rb")as f :
         DER =pickle .load (f )
-    with open ("results/_dev_val_kume.json",encoding ="utf-8")as f :
+    with open ("results/_dev_val_cluster.json",encoding ="utf-8")as f :
         kume_of =json .load (f )
     d =np .load ("results/gate_regrow_data_topo.npz",allow_pickle =True )
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
@@ -116,7 +116,7 @@ def main ():
     yk =np .array ([p ["kahin_K"]for p in PAR ],float )
     grp =np .array ([p ["geo"]for p in PAR ])
     suK =np .array ([int (wire_gate .decision_mask (p ["s"]).sum ())for p in PAR ],float )
-    print (f"{len (PAR )} part | kahin K medyan {np .median (yk ):.0f} | mevcut K medyan "
+    print (f"{len (PAR )} part | oracle K medyan {np .median (yk ):.0f} | mevcut K medyan "
     f"{np .median (suK ):.0f}",flush =True )
 
     oof =np .zeros (len (PAR ))
@@ -137,7 +137,7 @@ def main ():
     a_dev =puanla (suK ,lambda p :p ["cluster"]=="dev")
     a_val =puanla (suK ,lambda p :p ["cluster"]=="val")
     a_mfg =np .mean ([puanla (suK ,lambda p ,x =x :p ["mfg"]==x )for x in ("PXC","WEI")])
-    print (f"\nTABAN: tespit {a :.4f} | DEV {a_dev :.4f} | VAL {a_val :.4f} | manufacturer ort {a_mfg :.4f}")
+    print (f"\nTABAN: detection {a :.4f} | DEV {a_dev :.4f} | VAL {a_val :.4f} | manufacturer ort {a_mfg :.4f}")
     print (f"KAHIN: {puanla (yk ):.4f} (+{puanla (yk )-a :.4f})")
 
     KOL ={}
@@ -147,14 +147,14 @@ def main ():
         K =suK .copy ()
         f =np .abs (oof -suK )>=es 
         K [f ]=oof [f ]
-        KOL [f"C selector |fark|>={es }"]=K 
+        KOL [f"C selector |diff|>={es }"]=K 
     for es in (0.5 ,1.5 ,2.5 ):
         K =suK .copy ()
         f =(suK -oof )>=es # only AZALTMA
         K [f ]=oof [f ]
-        KOL [f"D yalniz azalt >={es }"]=K 
+        KOL [f"D only azalt >={es }"]=K 
 
-    print (f"\n{'arm':<24}{'tespit':>9}{'fark':>9}{'DEV':>9}{'VAL':>9}{'mfg ort':>10}{'KILL':>9}")
+    print (f"\n{'arm':<24}{'detection':>9}{'diff':>9}{'DEV':>9}{'VAL':>9}{'mfg ort':>10}{'KILL':>9}")
     kazanan ,en =None ,-10 
     for ad ,K in KOL .items ():
         t =puanla (K )
@@ -168,7 +168,7 @@ def main ():
             kazanan ,en =ad ,t 
     print (f"\nSONUC: {kazanan if kazanan else 'HICBIRI GECMEDI -> mevcut rule KALIR'}")
     with open ("results/t4_cut_selector.json","w",encoding ="utf-8")as f :
-        json .dump ({"baseline":float (a ),"kahin":float (puanla (yk )),
+        json .dump ({"baseline":float (a ),"oracle":float (puanla (yk )),
         "kollar":{k :float (puanla (v ))for k ,v in KOL .items ()},
         "kazanan":kazanan },f ,indent =1 )
     print ("receipt -> results/t4_cut_selector.json")

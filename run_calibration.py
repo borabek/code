@@ -3,17 +3,17 @@
 
 MEASURED (D7, 2512 prediction): ham skorla precision HICBIR esikte >=0.90 olmuyor,
 most high 0.6429 and egri vertex sonrasi GERI DONUYOR. Sebep, karar kuralinin
-GORELI olmasi (`0.85 x part-maks`): secilen tahminlerin all of them already part
-maksimumuna yakin, therefore MUTLAK skor parts arasi ayirt edici not.
+GORELI olmasi (`0.85 x part-maks`): selected tahminlerin all of them already part
+maksimumuna yakin, therefore MUTLAK score parts arasi ayirt edici not.
 
 Bu modul SECILMIS tahminler on ikinci a soru sorar: "this prediction DOGRU
 mu?" Girdi, secim aninda already hesaplanmis which is sinyallerdir:
 
-  * ham skor and part-ici GORELI konumu (skor / part-maks, order yuzdeligi)
-  * secenek bankasinin that konumda ne up to HEMFIKIR oldugu
+  * ham score and part-ici GORELI konumu (score / part-maks, order yuzdeligi)
+  * option bankasinin that konumda ne up to HEMFIKIR oldugu
   * lattice / order tutarliligi
   * mouth olculeri (girme, erisim, narinlik)
-  * part baglami (candidate count, secilen prediction count)
+  * part baglami (candidate count, selected prediction count)
 
 Cikti kalibre a olasiliktir; confidence kapisi ONUN uzerine kurulur. Boylece
 "robotun kullandigi isaretler >=0.90 kesinliktedir" sozu, KAPSAMA bedeliyle
@@ -31,7 +31,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -48,14 +48,14 @@ from sina_cluster import match_hungarian # noqa: E402
 
 PAKET =os .environ .get ("P6_MODEL","results/p6_kademe2_model.pkl")
 HEDEF =float (os .environ .get ("KAL_HEDEF","0.90"))
-OZ_AD =["skor","skor_orani","skor_sira","skor_marj",
+OZ_AD =["score","skor_orani","skor_sira","skor_marj",
 "banka_hemfikir","banka_n","kafes_mesafe","kafes_yon",
 "girme","erisim","narinlik","yaricap",
 "n_aday","n_secilen","secim_sirasi"]
 
 
 def secim_ve_oznitelik (d ,pk ):
-    """P6 secimini yap and HER SECILEN TAHMIN for kalibrasyon ozniteligi uret."""
+    """P6 secimini yap and HER SECILEN TAHMIN for calibration ozniteligi uret."""
     Xd =np .hstack ([p6_decision .donustur (d ["X"],pk .get ("zskor","ab")),
     p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
     if pk .get ("arm")=="P6_GEO":
@@ -80,7 +80,7 @@ def secim_ve_oznitelik (d ,pk ):
         sj =s [j ]
         # bankanin hemfikirligi: this adayin secenekleri ne up to single noktada
         hem =float (sj .max ()-np .median (sj ))if len (sj )>1 else 0.0 
-        # secilen secenegin satiri: skoru sc[r] which is
+        # selected secenegin satiri: skoru sc[r] which is
         t =j [int (np .argmin (np .abs (sj -sc [r ])))]
         X .append ([sc [r ],sc [r ]/max (smax ,1e-9 ),float (rank_ [t ]),hem ,
         float (sj .max ()-sj .min ())if len (sj )>1 else 0.0 ,
@@ -157,7 +157,7 @@ def main ():
     # HAM SKOR kiyasi AYNI fold-disi altkumede yapilmali; tum veride yapmak
     # kalibre modeli haksiz avantajli/dezavantajli gosterirdi.
     hs ,hk ,hc =egri (X [kd ,0 ],Y [kd ])
-    print (f"HAM SKOR (ayni altkume): en yuksek precision {hk .max ():.4f}")
+    print (f"HAM SKOR (same altkume): en yuksek precision {hk .max ():.4f}")
     print (f"KALIBRE  : en yuksek precision {kk .max ():.4f}")
 
     print (f"\n{'hedef':>7}{'ham kapsama':>14}{'kalibre kapsama':>18}")
@@ -173,18 +173,18 @@ def main ():
     last_ =HistGradientBoostingClassifier (
     max_iter =300 ,learning_rate =0.06 ,max_leaf_nodes =31 ,
     l2_regularization =1.0 ,random_state =0 ).fit (X ,Y )
-    pk ["kalibrasyon"]={"model":last_ ,"oz_ad":OZ_AD }
+    pk ["calibration"]={"model":last_ ,"oz_ad":OZ_AD }
     with open (PAKET ,"wb")as f :
         pickle .dump (pk ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"n_tahmin":int (len (Y )),
+    json .dump ({"damga":receipt_hash .damga (),"n_tahmin":int (len (Y )),
     "ham_kesinlik":float (Y .mean ()),
     "ham_maks_kesinlik":float (hk .max ()),
     "kalibre_maks_kesinlik":float (kk .max ()),
     "kapsama":out ,"katlar":katlar ,
     "not":"Guven kalibrasyonu: secilmis tahminler uzerinde ikinci "
     "model. Kat-disi measurement; D7'ye BAKILMADI."},
-    open ("results/kalibrasyon.json","w"),indent =1 )
-    print (f"\nmakbuz -> results/kalibrasyon.json ({time .time ()-t0 :.0f} s)")
+    open ("results/calibration.json","w"),indent =1 )
+    print (f"\nmakbuz -> results/calibration.json ({time .time ()-t0 :.0f} s)")
 
 
 if __name__ =="__main__":

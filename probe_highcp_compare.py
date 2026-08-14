@@ -30,7 +30,7 @@ import canonical_d7 as K # noqa: E402
 import d6_record # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
-OLCUTLER =(("tespit",0.0 ,180.0 ,True ,False ),
+OLCUTLER =(("detection",0.0 ,180.0 ,True ,False ),
 ("rob",2.0 ,10.0 ,False ,False ),
 ("rbi",2.0 ,10.0 ,False ,True ))
 
@@ -66,8 +66,8 @@ def main ():
 
     m4 =[load_any (c ,dev =dev )[:2 ]for c in cfg ["robot_vote2_checkpoints"]]
     m7 =m4 +[load_any (c ,dev =dev )[:2 ]for c in hc ["extra_checkpoints"]]
-    print (f"cihaz {dev } | baseline yol {len (m4 )} model | "
-    f"dense yol {len (m7 )} model x 2 cozunurluk\n",flush =True )
+    print (f"cihaz {dev } | baseline path {len (m4 )} model | "
+    f"dense path {len (m7 )} model x 2 cozunurluk\n",flush =True )
 
     kay =K .yukle ()
     kay .update ({str (p ):r for p ,r in d6_record .yukle ().items ()
@@ -79,7 +79,7 @@ def main ():
     for k in ("baseline","dense","yogun_yanlis")}
     for pid in pids :
         if pid not in STEP or pid not in kay :
-            print (f"  {pid }: STEP/GT yok -- ATLANDI")
+            print (f"  {pid }: STEP/GT none -- ATLANDI")
             continue 
         r =kay [pid ]
         G =np .asarray (r ["G"],float ).reshape (-1 ,3 )
@@ -92,9 +92,9 @@ def main ():
         b ,nb =puanla (robot_cp .extract_highcp (m7 ,STEP [pid ],dev ,ca ,
         mav ,n_gt ),G ,Gd ,dg )
         # cp_count YANLIS verilirse (2 missing) -- yardimin kirilganligi
-        yanlis =max (1 ,n_gt -2 )
+        wrong =max (1 ,n_gt -2 )
         c ,nc =puanla (robot_cp .extract_highcp (m7 ,STEP [pid ],dev ,ca ,
-        mav ,yanlis ),G ,Gd ,dg )
+        mav ,wrong ),G ,Gd ,dg )
         for ad ,v in (("baseline",a ),("dense",b ),("yogun_yanlis",c )):
             for k in v :
                 for i in range (3 ):
@@ -107,19 +107,19 @@ def main ():
     def f1 (t ):
         return 2 *t [0 ]/max (2 *t [0 ]+t [1 ]+t [2 ],1 )
 
-    print (f"\n{'yol':22s} {'tespit':>8s} {'robot':>8s} {'robot-ISR':>10s}")
+    print (f"\n{'path':22s} {'detection':>8s} {'robot':>8s} {'robot-ISR':>10s}")
     for ad ,isim in (("baseline","TABAN (extract)"),
     ("dense","YOGUN (cp_count=GT)"),
     ("yogun_yanlis","YOGUN (cp_count-2)")):
         v =top [ad ]
-        print (f"{isim :22s} {f1 (v ['tespit']):8.4f} {f1 (v ['rob']):8.4f} "
+        print (f"{isim :22s} {f1 (v ['detection']):8.4f} {f1 (v ['rob']):8.4f} "
         f"{f1 (v ['rbi']):10.4f}")
-    print ("\nUYARI: YOGUN yol cp_count ISTER -> METADATA YARDIMLI."
-    "\nTABAN yol yardimsizdir. Kiyas ADIL DEGILDIR ve oyle sunulmaz.")
+    print ("\nUYARI: YOGUN path cp_count ISTER -> METADATA YARDIMLI."
+    "\nTABAN path yardimsizdir. Kiyas ADIL DEGILDIR ve oyle sunulmaz.")
     json .dump ({k :{a :f1 (v )for a ,v in d .items ()}for k ,d in top .items ()},
-    io .open ("results/highcp_kiyas.json","w",encoding ="utf-8"),
+    io .open ("results/highcp_compare.json","w",encoding ="utf-8"),
     indent =1 )
-    print ("-> results/highcp_kiyas.json")
+    print ("-> results/highcp_compare.json")
     return 0 
 
 

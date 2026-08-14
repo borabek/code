@@ -15,7 +15,7 @@ guveni, candidate count, silindir count) -- ceiling varsa hangi sinyalle yakalan
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -97,14 +97,14 @@ c =collections .Counter (s ["mfg"]for s in sinyal if s ["brep_iyi"])
 t =collections .Counter (s ["mfg"]for s in sinyal )
 for m ,k in c .most_common ():
     print (f"  {m :<8} {k :>3}/{t [m ]:<4} (%{100 *k /t [m ]:.0f})")
-print ("\nUCUZ SINYALLER (B-rep iyi vs not, ortalama):")
+print ("\nUCUZ SINYALLER (B-rep iyi vs not, average):")
 for ad in ("n_seg","n_brep","seg_max","seg_ort","n_gt","diag"):
     a =np .mean ([s [ad ]for s in sinyal if s ["brep_iyi"]])
     b =np .mean ([s [ad ]for s in sinyal if not s ["brep_iyi"]])
     print (f"  {ad :<9} B-rep-iyi {a :>8.3f} | digeri {b :>8.3f} | ratio {a /max (b ,1e-9 ):.2f}")
-json .dump ({"damga":makbuz_hash .damga (),
+json .dump ({"damga":receipt_hash .damga (),
 "robot":{ad :2 *sum (x [0 ]for x in v )/max (sum (2 *x [0 ]+x [1 ]+x [2 ]for x in v ),1 )
 for ad ,v in arm .items ()},
 "brep_iyi_parca":n_b ,"esit":n_e ,"n":len (sinyal ),"sinyal":sinyal ,
 "not":"Parca duzeyinde router TAVANI. D7 brand-disi, MIKRO."},
-open ("results/parca_yonlendirici.json","w"),indent =1 )
+open ("results/part_yonlendirici.json","w"),indent =1 )

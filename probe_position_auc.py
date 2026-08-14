@@ -5,13 +5,13 @@ SUPHE. NIT'te ~260 konum present, 24'u correct. RASTGELE first-24 secsek
 24/260 = 0.092 cikardi. Olculen first-k orani 0.090.
 Yani model NIT'te konum siralamasinda TAM RASTGELE may be.
 
-Eger dogruysa: secenek duzeyindeki AUC 0.8854, konumu not YONU ayirt
+Eger dogruysa: option duzeyindeki AUC 0.8854, konumu not YONU ayirt
 etmekten geliyordur. O zaman NIT'in duvari ne direction ne ranking kurali;
 "hangi acikliklar kablo girisi" sorusunu HIC cevaplayamiyoruz demektir --
 temsil darbogazi.
 
-OLCULEN (brand disarida, gorulmemis brand kosulu):
-  auc_secenek : secenek duzeyi (bilinen: NIT 0.8854)
+OLCULEN (brand disarida, unseen brand kosulu):
+  auc_secenek : option duzeyi (known: NIT 0.8854)
   auc_konum   : KONUM duzeyi -- konum skoru = seceneklerinin max'i
   auc_yon     : YALNIZ correct konumlar inside, correct yonu ayirma AUC'si
   rastgele_k  : k / n_konum  (first-k'nin rastgele beklentisi)
@@ -32,7 +32,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -67,7 +67,7 @@ def auc (s ,y ):
 
 
 def konum_topla (s ,y ,idx ):
-    """each benzersiz konum for (max skor, correct mu)."""
+    """each benzersiz konum for (max score, correct mu)."""
     rank_ =np .argsort (idx ,kind ="stable")
     idx_s ,s_s ,y_s =idx [rank_ ],s [rank_ ],y [rank_ ]
     bound_ =np .flatnonzero (np .diff (idx_s ))+1 
@@ -157,7 +157,7 @@ def main ():
     print ("\nOKUMA:")
     print ("  auc_KONUM ~ 0.5 and ustk ~ rastgele -> KONUM bilgisi YOK")
     print ("  auc_KONUM high but ustk low    -> ranking present, rule kotu")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"brand":out ,
     "not":"KONUM duzeyi ayirt edicilik. Secenek AUC'sinin yonden "
     "mi konumdan mi geldigini ayirir. D7'ye BAKILMADI."},
     open (f"results/konum_auc_{KUME }.json","w"),indent =1 )

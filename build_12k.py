@@ -67,7 +67,7 @@ def main ():
         for s in ds .load_split ("wscad_corpus_scheffler_exact",split ,verify_hashes =False ):
             pid =s ["part_id"];step =s .get ("step_path")or POOL .get (pid )
             if not step or not os .path .exists (step ):
-                print (f"  {pid }: STEP yok, atlandi");fail +=1 ;continue 
+                print (f"  {pid }: STEP none, atlandi");fail +=1 ;continue 
             try :
                 nv ,nce =build_one (pid ,step ,s ["verts"],s ["labels"],out )
                 done +=1 
@@ -89,7 +89,7 @@ def main ():
                     sp =json .load (open (pv )).get ("source_step")or ""
                     step =sp if os .path .exists (sp )else POOL .get (os .path .basename (sp ).split ("_")[1 ]if "_"in sp else "")
             if not step or not os .path .exists (step ):
-                print (f"  {pid }: STEP yok, atlandi");fail +=1 ;continue 
+                print (f"  {pid }: STEP none, atlandi");fail +=1 ;continue 
             V6 ,_ =load_obj (of )
             L6 =np .array ([int (x )for x in open (lf ).read ().split ()],np .int64 )
             if len (L6 )!=len (V6 ):print (f"  {pid }: vertex uyusmazligi");fail +=1 ;continue 
@@ -99,7 +99,7 @@ def main ():
                 if done %20 ==0 :print (f"  ... {done } part ({time .time ()-t0 :.0f}s)",flush =True )
             except Exception as e :
                 print (f"  {pid }: HATA {str (e )[:45 ]}");fail +=1 
-    print (f"\n12k veri seti hazir: {done } part, {fail } atlandi, {time .time ()-t0 :.0f}s")
+    print (f"\n12k data seti hazir: {done } part, {fail } atlandi, {time .time ()-t0 :.0f}s")
 
 
 if __name__ =="__main__":

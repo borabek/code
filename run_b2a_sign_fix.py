@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """B2a: ISARET DUZELTME -- ogrenmeden, saf fizikle.
 
-DAYANAK (`results/b2_yon_isaret.json`): YON_YOK kovasinin **%44.3'u (312 GT)**
+DAYANAK (`results/b2_direction_sign.json`): YON_YOK kovasinin **%44.3'u (312 GT)**
 duz 180 derece ISARET hatasi. Kova aritmetigi: 312 kurtarilirsa F1 0.2773 ->
 **0.376**.
 
-B1 (mesh normalini secenek yapmak) only +0.0023 verdi: candidate basina onlarca
+B1 (mesh normalini option yapmak) only +0.0023 verdi: candidate basina onlarca
 normal secenegi present and selector dogrusunu bulamiyor (pozitif ratio %6.4). Isaret
 karari whereas TEK IKILI karar -- very more easy.
 
@@ -22,7 +22,7 @@ TEZE SADIK: konum and candidate count does not change, only yonun ISARETI.
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -33,7 +33,7 @@ OZ ="results/_tam_oz";TAN ="results/_tan_hizali"
 OB ={"d7":"results/_p1_olasilik_d7","tam":"results/_p1_olasilik_brepegit"}
 KAYNAKLAR =(0 ,1 );ESIK =0.05 ;YANAL ,ACI ,EKSENEL =2.0 ,10.0 ,40.0 
 GIRME ,ERISIM =3 ,5 # mouth_descriptor.AD indeksleri
-gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
 S =K .step_map ()
 _D6 ={str (p ):r for p ,r in d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
 Rk =K .yukle (None )
@@ -91,7 +91,7 @@ def olc (arm ,clf =None ):
         tes .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,dg ,max (3.0 ,0.06 *dg ),180.0 ,True )[:3 ])
     pm ={m :2 *v [0 ]/max (2 *v [0 ]+v [1 ]+v [2 ],1 )for m ,v in rob .items ()}
     mi =float (2 *sum (v [0 ]for v in rob .values ())/max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),"makro":float (np .mean (list (pm .values ()))),
+    return {"robot":mi ,"detection":K .mikro (tes ),"makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
 
 
@@ -121,18 +121,18 @@ print (f"sign egitimi {X .shape } | TERS olmasi gereken {Y .mean ():.4f}",flush 
 clf =HistGradientBoostingClassifier (max_iter =300 ,learning_rate =0.08 ,
 max_leaf_nodes =31 ,random_state =0 ).fit (X ,Y )
 out ={}
-for ad ,arm in (("TABAN (sign sabit)",None ),("FIZIKSEL KURAL","fizik"),
+for ad ,arm in (("TABAN (sign fixed)",None ),("FIZIKSEL KURAL","fizik"),
 ("OGRENILMIS ISARET","ogrenilmis")):
     out [ad ]=olc (arm ,clf )
     c =out [ad ]
-    print (f"{ad :<22} robot {c ['robot']:.4f} | tespit {c ['tespit']:.4f} | "
+    print (f"{ad :<22} robot {c ['robot']:.4f} | detection {c ['detection']:.4f} | "
     f"makro {c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f}",flush =True )
-t =out ["TABAN (sign sabit)"]["robot"]
+t =out ["TABAN (sign fixed)"]["robot"]
 for ad in out :
-    if ad !="TABAN (sign sabit)":
+    if ad !="TABAN (sign fixed)":
         print (f"  {ad :<22} {out [ad ]['robot']-t :+.4f}")
-print ("KAPI: >= +0.02 | kova aritmetigi beklentisi 0.376")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+print ("KAPI: >= +0.02 | bucket aritmetigi beklentisi 0.376")
+json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
 "not":"Isaret duzeltme. Konum ve candidate sayisi degismez. D7 brand-disi, TAM ZINCIR."},
-open ("results/b2a_isaret.json","w"),indent =1 )
-print ("receipt -> results/b2a_isaret.json")
+open ("results/b2a_sign.json","w"),indent =1 )
+print ("receipt -> results/b2a_sign.json")

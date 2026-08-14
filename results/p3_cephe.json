@@ -1,5 +1,5 @@
 {
- "olculen": [
+ "measured_path": [
   {
    "ad": "G2 ham+rf",
    "pool": 0.7668856868325583,
@@ -41,7 +41,7 @@
    "manufacturer": 0.6324322955909609
   },
   {
-   "ad": "P2 +36 zengin [z-skor]",
+   "ad": "P2 +36 zengin [z-score]",
    "pool": 0.7583943683019512,
    "manufacturer": 0.6324322955909609
   },
@@ -91,7 +91,7 @@
    "manufacturer": 0.6423699871882134
   },
   {
-   "ad": "P2 +4 icbukey topoloji [z-skor]",
+   "ad": "P2 +4 icbukey topoloji [z-score]",
    "pool": 0.742431995879957,
    "manufacturer": 0.6225564727138256
   },
@@ -126,7 +126,7 @@
    "manufacturer": 0.5786641069199243
   },
   {
-   "ad": "P2 +5 B-rep fiziksel [z-skor]",
+   "ad": "P2 +5 B-rep fiziksel [z-score]",
    "pool": 0.7248478050921863,
    "manufacturer": 0.6050365266577362
   },
@@ -166,7 +166,7 @@
    "manufacturer": 0.5839590332800779
   },
   {
-   "ad": "P2 13 baseline [z-skor]",
+   "ad": "P2 13 baseline [z-score]",
    "pool": 0.6678102662759997,
    "manufacturer": 0.560992292287832
   },

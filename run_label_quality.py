@@ -19,7 +19,7 @@ KOSUL: TANIDIK brand (rastgele katlar). KAPI: +0.01. D7'ye BAKILMAZ.
 import collections ,json ,os ,sys ,time 
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1"
 os .environ ["WG_ZENGIN"]="1"
@@ -38,7 +38,7 @@ def temel (d ):
     p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (np .float32 )
 
 def yakinlik (d ):
-    """each POZITIF secenek for GT'ye YANAL uzaklik (0 = full ustunde)."""
+    """each POZITIF option for GT'ye YANAL uzaklik (0 = full ustunde)."""
     P =np .asarray (d ["P"],float )[np .asarray (d ["idx"],int )]
     G =np .asarray (d ["G"],float );Gd =np .asarray (d ["Gd"],float )
     Gn =Gd /np .maximum (np .linalg .norm (Gd ,axis =1 ,keepdims =True ),1e-12 )
@@ -96,15 +96,15 @@ def main ():
     last_ ={k :f1 (agg [k ])for k in KOLLAR }
     print (f"\n=== TABAN {last_ ['baseline']:.4f} ===")
     for k in KOLLAR [1 :]:
-        fark =last_ [k ]-last_ ["baseline"]
-        print (f"  {k :<10}{last_ [k ]:.4f}   {fark :+.4f}"
-        +("  <- KAPI GECTI"if fark >=0.01 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"kat_tohumu":_t ,"toplam":last_ ,
+        diff =last_ [k ]-last_ ["baseline"]
+        print (f"  {k :<10}{last_ [k ]:.4f}   {diff :+.4f}"
+        +("  <- KAPI GECTI"if diff >=0.01 else ""))
+    json .dump ({"damga":receipt_hash .damga (),"kat_tohumu":_t ,"total":last_ ,
     "not":"Etiket kalitesi agirliklandirma: pozitife GT'ye "
     "YAKINLIGIYLA orantili agirlik. Metrik DEGISMEZ, "
     "yalnizca training agirligi. D7'ye BAKILMADI."},
     open (f"results/etiket_kalitesi_t{_t }.json","w"),indent =1 )
-    print ("receipt -> results/etiket_kalitesi.json")
+    print ("receipt -> results/label_quality.json")
 
 if __name__ =="__main__":
     main ()

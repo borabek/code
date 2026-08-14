@@ -1,7 +1,7 @@
 {
  "A_cok": 0.6530120481927711,
  "B_cok": 0.6812705366922235,
- "fark": 0.02825848849945234,
+ "diff": 0.02825848849945234,
  "ga": [
   0.0008897464203307268,
   0.004753239096948293
@@ -12,5 +12,5 @@
   0.0085,
   0.0453
  ],
- "not": "GA ilk yazildiginda f1w TUZAGINA dusuldu: tek rejimli (very-CP) alt kumede f1w sonucu W[very]=0.105 with CARPAR. Duzeltilmis GA sifiri DISLIYOR = kazanc GERCEK. Korpus agirligiyla genel tespit etkisi 0.105 x 0.0283 = +0.0030. Bar +0.03 -> GECMEDI (kil payi), low-CP bedeli YAPISAL SIFIR."
+ "not": "GA ilk yazildiginda f1w TUZAGINA dusuldu: tek rejimli (very-CP) alt kumede f1w sonucu W[very]=0.105 with CARPAR. Duzeltilmis GA sifiri DISLIYOR = kazanc GERCEK. Korpus agirligiyla genel detection etkisi 0.105 x 0.0283 = +0.0030. Bar +0.03 -> GECMEDI (kil payi), low-CP bedeli YAPISAL SIFIR."
 }

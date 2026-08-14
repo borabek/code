@@ -7,13 +7,13 @@ with acilip kapanir; same kosuda two times modul yeniden yuklenir.
 """
 import collections ,importlib ,json ,os ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
 from sina_cluster import match_hungarian 
 
-d7p =json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]
+d7p =json .load (open ("results/d7_exam_set.json"))["pidler"]
 out ={}
 RS =sys .argv [1 :]or ["0","6.0"]
 for ad ,r_mm in [(f"NMS r={x }",x )for x in RS ]:
@@ -41,13 +41,13 @@ for ad ,r_mm in [(f"NMS r={x }",x )for x in RS ]:
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm ,"n":len (tes )}
     c =out [ad ]
-    print (f"{ad :<20} robot {mi :.4f} | tespit {c ['tespit_mikro']:.4f} | "
+    print (f"{ad :<20} robot {mi :.4f} | detection {c ['tespit_mikro']:.4f} | "
     f"makro {c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f}",flush =True )
 a ,b =out [f"NMS r={RS [0 ]}"],out [f"NMS r={RS [-1 ]}"]
 art =sum (1 for m in b ["brand"]if b ["brand"][m ]>a ["brand"][m ]+1e-9 )
 print (f"\nFARK robot {b ['robot_mikro']-a ['robot_mikro']:+.4f} | "
-f"tespit {b ['tespit_mikro']-a ['tespit_mikro']:+.4f} | "
+f"detection {b ['tespit_mikro']-a ['tespit_mikro']:+.4f} | "
 f"artan brand {art }/{len (b ['brand'])}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"artan_marka":art ,
+json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"artan_marka":art ,
 "not":"TAM urun zinciri (poz kafasi dahil), D7=DEV, MIKRO."},
 open (f"results/urun_nms_uctan_uca_{'_'.join (RS )}.json","w"),indent =1 )

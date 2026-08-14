@@ -1,13 +1,13 @@
 {
  "router_auc": 0.9944972342720741,
  "scenarios": {
-  "her yerde promote KAPALI": {
+  "each yerde promote KAPALI": {
    "low": 0.8213318895506225,
    "high": 0.7704918032786886,
    "weighted": 0.8159936804920694,
    "n_routed_high": 0
   },
-  "her yerde promote ACIK": {
+  "each yerde promote ACIK": {
    "low": 0.8046744574290484,
    "high": 0.8400188768286927,
    "weighted": 0.808385621466011,

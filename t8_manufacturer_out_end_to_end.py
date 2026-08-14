@@ -2,9 +2,9 @@
 """T8 DECISION OLCUMU: goreli threshold, URETICI-DISI bolmede UCTAN UCA kazandiriyor mu?
 
 Buraya up to olculenler:
-  T1/T2  manufacturer-disi cokus (candidate duzeyi): 0.7422 -> 0.6399 / 0.2799; ~%42'si kalibrasyon
+  T1/T2  manufacturer-disi cokus (candidate duzeyi): 0.7422 -> 0.6399 / 0.2799; ~%42'si calibration
   T3/T6  goreli threshold + baseline (candidate duzeyi): most kotu 0.2799 -> 0.4402 (baseline .20) / 0.4222 (.25)
-  T7     tanidik veride UCTAN UCA bedel: baseline .25 -> DEV -0.0140, VAL -0.0022 (ort -0.0081)
+  T7     familiar veride UCTAN UCA bedel: baseline .25 -> DEV -0.0140, VAL -0.0022 (ort -0.0081)
 
 EKSIK OLAN: manufacturer-disi kazanc UCTAN UCA dogrulanmadi. Bugun candidate duzeyi two times yanildi
 (EK blogu, goreli esigin bedeli), that yuzden karar this betikle veriliyor.
@@ -13,7 +13,7 @@ TASARIM: DEV+VAL parcalari URETICIYE according to ayrilir. Her manufacturer for 
 GORMEDEN egitilir (also test geometri gruplari da dislanir). Turetme a times; two karar
 kurali same skorlar on.
 
-KILL (onceden yazili): goreli threshold, manufacturer-disi UCTAN UCA tespit F1'de sabiti HER IKI
+KILL (onceden yazili): goreli threshold, manufacturer-disi UCTAN UCA detection F1'de sabiti HER IKI
 manufacturer de gecmezse DAGITILMAZ.
 """
 import os ,sys ,json ,pickle ,collections 
@@ -85,7 +85,7 @@ def main ():
         kod [k ]=adlar .most_common (1 )[0 ][0 ]
     print (f"training korpusu manufacturer kodlari: {kod }",flush =True )
 
-    print (f"\n{'manufacturer (test)':<18}{'rule':<26}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'manufacturer (test)':<18}{'rule':<26}{'detection':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
     out ={}
     for k ,ad in kod .items ():
         icinde =[x for x in DER if x ["mfg"]==ad ]
@@ -94,13 +94,13 @@ def main ():
         keep =(tr_mfg !=k )&~np .isin (tr_grp ,list (tg ))
         clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (d ["X"][keep ][:,:18 ],d ["y"][keep ])
-        for rule_ in ("sabit",(0.5 ,0.25 ),(0.5 ,0.20 )):
+        for rule_ in ("fixed",(0.5 ,0.25 ),(0.5 ,0.20 )):
             det ,rob =[],[]
             for r in icinde :
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
                 if r ["X"]is not None :
                     s =clf .predict_proba (r ["X"])[:,1 ]
-                    if rule_ =="sabit":
+                    if rule_ =="fixed":
                         m =s >=(THR ["very"]if r ["is_hi"]else THR ["dusuk"])
                     else :
                         o_ ,t_ =rule_ 
@@ -111,21 +111,21 @@ def main ():
                 det .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
                 rob .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             p_ ,r_ =pr (det )
-            nm ="sabit (mevcut)"if rule_ =="sabit"else f"goreli {rule_ [0 ]} + baseline {rule_ [1 ]}"
+            nm ="fixed (mevcut)"if rule_ =="fixed"else f"goreli {rule_ [0 ]} + baseline {rule_ [1 ]}"
             print (f"{ad +' ('+str (len (icinde ))+')':<18}{nm :<26}{f1w (det ):>9.4f}"
             f"{f1w (rob ):>9.4f}{p_ :>9.3f}{r_ :>9.3f}",flush =True )
-            out .setdefault (ad ,{})[nm ]={"tespit":float (f1w (det )),"robot":float (f1w (rob ))}
+            out .setdefault (ad ,{})[nm ]={"detection":float (f1w (det )),"robot":float (f1w (rob ))}
         print ()
 
     print ("DECISION:")
     ok =True 
     for ad ,v in out .items ():
-        sb =v ["sabit (mevcut)"]["tespit"]
+        sb =v ["fixed (mevcut)"]["detection"]
         for nm ,vv in v .items ():
-            if nm =="sabit (mevcut)":
+            if nm =="fixed (mevcut)":
                 continue 
-            print (f"  {ad }: {nm } {vv ['tespit']-sb :+.4f}")
-        ok =ok and (v ["goreli 0.5 + baseline 0.25"]["tespit"]>sb )
+            print (f"  {ad }: {nm } {vv ['detection']-sb :+.4f}")
+        ok =ok and (v ["goreli 0.5 + baseline 0.25"]["detection"]>sb )
     print (f"\nKILL: goreli threshold HER IKI manufacturer-disi bolmede sabiti gecmezse DAGITILMAZ -> "
     f"{'GECTI'if ok else 'GECMEDI'}")
     json .dump (out ,open ("results/t8_manufacturer_out_end_to_end.json","w"),indent =1 )

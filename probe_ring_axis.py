@@ -2,7 +2,7 @@
 """HALKA NORMALI = EKSEN mi? (cevrimdisi, new inference YOK)
 
 Simdiye up to halka normali only **ISARET** duzeltmek for kullanildi
-(`halka_disari`, +0.0195 tanidik markada, KESIN). Ama fiziksel as
+(`halka_disari`, +0.0195 familiar markada, KESIN). Ama fiziksel as
 duz a yuzeydeki kablo girisinin EKSENI, that yuzeyin normalidir. Yani
 halka normali only isareti not, **ekseni de** verebilir.
 
@@ -27,8 +27,8 @@ import numpy as np
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 from sina_cluster import match_hungarian # noqa: E402
 
-DOKUM =os .environ .get ("HE_DOKUM","results/_dokum_halka.json")
-YOL =os .environ .get ("HE_YOL","saha")
+DOKUM =os .environ .get ("HE_DOKUM","results/_dump_ring.json")
+YOL =os .environ .get ("HE_YOL","field")
 
 
 def _birim (v ):
@@ -40,17 +40,17 @@ def uygula (D ,H ,arm ):
     """D: prediction yonleri (n,3). H: halka normalleri (n,3), sifir = absent."""
     if not len (D ):
         return D 
-    gecerli =np .linalg .norm (H ,axis =1 )>1e-9 
+    valid =np .linalg .norm (H ,axis =1 )>1e-9 
     Y =D .copy ()
     if arm =="baseline":
         return Y 
     if arm =="sign":# mevcut, dagitima candidate rule
         c =np .sum (D *H ,axis =1 )
-        cevir =gecerli &(c <0 )
+        cevir =valid &(c <0 )
         Y [cevir ]=-D [cevir ]
         return Y 
     if arm =="tam":
-        Y [gecerli ]=H [gecerli ]
+        Y [valid ]=H [valid ]
         return Y 
     if arm .startswith ("kapili_"):
         A =float (arm .split ("_")[1 ])
@@ -58,10 +58,10 @@ def uygula (D ,H ,arm ):
         c =np .sum (D *H ,axis =1 )
         Hs =H *np .where (c <0 ,-1.0 ,1.0 )[:,None ]# H'yi D'ye yaklastir
         aci =np .degrees (np .arccos (np .clip (np .sum (D *Hs ,axis =1 ),-1 ,1 )))
-        deg =gecerli &(aci >A )
+        deg =valid &(aci >A )
         Y [deg ]=H [deg ]# ISARETIYLE birlikte halka
         # kalanlarda only sign duzeltmesi
-        kal =gecerli &~deg &(c <0 )
+        kal =valid &~deg &(c <0 )
         Y [kal ]=-D [kal ]
         return Y 
     if arm .startswith ("harman_"):
@@ -70,14 +70,14 @@ def uygula (D ,H ,arm ):
         Ds =D *np .where (c <0 ,-1.0 ,1.0 )[:,None ]# D'yi H isaretine al
         v =w *H +(1 -w )*Ds 
         n =np .linalg .norm (v ,axis =1 )
-        ok =gecerli &(n >1e-9 )
+        ok =valid &(n >1e-9 )
         Y [ok ]=v [ok ]/n [ok ][:,None ]
         return Y 
     raise ValueError (arm )
 
 
 def olc (rec_ ,arm ):
-    tot ={k :[0 ,0 ,0 ]for k in ("tespit","rob","rbi")}
+    tot ={k :[0 ,0 ,0 ]for k in ("detection","rob","rbi")}
     part =[]
     for r in rec_ :
         G =np .asarray (r ["G"],float ).reshape (-1 ,3 )
@@ -91,7 +91,7 @@ def olc (rec_ ,arm ):
             H =np .zeros_like (D )
         D2 =uygula (D ,_birim (H )if len (H )else H ,arm )
         line_ ={}
-        for ad ,(tol ,am ,isr )in (("tespit",(2.0 ,180.0 ,False )),
+        for ad ,(tol ,am ,isr )in (("detection",(2.0 ,180.0 ,False )),
         ("rob",(2.0 ,10.0 ,False )),
         ("rbi",(2.0 ,10.0 ,True ))):
             tp ,fp ,fn ,_ =match_hungarian (P ,D2 ,G ,Gd ,float (r ["diag"]),
@@ -119,22 +119,22 @@ def boot (pa ,pb ,ad ,n =4000 ,seed =0 ):
 
 
 def main ():
-    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("yol")==YOL 
+    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("path")==YOL 
     and r .get ("halka_normal")]
-    print (f"{DOKUM } / yol={YOL } -> {len (rec_ )} part (halka normali olan)")
+    print (f"{DOKUM } / path={YOL } -> {len (rec_ )} part (halka normali which)")
     if not rec_ :
         return 1 
     KOLLAR =["baseline","sign","tam",
     "kapili_10","kapili_20","kapili_30","kapili_45",
     "harman_0.25","harman_0.5","harman_0.75"]
     res_ ={}
-    print (f"\n{'arm':14s} {'tespit':>8s} {'rob':>8s} {'rob-ISR':>8s}")
+    print (f"\n{'arm':14s} {'detection':>8s} {'rob':>8s} {'rob-ISR':>8s}")
     for arm in KOLLAR :
         m ,p =olc (rec_ ,arm )
         res_ [arm ]=(m ,p )
-        print (f"{arm :14s} {m ['tespit']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
+        print (f"{arm :14s} {m ['detection']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
     print ("\n--- ESLI BOOTSTRAP (tabana per) ---")
-    print (f"{'arm':14s} {'metrik':>7s} {'fark':>9s} {'%95 GA':>22s} {'poz%':>6s}")
+    print (f"{'arm':14s} {'metrik':>7s} {'diff':>9s} {'%95 GA':>22s} {'poz%':>6s}")
     for arm in KOLLAR [1 :]:
         for ad in ("rob","rbi"):
             f ,lo ,hi ,pz =boot (res_ ["baseline"][1 ],res_ [arm ][1 ],ad )

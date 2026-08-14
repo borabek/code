@@ -12,13 +12,13 @@ import collections ,json ,os ,pickle ,sys
 import numpy as np 
 sys .path .insert (0 ,".")
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
-import p2_brep_agiz_etiket as P2 
+import p2_brep_mouth_label as P2 
 import d6_record ,canonical_d7 as K 
 
 isler =[("corpus","results/_brepegit_silindirler.pkl",
 "results/_brepegit_acikliklar.pkl",
 K .yukle ([str (p )for p in json .load (
-open ("results/brep_egitim_kumesi.json"))["pidler"]])),
+open ("results/brep_training_set.json"))["pidler"]])),
 ("d6","results/_d6_silindirler.pkl","results/_d6_acikliklar.pkl",
 d6_record .yukle (set (d6_record .exam ()["pidler"])))]
 sat =[]
@@ -64,5 +64,5 @@ with open ("results/p2_kor_nokta_pidler.txt","w")as f :
 json .dump ({"n_kor":len (kor ),"ilk60":[list (x )for x in kor [:60 ]],
 "not":"B-rep oto-etiketinin eslestiremedigi parts -- insan etiketi "
 "ONCELIGI. Otomatigin already yaptigi yere emek harcanmaz."},
-open ("results/p2_kor_nokta.json","w"),indent =1 )
+open ("results/p2_blind_nokta.json","w"),indent =1 )
 print ("-> results/p2_kor_nokta_pidler.txt (first 60)")

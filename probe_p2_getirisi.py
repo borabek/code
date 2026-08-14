@@ -6,7 +6,7 @@ Soru: "mouth segmentasyonuna emek vermeye value mi?"
 YONTEM: segmentasyon kalitesi ZATEN parcadan parcaya degisiyor. GT'leri
 segmentasyon kalitesine according to ceyreklere ayirip each ceyrekte robot basarisini
 olcersek, "kaliteli ceyregin davranisi HERKESE uygulansa ne olurdu" sorusu
-P2'nin upper sinirini gives. Bu a TAHMIN DEGIL, veriden okunan a farktir.
+P2'nin upper sinirini gives. Bu a TAHMIN DEGIL, veriden read a farktir.
 
 KALITE OLCUSU (GT'den BAGIMSIZ must be, otherwise dairesel becomes): adayin cevresindeki
 segmentasyon guveni -- `p_pos = softmax[CE] + softmax[CT]`'nin candidate etrafindaki
@@ -23,7 +23,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -58,15 +58,15 @@ def kalite (V ,ppos ,p ):
 
 def main ():
     gate =K .gate_yukle ()
-    te =K .yukle (json .load (open ("results/d7_sinav_kumesi.json"))["pidler"])
+    te =K .yukle (json .load (open ("results/d7_exam_set.json"))["pidler"])
     kayitlar =[]
-    atlanan =0 
+    skipped =0 
     for pid ,r in sorted (te .items ()):
         G =np .asarray (r .get ("G",[]),float )
         M =K .x58 (r )
         f =f"{OB }/{pid }.npz"
         if M is None or not len (G )or not os .path .exists (f ):
-            atlanan +=1 
+            skipped +=1 
             continue 
         z =np .load (f )
         V =np .asarray (z ["V"],float )
@@ -100,7 +100,7 @@ def main ():
             (np .degrees (np .arccos (np .clip (np .abs (Dn @u ),-1.0 ,1.0 )))
             <=ACI )).any ())
             kayitlar .append ((o ,kes ,float (yan [i ]),float (aci ),tamam ))
-    print (f"D7: {len (kayitlar )} GT | atlanan part {atlanan }",flush =True )
+    print (f"D7: {len (kayitlar )} GT | skipped part {skipped }",flush =True )
 
     A =np .asarray ([[a ,b ]for a ,b ,_ ,_ ,_ in kayitlar ],float )
     lateral =np .asarray ([c for _ ,_ ,c ,_ ,_ in kayitlar ],float )
@@ -125,7 +125,7 @@ def main ():
             f"{(np .median (sonlu )if len (sonlu )else float ('nan')):>13.3f}")
         if len (ratio )==4 :
             print (f"  EN IYI ceyrek {ratio [3 ]:.4f} vs EN KOTU {ratio [0 ]:.4f} "
-            f"-> fark {ratio [3 ]-ratio [0 ]:+.4f}")
+            f"-> diff {ratio [3 ]-ratio [0 ]:+.4f}")
             print (f"  HERKES en iyi ceyrek gibi olsa robot recall "
             f"{ratio [3 ]:.4f} (su an {float (tam .mean ()):.4f}, "
             f"pay {ratio [3 ]-float (tam .mean ()):+.4f})")
@@ -138,11 +138,11 @@ def main ():
     print (f"\nROBOT RECALL su an {su_an :.4f} -> ceiling (herkes Q4 gibi) {ust :.4f}")
     print (f"KABA F1 KARSILIGI  {f1_su :.4f} -> {f1_ust :.4f}  "
     f"(pay {f1_ust -f1_su :+.4f})")
-    json .dump ({"damga":makbuz_hash .damga (),"n_gt":len (kayitlar ),
+    json .dump ({"damga":receipt_hash .damga (),"n_gt":len (kayitlar ),
     "robot_recall_su_an":su_an ,"robot_recall_Q4":ust ,
     "kaba_f1_su_an":f1_su ,"kaba_f1_Q4":f1_ust ,
     "not":"P2'nin UST SINIRI: segmentasyon kalitesi ceyreklerinden "
-    "okunan fark. Kalite olcusu GT'nin dogrulugundan BAGIMSIZ "
+    "read diff. Kalite olcusu GT'nin dogrulugundan BAGIMSIZ "
     "(agin o bolgede ne up to net konustugu). D7 brand-disi."},
     open ("results/p2_getirisi.json","w"),indent =1 )
     print ("\nmakbuz -> results/p2_getirisi.json")

@@ -7,10 +7,10 @@ ULASILABILIR ([[mesh-ceiling-not-lateral-model-hatasi]]) -- i.e. error ogrenileb
 OLABILIR. Bu probe "may be"i sinar.
 
 KURULUM:
-  * each eslesen candidate for hedef = GT - candidate, YONE DIK duzleme izdusurulmus (2 size)
+  * each matched candidate for hedef = GT - candidate, YONE DIK duzleme izdusurulmus (2 size)
   * feature = urunun 58 sutunu (X22 + XR)
   * split MARKA-DISI (rastgele CV this problemde HER ZAMAN siser)
-  * criterion: lateral hatanin medyani DUSTU mu, and <=2mm gecen ratio ARTTI mi
+  * criterion: lateral hatanin medyani DUSTU mu, and <=2mm passing ratio ARTTI mi
 KILL: brand-disi <=2mm orani artmiyorsa arm OLU.
 """
 import os ,sys ,pickle ,collections 
@@ -48,7 +48,7 @@ for r in R :
         X .append (F [i ]);Y .append ([lat @e1 ,lat @e2 ]);MF .append (r ["mfg"])
 X =np .asarray (X ,float );Y =np .asarray (Y ,float );MF =np .asarray (MF )
 n0 =np .linalg .norm (Y ,axis =1 )
-print (f"eslesen candidate {len (X )} | manufacturer {len (set (MF ))}")
+print (f"matched candidate {len (X )} | manufacturer {len (set (MF ))}")
 print (f"TABAN lateral error: medyan {np .median (n0 ):.3f}mm | <=2mm %{100 *(n0 <=2 ).mean ():.1f}\n")
 
 # MARKA-DISI split: at most parcali 3 markayi TEST yap
@@ -62,8 +62,8 @@ for m in test_mf :
     reg =RandomForestRegressor (n_estimators =200 ,min_samples_leaf =5 ,
     n_jobs =-1 ,random_state =0 ).fit (X [tr ],Y [tr ])
     pred =reg .predict (X [te ])
-    kalan =np .linalg .norm (Y [te ]-pred ,axis =1 )
+    remaining =np .linalg .norm (Y [te ]-pred ,axis =1 )
     ham =np .linalg .norm (Y [te ],axis =1 )
     print (f"  {m :<6} n={te .sum ():<6} medyan {np .median (ham ):.3f} -> "
-    f"{np .median (kalan ):.3f}mm | <=2mm %{100 *(ham <=2 ).mean ():.1f} -> "
-    f"%{100 *(kalan <=2 ).mean ():.1f}",flush =True )
+    f"{np .median (remaining ):.3f}mm | <=2mm %{100 *(ham <=2 ).mean ():.1f} -> "
+    f"%{100 *(remaining <=2 ).mean ():.1f}",flush =True )

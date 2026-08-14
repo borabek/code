@@ -20,14 +20,14 @@
   },
   "config": {
    "cp_config.json": "58a1cb216cd11d36",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
  "n_parca": 100,
  "gt": 660,
  "yollar": {
-  "saha": {
+  "field": {
    "f1": 0.40350877192982454,
    "precision": 0.42592592592592593,
    "recall": 0.38333333333333336,
@@ -36,7 +36,7 @@
    "fp": 341,
    "fn": 407
   },
-  "olculen": {
+  "measured_path": {
    "f1": 0.4825828377230246,
    "precision": 0.5493230174081238,
    "recall": 0.4303030303030303,
@@ -49,5 +49,5 @@
  "f1_farki": 0.07907406579320009,
  "kesinlik_farki": 0.12339709148219791,
  "acilabilir": true,
- "not": "Saha zinciri (robot_cp.extract) vs olculen zincir (canonical_chain.product_output), AYNI parcalarda. D7'ye BAKILMADI."
+ "not": "Saha zinciri (robot_cp.extract) vs measured_path zincir (canonical_chain.product_output), AYNI parcalarda. D7'ye BAKILMADI."
 }

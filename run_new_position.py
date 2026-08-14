@@ -15,7 +15,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -111,7 +111,7 @@ def main ():
     # brand kosulu. `YK_RASTGELE_KAT=1` with RASTGELE 3 fold is used =
     # brand-KARISIK, i.e. TANIDIK brand kosulu.
     # WHY: this kollar (ayna esi, yerel negatif, array uyeligi, isin-temas)
-    # gorulmemis markada measured and kapiyi gecemedi. Tanidik markada temsil
+    # unseen markada measured and kapiyi gecemedi. Tanidik markada temsil
     # problemi very more small oldugu for AYNI kollar tutabilir; bunu
     # olcmeden "olu" saymak, kapatma hukmunu sondanin kosuluna kurban
     # etmek becomes.
@@ -190,11 +190,11 @@ def main ():
     last_ ={k :f1 (agg [k ])for k in KOLLAR }
     print (f"\n=== TABAN {last_ ['baseline']:.4f} ===")
     for k in KOLLAR [1 :]:
-        fark =last_ [k ]-last_ ["baseline"]
-        print (f"  {k :<8}{last_ [k ]:.4f}   {fark :+.4f}"
-        +("  <- KAPI GECTI"if fark >=0.01 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"neg":NEG_KAT ,
-    "toplam":last_ ,
+        diff =last_ [k ]-last_ ["baseline"]
+        print (f"  {k :<8}{last_ [k ]:.4f}   {diff :+.4f}"
+        +("  <- KAPI GECTI"if diff >=0.01 else ""))
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"neg":NEG_KAT ,
+    "total":last_ ,
     "not":"L3 ayna esi + L4 vida cifti + L5 isin-temas. Taban = "
     "temel + kanonik + neg12. Hepsi GT'siz. "
     "D7'ye BAKILMADI."},

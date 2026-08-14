@@ -42,7 +42,7 @@ from sina_cluster import f1_rejim ,f1w
 
 
 ROOT =Path (__file__ ).resolve ().parent 
-D7_MANIFEST =ROOT /"results"/"d7_sinav_kumesi.json"
+D7_MANIFEST =ROOT /"results"/"d7_exam_set.json"
 G7_RECORDS =ROOT /"results"/"_der_yeni_G7BIRLESIK.pkl"
 CYLINDER_CACHE =ROOT /"results"/"_d7_silindirler.pkl"
 PLANAR_CACHE =ROOT /"results"/"_d7_acikliklar.pkl"

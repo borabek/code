@@ -22,7 +22,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -98,7 +98,7 @@ def main ():
         Pt =np .vstack ([P [m01 ],Pm ])if len (Pm )else P [m01 ]
         a ["konum_tam"]+=rec (Pt ,None ,G ,Gd ,direction =False )
         # direction bankasi with
-        idx ,YD ,_ =YB .secenekler (P ,D ,None ,V )
+        idx ,YD ,_ =YB .options (P ,D ,None ,V )
         a ["yon_banka"]+=rec (P [idx ],YD ,G ,Gd ,direction =True )
         a ["nsec"]+=len (idx )
 
@@ -128,7 +128,7 @@ def main ():
         f"{o ['konum_recall_012']:>10.4f}"
         f"{o ['konum_recall_TAM_MESH']:>10.4f}"
         f"{o ['yon_recall_BANKA']:>10.4f}")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
     "not":"CWT/WIE cephe TESHISI. D7 SINAV kumesidir; buradan "
     "hicbir threshold/rule/arm secimi YAPILMAZ, yalnizca nereye "
     "yatirim yapilacagi belirlenir."},

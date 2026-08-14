@@ -2,7 +2,7 @@
 """D1 — SENTETIK KLEMENS URETECI
 
 WHY. Duvar temsilde: NIT tipi dense parcada konum AUC 0.7053, gereken
-0.944 (`results/konum_auc_d6.json`). Havuz kucultme closed (most iyi 1.33x,
+0.944 (`results/position_auc_d6.json`). Havuz kucultme closed (most iyi 1.33x,
 hedef 5x), HPO tukendi, hedef-fonksiyonu kollari kapiyi gecemedi. Geriye
 single path kaldi: modelin "hangi opening kablo girisi" sorusunu OGRENMESI --
 i.e. VERI.
@@ -10,7 +10,7 @@ i.e. VERI.
 Gercek data stogu bitti ([[wscad-data-lever-dead]], D8 kurulamaz). Ama
 klemens GEOMETRISI parametriktir and sentetik uretilebilir:
   * GT INSAATTAN gelir -> label hatasi SIFIR
-  * brand kavrami tanimaz -> gorulmemis brand kosuluna dogal uyum
+  * brand kavrami tanimaz -> unseen brand kosuluna dogal uyum
   * dense aile (asil wall) istenildigi up to uretilebilir
 
 NEGATIF YAPILAR SART. Yalniz giris ureten a corpus, "hangi opening giris"
@@ -18,13 +18,13 @@ sorusunu ogretmez -- each opening giris becomes. Bu yuzden each parcaya kasitli
 CELDIRICI konur: montaj deligi, ray yuvasi, test noktasi, havalandirma
 yarigi. Bunlar GT'ye GIRMEZ. Modelin ogrenmesi gereken ayrim full budur.
 
-ORNEKLEME. Gercek korpusun olculen dagilimina yakin tutulur; uydurma a
+ORNEKLEME. Gercek korpusun measured_path dagilimina yakin tutulur; uydurma a
 distribution sentetik veriyi gercekten uzaklastirir.
 """
 import numpy as np 
 import trimesh 
 
-# --- real korpustan olculen araliklar (klemens ailesi)
+# --- real korpustan measured_path araliklar (klemens ailesi)
 KUTUP =(2 ,30 )# kutup count
 ADIM =(3.5 ,16.0 )# kutuplar arasi step (mm)
 GIRIS_CAP =(1.6 ,8.0 )# kablo girisi capi (mm)
@@ -60,8 +60,8 @@ def uret (seed =0 ):
     cap =min (cap ,0.6 *step_ )
     h =float (r .uniform (*GOVDE_H ))
     dr =float (r .uniform (*GOVDE_D ))
-    derin =float (r .uniform (*GIRIS_DERIN ))
-    derin =min (derin ,0.45 *dr )
+    deep =float (r .uniform (*GIRIS_DERIN ))
+    deep =min (deep ,0.45 *dr )
     genis =n_kutup *step_ 
     body =trimesh .creation .box (extents =(genis ,dr ,h ))
 
@@ -85,15 +85,15 @@ def uret (seed =0 ):
             x =-genis /2 +step_ *(k +0.5 )
             z =float (r .uniform (-0.15 ,0.15 ))*h 
             mouth =np .array ([x ,sign *dr /2 ,z ])
-            kesiciler .append (_silindir (cap /2 ,2 *derin ,
-            mouth -eks *(derin *0.5 ),eks ))
+            kesiciler .append (_silindir (cap /2 ,2 *deep ,
+            mouth -eks *(deep *0.5 ),eks ))
             # HAVSA (huni mouth). Ilk surumde duz silindirik hole vardi and
             # segmentasyon modeli sentetik parcada GT agizlarina HIC
             # yerellesmiyordu (agizda median 0.0001, zemin 0.0002 --
-            # `results/sentetik_duman.json`). Gercek kablo girisleri teli
+            # `results/synthetic_smoke.json`). Gercek kablo girisleri teli
             # yonlendirmek for HAVSALIDIR; modelin ogrendigi yerel imza
             # muhtemelen this huni. Bu yuzden agiza koni eklenir.
-            hv_h =min (0.35 *derin ,0.9 *cap )
+            hv_h =min (0.35 *deep ,0.9 *cap )
             if hv_h >0.2 :
                 T =trimesh .geometry .align_vectors ([0 ,0 ,1 ],eks )
                 T [:3 ,3 ]=mouth -eks *(hv_h *0.5 )
@@ -157,7 +157,7 @@ def uret (seed =0 ):
     G =np .asarray (G ,float ).reshape (-1 ,3 )
     Gd =np .asarray (Gd ,float ).reshape (-1 ,3 )
     metadata ={"seed":seed ,"kutup":n_kutup ,"adim":step_ ,"cap":cap ,
-    "body":[genis ,dr ,h ],"derin":derin ,
+    "body":[genis ,dr ,h ],"deep":deep ,
     "cift_sira":cift_sira ,"egim_derece":float (np .degrees (egim )),
     "gt":len (G )}
     return part ,G ,Gd ,metadata 

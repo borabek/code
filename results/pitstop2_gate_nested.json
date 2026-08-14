@@ -11,7 +11,7 @@
  ],
  "deployed": {
   "dusuk": 0.35,
-  "cok": 0.25
+  "very": 0.25
  },
  "regimes": {
   "dusuk": {
@@ -94,7 +94,7 @@
    ],
    "honest_gain": -0.03830645161290325
   },
-  "cok": {
+  "very": {
    "n_parts": 24,
    "table": {
     "0.15": [

@@ -17,7 +17,7 @@ OLCULEN (uretilen konumlarda, TAM kabul kutusu):
   all of them       : yakin seceneklerin most high skorlusu (bugunku, 0.077)
   dik_suzgec  : before adima DIK olanlari suz, after most high skorlu
   dik_kipsel  : dik olanlar inside part-ici KIPSEL direction
-  kahin       : correct direction MEVCUT mu (upper boundary, 0.527)
+  oracle       : correct direction MEVCUT mu (upper boundary, 0.527)
 
 D7'ye BAKILMAZ.
 """
@@ -114,7 +114,7 @@ def main ():
         if not bul :
             continue 
 
-        say ={a :0 for a in ("hepsi","dik_suzgec","dik_kipsel","kahin")}
+        say ={a :0 for a in ("hepsi","dik_suzgec","dik_kipsel","oracle")}
         for (seed ,step_ ),_puan ,uret in bul :
             u =_birim (step_ .reshape (1 ,3 ))[0 ]
             v =uret [:,None ,:]-G [None ,:,:]
@@ -138,7 +138,7 @@ def main ():
                 aci_gt =np .degrees (np .arccos (np .clip (Yo @Gn [j ],-1 ,1 )))
                 # KAHIN: correct direction mevcut mu
                 if (aci_gt <=K .ACI ).any ():
-                    say ["kahin"]+=1 
+                    say ["oracle"]+=1 
                     # BUGUNKU: most high skorlu
                 if aci_gt [int (np .argmax (So ))]<=K .ACI :
                     say ["hepsi"]+=1 
@@ -170,11 +170,11 @@ def main ():
         a =ist [m_ ]
         g =max (sum (a ["gt"]),1 )
         r ={k :sum (a [k ])/g for k in ("hepsi","dik_suzgec","dik_kipsel",
-        "kahin")}
+        "oracle")}
         r ["gt"]=g 
         out [m_ ]=r 
         print (f"{m_ :<7}{g :>7}{r ['hepsi']:>10.3f}{r ['dik_suzgec']:>12.3f}"
-        f"{r ['dik_kipsel']:>12.3f}{r ['kahin']:>9.3f}")
+        f"{r ['dik_kipsel']:>12.3f}{r ['oracle']:>9.3f}")
     json .dump ({"dik_tol":DIK_TOL ,"brand":out ,
     "not":"Kafes adimi yonu kisitlar: axis siraya DIKTIR. "
     "Uretilen konumlarda direction secimi. D7'ye BAKILMADI."},

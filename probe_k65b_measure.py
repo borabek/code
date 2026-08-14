@@ -7,7 +7,7 @@ PROTOKOL:
   * k=0 TABANI: degistirilmemis urun agi (g10) same parcalarda
   * adaptasyon parcalari OLCUME GIRMEZ (makbuzdaki `adapt` listesi dislanir)
   * TAM zincir: gate -> product_chain.tam_poz -> Macar eslestirme
-  * tespit VE robot AYRI raporlanir; k=0'a according to difference verilir
+  * detection VE robot AYRI raporlanir; k=0'a according to difference verilir
   * cekilisler arasi mean +- std (single cekilis gurultulu)
 
 HATA YUTULMAZ: a kosum olculemezse betik PATLAR (see. g10 kill kapisi dersi).
@@ -44,7 +44,7 @@ def olc (pidler ,ob_dir ,rec_ ,gate ,S ):
     for pid in pidler :
         f =f"{ob_dir }/{pid }.npz"
         if not os .path .exists (f ):
-            raise RuntimeError (f"onbellekte YOK: {f } -- measurement eksik kalirdi")
+            raise RuntimeError (f"onbellekte YOK: {f } -- measurement missing kalirdi")
         r =rec_ [pid ]
         G =np .asarray (r ["G"],float )
         Gd =np .asarray (r ["Gd"],float )
@@ -116,7 +116,7 @@ def main ():
             t1 ,r1 =olc (olcp ,ko ["cache"],rec_ ,gate ,S )
             tl .append ((t0 ,t1 ))
             rl .append ((r0 ,r1 ))
-            print (f"  k={k } cekilis {ko ['cekilis']}: tespit {t0 :.4f} -> {t1 :.4f} "
+            print (f"  k={k } cekilis {ko ['cekilis']}: detection {t0 :.4f} -> {t1 :.4f} "
             f"({t1 -t0 :+.4f}) | robot {r0 :.4f} -> {r1 :.4f} ({r1 -r0 :+.4f})",
             flush =True )
         t0m =float (np .mean ([x [0 ]for x in tl ]));t1m =float (np .mean ([x [1 ]for x in tl ]))
@@ -125,7 +125,7 @@ def main ():
         "robot_k0":r0m ,"robot_k":r1m ,"robot_fark":r1m -r0m ,
         "robot_std":float (np .std ([x [1 ]for x in rl ])),
         "n_cekilis":len (kosumlar )}
-        print (f"  --> k={k } ORTALAMA: tespit {t1m -t0m :+.4f} | robot {r1m -r0m :+.4f} "
+        print (f"  --> k={k } ORTALAMA: detection {t1m -t0m :+.4f} | robot {r1m -r0m :+.4f} "
         f"(std {res_ [k ]['robot_std']:.4f})\n",flush =True )
 
     with open (a .out_ ,"w")as f :

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """P1 ONCULU: gate ONCE mi SONRA mi? Tavan farki real mi?
 
-IDDIA: ham candidate + (silindir + planar) poz secenekleriyle bire-a kahin 0.6097;
-ONCE gate uygulanirsa same kahin 0.4837. Yani mevcut `gate -> pose` order
+IDDIA: ham candidate + (silindir + planar) poz secenekleriyle bire-a oracle 0.6097;
+ONCE gate uygulanirsa same oracle 0.4837. Yani mevcut `gate -> pose` order
 tavani BASTAN kirpiyor. Bu probe that iddiayi KENDI verimizde produces.
 
 KAHIN = each candidate for seceneklerin EN IYISI secilebilseydi (bire-a Macar,
@@ -30,7 +30,7 @@ pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set 
 print (f"part {len (pidler )}\n",flush =True )
 
 
-def secenekler (P ,D ,cyls ,mm =8.0 ):
+def options (P ,D ,cyls ,mm =8.0 ):
     """Her candidate for (konum, direction) secenekleri. ILK oge HER ZAMAN MEVCUT (tez)."""
     uy =[c for c in (cyls or [])if brep_snap .R_MIN <=c ["radius"]<=brep_snap .R_MAX ]
     out =[]
@@ -47,20 +47,20 @@ def secenekler (P ,D ,cyls ,mm =8.0 ):
 
 
 def oracle_ (P ,D ,cyls ,G ,Gd ,diag ):
-    """ORTAK (bipartite) kahin -- candidate BASINA acgozlu DEGIL.
+    """ORTAK (bipartite) oracle -- candidate BASINA acgozlu DEGIL.
 
     ILK SURUMUM YANLISTI: each candidate KENDI most iyi secenegini bagimsiz seciyordu.
     Boylece bircok candidate AYNI GT'ye yigiliyor, Macar bire-a atayinca most bosa
-    gidiyordu and kahin uctan uca sonucun however biraz ustunde cikiyordu (0.151) --
+    gidiyordu and oracle uctan uca sonucun however biraz ustunde cikiyordu (0.151) --
     hatta gate'li hali (0.199) DAHA YUKSEK gorunuyordu, ki a upper kumede
-    imkansizdir. Isaret: kahin ORTAK must be.
+    imkansizdir. Isaret: oracle ORTAK must be.
 
     Dogrusu: (candidate i, GT j) for i'nin O GT'ye according to EN IYI secenegini bul,
     kabul edilebilirse 1 score; after bipartite EN BUYUK ESLESME (Hungarian).
     """
     if not len (P )or not len (G ):
         return (len (G ),0.0 ,0.0 ,0.0 )
-    S_ =secenekler (P ,D ,cyls )
+    S_ =options (P ,D ,cyls )
     n ,m =len (P ),len (G )
     C =np .ones ((n ,m ))# maliyet: 0 = kabul edilebilir, 1 = not
     for i ,o in enumerate (S_ ):
@@ -112,9 +112,9 @@ for pid in pidler :
         R_gate .append ((len (G ),0. ,0. ,0. ))
 a ,b =f1w (R_ham ),f1w (R_gate )
 print (f"HAM candidate + poz secenekleri (gate YOK) : {a :.4f}")
-print (f"ONCE gate, sonra poz secenekleri      : {b :.4f}")
+print (f"ONCE gate, after poz secenekleri      : {b :.4f}")
 print (f"GATE'IN KIRPTIGI TAVAN                : {a -b :+.4f}")
-json .dump ({"ham_kahin":a ,"gate_once_kahin":b ,"fark":a -b ,"n_parca":len (pidler ),
+json .dump ({"ham_kahin":a ,"gate_once_kahin":b ,"diff":a -b ,"n_parca":len (pidler ),
 "not":"D6 (DEV). Kahin = ulasilabilir not TAVAN."},
-open ("results/p1_sira_tavani.json","w"),indent =1 )
-print ("receipt -> results/p1_sira_tavani.json")
+open ("results/p1_order_ceiling.json","w"),indent =1 )
+print ("receipt -> results/p1_order_ceiling.json")

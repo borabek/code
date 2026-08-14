@@ -26,7 +26,7 @@ import time
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -99,16 +99,16 @@ def main ():
     vtx_ =egri [en ]["robot"]
     bant =[e for e in ESIKLER if egri [e ]["robot"]>=vtx_ -0.01 ]
     print (f"\nEN IYI threshold {en } -> {vtx_ :.4f}")
-    print (f"TEPEDEN 0.01 ICINDE kalan esikler: {bant }")
+    print (f"TEPEDEN 0.01 ICINDE remaining esikler: {bant }")
     print (f"90'in degeri: {egri .get (90 ,{}).get ('robot',0 ):.4f} "
     f"(tepeden {vtx_ -egri .get (90 ,{}).get ('robot',0 ):+.4f})")
     print ("YORUM: bant genisse threshold KARARLI, dar whereas KIRILGAN.")
-    json .dump ({"damga":makbuz_hash .damga (),"egri":egri ,"en_iyi":en ,
+    json .dump ({"damga":receipt_hash .damga (),"egri":egri ,"en_iyi":en ,
     "bant":bant ,"katlar":katlar ,"n_parca":len (data_ ),
     "not":"Rejim esigi kararlilik egrisi. Kat-disi measurement; D7'ye "
     "BAKILMADI. Esik secimi this egriden yapilir."},
-    open ("results/rejim_kararlilik.json","w"),indent =1 )
-    print (f"receipt -> results/rejim_kararlilik.json ({time .time ()-t0 :.0f} s)")
+    open ("results/regime_kararlilik.json","w"),indent =1 )
+    print (f"receipt -> results/regime_kararlilik.json ({time .time ()-t0 :.0f} s)")
 
 
 if __name__ =="__main__":

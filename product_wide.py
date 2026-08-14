@@ -2,25 +2,25 @@
 """GENISLETILMIS URUN YOLU: B-rep havuzu + mouth tanimlayicilari + sign correction.
 
 MEASURED (D7 = 835 part brand-disi, TAM ZINCIR, MIKRO, threshold D6'da secildi):
-| yigin | robot | tespit | makro |
+| yigin | robot | detection | makro |
 |---|---|---|---|
 | dagitilan urun (v6 + NMS) | 0.2029 | 0.4523 | 0.2146 |
 | **this path** | **0.3090** | **0.4813** | **0.3142** |
 
 10/12 markada artis; real loss YOK (CCD -0.007 duz, C3 -0.009 five parcada).
-Makbuzlar: `results/secici_ailesi.json`, `results/b2a_isaret.json`,
-`results/tam_havuz_gate.json`.
+Makbuzlar: `results/selector_family.json`, `results/b2a_sign.json`,
+`results/full_pool_gate.json`.
 
 UC KALDIRAC (all of them single single measured):
  1. ETIKET TANIMI duzeltmesi -- gate korpusu `build_rich_parity.py`'nin
     tanimiyla (lateral + axial 40mm + acgozlu bire-a). Tek basina 0.1159 -> 0.2009.
  2. B-REP HAVUZU (silindir agizlari + duzlemsel opening merkezleri, 3mm dedupe):
     0.2213 -> 0.2563. Mesh tepeleri EKLENMEZ -- three bagimsiz olcumde ZARAR verdi.
- 3. AGIZ TANIMLAYICILARI (9 column) + HGB-derin + ISARET DUZELTME: -> 0.3090.
+ 3. AGIZ TANIMLAYICILARI (9 column) + HGB-deep + ISARET DUZELTME: -> 0.3090.
 
 TEZE SADIK: DiffusionNet 5 sinif, ~6000 uniform izotropik remesh and `v_o`
 mouth-ortasi turetmesi DEGISMEDI. B-rep onerileri tezin adaylarinin YANINA
-eklenen ikinci a kaynaktir; tezin cevabi always havuzda and `source==0`
+added ikinci a kaynaktir; tezin cevabi always havuzda and `source==0`
 with isaretlidir. Sonuclar "tez sonucu" not "tez-omurgali genisletme" as
 raporlanir.
 
@@ -52,7 +52,7 @@ def _cfg (ad ,cevre ,vars_ ):
 
 
 ACIK =_cfg ("robot_genis_havuz","URUN_GENIS",True )
-ESIK =0.05 # D6'da secildi (`results/secici_ailesi.json`), D7'de taranmadi
+ESIK =0.05 # D6'da secildi (`results/selector_family.json`), D7'de taranmadi
 
 
 def pool (P_seg ,D_seg ,cyl ,acik ):
@@ -91,7 +91,7 @@ def tanimlayici (P ,D ,cyl ,mesh ,diag ):
 def isaret_duzelt (D ,T ):
     """Tel DISARIDAN girer: disari yolu iceriden kisaysa direction TERS cevrilir.
 
-    Olculdu (`results/b2a_isaret.json`): +0.0316 robot, tespit DEGISMEDI.
+    Olculdu (`results/b2a_sign.json`): +0.0316 robot, detection DEGISMEDI.
     Saf fiziksel rule ogrenilmis siniflandiricinin %94'unu veriyor; urunde
     OGRENME YOK, rule present -- more few hareketli part.
     """
@@ -130,14 +130,14 @@ MODEL_YOL ="results/kazanan_hgb_derin.pkl"
 _MODEL =None 
 
 
-def model_yukle (yol =MODEL_YOL ):
-    """HGB-derin gate. Yoksa None returns -> cagiran ESKI yola duser."""
+def model_yukle (path =MODEL_YOL ):
+    """HGB-deep gate. Yoksa None returns -> cagiran ESKI yola duser."""
     global _MODEL 
     if _MODEL is None :
-        if not os .path .exists (yol ):
+        if not os .path .exists (path ):
             return None 
         import pickle 
-        _MODEL =pickle .load (open (yol ,"rb"))["HGB-derin"]
+        _MODEL =pickle .load (open (path ,"rb"))["HGB-deep"]
     return _MODEL 
 
 

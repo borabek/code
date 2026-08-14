@@ -7,7 +7,7 @@ WHY IMPORTANT (2026-07-28 bulgulari):
     uretebiliyorsa. Eski adjudication 'real opening mi?' diye sordu ('here TEL present mi?' not)
     and that yuzden precision %98'e sisti -- i.e. this soru correct bicimde HIC sorulmadi.
 DECISION KAPISI:
-  uyum >= %90  -> insan etiketi gecerli ikame; 2838 part acilabilir (data acligina ilac)
+  uyum >= %90  -> insan etiketi valid ikame; 2838 part acilabilir (data acligina ilac)
   uyum <  %75  -> ureticinin listesinde geometride OLMAYAN katalog bilgisi present (R4 kesinlesir);
                   insan etiketi GURULTU adds -> path kapatilir, 100 saat bosa gitmez
 Tasarim: GT'si BILINEN parts is used but kullaniciya GOSTERILMEZ (kor test).
@@ -28,7 +28,7 @@ def pack (a ,dt ):
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--n",type =int ,default =30 ,help ="kac part (15-20 dk for ~30 uygun)")
+    ap .add_argument ("--n",type =int ,default =30 ,help ="kac part (15-20 dk for ~30 eligible)")
     ap .add_argument ("--seed",type =int ,default =0 )
     a =ap .parse_args ()
 
@@ -45,7 +45,7 @@ def main ():
     if 4 <=int ((G ==g ).sum ())<=10 and seen [int (g )]==0 and pids [int (g )]not in LOCKED ]
     rs =np .random .RandomState (a .seed );rs .shuffle (cand_g )
     chosen =cand_g [:a .n ]
-    print (f"{len (chosen )} part secildi (candidate 4-10, kilitli degil)",flush =True )
+    print (f"{len (chosen )} part secildi (candidate 4-10, kilitli not)",flush =True )
 
     import thesis_remesh 
     from infer_step_cp import step_to_mesh 

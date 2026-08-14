@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """WIRE/TOOL KAPISI: robotun buldugu acikliklardan TOOL/actuator agizlarini eleyip TEL-girislerini keeps.
 
-Otopsi (OTOPSI_CP_TIPI.md): tez Contact sinifi = 'Kontaktierung bzw. Werkzeugeinschub' -> tool agzi
+Otopsi (autopsy_CP_TIPI.md): tez Contact sinifi = 'Kontaktierung bzw. Werkzeugeinschub' -> tool agzi
 kontaktla same sinif, segmentasyon ayirmaz, geometri de ayirmaz (recon AUC 0.61). AMA yapisal/baglamsal
 ozellikler AYIRIR (held-out AUC 0.867; outward + ce_frac basi ceker). Bu modul that ayiriciyi egitir,
 kaydeder and cikarimda uygular.
 
-Uctan-uca dogrulama (gorulmemis part, karisik manufacturer): precision 0.607->0.751 (+0.144) @ threshold 0.30,
+Uctan-uca dogrulama (unseen part, karisik manufacturer): precision 0.607->0.751 (+0.144) @ threshold 0.30,
 recall only 0.684->0.651. WEI P+0.087 / PXC P+0.217. Tool agizlari atiliyor, real teller kaliyor.
 
 feats_for(): CP basina yapisal feature. train_and_save(): npz'den egit+kaydet. apply(): CP listesini filtrele.
@@ -33,11 +33,11 @@ def fallback_ozet (sifirla =True ):
 FEAT_NAMES_13 =["size","depth","nn_dist","n_close","outward","nverts","ce_frac","ct_frac",
 "aspect","flat","chan_conn","votes","conf"]
 # E (2026-07-30): EKSEN GUVENI. Adayin ekseni B-rep'ten OKUNABILDI mi, hangi yuzeyden?
-# Olculdu (same split, same candidates, single degisken): axis BELIRLI adaylarda TP orani %93.8,
+# Olculdu (same split, same candidates, single variable): axis BELIRLI adaylarda TP orani %93.8,
 # BELIRSIZ olanlarda %85.0 (+8.8 score). Capraz dogrulamali gate karsilastirmasi: 13 feature
 # CP-F1 0.5798 -> 13+4 feature 0.6005 (+0.0208, kill esigi +0.005).
 # TAM KORPUS gate'inde de gecti (+0.0068) AMA UCTAN UCA KAYBETTI and REVERTED:
-# same candidates, two gate, single difference feature kumesi -> tespit 0.7790 -> 0.7665 (-0.0125),
+# same candidates, two gate, single difference feature kumesi -> detection 0.7790 -> 0.7665 (-0.0125),
 # robot-hazir +0.0001 (absent). Yani gate DUZEYINDE kazanan a feature real hatta zarar
 # verebiliyor; measurement havuzu (npz adaylari) with calisma havuzu (I with turetilen candidates) same
 # not. VARSAYILAN KAPALI. Model results/wire_gate_axis17.pkl as duruyor.
@@ -47,7 +47,7 @@ USE_AXIS_FEATS =os .environ .get ("WG_AXIS_FEATS","0")not in ("0","false","False
 # FIZ (2026-07-31): B-rep FIZIKSEL ozellikler. E'den farki, E "axis OKUNABILDI mi" diye
 # soruyordu (a GUVEN olcusu); bunlar acikligin FIZIGINI olcuyor.
 #
-# WHY: FP otopsisi yanlislarin %86.3'unu three fiziksel imzaya bagliyor (boydan-boya hole %31,
+# WHY: FP otopsisi yanlislarin %86.3'unu three fiziksel imzaya bagliyor (boydan-paint hole %31,
 # radius<1mm %21, axis-dik %35) and 13 ozelligin HICBIRI bunlari tasimiyordu.
 #
 # MEASURED (q4/q5, 3277 candidate, 200 AYRIK part, grup-capraz OOF):
@@ -66,7 +66,7 @@ USE_AXIS_FEATS =os .environ .get ("WG_AXIS_FEATS","0")not in ("0","false","False
 # VARSAYILAN KAPALI: dagitilan gate 13 sutunlu. Acmadan ONCE full corpus gate verisi this 5
 # sutunla yeniden uretilip gate yeniden egitilmeli, after UCTAN UCA olculmeli (E'nin dersi:
 # gate duzeyinde kazanan feature real hatta kaybedebilir).
-FEAT_NAMES_FIZ =["brep_r","esesenli","r_orani","bos_derinlik","gecen"]
+FEAT_NAMES_FIZ =["brep_r","esesenli","r_orani","bos_derinlik","passing"]
 
 
 def _fiz_default ():
@@ -121,15 +121,15 @@ def _ek_default ():
 USE_EK_FEATS =_ek_default ()
 
 
-def _cfg_get (key_ ,ortam ,varsayilan ):
+def _cfg_get (key_ ,ortam ,default ):
     v =os .environ .get (ortam )
     if v is not None :
-        return type (varsayilan )(v )
+        return type (default )(v )
     try :
         with open ("cp_config.json",encoding ="utf-8")as f :# see. [[file-tanitici-sizintisi]]
-            return type (varsayilan )(json .load (f ).get (key_ ,varsayilan ))
+            return type (default )(json .load (f ).get (key_ ,default ))
     except Exception :
-        return varsayilan 
+        return default 
 
 
         # GORELI ESIK: see. apply() icindeki not. Varsayilan KAPALI -- uctan uca olculmeden acilmaz.
@@ -140,12 +140,12 @@ GORELI_TABAN =float (_cfg_get ("gate_goreli_taban","WG_GORELI_TABAN",0.20 ))
 
 # TOPO (2026-08-01): ICBUKEY KENAR TOPOLOJISI -- hole-tanima alaninin birinci sinyali.
 # Bir opening, ICBUKEY kenarlarla cevrili face kumesidir; disa cikinti DISBUKEY kenarlarla.
-# Gate'in 18 sutununun HICBIRI topolojik degildi (all of them olasilik istatistigi ya da point-geometrisi).
+# Gate'in 18 sutununun HICBIRI topolojik degildi (all of them probability istatistigi ya da point-geometrisi).
 #
 # MEASURED (t13, 3277 candidate / 197 ayrik part, bag duzeltmeli Mann-Whitney + permutasyon null):
 #   kon_cevre 0.709 (TP medyan 1.000 = TAM TUR icbukey halka, FP 0.833) | kon_sayi 0.703
 #   kon_oran  0.666 | kon_aci 0.520 (OLU, but blokta tutuluyor -- model karar versin)
-# ARTIMLI (t14, same candidates): tanidik +0.0167, GORULMEMIS URETICIDE EN KOTU +0.0176.
+# ARTIMLI (t14, same candidates): familiar +0.0167, GORULMEMIS URETICIDE EN KOTU +0.0176.
 # Ikisinde birden kazanmasi beklenendi: hole each ureticide deliktir, istatistik not GEOMETRI.
 #
 # MESH tabanli -- B-rep/renk yollarindaki kapsama kaybi here YOK, each parcada is computed.
@@ -187,7 +187,7 @@ def _topo_feats (V ,F ,cps ):
     # MEASURED (p2 candidate duzeyi, 19631 candidate / 1599 part, grup-capraz OOF):
     #   +konum9 +0.0114 | +cokyaricap24 +0.0169 | +all of them(33) +0.0231  (ucu de HER IKI ureticide +)
     # UCTAN UCA (p4, kilitli cluster 194 part / 171 grup, GRUP bootstrap, decision_criterion):
-    #   tanidik 0.7301 -> 0.7534 (+0.0233) | WEI-disi 0.5593 -> 0.5946 | PXC-disi 0.6619 -> 0.6743
+    #   familiar 0.7301 -> 0.7534 (+0.0233) | WEI-disi 0.5593 -> 0.5946 | PXC-disi 0.6619 -> 0.6743
     #   GA(WEI) [+0.0005, +0.0697] = KANITLI. Bes sartin BESI de saglandi -> DEPLOYED.
     # TAPER (huni profili) BILEREK YOK: more before measured and OLU output.
 FEAT_NAMES_ZENGIN =(["kon_x","kon_y","kon_z"]
@@ -331,18 +331,18 @@ def _fiz_feats (V ,F ,cps ,step_path ):
                     # `bos_derinlik` ADI YANILTICI: isin DISARI (+d) gidiyor, i.e. kanalin dibine not
                     # aciklikin ONUNE. Olctugu sey "disarisi gercekten empty mu": measured (3277 candidate) TP'lerin
                     # %75.1'inde isin never carpmiyor (opening bosluga bakiyor), FP'lerin whereas only %35.6'sinda.
-                    # Yani gecerli a opening-dogrulamasi, depth olcusu DEGIL. ICERI (-d) bakan version
+                    # Yani valid a opening-dogrulamasi, depth olcusu DEGIL. ICERI (-d) bakan version
                     # (real channel derinligi = kelepceye distance) HENUZ DENENMEDI -- listede open madde.
-        derin ,gecen =-1.0 ,0 
+        deep ,passing =-1.0 ,0 
         try :
             h =_np .asarray (_G .ray_hits (mesh ,p +0.05 *d ,d ,max_mm =200.0 ),float ).ravel ()
             if len (h ):
-                derin =float (h [0 ]);gecen =int (len (h )<=1 )
+                deep =float (h [0 ]);passing =int (len (h )<=1 )
             else :
-                gecen =1 # HIC carpmadi: depth -1 kalir, 0.0'dan AYRI
+                passing =1 # HIC carpmadi: depth -1 kalir, 0.0'dan AYRI
         except Exception :
             pass 
-        out .append ([brep_r ,coax_n ,r_or ,derin ,gecen ])
+        out .append ([brep_r ,coax_n ,r_or ,deep ,passing ])
     return _np .array (out ,float ).reshape (n ,5 )
 
 
@@ -369,7 +369,7 @@ def _axis_feats (cps ,step_path ):
 
 
 def feats_for (V ,F ,probs ,cps ,CE ,CT ,step_path =None ):
-    """each CP for yapisal feature (mesh frame). probs = (N,5) olasilik; cps = connection_points ciktisi.
+    """each CP for yapisal feature (mesh frame). probs = (N,5) probability; cps = connection_points ciktisi.
 
     step_path verilir and WG_AXIS_FEATS=1 whereas 4 EKSEN GUVENI ozelligi eklenir (see FEAT_NAMES_AXIS).
     Varsayilan KAPALI: dagitilan gate 13 ozellikle egitildi, shape uyusmazligi onu bozardi.
@@ -446,7 +446,7 @@ def _load (path =MODEL_PATH ):
 def _cokus_yonlendir (m ,X_ham ,s_ham ):
     """COKUS YONLENDIRME: gate this parcada kararsizsa SAGLAM (part-ici) modele gec.
 
-    WHY (measured 2026-08-01, u6/u7/u8): part-ici z-skor GENEL a iyilestirme DEGIL, a
+    WHY (measured 2026-08-01, u6/u7/u8): part-ici z-score GENEL a iyilestirme DEGIL, a
     KURTARMA. Uctan uca 9 bolmede desen tekduze -- TABAN ZAYIFKEN kazaniyor, SAGLIKLIYKEN
     kaybediyor:
         WEI disarida baseline 0.4832 (COKUS)     -> +0.0869
@@ -456,17 +456,17 @@ def _cokus_yonlendir (m ,X_ham ,s_ham ):
         PXC disarida baseline 0.7203 (SAGLIKLI)  -> -0.0375
     Her parcaya uygulamak, cokmeyen parcalarda vergi odemek demekti.
 
-    SEZGI metadata GEREKTIRMEZ: ham gate'in KENDI skor dagilimi cokusu gosteriyor. Olculmus
+    SEZGI metadata GEREKTIRMEZ: ham gate'in KENDI score dagilimi cokusu gosteriyor. Olculmus
     teshis -- cokus halinde model adaylarin %10.3'une pozitif diyor, real %24.1. Yani parcanin
     EN YUKSEK ham skoru dusukse gate that parcada kararsizdir.
 
     ESIK training korpusunun 10'uncu yuzdeligi; modelin inside saklanir (`esik_cokus`), calisma
     aninda no sey hesaplanmaz and test tarafina BAKILMAZ.
 
-    KAZANC (uctan uca, D = each parcaya z-skor):
+    KAZANC (uctan uca, D = each parcaya z-score):
         WEI disarida  D 0.5702 -> R 0.5682  (-0.0020, kazancin %98'i korunur)
         PXC disarida  D 0.6828 -> R 0.7029  (+0.0201, bedelin YARISI geri)
-        tanidik       D 0.7390 -> R 0.7439  (+0.0049, ham gate'ten bile iyi)
+        familiar       D 0.7390 -> R 0.7439  (+0.0049, ham gate'ten bile iyi)
         7 seri-disi   D -0.0075 -> R -0.0029 (vergi %60 azaldi)
     """
     clf_z =m .get ("clf_z")
@@ -479,11 +479,11 @@ def _cokus_yonlendir (m ,X_ham ,s_ham ):
 
 
 def decision_score (m ,X ):
-    """URUNUN DECISION SKORU -- single source. Model + ham feature matrisi -> candidate basina skor.
+    """URUNUN DECISION SKORU -- single source. Model + ham feature matrisi -> candidate basina score.
 
     WHY SEPARATE BIR FONKSIYON (2026-08-01): measurement betiklerim gate'i `clf.predict_proba(...)` diye
     ELDE yeniden kuruyordu. Urunun `apply()` yolu whereas arada yonlendirme does. Iki path
-    AYRISIRSA olculen sey urunun YAPTIGI sey olmaz -- and difference small oldugu for tabloda
+    AYRISIRSA measured_path sey urunun YAPTIGI sey olmaz -- and difference small oldugu for tabloda
     difference edilmez. Artik ikisi de BURAYA cagiriyor.
     """
     X =np .asarray (X ,float )
@@ -503,9 +503,9 @@ def decision_score (m ,X ):
 
 
 def decision_mask (s ,threshold =None ):
-    """URUNUN KABUL KURALI -- single source (goreli threshold + mutlak baseline, ya da sabit threshold).
+    """URUNUN KABUL KURALI -- single source (goreli threshold + mutlak baseline, ya da fixed threshold).
 
-    `apply()` bunu CP sozlukleri uzerinden, measurement betikleri skor dizisi uzerinden uygular;
+    `apply()` bunu CP sozlukleri uzerinden, measurement betikleri score dizisi uzerinden uygular;
     kuralin KENDISI single places tanimli olsun diye ayrildi.
     """
     s =np .asarray (s ,float )
@@ -520,22 +520,22 @@ def decision_mask (s ,threshold =None ):
 def _dogrula_uyum (m ):
     """Modelin egitildigi AYARLARLA calisma anindaki ayarlarin AYNI oldugunu dogrula.
 
-    WHY REQUIRED (2026-08-01'de acilan mayin): topoloji yaricapi `TOPO_R` ayarlanabilir yapildi
+    WHY REQUIRED (2026-08-01'de opened mayin): topoloji yaricapi `TOPO_R` ayarlanabilir yapildi
     but model onu tasimiyordu. Biri `cp_config.gate_topo_r`'yi degistirse, R=6'da egitilmis gate
     R=8 ozellikleriyle beslenirdi -- SUTUN SAYISI AYNI KALDIGI ICIN HATA DA VERMEZDI. Gate sessizce
     kotulesir and bunu a sonraki full olcume up to no sey gostermez.
 
     Genislik uyumu (`n_feat`) BU HATAYI YAKALAMAZ: sutunlarin SAYISI not ANLAMI degisir.
-    Bu yuzden ayar degerinin kendisi modelde saklanir and here karsilastirilir.
+    Bu yuzden setting degerinin kendisi modelde saklanir and here karsilastirilir.
     """
     if m is None :
         return 
     r =m .get ("topo_r")
     if r is not None and USE_TOPO_FEATS and abs (float (r )-float (TOPO_R ))>1e-9 :
         raise ValueError (
-        f"gate topoloji yaricapi {r } mm ile EGITILDI, calisma aninda {TOPO_R } mm uretiliyor. "
-        f"Sutun sayisi ayni oldugu icin bu sessizce yanlis skor verirdi. "
-        f"cp_config.gate_topo_r'yi {r } yap ya da gate'i {TOPO_R } mm ile yeniden egit.")
+        f"gate topoloji yaricapi {r } mm with EGITILDI, calisma aninda {TOPO_R } mm uretiliyor. "
+        f"Sutun sayisi same oldugu for this sessizce wrong score verirdi. "
+        f"cp_config.gate_topo_r'yi {r } yap ya da gate'i {TOPO_R } mm with yeniden egit.")
 
 
 POSE_PATH ="results/pose_head.pkl"
@@ -547,7 +547,7 @@ POSE_KANCA =[]
 
 def _yerel_cerceve (d ):
     """Eksen + two dik unit vektor. Duzeltme YEREL cercevede ifade edilir ki part donunce
-    de gecerli olsun (dunya koordinatlarina bagimli a correction donmus parcada anlamsizdir)."""
+    de valid olsun (dunya koordinatlarina bagimli a correction donmus parcada anlamsizdir)."""
     d =np .asarray (d ,float );d =d /(np .linalg .norm (d )+1e-9 )
     a =np .array ([1.0 ,0.0 ,0.0 ])
     if abs (float (d @a ))>0.9 :
@@ -559,9 +559,9 @@ def _yerel_cerceve (d ):
 def pose_correct (X ,cps ,model_path =None ):
     """POST-GATE POSE DUZELTMESI -- kabul edilmis CP'lerin YANAL sapmasini duzelt.
 
-    WHY (ceiling olcumu, results/t_tavan.json): kahin gate robot-haziri only +0.059 tasiyor;
+    WHY (ceiling olcumu, results/t_ceiling.json): oracle gate robot-haziri only +0.059 tasiyor;
     KONUM +0.325, YON +0.103. Yani gate ne up to iyilesirse iyilessin robota few yansiyor, is
-    konumda. Bu, gate KARARINDAN SONRA calisan ayri a kafadir.
+    konumda. Bu, gate KARARINDAN SONRA running ayri a kafadir.
 
     WHY LEARNED, RULE DEGIL: 2026-08-01'de RULE tabanli four konum/direction kolu was tried and
     DORDU DE became (analitik eksene izdusum uctan uca -0.045, part-ici axis uzlasisi net -110
@@ -571,7 +571,7 @@ def pose_correct (X ,cps ,model_path =None ):
 
     MEASURED (uctan uca, kilitli cluster 194 part / 171 grup, GRUP bootstrap):
         robot-hazir 0.4407 -> 0.4835  (+0.0428, GA [+0.0220, +0.0680] -> KANITLI)
-        tespit      0.7534 -> 0.7535  (+0.0001, bedelsiz)
+        detection      0.7534 -> 0.7535  (+0.0001, bedelsiz)
     YON duzeltmesi NOT DEPLOYED: already correct which is yonleri bozuyordu (medyan 0.00 -> 2.36 derece).
 
     Duzeltme `maks_mm` with sinirli. Model otherwise CP'ler DEGISMEDEN returns.
@@ -632,7 +632,7 @@ def angle_correct (X ,cps ,model_path =ACI_PATH ):
 
     MEASURED (kilitli cluster 194 part / 171 grup, GRUP bootstrap):
         robot-hazir 0.5280 -> 0.5406  (+0.0126, GA [+0.0002, +0.0325] KANITLI)
-        tespit      DEGISMEZ -- and this YAPISAL: tespit olcutu aciya BAKMAZ (am=180), i.e. this
+        detection      DEGISMEZ -- and this YAPISAL: detection olcutu aciya BAKMAZ (am=180), i.e. this
         correction tespiti etkileyemez. Kazanc +0.02 barinin under but KANITLI and BEDELSIZ.
     """
     m =_load (model_path )
@@ -668,7 +668,7 @@ UYE_PATH ="results/uye_secici.pkl"
 def pick_member_direction (X ,cps ,uye_listeleri ,model_path =UYE_PATH ,yakin_mm =5.0 ):
     """UYE YON SECIMI -- `_vote2` birlestirmede ATILAN uye yonlerinden most iyisini sec.
 
-    WHY (R7 kahin olcumu): four modelin yonlerinde robot-haziri 0.5523 -> 0.6059 yapacak
+    WHY (R7 oracle olcumu): four modelin yonlerinde robot-haziri 0.5523 -> 0.6059 yapacak
     bilgi VAR (+0.0536). Konum tarafinda YOK (-0.0022; pose head already almis). `_vote2`
     konumu confidence-agirlikli ortaliyor but YONU only temsilciden aliyor -- digerleri ATILIYOR.
 
@@ -678,7 +678,7 @@ def pick_member_direction (X ,cps ,uye_listeleri ,model_path =UYE_PATH ,yakin_mm
 
     MEASURED (kilitli cluster 194 part / 171 grup, GRUP bootstrap):
         robot-hazir 0.5523 -> 0.5801  (+0.0278, GA [+0.0105, +0.0490] KANITLI)
-        tespit      DEGISMEZ (yapisal: tespit olcutu aciya bakmaz)
+        detection      DEGISMEZ (yapisal: detection olcutu aciya bakmaz)
     Kahinin ~%52'si yakalandi.
 
     uye_listeleri: model basina CP listesi (birlestirme ONCESI).
@@ -729,20 +729,20 @@ def within_part (X ,donusum ):
 
     WHY (measured 2026-08-01, u3/u4): gate GORULMEMIS a ureticide cokuyor. Cokusun a yarisi
     kalibrasyondu and GORELI ESIK with cozuldu -- i.e. SKORU part inside karsilastirmak. Bu, same
-    fikrin OZELLIK duzeyindeki hali: "this candidate this parcadaki most derin 2. hole" ifadesi ureticiden
+    fikrin OZELLIK duzeyindeki hali: "this candidate this parcadaki most deep 2. hole" ifadesi ureticiden
     bagimsizdir, "depth 4.2 mm" degildir.
 
     HAM sutunlar KORUNUR, uzerine goreli olanlar EKLENIR. Yalniz goreli kullanmak measured and
-    KOTU (tanidik -0.090): mutlak buyuklukler real bilgi tasiyor. Model hangisini nerede
+    KOTU (familiar -0.090): mutlak buyuklukler real bilgi tasiyor. Model hangisini nerede
     kullanacagina own karar versin.
 
     UCTAN UCA (manufacturer-disi, 200 part):
-        gorulmemis manufacturer EN KOTU  0.4832 -> 0.5702 (+0.0869, GA [+0.048,+0.126])
+        unseen manufacturer EN KOTU  0.4832 -> 0.5702 (+0.0869, GA [+0.048,+0.126])
         DIGER manufacturer-disi split    0.7203 -> 0.6828 (-0.0375, GA [-0.065,-0.009])  <- GERCEK BEDEL
-        tanidik                     0.7410 -> 0.7390 (-0.0023, GURULTU)
+        familiar                     0.7410 -> 0.7390 (-0.0023, GURULTU)
     Yani this a RISK TAKASI: ureticiler arasi YAYILIM 0.237 -> 0.113. Takasi kaldirmak for three
     path was tried (only ezberleyen sutunlar / only fiziksel sutunlar / ensemble) and UCU DE
-    basarisiz -- kazanc with bedel same mekanizmadan geliyor (u5_takas.json).
+    failed -- kazanc with bedel same mekanizmadan geliyor (u5_takas.json).
 
     CALISMA ANINDA UYGULANABILIR: only parcanin KENDI adaylarini kullanir; corpus istatistigi,
     komsu part ya da manufacturer kimligi gerektirmez.
@@ -757,7 +757,7 @@ def within_part (X ,donusum ):
         Z =(np .full_like (X ,0.5 )if len (X )<2 else 
         np .argsort (np .argsort (X ,axis =0 ),axis =0 ).astype (float )/(len (X )-1 ))
     else :
-        raise ValueError (f"bilinmeyen part-ici donusum: {donusum !r }")
+        raise ValueError (f"unknown part-ici donusum: {donusum !r }")
     return np .hstack ([X ,Z ])
 
 
@@ -766,8 +766,8 @@ def within_part (X ,donusum ):
     # oldugu for fazlasi ZORUNLU FP. Gate skoru most high which is tutulur.
     #
     # MEASURED -- TAM URUN ZINCIRI (poz kafasi dahil), D7 brand-disi 835 part, MIKRO
-    # (`probe_product_nms_end_to_end.py`, `results/urun_nms_uctan_uca*.json`):
-    #   r     robot            tespit           makro   artan brand   yikilan
+    # (`probe_product_nms_end_to_end.py`, `results/product_nms_end_to_end*.json`):
+    #   r     robot            detection           makro   artan brand   yikilan
     #   0   0.1956           0.4314           0.2051      -
     #   3   0.1974 (+0.0018) 0.4399 (+0.0085) 0.2062     8/12         CEM
     #   4   0.2008 (+0.0052) 0.4471 (+0.0157) 0.2118     9/12         -
@@ -775,16 +775,16 @@ def within_part (X ,donusum ):
     #   6   0.2041 (+0.0085) 0.4556 (+0.0242) 0.2143    10/12         CEM
     #
     # YARICAP SECIMI r=5.0. RULE: "no markayi YIKMAYAN most large radius".
-    # BILEREK ARGMAX DEGIL: D7 a DEV kumesi, argmax'ini almak ona ayar yapmaktir
+    # BILEREK ARGMAX DEGIL: D7 a DEV kumesi, argmax'ini almak ona setting yapmaktir
     # (uclu-split-and-fake-kazanclar). r=6 more high robot gives but CEM'i
     # 0.0164 -> 0.0000 yikar; r=3'te de yikiliyor, r=4/5'te YUKSELIYOR -- i.e. CEM'in
     # skoru single a eslesmeye dayanan noise, but rule kurala uyulur.
-    # BAGIMSIZ VERIFICATION (D6 468 part, gate yolu, `results/nms_tarama.json`):
+    # BAGIMSIZ VERIFICATION (D6 468 part, gate yolu, `results/nms_sweep.json`):
     # r=5'te robot +0.0005, 6/8 brand artida, most kotu brand 0.0155 -> 0.0157 (yikim YOK).
 NMS_MM =float (_cfg_get ("robot_cp_nms_mm","WG_NMS_MM",5.0 ))
 
 
-def crowd_mask (P ,skor ,r_mm =None ):
+def crowd_mask (P ,score ,r_mm =None ):
     """NMS'in TEK GERCEKLEMESI. Doner: tutulacaklarin bool maskesi.
 
     Hem urun yolu (`apply` -> `suppress_crowd`) hem measurement yolu (`canonical_d7.
@@ -793,11 +793,11 @@ def crowd_mask (P ,skor ,r_mm =None ):
     rule TEK YERDE durur.
     """
     r =NMS_MM if r_mm is None else float (r_mm )
-    P =np .asarray (P ,float );skor =np .asarray (skor ,float )
+    P =np .asarray (P ,float );score =np .asarray (score ,float )
     tut =np .ones (len (P ),bool )
     if r <=0 or len (P )<2 :
         return tut 
-    rank_ =np .argsort (-skor )
+    rank_ =np .argsort (-score )
     for a ,i in enumerate (rank_ ):
         if not tut [i ]:
             continue 
@@ -822,7 +822,7 @@ def suppress_crowd (cps ,r_mm =None ):
 def apply (V ,F ,probs ,cps ,CE ,CT ,threshold =0.30 ,model_path =MODEL_PATH ,top_n =None ,
 step_path =None ):
     """CP listesini wire-gate with filtrele. Her CP'ye wire_score yazilir.
-    top_n=None (BASE urun): skor>=threshold olanlari tut (tool agizlari atilir).
+    top_n=None (BASE urun): score>=threshold olanlari tut (tool agizlari atilir).
     top_n=N (METADATA-ASSISTED mod): manufacturer CP count N biliniyorsa, most high wire_score N tanesini tut
       (threshold instead of). Olculdu (leakage-free OOF): ALL F1 0.775 vs base 0.750 (RF gate). AYRI mod as
       raporla, base urun F1'i with karistirma.
@@ -848,23 +848,23 @@ step_path =None ):
     if top_n is not None :# metadata-assisted: most high wire_score N tanesi
         return sorted (cps ,key =lambda c :-c ["wire_score"])[:max (int (top_n ),0 )]
     if GORELI_ESIK :
-    # GORELI ESIK (2026-07-31): sabit threshold instead of PARCA-ICI goreli karar + low mutlak baseline.
+    # GORELI ESIK (2026-07-31): fixed threshold instead of PARCA-ICI goreli karar + low mutlak baseline.
     #
-    # WHY: sabit threshold new a URETICIDE cokuyor. Olculdu (manufacturer-disi split, 18 column):
+    # WHY: fixed threshold new a URETICIDE cokuyor. Olculdu (manufacturer-disi split, 18 column):
     # gate F1 0.7422 -> 0.6399 (manufacturer 0 disarida) / 0.2799 (manufacturer 1 disarida). Ayristirma:
     # kaybin ~%42'si KALIBRASYON. Kanit: manufacturer 1'de model adaylarin %10.3'une pozitif diyor,
-    # real %24.1 -- skor dagilimi kayinca sabit 0.40 very high kaliyor (orada most iyi 0.15).
+    # real %24.1 -- score dagilimi kayinca fixed 0.40 very high kaliyor (orada most iyi 0.15).
     #
     # RULE: candidate, own PARCASINDAKI most high skorun `GORELI_ORAN` katini gecmeli VE mutlak
     # `GORELI_TABAN`'i asmali. Goreli kisim distribution kaymasini emer; TABAN whereas saf goreli
     # kuralin acigini kapatir -- baseline olmadan rule, no real CP olmayan parcada bile
     # "most yuksegin yarisi"ni kabul edip garanti wrong uretirdi (korpusta sifir-CP part present).
     #
-    # MEASURED (goreli 0.5 + baseline 0.20): tanidik veride -0.0074, most kotu manufacturer-disi bolmede
-    # 0.2799 -> 0.4402 (+0.160). Makbuz: results/t6_relative_taban.json
+    # MEASURED (goreli 0.5 + baseline 0.20): familiar veride -0.0074, most kotu manufacturer-disi bolmede
+    # 0.2799 -> 0.4402 (+0.160). Makbuz: results/t6_relative_baseline.json
         _m =decision_mask ([c ["wire_score"]for c in cps ])
         return suppress_crowd ([c for c ,k in zip (cps ,_m )if k ])
-    _m =decision_mask ([c ["wire_score"]for c in cps ],threshold =threshold )# base: sabit threshold
+    _m =decision_mask ([c ["wire_score"]for c in cps ],threshold =threshold )# base: fixed threshold
     return suppress_crowd ([c for c ,k in zip (cps ,_m )if k ])
 
 
@@ -914,7 +914,7 @@ spatial_path =SPATIAL_MODEL_PATH ,step_path =None ):
     # HER ZAMAN ham first 13 sutunu gorur -- ikisi ayri genislikte, karistirilmamali.
     Xb =within_part (X ,base .get ("donusum"))
     nb =base .get ("n_feat")or Xb .shape [1 ]
-    ws0 =base ["clf"].predict_proba (Xb [:,:nb ])[:,1 ]# first-pass base skor
+    ws0 =base ["clf"].predict_proba (Xb [:,:nb ])[:,1 ]# first-pass base score
     X13 =X [:,:13 ]# spatial model 13 sutunla egitildi
     P =np .array ([np .asarray (c ["point"],float )for c in cps ])
     Xsp =np .hstack ([X13 ,spatial_feats (P ,ws0 )])
@@ -948,13 +948,13 @@ def pick_direction_from_dictionary (X ,cps ,V ,step_path =None ,uyeler =None ,mo
         yuzn +/-      B-rep baskin duzlem normalleri
     MEASURED: dictionary, "angle mukemmel" tavaninin (0.6717) %90'ini kapsiyor.
 
-    SAFETY: mevcut yonden however skor farki MARJI asarsa sapilir. "Herkese uygula"
+    SAFETY: mevcut yonden however score farki MARJI asarsa sapilir. "Herkese uygula"
     tuzagi this havuzda four kolu oldurmustu.
 
     MEASURED (194 part/174 grup, GRUP bootstrap; selector 1301 AYRI parcada egitildi,
     measurement kumesini and LOCKED'i HIC gormedi):
         robot-hazir 0.5893 -> 0.6213  (+0.0319, GA [+0.0120,+0.0527] KANITLI)
-        tespit      0.7584 -> 0.7584  (YAPISAL: tespit olcutu aciya bakmaz)
+        detection      0.7584 -> 0.7584  (YAPISAL: detection olcutu aciya bakmaz)
     Model otherwise CP'ler DEGISMEDEN returns.
     """
     m =_load (model_path )

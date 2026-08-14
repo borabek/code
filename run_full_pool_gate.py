@@ -3,11 +3,11 @@
 
 Havuz = segmentasyon `v_o` + B-rep agizlari + mesh tepeleri (p_pos>=0.50,
 2mm seyreltme; direction = yerel normal). Olculen TAVAN 0.8347 / ~318 candidate/part
-(`results/tavan_080_eksensiz.json`).
+(`results/ceiling_080_eksensiz.json`).
 
 Kiyas noktalari (all of them D7 brand-disi, MIKRO, full zincir):
-  dagitilan urun (v6 + NMS)                 robot 0.2029 | tespit 0.4523
-  B-rep havuzu + duzeltilmis label (gece)  robot 0.2249 | tespit 0.4518
+  dagitilan urun (v6 + NMS)                 robot 0.2029 | detection 0.4523
+  B-rep havuzu + duzeltilmis label (night)  robot 0.2249 | detection 0.4518
 
 KURALLAR:
 * Etiket PROJENIN tanimi (lateral + axial 40 + acgozlu bire-a) -- feature
@@ -25,7 +25,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -86,12 +86,12 @@ def kimlikle (v ):
     secim kumesi SESSIZCE empty kaliyordu."""
     global _D6 
     kay =K .yukle ([d ["pid"]for d in v ])
-    eksik =[d ["pid"]for d in v if d ["pid"]not in kay ]
-    if eksik :
+    missing =[d ["pid"]for d in v if d ["pid"]not in kay ]
+    if missing :
         if _D6 is None :
             _D6 ={str (p ):r for p ,r in 
             d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
-        kay .update ({p :_D6 [p ]for p in eksik if p in _D6 })
+        kay .update ({p :_D6 [p ]for p in missing if p in _D6 })
     out =[]
     for d in v :
         r =kay .get (d ["pid"])
@@ -141,7 +141,7 @@ def olc (model ,data_ ,tip ,e ,tam_zincir =False ,S =None ):
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
 
@@ -155,7 +155,7 @@ def main ():
         dev =kimlikle (oku ("d6",kaynaklar ))
         te =kimlikle (oku ("d7",kaynaklar ))
         if not tr or not dev or not te :
-            raise SystemExit (f"{ad }: veri eksik (tr {len (tr )} dev {len (dev )} "
+            raise SystemExit (f"{ad }: data missing (tr {len (tr )} dev {len (dev )} "
             f"te {len (te )}) -- sessiz atlamak yerine DURUYORUM")
         m ,sh ,poz =egit (tr )
         modeller [ad ]=m 
@@ -172,23 +172,23 @@ def main ():
         r7 =olc (m ,te ,tip ,e ,tam_zincir =True ,S =S )
         res_ [ad ]={"rule":f"{tip } {e }","aday_per_parca":ap ,"D7":r7 }
         print (f"  SECILEN {tip } {e } -> D7 (TAM ZINCIR) robot **{r7 ['robot']:.4f}** "
-        f"| tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f} | "
+        f"| detection {r7 ['detection']:.4f} | makro {r7 ['makro']:.4f} | "
         f"en kotu {r7 ['en_kotu']:.4f}",flush =True )
     print ("\n"+"="*64 )
-    print (f"{'arm':<14}{'candidate/part':>12}{'robot':>9}{'tespit':>9}{'makro':>9}")
+    print (f"{'arm':<14}{'candidate/part':>12}{'robot':>9}{'detection':>9}{'makro':>9}")
     for ad ,c in res_ .items ():
         print (f"{ad :<14}{c ['aday_per_parca']:>12.1f}{c ['D7']['robot']:>9.4f}"
-        f"{c ['D7']['tespit']:>9.4f}{c ['D7']['makro']:>9.4f}")
+        f"{c ['D7']['detection']:>9.4f}{c ['D7']['makro']:>9.4f}")
     print (f"{'URUN (v6+NMS)':<14}{13.4 :>12.1f}{0.2029 :>9.4f}{0.4523 :>9.4f}"
     f"{0.2146 :>9.4f}")
     with open (os .environ .get ("TG_MODEL","results/tam_havuz_gate_modeller.pkl"),"wb")as f :
         pickle .dump (modeller ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,
-    "urun":{"robot":0.2029 ,"tespit":0.4523 ,"makro":0.2146 },
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,
+    "urun":{"robot":0.2029 ,"detection":0.4523 ,"makro":0.2146 },
     "not":"Esik D6'da secildi, D7'de yeniden taranmadi. Egitim D6'yi "
     "icermez. TAM URUN ZINCIRI (poz kafasi). MIKRO."},
-    open (os .environ .get ("TG_CIKTI","results/tam_havuz_gate.json"),"w"),indent =1 )
-    print ("receipt -> results/tam_havuz_gate.json")
+    open (os .environ .get ("TG_CIKTI","results/full_pool_gate.json"),"w"),indent =1 )
+    print ("receipt -> results/full_pool_gate.json")
 
 
 if __name__ =="__main__":

@@ -24,7 +24,7 @@ def product_output (V ,F ,pbs ,step_path ,cfg =None ,cp_count =None ):
     if not cps :
         return []
         # GENISLETILMIS YOL (2026-08-11). Olculdu (D7 835 part brand-disi, TAM
-        # ZINCIR, MIKRO, threshold D6'da secildi): robot 0.2029 -> 0.3090, tespit
+        # ZINCIR, MIKRO, threshold D6'da secildi): robot 0.2029 -> 0.3090, detection
         # 0.4523 -> 0.4813, makro 0.2146 -> 0.3142; 10/12 brand artida.
         # Kol calisamazsa (model/STEP/B-rep absent) None returns and ESKI path surer --
         # silent bozuk output YOK. Kapatmak: cp_config `robot_genis_havuz=false`

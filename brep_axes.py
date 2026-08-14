@@ -24,16 +24,16 @@ import collections as _collections
 REJECT =_collections .Counter ()# tani: hangi gate kac times None dondurdu
 
 
-def _oku (yol ):
+def _oku (path ):
     """JSON'u KAPATARAK oku. `json.load(open(x))` deseni file tanitici SIZDIRIR: this fonksiyon
     candidate basina cagriliyor and 200 parcalik a olcumde process tanitici tukenmesinden SESSIZCE
     became (2026-07-31, t8 kosusu; log binlerce ResourceWarning with doluydu)."""
-    with open (yol ,"r",encoding ="utf-8")as f :
+    with open (path ,"r",encoding ="utf-8")as f :
         return json .load (f )
 
 
-def _yaz (yol ,data_ ):
-    with open (yol ,"w",encoding ="utf-8")as f :
+def _yaz (path ,data_ ):
+    with open (path ,"w",encoding ="utf-8")as f :
         json .dump (data_ ,f )
 
 
@@ -297,7 +297,7 @@ max_turn_deg =60.0 ):
 
 
 def axis_point (point ,seed_dir ,cyl ,max_off_mm =3.0 ,r_range =(0.5 ,12.0 ),max_turn_deg =60.0 ):
-    """CP'yi eslesen silindirin EKSEN CIZGISI uzerine izdusur (axial konumu KORUYARAK).
+    """CP'yi matched silindirin EKSEN CIZGISI uzerine izdusur (axial konumu KORUYARAK).
 
     `axis_at` YONU returns; this NOKTAYI carries. Ikisi ayri: manufacturer ConnectionPoint'i acikligin
     ekseni UZERINDEDIR, but bizim noktamiz mesh kumesinin weight merkezidir and opening

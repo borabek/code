@@ -1,15 +1,15 @@
 {
  "cluster": "val",
- "tespit": {
+ "detection": {
   "mevcut (keig96_s0)": 0.7273442497161887,
-  "keig128_s0 ile degisik": 0.7242408088235295
+  "keig128_s0 with degisik": 0.7242408088235295
  },
  "robot": {
   "mevcut (keig96_s0)": 0.3853300544351605,
-  "keig128_s0 ile degisik": 0.4086133578431372
+  "keig128_s0 with degisik": 0.4086133578431372
  },
  "bootstrap": {
-  "tespit": [
+  "detection": [
    -0.0033561553314977737,
    -0.04964589813083261,
    0.03960886462194747

@@ -19,7 +19,7 @@
  },
  "config": {
   "cp_config.json": "9c42853b08b790b5",
-  "results/metrik_dondurulmus.json": "884f23faace37573"
+  "results/metric_dondurulmus.json": "884f23faace37573"
  },
  "python": "3.12.10"
 }

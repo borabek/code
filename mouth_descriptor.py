@@ -9,7 +9,7 @@ soylememesi. Bu modul that bilgiyi URETIR -- hazir feature aramak instead of.
 Hepsi FIZIKSEL and etiketsiz hesaplanabilir:
   radius        silindir yaricapi
   depth       hole uzunlugu (two mouth arasi)
-  narinlik       depth / radius (vida deligi sig, tel kanali derin)
+  narinlik       depth / radius (vida deligi sig, tel kanali deep)
   girme          agizdan ICERI serbest path (eksende first carpisma)
   girme_kenar    same but yaricapin %70'i up to YANA kaydirilmis 4 isin -> telin
                  govdesi gercekten giriyor mu (eksende empty, kenarda full = fake)
@@ -39,7 +39,7 @@ def _ilk_mesafe (mesh ,O ,Dv ,uzak ):
     and sessizce wrong sutunu okumak this projede more before yasandi.
 
     TOPAKLI (2026-08-11): `multiple_hits=True` each isin for TUM kesisimleri
-    returns. Mesh tepesi havuzu acilinca part basina secenek ~200'den ~5000'e
+    returns. Mesh tepesi havuzu acilinca part basina option ~200'den ~5000'e
     output and single cagri 14 MILYON kesisim uretip belleği patlatti (8 payin 4'u
     MemoryError with became). Topaklama sonucu DEGISTIRMEZ -- each isin for most
     small distance alindigi for bolerek hesaplamak same sayiyi gives.
@@ -136,10 +136,10 @@ def tanimla (P ,D ,met ,mesh ,diag ):
                     continue # all of them cakisik -> duzen YOK
                 u =np .linalg .svd (off ,full_matrices =False )[2 ][0 ]
                 t =np .sort (off @u )
-                fark =np .diff (t )
-                ort =abs (float (fark .mean ()))
-                if len (fark )and ort >1e-6 :
-                    DUZ [i ]=1.0 /(1.0 +float (fark .std ())/ort )
+                diff =np .diff (t )
+                ort =abs (float (diff .mean ()))
+                if len (diff )and ort >1e-6 :
+                    DUZ [i ]=1.0 /(1.0 +float (diff .std ())/ort )
         X [:,8 ]=(rad [:,None ]>rad [None ,:]).mean (1 )
     else :
         X [:,8 ]=0.5 

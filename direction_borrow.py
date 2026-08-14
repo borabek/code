@@ -15,13 +15,13 @@ B-rep silindir ekseni VAL +0.086 / D7 +0.040, baskin direction +0.005.
 
 TEZE SADIK: `v_o` mouth-ortasi KONUMU, 5 sinif segmentasyon and ~6000 remesh
 DEGISMEZ. Tezin own yonu HER ZAMAN 0 numarali secenektir and real fallback'tir:
-no secenek more iyi gorunmezse candidate tezin yonuyle cikar.
+no option more iyi gorunmezse candidate tezin yonuyle cikar.
 """
 import numpy as np 
 
 KOMSU_R =10.0 # komsu adayin yonunu odunc alma yaricapi (mm)
 EKSEN_R =10.0 # B-rep silindir eksenini odunc alma yaricapi (mm)
-AYIRT_ACI =5.0 # this aciya more yakin secenekler AYNI sayilir (tekrar absent)
+AYIRT_ACI =5.0 # this aciya more yakin options AYNI sayilir (tekrar absent)
 
 OZ_AD =["mevcut","aci_mevcuda","kaynak_komsu","kaynak_eksen","kaynak_baskin",
 "distance","mesafe_diag","aci_baskina","eksen_hizasi","gate_skoru",
@@ -48,7 +48,7 @@ def baskin_yon (D ):
     return _birim ([B .mean (0 )])[0 ]
 
 
-def secenekler (P ,D ,i ,cyl ,gate_s ,bask ,komsu_r =KOMSU_R ,eksen_r =EKSEN_R ):
+def options (P ,D ,i ,cyl ,gate_s ,bask ,komsu_r =KOMSU_R ,eksen_r =EKSEN_R ):
     """`i` numarali candidate for (direction, feature) listesi. Ilk oge HER ZAMAN MEVCUT.
 
     Konum DEGISMEZ -- returns degerde konum absent, only direction.
@@ -82,7 +82,7 @@ def secenekler (P ,D ,i ,cyl ,gate_s ,bask ,komsu_r =KOMSU_R ,eksen_r =EKSEN_R )
 
         # TEKRAR AYIKLAMA: each other `AYIRT_ACI`'dan yakin yonler AYNI secenektir.
         # Mevcut HER ZAMAN korunur (first sirada oldugu for dogal as kazanir).
-    secili ,oz =[],[]
+    secili ,feat =[],[]
     for v ,src_ ,mes in candidates :
         v =_birim ([v ])[0 ]
         if any (_aci (v ,w )<AYIRT_ACI for w ,_ ,_ in secili ):
@@ -90,7 +90,7 @@ def secenekler (P ,D ,i ,cyl ,gate_s ,bask ,komsu_r =KOMSU_R ,eksen_r =EKSEN_R )
         secili .append ((v ,src_ ,mes ))
     for v ,src_ ,mes in secili :
         destek =int (sum (1 for w in D if _aci (v ,w )<AYIRT_ACI ))
-        oz .append ([
+        feat .append ([
         float (src_ =="mevcut"),
         _aci (v ,d ),
         float (src_ =="komsu"),
@@ -104,14 +104,14 @@ def secenekler (P ,D ,i ,cyl ,gate_s ,bask ,komsu_r =KOMSU_R ,eksen_r =EKSEN_R )
         float (n ),
         float (destek ),
         ])
-    return [v for v ,_ ,_ in secili ],np .asarray (oz ,float )
+    return [v for v ,_ ,_ in secili ],np .asarray (feat ,float )
 
 
 def uygula (P ,D ,cyl ,gate_skorlari ,puanla ):
     """Her candidate for most iyi yonu sec. Doner: new D (konum DOKUNULMAZ).
 
-    `puanla(X)` -> each secenek for skor. MEVCUT (0. secenek) esitlikte KAZANIR:
-    new direction however KESIN more iyiyse alinir, so tezin cevabi varsayilan kalir.
+    `puanla(X)` -> each option for score. MEVCUT (0. option) esitlikte KAZANIR:
+    new direction however KESIN more iyiyse alinir, so tezin cevabi default kalir.
     """
     P =np .asarray (P ,float ).reshape (-1 ,3 )
     D =_birim (D )
@@ -120,7 +120,7 @@ def uygula (P ,D ,cyl ,gate_skorlari ,puanla ):
     bask =baskin_yon (D )
     new_ =D .copy ()
     for i in range (len (P )):
-        V ,X =secenekler (P ,D ,i ,cyl ,float (gate_skorlari [i ]),bask )
+        V ,X =options (P ,D ,i ,cyl ,float (gate_skorlari [i ]),bask )
         if len (V )<2 :
             continue 
         s =np .asarray (puanla (X ),float )

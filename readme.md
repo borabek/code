@@ -8,10 +8,10 @@
 | `results/` | **makbuzlar** -- raporlanan each sayinin kaynagi (JSON) |
 | `docs/` | kampanya raporu, sunum paketi, otopsiler, devam notlari |
 | `tests/` | birim testler |
-| `ayarlar/` | training/kosum yapilandirmalari (YAML) |
-| `listeler/` | part listeleri (TXT) |
-| `veri/` | koddan okunmayan yardimci JSON'lar |
-| `_arsiv_betikler/` | eski deney betikleri -- kampanya tarihi, urun bunlari IMPORT ETMEZ |
+| `settings/` | training/kosum yapilandirmalari (YAML) |
+| `lists/` | part listeleri (TXT) |
+| `data/` | koddan okunmayan yardimci JSON'lar |
+| `_archive_scripts/` | eski deney betikleri -- kampanya tarihi, urun bunlari IMPORT ETMEZ |
 
 **Giris noktalari:** `robot_cp.py` (urun), `export_robot_glb.py` (GLB ciktisi),
 `robot_viz.py --compare` (GT with karsilastirmali gorsel), `smoke_test.py`
@@ -20,7 +20,7 @@
 
 **Onemli:** kokteki araclar `sys.path.insert(dirname(__file__))` kullanir --
 alt klasore tasinirlarsa urun modullerini bulamazlar. Bu yuzden kod duz
-tutuldu; yalnizca veri/ayar dosyalari gruplandi.
+tutuldu; yalnizca data/setting dosyalari gruplandi.
 
 Production-oriented pipeline that turns a connector mesh into **robot-ready
 connection points** for an automated wiring robot.

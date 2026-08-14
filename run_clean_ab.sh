@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# #11 TEMIZ A/B: 95 WEI etiketinin ETKISINI confound'suz olc. Ayni seed, same recete, TEK fark = _recall_v2.
+# #11 TEMIZ A/B: 95 WEI etiketinin ETKISINI confound'suz olc. Ayni seed, same recete, TEK diff = _recall_v2.
 # Her ikisi de best-corpus-val + last-epoch kaydeder (#8 fix). Sonra 4 checkpoint WEI arbiter'da karsilastirilir.
 # Kullanim: bash run_clean_ab.sh   (#10 integrity GECTIKTEN after)
 set -e

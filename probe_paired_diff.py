@@ -17,8 +17,8 @@ import canonical_d7 as K
 from sina_cluster import match_hungarian 
 from probe_final_post import uygula 
 
-DOKUM =os .environ .get ("EF_DOKUM","results/_dokum_halka.json")
-YOL =os .environ .get ("EF_YOL","saha")
+DOKUM =os .environ .get ("EF_DOKUM","results/_dump_ring.json")
+YOL =os .environ .get ("EF_YOL","field")
 KOL =os .environ .get ("EF_KOL","halka_disari")
 N_BOOT =int (os .environ .get ("EF_N","2000"))
 
@@ -33,7 +33,7 @@ def say (r ,arm ):
     False ,signed =True )[:3 ]
 
 def main ():
-    d =[r for r in json .load (open (DOKUM ))if r ["yol"]==YOL ]
+    d =[r for r in json .load (open (DOKUM ))if r ["path"]==YOL ]
     A =np .array ([say (r ,"baseline")for r in d ],float )
     B =np .array ([say (r ,KOL )for r in d ],float )
     def f1 (t ):
@@ -53,7 +53,7 @@ def main ():
     print (f"\n  GA sifiri ICERMIYOR mu: {'EVET -> kazanc GERCEK'if kesin else 'HAYIR -> evidence yetersiz'}")
     print (f"  bootstrap orneklerinin %{(bs >0 ).mean ()*100 :.1f}'i pozitif")
     json .dump ({"arm":KOL ,"n_parca":len (d ),"baseline":fa ,"kol_f1":fb ,
-    "fark":fb -fa ,"ga":[lo ,hi ],"pozitif_oran":float ((bs >0 ).mean ()),
+    "diff":fb -fa ,"ga":[lo ,hi ],"pozitif_oran":float ((bs >0 ).mean ()),
     "kesin":bool (kesin ),
     "not":"ESLI part duzeyi bootstrap. Marjinal GA not FARKIN "
     "GA'si. D7'ye BAKILMADI."},

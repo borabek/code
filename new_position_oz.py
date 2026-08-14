@@ -44,7 +44,7 @@ def _birim (v ):
 
 
 def konum_yonu (idx ,YD ,tek ):
-    """each benzersiz konum for TEMSILI direction (secenek yonlerinin ana ekseni).
+    """each benzersiz konum for TEMSILI direction (option yonlerinin ana ekseni).
 
     ISARETSIZ ana axis: +v and -v same sayilir, because measured -- dense
     parcada yonler two signed kumede but TEK eksende.

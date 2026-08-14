@@ -20,28 +20,28 @@
   },
   "config": {
    "cp_config.json": "9c42853b08b790b5",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
  "sonuc": {
   "0.0": {
-   "kahin": 0.49837833533922904,
+   "oracle": 0.49837833533922904,
    "recall": 0.48683322079675895,
    "candidate": 1446
   },
   "0.4": {
-   "kahin": 0.5092611423495634,
+   "oracle": 0.5092611423495634,
    "recall": 0.511816340310601,
    "candidate": 1601
   },
   "0.5": {
-   "kahin": 0.5119653583824055,
+   "oracle": 0.5119653583824055,
    "recall": 0.5205941931127617,
    "candidate": 1639
   },
   "0.6": {
-   "kahin": 0.5114074594502006,
+   "oracle": 0.5114074594502006,
    "recall": 0.5246455097906819,
    "candidate": 1666
   }
@@ -50,5 +50,5 @@
  "kahin_fark": 0.013587023043176494,
  "recall_fark": 0.033760972316002724,
  "n_parca": 64,
- "not": "COK-CP rejimi (>=8 GT). Kapi: kahin +0.02 VEYA recall +0.05"
+ "not": "COK-CP rejimi (>=8 GT). Kapi: oracle +0.02 VEYA recall +0.05"
 }

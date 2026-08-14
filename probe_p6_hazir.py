@@ -42,8 +42,8 @@ def main ():
     print (f"paket anahtarlari: {sorted (pk )}")
     for a in ("kademe1","rule","nms","tohum_kural","tohum_nms"):
         if a not in pk :
-            sys .exit (f"HATA: pakette `{a }` yok.")
-    print (f"  arm {pk .get ('arm')} | kural {pk ['rule']} | nms {pk ['nms']} "
+            sys .exit (f"HATA: pakette `{a }` none.")
+    print (f"  arm {pk .get ('arm')} | rule {pk ['rule']} | nms {pk ['nms']} "
     f"| kisa threshold {pk .get ('kisa_esik')} | 2. kademe "
     f"{'VAR'if pk .get ('kademe2')is not None else 'YOK'}")
     print (f"  URUN_P6 = {'ACIK'if product_p6 .ACIK else 'KAPALI'} | mesh havuzu "
@@ -84,7 +84,7 @@ def main ():
             sys .exit (f"HATA: sutun sayisi {Xd .shape [1 ]}, model {bek } bekliyor.")
         s1 =pk ["kademe1"].predict_proba (Xd )[:,1 ]
         out =canonical_chain .product_output (V ,F ,pbs ,S [pid ],cfg =cfg )
-        r ={"pid":pid ,"candidate":len (P ),"secenek":len (idx ),
+        r ={"pid":pid ,"candidate":len (P ),"option":len (idx ),
         "mesh_aday":int ((src_ ==2 ).sum ()),
         "s1_min":float (s1 .min ()),"s1_ort":float (s1 .mean ()),
         "s1_maks":float (s1 .max ()),
@@ -98,7 +98,7 @@ def main ():
     dej =[r for r in rapor if r .get ("s1_maks",0 )-r .get ("s1_min",0 )<1e-6 ]
     print (f"\n{len (ok )}/{len (rapor )} parcada BOS OLMAYAN cikti")
     if dej :
-        print (f"!! {len (dej )} parcada skorlar DEJENERE (hepsi ayni)")
+        print (f"!! {len (dej )} parcada skorlar DEJENERE (hepsi same)")
     if pk .get ("kademe2")is not None :
         empty_ =[r for r in rapor if r .get ("s1_kisa_liste",0 )==0 ]
         if empty_ :

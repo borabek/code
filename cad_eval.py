@@ -150,7 +150,7 @@ def icp_refine (V_step ,V_gt ,R ,t ,iters =40 ,sample =1500 ,seed =0 ):
     for _ in range (iters ):
         s_est =(G -t )@R # GT'yi STEP frame'e tasi (mevcut ters map)
         d ,j =tree .query (s_est ,k =1 )
-        S =Vs [j ]# eslesen STEP noktalari
+        S =Vs [j ]# matched STEP noktalari
         res =float (np .mean (d ))
         if abs (prev -res )<1e-4 :break 
         prev =res 

@@ -25,7 +25,7 @@ import time
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -103,12 +103,12 @@ def main ():
         print (f"{ad :<5} pool recall {out [ad ]:.4f}  (TP {v [0 ]} FN {v [1 ]})")
     d =out ["tta"]-out ["tek"]
     print (f"\nFARK {d :+.4f} | KAPI: >= +0.02 ise TAM OLCEGE gecilir")
-    json .dump ({"damga":makbuz_hash .damga (),"recall":out ,"fark":d ,
+    json .dump ({"damga":receipt_hash .damga (),"recall":out ,"diff":d ,
     "acilar":list (ACILAR ),"n_parca":len (secili ),
     "not":"TTA sondasi: cikarimda dondurme ortalamasi. Olcut HAVUZ "
     "RECALL. Egitime DOKUNULMADI, tez degismezleri korundu."},
-    open ("results/tta_havuz.json","w"),indent =1 )
-    print ("receipt -> results/tta_havuz.json")
+    open ("results/tta_pool.json","w"),indent =1 )
+    print ("receipt -> results/tta_pool.json")
 
 
 if __name__ =="__main__":

@@ -2,12 +2,12 @@
 """A3: SIRALAMA hedefi -- GATE_REDDI a threshold not SIRALAMA hatasi.
 
 Olculdu: karar kurali ailesinin HEPSI tabanin under kaldi
-(`results/a1_esik_kalibrasyon.json`) -> esigi nasil kurarsan kur GATE_REDDI
-kovasi (531 GT, %17.2) bosalmiyor. Demek ki uygun candidates yanlislarin ALTINDA
+(`results/a1_threshold_calibration.json`) -> esigi nasil kurarsan kur GATE_REDDI
+kovasi (531 GT, %17.2) bosalmiyor. Demek ki eligible candidates yanlislarin ALTINDA
 siralaniyor; sorun modelin OGRENME HEDEFINDE.
 
 Pointwise BCE each adayi BAGIMSIZ ogreniyor and very adayli parts kaybi domine
-ediyor. Denenen agirliklandirmalar (single degisken: `sample_weight`):
+ediyor. Denenen agirliklandirmalar (single variable: `sample_weight`):
   duz          weight absent (kazanan baseline, 0.3070/0.3090)
   parca_esit   1/n_parca -- each part kayba ESIT katkida bulunur
   poz_dengeli  part ICINDE pozitif/negatif dengelenir
@@ -26,7 +26,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -132,7 +132,7 @@ def olc (skorla ,data_ ,e ,S ,tam =False ):
     pm ={m :2 *v [0 ]/max (2 *v [0 ]+v [1 ]+v [2 ],1 )for m ,v in rob .items ()}
     mi =float (2 *sum (v [0 ]for v in rob .values ())/
     max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
 
@@ -166,7 +166,7 @@ def main ():
         r7 =olc (sk ,te ,e ,S ,tam =True )
         res_ [kip ]=dict (r7 ,threshold =e )
         print (f"{kip :<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | "
-        f"tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
+        f"detection {r7 ['detection']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
 
         # --- PAIRWISE: part inside (poz - neg) difference vektorleri
     A ,B =[],[]
@@ -202,19 +202,19 @@ def main ():
     r7 =olc (sk_pair ,te ,e ,S ,tam =True )
     res_ ["pairwise"]=dict (r7 ,threshold =e )
     print (f"{'pairwise':<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | "
-    f"tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
+    f"detection {r7 ['detection']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
 
     iyi =max (res_ ,key =lambda k :res_ [k ]["robot"])
     print (f"\nEN IYI: {iyi } {res_ [iyi ]['robot']:.4f} | baseline (duz) "
-    f"{res_ ['duz']['robot']:.4f} | fark "
+    f"{res_ ['duz']['robot']:.4f} | diff "
     f"{res_ [iyi ]['robot']-res_ ['duz']['robot']:+.4f}")
     print ("KAPI: >= +0.02")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"en_iyi":iyi ,
-    "not":"Tek degisken: OGRENME HEDEFI (agirlik / pairwise). Esik "
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,"en_iyi":iyi ,
+    "not":"Tek variable: OGRENME HEDEFI (agirlik / pairwise). Esik "
     "each model for D6'da secildi. Isaret duzeltmesi HER kolda "
     "acik. D7 brand-disi, TAM ZINCIR, MIKRO."},
-    open ("results/a3_siralama.json","w"),indent =1 )
-    print ("receipt -> results/a3_siralama.json")
+    open ("results/a3_ranking.json","w"),indent =1 )
+    print ("receipt -> results/a3_ranking.json")
 
 
 if __name__ =="__main__":

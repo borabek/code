@@ -14,9 +14,9 @@ Boylece gate each adayi HEP AYNI sozlesmede gorur: `girme` always govdeye
 correct, `erisim` always disariya.
 
 Kova hedefi: GATE_REDDI (489 GT, %15.8). Tutarli feature siralamayi
-duzeltirse this kova bosalir; kova aritmetigi 0.3070 -> 0.455 tavani veriyor.
+duzeltirse this bucket bosalir; bucket aritmetigi 0.3070 -> 0.455 tavani veriyor.
 
-Tek degisken: OZNITELIK SOZLESMESI. Havuz, label, model ailesi, threshold izgarasi
+Tek variable: OZNITELIK SOZLESMESI. Havuz, label, model ailesi, threshold izgarasi
 same. Esik D6'da secilir.
 """
 import collections 
@@ -28,7 +28,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -136,7 +136,7 @@ def olc (model ,data_ ,e ,S ,tam =False ):
     pm ={m :2 *v [0 ]/max (2 *v [0 ]+v [1 ]+v [2 ],1 )for m ,v in rob .items ()}
     mi =float (2 *sum (v [0 ]for v in rob .values ())/
     max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),
     "TP":int (sum (v [0 ]for v in rob .values ())),
@@ -165,17 +165,17 @@ def main ():
         r7 =olc (m ,te ,e ,S ,tam =True )
         res_ [ad ]=dict (r7 ,threshold =e ,col_ =int (M .shape [1 ]))
         print (f"{ad :<28} sutun {M .shape [1 ]} | threshold {e :.2f} -> D7 robot "
-        f"**{r7 ['robot']:.4f}** | tespit {r7 ['tespit']:.4f} | makro "
+        f"**{r7 ['robot']:.4f}** | detection {r7 ['detection']:.4f} | makro "
         f"{r7 ['makro']:.4f} | TP {r7 ['TP']} FP {r7 ['FP']}",flush =True )
     a =res_ ["HAM tanimlayici"]["robot"]
     b =res_ ["ISARET-NORMAL tanimlayici"]["robot"]
     print (f"\nFARK {b -a :+.4f} | KAPI >= +0.02 (threshold gurultusu ~0.015)")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"fark":b -a ,
-    "not":"Tek degisken: tanimlayici sozlesmesi (ham vs isarete per "
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,"diff":b -a ,
+    "not":"Tek variable: tanimlayici sozlesmesi (ham vs isarete per "
     "normallesmis + ters bayragi). Esik D6'da. D7 brand-disi, "
     "TAM ZINCIR, MIKRO."},
-    open ("results/c3_isaret_normal.json","w"),indent =1 )
-    print ("receipt -> results/c3_isaret_normal.json")
+    open ("results/c3_sign_normal.json","w"),indent =1 )
+    print ("receipt -> results/c3_sign_normal.json")
 
 
 if __name__ =="__main__":

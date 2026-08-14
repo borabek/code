@@ -27,7 +27,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -45,7 +45,7 @@ def _birim (V ):
 
 def main ():
     rec_ =os .environ .get ("AYR_KAYIT","results/_der_yeni.pkl")
-    cluster =os .environ .get ("AYR_KUME","results/val_kumesi.json")
+    cluster =os .environ .get ("AYR_KUME","results/val_set.json")
     silf =os .environ .get ("AYR_SIL","")
     pids ={str (p )for p in json .load (open (cluster ))["pidler"]}
     R =[r for r in pickle .load (open (rec_ ,"rb"))if str (r ["pid"])in pids ]
@@ -181,7 +181,7 @@ def main ():
     t =kum /max (n_gt ,1 )
     f1 =2 *kum /max (2 *kum +(n_gt -kum ),1 )
     print (f"\nrobot recall tavani {t :.4f} -> robot F1 tavani {f1 :.4f}")
-    json .dump ({"damga":makbuz_hash .damga (),"kayit":rec_ ,"cluster":cluster ,
+    json .dump ({"damga":receipt_hash .damga (),"kayit":rec_ ,"cluster":cluster ,
     "yon_yaricapi":YON_R ,"n_gt":n_gt ,"sayim":dict (say ),
     "robot_recall_tavani":t ,"robot_f1_tavani":f1 ,
     "genisletilmis_havuz":GENIS ,

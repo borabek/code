@@ -41,7 +41,7 @@ AD =["adim_hata","kafes_uyum","esdogrusal_n","sira_rank","sira_boy",
 def _baskin_adim (t ):
     """1B izdusumde BASKIN ADIM (pitch): ardisik farklarin most sik degeri.
 
-    Klemens bloklarinda kutuplar sabit araliklidir. Farklarin MEDYANI not MODU alinir --
+    Klemens bloklarinda kutuplar fixed araliklidir. Farklarin MEDYANI not MODU alinir --
     medyan, missing kutuplarin actigi double araliklardan etkilenir.
     """
     if len (t )<3 :
@@ -51,8 +51,8 @@ def _baskin_adim (t ):
     if len (d )<2 :
         return 0.0 
         # 0.5mm kovalarda mod (remesh gurultusu ~0.4mm)
-    kova =np .round (d /0.5 ).astype (int )
-    v ,c =np .unique (kova ,return_counts =True )
+    bucket =np .round (d /0.5 ).astype (int )
+    v ,c =np .unique (bucket ,return_counts =True )
     return float (v [np .argmax (c )]*0.5 )
 
 
@@ -79,9 +79,9 @@ def yapisal (P ,Pd ):
         km =float (yakin [0 ])if np .isfinite (yakin [0 ])else 0.0 
         if step_ >1e-6 :
         # lattice dugune uzaklik: t[i] adimin full kati mi?
-            kalan =abs (t [i ]/step_ -round (t [i ]/step_ ))*step_ 
-            F [i ,0 ]=kalan 
-            F [i ,1 ]=1.0 if kalan <0.25 *step_ else 0.0 
+            remaining =abs (t [i ]/step_ -round (t [i ]/step_ ))*step_ 
+            F [i ,0 ]=remaining 
+            F [i ,1 ]=1.0 if remaining <0.25 *step_ else 0.0 
             # same sirada esdogrusal komsu count (adimin katlarinda duranlar)
             dt =np .abs (t -t [i ])/step_ 
             dik =np .linalg .norm ((P -P [i ])-np .outer (t -t [i ],e0 ),axis =1 )
@@ -152,7 +152,7 @@ def main ():
     S ,gecti_her ={},{}
     for rad ,msk in REJIM :
         if msk .sum ()<60 :
-            print (f"\n{rad }: {int (msk .sum ())} candidate -- measurement icin AZ, atlandi");continue 
+            print (f"\n{rad }: {int (msk .sum ())} candidate -- measurement for AZ, atlandi");continue 
         print (f"\n=== {rad } ({int (msk .sum ())} candidate, iyi %{100 *Y [msk ].mean ():.1f}) ===")
         print (f"{'oznitelik uzayi':<26}{'kNN uyusmazlik':>16}{'AYRILAMAZ pay':>16}{'ceiling F1~':>11}")
         alt ={}

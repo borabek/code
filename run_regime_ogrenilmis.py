@@ -27,7 +27,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -114,7 +114,7 @@ def main ():
     X =np .asarray (X ,float )
     Y =np .asarray (Y ,int )
     W =np .asarray (W ,float )
-    print (f"P6 daha iyi olan part: {Y .mean ():.3f} | ortalama |fark| "
+    print (f"P6 more iyi which part: {Y .mean ():.3f} | average |diff| "
     f"{W .mean ():.4f}",flush =True )
 
     brand =collections .Counter (d ["mfg"]for d in data_ )
@@ -158,7 +158,7 @@ def main ():
     pk ["rejim2"]={"model":last_ ,"oz_ad":OZ_AD ,"threshold":0.5 }
     with open (PAKET .replace (".pkl","_rejim2.pkl"),"wb")as f :
         pickle .dump (pk ,f )
-    json .dump ({"damga":makbuz_hash .damga (),
+    json .dump ({"damga":receipt_hash .damga (),
     "hepsi_taban":hep_t ,"hepsi_p6":hep_p ,"v1_tek_esik":v1 ,
     "v2_kat_disi_robot":f1 ,"v1_kat_disi_robot":v1k ["robot"],
     "katlar":katlar ,"n_parca":len (data_ ),

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""GERI AL -- kontrol noktasina TAM donus. `kontrol_noktasi.py`'nin ikizi.
+"""GERI AL -- kontrol noktasina TAM donus. `kontrol_point.py`'nin ikizi.
 
     python rollback.py                 # most new kontrol noktasina TAM don
     python rollback.py 2026-08-11      # belirli a noktaya don
@@ -29,9 +29,9 @@ import sys
 KOK =os .path .dirname (os .path .abspath (__file__ ))
 
 
-def sha (yol ,blok =1 <<20 ):
+def sha (path ,blok =1 <<20 ):
     h =hashlib .sha256 ()
-    with open (yol ,"rb")as f :
+    with open (path ,"rb")as f :
         while True :
             b =f .read (blok )
             if not b :
@@ -57,7 +57,7 @@ def dizin_parmak_izi (d ):
 def en_yeni_kn ():
     d =sorted (glob .glob (os .path .join (KOK ,"_KN_*")))
     if not d :
-        sys .exit ("KONTROL NOKTASI YOK. Once: python kontrol_noktasi.py")
+        sys .exit ("KONTROL NOKTASI YOK. Once: python kontrol_point.py")
     return d [-1 ]
 
 
@@ -83,10 +83,10 @@ def dogrula (man ,sessiz =False ):
         elif f !=m :
             ps .append ((d ,f"n {m ['n']}->{f ['n']}"))
     if not sessiz :
-        print (f"  kopya   : {len (man ['kopya'])} dosya, {len (ks )} deviation")
+        print (f"  kopya   : {len (man ['kopya'])} file, {len (ks )} deviation")
         for r ,n in ks [:10 ]:
             print (f"      ! {r }  {n }")
-        print (f"  damga   : {len (man ['damga'])} dosya, {len (ds )} deviation"
+        print (f"  damga   : {len (man ['damga'])} file, {len (ds )} deviation"
         "   (GERI ALINAMAZ cluster)")
         for r ,n in ds [:10 ]:
             print (f"      ! {r }  {n }")
@@ -117,19 +117,19 @@ def main ():
     ["git","status","--porcelain"],cwd =KOK ,text =True ).strip ()
     # porcelain: "XY PATH". Durum kodu two karakter, after a bosluk. Ama git
     # some kabuklarda basi clips; safe path ILK bosluktan sonrasini almak.
-    yol =lambda l :l .split (" ",1 )[1 ].strip ().strip ('"')# noqa: E731
-    new_ =[yol (l )for l in kirli .splitlines ()if l .lstrip ().startswith ("??")]
-    degisen =[yol (l )for l in kirli .splitlines ()
+    path =lambda l :l .split (" ",1 )[1 ].strip ().strip ('"')# noqa: E731
+    new_ =[path (l )for l in kirli .splitlines ()if l .lstrip ().startswith ("??")]
+    changed =[path (l )for l in kirli .splitlines ()
     if not l .lstrip ().startswith ("??")]
-    print (f"\n-- 1) KOD --  {len (degisen )} degismis, {len (new_ )} yeni dosya")
-    for f in (degisen +new_ )[:20 ]:
+    print (f"\n-- 1) KOD --  {len (changed )} degismis, {len (new_ )} yeni file")
+    for f in (changed +new_ )[:20 ]:
         print (f"      {f }")
-    if len (degisen )+len (new_ )>20 :
-        print (f"      ... +{len (degisen )+len (new_ )-20 }")
+    if len (changed )+len (new_ )>20 :
+        print (f"      ... +{len (changed )+len (new_ )-20 }")
     silinecek =subprocess .check_output (
     ["git","clean","-nd"],cwd =KOK ,text =True ).strip ()
     if silinecek :
-        print ("   silinecek TAKIPSIZ dosyalar (veri dizinleri .gitignore'da, "
+        print ("   silinecek TAKIPSIZ dosyalar (data dizinleri .gitignore'da, "
         "ELLENMEZ):")
         for l in silinecek .splitlines ()[:15 ]:
             print (f"      {l }")
@@ -142,16 +142,16 @@ def main ():
         subprocess .run (["git","reset","-q","--hard",man ["git"]],cwd =KOK ,
         check =True )
         subprocess .run (["git","clean","-fdq"],cwd =KOK ,check =False )
-        print ("      -> master'a donuldu (veri dizinleri .gitignore'da, ELLENMEDI;"
+        print ("      -> master'a donuldu (data dizinleri .gitignore'da, ELLENMEDI;"
         " kampanya dali duruyor)")
 
         # --- 2) MODEL -------------------------------------------------------
-    print (f"\n-- 2) MODEL --  {len (man ['kopya'])} dosya")
+    print (f"\n-- 2) MODEL --  {len (man ['kopya'])} file")
     for rel ,m in man ["kopya"].items ():
         src =os .path .join (kn ,"dosyalar",rel .replace ("/",os .sep ))
         dst =os .path .join (KOK ,rel .replace ("/",os .sep ))
-        var =os .path .exists (dst )and sha (dst )==m ["sha256"]
-        if var :
+        present =os .path .exists (dst )and sha (dst )==m ["sha256"]
+        if present :
             continue 
         print (f"      geri kopyalanacak: {rel }")
         if not kuru :
@@ -174,7 +174,7 @@ def main ():
         print ("Yeniden uretilmeleri is required.")
         sys .exit (2 )
     print ("\nTAM DONUS BASARILI -- each sey kontrol noktasindaki gibi.")
-    print ("Kaniti for:  python probe_dagitim_verify.py   (beklenen robot 0.2980)")
+    print ("Kaniti for:  python probe_deploy_verify.py   (beklenen robot 0.2980)")
 
 
 if __name__ =="__main__":

@@ -2,7 +2,7 @@
 """III.2 -- ISARETI YEREL DIS NORMALDEN TURET
 
 FINDING. Analitik silindir ekseni GT yonunu ZATEN tutuyor (unsigned ceiling
-SUPU 0.612 / MOR 0.700 / UPUN 0.793). Geriye kalan single belirsizlik ISARET.
+SUPU 0.612 / MOR 0.700 / UPUN 0.793). Geriye remaining single belirsizlik ISARET.
 
 KURESEL SOZLESME CALISMIYOR: "part merkezinden disari" olcusu UPUN'da
 0.130, "iceri" 0.743 veriyor; SUPU'da tersi. Ve GT olcumu showed ki UPUN
@@ -66,7 +66,7 @@ def main ():
     kay .update ({str (p ):r for p ,r in d6_record .yukle ().items ()
     if str (p )not in kay })
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
-    n =atlanan =0 
+    n =skipped =0 
     for pid ,r in kay .items ():
         if r .get ("mfg")not in MARKALAR :
             continue 
@@ -76,7 +76,7 @@ def main ():
             continue 
         mf =f"{MESH_DIZ }/{pid }.npz"
         if not os .path .exists (mf ):
-            atlanan +=1 
+            skipped +=1 
             continue 
         z =np .load (mf )
         V =np .ascontiguousarray (z ["V"],np .float64 )
@@ -90,7 +90,7 @@ def main ():
             _ ,_ ,face_ =mesh .nearest .on_surface (AP )
             NN =_birim (mesh .face_normals [face_ ])
         except Exception :
-            atlanan +=1 
+            skipped +=1 
             continue 
         Gn =_birim (np .asarray (r ["Gd"],float ))
         v =AP [:,None ,:]-G [None ,:,:]
@@ -117,7 +117,7 @@ def main ():
         a ["yerel"].append (score_ (d_yer ))
         a ["yerel_ters"].append (score_ (-d_yer ))
         n +=1 
-    print (f"{n } part islendi, {atlanan } atlandi\n")
+    print (f"{n } part islendi, {skipped } atlandi\n")
     print (f"{'brand':<7}{'GT':>7}{'KONUM':>8}{'axis':>8}{'kur.disari':>11}"
     f"{'kur.iceri':>11}{'YEREL':>8}{'yerel ters':>11}")
     out ={}
@@ -136,8 +136,8 @@ def main ():
     "not":"Isaret kaynaklari: kuresel (merkezden agza) vs YEREL "
     "(mesh dis normali). 'axis' = unsigned ceiling. "
     "D7'ye BAKILMADI."},
-    open ("results/yerel_isaret.json","w"),indent =1 )
-    print ("\nmakbuz -> results/yerel_isaret.json")
+    open ("results/local_sign.json","w"),indent =1 )
+    print ("\nmakbuz -> results/local_sign.json")
     print ("OKUMA: YEREL, kuresel secenklerin ikisini de asiyorsa sign")
     print ("       GEOMETRIDEN cozulmus demektir (brand sozlesmesi gerekmez).")
 

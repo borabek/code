@@ -50,9 +50,9 @@ input[type=range]{width:100%}
 #hint{position:absolute;left:14px;bottom:12px;color:#7e8899;font-size:12px;background:#14161bcc;padding:7px 11px;border-radius:6px;line-height:1.5}
 .ok{color:#5fbf72}
 </style>
-<div id=left><canvas id=cv></canvas><div id=stat>boya modu KAPALI</div><div id=hint>
-<b>sol tik + surukle</b> = boya &nbsp;|&nbsp; <b>sag tik surukle</b> = dondur &nbsp;|&nbsp; tekerlek = yakinlas<br>
-<b>R</b> = delige bak &nbsp;|&nbsp; <b>B</b> = boya modu ac/kapa &nbsp;|&nbsp; <b>Z</b> = geri al &nbsp;|&nbsp; <b>Space</b> = sonraki &nbsp;|&nbsp; kirmizi kure = manufacturer CP-si (<b>parcanin ICINDE</b>, temas noktasi) &nbsp;|&nbsp; <b>sari ok</b> = disari, boyanacak yuzeye dogru
+<div id=left><canvas id=cv></canvas><div id=stat>paint modu KAPALI</div><div id=hint>
+<b>sol tik + surukle</b> = paint &nbsp;|&nbsp; <b>sag tik surukle</b> = dondur &nbsp;|&nbsp; tekerlek = yakinlas<br>
+<b>R</b> = delige bak &nbsp;|&nbsp; <b>B</b> = paint modu ac/kapa &nbsp;|&nbsp; <b>Z</b> = geri al &nbsp;|&nbsp; <b>Space</b> = sonraki &nbsp;|&nbsp; kirmizi kure = manufacturer CP-si (<b>parcanin ICINDE</b>, temas noktasi) &nbsp;|&nbsp; <b>sari ok</b> = disari, boyanacak yuzeye correct
 </div></div>
 <div id=side>
   <h2 id=title>-</h2>
@@ -71,7 +71,7 @@ input[type=range]{width:100%}
   </div>
   <div id=prog></div>
   <div class=sub style="margin-top:14px">
-    Sari okun <b>gosterdigi yondeki yuzey acikligini</b> boya. Kirmizi kure manufacturer CP-si ve parcanin icinde durur (temas noktasi) &mdash; boyanacak yer okun cikis yaptigi <b>dis yuzey</b>. Model burayi kaciriyor; senin boyadigin sekil
+    Sari okun <b>gosterdigi yondeki yuzey acikligini</b> paint. Kirmizi kure manufacturer CP-si ve parcanin icinde durur (temas noktasi) &mdash; boyanacak yer okun cikis yaptigi <b>dis yuzey</b>. Model burayi kaciriyor; senin boyadigin sekil
     egitime <b>pozitif</b> as girecek.<br><br>
     Aciklik gorunmuyorsa ya da emin degilsen <b>bos birak</b> ve gec &mdash; bos olanlar kullanilmaz.
   </div>
@@ -97,7 +97,7 @@ function toggleMode(){
   b.textContent = PAINT ? "BOYA MODU: ACIK" : "BOYA MODU: KAPALI";
   b.classList.toggle("on", PAINT);
   document.getElementById("stat").textContent =
-    PAINT ? "BOYA MODU ACIK -- sol tik boyar" : "boya modu KAPALI -- sol tik dondurur";
+    PAINT ? "BOYA MODU ACIK -- sol tik boyar" : "paint modu KAPALI -- sol tik dondurur";
 }
 scene.add(new THREE.AmbientLight(0xffffff,0.85));
 const dl1=new THREE.DirectionalLight(0xffffff,0.5); dl1.position.set(1,1,2); scene.add(dl1);

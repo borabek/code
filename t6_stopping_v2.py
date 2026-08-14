@@ -16,8 +16,8 @@ Iki missing vardi, ikisi de ucuz:
      for difference eden satirlari feda edebiliyordu. Satirlar residual MARJINAL F1 ETKISIYLE
      agirliklandiriliyor -- ogrenilen sey urun metrigine baglandi.
 
-KILL (t3/t4/t5 with AYNI, degistirilmedi): tespit >= +0.02 VE DEV with VAL same yonde VE
-gorulmemis manufacturer ortalamasi dusmeyecek. Gecerse eslestirilmis bootstrap with dogrulanir.
+KILL (t3/t4/t5 with AYNI, degistirilmedi): detection >= +0.02 VE DEV with VAL same yonde VE
+unseen manufacturer ortalamasi dusmeyecek. Gecerse eslestirilmis bootstrap with dogrulanir.
 """
 import json 
 import os 
@@ -59,7 +59,7 @@ def main ():
     mfg_of ={p :m for m ,p ,jf ,s in eligible ()}
     with open ("results/_u4_der.pkl","rb")as f :
         DER =pickle .load (f )
-    with open ("results/_dev_val_kume.json",encoding ="utf-8")as f :
+    with open ("results/_dev_val_cluster.json",encoding ="utf-8")as f :
         kume_of =json .load (f )
     d =np .load ("results/gate_regrow_data_topo.npz",allow_pickle =True )
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
@@ -177,16 +177,16 @@ def main ():
             if en is None or v >en [1 ]:
                 en =(t ,v ,v -a ,dv ,vl ,mf ,ok )
         SON [ad ]=en 
-        print (f"{ad :<20} en iyi t={en [0 ]:.2f} | tespit {en [1 ]:.4f} ({en [2 ]:+.4f}) | "
+        print (f"{ad :<20} en iyi t={en [0 ]:.2f} | detection {en [1 ]:.4f} ({en [2 ]:+.4f}) | "
         f"DEV {en [3 ]:+.4f} | VAL {en [4 ]:+.4f} | mfg {en [5 ]:+.4f} | "
         f"{'GECTI'if en [6 ]else ''}",flush =True )
 
     iyi =max (SON ,key =lambda k :SON [k ][2 ])
     print (f"\nEN IYI KOL: {iyi } -> {SON [iyi ][2 ]:+.4f}")
-    print (f"KILL: tespit >= +0.02 VE DEV/VAL ayni yonde VE manufacturer ort dusmeyecek -> "
+    print (f"KILL: detection >= +0.02 VE DEV/VAL same yonde VE manufacturer ort dusmeyecek -> "
     f"{'GECTI'if SON [iyi ][6 ]else 'GECMEDI'}")
     with open ("results/t6_stopping_v2.json","w",encoding ="utf-8")as f :
-        json .dump ({k :{"threshold":v [0 ],"tespit":v [1 ],"fark":v [2 ],"dev":v [3 ],
+        json .dump ({k :{"threshold":v [0 ],"detection":v [1 ],"diff":v [2 ],"dev":v [3 ],
         "val":v [4 ],"mfg":v [5 ],"gecti":bool (v [6 ])}
         for k ,v in SON .items ()},f ,indent =1 )
     print ("receipt -> results/t6_stopping_v2.json")

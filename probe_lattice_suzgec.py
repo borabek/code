@@ -9,7 +9,7 @@ Kolun butun degeri SUZGECTE. Bu probe most ucuz suzgeci olcer: uretilen each
 izgara noktasini MEVCUT MODEL SKORUYLA puanla (cevresindeki seceneklerin most
 high skoru), sirala, first k'yi al.
 
-OLCU: first k'da kalan kapsama (full kabul kutusu) and elde edilen F1.
+OLCU: first k'da remaining kapsama (full kabul kutusu) and elde edilen F1.
 Kiyas noktasi: suzgecsiz kapsama (VII.4) and bugunku F1.
 
 Suzgec CALISIRSA arm kurulabilir; calismazsa isin/mesh dogrulamasi (hole
@@ -108,7 +108,7 @@ def main ():
 
         # each uretilen point for: yakin seceneklerin EN IYI skoru + that direction
         d_ua =np .linalg .norm (uret [:,None ,:]-P [None ,:,:],axis =-1 )
-        skor =np .full (len (uret ),-1.0 )
+        score =np .full (len (uret ),-1.0 )
         direction =np .zeros ((len (uret ),3 ))
         for u in range (len (uret )):
             ad =np .where (d_ua [u ]<=YAKIN_R )[0 ]
@@ -118,11 +118,11 @@ def main ():
             if not m_ .any ():
                 continue 
             j =np .argmax (np .where (m_ ,s ,-1 ))
-            skor [u ]=s [j ]
+            score [u ]=s [j ]
             direction [u ]=YD [j ]
             # KIPSEL YON (part own sablonunu tanimlar): a klemenste butun
             # CP'ler PARALELDIR. Yonu point basina secmek zayif modele guvenmek
-            # demek -- measured: correct direction MEVCUT (kahin 0.527) but most high
+            # demek -- measured: correct direction MEVCUT (oracle 0.527) but most high
             # skorlu secenegin yonu most zaman YANLIS (0.054).
             # K2.1 yonu TEK TOHUMDAN kopyalayip cokmustu; KIPSEL direction, high
             # skorlu seceneklerin on oy birligiyle belirlenir.
@@ -131,15 +131,15 @@ def main ():
             Y0 =YD [ust ]
             Y0 =Y0 /np .maximum (np .linalg .norm (Y0 ,axis =1 ,keepdims =True ),
             1e-12 )
-            # ISARETLI oy: each direction adayina kac secenek 10 derece inside
+            # ISARETLI oy: each direction adayina kac option 10 derece inside
             cos =np .clip (Y0 @Y0 .T ,-1 ,1 )
             oy =(np .degrees (np .arccos (cos ))<=K .ACI ).sum (1 )
             kipsel =Y0 [int (np .argmax (oy ))]
             direction [:]=kipsel 
-        gecerli =skor >=0 
-        if not gecerli .any ():
+        valid =score >=0 
+        if not valid .any ():
             continue 
-        U ,S_ ,D_ =uret [gecerli ],skor [gecerli ],direction [gecerli ]
+        U ,S_ ,D_ =uret [valid ],score [valid ],direction [valid ]
         rank_ =np .argsort (-S_ )
 
         k =len (G )

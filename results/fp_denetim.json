@@ -1201,7 +1201,7 @@
    ],
    "aday_i": 13,
    "gt_uzaklik": 7.5905376322341835,
-   "regime": "cok",
+   "regime": "very",
    "diag": 83.84419962539093,
    "n_gt": 16
   },
@@ -1221,7 +1221,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 18.584888831107783,
-   "regime": "cok",
+   "regime": "very",
    "diag": 79.91509170450801,
    "n_gt": 8
   },
@@ -1241,7 +1241,7 @@
    ],
    "aday_i": 26,
    "gt_uzaklik": 10.430967165630841,
-   "regime": "cok",
+   "regime": "very",
    "diag": 79.91509170450801,
    "n_gt": 8
   },
@@ -1261,7 +1261,7 @@
    ],
    "aday_i": 27,
    "gt_uzaklik": 8.898085824824518,
-   "regime": "cok",
+   "regime": "very",
    "diag": 79.91509170450801,
    "n_gt": 8
   },
@@ -1281,7 +1281,7 @@
    ],
    "aday_i": 28,
    "gt_uzaklik": 4.658579163544457,
-   "regime": "cok",
+   "regime": "very",
    "diag": 79.91509170450801,
    "n_gt": 8
   },
@@ -1301,7 +1301,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 9.62864575168734,
-   "regime": "cok",
+   "regime": "very",
    "diag": 52.377689722473775,
    "n_gt": 12
   },
@@ -1321,7 +1321,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 7.00969006609541,
-   "regime": "cok",
+   "regime": "very",
    "diag": 52.377689722473775,
    "n_gt": 12
   },
@@ -1341,7 +1341,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 3.5573023355173494,
-   "regime": "cok",
+   "regime": "very",
    "diag": 52.377689722473775,
    "n_gt": 12
   },
@@ -1361,7 +1361,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 8.972974094629453,
-   "regime": "cok",
+   "regime": "very",
    "diag": 52.377689722473775,
    "n_gt": 12
   },
@@ -1381,7 +1381,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 8.677777356765015,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442323,
    "n_gt": 19
   },
@@ -1401,7 +1401,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 14.424494631206953,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442323,
    "n_gt": 19
   },
@@ -1421,7 +1421,7 @@
    ],
    "aday_i": 9,
    "gt_uzaklik": 13.04227313726139,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442323,
    "n_gt": 19
   },
@@ -1441,7 +1441,7 @@
    ],
    "aday_i": 22,
    "gt_uzaklik": 10.652749792475845,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442323,
    "n_gt": 19
   },
@@ -1461,7 +1461,7 @@
    ],
    "aday_i": 26,
    "gt_uzaklik": 8.014044593197433,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442323,
    "n_gt": 19
   },
@@ -1481,7 +1481,7 @@
    ],
    "aday_i": 18,
    "gt_uzaklik": 12.929522972873235,
-   "regime": "cok",
+   "regime": "very",
    "diag": 59.06318515690737,
    "n_gt": 18
   },
@@ -1501,7 +1501,7 @@
    ],
    "aday_i": 20,
    "gt_uzaklik": 8.509008277366924,
-   "regime": "cok",
+   "regime": "very",
    "diag": 59.06318515690737,
    "n_gt": 18
   },
@@ -1521,7 +1521,7 @@
    ],
    "aday_i": 22,
    "gt_uzaklik": 10.896599884282312,
-   "regime": "cok",
+   "regime": "very",
    "diag": 59.06318515690737,
    "n_gt": 18
   },
@@ -1541,7 +1541,7 @@
    ],
    "aday_i": 23,
    "gt_uzaklik": 14.75630769154749,
-   "regime": "cok",
+   "regime": "very",
    "diag": 59.06318515690737,
    "n_gt": 18
   },
@@ -1561,7 +1561,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 4.745452277920346,
-   "regime": "cok",
+   "regime": "very",
    "diag": 85.19295742810007,
    "n_gt": 16
   },
@@ -1581,7 +1581,7 @@
    ],
    "aday_i": 8,
    "gt_uzaklik": 11.550869593972955,
-   "regime": "cok",
+   "regime": "very",
    "diag": 62.69156583953046,
    "n_gt": 12
   },
@@ -1601,7 +1601,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 15.579750178355606,
-   "regime": "cok",
+   "regime": "very",
    "diag": 77.49033834574298,
    "n_gt": 18
   },
@@ -1621,7 +1621,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 13.78751398564215,
-   "regime": "cok",
+   "regime": "very",
    "diag": 77.49033834574298,
    "n_gt": 18
   },
@@ -1641,7 +1641,7 @@
    ],
    "aday_i": 16,
    "gt_uzaklik": 10.301152262948953,
-   "regime": "cok",
+   "regime": "very",
    "diag": 77.49033834574298,
    "n_gt": 18
   },
@@ -1661,7 +1661,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 10.585801971859826,
-   "regime": "cok",
+   "regime": "very",
    "diag": 77.49033834574298,
    "n_gt": 18
   },
@@ -1681,7 +1681,7 @@
    ],
    "aday_i": 28,
    "gt_uzaklik": 9.982369478466214,
-   "regime": "cok",
+   "regime": "very",
    "diag": 77.49033834574298,
    "n_gt": 18
   },
@@ -1701,7 +1701,7 @@
    ],
    "aday_i": 13,
    "gt_uzaklik": 9.457660279980537,
-   "regime": "cok",
+   "regime": "very",
    "diag": 67.986249131138,
    "n_gt": 13
   },
@@ -1721,7 +1721,7 @@
    ],
    "aday_i": 2,
    "gt_uzaklik": 13.318832490268615,
-   "regime": "cok",
+   "regime": "very",
    "diag": 47.727900471249626,
    "n_gt": 12
   },
@@ -1741,7 +1741,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 0.9825566192719037,
-   "regime": "cok",
+   "regime": "very",
    "diag": 47.727900471249626,
    "n_gt": 12
   },
@@ -1761,7 +1761,7 @@
    ],
    "aday_i": 14,
    "gt_uzaklik": 12.010125460447064,
-   "regime": "cok",
+   "regime": "very",
    "diag": 47.727900471249626,
    "n_gt": 12
   },
@@ -1781,7 +1781,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 11.284587295503847,
-   "regime": "cok",
+   "regime": "very",
    "diag": 83.84419962561401,
    "n_gt": 13
   },
@@ -1801,7 +1801,7 @@
    ],
    "aday_i": 21,
    "gt_uzaklik": 12.242320775028155,
-   "regime": "cok",
+   "regime": "very",
    "diag": 83.84419962561401,
    "n_gt": 13
   },
@@ -1821,7 +1821,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 6.5738928260041245,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.8326181688735,
    "n_gt": 12
   },
@@ -1841,7 +1841,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 14.899508427458274,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.8326181688735,
    "n_gt": 12
   },
@@ -1861,7 +1861,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 12.605690961507372,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.8326181688735,
    "n_gt": 12
   },
@@ -1881,7 +1881,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 20.95497848015085,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261898238408,
    "n_gt": 13
   },
@@ -1901,7 +1901,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 15.756338325537364,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261898238408,
    "n_gt": 13
   },
@@ -1921,7 +1921,7 @@
    ],
    "aday_i": 3,
    "gt_uzaklik": 12.978495405031316,
-   "regime": "cok",
+   "regime": "very",
    "diag": 78.27982995055865,
    "n_gt": 19
   },
@@ -1941,7 +1941,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 13.034806808694576,
-   "regime": "cok",
+   "regime": "very",
    "diag": 78.27982995055865,
    "n_gt": 19
   },
@@ -1961,7 +1961,7 @@
    ],
    "aday_i": 10,
    "gt_uzaklik": 12.086579926871943,
-   "regime": "cok",
+   "regime": "very",
    "diag": 78.27982995055865,
    "n_gt": 19
   },
@@ -1981,7 +1981,7 @@
    ],
    "aday_i": 22,
    "gt_uzaklik": 10.19030494361582,
-   "regime": "cok",
+   "regime": "very",
    "diag": 78.27982995055865,
    "n_gt": 19
   },
@@ -2001,7 +2001,7 @@
    ],
    "aday_i": 23,
    "gt_uzaklik": 8.460100104422413,
-   "regime": "cok",
+   "regime": "very",
    "diag": 78.27982995055865,
    "n_gt": 19
   },
@@ -2021,7 +2021,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 9.725479646337856,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.30792436575018,
    "n_gt": 13
   },
@@ -2041,7 +2041,7 @@
    ],
    "aday_i": 16,
    "gt_uzaklik": 2.314634324446282,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261891098677,
    "n_gt": 12
   },
@@ -2061,7 +2061,7 @@
    ],
    "aday_i": 18,
    "gt_uzaklik": 11.664791172428615,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261891098677,
    "n_gt": 12
   },
@@ -2081,7 +2081,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 15.955318074245701,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442244,
    "n_gt": 19
   },
@@ -2101,7 +2101,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 14.37810292700692,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442244,
    "n_gt": 19
   },
@@ -2121,7 +2121,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 8.934507052115281,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442244,
    "n_gt": 19
   },
@@ -2141,7 +2141,7 @@
    ],
    "aday_i": 10,
    "gt_uzaklik": 13.128391727382485,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442244,
    "n_gt": 19
   },
@@ -2161,7 +2161,7 @@
    ],
    "aday_i": 18,
    "gt_uzaklik": 12.182690602053727,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442244,
    "n_gt": 19
   },
@@ -2181,7 +2181,7 @@
    ],
    "aday_i": 28,
    "gt_uzaklik": 9.453055459934669,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442244,
    "n_gt": 19
   },
@@ -2201,7 +2201,7 @@
    ],
    "aday_i": 17,
    "gt_uzaklik": 16.534190112139182,
-   "regime": "cok",
+   "regime": "very",
    "diag": 105.16643815762119,
    "n_gt": 11
   },
@@ -2221,7 +2221,7 @@
    ],
    "aday_i": 23,
    "gt_uzaklik": 10.439495569342613,
-   "regime": "cok",
+   "regime": "very",
    "diag": 105.16643815762119,
    "n_gt": 11
   },
@@ -2241,7 +2241,7 @@
    ],
    "aday_i": 4,
    "gt_uzaklik": 9.179866142311663,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.69895492868947,
    "n_gt": 18
   },
@@ -2261,7 +2261,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 7.2856587942666495,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.69895492868947,
    "n_gt": 18
   },
@@ -2281,7 +2281,7 @@
    ],
    "aday_i": 2,
    "gt_uzaklik": 7.319207260106117,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.54937183110818,
    "n_gt": 16
   },
@@ -2301,7 +2301,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 12.929167145590277,
-   "regime": "cok",
+   "regime": "very",
    "diag": 59.06318515690737,
    "n_gt": 18
   },
@@ -2321,7 +2321,7 @@
    ],
    "aday_i": 20,
    "gt_uzaklik": 8.509008277355562,
-   "regime": "cok",
+   "regime": "very",
    "diag": 59.06318515690737,
    "n_gt": 18
   },
@@ -2341,7 +2341,7 @@
    ],
    "aday_i": 22,
    "gt_uzaklik": 10.89853513849531,
-   "regime": "cok",
+   "regime": "very",
    "diag": 59.06318515690737,
    "n_gt": 18
   },
@@ -2361,7 +2361,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 8.569297877263523,
-   "regime": "cok",
+   "regime": "very",
    "diag": 54.49633203860932,
    "n_gt": 13
   },
@@ -2381,7 +2381,7 @@
    ],
    "aday_i": 17,
    "gt_uzaklik": 12.262142428512881,
-   "regime": "cok",
+   "regime": "very",
    "diag": 54.49633203860932,
    "n_gt": 13
   },
@@ -2401,7 +2401,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 15.973163336418361,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442283,
    "n_gt": 19
   },
@@ -2421,7 +2421,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 14.376847660509485,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442283,
    "n_gt": 19
   },
@@ -2441,7 +2441,7 @@
    ],
    "aday_i": 8,
    "gt_uzaklik": 3.373431768202255,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442283,
    "n_gt": 19
   },
@@ -2461,7 +2461,7 @@
    ],
    "aday_i": 9,
    "gt_uzaklik": 13.031317873599832,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442283,
    "n_gt": 19
   },
@@ -2481,7 +2481,7 @@
    ],
    "aday_i": 25,
    "gt_uzaklik": 9.449996394924428,
-   "regime": "cok",
+   "regime": "very",
    "diag": 66.89881909442283,
    "n_gt": 19
   },
@@ -2501,7 +2501,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 20.208276139927897,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.57269086812208,
    "n_gt": 19
   },
@@ -2521,7 +2521,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 10.474712597868258,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.57269086812208,
    "n_gt": 19
   },
@@ -2541,7 +2541,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 6.573791033680172,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261816208494,
    "n_gt": 12
   },
@@ -2561,7 +2561,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 12.62230083281182,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261816208494,
    "n_gt": 12
   },
@@ -2581,7 +2581,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 26.23537092812845,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2601,7 +2601,7 @@
    ],
    "aday_i": 3,
    "gt_uzaklik": 43.10714071810163,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2621,7 +2621,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 28.17728687965269,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2641,7 +2641,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 21.62387979916394,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2661,7 +2661,7 @@
    ],
    "aday_i": 17,
    "gt_uzaklik": 38.37235433456135,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2681,7 +2681,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 30.474727087168286,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2701,7 +2701,7 @@
    ],
    "aday_i": 25,
    "gt_uzaklik": 79.10634341060205,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2721,7 +2721,7 @@
    ],
    "aday_i": 34,
    "gt_uzaklik": 10.024969084754224,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2741,7 +2741,7 @@
    ],
    "aday_i": 37,
    "gt_uzaklik": 14.56744868820023,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2761,7 +2761,7 @@
    ],
    "aday_i": 39,
    "gt_uzaklik": 14.739745905493095,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2781,7 +2781,7 @@
    ],
    "aday_i": 40,
    "gt_uzaklik": 15.289046014398009,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2801,7 +2801,7 @@
    ],
    "aday_i": 44,
    "gt_uzaklik": 8.211075691580401,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2821,7 +2821,7 @@
    ],
    "aday_i": 46,
    "gt_uzaklik": 24.28797457056309,
-   "regime": "cok",
+   "regime": "very",
    "diag": 241.33599339281898,
    "n_gt": 10
   },
@@ -2861,7 +2861,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 15.727692108579857,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -2881,7 +2881,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 16.38863516397157,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -2901,7 +2901,7 @@
    ],
    "aday_i": 2,
    "gt_uzaklik": 16.621585789975565,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -2921,7 +2921,7 @@
    ],
    "aday_i": 3,
    "gt_uzaklik": 15.224910961810364,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -2941,7 +2941,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 15.778706206349119,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -2961,7 +2961,7 @@
    ],
    "aday_i": 2,
    "gt_uzaklik": 15.33543026119378,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -2981,7 +2981,7 @@
    ],
    "aday_i": 3,
    "gt_uzaklik": 16.56652966041122,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -3001,7 +3001,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 12.243954016281053,
-   "regime": "cok",
+   "regime": "very",
    "diag": 157.48010563863647,
    "n_gt": 8
   },
@@ -3141,7 +3141,7 @@
    ],
    "aday_i": 2,
    "gt_uzaklik": 9.096279928324075,
-   "regime": "cok",
+   "regime": "very",
    "diag": 100.75244693337912,
    "n_gt": 24
   },
@@ -3161,7 +3161,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 24.85871734230894,
-   "regime": "cok",
+   "regime": "very",
    "diag": 100.75244693337912,
    "n_gt": 24
   },
@@ -3181,7 +3181,7 @@
    ],
    "aday_i": 10,
    "gt_uzaklik": 12.27162676309772,
-   "regime": "cok",
+   "regime": "very",
    "diag": 100.75244693337912,
    "n_gt": 24
   },
@@ -3201,7 +3201,7 @@
    ],
    "aday_i": 16,
    "gt_uzaklik": 2.538896063250783,
-   "regime": "cok",
+   "regime": "very",
    "diag": 100.75244693337912,
    "n_gt": 24
   },
@@ -3221,7 +3221,7 @@
    ],
    "aday_i": 22,
    "gt_uzaklik": 11.772259060454797,
-   "regime": "cok",
+   "regime": "very",
    "diag": 100.75244693337912,
    "n_gt": 24
   },
@@ -3241,7 +3241,7 @@
    ],
    "aday_i": 30,
    "gt_uzaklik": 11.714715261840324,
-   "regime": "cok",
+   "regime": "very",
    "diag": 100.75244693337912,
    "n_gt": 24
   },
@@ -3261,7 +3261,7 @@
    ],
    "aday_i": 39,
    "gt_uzaklik": 10.984171557505018,
-   "regime": "cok",
+   "regime": "very",
    "diag": 100.75244693337912,
    "n_gt": 24
   },
@@ -3461,7 +3461,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 30.17190427661905,
-   "regime": "cok",
+   "regime": "very",
    "diag": 152.32236149572944,
    "n_gt": 8
   },
@@ -3481,7 +3481,7 @@
    ],
    "aday_i": 4,
    "gt_uzaklik": 30.08303734436584,
-   "regime": "cok",
+   "regime": "very",
    "diag": 152.32236149572944,
    "n_gt": 8
   },
@@ -3501,7 +3501,7 @@
    ],
    "aday_i": 14,
    "gt_uzaklik": 19.59560823808073,
-   "regime": "cok",
+   "regime": "very",
    "diag": 152.32236149572944,
    "n_gt": 8
   },
@@ -3521,7 +3521,7 @@
    ],
    "aday_i": 17,
    "gt_uzaklik": 20.195033733195135,
-   "regime": "cok",
+   "regime": "very",
    "diag": 152.32236149572944,
    "n_gt": 8
   },
@@ -3681,7 +3681,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 6.621302002231165,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261817014436,
    "n_gt": 12
   },
@@ -3701,7 +3701,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 14.898927987997514,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261817014436,
    "n_gt": 12
   },
@@ -3721,7 +3721,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 13.016814561252247,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.83261817014436,
    "n_gt": 12
   },
@@ -3741,7 +3741,7 @@
    ],
    "aday_i": 14,
    "gt_uzaklik": 12.26465513899688,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.59330116755368,
    "n_gt": 18
   },
@@ -3761,7 +3761,7 @@
    ],
    "aday_i": 20,
    "gt_uzaklik": 8.348660698497289,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.59330116755368,
    "n_gt": 18
   },
@@ -3781,7 +3781,7 @@
    ],
    "aday_i": 14,
    "gt_uzaklik": 12.263638530994664,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.59330116436266,
    "n_gt": 18
   },
@@ -3801,7 +3801,7 @@
    ],
    "aday_i": 20,
    "gt_uzaklik": 8.222034927507575,
-   "regime": "cok",
+   "regime": "very",
    "diag": 71.59330116436266,
    "n_gt": 18
   },
@@ -3821,7 +3821,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 13.33981627290854,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.2916977823539,
    "n_gt": 19
   },
@@ -3841,7 +3841,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 7.440812055910197,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.2916977823539,
    "n_gt": 19
   },
@@ -3861,7 +3861,7 @@
    ],
    "aday_i": 13,
    "gt_uzaklik": 5.304426799476825,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.2916977823539,
    "n_gt": 19
   },
@@ -3881,7 +3881,7 @@
    ],
    "aday_i": 16,
    "gt_uzaklik": 9.396955667947026,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.2916977823539,
    "n_gt": 19
   },
@@ -3901,7 +3901,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 13.288293738904292,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153026,
    "n_gt": 19
   },
@@ -3921,7 +3921,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 7.36322162531492,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153026,
    "n_gt": 19
   },
@@ -3941,7 +3941,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 2.2487630568713977,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153026,
    "n_gt": 19
   },
@@ -3961,7 +3961,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 5.32385630282039,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153026,
    "n_gt": 19
   },
@@ -3981,7 +3981,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 9.402775184465215,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153026,
    "n_gt": 19
   },
@@ -4001,7 +4001,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 13.290534617936101,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4021,7 +4021,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 7.36322162531492,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4041,7 +4041,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 2.2487630568713963,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4061,7 +4061,7 @@
    ],
    "aday_i": 8,
    "gt_uzaklik": 10.324008089646918,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4081,7 +4081,7 @@
    ],
    "aday_i": 16,
    "gt_uzaklik": 5.31186719815815,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4101,7 +4101,7 @@
    ],
    "aday_i": 18,
    "gt_uzaklik": 9.247480662113011,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4121,7 +4121,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 9.413007560722773,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4141,7 +4141,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 13.288315945697274,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4161,7 +4161,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 2.250193795724017,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4181,7 +4181,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 5.322326700759922,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4201,7 +4201,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 9.39624188703179,
-   "regime": "cok",
+   "regime": "very",
    "diag": 70.29169776153024,
    "n_gt": 19
   },
@@ -4241,7 +4241,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 19.22332261643171,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4261,7 +4261,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 19.798378953301025,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4281,7 +4281,7 @@
    ],
    "aday_i": 4,
    "gt_uzaklik": 19.70555278569845,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4301,7 +4301,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 21.98320414535007,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4321,7 +4321,7 @@
    ],
    "aday_i": 8,
    "gt_uzaklik": 18.78521332667393,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4341,7 +4341,7 @@
    ],
    "aday_i": 12,
    "gt_uzaklik": 17.59498306379904,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4361,7 +4361,7 @@
    ],
    "aday_i": 13,
    "gt_uzaklik": 18.994490476380914,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4381,7 +4381,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 17.8186891298907,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4401,7 +4401,7 @@
    ],
    "aday_i": 16,
    "gt_uzaklik": 17.631445371477383,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4421,7 +4421,7 @@
    ],
    "aday_i": 20,
    "gt_uzaklik": 16.50986137199733,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4441,7 +4441,7 @@
    ],
    "aday_i": 22,
    "gt_uzaklik": 16.33236768461167,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4461,7 +4461,7 @@
    ],
    "aday_i": 24,
    "gt_uzaklik": 16.19715723888751,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4481,7 +4481,7 @@
    ],
    "aday_i": 27,
    "gt_uzaklik": 16.473757473732416,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4501,7 +4501,7 @@
    ],
    "aday_i": 29,
    "gt_uzaklik": 16.52124130083617,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4521,7 +4521,7 @@
    ],
    "aday_i": 30,
    "gt_uzaklik": 11.894483639127994,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4541,7 +4541,7 @@
    ],
    "aday_i": 41,
    "gt_uzaklik": 16.40699640270968,
-   "regime": "cok",
+   "regime": "very",
    "diag": 91.30455048337001,
    "n_gt": 20
   },
@@ -4581,7 +4581,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 12.207818079634585,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4601,7 +4601,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 11.632430770304136,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4621,7 +4621,7 @@
    ],
    "aday_i": 14,
    "gt_uzaklik": 37.6761218420866,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4641,7 +4641,7 @@
    ],
    "aday_i": 18,
    "gt_uzaklik": 13.038024377956054,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4661,7 +4661,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 4.9694163967012965,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4681,7 +4681,7 @@
    ],
    "aday_i": 21,
    "gt_uzaklik": 12.641441232812932,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4701,7 +4701,7 @@
    ],
    "aday_i": 24,
    "gt_uzaklik": 4.707764765099643,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4721,7 +4721,7 @@
    ],
    "aday_i": 26,
    "gt_uzaklik": 48.47110346366438,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4741,7 +4741,7 @@
    ],
    "aday_i": 27,
    "gt_uzaklik": 4.532453540594706,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4761,7 +4761,7 @@
    ],
    "aday_i": 28,
    "gt_uzaklik": 4.42599329491695,
-   "regime": "cok",
+   "regime": "very",
    "diag": 170.5936841791164,
    "n_gt": 8
   },
@@ -4781,7 +4781,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 7.724966029893103,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.54936597066079,
    "n_gt": 16
   },
@@ -4801,7 +4801,7 @@
    ],
    "aday_i": 12,
    "gt_uzaklik": 6.2353559392386835,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.54936597066079,
    "n_gt": 16
   },
@@ -4821,7 +4821,7 @@
    ],
    "aday_i": 18,
    "gt_uzaklik": 6.237775213636768,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.54936597066079,
    "n_gt": 16
   },
@@ -4841,7 +4841,7 @@
    ],
    "aday_i": 25,
    "gt_uzaklik": 6.051882948246548,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.54936597066079,
    "n_gt": 16
   },
@@ -4861,7 +4861,7 @@
    ],
    "aday_i": 28,
    "gt_uzaklik": 5.175324434347596,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.54936597066079,
    "n_gt": 16
   },
@@ -4881,7 +4881,7 @@
    ],
    "aday_i": 40,
    "gt_uzaklik": 9.34455297352838,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.54936597066079,
    "n_gt": 16
   },
@@ -4901,7 +4901,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 9.633367709456897,
-   "regime": "cok",
+   "regime": "very",
    "diag": 121.1858490048539,
    "n_gt": 8
   },
@@ -4921,7 +4921,7 @@
    ],
    "aday_i": 6,
    "gt_uzaklik": 16.68895821087453,
-   "regime": "cok",
+   "regime": "very",
    "diag": 121.1858490048539,
    "n_gt": 8
   },
@@ -4941,7 +4941,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 14.888852636637871,
-   "regime": "cok",
+   "regime": "very",
    "diag": 121.1858490048539,
    "n_gt": 8
   },
@@ -4961,7 +4961,7 @@
    ],
    "aday_i": 10,
    "gt_uzaklik": 16.654020325446275,
-   "regime": "cok",
+   "regime": "very",
    "diag": 121.1858490048539,
    "n_gt": 8
   },
@@ -4981,7 +4981,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 7.931387221045046,
-   "regime": "cok",
+   "regime": "very",
    "diag": 121.1858490048539,
    "n_gt": 8
   },
@@ -5001,7 +5001,7 @@
    ],
    "aday_i": 2,
    "gt_uzaklik": 25.44877679744107,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5021,7 +5021,7 @@
    ],
    "aday_i": 3,
    "gt_uzaklik": 23.371213289091934,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5041,7 +5041,7 @@
    ],
    "aday_i": 7,
    "gt_uzaklik": 29.28597757558242,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5061,7 +5061,7 @@
    ],
    "aday_i": 9,
    "gt_uzaklik": 22.159967089868694,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5081,7 +5081,7 @@
    ],
    "aday_i": 14,
    "gt_uzaklik": 23.935873046656003,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5101,7 +5101,7 @@
    ],
    "aday_i": 15,
    "gt_uzaklik": 29.343841563504867,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5121,7 +5121,7 @@
    ],
    "aday_i": 25,
    "gt_uzaklik": 21.286785213796954,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5141,7 +5141,7 @@
    ],
    "aday_i": 42,
    "gt_uzaklik": 26.177762989305513,
-   "regime": "cok",
+   "regime": "very",
    "diag": 89.31394616647147,
    "n_gt": 8
   },
@@ -5161,7 +5161,7 @@
    ],
    "aday_i": 4,
    "gt_uzaklik": 18.24303332544978,
-   "regime": "cok",
+   "regime": "very",
    "diag": 115.81338931226884,
    "n_gt": 20
   },
@@ -5181,7 +5181,7 @@
    ],
    "aday_i": 26,
    "gt_uzaklik": 23.339537277708164,
-   "regime": "cok",
+   "regime": "very",
    "diag": 115.81338931226884,
    "n_gt": 20
   },
@@ -5221,7 +5221,7 @@
    ],
    "aday_i": 4,
    "gt_uzaklik": 18.24303332544978,
-   "regime": "cok",
+   "regime": "very",
    "diag": 115.81338931226884,
    "n_gt": 20
   },
@@ -5241,7 +5241,7 @@
    ],
    "aday_i": 26,
    "gt_uzaklik": 23.339537277708164,
-   "regime": "cok",
+   "regime": "very",
    "diag": 115.81338931226884,
    "n_gt": 20
   },
@@ -5261,7 +5261,7 @@
    ],
    "aday_i": 3,
    "gt_uzaklik": 10.977151800839712,
-   "regime": "cok",
+   "regime": "very",
    "diag": 105.16643331317512,
    "n_gt": 11
   },
@@ -5281,7 +5281,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 22.83110460916667,
-   "regime": "cok",
+   "regime": "very",
    "diag": 105.16643331317512,
    "n_gt": 11
   },
@@ -5301,7 +5301,7 @@
    ],
    "aday_i": 17,
    "gt_uzaklik": 27.14451031448304,
-   "regime": "cok",
+   "regime": "very",
    "diag": 105.16643331317512,
    "n_gt": 11
   },
@@ -5321,7 +5321,7 @@
    ],
    "aday_i": 26,
    "gt_uzaklik": 19.421314341888024,
-   "regime": "cok",
+   "regime": "very",
    "diag": 105.16643331317512,
    "n_gt": 11
   },
@@ -5661,7 +5661,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 16.637903154751008,
-   "regime": "cok",
+   "regime": "very",
    "diag": 112.58415166310648,
    "n_gt": 22
   },
@@ -5681,7 +5681,7 @@
    ],
    "aday_i": 10,
    "gt_uzaklik": 14.664064480854032,
-   "regime": "cok",
+   "regime": "very",
    "diag": 112.58415166310648,
    "n_gt": 22
   },
@@ -5701,7 +5701,7 @@
    ],
    "aday_i": 18,
    "gt_uzaklik": 12.09695681066759,
-   "regime": "cok",
+   "regime": "very",
    "diag": 112.58415166310648,
    "n_gt": 22
   },
@@ -5721,7 +5721,7 @@
    ],
    "aday_i": 28,
    "gt_uzaklik": 13.425893753666239,
-   "regime": "cok",
+   "regime": "very",
    "diag": 112.58415166310648,
    "n_gt": 22
   },
@@ -5741,7 +5741,7 @@
    ],
    "aday_i": 32,
    "gt_uzaklik": 28.360189328444747,
-   "regime": "cok",
+   "regime": "very",
    "diag": 112.58415166310648,
    "n_gt": 22
   },
@@ -5761,7 +5761,7 @@
    ],
    "aday_i": 48,
    "gt_uzaklik": 19.55299106135075,
-   "regime": "cok",
+   "regime": "very",
    "diag": 112.58415166310648,
    "n_gt": 22
   },
@@ -5781,7 +5781,7 @@
    ],
    "aday_i": 50,
    "gt_uzaklik": 10.772021570307338,
-   "regime": "cok",
+   "regime": "very",
    "diag": 112.58415166310648,
    "n_gt": 22
   },
@@ -5861,7 +5861,7 @@
    ],
    "aday_i": 0,
    "gt_uzaklik": 18.506119814232537,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -5881,7 +5881,7 @@
    ],
    "aday_i": 1,
    "gt_uzaklik": 32.30740659034642,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -5901,7 +5901,7 @@
    ],
    "aday_i": 2,
    "gt_uzaklik": 33.65541816741726,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -5921,7 +5921,7 @@
    ],
    "aday_i": 3,
    "gt_uzaklik": 22.966126418127796,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -5941,7 +5941,7 @@
    ],
    "aday_i": 5,
    "gt_uzaklik": 28.16299585682454,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -5961,7 +5961,7 @@
    ],
    "aday_i": 8,
    "gt_uzaklik": 23.16565587668452,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -5981,7 +5981,7 @@
    ],
    "aday_i": 9,
    "gt_uzaklik": 35.79905614037355,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6001,7 +6001,7 @@
    ],
    "aday_i": 11,
    "gt_uzaklik": 28.38148250657938,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6021,7 +6021,7 @@
    ],
    "aday_i": 19,
    "gt_uzaklik": 35.848786803465686,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6041,7 +6041,7 @@
    ],
    "aday_i": 25,
    "gt_uzaklik": 22.397132585257996,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6061,7 +6061,7 @@
    ],
    "aday_i": 29,
    "gt_uzaklik": 23.288238888111884,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6081,7 +6081,7 @@
    ],
    "aday_i": 39,
    "gt_uzaklik": 33.69064658946586,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6101,7 +6101,7 @@
    ],
    "aday_i": 46,
    "gt_uzaklik": 21.876971066717438,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6121,7 +6121,7 @@
    ],
    "aday_i": 48,
    "gt_uzaklik": 26.57884078646013,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6141,7 +6141,7 @@
    ],
    "aday_i": 57,
    "gt_uzaklik": 10.547388723996123,
-   "regime": "cok",
+   "regime": "very",
    "diag": 150.31226171938593,
    "n_gt": 10
   },
@@ -6349,5 +6349,5 @@
   292,
   303
  ],
- "not": "Ornek TABAKALI RASTGELE (manufacturer x regime). 'En emin FP'leri secmek sismedir; yansiz prediction + confidence araligi tek durust yol."
+ "not": "Ornek TABAKALI RASTGELE (manufacturer x regime). 'En emin FP'leri secmek sismedir; yansiz prediction + confidence araligi tek durust path."
 }

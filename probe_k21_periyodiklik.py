@@ -10,7 +10,7 @@ Iki soru:
 Kahin spread TANIMI (bilerek IYIMSER -- ceiling olcuyoruz):
   - parcanin TP'lerinden most iyi dogruyu (direction) and adimi (periyot) AL
   - that correct along +-N step ilerle
-  - uretilen noktalarin tespit toleransi inside a FN'e dusenlerini say
+  - uretilen noktalarin detection toleransi inside a FN'e dusenlerini say
 Gercek arm bundan DAHA IYI olamaz.
 """
 import os 
@@ -31,7 +31,7 @@ import pickle # noqa: E402
 from p1c_threshold import maske # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
-CIKTI ="results/k21_periyodiklik_tavani.json"
+CIKTI ="results/k21_periyodiklik_ceiling.json"
 ADIM_N =6 # correct along +-6 step
 
 
@@ -43,11 +43,11 @@ def periyot_ve_yon (X ):
     _u ,_s ,Vt =np .linalg .svd (C ,full_matrices =False )
     direction =Vt [0 ]
     t =np .sort (C @direction )
-    fark =np .diff (t )
-    fark =fark [fark >1e-6 ]
-    if not len (fark ):
+    diff =np .diff (t )
+    diff =diff [diff >1e-6 ]
+    if not len (diff ):
         return None ,None 
-    return direction ,float (np .median (fark ))
+    return direction ,float (np .median (diff ))
 
 
 def main ():
@@ -57,7 +57,7 @@ def main ():
 
     # 1) GT'nin own periyodikligi
     duzenlilik =[]# medyan step / std step  (large = duzenli)
-    # 2) kahin spread
+    # 2) oracle spread
     fn_top ,fn_kurtarilan =0 ,0 
     part =0 
 
@@ -79,7 +79,7 @@ def main ():
             if len (f )>=2 and np .median (f )>0 :
                 duzenlilik .append (float (np .std (f )/np .median (f )))
 
-                # --- urunun TP/FN'leri (gate sonrasi, tespit toleransi)
+                # --- urunun TP/FN'leri (gate sonrasi, detection toleransi)
         sk =np .asarray (wire_gate .decision_score (gate ,M ),float )
         k =maske (sk ,0.40 ,0.30 )
         if not k .any ():
@@ -120,9 +120,9 @@ def main ():
     print (f"   medyan {np .median (dz ):.3f} | p25 {np .percentile (dz ,25 ):.3f} | "
     f"p75 {np .percentile (dz ,75 ):.3f}")
     print (f"   'duzenli' (<0.25) part orani: %{100 *(dz <0.25 ).mean ():.1f}")
-    print (f"   'cok duzensiz' (>1.0) orani  : %{100 *(dz >1.0 ).mean ():.1f}")
+    print (f"   'very duzensiz' (>1.0) orani  : %{100 *(dz >1.0 ).mean ():.1f}")
     print (f"\n2) KAHIN YAYILIM TAVANI (bilerek iyimser)")
-    print (f"   toplam FN {fn_top } | yayilimla erisilebilen {fn_kurtarilan } "
+    print (f"   total FN {fn_top } | yayilimla erisilebilen {fn_kurtarilan } "
     f"= **%{100 *fn_kurtarilan /max (fn_top ,1 ):.1f}**")
     with open (CIKTI ,"w")as f :
         json .dump ({"part":part ,"duzenlilik_medyan":float (np .median (dz )),

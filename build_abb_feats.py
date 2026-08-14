@@ -27,7 +27,7 @@ def main ():
     models =[load_any (c ,dev =dev )[:2 ]for c in CK ]
     fs =sorted (glob .glob (f"C:/Users/DE00024082/Desktop/JSON/{MFG }.*.json"))
     if LIM :fs =fs [:LIM ]
-    print (f"{len (fs )} {MFG } part | JSON mesh (ayni frame, hizalama YOK)",flush =True )
+    print (f"{len (fs )} {MFG } part | JSON mesh (same frame, hizalama YOK)",flush =True )
     X13 ,XR ,YY ,GG ,POS ,NGT ,PIDS =[],[],[],[],[],{},[]
     t0 =time .time ()
     for k ,f in enumerate (fs ,1 ):

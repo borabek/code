@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Gate sonrasi kalabalik bastirma (NMS) testleri. See. results/nms_tarama.json."""
+"""Gate sonrasi kalabalik bastirma (NMS) testleri. See. results/nms_sweep.json."""
 import os 
 import sys 
 
@@ -61,5 +61,5 @@ def test_tek_cp_ve_bos_liste ():
 def test_varsayilan_yaricap_konfigden_5mm ():
     """r=5.0 DAGITILAN value. Kural: no markayi yikmayan most large radius.
     r=6 D7'de more high robot gives but CEM markasini 0.0164 -> 0.0000 yikar.
-    See. results/urun_nms_uctan_uca*.json."""
+    See. results/product_nms_end_to_end*.json."""
     assert wire_gate .NMS_MM ==pytest .approx (5.0 )

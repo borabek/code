@@ -28,7 +28,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -183,7 +183,7 @@ def olc (model ,te ,segtek ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
         if en is None or r ["robot"]>en ["robot"]:
@@ -201,22 +201,22 @@ def main ():
         m =training (segtek )
         out [ad ]=olc (m ,te ,segtek )
         c =out [ad ]
-        print (f"  -> robot {c ['robot']:.4f} | tespit {c ['tespit']:.4f} | makro "
+        print (f"  -> robot {c ['robot']:.4f} | detection {c ['detection']:.4f} | makro "
         f"{c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f} | {c ['rule']}\n",
         flush =True )
     a =out ["A) TEZ-SAF + proje etiketi"]["robot"]
     b =out ["B) GENISLETILMIS + proje etiketi"]["robot"]
     print (f"ESKI ETIKETLE tez-saf:  0.1159")
     print (f"PROJE ETIKETIYLE:       {a :.4f}   (v6 seviyesi 0.1970)")
-    print (f"GENISLETILMIS pool:    {b :.4f}   (fark {b -a :+.4f})")
+    print (f"GENISLETILMIS pool:    {b :.4f}   (diff {b -a :+.4f})")
     print (f"DAGITILAN URUN (NMS'li): 0.2029")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
     "eski_etiketle_tezsaf":0.1159 ,"v6":0.1970 ,"urun":0.2029 ,
     "not":"Etiket projenin tanimiyla (lateral + axial 40mm + acgozlu "
     "bire-a) yeniden uretildi; OZNITELIKLER onbellekten, "
     "DEGISMEDI. D7 brand-disi, MIKRO."},
-    open ("results/v6_farki_C.json","w"),indent =1 )
-    print ("receipt -> results/v6_farki_B.json")
+    open ("results/v6_delta_C.json","w"),indent =1 )
+    print ("receipt -> results/v6_delta_B.json")
 
 
 if __name__ =="__main__":

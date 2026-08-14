@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""D6 URUN YOLU OLCUMU -- `probe_dagitim_verify.py`'nin D6 ikizi.
+"""D6 URUN YOLU OLCUMU -- `probe_deploy_verify.py`'nin D6 ikizi.
 
 WHY SEPARATE BIR BETIK: gate kararlari D6'da veriliyor but D6 olcumlerim
 ONBELLEKTEN (`_tam_oz`) kosuyordu. Onbellek `cp_config.json`'un old halinde
-turetilmis and segmentasyon adaylari kaymis (`results/p6_parite_d6.json`).
-Onbellekten olculen number URUNUN count degildir; gate that is why urunun CANLI
+turetilmis and segmentasyon adaylari kaymis (`results/p6_parity_d6.json`).
+Onbellekten measured_path number URUNUN count degildir; gate that is why urunun CANLI
 yolundan gecmeli.
 
 Bu betik `canonical_chain.product_output`'yi cagirir -- i.e. URUNUN TEK zincirini --
@@ -20,7 +20,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -50,7 +50,7 @@ def main ():
     and S .get (p )]
     if N :
         secili =secili [:N ]
-    sh =os .environ .get ("DOG_SHARD")# `birlestir_makbuz.py` with birlesir
+    sh =os .environ .get ("DOG_SHARD")# `merge_receipt.py` with birlesir
     if sh :
         i_ ,n_ =(int (x )for x in sh .split ("/"))
         secili =[p for k ,p in enumerate (secili )if k %n_ ==i_ ]
@@ -91,7 +91,7 @@ def main ():
     pm ={m :2 *v [0 ]/max (2 *v [0 ]+v [1 ]+v [2 ],1 )for m ,v in rob .items ()}
     mi =float (2 *sum (v [0 ]for v in rob .values ())/
     max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-    out ={"robot":mi ,"tespit":K .mikro (tes ),
+    out ={"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm ,
     "TP":sum (v [0 ]for v in rob .values ()),
@@ -101,15 +101,15 @@ def main ():
     "p6_sayac":dict (product_p6 .SAYAC ),
     "genis_acik":bool (product_wide .ACIK ),"poz_kafasi":bool (POZ ),
     "parca_kirilim":kirilim }
-    print (f"\nD6 URUN ZINCIRI robot {mi :.4f} | tespit {out ['tespit']:.4f} | "
+    print (f"\nD6 URUN ZINCIRI robot {mi :.4f} | detection {out ['detection']:.4f} | "
     f"makro {out ['makro']:.4f} | TP {out ['TP']} FP {out ['FP']} "
     f"FN {out ['FN']}")
-    yol =os .environ .get ("DOG_CIKTI","results/d6_urun.json")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
-    "not":"URUNUN TEK kanonik zinciri, D6 (gorulmemis brand: SUPU/"
+    path =os .environ .get ("DOG_CIKTI","results/d6_urun.json")
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
+    "not":"URUNUN TEK kanonik zinciri, D6 (unseen brand: SUPU/"
     "UPUN/MOR/NIT/UTL/S+S/SE/ONV). MIKRO."},
-    open (yol ,"w"),indent =1 )
-    print (f"receipt -> {yol }")
+    open (path ,"w"),indent =1 )
+    print (f"receipt -> {path }")
 
 
 if __name__ =="__main__":

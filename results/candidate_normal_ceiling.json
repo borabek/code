@@ -1,0 +1,66 @@
+{
+ "corpus": "results/_p6_oz_tam4",
+ "brand": {
+  "NIT": {
+   "gt": 1222,
+   "konum": 0.8428805237315876,
+   "aday_normali": 0.028641571194762683,
+   "banka": 0.8428805237315876,
+   "aday_parca": 491.78
+  },
+  "SUPU": {
+   "gt": 547,
+   "konum": 0.9506398537477148,
+   "aday_normali": 0.6307129798903108,
+   "banka": 0.9213893967093236,
+   "aday_parca": 152.23636363636365
+  },
+  "UPUN": {
+   "gt": 370,
+   "konum": 0.9648648648648649,
+   "aday_normali": 0.5459459459459459,
+   "banka": 0.9621621621621622,
+   "aday_parca": 197.97435897435898
+  },
+  "MOR": {
+   "gt": 274,
+   "konum": 0.8686131386861314,
+   "aday_normali": 0.635036496350365,
+   "banka": 0.8686131386861314,
+   "aday_parca": 453.2
+  },
+  "UTL": {
+   "gt": 84,
+   "konum": 1.0,
+   "aday_normali": 0.2976190476190476,
+   "banka": 1.0,
+   "aday_parca": 202.93548387096774
+  },
+  "SE": {
+   "gt": 82,
+   "konum": 1.0,
+   "aday_normali": 0.2682926829268293,
+   "banka": 1.0,
+   "aday_parca": 303.5
+  },
+  "ONV": {
+   "gt": 67,
+   "konum": 1.0,
+   "aday_normali": 0.9850746268656716,
+   "banka": 1.0,
+   "aday_parca": 439.125
+  },
+  "S+S": {
+   "gt": 26,
+   "konum": 1.0,
+   "aday_normali": 0.8846153846153846,
+   "banka": 1.0,
+   "aday_parca": 199.0
+  }
+ },
+ "total": {
+  "aday_normali": 0.3338323353293413,
+  "banka": 0.8933383233532934
+ },
+ "not": "ADAYIN KENDI mesh normali vs 24 secenekli direction bankasi. Yeniden cikarimin TAVANI. D7'ye BAKILMADI."
+}

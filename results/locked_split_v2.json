@@ -1,6 +1,6 @@
 {
  "created": "2026-07-31",
- "kural": "Bu cluster UZERINDE AYAR YAPILMAZ: threshold secimi, ozellik secimi, model secimi, hicbiri. Yalnizca TEK ATISLIK final measurement. Gate egitimi ve kalibrasyon this geometri gruplarinin hicbirini gormemeli.",
+ "rule": "Bu cluster UZERINDE AYAR YAPILMAZ: threshold secimi, ozellik secimi, model secimi, hicbiri. Yalnizca TEK ATISLIK final measurement. Gate egitimi ve calibration this geometri gruplarinin hicbirini gormemeli.",
  "anahtar": "keskin geometri (bbox 0.5mm + B-rep silindir/duzlem imzasi + kovalar)",
  "n_test": 100,
  "test_parts": [

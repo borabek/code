@@ -54,7 +54,7 @@ def step_to_mesh (path ):
     #
     # WHY GENEL BIR BOYUT ESIGI KOYMUYORUZ: dondurulmus kumelerde de large parts
     # present (194'lukte 2 count >10MB, exam kumesinde 7 count, max 34.8 MB). Global a threshold
-    # that parcalarin mesh KAYNAGINI changes and mevcut olcumleri gecersiz kilar.
+    # that parcalarin mesh KAYNAGINI changes and mevcut olcumleri invalid kilar.
     # Bu yuzden rota YALNIZ acikca istendiginde (kurtarma turu) devreye girer; diger
     # tum kosular BIREBIR same davranir.
     if os .environ .get ("MESH_OCC_ONCE")=="1":
@@ -69,16 +69,16 @@ def step_to_mesh (path ):
     # duser -- measured: 1650 parcanin 20'si (%1.2), i.e. silent corpus kaybi. OCC healing
     # (degenerate/small edge-face correction + dikis + gevsek tolerans) UCUNU DE kurtardi
     # (2502750000, 1704350000, 1704360000 -> 8673/2787/2787 vertex).
-    # SADECE YEDEK as: healing tum parcalara uygulanirsa calisan %98.8'in mesh'i de degisir
-    # and tum onbellekler/olcumler gecersiz becomes. Normal path aynen korunur.
+    # SADECE YEDEK as: healing tum parcalara uygulanirsa running %98.8'in mesh'i de degisir
+    # and tum onbellekler/olcumler invalid becomes. Normal path aynen korunur.
         try :
             return _gmsh_mesh (path ,heal =True )
         except Exception :
         # UCUNCU KADEME (2026-08-04): DataSet5 turetmesinde two part IKI kademeyi de gecemedi
         # ("1D mesh not forming a closed loop", "Could not fix wire in surface 265").
-        # 7 ayar x 2 part measured; kurtaran TEK ayar GEVSEK TOLERANS output (1e-3 -> 1e-2):
+        # 7 setting x 2 part measured; kurtaran TEK setting GEVSEK TOLERANS output (1e-3 -> 1e-2):
         # 5D.202.0055.6 -> 4321 vertex / 8638 face, HIC surface atmadan, full mesh.
-        # Yalniz ikinci kademe de DUSTUGUNDE works, i.e. calisan parcalarin mesh'i
+        # Yalniz ikinci kademe de DUSTUGUNDE works, i.e. running parcalarin mesh'i
         # and tum onbellekler AYNEN korunur.
             try :
                 return _gmsh_mesh (path ,heal =True ,tol =1e-2 )
@@ -179,7 +179,7 @@ def _kaynakla (V ,F ,tol =1e-6 ):
     return np .ascontiguousarray (V2 ,float ),np .ascontiguousarray (F2 ,int )
 
 
-MESH_TAMLIK =0.95 # below MEASURED; calisan parcalarda ratio 1.00
+MESH_TAMLIK =0.95 # below MEASURED; running parcalarda ratio 1.00
 
 
 def _tamlik_kontrol (nyuzey ):

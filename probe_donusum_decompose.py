@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """DONUSUM NEREDE KAYBEDILIYOR: lateral mi, angle mi, axial mi?
 
-Olculdu: bilinen brand/gorulmemis modelde pool recall 0.8697 but robot recall
+Olculdu: known brand/unseen modelde pool recall 0.8697 but robot recall
 0.4212 -> donusum **0.4843**. Robot tavani 0.5928, i.e. robot 0.80 IMKANSIZ.
 Tavani yukseltmenin single yolu donusumu acmak.
 
@@ -24,7 +24,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -48,7 +48,7 @@ def bilesenler (P ,D ,g ,gd ):
 
 def main ():
     rec_ =os .environ .get ("AYR_KAYIT","results/_der_yeni.pkl")
-    cluster =os .environ .get ("AYR_KUME","results/val_kumesi.json")
+    cluster =os .environ .get ("AYR_KUME","results/val_set.json")
     pids ={str (p )for p in json .load (open (cluster ))["pidler"]}
     R =[r for r in pickle .load (open (rec_ ,"rb"))if str (r ["pid"])in pids ]
     print (f"kayit {rec_ } | cluster {cluster } | part {len (R )}",flush =True )
@@ -79,7 +79,7 @@ def main ():
             # TESPIT toleransinda ulasilabilir mi (lateral tol, angle serbest)
             ul =(yan <=tol )&(eks <=EKSENEL )
             if not ul .any ():
-                say ["ULASILAMAZ (tespit tol.)"]+=1 
+                say ["ULASILAMAZ (detection tol.)"]+=1 
                 continue 
             iy ,ia ,ie =yan [ul ],aci [ul ],eks [ul ]
             if ((iy <=YANAL )&(ia <=ACI )&(ie <=EKSENEL )).any ():
@@ -112,7 +112,7 @@ def main ():
     f"(+{(ceiling ['yalniz_yanal']-r_tam )/max (n_gt ,1 ):.4f})")
     print (f"YALNIZ ACI duzelirse     {ceiling ['yalniz_aci']/max (n_gt ,1 ):.4f}  "
     f"(+{(ceiling ['yalniz_aci']-r_tam )/max (n_gt ,1 ):.4f})")
-    json .dump ({"damga":makbuz_hash .damga (),"kayit":rec_ ,"cluster":cluster ,
+    json .dump ({"damga":receipt_hash .damga (),"kayit":rec_ ,"cluster":cluster ,
     "n_gt":n_gt ,"sayim":dict (say ),
     "robot_recall":r_tam /max (n_gt ,1 ),
     "yalniz_yanal_tavani":ceiling ["yalniz_yanal"]/max (n_gt ,1 ),

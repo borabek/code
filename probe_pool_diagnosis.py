@@ -18,8 +18,8 @@ import sys
 
 import numpy as np 
 
-DOKUM =sys .argv [1 ]if len (sys .argv )>1 else "results/_dokum_taban.json"
-YOL =sys .argv [2 ]if len (sys .argv )>2 else "olculen"
+DOKUM =sys .argv [1 ]if len (sys .argv )>1 else "results/_dump_baseline.json"
+YOL =sys .argv [2 ]if len (sys .argv )>2 else "measured_path"
 YANAL ,EKSEN ,ACI =2.0 ,40.0 ,10.0 
 
 
@@ -42,8 +42,8 @@ def kapsama (P ,D ,G ,Gd ,signed ):
 
 
 def main ():
-    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("yol")==YOL ]
-    print (f"{DOKUM } / yol={YOL } -> {len (rec_ )} part")
+    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("path")==YOL ]
+    print (f"{DOKUM } / path={YOL } -> {len (rec_ )} part")
     ust_kume_ihlali =0 
     havuz_bos =0 
     say ={k :0 for k in ("gt","cikti","pool","havuz_var_cikti_yok",
@@ -77,17 +77,17 @@ def main ():
         gt =max (say ["gt"],1 )
         print (f"\n--- {ad } kabul kutusu (lateral<={YANAL } axis<={EKSEN } "
         f"aci<={ACI }) ---")
-        print (f"  GT toplam                        : {say ['gt']}")
+        print (f"  GT total                        : {say ['gt']}")
         print (f"  HAVUZ kapsamasi (ceiling)          : {say ['pool']:5d} "
         f"({say ['pool']/gt :.4f})")
         print (f"  CIKTI kapsamasi                  : {say ['cikti']:5d} "
         f"({say ['cikti']/gt :.4f})")
-        print (f"  havuzda VAR ama ciktida YOK      : "
+        print (f"  havuzda VAR but ciktida YOK      : "
         f"{say ['havuz_var_cikti_yok']:5d} "
         f"({say ['havuz_var_cikti_yok']/gt :.4f})  <- SKOR/GATE kaybi")
         print (f"  havuzda HIC YOK                  : {say ['havuz_yok']:5d} "
         f"({say ['havuz_yok']/gt :.4f})  <- TEMSIL kaybi")
-        print (f"  [yapisal kontrol] ciktida var/havuzda yok: "
+        print (f"  [yapisal kontrol] ciktida present/havuzda none: "
         f"{ust_kume_ihlali }  (0 OLMALI)")
         if havuz_bos :
             print (f"  UYARI: {havuz_bos } parcada pool BOS kaydedilmis")

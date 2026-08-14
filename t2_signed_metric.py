@@ -91,7 +91,7 @@ def main ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         for ad ,s in KOL .items ():
             det [ad ].append ((rj ,)+match_signed (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,s ))
-            # ISARET SAYIMI: eslesen ciftlerde -Pd mi +Pd mi GT'ye yakin
+            # ISARET SAYIMI: matched ciftlerde -Pd mi +Pd mi GT'ye yakin
         if len (P )and len (G ):
             diff =P [:,None ,:]-G [None ,:,:]
             al =(diff *Gd [None ,:,:]).sum (-1 )
@@ -112,26 +112,26 @@ def main ():
         print (f"{ad :<26}{S [ad ]:>10.4f}")
 
     I =np .array (ISARET )
-    print (f"\nISARET DAGILIMI ({len (I )} eslesen cift, Pd . Gd):")
+    print (f"\nISARET DAGILIMI ({len (I )} matched cift, Pd . Gd):")
     print (f"  NEGATIF (Pd disari, Gd iceri -> takma = -Pd): {float ((I <0 ).mean ()):.1%}")
-    print (f"  POZITIF (ayni yone bakiyor)                 : {float ((I >0 ).mean ()):.1%}")
+    print (f"  POZITIF (same yone bakiyor)                 : {float ((I >0 ).mean ()):.1%}")
     print (f"  medyan {np .median (I ):+.3f}")
 
     e =S ["axis-hazir (unsigned)"]
     m =S ["takma-hazir (-disari)"];p =S ["takma-hazir (+disari)"]
     en_iyi ="-disari"if m >=p else "+disari"
     loss =e -max (m ,p )
-    print (f"\nHUKUM: dogru sozlesme takma_yonu = {en_iyi }")
+    print (f"\nHUKUM: correct sozlesme takma_yonu = {en_iyi }")
     print (f"  signed metrik {max (m ,p ):.4f} vs unsigned {e :.4f} -> loss {loss :+.4f}")
     if loss <=0.01 :
         print ("  -> Sozlesme TUTARLI. Metrik already fiziksel; missing which is only ILAN.")
     else :
         print ("  -> Yonler candidate BASINA TUTARSIZ. Robot hedefi signed metrikle YENIDEN tabanlanmali.")
-    with io .open ("results/t2_isaretli.json","w",encoding ="utf-8")as f :
+    with io .open ("results/t2_signed.json","w",encoding ="utf-8")as f :
         json .dump ({k :float (v )for k ,v in S .items ()}|
         {"negatif_pay":float ((I <0 ).mean ()),"medyan_dot":float (np .median (I )),
         "dogru_sozlesme":en_iyi ,"loss":float (loss )},f ,indent =1 )
-    print ("receipt -> results/t2_isaretli.json")
+    print ("receipt -> results/t2_signed.json")
 
 
 if __name__ =="__main__":

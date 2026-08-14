@@ -1,0 +1,18 @@
+{
+ "detection": 0.7583943683019512,
+ "robot_mevcut": 0.5893431322317577,
+ "robot_kahin": 0.626280517484309,
+ "robot_kahin_isaretli": 0.5748056658554288,
+ "sozluk_medyan": 8.0,
+ "kapsam": {
+  "mevcut": 1186,
+  "ham": 1186,
+  "uye": 2009,
+  "brep": 885,
+  "kanal": 1174,
+  "normal": 1149,
+  "duzlem_A": 1149,
+  "duzlem_B": 1149
+ },
+ "gecti": false
+}

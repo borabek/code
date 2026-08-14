@@ -1,0 +1,37 @@
+{
+ "keig96_s0": {
+  "val": 0.6378,
+  "detection": 0.594882183908046,
+  "candidate": 948,
+  "candidate_recall": 0.6972624798711755,
+  "n_parca": 126
+ },
+ "keig96_s3": {
+  "val": 0.6676,
+  "detection": 0.5799609609609611,
+  "candidate": 533,
+  "candidate_recall": 0.5688816855753647,
+  "n_parca": 126
+ },
+ "keig128_s0": {
+  "val": 0.6237,
+  "detection": 0.6307053745239102,
+  "candidate": 831,
+  "candidate_recall": 0.6811594202898551,
+  "n_parca": 126
+ },
+ "keig128_s1": {
+  "val": 0.7079,
+  "detection": 0.5778318409816358,
+  "candidate": 719,
+  "candidate_recall": 0.6527331189710611,
+  "n_parca": 127
+ },
+ "A1a": {
+  "val": 0.5573,
+  "detection": 0.5660526597556822,
+  "candidate": 1455,
+  "candidate_recall": 0.7588424437299035,
+  "n_parca": 127
+ }
+}

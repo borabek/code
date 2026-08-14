@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """KANONIK MANSET -- dagitilan urunun tum sayilarini TEK places produces and cp_config'e YAZAR.
 
-Bu betik, gece along ortaya cikan OLCUM ZAAFIYETLERINI kapatmak for yazildi:
+Bu betik, night along ortaya produced OLCUM ZAAFIYETLERINI kapatmak for yazildi:
 
 1. ELLE YAZILAN SAYI -> KARISIK KOL. cp_config manseti elle guncelleniyordu and 2026-08-01'de
    `tespit_F1` dagitilan koldan, `robot_hazir_F1`/`precision`/`recall` ONCEKI koldan kalmisti.
@@ -12,13 +12,13 @@ Bu betik, gece along ortaya cikan OLCUM ZAAFIYETLERINI kapatmak for yazildi:
    `wire_gate.decision_score` / `decision_mask` cagiriyor -- taklit not, AYNI KOD.
 
 3. DEV and VAL BIRLESTIRILMISTI. Uc parcali split (DEV karar / VAL exam / LOCKED harcanmadi)
-   kurulmustu but gece along "DEV+VAL havuzlanmis" single number raporlandi; i.e. exam da karar
+   kurulmustu but night along "DEV+VAL havuzlanmis" single number raporlandi; i.e. exam da karar
    verirken kullanildi. Artik UCU DE AYRI basilir.
 
 4. "EN KOTU URETICI" TEK OLCUMDU. Iki manufacturer = two split; urun karari that single sayiya dayaniyordu.
    Artik 7 URUN SERISI bolmesi de basilir -> 9 bolmelik DAGILIM.
 
-5. GUVEN ARALIGI YOKTU. Bu sabah yazdigim headline ciplak sayilardan olusuyordu. Her number residual
+5. GUVEN ARALIGI YOKTU. Bu morning yazdigim headline ciplak sayilardan olusuyordu. Her number residual
    eslestirilmis bootstrap GA'si with gelir.
 
 6. TEK REJIM ORTALAMASI. Korpus carpik (low-CP %89.5 / very-CP %10.5); duz mean yaniltir.
@@ -65,9 +65,9 @@ NBOOT =4000
 
 
 def _pose_acik ():
-    """POSE HEAD bayragi. Urun uyguluyorsa OLCUM DE uygulamali -- aksi halde olculen sey
+    """POSE HEAD bayragi. Urun uyguluyorsa OLCUM DE uygulamali -- aksi halde measured_path sey
     dagitilan urun DEGILDIR (2026-08-02'de this sinifta two kusur output: headline dagitilan
-    modelin donusumunu kurmuyordu and training npz'si sabit koduydu)."""
+    modelin donusumunu kurmuyordu and training npz'si fixed koduydu)."""
     try :
         import wire_gate as _w 
         with io .open ("cp_config.json",encoding ="utf-8")as f :
@@ -153,7 +153,7 @@ def main ():
         cfg =json .load (f )
     mfg_of ={p :m for m ,p ,jf ,s in eligible ()}
     # OLCUM KUMESI TEK KAYNAKTAN (2026-08-01 denetimi): split3.json'dan DEV/VAL, PID dedup,
-    # dogrudan kullanilan LOCKED parts CIKARILIR. Eskiden kumeler olasilik onbelleginden
+    # dogrudan kullanilan LOCKED parts CIKARILIR. Eskiden kumeler probability onbelleginden
     # cikariliyordu and "dev" aslinda old _h_probs.pkl idi -- atama %100 yanlisti.
     import measure_set 
     DER ,_kume_rap =measure_set .cluster (DER_CACHE )
@@ -227,8 +227,8 @@ def main ():
                 k =wire_gate .decision_mask (s )
                 if k .any ():
                     P =r ["P"][k ].copy ();Pd =r ["Pd"][k ].copy ()
-                    # POSE HEAD: urun uyguluyorsa measurement de uygulamali (aksi halde olculen
-                    # sey dagitilan urun DEGILDIR -- this gece two times that is why wrong olctum).
+                    # POSE HEAD: urun uyguluyorsa measurement de uygulamali (aksi halde measured_path
+                    # sey dagitilan urun DEGILDIR -- this night two times that is why wrong olctum).
                     if _pose_acik ():
                         _c =[{"point":P [i ],"direction":Pd [i ]}for i in range (len (P ))]
                         _c =wire_gate .pose_correct (Xr [k ],_c )
@@ -316,14 +316,14 @@ def main ():
         f"{s ['robot_ISARETLI_F1']:>10.4f}",flush =True )
 
     hepsi =~np .isin (tr_grp ,list (tg ))
-    print (f"\n{'split':<22}{'n':>5}{'tespit':>9}{'  %95 GA':>18}{'robot':>9}"
+    print (f"\n{'split':<22}{'n':>5}{'detection':>9}{'  %95 GA':>18}{'robot':>9}"
     f"{'kesin*':>8}{'recall*':>8}{'dusuk-CP':>9}{'very-CP':>9}{'robot-ISRT':>10}")
     print ("-- 1. TANIDIK (manufacturer-karisik, geometri-ayrik) "+"-"*45 )
     for cluster in ("dev","val","atanmamis"):
         alt =[r for r in DER if r .get ("cluster")==cluster ]
         if alt :
-            kaydet (f"  {cluster .upper ()}",alt ,hepsi ,"tanidik")
-    kaydet ("  HAVUZLANMIS",DER ,hepsi ,"tanidik")
+            kaydet (f"  {cluster .upper ()}",alt ,hepsi ,"familiar")
+    kaydet ("  HAVUZLANMIS",DER ,hepsi ,"familiar")
 
     print ("-- 2. GORULMEMIS URETICI (asil axis, n=2) "+"-"*49 )
     for k ,mad in kod .items ():
@@ -363,11 +363,11 @@ def main ():
     if a .yaz :
         h =cfg ["current_product"]["headline_F1"]
         hav =SON ["  HAVUZLANMIS"]
-        h ["tanidik"]={k :hav [k ]for k in ("tespit_F1","tespit_GA","robot_hazir_F1",
+        h ["familiar"]={k :hav [k ]for k in ("tespit_F1","tespit_GA","robot_hazir_F1",
         "robot_GA","precision","recall","n_parca",
         "dusuk_CP_F1","cok_CP_F1")}
-        h ["tanidik"]["DEV"]=SON ["  DEV"]["tespit_F1"]if "  DEV"in SON else None 
-        h ["tanidik"]["VAL"]=SON ["  VAL"]["tespit_F1"]if "  VAL"in SON else None 
+        h ["familiar"]["DEV"]=SON ["  DEV"]["tespit_F1"]if "  DEV"in SON else None 
+        h ["familiar"]["VAL"]=SON ["  VAL"]["tespit_F1"]if "  VAL"in SON else None 
         for k ,v in SON .items ():
             if v ["grup"]=="uretici_disi":
                 h ["gorulmemis_uretici"][k .strip ().split ()[0 ]+"_disarida"]={
@@ -375,7 +375,7 @@ def main ():
         h ["gorulmemis_seri"]={k .strip ():{x :v [x ]for x in ("tespit_F1","n_parca")}
         for k ,v in SON .items ()if v ["grup"]=="seri_disi"}
         h ["ozet"]=ozet 
-        # GATE TARIFI ARTEFAKTTAN URETILIR. Elle yazilan hali 2026-08-02'de BAYATLADI:
+        # GATE TARIFI ARTEFAKTTAN URETILIR. Elle written hali 2026-08-02'de BAYATLADI:
         # "22 column + cokus yonlendirme (44 column)" diyordu, oysa dagitilan gate 116 column and
         # yonlendirme GERI ALINMISTI. Kimlik residual dosyanin kendisinden okunur -> bayatlayamaz.
         import hashlib as _h 
@@ -384,14 +384,14 @@ def main ():
         h ["gate"]={
         "n_feat":int (dag ["n_feat"]),"topo_r":dag .get ("topo_r"),
         "donusum":dag .get ("donusum"),"yonlendirmeli":bool (yonlendirmeli ),
-        "dosya":_p ,
+        "file":_p ,
         "md5":_h .md5 (open (_p ,"rb").read ()).hexdigest (),
         "egitim_verisi":NPZ ,
         "tarif":str (dag .get ("note",""))[:400 ],
         "URETIM":"headline.py --yaz with ARTEFAKTTAN okunur; elle yazilmaz.",
         }
         h ["URETIM"]=("Bu blok headline.py --yaz with URETILIR, ELLE YAZILMAZ. Elle guncelleme "
-        "2026-08-01'de kollari karistirmisti (tespit yeni koldan, robot eskisinden).")
+        "2026-08-01'de kollari karistirmisti (detection yeni koldan, robot eskisinden).")
         with io .open ("cp_config.json","w",encoding ="ascii")as f :
             json .dump (cfg ,f ,indent =1 ,ensure_ascii =True )
         print ("cp_config.current_product.headline_F1 GUNCELLENDI (uretilmis, elle not)")

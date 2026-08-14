@@ -120,8 +120,8 @@ def main ():
     if offs :
         o =np .abs (np .asarray (offs ))
         print (f"\nyuva->mouth kaydirmasi: medyan {np .median (o ):.2f}mm  %90 {np .percentile (o ,90 ):.2f}mm"
-        f"  hic oynamayan %{100 *(o <1e-6 ).mean ():.0f}")
-    print (f"bitti: {npart } yeni part, {nv } hedef kose | toplam {len (allp )}")
+        f"  no oynamayan %{100 *(o <1e-6 ).mean ():.0f}")
+    print (f"bitti: {npart } yeni part, {nv } hedef kose | total {len (allp )}")
 
 
 if __name__ =="__main__":

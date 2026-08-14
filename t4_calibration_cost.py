@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-"""T4: kalibrasyon kurallari TANIDIK veride ne KAYBETTIRIYOR?
+"""T4: calibration kurallari TANIDIK veride ne KAYBETTIRIYOR?
 
 T3 OLCTU: part-ici kurallar manufacturer-disi most kotu durumu 0.2799 -> 0.4553 does (+0.175).
-AMA that kurallar very more GEVSEK (adaylarin %38-53'une pozitif; sabit threshold %10-36).
-Gevseklik tanidik dagilimda KESINLIGI dusurur. Bir rule however
+AMA that kurallar very more GEVSEK (adaylarin %38-53'une pozitif; fixed threshold %10-36).
+Gevseklik familiar dagilimda KESINLIGI dusurur. Bir rule however
    (a) manufacturer-disi belirgin kazandiriyorsa VE
-   (b) tanidik veride loss kucukse
+   (b) familiar veride loss kucukse
 alinabilir. Bu betik (b)'yi olcer -- same geometri-disi protocol, same referans.
 
-KILL: tanidik veride loss 0.02'den buyukse rule ALINMAZ (manseti bozmaya degmez).
+KILL: familiar veride loss 0.02'den buyukse rule ALINMAZ (manseti bozmaya degmez).
 """
 import json 
 import numpy as np 
@@ -37,14 +37,14 @@ def main ():
         return m 
 
     kur ={
-    "sabit (mevcut)":o >=THR ,
+    "fixed (mevcut)":o >=THR ,
     "parca_orani 0.5":part (lambda v :v >=0.5 *max (v .max (),1e-9 )),
     "parca_orani 0.6":part (lambda v :v >=0.6 *max (v .max (),1e-9 )),
     "parca_z >= 0.0":part (lambda v :(v -v .mean ())/(v .std ()+1e-9 )>=0.0 ),
-    "VE(sabit, parca_orani 0.5)":(o >=THR )&part (lambda v :v >=0.5 *max (v .max (),1e-9 )),
-    "VEYA(sabit, parca_orani 0.5)":(o >=THR )|part (lambda v :v >=0.5 *max (v .max (),1e-9 )),
+    "VE(fixed, parca_orani 0.5)":(o >=THR )&part (lambda v :v >=0.5 *max (v .max (),1e-9 )),
+    "VEYA(fixed, parca_orani 0.5)":(o >=THR )|part (lambda v :v >=0.5 *max (v .max (),1e-9 )),
     }
-    print (f"{'rule':<30}{'F1':>8}{'kesin':>8}{'recall':>8}{'pozitif%':>10}{'fark':>9}")
+    print (f"{'rule':<30}{'F1':>8}{'kesin':>8}{'recall':>8}{'pozitif%':>10}{'diff':>9}")
     out ={}
     baseline =None 
     for ad ,m in kur .items ():
@@ -54,8 +54,8 @@ def main ():
         if baseline is None :
             baseline =f 
         print (f"{ad :<30}{f :>8.4f}{pr :>8.3f}{rc :>8.3f}{float (m .mean ()):>10.3f}{f -baseline :>+9.4f}")
-        out [ad ]={"f1":f ,"precision":pr ,"recall":rc ,"fark":f -baseline }
-    print ("\nKILL: tanidik veride loss > 0.02 ise rule ALINMAZ.")
+        out [ad ]={"f1":f ,"precision":pr ,"recall":rc ,"diff":f -baseline }
+    print ("\nKILL: familiar veride loss > 0.02 ise rule ALINMAZ.")
     json .dump (out ,open ("results/t4_calibration_cost.json","w"),indent =1 )
     print ("receipt -> results/t4_calibration_cost.json")
 

@@ -3,11 +3,11 @@
 
 TESHISIMDEKI DEFECT (2026-08-12). S7'de "correct secenegin order yuzdeligi 0.005"
 diye olctugum sey, parcadaki **EN IYI siralanmis** correct secenegin sirasiydi.
-Yani "a tane correct secenek tepeye yakin" diyor -- 24 CP'li a parcada
+Yani "a tane correct option tepeye yakin" diyor -- 24 CP'li a parcada
 24.'sunun nerede oldugu hakkinda HICBIR SEY soylemiyor. "Siralama iyi"
 cikarimim that is why extra iyimserdi.
 
-DOGRU SORU: k'inci correct secenek kacinci sirada? (k = parcanin CP count)
+DOGRU SORU: k'inci correct option kacinci sirada? (k = parcanin CP count)
 
 HIPOTEZ: model ILK CP'yi buluyor, TEKRARLARI bulamiyor. Bu, gozlenen deseni
 birebir aciklar -- few CP'li brand (UPUN 3.2) calisiyor, very CP'li (NIT 24.4)
@@ -15,7 +15,7 @@ cokuyor; because bugun HER CP own basina markalar-arasi a karar gerektiriyor.
 
 AYRICA OLCULUR -- TEKRAR TAVANI: most iyi tohumdan TEK BIR OTELEME with kac GT
 uretilebilir? Bu, "kendine benzerlik with spread" kolunun upper siniridir and
-markalar-arasi transfer GEREKTIRMEZ: gorulmemis markada da 24 hole
+markalar-arasi transfer GEREKTIRMEZ: unseen markada da 24 hole
 birbirinin aynisidir.
 
 D7'ye BAKILMAZ.
@@ -144,7 +144,7 @@ def main ():
         G =np .asarray (d ["G"],float )
         k =len (G )
         a ["cp"].append (k )
-        dg =dogru_maske (d )# (secenek, GT)
+        dg =dogru_maske (d )# (option, GT)
         if not dg .any ():
             continue 
         rank_ =np .argsort (np .argsort (-np .asarray (s )))

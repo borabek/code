@@ -1,18 +1,18 @@
 # 0.85'E GIDEN YOL — stacked, each adim OLCULU (2026-07-27 aksam)
 
-> Bu gece CONFIRMED temel: (1) recall-fav + last-epoch recipe WEI 0.525->0.558 (+0.033, full-145),
+> Bu night CONFIRMED temel: (1) recall-fav + last-epoch recipe WEI 0.525->0.558 (+0.033, full-145),
 > (2) BUG-2 checkpoint: last-epoch >> best-val (+0.086). Artik gercek leverler present.
-> DURUST cerceve: "conclusive 0.85" garanti not but this, each adimi olçulen en gercek yol.
+> DURUST cerceve: "conclusive 0.85" garanti not but this, each adimi olçulen en gercek path.
 
 ## Baslangic (gated urun, scoreboard): base ALL 0.75 | WEI 0.696 | PXC 0.823 | count-assisted 0.775
 
 ## STACKED LEVERLER (confidence sirasi, kumulatif)
 
 ### 1. BUG-2 last-epoch redeploy  [YUKSEK confidence, BEDAVA, +0.05-0.08]
-- Deployed urun best-val checkpoint kullaniyor (WEI-underfit, this gece kanitlandi)
+- Deployed urun best-val checkpoint kullaniyor (WEI-underfit, this night kanitlandi)
 - Urun receipsini last-epoch save with YENIDEN egit -> last-epoch sec
 - Beklenti: WEI 0.696->~0.75, PXC 0.82->~0.85, ALL 0.75->~0.78-0.80
-- Kill: last-epoch best-val'i gecmiyorsa (this gece B_rec'te gecti)
+- Kill: last-epoch best-val'i gecmiyorsa (this night B_rec'te gecti)
 
 ### 2. Recall-fav recipe deploy  [CONFIRMED, +0.03]
 - recall-fav (pos-w 40, tversky 0.5, ce-mult 2) + last-epoch = combined (su an egitiliyor)
@@ -28,7 +28,7 @@
 - WSCAD katalog-bagli parts for gercekci
 
 ### 5. Hedefli label OLCEK (recall-fav recipe with)  [BUYUK, +0.04-0.08]
-- ARTIK etiket YARDIM EDIYOR (correct recipe with, this gece kanitlandi)
+- ARTIK etiket YARDIM EDIYOR (correct recipe with, this night kanitlandi)
 - WEI/high-CP zayif noktalarina recall-fav recipe with more very label
 - WEI 0.75 -> 0.80+; base ALL -> 0.83+
 
@@ -49,7 +49,7 @@
 3. **base ALL 0.85** -> lever 1-6 hepsi (en zor, en gec)
 
 ## SIRA (net)
-1. Combined verdict (su an) -> recipe+PXC gecerli mi
+1. Combined verdict (su an) -> recipe+PXC valid mi
 2. BUG-2 redeploy (bedava, en high ROI)
 3. Bug-tuning (ensemble/postproc)
 4. Metadata mode netlestir
@@ -58,7 +58,7 @@
 
 ## DURUST NOT
 "Kesin 0.85" tek adimda not, STACK with. Her lever olculecek; landmiyorsa durust raporla.
-Bu gece 3 gunun ilk CONFIRMED pozitifi geldi -> yol residual OPEN, sadece stack + olcek.
+Bu night 3 gunun ilk CONFIRMED pozitifi geldi -> path residual OPEN, sadece stack + olcek.
 
 ---
 
@@ -74,13 +74,13 @@ Bu gece 3 gunun ilk CONFIRMED pozitifi geldi -> yol residual OPEN, sadece stack 
 ---
 
 ## HAM WEI-DAHIL ALL 0.85 SALDIRISI (en zor framing, test edilmemis leverler)
-> Bu gece: etiket doyumda (95->+0.006), recipe marjinal, BUG-2 recall_hard'a yardim etmiyor.
+> Bu night: etiket doyumda (95->+0.006), recipe marjinal, BUG-2 recall_hard'a yardim etmiyor.
 > AMA test EDILMEMIS leverler present. Sirasiyla (potansiyel), each biri OLCULECEK:
 
 ### W1. GT-TAMLIK AUDIT (ONCE — belki 0.58 PESIMIST) [measurement, large potansiyel]
 - WEI FP'lerinin ne kadari GERCEK listelenmemis opening? (PXC'de %96-98'di)
 - Ornek WEI FP'yi denetle: gercek acikliksa -> GT missing -> gercek WEI precision YUKSEK -> F1 0.58->0.70+?
-- NOTE: sisme tuzagi -> SADECE dogrulanirsa (insan/gorsel denetim). Olcum duzeltmesi, model not.
+- NOTE: sisme tuzagi -> SADECE dogrulanirsa (insan/gorsel audit). Olcum duzeltmesi, model not.
 
 ### W2. YUKSEK-COZUNURLUK / HOLE-PRESERVING REMESH [WEI recall, test edilmemis]
 - WEI acikliklari KUCUK/duz; 6000-vertex remesh cozmuyor olabilir

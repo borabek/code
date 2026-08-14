@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Ikinci kademe olculerini KISA LISTE for uret and onbellekle.
 
-Kisa list = birinci kademe gate'in esigi gecen candidates (~10-30/part), i.e.
+Kisa list = birinci kademe gate'in esigi passing candidates (~10-30/part), i.e.
 pahali isin olculeri however here hesaplanabilir. Tum havuzda (100+/part)
 maliyet 5 fold artardi and gerek absent: elenmis adaya olcu hesaplamak israf.
 
@@ -54,7 +54,7 @@ def main ():
     ap .add_argument ("--cluster",nargs ="+",default =["d7","d6","tam"])
     a =ap .parse_args ()
     os .makedirs (CIK ,exist_ok =True )
-    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     d6 ={str (p ):r for p ,r in 
     d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
     Rk =K .yukle (None )
@@ -62,16 +62,16 @@ def main ():
         pids =[f [len (on )+1 :-4 ]for f in sorted (os .listdir (OZ ))
         if f .startswith (on +"_")and f .endswith (".npz")]
         t0 =time .time ()
-        n =atlanan =0 
+        n =skipped =0 
         for i ,pid in enumerate (pids ,1 ):
             hedef =f"{CIK }/{on }_{pid }.npz"
             if os .path .exists (hedef ):
-                atlanan +=1 
+                skipped +=1 
                 continue 
             r =Rk .get (pid )or d6 .get (pid )
             f =f"{OB [on ]}/{pid }.npz"
             if r is None or not os .path .exists (f ):
-                atlanan +=1 
+                skipped +=1 
                 continue 
             z =np .load (f"{OZ }/{on }_{pid }.npz")
             m =np .isin (np .asarray (z ["source"],int ),KAYNAKLAR )
@@ -98,7 +98,7 @@ def main ():
                 continue 
             P =np .asarray (z ["P"],float )[m ][k ]
             D =np .asarray (z ["D"],float )[m ][k ]
-            # ISARET DUZELTMESI: derin olculer DISARI bakan yonle anlamlidir
+            # ISARET DUZELTMESI: deep olculer DISARI bakan yonle anlamlidir
             D =np .where (ters [k ][:,None ],-D ,D )
             zz =np .load (f )
             mesh =trimesh .Trimesh (np .asarray (zz ["V"],float ),
@@ -109,9 +109,9 @@ def main ():
             n +=1 
             if n %50 ==0 :
                 h =(time .time ()-t0 )/n 
-                print (f"  {on } {i }/{len (pids )} yazilan={n } {h :.2f}s/part "
-                f"kalan ~{h *(len (pids )-i )/60 :.0f}dk",flush =True )
-        print (f"{on } BITTI: yazilan {n } | atlanan {atlanan }",flush =True )
+                print (f"  {on } {i }/{len (pids )} written={n } {h :.2f}s/part "
+                f"remaining ~{h *(len (pids )-i )/60 :.0f}dk",flush =True )
+        print (f"{on } BITTI: written {n } | skipped {skipped }",flush =True )
     print ("->",CIK )
 
 

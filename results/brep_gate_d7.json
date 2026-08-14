@@ -20,14 +20,14 @@
   },
   "config": {
    "cp_config.json": "e568da8fa71cdc57",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
  "sonuc": {
   "0.3": {
    "robot": 0.15681315207081883,
-   "tespit": 0.35630730319317105,
+   "detection": 0.35630730319317105,
    "makro": 0.1484925915919806,
    "en_kotu": 0.014134275618374558,
    "brand": {
@@ -47,7 +47,7 @@
   },
   "0.4": {
    "robot": 0.1491579791499599,
-   "tespit": 0.33480352846832395,
+   "detection": 0.33480352846832395,
    "makro": 0.13397834448046939,
    "en_kotu": 0.014705882352941176,
    "brand": {
@@ -67,7 +67,7 @@
   },
   "0.5": {
    "robot": 0.13432835820895522,
-   "tespit": 0.2797303803562831,
+   "detection": 0.2797303803562831,
    "makro": 0.10265110219977608,
    "en_kotu": 0.0,
    "brand": {
@@ -87,7 +87,7 @@
   },
   "0.6": {
    "robot": 0.11006204478014567,
-   "tespit": 0.19854329646614513,
+   "detection": 0.19854329646614513,
    "makro": 0.07484029236711619,
    "en_kotu": 0.0,
    "brand": {
@@ -107,7 +107,7 @@
   },
   "0.7": {
    "robot": 0.07880035283740076,
-   "tespit": 0.12525727727139077,
+   "detection": 0.12525727727139077,
    "makro": 0.049598092041073856,
    "en_kotu": 0.0,
    "brand": {
@@ -128,7 +128,7 @@
  },
  "taban_kanonik": {
   "robot": 0.2029,
-  "tespit": 0.4523
+  "detection": 0.4523
  },
  "not": "GENISLETILMIS HAVUZ (seg + B-rep) + D6'da REFIT gate. D7 brand-disi. MIKRO. Tez turetmesi DEGISMEDI; B-rep EK candidate kaynagi."
 }

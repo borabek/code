@@ -12,7 +12,7 @@ D7'nin KENDISINDE taranmisti and two arm FARKLI esikte vertex does:
   goreli .5/.2    0.1851        0.2126
   goreli .5/.3    0.1957        0.1849
 
-Yani sonuc esige BAGLI and D7'de secmek exam kumesine ayar yapmaktir
+Yani sonuc esige BAGLI and D7'de secmek exam kumesine setting yapmaktir
 ([[uclu-split-and-fake-kazanclar]]). Bu betik esigi **D6'da** selects (markalari
 D7'den AYRIK) and D7'ye oyle uygular. Egitim korpusu D6'yi ICERMEZ, so threshold
 secimi de ORNEKLEM-DISI becomes.
@@ -26,7 +26,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -155,7 +155,7 @@ def olc (model ,data_ ,tip ,e ):
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
 
@@ -203,25 +203,25 @@ def main ():
         res_ [ad ]={"secilen_kural":f"{tip } {e }","D6_robot":dr ["robot"],
         "D7":tr_ }
         print (f"  SECILEN (D6'da) {tip } {e } -> D7 robot **{tr_ ['robot']:.4f}** | "
-        f"tespit {tr_ ['tespit']:.4f} | makro {tr_ ['makro']:.4f} | "
+        f"detection {tr_ ['detection']:.4f} | makro {tr_ ['makro']:.4f} | "
         f"en kotu {tr_ ['en_kotu']:.4f}",flush =True )
     a =res_ ["TEZ-SAF"]["D7"]["robot"]
     b =res_ ["GENISLETILMIS"]["D7"]["robot"]
     print (f"\nORNEKLEM-DISI ESIKLE:")
     print (f"  TEZ-SAF        {a :.4f}")
-    print (f"  GENISLETILMIS  {b :.4f}   (fark {b -a :+.4f})")
+    print (f"  GENISLETILMIS  {b :.4f}   (diff {b -a :+.4f})")
     print (f"  DAGITILAN URUN 0.2029")
     print ("\nKARAR: "+("GENISLETILMIS HAVUZ KAZANDI -- dagitilabilir"
     if b >0.2029 else 
     "urunu GECEMEDI -- dagitilmaz"))
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"urun":0.2029 ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,"urun":0.2029 ,
     "not":"Esik D6'da secildi (D7'den brand as AYRIK), training "
     "korpusu D6'yi ICERMEZ. D7 brand-disi, MIKRO."},
-    open ("results/v6_farki_E.json","w"),indent =1 )
+    open ("results/v6_delta_E.json","w"),indent =1 )
     with open ("results/v6_farki_E_modeller.pkl","wb")as f :
         pickle .dump (modeller ,f )
     print ("models -> results/v6_farki_E_modeller.pkl")
-    print ("receipt -> results/v6_farki_E.json")
+    print ("receipt -> results/v6_delta_E.json")
 
 
 if __name__ =="__main__":

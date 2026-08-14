@@ -4,9 +4,9 @@
 Neden ayri betik: `_h_probs.pkl` only DEV kumesini tasiyor. VAL on karar SINAMAK
 for that parcalarin olasiliklari is required; LOCKED for de single atislik final olcumde gerekecek.
 
-IKI KORUMA (ikisi de this gece yasanmis hatalardan):
+IKI KORUMA (ikisi de this night yasanmis hatalardan):
  1) ZEHIRLI PARCA: gmsh single a STEP'te asilabiliyor. Islenmeden ONCE name INFLIGHT dosyasina
-    yazilir; yeniden baslatmada orada duran part kalici as atlanir.
+    yazilir; yeniden baslatmada orada stopped part persistent as atlanir.
  2) DEVAM PARCA KIMLIGINE according to: loop indeksine according to devam etmek, pool degisince wrong
     parcalari skips and metrigi SESSIZCE breaks (2026-07-29'da yasandi).
 
@@ -57,11 +57,11 @@ def main ():
             skip .add (st )
             with open (SKIP ,"a")as fh :
                 fh .write (st +"\n")
-            print (f"  [zehirli part] {st } kalici atlandi",flush =True )
+            print (f"  [zehirli part] {st } persistent atlandi",flush =True )
         os .remove (INFLIGHT )
 
     todo =[p for p in parts if p [1 ]not in done and p [1 ]not in skip ]# KIMLIGE according to
-    print (f"  bitmis {len (done )} | atlanan {len (skip )} | kalan {len (todo )}",flush =True )
+    print (f"  bitmis {len (done )} | skipped {len (skip )} | remaining {len (todo )}",flush =True )
     if not todo :
         print ("yapacak is absent");return 
 

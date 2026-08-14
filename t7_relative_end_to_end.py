@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-"""T7: GORELI ESIK uctan uca -- tanidik veride ne kaybettiriyor?
+"""T7: GORELI ESIK uctan uca -- familiar veride ne kaybettiriyor?
 
 ADAY DUZEYINDE MEASURED (t6): goreli 0.5 + baseline 0.20
-  tanidik (geometri-disi) 0.7422 -> 0.7348 (-0.0074)
+  familiar (geometri-disi) 0.7422 -> 0.7348 (-0.0074)
   manufacturer-disi EN KOTU    0.2799 -> 0.4402 (+0.160)
 
 AMA candidate-duzeyi F1 uctan uca F1 DEGILDIR (E maddesi gate duzeyinde kazanip uctan uca kaybetmisti).
-Bu betik same candidates and same skorlar on YALNIZ DECISION KURALINI changes -- single degisken,
+Bu betik same candidates and same skorlar on YALNIZ DECISION KURALINI changes -- single variable,
 yeniden inference absent, yeniden turetme absent.
 
-KILL (onceden yazili): tanidik (DEV+VAL) tespit F1 kaybi 0.02'yi asarsa ACILMAZ. Kazanc already
-tanidik veride not, GORULMEMIS URETICIDE bekleniyor; here olculen sey BEDEL.
+KILL (onceden yazili): familiar (DEV+VAL) detection F1 kaybi 0.02'yi asarsa ACILMAZ. Kazanc already
+familiar veride not, GORULMEMIS URETICIDE bekleniyor; here measured_path sey BEDEL.
 """
 import os ,sys ,json ,pickle 
 import numpy as np 
@@ -76,7 +76,7 @@ def main ():
             s =r ["s"]
             if len (s )==0 :
                 m =np .zeros (0 ,bool )
-            elif rule_ =="sabit":
+            elif rule_ =="fixed":
                 m =s >=(THR ["very"]if r ["is_hi"]else THR ["dusuk"])
             else :
                 ratio ,baseline =rule_ 
@@ -88,9 +88,9 @@ def main ():
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    ADAY =[("sabit (mevcut)","sabit"),("goreli 0.5 + baseline 0.20",(0.5 ,0.20 )),
+    ADAY =[("fixed (mevcut)","fixed"),("goreli 0.5 + baseline 0.20",(0.5 ,0.20 )),
     ("goreli 0.5 + baseline 0.25",(0.5 ,0.25 )),("goreli 0.4 + baseline 0.20",(0.4 ,0.20 ))]
-    print (f"\n{'karar kurali':<26}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}{'fark':>9}")
+    print (f"\n{'karar kurali':<26}{'detection':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}{'diff':>9}")
     R ,taban_f ={},None 
     for ad ,k in ADAY :
         det ,rob =kos (k )
@@ -101,9 +101,9 @@ def main ():
         print (f"{ad :<26}{f1w (det ):>9.4f}{f1w (rob ):>9.4f}{p_ :>9.3f}{r_ :>9.3f}"
         f"{f1w (det )-taban_f :>+9.4f}",flush =True )
     pickle .dump (R ,open (f"results/t7_parca_{cluster }.pkl","wb"))
-    json .dump ({k :{"tespit":float (f1w (v [0 ])),"robot":float (f1w (v [1 ]))}for k ,v in R .items ()},
+    json .dump ({k :{"detection":float (f1w (v [0 ])),"robot":float (f1w (v [1 ]))}for k ,v in R .items ()},
     open (f"results/t7_goreli_{cluster }.json","w"),indent =1 )
-    print (f"\nKILL: tanidik tespit kaybi > 0.02 ise ACILMAZ. receipt -> results/t7_goreli_{cluster }.json")
+    print (f"\nKILL: familiar detection kaybi > 0.02 ise ACILMAZ. receipt -> results/t7_goreli_{cluster }.json")
 
 
 if __name__ =="__main__":

@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """VII.2d + II.2 -- ADET TAHMINI (ogrenmeli) and ADET-KISITLI SECIM, UCTAN UCA
 
-WHY. Ust-k kahin deneyi olctu: correct CP sayisini bilmek UPUN'da F1'i
+WHY. Ust-k oracle deneyi olctu: correct CP sayisini bilmek UPUN'da F1'i
 0.5359 -> 0.6892 does (**+0.1533**), SUPU'da +0.0314. Bugune up to
 olctugum most large single kazanc. Adet GEOMETRIDEN okunamadi (kipsel yaricapli
 silindir sayimi curudu: error 25-84). Ama OGRENMELI as HIC denenmedi.
 
 BU BETIK two seyi birden yapar:
   1. Parca ozniteliklerinden CP SAYISINI prediction eden a regresyon egitir
-     (brand disarida = gorulmemis brand kosulu).
+     (brand disarida = unseen brand kosulu).
   2. Tahmini adetle ILK-k secimi yapip UCTAN UCA robot F1 olcer, mevcut
      threshold kuralina karsi.
 
@@ -30,7 +30,7 @@ import numpy as np
 from sklearn .ensemble import HistGradientBoostingClassifier 
 from sklearn .ensemble import HistGradientBoostingRegressor 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -106,7 +106,7 @@ def main ():
     for b in katlar :
         ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
         dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
-        # --- 1) secenek skorlayici
+        # --- 1) option skorlayici
         n_s =sum (len (data_ [i ]["y"])for i in ic )
         M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
@@ -162,7 +162,7 @@ def main ():
         tp2 ,fp2 ,fn2 =match_hungarian (P2 ,D2 ,G ,Gd ,dg ,K .YANAL ,K .ACI ,False ,
         signed =True )[:3 ]
         a ["k_tp"]+=tp2 ;a ["k_fp"]+=fp2 ;a ["k_fn"]+=fn2 
-        # REJIM: skor ayrimi yuksekse first-k, dusukse threshold
+        # REJIM: score ayrimi yuksekse first-k, dusukse threshold
         # REJIM KURALI: count tahmini KUCUKSE first-k'ya confidence.
         # Gerekce measured: count hatasi UPUN 0.0, SUPU/MOR 1.0, NIT 18.0 --
         # i.e. prediction YOGUN parcada cokuyor. Skor yayilimina bakan first rule
@@ -175,7 +175,7 @@ def main ():
     def f1 (t ,f ,n ):
         return 2 *t /max (2 *t +f +n ,1 )
 
-    print (f"\n{'brand':<7}{'GT':>7}{'adet |error|':>13}{'ESIK':>9}"
+    print (f"\n{'brand':<7}{'GT':>7}{'count |error|':>13}{'ESIK':>9}"
     f"{'ILK-k':>9}{'REJIM':>9}")
     out ={}
     T =collections .Counter ()
@@ -196,8 +196,8 @@ def main ():
     print (f"{'TOPLAM':<7}{T ['gt']:>7}{'':>13}{e :>9.4f}{kk :>9.4f}{rr :>9.4f}")
     print (f"\nILK-k  - ESIK = {kk -e :+.4f}")
     print (f"REJIM  - ESIK = {rr -e :+.4f}")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
-    "toplam":{"threshold":e ,"ilk_k":kk ,"regime":rr },
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"brand":out ,
+    "total":{"threshold":e ,"ilk_k":kk ,"regime":rr },
     "not":"Adet OGRENMELI tahmin (part oznitelikleri, brand "
     "disarida). Uctan uca robot F1. D7'ye BAKILMADI."},
     open (f"results/adet_regresyon_{KUME }.json","w"),indent =1 )

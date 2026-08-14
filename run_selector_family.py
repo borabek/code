@@ -3,16 +3,16 @@
 
 Kazanan arm: B-rep havuzu + mouth tanimlayicilari, RF 400/leaf3 -> D7 TAM ZINCIR
 robot **0.2649** (urun 0.2029). Havuz and feature tarafi tuketildi; this betik
-SECICININ KENDISINI changes. Tek degisken: model.
+SECICININ KENDISINI changes. Tek variable: model.
 
 Kollar:
   RF-400/3   (kazanan baseline)
   RF-800/1   more high kapasite
   HGB        HistGradientBoosting (tabular veride RF'yi sik geciyor)
-  HGB derin  more very yaprak / iterasyon
-  ENSEMBLE   RF + HGB skor ortalamasi
+  HGB deep  more very yaprak / iterasyon
+  ENSEMBLE   RF + HGB score ortalamasi
 
-Esik HER MODEL ICIN D6'da AYRI secilir (model kalibrasyonu different becomes; sabit
+Esik HER MODEL ICIN D6'da AYRI secilir (model kalibrasyonu different becomes; fixed
 threshold kullanmak zayif modeli haksiz cezalandirirdi). D7'de yeniden TARANMAZ.
 """
 import collections 
@@ -24,7 +24,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier ,RandomForestClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -71,12 +71,12 @@ def oku (on ):
 def kimlikle (v ):
     global _D6 
     kay =K .yukle ([d ["pid"]for d in v ])
-    eksik =[d ["pid"]for d in v if d ["pid"]not in kay ]
-    if eksik :
+    missing =[d ["pid"]for d in v if d ["pid"]not in kay ]
+    if missing :
         if _D6 is None :
             _D6 ={str (p ):r for p ,r in 
             d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
-        kay .update ({p :_D6 [p ]for p in eksik if p in _D6 })
+        kay .update ({p :_D6 [p ]for p in missing if p in _D6 })
     out =[]
     for d in v :
         r =kay .get (d ["pid"])
@@ -123,7 +123,7 @@ def olc (modeller ,data_ ,e ,tam_zincir =False ,S =None ):
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
 
@@ -145,7 +145,7 @@ def main ():
     n_estimators =800 ,min_samples_leaf =1 ,n_jobs =-1 ,random_state =0 ),
     "HGB":lambda :HistGradientBoostingClassifier (
     max_iter =300 ,learning_rate =0.1 ,random_state =0 ),
-    "HGB-derin":lambda :HistGradientBoostingClassifier (
+    "HGB-deep":lambda :HistGradientBoostingClassifier (
     max_iter =600 ,learning_rate =0.06 ,max_leaf_nodes =63 ,
     l2_regularization =1.0 ,random_state =0 ),
     }
@@ -162,10 +162,10 @@ def main ():
         e ,_ =en 
         r7 =olc ([m ],te ,e ,tam_zincir =True ,S =S )
         res_ [ad ]=dict (r7 ,threshold =e )
-        print (f"{ad :<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | tespit "
-        f"{r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f} | en kotu "
+        print (f"{ad :<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | detection "
+        f"{r7 ['detection']:.4f} | makro {r7 ['makro']:.4f} | en kotu "
         f"{r7 ['en_kotu']:.4f}",flush =True )
-    ens =[egitilmis ["RF-400/3"],egitilmis ["HGB-derin"]]
+    ens =[egitilmis ["RF-400/3"],egitilmis ["HGB-deep"]]
     en =None 
     for _t ,e in KURALLAR :
         r =olc (ens ,dev ,e )
@@ -175,19 +175,19 @@ def main ():
     r7 =olc (ens ,te ,e ,tam_zincir =True ,S =S )
     res_ ["ENSEMBLE RF+HGB"]=dict (r7 ,threshold =e )
     print (f"{'ENSEMBLE':<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | "
-    f"tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
+    f"detection {r7 ['detection']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
     iyi =max (res_ ,key =lambda k :res_ [k ]["robot"])
     print (f"\nEN IYI: {iyi } robot {res_ [iyi ]['robot']:.4f} | urun 0.2029 "
     f"({res_ [iyi ]['robot']-0.2029 :+.4f})")
     with open ("results/secici_ailesi_modeller.pkl","wb")as f :
         pickle .dump (egitilmis ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"en_iyi":iyi ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,"en_iyi":iyi ,
     "urun":0.2029 ,
     "not":"Ayni pool (B-rep + tanimlayici), same etiket; TEK DEGISKEN "
     "siniflandirici. Esik each model for D6'da ayri secildi. "
     "D7 brand-disi, TAM ZINCIR, MIKRO."},
-    open ("results/secici_ailesi.json","w"),indent =1 )
-    print ("receipt -> results/secici_ailesi.json")
+    open ("results/selector_family.json","w"),indent =1 )
+    print ("receipt -> results/selector_family.json")
 
 
 if __name__ =="__main__":

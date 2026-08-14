@@ -2,8 +2,8 @@
 """MESH ADAYI SEYRELTME -- training de urun de BU fonksiyonu cagirir.
 
 MEASURED (D6, 468 part; criterion YALNIZ KONUM recall'u / candidate-part):
-    most high olasilik 60      0.6362 / 160
-    most high olasilik 150     0.7163 / 214
+    most high probability 60      0.6362 / 160
+    most high probability 150     0.7163 / 214
     uzamsal 4.0mm, 2x120       0.8091 / 178
     uzamsal 2.5mm, 4x250       0.8713 / 251   <- SECILEN (maliyet array)
     uzamsal 2.0mm, sinirsiz    0.9768 / 458

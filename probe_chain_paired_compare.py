@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """E2 — SAHAYA INEN ZINCIR vs OLCULEN ZINCIR, ESLI KIYAS
 
-SORUN. Ihracatcilar `robot_cp.extract` cagiriyor; kampanyada olculen
+SORUN. Ihracatcilar `robot_cp.extract` cagiriyor; kampanyada measured_path
 `product_p6`/`product_wide` sahaya HIC girmiyor. `export_robot_glb.py` icine
 `cp_config.glb_kanonik_zincir` bayragi kondu but ACILMADI: saglamlik
-denetimi gecti (40/40 part, cokme/NaN absent, yonler unit) fakat olculen
+denetimi gecti (40/40 part, cokme/NaN absent, yonler unit) fakat measured_path
 zincir **181 GT for 309 CP** uretiyordu. Fonksiyonel karsiligi robotun
 olmayan yerlere gitmesidir; F1 same kalsa bile this a gerileme may be.
 
@@ -26,7 +26,7 @@ import time
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -42,9 +42,9 @@ _NRM ={}
 
 
 def _graf_duzelt (pb ,F ,tur ,w ):
-    """Y24: mesh KENARLARI on olasilik correction (mean-alan CRF).
+    """Y24: mesh KENARLARI on probability correction (mean-alan CRF).
 
-    Her turda each tepenin olasilik vektoru, komsularinin ortalamasiyla
+    Her turda each tepenin probability vektoru, komsularinin ortalamasiyla
     `w` agirliginda harmanlanir: p <- (1-w)*p + w*komsu_ortalamasi.
     Bu, full a CRF'in mean-alan yaklasimidir and ek parametre/training
     GEREKTIRMEZ. `kind=0` or `w=0` -> bit-same baseline.
@@ -167,7 +167,7 @@ def main ():
     kay .update ({str (p ):r for p ,r in d6_record .yukle ().items ()
     if str (p )not in kay })
     # PARCA LISTESI (2026-08-13). `EZ_LISTE` verilirse brand suzgeci instead of
-    # OPEN part listesi is used. Sunulacak "tanidik brand" count for
+    # OPEN part listesi is used. Sunulacak "familiar brand" count for
     # gereken cluster budur: `results/split3.json` -> VAL (100 part,
     # geometri-ayrik, manufacturer-KARISIK) and measured ki VAL parcalarinin
     # HICBIRI secicinin training kumesinde DEGIL (DEV'de 37 tanesi vardi --
@@ -181,7 +181,7 @@ def main ():
         if str (p )in istenen and len (r .get ("G",[]))and p in STEP ]
         print (f"part listesi: {lst_ } / "
         f"{os .environ .get ('EZ_BOLME','val')} -> {len (candidate )} part "
-        f"(STEP'i ve GT'si olan)",flush =True )
+        f"(STEP'i ve GT'si which)",flush =True )
     else :
         candidate =[(p ,r )for p ,r in kay .items ()
         if r .get ("mfg")in MARKALAR and len (r .get ("G",[]))
@@ -190,10 +190,10 @@ def main ():
     if len (candidate )>N_PARCA :
         candidate =[candidate [i ]for i in rng .choice (len (candidate ),N_PARCA ,
         replace =False )]
-    print (f"{len (candidate )} part | STEP'ten TAM zincir, iki yol yan yana",
+    print (f"{len (candidate )} part | STEP'ten TAM zincir, iki path yan yana",
     flush =True )
 
-    agg ={k :collections .Counter ()for k in ("saha","olculen")}
+    agg ={k :collections .Counter ()for k in ("field","measured_path")}
     dokum =[]
     n =0 
     for pid ,r in candidate :
@@ -228,7 +228,7 @@ def main ():
                 # "havuzda candidate YOK" mu, "candidate VARDI gate eledi" mi -- ayrimi
                 # tahminle gecmek wrong becomes. Havuz here, gate'ten ONCE
                 # kaydedilir; so HAVUZ RECALL'u with CIKTI recall'u yan yana
-                # okunur and kalan emegin havuza mi skora mi gitmesi gerektigi
+                # okunur and remaining emegin havuza mi skora mi gitmesi gerektigi
                 # OLCUMLE belli becomes.
                 # DUZELTME 2026-08-14: pool DISARIDAN yeniden uretilemez.
                 # `extract` operator onbellegini kullanir, buradaki taze inference
@@ -240,7 +240,7 @@ def main ():
             import wire_gate as _WG 
             del _WG .POSE_KANCA [:]
             # SAHA yolu: ihracatcilarin bugun cagirdigi
-            saha =robot_cp .extract (modeller ,STEP [pid ],dev ,ca ,mav )
+            field =robot_cp .extract (modeller ,STEP [pid ],dev ,ca ,mav )
             _poz =list (_WG .POSE_KANCA )
             _hav =(robot_cp .HAVUZ_KANCA [-1 ]if robot_cp .HAVUZ_KANCA 
             else None )
@@ -252,7 +252,7 @@ def main ():
         G =np .asarray (r ["G"],float )
         Gd =np .asarray (r ["Gd"],float )
         dg =float (np .linalg .norm (V .max (0 )-V .min (0 )))
-        for ad ,cps in (("saha",saha ),("olculen",olc )):
+        for ad ,cps in (("field",field ),("measured_path",olc )):
             P ,D =_pd (cps )
             c =agg [ad ]
             # UC METRIK BIRDEN. `headline.py` manseti IKI ayri olcutle
@@ -279,10 +279,10 @@ def main ():
             # dakikalik TAM ZINCIR kosusu gerektiriyor. Tahminler diske
             # dokulurse same denemeler SANIYELER inside cevrimdisi is done.
             # Metrikleri DEGISTIRMEZ, only output adds.
-        for ad ,cps in (("saha",saha ),("olculen",olc )):
+        for ad ,cps in (("field",field ),("measured_path",olc )):
             P ,D =_pd (cps )
             dokum .append ({
-            "pid":str (pid ),"yol":ad ,
+            "pid":str (pid ),"path":ad ,
             "P":P .tolist (),"D":D .tolist (),
             "confidence":[float (c .get ("confidence",float ("nan")))
             for c in cps ],
@@ -306,29 +306,29 @@ def main ():
             "mesh_merkez":V .mean (0 ).tolist (),
             "yerel_normal":_yerel_normal (V ,F ,P ).tolist (),
             "halka_normal":_halka_normal (V ,F ,P ).tolist ()})
-        agg ["saha"]["gt"]+=len (G )
+        agg ["field"]["gt"]+=len (G )
         n +=1 
         if n %5 ==0 :
             print (f"  {n }/{len (candidate )} ({time .time ()-t0 :.0f} s)",flush =True )
 
-    print (f"\n{n } part | GT {agg ['saha']['gt']}")
+    print (f"\n{n } part | GT {agg ['field']['gt']}")
     print ("\n=== UC METRIK (same parts, same zincir) ===")
-    print (f"{'yol':<10}{'tespit':>10}{'robot ISARETSIZ':>18}"
+    print (f"{'path':<10}{'detection':>10}{'robot ISARETSIZ':>18}"
     f"{'robot ISARETLI':>17}")
-    for _ad in ("saha","olculen"):
+    for _ad in ("field","measured_path"):
         _c =agg [_ad ]
         def _f (on ,_c =_c ):
             return (2 *_c [on +"_tp"]/max (
             2 *_c [on +"_tp"]+_c [on +"_fp"]+_c [on +"_fn"],1 ))
-        print (f"{_ad :<10}{_f ('tespit'):>10.4f}"
+        print (f"{_ad :<10}{_f ('detection'):>10.4f}"
         f"{_f ('robot_isaretsiz'):>18.4f}"
         f"{_f ('robot_isaretli'):>17.4f}")
     print ("  NOT: yapilandirmadaki `robot_hazir_F1` ISARETSIZ olandir;")
-    print ("       robot for gecerli criterion ISARETLI olandir.")
-    print (f"{'yol':<10}{'robot F1':>10}{'precision':>10}{'recall':>9}"
+    print ("       robot for valid criterion ISARETLI olandir.")
+    print (f"{'path':<10}{'robot F1':>10}{'precision':>10}{'recall':>9}"
     f"{'uretilen CP':>13}")
     out ={}
-    for ad in ("saha","olculen"):
+    for ad in ("field","measured_path"):
         c =agg [ad ]
         f1 =2 *c ["tp"]/max (2 *c ["tp"]+c ["fp"]+c ["fn"],1 )
         kes =c ["tp"]/max (c ["tp"]+c ["fp"],1 )
@@ -337,8 +337,8 @@ def main ():
         "cp":int (c ["cp"]),"tp":int (c ["tp"]),
         "fp":int (c ["fp"]),"fn":int (c ["fn"])}
         print (f"{ad :<10}{f1 :>10.4f}{kes :>10.4f}{rec :>9.4f}{c ['cp']:>13}")
-    df1 =out ["olculen"]["f1"]-out ["saha"]["f1"]
-    dke =out ["olculen"]["precision"]-out ["saha"]["precision"]
+    df1 =out ["measured_path"]["f1"]-out ["field"]["f1"]
+    dke =out ["measured_path"]["precision"]-out ["field"]["precision"]
     print (f"\n  F1 farki       {df1 :+.4f}")
     print (f"  precision farki {dke :+.4f}")
     ac =df1 >0 and dke >=-0.02 
@@ -346,17 +346,17 @@ def main ():
     print ("  Kural: F1 ARTTI **VE** precision 0.02'den extra GERILEMEDI.")
     print ("  Gerekce: wrong CP = robotun empty yere hareketi; F1 same kalsa")
     print ("           bile precision dususu sahada GERILEMEDIR.")
-    json .dump ({"damga":makbuz_hash .damga (),"n_parca":n ,
-    "gt":int (agg ["saha"]["gt"]),"yollar":out ,
+    json .dump ({"damga":receipt_hash .damga (),"n_parca":n ,
+    "gt":int (agg ["field"]["gt"]),"yollar":out ,
     "f1_farki":df1 ,"kesinlik_farki":dke ,"acilabilir":bool (ac ),
-    "not":"Saha zinciri (robot_cp.extract) vs olculen zincir "
+    "not":"Saha zinciri (robot_cp.extract) vs measured_path zincir "
     "(canonical_chain.product_output), AYNI parcalarda. "
     "D7'ye BAKILMADI."},
-    open ("results/zincir_esli_kiyas.json","w"),indent =1 )
+    open ("results/chain_paired_compare.json","w"),indent =1 )
     _dk =os .environ .get ("EZ_DOKUM","results/_tahmin_dokumu.json")
     json .dump (dokum ,open (_dk ,"w"),indent =0 )
     print (f"tahmin dokumu -> {_dk } ({len (dokum )} kayit)")
-    print (f"receipt -> results/zincir_esli_kiyas.json "
+    print (f"receipt -> results/chain_paired_compare.json "
     f"({time .time ()-t0 :.0f} s)")
 
 

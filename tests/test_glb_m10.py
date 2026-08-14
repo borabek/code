@@ -65,7 +65,7 @@ def test_dort_bayrak_dort_ayri_dugum (tmp_path ):
     _cp (6 ,["dar_agiz"]),_cp (9 ,["ters_yon"])],"f.glb")
     ham =open (p ,"rb").read ()
     for ad in ("govde_ici","onu_kapali","dar_agiz","ters_yon"):
-        assert ("fiz_"+ad ).encode ()in ham ,f"{ad } dugumu yok"
+        assert ("fiz_"+ad ).encode ()in ham ,f"{ad } dugumu none"
 
 
 def test_ayni_cp_birden_cok_bayrak (tmp_path ):

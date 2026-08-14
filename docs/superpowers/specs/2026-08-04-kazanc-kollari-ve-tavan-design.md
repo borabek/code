@@ -70,8 +70,8 @@ En yüksek tavanlı, en pahalı arm. Seg korpusu 71 → ~1500+.
 - **Tez etkisi:** none. 5 sınıf ve `v_o` değişmez; yalnız etiketli parça sayısı artar.
   Eğitim `train_seg_extra.py --train-dir` with, üç seed.
 - **KILL (bağlayıcı):** ateşleme oranı %78'in altına düşerse **veya** görülmemiş üretici
-  F1'i -0.005'ten fazla düşerse **geri al**.
-  - Neden this ölçüt: h3'ün gerçek çöküşü ateşlemeydi ve F1 o çökerken a süre sabit
+  F1'i -0.005'ten excess düşerse **geri al**.
+  - Neden this ölçüt: h3'ün gerçek çöküşü ateşlemeydi ve F1 o çökerken a süre fixed
     görünür — "sadece F1" geç yakalar. Seg IoU ise zayıf etiketle doğal as
     düşebileceği için yanlış negatif üretir, iyi arm boşuna öldürür.
 
@@ -79,7 +79,7 @@ En yüksek tavanlı, en pahalı arm. Seg korpusu 71 → ~1500+.
 
 ```
 ŞİMDİ    T3  yapısal ceiling ölçümü          bedava, önbellekten, GPU kullanmaz
-~3 saat  türetme biter → D5-3 → F2-12      ölçülmüş kazancı which tek arm (veri)
+~3 saat  türetme biter → D5-3 → F2-12      ölçülmüş kazancı which tek arm (data)
 after    T2  gizli öznitelik ceiling ölçümü   ağ boşalınca
          geçen arm TEK BAŞINA dağıt        atıf korunur
 GECE     A   oto-etiket + seg eğitimi       uzun eğitim uykuya
@@ -88,7 +88,7 @@ GECE     A   oto-etiket + seg eğitimi       uzun eğitim uykuya
 İki arm aynı anda **ölçmek** sorunsuz (ölçüm dağıtım değildir); aynı anda **dağıtmak**
 atfı bozar. Bu yüzden ölçümler paralel, dağıtımlar sıralı.
 
-Kritik yol aç bırakılır: veri arm şu an koşuyor ve ölçülmüş kazancı which tek şey o
+Kritik path aç bırakılır: data arm şu an koşuyor ve ölçülmüş kazancı which tek şey o
 ([[ogrenme-egrisi-fiyat-etiketi]]: hacimden +0.030, [[cesitlilik-ve-fn-profili]]:
 çeşitlilikten ayrıca +0.0443).
 
@@ -100,7 +100,7 @@ Kritik yol aç bırakılır: veri arm şu an koşuyor ve ölçülmüş kazancı 
 - A: ölçülmemiş; düşük-CP'de candidate tavanında +0.129 alınmamış pay present ve ona **yalnız
   temsil** dokunabiliyor
 
-0.85'i gören senaryo: veri + A + C. B tek başına 0.85 getirmez but FN kovasını açar.
+0.85'i gören senaryo: data + A + C. B tek başına 0.85 getirmez but FN kovasını açar.
 
 ## Doğrulama
 

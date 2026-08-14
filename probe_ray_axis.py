@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 """A1 SONDASI -- ISIN ATMA with YON, GERCEK VERIDE
 
-SENTETIK YETENEK GECTI (`ray_axis.self_check`): ekseni bilinen three
+SENTETIK YETENEK GECTI (`ray_axis.self_check`): ekseni known three
 delikte deviation 0.0 derece, tup skoru 8.45 / zemin 1.00.
 
-DIAGNOSIS (docs/OTOPSI_YOGUN_PARCA.md). NIT'te 6322 secenek = ~260 konum x 24
+DIAGNOSIS (docs/autopsy_dense_part.md). NIT'te 6322 option = ~260 konum x 24
 direction. Konum/GT orani 11:1 (iyi); fazlaligin TAMAMI direction coklugundan.
 Yon konum basina TEK olsaydi gereken AUC 0.9968 -> 0.91.
 
 ESLESME KUTUSU -- BUGUN IKI KEZ DUSTUGUM TRAP. Aday-GT eslesmesi OKLID
 mesafesiyle YAPILMAZ. Kabul kutusu carpimdir: GT yonune according to YANAL <= 2mm
-and EKSENEL <= 40mm. Oklid 2mm kullanmak `kahin`i 0.593'ten 0.0172'ye
-dusuruyordu -- olculen sey mekanizma not kusurdu.
+and EKSENEL <= 40mm. Oklid 2mm kullanmak `oracle`i 0.593'ten 0.0172'ye
+dusuruyordu -- measured_path sey mekanizma not kusurdu.
 
-KOLLAR (GT with eslesen adaylarda, direction YALITILMIS):
-  bugunku    : model skoru most high secenek
-  tup        : tup skoru most high secenek (own isaretiyle)
+KOLLAR (GT with matched adaylarda, direction YALITILMIS):
+  bugunku    : model skoru most high option
+  tup        : tup skoru most high option (own isaretiyle)
   tup_disari : tup most high EKSEN + sign "govdeden disari"
   tup_x_skor : tup x model skoru
-  kahin      : correct direction candidates between VAR mi (upper boundary)
+  oracle      : correct direction candidates between VAR mi (upper boundary)
 
 KAPI: NIT'te `tup` or `tup_disari`, `bugunku`yu >= 0.05 asacak.
 D7'ye BAKILMAZ.
@@ -32,7 +32,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -54,7 +54,7 @@ MESH ={"d6":"results/_p1_olasilik",
 MAKS_KONUM =int (os .environ .get ("IS_KONUM","3"))# GT basina konum tavani
 MAKS_YON =int (os .environ .get ("IS_YON","24"))# konum basina direction tavani
 KOLLAR =("bugunku","tup","tup_eksen","tup_hava","tup_disari",
-"tup_x_skor","kahin")
+"tup_x_skor","oracle")
 
 
 def _birim (v ):
@@ -116,18 +116,18 @@ def main ():
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
-    atlanan =collections .Counter ()
+    skipped =collections .Counter ()
     for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         mf =f"{MESH }/{d ['pid']}.npz"
         if not os .path .exists (mf ):
-            atlanan ["mesh_yok"]+=1 
+            skipped ["mesh_yok"]+=1 
             continue 
         z =np .load (mf )
         V ,F =np .asarray (z ["V"],float ),np .asarray (z ["F"],int )
         if len (F )<100 :
-            atlanan ["mesh_kucuk"]+=1 
+            skipped ["mesh_kucuk"]+=1 
             continue 
         ag =trimesh .Trimesh (vertices =V ,faces =F ,process =False )
         isinci =trimesh .ray .ray_triangle .RayMeshIntersector (ag )
@@ -158,7 +158,7 @@ def main ():
 
             aci =np .degrees (np .arccos (np .clip (YD [se ]@Gn [j ],-1 ,1 )))
             if (aci <=K .ACI ).any ():
-                say ["kahin"]+=1 
+                say ["oracle"]+=1 
             if aci [int (np .argmax (s [se ]))]<=K .ACI :
                 say ["bugunku"]+=1 
 
@@ -186,7 +186,7 @@ def main ():
                 say ["tup_eksen"]+=1 
 
                 # --- ISARET KURALI 1: HAVA TARAFI (isin verisinden dogrudan)
-                # Disari which is taraf havaya cikan taraftir: that yonde isin no
+                # Disari which is taraf havaya produced taraftir: that yonde isin no
                 # seye carpmaz (serbest path large), ic tarafta duvara carpar.
             kok =P [idx [se ][en ]]
             d_ci =IE .ilk_carpma (isinci ,np .vstack ([kok ,kok ]),
@@ -211,7 +211,7 @@ def main ():
         if n %20 ==0 :
             print (f"  {n } part ({time .time ()-t0 :.0f} s)",flush =True )
 
-    print (f"\n{n } part | atlanan {dict (atlanan )}")
+    print (f"\n{n } part | skipped {dict (skipped )}")
     print ("GT with ESLESEN adaylarda direction dogrulugu (CARPIM kutusu)")
     print (f"{'brand':<7}{'GT':>7}"+"".join (f"{k :>13}"for k in KOLLAR ))
     out ={}
@@ -231,8 +231,8 @@ def main ():
             f =out ["NIT"][k_ ]-h 
             print (f"  {k_ :<12}{out ['NIT'][k_ ]:.4f}   {f :+.4f}"
             +("  <- KAPI GECTI"if f >=0.05 else ""))
-        print (f"  {'kahin':<12}{out ['NIT']['kahin']:.4f}   (ust sinir)")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
+        print (f"  {'oracle':<12}{out ['NIT']['oracle']:.4f}   (ust sinir)")
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"brand":out ,
     "maks_konum":MAKS_KONUM ,"maks_yon":MAKS_YON ,
     "not":"Isin atma with delik ekseni. CARPIM kabul kutusu "
     "(lateral 2mm / axial 40mm) -- Oklid DEGIL. "

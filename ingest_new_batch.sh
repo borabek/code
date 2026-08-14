@@ -4,7 +4,7 @@
 # Kullanim:  bash ingest_new_batch.sh
 # On kosul:  yeni .stp dosyalari all_wscad_stp/ icine atilmis olmali.
 #
-# Bu script yeni gelenleri MEVCUT corpus'tan (wscad_corpus_v5) ayirt eder ve yalnizca
+# Bu script yeni gelenleri MEVCUT corpus'defn (wscad_corpus_v5) ayirt eder ve yalnizca
 # onlari etiketler -- 1741 parcayi yeniden etiketlemez.
 set -u
 cd "c:/Users/DE00024082/Desktop/code"
@@ -13,7 +13,7 @@ echo "=== 1) YENI DOSYALARI TESPIT ET ==="
 ls all_wscad_stp/*.stp | sort > _pool_now.txt
 # corpus'ta already etiketli olanlarin adlari
 ls wscad_corpus_v5/*.json 2>/dev/null | xargs -n1 basename 2>/dev/null | sed 's/\.json$//' | sort > _labelled.txt
-# havuzdaki each STEP for part_nr (dosya adi) cikar, etiketli olmayanlari sec
+# havuzdaki each STEP for part_nr (file adi) cikar, etiketli olmayanlari sec
 : > _new_steps.txt
 while read -r f; do
   pn=$(basename "$f" .stp)
@@ -22,17 +22,17 @@ done < _pool_now.txt
 n_new=$(grep -c . _new_steps.txt || echo 0)
 echo "yeni/etiketsiz STEP: $n_new"
 if [ "$n_new" -lt 50 ]; then
-  echo "HATA: yeni dosya none/az ($n_new) -- dosyalari all_wscad_stp/ icine attin mi?"
+  echo "HATA: yeni file none/az ($n_new) -- dosyalari all_wscad_stp/ icine attin mi?"
   exit 1
 fi
 
-echo "=== 2) KAPSAM DENETIMI (dagitim bloklari / yasakli liste) ==="
+echo "=== 2) KAPSAM DENETIMI (dagitim bloklari / yasakli list) ==="
 .venv/Scripts/python.exe audit_batch.py --files _new_steps.txt --guard pxc_out_of_scope.txt \
   --delete-out-of-scope 2>&1 | tee _new_batch_audit.log
-# denetim silmis olabilir -> listeyi tazele
+# audit silmis olabilir -> listeyi tazele
 awk '{print}' _new_steps.txt > _tmp && while read -r f; do [ -f "$f" ] && echo "$f"; done < _tmp > _new_steps.txt && rm -f _tmp
 n_new=$(grep -c . _new_steps.txt || echo 0)
-echo "denetim sonrasi etiketlenecek: $n_new"
+echo "audit sonrasi etiketlenecek: $n_new"
 
 echo "=== 3) ETIKETLE (6 shard, kanitlanmis tarif) ==="
 rm -rf _nshard_dir_* wscad_corpus_new_p* _nshard_0*

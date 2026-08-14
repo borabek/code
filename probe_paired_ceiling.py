@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ESLI TAVAN KIYASI: two korpusu AYNI PARCALAR on karsilastir.
 
-WHY. Tavan-24 korpusu (`tam4`) yet tamamlanmadi. Yarim korpusta olculen
+WHY. Tavan-24 korpusu (`tam4`) yet tamamlanmadi. Yarim korpusta measured_path
 yonlu recall, full korpusunkiyle KIYASLANAMAZ: biten parts rastgele not,
 ONCE BITEN i.e. more small/easy parcalardir. Nitekim kismi tam4 olcumu 0.8952
 verdi -- ceiling-12'nin 0.7347'sinden very high, but farkin ne kadari TAVANDAN
@@ -39,7 +39,7 @@ def pidler (diz ):
 
 
 def olc (diz ,pid_list ,kay ):
-    """Doner: (gt, konum_yakalanan, yonlu_yakalanan, secenek, candidate)."""
+    """Doner: (gt, konum_yakalanan, yonlu_yakalanan, option, candidate)."""
     gt =ky =yy =sec =ad =0 
     for pid in pid_list :
         r =kay .get (pid )
@@ -76,7 +76,7 @@ def main ():
     kay =kayitlar (ortak )
     out ={}
     print (f"{'corpus':<26}{'GT':>7}{'konum':>9}{'YONLU':>9}"
-    f"{'secenek/part':>15}")
+    f"{'option/part':>15}")
     for ad_ ,dz in (("A (ceiling 12)",A_DIZ ),("B (ceiling 24)",B_DIZ )):
         gt ,ky ,yy ,sec ,adn =olc (dz ,ortak ,kay )
         kr ,yr =ky /max (gt ,1 ),yy /max (gt ,1 )
@@ -90,11 +90,11 @@ def main ():
     print (f"\nFARK (B - A):  konum {b ['konum_recall']-a ['konum_recall']:+.4f}"
     f"   YONLU {b ['yonlu_recall']-a ['yonlu_recall']:+.4f}"
     f"   F1 tavani {b ['f1_tavani']-a ['f1_tavani']:+.4f}")
-    print (f"secenek maliyeti: "
+    print (f"option maliyeti: "
     f"{b ['secenek_parca']/max (a ['secenek_parca'],1e-9 ):.2f}x")
     json .dump ({"on":ON ,"n_ortak":len (ortak ),"A":A_DIZ ,"B":B_DIZ ,
     "sonuc":out ,
-    "not":"ESLI kiyas: only IKI korpusta da bulunan parts. "
+    "not":"ESLI kiyas: only IKI korpusta da found parts. "
     "Yarim korpusu tam korpusla kiyaslamak alt cluster "
     "yanliligi uretir; this measurement onu kaldirir. D7'ye "
     "BAKILMADI."},

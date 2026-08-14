@@ -20,15 +20,15 @@
   },
   "config": {
    "cp_config.json": "e568da8fa71cdc57",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
  "sonuc": {
   "v6 | TEZ-SAF (referans)": {
-   "kural": "mutlak 0.3",
+   "rule": "mutlak 0.3",
    "robot": 0.19695431472081218,
-   "tespit": 0.42923857868020304,
+   "detection": 0.42923857868020304,
    "makro": 0.22497285858696772,
    "en_kotu": 0.012253233492171545,
    "brand": {
@@ -47,9 +47,9 @@
    }
   },
   "v6 | GENISLETILMIS": {
-   "kural": "mutlak 0.4",
+   "rule": "mutlak 0.4",
    "robot": 0.14348206474190725,
-   "tespit": 0.28492271799358415,
+   "detection": 0.28492271799358415,
    "makro": 0.1816840968095054,
    "en_kotu": 0.015151515151515152,
    "brand": {
@@ -68,9 +68,9 @@
    }
   },
   "v6 | GENISLETILMIS -0.05 ceza": {
-   "kural": "mutlak 0.4",
+   "rule": "mutlak 0.4",
    "robot": 0.1672268907563025,
-   "tespit": 0.32100840336134456,
+   "detection": 0.32100840336134456,
    "makro": 0.20565625991026218,
    "en_kotu": 0.009569377990430622,
    "brand": {
@@ -89,9 +89,9 @@
    }
   },
   "v6 | GENISLETILMIS -0.10 ceza": {
-   "kural": "mutlak 0.4",
+   "rule": "mutlak 0.4",
    "robot": 0.16755135010385414,
-   "tespit": 0.30833141010846987,
+   "detection": 0.30833141010846987,
    "makro": 0.21171600878938726,
    "en_kotu": 0.010416666666666666,
    "brand": {
@@ -110,9 +110,9 @@
    }
   },
   "v6 | GENISLETILMIS -0.20 ceza": {
-   "kural": "mutlak 0.3",
+   "rule": "mutlak 0.3",
    "robot": 0.20260747004933052,
-   "tespit": 0.43446088794926,
+   "detection": 0.43446088794926,
    "makro": 0.23308734487302044,
    "en_kotu": 0.02028639618138425,
    "brand": {

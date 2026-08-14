@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""S7 COKUS TESHISI: coken brand with calisan brand arasindaki difference NE?
+"""S7 COKUS TESHISI: coken brand with running brand arasindaki difference NE?
 
 FINDING (2026-08-12). Secici verimliligi (gerceklesen F1 / pool tavani) two
 kutuplu: UPUN %65.5, SUPU %47.5 -- but MOR %5.7, NIT %0.5. Arada a sey absent.
@@ -9,14 +9,14 @@ ILK HIPOTEZ (YOGUNLUK) HEMEN CURUYOR: NIT dense (24.4 CP/part) but MOR
 3.4 CP/part and UPUN 3.2 -- ikisi neredeyse same, biri cokuyor obru calisiyor.
 
 BU SONDA this eksenlerde brand basina measurement yapar:
-  * CP yogunlugu, candidate/part, secenek/part
+  * CP yogunlugu, candidate/part, option/part
   * DOGRU secenegin part ICINDEKI SKOR SIRASI (yuzdelik) -- asil soru this:
     model correct secenegi YUKARI koyuyor mu, otherwise gomuyor mu?
-  * first-10 / first-50 inside bulunan GT orani
+  * first-10 / first-50 inside found GT orani
   * pozitif and negatif skorlarin AYRILIGI (medyan difference)
   * skorun part ici DAGILIM GENISLIGI (goreli rule buna duyarli)
 
-Skorlar OOF: each brand disarida birakilarak egitilir (gorulmemis brand kosulu).
+Skorlar OOF: each brand disarida birakilarak egitilir (unseen brand kosulu).
 
 Kullanim:  P6_DIZIN=results/_p6_oz_tam4 python probe_cokus.py
 """
@@ -52,7 +52,7 @@ def temel (d ):
 
 
 def dogru_maske (d ):
-    """Her secenek for: a GT'yi kabul kutusunda tutuyor mu?"""
+    """Her option for: a GT'yi kabul kutusunda tutuyor mu?"""
     P =d ["P"][d ["idx"]]
     YD =d ["YD"]
     G ,Gd =np .asarray (d ["G"],float ),np .asarray (d ["Gd"],float )
@@ -68,7 +68,7 @@ def dogru_maske (d ):
     pe =np .linalg .norm (v -al [...,None ]*Gd [None ,:,:],axis =-1 )
     an =np .degrees (np .arccos (np .clip (YD @Gd .T ,-1 ,1 )))
     kabul =(pe <=K .YANAL )&(np .abs (al )<=EKSEN_TOL )&(an <=K .ACI )
-    return kabul .any (1 ),kabul .any (0 )# (secenek correct mu, GT ulasildi mi)
+    return kabul .any (1 ),kabul .any (0 )# (option correct mu, GT ulasildi mi)
 
 
 def main ():
@@ -118,7 +118,7 @@ def main ():
         a ["part"].append (1 )
         a ["cp"].append (len (d ["G"]))
         a ["candidate"].append (len (np .unique (d ["idx"])))
-        a ["secenek"].append (n )
+        a ["option"].append (n )
         # MIKRO topla (part oranlarinin ORTALAMASI DEGIL). Ilk surumde
         # `ulasilan.mean()` part basina ratio biriktiriyordu; this MAKRO'dur and
         # KAPI A'nin MIKRO sayisiyla kiyaslanamaz. MOR'da 0.653 vs 0.8686
@@ -150,7 +150,7 @@ def main ():
             continue 
         r ={"part":len (a ["part"]),"cp_parca":float (np .mean (a ["cp"])),
         "aday_parca":float (np .mean (a ["candidate"])),
-        "secenek_parca":float (np .mean (a ["secenek"])),
+        "secenek_parca":float (np .mean (a ["option"])),
         "havuzda":float (sum (a ["gt_ulasilan"])/
         max (sum (a ["gt_toplam"]),1 )),# MIKRO
         "ilk10":float (np .mean (a ["ilk10"])),
@@ -170,7 +170,7 @@ def main ():
     "not":"S7 cokus teshisi. `havuzda` = GT'nin kabul kutusunda "
     "en az a secenegi olma orani (pool tavani). "
     "`ilk10/ilk50` = DOGRU secenegin part icinde ilk 10/50'ye "
-    "girme orani. `sira%` = dogru secenegin ortalama sira "
+    "girme orani. `sira%` = correct secenegin average sira "
     "yuzdeligi (0 = tepe). D7'ye BAKILMADI."},
     open (f"results/cokus_teshisi_{KUME }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/cokus_teshisi_{KUME }.json")

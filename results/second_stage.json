@@ -1,0 +1,73 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "baseline": {
+  "robot": 0.36422613531047265,
+  "detection": 0.5704355885078777,
+  "makro": 0.35142436262844473,
+  "en_kotu": 0.0,
+  "TP": 786,
+  "FP": 1247,
+  "brand": {
+   "CCD": 0.625,
+   "KLM": 0.25,
+   "A-B": 0.5041551246537396,
+   "EFX": 0.2222222222222222,
+   "WIE": 0.5988142292490118,
+   "CWT": 0.05670665212649945,
+   "DIN": 0.5195729537366548,
+   "WEG": 0.05825242718446602,
+   "CEM": 0.18681318681318682,
+   "DEG": 0.64,
+   "ELMEX": 0.5555555555555556,
+   "C3": 0.0
+  }
+ },
+ "iki_kademe": {
+  "robot": 0.2742935906271537,
+  "detection": 0.36044107512060647,
+  "makro": 0.25946274238417133,
+  "en_kotu": 0.0,
+  "TP": 398,
+  "FP": 221,
+  "brand": {
+   "CCD": 0.5211267605633803,
+   "KLM": 0.18181818181818182,
+   "A-B": 0.41596638655462187,
+   "EFX": 0.012738853503184714,
+   "WIE": 0.5049928673323824,
+   "CWT": 0.011644832605531296,
+   "DIN": 0.36065573770491804,
+   "WEG": 0.02702702702702703,
+   "CEM": 0.05217391304347826,
+   "DEG": 0.47368421052631576,
+   "ELMEX": 0.5517241379310345,
+   "C3": 0.0
+  }
+ },
+ "e2": 0.1,
+ "not": "Ikinci kademe: kisa listeye pahali fiziksel olculer. Esik D6'da secildi. D7 brand-disi, TAM ZINCIR, MIKRO."
+}

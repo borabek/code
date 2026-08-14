@@ -11,13 +11,13 @@ ONBELLEKTEN geldi. Ayni olcu, CANLI four modelle taze hesaplandiginda
 16 parcalik a ten denemede **6.34x** output. Fark mekanizmadan not
 BAYAT ONBELLEKTEN geliyor may be.
 
-Onemi: if taze olasilik belirgin sekilde more ayirt ediciyse, YENIDEN
+Onemi: if taze probability belirgin sekilde more ayirt ediciyse, YENIDEN
 EGITIM OLMADAN, only onbellegi tazeleyerek zincirin basi duzelir.
 
 BU BETIK same parcalarda IKISINI birden olcer:
   cache : npz icindeki `pbs` (bugun kullanilan)
   taze     : canli four kontrol noktasiyla yeniden inference
-Olcut same: GT'deki olasilik / rastgele yuzeydeki olasilik, and AUC.
+Olcut same: GT'deki probability / rastgele yuzeydeki probability, and AUC.
 
 D7'ye BAKILMAZ (measurement d6 parcalarinda).
 """
@@ -126,8 +126,8 @@ def main ():
     "brand":out ,
     "not":"Onbellekteki pbs vs canli modellerle taze inference, "
     "AYNI parcalarda. D7'ye BAKILMADI."},
-    open ("results/onbellek_vs_taze.json","w"),indent =1 )
-    print ("receipt -> results/onbellek_vs_taze.json")
+    open ("results/cache_vs_taze.json","w"),indent =1 )
+    print ("receipt -> results/cache_vs_taze.json")
 
 
 if __name__ =="__main__":

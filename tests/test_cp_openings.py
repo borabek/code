@@ -160,7 +160,7 @@ def test_snap_axis_keeps_a_genuine_tilt ():
     Olcum bunu curuttu (8534 manufacturer ConnectionPoint): yonlerin only %75.6'si eksene hizali,
     **%19.1'i 10 dereceden extra egik** (most extra 43.1), and this single ureticiye ozgu not
     (PXC %16.9, WEI %21.7) -- klemenste tel acili a huniden girer, egim GERCEKTIR.
-    Her yonu yuvarlamak eslesen CP'lerin %18.2'sinde ekseni 15-90 derece saptiriyordu and error
+    Her yonu yuvarlamak matched CP'lerin %18.2'sinde ekseni 15-90 derece saptiriyordu and error
     part basina ya hep ya never goruluyordu (93 parcanin 19'u tamamen wrong).
     Esik 10 derece: korpusta 1-10 derece bandi tum CP'lerin only %5.3'u (titreme bandi),
     real egimler 22-43 derecede kumeleniyor.

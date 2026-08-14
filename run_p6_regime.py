@@ -36,7 +36,7 @@ import time
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -60,7 +60,7 @@ PAKET =os .environ .get ("P6_MODEL","results/p6_kademe2_model.pkl")
 # Ilk dordu pool buyuklugu (zayif vekil). Son ucu TABANIN KENDI GUVENI:
 # desen "P6, tabanin ZAYIF oldugu places kazanir" oldugu for most dogrudan
 # yonlendirme sinyali tabanin skorlaridir -- part on high safe
-# tespit uretiyorsa ona dokunma, uretmiyorsa P6'ya gec.
+# detection uretiyorsa ona dokunma, uretmiyorsa P6'ya gec.
 ISTATISTIKLER =("n01","mesh_oran","n_aday","n_secenek",
 "taban_maks_ters","taban_ort3_ters","taban_sayi_ters")
 
@@ -84,7 +84,7 @@ def istatistik (d ,s_tb ):
 def taban_cikti (d ,model ):
     """DAGITILAN yolun ciktisi, onbellekten yeniden kurulmus.
 
-    `product_wide.sec` with same: A+B, part-ici z-skor, HGB-derin, threshold 0.05,
+    `product_wide.sec` with same: A+B, part-ici z-score, HGB-deep, threshold 0.05,
     kalabalik NMS, sign correction. Mesh adaylari tabanin havuzunda YOK.
     """
     k =np .where (d ["X"][:,C0 ]==1.0 )[0 ]
@@ -148,7 +148,7 @@ def puanla (data_ ,sel_ ):
 def main ():
     t0 =time .time ()
     pk =pickle .load (open (PAKET ,"rb"))
-    print (f"paket: arm {pk .get ('arm')} | kural {pk .get ('rule')} | "
+    print (f"paket: arm {pk .get ('arm')} | rule {pk .get ('rule')} | "
     f"nms {pk .get ('nms')} | 2.kademe "
     f"{'VAR'if pk .get ('kademe2')is not None else 'YOK'}",flush =True )
     tb_model =product_wide .model_yukle ()
@@ -186,7 +186,7 @@ def main ():
         candidates =[-np .inf ]+list (np .percentile (v ,[10 ,20 ,30 ,40 ,50 ,60 ,
         70 ,80 ,90 ]))+[np .inf ]
         top =collections .Counter ()
-        secilen =[]
+        selected =[]
         for b in katlar :
             ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
             dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
@@ -197,12 +197,12 @@ def main ():
             [data_ [i ]["_ist"][ist ]>=en for i in dis ])
             for k_ in ("TP","FP","FN"):
                 top [k_ ]+=r [k_ ]
-            secilen .append (en )
+            selected .append (en )
         f1 =2 *top ["TP"]/max (2 *top ["TP"]+top ["FP"]+top ["FN"],1 )
-        res_ [ist ]={"robot":f1 ,"esikler":[float (x )for x in secilen ],
+        res_ [ist ]={"robot":f1 ,"esikler":[float (x )for x in selected ],
         **dict (top )}
-        print (f"{ist :<11} fold-disi robot {f1 :.4f} | secilen esikler "
-        f"{[round (float (x ),2 )for x in secilen ]}",flush =True )
+        print (f"{ist :<11} fold-disi robot {f1 :.4f} | selected esikler "
+        f"{[round (float (x ),2 )for x in selected ]}",flush =True )
 
     en_ist =max (res_ ,key =lambda k :res_ [k ]["robot"])
     # threshold: katlarda secilenlerin MEDYANI (single kata asiri uymasin)
@@ -214,15 +214,15 @@ def main ():
     pk ["regime"]={"istatistik":en_ist ,"threshold":en_esik }
     with open (PAKET ,"wb")as f :
         pickle .dump (pk ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"hepsi_taban":hep_tb ,
+    json .dump ({"damga":receipt_hash .damga (),"hepsi_taban":hep_tb ,
     "hepsi_p6":hep_p6 ,"istatistikler":res_ ,
-    "secilen":{"istatistik":en_ist ,"threshold":en_esik },
+    "selected":{"istatistik":en_ist ,"threshold":en_esik },
     "katlar":katlar ,"n_parca":len (data_ ),
     "not":"Rejim yonlendirme: part basina P6 mu TABAN mi. Esik "
     "brand katlarinda MAKRO olcutle secildi; disarida "
     "birakilan markada TARANMADI. D7'ye BAKILMADI."},
-    open ("results/p6_rejim.json","w"),indent =1 )
-    print (f"receipt -> results/p6_rejim.json  ({time .time ()-t0 :.0f} s)")
+    open ("results/p6_regime.json","w"),indent =1 )
+    print (f"receipt -> results/p6_regime.json  ({time .time ()-t0 :.0f} s)")
 
 
 if __name__ =="__main__":

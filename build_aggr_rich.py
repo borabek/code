@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """GECE 3. HAMLE: AGRESIF ADAY (very-cozunurluk, recall tavani 0.969) + ZENGIN FEATURE.
 WHY SIMDI: P2 (agresif candidate) more before ASKIYA alinmisti because zayif gate 6.5x adayi kaldiramiyordu
-(WEI top-N 0.662 < baz 0.723). Bu gece gate MATERYAL guclendi (AUC 0.88 -> 0.955, zengin temsil).
+(WEI top-N 0.662 < baz 0.723). Bu night gate MATERYAL guclendi (AUC 0.88 -> 0.955, zengin temsil).
 P2'nin ten-kosulu ("precision yukunu more iyi gate carries") ARTIK KARSILANDI -> yeniden test.
 Cikti: results/aggr_rich_<mfg>.npz (X13, XR, y, groups, mfg, pos, ngt) -- analiz eval_rich_deploy with same.
 Kullanim: python build_aggr_rich.py WEI [limit]"""
@@ -44,7 +44,7 @@ def main ():
         parts =[(m ,p ,jf ,s )for m ,p ,jf ,s in eligible ()
         if m ==MFG and ((m =="WEI"and p in held )or (m =="PXC"and p not in oos ))]
     if LIM :parts =parts [:LIM ]
-    print (f"{len (parts )} {MFG } part | {len (m7 )} model | agresif cok-cozunurluk + zengin feature",flush =True )
+    print (f"{len (parts )} {MFG } part | {len (m7 )} model | agresif very-cozunurluk + zengin feature",flush =True )
     X13 ,XR ,YY ,GG ,POS ,NGT =[],[],[],[],[],{}
     PIDS =[]
     t0 =time .time ()

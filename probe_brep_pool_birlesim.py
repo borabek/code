@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """BAGLAYICI KISIT HAVUZ: B-rep fiziksel onerileri havuza EKLEMEK recall'u acar mi?
 
-Olculdu (`results/havuz_recall_d7.json`): D7 brand-disi pool recall G7'de
+Olculdu (`results/pool_recall_d7.json`): D7 brand-disi pool recall G7'de
 **0.6654**. Donusum ~%48 oldugu for robot tavani ~0.32 -- i.e. MEVCUT HAVUZLA
 0.50 IMKANSIZ. Gate/selector/count uzerine kurulan each arm this tavanin under.
 
@@ -17,12 +17,12 @@ Ayrica precision bedeli ACIKCA sayilir: recall bedava not, candidate count artar
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
 from sina_cluster import match_hungarian 
 
-d7 =set (map (str ,json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]))
+d7 =set (map (str ,json .load (open ("results/d7_exam_set.json"))["pidler"]))
 R =[r for r in pickle .load (open ("results/_der_yeni_G7BIRLESIK.pkl","rb"))
 if str (r ["pid"])in d7 ]
 cy =pickle .load (open ("results/_d7_silindirler.pkl","rb"))
@@ -84,12 +84,12 @@ for ad in KOLLAR :
     flush =True )
 
 t =res_ ["SEG (kanonik)"]
-print (f"\n{'brand':<8} {'SEG':>8} {'+B-rep':>8} {'fark':>8}")
+print (f"\n{'brand':<8} {'SEG':>8} {'+B-rep':>8} {'diff':>8}")
 u =res_ ["SEG + B-rep (tum)"]
 for m in sorted (t ["brand"],key =lambda k :t ["brand"][k ]):
     print (f"  {m :<7} {t ['brand'][m ]:>7.4f} {u ['brand'].get (m ,0 ):>8.4f} "
     f"{u ['brand'].get (m ,0 )-t ['brand'][m ]:>+8.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,
+json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,
 "not":"HAVUZ RECALL. B-rep onerileri TEZ TURETMESI DEGIL, ek candidate "
 "kaynagi -- ayri raporlanir. D7 brand-disi."},
-open ("results/brep_havuz_birlesim.json","w"),indent =1 )
+open ("results/brep_pool_birlesim.json","w"),indent =1 )

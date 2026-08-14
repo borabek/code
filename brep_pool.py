@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """B-rep GENISLETILMIS ADAY HAVUZU -- single source.
 
-WHY: measured (`results/havuz_recall_d7.json`) ki D7 brand-disi pool recall'u
+WHY: measured (`results/pool_recall_d7.json`) ki D7 brand-disi pool recall'u
 segmentasyon single basina **0.6654**. Donusum ~%48 oldugundan robot tavani ~0.32;
 i.e. MEVCUT HAVUZLA 0.50 IMKANSIZ. Gate/selector/count kollarinin all of them this tavanin
 altindaydi and all of them closed. Baglayici kisit HAVUZ.
 
 B-rep silindir agizlari + duzlemsel opening merkezleri EK candidate kaynagi as
-eklenince (D7, `results/brep_filtre_taramasi.json`):
+eklenince (D7, `results/brep_filtre_sweep.json`):
     only seg        recall 0.6654   13.5 candidate/part
     + B-rep (ham)     recall 0.8465  379.9
     + B-rep (dedupe3) recall 0.7852   98.2   <-- DIZ
 CWT 0.3595 -> 0.6579, KLM 0.5663 -> 0.8313 (tabani ceken markalar).
 
 DURUSTLUK: this TEZ TURETMESI DEGIL. Tezin `v_o` mouth-ortasi turetmesi, 5 sinif
-segmentasyon and ~6000 remesh AYNEN durur; B-rep onerileri ONLARIN YANINA eklenen
+segmentasyon and ~6000 remesh AYNEN durur; B-rep onerileri ONLARIN YANINA added
 ikinci a candidate kaynagidir and `source` alaniyla isaretlenir. Sonuclar "tez
 sonucu" as DEGIL, "tez-omurgali geometrik genisletme" as raporlanir.
 """
@@ -97,7 +97,7 @@ def merged_pool (P_seg ,D_seg ,cyl ,acik ,dedupe_mm =DEDUPE_MM ):
 
 
     # --- MESH TEPESI KAYNAGI ---------------------------------------------------
-    # Olculdu (`results/tavan_080_eksensiz.json`, D7 brand-disi, signed angle):
+    # Olculdu (`results/ceiling_080_eksensiz.json`, D7 brand-disi, signed angle):
     #   only B-rep havuzu          ceiling 0.7472   102 candidate/part
     #   + mesh p>=0.50, 2mm seyrelt  ceiling 0.8347   318 candidate/part
     #   + mesh p>=0.05, 2mm seyrelt  ceiling 0.9235   829 candidate/part
@@ -128,7 +128,7 @@ def vertex_normals_at (V ,F ):
 
 
 def mesh_adaylari (V ,F ,ppos ,threshold =MESH_ESIK ,dedupe_mm =MESH_DEDUPE_MM ):
-    """p_pos esigini gecen mesh tepeleri, uzamsal seyreltmeyle.
+    """p_pos esigini passing mesh tepeleri, uzamsal seyreltmeyle.
 
     Doner: (P, D) -- D tepenin YEREL NORMALI (disari). Seyreltmede p_pos'u
     high which is tutulur; tolerans YANAL 2mm oldugu for 2mm'de single vertex yeter.

@@ -25,7 +25,7 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 from sina_cluster import match_hungarian # noqa: E402
 
 KUME_MM =float (os .environ .get ("RT_KUME","5.0"))
-YOL =os .environ .get ("RT_YOL","saha")
+YOL =os .environ .get ("RT_YOL","field")
 
 
 def _birim (v ):
@@ -37,13 +37,13 @@ def _yukle (fp ):
     """dokum -> {pid: kayit}, only istenen path."""
     out ={}
     for r in json .load (open (fp )):
-        if r .get ("yol")!=YOL :
+        if r .get ("path")!=YOL :
             continue 
         out [str (r ["pid"])]=r 
     return out 
 
 
-def birlestir (listeler ,min_oy ):
+def birlestir (lists ,min_oy ):
     """Uc varyantin (P, D) listelerini KUME_MM'de merges.
 
     Ilk varyant cipa alinir; each cluster, kendisine KUME_MM inside most yakin
@@ -51,10 +51,10 @@ def birlestir (listeler ,min_oy ):
     (same varyanttan two candidate oyu 1 sayar -- otherwise single varyant single basina
     coklu oy uretirdi).
     """
-    P =np .concatenate ([l [0 ]for l in listeler ])if listeler else np .zeros ((0 ,3 ))
-    D =np .concatenate ([l [1 ]for l in listeler ])if listeler else np .zeros ((0 ,3 ))
+    P =np .concatenate ([l [0 ]for l in lists ])if lists else np .zeros ((0 ,3 ))
+    D =np .concatenate ([l [1 ]for l in lists ])if lists else np .zeros ((0 ,3 ))
     src_ =np .concatenate ([np .full (len (l [0 ]),i )for i ,l in 
-    enumerate (listeler )])if listeler else np .zeros (0 ,int )
+    enumerate (lists )])if lists else np .zeros (0 ,int )
     if not len (P ):
         return np .zeros ((0 ,3 )),np .zeros ((0 ,3 ))
     kullanildi =np .zeros (len (P ),bool )
@@ -84,9 +84,9 @@ def birlestir (listeler ,min_oy ):
 
 
 def olc (kayitlar ,selector ):
-    """selector(pid, r) -> (P, D). Doner: (tespit, rob_isaretsiz, rob_isaretli,
+    """selector(pid, r) -> (P, D). Doner: (detection, rob_isaretsiz, rob_isaretli,
     parca_basina_liste)."""
-    tot ={k :[0 ,0 ,0 ]for k in ("tespit","rob","rbi")}
+    tot ={k :[0 ,0 ,0 ]for k in ("detection","rob","rbi")}
     part =[]
     for pid ,r in sorted (kayitlar .items ()):
         G =np .asarray (r ["G"],float ).reshape (-1 ,3 )
@@ -94,7 +94,7 @@ def olc (kayitlar ,selector ):
         diag =float (r ["diag"])
         P ,D =selector (pid ,r )
         line_ ={"pid":pid }
-        for ad ,kw in (("tespit",dict (tol =2.0 ,am =180.0 ,signed =False )),
+        for ad ,kw in (("detection",dict (tol =2.0 ,am =180.0 ,signed =False )),
         ("rob",dict (tol =2.0 ,am =10.0 ,signed =False )),
         ("rbi",dict (tol =2.0 ,am =10.0 ,signed =True ))):
             tp ,fp ,fn ,_ =match_hungarian (P ,D ,G ,Gd ,diag ,kw ["tol"],
@@ -112,7 +112,7 @@ def olc (kayitlar ,selector ):
 
 
 def esli_bootstrap (pa ,pb ,ad ,n =4000 ,seed =0 ):
-    """part duzeyinde esli bootstrap; FARKIN dagilimi."""
+    """part duzeyinde paired bootstrap; FARKIN dagilimi."""
     rng =np .random .default_rng (seed )
     A =np .asarray ([r [ad ]for r in pa ],float )
     B =np .asarray ([r [ad ]for r in pb ],float )
@@ -130,7 +130,7 @@ def esli_bootstrap (pa ,pb ,ad ,n =4000 ,seed =0 ):
 def main ():
     hedefler =[6000 ,5000 ,7200 ]# 6000 ONCE: cipa = mevcut davranis
     file_ ={t :f"results/_dokum_remesh{t }.json"for t in hedefler }
-    file_ [6000 ]=os .environ .get ("RT_TABAN","results/_dokum_taban.json")
+    file_ [6000 ]=os .environ .get ("RT_TABAN","results/_dump_baseline.json")
     K ={}
     for t in hedefler :
         if not os .path .exists (file_ [t ]):
@@ -138,7 +138,7 @@ def main ():
             return 1 
         K [t ]=_yukle (file_ [t ])
     ortak =sorted (set .intersection (*[set (K [t ])for t in hedefler ]))
-    print (f"yol={YOL } | ortak part: {len (ortak )} "
+    print (f"path={YOL } | ortak part: {len (ortak )} "
     f"(tekil: {[len (K [t ])for t in hedefler ]})")
     if not ortak :
         print ("ORTAK PARCA YOK")
@@ -162,7 +162,7 @@ def main ():
 
     res_ ={}
     taban_parca =None 
-    print (f"\n{'varyant':28s} {'tespit':>8s} {'rob':>8s} {'rob-ISR':>8s}")
+    print (f"\n{'varyant':28s} {'detection':>8s} {'rob':>8s} {'rob-ISR':>8s}")
     for ad ,sec in [("TABAN (6000)",tek (6000 )),
     ("tek 5000",tek (5000 )),
     ("tek 7200",tek (7200 )),
@@ -173,23 +173,23 @@ def main ():
         res_ [ad ]={"metrik":m ,"part":part }
         if taban_parca is None :
             taban_parca =part 
-        print (f"{ad :28s} {m ['tespit']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
+        print (f"{ad :28s} {m ['detection']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
 
-    print ("\n--- ESLI PARCA BOOTSTRAP (TABAN'a per fark) ---")
-    print (f"{'varyant':28s} {'metrik':>8s} {'fark':>9s} "
+    print ("\n--- ESLI PARCA BOOTSTRAP (TABAN'a per diff) ---")
+    print (f"{'varyant':28s} {'metrik':>8s} {'diff':>9s} "
     f"{'%95 GA':>22s} {'poz%':>6s}")
     for ad in res_ :
         if ad .startswith ("TABAN"):
             continue 
-        for mad in ("tespit","rob","rbi"):
+        for mad in ("detection","rob","rbi"):
             f ,lo ,hi ,pz =esli_bootstrap (taban_parca ,res_ [ad ]["part"],mad )
             yildiz =" *"if (lo >0 or hi <0 )else ""
             print (f"{ad :28s} {mad :>8s} {f :+9.4f} "
             f"[{lo :+.4f},{hi :+.4f}]{yildiz :>3s} {100 *pz :5.1f}")
 
-    with open ("results/remesh_toplulugu.json","w")as fh :
+    with open ("results/remesh_ensemble.json","w")as fh :
         json .dump ({ad :v ["metrik"]for ad ,v in res_ .items ()},fh ,indent =1 )
-    print ("\n-> results/remesh_toplulugu.json")
+    print ("\n-> results/remesh_ensemble.json")
     return 0 
 
 

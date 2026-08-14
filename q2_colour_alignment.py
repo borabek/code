@@ -137,7 +137,7 @@ def main ():
     o =iyi /max (tot ,1 );no =nul_iyi /max (tot ,1 )
     print (f"\nGERCEK esleme: {iyi }/{tot } ({o :.3f}) <1.0mm")
     print (f"NULL  esleme : {nul_iyi }/{tot } ({no :.3f}) <1.0mm   "
-    f"<- bu da yuksekse test DEGERSIZ")
+    f"<- this da yuksekse test DEGERSIZ")
     print (f"\nKILL: gercek ratio <0.60 ya da null ratio gercege yakinsa is KAPANIR -> "
     f"{'AC'if (o >=0.60 and no <o -0.3 )else 'KAPAT'}")
     json .dump ({"n":tot ,"gercek_oran":o ,"null_oran":no ,"kayit":rec_ ,

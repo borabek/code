@@ -9,7 +9,7 @@ DUSEN BASIT KURALLAR (ikisi de measured, tekrar acilmayacak):
   * part-ici axis UZLASISI        -> 0.2089 -> 0.1773 (`p3b`)
 Ikisi de single a sinyale guveniyordu. Secici BIRDEN COK zayif sinyali merges.
 
-ADAY UZAYI: each candidate for {MEVCUT (oldugu like kal)} + agzi yakin each uygun
+ADAY UZAYI: each candidate for {MEVCUT (oldugu like kal)} + agzi yakin each eligible
 silindirin (mouth, +axis) and (mouth, -axis) secenekleri.
 
 OZNITELIKLER URETICI KIMLIGI ICERMEZ -- all of them geometrik/istatistikseldir, otherwise
@@ -58,13 +58,13 @@ OZ_AD =["aci_mevcut","mesafe","mesafe_norm","yaricap","uzunluk","mevcut_mu",
 # according to buyuklugu. Sonda destekliyordu: correct silindir komsulugun most buyugu
 # %54.2, first ikisinde %87.8 (D6, 640 eslesme).
 #
-# AMA TEMIZ A/B NULL CIKTI (same 2584 part, same measurement, single degisken feature):
+# AMA TEMIZ A/B NULL CIKTI (same 2584 part, same measurement, single variable feature):
 #     13 feature -> DEV 0.3035 / SINAV 0.2676
 #     17 feature -> DEV 0.3122 / SINAV 0.2621
 # Ayar kumesinde +0.0087, AYRIK kumede -0.0055 = klasik fake kazanc deseni.
 # NOT DEPLOYED. Kod duruyor because LOMO secimi (SIRA-7) ya da different a
 # birlestirmeyle yeniden denenebilir; but urun yolunun bedava hesap yapmamasi
-# for varsayilan KAPALI.
+# for default KAPALI.
 P3C_YEREL_YARICAP =os .environ .get ("P3C_YEREL_YARICAP","0")=="1"
 if P3C_YEREL_YARICAP :
     OZ_AD =OZ_AD +["yaricap_orani","yaricap_sira","yerel_en_buyuk","n_yerel"]
@@ -75,7 +75,7 @@ def _uyumlu (sec ,X ):
 
     K1.7 with OZ_AD 13 -> 17'ye output. Eski ckpt'ler (p3c_axis_selector.pkl) 13
     bekliyor. Genislik sessizce uyusmazsa sklearn ya patlar ya da -- more kotusu --
-    baska a places sessizce wrong skor produces. Yeni ozellikler LISTENIN SONUNA
+    baska a places sessizce wrong score produces. Yeni ozellikler LISTENIN SONUNA
     eklendigi for first n column old sirayla same; bastan kesmek GUVENLI.
     Genisletme YAPILMAZ: model more genis bekliyorsa this a hatadir, patlasin.
     """
@@ -101,7 +101,7 @@ def _yerel_yaricaplar (uy ,p ):
     return np .asarray (out ,float )
 
 
-def secenekler (cyls ,p ,d ,diag ,gate_s ,komsu ,n_aday ):
+def options (cyls ,p ,d ,diag ,gate_s ,komsu ,n_aday ):
     """Bu candidate for (konum, axis, feature) listesi. Ilk oge HER ZAMAN MEVCUT."""
     import brep_snap 
     p =np .asarray (p ,float );d =np .asarray (d ,float )
@@ -112,7 +112,7 @@ def secenekler (cyls ,p ,d ,diag ,gate_s ,komsu ,n_aday ):
     yerel =_yerel_yaricaplar (uy ,p )if P3C_YEREL_YARICAP else np .zeros (0 )
     r_max =float (yerel .max ())if len (yerel )else 0.0 
 
-    def oz (pp ,aa ,mevcut ,yar ,uzn ,mes ):
+    def feat (pp ,aa ,mevcut ,yar ,uzn ,mes ):
         aci =np .degrees (np .arccos (np .clip (abs (float (aa @d )),-1 ,1 )))
         par =int ((np .abs (A @aa )>=np .cos (np .radians (10 ))).sum ())if len (A )else 0 
         if len (yerel )and not mevcut :
@@ -129,7 +129,7 @@ def secenekler (cyls ,p ,d ,diag ,gate_s ,komsu ,n_aday ):
             v +=[ratio ,rank_ ,enb ,len (yerel )]
         return v 
 
-    out =[(p ,d ,oz (p ,d ,True ,0.0 ,0.0 ,0.0 ))]
+    out =[(p ,d ,feat (p ,d ,True ,0.0 ,0.0 ,0.0 ))]
     for c in uy :
         uzn =float (np .linalg .norm (np .asarray (c ["mouth_b"])-np .asarray (c ["mouth_a"])))
         for m in (c ["mouth_a"],c ["mouth_b"]):
@@ -139,12 +139,12 @@ def secenekler (cyls ,p ,d ,diag ,gate_s ,komsu ,n_aday ):
                 continue 
             a =np .asarray (c ["axis"],float )
             for s in (1.0 ,-1.0 ):
-                out .append ((m ,s *a ,oz (m ,s *a ,False ,c ["radius"],uzn ,mes )))
+                out .append ((m ,s *a ,feat (m ,s *a ,False ,c ["radius"],uzn ,mes )))
     return out 
 
 
 def parca_adaylari (r ,model ,ob ,ratio =0.40 ,baseline =0.30 ):
-    """Gate'ten gecen candidates + part duzeyi baglam."""
+    """Gate'ten passing candidates + part duzeyi baglam."""
     import wire_gate 
     from p1c_threshold import maske 
     M =d6_record .x58 (r )
@@ -162,34 +162,34 @@ def parca_adaylari (r ,model ,ob ,ratio =0.40 ,baseline =0.30 ):
     return P ,D ,S ,komsu 
 
 
-def silindir_onbellek (pidler ,yol ):
+def silindir_onbellek (pidler ,path ):
     import brep_snap 
     from corpus_identity import step_kimlik as SK 
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     ob ={}
-    if os .path .exists (yol ):
-        with open (yol ,"rb")as f :
+    if os .path .exists (path ):
+        with open (path ,"rb")as f :
             ob =pickle .load (f )
-    eksik =[p for p in pidler if p not in ob and p in S ]
-    if eksik :
-        print (f"silindir cikariliyor: {len (eksik )} part",flush =True )
+    missing =[p for p in pidler if p not in ob and p in S ]
+    if missing :
+        print (f"silindir cikariliyor: {len (missing )} part",flush =True )
         t0 =time .time ()
-        for i ,p in enumerate (eksik ,1 ):
+        for i ,p in enumerate (missing ,1 ):
             try :
                 ob [p ]=brep_snap .exact_cylinders (S [p ])
             except Exception :
                 ob [p ]=[]
             if i %100 ==0 :
-                print (f"  {i }/{len (eksik )}  {(time .time ()-t0 )/i :.1f}s/part",flush =True )
-                with open (yol ,"wb")as f :
+                print (f"  {i }/{len (missing )}  {(time .time ()-t0 )/i :.1f}s/part",flush =True )
+                with open (path ,"wb")as f :
                     pickle .dump (ob ,f )
-        with open (yol ,"wb")as f :
+        with open (path ,"wb")as f :
             pickle .dump (ob ,f )
     return ob 
 
 
 def veri_kur (rec_ ,model ,ob ,match_greedy ):
-    """(feature, label) ciftleri. Etiket: this secenek adayi ROBOT-HAZIR yapar mi."""
+    """(feature, label) ciftleri. Etiket: this option adayi ROBOT-HAZIR yapar mi."""
     X ,y ,grp =[],[],[]
     for pid ,r in rec_ .items ():
         pak =parca_adaylari (r ,model ,ob )
@@ -202,7 +202,7 @@ def veri_kur (rec_ ,model ,ob ,match_greedy ):
         _t ,_f ,_n ,bi =match_greedy (P ,D ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True )
         cy =ob .get (pid )or []
         for (pi ,gi ,*_x )in bi ["eslesme"]:
-            sec =secenekler (cy ,P [pi ],D [pi ],r ["diag"],float (S [pi ]),komsu ,len (P ))
+            sec =options (cy ,P [pi ],D [pi ],r ["diag"],float (S [pi ]),komsu ,len (P ))
             for (pp ,dd ,ozn )in sec :
                 v =pp -G [gi ]
                 yan =float (np .linalg .norm (v -(v @Gd [gi ])*Gd [gi ]))
@@ -227,17 +227,17 @@ def uygula (rec_ ,model ,ob ,sec ,threshold ,match_greedy ,f1w ,mfgler =None ,sa
                 cy =ob .get (pid )or []
                 P2 =P .copy ();D2 =D .copy ()
                 for i in range (len (P )):
-                    opt =secenekler (cy ,P [i ],D [i ],r ["diag"],float (S [i ]),komsu ,len (P ))
+                    opt =options (cy ,P [i ],D [i ],r ["diag"],float (S [i ]),komsu ,len (P ))
                     if len (opt )==1 :
                         continue 
                     Xo =np .asarray ([o [2 ]for o in opt ],float )
                     sk =sec .predict_proba (_uyumlu (sec ,Xo ))[:,1 ]
                     j =int (np .argmax (sk ))
-                    # MEVCUT'u only secenek BELIRGIN sekilde onden whereas birak
+                    # MEVCUT'u only option BELIRGIN sekilde onden whereas birak
                     if j !=0 and sk [j ]>=sk [0 ]+threshold :
                         P2 [i ]=opt [j ][0 ];D2 [i ]=opt [j ][1 ]
                         if sayac is not None :
-                            sayac ["degisen"]+=1 
+                            sayac ["changed"]+=1 
                     if sayac is not None :
                         sayac ["candidate"]+=1 
                 P ,D =P2 ,D2 
@@ -294,7 +294,7 @@ def main ():
     sorted (zip (OZ_AD ,sec .feature_importances_ ),
     key =lambda t :-t [1 ])[:6 ]))
     with open (MODEL ,"wb")as f :
-        pickle .dump ({"clf":sec ,"oz":OZ_AD ,"mm_max":MM_MAX },f )
+        pickle .dump ({"clf":sec ,"feat":OZ_AD ,"mm_max":MM_MAX },f )
 
         # --- OLCUM: temiz exam, DEV yarisinda threshold secimi
     sv =d6_record .exam ()
@@ -304,12 +304,12 @@ def main ():
     dev ={p :r for p ,r in rec_ .items ()if r ["mfg"]in DEV_MFG }
     sin ={p :r for p ,r in rec_ .items ()if r ["mfg"]not in DEV_MFG }
     d0t ,d0r =uygula (dev ,gate ,ob_s ,None ,0 ,match_greedy ,f1w )
-    print (f"\nDEV secicisiz: tespit {d0t :.4f} robot {d0r :.4f}")
+    print (f"\nDEV secicisiz: detection {d0t :.4f} robot {d0r :.4f}")
     en ,en_r ,izgara =None ,d0r ,{}
     for threshold in (0.00 ,0.05 ,0.10 ,0.20 ,0.30 ):
         tf ,rf =uygula (dev ,gate ,ob_s ,sec ,threshold ,match_greedy ,f1w )
-        izgara [str (threshold )]={"tespit":tf ,"robot":rf }
-        print (f"  threshold {threshold :.2f}: tespit {tf :.4f} robot {rf :.4f}")
+        izgara [str (threshold )]={"detection":tf ,"robot":rf }
+        print (f"  threshold {threshold :.2f}: detection {tf :.4f} robot {rf :.4f}")
         if rf >en_r :
             en_r ,en =rf ,threshold 
     if en is None :
@@ -322,19 +322,19 @@ def main ():
     s0t ,s0r =uygula (sin ,gate ,ob_s ,None ,0 ,match_greedy ,f1w )
     s1t ,s1r =uygula (sin ,gate ,ob_s ,sec ,en ,match_greedy ,f1w ,sayac =sc )
     print (f"\n--- SINAV YARISI (TEK ATIS) ---")
-    print (f"{'ayar':<20}{'TESPIT':>9}{'ROBOT':>9}")
+    print (f"{'setting':<20}{'TESPIT':>9}{'ROBOT':>9}")
     print (f"{'secicisiz':<20}{s0t :>9.4f}{s0r :>9.4f}")
     print (f"{f'selector threshold {en :.2f}':<20}{s1t :>9.4f}{s1r :>9.4f}")
     print (f"{'FARK':<20}{s1t -s0t :>+9.4f}{s1r -s0r :>+9.4f}")
-    print (f"  degistirilen candidate: {sc ['degisen']}/{sc ['candidate']}")
+    print (f"  degistirilen candidate: {sc ['changed']}/{sc ['candidate']}")
     karar ="DAGIT"if s1r >s0r and s1t >=s0t -0.01 else "GERI AL"
     print (f"\nKARAR: {karar }")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
         json .dump ({"egitim_parca":len (ek ),"egitim_cifti":int (len (y )),
         "izgara":izgara ,"dev_esik":en ,
-        "sinav_secicisiz":{"tespit":s0t ,"robot":s0r },
-        "sinav_secicili":{"tespit":s1t ,"robot":s1r },
-        "degisen":sc ["degisen"],"candidate":sc ["candidate"],"karar":karar },
+        "sinav_secicisiz":{"detection":s0t ,"robot":s0r },
+        "sinav_secicili":{"detection":s1t ,"robot":s1r },
+        "changed":sc ["changed"],"candidate":sc ["candidate"],"karar":karar },
         f ,indent =1 ,ensure_ascii =False )
     print (f"receipt -> {MAKBUZ }")
 

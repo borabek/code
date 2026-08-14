@@ -3,7 +3,7 @@
 
 WHY. Sunum sayilarinda two large loss present and ikisinin de SEBEBI
 olculmedi:
-    tespit 0.7878 -> robot axis 0.5764   (-0.2114)
+    detection 0.7878 -> robot axis 0.5764   (-0.2114)
     precision 0.5008                        (ciktinin YARISI wrong)
 
 Onarilacak seyi bilmeden onarim denemek tahmindir. Bu betik dokumden
@@ -13,11 +13,11 @@ FP (wrong pozitif) turleri:
   double      : a TP'ye 5mm'den yakin -- AYNI acikligin ikinci kopyasi
   angle       : a GT'ye lateral as yakin but ACI tutmuyor
   sign    : GT with same EKSENDE but TERS yonde (180 derece)
-  hayalet   : no GT'ye yakin not -- real wrong tespit
+  hayalet   : no GT'ye yakin not -- real wrong detection
 
 FN (kacan) turleri:
   yakin_var : next to prediction VAR but kabul kutusuna girmiyor (angle/lateral)
-  empty       : yakininda no prediction YOK -- pool/tespit sorunu
+  empty       : yakininda no prediction YOK -- pool/detection sorunu
 
 Her turun PAYI, hangi onarimin ne up to getirecegini soyler.
 D7'ye BAKILMAZ.
@@ -35,7 +35,7 @@ import canonical_d7 as K # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
 DOKUM =os .environ .get ("HO_DOKUM","results/_tahmin_dokumu.json")
-YOL =os .environ .get ("HO_YOL","saha")
+YOL =os .environ .get ("HO_YOL","field")
 CIFT_R =float (os .environ .get ("HO_CIFT","5.0"))
 
 
@@ -45,9 +45,9 @@ def _birim (v ):
 
 
 def main ():
-    d =[r for r in json .load (open (DOKUM ))if r ["yol"]==YOL ]
+    d =[r for r in json .load (open (DOKUM ))if r ["path"]==YOL ]
     if not d :
-        sys .exit (f"{DOKUM } icinde '{YOL }' yok")
+        sys .exit (f"{DOKUM } icinde '{YOL }' none")
     fp_tur =collections .Counter ()
     fn_tur =collections .Counter ()
     tp_top =fp_top =fn_top =0 
@@ -67,7 +67,7 @@ def main ():
             fn_tur ["bos"]+=len (G )
             continue 
             # hangi prediction/GT eslesti: eslesme ayrintisi otherwise yeniden kur
-            # (kaba: each GT for kabul kutusuna giren EN YAKIN prediction)
+            # (kaba: each GT for kabul kutusuna entering EN YAKIN prediction)
         v =P [:,None ,:]-G [None ,:,:]
         al =np .einsum ("pgc,gc->pg",v ,Gd )
         yan =np .linalg .norm (v -al [...,None ]*Gd [None ,:,:],axis =-1 )
@@ -99,16 +99,16 @@ def main ():
             else :
                 fp_tur ["hayalet"]+=1 
 
-    print (f"{len (d )} part | yol={YOL }")
+    print (f"{len (d )} part | path={YOL }")
     print (f"TP {tp_top } | FP {fp_top } | FN {fn_top }")
     f1 =2 *tp_top /max (2 *tp_top +fp_top +fn_top ,1 )
     print (f"robot ISARETLI F1 {f1 :.4f}\n")
     tf =max (sum (fp_tur .values ()),1 )
-    print (f"--- YANLIS POZITIF dagilimi (toplam {sum (fp_tur .values ())}) ---")
+    print (f"--- YANLIS POZITIF dagilimi (total {sum (fp_tur .values ())}) ---")
     for k ,v in fp_tur .most_common ():
         print (f"  {k :<10}{v :>6}  {v /tf :>7.1%}")
     tn =max (sum (fn_tur .values ()),1 )
-    print (f"\n--- KACAN dagilimi (toplam {sum (fn_tur .values ())}) ---")
+    print (f"\n--- KACAN dagilimi (total {sum (fn_tur .values ())}) ---")
     for k ,v in fn_tur .most_common ():
         print (f"  {k :<10}{v :>6}  {v /tn :>7.1%}")
     print ("\nOKUMA:")
@@ -118,7 +118,7 @@ def main ():
     print ("  hayalet YUKSEK   -> pool/gate sorunu")
     print ("  FN yakin_var     -> prediction VAR, kabul kutusuna sokulamiyor")
     print ("  FN empty           -> pool that acikligi HIC uretmemis")
-    json .dump ({"yol":YOL ,"n_parca":len (d ),"tp":tp_top ,"fp":fp_top ,
+    json .dump ({"path":YOL ,"n_parca":len (d ),"tp":tp_top ,"fp":fp_top ,
     "fn":fn_top ,"f1":f1 ,"fp_tur":dict (fp_tur ),
     "fn_tur":dict (fn_tur ),
     "not":"Hata otopsisi, cevrimdisi. D7'ye BAKILMADI."},

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""NMS radius taramasi + MARKA KARARLILIGI + tespit etkisi.
+"""NMS radius taramasi + MARKA KARARLILIGI + detection etkisi.
 
 Ilk olcumde six varyantin ALTISI da pozitifti and yaricapla monoton artiyordu
 (r=3.0'da +0.0093). Kucuk but tutarli. Dagitim karari for gereken three sey:
@@ -10,7 +10,7 @@ D7 = DEV. Yaricap here secilirse D7'ye ayarlanmis becomes -> D6'da DOGRULANIR.
 """
 import collections ,json ,os ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -55,7 +55,7 @@ def kos (rec_ ,x58f ,ad ):
             max (3.0 ,0.06 *dg ),180.0 ,True )[:3 ]
             tes [r ].append ((len (G ),)+t )
     print (f"\n=== {ad } ===")
-    print (f"{'r':>5} {'robot':>8} {'d':>8} {'tespit':>8} {'makro':>7} {'kotu':>7} {'+brand':>7}")
+    print (f"{'r':>5} {'robot':>8} {'d':>8} {'detection':>8} {'makro':>7} {'kotu':>7} {'+brand':>7}")
     t0 =None ;cik ={}
     for r in RS :
         per =rob [r ]
@@ -65,22 +65,22 @@ def kos (rec_ ,x58f ,ad ):
         if t0 is None :
             t0 =mi ;b0 =dict (pm )
         art =sum (1 for m in pm if pm [m ]>b0 [m ]+1e-9 )
-        cik [r ]={"robot":mi ,"tespit":K .mikro (tes [r ]),
+        cik [r ]={"robot":mi ,"detection":K .mikro (tes [r ]),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"artan_marka":art ,
         "n_marka":len (pm )}
         c =cik [r ]
-        print (f"{r :>5.1f} {mi :>8.4f} {mi -t0 :>+8.4f} {c ['tespit']:>8.4f} "
+        print (f"{r :>5.1f} {mi :>8.4f} {mi -t0 :>+8.4f} {c ['detection']:>8.4f} "
         f"{c ['makro']:>7.4f} {c ['en_kotu']:>7.4f} {art :>4}/{len (pm )}")
     return cik 
 
 
 gate =K .gate_yukle ()
-d7 =kos (K .yukle (json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]),
+d7 =kos (K .yukle (json .load (open ("results/d7_exam_set.json"))["pidler"]),
 K .x58 ,"D7 (DEV, 835 part, brand-disi)")
 d6 =kos (d6_record .yukle (set (d6_record .exam ()["pidler"])),d6_record .x58 ,
 "D6 (468 part) -- BAGIMSIZ DOGRULAMA")
-json .dump ({"damga":makbuz_hash .damga (),"D7":d7 ,"D6":d6 ,"yaricaplar":RS ,
+json .dump ({"damga":receipt_hash .damga (),"D7":d7 ,"D6":d6 ,"yaricaplar":RS ,
 "not":"mesafe-NMS, gate skoruna per. Yaricap D7'de secilirse D6 "
 "dogrulamasi ZORUNLU. MIKRO."},
-open ("results/nms_tarama.json","w"),indent =1 )
+open ("results/nms_sweep.json","w"),indent =1 )

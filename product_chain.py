@@ -8,7 +8,7 @@ Oysa urunun real yolu (`robot_cp.extract`) gate'ten SONRA two step more kosuyor:
     pick_direction_from_dictionary   fiziksel direction SOZLUGU     -> robot +0.0218 (ustune)
 
 Yani olctugum 0.2103, urunun real 0.2469'unun altindaydi. Bu modul that farki kapatir:
-each measurement betigi same fonksiyonu cagirir, so "olculen sey urunun YAPTIGI sey" becomes
+each measurement betigi same fonksiyonu cagirir, so "measured_path sey urunun YAPTIGI sey" becomes
 ([[measurement-zaafiyetleri-kapatildi]] with same ilke).
 
 TEZ DEGISMEZ: two step da SON ISLEM; `v_o` turetmesi, 5 sinif and ~6000 remesh aynen kalir.

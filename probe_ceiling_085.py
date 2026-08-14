@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ROBOT TAVANINI 0.85'e TASI: konum and direction kaynaklarini kademe kademe zenginlestir.
 
-DURUM (D7 brand-disi, `results/konum_yon_sik_d7.json`): robot F1 tavani 0.7273.
+DURUM (D7 brand-disi, `results/position_direction_sik_d7.json`): robot F1 tavani 0.7273.
 Kalan loss: KONUM YOK %31.8, YON HICBIR KAYNAKTA YOK %11.0.
 0.85 for recall 0.5714 -> 0.7391 is required (F1 = 2r/(1+r)).
 
@@ -32,7 +32,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -71,7 +71,7 @@ def axis_sample (cyl ):
 def main ():
     cy =pickle .load (open ("results/_d7_silindirler.pkl","rb"))
     ac =pickle .load (open ("results/_d7_acikliklar.pkl","rb"))
-    kay =K .yukle (json .load (open ("results/d7_sinav_kumesi.json"))["pidler"])
+    kay =K .yukle (json .load (open ("results/d7_exam_set.json"))["pidler"])
 
     KOLLAR =[("P0+Y0  tez-saf",0 ,0 ),("P1+Y0  +B-rep mouth",1 ,0 ),
     ("P2+Y0  +axis ornek",2 ,0 ),("P2+Y1  +komsu yonu",2 ,1 ),
@@ -79,7 +79,7 @@ def main ():
     ("P3+Y3  +MESH TEPELERI",3 ,3 )]
     say ={ad :collections .Counter ()for ad ,_ ,_ in KOLLAR }
     n_gt =0 
-    eksik =0 
+    missing =0 
     for pid ,r in sorted (kay .items ()):
         G =np .asarray (r .get ("G",[]),float )
         if not len (G ):
@@ -97,7 +97,7 @@ def main ():
             V =np .asarray (np .load (f )["V"],float )
         else :
             V =np .zeros ((0 ,3 ))
-            eksik +=1 
+            missing +=1 
             # direction kaynaklari
         eks =[]
         for c in cyl or []:
@@ -143,7 +143,7 @@ def main ():
 
                     Ilk version `np.abs(...)` with ISARETSIZ olcuyordu; this, ters
                     yone bakan a adayi correct sayar and tavani sisirir
-                    ([[unsigned-kahin-artefakti]]: ~0.08). Yon kaynaklarinin
+                    ([[unsigned-oracle-artefakti]]: ~0.08). Yon kaynaklarinin
                     all of them already +/- ciftleriyle havuzda oldugu for signed
                     measurement source cesitliligini KAYBETTIRMEZ.
                     """
@@ -174,7 +174,7 @@ def main ():
                     continue 
                 say [ad ]["YON YOK"]+=1 
 
-    print (f"D7 {n_gt } GT | mesh onbellegi olmayan part {eksik }\n")
+    print (f"D7 {n_gt } GT | mesh onbellegi olmayan part {missing }\n")
     print (f"{'arm':<28} {'recall':>8} {'F1 tavani':>10} {'KONUM YOK':>10} {'YON YOK':>9}")
     out ={}
     for ad ,_ ,_ in KOLLAR :
@@ -195,12 +195,12 @@ def main ():
     print (f"\nEN YUKSEK: {en } -> F1 tavani {out [en ]['f1_tavani']:.4f}")
     print ("0.85 HEDEFI: "+("ULASILDI"if out [en ]["f1_tavani"]>=0.85 
     else f"ULASILMADI ({out [en ]['f1_tavani']:.4f})"))
-    json .dump ({"damga":makbuz_hash .damga (),"n_gt":n_gt ,"sonuc":out ,
+    json .dump ({"damga":receipt_hash .damga (),"n_gt":n_gt ,"sonuc":out ,
     "not":"TAVAN olcumu, mukemmel selector. P3 kolu part basina binlerce "
     "konum -- dagitilabilir sistem DEGIL, 'bilgi meshte present mi' "
     "sorusunun cevabi. D7 brand-disi."},
-    open ("results/tavan_085.json","w"),indent =1 )
-    print ("receipt -> results/tavan_085.json")
+    open ("results/ceiling_085.json","w"),indent =1 )
+    print ("receipt -> results/ceiling_085.json")
 
 
 if __name__ =="__main__":

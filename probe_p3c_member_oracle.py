@@ -10,7 +10,7 @@ DAHA different, i.e. real seed kazanci bundan KUCUK becomes).
 """
 import glob ,json ,os ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
 import d6_record ,robot_cp 
@@ -54,8 +54,8 @@ print (f"BIRLESIM      : {u :.4f}")
 print (f"BIRLESIM KAZANCI (en iyi tekten): {u -max (a ,b ):+.4f}")
 k =u -max (a ,b )
 print (f"KARAR: {'EGIT (>=+0.05)'if k >=0.05 else ('KAPAT (<+0.02)'if k <0.02 else 'BELIRSIZ (0.02-0.05)')}")
-json .dump ({"damga":makbuz_hash .damga (),"g10":a ,"g7":b ,"birlesim":u ,
+json .dump ({"damga":receipt_hash .damga (),"g10":a ,"g7":b ,"birlesim":u ,
 "kazanc":k ,"n_parca":len (T_a ),
 "not":"g7+g10 birlesimi, IKI SEED birlesimi for ALT SINIR"},
-open ("results/p3c_uye_kahin.json","w"),indent =1 )
-print ("receipt -> results/p3c_uye_kahin.json")
+open ("results/p3c_member_oracle.json","w"),indent =1 )
+print ("receipt -> results/p3c_member_oracle.json")

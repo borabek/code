@@ -25,7 +25,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -41,9 +41,9 @@ OZ ="results/_brep_oz"
 DONUSUM ="zskor"
 
 
-def korpustan_egit (yol ):
+def korpustan_egit (path ):
     """refit_gate_v7 recetesi: within_part PARCA PARCA + RF 400/leaf3."""
-    d =np .load (yol ,allow_pickle =True )
+    d =np .load (path ,allow_pickle =True )
     X =np .hstack ([d ["X22"],d ["XR"]]).astype (float )
     y =np .asarray (d ["y"]).astype (int )
     pids =np .array ([str (p )for p in d ["pids"]])
@@ -102,7 +102,7 @@ def olc (model ,te ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ()))}
         if en is None or r ["robot"]>en ["robot"]:
@@ -117,30 +117,30 @@ def main ():
     g6 =K .gate_yukle ()
     out ["v6 (DAGITILAN)"]=olc (g6 ,te )
     print (f"{'v6 (DAGITILAN)':<34} robot {out ['v6 (DAGITILAN)']['robot']:.4f} | "
-    f"tespit {out ['v6 (DAGITILAN)']['tespit']:.4f} | "
+    f"detection {out ['v6 (DAGITILAN)']['detection']:.4f} | "
     f"{out ['v6 (DAGITILAN)']['rule']}",flush =True )
-    for yol in ("results/zengin_parite_v6.npz","results/zengin_parite_v3.npz"):
-        ad =f"benim recete + {os .path .basename (yol )}"
-        m ,sh ,poz ,np_ =korpustan_egit (yol )
+    for path in ("results/zengin_parite_v6.npz","results/zengin_parite_v3.npz"):
+        ad =f"benim recete + {os .path .basename (path )}"
+        m ,sh ,poz ,np_ =korpustan_egit (path )
         out [ad ]=olc (m ,te )
         c =out [ad ]
-        print (f"{ad :<34} robot {c ['robot']:.4f} | tespit {c ['tespit']:.4f} | "
+        print (f"{ad :<34} robot {c ['robot']:.4f} | detection {c ['detection']:.4f} | "
         f"{c ['rule']} | training {sh } part {np_ } pozitif {poz :.4f}",flush =True )
     v =out ["v6 (DAGITILAN)"]["robot"]
     b =out ["benim recete + zengin_parite_v6.npz"]["robot"]
     print (f"\nBENIM KORPUSUMLA (onceki measurement): 0.1159")
     print (f"v6 KORPUSUYLA:                   {b :.4f}")
     print (f"v6 KENDISI:                      {v :.4f}")
-    print ("\nTESHIS: "+("fark KORPUS/ETIKET tanimindan -- kapatilabilir"
+    print ("\nTESHIS: "+("diff KORPUS/ETIKET tanimindan -- kapatilabilir"
     if b >=v -0.02 else 
-    "corpus ACIKLAMIYOR -- fark `_cokus_yonlendir` ya da "
+    "corpus ACIKLAMIYOR -- diff `_cokus_yonlendir` ya da "
     "oznitelik kaynaginda, ADIM B'ye gecilir"))
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
     "benim_korpusum_robot":0.1159 ,
     "not":"ADIM A: same recete, FARKLI corpus. D7 tez-saf pool, MIKRO. "
     "Sizinti denetimi: corpus-D7 kesisimi part 0, brand 0."},
-    open ("results/v6_farki_A.json","w"),indent =1 )
-    print ("receipt -> results/v6_farki_A.json")
+    open ("results/v6_delta_A.json","w"),indent =1 )
+    print ("receipt -> results/v6_delta_A.json")
 
 
 if __name__ =="__main__":

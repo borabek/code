@@ -5,7 +5,7 @@ Olcum fasli closed. Bu betik only F1'i YUKSELTMEYE works.
 Taranan four kaldirac (none of them sistematik denenmedi):
 
   1. HPO          : ogrenme hizi / yaprak / iterasyon / L2
-  2. ZOR NEGATIF  : negatif orani and SECIMI (rastgele vs skor-yakin)
+  2. ZOR NEGATIF  : negatif orani and SECIMI (rastgele vs score-yakin)
   3. AGIRLIK      : part-esitleyici weight -- NIT GT'nin %51'i, egitimi
                     eziyor; each part equal weight alirsa sparse markalar
                     bogulmaz
@@ -13,7 +13,7 @@ Taranan four kaldirac (none of them sistematik denenmedi):
 
 Her yapilandirma AYNI brand-disi katlarda, AYNI karar kuraliyla, UCTAN UCA
 robot F1 with olculur. Kazanan, `full` katlarinda AYRICA dogrulanmadan urune
-girmez (d6'ya ayar yapmak d6'ya ezberlemektir).
+girmez (d6'ya setting yapmak d6'ya ezberlemektir).
 
 D7'ye BAKILMAZ.
 """
@@ -27,7 +27,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -72,8 +72,8 @@ def negatif_sec (M ,Y ,agirlik_p ,neg_kat ,zor ,rng ,on_skor =None ):
     # hard, yarisini rastgele al -- salt hard secim dagilimi breaks.
         rank_ =neg [np .argsort (-on_skor [neg ])]
         z =rank_ [:n_al //2 ]
-        kalan =np .setdiff1d (neg ,z ,assume_unique =False )
-        r =rng .choice (kalan ,min (len (kalan ),n_al -len (z )),replace =False )
+        remaining =np .setdiff1d (neg ,z ,assume_unique =False )
+        r =rng .choice (remaining ,min (len (remaining ),n_al -len (z )),replace =False )
         sec =np .concatenate ([poz ,z ,r ])
     else :
         sec =np .concatenate ([poz ,rng .choice (neg ,n_al ,replace =False )])
@@ -101,12 +101,12 @@ def main ():
     if os .environ .get ("GT_MOD")=="4":
     # URETIM TABANI DUZELTMESI. Taramanin tabani neg=6 idi, but URETIM
     # egiticisi (`run_p6_kademe2.py`) `P6_NEG_KAT` varsayilani **8**
-    # kullaniyor. Yani olculen "+0.0088" 6->12 farkidir; uretimin real
+    # kullaniyor. Yani measured_path "+0.0088" 6->12 farkidir; uretimin real
     # kazanci 8->12 and DAHA KUCUK must be. Dagitilan number this must be.
         ADAYLAR =[{**TABAN ,"neg":8 },{**TABAN ,"neg":12 }]
     elif os .environ .get ("GT_MOD")=="3":
-    # VERIFICATION TURU. d6'da secilen ayar (neg=12, +0.0088) `full`
-    # katlarinda tekrar edilir. d6'da ayar yapip d6'da ilan etmek
+    # VERIFICATION TURU. d6'da selected setting (neg=12, +0.0088) `full`
+    # katlarinda tekrar edilir. d6'da setting yapip d6'da ilan etmek
     # d6'ya ezberlemektir; gate ONCE ilan edilmisti.
         ADAYLAR =[TABAN ,{**TABAN ,"neg":12 }]
     elif os .environ .get ("GT_MOD")=="2":
@@ -195,11 +195,11 @@ def main ():
     res_ .sort (key =lambda x :-x [0 ])
     print (f"\n=== TABAN {baseline :.4f} ===")
     for r ,c in res_ [:5 ]:
-        fark =r -baseline 
+        diff =r -baseline 
         et =" ".join (f"{k }={v }"for k ,v in c .items ()if v !=TABAN [k ])
-        print (f"  {r :.4f}  {fark :+.4f}  {et or 'TABAN'}"
-        +("  <- KAZANC"if fark >=0.01 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"baseline":baseline ,
+        print (f"  {r :.4f}  {diff :+.4f}  {et or 'TABAN'}"
+        +("  <- KAZANC"if diff >=0.01 else ""))
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"baseline":baseline ,
     "en_iyi":{"f1":res_ [0 ][0 ],"yapilandirma":res_ [0 ][1 ]},
     "hepsi":[{"f1":r ,"c":c }for r ,c in res_ ],
     "not":"HPO + zor negatif + part-esitleyici agirlik, baseline "

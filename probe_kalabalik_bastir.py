@@ -11,7 +11,7 @@ KANONIK girdiler, MIKRO, D7 (=DEV).
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -21,7 +21,7 @@ from sina_cluster import match_hungarian
 
 gate =K .gate_yukle ()
 cy7 =pickle .load (open ("results/_d7_silindirler.pkl","rb"))
-k7 =K .yukle (json .load (open ("results/d7_sinav_kumesi.json"))["pidler"])
+k7 =K .yukle (json .load (open ("results/d7_exam_set.json"))["pidler"])
 
 
 def agiz_kimlikleri (P ,cyl ,R ):
@@ -111,7 +111,7 @@ for ad in arm :
 en =max ((a for a in res if a !="threshold (urun)"),key =lambda a :res [a ])
 print (f"\nEN IYI: {en } {res [en ]-baseline :+.4f}")
 print ("DECISION: "+("madde 6 ACIK"if res [en ]-baseline >=0.01 else "madde 6 OLU"))
-json .dump ({"damga":makbuz_hash .damga (),"mikro":res ,"baseline":baseline ,
+json .dump ({"damga":receipt_hash .damga (),"mikro":res ,"baseline":baseline ,
 "en_iyi":en ,"kazanc":res [en ]-baseline ,"n":len (arm ["threshold (urun)"]),
 "not":"URUN zincirine tek basina NMS. D7=DEV. MIKRO."},
 open ("results/suppress_crowd.json","w"),indent =1 )

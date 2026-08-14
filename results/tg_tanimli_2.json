@@ -20,17 +20,17 @@
   },
   "config": {
    "cp_config.json": "e568da8fa71cdc57",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
  "sonuc": {
   "TEZ-SAF +TANIM": {
-   "kural": "mutlak 0.1",
+   "rule": "mutlak 0.1",
    "aday_per_parca": 13.465227817745804,
    "D7": {
     "robot": 0.22680842193037315,
-    "tespit": 0.42067959141129874,
+    "detection": 0.42067959141129874,
     "makro": 0.23639766569475903,
     "en_kotu": 0.0,
     "brand": {
@@ -50,11 +50,11 @@
    }
   },
   "TAM HAVUZ +TANIM": {
-   "kural": "mutlak 0.1",
+   "rule": "mutlak 0.1",
    "aday_per_parca": 279.9425149700599,
    "D7": {
     "robot": 0.23099054665022606,
-    "tespit": 0.42060556240580904,
+    "detection": 0.42060556240580904,
     "makro": 0.24765998026612837,
     "en_kotu": 0.03529411764705882,
     "brand": {
@@ -76,7 +76,7 @@
  },
  "urun": {
   "robot": 0.2029,
-  "tespit": 0.4523,
+  "detection": 0.4523,
   "makro": 0.2146
  },
  "not": "Esik D6'da secildi, D7'de yeniden taranmadi. Egitim D6'yi icermez. TAM URUN ZINCIRI (poz kafasi). MIKRO."

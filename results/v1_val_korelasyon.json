@@ -1,26 +1,26 @@
 {
  "keig96_s0": {
   "val": 0.6378,
-  "tespit": 0.6167403687335388,
+  "detection": 0.6167403687335388,
   "candidate": 1348,
-  "aday_recall": 0.5620272314674736
+  "candidate_recall": 0.5620272314674736
  },
  "keig96_s3": {
   "val": 0.6676,
-  "tespit": 0.5984243377509227,
+  "detection": 0.5984243377509227,
   "candidate": 835,
-  "aday_recall": 0.4370257966616085
+  "candidate_recall": 0.4370257966616085
  },
  "keig128_s0": {
   "val": 0.6237,
-  "tespit": 0.6300340887267141,
+  "detection": 0.6300340887267141,
   "candidate": 1225,
-  "aday_recall": 0.516641452344932
+  "candidate_recall": 0.516641452344932
  },
  "keig128_s1": {
   "val": 0.7079,
-  "tespit": 0.6092848980309423,
+  "detection": 0.6092848980309423,
   "candidate": 1109,
-  "aday_recall": 0.5200605601816806
+  "candidate_recall": 0.5200605601816806
  }
 }

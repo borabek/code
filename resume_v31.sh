@@ -4,7 +4,7 @@
 #   bash resume_v31.sh
 #
 # Neden this 3 env degiskeni: corpus v8 (3033 part) 12.556 training grafigine
-# yamalaniyor ve varsayilan yol 31GB'a SIGMIYOR -- commit %99'a yapisir, Windows
+# yamalaniyor ve default path 31GB'a SIGMIYOR -- commit %99'a yapisir, Windows
 # pagefile'i buyutur, disk biter. Ikisi de matematiksel as notr (same tohumla
 # kayiplar birebir same olcüldü):
 #   CP_LAZY_HIER=1        hiyerarsileri RAM yerine prep_cache'ten batch basina okur

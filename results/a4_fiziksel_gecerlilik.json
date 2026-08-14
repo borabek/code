@@ -6,22 +6,22 @@
  "kusurlu_tp": 399,
  "bayraklar": {
   "govde_ici": {
-   "toplam": 134,
+   "total": 134,
    "tp": 61,
    "fp": 73
   },
   "onu_kapali": {
-   "toplam": 148,
+   "total": 148,
    "tp": 85,
    "fp": 63
   },
   "duvara_yapisik": {
-   "toplam": 92,
+   "total": 92,
    "tp": 51,
    "fp": 41
   },
   "eksenel_buyuk": {
-   "toplam": 330,
+   "total": 330,
    "tp": 330,
    "fp": 0
   }

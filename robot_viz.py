@@ -26,13 +26,13 @@ MODES ,ROBOT_ROLE ,MAX_MARKER_OFFSET_MM )
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 OUT_DIR ="results/robot_glb"
-_WRITTEN =[]# this kosuda yazilan GLB'ler -- denetim TAM bunlari reads
+_WRITTEN =[]# this kosuda written GLB'ler -- audit TAM bunlari reads
 
 
 class _NoReference (Exception ):
     """Bu parcanin manufacturer JSON'u absent -- BEKLENEN state, error not.
 
-    Urun gorunumu gorulmemis parcada works; orada GT never yoktur. Ayri a kind olmasinin sebebi
+    Urun gorunumu unseen parcada works; orada GT never yoktur. Ayri a kind olmasinin sebebi
     genel `except Exception` dalinin ekrana "(no manufacturer reference: TypeError)" like a
     error adi basmasi -- kullanici for this, bozulmus like okunuyordu.
     """
@@ -91,12 +91,12 @@ def surface_along (body ,p ,d ):
     baslatmak boyu parcayla oranti keeps.
 
     NOTE -- BU FONKSIYON BIR KEZ YANLIS YAZILDI (2026-07-29, measured): (a) 'iceride mi'
-    kontrolu yoktu and (b) EN UZAK kesisim (h[-1]) aliniyordu. Ikisi birlikte, yonu ters cikan
+    kontrolu yoktu and (b) EN UZAK kesisim (h[-1]) aliniyordu. Ikisi birlikte, yonu ters produced
     isaretcileri butun blogu deldirip KARSI YUZEYE firlatti: 306 isaretcinin 148'i (%48)
     CP'sinden 3mm'den extra koptu, most kotusu 88.9mm. Ekranda oklar parcadan ayri, havada duruyordu.
 
     Dogru konvansiyon already cp_geometry.seat_to_mouth'ta yaziliydi ("disaridaki point
-    OYNATILMAZ; otherwise isin karsi duvara carpar"). Ayni rule here da gecerli: ONCE iceride mi
+    OYNATILMAZ; otherwise isin karsi duvara carpar"). Ayni rule here da valid: ONCE iceride mi
     diye bak, after ILK kesisimi al.
     """
     p =np .asarray (p ,float );d =np .asarray (d ,float )
@@ -134,7 +134,7 @@ def escape_dir (body ,p ,d ,arrow_len ):
 
 def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
     """mode='robot_only' (VARSAYILAN, urun gorunumu): only robotun koydugu CP'ler, single renk.
-    mode='compare' (teshis): manufacturer with karsilastirma renkleri + eslesme cizgileri."""
+    mode='compare' (teshis): manufacturer with comparison renkleri + eslesme cizgileri."""
     import torch 
     import thesis_remesh ,robot_cp 
     from cad_eval import align_frames 
@@ -142,16 +142,16 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
     from big_arbiter import eligible 
 
     if mode not in MODES :
-        raise ValueError (f"bilinmeyen mod {mode !r }, gecerli: {MODES }")
+        raise ValueError (f"unknown mod {mode !r }, valid: {MODES }")
     dev =dev or ("cuda"if torch .cuda .is_available ()else "cpu")
     cfg =json .load (open ("cp_config.json"))
     if models is None :
         models =[load_any (c ,dev =dev )[:2 ]for c in cfg ["current_product"]["checkpoints"]]
         # PARCA COZUMLEME. eligible() only UYGUN parcalari gives: manufacturer JSON'u which is VE leakage
-        # korumasindan gecen. Urun gorunumu (robot_only) for this wrong gate -- robot gorulmemis a
+        # korumasindan passing. Urun gorunumu (robot_only) for this wrong gate -- robot unseen a
         # parcada works, GT'si olmayanda da calismak ZORUNDA. 0270018 diskte duruyorken
         # "part not found" diyordu, because egitimde kullanildigi for pool disindaydi.
-        # Once uygun pool (varsa GT with karsilastirma da is done), after DISKTEKI STEP.
+        # Once eligible pool (varsa GT with comparison da is done), after DISKTEKI STEP.
     if str (pid ).lower ().endswith ((".stp",".step"))and os .path .isfile (pid ):
     # DISARIDAN gelen STEP: internetten indirilmis, musteriden gelmis, herhangi a file.
     # Urunun asil kullanim bicimi this -- korpusa girmesi ya da part numarasi olmasi gerekmez.
@@ -166,7 +166,7 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
             jf =jhit [0 ]
             mfg =os .path .basename (jf ).split (".")[0 ]
         print (f"  (harici STEP: {os .path .basename (stp )}"
-        +(", manufacturer JSON'u bulundu -- karsilastirma yapilacak"if jf 
+        +(", manufacturer JSON'u bulundu -- comparison yapilacak"if jf 
         else ", manufacturer referansi YOK -- saf urun gorunumu")+")")
         hit =None 
     else :
@@ -186,7 +186,7 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
         if jhit :
             jf =jhit [0 ]
         mfg =os .path .basename (jf ).split (".")[0 ]if jf else "STEP"
-        print (f"  ({pid }: scoring pool disinda -- diskteki STEP ile URUN gorunumu"
+        print (f"  ({pid }: scoring pool disinda -- diskteki STEP with URUN gorunumu"
         +(", manufacturer JSON'u bulundu"if jf else ", manufacturer referansi YOK")+")")
 
     cps =robot_cp .extract (models ,stp ,dev ,conf_auto =float (cfg .get ("robot_conf_auto",0.5 )))
@@ -197,8 +197,8 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
     P =np .array ([c ["point"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
     Pd =np .array ([c ["direction"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
 
-    # URETICI CP'si OPSIYONEL: real kullanimda (gorulmemis part) yoktur. Varsa konsolda
-    # karsilastirma yazilir; CIZIME only 'compare' modunda girer.
+    # URETICI CP'si OPSIYONEL: real kullanimda (unseen part) yoktur. Varsa konsolda
+    # comparison yazilir; CIZIME only 'compare' modunda girer.
     Gm =np .zeros ((0 ,3 ));Gdm =np .zeros ((0 ,3 ));names =[]
     try :
         if jf is None :
@@ -279,9 +279,9 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
     # Kisa igne body inside kaybolur, uzun igne parcayi ezer; ikisi de yasandi (2026-07-28).
     # OK GEOMETRISI (2026-07-29'da bastan yazildi):
     #  * ok GOVDENIN DISINDA baslar (surface cikis noktasi) -> boy residual CP derinligine bagli DEGIL
-    #  * boy PARCAYA according to sabit -> a parcadaki tum oklar same uzunlukta, duzenli gorunur
+    #  * boy PARCAYA according to fixed -> a parcadaki tum oklar same uzunlukta, duzenli gorunur
     #  * shape real ok: silindir body + konik three (lolipop not)
-    # Her isaretci still TAM 2 bagli bilesen (body + three), so denetcinin M1/M2/M6 sayimi aynen gecerli.
+    # Her isaretci still TAM 2 bagli bilesen (body + three), so denetcinin M1/M2/M6 sayimi aynen valid.
     L_ARROW =float (np .clip (0.11 *diag ,4.0 ,12.0 ))
     marg =float (np .clip (0.04 *diag ,2.0 ,6.0 ))# uzatma gerekirse ucun disarida kalma payi
     R_SHAFT =float (np .clip (0.006 *diag ,0.28 ,0.75 ))
@@ -291,8 +291,8 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
     def add_arrow (start ,od ,role ,index ,shaft_scale =1.0 ):
         od =escape_dir (body ,start ,od ,L_ARROW )# cikamiyorsa isareti duzelt
         s =surface_along (body ,start ,od )# gorunur ok YUZEYDEN baslar
-        # BOY: varsayilan SABIT (duzenli gorunum). Sadece this boyla govdeden CIKILAMIYORSA
-        # gereken up to uzatilir -- gorunmeyen isaretci, uzun ok'tan more kotudur. Uzatma
+        # BOY: default SABIT (duzenli gorunum). Sadece this boyla govdeden CIKILAMIYORSA
+        # gereken up to uzatilir -- gorunmeyen isaretci, uzun ok'defn more kotudur. Uzatma
         # OLCULUR (exit_length), prediction edilmez; parcalarin %90'inda devreye never girmez.
         L =L_ARROW 
         if is_inside (body ,s +od *L )or len (ray_hits (body ,s +od *L ,od ,_reach (body ,s )))>0 :
@@ -339,7 +339,7 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
 
     n_out =sum (0 if is_inside (body ,t )else 1 for t in tips )
     print (f"   visibility: {n_out }/{len (tips )} needle tips outside body"
-    +(""if n_out ==len (tips )else "   <-- UYARI: icerde kalan present"))
+    +(""if n_out ==len (tips )else "   <-- UYARI: icerde remaining present"))
 
     for a ,b ,_ ,_ in (pairs if draw_gt else []):# mavi eslesme cizgisi
         v =Gm [b ]-P [a ];n =float (np .linalg .norm (v ))
@@ -362,7 +362,7 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
                 os .remove (_r )
         except OSError :
             pass 
-            # DOSYA ADI moda according to: robot_only'de F1 YOKTUR (gorulmemis parcada manufacturer referansi de absent),
+            # DOSYA ADI moda according to: robot_only'de F1 YOKTUR (unseen parcada manufacturer referansi de absent),
             # instead of robotun koydugu CP count yazilir. compare modunda F1 kalir (-Worst/-Best onu kullanir).
     out =os .path .join (OUT_DIR ,f"{mfg }_{pid }_F1_{f1 :.2f}.glb"if draw_gt 
     else f"{mfg }_{pid }_CP{len (P )}.glb")

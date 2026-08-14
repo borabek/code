@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 # L1: BAGIMSIZ 5. TOPLULUK UYESI (k_eig 96, seed 3).
 #
-# RATIONALE (this gece measured, results/k_log.txt): gate'in 13 ozelliginden yalnizca `votes` durust
+# RATIONALE (this night measured, results/k_log.txt): gate'in 13 ozelliginden yalnizca `votes` durust
 # geometri bolmesinde transfer ediyor (AUC dususu 0.018; digerleri 0.12-0.18 dusuyor). `votes`
 # = kac independent uyenin same acikligi gordugu. Yani tek gercekten genelleyen sinyalin
 # COZUNURLUGU uye sayisiyla sinirli: 4 uye with oy only {1,2,3,4} degerlerini alabiliyor.
 #
-# L (turetilmis 5. uye = olasilik ortalamasi) MEASURED ve KAYBETTI (tespit 0.6308 -> 0.6034):
+# L (turetilmis 5. uye = probability ortalamasi) MEASURED ve KAYBETTI (detection 0.6308 -> 0.6034):
 # turetilmis uye BAGIMSIZ not, oy cozunurlugu katmiyor. Bu kosu gercekten independent a
-# tohumla same tarifi tekrarlar -- tek farki rastgele baslangic ve veri sirasi.
+# tohumla same tarifi tekrarlar -- tek farki rastgele baslangic ve data sirasi.
 #
-# KILL: VAL kumesinde tespit F1 +0.01 gelmezse uye alinmaz (urun 4 uyeyle kalir).
+# KILL: VAL kumesinde detection F1 +0.01 gelmezse uye alinmaz (urun 4 uyeyle kalir).
 set -u
 export PYTHONPATH=_diffusion_net_repo/src
 PY=.venv/Scripts/python.exe

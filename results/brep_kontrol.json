@@ -20,7 +20,7 @@
   },
   "config": {
    "cp_config.json": "e568da8fa71cdc57",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
@@ -28,21 +28,21 @@
   "A) SEG-TEK + D6 gate": {
    "threshold": 0.2,
    "robot": 0.12238277794161015,
-   "tespit": 0.3998820406959599,
+   "detection": 0.3998820406959599,
    "makro": 0.11597829850143192,
    "en_kotu": 0.012485811577752554
   },
   "B) GENISLETILMIS + D6 gate": {
    "threshold": 0.3,
    "robot": 0.15537346359911755,
-   "tespit": 0.3567601638827608,
+   "detection": 0.3567601638827608,
    "makro": 0.15397511299145766,
    "en_kotu": 0.020026702269692925
   },
   "C) SEG-TEK + kanonik gate v6": {
    "threshold": 0.3,
    "robot": 0.19683441558441558,
-   "tespit": 0.4289772727272727,
+   "detection": 0.4289772727272727,
    "makro": 0.22458733234364558,
    "en_kotu": 0.012253233492171545
   }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """BELIRLEYICI AYRISTIRMA: SIRALAMA mi, ADET/ESIK mi?
 
-PARADOKS. NIT'te pool GT'nin %89.8'ini tasiyor, DOGRU secenek 7470 secenek
+PARADOKS. NIT'te pool GT'nin %89.8'ini tasiyor, DOGRU option 7470 option
 between first ~40'ta (order yuzdeligi 0.005) -- but uctan uca F1 = 0.005.
 Siralama iyi, pool iyi, sonuc SIFIR.
 
@@ -59,7 +59,7 @@ def temel (d ):
 
 
 def _tavan (d ):
-    """Havuzda kabul kutusuna giren GT count (mukemmel selector)."""
+    """Havuzda kabul kutusuna entering GT count (mukemmel selector)."""
     P =d ["P"][d ["idx"]]
     YD =d ["YD"]
     G =np .asarray (d ["G"],float )
@@ -76,7 +76,7 @@ def _tavan (d ):
 
 
 def _ustk (d ,s ,k ):
-    """Skora according to first k secenek, NMS with (same kabul kutusu)."""
+    """Skora according to first k option, NMS with (same kabul kutusu)."""
     P =d ["P"][d ["idx"]]
     YD =d ["YD"]
     rank_ =np .argsort (-np .asarray (s ))
@@ -174,7 +174,7 @@ def main ():
     print ("  BUYUKSE -> sorun ADET/ESIK (lattice + count tahmini kolu ACILIR)")
     print ("  ~0 ISE  -> sorun SIRALAMA (secicinin kendisi degismeli)")
     json .dump ({"dizin":os .environ ["P6_DIZIN"],"cluster":KUME ,"brand":out ,
-    "toplam":{"rule":kf ,"ustk_kahin":uf ,"ceiling":tv ,
+    "total":{"rule":kf ,"ustk_kahin":uf ,"ceiling":tv ,
     "gt":T ["gt"]},
     "not":"USTK_KAHIN: same skorla ilk k, k = GERCEK CP sayisi. "
     "KAHIN'dir, urun not. Amac SIRALAMA with ADET/ESIK "

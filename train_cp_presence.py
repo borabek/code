@@ -4,7 +4,7 @@
 WHY BU, VE WHY SIMDI:
 Segmentasyon modeli 102 insan-etiketli parcayla egitildi. Kayitli bulgu angle: CAD sozde-etiketleri
 insan GT'siyle however F1~0.46 ortusuyor, i.e. more extra CAD etiketi tavani yukseltmiyor.
-Ama elimizde BAMBASKA and KESIN a denetim present: **8534 manufacturer ConnectionPoint konumu**,
+Ama elimizde BAMBASKA and KESIN a audit present: **8534 manufacturer ConnectionPoint konumu**,
 1542 parcada -- and bugune up to only DEGERLENDIRMEDE kullanildi, egitimde HIC kullanilmadi.
 
 H'NIN OLUMU BU KOLU ZORUNLU KILDI (measured 2026-07-30): sinif-oncullu karar duzeltmesi
@@ -26,7 +26,7 @@ manufacturer-disi split this sizintiyi tamamen keser.
 
 KILL (olcumden ONCE yazildi):
   * val CP-yakalama orani, mevcut hattin candidate recall'ini (**0.747**) GECMEZSE arm duser.
-  * yakalama artip precision'i wire-gate geri alamiyorsa (tespit F1 gerilerse) arm duser --
+  * yakalama artip precision'i wire-gate geri alamiyorsa (detection F1 gerilerse) arm duser --
     this however G ciktisi candidate havuzuna baglandiktan after olculebilir (2. stage).
 """
 import os ,sys ,json ,time ,argparse 
@@ -43,7 +43,7 @@ _RETRY ={}
 
 
 def _load_skip ():
-    """Kilitleyen parcayi atla (gate_regrow deseni). Ilk kesintide kara listeye ALINMAZ:
+    """Kilitleyen parcayi skip (gate_regrow deseni). Ilk kesintide kara listeye ALINMAZ:
     'part asildi' with 'sureci ben oldurdum' ayirt edilemez; real asilan ikinci times de asilir."""
     skip =set ()
     if os .path .exists (SKIPFILE ):
@@ -57,7 +57,7 @@ def _load_skip ():
                 os .makedirs (OUTDIR ,exist_ok =True )
                 with open (SKIPFILE ,"a")as fh :
                     fh .write (stuck +chr (10 ))
-                print (f"  [zehirli part] {stuck } IKI kez asti -> kalici atlama",flush =True )
+                print (f"  [zehirli part] {stuck } IKI kez asti -> persistent atlama",flush =True )
             else :
                 _RETRY [stuck ]=att +1 
         os .remove (INFLIGHT )

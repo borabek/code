@@ -10,7 +10,7 @@ Hata YUTULMAZ.
 """
 import json ,os ,pickle ,sys ,glob 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -35,17 +35,17 @@ res_ ={}
 for ad ,ob ,gy in KOLLAR :
     gate =pickle .load (open (gy ,"rb"))
     t ,r =olc (pidler ,ob ,rec_ ,gate ,S )
-    res_ [ad ]={"tespit":t ,"robot":r ,"cache":ob ,"gate":gy }
-    print (f"{ad :<28} tespit {t :.4f} | robot {r :.4f}",flush =True )
+    res_ [ad ]={"detection":t ,"robot":r ,"cache":ob ,"gate":gy }
+    print (f"{ad :<28} detection {t :.4f} | robot {r :.4f}",flush =True )
 
 baseline =res_ ["g7 + gate v5 (DAGITILAN)"]
 for ad ,v in res_ .items ():
-    v ["tespit_fark"]=v ["tespit"]-baseline ["tespit"]
+    v ["tespit_fark"]=v ["detection"]-baseline ["detection"]
     v ["robot_fark"]=v ["robot"]-baseline ["robot"]
 print ("\nDAGITILANA GORE FARK:")
 for ad ,v in res_ .items ():
-    print (f"  {ad :<28} tespit {v ['tespit_fark']:+.4f} | robot {v ['robot_fark']:+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"n_parca":len (pidler ),
+    print (f"  {ad :<28} detection {v ['tespit_fark']:+.4f} | robot {v ['robot_fark']:+.4f}")
+json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,"n_parca":len (pidler ),
 "not":"D6 = DEV. Muhurlu exam DEGIL."},
 open ("results/a4_gate_v7.json","w"),indent =1 )
 print ("\nmakbuz -> results/a4_gate_v7.json")

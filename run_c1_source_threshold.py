@@ -19,7 +19,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -91,7 +91,7 @@ def kos (gate ,data_ ,e0 ,e1 ,S ,tam =False ):
     pm ={m :2 *v [0 ]/max (2 *v [0 ]+v [1 ]+v [2 ],1 )for m ,v in rob .items ()}
     mi =float (2 *sum (v [0 ]for v in rob .values ())/
     max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),
     "FP":int (sum (v [1 ]for v in rob .values ())),
@@ -121,7 +121,7 @@ def cluster (on ):
 
 
 def main ():
-    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     S =K .step_map ()
     dev ,te =cluster ("d6"),cluster ("d7")
     print (f"D6 {len (dev )} | D7 {len (te )}\n",flush =True )
@@ -135,18 +135,18 @@ def main ():
     e0 ,e1 ,_ =en 
     baseline =kos (gate ,te ,0.05 ,0.05 ,S ,tam =True )
     new_ =kos (gate ,te ,e0 ,e1 ,S ,tam =True )
-    print (f"\nTABAN  (e0=e1=0.05) robot {baseline ['robot']:.4f} | tespit "
-    f"{baseline ['tespit']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
-    print (f"KAYNAK (e0={e0 } e1={e1 }) robot {new_ ['robot']:.4f} | tespit "
-    f"{new_ ['tespit']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']}")
+    print (f"\nTABAN  (e0=e1=0.05) robot {baseline ['robot']:.4f} | detection "
+    f"{baseline ['detection']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
+    print (f"KAYNAK (e0={e0 } e1={e1 }) robot {new_ ['robot']:.4f} | detection "
+    f"{new_ ['detection']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']}")
     print (f"\nFARK {new_ ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02")
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"source":new_ ,
-    "secilen":[e0 ,e1 ],
+    json .dump ({"damga":receipt_hash .damga (),"baseline":baseline ,"source":new_ ,
+    "selected":[e0 ,e1 ],
     "not":"Kaynak-duyarli threshold (seg vs B-rep). Izgara D6'da, D7'de "
     "yeniden taranmadi. Isaret duzeltmesi IKI kolda da acik. "
     "D7 brand-disi, TAM ZINCIR."},
-    open ("results/c1_kaynak_esik.json","w"),indent =1 )
-    print ("receipt -> results/c1_kaynak_esik.json")
+    open ("results/c1_kaynak_threshold.json","w"),indent =1 )
+    print ("receipt -> results/c1_kaynak_threshold.json")
 
 
 if __name__ =="__main__":

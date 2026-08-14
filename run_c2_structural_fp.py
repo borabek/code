@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """C2: YAPISAL FP BASTIRMA -- real CP'ler SIRA olusturur.
 
-HATA BANKASI v2 (sign duzeltmeli yigin, `results/hata_bankasi_v2.json`):
+HATA BANKASI v2 (sign duzeltmeli yigin, `results/error_bank_v2.json`):
 TP 786 / FN 2301 / **FP 1247** (B-rep 639, seg 382) -> F1 0.3070.
 Kova aritmetigi: **FP yariya inerse F1 0.350** (+0.043).
 
 FIZIK: klemensler tekrarli yapilardir; real tel girisleri part on
-DUZENLI ARALIKLI SIRALAR olusturur. Yalitik duran a candidate (komsusu absent, order
+DUZENLI ARALIKLI SIRALAR olusturur. Yalitik stopped a candidate (komsusu absent, order
 uyumu absent) large olasilikla vida deligi / alet yuvasi.
 
 KOL: gate+NMS sonrasi each candidate for YAPI SKORU is computed --
@@ -29,7 +29,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -58,7 +58,7 @@ def yapi_skoru (P ):
 
     Parcanin baskin ekseni bulunur, candidates that eksene yansitilir, ardisik
     araliklarin MEDYANI referans alinir. Bir adayin skoru, kendisine medyan
-    aralik +/- tolerans mesafede duran komsu sayisidir. Yalitik candidate -> 0.
+    aralik +/- tolerans mesafede stopped komsu sayisidir. Yalitik candidate -> 0.
     """
     n =len (P )
     if n <3 :
@@ -67,11 +67,11 @@ def yapi_skoru (P ):
     u =np .linalg .svd (Q ,full_matrices =False )[2 ][0 ]
     t =Q @u 
     s =np .sort (t )
-    fark =np .diff (s )
-    fark =fark [fark >1e-6 ]
-    if not len (fark ):
+    diff =np .diff (s )
+    diff =diff [diff >1e-6 ]
+    if not len (diff ):
         return np .full (n ,99 )
-    med =float (np .median (fark ))
+    med =float (np .median (diff ))
     if med <=1e-6 :
         return np .full (n ,99 )
     d =np .abs (t [:,None ]-t [None ,:])
@@ -122,7 +122,7 @@ def cluster (on ):
 def kos (gate ,data_ ,yapi_esik ,S ,tam =False ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    silinen =0 
+    deleted =0 
     for d in data_ :
         s =np .asarray (gate .predict_proba (
         wire_gate .within_part (d ["X"],"zskor"))[:,1 ],float )
@@ -138,7 +138,7 @@ def kos (gate ,data_ ,yapi_esik ,S ,tam =False ):
             if yapi_esik is not None and len (P )>=3 :
                 ys =yapi_skoru (P )
                 tut =ys >=yapi_esik 
-                silinen +=int ((~tut ).sum ())
+                deleted +=int ((~tut ).sum ())
                 P ,D =P [tut ],D [tut ]
         if tam and len (P ):
             P ,D =product_chain .tam_poz (d ["V"],d ["F"],d ["pb"],P ,D ,
@@ -153,16 +153,16 @@ def kos (gate ,data_ ,yapi_esik ,S ,tam =False ):
     pm ={m :2 *v [0 ]/max (2 *v [0 ]+v [1 ]+v [2 ],1 )for m ,v in rob .items ()}
     mi =float (2 *sum (v [0 ]for v in rob .values ())/
     max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),
     "TP":int (sum (v [0 ]for v in rob .values ())),
     "FP":int (sum (v [1 ]for v in rob .values ())),
-    "silinen":silinen ,"brand":pm }
+    "deleted":deleted ,"brand":pm }
 
 
 def main ():
-    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     S =K .step_map ()
     dev ,te =cluster ("d6"),cluster ("d7")
     print (f"D6 {len (dev )} | D7 {len (te )}\n",flush =True )
@@ -170,26 +170,26 @@ def main ():
     for ye in YAPI_ESIKLERI :
         r =kos (gate ,dev ,ye ,S )
         print (f"  D6 yapi_esik={ye }  robot {r ['robot']:.4f} | TP {r ['TP']} "
-        f"FP {r ['FP']} | silinen {r ['silinen']}",flush =True )
+        f"FP {r ['FP']} | deleted {r ['deleted']}",flush =True )
         if ye is not None and (en is None or r ["robot"]>en [1 ]["robot"]):
             en =(ye ,r )
     ye =en [0 ]
     baseline =kos (gate ,te ,None ,S ,tam =True )
     new_ =kos (gate ,te ,ye ,S ,tam =True )
-    print (f"\nTABAN (arm kapali)   robot {baseline ['robot']:.4f} | tespit "
-    f"{baseline ['tespit']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
-    print (f"YAPI  (threshold={ye })       robot {new_ ['robot']:.4f} | tespit "
-    f"{new_ ['tespit']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']} | "
-    f"silinen {new_ ['silinen']}")
+    print (f"\nTABAN (arm kapali)   robot {baseline ['robot']:.4f} | detection "
+    f"{baseline ['detection']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
+    print (f"YAPI  (threshold={ye })       robot {new_ ['robot']:.4f} | detection "
+    f"{new_ ['detection']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']} | "
+    f"deleted {new_ ['deleted']}")
     print (f"\nFARK {new_ ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02 "
     f"(threshold gurultusu ~0.015)")
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"yapi":new_ ,
+    json .dump ({"damga":receipt_hash .damga (),"baseline":baseline ,"yapi":new_ ,
     "secilen_esik":ye ,
     "not":"Yapisal FP bastirma: parcanin baskin ekseninde es-aralikli "
     "komsu sayisi. Esik D6'da secildi. Isaret duzeltmesi IKI "
     "kolda acik. D7 brand-disi, TAM ZINCIR, MIKRO."},
-    open ("results/c2_yapisal_fp.json","w"),indent =1 )
-    print ("receipt -> results/c2_yapisal_fp.json")
+    open ("results/c2_structural_fp.json","w"),indent =1 )
+    print ("receipt -> results/c2_structural_fp.json")
 
 
 if __name__ =="__main__":

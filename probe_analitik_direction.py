@@ -2,7 +2,7 @@
 """III. KOL -- YONU OGRENME, HESAPLA (analitik silindir ekseni)
 
 WHY SIMDI. Yayilim kolunun darbogazi measured: uretilen konumda correct direction
-MEVCUT (kahin 0.527) but model onu SECEMIYOR (0.077). Yani sorun direction
+MEVCUT (oracle 0.527) but model onu SECEMIYOR (0.077). Yani sorun direction
 BILGISININ yoklugu not, SECIMI. B-rep agzinda direction whereas ANALITIKTIR --
 silindirin ekseni. Ogrenmeye gerek absent.
 
@@ -130,8 +130,8 @@ def main ():
     "not":"B-rep agzi + ANALITIK axis yonu (merkezden agza "
     "isaretlenmis). 'sign kaybi' = unsigned - signed. "
     "D7'ye BAKILMADI."},
-    open ("results/analitik_yon.json","w"),indent =1 )
-    print ("\nmakbuz -> results/analitik_yon.json")
+    open ("results/analitik_direction.json","w"),indent =1 )
+    print ("\nmakbuz -> results/analitik_direction.json")
     print ("OKUMA: +ISARETLI yuksekse direction HESAPLANABILIR, ogrenilmesi gereksiz.")
 
 

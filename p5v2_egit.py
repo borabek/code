@@ -5,19 +5,19 @@ Plan (kullanici, 2026-08-09) + olculmus oncul
 ([[gate-before-poz-after-tavani-kirpiyor]]: ham pool kahini 0.3781 / before-gate 0.3155).
 
 TASARIM
-  * TUM ham candidates (gate YOK) -> p5v2_secenek.secenekler()
+  * TUM ham candidates (gate YOK) -> p5v2_secenek.options()
   * ETIKET: bire-a STRICT robot eslesmesi (greedy DEGIL) -- Macar with
-  * SECIM: each adaya a secenek; AYNI fiziksel mouth EN FAZLA a adaya
+  * SECIM: each adaya a option; AYNI fiziksel mouth EN FAZLA a adaya
     (bipartite kisit, `agiz_kimlik`)
   * EGITIM and INFERENCE AYNI secenekleri gorur (mevcut p5'te planar only
     inference'ta vardi -- that kusur here YOK)
   * MEVCUT (`v_o`) real fallback: skoru dusukse bile candidate SILINMEZ, MEVCUT'ta kalir
-  * Gate SONRA, last kabul/kalibrasyon as (this betikte DEGIL)
-TEZE SADIK: `v_o` always 0 numarali secenek; turetme/remesh/sinif count does not change.
+  * Gate SONRA, last kabul/calibration as (this betikte DEGIL)
+TEZE SADIK: `v_o` always 0 numarali option; turetme/remesh/sinif count does not change.
 """
 import argparse ,collections ,glob ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -42,7 +42,7 @@ def robot_uyar (p ,y ,g ,gd ):
 
 
 def etiketle (secs ,G ,Gd ):
-    """BIRE-BIR strict robot eslesmesi -> secenek basina 0/1.
+    """BIRE-BIR strict robot eslesmesi -> option basina 0/1.
 
     Greedy DEGIL: (candidate, GT) maliyet matrisi kurulur, Macar atar, only ATANAN
     ciftin O GT'yi saglayan secenekleri 1 becomes. Greedy olsaydi same GT birden
@@ -70,10 +70,10 @@ def etiketle (secs ,G ,Gd ):
     return y 
 
 
-def sec (secs ,skor ,gate_skor =None ,gate_esik =None ):
-    """ORTAK secim: each adaya a secenek, a AGIZ most extra a adaya.
+def sec (secs ,score ,gate_skor =None ,gate_esik =None ):
+    """ORTAK secim: each adaya a option, a AGIZ most extra a adaya.
 
-    Macar with (candidate x mouth) atamasi; agzi olmayan (MEVCUT/NULL) secenekler
+    Macar with (candidate x mouth) atamasi; agzi olmayan (MEVCUT/NULL) options
     kisit disi and atamadan SONRA degerlendirilir.
     """
     n =len (secs )
@@ -87,7 +87,7 @@ def sec (secs ,skor ,gate_skor =None ,gate_esik =None ):
             for k ,(p ,y ,_oz ,a )in enumerate (o ):
                 if a <0 :
                     continue 
-                c =1.0 -float (skor [i ][k ])
+                c =1.0 -float (score [i ][k ])
                 if c <C [i ,idx [a ]]:
                     C [i ,idx [a ]]=c 
                     en [(i ,idx [a ])]=k 
@@ -96,14 +96,14 @@ def sec (secs ,skor ,gate_skor =None ,gate_esik =None ):
             k =en .get ((i ,j ))
             if k is None :
                 continue 
-                # mouth secenegi however MEVCUT'tan IYIYSE alinir
-            if skor [i ][k ]>skor [i ][0 ]:
+                # mouth secenegi however MEVCUT'defn IYIYSE alinir
+            if score [i ][k ]>score [i ][0 ]:
                 P [i ],D [i ]=secs [i ][k ][0 ],secs [i ][k ][1 ]
     for i ,o in enumerate (secs ):
         if P [i ]is None :
         # NULL most yuksekse adayi at; degilse MEVCUT'ta kal (GERCEK fallback)
             k_null =len (o )-1 
-            if skor [i ][k_null ]>skor [i ][0 ]:
+            if score [i ][k_null ]>score [i ][0 ]:
                 continue 
             P [i ],D [i ]=o [0 ][0 ],o [0 ][1 ]
             # GATE SON KABUL: ortak secimden SONRA, goreli esikle
@@ -119,7 +119,7 @@ def sec (secs ,skor ,gate_skor =None ,gate_esik =None ):
 
 
 def veri_kur (pidler ,rec_ ,ob_dir ,cyl ,acik ,S ,gate ):
-    """Her part for (secenekler, labels, manufacturer). Gate SKOR ozniteligi
+    """Her part for (options, labels, manufacturer). Gate SKOR ozniteligi
     for is used but ADAY ELEMEZ -- eleme p5-v2'nin isi."""
     from p1c_threshold import maske # noqa: F401  (kullanilmiyor; gate ELEMEZ)
     data_ =[]
@@ -149,7 +149,7 @@ def veri_kur (pidler ,rec_ ,ob_dir ,cyl ,acik ,S ,gate ):
         if len (D )>1 :
             B =D *np .sign (D @D [0 ])[:,None ]
             komsu =B .mean (0 );komsu /=(np .linalg .norm (komsu )+1e-12 )
-        secs =PS .secenekler (P ,D ,cyl .get (pid ),acik .get (pid ),r ["diag"],
+        secs =PS .options (P ,D ,cyl .get (pid ),acik .get (pid ),r ["diag"],
         gate_s =gs ,votes =vt ,komsu =komsu )
         data_ .append ({"pid":pid ,"mfg":r ["mfg"],"secs":secs ,"gate_skor":gs ,
         "y":etiketle (secs ,G ,Gd ),"G":G ,"Gd":Gd ,
@@ -162,10 +162,10 @@ class Siralayici :
 
     WHY: p5-v2'nin real karari "this adayin secenekleri arasindan BIRINI sec".
     Ikili siniflandirici each secenegi BAGIMSIZ puanliyordu; ogrendigi sey
-    ("this secenek correct mu") with kullanildigi sey ("hangisi EN IYI") same not.
-    Pairwise: same adayin (correct, wrong) secenek ciftleri ten
+    ("this option correct mu") with kullanildigi sey ("hangisi EN IYI") same not.
+    Pairwise: same adayin (correct, wrong) option ciftleri ten
     f(correct) > f(wrong) ogretilir -- feature FARKI ten ikili sinif.
-    Cikarimda skor single secenek uzerinden hesaplanabilsin diye model FARKA
+    Cikarimda score single option uzerinden hesaplanabilsin diye model FARKA
     egitilir and puanlama f(x) = P(x - 0 farki) instead of DOGRUDAN karar fonksiyonu
     as is used: double (x_i - x_j) -> 1 whereas x_i more iyi.
     """
@@ -202,7 +202,7 @@ class Siralayici :
         return self 
 
     def skorla (self ,F ):
-        """Aday-ici skor: each secenegin DIGERLERINE karsi kazanma orani."""
+        """Aday-ici score: each secenegin DIGERLERINE karsi kazanma orani."""
         F =np .asarray (F ,float )
         n =len (F )
         if n ==1 :
@@ -230,7 +230,7 @@ def egit (data_ ,kip =None ):
 def uygula (data_ ,clf ,gate_esik =None ):
     """gate_esik verilirse ORTAK SECIMDEN SONRA last kabul as uygulanir.
 
-    Plandaki order: ham pool -> ortak secim -> GATE (last kabul/kalibrasyon).
+    Plandaki order: ham pool -> ortak secim -> GATE (last kabul/calibration).
     Gate'i ONCE uygulamak tavani kirpiyordu; SONRA uygulamak kesinligi toplar.
     """
     from sina_cluster import match_hungarian ,f1w 
@@ -239,11 +239,11 @@ def uygula (data_ ,clf ,gate_esik =None ):
     T ,R =[],[]
     for d in data_ :
         if isinstance (clf ,Siralayici ):
-            skor =[clf .skorla ([s [2 ]for s in o ])for o in d ["secs"]]
+            score =[clf .skorla ([s [2 ]for s in o ])for o in d ["secs"]]
         else :
-            skor =[clf .predict_proba (np .asarray ([s [2 ]for s in o ],float ))[:,1 ]
+            score =[clf .predict_proba (np .asarray ([s [2 ]for s in o ],float ))[:,1 ]
             for o in d ["secs"]]
-        P ,D =sec (d ["secs"],skor ,gate_skor =d .get ("gate_skor"),
+        P ,D =sec (d ["secs"],score ,gate_skor =d .get ("gate_skor"),
         gate_esik =gate_esik )
         G ,Gd =d ["G"],d ["Gd"]
         T .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,d ["diag"],0.0 ,180.0 ,True )[:3 ])
@@ -265,7 +265,7 @@ def main ():
     acik =pickle .load (open ("results/_d6_acikliklar.pkl","rb"))
     pidler =sorted ({f [:-4 ]for f in os .listdir (a .ob )if f .endswith (".npz")}
     &set (rec_ ))
-    print (f"part {len (pidler )} | veri kuruluyor...",flush =True )
+    print (f"part {len (pidler )} | data kuruluyor...",flush =True )
     data_ =veri_kur (pidler ,rec_ ,a .ob ,cyl ,acik ,S ,gate )
     print (f"kullanilabilir part {len (data_ )}",flush =True )
 
@@ -310,7 +310,7 @@ def main ():
             False ,signed =True )[:3 ])
         t0 ,r0 =f1w (T0 ),f1w (R0 )
         t0m ,r0m =KZ .mikro (T0 ),KZ .mikro (R0 )
-        res_ [m ]={"n":len (te ),"ic_esik":list (en_e ),"tespit_taban":t0 ,"tespit":t ,
+        res_ [m ]={"n":len (te ),"ic_esik":list (en_e ),"tespit_taban":t0 ,"detection":t ,
         "robot_taban":r0 ,"robot":r ,
         "tespit_gate":tg ,"robot_gate":rg ,
         "robot_gate_MIKRO":rgm ,"tespit_gate_MIKRO":tgm ,
@@ -323,8 +323,8 @@ def main ():
     if res_ :
         rf =float (np .mean ([v ["robot_fark"]for v in res_ .values ()]))
         tf =float (np .mean ([v ["tespit_fark"]for v in res_ .values ()]))
-        print (f"\nLOMO ORTALAMA: tespit {tf :+.4f} | robot {rf :+.4f}")
-        json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"robot_fark_ort":rf ,"tespit_fark_ort":tf ,
+        print (f"\nLOMO ORTALAMA: detection {tf :+.4f} | robot {rf :+.4f}")
+        json .dump ({"damga":receipt_hash .damga (),"sonuc":res_ ,"robot_fark_ort":rf ,"tespit_fark_ort":tf ,
         "baseline":"secim YOK, hep MEVCUT (v_o)"},
         open ("results/p5v2_lomo.json","w"),indent =1 )
         print ("receipt -> results/p5v2_lomo.json")

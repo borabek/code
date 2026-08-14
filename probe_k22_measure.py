@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""K2.2+K2.1 UCTAN UCA: periyodik spread tespit/robot'u oynatiyor mu?
+"""K2.2+K2.1 UCTAN UCA: periyodik spread detection/robot'u oynatiyor mu?
 
 Yigin: g10 + gate v7 (bugunku most iyi). Iki arm, AYNI parts:
   A) spread YOK   B) spread VAR (+-1 step, row bazinda)
@@ -8,7 +8,7 @@ i.e. this kolun KESINLIK BEDELI full as olculur.
 """
 import json ,os ,pickle ,sys ,glob 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -60,10 +60,10 @@ for ad ,yayilim in (("yayilim YOK",0 ),("yayilim VAR (+-1)",1 )):
         R .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],ROBOT_YANAL ,
         ROBOT_ACI ,False ,signed =True )[:3 ])
     t ,rr =f1w (T ),f1w (R )
-    res_ [ad ]={"tespit":t ,"robot":rr ,"eklenen_nokta":ek_toplam }
-    print (f"{ad :<20} tespit {t :.4f} | robot {rr :.4f} | eklenen {ek_toplam }",flush =True )
+    res_ [ad ]={"detection":t ,"robot":rr ,"eklenen_nokta":ek_toplam }
+    print (f"{ad :<20} detection {t :.4f} | robot {rr :.4f} | added {ek_toplam }",flush =True )
 
 a ,b =res_ ["yayilim YOK"],res_ ["yayilim VAR (+-1)"]
-print (f"\nFARK: tespit {b ['tespit']-a ['tespit']:+.4f} | robot {b ['robot']-a ['robot']:+.4f}")
+print (f"\nFARK: detection {b ['detection']-a ['detection']:+.4f} | robot {b ['robot']-a ['robot']:+.4f}")
 json .dump (res_ ,open ("results/k22_periyodik_yayilim.json","w"),indent =1 )
 print ("receipt -> results/k22_periyodik_yayilim.json")

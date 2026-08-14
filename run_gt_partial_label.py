@@ -4,9 +4,9 @@
 WHY. Canli segmentasyon kontrol noktalari **27 Temmuz** tarihli and
 ~200 parcalik a veriyle egitilmis. Kampanya along SECICI optimize
 edildi but altindaki segmentasyon DONDURULMUS kaldi. Olculen sonuc:
-NIT'te GT'de olasilik 0.5244 / rastgele yuzeyde 0.4394 (1.19x), SUPU'da
+NIT'te GT'de probability 0.5244 / rastgele yuzeyde 0.4394 (1.19x), SUPU'da
 83x. Yani zincirin EN BASI dense parcada bilgi uretmiyor
-(`results/otopsi_segmentasyon.json`).
+(`results/autopsy_segmentation.json`).
 
 Elimizde `full` kumesinde 2583 parcanin URETICI GT'si present. Egitici already
 `--partial-dir` with "kablo girisi signed, gerisi MASKELI" formatini
@@ -18,10 +18,10 @@ gelir.
 
 SIZINTI KISITI -- EN IMPORTANT RULE. Yalniz `full` parcalari boyanir.
   * D7 = SINAV; GT'si segmentasyona girerse exam yanar.
-  * d6 = benim gelistirme kumem; girerse d6'daki each measurement gecersiz becomes.
+  * d6 = benim gelistirme kumem; girerse d6'daki each measurement invalid becomes.
 Bekci: D7/d6 kimlikleri KUMEDEN cikarilir and sayilir; sifir olmalidir.
 
-YARICAP. GT a NOKTADIR, kablo girisi a BOLGEDIR. `PAINT_R` (varsayilan
+YARICAP. GT a NOKTADIR, kablo girisi a BOLGEDIR. `PAINT_R` (default
 2.0 mm) lateral kabul toleransiyla same secildi; GT'lerin %98.1'i already
 2mm'de a tepeye komsu (`mesh-ceiling-not-lateral-model-hatasi`).
 """
@@ -69,7 +69,7 @@ def main ():
     flush =True )
     assert tam and not (tam &yasak ),"tam kumesi d6/d7 with KESISIYOR"
 
-    yazilan =atlanan =empty_ =leakage =0 
+    written =skipped =empty_ =leakage =0 
     poz_top =tepe_top =0 
     for pid ,r in sorted (kay .items ()):
         pid =str (pid )
@@ -78,7 +78,7 @@ def main ():
             continue 
         hedef =f"{CIK }/{pid }"
         if os .path .exists (f"{hedef }/{pid }.labels.txt"):
-            atlanan +=1 
+            skipped +=1 
             continue 
         G =np .asarray (r .get ("G",[]),float )
         mf =f"{MESH }/{pid }.npz"
@@ -131,12 +131,12 @@ def main ():
             f .write ("\n".join (str (int (x ))for x in L ))
         poz_top +=int ((L >0 ).sum ())
         tepe_top +=len (L )
-        yazilan +=1 
-        if yazilan %100 ==0 :
-            print (f"  {yazilan } yazildi ({time .time ()-t0 :.0f} s)",
+        written +=1 
+        if written %100 ==0 :
+            print (f"  {written } yazildi ({time .time ()-t0 :.0f} s)",
             flush =True )
 
-    print (f"\nBITTI: yazilan {yazilan } | cache {atlanan } | bos {empty_ }")
+    print (f"\nBITTI: written {written } | cache {skipped } | bos {empty_ }")
     print (f"SIZINTI BEKCISI: {leakage } part (d6/d7) DISARIDA BIRAKILDI")
     if tepe_top :
         print (f"signed tepe orani: {poz_top /tepe_top :.4f} "

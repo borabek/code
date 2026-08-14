@@ -1,0 +1,15 @@
+{
+ "candidate": 12991,
+ "part": 1190,
+ "manufacturer": 4,
+ "eski_parca": 1709,
+ "yeni_parca_eklendi": 0,
+ "skipped": {},
+ "pozitif_oran": 0.26472173042875835,
+ "uretici_dagilimi": {
+  "PXC": 5296,
+  "SIE": 5,
+  "WAGO": 8,
+  "WEI": 7682
+ }
+}

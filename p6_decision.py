@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """P6 DECISION KODU -- training de urun de BU fonksiyonlari cagirir.
 
-Bu projede measurement yolu urunden IKI KEZ ayristi and two gece kaybettirdi
+Bu projede measurement yolu urunden IKI KEZ ayristi and two night kaybettirdi
 ([[measurement-zaafiyetleri-kapatildi]], [[measurement-yolu-and-secim-kusurlari]]). Sebep each
 seferinde ayniydi: karar kurali two places YAZILMISTI. Burada single places duruyor.
 
-`donustur` : feature donusumu (A+B part-ici z-skor, C+D ham)
-`sec`      : acgozlu skor order + konum NMS -> (P, D)
+`donustur` : feature donusumu (A+B part-ici z-score, C+D ham)
+`sec`      : acgozlu score order + konum NMS -> (P, D)
 """
 import numpy as np 
 
@@ -15,10 +15,10 @@ NMS_MM =5.0 # dagitilan `wire_gate.crowd_mask` with same scale
 
 
 def donustur (X ,zskor ="ab"):
-    """A+B blogu part-ici z-skor, C+D ham.
+    """A+B blogu part-ici z-score, C+D ham.
 
-    WHY SEPARATE: A+B mutlak buyukluklerdir (olasilik, mm, sayim) and markadan
-    markaya olcegi kayar -- part-ici z-skor gate tarihindeki most large single
+    WHY SEPARATE: A+B mutlak buyukluklerdir (probability, mm, sayim) and markadan
+    markaya olcegi kayar -- part-ici z-score gate tarihindeki most large single
     kazancti. C+D ZATEN gorelidir (angle, ratio, destek yuzdesi); onlari a more
     normalize etmek p5-v2'de uctan uca 0.1649 -> 0.1465 DUSURMUSTU.
     """
@@ -29,14 +29,14 @@ def donustur (X ,zskor ="ab"):
     if zskor =="none":
         return X 
     if zskor =="sira":
-    # PARCA-ICI SIRA (yuzdelik). Z-skor parcanin ORTALAMA and SAPMASINA
+    # PARCA-ICI SIRA (yuzdelik). Z-score parcanin ORTALAMA and SAPMASINA
     # baglidir; candidate count and karisimi degisince (training ~232 candidate/part,
     # NIT 407 and cogunlugu mesh) same fiziksel candidate different a z-skora
-    # dusuyor. Sira this kaymadan ETKILENMEZ: "this parcadaki most derin 3. hole"
+    # dusuyor. Sira this kaymadan ETKILENMEZ: "this parcadaki most deep 3. hole"
     # ifadesi candidate sayisindan bagimsizdir.
         return np .hstack ([wire_gate .within_part (X [:,:AB ],"sira"),X [:,AB :]])
     if zskor =="ikisi":
-    # Hem z-skor hem order: model hangisine nerede guvenecegine karar versin.
+    # Hem z-score hem order: model hangisine nerede guvenecegine karar versin.
         return np .hstack ([wire_gate .within_part (X [:,:AB ],"zskor"),
         wire_gate .within_part (X [:,:AB ],"sira")[:,AB :],
         X [:,AB :]])
@@ -64,7 +64,7 @@ def kabul_maskesi (s ,rule_ ):
 
     GORELI rule urunun own kuralidir (`p1c_threshold.maske`): candidate, KENDI
     PARCASINDAKI most high skorun `ratio` katini gecmeli VE `baseline`i asmali.
-    Parcalar arasi skor olcegi kaydigi for mutlak threshold some parcalarda no
+    Parcalar arasi score olcegi kaydigi for mutlak threshold some parcalarda no
     seyi, bazilarinda each seyi geciriyor.
     """
     s =np .asarray (s ,float )
@@ -76,10 +76,10 @@ def kabul_maskesi (s ,rule_ ):
 
 
 def sec_ayrintili (P ,idx ,YD ,s ,threshold ,nms_mm =NMS_MM ):
-    """`sec` with AYNI karar, but secilen ADAY indekslerini de returns.
+    """`sec` with AYNI karar, but selected ADAY indekslerini de returns.
 
     Teshis for: "konumu correct sectik but yonu mu kacirdik?" sorusu however
-    secilen adaylarin kimligi bilinerek sorulabilir.
+    selected adaylarin kimligi bilinerek sorulabilir.
     Doner: (P_sec, D_sec, aday_idx)
     """
     P =np .asarray (P ,float ).reshape (-1 ,3 )
@@ -109,7 +109,7 @@ def sec_ayrintili (P ,idx ,YD ,s ,threshold ,nms_mm =NMS_MM ):
         ap .append (p )
         ad .append (YD [j ])
         ai .append (i )
-        asc .append (float (s [j ]))# GUVEN KAPISI for: secilen secenegin skoru
+        asc .append (float (s [j ]))# GUVEN KAPISI for: selected secenegin skoru
         kapali .add (i )
     return (np .asarray (ap ,float ).reshape (-1 ,3 ),
     np .asarray (ad ,float ).reshape (-1 ,3 ),np .asarray (ai ,int ),

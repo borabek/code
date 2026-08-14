@@ -16,7 +16,7 @@ cevaplar. Kiyas noktasi: pose head'in bugun OOF'ta ulastigi residual
 (median 0.67 mm) -- i.e. network'in this kind a regresyonda ulasabildigi
 real hassasiyet.
 
-KUMELEME: kaydirilmis vertices mean-shift benzeri sabit bantli
+KUMELEME: kaydirilmis vertices mean-shift benzeri fixed bantli
 yogunlasmayla kumelenir (bant = clustering yaricapi). Her kumenin merkezi
 a CP adayidir. Bu, Panoptic-DeepLab/Spatial Embeddings ailesindeki
 "shift + cluster" adiminin birebir karsiligidir.
@@ -53,10 +53,10 @@ def kumelen (Q ,bant =BANT ,min_uye =MIN_UYE ):
     """
     if not len (Q ):
         return np .zeros ((0 ,3 )),[]
-    kalan =np .ones (len (Q ),bool )
+    remaining =np .ones (len (Q ),bool )
     center_ ,uyeler =[],[]
-    while kalan .any ():
-        idx =np .where (kalan )[0 ]
+    while remaining .any ():
+        idx =np .where (remaining )[0 ]
         P =Q [idx ]
         # each candidate for bant icindeki komsu count
         d =np .linalg .norm (P [:,None ,:]-P [None ,:,:],axis =-1 )
@@ -66,7 +66,7 @@ def kumelen (Q ,bant =BANT ,min_uye =MIN_UYE ):
         if len (uye )>=min_uye :
             center_ .append (Q [uye ].mean (0 ))
             uyeler .append (len (uye ))
-        kalan [uye ]=False 
+        remaining [uye ]=False 
     return np .asarray (center_ ).reshape (-1 ,3 ),uyeler 
 
 
@@ -85,7 +85,7 @@ def main ():
     flush =True )
 
     SIGMA =[0.0 ,0.25 ,0.5 ,0.75 ,1.0 ,1.5 ,2.0 ,3.0 ]
-    tot ={s :{"tespit":[0 ,0 ,0 ],"rob":[0 ,0 ,0 ]}for s in SIGMA }
+    tot ={s :{"detection":[0 ,0 ,0 ],"rob":[0 ,0 ,0 ]}for s in SIGMA }
     rng =np .random .default_rng (0 )
     n_ok =0 
     for pid in candidate :
@@ -130,11 +130,11 @@ def main ():
             D =np .zeros ((len (P ),3 ))
             if len (P ):
             # direction: GT'nin most yakin CP yonu (this betik YONU olcmuyor,
-            # tespit and unsigned-konum tavanina bakiyor)
+            # detection and unsigned-konum tavanina bakiyor)
                 j =np .linalg .norm (P [:,None ,:]-G [None ,:,:],
                 axis =-1 ).argmin (1 )
                 D =Gd [j ]
-            for ad ,tol ,am ,pct in (("tespit",0.0 ,180.0 ,True ),
+            for ad ,tol ,am ,pct in (("detection",0.0 ,180.0 ,True ),
             ("rob",2.0 ,10.0 ,False )):
                 tp ,fp ,fn ,_ =match_hungarian (P ,D ,G ,Gd ,dg ,tol ,am ,pct )
                 tot [s ][ad ][0 ]+=tp 
@@ -148,18 +148,18 @@ def main ():
         return 2 *t [0 ]/max (2 *t [0 ]+t [1 ]+t [2 ],1 )
 
     print (f"\n{n_ok } part | KAYDIR + KUMELE tavani\n")
-    print (f"{'offset gurultusu':>18s} {'tespit F1':>10s} {'konum F1':>10s}")
+    print (f"{'offset gurultusu':>18s} {'detection F1':>10s} {'konum F1':>10s}")
     for s in SIGMA :
-        print (f"{s :15.2f} mm {f1 (tot [s ]['tespit']):10.4f} "
+        print (f"{s :15.2f} mm {f1 (tot [s ]['detection']):10.4f} "
         f"{f1 (tot [s ]['rob']):10.4f}")
     print ("\nKIYAS (same criterion, bugunku urun, VAL 100): "
-    "tespit 0.7878 / robot-axis 0.5764")
+    "detection 0.7878 / robot-axis 0.5764")
     print ("Pose head'in bugun OOF'ta ulastigi residual: median 0.67 mm")
     json .dump ({str (s ):{k :f1 (v )for k ,v in tot [s ].items ()}
     for s in SIGMA },
-    io .open ("results/offset_tavani.json","w",encoding ="utf-8"),
+    io .open ("results/offset_ceiling.json","w",encoding ="utf-8"),
     indent =1 )
-    print ("-> results/offset_tavani.json")
+    print ("-> results/offset_ceiling.json")
     return 0 
 
 

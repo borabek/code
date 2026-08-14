@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """TAM HAVUZ (seg + B-rep + mesh tepeleri) for gate ozniteliklerini uret.
 
-Olculdu (`results/tavan_080_eksensiz.json`, D7 brand-disi, signed angle,
+Olculdu (`results/ceiling_080_eksensiz.json`, D7 brand-disi, signed angle,
 mukemmel selector): this havuzun robot F1 TAVANI **0.8347**, part basina ~318 candidate.
-Karsilastirma: urunun bugunku havuzu 13.4 candidate / ceiling 0.3430; this gece kazanan
+Karsilastirma: urunun bugunku havuzu 13.4 candidate / ceiling 0.3430; this night kazanan
 B-rep havuzu 98 candidate / ceiling 0.5761.
 
 Yeniden baslatilabilir: each part own npz'sine yazilir, present which is atlanir.
@@ -61,9 +61,9 @@ def kayitlar (ad ):
     if ad =="d6":
         return d6_record .yukle (set (d6_record .exam ()["pidler"]))
     if ad =="d7":
-        return K .yukle (json .load (open ("results/d7_sinav_kumesi.json"))["pidler"])
+        return K .yukle (json .load (open ("results/d7_exam_set.json"))["pidler"])
     return K .yukle ([str (p )for p in json .load (
-    open ("results/brep_egitim_kumesi.json"))["pidler"]])
+    open ("results/brep_training_set.json"))["pidler"]])
 
 
 ISLER ={
@@ -88,17 +88,17 @@ def main ():
         ac =pickle .load (open (acf ,"rb"))
         kay =kayitlar (ad )
         t0 =time .time ()
-        yazilan =atlanan =yok =0 
+        written =skipped =none =0 
         for i ,(pid ,r )in enumerate (sorted (kay .items ()),1 ):
             pid =str (pid )
-            yol =f"{CIK }/{ad }_{pid }.npz"
-            if os .path .exists (yol ):
-                atlanan +=1 
+            path =f"{CIK }/{ad }_{pid }.npz"
+            if os .path .exists (path ):
+                skipped +=1 
                 continue 
             G =np .asarray (r .get ("G",[]),float )
             f =f"{ob }/{pid }.npz"
             if not len (G )or not os .path .exists (f ):
-                yok +=1 
+                none +=1 
                 continue 
             z =np .load (f )
             V =np .ascontiguousarray (z ["V"],np .float64 )
@@ -109,23 +109,23 @@ def main ():
             np .asarray (r ["P"],float ),np .asarray (r ["Pd"],float ),
             cy .get (pid ),ac .get (pid ),V =V ,F =F ,ppos =ppos )
             if len (P )<2 :
-                yok +=1 
+                none +=1 
                 continue 
             X =np .asarray (wire_gate .feats_for (
             V ,F ,pb ,[{"point":P [j ],"direction":D [j ]}
             for j in range (len (P ))],
             CE ,CT ,step_path =S .get (pid )),float )
             y =project_label (P ,G ,np .asarray (r ["Gd"],float ),float (r ["diag"]))
-            np .savez_compressed (yol ,X =X .astype (np .float32 ),y =y .astype (np .int8 ),
+            np .savez_compressed (path ,X =X .astype (np .float32 ),y =y .astype (np .int8 ),
             P =P .astype (np .float32 ),D =D .astype (np .float32 ),
             src_ =kayn .astype (np .int8 ))
-            yazilan +=1 
-            if yazilan %50 ==0 :
-                h =(time .time ()-t0 )/yazilan 
-                print (f"  {ad } {i }/{len (kay )} yazilan={yazilan } {h :.2f}s/part "
-                f"kalan ~{h *(len (kay )-i )/60 :.0f}dk",flush =True )
-        print (f"{ad } BITTI: yazilan {yazilan } | onbellekte {atlanan } | "
-        f"girdisi yok {yok }",flush =True )
+            written +=1 
+            if written %50 ==0 :
+                h =(time .time ()-t0 )/written 
+                print (f"  {ad } {i }/{len (kay )} written={written } {h :.2f}s/part "
+                f"remaining ~{h *(len (kay )-i )/60 :.0f}dk",flush =True )
+        print (f"{ad } BITTI: written {written } | onbellekte {skipped } | "
+        f"girdisi none {none }",flush =True )
     print ("->",CIK )
 
 

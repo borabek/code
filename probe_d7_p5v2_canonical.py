@@ -3,14 +3,14 @@
 
 GIRDILER (makbuzlardan dogrulandi): kayitlar `_der_yeni_G7BIRLESIK.pkl`,
 gate `wire_gate_v6.pkl`. TOPLAMA: MIKRO (headline olcegi).
-TABAN (same girdilerle measured): tespit 0.2988 / robot 0.1956.
+TABAN (same girdilerle measured): detection 0.2988 / robot 0.1956.
 
 p5-v2 D6'da egitilir, D7'de olculur -- brand kumeleri AYRIK.
 D7 = DEV. FINAL DEGIL.
 """
 import collections ,glob ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -24,7 +24,7 @@ cy6 =pickle .load (open ("results/_d6_silindirler.pkl","rb"))
 ac6 =pickle .load (open ("results/_d6_acikliklar.pkl","rb"))
 cy7 =pickle .load (open ("results/_d7_silindirler.pkl","rb"))
 ac7 =pickle .load (open ("results/_d7_acikliklar.pkl","rb"))
-d7p =json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]
+d7p =json .load (open ("results/d7_exam_set.json"))["pidler"]
 k7 =K .yukle (d7p )
 d6 =d6_record .exam ();k6 =d6_record .yukle (set (d6 ["pidler"]))
 print (f"D6 training {len (k6 )} | D7 measurement {len (k7 )}",flush =True )
@@ -45,7 +45,7 @@ def kur (rec_ ,cy ,ac ,etiketli ,x58f ):
         if len (D )>1 :
             B =D *np .sign (D @D [0 ])[:,None ]
             komsu =B .mean (0 );komsu /=(np .linalg .norm (komsu )+1e-12 )
-        secs =PS .secenekler (P ,D ,cy .get (pid ),ac .get (pid ),r ["diag"],
+        secs =PS .options (P ,D ,cy .get (pid ),ac .get (pid ),r ["diag"],
         gate_s =gs ,komsu =komsu )
         d ={"pid":pid ,"mfg":r ["mfg"],"secs":secs ,"gate_skor":gs ,"G":G ,
         "Gd":np .asarray (r .get ("Gd",[]),float ),"diag":r ["diag"],
@@ -70,9 +70,9 @@ for ad ,p5 in (("TABAN (gate -> tam_poz)",False ),("p5-v2 (ortak secim -> gate)"
         if not len (d ["G"]):
             continue 
         if p5 :
-            skor =[clf .predict_proba (np .asarray ([s [2 ]for s in o ],float ))[:,1 ]
+            score =[clf .predict_proba (np .asarray ([s [2 ]for s in o ],float ))[:,1 ]
             for o in d ["secs"]]
-            P ,D =PE .sec (d ["secs"],skor ,gate_skor =d ["gate_skor"],
+            P ,D =PE .sec (d ["secs"],score ,gate_skor =d ["gate_skor"],
             gate_esik =(0.40 ,0.30 ))
         else :
             k =maske (d ["gate_skor"],0.40 ,0.30 )
@@ -87,7 +87,7 @@ for ad ,p5 in (("TABAN (gate -> tam_poz)",False ),("p5-v2 (ortak secim -> gate)"
     print (f"{ad :<28} MIKRO {mi :.4f} | makro {ma :.4f} | en kotu {ku :.4f}",flush =True )
 a ,b =list (out .values ())
 print (f"\nFARK: mikro {b ['mikro']-a ['mikro']:+.4f} | makro {b ['makro']-a ['makro']:+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"n_parca":len (te ),
+json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"n_parca":len (te ),
 "not":"KANONIK girdiler (G7BIRLESIK + gate v6), MIKRO toplama. D7=DEV."},
-open ("results/d7_p5v2_kanonik.json","w"),indent =1 )
-print ("receipt -> results/d7_p5v2_kanonik.json")
+open ("results/d7_p5v2_canonical.json","w"),indent =1 )
+print ("receipt -> results/d7_p5v2_canonical.json")

@@ -9,7 +9,7 @@ BU KOL: adimi, gate'ten ONCE present which is sinyalden removes -- TOPLULUK OYU 
 segmentasyon guveni (`conf`). Yuksek oylu candidates CAPA becomes, RANSAC with at most capayi
 aciklayan step vektoru secilir, after HER candidate that orguye according to puanlanir.
 
-WHY OLEN "UZAMSAL DUZEN" BLOGUNUN TEKRARI DEGIL: that blok YEREL yogunluk/simetri
+WHY OLEN "UZAMSAL DUZEN" BLOGUNUN TEKRARI DEGIL: that blok YEREL yogunluk/symmetry
 sayiyordu (ayna-esi, row/column tutarliligi, merkezilik). Bu, KURESEL a orgu MODELI
 uydurup each adayin that modele UYUMUNU olcuyor. Farkli nesne.
 
@@ -127,7 +127,7 @@ def main ():
     from sina_cluster import esle 
     from sklearn .ensemble import RandomForestClassifier 
     from sklearn .model_selection import GroupKFold 
-    from gece_kilit import guard 
+    from night_kilit import guard 
 
     guard ("t3 baslangic")
     D =T .yukle ()
@@ -152,7 +152,7 @@ def main ():
         s ,destek ,confidence =orgu_uydur (P [capa ])if len (capa )>=MIN_CAPA else (None ,0 ,0.0 )
         kapsam +=int (s is not None )
         FO =orgu_ozellik (P ,capa ,s ,destek ,confidence )
-        # GT etiketi (tespit toleransi)
+        # GT etiketi (detection toleransi)
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         diff =P [:,None ,:]-G [None ,:,:]
         al =(diff *Gd [None ,:,:]).sum (-1 )
@@ -170,7 +170,7 @@ def main ():
             RG .append (r ["geo"]);RP .append (r ["pid"])
     RX =np .array (RX );ORG =np .array (ORG );RY =np .array (RY )
     RG =np .array (RG );RP =np .array (RP )
-    print (f"\n{len (RY )} candidate | pozitif {RY .mean ():.1%} | orgu bulunan part "
+    print (f"\n{len (RY )} candidate | pozitif {RY .mean ():.1%} | orgu found part "
     f"{kapsam }/{len (D ['DER'])} ({kapsam /len (D ['DER']):.0%})")
 
     from t1_manufacturer_out import auc_mw 
@@ -194,13 +194,13 @@ def main ():
         p_ =tp /max (tp +fp ,1 );r_ =tp /max (tp +fn ,1 )
         return 2 *p_ *r_ /max (p_ +r_ ,1e-9 )
     a58 =olc (RX );a64 =olc (np .hstack ([RX ,ORG ]))
-    print (f"\nADAY DUZEYI: 58 sutun {a58 :.4f} | 58+orgu {a64 :.4f} | fark {a64 -a58 :+.4f}")
+    print (f"\nADAY DUZEYI: 58 sutun {a58 :.4f} | 58+orgu {a64 :.4f} | diff {a64 -a58 :+.4f}")
     gecti =(a64 -a58 )>=0.01 
     print (f"KARAR: {'SINYAL VAR -> tam korpusa yatirim'if gecti else 'SINYAL YOK -> T3 KAPANIR'}")
     with open ("results/t3_weave.pkl","wb")as f :
         pickle .dump ({"ORG":ORG ,"RG":RG ,"RP":RP ,"RY":RY ,"AD":AD },f )
     with io .open ("results/t3_weave.json","w",encoding ="utf-8")as f :
-        json .dump ({"aday_58":float (a58 ),"aday_64":float (a64 ),"fark":float (a64 -a58 ),
+        json .dump ({"aday_58":float (a58 ),"aday_64":float (a64 ),"diff":float (a64 -a58 ),
         "kapsam":kapsam /len (D ["DER"]),"gecti":bool (gecti ),
         "auc":{a :float (auc_mw (ORG [:,j ],RY .astype (bool )))
         for j ,a in enumerate (AD )}},f ,indent =1 )

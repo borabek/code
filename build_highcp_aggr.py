@@ -90,7 +90,7 @@ def main ():
             continue 
         if k %5 ==0 :print (f"  {k }/{len (hi )}  {time .time ()-t0 :.0f}s",flush =True )
     json .dump (out ,open ("results/highcp_pool_aggr.json","w"))
-    print (f"-> results/highcp_pool_aggr.json ({len (out )} part) -- AGRESIF (9k-aggr+12k); leave_family_out ile karsilastir")
+    print (f"-> results/highcp_pool_aggr.json ({len (out )} part) -- AGRESIF (9k-aggr+12k); leave_family_out with karsilastir")
 
 
 if __name__ =="__main__":

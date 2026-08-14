@@ -9,13 +9,13 @@ DENEMEZ.
 Bu betik same onbellekli ozniteliklerle UC kolu same training buyuklugunde kiyaslar:
   A) SEG-TEK pool  + D6-single gate     <- kontrol
   B) GENISLETILMIS  + D6-single gate     <- deney
-  C) SEG-TEK pool  + kanonik gate v6 <- referans (bilinen 0.2029)
+  C) SEG-TEK pool  + kanonik gate v6 <- referans (known 0.2029)
 A with B arasindaki difference HAVUZUN etkisidir; A with C arasindaki difference EGITIM
 BUYUKLUGUNUN etkisidir.
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -82,7 +82,7 @@ def olc (skorla ,segtek ,esikler ):
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
-        r ={"threshold":e ,"robot":mi ,"tespit":K .mikro (tes ),
+        r ={"threshold":e ,"robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ()))}
         if en is None or r ["robot"]>en ["robot"]:
@@ -97,22 +97,22 @@ for ad ,segtek in (("A) SEG-TEK + D6 gate",True ),
     c ,sh ,poz =egit (segtek )
     out [ad ]=olc (lambda X :c .predict_proba (X )[:,1 ],segtek ,ES )
     r =out [ad ]
-    print (f"{ad :<28} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | "
+    print (f"{ad :<28} robot {r ['robot']:.4f} | detection {r ['detection']:.4f} | "
     f"makro {r ['makro']:.4f} | threshold {r ['threshold']:.2f} | training {sh } poz {poz :.4f}",
     flush =True )
 g6 =K .gate_yukle ()
 out ["C) SEG-TEK + kanonik gate v6"]=olc (
 lambda X :np .asarray (wire_gate .decision_score (g6 ,X ),float ),True ,ES )
 r =out ["C) SEG-TEK + kanonik gate v6"]
-print (f"{'C) SEG-TEK + kanonik v6':<28} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | "
+print (f"{'C) SEG-TEK + kanonik v6':<28} robot {r ['robot']:.4f} | detection {r ['detection']:.4f} | "
 f"makro {r ['makro']:.4f} | threshold {r ['threshold']:.2f}",flush =True )
 A ,B ,C =(out ["A) SEG-TEK + D6 gate"],out ["B) GENISLETILMIS + D6 gate"],
 out ["C) SEG-TEK + kanonik gate v6"])
 print (f"\nHAVUZUN etkisi (B-A): robot {B ['robot']-A ['robot']:+.4f} | "
-f"tespit {B ['tespit']-A ['tespit']:+.4f}")
+f"detection {B ['detection']-A ['detection']:+.4f}")
 print (f"EGITIM BUYUKLUGUNUN etkisi (A-C): robot {A ['robot']-C ['robot']:+.4f} | "
-f"tespit {A ['tespit']-C ['tespit']:+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+f"detection {A ['detection']-C ['detection']:+.4f}")
+json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
 "havuz_etkisi":B ["robot"]-A ["robot"],
 "egitim_buyuklugu_etkisi":A ["robot"]-C ["robot"],
 "not":"Ayni onbellekli oznitelikler, same threshold taramasi. D7 brand-disi, MIKRO."},

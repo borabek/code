@@ -3,12 +3,12 @@
 
 RATIONALE (21.60, 21.75, 21.76). Baglayici kisit YANAL KONUM (+0.358) and
 konum bugun "segmentlenen bolgenin weight merkezi"nden turetiliyor --
-literaturde bunun bilinen kusuru degen same nesneleri ayiramamak.
+literaturde bunun known kusuru degen same nesneleri ayiramamak.
 Onerilen: each TEPE own CP merkezine a offset vektoru prediction etsin,
 vertices kaydirilip kumelensin.
 
 TAVAN MEASURED (`probe_offset_ceiling.py`, training YOK): clustering bandi
-4 mm iken **1.0 mm** offset hatasinda tespit F1 **0.9933**. Yani gereken
+4 mm iken **1.0 mm** offset hatasinda detection F1 **0.9933**. Yani gereken
 hassasiyet ~1 mm. Kiyas: pose head'in bugun ulastigi residual 0.67 mm.
 
 BU BETIGIN CEVAPLADIGI SORU (mutlak, threshold sorusu):
@@ -16,7 +16,7 @@ BU BETIGIN CEVAPLADIGI SORU (mutlak, threshold sorusu):
 Bu a "small difference" sorusu DEGIL; that is why seed gurultusu (0.046, F1
 farklari for) here BAGLAYICI DEGIL and single run verdict verebilir.
 
-CIKTI: 4 channel -- [ox, oy, oz, seed_logit].
+CIKTI: 4 channel -- [ox, oy, feat, seed_logit].
 KAYIP: seed tepelerinde offset for L1 + tum tepelerde seed for BCE.
 TARGET YENI ETIKET GEREKTIRMEZ: (most yakin GT CP - vertex konumu).
 
@@ -52,13 +52,13 @@ def veri_havuzu ():
     gk =json .load (io .open ("results/_strict_geometry_keys.json",
     encoding ="utf-8"))
     vg ={gk [p ]for p in val if p in gk }
-    uygun =[str (p )for p in kay 
+    eligible =[str (p )for p in kay 
     if str (p )not in val and str (p )not in lock 
     and gk .get (str (p ))not in vg ]
-    assert uygun ,"training havuzu BOS -- leakage kapisi yanlis kurulmus"
-    print (f"leakage kapisi: {len (kay )} kayit -> {len (uygun )} uygun "
+    assert eligible ,"training havuzu BOS -- leakage kapisi wrong kurulmus"
+    print (f"leakage kapisi: {len (kay )} kayit -> {len (eligible )} eligible "
     f"(VAL/LOCKED ve VAL geometri gruplari HARIC)",flush =True )
-    return kay ,uygun 
+    return kay ,eligible 
 
 
 def hedefler (V ,G ):
@@ -79,12 +79,12 @@ def main ():
     from export_robot_glb import step_to_mesh 
 
     dev ="cuda"if torch .cuda .is_available ()else "cpu"
-    kay ,uygun =veri_havuzu ()
+    kay ,eligible =veri_havuzu ()
     STEP =K .step_map ()
     rng =np .random .default_rng (0 )
-    rng .shuffle (uygun )
-    uygun =[p for p in uygun if p in STEP ][:N_EGITIM ]
-    print (f"training parcasi: {len (uygun )} | cihaz {dev } | k_eig {KEIG } | "
+    rng .shuffle (eligible )
+    eligible =[p for p in eligible if p in STEP ][:N_EGITIM ]
+    print (f"training parcasi: {len (eligible )} | cihaz {dev } | k_eig {KEIG } | "
     f"epok {EPOK }",flush =True )
 
     cfg ={"input_features":"xyz","c_width":128 ,
@@ -99,7 +99,7 @@ def main ():
     # edilmesin). Bellek for mesh basina only gerekli sey tutulur.
     hazir =[]
     t0 =time .time ()
-    for i ,pid in enumerate (uygun ):
+    for i ,pid in enumerate (eligible ):
         try :
             Vr ,Fr =step_to_mesh (STEP [pid ])
             V ,F =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
@@ -119,7 +119,7 @@ def main ():
         except Exception as e :# noqa: BLE001
             print (f"  {pid }: {type (e ).__name__ } -- atlandi",flush =True )
         if (i +1 )%25 ==0 :
-            print (f"  hazirlik {i +1 }/{len (uygun )} "
+            print (f"  hazirlik {i +1 }/{len (eligible )} "
             f"({time .time ()-t0 :.0f} s, kullanilan {len (hazir )})",
             flush =True )
     print (f"\nhazir part: {len (hazir )} ({time .time ()-t0 :.0f} s)\n",

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """B-rep onbellekleri (silindir + opening) EGITIM korpusu for -- yeniden baslatilabilir.
 
-`p3c_axis_selector.silindir_onbellek` same isi does but basarisiz parcayi
+`p3c_axis_selector.silindir_onbellek` same isi does but failed parcayi
 sessizce empty list yaziyor; here BASARISIZLIK SAYILIR and makbuza yazilir
 (empty pool with cikarilamayan part AYNI SEY DEGIL).
 
@@ -14,7 +14,7 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 import brep_snap ,brep_opening 
 from corpus_identity import step_kimlik as SK 
 
-KUME =os .environ .get ("BREP_KUME","results/brep_egitim_kumesi.json")
+KUME =os .environ .get ("BREP_KUME","results/brep_training_set.json")
 ON =os .environ .get ("BREP_ON","_brepegit")
 ISLER =[("silindir",f"results/{ON }_silindirler.pkl",
 lambda p :brep_snap .exact_cylinders (p )),
@@ -22,28 +22,28 @@ lambda p :brep_snap .exact_cylinders (p )),
 lambda p :brep_opening .acikliklar (p ))]
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 pidler =[str (p )for p in json .load (open (KUME ))["pidler"]]
-print (f"cluster {len (pidler )} | STEP eslesen {sum (1 for p in pidler if p in S )}",flush =True )
+print (f"cluster {len (pidler )} | STEP matched {sum (1 for p in pidler if p in S )}",flush =True )
 
-for ad ,yol ,fn in ISLER :
+for ad ,path ,fn in ISLER :
     ob ,error ={},{}
-    if os .path .exists (yol ):
-        with open (yol ,"rb")as f :
+    if os .path .exists (path ):
+        with open (path ,"rb")as f :
             ob =pickle .load (f )
-    eksik =[p for p in pidler if p not in ob and p in S ]
-    print (f"\n{ad }: onbellekte {len (ob )} | cikarilacak {len (eksik )}",flush =True )
+    missing =[p for p in pidler if p not in ob and p in S ]
+    print (f"\n{ad }: onbellekte {len (ob )} | cikarilacak {len (missing )}",flush =True )
     t0 =time .time ()
-    for i ,p in enumerate (eksik ,1 ):
+    for i ,p in enumerate (missing ,1 ):
         try :
             ob [p ]=fn (S [p ])
         except Exception as e :# yutulmaz: SAYILIR and raporlanir
             ob [p ]=[]
             error [p ]=f"{type (e ).__name__ }: {e }"[:200 ]
-        if i %100 ==0 or i ==len (eksik ):
-            with open (yol ,"wb")as f :
+        if i %100 ==0 or i ==len (missing ):
+            with open (path ,"wb")as f :
                 pickle .dump (ob ,f )
-            print (f"  {ad } {i }/{len (eksik )}  {(time .time ()-t0 )/i :.2f}s/part  "
+            print (f"  {ad } {i }/{len (missing )}  {(time .time ()-t0 )/i :.2f}s/part  "
             f"error {len (error )}",flush =True )
-    with open (yol ,"wb")as f :
+    with open (path ,"wb")as f :
         pickle .dump (ob ,f )
     empty_ =sum (1 for p in ob if not ob [p ])
     print (f"{ad } BITTI: {len (ob )} part | BOS {empty_ } | HATA {len (error )}",flush =True )

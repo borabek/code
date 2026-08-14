@@ -1,0 +1,57 @@
+# v25: synth-pretrain finetune A/B. EXACT v22 recipe (the 0.644-tuned scratch
+# baseline) with a single variable changed: initialization from the synthetic
+# pretrain (run_hp_pretrain_synth, 3000 fixed-generator blocks with realistic
+# recess mixture). Motivation (RESULTS 11i): PXC is a LEARNING failure -- the
+# model cannot fit PXC train parts (recall 35%) while the PXC GT-decode ceiling
+# is 0.965; the synth corpus teaches the recessed-CP concept generically.
+# Verdict rule: compare tuned-threshold val F1 and the per-family PXC rows vs
+# v22 scratch (0.644 / PXC ~0). lr kept at 1e-3 deliberately -- the cosine
+# schedule anneals it, and 5e-4 starved the heat head on a prior control; if
+# this run collapses early, retry before with lr 3e-4 before rejecting.
+#
+# SCOPE CHANGE (2026-07-10, user decision): the 12 PXC-prefixed parts that are
+# NOT terminal blocks (touch panel, box PC, power supply, I/O modules --
+# catalog-verified) are excluded via pxc_out_of_scope.txt. That makes v22's
+# 0.644 NOT directly comparable; the honest A/B partner is run_hp_v26_scratch
+# (same clean scope, no init_from), queued right after this run.
+backbone: hierpoint
+run_name: cp_hp_v25_ftsynth
+seed: 0
+split_seed: 0
+exclude_parts_file: pxc_out_of_scope.txt
+init_from: checkpoints/cp_hp_pretrain_synth_best.ckpt
+extra_sources:
+  - wscad_corpus_v2
+keep_prefixes: wscaduniverse,PXC
+
+split_group: geometry
+val_frac: 0.20
+test_frac: 0.15
+
+device: cuda
+max_gpu_verts: 14000
+fwd_verts: 28000
+
+epochs: 90
+eval_every: 5
+patience: 10
+min_delta: 0.005
+collapse_gap: 0.03
+ckpt_every: 5
+snapshot_every: 5
+
+augment: 4
+aug_jitter_frac: 0.005
+aug_reflect: true
+aug_dropout_frac: 0.10
+aug_cable_frac: 0.20
+
+heat_loss: centernet
+centernet_alpha: 1.5
+w_heat: 1.0
+w_off: 5.0
+w_dir: 2.0
+lr: 0.001
+lr_schedule: cosine
+weight_decay: 0.0005
+grad_clip: 1.0

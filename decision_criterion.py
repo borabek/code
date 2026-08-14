@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """DECISION OLCUTU -- a kolun dagitilip dagitilmayacagina karar veren TEK rule.
 
-WHY IT EXISTS (2026-07-31/08-01 kosusunun most pahali dersi): same gece UC FARKLI cubuk kullandim and
+WHY IT EXISTS (2026-07-31/08-01 kosusunun most pahali dersi): same night UC FARKLI cubuk kullandim and
 ucu de savunulabilir gorunuyordu:
 
-  * t15/TOPO       : "gorulmemis manufacturer EN KOTU durumu ARTMALI"        -> topoloji GECTI
+  * t15/TOPO       : "unseen manufacturer EN KOTU durumu ARTMALI"        -> topoloji GECTI
   * ExtraTrees kolu: "HER IKI manufacturer-disi bolmede de artmali"          -> ExtraTrees OLDU
   * t16/regime-ratio : "artmali" (BUYUKLUK YOK)                           -> +0.0018 with GECTI (noise)
   * u2/R taramasi  : yine buyukluksuz                                    -> R=8 lafzen gecti, bootstrap bitirdi
@@ -13,13 +13,13 @@ ucu de savunulabilir gorunuyordu:
 Cubugu each deneyde yeniden yazmak, farkinda olmadan SONUCA GORE cubuk secmeye open gate birakir.
 Bu modul kurali TEK places tanimlar; deney betikleri only sayilari gives.
 
-RULE (gecerli version):
+RULE (valid version):
   Bir arm dagitilabilir however and however
-    (1) TANIDIK veride loss <= `tanidik_tolerans` (varsayilan 0.01), VE
-    (2) gorulmemis-manufacturer bolmelerinde ORTALAMA at least `min_kazanc` up to artmali
-        (varsayilan 0.01 -- ISARET DEGIL BUYUKLUK), VE
+    (1) TANIDIK veride loss <= `tanidik_tolerans` (default 0.01), VE
+    (2) unseen-manufacturer bolmelerinde ORTALAMA at least `min_kazanc` up to artmali
+        (default 0.01 -- ISARET DEGIL BUYUKLUK), VE
     (3) EN KOTU split kotulesmemeli (>= mevcut most kotu - `en_kotu_tolerans`), VE
-    (4) no bolmede `maks_bolme_kaybi`'ndan (varsayilan 0.05) extra loss olmamali.
+    (4) no bolmede `maks_bolme_kaybi`'ndan (default 0.05) extra loss olmamali.
 
 (2) ORTALAMA uzerinden yazildi because "most kotu artsin" single basina RISK TASIMAYA izin veriyor
 (ExtraTrees: most kotu +0.053 but diger split -0.039, mean +0.007 = no sey). (4) whereas
@@ -42,16 +42,16 @@ class Karar :
         return f"{'GECTI'if self .gecti else 'GECMEDI'} -- {self .rationale }\n{line_ }"
 
 
-def degerlendir (baseline ,candidate ,tanidik_anahtar ="tanidik",*,ga =None ,
+def degerlendir (baseline ,candidate ,tanidik_anahtar ="familiar",*,ga =None ,
 tanidik_tolerans =0.01 ,min_kazanc =0.01 ,en_kotu_tolerans =0.0 ,
 maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
-    """baseline/candidate: {bolme_adi: F1}. `tanidik_anahtar` disindakiler gorulmemis-manufacturer sayilir.
+    """baseline/candidate: {bolme_adi: F1}. `tanidik_anahtar` disindakiler unseen-manufacturer sayilir.
 
-    ga: {bolme_adi: (lower, upper)} verilirse, tanidik bolmedeki kaybin GURULTU olup olmadigi and
+    ga: {bolme_adi: (lower, upper)} verilirse, familiar bolmedeki kaybin GURULTU olup olmadigi and
     mean kazancin gercekligi this araliklarla degerlendirilir.
     """
     bolmeler =[k for k in baseline if k !=tanidik_anahtar ]
-    assert bolmeler ,"at least a gorulmemis-manufacturer bolmesi is required"
+    assert bolmeler ,"at least a unseen-manufacturer bolmesi is required"
     d ={k :candidate [k ]-baseline [k ]for k in baseline }
     t =d .get (tanidik_anahtar ,0.0 )
     ort =float (np .mean ([d [k ]for k in bolmeler ]))
@@ -64,7 +64,7 @@ maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
     k3 =ek_a >=ek_t -en_kotu_tolerans 
     k4 =en_kotu_bolme >=-maks_bolme_kaybi 
     ayr ={
-    "(1) tanidik difference":f"{t :+.4f}  (>= {-tanidik_tolerans :+.4f})  {'OK'if k1 else 'X'}",
+    "(1) familiar difference":f"{t :+.4f}  (>= {-tanidik_tolerans :+.4f})  {'OK'if k1 else 'X'}",
     "(2) split ORTALAMASI":f"{ort :+.4f}  (>= {min_kazanc :+.4f})  {'OK'if k2 else 'X'}",
     "(3) most kotu split":f"{ek_t :.4f} -> {ek_a :.4f}  {'OK'if k3 else 'X'}",
     "(4) most large split kaybi":f"{en_kotu_bolme :+.4f}  (>= {-maks_bolme_kaybi :+.4f})  "
@@ -74,7 +74,7 @@ maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
         for k ,(lo ,hi )in ga .items ():
             ayr [f"    GA {k }"]=(f"[{lo :+.4f}, {hi :+.4f}] "
             f"{'GURULTU (sifiri iceriyor)'if lo <=0 <=hi else 'GERCEK'}")
-            # (5) KANIT SARTI -- 2026-08-01 denetiminde acilan hole: GA HESAPLANIP YAZDIRILIYOR but
+            # (5) KANIT SARTI -- 2026-08-01 denetiminde opened hole: GA HESAPLANIP YAZDIRILIYOR but
             # karara KATILMIYORDU (ok = all([k1..k4])). Yani %95 GA'si sifiri iceren, i.e. gurultuden
             # ayirt edilemeyen a kazanc "GECTI" alabiliyordu. Artik:
             #   * ga verilmisse: kazanci TASIYAN bolmelerden EN AZ BIRI sifiri DISLAMALI (lo > 0), and
@@ -98,34 +98,34 @@ maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
         ayr ["(5) KANIT (GA)"]="evidence araniyor DEGIL (kanit_gerekli=False)"
 
     ok =all ([k1 ,k2 ,k3 ,k4 ,k5 ])
-    neden =("five sart da saglandi"if ok else 
-    "; ".join (x for x ,c in (("tanidik veride loss extra",not k1 ),
+    why =("five sart da saglandi"if ok else 
+    "; ".join (x for x ,c in (("familiar veride loss extra",not k1 ),
     ("split ortalamasi yeterince artmadi",not k2 ),
     ("most kotu split kotulesti",not k3 ),
     ("a bolmede large loss",not k4 ),
     ("evidence absent (GA sifiri iceriyor ya da verilmedi)",
     not k5 ))if c ))
-    return Karar (ok ,neden ,ayr )
+    return Karar (ok ,why ,ayr )
 
 
 def _kendini_sina ():
     """Bu gecenin real kollarini kurala sok -- rule, verdigim kararlari yeniden uretiyor mu?"""
     olay =[
     ("ExtraTrees (KILL bekleniyor)",
-    {"tanidik":0.7355 ,"WEI":0.4736 ,"PXC":0.7048 },
-    {"tanidik":0.7300 ,"WEI":0.5266 ,"PXC":0.6658 },False ),
+    {"familiar":0.7355 ,"WEI":0.4736 ,"PXC":0.7048 },
+    {"familiar":0.7300 ,"WEI":0.5266 ,"PXC":0.6658 },False ),
     ("topoloji (GECMESI bekleniyor)",
-    {"tanidik":0.7287 ,"WEI":0.4736 ,"PXC":0.7048 },
-    {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },True ),
+    {"familiar":0.7287 ,"WEI":0.4736 ,"PXC":0.7048 },
+    {"familiar":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },True ),
     ("R=8 radius (KILL bekleniyor: kazanc noise)",
-    {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
-    {"tanidik":0.7422 ,"WEI":0.5013 ,"PXC":0.6961 },False ),
-    ("each parcaya z-skor (SINIRDA)",
-    {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
-    {"tanidik":0.7390 ,"WEI":0.5702 ,"PXC":0.6828 },True ),
+    {"familiar":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
+    {"familiar":0.7422 ,"WEI":0.5013 ,"PXC":0.6961 },False ),
+    ("each parcaya z-score (SINIRDA)",
+    {"familiar":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
+    {"familiar":0.7390 ,"WEI":0.5702 ,"PXC":0.6828 },True ),
     ("cokus yonlendirme (GECMESI bekleniyor)",
-    {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
-    {"tanidik":0.7439 ,"WEI":0.5682 ,"PXC":0.7029 },True ),
+    {"familiar":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
+    {"familiar":0.7439 ,"WEI":0.5682 ,"PXC":0.7029 },True ),
     ]
     print ("RULE KENDINI SINIYOR (gecenin real kollari):\n")
     hepsi =True 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """`robot_cp.assign_tier` ortak yere tasindi -- DAVRANIS DEGISMEDIGINI dogrula.
 
-Bu rule `_format_cps` govdesine gomuluydu; GLB ihracatcisini olculen zincire
+Bu rule `_format_cps` govdesine gomuluydu; GLB ihracatcisini measured_path zincire
 (`canonical_chain.product_output`) baglayabilmek for ayri cagrilabilmesi gerekti.
 Tasima SAF must be: same input -> same tier.
 """

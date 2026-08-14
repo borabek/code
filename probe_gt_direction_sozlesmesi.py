@@ -73,13 +73,13 @@ def main ():
     "bakma orani. parca_ici_baskinlik = each parcada "
     "cogunluk yonun payi (1.0 = part icinde tam tutarli). "
     "D7'ye BAKILMADI."},
-    open ("results/gt_yon_sozlesmesi.json","w"),indent =1 )
-    print ("\nmakbuz -> results/gt_yon_sozlesmesi.json")
+    open ("results/gt_direction_sozlesmesi.json","w"),indent =1 )
+    print ("\nmakbuz -> results/gt_direction_sozlesmesi.json")
     print ("OKUMA:")
     print ("  baskinlik ~1.0 -> part ICINDE tutarli (sozlesme present)")
     print ("  disari_orani markalar between dagilmissa -> SOZLESME MARKAYA")
     print ("     GORE DEGISIYOR; sign a PARCA OZELLIGI as ogrenilebilir")
-    print ("  baskinlik ~0.5 -> part inside bile karisik; sorun more derin")
+    print ("  baskinlik ~0.5 -> part inside bile karisik; sorun more deep")
 
 
 if __name__ =="__main__":

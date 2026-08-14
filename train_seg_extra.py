@@ -17,7 +17,7 @@ import diffusionnet as D
 import scheffler_dataset as dataset 
 
 # OPERATOR ONBELLEGI k_eig'e GORE AYRILIR (2026-07-29): single a mesh-anahtarli directory, 64 and 96
-# eigen with calisan kosular between surekli "overwriting cache -- not enough eigenvalues" +
+# eigen with running kosular between surekli "overwriting cache -- not enough eigenvalues" +
 # WinError 32 file kilidi dongusune giriyordu (training ilerlemiyordu). robot_cp same sorunu
 # ops_k{64,96} ayrimiyla cozmustu; here da same ayrim yapiliyor.
 OPS_BASE ="results/seg_extra/ops";NCLS =5 ;NCLS_CE =3 # CableEntry class index
@@ -111,7 +111,7 @@ def miou (model ,meta ,data ,dev ):
 
     BULUNAN HATA (2026-08-07): dogrulama kumesi kismi etiketli parcalara cevrilince
     Conn-IoU 0.5878 -> 0.0995'e COKTU. Sebep: kismi etikette YALNIZ CableEntry signed,
-    geri kalan 0 (Housing). Maskesiz IoU, modelin DOGRU prediction ettigi Contact bolgelerini
+    geri remaining 0 (Housing). Maskesiz IoU, modelin DOGRU prediction ettigi Contact bolgelerini
     YANLIS POZITIF sayiyordu. Bu, EGITIM HEDEFIYLE CELISIR -- egitimde loss maskeli
     (`partial_ce` dallarinda only CE-vs-not denetleniyor).
     Boyle a sinyalle secim yapmak, Contact'i DAHA AZ prediction eden modeli "iyi" sanmak
@@ -180,7 +180,7 @@ def main ():
     # modele YALNIZCA HAM KOORDINAT veriliyordu and `hks` secenegi never
     # denenemiyordu. Fark mekanik as onemli: `xyz` DISSALDIR (model
     # mutlak konuma baglanir), `hks` ICSELDIR (donme/otelemeye duyarsiz) --
-    # gorulmemis brand kosulunda istenen full as budur.
+    # unseen brand kosulunda istenen full as budur.
     ap .add_argument ("--input-features",choices =("xyz","hks"),default ="xyz",
     help ="xyz = ham koordinat (dissal) | hks = isi cekirdegi "
     "imzasi (icsel, donme/oteleme duyarsiz)")
@@ -190,7 +190,7 @@ def main ():
     "BOLGEYI hedefler. 0 = kapali (davranis degismez).")
     ap .add_argument ("--tversky-gamma",type =float ,default =1.0 ,
     help ="Y14 Focal-Tversky ussu. 1.0 = klasik Tversky "
-    "(varsayilan, davranis degismez). 0.75/1.33 tipik.")
+    "(default, davranis degismez). 0.75/1.33 tipik.")
     ap .add_argument ("--tversky",type =float ,default =0.25 )# thesis overlap term for rare classes
     ap .add_argument ("--lr-decay-every",type =int ,default =100 );ap .add_argument ("--lr-decay-rate",type =float ,default =0.75 )
     ap .add_argument ("--checkpoint-out",required =True ,help ="where to save best-by-val-mIoU (no default -> cannot clobber the product model)")
@@ -256,7 +256,7 @@ def main ():
         _ilk_cfg =(_ck .get ("cfg")if isinstance (_ck ,dict )else None )or {}
         _ne =_ilk_cfg .get ("n_eig")
         if _ne and int (_ne )!=int (a .k_eig ):
-            print (f"  [fine-tune] k_eig {a .k_eig } -> {_ne } (kaynak ckpt'ten alindi)",
+            print (f"  [fine-tune] k_eig {a .k_eig } -> {_ne } (source ckpt'ten alindi)",
             flush =True )
             a .k_eig =int (_ne )
         del _ck 
@@ -362,11 +362,11 @@ def main ():
     # (cfg'ye guvenmek "mat1 and mat2 shapes cannot be multiplied" with patliyordu.)
         _w =int (model .last_lin .in_features )
         aux_lin =torch .nn .Linear (_w ,1 ).to (dev )
-        def _kanca (mod ,giren ,cikan ):
-            _gizli ["z"]=giren [0 ]
+        def _kanca (mod ,entering ,produced ):
+            _gizli ["z"]=entering [0 ]
         model .last_lin .register_forward_hook (_kanca )
         n_aux =sum (1 for _d in tr_d if _d .get ("aux")is not None )
-        print (f"  [aux-wire] {n_aux }/{len (tr_d )} parcada TEL/ALET etiketi var "
+        print (f"  [aux-wire] {n_aux }/{len (tr_d )} parcada TEL/ALET etiketi present "
         f"| agirlik {a .aux_w } | pos_w {a .aux_pos_weight }",flush =True )
     _par =list (model .parameters ())+(list (aux_lin .parameters ())if aux_lin else [])
     opt =torch .optim .Adam (_par ,lr =a .lr )
@@ -417,7 +417,7 @@ def main ():
                     loss =per_v .mean ()
             else :
             # Y13: `faces` verilirse boundary-farkindali terim devreye
-            # girer (weight `sinir_weight`, varsayilan 0 = does not change).
+            # girer (weight `sinir_weight`, default 0 = does not change).
                 loss =D ._compute_loss (out ,lab ,w ,meta ,cfg ,
                 faces =ops .get ("faces"))
                 # FB-2 YARDIMCI KAYIP: ana loss above hesaplandi and DEGISMEDI;

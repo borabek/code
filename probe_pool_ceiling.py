@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""HAVUZ TAVANI: a secenek onbelleginin YONLU recall'u and F1 tavani.
+"""HAVUZ TAVANI: a option onbelleginin YONLU recall'u and F1 tavani.
 
 KAPI A'nin olcusu. `P6_DIZIN` with hangi onbellegin olculecegi secilir; so
 "old pool vs three kaldirac open pool" single degiskenli kiyaslanir.
@@ -16,7 +16,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -77,8 +77,8 @@ def main ():
             a ["konum"]+=rec (P [idx ],YD ,G ,Gd ,direction =False )
             a ["yonlu"]+=rec (P [idx ],YD ,G ,Gd ,direction =True )
             a ["candidate"]+=len (P )
-            a ["secenek"]+=len (idx )
-            for k_ in ("part","gt","konum","yonlu","candidate","secenek"):
+            a ["option"]+=len (idx )
+            for k_ in ("part","gt","konum","yonlu","candidate","option"):
                 top [k_ ]+=a [k_ ]-top .get ("_",0 )*0 # (total below)
                 # toplami markalardan topla (yukaridaki loop inside birikim wrong olurdu)
     top =collections .Counter ()
@@ -97,21 +97,21 @@ def main ():
         out [m ]={"part":a ["part"],"gt":a ["gt"],
         "konum_recall":a ["konum"]/g ,"yonlu_recall":ry ,
         "f1_tavani":2 *ry /(1 +ry ),
-        "aday_parca":a ["candidate"]/p ,"secenek_parca":a ["secenek"]/p }
+        "aday_parca":a ["candidate"]/p ,"secenek_parca":a ["option"]/p }
         print (f"{m :<7}{a ['part']:>6}{a ['gt']:>7}{a ['konum']/g :>9.4f}"
         f"{ry :>9.4f}{2 *ry /(1 +ry ):>11.4f}"
-        f"{a ['candidate']/p :>8.0f}{a ['secenek']/p :>8.0f}")
+        f"{a ['candidate']/p :>8.0f}{a ['option']/p :>8.0f}")
     g =max (top ["gt"],1 )
     p =max (top ["part"],1 )
     ry =top ["yonlu"]/g 
     T ={"part":top ["part"],"gt":top ["gt"],
     "konum_recall":top ["konum"]/g ,"yonlu_recall":ry ,
     "f1_tavani":2 *ry /(1 +ry ),
-    "aday_parca":top ["candidate"]/p ,"secenek_parca":top ["secenek"]/p }
+    "aday_parca":top ["candidate"]/p ,"secenek_parca":top ["option"]/p }
     print (f"{'TOPLAM':<7}{top ['part']:>6}{top ['gt']:>7}"
     f"{T ['konum_recall']:>9.4f}{ry :>9.4f}{T ['f1_tavani']:>11.4f}"
     f"{T ['aday_parca']:>8.0f}{T ['secenek_parca']:>8.0f}")
-    # TAVAN DOYGUNLUGU UYARISI (2026-08-12). Aday basina secenek count
+    # TAVAN DOYGUNLUGU UYARISI (2026-08-12). Aday basina option count
     # `direction_bank.MAX_SEC` tavanina dayanmissa, direction KAYNAKLARINI zenginlestirmek
     # (for example yelpaze cozunurlugunu artirmak) recall'u ARTIRAMAZ: new yonler
     # tavana takilip mevcutlarin instead of geciyordur. Bu, olcumu yorumlarken
@@ -119,7 +119,7 @@ def main ():
     # KORPUSUN KURULDUGU TAVAN, BU SURECIN TAVANI DEGILDIR. Onbellek hangi
     # `YB_MAX_SEC` with cikarildiysa doygunluk ona according to olculur; surecin own
     # varsayilanina (12) bakmak ceiling-24 korpusunda YANLIS ALARM produces
-    # (17.2 secenek/candidate "doygun" sanilir, oysa 24'un %72'si). Korpus tavani
+    # (17.2 option/candidate "doygun" sanilir, oysa 24'un %72'si). Korpus tavani
     # npz'de yazili olmadigi for cevreden verilir.
     try :
         _sp =T ["secenek_parca"]/max (T ["aday_parca"],1e-9 )
@@ -132,18 +132,18 @@ def main ():
             _cap =int (_cap )
             _kaynak =f"corpus tavani {_cap }"
         if _sp >=0.9 *_cap :
-            print (f"\n!! TAVAN DOYGUN: candidate basina {_sp :.1f} secenek, "
+            print (f"\n!! TAVAN DOYGUN: candidate basina {_sp :.1f} option, "
             f"{_kaynak }. Yon kaynagi eklemek recall'u ARTIRMAZ; "
-            f"once ceiling buyutulmeli (probe_max_select.py).")
+            f"before ceiling buyutulmeli (probe_max_select.py).")
         else :
-            print (f"\n   ceiling doygun DEGIL: candidate basina {_sp :.1f} secenek, "
+            print (f"\n   ceiling doygun DEGIL: candidate basina {_sp :.1f} option, "
             f"{_kaynak }")
     except Exception :
         pass 
     print (f"\nKAPI A: yonlu recall >= 0.85 mi -> "
     f"{'GECTI'if ry >=0.85 else 'GECMEDI'} ({ry :.4f})")
-    json .dump ({"damga":makbuz_hash .damga (),"dizin":DIZ ,"cluster":ONLER ,
-    "toplam":T ,"brand":out ,
+    json .dump ({"damga":receipt_hash .damga (),"dizin":DIZ ,"cluster":ONLER ,
+    "total":T ,"brand":out ,
     "kapi_a_gecti":bool (ry >=0.85 ),
     "not":"Havuz TAVANI (mukemmel selector). Kabul kutusu urun "
     "metrigiyle birebir. D7'ye BAKILMADI."},

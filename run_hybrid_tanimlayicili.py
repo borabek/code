@@ -6,12 +6,12 @@ NULL output (ceiling 0.5748 but uctan uca 0.1959 <= baseline 0.1970). Olculdu ki
 feature a agzin real tel girisi olup olmadigini SOYLEMIYOR.
 
 `mouth_descriptor.py` that bilgiyi uretti. Parca-ICI AUC (training absent, saf ayrilabilirlik,
-`results/agiz_ayirt_edicilik.json`): radius 0.690, es_eksen 0.293, narinlik 0.317,
+`results/mouth_ayirt_edicilik.json`): radius 0.690, es_eksen 0.293, narinlik 0.317,
 girme_kenar 0.331, girme 0.343 -- 0.29 with 0.69 equal guclu, direction ters.
 
 MIMARI DEGISMEDI and this KASITLI: seg adaylari DAGITILAN v6 with puanlanir (tez-saf
 arm AYNEN korunur, arm kotu calisirsa baseline KAYBEDILMEZ); only B-rep modeli
-58 + 9 = 67 sutunla, part-ici z-skor donusumuyle yeniden egitilir.
+58 + 9 = 67 sutunla, part-ici z-score donusumuyle yeniden egitilir.
 
 TEZE SADIK: segmentasyon, ~6000 remesh, `v_o` turetmesi DEGISMEDI.
 """
@@ -24,7 +24,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -79,13 +79,13 @@ def egitim_seti ():
             continue 
         M .append (wire_gate .within_part (np .hstack ([Xb ,T ]),DONUSUM ))
         Y .append (yb )
-    print (f"  tanimlayici sayisi tutmayan/eksik part: {uyumsuz }",flush =True )
+    print (f"  tanimlayici sayisi tutmayan/missing part: {uyumsuz }",flush =True )
     return np .vstack (M ),np .concatenate (Y )
 
 
 def sinav_seti ():
     te =[]
-    atlanan =0 
+    skipped =0 
     for f in sorted (os .listdir (OZ )):
         if not (f .startswith ("d7_")and f .endswith (".npz")):
             continue 
@@ -96,11 +96,11 @@ def sinav_seti ():
         nb =int ((kay ==1 ).sum ())
         T =tanim ("d7",pid ,nb )if nb else np .zeros ((0 ,len (AT .AD )))
         if T is None :
-            atlanan +=1 
+            skipped +=1 
             continue 
         te .append ({"pid":pid ,"X":X ,"T":T ,"P":z ["P"],"D":z ["D"],
         "source":kay })
-    print (f"  tanimlayicisi eksik exam parcasi: {atlanan }",flush =True )
+    print (f"  tanimlayicisi missing exam parcasi: {skipped }",flush =True )
     return te 
 
 
@@ -158,7 +158,7 @@ def main ():
             for m ,a in rob .items ()}
             mi =float (2 *sum (a [0 ]for a in rob .values ())/
             max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-            r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+            r ={"rule":f"{tip } {e }","robot":mi ,"detection":K .mikro (tes ),
             "makro":float (np .mean (list (pm .values ()))),
             "en_kotu":float (min (pm .values ())),"brand":pm }
             if en is None or r ["robot"]>en ["robot"]:
@@ -171,7 +171,7 @@ def main ():
     ("+B-rep 0.70",0.70 ),("+B-rep 0.80",0.80 )):
         out [ad ]=kos (be )
         r =out [ad ]
-        print (f"{ad :<24} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | "
+        print (f"{ad :<24} robot {r ['robot']:.4f} | detection {r ['detection']:.4f} | "
         f"makro {r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['rule']}",
         flush =True )
     t =out ["TEZ-SAF (B-rep KAPALI)"]
@@ -182,15 +182,15 @@ def main ():
         r =out [ad ]
         art =sum (1 for m in r ["brand"]if r ["brand"][m ]>t ["brand"][m ]+1e-9 )
         yik =[m for m in r ["brand"]if r ["brand"][m ]==0 and t ["brand"][m ]>0 ]
-        print (f"  {ad :<14} robot {r ['robot']-t ['robot']:+.4f} | tespit "
-        f"{r ['tespit']-t ['tespit']:+.4f} | artan brand {art }/12"
+        print (f"  {ad :<14} robot {r ['robot']-t ['robot']:+.4f} | detection "
+        f"{r ['detection']-t ['detection']:+.4f} | artan brand {art }/12"
         +(f" | YIKILAN: {','.join (yik )}"if yik else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
     "not":"HIBRIT + mouth tanimlayicilari (58+9=67 sutun, part-ici "
     "zskor). Seg kolu DAGITILAN v6, degistirilmedi. D7 "
     "brand-disi, MIKRO. B-rep TEZ TURETMESI DEGIL."},
-    open ("results/hibrit_tanimlayicili_d7.json","w"),indent =1 )
-    print ("receipt -> results/hibrit_tanimlayicili_d7.json")
+    open ("results/hybrid_tanimlayicili_d7.json","w"),indent =1 )
+    print ("receipt -> results/hybrid_tanimlayicili_d7.json")
 
 
 if __name__ =="__main__":

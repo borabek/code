@@ -6,10 +6,10 @@ BUGUN BES MEKANIZMA DENENDI, BESI DE ZINCIRIN SONUNDAYDI:
 Hicbiri EN BASA, SEGMENTASYONA bakmadi.
 
 HIPOTEZ. NIT'te 24 CP'nin only BIRKACINDA segmentasyon ateşliyor;
-gerisi mesh seyreltmesinden geliyor and ZAYIF feature tasiyor. Bu, olculen
+gerisi mesh seyreltmesinden geliyor and ZAYIF feature tasiyor. Bu, measured_path
 deseni birebir aciklar:
-  * ILK correct secenek 18. sirada, SONUNCUSU 1065. (model ilkini buluyor)
-  * poz-neg skor ayrimi 0.050 (skor bilgi tasimiyor)
+  * ILK correct option 18. sirada, SONUNCUSU 1065. (model ilkini buluyor)
+  * poz-neg score ayrimi 0.050 (score bilgi tasimiyor)
   * havuzda konum VAR (0.843) but secilemiyor
 
 OLCULEN: each GT'nin konumunda segmentasyon olasiligi (CE+CT) nedir?
@@ -79,7 +79,7 @@ def main ():
         a ["rast"].append (float (np .median (
         p_ce [rng .choice (len (V ),min (len (V ),500 ),replace =False )])))
         n +=1 
-    print (f"{n } part | olasilik = CE + CT (segmentasyon)\n")
+    print (f"{n } part | probability = CE + CT (segmentasyon)\n")
     print (f"{'brand':<7}{'GT':>7}{'p_gt ortanca':>14}{'p_gt en dusuk':>15}"
     f"{'>0.5':>8}{'>0.1':>8}{'>0.01':>8}{'rastgele':>10}")
     out ={}
@@ -99,8 +99,8 @@ def main ():
     json .dump ({"brand":out ,
     "not":"GT konumundaki segmentasyon olasiligi (CE+CT). "
     "Zincirin EN BASI. D7'ye BAKILMADI."},
-    open ("results/otopsi_segmentasyon.json","w"),indent =1 )
-    print ("\nmakbuz -> results/otopsi_segmentasyon.json")
+    open ("results/autopsy_segmentation.json","w"),indent =1 )
+    print ("\nmakbuz -> results/autopsy_segmentation.json")
     print ("OKUMA:")
     print ("  >0.5 low but >0.1 high -> segmentasyon ZAYIF but VAR")
     print ("     (threshold/duyarlilik kolu acilir)")

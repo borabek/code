@@ -5,9 +5,9 @@ Kazanan: B-rep havuzu + mouth tanimlayicilari, D7 TAM ZINCIR robot **0.2649**
 (urun 0.2029). Donusum %60 (0.2649/0.4409) -- urunun %45'inin very ustunde,
 i.e. pool adaylari more iyi KONUMLANIYOR. Kalan loss TESPITTE.
 
-Yon odunc alma this gece -0.0044 olculmustu but that measurement BOZUK ETIKETLI gate with
+Yon odunc alma this night -0.0044 olculmustu but that measurement BOZUK ETIKETLI gate with
 yapilmisti ([[gate-label-tanimi-hatasi-and-v6-kunyesi]]); dayanagi cokmus
-durumda. Kol candidate EKLEMEZ, only secilen adayin yonunu changes -> tespit
+durumda. Kol candidate EKLEMEZ, only selected adayin yonunu changes -> detection
 YAPISAL OLARAK bozulamaz.
 
 Yon selector, gate'in KENDI skorunu and `direction_borrow.OZ_AD` ozniteliklerini kullanir;
@@ -22,7 +22,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import RandomForestClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -67,12 +67,12 @@ def oku (on ):
 def kimlikle (v ):
     global _D6 
     kay =K .yukle ([d ["pid"]for d in v ])
-    eksik =[d ["pid"]for d in v if d ["pid"]not in kay ]
-    if eksik :
+    missing =[d ["pid"]for d in v if d ["pid"]not in kay ]
+    if missing :
         if _D6 is None :
             _D6 ={str (p ):r for p ,r in 
             d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
-        kay .update ({p :_D6 [p ]for p in eksik if p in _D6 })
+        kay .update ({p :_D6 [p ]for p in missing if p in _D6 })
     out =[]
     for d in v :
         r =kay .get (d ["pid"])
@@ -117,7 +117,7 @@ def yon_egitim (data_ ,gate ,cyl ):
                     break 
             if j <0 :
                 continue 
-            V ,F =YO .secenekler (P ,D ,i ,cy ,float (sk [i ]),bask )
+            V ,F =YO .options (P ,D ,i ,cy ,float (sk [i ]),bask )
             if len (V )<2 :
                 continue 
             u =d ["Gd"][j ]/max (np .linalg .norm (d ["Gd"][j ]),1e-12 )
@@ -160,7 +160,7 @@ def olc (data_ ,gate ,cyl ,S ,yon_clf =None ):
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
 
@@ -182,20 +182,20 @@ def main ():
     random_state =0 ).fit (X ,Y )
     out ={}
     out ["YON SABIT"]=olc (te ,gate ,cyl ,S ,None )
-    print (f"YON SABIT   robot {out ['YON SABIT']['robot']:.4f} | tespit "
-    f"{out ['YON SABIT']['tespit']:.4f} | makro "
+    print (f"YON SABIT   robot {out ['YON SABIT']['robot']:.4f} | detection "
+    f"{out ['YON SABIT']['detection']:.4f} | makro "
     f"{out ['YON SABIT']['makro']:.4f}",flush =True )
     out ["YON ODUNC"]=olc (te ,gate ,cyl ,S ,yc )
-    print (f"YON ODUNC   robot {out ['YON ODUNC']['robot']:.4f} | tespit "
-    f"{out ['YON ODUNC']['tespit']:.4f} | makro "
+    print (f"YON ODUNC   robot {out ['YON ODUNC']['robot']:.4f} | detection "
+    f"{out ['YON ODUNC']['detection']:.4f} | makro "
     f"{out ['YON ODUNC']['makro']:.4f}",flush =True )
     d =out ["YON ODUNC"]["robot"]-out ["YON SABIT"]["robot"]
     print (f"\nFARK {d :+.4f} | urun 0.2029")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"fark":d ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"diff":d ,
     "not":"Kazanan arm (B-rep + tanimlayici) uzerinde direction odunc alma, "
     "DUZELTILMIS etiketli gate with. D7 brand-disi, TAM ZINCIR."},
-    open ("results/kazanan_yon_odunc.json","w"),indent =1 )
-    print ("receipt -> results/kazanan_yon_odunc.json")
+    open ("results/winner_direction_borrow.json","w"),indent =1 )
+    print ("receipt -> results/winner_direction_borrow.json")
 
 
 if __name__ =="__main__":

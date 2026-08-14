@@ -73,7 +73,7 @@ def test_dar_agiz_delikte_atesler ():
         except Exception :
             pytest .skip ("boolean motoru none")
         if m is None or not len (getattr (m ,"faces",[])):
-            pytest .skip ("boolean basarisiz")
+            pytest .skip ("boolean failed")
             # z=5.0 AGIZ DUZLEMI (kutu 10mm high -> z in [-5,+5]). Ilk surumde z=8 verilmisti,
             # i.e. point govdenin TAMAMEN outside kaliyordu and olculecek mouth yoktu.
         g ={a for a ,_ in _fiz_bayraklar (m ,np .array ([0.0 ,0.0 ,5.0 ]),

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""T1: DECISION KURALI GATE'DEN SONRA YENIDEN AYARLANDI MI? (tespit kolu)
+"""T1: DECISION KURALI GATE'DEN SONRA YENIDEN AYARLANDI MI? (detection kolu)
 
 RATIONALE: gate 2026-08-02'de ZENGIN feature kumesiyle YENIDEN EGITILDI (116 column,
 +110 new WEI parcasi). Kabul kurali whereas
     (s >= ORAN * max(s)) & (s >= TABAN),  ORAN=0.5, TABAN=0.25
 degerleriyle duruyor. Bu proje same cinsten bayatligi IKI KEZ yasadi:
   * [[gate-refit-minv4]] -- dagitilan gate topyekun bayatti, refit +0.1273
-  * [[topoloji-yaricapi-closed]] -- modele bagli ayar modelden bagimsiz degistirilebiliyordu
+  * [[topoloji-yaricapi-closed]] -- modele bagli setting modelden bagimsiz degistirilebiliyordu
 Model degisti; ona bagli esikler degismedi. Once bunu olcmek, new a mekanizma
 aramaktan ONCE gelir.
 
@@ -54,7 +54,7 @@ def main ():
                 rec ["X"]=X ;rec ["P"]=np .asarray (r ["P"],float )
                 rec ["Pd"]=np .asarray (r ["Pd"],float );rec ["UYE"]=r .get ("UYE")
         HAZ .append (rec )
-    print (f"hazir: {sum (1 for h in HAZ if h ['sk']is not None )}/{len (HAZ )} parcada skor var",
+    print (f"hazir: {sum (1 for h in HAZ if h ['sk']is not None )}/{len (HAZ )} parcada score present",
     flush =True )
 
     def kos (ratio ,baseline ,cluster ):
@@ -94,34 +94,34 @@ def main ():
         print (sat ,flush =True )
     mev =TAR [(0.50 ,0.25 )]
     en =max (TAR ,key =TAR .get )
-    print (f"\nDEV'de mevcut kural (0.50/0.25): {mev :.4f}")
+    print (f"\nDEV'de mevcut rule (0.50/0.25): {mev :.4f}")
     print (f"DEV'de en iyi hucre: ratio {en [0 ]:.2f} / baseline {en [1 ]:.2f} -> {TAR [en ]:.4f} "
     f"({TAR [en ]-mev :+.4f})")
 
     # ---------- 2) VERDICT: YALNIZ VAL, TEK hucre
-    print (f"\n--- HUKUM (YALNIZ VAL, {len (val )} part; DEV'de secilen TEK hucre) ---")
+    print (f"\n--- HUKUM (YALNIZ VAL, {len (val )} part; DEV'de selected TEK hucre) ---")
     d0 ,r0 ,gg =kos (0.50 ,0.25 ,val )
     d1 ,r1 ,_ =kos (en [0 ],en [1 ],val )
     fn =lambda rows :f1w ([q for _ ,q in rows ])-f1w ([p for p ,_ in rows ])
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (d0 ,d1 )),gg ,fn ,n =3000 )
     _ ,rlo ,rhi =measure_set .grup_bootstrap (list (zip (r0 ,r1 )),gg ,fn ,n =3000 )
     dd =f1w (d1 )-f1w (d0 )
-    print (f"{'rule':<20}{'tespit':>10}{'robot(FIZ)':>13}")
+    print (f"{'rule':<20}{'detection':>10}{'robot(FIZ)':>13}")
     print (f"{'mevcut 0.50/0.25':<20}{f1w (d0 ):>10.4f}{f1w (r0 ):>13.4f}")
     print (f"{f'DEV-secimi {en [0 ]:.2f}/{en [1 ]:.2f}':<20}{f1w (d1 ):>10.4f}{f1w (r1 ):>13.4f}")
-    print (f"\nVAL tespit farki: {dd :+.4f}  GA[{lo :+.4f},{hi :+.4f}] "
+    print (f"\nVAL detection farki: {dd :+.4f}  GA[{lo :+.4f},{hi :+.4f}] "
     f"{'GERCEK'if (lo >0 or hi <0 )else 'noise'}")
     print (f"VAL robot  farki: {f1w (r1 )-f1w (r0 ):+.4f}  GA[{rlo :+.4f},{rhi :+.4f}]")
 
     # ---------- 3) BILGI: havuzlanmis (SECIM ICIN KULLANILMAZ)
     dh0 ,rh0 ,ggh =kos (0.50 ,0.25 ,None )
     dh1 ,rh1 ,_ =kos (en [0 ],en [1 ],None )
-    print (f"\n[bilgi] HAVUZLANMIS 194 part: tespit {f1w (dh0 ):.4f} -> {f1w (dh1 ):.4f} "
+    print (f"\n[bilgi] HAVUZLANMIS 194 part: detection {f1w (dh0 ):.4f} -> {f1w (dh1 ):.4f} "
     f"({f1w (dh1 )-f1w (dh0 ):+.4f}) | robot {f1w (rh0 ):.4f} -> {f1w (rh1 ):.4f}")
     print ("   (this row VERDICT DEGIL: rule DEV'de secildi, pool DEV'i de iceriyor)")
 
     gecti =dd >=0.005 and lo >0 
-    print (f"\nKILL: VAL tespit +0.005 VE GA>0 -> "
+    print (f"\nKILL: VAL detection +0.005 VE GA>0 -> "
     f"{'GECTI -- rule guncellenir'if gecti else 'GECMEDI -- mevcut rule KALIR'}")
     with io .open ("results/t1_decision_rule.json","w",encoding ="utf-8")as f :
         json .dump ({"dev_tarama":{f"{o }_{t }":v for (o ,t ),v in TAR .items ()},

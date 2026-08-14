@@ -3,7 +3,7 @@
 
 DIAGNOSIS. NIT'te direction KAHINI 0.593, gerceklesen 0.150. Bugune kadarki most large
 single bosluk. Iki olculmus basarisizlik same sebebe sign ediyor:
-  * K2.1 periyodiklik : tespit +0.0126 but robot -0.0100  (direction KOPYALAMA)
+  * K2.1 periyodiklik : detection +0.0126 but robot -0.0100  (direction KOPYALAMA)
   * dik_kipsel        : 0.064, dik_suzgec 0.166'nin ALTINDA (modal oylama)
 Ikisi de "parcadaki yonu kopyala" fikrini denedi, ikisi de coktu.
 
@@ -26,7 +26,7 @@ KOLLAR (all of them GT KONUMUNDA, i.e. direction TEK BASINA yalitilir):
   eksen_disari  : yerel unsigned modal axis, sign DISARIDAN (centre)
   eksen_dis_yer : same, but yerel (15mm) merkeze according to disari
   parca_eksen   : PARCA capinda single unsigned axis + disari isareti
-  kahin         : correct direction candidates between VAR mi
+  oracle         : correct direction candidates between VAR mi
 
 KAPI: NIT'te herhangi a arm `bugunku`yu >= 0.05 asacak.
 D7'ye BAKILMAZ.
@@ -40,7 +40,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -62,7 +62,7 @@ YEREL_R =float (os .environ .get ("BY_YEREL","15.0"))
 MESH ={"d6":"results/_p1_olasilik",
 "tam":"results/_p1_olasilik_brepegit"}[KUME ]
 KOLLAR =("bugunku","eksen_skor","eksen_disari","eksen_dis_yer",
-"parca_eksen","kahin")
+"parca_eksen","oracle")
 
 
 def _birim (v ):
@@ -98,14 +98,14 @@ def eksen_modal (Y ,W =None ):
 
 def kip_sayisi (Y ,signed ):
     """acgozlu clustering with kip count (ACI toleransinda)."""
-    kalan =list (range (len (Y )))
+    remaining =list (range (len (Y )))
     n =0 
-    while kalan :
-        j =kalan [0 ]
-        c =Y [kalan ]@Y [j ]
+    while remaining :
+        j =remaining [0 ]
+        c =Y [remaining ]@Y [j ]
         c =np .clip (c if signed else np .abs (c ),-1 ,1 )
         yakin =np .degrees (np .arccos (c ))<=K .ACI 
-        kalan =[k for k ,y in zip (kalan ,yakin )if not y ]
+        remaining =[k for k ,y in zip (remaining ,yakin )if not y ]
         n +=1 
     return n 
 
@@ -175,9 +175,9 @@ def main ():
         say ={k :0 for k in KOLLAR }
         # ESLESME KUTUSU DUZELTMESI. Ilk kosuda adaylari GT'ye OKLID 2mm with
         # esledim; oysa kabul kutusu CARPIMDIR: GT yonune according to lateral <= 2mm
-        # and axial <= 40mm. Bir candidate eksende 30mm uzakta olup still gecerli
-        # eslesme may be. Oklid kullanmak `kahin`i 0.593'ten 0.0172'ye
-        # dusuruyordu -- olculen sey mekanizma not KUSURDU.
+        # and axial <= 40mm. Bir candidate eksende 30mm uzakta olup still valid
+        # eslesme may be. Oklid kullanmak `oracle`i 0.593'ten 0.0172'ye
+        # dusuruyordu -- measured_path sey mekanizma not KUSURDU.
         Pk =P [idx ]
         for j in range (len (G )):
             v =Pk -G [j ][None ,:]
@@ -189,7 +189,7 @@ def main ():
             Yo ,So =YD [m_ ],s [m_ ]
             aci =np .degrees (np .arccos (np .clip (Yo @Gn [j ],-1 ,1 )))
             if (aci <=K .ACI ).any ():
-                say ["kahin"]+=1 
+                say ["oracle"]+=1 
             if aci [int (np .argmax (So ))]<=K .ACI :
                 say ["bugunku"]+=1 
 
@@ -198,10 +198,10 @@ def main ():
             # DISARI testi GT KONUMUNU kullaniyordu. Uruende elimizde only
             # ADAY konumu present and candidate eksende 40mm'ye up to kayabilir --
             # `e @ (konum - centre)` isareti that is why ters donebilir.
-            # Dogrusu: that GT with eslesen adaylarin EN YUKSEK SKORLUSUNUN
+            # Dogrusu: that GT with matched adaylarin EN YUKSEK SKORLUSUNUN
             # own konumu (uruende de this bilinir).
             konum =Pk [m_ ][int (np .argmax (So ))]
-            # sign: skor agirlikli izdusum
+            # sign: score agirlikli izdusum
             pr =(So *(Yo @e )).sum ()
             v1 =e *(1.0 if pr >=0 else -1.0 )
             # sign: kuresel merkezden disari
@@ -246,8 +246,8 @@ def main ():
             f =out ["NIT"][k_ ]-h 
             print (f"  {k_ :<14}{out ['NIT'][k_ ]:.4f}   {f :+.4f}"
             +("  <- KAPI GECTI"if f >=0.05 else ""))
-        print (f"  {'kahin':<14}{out ['NIT']['kahin']:.4f}   (ust sinir)")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
+        print (f"  {'oracle':<14}{out ['NIT']['oracle']:.4f}   (ust sinir)")
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"brand":out ,
     "not":"Isaretsiz axis + disari isareti. GT KONUMUNDA, direction "
     "yalitildi. kip+- = GT yonlerinin signed kip sayisi, "
     "kipEks = unsigned. D7'ye BAKILMADI."},

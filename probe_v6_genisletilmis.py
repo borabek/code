@@ -10,11 +10,11 @@ adaylarini HIC gormedi ([[gate-refit-minv4]] dersi full bunu yasaklar). O yuzden
 this a DAGITIM KARARI DEGIL, a OLCUM: v6'nin feature uzayi B-rep adaylarina
 genelleniyor mu?
 
-Uc arm: only seg (referans) / seg + B-rep / B-rep'e skor CEZASI with.
+Uc arm: only seg (referans) / seg + B-rep / B-rep'e score CEZASI with.
 """
 import collections ,json ,os ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -65,7 +65,7 @@ def kos (segtek ,ceza ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
         if en is None or r ["robot"]>en ["robot"]:
@@ -81,14 +81,14 @@ for ad ,segtek ,ceza in (("v6 | TEZ-SAF (referans)",True ,0.0 ),
 ("v6 | GENISLETILMIS -0.20 ceza",False ,0.20 )):
     out [ad ]=kos (segtek ,ceza )
     r =out [ad ]
-    print (f"{ad :<32} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | makro "
+    print (f"{ad :<32} robot {r ['robot']:.4f} | detection {r ['detection']:.4f} | makro "
     f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['rule']}",flush =True )
 t =out ["v6 | TEZ-SAF (referans)"]["robot"]
 print ()
 for ad in out :
     if ad !="v6 | TEZ-SAF (referans)":
         print (f"  {ad :<32} {out [ad ]['robot']-t :+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
 "not":"DAGITILAN gate v6, degistirilmeden, genisletilmis havuza. "
 "OLCUM -- dagitim karari DEGIL (v6 B-rep adaylarini gormedi). "
 "D7 brand-disi, MIKRO."},

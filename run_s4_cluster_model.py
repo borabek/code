@@ -7,10 +7,10 @@ same rule aramasi, same kabul kutusu. Fark only skorlayici:
   DeepSets : secenegi parcanin ORTALAMA/MAKSIMUM ozetiyle birlikte puanlar
 
 RATIONALE (S7). Secici verimliligi two kutuplu (UPUN %65.5 / NIT %0.5) and reason
-POZ-NEG SKOR AYRIMI'nin cokmesi (0.847 -> 0.050). Noktasal model "this secenek
+POZ-NEG SKOR AYRIMI'nin cokmesi (0.847 -> 0.050). Noktasal model "this option
 this parcadaki digerlerine according to iyi mi" sorusunu goremiyor.
 
-YETENEK DOGRULANDI (tests/test_kume_modeli.py): part baglami gerektiren
+YETENEK DOGRULANDI (tests/test_cluster_model.py): part baglami gerektiren
 sentetik gorevde DeepSets 0.483, noktasal 0.025 (sans 0.04).
 
 KAPI: LOMO MIKRO robot F1'de HGB'ye **+0.05**. Alti kalirsa arm KAPANIR.
@@ -26,7 +26,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -52,11 +52,11 @@ DEVIR =int (os .environ .get ("S4_DEVIR","25"))
 LR =float (os .environ .get ("S4_LR","3e-3"))
 LAM =float (os .environ .get ("S4_LAM","1.0"))
 BOYUT =int (os .environ .get ("S4_D","128"))
-# Cok large parts GPU belleğini zorlar; egitimde secenek ORNEKLENIR
+# Cok large parts GPU belleğini zorlar; egitimde option ORNEKLENIR
 # (pozitifler HER ZAMAN tutulur, negatifler seyreltilir). Tahminde TAM cluster.
 EGIT_MAKS =int (os .environ .get ("S4_EGIT_MAKS","3000"))
 # BCE'yi HGB koluyla AYNI sinif dengesinde hesapla (pozitif basina N negatif).
-# 0 = closed (v1 davranisi: tum secenekler, ~300:1 dengesizlik).
+# 0 = closed (v1 davranisi: tum options, ~300:1 dengesizlik).
 S4_NEG_KAT =int (os .environ .get ("S4_NEG_KAT","0"))
 
 
@@ -66,9 +66,9 @@ def temel (d ):
     np .float32 )
 
 
-def puanla (data_ ,skor ,rule_ ):
+def puanla (data_ ,score ,rule_ ):
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,s in zip (data_ ,skor ):
+    for d ,s in zip (data_ ,score ):
         P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =NMS )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
@@ -81,11 +81,11 @@ def puanla (data_ ,skor ,rule_ ):
     "TP":T [0 ],"FP":T [1 ],"FN":T [2 ]}
 
 
-def en_iyi_kural (data_ ,skor ,rng ):
+def en_iyi_kural (data_ ,score ,rng ):
     ar =(rng .choice (len (data_ ),ARAMA_N ,replace =False )
     if len (data_ )>ARAMA_N else np .arange (len (data_ )))
     AR =[data_ [i ]for i in ar ]
-    AS =[skor [i ]for i in ar ]
+    AS =[score [i ]for i in ar ]
     return max (KURALLAR ,key =lambda k :puanla (AR ,AS ,k )["makro"])
 
 
@@ -100,7 +100,7 @@ def main ():
         d ["_M"]=temel (d )
         # HAM `X` ARTIK GEREKMIYOR: puanlama P/idx/YD/G/Gd with calisiyor.
         # Ikisini birden tutmak vertex bellegi ~10 GB'a cikariyordu (corpus
-        # 3051 part x ~2600 secenek x 162 column), this da this gece three sureci
+        # 3051 part x ~2600 option x 162 column), this da this night three sureci
         # olduren bellek darligini tekrar dogururdu.
         d ["X"]=None 
     brand =collections .Counter (d ["mfg"]for d in data_ )
@@ -174,23 +174,23 @@ def main ():
     for ad in ("HGB","KUME"):
         c =top [ad ]
         last_ [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
-    fark =last_ ["KUME"]-last_ ["HGB"]
+    diff =last_ ["KUME"]-last_ ["HGB"]
     print (f"\n=== S4 SONUC (MIKRO, {len (katlar )} brand kati) ===")
     print (f"  HGB (noktasal)   {last_ ['HGB']:.4f}")
     print (f"  KUME (DeepSets)  {last_ ['KUME']:.4f}")
-    print (f"  FARK             {fark :+.4f}   KAPI +0.05 -> "
-    f"{'GECTI'if fark >=0.05 else 'GECMEDI'}")
-    json .dump ({"damga":makbuz_hash .damga (),"dizin":os .environ ["P6_DIZIN"],
+    print (f"  FARK             {diff :+.4f}   KAPI +0.05 -> "
+    f"{'GECTI'if diff >=0.05 else 'GECMEDI'}")
+    json .dump ({"damga":receipt_hash .damga (),"dizin":os .environ ["P6_DIZIN"],
     "katlar":katlar ,"n_parca":len (data_ ),
-    "hgb":last_ ["HGB"],"cluster":last_ ["KUME"],"fark":fark ,
-    "gecti":bool (fark >=0.05 ),"fold":kat_sonuc ,
-    "ayar":{"devir":DEVIR ,"lr":LR ,"lam":LAM ,"d":BOYUT ,
+    "hgb":last_ ["HGB"],"cluster":last_ ["KUME"],"diff":diff ,
+    "gecti":bool (diff >=0.05 ),"fold":kat_sonuc ,
+    "setting":{"devir":DEVIR ,"lr":LR ,"lam":LAM ,"d":BOYUT ,
     "egit_maks":EGIT_MAKS ,"neg_kat":S4_NEG_KAT },
     "not":"S4: candidate-kumesi modeli vs noktasal HGB, AYNI protocol "
     "(same katlar, features, rule aramasi, kabul "
-    "kutusu). Tek degisken MODEL SINIFI. D7'ye BAKILMADI."},
-    open ("results/s4_kume_modeli.json","w"),indent =1 )
-    print ("receipt -> results/s4_kume_modeli.json")
+    "kutusu). Tek variable MODEL SINIFI. D7'ye BAKILMADI."},
+    open ("results/s4_cluster_model.json","w"),indent =1 )
+    print ("receipt -> results/s4_cluster_model.json")
 
 
 if __name__ =="__main__":

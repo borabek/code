@@ -17,7 +17,7 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
-import connector3d ,wire_gate ,brep_pool ,makbuz_hash 
+import connector3d ,wire_gate ,brep_pool ,receipt_hash 
 import d6_record ,canonical_d7 as K 
 from sina_cluster import match_hungarian 
 
@@ -29,25 +29,25 @@ S =K .step_map ()
 def cluster (ad ,kayitlar ,ob ,cylf ,acf ):
     cy =pickle .load (open (cylf ,"rb"));ac =pickle .load (open (acf ,"rb"))
     cik =[]
-    t0 =time .time ();atlanan =0 
+    t0 =time .time ();skipped =0 
     for i ,(pid ,r )in enumerate (sorted (kayitlar .items ())):
         G =np .asarray (r .get ("G",[]),float )
         if not len (G ):
             continue 
-        yol =f"{OZ }/{ad }_{pid }.npz"
-        if os .path .exists (yol ):
+        path =f"{OZ }/{ad }_{pid }.npz"
+        if os .path .exists (path ):
             try :
-                z =np .load (yol )
+                z =np .load (path )
                 cik .append ({"pid":pid ,"mfg":r ["mfg"],"X":z ["X"],"y":z ["y"],
                 "P":z ["P"],"D":z ["D"],"source":z ["source"],
                 "G":G ,"Gd":np .asarray (r ["Gd"],float ),
                 "diag":r ["diag"]})
                 continue 
             except Exception :
-                os .remove (yol )# bozuk cache -> yeniden uret
+                os .remove (path )# bozuk cache -> yeniden uret
         f =f"{ob }/{pid }.npz"
         if not os .path .exists (f ):
-            atlanan +=1 
+            skipped +=1 
             continue 
         z =np .load (f )
         V =np .ascontiguousarray (z ["V"],np .float64 )
@@ -64,14 +64,14 @@ def cluster (ad ,kayitlar ,ob ,cylf ,acf ):
         tol =max (3.0 ,0.06 *r ["diag"])
         d =np .linalg .norm (P [:,None ]-G [None ],axis =-1 )
         y =(d .min (1 )<=tol ).astype (np .int8 )
-        np .savez_compressed (yol ,X =X ,y =y ,P =P ,D =D ,src_ =kay )
+        np .savez_compressed (path ,X =X ,y =y ,P =P ,D =D ,src_ =kay )
         cik .append ({"pid":pid ,"mfg":r ["mfg"],"X":X ,"y":y ,"P":P ,"D":D ,
         "source":kay ,"G":G ,"Gd":np .asarray (r ["Gd"],float ),
         "diag":r ["diag"]})
         if (i +1 )%25 ==0 :
             print (f"  {ad } {i +1 }/{len (kayitlar )} ({time .time ()-t0 :.0f}s, "
-            f"atlanan {atlanan })",flush =True )
-    print (f"{ad }: {len (cik )} part hazir (atlanan {atlanan })",flush =True )
+            f"skipped {skipped })",flush =True )
+    print (f"{ad }: {len (cik )} part hazir (skipped {skipped })",flush =True )
     return cik 
 
 
@@ -80,7 +80,7 @@ tr =cluster ("d6",d6_record .yukle (set (d6_record .exam ()["pidler"])),
 "results/_p1_olasilik_g7","results/_d6_silindirler.pkl",
 "results/_d6_acikliklar.pkl")
 print ("D7 ozellikleri...",flush =True )
-te =cluster ("d7",K .yukle (json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]),
+te =cluster ("d7",K .yukle (json .load (open ("results/d7_exam_set.json"))["pidler"]),
 "results/_p1_olasilik_d7","results/_d7_silindirler.pkl",
 "results/_d7_acikliklar.pkl")
 
@@ -112,14 +112,14 @@ for threshold in (0.30 ,0.40 ,0.50 ,0.60 ,0.70 ):
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    res_ [threshold ]={"robot":mi ,"tespit":K .mikro (tes ),
+    res_ [threshold ]={"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
     c =res_ [threshold ]
-    print (f"threshold {threshold :.2f}  robot {mi :.4f} | tespit {c ['tespit']:.4f} | "
+    print (f"threshold {threshold :.2f}  robot {mi :.4f} | detection {c ['detection']:.4f} | "
     f"makro {c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f}",flush =True )
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":{str (k ):v for k ,v in res_ .items ()},
-"taban_kanonik":{"robot":0.2029 ,"tespit":0.4523 },
+json .dump ({"damga":receipt_hash .damga (),"sonuc":{str (k ):v for k ,v in res_ .items ()},
+"taban_kanonik":{"robot":0.2029 ,"detection":0.4523 },
 "not":"GENISLETILMIS HAVUZ (seg + B-rep) + D6'da REFIT gate. D7 brand-disi. "
 "MIKRO. Tez turetmesi DEGISMEDI; B-rep EK candidate kaynagi."},
 open ("results/brep_gate_d7.json","w"),indent =1 )

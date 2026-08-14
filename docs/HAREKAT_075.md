@@ -4,7 +4,7 @@
 
 | | value |
 |---|---|
-| bugunku F1 (gorulmemis brand) | **0.31** |
+| bugunku F1 (unseen brand) | **0.31** |
 | pool F1 tavani (ceiling-24) | **0.9432** |
 | selector verimliligi | ~%33 |
 | **0.75 for gereken verimlilik** | **%79.5** |
@@ -12,7 +12,7 @@
 
 **Hedefin gercek anlami:** 0.75, bugun EN IYI markada aldigimiz verimin
 USTUNU **each markada** istiyor. Bu, artimli kazanclarla ulasilamaz. Sekiz
-koldan yalnizca biri gecti (kanonik +0.0151); this hizla 0.75'e giden yol YOK.
+koldan yalnizca biri gecti (kanonik +0.0151); this hizla 0.75'e giden path YOK.
 
 **Demek ki problemin KURGUSU degismeli.** Asagisi onun for.
 
@@ -25,7 +25,7 @@ NIT markasinda:
 | olcu | value |
 |---|---|
 | havuzda GT (ceiling) | 0.898 |
-| correct secenegin sira yuzdeligi | **0.005** (7470 secenek icinde ilk ~40) |
+| correct secenegin sira yuzdeligi | **0.005** (7470 option icinde ilk ~40) |
 | part basina CP | **24.4** |
 | uctan uca F1 | **0.005** |
 
@@ -47,8 +47,8 @@ Bu tek measurement, harekatin agirlik merkezini belirler. Once o, after gerisi.
 ## I. KOL -- YAPISAL URETIM ("hapishane kacisi": 24 karari 2 karara indir)
 
 **Fikir.** Klemens bloklarindaki CP'ler BAGIMSIZ DEGIL: a KAFES olustururlar
-(sabit adim, tek axis). 24 independent secim yerine **1 seed + 1 adim vektoru +
-1 adet** prediction edilir, gerisi URETILIR. Karar sayisi ~7470'ten ~3'e iner.
+(fixed adim, tek axis). 24 independent secim yerine **1 seed + 1 adim vektoru +
+1 count** prediction edilir, gerisi URETILIR. Karar sayisi ~7470'ten ~3'e iner.
 
 Elimizde already olculmus destek present: `lattice.py` -- D6 GT'sinin **%90.8'i**
 parcanin en yaygin oteleme vektoruyle uretilebiliyor.
@@ -56,7 +56,7 @@ parcanin en yaygin oteleme vektoruyle uretilebiliyor.
 **I.1 Kafes with konum uretimi.** En guvenli seed bul, lattice adimini olc,
 body uzunlugu boyunca uret.
 **I.2 Uretilen each konumda YONU YENIDEN SEC.** Onceki denemenin (K2.1)
-cokme sebebi buydu: direction KOPYALANMISTI (tespit +0.0126 but robot -0.0100).
+cokme sebebi buydu: direction KOPYALANMISTI (detection +0.0126 but robot -0.0100).
 Yon, o konumdaki direction-bankasi secenekleri arasindan YENIDEN puanlanmali.
 **I.3 Adet tahmini.** `n ≈ body uzunlugu / lattice adimi`. Geometriden gelir,
 modelden not.
@@ -74,8 +74,8 @@ Bugun rule KURESEL: tum parts for tek threshold. Oysa parts very different
 (3 CP'lik UPUN vs 24 CP'lik NIT).
 
 **II.1 Parca basina threshold.** Kucuk a model part ozniteliklerinden (candidate
-sayisi, skor dagilimi, lattice adimi, tahmini adet) O PARCA ICIN esigi secsin.
-**II.2 Adet-kisitli secim.** Esik yerine "ilk k" -- k tahmini adet.
+sayisi, score dagilimi, lattice adimi, tahmini count) O PARCA ICIN esigi secsin.
+**II.2 Adet-kisitli secim.** Esik yerine "ilk k" -- k tahmini count.
 **II.3 Kapi.** LOMO'da +0.03.
 
 **Onemli ayrim:** this, dusen `ozkalib`/`cluster`/S4 kollarindan FARKLI. Onlar
@@ -91,8 +91,8 @@ Ama B-rep agizlarinda direction ANALITIKTIR (silindir axis). Ogrenmeye gerek non
 
 **III.1** Kaynak B-rep which adaylarda direction analitik eksene SABITLE, secimi
 yalnizca konumda yap.
-**III.2** Mesh adaylarinda direction yerel yuzey normalinden turet.
-**III.3 Kapi:** yonlu recall sabitken secenek sayisi >= %50 duser (arama
+**III.2** Mesh adaylarinda direction yerel yuzey normalinden derive.
+**III.3 Kapi:** yonlu recall sabitken option sayisi >= %50 duser (arama
 uzayi kuculur, ayrim keskinlesir).
 
 ---
@@ -100,7 +100,7 @@ uzayi kuculur, ayrim keskinlesir).
 ## IV. KOL -- EGITIMIN BIRIMI PARCA OLSUN
 
 Bugun training satir bazli: 7470 secenekli NIT part, 1000 secenekli UPUN
-parcasindan 7 fold fazla agirlik tasiyor. Metrik ise MIKRO but karar PARCA
+parcasindan 7 fold excess agirlik tasiyor. Metrik ise MIKRO but karar PARCA
 basina veriliyor.
 
 **IV.1** Parca basina agirliklandirma (each part esit katki).
@@ -113,22 +113,22 @@ basina veriliyor.
 
 **V.1 SENTETIK KLEMENS URETECI.** Klemensler PARAMETRIK: kutup sayisi, adim,
 delik capi, body olculeri. Binlerce etiketli sentetik part uretmek
-mumkun ve this DOGRUDAN "gorulmemis brand" sorununa calisir -- because sentetik
+mumkun ve this DOGRUDAN "unseen brand" sorununa calisir -- because sentetik
 uretec brand kavrami tanimaz.
 **V.2** SIE +310 part (elde, kullanilmamis).
 **V.3** Oz-training (kapili).
 **V.4 Kapi:** +0.03.
 
 **Ogrenme egrisi uyarisi:** hafizadaki measurement "0.80 for 3.8x, 0.85 for 17.3x
-corpus" diyor. Yani veri TEK BASINA 0.75'e goturmez but I/II kollarinin
+corpus" diyor. Yani data TEK BASINA 0.75'e goturmez but I/II kollarinin
 tabanini yukseltir.
 
 ---
 
 ## VI. KOL -- SIMETRI VE TEKRAR (ucuz, kismen kuyrukta)
 
-Klemensler aynali simetriktir. Bir tarafta bulunan CP, karsi tarafta
-BEKLENIR. `simetri` blogu kuyrukta; lattice with birlestirilirse uretim arm
+Klemensler aynali simetriktir. Bir tarafta found CP, karsi tarafta
+BEKLENIR. `symmetry` blogu kuyrukta; lattice with birlestirilirse uretim arm
 guclenir.
 
 ---
@@ -137,19 +137,19 @@ guclenir.
 
 | faz | is | gate | why this sirada |
 |---|---|---|---|
-| **0** | ustk-kahin ayristirmasi (KOSUYOR) | - | agirlik merkezini belirler |
+| **0** | ustk-oracle ayristirmasi (KOSUYOR) | - | agirlik merkezini belirler |
 | **1** | I. KOL lattice uretimi | coken markada F1 >= 0.30 | en very kanayan yer |
 | **2** | II. KOL ogrenilen karar | +0.03 | I with dogrudan birlesir |
-| **3** | III. KOL analitik direction | secenek -%50, recall sabit | arama uzayini kucultur |
+| **3** | III. KOL analitik direction | option -%50, recall fixed | arama uzayini kucultur |
 | **4** | IV. KOL part birimli training | +0.02 | ucuz, independent |
-| **5** | V. KOL sentetik veri | +0.03 | uzun soluklu, tabani yukseltir |
+| **5** | V. KOL sentetik data | +0.03 | uzun soluklu, tabani yukseltir |
 
 ## DURUST BEKLENTI
 
 - **I+II calisirsa** (coken markalar 0.005 -> 0.30-0.45): mikro F1 **0.45-0.55**.
   Cunku coken markalar GT'nin large kismini tutuyor (NIT %45.7, D7'de CWT %37).
 - **Ustune III+IV+V**: **0.55-0.65**.
-- **0.75**, however yukaridakilerin HEPSI calisirsa ve calisan markalarda da
+- **0.75**, however yukaridakilerin HEPSI calisirsa ve running markalarda da
   loss olmazsa. **Olasiligi low goruyorum but YOLU VAR** -- bugunku
   yaklasimin ise yolu yoktu.
 
@@ -160,7 +160,7 @@ kumulatif +0.10 birikmeden BAKILMAZ.
 
 # FAZ 0 SONUCU -- AGIRLIK MERKEZI BELIRLENDI (ve hipotezim KISMEN CURUDU)
 
-Makbuz `results/ustk_kahin_d6.json`.
+Makbuz `results/ustk_oracle_d6.json`.
 
 | brand | GT | RULE | USTK_KAHIN | CEILING | kazanc |
 |---|---|---|---|---|---|
@@ -172,7 +172,7 @@ Makbuz `results/ustk_kahin_d6.json`.
 
 ## Dort markanin DORDU kazaniyor, TOPLAM kaybediyor
 
-Hata not, MIKRO metrigin dogasi: NIT'te gercek adet up to (part basina
+Hata not, MIKRO metrigin dogasi: NIT'te gercek count up to (part basina
 ~24) prediction uretince yuzlerce YANLIS POZITIF ekleniyor. NIT kendi icinde
 kazaniyor (because FN yigini devasa, recall artisi precision kaybini yeniyor)
 but HAVUZLANMIS toplami batiriyor.
@@ -189,30 +189,30 @@ UPUN: 0.5359 -> **0.6892** yalnizca correct adedi bilmekle. Bu, tek a
 degisiklikten gelen en large kazanc (+0.1533) -- bugune up to olctugum
 each seyden large.
 
-**2. Siralamanin COKTUGU markada, adet KURTARMIYOR.**
-NIT: gercek adet verilse bile 0.0434 (ceiling 0.9147). Yani NIT'te siralama
-GERCEKTEN bozuk; threshold/adet duzeltmesi ise yaramaz.
+**2. Siralamanin COKTUGU markada, count KURTARMIYOR.**
+NIT: gercek count verilse bile 0.0434 (ceiling 0.9147). Yani NIT'te siralama
+GERCEKTEN bozuk; threshold/count duzeltmesi ise yaramaz.
 
 ## PLANIN GUNCELLENMIS AGIRLIK MERKEZI
 
 | arm | hedef kitle | dayanak |
 |---|---|---|
-| **II. KOL (ogrenilen karar/adet)** | siralamanin CALISTIGI markalar | UPUN +0.1533 MEASURED |
-| **I. KOL (lattice with yapisal uretim)** | siralamanin COKTUGU markalar | NIT'te adet kurtarmiyor -> yapi sart |
+| **II. KOL (ogrenilen karar/count)** | siralamanin CALISTIGI markalar | UPUN +0.1533 MEASURED |
+| **I. KOL (lattice with yapisal uretim)** | siralamanin COKTUGU markalar | NIT'te count kurtarmiyor -> yapi sart |
 
-**Ve kritik tasarim kisiti:** adet-kisitli secim KURESEL uygulanamaz --
+**Ve kritik tasarim kisiti:** count-kisitli secim KURESEL uygulanamaz --
 NIT'te FP patlamasi yaratir. Parca basina, modelin O PARCADA guvenilir olup
 olmadigina per uygulanmali. Yani II. KOL'un ic mekanizmasi:
 
-    confidence high -> ilk-k (k = tahmini adet)
+    confidence high -> ilk-k (k = tahmini count)
     confidence low  -> mevcut threshold kurali (muhafazakar)
 
-"Guven"in kendisi olculebilir: part ici skor ayrimi (S7'nin poz-neg olcusu
-bunun kahin surumuydu; urun surumu skor dagiliminin bicimi olabilir).
+"Guven"in kendisi olculebilir: part ici score ayrimi (S7'nin poz-neg olcusu
+bunun oracle surumuydu; urun surumu score dagiliminin bicimi olabilir).
 
 ## Sonraki adim
 
-II. KOL'u this haliyle kur: part basina regime (confidence) + adet tahmini + ilk-k.
+II. KOL'u this haliyle kur: part basina regime (confidence) + count tahmini + ilk-k.
 Kapi: havuzlanmis MIKRO'da +0.03, VE coken markalarda loss olmamasi.
 
 ---
@@ -224,9 +224,9 @@ Kapi: havuzlanmis MIKRO'da +0.03, VE coken markalarda loss olmamasi.
 S7'de "correct secenegin sira yuzdeligi 0.005" diye olctugum sey, parcadaki
 **EN IYI siralanmis** correct secenegin sirasiydi. 24 CP'li a parts
 **24.'sunun nerede oldugu hakkinda hicbir sey soylemiyor.** "Siralama iyi"
-cikarimim fazla iyimserdi.
+cikarimim excess iyimserdi.
 
-Dogru soru: **k'inci correct secenek kacinci sirada?** Ve this soruyu sorunca
+Dogru soru: **k'inci correct option kacinci sirada?** Ve this soruyu sorunca
 butun basarisizliklar tek cumleyle aciklaniyor:
 
 > **Model ILK CP'yi bulabiliyor, TEKRARLARI bulamiyor.**
@@ -249,7 +249,7 @@ Bu bilgi hicbir markadan tasinmaz -- parcanin kendisinden gelir.
 
 Bu, "24 zor markalar-arasi karar"i -> "1 markalar-arasi karar + 23 part-ici
 esleştirme"ye indirir. Model o 1 kararda already iyi (NIT parcalarinin %76'sinda
-correct a secenek ilk 50'de).
+correct a option ilk 50'de).
 
 ## Ilke KONUMLA SINIRLI DEGIL
 
@@ -260,11 +260,11 @@ Bir klemenste CP'ler yalnizca dizilişte not, HER NITELIKTE aynidir:
 | delik yaricapi | hepsi same bore capinda |
 | depth | hepsi same |
 | direction | hepsi paralel |
-| adim | sabit lattice araligi |
+| adim | fixed lattice araligi |
 | mouth bicimi | same huni profili |
 
 **Sonuc 1 -- ADET GEOMETRIDEN OKUNUR.** Bir klemensteki CP sayisi ~ B-rep'teki
-KIPSEL YARICAPLI silindir sayisi. Ust-k deneyinde +0.1533 kazandiran "adet",
+KIPSEL YARICAPLI silindir sayisi. Ust-k deneyinde +0.1533 kazandiran "count",
 large olcude OGRENMEYE GEREK OLMADAN elde edilebilir.
 
 **Sonuc 2 -- KIPSEL IMZA SUZGECI.** Parcanin kipsel yaricapina/derinligine
@@ -282,7 +282,7 @@ katalog degerine oturtmak, gurultuye karsi bedava a duzeltmedir.
 **VII.3** Kipsel imzaya uymayan adaylari kirp.
 **VII.4** En guvenli tohumdan otelemeyle uret; each uretilen konumda YONU
 YENIDEN sec (K2.1'in cokme sebebi direction kopyalamaydi).
-**VII.5 Kapi:** coken markada F1 >= 0.30, calisan markada loss YOK.
+**VII.5 Kapi:** coken markada F1 >= 0.30, running markada loss YOK.
 
 **Neden this arm digerlerinden different:** hicbir markadan bilgi tasimiyor.
 Gorulmemis brand sinavinda BOZULMASI for a reason none -- oysa bugune up to
@@ -309,16 +309,16 @@ Makbuz `results/tekrar_sondasi_d6.json`.
 
 ## "Model ilkini buluyor, tekrarlari bulamiyor" -- KANITLANDI
 
-NIT'te ILK correct secenek **18. sirada** (gayet iyi), SONUNCUSU **1065.**
-Siralama ilkten sonuncuya ~60 KAT bozuluyor; gercek adet up to secim yapilsa
+NIT'te ILK correct option **18. sirada** (gayet iyi), SONUNCUSU **1065.**
+Siralama ilkten sonuncuya ~60 KAT bozuluyor; gercek count up to secim yapilsa
 GT'nin yalnizca **%5.3'u** yakalanir.
 
 UPUN/SUPU'da ilk 0., son 5-8. sirada -- neredeyse kusursuz. **Calisan ve
-coken brand arasindaki fark TAM OLARAK BUDUR.**
+coken brand arasindaki diff TAM OLARAK BUDUR.**
 
-Bu same zamanda ust-k deneyindeki celiskiyi de acikliyor: UPUN'da adet vermek
+Bu same zamanda ust-k deneyindeki celiskiyi de acikliyor: UPUN'da count vermek
 +0.1533 kazandiriyor because siralama already correct; NIT'te kazandirmiyor because
-24. correct secenek 1065. sirada -- ilk 24'e hicbir zaman giremez.
+24. correct option 1065. sirada -- ilk 24'e hicbir zaman giremez.
 
 ## Yayilim kolunun tavani ve aritmetigi
 
@@ -341,7 +341,7 @@ residual varsayim not measurement:
  * loss yeri conclusive (tekrarlar, ilk not)
  * tavani olculu (NIT 0.557, alt sinir)
  * mekanizmasi brand-independent (parcanin kendi otelemesi)
- * bugune up to dusen each kolun dustugu yerde (gorulmemis brand) bozulmasi
+ * bugune up to dusen each kolun dustugu yerde (unseen brand) bozulmasi
    for YAPISAL a reason none
 
 **Adim degerleri (10.5 / 13.0 / 12.0 / 21.0 mm) standart klemens
@@ -353,7 +353,7 @@ sinanmali; otherwise uretilen izgara each ikinci CP'yi atlar.
 
 # VII.0 SONUCU -- 0.70 YAPISAL OLARAK MUMKUN (ceiling not, ULASIM sorunu)
 
-Makbuz `results/coklu_kafes.json`. **Model none, yalnizca GT geometrisi.**
+Makbuz `results/coklu_lattice.json`. **Model none, yalnizca GT geometrisi.**
 
 | brand | 1 lattice | **2 lattice** | 3 lattice | adim1 | F1 TAVANI |
 |---|---|---|---|---|---|
@@ -408,9 +408,9 @@ Kapsama ratio duserse, dusus miktari "ulasim acigi"nin dogrudan olcusudur.
 
 # VII.2 SONUCU -- ADET GEOMETRIDEN OKUNAMIYOR (this haliyle)
 
-Makbuz `results/adet_geometri.json` (397 part, model none).
+Makbuz `results/count_geometri.json` (397 part, model none).
 
-| brand | gercek adet | n_kipsel | median error | isabet(<=1) |
+| brand | gercek count | n_kipsel | median error | isabet(<=1) |
 |---|---|---|---|---|
 | NIT | 24.4 | 104.5 | 75 | 0.00 |
 | SUPU | 3.3 | 82.9 | 52 | 0.00 |
@@ -428,8 +428,8 @@ tutuyor. "Kipsel yaricap = CP yaricapi" varsayimi YANLIS.
 silindirleri AGZI OLAN (disaridan erisilebilir) olanlarla sinirlamak
 (`mouth_a`/`mouth_b` alanlari onbellekte VAR). Ayri madde as eklendi.
 
-**Onemli sonuc:** ust-k deneyinin gosterdigi +0.1533'luk adet kazanci
-GERCEKTIR, but adet KOLAY elde edilmiyor. Adet tahmini residual ogrenmeli a
+**Onemli sonuc:** ust-k deneyinin gosterdigi +0.1533'luk count kazanci
+GERCEKTIR, but count KOLAY elde edilmiyor. Adet tahmini residual ogrenmeli a
 alt problem (part ozniteliklerinden regresyon) ya da lattice adimindan
 turetme (body uzunlugu / adim) as ele alinmali.
 
@@ -437,7 +437,7 @@ turetme (body uzunlugu / adim) as ele alinmali.
 
 # VII.0m -- KAFES GT OLMADAN BULUNABILIYOR (mesh pool + urun kutusu)
 
-Makbuz `results/kafes_v2_d6.json`. Arama olcutu **GT'SIZ** (izgaraya dusen
+Makbuz `results/lattice_v2_d6.json`. Arama olcutu **GT'SIZ** (izgaraya dusen
 ADAY sayisi x doluluk); GT yalnizca degerlendirmede.
 
 | brand | 1k | 2k | 3k | 4k | 5k | **6 lattice** | KAHIN | acik |
@@ -463,9 +463,9 @@ Uc kusurun ucu de duzeltildikten after arm CANLI:
 | **izgaradan TAM ADET up to uret** | **0.5876** |
 | adedin 1.5 fold | 0.4701 |
 | 2 fold | 0.3917 |
-| 3 fold (kotu adet kontrolu) | 0.2938 |
+| 3 fold (kotu count kontrolu) | 0.2938 |
 
-**Adet kontrolu berbat olsa bile (3x fazla uretim) bugunku tabanin USTUNDE.**
+**Adet kontrolu berbat olsa bile (3x excess uretim) bugunku tabanin USTUNDE.**
 
 ## KRITIK EKSIK -- direction hesaba KATILMADI
 
@@ -474,7 +474,7 @@ Robot metrigi also **ISARETLI ACI <= 10 derece** istiyor. Yani yukaridaki
 sayilar, uretilen each konumda YONUN DE correct secilebildigini VARSAYIYOR.
 
 Bu tam as VII.4 maddesi ve K2.1'in coktugu yer: onceki deneme direction
-KOPYALAMIS ve robot metrigi -0.0100 dusmustu (tespit +0.0126 iken).
+KOPYALAMIS ve robot metrigi -0.0100 dusmustu (detection +0.0126 iken).
 
 **Sonraki belirleyici measurement:** uretilen konumlarda direction-bankasi secenekleri
 arasindan direction YENIDEN secilirse, kapsamanin ne kadari ISARETLI ACI kutusundan
@@ -484,7 +484,7 @@ da gecer? O number gelmeden yukaridaki F1 tahminleri VAAT DEGILDIR.
 
 # VII.4 SONUCU -- YON KURTARILIYOR (arm CANLI, but SUZGEC sart)
 
-Makbuz `results/kafes_yon_d6.json`. TAM kabul kutusu: lateral <=2mm, axial
+Makbuz `results/lattice_direction_d6.json`. TAM kabul kutusu: lateral <=2mm, axial
 <=40mm, **ISARETLI aci <=10 derece**.
 
 | brand | only KONUM | **KONUM+YON** | direction kaybi | uret/part |
@@ -504,7 +504,7 @@ loss kuculuyor.
 |---|---|
 | bugun | 0.1789 |
 | **suzgecsiz** (179 nokta/part yayinla) | **0.0845** |
-| adet up to uret (n=k) | **0.4769** |
+| count up to uret (n=k) | **0.4769** |
 | 2 fold uret (n=2k) | 0.3179 |
 
 **Kritik:** ham haliyle arm bugunku tabandan KOTU (0.0845 < 0.1789), because
@@ -528,10 +528,10 @@ Kol however COKEN markalarda devreye girmeli -- this already VII.5 kapisinin sar
    noktasinda GERCEKTEN delik present mi (isin/mesh dogrulamasi, VII.0l),
    (b) kipsel imza uyumu (VII.1), (c) mevcut model skoru.
 2. **ADET (k)**: n=k senaryosu adedin bilindigini varsayiyor. VII.2 curudu
-   (silindir sayimi); kalan yollar lattice adimindan turetme (VII.2c) ve
+   (silindir sayimi); remaining yollar lattice adimindan turetme (VII.2c) ve
    ogrenmeli regresyon (VII.2d).
 3. **REJIM KAPISI**: arm yalnizca coken markalarda. Ayirt edici olcu S7'de
-   present (poz-neg skor ayrimi) but urun surumu gerekiyor.
+   present (poz-neg score ayrimi) but urun surumu gerekiyor.
 
 ---
 
@@ -539,7 +539,7 @@ Kol however COKEN markalarda devreye girmeli -- this already VII.5 kapisinin sar
 
 ## Suzgec olcumu (uretilen noktalari model skoruyla sirala, ilk k)
 
-| brand | bugun | KOL (ilk k) | KAHIN direction | arm/kahin |
+| brand | bugun | KOL (ilk k) | KAHIN direction | arm/oracle |
 |---|---|---|---|---|
 | **NIT** | 0.009 | **0.077** | 0.527 | **%15** |
 | MOR | 0.178 | 0.120 | 0.495 | %24 |
@@ -561,7 +561,7 @@ kapsama 0.676; direction KAHIN gibi secilirse 0.527.
 0.122 (kipsel direction) -> 0.077 (ilk k). Yani **correct direction MEVCUT but model onu
 SECEMIYOR.**
 
-Bu, S7'nin bulgusunun aynisi: NIT'te poz-neg skor ayrimi 0.05. Yani spread
+Bu, S7'nin bulgusunun aynisi: NIT'te poz-neg score ayrimi 0.05. Yani spread
 arm konum sorununu cozuyor, **but direction secimi same zayif skora geri
 bagimli** ve orada tikaniyor.
 
@@ -574,7 +574,7 @@ cikardi but MOR'u 0.221 -> 0.139 dusurdu. Net etki sinirli.
 - Kol **kuresel uygulanamaz** (0.1129 < 0.1789).
 - **Rejim kapili** haliyle **+0.0394** getiriyor (0.1789 -> 0.2184). Bu
   gercek but mutevazi a kazanc.
-- Kolun TAVANI (0.527 NIT) with GERCEKLESENI (0.077) arasindaki 7 fold fark,
+- Kolun TAVANI (0.527 NIT) with GERCEKLESENI (0.077) arasindaki 7 fold diff,
   tamamen YON SECIMINDEN geliyor.
 
 ## Bundan sonrasi
@@ -596,7 +596,7 @@ direction secimi.**
 
 # III. KOL SONUCU -- YON HESAPLANABILIR, AMA ISARET MARKAYA GORE DEGISIYOR
 
-Makbuz `results/analitik_yon.json`. B-rep mouth + ANALITIK silindir axis.
+Makbuz `results/analitik_direction.json`. B-rep mouth + ANALITIK silindir axis.
 
 | brand | KONUM | +axis (ISARETSIZ) | merkez->mouth | mouth->merkez |
 |---|---|---|---|---|
@@ -607,9 +607,9 @@ Makbuz `results/analitik_yon.json`. B-rep mouth + ANALITIK silindir axis.
 
 ## Bulgu 1 -- YON PROBLEMI TEK BIR BITE INIYOR
 
-Analitik axis ZATEN correct: unsigned ceiling 0.612-0.793. Geriye kalan tek
-karar **part basina BIR ISARET BITI**. Bu, secenek basina direction secmekten
-(bugun 24 secenek arasindan) fold fold kolay ve model skoruyla oylanabilir.
+Analitik axis ZATEN correct: unsigned ceiling 0.612-0.793. Geriye remaining tek
+karar **part basina BIR ISARET BITI**. Bu, option basina direction secmekten
+(bugun 24 option arasindan) fold fold kolay ve model skoruyla oylanabilir.
 
 Kiyas: spread kolunda direction secimi 0.527 -> 0.077 dusuruyordu. Burada correct
 isaretle 0.61-0.79 dogrudan elde ediliyor.
@@ -627,7 +627,7 @@ oldugu arastirilmali** -- eger (c) ise D7 dahil butun direction olcumleri etkile
 ## Bulgu 3 -- NIT'te B-rep AGIZLARI CP'lerin UZERINDE DEGIL
 
 KONUM 0.011. Yani analitik direction NIT'e HIC yardim edemez; oradaki darbogaz
-temsil (B-rep mouth none), direction not. NIT for tek yol mesh tabanli kalir.
+temsil (B-rep mouth none), direction not. NIT for tek path mesh tabanli kalir.
 
 Bu, same acigin UCUNCU independent olcumu (more before: GT'ye oklit median
 2.44mm; lattice cipasi 0.099).
@@ -644,7 +644,7 @@ cerceve / lattice tutarliligi) ve uctan uca olc.
 
 # GT YON SOZLESMESI COZULDU -- sign YEREL a ozellik
 
-Makbuz `results/gt_yon_sozlesmesi.json`. Olcu: GT direction, parcanin agirlik
+Makbuz `results/gt_direction_sozlesmesi.json`. Olcu: GT direction, parcanin agirlik
 merkezinden DISARI mi bakiyor?
 
 | brand | GT | disari ratio | **part ici baskinlik** |
@@ -662,7 +662,7 @@ merkezinden DISARI mi bakiyor?
 ## Uc olgu
 
 1. **Cogu markada sign PARCA ICINDE TUTARLI** (baskinlik 0.88-1.00).
-   "Parca basina a bit" fikri cogunluk for gecerli.
+   "Parca basina a bit" fikri cogunluk for valid.
 2. **Yon MARKAYA per degisiyor:** NIT tamamen DISARI (1.000), SE/EFX
    agirlikla ICERI (0.167/0.148). Kuresel sozlesme gercekten YOK.
 3. **UPUN ve DIN part ICINDE BILE karisik** (0.597/0.540). Fiziksel as
@@ -689,7 +689,7 @@ uzerinde none (KONUM 0.011). Bu, same acigin DORDUNCU independent olcumu.
 
 # YON, MESH GEOMETRISINDEN OKUNUYOR -- 0.70'i menzile sokan bulgu
 
-Makbuz `results/mesh_yon.json`. Model none, B-rep none; only mesh.
+Makbuz `results/mesh_direction.json`. Model none, B-rep none; only mesh.
 
 | brand | KONUM | **tepe normali** | komsu ort. | kipsel | duzlem |
 |---|---|---|---|---|---|
@@ -710,12 +710,12 @@ sinyal TEK TEPENIN kendi normali -- mean almak zarar veriyor.
 
 | | bugun | mesh normali |
 |---|---|---|
-| secenek / part | 4857 | **~350** |
+| option / part | 4857 | **~350** |
 | direction / candidate | 24 | **1** |
 | NIT yonlu recall | 0.8429 | 0.800 |
 
 Secicinin isi:
-* bugun : 4857 secenek icinden ~24 dogruyu bul -> pozitif yogunlugu **1/202**
+* bugun : 4857 option icinden ~24 dogruyu bul -> pozitif yogunlugu **1/202**
 * yeni  :  350 candidate icinden ~24 dogruyu bul   -> pozitif yogunlugu **1/15**
 
 **Pozitif yogunlugu 13.5 KAT artiyor, recall bedeli yalnizca 0.04.**
@@ -732,7 +732,7 @@ mantik, therefore 0.8429 with kiyaslanabilir). Ama axial tolerans 40mm
 oldugu for kutu UZUN a silindir; icinde very tepe present. Bu number a
 TAVANDIR -- selector o tepeyi SECEBILMELI.
 
-Yine de kritik fark su: bugun selector hem KONUMU hem YONU secmek zorunda;
+Yine de kritik diff su: bugun selector hem KONUMU hem YONU secmek zorunda;
 mesh normaliyle direction DECISION OLMAKTAN CIKIYOR, geriye yalnizca konum secimi
 kaliyor.
 
@@ -741,15 +741,15 @@ kaliyor.
 Yon-bankasini KALDIR, each adaya TEK direction ver (kendi mesh normali), kademe2'yi
 tek degiskenli kos. Kapi: **uctan uca robot F1 >= bugunku 0.3124.** Recall
 bedeli 0.04 iken pozitif yogunlugu 13.5 fold artiyorsa precision very more
-fazla artmali.
+excess artmali.
 
 ---
 
 # MESH NORMALI MEKANIZMASI OLDU -- ve 0.800 tahminim SISIKTI
 
-Makbuz `results/aday_normal_tavan.json`.
+Makbuz `results/candidate_normal_ceiling.json`.
 
-| brand | KONUM | **candidate's KENDI normali** | banka (24 secenek) |
+| brand | KONUM | **candidate's KENDI normali** | banka (24 option) |
 |---|---|---|---|
 | NIT | 0.843 | **0.029** | 0.843 |
 | SUPU | 0.951 | 0.631 | 0.921 |

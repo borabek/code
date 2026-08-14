@@ -3,11 +3,11 @@
 ## Neden this belge present
 
 Yon yelpazesi kolunu 64 yonlu a sondayla olcup **OLU** ilan ettim
-(NIT'te +0.0000 recall). Sonra fark ettim ki 64 yonun kure uzerindeki komsuluk
+(NIT'te +0.0000 recall). Sonra diff ettim ki 64 yonun kure uzerindeki komsuluk
 araligi ~25 derece, measurement toleransi ise 10 derece — **probe, aradigi etkiyi
 fiziksel as olcemezdi.** 256 yonle same arm NIT'te **+0.0676 recall** verdi.
 
-Yani verdict kolun not, SONDANIN kusuruydu. Bu, hafizada "CLOSED" diye duran
+Yani verdict kolun not, SONDANIN kusuruydu. Bu, hafizada "CLOSED" diye stopped
 diger kollar for de sorulmasi gereken a soru aciyor.
 
 ## Kapatma karari vermeden before sorulacak uc soru
@@ -29,7 +29,7 @@ listesidir; each biri before ucuz a ceiling sondasiyla yoklanir.
 
 | arm | kapanma gerekcesi | supheli mi | why |
 |---|---|---|---|
-| K2.1 periyodiklik | tespit +0.0126 but robot -0.0100 | **EVET** | direction KAYNAKTAN KOPYALANIYORDU; direction bankasi varken tekrar denenmeli — `lattice.py` + `order_stamp.py` bunun for yazildi |
+| K2.1 periyodiklik | detection +0.0126 but robot -0.0100 | **EVET** | direction KAYNAKTAN KOPYALANIYORDU; direction bankasi varken tekrar denenmeli — `lattice.py` + `order_stamp.py` bunun for yazildi |
 | mesh tepeleri pool | "uc independent olcumde ZARAR" | **CLOSED DEGIL** | this oturumda ACILDI: direction bankasi otherwise mesh only FP uretiyor; ikisi birlikte konum recall'u 0.54 -> 0.98 |
 | axis boyu ornekleme | "tavani very az oynatti, 11x candidate" | **EVET** | measurement YON BANKASI OLMADAN yapilmisti; bugun candidate sayisi regime kapisiyla yonetiliyor |
 | ensemble (g7+g10) | birlesim -0.0068 | belki | tek measurement, confidence araligi none |
@@ -37,7 +37,7 @@ listesidir; each biri before ucuz a ceiling sondasiyla yoklanir.
 | few-shot gate | NULL | belki | ornek sayisi very kucuktu |
 | TEL-B kanal profili | OLU | **EVET** | yelpazeyle same aile (isin tabanli); cozunurluk kontrolu yapilmadi |
 | B-rep snap | DEAD | hayir | kok why bulunmustu (yaricap/yay hatasi) |
-| GEO 0.70 | kalici kapali | hayir | uc independent gate |
+| GEO 0.70 | persistent kapali | hayir | uc independent gate |
 
 ## Kural
 

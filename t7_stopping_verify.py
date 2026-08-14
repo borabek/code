@@ -128,7 +128,7 @@ def main ():
 
     baseline =satirlar (lambda p :p ["su_K"])
     print (f"TABAN {f1w (baseline ):.4f}\n")
-    print (f"{'seed':<8}{'tespit':>9}{'fark':>9}")
+    print (f"{'seed':<8}{'detection':>9}{'diff':>9}")
     farklar ,kollar =[],[]
     for seed in (0 ,1 ,2 ,3 ,4 ):
         oof =kur (seed )

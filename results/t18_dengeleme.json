@@ -1,22 +1,22 @@
 {
- "not": "SINIF DENGELEME measured ve ALINMADI. Aday duzeyi (t17) UC eksende birden kazaniyordu (tanidik +0.0011, PXC +0.010, WEI +0.021) but UCTAN UCA only WEI'de kazandi.",
+ "not": "SINIF DENGELEME measured ve ALINMADI. Aday duzeyi (t17) UC eksende birden kazaniyordu (familiar +0.0011, PXC +0.010, WEI +0.021) but UCTAN UCA only WEI'de kazandi.",
  "uctan_uca": {
-  "agirlik yok (mevcut)": {
-   "tanidik": 0.741,
+  "agirlik none (mevcut)": {
+   "familiar": 0.741,
    "PXC_disarida": 0.7203,
    "WEI_disarida": 0.4832
   },
   "balanced_subsample": {
-   "tanidik": 0.7207,
+   "familiar": 0.7207,
    "PXC_disarida": 0.7124,
    "WEI_disarida": 0.4935
   },
   "balanced": {
-   "tanidik": 0.6982,
+   "familiar": 0.6982,
    "PXC_disarida": 0.6629,
    "WEI_disarida": 0.5042
   }
  },
- "kill": "tanidik >= -0.01 VE HER IKI manufacturer-disi bolmede de gecmeli -> IKISI DE GECMEDI (tanidik -0.020/-0.043, PXC -0.008/-0.057)",
- "ders": "Aday duzeyi this gece UCUNCU kez yaniltti (EK blogu, goreli esigin bedeli, sinif dengeleme). Aday duzeyi a ELEME kapisidir, karar kapisi DEGIL."
+ "kill": "familiar >= -0.01 VE HER IKI manufacturer-disi bolmede de gecmeli -> IKISI DE GECMEDI (familiar -0.020/-0.043, PXC -0.008/-0.057)",
+ "ders": "Aday duzeyi this night UCUNCU kez yaniltti (EK blogu, goreli esigin bedeli, sinif dengeleme). Aday duzeyi a ELEME kapisidir, karar kapisi DEGIL."
 }

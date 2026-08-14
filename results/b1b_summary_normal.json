@@ -1,0 +1,71 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "0bc837c9dde1199e",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "e568da8fa71cdc57",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "sonuc": {
+  "TABAN (sign duzeltmeli)": {
+   "robot": 0.30703125,
+   "detection": 0.480859375,
+   "makro": 0.31341492426902523,
+   "en_kotu": 0.0,
+   "brand": {
+    "CCD": 0.5617977528089888,
+    "KLM": 0.1572052401746725,
+    "A-B": 0.48021108179419525,
+    "EFX": 0.20710059171597633,
+    "WIE": 0.5787965616045845,
+    "CWT": 0.0364656381486676,
+    "DIN": 0.48184818481848185,
+    "WEG": 0.04743083003952569,
+    "CEM": 0.18681318681318682,
+    "DEG": 0.48484848484848486,
+    "ELMEX": 0.5384615384615384,
+    "C3": 0.0
+   }
+  },
+  "+OZET NORMAL": {
+   "robot": 0.308203125,
+   "detection": 0.48125,
+   "makro": 0.3154602493635244,
+   "en_kotu": 0.0,
+   "brand": {
+    "CCD": 0.5617977528089888,
+    "KLM": 0.16593886462882096,
+    "A-B": 0.48021108179419525,
+    "EFX": 0.20710059171597633,
+    "WIE": 0.5787965616045845,
+    "CWT": 0.0364656381486676,
+    "DIN": 0.48184818481848185,
+    "WEG": 0.06324110671936758,
+    "CEM": 0.18681318681318682,
+    "DEG": 0.48484848484848486,
+    "ELMEX": 0.5384615384615384,
+    "C3": 0.0
+   }
+  }
+ },
+ "diff": 0.0011718750000000444,
+ "not": "Mesh normalleri OZETLENDI (agirlikli/pca/en-high). Taban ISARET DUZELTMELI arm. D7 brand-disi, TAM ZINCIR."
+}

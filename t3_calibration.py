@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 """T3 TEDAVI-1: SABIT threshold instead of DAGILIMA UYARLANAN threshold.
 
-T2 OLCTU: manufacturer-disi cokusun kalibrasyon payi manufacturer 0'da -0.0543, manufacturer 1'de -0.1949.
-Kanit: manufacturer 1'de model adaylarin %10.3'une pozitif diyor, real %24.1 -- sabit 0.40 that
+T2 OLCTU: manufacturer-disi cokusun calibration payi manufacturer 0'da -0.0543, manufacturer 1'de -0.1949.
+Kanit: manufacturer 1'de model adaylarin %10.3'une pozitif diyor, real %24.1 -- fixed 0.40 that
 dagilimda very high kaliyor (orada most iyi threshold 0.15).
 
 ADAY KURALLAR (none of them new ureticinin istatistigini BILMIYOR):
-  sabit        : mevcut urun (threshold cp_config'den)
+  fixed        : mevcut urun (threshold cp_config'den)
   ratio         : esigi, EGITIM korpusunun pozitif oranini yakalayacak sekilde test dagiliminda
-                 quantile with sec (test etiketlerini KULLANMAZ, only skor dagilimini)
+                 quantile with sec (test etiketlerini KULLANMAZ, only score dagilimini)
   parca_orani  : each PARCA inside, that parcanin most high skorunun f katindan buyukleri tut
-  parca_z      : each PARCA inside skorlari z-skorla, sabit z esigi uygula
+  parca_z      : each PARCA inside skorlari z-skorla, fixed z esigi uygula
 
-KILL (onceden yazili): a rule, HER IKI manufacturer-disi bolmede de sabit esigi gecmezse
-ALINMAZ. Tek bolmede kazanip otekinde kaybeden rule kalibrasyon not, sanstir.
+KILL (onceden yazili): a rule, HER IKI manufacturer-disi bolmede de fixed esigi gecmezse
+ALINMAZ. Tek bolmede kazanip otekinde kaybeden rule calibration not, sanstir.
 """
 import json 
 import numpy as np 
@@ -45,7 +45,7 @@ def main ():
         random_state =0 ).fit (X [~te ],y [~te ]).predict_proba (X [te ])[:,1 ]
         yy =y [te ];pp =pids [te ]
         kur ={
-        "sabit (mevcut)":s >=THR ,
+        "fixed (mevcut)":s >=THR ,
         "ratio-esleme":s >=np .quantile (s ,1.0 -egit_oran ),
         "parca_orani 0.5":parca_kural (s ,pp ,lambda v :v >=0.5 *max (v .max (),1e-9 )),
         "parca_orani 0.6":parca_kural (s ,pp ,lambda v :v >=0.6 *max (v .max (),1e-9 )),
@@ -61,14 +61,14 @@ def main ():
         print ()
 
     U =sorted (set (mfg ))
-    baseline =out ["sabit (mevcut)"]
+    baseline =out ["fixed (mevcut)"]
     print (f"{'rule':<18}"+"".join (f"{'manufacturer '+u :>12}"for u in U )+f"{'EN KOTU':>10}{'karar':>10}")
     for ad ,v in out .items ():
         dl =[v [u ]-baseline [u ]for u in U ]
         gecti =all (x >0 for x in dl )
         print (f"{ad :<18}"+"".join (f"{v [u ]:>12.4f}"for u in U )
         +f"{min (v .values ()):>10.4f}"
-        +f"{('GECTI'if gecti and ad !='sabit (mevcut)'else '-'):>10}")
+        +f"{('GECTI'if gecti and ad !='fixed (mevcut)'else '-'):>10}")
     print ("\nKILL: a rule HER IKI bolmede de sabiti gecmezse ALINMAZ.")
     json .dump (out ,open ("results/t3_calibration.json","w"),indent =1 )
     print ("receipt -> results/t3_calibration.json")

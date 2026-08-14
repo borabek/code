@@ -1,29 +1,29 @@
 # -*- coding: utf-8 -*-
 """YENI-8 -- KONUM TOPLAMA: 24 direction secenegi = 24 PIYANGO BILETI
 
-DIAGNOSIS (results/aday_auc_d6.json). Aday duzeyinde secicinin AUC'si iyi
+DIAGNOSIS (results/candidate_auc_d6.json). Aday duzeyinde secicinin AUC'si iyi
 (NIT 0.8854, UPUN 0.9877). Bagliyan sey AUC not, ADAY/GT orani:
-  NIT  6322 secenek / 24 GT   -> gereken AUC 0.9968
-  MOR 11555 secenek /  9 GT   -> gereken AUC 0.9997
+  NIT  6322 option / 24 GT   -> gereken AUC 0.9968
+  MOR 11555 option /  9 GT   -> gereken AUC 0.9997
 Ama this 6322 count KONUM count not: each konum MAX_SEC=24 direction secenegi
 uretiyor, i.e. ~260 konum x 24 direction.
 
 MEKANIZMA. Bir konumu "most high skorlu secenegiyle" siralamak, each YANLIS
 konuma 24 piyango bileti vermektir. Yanlis a konumun 24 denemeden birinde
-high skor kapma olasiligi, correct konumun single real sinyalini bastirir.
-Bu klasik coklu-karsilastirma sismesidir and MAX_SEC 12->24'un tavani acip
+high score kapma olasiligi, correct konumun single real sinyalini bastirir.
+Bu klasik coklu-comparison sismesidir and MAX_SEC 12->24'un tavani acip
 gerceklesen F1'i acmamasini da aciklar.
 
 COZUM. Konum skorunu MAX with not, sisme yapmayan a toplamayla kur.
 Yanlis konumda skorlar rastgele dagilir (high max, low median);
-correct konumda BIRCOK secenek makul skor takes (high median).
+correct konumda BIRCOK option makul score takes (high median).
 
 KOLLAR (konum siralamasi; direction always that konumun most iyi secenegi):
   max        : bugunku
   median    : medyan -- piyangoyu tamamen sondurur
   ort        : mean
   q75        : 75. yuzdelik -- max with median arasi
-  say        : skoru 0.5 ustunde which is secenek SAYISI
+  say        : skoru 0.5 ustunde which is option SAYISI
   maxxort    : max * mean (gucbirligi)
   ust2       : most high IKI secenegin ortalamasi
 
@@ -40,7 +40,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -69,12 +69,12 @@ def temel (d ):
 
 
 def konum_skoru (s ,idx ,arm ):
-    """each BENZERSIZ konum for (skor, that konumun most iyi secenek indisi)."""
+    """each BENZERSIZ konum for (score, that konumun most iyi option indisi)."""
     rank_ =np .argsort (idx ,kind ="stable")
     idx_s ,s_s =idx [rank_ ],s [rank_ ]
     bound_ =np .flatnonzero (np .diff (idx_s ))+1 
     parts =np .split (np .arange (len (idx_s )),bound_ )
-    konum ,skor ,en_iyi =[],[],[]
+    konum ,score ,en_iyi =[],[],[]
     for p in parts :
         q =s_s [p ]
         if arm =="max":
@@ -94,9 +94,9 @@ def konum_skoru (s ,idx ,arm ):
         else :
             raise ValueError (arm )
         konum .append (idx_s [p [0 ]])
-        skor .append (float (v ))
+        score .append (float (v ))
         en_iyi .append (int (rank_ [p [int (np .argmax (q ))]]))
-    return (np .asarray (konum ,int ),np .asarray (skor ,float ),
+    return (np .asarray (konum ,int ),np .asarray (score ,float ),
     np .asarray (en_iyi ,int ))
 
 
@@ -104,7 +104,7 @@ def konum_dogru (y ,idx ):
     """each BENZERSIZ konum (konum_skoru with AYNI sirada) correct mu.
 
     Dongusuz: konum_skoru like idx'e according to siralayip parcalara boler.
-    Naif hali (each konum for `y[idx == ki]`) 6322 secenek x 260 konum x
+    Naif hali (each konum for `y[idx == ki]`) 6322 option x 260 konum x
     7 arm x 468 part = milyarlarca islem ederdi; also kola bagli
     olmadigi for part basina BIR times is computed.
     """
@@ -182,7 +182,7 @@ def main ():
         YD =np .asarray (d ["YD"],float )
         s =np .asarray (s ,float )
         y =d ["y"]
-        dogru =konum_dogru (y ,idx )
+        correct =konum_dogru (y ,idx )
         for arm in KOLLAR :
             kon ,ks ,en_iyi =konum_skoru (s ,idx ,arm )
             # OLCEK DUZELTMESI. Ilk kosuda threshold izgarasi (0.20-0.95) TUM
@@ -193,11 +193,11 @@ def main ():
             # kollar same olcege gelir and threshold anlamli becomes.
             if os .environ .get ("KT_NORM","1")=="1"and len (ks )>1 :
                 ks =np .argsort (np .argsort (ks ))/(len (ks )-1.0 )
-            assert len (dogru )==len (kon ),"konum sirasi tutmuyor"
+            assert len (correct )==len (kon ),"konum sirasi tutmuyor"
             # konum duzeyinde first-k dogruluk orani
             rank_ =np .argsort (-ks )
             k =max (len (G ),1 )
-            ustk [d ["mfg"]][arm ].append (float (dogru [rank_ [:k ]].sum ())/k )
+            ustk [d ["mfg"]][arm ].append (float (correct [rank_ [:k ]].sum ())/k )
             for e in ESIKLER :
                 Ps ,Ds =sec_esik (P [kon ],YD ,idx ,ks ,en_iyi ,e )
                 tp ,fp ,fn =match_hungarian (Ps ,Ds ,G ,Gd ,d ["diag"],K .YANAL ,
@@ -235,10 +235,10 @@ def main ():
         f =en [arm ]-en ["max"]
         print (f"  {arm :<10}{en [arm ]:.4f}   {f :+.4f}"
         +("  <- KAPI GECTI"if f >=0.01 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"en_iyi":en ,
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"en_iyi":en ,
     "ustk":{m_ :{k :float (np .mean (ustk [m_ ][k ]))for k in KOLLAR }
     for m_ in ustk },
-    "not":"KONUM skoru toplama kurali. max = bugunku (each yanlis "
+    "not":"KONUM skoru toplama kurali. max = bugunku (each wrong "
     "konuma 24 piyango bileti). D7'ye BAKILMADI."},
     open (f"results/konum_toplama_{KUME }.json","w"),indent =1 )
     print (f"receipt -> results/konum_toplama_{KUME }.json")

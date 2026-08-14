@@ -1,0 +1,19 @@
+{
+ "not": "REJIM-KOSULLU GORELI ORAN measured ve ALINMADI. Teknik as kill'i gecti but kazanc +0.0012..+0.0018 = night boyunca measured_path noise tabaninin ONDA BIRI.",
+ "en_iyiler": {
+  "0.5/0.4": {
+   "familiar": -0.0019,
+   "en_kotu_uretici": 0.0012
+  },
+  "0.5/0.35": {
+   "familiar": -0.0029,
+   "en_kotu_uretici": 0.0018
+  },
+  "0.55/0.4": {
+   "familiar": -0.0063,
+   "en_kotu_uretici": 0.006,
+   "not": "familiar butcesini asti"
+  }
+ },
+ "ders": "Kill olcutum ISARET istemis, BUYUKLUK istememisti. +0.0018 a kazanc not; bundan after kill'lere magnitude yazilacak (orn. >= +0.01)."
+}

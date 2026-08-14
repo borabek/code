@@ -68,4 +68,4 @@ if zc .mean ()<fc .mean ()-0.05 :
     print (f"  -> ACIKLIK MESH'TE YOK/ZAYIF -> etiket kurtaramaz -> HOLE-PRESERVING REMESH sart")
 else :
     print (f"  zero-recall ~ found (konkavlik benzer)")
-    print (f"  -> ACIKLIK VAR ama model firmuyor -> TRAINING/MODEL sorunu (etiket yaklasimi/kapasite)")
+    print (f"  -> ACIKLIK VAR but model firmuyor -> TRAINING/MODEL sorunu (etiket yaklasimi/kapasite)")

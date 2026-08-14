@@ -1,0 +1,75 @@
+{
+ "damga": {
+  "kod": {
+   "robot_cp.py": "81bced9a2b2a5466",
+   "wire_gate.py": "b67507021092f07a",
+   "cp_openings.py": "d6bc011bd794a5c6",
+   "product_chain.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
+   "p5v2_secenek.py": "f5f3fa1817568f71",
+   "p5v2_egit.py": "47fdec33f407f9d2",
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
+  },
+  "model": {
+   "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
+   "results/wire_gate_v7.pkl": "00161e0f415d61e5",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
+   "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
+   "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
+  },
+  "config": {
+   "cp_config.json": "5e84bd141b4e0e61",
+   "results/metric_dondurulmus.json": "884f23faace37573"
+  },
+  "python": "3.12.10"
+ },
+ "cluster": "d6",
+ "brand": {
+  "NIT": {
+   "bugunku": 0.26595744680851063,
+   "eksen_skor": 0.26677577741407527,
+   "eksen_disari": 0.26677577741407527,
+   "eksen_dis_yer": 0.26677577741407527,
+   "parca_eksen": 0.39361702127659576,
+   "oracle": 0.8428805237315876,
+   "gt": 1222,
+   "kip_imzali": 2.0,
+   "kip_eksen": 1.0
+  },
+  "SUPU": {
+   "bugunku": 0.7071823204419889,
+   "eksen_skor": 0.714548802946593,
+   "eksen_disari": 0.7237569060773481,
+   "eksen_dis_yer": 0.6740331491712708,
+   "parca_eksen": 0.6353591160220995,
+   "oracle": 0.9208103130755064,
+   "gt": 543,
+   "kip_imzali": 1.0,
+   "kip_eksen": 1.0
+  },
+  "UPUN": {
+   "bugunku": 0.8801089918256131,
+   "eksen_skor": 0.8528610354223434,
+   "eksen_disari": 0.8337874659400545,
+   "eksen_dis_yer": 0.7057220708446866,
+   "parca_eksen": 0.8501362397820164,
+   "oracle": 0.9618528610354223,
+   "gt": 367,
+   "kip_imzali": 1.0,
+   "kip_eksen": 1.0
+  },
+  "MOR": {
+   "bugunku": 0.45528455284552843,
+   "eksen_skor": 0.4634146341463415,
+   "eksen_disari": 0.4796747967479675,
+   "eksen_dis_yer": 0.4349593495934959,
+   "parca_eksen": 0.4105691056910569,
+   "oracle": 0.9349593495934959,
+   "gt": 246,
+   "kip_imzali": 2.0,
+   "kip_eksen": 1.0
+  }
+ },
+ "not": "Isaretsiz axis + disari isareti. GT KONUMUNDA, direction yalitildi. kip+- = GT yonlerinin signed kip sayisi, kipEks = unsigned. D7'ye BAKILMADI."
+}

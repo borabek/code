@@ -58,11 +58,11 @@ def main ():
     pids =[x .strip ()for x in io .open (LISTE ,encoding ="utf-8")
     if x .strip ()]
 
-    top ={k :[0 ,0 ,0 ]for k in ("tespit","rob","rbi")}
+    top ={k :[0 ,0 ,0 ]for k in ("detection","rob","rbi")}
     satirlar =[]
     for pid in pids :
         if pid not in STEP or pid not in kay :
-            print (f"  {pid }: STEP ya da GT yok -- ATLANDI")
+            print (f"  {pid }: STEP ya da GT none -- ATLANDI")
             continue 
         r =kay [pid ]
         G =np .asarray (r ["G"],float ).reshape (-1 ,3 )
@@ -77,7 +77,7 @@ def main ():
         for c in cps :
             tier [c .get ("tier","?")]=tier .get (c .get ("tier","?"),0 )+1 
         s ={"pid":pid ,"gt":len (G ),"cp":len (cps ),"tier":tier }
-        for ad ,tol ,am ,pct ,isr in (("tespit",0.0 ,180.0 ,True ,False ),
+        for ad ,tol ,am ,pct ,isr in (("detection",0.0 ,180.0 ,True ,False ),
         ("rob",2.0 ,10.0 ,False ,False ),
         ("rbi",2.0 ,10.0 ,False ,True )):
             tp ,fp ,fn ,_ =match_hungarian (P ,D ,G ,Gd ,dg ,tol ,am ,pct ,
@@ -88,27 +88,27 @@ def main ():
             s [ad ]=tp 
         satirlar .append (s )
         print (f"  {pid :12s} GT={len (G ):3d}  uretilen={len (cps ):3d}  "
-        f"tespit_dogru={s ['tespit']:3d}  robot_eksen={s ['rob']:3d}  "
+        f"tespit_dogru={s ['detection']:3d}  robot_eksen={s ['rob']:3d}  "
         f"ROBOT_ISARETLI={s ['rbi']:3d}  tier={tier }",flush =True )
 
     def f1 (t ):
         return 2 *t [0 ]/max (2 *t [0 ]+t [1 ]+t [2 ],1 )
 
-    print (f"\n{'part':13s} {'GT':>4s} {'uretilen':>9s} {'tespit':>7s} "
+    print (f"\n{'part':13s} {'GT':>4s} {'uretilen':>9s} {'detection':>7s} "
     f"{'robot':>6s} {'ISARETLI':>9s}")
     for s in satirlar :
         print (f"{s ['pid']:13s} {s ['gt']:4d} {s ['cp']:9d} "
-        f"{s ['tespit']:7d} {s ['rob']:6d} {s ['rbi']:9d}")
+        f"{s ['detection']:7d} {s ['rob']:6d} {s ['rbi']:9d}")
     print (f"\n--- 5 PARCA TOPLAMI (mikro F1) ---")
-    for ad ,isim in (("tespit","tespit"),("rob","robot-axis"),
+    for ad ,isim in (("detection","detection"),("rob","robot-axis"),
     ("rbi","robot-ISARETLI")):
         tp ,fp ,fn =top [ad ]
         print (f"  {isim :16s} F1 {f1 (top [ad ]):.4f}   "
         f"(TP {tp } / FP {fp } / FN {fn })")
     print ("\nNOT: 5 part KUCUK a ornek -- this sayilar headline DEGILDIR.")
-    print ("Manset VAL 100 parcadir (tespit 0.7878 / robot-ISARETLI 0.4839).")
+    print ("Manset VAL 100 parcadir (detection 0.7878 / robot-ISARETLI 0.4839).")
     json .dump ({"parts":satirlar ,
-    "toplam":{k :f1 (v )for k ,v in top .items ()}},
+    "total":{k :f1 (v )for k ,v in top .items ()}},
     io .open ("results/ara_test_glb.json","w",encoding ="utf-8"),
     indent =1 )
     print ("-> results/ara_test_glb.json")

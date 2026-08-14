@@ -5,7 +5,7 @@ WHY: elimizde 8534 manufacturer ConnectionPoint yonu present and model bunlari H
 tamamen geometrik sezgiyle cikariliyor. Bugun measured: axis yonu robot-hazir F1'in 0.109'unu
 single basina tutuyor, and B-rep duzeltmesinden after bile CP'lerin %16'sinda axis 15 dereceden
 extra sapiyor. Geometrinin cozemedigi kisim yuva/kelepce girisleri -- oralarda silindir absent,
-i.e. analitik axis de absent. Ogrenmek single kalan path.
+i.e. analitik axis de absent. Ogrenmek single remaining path.
 
 TASARIM
   * Hedef only manufacturer CP'sinin YAKININDAKI kosede tanimlidir; gerisi MASKELENIR. Boylece
@@ -50,7 +50,7 @@ def main ():
             parts .append ((mfg ,pid ,jf ,stp ,n ))
     if a .limit :
         parts =parts [:a .limit ]
-    print (f"{len (parts )} part | {len (done )} zaten hazir | yaricap {a .radius }mm",flush =True )
+    print (f"{len (parts )} part | {len (done )} already hazir | yaricap {a .radius }mm",flush =True )
 
     index ,nv_tot ,npart =[],0 ,0 
     for k ,(mfg ,pid ,jf ,stp ,n )in enumerate (parts ,1 ):
@@ -102,7 +102,7 @@ def main ():
     json .dump ({"radius_mm":a .radius ,"remesh_target":a .target ,
     "n_parts":len (allp ),"parts":list (allp .values ())},
     open (os .path .join (OUT ,"index.json"),"w"),indent =1 )
-    print (f"\nbitti: {npart } yeni part, {nv_tot } hedef kose | toplam {len (allp )} part")
+    print (f"\nbitti: {npart } yeni part, {nv_tot } hedef kose | total {len (allp )} part")
     print (f"-> {OUT }/")
 
 

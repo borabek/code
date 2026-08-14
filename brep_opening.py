@@ -18,7 +18,7 @@ Ayirt etme, halkanin CEVRELEDIGI ALANIN yuzun total alanina orani with is done -
 dis kontur most large alanlidir.
 
 TEZ DEGISMEZ: this a SECENEK URETICISIDIR; `v_o` turetmesi, 5 sinif and ~6000 remesh
-aynen kalir. Uretilen secenekler P4/P5'te candidate as yarisir.
+aynen kalir. Uretilen options P4/P5'te candidate as yarisir.
 """
 import numpy as np 
 
@@ -115,7 +115,7 @@ def acikliklar (step_path ,esd_min =ESD_MIN ,esd_max =ESD_MAX ):
             "yuvarlaklik":float (4 *np .pi *A /max (cev *cev ,1e-9 )),
             # POLIGON da returns (2026-08-06): oto-label agzi DISK as
             # boyuyor; kare/yarik girislerde this YANLIS geometri and
-            # oz-tutarlilik kapisi that parcalari eliyor. Gercek kesitle
+            # feat-tutarlilik kapisi that parcalari eliyor. Gercek kesitle
             # boyayabilmek for halka noktalari saklanir (most extra 64).
             "poligon":np .asarray (P [::max (1 ,len (P )//64 )],np .float32 )})
         if len (out )>4000 :# patolojik parcalarda dur

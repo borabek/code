@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """A1+A2: GATE_REDDI kovasini bosalt -- goreli threshold and SKOR kalibrasyonu.
 
-HATA BANKASI (`results/kazanan_hata_bankasi.json`): kazanan yiginda
+HATA BANKASI (`results/winner_error_bank.json`): kazanan yiginda
 GATE_REDDI = 531 GT (%17.2). Bunlar for havuzda ROBOT-UYGUN candidate VARDI but
-skoru esigin under kaldi. Kova aritmetigi: only this kova kurtarilirsa
+skoru esigin under kaldi. Kova aritmetigi: only this bucket kurtarilirsa
 F1 0.2773 -> **0.439**.
 
 GATE_REDDI a SIRALAMA/KALIBRASYON hatasi. Uc karar kurali kiyaslanir:
@@ -12,9 +12,9 @@ GATE_REDDI a SIRALAMA/KALIBRASYON hatasi. Uc karar kurali kiyaslanir:
             measured ki distribution kaymasini emiyor (gate-manufacturer-disi-cokusu:
             0.2799 -> 0.4402)
   Z-SKOR    skoru PARCA ICINDE z-skorla, after esikle. Oznitelikte `within_part`
-            present but SKORDA absent; mutlak skor markadan markaya kayiyorsa this
+            present but SKORDA absent; mutlak score markadan markaya kayiyorsa this
             dogrudan fixes.
-  YUZDELIK  part inside skor yuzdeligi >= q (count-serbest ranking karari)
+  YUZDELIK  part inside score yuzdeligi >= q (count-serbest ranking karari)
 
 Esik/parametre D6'da secilir, D7'de YENIDEN TARANMAZ. TAM ZINCIR, MIKRO.
 """
@@ -26,7 +26,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -75,12 +75,12 @@ def oku (on ):
 def kimlikle (v ):
     global _D6 
     kay =K .yukle ([d ["pid"]for d in v ])
-    eksik =[d ["pid"]for d in v if d ["pid"]not in kay ]
-    if eksik :
+    missing =[d ["pid"]for d in v if d ["pid"]not in kay ]
+    if missing :
         if _D6 is None :
             _D6 ={str (p ):r for p ,r in 
             d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
-        kay .update ({p :_D6 [p ]for p in eksik if p in _D6 })
+        kay .update ({p :_D6 [p ]for p in missing if p in _D6 })
     out =[]
     for d in v :
         r =kay .get (d ["pid"])
@@ -138,13 +138,13 @@ def olc (model ,data_ ,tip ,p ,tam_zincir =False ,S =None ):
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
 
 
 def main ():
-    model =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    model =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     S =K .step_map ()
     dev =kimlikle (oku ("d6"))
     te =kimlikle (oku ("d7"))
@@ -162,20 +162,20 @@ def main ():
     for tip ,v in aileler .items ():
         p =max (v )[1 ]
         r7 =olc (model ,te ,tip ,p ,tam_zincir =True ,S =S )
-        out [tip ]=dict (r7 ,secilen =str (p ),d6 =max (v )[0 ])
-        print (f"\n{tip :<9} secilen {str (p ):<14} -> D7 robot **{r7 ['robot']:.4f}** "
-        f"| tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f} | "
+        out [tip ]=dict (r7 ,selected =str (p ),d6 =max (v )[0 ])
+        print (f"\n{tip :<9} selected {str (p ):<14} -> D7 robot **{r7 ['robot']:.4f}** "
+        f"| detection {r7 ['detection']:.4f} | makro {r7 ['makro']:.4f} | "
         f"en kotu {r7 ['en_kotu']:.4f}",flush =True )
     iyi =max (out ,key =lambda k :out [k ]["robot"])
     print (f"\nEN IYI KURAL: {iyi } -> {out [iyi ]['robot']:.4f} "
-    f"(baseline mutlak 0.05 = 0.2773, fark {out [iyi ]['robot']-0.2773 :+.4f})")
+    f"(baseline mutlak 0.05 = 0.2773, diff {out [iyi ]['robot']-0.2773 :+.4f})")
     print ("KAPI: >= +0.02 whereas A1/A2 KABUL")
-    json .dump ({"damga":makbuz_hash .damga (),"D6":d6skor ,"D7":out ,
+    json .dump ({"damga":receipt_hash .damga (),"D6":d6skor ,"D7":out ,
     "baseline":0.2773 ,"en_iyi":iyi ,
     "not":"Karar kurali ailesi kiyasi. Parametre D6'da secildi, D7'de "
     "yeniden taranmadi. TAM ZINCIR, MIKRO, D7 brand-disi."},
-    open ("results/a1_esik_kalibrasyon.json","w"),indent =1 )
-    print ("receipt -> results/a1_esik_kalibrasyon.json")
+    open ("results/a1_threshold_calibration.json","w"),indent =1 )
+    print ("receipt -> results/a1_threshold_calibration.json")
 
 
 if __name__ =="__main__":

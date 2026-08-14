@@ -26,7 +26,7 @@ import numpy as np
 
 import measure_set as OK 
 
-MAKBUZ ="results/protokol_dogrulama.json"
+MAKBUZ ="results/protocol_dogrulama.json"
 
 
 def yasak_gruplar (olcum_da =False ,der_yolu ="results/_der_tam.pkl"):
@@ -69,17 +69,17 @@ def dogrula (pidler ,ad ="training",olcum_da =False ,sert =True ,der_yolu ="resu
         raise AssertionError (
         f"PROTOKOL IHLALI [{ad }]: {len (ihlal )} part yasak geometri grubunda "
         f"(LOCKED{' + OLCUM'if olcum_da else ''}). Ilk 10: {ihlal [:10 ]}. "
-        f"`protocol.egitim_maskesi()` ile filtreleyin.")
+        f"`protocol.egitim_maskesi()` with filtreleyin.")
     return m 
 
 
     # --------------------------------------------------------------------------------------
-    # F0-3 DAIMI OLCUM KURALLARI -- each arm for gecerli, istisnasiz.
+    # F0-3 DAIMI OLCUM KURALLARI -- each arm for valid, istisnasiz.
 KURALLAR ="""
 1. KILL ONCEDEN YAZILIR. Kol kosmadan first "neyi gecerse yasar" yazili olmali; sonucu
    gorup threshold belirlemek yasak. (2026-08-04: r9c'de threshold tutmadi ve KAYDIRILMADI.)
-2. AYAR = DEV + ATANMAMIS.  HUKUM = VAL.  Ayar kumesinde secilen TEK ayar VAL'de raporlanir.
-3. HAVUZLANMIS SATIR SECIM ICIN KULLANILMAZ -- ayar kumesini de icerdigi for yaniltir.
+2. AYAR = DEV + ATANMAMIS.  HUKUM = VAL.  Ayar kumesinde selected TEK setting VAL'de raporlanir.
+3. HAVUZLANMIS SATIR SECIM ICIN KULLANILMAZ -- setting kumesini de icerdigi for yaniltir.
    Olculdu (T1): DEV'de +0.0277 gosteren rule VAL'de -0.0162 cikti; havuzlanmis +0.0011
    diyordu. Havuzlanmis only BILGI satiridir.
 4. GRUP BOOTSTRAP: part not GEOMETRI GRUBU. Parcalarin %80'inin ikizi present; part
@@ -91,11 +91,11 @@ KURALLAR ="""
 7. ADAY-URETIMI kararlari (cluster_mm / min_vertices / dedupe / promote / havuzlama)
    ONBELLEKLE OLCULEMEZ -- yeniden turetme sart.
 8. TEZ DEGISMEZLERI (asagidaki TEZ sozlugu) each kolun basinda dogrulanir.
-9. BULUNAN HATA GOZ ARDI EDILMEZ. Bir madde biterken cikan error/uyari/tutarsizlik
+9. BULUNAN HATA GOZ ARDI EDILMEZ. Bir madde biterken produced error/uyari/tutarsizlik
    "then bakariz" diye gecilmez: LISTEYE H-maddesi as eklenir, ETKISI OLCULUR ve
    duzeltilir. Duzeltme measurement kumesini oynatabiliyorsa first ETKI raporlanir, then
    uygulanir. (Bu proje hatalari bulup ertelediginde each seferinde bedelini odedi:
-   diffusion_net dususu, gate bayatlamasi, unsigned kahin, kimlik ayristirmasi.)
+   diffusion_net dususu, gate bayatlamasi, unsigned oracle, kimlik ayristirmasi.)
 """
 
 

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """D7'de YIGIN KIYASI: kanonik (G7 + gate v6) vs A3-A4 (g10 + gate v7).
 
-A3-A4 zinciri D6'da +0.0203 tespit / +0.0245 robot olculmustu but MANSET yoluna
+A3-A4 zinciri D6'da +0.0203 detection / +0.0245 robot olculmustu but MANSET yoluna
 (D7, brand-disi) HIC sokulmadi. Temsil kolu ([[temsil-kolu-calisti-ara-sonuc]])
-gorulmemis ureticide +0.2396 iddia ediyor; this, that iddianin kanonik olcekte sinavi.
+unseen ureticide +0.2396 iddia ediyor; this, that iddianin kanonik olcekte sinavi.
 
 SIZINTI DENETIMI YAPILDI and TEMIZ: g10'un training dizini `_label_auto_obj_TR`
 (2108 part) with D7 kesisimi PARCA duzeyinde 0, MARKA duzeyinde 0 (12 D7
@@ -13,7 +13,7 @@ Ayni harness, only yigin degisir (KD7_* cevre degiskenleri). MIKRO. Tam zincir.
 """
 import collections ,importlib ,json ,os ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -27,7 +27,7 @@ YIGINLAR =[
 "KD7_GATE":"results/wire_gate_v7.pkl",
 "KD7_OB":"results/_p1_olasilik_d7g10"}),
 ]
-d7p =json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]
+d7p =json .load (open ("results/d7_exam_set.json"))["pidler"]
 out ={}
 for ad ,env in YIGINLAR :
     os .environ .update (env )
@@ -53,24 +53,24 @@ for ad ,env in YIGINLAR :
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    out [ad ]={"robot":mi ,"tespit":K .mikro (tes ),"aday_kahini":K .mikro (oracle_ ),
+    out [ad ]={"robot":mi ,"detection":K .mikro (tes ),"aday_kahini":K .mikro (oracle_ ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm ,"n":len (tes )}
     c =out [ad ]
-    print (f"{ad :<16} robot {c ['robot']:.4f} | tespit {c ['tespit']:.4f} | "
+    print (f"{ad :<16} robot {c ['robot']:.4f} | detection {c ['detection']:.4f} | "
     f"candidate kahini {c ['aday_kahini']:.4f} | makro {c ['makro']:.4f} | "
     f"en kotu {c ['en_kotu']:.4f} | n={c ['n']}",flush =True )
 
 a ,b =out ["KANONIK G7+v6"],out ["A3-A4 g10+v7"]
 art =sum (1 for m in b ["brand"]if b ["brand"][m ]>a ["brand"].get (m ,0 )+1e-9 )
-print (f"\nFARK robot {b ['robot']-a ['robot']:+.4f} | tespit {b ['tespit']-a ['tespit']:+.4f} "
-f"| kahin {b ['aday_kahini']-a ['aday_kahini']:+.4f} | artan brand {art }/{len (b ['brand'])}")
+print (f"\nFARK robot {b ['robot']-a ['robot']:+.4f} | detection {b ['detection']-a ['detection']:+.4f} "
+f"| oracle {b ['aday_kahini']-a ['aday_kahini']:+.4f} | artan brand {art }/{len (b ['brand'])}")
 for m in sorted (a ["brand"],key =lambda k :-a ["brand"][k ]):
     print (f"  {m :<7} {a ['brand'][m ]:.4f} -> {b ['brand'].get (m ,float ('nan')):.4f}  "
     f"{b ['brand'].get (m ,0 )-a ['brand'][m ]:+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"artan_marka":art ,
+json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"artan_marka":art ,
 "sizinti_denetimi":"g10 training dizini _label_auto_obj_TR with D7 "
 "kesisimi: part 0, brand 0 (12/12 brand temiz)",
 "not":"AYNI harness (canonical_d7), only yigin degisti. Tam zincir, "
 "MIKRO, D7=DEV brand-disi."},
-open ("results/g10_zinciri_d7.json","w"),indent =1 )
+open ("results/g10_chain_d7.json","w"),indent =1 )

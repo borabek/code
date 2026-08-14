@@ -10,7 +10,7 @@ OLCUM SORUSU (D6, seyreltilmis pool):
 Konum-single recall 0.8713 -> direction kaybi 0.145. Yelpaze bunun kacini geri takes?
 
 YONTEM: each candidate for fibonacci-kure 64 direction; p + eps*d yonunde first carpisma
-mesafesi (topakli isin atisi, `mouth_descriptor._ilk_mesafe`); most derin K direction
+mesafesi (topakli isin atisi, `mouth_descriptor._ilk_mesafe`); most deep K direction
 oneri becomes. Olcut ISARETLI angle <= 10 (urun metrigiyle same).
 """
 import json 
@@ -19,7 +19,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -114,21 +114,21 @@ def main ():
         return rc ,2 *rc /(1 +rc )
 
     out ={}
-    print (f"\nD6 {npar } part | {n_gt } GT | yelpaze {NFAN } direction, en derin {K }")
+    print (f"\nD6 {npar } part | {n_gt } GT | yelpaze {NFAN } direction, en deep {K }")
     for ad ,t ,ns in (("BANKA",t_bank ,n_sec_b ),("YELPAZE",t_fan ,n_sec_f ),
     ("BANKA+YELPAZE",t_ikisi ,n_sec_b +n_sec_f )):
         rc ,f1 =f1t (t )
         out [ad ]={"recall":rc ,"f1_tavani":f1 ,
         "secenek_parca":ns /max (npar ,1 )}
         print (f"{ad :<14} yonlu recall {rc :.4f}  F1 tavani {f1 :.4f}  "
-        f"secenek/part {ns /max (npar ,1 ):.0f}")
+        f"option/part {ns /max (npar ,1 ):.0f}")
     print (f"\nYELPAZE KAZANCI: {out ['BANKA+YELPAZE']['recall']-out ['BANKA']['recall']:+.4f} recall")
-    json .dump ({"damga":makbuz_hash .damga (),"n_parca":npar ,"n_gt":n_gt ,
+    json .dump ({"damga":receipt_hash .damga (),"n_parca":npar ,"n_gt":n_gt ,
     "fan_n":NFAN ,"fan_k":K ,"sonuc":out ,
     "not":"Serbest-depth direction yelpazesi TAVAN sondasi. D6, "
     "seyreltilmis pool (_p6_oz_u25), ISARETLI aci."},
-    open ("results/yon_fani_d6.json","w"),indent =1 )
-    print ("receipt -> results/yon_fani_d6.json")
+    open ("results/direction_fani_d6.json","w"),indent =1 )
+    print ("receipt -> results/direction_fani_d6.json")
 
 
 if __name__ =="__main__":

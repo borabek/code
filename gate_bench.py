@@ -2,7 +2,7 @@
 """GATE TEZGAHI -- genellesme kollarinin ORTAK and TEK hakemi.
 
 WHY: last five arm gate'e BILGI eklemeye calisti and besi de sifir verdi. Olculen sey this:
-havuzlanmis 0.7584 but gorulmemis ureticide 0.5968/0.6680. Aradaki 0.13 bilgi eksikligi
+havuzlanmis 0.7584 but unseen ureticide 0.5968/0.6680. Aradaki 0.13 bilgi eksikligi
 not, EZBER. Bu tezgah ezbere saldiran kollari same olcutle yargilar.
 
 TEK YARGIC KURALI: each arm
@@ -121,13 +121,13 @@ def calistir (D ,kol_fn ,ad ,tohumlar =(0 ,),ayrinti =True ):
             v .append ((f1w (det ),f1w (rob )))
             if th ==tohumlar [0 ]:
                 PARCA [b ]=(det ,rob ,[x ["geo"]for x in alt ])
-        SON [b ]={"tespit":float (np .mean ([x [0 ]for x in v ])),
+        SON [b ]={"detection":float (np .mean ([x [0 ]for x in v ])),
         "robot":float (np .mean ([x [1 ]for x in v ])),
         "tohumlar":[float (x [0 ])for x in v ]}
     ud =[b for b in SON if b .endswith ("-disi")]
-    SON ["_URETICI_DISI_ORT"]=float (np .mean ([SON [b ]["tespit"]for b in ud ]))if ud else 0.0 
+    SON ["_URETICI_DISI_ORT"]=float (np .mean ([SON [b ]["detection"]for b in ud ]))if ud else 0.0 
     if ayrinti :
-        print (f"{ad :<26}"+"".join (f"{SON [b ]['tespit']:>13.4f}"for b ,_ ,_ in bolmeler )
+        print (f"{ad :<26}"+"".join (f"{SON [b ]['detection']:>13.4f}"for b ,_ ,_ in bolmeler )
         +f"{SON ['_URETICI_DISI_ORT']:>10.4f}{SON ['havuzlanmis']['robot']:>9.4f}")
     return SON ,PARCA 
 

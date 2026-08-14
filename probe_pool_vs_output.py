@@ -4,7 +4,7 @@
 Hata otopsisi: kacanlarin %94'unun yakininda HIC prediction absent. Ama this two
 BAMBASKA sey may be:
   (a) HAVUZDA candidate absent      -> candidate uretimi sorunu (PAHALI onarim)
-  (b) Aday VARDI, elendi    -> gate/skor sorunu (UCUZ onarim may be)
+  (b) Aday VARDI, elendi    -> gate/score sorunu (UCUZ onarim may be)
 
 Bu betik ikisini AYIRIR: same parcalarda HAVUZ recall'u with CIKTI recall'u
 yan yana olculur.
@@ -21,15 +21,15 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
 import canonical_d7 as K 
 
-DOKUM =os .environ .get ("HV_DOKUM","results/_dokum_taban.json")
-YOL =os .environ .get ("HV_YOL","saha")
+DOKUM =os .environ .get ("HV_DOKUM","results/_dump_baseline.json")
+YOL =os .environ .get ("HV_YOL","field")
 
 def _birim (v ):
     v =np .asarray (v ,float )
     return v /np .maximum (np .linalg .norm (v ,axis =-1 ,keepdims =True ),1e-12 )
 
 def kutuda (P ,D ,G ,Gd ,signed ):
-    """each GT for kutusunda uygun candidate VAR mi (bool array)."""
+    """each GT for kutusunda eligible candidate VAR mi (bool array)."""
     if not len (P ):
         return np .zeros (len (G ),bool )
     v =P [:,None ,:]-G [None ,:,:]
@@ -42,9 +42,9 @@ def kutuda (P ,D ,G ,Gd ,signed ):
     return ok .any (0 )
 
 def main ():
-    d =[r for r in json .load (open (DOKUM ))if r ["yol"]==YOL ]
+    d =[r for r in json .load (open (DOKUM ))if r ["path"]==YOL ]
     if not d :
-        sys .exit (f"{DOKUM } icinde '{YOL }' yok")
+        sys .exit (f"{DOKUM } icinde '{YOL }' none")
     if "havuz_P"not in d [0 ]:
         sys .exit ("dokumde pool YOK -- sondayi pool dokumuyle yeniden kos")
     top ={k :0 for k in ("gt","hav_konum","hav_yonlu",
@@ -62,7 +62,7 @@ def main ():
         top ["cik_konum"]+=int (kutuda (CP ,CD ,G ,Gd ,False ).sum ())
         top ["cik_yonlu"]+=int (kutuda (CP ,CD ,G ,Gd ,True ).sum ())
     g =max (top ["gt"],1 )
-    print (f"{len (d )} part | GT {top ['gt']} | yol={YOL }\n")
+    print (f"{len (d )} part | GT {top ['gt']} | path={YOL }\n")
     print (f"{'olcu':<28}{'recall':>9}")
     for ad ,k in (("HAVUZ recall (konum)","hav_konum"),
     ("HAVUZ recall (yonlu)","hav_yonlu"),
@@ -74,7 +74,7 @@ def main ():
     print ("OKUMA:")
     print ("  havuz_yonlu DUSUK  -> onarim ADAY URETIMINDE (pahali)")
     print ("  difference BUYUK         -> onarim SKOR/GATE'te (ucuz may be)")
-    json .dump ({"yol":YOL ,"n_parca":len (d ),
+    json .dump ({"path":YOL ,"n_parca":len (d ),
     "recall":{k :top [k ]/g for k in top if k !="gt"},
     "gate_attigi":loss ,
     "not":"Havuz recall vs cikti recall. Kacanlarin sebebini "

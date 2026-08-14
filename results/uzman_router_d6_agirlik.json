@@ -20,7 +20,7 @@
   },
   "config": {
    "cp_config.json": "58a1cb216cd11d36",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
@@ -28,7 +28,7 @@
  "cok_esik": 8,
  "n_cok": 64,
  "yonlendirici_dogruluk": 0.9615384615384616,
- "toplam": {
+ "total": {
   "baseline": 0.5572413793103448,
   "uzman_gt": 0.5154468858417314,
   "uzman": 0.5162460827972951,

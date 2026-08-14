@@ -3,12 +3,12 @@
 
 DURUM. "Mesh normali yonu %80 tutuyor" sondasi, kutudaki 6000 TEPENIN
 HERHANGI BIRINI kabul ediyordu -- extra comert a criterion. Korpus suzgeci
-denendiginde (each adaya bankadaki normale EN YAKIN secenek) yonlu recall
+denendiginde (each adaya bankadaki normale EN YAKIN option) yonlu recall
 0.8926 -> 0.3679 dustu, NIT'te 0.8429 -> 0.027.
 
 Iki ayri reason vardi:
   (a) candidates 6000 tepeden ~490'a SEYRELTILMIS
-  (b) "bankadaki normale most yakin secenek" != "normalin kendisi"
+  (b) "bankadaki normale most yakin option" != "normalin kendisi"
 
 BU SONDA (b)'yi kaldirir: each ADAYA KENDI normali verilir and yonlu recall
 olculur. Bu, yeniden cikarimin (approximately 4 saat) TAVANIDIR.
@@ -85,7 +85,7 @@ def main ():
         a ["gt"].append (len (G ))
         a ["konum"].append (int (konum .any (0 ).sum ()))
         a ["normal"].append (int ((konum &(aci_n <=K .ACI )).any (0 ).sum ()))
-        # KIYAS: mevcut BANKA (tum secenekler)
+        # KIYAS: mevcut BANKA (tum options)
         kb =np .zeros (len (G ),bool )
         for j in range (len (G )):
             ad =np .where (konum [:,j ])[0 ]
@@ -120,13 +120,13 @@ def main ():
         f"{nn :>14.3f}{bb :>16.3f}")
     print (f"{'TOPLAM':<7}{tg :>7}{'':>8}{'':>8}{tn /tg :>14.3f}{tb /tg :>16.3f}")
     json .dump ({"corpus":KORPUS ,"brand":out ,
-    "toplam":{"aday_normali":tn /tg ,"banka":tb /tg },
+    "total":{"aday_normali":tn /tg ,"banka":tb /tg },
     "not":"ADAYIN KENDI mesh normali vs 24 secenekli direction bankasi. "
     "Yeniden cikarimin TAVANI. D7'ye BAKILMADI."},
-    open ("results/aday_normal_tavan.json","w"),indent =1 )
-    print ("\nmakbuz -> results/aday_normal_tavan.json")
+    open ("results/candidate_normal_ceiling.json","w"),indent =1 )
+    print ("\nmakbuz -> results/candidate_normal_ceiling.json")
     print ("DECISION: candidate normali ~banka'ya yakinsa yeniden inference HAK EDILIR")
-    print ("       (24 fold few secenek, same recall). Cok dusukse mekanizma OLU.")
+    print ("       (24 fold few option, same recall). Cok dusukse mekanizma OLU.")
 
 
 if __name__ =="__main__":

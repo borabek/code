@@ -1,6 +1,6 @@
 """K6.5-a: FEW-SHOT egrisi, GATE katmani (CPU; segmentasyon fine-tune AYRI).
 
-Senaryo: gorulmemis a markadan k part ELLE etiketlenir (CP noktalari verilir).
+Senaryo: unseen a markadan k part ELLE etiketlenir (CP noktalari verilir).
 Bu k parcanin adaylari gate egitimine eklenir, AYNI markanin KALAN parcalarinda
 olculur. k=0 = bugunku sifir-atis durumu.
 
@@ -57,8 +57,8 @@ def candidate_label (P ,G ,diag ):
 def donustur (X ,pids ,donusum ):
     """URUNUN training donusumu: within_part PARCA PARCA uygulanir.
 
-    parca_ici_dagit.py with AYNI loop. Toptan uygulanirsa z-skor corpus geneli
-    becomes and calisma anindaki (part-ici) anlamini KAYBEDER -- olculen sey urunun
+    part_ici_distribute.py with AYNI loop. Toptan uygulanirsa z-score corpus geneli
+    becomes and calisma anindaki (part-ici) anlamini KAYBEDER -- measured_path sey urunun
     yaptigi sey olmaz.
     """
     X =np .asarray (X ,float )
@@ -172,13 +172,13 @@ def main ():
                     rf .append (f1w (R ))
                 del g 
             if tf :
-                res_ [M ][k ]={"tespit":float (np .mean (tf )),
+                res_ [M ][k ]={"detection":float (np .mean (tf )),
                 "tespit_std":float (np .std (tf )),
                 "robot":float (np .mean (rf )),
                 "robot_std":float (np .std (rf )),
                 "n_olc":len (olc ),"cekilis":cekilisler }
                 s =res_ [M ][k ]
-                print (f"  k={k }: tespit {s ['tespit']:.4f}+-{s ['tespit_std']:.4f} | "
+                print (f"  k={k }: detection {s ['detection']:.4f}+-{s ['tespit_std']:.4f} | "
                 f"robot {s ['robot']:.4f}+-{s ['robot_std']:.4f} "
                 f"(measurement {s ['n_olc']} part)",flush =True )
         del ob 
@@ -192,7 +192,7 @@ def main ():
             print (f"  {M }: k=0 baseline {t0 :.4f}  ->  "+
             "  ".join (f"k={k }:{d [k ]['robot']:.4f}"
             for k in KLAR if k in d and k >0 ))
-            print (f"       fark: "+"  ".join (
+            print (f"       diff: "+"  ".join (
             f"k={k }:{d [k ]['robot']-t0 :+.4f}"for k in KLAR if k in d and k >0 ))
     with open (CIKTI ,"w")as f :
         json .dump ({"sonuc":res_ ,"not":"GATE-only few-shot; seg fine-tune AYRI. "

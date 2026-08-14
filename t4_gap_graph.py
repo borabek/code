@@ -3,7 +3,7 @@
 
 DOGRULANDI: old "B-rep graf" kolu (s7_brep_graf.py) real a graf KURMAMIS.
 `graf_ozellik` 10 slot aciyor but only 0-7'yi dolduruyor; `g_agiz_cev` and `g_yuz_alan`
-kalici as SIFIR. Dahasi no places face-edge komsulugu absent -- only silindir and
+persistent as SIFIR. Dahasi no places face-edge komsulugu absent -- only silindir and
 duzlem AGIRLIK MERKEZLERI sayiliyordu. Yani boskuk grafi denenmemistir.
 
 BURADA GERCEK TOPOLOJI CIKARILIYOR (gmsh/OCC):
@@ -19,7 +19,7 @@ OZELLIKLER (8), each candidate for:
     bg_dairesel     mouth cevriminin daireden sapmasi: cev^2 / (4*pi*alan)
     bg_kom_yuz      channel duvariyla KENAR PAYLASAN face count (real komsuluk derecesi)
     bg_kom_duzlem   this komsulardan duzlem olanlarin count
-    bg_gecis        channel duvarinin serbest boundary cevrimi count (2 = gecen hole, 1 = kor)
+    bg_gecis        channel duvarinin serbest boundary cevrimi count (2 = passing hole, 1 = kor)
     bg_yaricap      channel yaricapi (dogrudan B-rep'ten, agdan not)
 
 Renk (plastik->metal) BILEREK YOK: `c_metal` 2026-07-31'de measured and OLU output.
@@ -146,7 +146,7 @@ def main ():
     from big_arbiter import eligible 
     from sklearn .ensemble import RandomForestClassifier 
     from sklearn .model_selection import GroupKFold 
-    from gece_kilit import guard 
+    from night_kilit import guard 
 
     guard ("t4 baslangic")
     D =T .yukle ()
@@ -160,7 +160,7 @@ def main ():
         print (f"onbellekten {len (CACHE )} part",flush =True )
 
     RX ,RY ,RG ,RP ,BG =[],[],[],[],[]
-    t0 =time .time ();basarili =0 
+    t0 =time .time ();ok =0 
     for k ,r in enumerate (D ["DER"],1 ):
         if k %20 ==0 :
             print (f"  {k }/{len (D ['DER'])}  {time .time ()-t0 :.0f}s",flush =True )
@@ -179,7 +179,7 @@ def main ():
                 CACHE [r ["pid"]]=None 
         data_ =CACHE [r ["pid"]]
         FB =ozellik (P ,Pd ,*data_ )if data_ is not None else np .zeros ((len (P ),len (AD )))
-        basarili +=int (data_ is not None )
+        ok +=int (data_ is not None )
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         diff =P [:,None ,:]-G [None ,:,:]
         al =(diff *Gd [None ,:,:]).sum (-1 )
@@ -199,7 +199,7 @@ def main ():
         pickle .dump (CACHE ,f )
     RX =np .array (RX );BG =np .array (BG );RY =np .array (RY )
     RG =np .array (RG );RP =np .array (RP )
-    print (f"\n{len (RY )} candidate | pozitif {RY .mean ():.1%} | topoloji cikan part {basarili }")
+    print (f"\n{len (RY )} candidate | pozitif {RY .mean ():.1%} | topoloji produced part {ok }")
 
     from t1_manufacturer_out import auc_mw 
     print (f"\n{'sutun':<16}{'AUC':>8}{'TP ort':>11}{'FP ort':>11}{'sifir-disi':>11}")
@@ -222,16 +222,16 @@ def main ():
         p_ =tp /max (tp +fp ,1 );r_ =tp /max (tp +fn ,1 )
         return 2 *p_ *r_ /max (p_ +r_ ,1e-9 )
     a58 =olc (RX );a66 =olc (np .hstack ([RX ,BG ]))
-    print (f"\nADAY DUZEYI: 58 sutun {a58 :.4f} | 58+bosluk-grafi {a66 :.4f} | fark {a66 -a58 :+.4f}")
+    print (f"\nADAY DUZEYI: 58 sutun {a58 :.4f} | 58+bosluk-grafi {a66 :.4f} | diff {a66 -a58 :+.4f}")
     gecti =(a66 -a58 )>=0.01 
     print (f"KARAR: {'SINYAL VAR -> T5 uctan uca sinava'if gecti else 'SINYAL YOK -> T4 KAPANIR'}")
-    np .savez ("results/t4_bosluk.npz",BG =BG ,RY =RY ,RG =RG ,RP =RP )
-    with io .open ("results/t4_bosluk.json","w",encoding ="utf-8")as f :
-        json .dump ({"aday_58":float (a58 ),"aday_66":float (a66 ),"fark":float (a66 -a58 ),
-        "gecti":bool (gecti ),"topoloji_parca":basarili ,
+    np .savez ("results/t4_gap.npz",BG =BG ,RY =RY ,RG =RG ,RP =RP )
+    with io .open ("results/t4_gap.json","w",encoding ="utf-8")as f :
+        json .dump ({"aday_58":float (a58 ),"aday_66":float (a66 ),"diff":float (a66 -a58 ),
+        "gecti":bool (gecti ),"topoloji_parca":ok ,
         "auc":{a :float (auc_mw (BG [:,j ],RY .astype (bool )))
         for j ,a in enumerate (AD )}},f ,indent =1 )
-    print ("receipt -> results/t4_bosluk.json")
+    print ("receipt -> results/t4_gap.json")
 
 
 if __name__ =="__main__":

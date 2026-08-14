@@ -16,7 +16,7 @@ raporlarda AYRI satirda gosterilir.
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -105,7 +105,7 @@ def kos (b_esik ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
         if en is None or r ["robot"]>en ["robot"]:
@@ -119,7 +119,7 @@ for ad ,be in (("TEZ-SAF (B-rep KAPALI)",None ),("+B-rep threshold 0.50",0.50 ),
 ("+B-rep threshold 0.80",0.80 ),("+B-rep threshold 0.90",0.90 )):
     out [ad ]=kos (be )
     r =out [ad ]
-    print (f"{ad :<24} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | makro "
+    print (f"{ad :<24} robot {r ['robot']:.4f} | detection {r ['detection']:.4f} | makro "
     f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['rule']}",flush =True )
 t =out ["TEZ-SAF (B-rep KAPALI)"]
 print ()
@@ -128,11 +128,11 @@ for ad in out :
         r =out [ad ]
         art =sum (1 for m in r ["brand"]if r ["brand"][m ]>t ["brand"][m ]+1e-9 )
         yik =[m for m in r ["brand"]if r ["brand"][m ]==0 and t ["brand"][m ]>0 ]
-        print (f"  {ad :<20} robot {r ['robot']-t ['robot']:+.4f} | tespit "
-        f"{r ['tespit']-t ['tespit']:+.4f} | artan brand {art }/12"
+        print (f"  {ad :<20} robot {r ['robot']-t ['robot']:+.4f} | detection "
+        f"{r ['detection']-t ['detection']:+.4f} | artan brand {art }/12"
         +(f" | YIKILAN: {','.join (yik )}"if yik else ""))
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
 "not":"HIBRIT: seg adaylari DAGITILAN v6 with, B-rep adaylari AYRI "
 "model with puanlanir. Tez-saf arm DEGISMEDI. D7 brand-disi, MIKRO."},
-open ("results/hibrit_gate_d7.json","w"),indent =1 )
-print ("receipt -> results/hibrit_gate_d7.json")
+open ("results/hybrid_gate_d7.json","w"),indent =1 )
+print ("receipt -> results/hybrid_gate_d7.json")

@@ -3,16 +3,16 @@
 
 RATIONALE: this oturumda whereas yarayan two koldan ikisi de FIZIKSELDI --
 B2a sign correction (+0.0316, saf rule) and C3 tanimlayici tutarliligi
-(FP -%45). Ogrenme mimarisi degistirmek (ranking hedefi, pairwise, kalibrasyon)
+(FP -%45). Ogrenme mimarisi degistirmek (ranking hedefi, pairwise, calibration)
 HICBIR kolda whereas yaramadi. Demek ki missing which is MODEL not OLCU.
 
-Kademe 1: mevcut gate (58 + 9 tanimlayici, HGB-derin), threshold 0.05 -> kisa list
+Kademe 1: mevcut gate (58 + 9 tanimlayici, HGB-deep), threshold 0.05 -> kisa list
 Kademe 2: kisa listeye 9 PAHALI olcu (`mouth_deep_definition`) + kademe-1 skoru
           -> ikinci HGB. Esik D6'da secilir.
 Sonra: NMS -> sign correction -> poz kafasi (urun zinciri).
 
 KIYAS: same kisa list, ikinci kademe KAPALI (i.e. mevcut 0.3070/0.3090 kolu).
-Tek degisken: ikinci kademe.
+Tek variable: ikinci kademe.
 """
 import collections 
 import json 
@@ -23,7 +23,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -91,7 +91,7 @@ def cluster (on ,gate ,mesh =False ):
     d6 ={str (p ):r for p ,r in 
     d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
     Rk =K .yukle (None )
-    out ,atlanan =[],0 
+    out ,skipped =[],0 
     for f in sorted (os .listdir (OZ )):
         if not (f .startswith (on +"_")and f .endswith (".npz")):
             continue 
@@ -105,14 +105,14 @@ def cluster (on ,gate ,mesh =False ):
         # parcasindan only 597'si olculuyordu; atlananlar full da hard
         # parcalardi (kisa listesi empty) and all of them FN. Taban 0.3070 instead of
         # SAHTE 0.3642 cikmisti. Kume filtrelemek metrigi sisirir.
-            atlanan +=1 
+            skipped +=1 
             out .append ({"pid":pid ,"mfg":r ["mfg"],"bos":True ,
             "G":np .asarray (r ["G"],float ),
             "Gd":np .asarray (r ["Gd"],float ),
             "diag":float (r ["diag"])})
             continue 
         out .append (d )
-    print (f"  {on }: {len (out )} part (atlanan {atlanan })",flush =True )
+    print (f"  {on }: {len (out )} part (skipped {skipped })",flush =True )
     return out 
 
 
@@ -163,7 +163,7 @@ def olc (data_ ,s2clf ,e2 ,S ,tam =False ):
     pm ={m :2 *v [0 ]/max (2 *v [0 ]+v [1 ]+v [2 ],1 )for m ,v in rob .items ()}
     mi =float (2 *sum (v [0 ]for v in rob .values ())/
     max (sum (2 *v [0 ]+v [1 ]+v [2 ]for v in rob .values ()),1 ))
-    return {"robot":mi ,"tespit":K .mikro (tes ),
+    return {"robot":mi ,"detection":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),
     "TP":int (sum (v [0 ]for v in rob .values ())),
@@ -171,7 +171,7 @@ def olc (data_ ,s2clf ,e2 ,S ,tam =False ):
 
 
 def main ():
-    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
+    gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-deep"]
     S =K .step_map ()
     tr =cluster ("tam",gate )
     dev =cluster ("d6",gate ,mesh =True )
@@ -184,7 +184,7 @@ def main ():
     max_leaf_nodes =63 ,
     l2_regularization =1.0 ,
     random_state =0 ).fit (X ,Y )
-    pickle .dump (s2 ,open ("results/ikinci_kademe.pkl","wb"))
+    pickle .dump (s2 ,open ("results/second_stage.pkl","wb"))
     en =None 
     for e2 in ESIKLER2 :
         r =olc (dev ,s2 ,e2 ,S )
@@ -195,18 +195,18 @@ def main ():
     e2 =en [0 ]
     baseline =olc (te ,None ,0.0 ,S ,tam =True )
     new_ =olc (te ,s2 ,e2 ,S ,tam =True )
-    print (f"\nTABAN (tek kademe)  robot {baseline ['robot']:.4f} | tespit "
-    f"{baseline ['tespit']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
-    print (f"IKI KADEME (e2={e2 }) robot {new_ ['robot']:.4f} | tespit "
-    f"{new_ ['tespit']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']}")
+    print (f"\nTABAN (tek kademe)  robot {baseline ['robot']:.4f} | detection "
+    f"{baseline ['detection']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
+    print (f"IKI KADEME (e2={e2 }) robot {new_ ['robot']:.4f} | detection "
+    f"{new_ ['detection']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']}")
     print (f"\nFARK {new_ ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02 "
     f"(threshold gurultusu ~0.015)")
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"iki_kademe":new_ ,
+    json .dump ({"damga":receipt_hash .damga (),"baseline":baseline ,"iki_kademe":new_ ,
     "e2":e2 ,
     "not":"Ikinci kademe: kisa listeye pahali fiziksel olculer. Esik "
     "D6'da secildi. D7 brand-disi, TAM ZINCIR, MIKRO."},
-    open ("results/ikinci_kademe_v2.json","w"),indent =1 )
-    print ("receipt -> results/ikinci_kademe.json")
+    open ("results/second_stage_v2.json","w"),indent =1 )
+    print ("receipt -> results/second_stage.json")
 
 
 if __name__ =="__main__":

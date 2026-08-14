@@ -6,7 +6,7 @@ Klasör: `c:\Users\DE00024082\Desktop\code` — terminali burada aç (PowerShell
 
 ## 1. Tek parça — rapor + 3D görsel ⭐
 
-**En kolay yol:**
+**En kolay path:**
 
 ```powershell
 .\viz.ps1 0311087

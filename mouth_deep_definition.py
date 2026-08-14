@@ -7,7 +7,7 @@ FP'yi %45 dusurdu. Ilk kademe tanimlayicilarinda only 9 olcu present and all of 
 single isin / single radius duzeyinde.
 
 Pahali olculeri TUM havuzda (100+ candidate/part) hesaplamak mumkun not; but gate
-esigini gecen KISA LISTEDE (~10-30 candidate/part) mumkun. Bu modul that olculeri gives.
+esigini passing KISA LISTEDE (~10-30 candidate/part) mumkun. Bu modul that olculeri gives.
 
 OLCULER (all of them isin tabanli, GT KULLANMAZ):
   profil_ort/std   mouth ekseninde different derinliklerde SERBEST YARICAP profili.
@@ -17,7 +17,7 @@ OLCULER (all of them isin tabanli, GT KULLANMAZ):
   dis_izi          radius profilinin salinim genligi (dis izi -> high)
   wall            mouth kenarindan DISARI, eksene dik yonde first yuzeye uzaklik
   koniklik         yaricabin derinlikle degisim egimi (pah/koni)
-  karsi_agiz       axis along govdeyi gecip cikan isin present mi (hole mi kor mu)
+  karsi_agiz       axis along govdeyi gecip produced isin present mi (hole mi kor mu)
   halka_duzlugu    mouth cevresindeki isin uzunluklarinin degisimi (duz mouth -> low)
   govde_orani      mouth merkezinden part merkezine uzaklik / part yarikosegeni
 
@@ -123,7 +123,7 @@ def tanimla (P ,D ,mesh ,diag ,center_ =None ):
         # KONIKLIK: yaricabin derinlikle egimi
         t =np .asarray (DERINLIKLER )
         X [i ,5 ]=float (np .polyfit (t ,prof ,1 )[0 ])if len (t )>1 else 0.0 
-        # KARSI AGIZ: govdeyi bastan sona gecen isin
+        # KARSI AGIZ: govdeyi bastan sona passing isin
         X [i ,6 ]=float (_mesafe (mesh ,(P [i ]-0.05 *d )[None ],(-d )[None ],
         uzak )[0 ]>=uzak *0.98 )
         # HALKA DUZLUGU: mouth cevresi isin uzunluklarinin degisimi

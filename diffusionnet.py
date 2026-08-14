@@ -318,7 +318,7 @@ gamma =1.0 ):
         tv =tv *(class_w /class_w .sum ()*len (class_w ))
         # Y14 FOCAL-TVERSKY (2026-08-13). gamma>1 easy orneklerin katkisini
         # bastirir, hard (low ortusme) siniflara odaklanir. gamma=1 KLASIK
-        # Tversky'dir, i.e. varsayilan davranis DEGISMEZ.
+        # Tversky'dir, i.e. default davranis DEGISMEZ.
     loss =1.0 -tv .mean ()
     if gamma !=1.0 :
         loss =loss .clamp_min (1e-6 )**gamma 
@@ -657,7 +657,7 @@ op_cache_dir =None ,mc_dropout =0 ):
     ops ={k :(v .to (device )if hasattr (v ,"to")else v )for k ,v in ops .items ()}
     # Y22 MC DROPOUT (2026-08-14). `model.eval()` above dropout'u KAPATIR;
     # that is why MC dropout'u disaridan acmaya calismak SESSIZ NO-OP becomes --
-    # this gece same tuzak baska a kolda `+0.0000` uretmisti. Katmanlar
+    # this night same tuzak baska a kolda `+0.0000` uretmisti. Katmanlar
     # eval()'den SONRA, here aciliyor and sayilari DOGRULANIYOR.
     _mc =int (mc_dropout or 0 )
     if _mc >0 :
@@ -678,7 +678,7 @@ op_cache_dir =None ,mc_dropout =0 ):
                 else _o .softmax (dim =-1 ))
                 _yig =_p if _yig is None else _yig +_p 
             probs =_yig /float (_mc )
-            out =probs # argmax olasilik uzerinden
+            out =probs # argmax probability uzerinden
         else :
             out =_forward (model ,ops ,_model_input (ops ,meta ))
         labels =out .argmax (dim =-1 ).cpu ().numpy ()

@@ -20,13 +20,13 @@
   },
   "config": {
    "cp_config.json": "5e84bd141b4e0e61",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
  "sonuc": {
   "robot": 0.18181818181818182,
-  "tespit": 0.18181818181818182,
+  "detection": 0.18181818181818182,
   "makro": 0.16666666666666666,
   "en_kotu": 0.0,
   "brand": {

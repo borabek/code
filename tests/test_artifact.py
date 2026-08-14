@@ -34,13 +34,13 @@ def _cfg ():
 def test_dagitilan_artifact_makbuzla_AYNI (alan ):
     blok =_cfg ().get ("current_product",{}).get (alan )
     if not isinstance (blok ,dict )or "md5"not in blok :
-        pytest .skip (f"{alan } icin md5 damgasi yok")
-    yol =os .path .join (KOK ,blok .get ("yol",f"results/{alan }.pkl"))
-    if not os .path .exists (yol ):
-        pytest .skip (f"{yol } yok")
-    assert _md5 (yol )==blok ["md5"],(
+        pytest .skip (f"{alan } for md5 damgasi none")
+    path =os .path .join (KOK ,blok .get ("path",f"results/{alan }.pkl"))
+    if not os .path .exists (path ):
+        pytest .skip (f"{path } none")
+    assert _md5 (path )==blok ["md5"],(
     f"{alan }: DAGITILAN DOSYA makbuzdaki damgayla UYUSMUYOR. "
-    f"config {blok ['md5'][:8 ]}... vs gercek {_md5 (yol )[:8 ]}... "
+    f"config {blok ['md5'][:8 ]}... vs gercek {_md5 (path )[:8 ]}... "
     f"Model degistiyse receipt da guncellenmelidir (headline.py --yaz / dagit betigi).")
 
 
@@ -67,12 +67,12 @@ def test_manset_gate_kimligi_ARTEFAKTLA_AYNI ():
     g =h .get ("gate")
     if not isinstance (g ,dict )or "md5"not in g :
         pytest .skip ("gate kimligi henuz uretilmemis (headline.py --yaz)")
-    yol =os .path .join (KOK ,g .get ("dosya","results/wire_gate.pkl"))
-    if not os .path .exists (yol ):
-        pytest .skip (f"{yol } yok")
-    assert _md5 (yol )==g ["md5"],(
-    f"headline gate kimligi BAYAT: config {g ['md5'][:8 ]}... vs dosya {_md5 (yol )[:8 ]}...")
-    with open (yol ,"rb")as f :
+    path =os .path .join (KOK ,g .get ("file","results/wire_gate.pkl"))
+    if not os .path .exists (path ):
+        pytest .skip (f"{path } none")
+    assert _md5 (path )==g ["md5"],(
+    f"headline gate kimligi BAYAT: config {g ['md5'][:8 ]}... vs file {_md5 (path )[:8 ]}...")
+    with open (path ,"rb")as f :
         d =pickle .load (f )
     assert int (g ["n_feat"])==int (d ["n_feat"]),(
     f"sutun sayisi uyusmuyor: kimlik {g ['n_feat']} vs artefakt {d ['n_feat']}")

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """CALISAN TAVANI 0.80'e: mesh tepelerini FILTRELE + normali direction kaynagi yap.
 
-DURUM (`results/tavan_085.json`): P2+Y3 kademesi 0.7798, P3 (ham mesh tepeleri)
+DURUM (`results/ceiling_085.json`): P2+Y3 kademesi 0.7798, P3 (ham mesh tepeleri)
 0.8686. 0.80 between kaliyor -> mesh tepeleri SART, but ham hali part basina
 ~7000 candidate demek and DAGITILAMAZ.
 
@@ -25,7 +25,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -82,7 +82,7 @@ def axis_sample (cyl ):
 def main ():
     cy =pickle .load (open ("results/_d7_silindirler.pkl","rb"))
     ac =pickle .load (open ("results/_d7_acikliklar.pkl","rb"))
-    kay =K .yukle (json .load (open ("results/d7_sinav_kumesi.json"))["pidler"])
+    kay =K .yukle (json .load (open ("results/d7_exam_set.json"))["pidler"])
     KOMBO =[(e ,dd )for e in ESIKLER for dd in (DEDUPE if e <=1 else (0.0 ,))]
     say ={k :collections .Counter ()for k in KOMBO }
     candidate ={k :0 for k in KOMBO }
@@ -180,7 +180,7 @@ def main ():
                         break 
                 if bul :
                     continue 
-                    # YENI: mesh tepesinin YEREL NORMALI (only secilen tepelerde)
+                    # YENI: mesh tepesinin YEREL NORMALI (only selected tepelerde)
                 mi =idx [idx >=nb ]-nb 
                 if len (mi )and len (Nm ):
                     yerel =np .vstack ([Nm [:len (Nm )//2 ][mi ],
@@ -222,12 +222,12 @@ def main ():
     else :
         print (f"\n0.80 SAGLANMADI (en yuksek "
         f"{max (v ['f1_tavani']for v in out .values ()):.4f})")
-    json .dump ({"damga":makbuz_hash .damga (),"n_gt":n_gt ,"n_parca":n_parca ,
+    json .dump ({"damga":receipt_hash .damga (),"n_gt":n_gt ,"n_parca":n_parca ,
     "sonuc":out ,
     "not":"Mesh tepeleri p_pos with filtrelendi + YEREL NORMAL direction "
     "kaynagi eklendi. ISARETLI aci. D7 brand-disi. TAVAN."},
-    open (os .environ .get ("T080_CIKTI","results/tavan_080_seyreltilmis.json"),"w"),indent =1 )
-    print ("receipt -> results/tavan_080_dagitilabilir.json")
+    open (os .environ .get ("T080_CIKTI","results/ceiling_080_seyreltilmis.json"),"w"),indent =1 )
+    print ("receipt -> results/ceiling_080_dagitilabilir.json")
 
 
 if __name__ =="__main__":

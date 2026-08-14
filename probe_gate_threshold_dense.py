@@ -16,12 +16,12 @@ import canonical_d7 as K
 import d6_record 
 from sina_cluster import match_hungarian 
 
-OLCUT =(("tespit",0.0 ,180.0 ,True ,False ),
+OLCUT =(("detection",0.0 ,180.0 ,True ,False ),
 ("rob",2.0 ,10.0 ,False ,False ),
 ("rbi",2.0 ,10.0 ,False ,True ))
-# CANLI PARAMETRE: dagitilan yolda GORELI_ESIK open, i.e. sabit threshold OLU.
-# Gercek karar: skor >= ORAN * parca_maksimumu VE skor >= TABAN.
-# Burada ORAN taranir (TABAN sabit 0.20).
+# CANLI PARAMETRE: dagitilan yolda GORELI_ESIK open, i.e. fixed threshold OLU.
+# Gercek karar: score >= ORAN * parca_maksimumu VE score >= TABAN.
+# Burada ORAN taranir (TABAN fixed 0.20).
 ESIKLER =[float (x )for x in 
 os .environ .get ("GE_ESIK","0.30,0.40,0.50,0.60").split (",")]
 N =int (os .environ .get ("GE_N","18"))
@@ -52,7 +52,7 @@ def main ():
     # Bir ayari only yogunda olcup dagitmak, katalogun cogunlugunu
     # olcmeden degistirmek olurdu.
     # BAGIMSIZ VERIFICATION (2026-08-14). Parametre VAL'de tarandiysa VAL'de
-    # olculen kazanc SISIK may be -- this kampanyada tarama two times
+    # measured_path kazanc SISIK may be -- this kampanyada tarama two times
     # yaniltti (vc0.35: taramada +0.01, full dagitimda -0.012).
     # `GE_KAYNAK=disari` -> VAL DISI parts (same parametre, BAGIMSIZ ornek).
     _rej =os .environ .get ("GE_REJIM","dense")
@@ -99,10 +99,10 @@ def main ():
     os .environ .pop ("WG_GORELI_ORAN",None )
 
     f1 =lambda t :2 *t [0 ]/max (2 *t [0 ]+t [1 ]+t [2 ],1 )# noqa: E731
-    print (f"\n{'threshold':>6s} {'tespit':>8s} {'robot':>8s} {'robot-ISR':>10s}")
+    print (f"\n{'threshold':>6s} {'detection':>8s} {'robot':>8s} {'robot-ISR':>10s}")
     for e in ESIKLER :
         yz ="  <- DAGITILAN"if abs (e -0.50 )<1e-9 else ""
-        print (f"{e :6.2f} {f1 (top [e ]['tespit']):8.4f} {f1 (top [e ]['rob']):8.4f} "
+        print (f"{e :6.2f} {f1 (top [e ]['detection']):8.4f} {f1 (top [e ]['rob']):8.4f} "
         f"{f1 (top [e ]['rbi']):10.4f}{yz }")
 
         # ESLI BOOTSTRAP: dagitilan 0.35'e according to
@@ -118,18 +118,18 @@ def main ():
         return d .mean (),np .percentile (d ,2.5 ),np .percentile (d ,97.5 ),(d >0 ).mean ()
 
     if 0.50 in ESIKLER :
-        print (f"\n--- ESLI BOOTSTRAP (0.35'e gore) ---")
-        print (f"{'threshold':>6s} {'metrik':>8s} {'fark':>9s} {'%95 GA':>22s} {'poz%':>6s}")
+        print (f"\n--- ESLI BOOTSTRAP (0.35'e per) ---")
+        print (f"{'threshold':>6s} {'metrik':>8s} {'diff':>9s} {'%95 GA':>22s} {'poz%':>6s}")
         for e in ESIKLER :
             if abs (e -0.50 )<1e-9 :
                 continue 
-            for ad in ("tespit","rbi"):
+            for ad in ("detection","rbi"):
                 f ,lo ,hi ,pz =boot (part [0.50 ],part [e ],ad )
                 yz =" *"if (lo >0 or hi <0 )else ""
                 print (f"{e :6.2f} {ad :>8s} {f :+9.4f} [{lo :+.4f},{hi :+.4f}]{yz :>3s} {100 *pz :5.1f}")
     json .dump ({str (e ):{a :f1 (v )for a ,v in top [e ].items ()}for e in ESIKLER },
     io .open (f"results/gate_esik_{_rej }.json","w",encoding ="utf-8"),indent =1 )
-    print ("\n-> results/gate_esik_yogun.json")
+    print ("\n-> results/gate_threshold_dense.json")
     return 0 
 
 

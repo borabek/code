@@ -5,7 +5,7 @@ Bu, wire_gate'in USTUNE gelen 2. kademe selector: only high-CP parcalarda devrey
 
 feats:  13 wire_gate (feats_for) + 8 lattice (lattice_feats) + 4 ranking (rank_feats) = 25.
 train:  results/highcp_pool.json (24 part, 6k+9k, sizintisiz base-gate ws) -> full-train RF -> pkl.
-apply:  cikarimda cps + probs + point'lerden 25 feat kur -> skor -> top-N.
+apply:  cikarimda cps + probs + point'lerden 25 feat kur -> score -> top-N.
 OOF/family-out skorlari AYRI (leave_family_out.py / receipt); this artefact FULL-TRAIN deploy modeli."""
 import os ,json ,numpy as np 
 
@@ -95,7 +95,7 @@ def _load (path =MODEL_PATH ):
 
 
 def apply (cps ,V ,probs ,CE ,CT ,N ,base_ws =None ,model_path =MODEL_PATH ):
-    """high-CP top-N selector. cps=union candidate listesi (6k+9k), V/probs=6k mesh+avg olasilik, N=manufacturer CP count.
+    """high-CP top-N selector. cps=union candidate listesi (6k+9k), V/probs=6k mesh+avg probability, N=manufacturer CP count.
     base_ws verilmezse wire_gate base-gate with is computed (lattice consistency for gerekli). top-N cps returns."""
     import wire_gate 
     m =_load (model_path )

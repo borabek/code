@@ -35,7 +35,7 @@ def _birim (V ):
 
 
 def oznitelik (P ,D ,Pu ,diag ):
-    """(n, 6). `P`,`D` secenek konum/yonu; `Pu` parcanin TUM candidate konumlari."""
+    """(n, 6). `P`,`D` option konum/yonu; `Pu` parcanin TUM candidate konumlari."""
     P =np .asarray (P ,float ).reshape (-1 ,3 )
     D =_birim (D )
     Pu =np .asarray (Pu ,float ).reshape (-1 ,3 )

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""cp_geometry primitifleri -- ANALITIK as bilinen sekillerde sabitlenir.
+"""cp_geometry primitifleri -- ANALITIK as known sekillerde sabitlenir.
 
 Neden: 2026-07-28'de this fonksiyonlar rtree yoklugunda sessizce girdilerini geri donduruyordu and
 no sey difference etmedi. Burada beklenen degerler ELDE hesaplanabilir olduğu for, fonksiyon
@@ -27,7 +27,7 @@ def test_ray_hits_from_center (box ):
 
 
 def test_ray_hits_through_from_outside (box ):
-    """Disaridan gecen isin: IKI kesisim (giris + cikis), 35 and 65 mm."""
+    """Disaridan passing isin: IKI kesisim (giris + cikis), 35 and 65 mm."""
     h =ray_hits (box ,[0 ,0 ,-50 ],[0 ,0 ,1 ])
     assert len (h )==2 
     assert h [0 ]==pytest .approx (35.0 ,abs =1e-6 )
@@ -135,7 +135,7 @@ def test_exit_length_respects_min_and_max (box ):
 
 
 def test_exit_length_tip_is_actually_outside (box ):
-    """SOZLESME M3'un tabani: olculen boyla three GERCEKTEN disarida must be."""
+    """SOZLESME M3'un tabani: measured_path boyla three GERCEKTEN disarida must be."""
     for p in ([0 ,0 ,0 ],[0 ,0 ,14.0 ],[3 ,5 ,-10.0 ]):
         d =outward_along_axis (box ,p ,[0 ,0 ,1 ])
         L =exit_length (box ,p ,d ,margin =2.0 )

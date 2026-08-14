@@ -65,7 +65,7 @@ def main ():
     b =np .array ([h ["rj"]=="very"for h in HAZ ])
     print (f"yonlendirme (candidate>={AYIRIM }): cok_aday {int (a .sum ())} / az_aday {int ((~a ).sum ())}")
     print (f"  GT rejimiyle uyum: {float ((a ==b ).mean ()):.1%} "
-    f"(yonlendirme GT GORMEZ, bu yalniz bilgi)")
+    f"(yonlendirme GT GORMEZ, this only bilgi)")
 
     def puanla (h ,ratio ,baseline ):
         P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
@@ -92,9 +92,9 @@ def main ():
             HUC [(o ,t )]=[puanla (h ,o ,t )for h in HAZ ]
         print (f"  ratio {o :.2f} bitti",flush =True )
 
-    ayar =[j for j ,h in enumerate (HAZ )if h ["pid"]not in val ]
+    setting =[j for j ,h in enumerate (HAZ )if h ["pid"]not in val ]
     verdict =[j for j ,h in enumerate (HAZ )if h ["pid"]in val ]
-    print (f"AYAR {len (ayar )} part | HUKUM(VAL) {len (verdict )} part")
+    print (f"AYAR {len (setting )} part | HUKUM(VAL) {len (verdict )} part")
 
     def f1_of (idx ,sec ):
         """sec: arm -> (ratio,baseline).  det, rob returns."""
@@ -103,12 +103,12 @@ def main ():
         return f1w (det ),f1w (rob ),det ,rob ,[HAZ [j ]["geo"]for j in idx ]
 
     MEV ={"cok_aday":(0.50 ,0.25 ),"az_aday":(0.50 ,0.25 )}
-    # --- AYAR kumesinde arm basina most iyi (digeri mevcutta sabit tutulur)
+    # --- AYAR kumesinde arm basina most iyi (digeri mevcutta fixed tutulur)
     EN =dict (MEV )
     for arm in ("az_aday","cok_aday"):
-        alt =[j for j in ayar if HAZ [j ]["arm"]==arm ]
+        alt =[j for j in setting if HAZ [j ]["arm"]==arm ]
         if len (alt )<10 :
-            print (f"  {arm }: yalniz {len (alt )} part -- AYARLANMAZ, mevcut kalir")
+            print (f"  {arm }: only {len (alt )} part -- AYARLANMAZ, mevcut kalir")
             continue 
         en ,eb =None ,None 
         for o in ORANLAR :
@@ -120,33 +120,33 @@ def main ():
         print (f"  {arm } ({len (alt )} part): mevcut {mv :.4f} -> en iyi {eb } {en :.4f} ({en -mv :+.4f})")
         EN [arm ]=eb 
 
-    print (f"\nAYAR kumesinde secilen kural: {EN }")
+    print (f"\nAYAR kumesinde selected rule: {EN }")
     fn =lambda rows :f1w ([q for _ ,q in rows ])-f1w ([p for p ,_ in rows ])
     d0 ,r0 ,D0 ,R0 ,gg =f1_of (verdict ,MEV )
     d1 ,r1 ,D1 ,R1 ,_ =f1_of (verdict ,EN )
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (D0 ,D1 )),gg ,fn ,n =3000 )
     _ ,rlo ,rhi =measure_set .grup_bootstrap (list (zip (R0 ,R1 )),gg ,fn ,n =3000 )
     print (f"\n--- HUKUM: VAL ({len (verdict )} part) ---")
-    print (f"{'rule':<26}{'tespit':>10}{'robot(FIZ)':>13}")
+    print (f"{'rule':<26}{'detection':>10}{'robot(FIZ)':>13}")
     print (f"{'mevcut (tek rule)':<26}{d0 :>10.4f}{r0 :>13.4f}")
     print (f"{'rejime kosullu':<26}{d1 :>10.4f}{r1 :>13.4f}")
-    print (f"\nVAL tespit farki: {d1 -d0 :+.4f}  GA[{lo :+.4f},{hi :+.4f}] "
+    print (f"\nVAL detection farki: {d1 -d0 :+.4f}  GA[{lo :+.4f},{hi :+.4f}] "
     f"{'GERCEK'if (lo >0 or hi <0 )else 'noise'}")
     print (f"VAL robot  farki: {r1 -r0 :+.4f}  GA[{rlo :+.4f},{rhi :+.4f}]")
     ha0 =f1_of (range (len (HAZ )),MEV );ha1 =f1_of (range (len (HAZ )),EN )
-    print (f"\n[bilgi] HAVUZLANMIS: tespit {ha0 [0 ]:.4f} -> {ha1 [0 ]:.4f} | "
-    f"robot {ha0 [1 ]:.4f} -> {ha1 [1 ]:.4f}   (HUKUM DEGIL: ayar kumesi havuzda)")
+    print (f"\n[bilgi] HAVUZLANMIS: detection {ha0 [0 ]:.4f} -> {ha1 [0 ]:.4f} | "
+    f"robot {ha0 [1 ]:.4f} -> {ha1 [1 ]:.4f}   (HUKUM DEGIL: setting kumesi havuzda)")
     gecti =(d1 -d0 )>=0.005 and lo >0 
-    print (f"\nKILL: VAL tespit +0.005 VE GA>0 -> "
+    print (f"\nKILL: VAL detection +0.005 VE GA>0 -> "
     f"{'GECTI'if gecti else 'GECMEDI -- tek rule KALIR'}")
     with io .open ("results/t2_regime_rule.json","w",encoding ="utf-8")as f :
-        json .dump ({"ayirim_aday":AYIRIM ,"secilen":{k :list (v )for k ,v in EN .items ()},
-        "val_mevcut":{"tespit":d0 ,"robot":r0 },
-        "val_yeni":{"tespit":d1 ,"robot":r1 },
+        json .dump ({"ayirim_aday":AYIRIM ,"selected":{k :list (v )for k ,v in EN .items ()},
+        "val_mevcut":{"detection":d0 ,"robot":r0 },
+        "val_yeni":{"detection":d1 ,"robot":r1 },
         "val_d_tespit":d1 -d0 ,"ga_tespit":[lo ,hi ],
         "val_d_robot":r1 -r0 ,"ga_robot":[rlo ,rhi ],
-        "havuz_mevcut":{"tespit":ha0 [0 ],"robot":ha0 [1 ]},
-        "havuz_yeni":{"tespit":ha1 [0 ],"robot":ha1 [1 ]},
+        "havuz_mevcut":{"detection":ha0 [0 ],"robot":ha0 [1 ]},
+        "havuz_yeni":{"detection":ha1 [0 ],"robot":ha1 [1 ]},
         "gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/t2_regime_rule.json")
 

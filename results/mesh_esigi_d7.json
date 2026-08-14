@@ -20,7 +20,7 @@
   },
   "config": {
    "cp_config.json": "5e84bd141b4e0e61",
-   "results/metrik_dondurulmus.json": "884f23faace37573"
+   "results/metric_dondurulmus.json": "884f23faace37573"
   },
   "python": "3.12.10"
  },
@@ -106,5 +106,5 @@
    }
   }
  },
- "not": "Mesh olasilik esigi taramasi (YALNIZ KONUM recall'u). D7'de DIAGNOSIS amaclidir; threshold secimi `tam` korpusunda yapilir."
+ "not": "Mesh probability esigi taramasi (YALNIZ KONUM recall'u). D7'de DIAGNOSIS amaclidir; threshold secimi `tam` korpusunda yapilir."
 }

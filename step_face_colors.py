@@ -8,7 +8,7 @@ WHY GEREKLI:
     (5 parcanin 2'sinde tutarli, 3'unde not). Sira varsayimi guvenilir not.
   * STEPCAFControl_Reader rengi and geometriyi BIRLIKTE reads -> eslestirme sorunu ORTADAN KALKAR.
 
-WHY IMPORTANT: [[low-cp-information-gap]] sizintili upper sinirla kanitladi ki kalan error a BILGI
+WHY IMPORTANT: [[low-cp-information-gap]] sizintili upper sinirla kanitladi ki remaining error a BILGI
 sorunu -- data or kapasite not. "Kanalin dibinde METAL present mi" full da no sondanin sahip
 olmadigi turden a sinyal.
 """
@@ -200,7 +200,7 @@ def read_all_by_order (step_path ,max_shift =4 ):
 
     1) SILINDIR DEGIL, TUM YUZLER. Tel kelepcesi silindirik a surface DEGIL, duz metal a
        yuzeydir; only silindirlere bakan a "metale distance" ozelligi asil metali kacirir.
-       (q8'de olculen metal_mesafe AUC 0.639 silindir-metaliyle alinmisti.)
+       (q8'de measured_path metal_mesafe AUC 0.639 silindir-metaliyle alinmisti.)
 
     2) SABIT KAYMA (offset) COZULUR, part ATILMAZ. Mutlak face order a parcada full a
        eleman kayiyordu (measured: OCC indeksi = metin indeksi + 1). `read_by_order` bunu

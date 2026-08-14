@@ -19,7 +19,7 @@ import sys
 import numpy as np 
 import trimesh 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -33,12 +33,12 @@ import canonical_d7 as K # noqa: E402
 OB ="results/_p1_olasilik_d7"
 
 
-def auc (skor ,y ):
+def auc (score ,y ):
     """Mann-Whitney AUC. Sabit column 0.5 returns (bilgi absent)."""
     y =np .asarray (y ).astype (bool )
     if y .all ()or not y .any ():
         return float ("nan")
-    s =np .asarray (skor ,float )
+    s =np .asarray (score ,float )
     if not np .isfinite (s ).all ()or s .std ()<1e-12 :
         return 0.5 
     r =np .argsort (np .argsort (s ))+1.0 
@@ -49,7 +49,7 @@ def auc (skor ,y ):
 def main ():
     cy =pickle .load (open ("results/_d7_silindirler.pkl","rb"))
     ac =pickle .load (open ("results/_d7_acikliklar.pkl","rb"))
-    pids =json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]
+    pids =json .load (open ("results/d7_exam_set.json"))["pidler"]
     kay =K .yukle (pids )
 
     X ,Y ,PID =[],[],[]
@@ -74,9 +74,9 @@ def main ():
             print (f"  {i +1 }/{len (kay )} part",flush =True )
     X =np .vstack (X );Y =np .concatenate (Y )
     print (f"\n{len (X )} B-rep onerisi | GT'ye dusen {Y .mean ():.4f} | "
-    f"atlanan part {n_atlanan }\n",flush =True )
+    f"skipped part {n_atlanan }\n",flush =True )
 
-    print (f"{'tanimlayici':<16} {'AUC':>7}  (0.5 = bilgi yok)")
+    print (f"{'tanimlayici':<16} {'AUC':>7}  (0.5 = bilgi none)")
     res_ ={}
     for j ,ad in enumerate (AT .AD ):
         a =auc (X [:,j ],Y )
@@ -102,12 +102,12 @@ def main ():
         print (f"{ad :<16} {ici [ad ]:>14.4f}"
         +("  <-- AYIRT EDIYOR"if abs (ici [ad ]-0.5 )>=0.10 else ""))
 
-    json .dump ({"damga":makbuz_hash .damga (),"auc":res_ ,"parca_ici_auc":ici ,
+    json .dump ({"damga":receipt_hash .damga (),"auc":res_ ,"parca_ici_auc":ici ,
     "n_aday":int (len (X )),"pozitif_oran":float (Y .mean ()),
     "not":"EGITIM YOK, saf ayrilabilirlik. D7 brand-disi. Etiket: "
-    "B-rep onerisi GT'ye tespit toleransinda mi."},
-    open ("results/agiz_ayirt_edicilik.json","w"),indent =1 )
-    print ("\nmakbuz -> results/agiz_ayirt_edicilik.json")
+    "B-rep onerisi GT'ye detection toleransinda mi."},
+    open ("results/mouth_ayirt_edicilik.json","w"),indent =1 )
+    print ("\nmakbuz -> results/mouth_ayirt_edicilik.json")
 
 
 if __name__ =="__main__":

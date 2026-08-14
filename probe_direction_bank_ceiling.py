@@ -2,14 +2,14 @@
 """SONDA: direction bankasinin DAGITILABILIR tavani. D6'da olculur, D7'ye DOKUNULMAZ.
 
 Soru: dagitilan havuzun (B-rep birlesik pool -- `product_wide.pool` with AYNI)
-uzerine `direction_bank.secenekler` konursa, MUKEMMEL selector ne up to takes?
+uzerine `direction_bank.options` konursa, MUKEMMEL selector ne up to takes?
 
 Karsilastirma single degiskenli:
   Y0  : havuzun own yonu (bugun dagitilan state)
   BANK: direction_bank (own + komsu + silindir + ana), candidate basina <= MAX_SEC
 
-Ayrica DAGITILABILIRLIK olculur: candidate basina mean secenek count and part
-basina total secenek. Tavan betikleri (`probe_ceiling_085.py`) part basina
+Ayrica DAGITILABILIRLIK olculur: candidate basina mean option count and part
+basina total option. Tavan betikleri (`probe_ceiling_085.py`) part basina
 binlerce konum kullaniyordu; this bank onu YAPMAZ.
 
 D7 BUTCESI: this betik D7'ye BAKMAZ. Ayar and karar D6'da verilir.
@@ -21,7 +21,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -73,7 +73,7 @@ def main ():
             n_gt +=len (G )
             continue 
         V =np .asarray (np .load (f"{OB }/{pid }.npz")["V"],float )
-        idx ,YD ,_OZ =YB .secenekler (Pb ,Db ,cyl ,V )
+        idx ,YD ,_OZ =YB .options (Pb ,Db ,cyl ,V )
         n_gt +=len (G )
         tut ["Y0"]+=recall_tavan (Pb ,Db ,G ,Gd )
         tut ["BANK"]+=recall_tavan (Pb [idx ],YD ,G ,Gd )
@@ -95,14 +95,14 @@ def main ():
         print (f"{ad :<8} {rc :>8.4f} {f1 :>10.4f}")
     d =out ["arm"]["BANK"]["f1_tavani"]-out ["arm"]["Y0"]["f1_tavani"]
     print (f"\nBANK - Y0 ceiling farki: {d :+.4f}")
-    print (f"candidate basina secenek: {out ['aday_basina_secenek']:.1f} | "
+    print (f"candidate basina option: {out ['aday_basina_secenek']:.1f} | "
     f"part basina candidate {out ['parca_basina_aday']:.0f} -> "
-    f"secenek {out ['parca_basina_secenek']:.0f}")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
+    f"option {out ['parca_basina_secenek']:.0f}")
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,
     "not":"Yon bankasi TAVANI, dagitilan pool uzerinde. MUKEMMEL "
     "selector. D6 -- D7'ye BAKILMADI."},
-    open ("results/yon_bankasi_tavan_d6.json","w"),indent =1 )
-    print ("receipt -> results/yon_bankasi_tavan_d6.json")
+    open ("results/direction_bank_ceiling_d6.json","w"),indent =1 )
+    print ("receipt -> results/direction_bank_ceiling_d6.json")
 
 
 if __name__ =="__main__":

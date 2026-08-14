@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""B-kolu: GATE HEDEFI = ROBOT-HAZIR (tespit instead of).
+"""B-kolu: GATE HEDEFI = ROBOT-HAZIR (detection instead of).
 
 Urunun hedefi ROBOT but gate "this candidate a CP mi" diye egitiliyor. Robot-hazir
 olmak lateral<=2mm VE signed angle<=10 gerektirir; gate this ikisini HIC gormuyor.
 Hipotez: hedefi degistirmek robot F1'i artirir (precision bedeliyle).
 
-Korpus v4 (g10), MARKA-DISI split. Tek degisken: y.
+Korpus v4 (g10), MARKA-DISI split. Tek variable: y.
 KILL: brand-disi robot-F1 artmiyorsa arm NULL.
 """
 import collections ,json ,os ,pickle ,sys 
@@ -48,7 +48,7 @@ M =np .zeros ((len (X ),X .shape [1 ]*2 ))
 for u in np .unique (pid ):
     i =np .where (pid ==u )[0 ]
     M [i ]=wire_gate .within_part (X [i ],"zskor")
-print (f"candidate {len (M )} | tespit-poz %{100 *y_tes .mean ():.1f} | "
+print (f"candidate {len (M )} | detection-poz %{100 *y_tes .mean ():.1f} | "
 f"ROBOT-poz %{100 *y_rob .mean ():.1f}\n",flush =True )
 
 say =collections .Counter (mfg )
@@ -69,7 +69,7 @@ for m in test_mf :
         sat [ad ]=2 *tp /max (2 *tp +fp +fn ,1 )
     if len (sat )==2 :
         out [m ]=sat 
-        print (f"  {m :<6} n={te .sum ():<6} robot-F1: tespit-hedefli {sat ['hedef=TESPIT']:.4f}"
+        print (f"  {m :<6} n={te .sum ():<6} robot-F1: detection-hedefli {sat ['hedef=TESPIT']:.4f}"
         f" | robot-hedefli {sat ['hedef=ROBOT']:.4f}"
         f" ({sat ['hedef=ROBOT']-sat ['hedef=TESPIT']:+.4f})",flush =True )
 if out :

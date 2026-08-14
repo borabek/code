@@ -18,7 +18,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -112,7 +112,7 @@ def main ():
         out [ad ]={"konum_recall":rc ,"aday_parca":a ["n"]/max (a ["p"],1 ),
         "n_parca":a ["p"],"n_gt":a ["gt"]}
         print (f"{ad :<24}{rc :>14.4f}{a ['n']/max (a ['p'],1 ):>13.0f}")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":on ,"sonuc":out ,
+    json .dump ({"damga":receipt_hash .damga (),"cluster":on ,"sonuc":out ,
     "not":"Mesh seyreltme kuralinin YALNIZ KONUM recall'u. Kural "
     "EGITIM markalarinda secilir; D6/D7 yalnizca olculur."},
     open (f"results/seyreltme_kurali_{on }.json","w"),indent =1 )

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """0.45 ICIN BELIRLEYICI SONDA: lateral error SEGMENTASYON KALITESIYLE aciklaniyor mu?
 
-ARITMETIK: robot = tespit x donusum. Donusumun tavani = lateral<=2mm gecme orani
+ARITMETIK: robot = detection x donusum. Donusumun tavani = lateral<=2mm gecme orani
 (%54.6). 0.45 for YANAL duzelmek ZORUNDA. `v_o` (mouth-ortasi) tez sabiti and
 degismeyecek -- AMA `v_o` mouth cevresindeki tepelerin ORTALAMASI. Segmentasyon
 agzi more iyi secerse centroid more DOGRU yere duser. Bu tez-sadik a path.
@@ -42,7 +42,7 @@ for r in R :
         lat .append (float (np .linalg .norm (v -(v @u )*u )))
         feats .append (X [i ])
 lat =np .asarray (lat );Fm =np .asarray (feats )
-print (f"eslesen candidate {len (lat )} | lateral medyan {np .median (lat ):.3f}mm | "
+print (f"matched candidate {len (lat )} | lateral medyan {np .median (lat ):.3f}mm | "
 f"<=2mm %{100 *(lat <=2 ).mean ():.1f}\n")
 
 print ("YANAL HATA with KORELASYON (Spearman, |rho| large = aciklayici):")

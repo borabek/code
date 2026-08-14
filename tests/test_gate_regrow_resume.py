@@ -57,7 +57,7 @@ def test_resume_remaps_indices_when_corpus_grows (tmp_path ):
 
 
 def test_resume_drops_parts_that_left_the_corpus (tmp_path ):
-    """Korpustan cikan parcanin satirlari atilmali, kalanlar bozulmamali."""
+    """Korpustan produced parcanin satirlari atilmali, rest bozulmamali."""
     part =str (tmp_path /"partial.npz")
     _write_partial (part ,[("A",2 ),("B",3 ),("C",1 )],{"A":4 ,"B":7 ,"C":1 })
 

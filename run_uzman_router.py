@@ -35,7 +35,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -83,7 +83,7 @@ def yap ():
 def egit (data_ ,ic ,cok_agirlik =1.0 ):
     """cok_agirlik > 1 whereas COK-CP parcalarindan gelen orneklerin agirligi
     artirilir. Y23: veriyi BOLMEK instead of AGIRLIKLANDIRMAK. Uzman kolu
-    kahin rejimle bile dustu (-0.0418) and sebebi data parcalanmasiydi;
+    oracle rejimle bile dustu (-0.0418) and sebebi data parcalanmasiydi;
     agirliklandirma parcalamaz."""
     n_s =sum (len (data_ [i ]["y"])for i in ic )
     if not n_s :
@@ -112,7 +112,7 @@ def egit (data_ ,ic ,cok_agirlik =1.0 ):
 def ince_ayar (genel_veri ,ic_cok ,data_ ,ek_agac =60 ):
     """UZMANLASMA, VERI PARCALAMADAN.
 
-    Uzman kolu kahin rejimle bile dustu (-0.0418) and reason teshis edildi:
+    Uzman kolu oracle rejimle bile dustu (-0.0418) and reason teshis edildi:
     lower kumede SIFIRDAN egitmek each uzmani more few veriyle birakiyor.
     Duzeltme: genel modelden DEVAM ET (`warm_start`) and only dense
     parcalarda EK AGAC ekle. Boylece uzman TUM verinin bilgisiyle baslar,
@@ -145,11 +145,11 @@ def ince_ayar (genel_veri ,ic_cok ,data_ ,ek_agac =60 ):
     # kullaniyordu -- boyle a feature YOK (dogrusu `n_iter_`).
     # AttributeError, genis a `except` by yutuluyor and fonksiyon
     # None donuyordu; two arm da sessizce TABANA dusup full +0.0000 veriyordu.
-    # "Ince ayar whereas yaramiyor" diye rapor edilecekti. Artik error YUTULMAZ.
+    # "Ince setting whereas yaramiyor" diye rapor edilecekti. Artik error YUTULMAZ.
     m .set_params (warm_start =True ,max_iter =int (m .n_iter_ )+ek_agac )
     m .fit (M [sec ],Y [sec ])
     del M 
-    assert int (m .n_iter_ )>ek_agac //2 ,"ince ayar agac EKLEMEDI"
+    assert int (m .n_iter_ )>ek_agac //2 ,"ince setting agac EKLEMEDI"
     return m 
 
 
@@ -165,7 +165,7 @@ def main ():
         d ["_M"]=temel (d )
         d ["_cok"]=int (len (d ["G"])>=COK_ESIK )
     n_cok =sum (d ["_cok"]for d in data_ )
-    print (f"{len (data_ )} part | cok-CP {n_cok } ({n_cok /len (data_ ):.1%}) "
+    print (f"{len (data_ )} part | very-CP {n_cok } ({n_cok /len (data_ ):.1%}) "
     f"| threshold n_gt>={COK_ESIK }",flush =True )
 
     # TANIDIK MARKA kosulu: rastgele 3 fold (brand-KARISIK)
@@ -223,14 +223,14 @@ def main ():
     f"({yon_dogru /max (yon_top ,1 ):.3f})")
     print (f"\n=== TABAN {last_ ['baseline']:.4f} (TANIDIK brand kosulu) ===")
     for k in KOLLAR [1 :]:
-        fark =last_ [k ]-last_ ["baseline"]
-        et ="  <- KAPI GECTI"if fark >=0.01 else ""
+        diff =last_ [k ]-last_ ["baseline"]
+        et ="  <- KAPI GECTI"if diff >=0.01 else ""
         ust ="  (UST SINIR, dagitilamaz)"if k =="uzman_gt"else ""
-        print (f"  {k :<10}{last_ [k ]:.4f}   {fark :+.4f}{et }{ust }")
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,
+        print (f"  {k :<10}{last_ [k ]:.4f}   {diff :+.4f}{et }{ust }")
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,
     "cok_esik":COK_ESIK ,"n_cok":n_cok ,
     "yonlendirici_dogruluk":yon_dogru /max (yon_top ,1 ),
-    "toplam":last_ ,
+    "total":last_ ,
     "not":"Yogun-part UZMANI + ogrenilmis router. TANIDIK "
     "brand kosulu (rastgele katlar). uzman_gt UST SINIRDIR. "
     "D7'ye BAKILMADI."},

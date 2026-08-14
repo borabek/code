@@ -70,14 +70,14 @@ CABLE_ENTRY_CLASS =3
 
 SPLITS ={
 "d6":{
-"manifest":RESULTS /"d6_sinav_kumesi.json",
+"manifest":RESULTS /"d6_exam_set.json",
 "records":RESULTS /"_der_yeni_g10_n22.pkl",
 "cylinders":RESULTS /"_d6_silindirler.pkl",
 "planars":RESULTS /"_d6_acikliklar.pkl",
 "probabilities":RESULTS /"_p1_olasilik_g10",
 },
 "d7":{
-"manifest":RESULTS /"d7_sinav_kumesi.json",
+"manifest":RESULTS /"d7_exam_set.json",
 "records":RESULTS /"_der_yeni_G7BIRLESIK.pkl",
 "cylinders":RESULTS /"_d7_silindirler.pkl",
 "planars":RESULTS /"_d7_acikliklar.pkl",

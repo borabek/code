@@ -11,12 +11,12 @@ Once GT with ESLESEN onerilerin fiziksel dagilimi olculur, filtreler ORADAN seci
 """
 import collections ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
 from sina_cluster import match_hungarian 
 
-d7 =set (map (str ,json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]))
+d7 =set (map (str ,json .load (open ("results/d7_exam_set.json"))["pidler"]))
 R =[r for r in pickle .load (open ("results/_der_yeni_G7BIRLESIK.pkl","rb"))
 if str (r ["pid"])in d7 and len (r .get ("G",[]))]
 cy =pickle .load (open ("results/_d7_silindirler.pkl","rb"))
@@ -38,7 +38,7 @@ def oneriler (pid ):
     np .asarray (rad ,float ),np .asarray (ora ,float ))
 
 
-    # --- 1) GT with eslesen onerilerin FIZIKSEL dagilimi -------------------------
+    # --- 1) GT with matched onerilerin FIZIKSEL dagilimi -------------------------
 es_r ,es_o ,tum_r ,tum_o =[],[],[],[]
 for r in R :
     P ,D ,rad ,ora =oneriler (str (r ["pid"]))
@@ -51,9 +51,9 @@ for r in R :
     tum_r +=rad .tolist ();tum_o +=ora .tolist ()
 q =lambda a ,p :float (np .percentile (a ,p ))# noqa: E731
 print (f"GT'ye YAKIN oneriler n={len (es_r )} | TUM oneriler n={len (tum_r )}")
-print (f"  yaricap  eslesen  p2 {q (es_r ,2 ):.2f} p50 {q (es_r ,50 ):.2f} p98 {q (es_r ,98 ):.2f} mm")
+print (f"  yaricap  matched  p2 {q (es_r ,2 ):.2f} p50 {q (es_r ,50 ):.2f} p98 {q (es_r ,98 ):.2f} mm")
 print (f"           TUMU     p2 {q (tum_r ,2 ):.2f} p50 {q (tum_r ,50 ):.2f} p98 {q (tum_r ,98 ):.2f} mm")
-print (f"  L/r      eslesen  p2 {q (es_o ,2 ):.2f} p50 {q (es_o ,50 ):.2f} p98 {q (es_o ,98 ):.2f}")
+print (f"  L/r      matched  p2 {q (es_o ,2 ):.2f} p50 {q (es_o ,50 ):.2f} p98 {q (es_o ,98 ):.2f}")
 print (f"           TUMU     p2 {q (tum_o ,2 ):.2f} p50 {q (tum_o ,50 ):.2f} p98 {q (tum_o ,98 ):.2f}")
 
 R_LO ,R_HI =q (es_r ,2 ),q (es_r ,98 )
@@ -111,8 +111,8 @@ for ad ,fr ,fo ,dd in KOLLAR :
     c =cik [ad ]
     print (f"{ad :<22} {c ['recall']:>8.4f} {c ['aday_per_parca']:>11.1f} "
     f"{pm .get ('CWT',0 ):>8.4f} {pm .get ('KLM',0 ):>8.4f}",flush =True )
-json .dump ({"damga":makbuz_hash .damga (),"filtre":{"r_lo":R_LO ,"r_hi":R_HI ,
+json .dump ({"damga":receipt_hash .damga (),"filtre":{"r_lo":R_LO ,"r_hi":R_HI ,
 "lr_lo":O_LO },"kollar":cik ,
-"not":"HAVUZ RECALL, D7 brand-disi. Filtre esikleri GT'ye eslesen "
+"not":"HAVUZ RECALL, D7 brand-disi. Filtre esikleri GT'ye matched "
 "onerilerin p2-p98'inden, kor tarama DEGIL."},
-open ("results/brep_filtre_taramasi.json","w"),indent =1 )
+open ("results/brep_filtre_sweep.json","w"),indent =1 )

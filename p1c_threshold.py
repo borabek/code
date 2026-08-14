@@ -8,8 +8,8 @@ GATE_REDDI still GT'nin %10.5'i.
 
 SECIM YANLILIGI ENGELI: 8 exam ureticisi IKIYE bolunur.
   DEV  : SUPU, NIT, S+S, SE      (threshold BURADA secilir)
-  SINAV: UPUN, MOR, UTL, ONV     (secilen threshold BURADA TEK ATIS olculur)
-Ikisi de "gorulmemis manufacturer" ozelligini korur; secilen number with raporlanan number
+  SINAV: UPUN, MOR, UTL, ONV     (selected threshold BURADA TEK ATIS olculur)
+Ikisi de "unseen manufacturer" ozelligini korur; selected number with raporlanan number
 AYNI parcalardan gelmez. ([[uclu-split-and-fake-kazanclar]])
 """
 import argparse 
@@ -33,11 +33,11 @@ DEV_MFG ={"SUPU","NIT","S+S","SE"}
 ROBOT_YANAL ,ROBOT_ACI =2.0 ,10.0 
 
 
-def maske (skor ,ratio ,baseline ):
+def maske (score ,ratio ,baseline ):
     """Urunun goreli karar kurali -- single source here TEKRAR EDILMEZ, same formul."""
-    if not len (skor ):
+    if not len (score ):
         return np .zeros (0 ,bool )
-    return (skor >=ratio *float (np .max (skor )))&(skor >=baseline )
+    return (score >=ratio *float (np .max (score )))&(score >=baseline )
 
 
 def puanla (rec_ ,model ,ratio ,baseline ,match_greedy ,f1w ,mfgler =None ):
@@ -88,7 +88,7 @@ def main ():
         line_ =[]
         for t in tabanlar :
             tf ,rf =puanla (dev ,model ,o ,t ,match_greedy ,f1w )
-            izgara [f"{o }/{t }"]={"tespit":tf ,"robot":rf }
+            izgara [f"{o }/{t }"]={"detection":tf ,"robot":rf }
             line_ .append (tf )
             if tf >en_iyi_skor :
                 en_iyi_skor ,en_iyi =tf ,(o ,t )
@@ -96,13 +96,13 @@ def main ():
 
     o0 ,t0 =0.50 ,0.25 
     dt0 ,dr0 =puanla (dev ,model ,o0 ,t0 ,match_greedy ,f1w )
-    print (f"\nDEV'de secilen: ratio {en_iyi [0 ]:.2f} / baseline {en_iyi [1 ]:.2f} "
-    f"-> tespit {en_iyi_skor :.4f}  (mevcut 0.50/0.25: {dt0 :.4f})")
+    print (f"\nDEV'de selected: ratio {en_iyi [0 ]:.2f} / baseline {en_iyi [1 ]:.2f} "
+    f"-> detection {en_iyi_skor :.4f}  (mevcut 0.50/0.25: {dt0 :.4f})")
 
     st0 ,sr0 =puanla (sin ,model ,o0 ,t0 ,match_greedy ,f1w )
     st1 ,sr1 =puanla (sin ,model ,en_iyi [0 ],en_iyi [1 ],match_greedy ,f1w )
     print (f"\n--- SINAV YARISI (TEK ATIS, secimde KULLANILMADI) ---")
-    print (f"{'ayar':<18}{'TESPIT':>9}{'ROBOT':>9}")
+    print (f"{'setting':<18}{'TESPIT':>9}{'ROBOT':>9}")
     print (f"{'mevcut 0.50/0.25':<18}{st0 :>9.4f}{sr0 :>9.4f}")
     print (f"{f'yeni {en_iyi [0 ]:.2f}/{en_iyi [1 ]:.2f}':<18}{st1 :>9.4f}{sr1 :>9.4f}")
     print (f"{'FARK':<18}{st1 -st0 :>+9.4f}{sr1 -sr0 :>+9.4f}")
@@ -112,8 +112,8 @@ def main ():
         json .dump ({"model":a .model ,"dev_mfg":sorted (DEV_MFG ),"izgara":izgara ,
         "dev_secim":{"ratio":en_iyi [0 ],"baseline":en_iyi [1 ],
         "dev_tespit":en_iyi_skor },
-        "sinav_mevcut":{"tespit":st0 ,"robot":sr0 },
-        "sinav_yeni":{"tespit":st1 ,"robot":sr1 },
+        "sinav_mevcut":{"detection":st0 ,"robot":sr0 },
+        "sinav_yeni":{"detection":st1 ,"robot":sr1 },
         "karar":karar },f ,indent =1 ,ensure_ascii =False )
     print (f"receipt -> {MAKBUZ }")
 

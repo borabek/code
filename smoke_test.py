@@ -16,7 +16,7 @@ BU TEST TEK SEYI YAPAR: real a STEP dosyasini bastan sona URUNUN yolundan geciri
 and sonunda CP CIKMASINI SART KOSAR. Cikmazsa EXIT 1.
 
 Kullanim:
-    python smoke_test.py            # korpustan first uygun part
+    python smoke_test.py            # korpustan first eligible part
     python smoke_test.py <step>     # belirli a file
 """
 import os 
@@ -51,7 +51,7 @@ def main ():
     else :
         from big_arbiter import eligible 
         E =eligible ()
-        assert E ,"korpusta uygun part none"
+        assert E ,"korpusta eligible part none"
         stp =E [0 ][3 ]
     print (f"part: {os .path .basename (stp )}")
 
@@ -66,7 +66,7 @@ def main ():
     Vr ,Fr =step_to_mesh (stp )
     V ,F =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
     V =np .ascontiguousarray (V ,np .float64 );F =np .ascontiguousarray (F ,np .int64 )
-    assert len (V )>1000 ,f"remesh cok az tepe uretti: {len (V )}"
+    assert len (V )>1000 ,f"remesh very az tepe uretti: {len (V )}"
     print (f"[2/5] mesh {len (Vr )} -> remesh {len (V )} tepe / {len (F )} yuz")
 
     # --- 3) inference
@@ -77,12 +77,12 @@ def main ():
         return_probs =True )
         pbs .append (np .asarray (pb ,float ))
     assert len (pbs )==len (cks )
-    print (f"[3/5] inference tamam, olasilik boyutu {pbs [0 ].shape }")
+    print (f"[3/5] inference tamam, probability boyutu {pbs [0 ].shape }")
 
     # --- 4) candidate uretimi
     cps ,probs ,is_hi ,uyeler =RC .derive_candidates (V ,F ,pbs ,stp ,cfg =cfg )
     assert cps ,"HIC ADAY URETILMEDI"
-    print (f"[4/5] {len (cps )} candidate (cok-CP rejimi: {is_hi })")
+    print (f"[4/5] {len (cps )} candidate (very-CP rejimi: {is_hi })")
 
     # --- 5) gate karari + duzeltmeler = URUNUN CIKTISI
     X =wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ,step_path =stp )
@@ -104,7 +104,7 @@ def main ():
         c =wire_gate .pick_direction_from_dictionary (Xk ,c ,V ,step_path =stp ,uyeler =uyeler )
     P =np .array ([x ["point"]for x in c ],float )
     D =np .array ([x ["direction"]for x in c ],float )
-    assert len (P )and np .isfinite (P ).all (),"CP konumlari gecersiz"
+    assert len (P )and np .isfinite (P ).all (),"CP konumlari invalid"
     assert np .allclose (np .linalg .norm (D ,axis =1 ),1.0 ,atol =1e-3 ),"yonler birim not"
     print (f"[5/5] URUN CIKTISI: {len (P )} CP")
     for i in range (min (3 ,len (P ))):
@@ -120,7 +120,7 @@ if __name__ =="__main__":
         rc =main ()
     except Exception :
     # SystemExit / KeyboardInterrupt YAKALANMAZ: `except BaseException` yazarsam
-    # basarili kosudaki sys.exit(0) da buraya duser and test GECERKEN "URUN CALISMIYOR"
+    # ok kosudaki sys.exit(0) da buraya duser and test GECERKEN "URUN CALISMIYOR"
     # basar -- i.e. gostergeyi full da this betigin onlemek for present oldugu sekilde breaks.
         traceback .print_exc ()
         print ("\nDUMAN TESTI KALDI -- URUN CALISMIYOR")

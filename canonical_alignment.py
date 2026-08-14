@@ -17,7 +17,7 @@ verilir: mutlak sutunlar sign secimi ne olursa olsun same kalir.
 
 Sutunlar (10):
   k1,k2,k3    candidate konumunun axis boyu yeri, that eksendeki uzanima bolunmus [-1,1]
-  d1,d2,d3    secenek yonunun eksenlerle ic carpimi (ISARETLI)
+  d1,d2,d3    option yonunun eksenlerle ic carpimi (ISARETLI)
   a1,a2,a3    same ic carpimlarin MUTLAK degeri (isaretten bagimsiz)
   uzanim_or    most kisa / most uzun axis orani (body biciminin kaba olcusu)
 """
@@ -50,7 +50,7 @@ def cerceve (V ):
         if c <0 :
             E [i ]=-E [i ]
         elif c ==0.0 and float (E [i ].sum ())<0 :
-            E [i ]=-E [i ]# full simetride sabit a rule
+            E [i ]=-E [i ]# full simetride fixed a rule
             # right el sistemi
     if float (np .dot (np .cross (E [0 ],E [1 ]),E [2 ]))<0 :
         E [2 ]=-E [2 ]

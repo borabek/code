@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """C2 -- KONUM HAVUZUNU 5x KUCULT: hedef ILK KEZ full sayiyla belli
 
-DIAGNOSIS (results/konum_auc_d6.json). Ilk-k'nin dolmasi for gereken KONUM
+DIAGNOSIS (results/position_auc_d6.json). Ilk-k'nin dolmasi for gereken KONUM
 AUC'si = 1 - k/n_konum:
     NIT : 1 - 24/432 = 0.944 gerek,  0.705 present
     MOR : 1 -  9/497 = 0.982 gerek,  0.900 present
-Ayni teshis, secenek duzeyinde YANILTICIYDI: NIT'te secenek AUC 0.8854'un
+Ayni teshis, option duzeyinde YANILTICIYDI: NIT'te option AUC 0.8854'un
 most YON becerisinden geliyor (direction AUC 0.8899), konum becerisi 0.7053.
 
 IKI YOL VAR. AUC'yi yukseltmek (temsil problemi, hard) ya da HAVUZU
@@ -20,13 +20,13 @@ sayede kurtarildi).
 SUZGECLER (all of them GT'siz, all of them single single VE birlikte):
   seg      : konumun segmentasyon olasiligi (that konumdaki most yakin vertex)
   ickonum  : konumun icbukeylik olcusu -- hole ICBUKEYDIR
-  derin    : konumdan body icine serbest path (hole DERINDIR)
+  deep    : konumdan body icine serbest path (hole DERINDIR)
   cap      : opening capi kablo araliginda mi (1.5 - 12 mm)
   dis      : konum dis yuzeyde mi (body inside gomulu not)
 
-CIKTI: each suzgec and threshold for (konum recall, kalan konum count,
+CIKTI: each suzgec and threshold for (konum recall, remaining konum count,
 gereken AUC). "gereken AUC 0.705'in ALTINA inerken recall >= 0.95"
-which is a ayar VARSA arm canlidir.
+which is a setting VARSA arm canlidir.
 
 D7'ye BAKILMAZ.
 """
@@ -57,7 +57,7 @@ CE =int (connector3d .CABLE_ENTRY )
 CT =int (connector3d .CONTACT )
 EKSENEL =40.0 
 N_ISIN =24 # ickonum/depth for direction ornegi
-SUZ =("seg","ickonum","derin","cap","dis")
+SUZ =("seg","ickonum","deep","cap","dis")
 
 
 def _birim (v ):
@@ -89,7 +89,7 @@ def konum_oz (kon_P ,V ,N ,agac ,p_seg ,isinci ):
         out ["ickonum"][i ]=float ((np .sum (v *N [kom ],axis =1 )>0 ).mean ())
         # DERINLIK: body icine most uzun serbest path
         d =IE .ilk_carpma (isinci ,np .tile (p ,(N_ISIN ,1 )),direction ,cap =40.0 )
-        out ["derin"][i ]=float (np .max (d ))
+        out ["deep"][i ]=float (np .max (d ))
         # CAP: most yakin yuzeye uzaklik x2 (opening genisligi vekili)
         out ["cap"][i ]=2.0 *float (agac .query (p )[0 ])
         # DIS: 6mm topta komsu present mi and yuzeye yakin mi
@@ -144,13 +144,13 @@ def main ():
             dg |=(yan <=K .YANAL )&(np .abs (al )<=EKSENEL )
         if dg .sum ()==0 :
             continue 
-        oz =konum_oz (kon_P ,V ,N ,agac ,p_seg ,isinci )
+        feat =konum_oz (kon_P ,V ,N ,agac ,p_seg ,isinci )
         a =ist [d ["mfg"]]
         a ["gt"].append (len (G ))
         a ["n"].append (len (kon_P ))
-        a ["dogru"].append (int (dg .sum ()))
+        a ["correct"].append (int (dg .sum ()))
         for k_ in SUZ :
-            a [f"v_{k_ }"].append (oz [k_ ])
+            a [f"v_{k_ }"].append (feat [k_ ])
             a [f"d_{k_ }"].append (dg )
         n +=1 
         if n %40 ==0 :
@@ -164,12 +164,12 @@ def _rapor (ist ,n ):
     out ={}
     for m_ in sorted (ist ,key =lambda x :-sum (ist [x ]["gt"])):
         a =ist [m_ ]
-        k_ort =float (np .mean (a ["dogru"]))
+        k_ort =float (np .mean (a ["correct"]))
         n_ort =float (np .mean (a ["n"]))
         print (f"\n--- {m_ }  (GT {sum (a ['gt'])} | konum {n_ort :.0f} | "
-        f"dogru konum {k_ort :.1f} | gereken AUC "
+        f"correct konum {k_ort :.1f} | gereken AUC "
         f"{1 -k_ort /n_ort :.4f})")
-        print (f"  {'suzgec':<10}{'yuzdelik':>10}{'recall':>9}{'kalan':>8}"
+        print (f"  {'suzgec':<10}{'yuzdelik':>10}{'recall':>9}{'remaining':>8}"
         f"{'kucultme':>10}{'gereken AUC':>13}")
         out [m_ ]={}
         for k_ in SUZ :
@@ -194,7 +194,7 @@ def _rapor (ist ,n ):
                 ger =1 -tut_d /max (tut_n ,1 )
                 print (f"  {k_ :<10}{q :>10}{rec :>9.3f}{kal :>8.0f}"
                 f"{n_ort /max (kal ,1e-9 ):>10.2f}x{ger :>12.4f}")
-                out [m_ ][f"{k_ }_{q }"]={"recall":rec ,"kalan":kal ,
+                out [m_ ][f"{k_ }_{q }"]={"recall":rec ,"remaining":kal ,
                 "gereken_auc":ger }
     json .dump ({"cluster":KUME ,"brand":out ,
     "not":"GT'siz konum suzgecleri: recall / pool kucultme "

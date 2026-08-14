@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """VII.2 -- ADET GEOMETRIDEN OKUNABILIR MI? (ogrenmesiz)
 
-WHY IMPORTANT. Ust-k kahin deneyi adedin degerini olctu: UPUN'da only
+WHY IMPORTANT. Ust-k oracle deneyi adedin degerini olctu: UPUN'da only
 correct CP sayisini bilmek F1'i 0.5359 -> 0.6892 does (**+0.1533**), SUPU'da
 +0.0314. Ama that a KAHINDI. Soru: adedi OGRENMEDEN, parcanin own
 geometrisinden okuyabilir miyiz?
@@ -41,8 +41,8 @@ def _kipsel_yaricap (R ):
     """En kalabalik radius kovasinin merkezi (0.1mm cozunurluk)."""
     if not len (R ):
         return None 
-    kova =np .round (np .asarray (R ,float )/0.1 )*0.1 
-    d =collections .Counter (kova )
+    bucket =np .round (np .asarray (R ,float )/0.1 )*0.1 
+    d =collections .Counter (bucket )
     return max (d ,key =lambda k :(d [k ],-k ))
 
 
@@ -113,11 +113,11 @@ def main ():
         out [m_ ]=r 
         print (sat )
     json .dump ({"r_tol":R_TOL ,"a_tol":A_TOL ,"brand":out ,
-    "not":"Ogrenmesiz adet tahmini: kipsel yaricapli silindir "
+    "not":"Ogrenmesiz count tahmini: kipsel yaricapli silindir "
     "sayisi. |error| = ortanca mutlak error, <=1 = tam "
     "isabete yakin ratio. D7'ye BAKILMADI."},
-    open ("results/adet_geometri.json","w"),indent =1 )
-    print ("\nmakbuz -> results/adet_geometri.json")
+    open ("results/count_geometri.json","w"),indent =1 )
+    print ("\nmakbuz -> results/count_geometri.json")
     print ("OKUMA: <=1 orani yuksekse count OGRENMEDEN okunabiliyor demektir;")
     print ("       upper-k deneyi bunun UPUN'da +0.1533 degerinde oldugunu showed.")
 

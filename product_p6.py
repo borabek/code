@@ -11,7 +11,7 @@ skorla siralar. Yon residual SECILIR.
 
 ISARET DUZELTME YOK -- and this kasten. `product_wide.isaret_duzelt` fiziksel a
 kuralla yonu ters cevirir (+0.0316 olculmustu); here +u and -u ZATEN ayri two
-secenek as bankada and siralayici hangisinin correct oldugunu ogrenir. Kurali
+option as bankada and siralayici hangisinin correct oldugunu ogrenir. Kurali
 ustune koymak, ogrenilen karari eziyor. `P6_ISARET=1` with acilir (ablasyon).
 """
 import os 
@@ -43,7 +43,7 @@ def _cfg (ad ,cevre ,vars_ ):
 ACIK =_cfg ("robot_p6_ortak","URUN_P6",False )
 
 
-def model_yukle (yol =MODEL_YOL ):
+def model_yukle (path =MODEL_YOL ):
     """Egitimin yazdigi PAKETI oku. Doner: dictionary ya da None.
 
     Paket: kademe1 (+ istege bagli kademe2), karar kurali, NMS, seed kurali.
@@ -51,10 +51,10 @@ def model_yukle (yol =MODEL_YOL ):
     """
     global _MODEL 
     if _MODEL is None :
-        if not os .path .exists (yol ):
+        if not os .path .exists (path ):
             return None 
         import pickle 
-        _MODEL =pickle .load (open (yol ,"rb"))
+        _MODEL =pickle .load (open (path ,"rb"))
     return _MODEL 
 
 
@@ -107,7 +107,7 @@ def secenek_tablosu (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     float )
     B =product_wide .tanimlayici (P ,D ,cyl ,mesh ,diag )
     # YELPAZE only mesh OLMAYAN adaylara -- egitimdekiyle AYNI rule.
-    idx ,YD ,C =YB .secenekler (P ,D ,cyl ,V ,mesh =mesh ,diag =diag ,
+    idx ,YD ,C =YB .options (P ,D ,cyl ,V ,mesh =mesh ,diag =diag ,
     fan_maske =(np .asarray (src_ ,int )!=2 ))
     if not len (idx ):
         return None 
@@ -181,7 +181,7 @@ def out_ (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     if pk .get ("kademe2")is not None :
     # IKINCI KADEME = KISA LISTE UZERINDE FP REDDEDICI.
     # Birinci gecisin YUKSEK GUVENLI secimleri TOHUM becomes, periyodik yapi
-    # olculeri cikar; ikinci model only `kisa_esik`i gecen secenekleri
+    # olculeri cikar; ikinci model only `kisa_esik`i passing secenekleri
     # yeniden puanlar and birinci kademe skorunu da OZNITELIK as takes.
     # Kisa list DISI satirlar 0 kalir -- ikinci kademe birinci kademeyi
     # EZEMEZ, only icinden selects. Tohumlar only tahminden gelir; GT this
@@ -207,7 +207,7 @@ def out_ (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     if ISARET and len (P2 ):
         T2 =product_wide .tanimlayici (P2 ,D2 ,*_mesh_arg (V ,F ))
         D2 =product_wide .isaret_duzelt (D2 ,T2 )
-        # `wire_score` GERCEK skordur (eskiden sabit 1.0 idi). Guven kapili GLB
+        # `wire_score` GERCEK skordur (eskiden fixed 1.0 idi). Guven kapili GLB
         # bunun uzerine kurulur: precision >=0.90 verecek threshold kalibre edilir,
         # ustundekiler ONAYLI, altindakiler ONERI becomes.
     return [{"point":P2 [i ],"direction":D2 [i ],"wire_score":float (S2 [i ])}

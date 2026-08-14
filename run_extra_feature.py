@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 """EK OZNITELIK BLOGU: single degiskenli kiyas cercevesi.
 
-`EK_BLOK` cevre degiskeniyle secilen a blok, mevcut 95 sutunun UZERINE
+`EK_BLOK` cevre degiskeniyle selected a blok, mevcut 95 sutunun UZERINE
 eklenir and `full` MARKA KATLARINDA blogu OLAN / OLMAYAN two arm karsilastirilir.
-Tek degisken bloktur: same corpus, same katlar, same kurallar, same seed.
+Tek variable bloktur: same corpus, same katlar, same kurallar, same seed.
 
 Bloklar:
-  simetri   4 column  -- ayna simetri esi present mi (klemensler simetriktir)
+  symmetry   4 column  -- ayna symmetry esi present mi (klemensler simetriktir)
   depth 12 column  -- axis boyu radius profili (tel/vida/alet ayrimi)
   kafes_adet 3 column -- lattice adiminden beklenen CP count and secim baskisi
-  ozkalib   3 column  -- part-ici oz-kalibrasyon (transduktif yeniden ranking)
+  ozkalib   3 column  -- part-ici feat-calibration (transduktif yeniden ranking)
 
-KAPI: +0.01 under kalan blok ATILIR. Oznitelik sisirmek modeli bozuyor --
+KAPI: +0.01 under remaining blok ATILIR. Oznitelik sisirmek modeli bozuyor --
 P6_GEO deneyi (-0.0154) and p5-v2'nin goreli sutunlari bunu showed.
 
 D7'ye BAKILMAZ.
@@ -25,7 +25,7 @@ import time
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -39,7 +39,7 @@ import p6_decision # noqa: E402
 from run_p6_ortak import yukle # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
-BLOK =os .environ .get ("EK_BLOK","simetri")
+BLOK =os .environ .get ("EK_BLOK","symmetry")
 KURALLAR =([("mutlak",e )for e in (0.20 ,0.40 ,0.60 ,0.80 ,0.90 ,0.95 ,0.97 )]+
 [("goreli",o ,t )for o in (0.50 ,0.70 ,0.85 ,0.95 )
 for t in (0.05 ,0.20 ,0.40 )])
@@ -61,7 +61,7 @@ def yigin_f32 (ogeler ,uret ,line_ ):
 
     `np.vstack([...]).astype(np.float32)` before HEPSINI float64 merges:
     full-open korpusta 8.414.677 row x 162 column = **10.2 GiB** and
-    MemoryError -- gece 04:15'te `kanonik` blogu full boyle dustu. Satir count
+    MemoryError -- night 04:15'te `kanonik` blogu full boyle dustu. Satir count
     onceden bilindigi for array DOGRUDAN float32 ayrilir and part part
     doldurulur: vertex bellek yariya iner, ara kopya kalmaz.
 
@@ -85,12 +85,12 @@ def ek_blok (d ,s1 ):
     """Secilen blogu SECENEK BASINA uret. Tohumlar HER ZAMAN tahminden."""
     P =d ["P"][d ["idx"]]
     YD =d ["YD"]
-    if BLOK =="simetri":
-        import simetri 
+    if BLOK =="symmetry":
+        import symmetry 
         mf =f"{MESH_DIZ [d ['_kume']]}/{d ['pid']}.npz"
         V =(np .asarray (np .load (mf )["V"],float )
         if os .path .exists (mf )else np .zeros ((0 ,3 )))
-        return simetri .oznitelik (P ,V ,skor =s1 )
+        return symmetry .oznitelik (P ,V ,score =s1 )
     if BLOK =="depth":
         import trimesh 
 
@@ -125,7 +125,7 @@ def ek_blok (d ,s1 ):
         import cluster_context as KM 
         return KM .oznitelik (P ,YD ,d ["idx"],s1 ,d ["diag"])
     if BLOK =="kanonik":
-    # PARCANIN KENDI EKSEN SISTEMI: gorulmemis markada modelleme ekseni
+    # PARCANIN KENDI EKSEN SISTEMI: unseen markada modelleme ekseni
     # bizimkiyle same olmak zorunda not; dunya koordinati ogrenilen each
     # konumsal kalibi bozuyor.
         import canonical_alignment as KH 
@@ -135,7 +135,7 @@ def ek_blok (d ,s1 ):
         return KH .oznitelik (P ,YD ,V )
     if BLOK =="topoloji":
     # ES-EKSENLI AILE: candidate a dizinin uyesi mi, only mi. Mesh/isin
-    # GEREKMEZ -- only candidate konumlari and secenek yonu.
+    # GEREKMEZ -- only candidate konumlari and option yonu.
         import topology_family as TA 
         return TA .oznitelik (P ,YD ,d ["P"],d ["diag"])
     if BLOK =="ozkalib":
@@ -185,9 +185,9 @@ def ek_hepsi (data_ ,oof ):
         return p .map (_ek_bir ,isler ,chunksize =2 )
 
 
-def puanla (data_ ,skor ,rule_ ):
+def puanla (data_ ,score ,rule_ ):
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,s in zip (data_ ,skor ):
+    for d ,s in zip (data_ ,score ):
         P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =NMS )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
@@ -281,13 +281,13 @@ def main ():
     for ad in ("YOK","VAR"):
         c =top [ad ]
         last_ [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
-    fark =last_ ["VAR"]-last_ ["YOK"]
+    diff =last_ ["VAR"]-last_ ["YOK"]
     print (f"\nBLOK {BLOK }: YOK {last_ ['YOK']:.4f} -> VAR {last_ ['VAR']:.4f} "
-    f"({fark :+.4f})")
-    print (f"KAPI: +0.01 -> {'GECTI'if fark >=0.01 else 'GECMEDI'}")
-    json .dump ({"damga":makbuz_hash .damga (),"blok":BLOK ,
-    "none":last_ ["YOK"],"present":last_ ["VAR"],"fark":fark ,
-    "gecti":bool (fark >=0.01 ),"katlar":katlar ,
+    f"({diff :+.4f})")
+    print (f"KAPI: +0.01 -> {'GECTI'if diff >=0.01 else 'GECMEDI'}")
+    json .dump ({"damga":receipt_hash .damga (),"blok":BLOK ,
+    "none":last_ ["YOK"],"present":last_ ["VAR"],"diff":diff ,
+    "gecti":bool (diff >=0.01 ),"katlar":katlar ,
     "n_parca":len (data_ ),
     "not":"Tek degiskenli ek-oznitelik kiyasi. tam brand katlari, "
     "MAKRO rule secimi. D7'ye BAKILMADI."},

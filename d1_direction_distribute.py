@@ -52,15 +52,15 @@ def sozluk_kur (V ,P ,Pd ,Dham =None ,UYE =None ,YUZN =()):
       * urun    `sozluk_kur(..., Pd, uyeler, YUZN)`  -> "uye" girdileri VAR, and "ham"
                  girdisi "mevcut" with AYNI vektor (because Dham=Pd geciliyordu)
     `satirla()` two KONUMSAL feature uretiyor (`gi` and `len(SOZ[i])`), therefore araya
-    giren "uye" girdileri sonraki TUM kaynaklarin indeksini KAYDIRIYORDU: egitimde gi=2
+    entering "uye" girdileri sonraki TUM kaynaklarin indeksini KAYDIRIYORDU: egitimde gi=2
     "obb" iken uruinde "uye" oluyordu. Ustelik `KAYNAK` one-hot'unda "uye" sutunu egitimde
     SABIT SIFIRDI. Model, never gormedigi a column deseniyle karar veriyordu.
 
-    COZUM: two degisken input de KALDIRILDI.
+    COZUM: two variable input de KALDIRILDI.
       * "uye" already UPSTREAM'de is used (`wire_gate.pick_member_direction` zincirde before works),
         sozlukte TEKRAR etmesi gereksizdi.
       * "ham" uründe "mevcut"un kopyasiydi.
-    Geriye kalan dictionary tamamen deterministik and HER YERDE AYNI:
+    Geriye remaining dictionary tamamen deterministik and HER YERDE AYNI:
         mevcut, obb+/-, uzlasi, yuz_uzlasi, dik+/-, yuzn+/-
     `Dham` and `UYE` parametreleri geriye donuk uyumluluk for duruyor but KULLANILMIYOR.
     """
@@ -102,12 +102,12 @@ def satirla (Xk ,SOZ ,UZ ,Pd ,hedef_yon ):
     for i in range (len (SOZ )):
         d0 =Pd [i ]
         for gi ,(tip ,v )in enumerate (SOZ [i ]):
-            oz =[1.0 if tip ==t2 else 0.0 for t2 in KAYNAK ]
-            oz .append (float (np .degrees (np .arccos (np .clip (abs (float (v @d0 )),0 ,1 )))))
-            oz .append (float (np .degrees (np .arccos (np .clip (abs (float (v @UZ )),0 ,1 ))))
+            feat =[1.0 if tip ==t2 else 0.0 for t2 in KAYNAK ]
+            feat .append (float (np .degrees (np .arccos (np .clip (abs (float (v @d0 )),0 ,1 )))))
+            feat .append (float (np .degrees (np .arccos (np .clip (abs (float (v @UZ )),0 ,1 ))))
             if np .linalg .norm (UZ )>0.5 else 90.0 )
-            oz .append (float (gi ));oz .append (float (len (SOZ [i ])))
-            RX .append (np .concatenate ([Xk [i ],oz ]));RJ .append ((i ,gi ))
+            feat .append (float (gi ));feat .append (float (len (SOZ [i ])))
+            RX .append (np .concatenate ([Xk [i ],feat ]));RJ .append ((i ,gi ))
             if hedef_yon is not None :
                 g =hedef_yon [i ]
                 # ISARETLI ETIKET (2026-08-03 duzeltmesi): onceki version abs() kullaniyordu,
@@ -132,7 +132,7 @@ def main ():
     from infer_step_cp import load_any ,step_to_mesh 
     from sina_cluster import esle 
     from sklearn .ensemble import RandomForestClassifier 
-    from gece_kilit import guard 
+    from night_kilit import guard 
 
     guard ("d1")
     D =T .yukle ()
@@ -207,7 +207,7 @@ def main ():
                 except Exception :
                     pass 
                 SOZ ,UZ =sozluk_kur (V ,P ,Pd ,Dham ,None ,YUZN )
-                # ETIKET: each adayi most yakin GT'ye bagla (tespit toleransi)
+                # ETIKET: each adayi most yakin GT'ye bagla (detection toleransi)
                 diff =P [:,None ,:]-Gm [None ,:,:]
                 al =(diff *Gdm [None ,:,:]).sum (-1 )
                 pe =np .linalg .norm (diff -al [...,None ]*Gdm [None ,:,:],axis =-1 )
@@ -220,7 +220,7 @@ def main ():
                     else :
                         hedef .append (None )
                 ax ,ay ,rj_ =satirla (Xf ,SOZ ,UZ ,Pd ,hedef )
-                # YALNIZ eslesen adaylarin satirlari: label however GT'ye baglanabilen
+                # YALNIZ matched adaylarin satirlari: label however GT'ye baglanabilen
                 # adaylarda tanimlidir. (satirla() RJ'de (candidate, giris) ciftini returns.)
                 for n ,(i ,_gi )in enumerate (rj_ ):
                     if hedef [i ]is not None :
@@ -234,7 +234,7 @@ def main ():
         print (f"-> {EGT } | {len (RY )} satir / {ok } part",flush =True )
 
     RX =np .array (RX ,float );RY =np .array (RY )
-    print (f"\negitim: {len (RY )} satir | dogru giris {RY .mean ():.1%} | sutun {RX .shape [1 ]}")
+    print (f"\negitim: {len (RY )} satir | correct giris {RY .mean ():.1%} | sutun {RX .shape [1 ]}")
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =5 ,n_jobs =-1 ,
     random_state =0 ).fit (RX ,RY )
     with open (MODEL ,"wb")as f :
@@ -274,11 +274,11 @@ def main ():
     d =T .f1w (rob1 )-T .f1w (rob0 )
     print (f"\nDAGITILABILIR SECICI (training korpusunda egitildi):")
     print (f"  robot  {T .f1w (rob0 ):.4f} -> {T .f1w (rob1 ):.4f}  ({d :+.4f})  GA[{lo :+.4f},{hi :+.4f}]")
-    print (f"  tespit {T .f1w (det0 ):.4f} -> {T .f1w (det1 ):.4f}")
+    print (f"  detection {T .f1w (det0 ):.4f} -> {T .f1w (det1 ):.4f}")
     gecti =d >=0.01 and lo >0 
     print (f"\nKILL: robot +0.01 VE GA>0 -> {'GECTI -> DAGITILIR'if gecti else 'GECMEDI'}")
     with io .open ("results/d1_direction_distribute.json","w",encoding ="utf-8")as f :
-        json .dump ({"robot_once":T .f1w (rob0 ),"robot_sonra":T .f1w (rob1 ),"fark":d ,
+        json .dump ({"robot_once":T .f1w (rob0 ),"robot_sonra":T .f1w (rob1 ),"diff":d ,
         "ga":[lo ,hi ],"tespit_once":T .f1w (det0 ),"tespit_sonra":T .f1w (det1 ),
         "marj":MARJ ,"egitim_satir":int (len (RY )),"gecti":bool (gecti )},
         f ,indent =1 )

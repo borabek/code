@@ -3,7 +3,7 @@
 
 WHY (tez):
   Tez CP'yi acikligin AGIZ MERKEZI (v_o) and INSERT YONU with tanimlar. Bizim turetmemiz mesh
-  bilesenlerinin weight merkezinden geliyor; olculen dik error 0.1-2.3 mm. Robot hedefi <2mm.
+  bilesenlerinin weight merkezinden geliyor; measured_path dik error 0.1-2.3 mm. Robot hedefi <2mm.
   B-rep whereas silindirin TAM merkezini and TAM eksenini tasiyor -- tessellation'da atilan bilgi.
 
 NE DEGISIR, NE DEGISMEZ:
@@ -28,7 +28,7 @@ def _axis_and_len (lo ,hi ):
 
 
 def snap (surfaces ,point ,direction ,max_mm =MAX_SNAP_MM ):
-    """CP'yi most yakin uygun B-rep silindirinin mouth merkezine + eksenine tasi.
+    """CP'yi most yakin eligible B-rep silindirinin mouth merkezine + eksenine tasi.
 
     Doner: (yeni_nokta, yeni_yon, tasima_mm, yapisti_mi)
     Uygun candidate otherwise input AYNEN dondurulur -- sessizce bozma absent.

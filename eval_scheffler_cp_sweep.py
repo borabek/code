@@ -50,7 +50,7 @@ for s in samples :
     gt =cps (V ,F ,s ["labels"],1 )
     pl =np .asarray (diffusionnet .predict (model ,meta ,V ,F ,device ="cuda",op_cache_dir =OPCACHE ))
     cache .append ((V ,F ,gt ,pl ))
-print (f"val {len (cache )} parts inferred once; sweeping min-size x NMS\n")
+print (f"val {len (cache )} parts inferred before; sweeping min-size x NMS\n")
 
 print (f"  {'min_v':>5}{'nms':>5}{'F1':>8}{'prec':>7}{'recall':>8}   TP/FP/FN")
 best =None 

@@ -44,19 +44,19 @@ def kimlik (dosya_adi ):
     b =os .path .basename (dosya_adi )
     if "."not in b :
         return ("","")
-    mfg ,kalan =b .split (".",1 )
+    mfg ,remaining =b .split (".",1 )
     # part numarasi, first "_ElectricalTerminal" (ya da baska a "_Electrical*") oncesine up to
-    m =re .split (r"_Electrical|_Mechanics|_Common",kalan ,maxsplit =1 )
+    m =re .split (r"_Electrical|_Mechanics|_Common",remaining ,maxsplit =1 )
     return (mfg ,m [0 ])
 
 
 def kimlik_eski (dosya_adi ):
-    """big_arbiter'in SU ANDA kullandigi (hatali) ayristirma -- karsilastirma for."""
+    """big_arbiter'in SU ANDA kullandigi (hatali) ayristirma -- comparison for."""
     h =os .path .basename (dosya_adi ).split ("_")[0 ]
     return tuple ((h .split (".",1 )+[""])[:2 ])
 
 
-def step_kimlik (yol ):
+def step_kimlik (path ):
     """STEP file adindan kimlik -- IKI adlandirma sozlesmesini de anlar.
 
     A) INDIRME sozlesmesi : `wscaduniverse_<pid>_<ts>.stp`      -> pid
@@ -68,7 +68,7 @@ def step_kimlik (yol ):
     anahtarla kurdugu for 1655 file sessizce EZILIYOR, corpus 4405'te KALIYORDU --
     no error verilmeden. Sozlesme before ayirt edilir, after ayristirilir.
     """
-    b =os .path .splitext (os .path .basename (yol ))[0 ]
+    b =os .path .splitext (os .path .basename (path ))[0 ]
     # (B): JSON sozlesmesi -- bilesen eki present VE ondan ONCE point present.
     # Nokta ILK lower cizgiden before olmak ZORUNDA DEGIL: `A-B_N.1492-H4_Electrical...`
     # like ALT CIZGILI manufacturer kodlarinda point ikinci parcadadir.
@@ -90,9 +90,9 @@ def main ():
     print (f"JSON {len (js )} | STEP {len (stp )}")
 
     # --- 1) ESKI vs YENI ayristirma farki
-    fark =[f for f in js if kimlik (f )[1 ]!=kimlik_eski (f )[1 ]]
+    diff =[f for f in js if kimlik (f )[1 ]!=kimlik_eski (f )[1 ]]
     empty_ =[f for f in js if not kimlik_eski (f )[1 ]]
-    print (f"\nayristirma FARKI olan dosya: {len (fark )}  (bunlarin {len (empty_ )}'i eski yontemde BOS)")
+    print (f"\nayristirma FARKI which file: {len (diff )}  (bunlarin {len (empty_ )}'i eski yontemde BOS)")
 
     # --- 2) CAKISMA: two different part same ESKI kimlige dusuyor mu?
     esk =collections .defaultdict (set )
@@ -108,9 +108,9 @@ def main ():
     for s in stp :
         sk_eski [os .path .basename (s ).split ("_")[1 ]].append (s )
     riskli ={k :v for k ,v in cak .items ()if k in sk_eski }
-    print (f"** CAKISAN VE STEP'i OLAN (yanlis eslesme RISKI): {len (riskli )} kimlik **")
+    print (f"** CAKISAN VE STEP'i OLAN (wrong eslesme RISKI): {len (riskli )} kimlik **")
     for k ,v in sorted (riskli .items ())[:10 ]:
-        print (f"   '{k }' -> {sorted (v )}  | STEP {len (sk_eski [k ])} dosya")
+        print (f"   '{k }' -> {sorted (v )}  | STEP {len (sk_eski [k ])} file")
 
         # --- 4) MANIFEST (F2-9)
     man =[]
@@ -123,19 +123,19 @@ def main ():
         cps =j .get ("ConnectionPoints")or []
         pts =(j .get ("Graphic3d")or {}).get ("Points")or []
         n =len (cps )
-        man .append ({"dosya":os .path .basename (f ),"manufacturer":mfg ,"part":pid ,
+        man .append ({"file":os .path .basename (f ),"manufacturer":mfg ,"part":pid ,
         "cp":n ,"g3d_tepe":len (pts ),
-        "kova":"1-3"if n <=3 else ("4-7"if n <=7 else "8+"),
+        "bucket":"1-3"if n <=3 else ("4-7"if n <=7 else "8+"),
         "step":bool (kimlik_eski (f )[1 ]in sk_eski )})
-    with io .open ("results/manifest_korpus.json","w",encoding ="utf-8")as fh :
+    with io .open ("results/manifest_corpus.json","w",encoding ="utf-8")as fh :
         json .dump (man ,fh ,indent =0 )
-    print (f"\nMANIFEST -> results/manifest_korpus.json ({len (man )} part)")
+    print (f"\nMANIFEST -> results/manifest_corpus.json ({len (man )} part)")
 
     ok =[m for m in man if m ["cp"]>0 and m ["g3d_tepe"]>0 ]
     print (f"\n{'manufacturer':<9}{'part':>7}{'CP':>8}{'STEP':>7}{'1-3':>6}{'4-7':>6}{'8+':>6}")
     for u ,g in sorted (collections .Counter (m ["manufacturer"]for m in ok ).most_common ()):
         alt =[m for m in ok if m ["manufacturer"]==u ]
-        kv =collections .Counter (m ["kova"]for m in alt )
+        kv =collections .Counter (m ["bucket"]for m in alt )
         print (f"{u :<9}{len (alt ):>7}{sum (m ['cp']for m in alt ):>8}"
         f"{sum (m ['step']for m in alt ):>7}{kv ['1-3']:>6}{kv ['4-7']:>6}{kv ['8+']:>6}")
     print (f"{'TOPLAM':<9}{len (ok ):>7}{sum (m ['cp']for m in ok ):>8}{sum (m ['step']for m in ok ):>7}")

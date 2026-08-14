@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""POSE HEAD testleri -- gate KARARINDAN SONRA calisan lateral correction.
+"""POSE HEAD testleri -- gate KARARINDAN SONRA running lateral correction.
 
-Tavan olcumu (results/t_tavan.json): kahin gate robot-haziri only +0.059 tasiyor, KONUM
+Tavan olcumu (results/t_ceiling.json): oracle gate robot-haziri only +0.059 tasiyor, KONUM
 +0.325. Yani gate'in otesindeki single real kaldirac buydu. 2026-08-01'de RULE tabanli four
 konum/direction kolu was tried and dordu de became; difference, this kafanin duzeltmenin BUYUKLUGUNU candidate basina
 OGRENMESI.

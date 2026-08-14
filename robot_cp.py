@@ -63,9 +63,9 @@ def _load_cfg ():
       2) Bu fonksiyon PARCA BASINA cagriliyor -- same small file yuzlerce times diskten okunuyordu.
     """
     if "v"not in _CFG_ONBELLEK :
-        yol =os .path .join (os .path .dirname (os .path .abspath (__file__ )),"cp_config.json")
+        path =os .path .join (os .path .dirname (os .path .abspath (__file__ )),"cp_config.json")
         try :
-            with open (yol ,"r",encoding ="utf-8")as f :
+            with open (path ,"r",encoding ="utf-8")as f :
                 _CFG_ONBELLEK ["v"]=json .load (f )
         except Exception :
             _CFG_ONBELLEK ["v"]={}
@@ -135,8 +135,8 @@ def _vote2 (cp_lists ,cluster_mm =5.0 ,min_votes =1 ):
     # KONUM = anlasan uyelerin GUVEN-AGIRLIKLI ORTALAMASI (2026-07-31, measured).
     # Eskiden only most safe uyenin noktasi tutuluyor, digerlerininki ATILIYORDU --
     # toplulugun most klasik faydasi (bagimsiz hatalarin ortalamada sonmesi) kullanilmiyordu.
-    # Geometri bolmesinde, same 100 part, single degisken:
-    #   tespit 0.6511 -> 0.6612 | lateral<=2mm 0.4980 -> 0.5220 | robot-hazir 0.4384 -> 0.4558
+    # Geometri bolmesinde, same 100 part, single variable:
+    #   detection 0.6511 -> 0.6612 | lateral<=2mm 0.4980 -> 0.5220 | robot-hazir 0.4384 -> 0.4558
     # Duz mean da kazaniyor (0.6593/0.5159/0.4499) but confidence-agirlikli more iyi.
     for c in out :
         c .pop ("_mids",None );c .pop ("_mid",None )
@@ -159,7 +159,7 @@ def derive_candidates (V ,F ,pbs ,step_path ,cfg =None ):
         Sonuc: training verisinde `votes` 12'ye up to cikiyordu, uründe ceiling MODEL SAYISI (4).
         Ve `votes`, durust bolmede gate'in GENELLESEN TEK ozelligi.
 
-    pbs: model basina olasilik dizisi.
+    pbs: model basina probability dizisi.
     Doner: **DORT** value -- (cps, ortalama_olasilik, cok_CP_mu, per).
     (`per` = model basina candidate listesi; oy havuzu for gerekli.)
 
@@ -179,14 +179,14 @@ def derive_candidates (V ,F ,pbs ,step_path ,cfg =None ):
     # BIRLESME YARICAPLARI ARTIK CONFIG'TEN (2026-08-06, P1).
     # Onceden `dedupe_mm` 10.0 SABIT kodluydu and oy havuzu `_vote2`'nin varsayilanini
     # (5.0) kullaniyordu. P1 taramasi (D6, candidate kahini one-to-one Macar) this ucunun
-    # KOMSU GERCEK GIRISLERI single adaya yuttugunu olctu: 3/10/5 -> 1/2/2 with kahin
+    # KOMSU GERCEK GIRISLERI single adaya yuttugunu olctu: 3/10/5 -> 1/2/2 with oracle
     # 0.8808 -> 0.8966, COK-CP 0.4740 -> 0.5071 (+0.0331), low-CP kayipsiz.
     # Varsayilanlar ESKI degerler: config'i olmayan a kurulum aynen eskisi like works.
     dd =float (_pp .get ("dedupe_mm",10.0 ))
     oy =float (_pp .get ("vote_pool_mm",5.0 ))
     # SPLIT_RATIO CONFIG'TEN (2026-08-09 / P3-a). `cp_openings._split_elongated`
     # birlesmis IKI komsu agzi separates but urun yolu this parametreyi HIC gecirmiyordu
-    # -> varsayilan 0.0 = KAPALI, i.e. olu kod. Artik taranabilir.
+    # -> default 0.0 = KAPALI, i.e. olu kod. Artik taranabilir.
     sr =float (_pp .get ("split_ratio",0.0 ))
 
     def _turet (promote ):
@@ -216,7 +216,7 @@ def _highcp_router (step_path ,V ,n_cand ,model_path ="results/highcp_router.pkl
     """Bu part COK-CP mi? SADECE geometriden karar gives -- manufacturer metadata'si YOK.
 
     conn_promote very-CP'de +0.072 kazandirir but low-CP'de -0.018 kaybettirir; kuresel
-    uygulanamaz. Robot bilinmeyen a parcada CP sayisini bilmedigi for rejimi KENDI anlamali.
+    uygulanamaz. Robot unknown a parcada CP sayisini bilmedigi for rejimi KENDI anlamali.
     Girdi: STEP bbox (3 edge + kosegen + kutu alani/hacmi) + promote'suz candidate count/yogunlugu.
     Aile-disi AUC 0.9942. Model otherwise False returns (promote closed = old davranis).
     """
@@ -271,7 +271,7 @@ def extract (models ,step_path ,dev ,conf_auto ,min_auto_votes =1 ,cp_count =Non
         acc =probs if acc is None else acc +probs 
         pbs .append (probs )
         # Y24 CRF (2026-08-14, VARSAYILAN KAPALI). Mesh kenarlari on
-        # mean-alan olasilik duzeltmesi. Sonda only `olculen` yolunu
+        # mean-alan probability duzeltmesi. Sonda only `measured_path` yolunu
         # olcebiliyor; this kanca, kazanan ayarin DAGITILACAK yolda da
         # olculebilmesi for. Kanonik zincir dersi: measurement betiginde +0.0151
         # veren blok uretim yolunda −0.0138 vermisti -- path farki DECISION
@@ -364,10 +364,10 @@ def _kapi_sonrasi_zincir (cps ,V ,F ,avg_probs ,step_path ,_cfg ,_uyeler ):
     not -- this ayrim da this olcumle netlesti.
     """
     # POSE HEAD: gate KARARINDAN SONRA, kabul edilmis CP'lerin YANAL sapmasini duzelt.
-    # Tavan olcumu (results/t_tavan.json): kahin gate robot-haziri only +0.059 tasiyor,
+    # Tavan olcumu (results/t_ceiling.json): oracle gate robot-haziri only +0.059 tasiyor,
     # KONUM +0.325. Yani gate'in otesindeki single real kaldirac buydu.
     # Olculdu (kilitli cluster, GRUP bootstrap): robot-hazir 0.4407 -> 0.4835
-    # (+0.0428, GA [+0.0220,+0.0680] KANITLI), tespit +0.0001.
+    # (+0.0428, GA [+0.0220,+0.0680] KANITLI), detection +0.0001.
     # Gate hatasi which is parcalarda UYGULANMAZ: orada elimizdeki ham birlesimdir.
     if _cfg .get ("robot_pose_head",False )and cps and not any (c .get ("_gate_hata")for c in cps ):
         try :
@@ -386,7 +386,7 @@ def _kapi_sonrasi_zincir (cps ,V ,F ,avg_probs ,step_path ,_cfg ,_uyeler ):
                 # duzeltmelerin ciktisi olmalidir. Olculdu (selector 1301 AYRI parcada
                 # egitildi; measurement kumesini and LOCKED gruplarini HIC gormedi):
                 #   robot-hazir 0.5893 -> 0.6213 (+0.0319, GA [+0.0120,+0.0527])
-                #   tespit DEGISMEZ -- YAPISAL: tespit olcutu aciya bakmaz.
+                #   detection DEGISMEZ -- YAPISAL: detection olcutu aciya bakmaz.
             if _cfg .get ("robot_yon_secici",False ):
                 cps =_wg .pick_direction_from_dictionary (_Xp ,cps ,V ,step_path =step_path ,
                 uyeler =_uyeler )
@@ -412,17 +412,17 @@ def assign_tier (c ,conf_auto ,min_auto_votes ,auto_thr =None ):
     """TEK CP for tier: "auto" | "review".
 
     ORTAK YERE TASINDI (2026-08-12). Bu rule `_format_cps` govdesine gomuluydu
-    and only `extract` yolundan gecen ciktilar tier alani aliyordu. Oysa
-    olculen zincir `canonical_chain.product_output`; GLB ihracatcisini oraya
+    and only `extract` yolundan passing ciktilar tier alani aliyordu. Oysa
+    measured_path zincir `canonical_chain.product_output`; GLB ihracatcisini oraya
     baglamak for tier'in AYRI cagrilabilmesi is required (see. rapor bolum 8:
-    "olculen zincir GLB'ye girmiyor", 2. madde TIER TUZAGI).
+    "measured_path zincir GLB'ye girmiyor", 2. madde TIER TUZAGI).
 
     DAVRANIS DEGISMEDI -- body birebir tasindi:
       * gate hatasi varsa       -> review (ham birlesimin kesinligi ~0.40)
       * gate skoru varsa        -> wire_score >= auto_thr whereas auto
       * gate skoru YOKSA (old) -> confidence >= conf_auto VE votes >= min_votes
 
-    OLCULEN GERCEK (D7, gorulmemis brand): dagitilan esikte (0.6) isaretlerin
+    OLCULEN GERCEK (D7, unseen brand): dagitilan esikte (0.6) isaretlerin
     %100'u AUTO cikiyor and precision 0.3471 -- REVIEW katmani BOS. Skor tabani
     0.6006, i.e. threshold dagilimin ALTINDA kaliyor and no seyi elemiyor.
     Bu fonksiyon that kusuru DUZELTMEZ, only single yere toplar.
@@ -430,14 +430,14 @@ def assign_tier (c ,conf_auto ,min_auto_votes ,auto_thr =None ):
     # GUVENLI ANAHTAR: `cp_config.robot_auto_kapali = true` whereas HICBIR sign
     # otonom isaretlenmez, all of them REVIEW becomes.
     #
-    # WHY IT EXISTS (measured, D7 gorulmemis brand, receipt tier_cokusu_d7.json):
+    # WHY IT EXISTS (measured, D7 unseen brand, receipt tier_cokusu_d7.json):
     # dagitilan esikte (0.6) isaretlerin %100'u AUTO and precision 0.3471 --
     # REVIEW katmani BOS. Skor tabani 0.6006, i.e. threshold dagilimin ALTINDA and
     # no seyi elemiyor. Robot ucte ikisi wrong isarete own basina
     # guveniyor. Esigi yukseltmek KURTARMIYOR (0.95'te bile precision 0.4652).
     #
     # VARSAYILAN FALSE: urunun bugunku davranisi DEGISMEZ. Anahtar, kalibre
-    # a skor cikana up to sahada safe tarafa gecmek isteyen for.
+    # a score cikana up to sahada safe tarafa gecmek isteyen for.
     try :
         if bool (_load_cfg ().get ("robot_auto_kapali",False )):
             return "review"
@@ -536,7 +536,7 @@ def extract_highcp (models7 ,step_path ,dev ,conf_auto ,min_auto_votes ,cp_count
     d9 =hc .get ("derive_9k",{"min_v":12 ,"vertex_conf":0.20 ,"cluster_mm":0.0 })
     # TURETME PARAMETRELERI CEVREDEN EZILEBILIR (2026-08-14). Bolum 21.74:
     # `derive_6k` degerleri (30/0.5/5.0) `prediction_postproc` inside
-    # `_superseded_2026_07_24_values` as duran TERK EDILMIS degerlerin
+    # `_superseded_2026_07_24_values` as stopped TERK EDILMIS degerlerin
     # ta kendisi; urun 2026-08-06'da 4/0.3/1.0'a gecti, this path GECMEDI.
     # NOTE: selector that gunku adaylarla egitildi, i.e. this degisiklik
     # seciciyi de etkiler -- VARSAYILMAZ, OLCULUR.
@@ -591,7 +591,7 @@ def extract_highcp (models7 ,step_path ,dev ,conf_auto ,min_auto_votes ,cp_count
         _sec =_ws >=_esik 
         cp_count ,_tesh =count_estimate .estimate (_P [_sec ]if _sec .sum ()>=2 
         else _P )
-        print (f"  [adet TAHMIN EDILDI: {cp_count } "
+        print (f"  [count TAHMIN EDILDI: {cp_count } "
         f"(nu={_tesh .get ('nu')} x nv={_tesh .get ('nv')}, "
         f"pool {len (cps )})]",flush =True )
     cps =highcp_selector .apply (cps ,V6 ,avg ,CE ,CT ,int (cp_count ),
@@ -643,15 +643,15 @@ def main ():
     _gate_on =bool (cfg .get ("robot_wire_gate",True ))and cfg .get ("robot_auto_gate_threshold")is not None 
     _tier =(f"wire_score>={cfg ['robot_auto_gate_threshold']}"if _gate_on 
     else f"conf>={conf_auto } & votes>={min_auto_votes }")
-    # BANNER GERCEGI SOYLEMELI: goreli threshold acikken sabit threshold sayilari KULLANILMIYOR but banner
+    # BANNER GERCEGI SOYLEMELI: goreli threshold acikken fixed threshold sayilari KULLANILMIYOR but banner
     # onlari yaziyordu (2026-08-01). Yaniltici, because ikisi very different davraniyor -- same two
-    # parcada sabit threshold 0 CP, goreli threshold 3 and 2 CP donduruyor.
+    # parcada fixed threshold 0 CP, goreli threshold 3 and 2 CP donduruyor.
     if cfg .get ("gate_goreli_esik"):
         _kural =(f"goreli threshold (part-ici {cfg .get ('gate_goreli_oran',0.5 )}x en yuksek, "
         f"baseline {cfg .get ('gate_goreli_taban',0.25 )})")
     else :
-        _kural =(f"sabit threshold {cfg .get ('robot_wire_gate_threshold',0.35 )}"
-        f"/{cfg .get ('robot_wire_gate_threshold_highcp')} (dusuk/cok-CP)")
+        _kural =(f"fixed threshold {cfg .get ('robot_wire_gate_threshold',0.35 )}"
+        f"/{cfg .get ('robot_wire_gate_threshold_highcp')} (dusuk/very-CP)")
         # Sutun count URETIMDEN not DAGITILAN MODELDEN okunmali: part-ici donusum (2026-08-01)
         # genisligi ikiye katliyor and banner ham sayiyi yazarsa yine yaniltir -- this bloga full as
         # bunun for dokunuldu, same hatayi a sonraki katmanda tekrarlamayalim.

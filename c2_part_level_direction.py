@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """C2: PARCA DUZEYINDE YON -- C1'in sozlugundeki bosluk.
 
-C1 SONUCU: fiziksel direction sozlugu uzerindeki kahin 0.6263 (bar 0.70) -> "correct direction
+C1 SONUCU: fiziksel direction sozlugu uzerindeki oracle 0.6263 (bar 0.70) -> "correct direction
 elimizdeki geometriden turetilemiyor" dedim. O cumle FAZLA GENISTI: correct direction BENIM
 KURDUGUM sozlukte yoktu. Sozlugun tamami YERELDI (candidate cevresindeki geometri):
 mevcut/ham direction, uye yonleri, B-rep silindir ekseni, channel ekseni, surface normali,
@@ -19,7 +19,7 @@ EKLENEN GIRISLER (all of them calisma aninda turetilebilir):
 
 ONCE DIAGNOSIS: GT yonu ne up to siklikla a OBB eksenine yakin? Cevap yuksekse arm canli.
 
-KILL (C1 with same bar): genisletilmis kahin < 0.70 whereas Rota C GERCEKTEN kapanir.
+KILL (C1 with same bar): genisletilmis oracle < 0.70 whereas Rota C GERCEKTEN kapanir.
 """
 import io 
 import json 
@@ -73,7 +73,7 @@ def main ():
     from infer_step_cp import step_to_mesh 
     from sina_cluster import esle 
     from sklearn .ensemble import RandomForestClassifier 
-    from gece_kilit import guard 
+    from night_kilit import guard 
 
     guard ("c2")
     D =T .yukle ()
@@ -203,17 +203,17 @@ def main ():
     ust =0.7584 
     print (f"\n{'arm':<28}{'robot':>9}")
     print (f"{'MEVCUT':<28}{rm :>9.4f}")
-    print (f"{'KAHIN yerel sozluk (C1)':<28}{r1 :>9.4f}   direction boslugunun %{100 *(r1 -rm )/max (ust -rm ,1e-9 ):.0f}'i")
+    print (f"{'KAHIN yerel dictionary (C1)':<28}{r1 :>9.4f}   direction boslugunun %{100 *(r1 -rm )/max (ust -rm ,1e-9 ):.0f}'i")
     print (f"{'KAHIN +PARCA DUZEYI (C2)':<28}{r2 :>9.4f}   direction boslugunun %{100 *(r2 -rm )/max (ust -rm ,1e-9 ):.0f}'i")
-    print (f"{'ust sinir (=tespit)':<28}{ust :>9.4f}")
+    print (f"{'ust sinir (=detection)':<28}{ust :>9.4f}")
     gecti =r2 >=0.70 
-    print (f"\nKILL: kahin >= 0.70 -> {'GECTI, ayrik selector egitilir'if gecti else 'GECMEDI'}")
-    with io .open ("results/c2_parca_yon.json","w",encoding ="utf-8")as f :
+    print (f"\nKILL: oracle >= 0.70 -> {'GECTI, ayrik selector egitilir'if gecti else 'GECMEDI'}")
+    with io .open ("results/c2_part_direction.json","w",encoding ="utf-8")as f :
         json .dump ({"mevcut":rm ,"kahin_yerel":r1 ,"kahin_parca":r2 ,
         "obb_aci_medyan":float (np .median (A ))if TESHIS else None ,
         "obb_10deg":float ((A <=10 ).mean ())if TESHIS else None ,
         "gecti":bool (gecti )},f ,indent =1 )
-    print ("receipt -> results/c2_parca_yon.json")
+    print ("receipt -> results/c2_part_direction.json")
 
 
 if __name__ =="__main__":

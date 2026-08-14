@@ -76,22 +76,22 @@ def main ():
             kay =d6_record .yukle (set (d6_record .exam ()["pidler"]))
         elif ad =="d7":
             kay =K .yukle (json .load (
-            open ("results/d7_sinav_kumesi.json"))["pidler"])
+            open ("results/d7_exam_set.json"))["pidler"])
         else :
             kay =K .yukle ([str (p )for p in json .load (
-            open ("results/brep_egitim_kumesi.json"))["pidler"]])
+            open ("results/brep_training_set.json"))["pidler"]])
         t0 =time .time ()
-        n =atlanan =0 
+        n =skipped =0 
         for pid ,r in sorted (kay .items ()):
             pid =str (pid )
             src_ =f"{OZ }/{ad }_{pid }.npz"
             hedef =f"{CIK }/{ad }_{pid }.npz"
             if os .path .exists (hedef )or not os .path .exists (src_ ):
-                atlanan +=1 
+                skipped +=1 
                 continue 
             f =f"{OB [ad ]}/{pid }.npz"
             if not os .path .exists (f ):
-                atlanan +=1 
+                skipped +=1 
                 continue 
             z =np .load (src_ )
             P =np .asarray (z ["P"],float )
@@ -109,7 +109,7 @@ def main ():
             if n %200 ==0 :
                 print (f"  {ad } {n } yazildi {(time .time ()-t0 )/n :.2f}s/part",
                 flush =True )
-        print (f"{ad } BITTI: {n } yazildi | atlanan {atlanan }",flush =True )
+        print (f"{ad } BITTI: {n } yazildi | skipped {skipped }",flush =True )
     print ("->",CIK )
 
 

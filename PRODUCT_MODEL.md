@@ -11,15 +11,15 @@
 **wire-gate** → **göreli eşik** → **POSE HEAD** (lateral düzeltme) → **SEÇİCİ AÇI DÜZELTMESİ** →
 iki katman.
 
-**Gate:** `results/wire_gate.pkl` — **58 ham × 2 (parça-içi z-skor) = 116 sütun**
+**Gate:** `results/wire_gate.pkl` — **58 ham × 2 (parça-içi z-score) = 116 sütun**
  (13 baseline + 5 B-rep fiziksel + 4 içbükey topoloji + **36 zengin**: konum9 + çok-yarıçap24 + normal-std3)
-**Pose head:** `results/pose_head.pkl` — gate kararından after lateral düzeltme, ≤3mm, axial depth sabit
+**Pose head:** `results/pose_head.pkl` — gate kararından after lateral düzeltme, ≤3mm, axial depth fixed
 **Açı seçici:** `results/aci_secici.pkl` — önce "this açı yanlış mı", yalnız öyleyse düzelt
 Hepsi MD5 damgalı ve `tests/test_artifact.py` with doğrulanıyor.
 
 ### 📊 MANŞET — `headline.py --yaz` ÜRETİR (194 parça / 171 grup, **grup** bootstrap)
 
-| bölme | n | tespit F1 | %95 GA | robot-hazır | düşük-CP | çok-CP |
+| bölme | n | detection F1 | %95 GA | robot-hazır | düşük-CP | çok-CP |
 |---|---|---|---|---|---|---|
 | DEV *(kararlar burada)* | 54 | 0.8012 | [0.707, 0.878] | **0.6336** | 0.8108 | 0.7196 |
 | **VAL** *(sınav)* | 100 | **0.7503** | [0.701, 0.799] | 0.5441 | 0.7696 | 0.5862 |
@@ -27,16 +27,16 @@ Hepsi MD5 damgalı ve `tests/test_artifact.py` with doğrulanıyor.
 | PXC dışarıda | 90 | 0.6750 | [0.603, 0.745] | 0.5562 | 0.6873 | 0.5702 |
 | **WEI dışarıda** | 103 | **0.5968** | [0.533, 0.654] | 0.3746 | 0.6100 | 0.4847 |
 
-**2026-08-02 gecesi:** robot-hazır **0.4391 → 0.5801 (+0.141)**, tespit 0.7384 → 0.7538.
+**2026-08-02 gecesi:** robot-hazır **0.4391 → 0.5801 (+0.141)**, detection 0.7384 → 0.7538.
 **95 grup-temiz LOCKED parça harcanmadı.**
 
 ### 🔧 GECENİN ÜÇ KOLU
 
 | arm | etki | kanıt |
 |---|---|---|
-| **zengin bloklar** (+36 sütun) | tespit **+0.0233** | GA(WEI) [+0.0005, +0.0697] · `decision_criterion` 5/5 şart |
-| **pose head** (lateral) | robot **+0.0428** | GA [+0.0220, +0.0680] · tespit +0.0001 |
-| **seçici açı** | robot **+0.0126** | GA [+0.0002, +0.0325] · tespit bedeli **yapısal sıfır** |
+| **zengin bloklar** (+36 sütun) | detection **+0.0233** | GA(WEI) [+0.0005, +0.0697] · `decision_criterion` 5/5 şart |
+| **pose head** (lateral) | robot **+0.0428** | GA [+0.0220, +0.0680] · detection +0.0001 |
+| **seçici açı** | robot **+0.0126** | GA [+0.0002, +0.0325] · detection bedeli **yapısal sıfır** |
 | **üye yön seçici** | robot **+0.0278** | GA [+0.0105, +0.0490] · kâhin +0.0536'nın %52'si
 
 **Pose head'in dersi:** aynı fikir 1068 satırla **kanıtsızdı** (+0.0222, GA sıfırı içeriyor),
@@ -59,13 +59,13 @@ sağlıklıyken kaybediyor**:
 | seri 17 / 30 / 15 / 32 / 16 | 0.66–0.78 | −0.060 … −0.008 |
 | PXC dışarıda | 0.7203 (sağlıklı) | **−0.0375** |
 
-Bu yüzden **each parçaya uygulanmıyor.** Yönlendirme, gate'in kendi skor dağılımından çöküşü
+Bu yüzden **each parçaya uygulanmıyor.** Yönlendirme, gate'in kendi score dağılımından çöküşü
 sezer (ölçülmüş teşhis: çöküşte model adayların %10.3'üne pozitif diyor, gerçek %24.1) ve
 kazancın **%98'ini** korurken PXC vergisinin **yarısını**, seri vergisinin **%60'ını** geri alır.
 Metadata gerektirmez.
 
-> **Dürüst not (kendi çubuğum):** *"yönlendirmeli arm each eksende en az z-skor up to iyi olmalı"*
-> testim WEI'de kıl payı düştü — fark −0.0020, %95 GA [−0.0066, **+0.0000**], üst uç tam sıfır.
+> **Dürüst not (kendi çubuğum):** *"yönlendirmeli arm each eksende en az z-score up to iyi olmalı"*
+> testim WEI'de kıl payı düştü — diff −0.0020, %95 GA [−0.0066, **+0.0000**], üst uç tam sıfır.
 > Ürün kararını a `>0`/`>=0` sınır artefaktına bırakmadım: yönlendirme WEI'de 0.0020 verip
 > PXC'de 0.0201 ve tanıdıkta 0.0049 alıyor (10'a 1) ve üretici ortalamasında en iyisi.
 > Gerekçe budur, artefakt gizlenmedi.
@@ -83,7 +83,7 @@ DEV (karar) / VAL (sınav) / **LOCKED (harcanmadı)**.
 
 **Kazançların kaynağı (sırayla):** 5 B-rep fiziksel özellik (`brep_r` with `size` korelasyonu
 −0.009 = yeni bilgi) → 4 içbükey topoloji sütunu (`kon_cevre` AUC 0.709; gerçek açıklıklarda
-medyan 1.000 = tam tur halka) → göreli eşik (kalibrasyon) → parça-içi z-skor (sıralama).
+medyan 1.000 = tam tur halka) → göreli eşik (calibration) → parça-içi z-score (sıralama).
 
 **🎓 TEZ-NATIVE METRİK (Scheffler benchmark'ı = SEGMENTASYON, mean Jaccard 0.514):**
 `best_full.pt` val 20-parça: **mean-IoU 0.681** · Dice 0.790 · acc 0.864.

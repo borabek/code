@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
 """P6 ERKEN OKUMA: D6-ICI LOMO (brand-birak-disarida) + ESIK x NMS taramasi.
 
-WHY: `full` korpusunun secenek oznitelikleri still cikiyor. Ama D6'nin 8 markasi
+WHY: `full` korpusunun option oznitelikleri still cikiyor. Ama D6'nin 8 markasi
 elde and LOMO with ADIL a kiyas kurulabilir -- each kivrimda same parts, same
 training buyuklugu, TEK DEGISKEN feature+secim kurali.
 
 KOLLAR
   TABAN     candidate basina TEK row (own yonu), A+B (67 column), threshold + NMS +
             sign correction                      -- dagitilan kuralin ta kendisi
-  P6        candidate basina TUM direction secenekleri, A+B+C+D (92 column), ortak skor +
+  P6        candidate basina TUM direction secenekleri, A+B+C+D (92 column), ortak score +
             acgozlu secim + konum NMS
   P6_KAHIN  P6 secimi, but SECILEN adaylarin yonu KAHIN'den. Tavan not DIAGNOSIS:
             "yonu mu kaciriyoruz, konumu mu?"
 
 ILK KOSU BULGUSU (2026-08-11):
   TABAN 0.2093 -> P6 0.2649 (+0.0556), direction kahini only +0.0064 EKLIYOR.
-  Yani secilen adaylarda direction secimi ZATEN neredeyse mukemmel; bankanin actigi
+  Yani selected adaylarda direction secimi ZATEN neredeyse mukemmel; bankanin actigi
   +0.2392'lik ceiling HIC SECILMEYEN adaylarda duruyor. Recall %17 / precision %58
   -- i.e. very AZ prediction uretiyoruz.
   Olculdu: D6 GT'lerinin %16.1'inin most yakin komsusu 5mm'den yakin. NMS yaricapi
@@ -36,7 +36,7 @@ import sys
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -131,10 +131,10 @@ def puanla (d ,s ,threshold ,nms ,arm ):
     return P ,D 
 
 
-def olc (data_ ,skor ,threshold ,nms ,arm ):
+def olc (data_ ,score ,threshold ,nms ,arm ):
     tp =fp =fn =0 
     tes =[]
-    for d ,s in zip (data_ ,skor ):
+    for d ,s in zip (data_ ,score ):
         P ,D =puanla (d ,s ,threshold ,nms ,arm )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
@@ -142,7 +142,7 @@ def olc (data_ ,skor ,threshold ,nms ,arm ):
         tes .append ((len (d ["G"]),)+match_hungarian (
         P ,D ,d ["G"],d ["Gd"],d ["diag"],max (3.0 ,0.06 *d ["diag"]),
         180.0 ,True )[:3 ])
-    return {"robot":2 *tp /max (2 *tp +fp +fn ,1 ),"tespit":K .mikro (tes ),
+    return {"robot":2 *tp /max (2 *tp +fp +fn ,1 ),"detection":K .mikro (tes ),
     "TP":tp ,"FP":fp ,"FN":fn }
 
 
@@ -218,7 +218,7 @@ def main ():
     art =sum (1 for b in kivrimlar 
     if ayrinti [b ]["P6"]["robot"]>ayrinti [b ]["TABAN"]["robot"])
     print (f"P6 - TABAN = {d :+.4f} | {art }/{len (kivrimlar )} markada ARTI")
-    json .dump ({"damga":makbuz_hash .damga (),"toplam":last_ ,"brand":ayrinti ,
+    json .dump ({"damga":receipt_hash .damga (),"total":last_ ,"brand":ayrinti ,
     "n_parca":len (dev ),"kivrim":kivrimlar ,
     "kurallar":[list (k )for k in KURALLAR ],"nmsler":list (NMSLER ),
     "not":"D6-ICI LOMO on okumasi. Esik VE NMS each arm/kivrim for "

@@ -2,11 +2,11 @@
 """GATE'I BUYUMUS KORPUSLA YENIDEN EGIT -- olculmemis single canli kaldirac.
 
 DURUM: dagitilan wire-gate 1041 parcadan cikarilmis adaylarla egitildi (25.07). Korpus that
-gunden beri 1906 uygun parcaya output: gate'in HIC gormedigi 865 part present.
+gunden beri 1906 eligible parcaya output: gate'in HIC gormedigi 865 part present.
 
 WHY UMUT VAR (S5 bulgusu, measured): candidate arzini degiten a mudahale KUCUK korpusta notr
 okunur; corpus two katina cikinca same double +0.037 verdi. Gate de candidate dagilimini ogrenen
-a bilesen -- same mantik gecerli.
+a bilesen -- same mantik valid.
 
 SAFETY: urun gate'i (results/wire_gate.pkl) BU BETIKTE ASLA UZERINE YAZILMAZ. Yeni model
 ayri dosyaya gider; kabul karari OOF olcumune bakilarak AYRICA verilir.
@@ -28,16 +28,16 @@ PKL_NEW =f"results/wire_gate_regrow{TAG }.pkl"
 NPZ_OLD ="results/f1_sweep_data.npz"
 PARTIAL =f"results/gate_regrow_partial{TAG }.npz"# ara kayit -- cokme/oldurme sonrasi devam
 INFLIGHT ="results/gate_regrow_inflight.txt"# this an islenen part (zehirli-part korumasi)
-SKIPFILE ="results/gate_regrow_skip.txt"# kalici atlama listesi
+SKIPFILE ="results/gate_regrow_skip.txt"# persistent atlama listesi
 
 
 def _load_skip ():
-    """Daha before bizi kilitleyen parcalari atla.
+    """Daha before bizi kilitleyen parcalari skip.
 
     2026-07-29: single a WEI parcasi spektral ayristirmada 47 DAKIKA %100 CPU'da dondu and
     no output uretmedi; 1700 parcalik inference bellekteydi and oldurulunce ucup gitti.
     Artik each part ISLENMEDEN ONCE adi INFLIGHT'a yazilir. Kosu a more baslatildiginda
-    orada duran part "bizi olduren part"dir and kalici atlama listesine alinir.
+    orada stopped part "bizi olduren part"dir and persistent atlama listesine alinir.
     """
     skip =set ()
     if os .path .exists (SKIPFILE ):
@@ -48,24 +48,24 @@ def _load_skip ():
         attempt =int (raw [1 ])if len (raw )>1 else 1 
         if stuck :
         # ILK KESINTIDE KARA LISTEYE ALMA. Mekanizma "part asildi" with "process disaridan
-        # olduruldu"yu ayirt edemiyor -- 2026-07-29 gece elektrik kesildi and masum a part
+        # olduruldu"yu ayirt edemiyor -- 2026-07-29 night elektrik kesildi and masum a part
         # (2466530000) zehirli sayilacakti. Gercekten asilan part IKINCI denemede de asilir;
-        # that yuzden kalici atlama however 2. kesintiden after is done.
+        # that yuzden persistent atlama however 2. kesintiden after is done.
             if attempt >=2 :
                 skip .add (stuck )
                 with open (SKIPFILE ,"a")as fh :
                     fh .write (stuck +"\n")
-                print (f"  [zehirli part] {stuck } IKI kez kosuyu kilitledi -> kalici atlama",
+                print (f"  [zehirli part] {stuck } IKI kez kosuyu kilitledi -> persistent atlama",
                 flush =True )
             else :
                 _RETRY [stuck ]=attempt +1 
-                print (f"  [yeniden dene] {stuck } bir kez yarim kaldi (elektrik/oldurme olabilir) "
+                print (f"  [yeniden dene] {stuck } a kez yarim kaldi (elektrik/oldurme olabilir) "
                 f"-> {attempt +1 }. deneme, kara listeye ALINMADI",flush =True )
         os .remove (INFLIGHT )
     return skip 
 
 
-_RETRY ={}# a times half kalan parts -> sonraki deneme numarasi
+_RETRY ={}# a times half remaining parts -> sonraki deneme numarasi
 
 
 def resume_partial (parts ,partial_path ):

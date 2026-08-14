@@ -7,16 +7,16 @@ BOS kaliyor. Yani two katmanli guvenlik mekanizmasi ATIL: robot each isarete
 own basina guveniyor, oysa isaretlerin however ucte biri correct.
 
 WHY COKUYOR. Secim kurali with tier esigi AYNI skoru kullaniyor. Secim kurali
-already goreli (part-maksimumunun %85'i) oldugu for hayatta kalan each tahminin
+already goreli (part-maksimumunun %85'i) oldugu for hayatta remaining each tahminin
 skoru high; tier esigi no seyi elemiyor. Esik "baglamiyor".
 
 TARIHCE. Ayni cokus 2026-07-29'da a times yasanmis and duzeltilmisti (that zaman
 tier SEGMENTASYON guvenine bakiyordu, REVIEW empty cikmisti, precision 0.7735).
-Duzeltme skoru degistirdi but COKUS BICIMI geri geldi -- this sefer gorulmemis
+Duzeltme skoru degistirdi but COKUS BICIMI geri geldi -- this sefer unseen
 brand kosulunda and very more low kesinlikle.
 
 BU BETIK YENI BIR D7 OKUMASI DEGILDIR: harcanmis olcumun makbuzlarini yeniden
-reads, model secimi/ayar yapmaz.
+reads, model secimi/setting yapmaz.
 
 Kullanim:  python probe_tier_cokusu.py
 """
@@ -44,8 +44,8 @@ def cift (y ):
     gercek =True 
     for v in kir .values ():
         gt +=v ["rob"][0 ]+v ["rob"][2 ]
-        sk =v .get ("skor")or []
-        dg =v .get ("dogru")or []
+        sk =v .get ("score")or []
+        dg =v .get ("correct")or []
         # `skor_gercek` new makbuzlarda present; old makbuzlarda YOK and orada
         # dejenere distribution kontrolu devreye girer.
         if sk and not v .get ("skor_gercek",True ):
@@ -82,7 +82,7 @@ def main ():
     print (f"DAGITILAN AUTO ESIGI = {dag }")
     out ={"dagitilan_esik":dag ,"kumeler":{}}
     for y in sorted (glob .glob ("results/d7_p6.json")+
-    glob .glob ("results/d7_taban.json")):
+    glob .glob ("results/d7_baseline.json")):
         r =cift (y )
         if not r :
             continue 
@@ -95,7 +95,7 @@ def main ():
             out ["kumeler"][ad ]={"n_parca":npar ,"n_isaret":int (len (S )),
             "durum":"OLCULMEMIS_skor_gercek_false"}
             continue 
-            # VARSAYILAN DOLGU TUZAGI: `probe_dagitim_verify` skoru
+            # VARSAYILAN DOLGU TUZAGI: `probe_deploy_verify` skoru
             # `c.get("wire_score", 1.0)` with okuyor. Zincir wire_score URETMIYORSA
             # each tahmine 1.0 yazilir and tablo "each esikte %100 AUTO" like gorunur.
             # Bu a FINDING DEGIL, measurement bosllugudur -- ayirt edilmezse tier cokusu
@@ -109,7 +109,7 @@ def main ():
             "durum":"OLCULMEMIS_varsayilan_dolgu"}
             continue 
         sat =tablo (f"{ad }  ({npar } part)",S ,Y ,gt )
-        print (f"  skor dagilimi: min {S .min ():.4f}  medyan "
+        print (f"  score dagilimi: min {S .min ():.4f}  medyan "
         f"{np .median (S ):.4f}  maks {S .max ():.4f}")
         if S .min ()>=dag :
             print (f"  !! DAGITILAN ESIK ({dag }) SKOR TABANININ ALTINDA "

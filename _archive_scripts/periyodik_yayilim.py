@@ -1,0 +1,80 @@
+# -*- coding: utf-8 -*-
+"""K2.2 + K2.1: SATIR AYRIMI + PERIYODIK YAYILIM (last-islem, tez NOTR).
+
+Klemensler tekrarlanan kutuplardan olusur. Urunun bulduğu adaylardan SATIRLARI
+cikarip each satirin ADIMINI olcer, +-N step yayarak KACIRILAN kutuplari onerir.
+
+TAVAN MEASURED (probe_k21_periyodiklik.py, D6):
+  +-1 step -> isabet %39.4, FN'lerin %21.4'u | +-2 -> %29.2 | +-6 -> %16.0
+Urunun own detection kesinligi 0.4673 -- i.e. +-1 AYNI LIGDE. **DAR tut.**
+
+Onceki sondanin KUSURU giderildi: single PCA ekseni very sirali parcada sıralari
+upper uste bindiriyordu. Burada ONCE satirlar ayrilir (direction benzerligi + dikey
+distance), SONRA each satirda ayri periyot cikarilir.
+"""
+import numpy as np 
+
+
+def _satirlar (P ,D ,tol_mm =4.0 ,aci_cos =0.90 ):
+    """Adaylari SATIRLARA ayir: yonu benzer + ortak a dogruya yakin olanlar."""
+    n =len (P )
+    remaining =list (range (n ))
+    out =[]
+    while len (remaining )>=3 :
+        i0 =remaining [0 ]
+        # same yone bakanlar
+        same_ =[i for i in remaining 
+        if abs (float (D [i ]@D [i0 ]))>=aci_cos ]
+        if len (same_ )<3 :
+            remaining .remove (i0 );continue 
+        Q =P [same_ ]
+        C =Q -Q .mean (0 )
+        _u ,_s ,Vt =np .linalg .svd (C ,full_matrices =False )
+        eks =Vt [0 ]
+        # dogruya dik distance <= tol olanlar SATIRI olusturur
+        t =C @eks 
+        dik =np .linalg .norm (C -np .outer (t ,eks ),axis =1 )
+        grup =[same_ [k ]for k in range (len (same_ ))if dik [k ]<=tol_mm ]
+        if len (grup )>=3 :
+            out .append ((grup ,eks ))
+            for g in grup :
+                if g in remaining :
+                    remaining .remove (g )
+        else :
+            remaining .remove (i0 )
+    return out 
+
+
+def yay (P ,D ,adim_n =1 ,tol_mm =4.0 ,min_adim =2.0 ,maks_adim =40.0 ):
+    """Satir basina periyot cikar, +-adim_n yay. Doner: (yeni_P, yeni_D)."""
+    P =np .asarray (P ,float );D =np .asarray (D ,float )
+    if len (P )<3 :
+        return np .zeros ((0 ,3 )),np .zeros ((0 ,3 ))
+    yeniP ,yeniD =[],[]
+    for grup ,eks in _satirlar (P ,D ,tol_mm ):
+        Q =P [grup ]
+        t =np .sort ((Q -Q .mean (0 ))@eks )
+        f =np .diff (t );f =f [f >1e-6 ]
+        if not len (f ):
+            continue 
+        step_ =float (np .median (f ))
+        if not (min_adim <=step_ <=maks_adim ):
+            continue 
+        for gi in grup :
+            for s in range (-adim_n ,adim_n +1 ):
+                if s ==0 :
+                    continue 
+                yeniP .append (P [gi ]+s *step_ *eks )
+                yeniD .append (D [gi ])
+    if not yeniP :
+        return np .zeros ((0 ,3 )),np .zeros ((0 ,3 ))
+    U =np .asarray (yeniP ,float );V =np .asarray (yeniD ,float )
+    # MEVCUT adaylara and BIRBIRINE very yakin olanlari ELE
+    tut =[]
+    for i in range (len (U )):
+        if np .min (np .linalg .norm (P -U [i ],axis =1 ))<=tol_mm :
+            continue 
+        if tut and np .min (np .linalg .norm (U [tut ]-U [i ],axis =1 ))<=tol_mm :
+            continue 
+        tut .append (i )
+    return U [tut ],V [tut ]

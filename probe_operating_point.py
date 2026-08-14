@@ -10,12 +10,12 @@ belirliyor.
 TARANAN (uretilen CP'ler SABIT, only hangilerinin TUTULDUGU degisir):
   confidence esigi   : confidence >= t
   oy esigi      : votes >= v
-  first-k         : guvene according to first k (k sabit ya da part capina bagli)
+  first-k         : guvene according to first k (k fixed ya da part capina bagli)
   ikili         : confidence esigi + first-k tavani
 
-RAPORLANAN: tespit / robot ISARETSIZ / robot ISARETLI, also precision and
+RAPORLANAN: detection / robot ISARETSIZ / robot ISARETLI, also precision and
 recall. Uc metrik birden verilir because yapilandirmadaki headline ISARETSIZ,
-robot for gecerli criterion ISARETLIDIR.
+robot for valid criterion ISARETLIDIR.
 
 D7'ye BAKILMAZ.
 """
@@ -32,7 +32,7 @@ import canonical_d7 as K # noqa: E402
 from sina_cluster import match_hungarian # noqa: E402
 
 DOKUM =os .environ .get ("CN_DOKUM","results/_tahmin_dokumu.json")
-YOL =os .environ .get ("CN_YOL","saha")
+YOL =os .environ .get ("CN_YOL","field")
 
 
 def olc (kayitlar ,sec_fn ):
@@ -62,19 +62,19 @@ def olc (kayitlar ,sec_fn ):
         max (2 *c [on +"_tp"]+c [on +"_fp"]+c [on +"_fn"],1 ))
     kes =c ["isaretli_tp"]/max (c ["isaretli_tp"]+c ["isaretli_fp"],1 )
     rec =c ["isaretli_tp"]/max (c ["isaretli_tp"]+c ["isaretli_fn"],1 )
-    return {"tespit":f1 ("tespit"),"unsigned":f1 ("unsigned"),
+    return {"detection":f1 ("detection"),"unsigned":f1 ("unsigned"),
     "signed":f1 ("signed"),"precision":kes ,"recall":rec ,
     "cp":int (c ["cp"])}
 
 
 def main ():
     d =json .load (open (DOKUM ))
-    kayitlar =[r for r in d if r ["yol"]==YOL ]
+    kayitlar =[r for r in d if r ["path"]==YOL ]
     if not kayitlar :
-        sys .exit (f"{DOKUM } icinde '{YOL }' yolu yok")
+        sys .exit (f"{DOKUM } icinde '{YOL }' yolu none")
     gh =np .concatenate ([np .asarray (r ["confidence"],float )
     for r in kayitlar if len (r ["confidence"])])
-    print (f"{len (kayitlar )} part | yol={YOL } | toplam CP {len (gh )}")
+    print (f"{len (kayitlar )} part | path={YOL } | total CP {len (gh )}")
     print (f"confidence dagilimi: min {np .nanmin (gh ):.3f} ortanca "
     f"{np .nanmedian (gh ):.3f} maks {np .nanmax (gh ):.3f}")
 
@@ -92,7 +92,7 @@ def main ():
         -np .where (g >=t ,g ,-np .inf ))[:kk ][
         g [np .argsort (-np .where (g >=t ,g ,-np .inf ))[:kk ]]>=t ]))
 
-    print (f"\n{'deneme':<24}{'tespit':>9}{'unsigned':>11}{'ISARETLI':>10}"
+    print (f"\n{'deneme':<24}{'detection':>9}{'unsigned':>11}{'ISARETLI':>10}"
     f"{'precision':>10}{'recall':>9}{'CP':>7}")
     baseline =None 
     res_ ={}
@@ -102,14 +102,14 @@ def main ():
             baseline =r 
         res_ [ad ]=r 
         yildiz ="  <-"if r ["signed"]>baseline ["signed"]+1e-9 else ""
-        print (f"{ad :<24}{r ['tespit']:>9.4f}{r ['unsigned']:>11.4f}"
+        print (f"{ad :<24}{r ['detection']:>9.4f}{r ['unsigned']:>11.4f}"
         f"{r ['signed']:>10.4f}{r ['precision']:>10.4f}"
         f"{r ['recall']:>9.4f}{r ['cp']:>7}{yildiz }")
     en =max (res_ .items (),key =lambda kv :kv [1 ]["signed"])
     print (f"\nEN IYI (robot ISARETLI): {en [0 ]} -> {en [1 ]['signed']:.4f} "
-    f"(baseline {baseline ['signed']:.4f}, fark "
+    f"(baseline {baseline ['signed']:.4f}, diff "
     f"{en [1 ]['signed']-baseline ['signed']:+.4f})")
-    json .dump ({"yol":YOL ,"n_parca":len (kayitlar ),"sonuc":res_ ,
+    json .dump ({"path":YOL ,"n_parca":len (kayitlar ),"sonuc":res_ ,
     "en_iyi":{"ad":en [0 ],**en [1 ]},
     "not":"Cevrimdisi calisma noktasi taramasi; uretilen CP'ler "
     "SABIT, yalnizca tutma kurali degisir. D7'ye BAKILMADI."},

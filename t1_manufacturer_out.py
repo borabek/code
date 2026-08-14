@@ -6,9 +6,9 @@ bolmede -0.061 kaybetmisti, a ureticide -0.128. O yuzden urunde RandomForest kul
 Ama that measurement 13 sutunlu donemdendi; gate that gunden beri 18 sutuna output.
 
 SORU 1: mevcut 18 sutunlu gate manufacturer-disi bolmede ne kaybediyor?
-SORU 2: B-rep FIZIKSEL sutunlari (brep_r, esesenli, r_orani, bos_derinlik, gecen) more iyi
+SORU 2: B-rep FIZIKSEL sutunlari (brep_r, esesenli, r_orani, bos_derinlik, passing) more iyi
         transfer ediyor mu? Hipotez: onlar FIZIKSEL buyukluk (mm), digerleri corpus istatistigi
-        (komsu count, kose count, olasilik ortalamasi) -- fizik ureticiden ureticiye does not change,
+        (komsu count, kose count, probability ortalamasi) -- fizik ureticiden ureticiye does not change,
         istatistik degisir.
 
 Bu betik CIKARIM YAPMAZ: only gate verisi on training/value. Ucuz and fast.

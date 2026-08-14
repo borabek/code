@@ -2,7 +2,7 @@
 """ICBUKEY KENAR TOPOLOJISI -- hole-tanima alaninin birinci sinyali.
 
 FIKIR: a opening/cep, ICBUKEY kenarlarla cevrili face kumesidir; disa cikinti whereas DISBUKEY
-kenarlarla. Gate'in 18 ozelliginin HICBIRI topolojik not (all of them olasilik istatistigi ya da
+kenarlarla. Gate'in 18 ozelliginin HICBIRI topolojik not (all of them probability istatistigi ya da
 point-geometrisi). Bu, bugun +0.0704 getiren "gate'e sahip olmadigi bilgiyi ver" hamlesinin
 acilmamis ikinci kanadi.
 
@@ -90,8 +90,8 @@ def topo_ozellik (V ,F ,p ,dvec ,R =R_VARSAYILAN ,cache =None ):
         e1 =e1 -(e1 @d )*d ;e1 /=np .linalg .norm (e1 )+1e-12 
         e2 =np .cross (d ,e1 )
         th =np .arctan2 (perp @e2 ,perp @e1 )
-        kova =((th +np .pi )/(2 *np .pi )*N_KOVA ).astype (int )%N_KOVA 
-        out [3 ]=float (len (set (kova .tolist ())))/N_KOVA # kon_cevre
+        bucket =((th +np .pi )/(2 *np .pi )*N_KOVA ).astype (int )%N_KOVA 
+        out [3 ]=float (len (set (bucket .tolist ())))/N_KOVA # kon_cevre
     return out 
 
 

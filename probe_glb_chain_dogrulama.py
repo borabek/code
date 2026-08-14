@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """E2 -- SAHAYA INEN ZINCIRIN DOGRULANMASI
 
-SORUN (memory: glb-olculen-zinciri-kullanmiyor). Ihracatcilar
-`robot_cp.extract` cagiriyor; kampanyada olculen `product_p6`/`product_wide`
+SORUN (memory: glb-measured_path-zinciri-kullanmiyor). Ihracatcilar
+`robot_cp.extract` cagiriyor; kampanyada measured_path `product_p6`/`product_wide`
 sahaya HIC girmiyor. Yani olctugum each kazanc robota ULASMIYOR.
-Olculmus difference: baseline 0.2980 vs olculen zincir 0.3115.
+Olculmus difference: baseline 0.2980 vs measured_path zincir 0.3115.
 
 `export_robot_glb.py` icine `cp_config.glb_kanonik_zincir` bayragi kondu
-(varsayilan KAPALI). Bu betik bayragi ACMADAN ONCE yolun saglam calistigini
+(default KAPALI). Bu betik bayragi ACMADAN ONCE yolun saglam calistigini
 dogrular -- sahaya inen sey budur, kirik output robotu wrong yere gonderir.
 
 DENETLENEN (GT'li parcalarda, two zincir YAN YANA):
@@ -18,7 +18,7 @@ DENETLENEN (GT'li parcalarda, two zincir YAN YANA):
   tier         : tier atamasi yapiliyor mu (AUTO/REVIEW)
   robot_F1     : uctan uca robot F1 (lateral 2mm / signed angle 10 / axial 40)
 
-KAPI: olculen zincir (1) no parcada COKMEYECEK, (2) yonleri gecerli
+KAPI: measured_path zincir (1) no parcada COKMEYECEK, (2) yonleri valid
 olacak, (3) robot F1'de tabani ASACAK. Ucu birden saglanmadan bayrak
 ACILMAZ.
 
@@ -32,7 +32,7 @@ import time
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,".")
@@ -99,7 +99,7 @@ def main ():
             continue 
         if not _birim_mi (D ):
             say ["YON_BIRIM_DEGIL"]+=1 
-            error .append (f"{pid }: yonler birim degil")
+            error .append (f"{pid }: yonler birim not")
         G =np .asarray (r ["G"],float )
         Gd =np .asarray (r ["Gd"],float )
         dg =float (np .linalg .norm (V .max (0 )-V .min (0 )))
@@ -127,15 +127,15 @@ def main ():
     print (f"\nSAGLAMLIK: {'GECTI'if saglam else 'KALDI'}")
     print ("Bayrak `glb_kanonik_zincir` however SAGLAMLIK GECTI and robot F1")
     print ("tabani astiktan after acilir.")
-    json .dump ({"damga":makbuz_hash .damga (),"n_parca":say ["part"],
+    json .dump ({"damga":receipt_hash .damga (),"n_parca":say ["part"],
     "coken":say ["COKTU"],"sonsuz":say ["SONSUZ"],
     "yon_birim_degil":say ["YON_BIRIM_DEGIL"],
     "cikti_veren":say ["cikti_var"],"uretilen_cp":say ["cp"],
     "gt":agg ["gt"],"robot_f1":f1 ,"saglam":saglam ,
     "not":"Sahaya inecek zincirin saglamlik denetimi. Bayrak "
     "acilmadan ONCE kosulur. D7'ye BAKILMADI."},
-    open ("results/glb_zincir_dogrulama.json","w"),indent =1 )
-    print (f"receipt -> results/glb_zincir_dogrulama.json "
+    open ("results/glb_chain_dogrulama.json","w"),indent =1 )
+    print (f"receipt -> results/glb_chain_dogrulama.json "
     f"({time .time ()-t0 :.0f} s)")
 
 

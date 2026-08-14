@@ -2,7 +2,7 @@
 """Y7 — OZNITELIK SECIMI: 100+ column, sistematik never budanmadi
 
 Secicinin feature matrisi zamanla buyudu (donusturulmus X + source
-blogu). Gereksiz sutunlar noise carries and gorulmemis markada zarar
+blogu). Gereksiz sutunlar noise carries and unseen markada zarar
 verebilir. Bu betik ONEM SIRALAMASINA according to budayip olcer.
 
 ONEM: HGB'nin own `permutation_importance`si pahali; bunun instead of
@@ -16,7 +16,7 @@ KAPI: +0.01. D7'ye BAKILMAZ.
 import collections ,json ,os ,sys ,time 
 import numpy as np 
 from sklearn .ensemble import HistGradientBoostingClassifier 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1"
 os .environ ["WG_ZENGIN"]="1"
@@ -75,7 +75,7 @@ def main ():
     rank_ =np .argsort (-onem )
     print (f"baseline AUC {taban_auc :.4f} | onem hesaplandi ({time .time ()-t0 :.0f} s)",flush =True )
     print (f"  en onemli 5 sutun: {rank_ [:5 ].tolist ()}")
-    print (f"  onemi <=0 olan sutun sayisi: {int ((onem <=0 ).sum ())}/{n_sut }")
+    print (f"  onemi <=0 which sutun sayisi: {int ((onem <=0 ).sum ())}/{n_sut }")
 
     KOLLAR =[("hepsi",n_sut ),("ilk75",int (n_sut *0.75 )),
     ("ilk50",int (n_sut *0.50 )),("ilk25",int (n_sut *0.25 ))]
@@ -104,17 +104,17 @@ def main ():
     last_ ={k :f1 (agg [k ])for k ,_ in KOLLAR }
     print (f"\n=== TABAN (hepsi) {last_ ['hepsi']:.4f} ===")
     for ad ,k in KOLLAR [1 :]:
-        fark =last_ [ad ]-last_ ["hepsi"]
-        print (f"  {ad :<8}({k :>3} sutun) {last_ [ad ]:.4f}   {fark :+.4f}"
-        +("  <- KAPI GECTI"if fark >=0.01 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"kat_tohumu":_tohum ,
+        diff =last_ [ad ]-last_ ["hepsi"]
+        print (f"  {ad :<8}({k :>3} sutun) {last_ [ad ]:.4f}   {diff :+.4f}"
+        +("  <- KAPI GECTI"if diff >=0.01 else ""))
+    json .dump ({"damga":receipt_hash .damga (),"kat_tohumu":_tohum ,
     "n_sutun":n_sut ,
     "taban_auc":taban_auc ,"onemsiz_sutun":int ((onem <=0 ).sum ()),
-    "toplam":last_ ,
+    "total":last_ ,
     "not":"Oznitelik secimi, permutasyon onemi. TANIDIK brand "
     "(rastgele katlar). D7'ye BAKILMADI."},
     open (f"results/oznitelik_secimi_t{_tohum }.json","w"),indent =1 )
-    print ("receipt -> results/oznitelik_secimi.json")
+    print ("receipt -> results/feature_secimi.json")
 
 if __name__ =="__main__":
     main ()

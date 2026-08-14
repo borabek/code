@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """L1 + L2 — PARCA ICI SIRALAMA and DIZI UYELIGI
 
-DIAGNOSIS (results/konum_auc_d6.json). Baglayan sey PARCA ICI KONUM SIRALAMASI:
+DIAGNOSIS (results/position_auc_d6.json). Baglayan sey PARCA ICI KONUM SIRALAMASI:
 NIT'te direction AUC 0.8899 but konum AUC 0.7053 (gereken 0.944). Havuz kucultme
 closed (most iyi 1.33x), HPO tukendi (only neg=12, +0.0088/+0.0054).
 Geriye two sey kaliyor: YENI BILGI and YENI TARGET FONKSIYONU.
@@ -13,11 +13,11 @@ cekiliyor; model "genel as CP neye benzer" ogreniyor. Oysa is "BU
 parcanin inside hangisi more iyi". Negatifleri pozitifle AYNI parcadan
 cekmek sinirin part-ici karsitliga oturmasini saglar.
 
-L1b LAMBDA AGIRLIGI. Her pozitif for, AYNI parcada onu gecen negatif
+L1b LAMBDA AGIRLIGI. Her pozitif for, AYNI parcada onu passing negatif
 count = that pozitifin part-ici AUC'ye verdigi zarar. Agirliklar oradan
 kurulur (LambdaMART'in weight duzeyindeki karsiligi).
 NOTE: weights KAT-DISI skordan is computed. Focal denemesinde
-ornek-ici olasilik kullanmak modeli sifirlamisti (p~1 -> weight~0).
+ornek-ici probability kullanmak modeli sifirlamisti (p~1 -> weight~0).
 
 --- L2: YENI BILGI (array uyeligi) ---
 
@@ -27,7 +27,7 @@ olusan duzenli dizinin uyesi mi" sorusu konum duzeyinde ayirt edicidir.
 
 BU, DUSEN KAFES KOLU DEGILDIR. O arm konum URETIYORDU and direction kopyalamada
 coktu (uctan uca -0.0645). Bu arm mevcut adaylara OZNITELIK gives; that
-cokus mekanizmasi here gecerli not.
+cokus mekanizmasi here valid not.
 
 KOLLAR: baseline / yerel_neg / lambda / array / array+yerel_neg
 KAPI: uctan uca mikro robot F1'de +0.01. Gecen arm `full`'da dogrulanir.
@@ -43,7 +43,7 @@ import numpy as np
 from scipy .spatial import cKDTree 
 from sklearn .ensemble import HistGradientBoostingClassifier 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -107,16 +107,16 @@ def dizi_oz (Pk_tekil ):
                 continue 
             hedef =p [None ,:]+np .arange (-ADIM_K ,ADIM_K +1 )[:,None ]*step_ [None ,:]
             uz ,_ =agac .query (hedef )
-            var =uz <=DIZI_TOL 
-            u =int (var .sum ())
+            present =uz <=DIZI_TOL 
+            u =int (present .sum ())
             if u >=3 :
                 yon_say +=1 
             if u >en_uye :
                 en_uye =u 
                 en_adim =s 
-                en_kalinti =float (uz [var ].mean ())if var .any ()else 0.0 
+                en_kalinti =float (uz [present ].mean ())if present .any ()else 0.0 
                 # p'nin array icindeki normalize konumu (three mu, middle mi)
-                yer =np .where (var )[0 ]
+                yer =np .where (present )[0 ]
                 en_yer =float (abs (ADIM_K -yer .mean ())/max (ADIM_K ,1 ))
         out [i ]=(en_uye ,en_adim ,en_kalinti ,en_yer ,yon_say )
     return out 
@@ -185,7 +185,7 @@ def main ():
                 replace =False )])
             w =np .ones (len (sec ),np .float32 )
             if arm =="lambda":
-            # KAT-DISI skor (2 katli ic split) -> part ici order hatasi
+            # KAT-DISI score (2 katli ic split) -> part ici order hatasi
                 p_oof =np .zeros (len (sec ))
                 yari =rng .permutation (len (sec ))
                 for h in (yari [:len (yari )//2 ],yari [len (yari )//2 :]):
@@ -221,11 +221,11 @@ def main ():
     last_ ={k :f1 (agg [k ])for k in KOLLAR }
     print (f"\n=== TABAN {last_ ['baseline']:.4f} ===")
     for k in KOLLAR [1 :]:
-        fark =last_ [k ]-last_ ["baseline"]
-        print (f"  {k :<12}{last_ [k ]:.4f}   {fark :+.4f}"
-        +("  <- KAPI GECTI"if fark >=0.01 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"neg":NEG_KAT ,
-    "toplam":last_ ,
+        diff =last_ [k ]-last_ ["baseline"]
+        print (f"  {k :<12}{last_ [k ]:.4f}   {diff :+.4f}"
+        +("  <- KAPI GECTI"if diff >=0.01 else ""))
+    json .dump ({"damga":receipt_hash .damga (),"cluster":KUME ,"neg":NEG_KAT ,
+    "total":last_ ,
     "not":"L1 part-ici siralama (yerel negatif / lambda "
     "agirligi) + L2 dizi uyeligi oznitelikleri. Taban = "
     "temel + kanonik + neg12. D7'ye BAKILMADI."},

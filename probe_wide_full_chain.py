@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """DAGITIM KAPISI: genisletilmis pool + duzeltilmis etiketli gate, TAM ZINCIRDE.
 
-`results/v6_farki_E.json`: threshold D6'da secilerek genisletilmis pool D7'de 0.2079,
+`results/v6_delta_E.json`: threshold D6'da secilerek genisletilmis pool D7'de 0.2079,
 tez-saf kontrol 0.1981 (+0.0098). AMA that measurement urunun TAM zincirini kosmuyordu --
 POZ KAFASI (`product_chain.tam_poz`) yoktu. Dagitim karari full zincirde verilir
 ([[measurement-yolu-and-secim-kusurlari]]: measurement yolu urunun KENDI yolunu kosmali).
@@ -9,7 +9,7 @@ POZ KAFASI (`product_chain.tam_poz`) yoktu. Dagitim karari full zincirde verilir
 Bu betik two kolu da TAM zincirle olcer:
   A) TEZ-SAF pool   + duzeltilmis-label gate  (kontrol)
   B) GENISLETILMIS   + duzeltilmis-label gate  (deney)
-Referans: dagitilan urun (gate v6 + NMS + poz kafasi) = robot 0.2029 / tespit 0.4523.
+Referans: dagitilan urun (gate v6 + NMS + poz kafasi) = robot 0.2029 / detection 0.4523.
 
 Esik D6'da secilmis kurallardir, D7'de YENIDEN TARANMAZ:
   tez-saf -> goreli (0.5, 0.30) | genisletilmis -> mutlak 0.15
@@ -22,7 +22,7 @@ import sys
 
 import numpy as np 
 
-import makbuz_hash 
+import receipt_hash 
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
@@ -95,23 +95,23 @@ def main ():
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        out [ad ]={"robot":mi ,"tespit":K .mikro (tes ),
+        out [ad ]={"robot":mi ,"detection":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm ,
         "rule":f"{tip } {e }","poz_kafasiz":pozsuz }
         c =out [ad ]
-        print (f"{ad :<16} robot {mi :.4f} | tespit {c ['tespit']:.4f} | makro "
+        print (f"{ad :<16} robot {mi :.4f} | detection {c ['detection']:.4f} | makro "
         f"{c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f} | {c ['rule']}",
         flush =True )
     a ,b =out ["TEZ-SAF"]["robot"],out ["GENISLETILMIS"]["robot"]
     print (f"\nTAM ZINCIRDE: tez-saf {a :.4f} | genisletilmis {b :.4f} "
     f"({b -a :+.4f}) | dagitilan urun 0.2029")
     print ("DECISION: "+("DAGITILABILIR"if b >0.2029 else "urunu gecemedi"))
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"urun":0.2029 ,
+    json .dump ({"damga":receipt_hash .damga (),"sonuc":out ,"urun":0.2029 ,
     "not":"TAM URUN ZINCIRI (poz kafasi dahil). Esikler D6'da "
     "secildi, D7'de yeniden taranmadi. MIKRO."},
-    open ("results/genis_tam_zincir.json","w"),indent =1 )
-    print ("receipt -> results/genis_tam_zincir.json")
+    open ("results/wide_full_chain.json","w"),indent =1 )
+    print ("receipt -> results/wide_full_chain.json")
 
 
 if __name__ =="__main__":

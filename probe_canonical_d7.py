@@ -6,7 +6,7 @@ Vermezse measurement yolu HALA urunun yaptigi sey DEGILDIR and devam edilmez.
 """
 import glob ,json ,os ,pickle ,sys 
 import numpy as np 
-import makbuz_hash 
+import receipt_hash 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1";os .environ ["WG_TOPO"]="1";os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,".")
@@ -15,7 +15,7 @@ from sina_cluster import match_hungarian ,f1w
 from corpus_identity import step_kimlik as SK 
 
 YANAL ,ACI =2.0 ,10.0 
-d7p =set (map (str ,json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]))
+d7p =set (map (str ,json .load (open ("results/d7_exam_set.json"))["pidler"]))
 rec_ =d6_record .yukle (d7p )
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 OB ="results/_p1_olasilik_d7"
@@ -41,10 +41,10 @@ for pid in pidler :
     R .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],YANAL ,ACI ,
     False ,signed =True )[:3 ])
 t ,rr =f1w (T ),f1w (R )
-print (f"\nKANONIK ZINCIR (eski ag): tespit {t :.4f} | robot {rr :.4f}")
-print (f"MANSET BEKLENTISI       : tespit 0.4847 | robot 0.2344")
-print (f"FARK                    : tespit {t -0.4847 :+.4f} | robot {rr -0.2344 :+.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"tespit":t ,"robot":rr ,
+print (f"\nKANONIK ZINCIR (eski ag): detection {t :.4f} | robot {rr :.4f}")
+print (f"MANSET BEKLENTISI       : detection 0.4847 | robot 0.2344")
+print (f"FARK                    : detection {t -0.4847 :+.4f} | robot {rr -0.2344 :+.4f}")
+json .dump ({"damga":receipt_hash .damga (),"detection":t ,"robot":rr ,
 "manset_tespit":0.4847 ,"manset_robot":0.2344 ,"n_parca":len (T )},
-open ("results/kanonik_d7_dogrulama.json","w"),indent =1 )
-print ("receipt -> results/kanonik_d7_dogrulama.json")
+open ("results/canonical_d7_dogrulama.json","w"),indent =1 )
+print ("receipt -> results/canonical_d7_dogrulama.json")

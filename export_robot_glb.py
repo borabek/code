@@ -110,11 +110,11 @@ def main ():
 # FIZIKSEL DEFECT ISARETCILERI VARSAYILAN OLARAK KAPALI (2026-08-05).
 # GLB tamamen CIKTI katmanidir: F1 CP'nin konumundan/yonunden is computed, cizimden
 # DEGIL. Yani this anahtar no sayiyi etkilemez -- only ne gordugunu belirler.
-#   varsayilan : sade -- kirmizi/turuncu kure + ok (tier'i gosterir)
+#   default : sade -- kirmizi/turuncu kure + ok (tier'i gosterir)
 #   --fiz      : ustune fiziksel kusur isaretcileri (why wrong oldugunu gosterir)
     argv =[a for a in sys .argv [1 :]if a not in ("--fiz","--sade")]
     FIZ ="--fiz"in sys .argv [1 :]
-    # TEK RENK: tier ayrimini gosterme, only bulunan CP'leri ciz.
+    # TEK RENK: tier ayrimini gosterme, only found CP'leri ciz.
     global SADE 
     SADE =("--sade"in sys .argv [1 :]
     or os .environ .get ("CP_GLB_SADE","0")not in ("0","","false"))
@@ -126,11 +126,11 @@ def main ():
     os .makedirs (OUTDIR ,exist_ok =True )
     for pid in pids :
         if pid not in STEP :
-            print (f"  {pid }: STEP yok");continue 
+            print (f"  {pid }: STEP none");continue 
         Vr ,Fr =step_to_mesh (STEP [pid ])
         V ,F =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
         V =np .ascontiguousarray (V ,np .float64 );F =np .ascontiguousarray (F ,np .int64 )
-        # modelin segmentasyonu (vote>=2 uyeleri mean) -> baglanti vertekslerini boya
+        # modelin segmentasyonu (vote>=2 uyeleri mean) -> baglanti vertekslerini paint
         acc =None 
         pbs =[]# <- LISTE de saklaniyor (below gerekli)
         for model ,meta in models :
@@ -161,13 +161,13 @@ def main ():
             # HALKA NORMALI ILE ISARET DUZELTMESI (2026-08-14).
             # Her CP'nin direction ISARETINI mouth cevresi face normaliyle uyumlu yapar;
             # konumu and ekseni DEGISTIRMEZ, parametresi YOKTUR.
-            # MEASURED (VAL 100, esli part bootstrap):
-            #   TANIDIK brand / olculen zincir : +0.0195  GA [+0.0030,+0.0378] KESIN
-            #   TANIDIK brand / saha yolu      : +0.0329  GA sifiri ICERIYOR
-            #   hard-gorulmemis brand (150)     : +0.0023 / −0.0016  (notr)
+            # MEASURED (VAL 100, paired part bootstrap):
+            #   TANIDIK brand / measured_path zincir : +0.0195  GA [+0.0030,+0.0378] KESIN
+            #   TANIDIK brand / field yolu      : +0.0329  GA sifiri ICERIYOR
+            #   hard-unseen brand (150)     : +0.0023 / −0.0016  (notr)
             # VARSAYILAN KAPALI: kampanya along uygulanan disipline according to
-            # "GA sifiri iceriyorsa dagitma". Kanit YALNIZ `olculen` zincirde and
-            # TANIDIK brand populasyonunda conclusive; this an dagitilan path `saha`.
+            # "GA sifiri iceriyorsa dagitma". Kanit YALNIZ `measured_path` zincirde and
+            # TANIDIK brand populasyonunda conclusive; this an dagitilan path `field`.
             # Acmak: cp_config `ring_sign=true`.
         if cfg .get ("ring_sign",False ):
             import ring_sign 
@@ -199,7 +199,7 @@ def main ():
             col =([230 ,20 ,20 ,255 ]if SADE else 
             ([230 ,20 ,20 ,255 ]if c ["tier"]=="auto"
             else [245 ,150 ,20 ,255 ]))
-            # KUCUK sabit kure (1.5mm) -- residual gomulmuyor, centre net
+            # KUCUK fixed kure (1.5mm) -- residual gomulmuyor, centre net
             ball =trimesh .creation .icosphere (subdivisions =3 ,radius =1.5 )
             ball .apply_translation (p );ball .visual .vertex_colors =np .tile (col ,(len (ball .vertices ),1 ))
             scene .add_geometry (ball ,node_name =f"cp{i }_ball")
