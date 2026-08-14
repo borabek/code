@@ -88,7 +88,7 @@ def dogrula (beklenen =None ,HEDEF =HEDEF_VARSAYILAN ):
 if __name__ =="__main__":
     import argparse 
     _ap =argparse .ArgumentParser ()
-    _ap .add_argument ("--kaynak",default =KAYNAK_VARSAYILAN )
+    _ap .add_argument ("--source",default =KAYNAK_VARSAYILAN )
     _ap .add_argument ("--hedef",default =HEDEF_VARSAYILAN )
     _a =_ap .parse_args ()
     n ,atl =donustur (_a .src_ ,_a .hedef )

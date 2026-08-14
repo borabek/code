@@ -99,14 +99,14 @@ def main ():
     print (f"OLCUM: {len (DER )} part\n")
 
     S ={}
-    for ad ,npz in (("TABAN (yalniz eski)",TABAN ),("v3 (eski + YENI)",V3 )):
+    for ad ,npz in (("TABAN (only old)",TABAN ),("v3 (old + YENI)",V3 )):
         model ,bilgi =egit (npz )
         r =olc (model ,DER )
         S [ad ]={**r ,"corpus":bilgi }
         print (f"{ad :<22} corpus {bilgi ['part']:>5} part / {bilgi ['manufacturer']:>2} manufacturer "
         f"| TESPIT F1 {r ['F1']:.4f}  (TP {r ['TP']} FP {r ['FP']} FN {r ['FN']})")
 
-    a ,b =S ["TABAN (yalniz eski)"],S ["v3 (eski + YENI)"]
+    a ,b =S ["TABAN (only old)"],S ["v3 (old + YENI)"]
     d =b ["F1"]-a ["F1"]
     print (f"\nFARK (v3 - baseline): {d :+.4f}")
     ort =set (a ["manufacturer"])&set (b ["manufacturer"])
@@ -116,22 +116,22 @@ def main ():
     # tetikleyebilmek for ureticinin at least 5 parcasi must be; digerleri RAPORLANIR but
     # karar vermez.
     say =collections .Counter (r ["mfg"]for r in DER )
-    print (f"\n{'manufacturer':<8}{'part':>7}{'baseline':>9}{'v3':>9}{'fark':>9}  {'gate':>6}")
+    print (f"\n{'manufacturer':<8}{'part':>7}{'baseline':>9}{'v3':>9}{'difference':>9}  {'gate':>6}")
     kotu =[]
     for m in sorted (ort ):
         f =b ["manufacturer"][m ]-a ["manufacturer"][m ]
         n =say .get (m ,0 )
         gate =n >=5 
         print (f"{m :<8}{n :>7}{a ['manufacturer'][m ]:>9.4f}{b ['manufacturer'][m ]:>9.4f}{f :>+9.4f}"
-        f"  {'EVET'if gate else 'yok(n<5)':>6}")
+        f"  {'EVET'if gate else 'absent(n<5)':>6}")
         if f <-0.005 and gate :
             kotu .append (m )
     print (f"\nGO: havuzlanmis >= +0.015  -> {'GECTI'if d >=0.015 else 'gecmedi'}")
     print (f"    hicbir manufacturer < -0.005 -> {'GECTI'if not kotu else 'GECMEDI '+str (kotu )}")
-    print ("\nNOT: bu ARA olcumdur -- turetme %62'de durdu, corpus henuz tam degil.")
+    print ("\nNOT: this ARA olcumdur -- turetme %62'de durdu, corpus yet full not.")
     print ("     Ayrica measurement kumesi PXC+WEI agirlikli; gorulmemis manufacturer sorusu D5-4 with yanitlanir.")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-        json .dump ({"baseline":a ,"v3":b ,"fark":d ,"kotulesen_uretici":kotu ,
+        json .dump ({"baseline":a ,"v3":b ,"difference":d ,"kotulesen_uretici":kotu ,
         "ara_olcum":True },f ,indent =1 ,ensure_ascii =False )
     print (f"receipt -> {MAKBUZ }")
 

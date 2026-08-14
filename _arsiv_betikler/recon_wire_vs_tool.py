@@ -88,7 +88,7 @@ def main ():
         import itertools 
         auc =float ((w [:,None ]>tl [None ,:]).mean ())if len (w )and len (tl )else 0.5 
         print (f"  {name :11s}: tel medyan {np .median (w ):.2f}  tool medyan {np .median (tl ):.2f}  | ayrilabilirlik(AUC) {auc :.2f}")
-    print ("\n  AUC ~0.5 = ayirt edilemez; >0.65 = zayif sinyal; >0.75 = geometrik gate ise yarar")
+    print ("\n  AUC ~0.5 = ayirt edilemez; >0.65 = zayif sinyal; >0.75 = geometrik gate whereas yarar")
 
 
 if __name__ =="__main__":

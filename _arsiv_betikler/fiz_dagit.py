@@ -51,19 +51,19 @@ def main ():
     "feat_names":list (wire_gate .FEAT_NAMES ),
     "cols":None ,
     "n_feat":18 ,
-    "note":("FIZ 2026-07-31: 13 + 5 B-rep FIZIKSEL ozellik (brep_r, esesenli, r_orani, "
+    "note":("FIZ 2026-07-31: 13 + 5 B-rep FIZIKSEL feature (brep_r, esesenli, r_orani, "
     "bos_derinlik, gecen). Uctan uca DEV +0.0481 / VAL +0.0911 tespit, ikisi de "
-    "BELIRGIN; ozellik etkisi tek basina DEV +0.0628 / VAL +0.0854. brep_r ile "
-    "mevcut size korelasyonu -0.009 = kopya degil, yeni bilgi. Bu ozellikler "
-    "brep_axes._fit_circle duzeltmesine BAGIMLI (yaricap oncesinde 3.5 fold "
+    "BELIRGIN; feature etkisi single basina DEV +0.0628 / VAL +0.0854. brep_r with "
+    "mevcut size korelasyonu -0.009 = kopya not, new bilgi. Bu ozellikler "
+    "brep_axes._fit_circle duzeltmesine BAGIMLI (radius oncesinde 3.5 fold "
     "kucuktu). Onceki model: results/wire_gate.pkl.pre_fiz"),
     },open (PKL ,"wb"))
     print ("gate 18 sutunla egitildi and yazildi")
 
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     cfg ["gate_fiz_feats"]=True 
-    cfg ["gate_fiz_feats_not"]=("wire_gate.USE_FIZ_FEATS bu bayrakla ACIK olmali; kapatirsan "
-    "results/wire_gate.pkl.pre_fiz'i geri koy (13 sutun).")
+    cfg ["gate_fiz_feats_not"]=("wire_gate.USE_FIZ_FEATS this bayrakla OPEN must be; kapatirsan "
+    "results/wire_gate.pkl.pre_fiz'i geri koy (13 column).")
     json .dump (cfg ,open ("cp_config.json","w",encoding ="ascii"),indent =1 ,ensure_ascii =True )
     print ("cp_config.gate_fiz_feats = true")
 

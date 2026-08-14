@@ -70,7 +70,7 @@ def main ():
             auc =0.5 
         rows .append ((abs (auc -0.5 ),auc ,nm ,float (np .median (a )),float (np .median (b ))))
     for s ,auc ,nm ,ma ,mb in sorted (rows ,reverse =True ):
-        flag ="  <-- kayda deger"if abs (auc -0.5 )>=0.10 else ""
+        flag ="  <-- kayda value"if abs (auc -0.5 )>=0.10 else ""
         print (f"   {nm :<18} AUC {auc :.3f}   FP med {ma :8.2f}   TP med {mb :8.2f}{flag }")
 
         # --- 2-4. baseline vs birlesik --------------------------------------------------------------

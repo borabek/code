@@ -97,14 +97,14 @@ def main ():
                     b ,url ,k =ara (page ,no )
                 except Exception as e :
                     b ,url ,k =(None ,f"HATA {type (e ).__name__ }",-1 )
-                rapor [u ].append ({"part":no ,"bulundu":b ,"kart":k ,"url":url })
+                rapor [u ].append ({"part":no ,"was found":b ,"kart":k ,"url":url })
                 print (f"  {u :<12}{no :<24}{'BULUNDU'if b else ('YOK'if b is False else 'HATA')}"
                 f"  (kart {k })",flush =True )
         with io .open ("results/wscad_varlik.json","w",encoding ="utf-8")as f :
             json .dump (rapor ,f ,indent =1 ,ensure_ascii =False )
         print ("\nOZET")
         for u ,rs in rapor .items ():
-            v =sum (1 for r in rs if r ["bulundu"])
+            v =sum (1 for r in rs if r ["was found"])
             print (f"  {u :<12}{v }/{len (rs )} bulundu")
         print ("\nmakbuz -> results/wscad_varlik.json")
         ctx .close ()

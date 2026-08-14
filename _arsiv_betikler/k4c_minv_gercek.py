@@ -9,7 +9,7 @@ import os ,sys ,json ,copy
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -54,15 +54,15 @@ def main ():
             R ,t ,_ =align_frames (Vr ,Vj )
             cache .append (dict (V =V ,F =F ,pbs =pbs ,G =(G -t )@R ,Gd =Gd @R ,n =n ,
             tol =max (3.0 ,0.06 *float (np .linalg .norm (V .max (0 )-V .min (0 )))),
-            regime ="cok"if n >=8 else "dusuk"))
+            regime ="very"if n >=8 else "low"))
         except Exception :
             continue 
     print (f"cache: {len (cache )} part\n",flush =True )
 
     def score (minv ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
-            hi_ =r ["regime"]=="cok"
+            hi_ =r ["regime"]=="very"
             per =[cp_openings .connection_points (
             r ["V"],r ["F"],pb .argmax (-1 ),min_v =minv ,classes =(CE ,CT ),dedupe_mm =10.0 ,
             probs =pb ,vertex_conf =float (pp ["vertex_confidence_mask"]),
@@ -91,12 +91,12 @@ def main ():
         out ["weighted"]=sum (W [k ]*out [k ]for k in W )
         return out 
 
-    print (f"{'min_v':>7}{'dusuk-F1':>10}{'cok-F1':>9}{'agirlikli':>11}")
+    print (f"{'min_v':>7}{'low-F1':>10}{'very-F1':>9}{'agirlikli':>11}")
     res ={}
     for mv in (4 ,6 ,10 ):
         r =score (mv );res [mv ]=r 
         mk ="  <- urunde"if mv ==10 else ""
-        print (f"{mv :>7}{r ['dusuk']:>10.4f}{r ['cok']:>9.4f}{r ['weighted']:>11.4f}{mk }",flush =True )
+        print (f"{mv :>7}{r ['low']:>10.4f}{r ['very']:>9.4f}{r ['weighted']:>11.4f}{mk }",flush =True )
     d =res [4 ]["weighted"]-res [10 ]["weighted"]
     print (f"\nmin_v 10 -> 4 GERCEK HATTA: {d :+.4f}")
     json .dump ({str (k ):v for k ,v in res .items ()},open ("results/k4c_minv.json","w"),indent =1 )

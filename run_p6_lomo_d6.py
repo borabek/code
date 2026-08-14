@@ -198,7 +198,7 @@ def main ():
             ayrinti [b ][arm ]=dict (r ,rule_ =list (en [0 ]),nms =en [1 ])
         t ,p ,o =(ayrinti [b ]["TABAN"],ayrinti [b ]["P6"],ayrinti [b ]["P6_KAHIN"])
         print (f"  {b :<6} n={len (te ):<4} TABAN {t ['robot']:.4f} -> "
-        f"P6 {p ['robot']:.4f} ({p ['kural']}, nms {p ['nms']})  "
+        f"P6 {p ['robot']:.4f} ({p ['rule']}, nms {p ['nms']})  "
         f"({p ['robot']-t ['robot']:+.4f})  [direction kahini {o ['robot']:.4f}]",
         flush =True )
 
@@ -221,7 +221,7 @@ def main ():
     json .dump ({"damga":makbuz_hash .damga (),"toplam":last_ ,"brand":ayrinti ,
     "n_parca":len (dev ),"kivrim":kivrimlar ,
     "kurallar":[list (k )for k in KURALLAR ],"nmsler":list (NMSLER ),
-    "not":"D6-ICI LOMO on okumasi. Esik VE NMS her arm/kivrim icin "
+    "not":"D6-ICI LOMO on okumasi. Esik VE NMS each arm/kivrim for "
     "EGITIM markalarinda secildi. Onbellek havuzu -- urunun "
     "canli havuzu DEGIL."},
     open ("results/p6_lomo_d6.json","w"),indent =1 )

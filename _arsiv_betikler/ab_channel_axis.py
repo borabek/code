@@ -21,7 +21,7 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
 CACHE ="results/pitstop2_cache"
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def derive (rows ,use_axis ):
@@ -42,9 +42,9 @@ def derive (rows ,use_axis ):
             r ["V"],r ["F"],pb .argmax (-1 ),min_v =int (pp ["min_vertices"]),classes =(CE ,CT ),
             dedupe_mm =10.0 ,probs =pb ,vertex_conf =float (pp ["vertex_confidence_mask"]),
             ct_depth_min_mm =1.0 ,cluster_mm =float (pp ["cluster_mm"]),
-            conn_promote =(0.25 if r ["regime"]=="cok"else 0.0 )))
+            conn_promote =(0.25 if r ["regime"]=="very"else 0.0 )))
         cps =per [0 ]
-        thr =float (cfg .get ("robot_wire_gate_threshold_highcp",0.25 ))if r ["regime"]=="cok"else float (cfg .get ("robot_wire_gate_threshold",0.35 ))
+        thr =float (cfg .get ("robot_wire_gate_threshold_highcp",0.25 ))if r ["regime"]=="very"else float (cfg .get ("robot_wire_gate_threshold",0.35 ))
         if cps :
             cps =wire_gate .apply (r ["V"],r ["F"],pb ,cps ,CE ,CT ,threshold =thr ,top_n =None )
         out [r ["pid"]]=np .array ([c ["point"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
@@ -52,7 +52,7 @@ def derive (rows ,use_axis ):
 
 
 def score (rows ,preds ):
-    agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+    agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
     for r in rows :
         P =preds [r ["pid"]];G =r ["G"];Gd =r ["Gd"];tol =r ["tol"]
         hit =np .zeros (len (G ),bool );used =set ()
@@ -85,22 +85,22 @@ def main ():
         d =np .load (f ,allow_pickle =True )
         rows .append ({"pid":pid ,"V":d ["V"],"F":d ["F"],"probs":d ["probs"],
         "G":d ["G"],"Gd":d ["Gd"],"n":int (d ["n"]),"tol":float (d ["tol"]),
-        "regime":"cok"if int (d ["n"])>=8 else "dusuk"})
+        "regime":"very"if int (d ["n"])>=8 else "low"})
     if not rows :
         print ("cache empty -- before pitstop2_gate_nested.py cikarimini kos");return 1 
-    print (f"{len (rows )} part ({sum (r ['regime']=='dusuk'for r in rows )} dusuk / "
-    f"{sum (r ['regime']=='cok'for r in rows )} cok)\n",flush =True )
+    print (f"{len (rows )} part ({sum (r ['regime']=='low'for r in rows )} dusuk / "
+    f"{sum (r ['regime']=='very'for r in rows )} cok)\n",flush =True )
 
     off =score (rows ,derive (rows ,False ))
     on =score (rows ,derive (rows ,True ))
-    print (f"{'':<14}{'dusuk-CP':>10}{'cok-CP':>10}{'agirlikli':>12}")
-    print (f"{'direction KAPALI':<14}{off ['dusuk']:>10.4f}{off ['cok']:>10.4f}{off ['weighted']:>12.4f}")
-    print (f"{'direction ACIK':<14}{on ['dusuk']:>10.4f}{on ['cok']:>10.4f}{on ['weighted']:>12.4f}")
+    print (f"{'':<14}{'low-CP':>10}{'very-CP':>10}{'agirlikli':>12}")
+    print (f"{'direction KAPALI':<14}{off ['low']:>10.4f}{off ['very']:>10.4f}{off ['weighted']:>12.4f}")
+    print (f"{'direction OPEN':<14}{on ['low']:>10.4f}{on ['very']:>10.4f}{on ['weighted']:>12.4f}")
     delta =on ["weighted"]-off ["weighted"]
     print (f"\nFARK: {delta :+.4f}")
     verdict ="GUVENLI"if delta >=-0.005 else "GERI AL"
     print (f"KAPI (loss <= 0.005): {verdict }")
-    json .dump ({"off":off ,"on":on ,"delta":delta ,"verdict":verdict },
+    json .dump ({"off":off ,"ten":on ,"delta":delta ,"verdict":verdict },
     open ("results/ab_channel_axis.json","w"),indent =1 )
     print ("receipt -> results/ab_channel_axis.json")
     return 0 

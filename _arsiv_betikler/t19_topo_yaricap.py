@@ -99,7 +99,7 @@ def main ():
         p_ =tp /max (tp +fp ,1 );r_ =tp /max (tp +fn ,1 )
         return 2 *p_ *r_ /max (p_ +r_ ,1e-9 )
 
-    print (f"\n{'R (mm)':<10}{'kon_cevre AUC':>15}{'TP med':>9}{'FP med':>9}{'18+4 F1':>10}{'fark':>9}")
+    print (f"\n{'R (mm)':<10}{'kon_cevre AUC':>15}{'TP med':>9}{'FP med':>9}{'18+4 F1':>10}{'difference':>9}")
     taban_f1 =olc (X18 )
     print (f"{'(topolojisiz)':<10}{'-':>15}{'-':>9}{'-':>9}{taban_f1 :>10.4f}{'':>9}")
     out ={}
@@ -118,7 +118,7 @@ def main ():
     print (f"\nEN IYI R = {en_iyi } | mevcut 6.0'a gore {fark :+.4f}")
     print (f"KILL (BUYUKLUK dahil): >= +0.01 gelmezse tam corpus YENIDEN URETILMEZ -> "
     f"{'URET'if fark >=0.01 else 'URETME'}")
-    json .dump (out |{"en_iyi":en_iyi ,"fark":float (fark )},
+    json .dump (out |{"en_iyi":en_iyi ,"difference":float (fark )},
     open ("results/t19_topo_yaricap.json","w"),indent =1 )
     print ("receipt -> results/t19_topo_yaricap.json")
 

@@ -43,14 +43,14 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     d =np .load ("results/gate_regrow_data_rt2.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }
     pids =np .array ([str (x )for x in d ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (d ["X"][keep ],d ["y"][keep ])
     print (f"KUME={cluster } | {len (cache )} part | gate {int (keep .sum ())} candidate "
@@ -91,15 +91,15 @@ def main ():
                 if olcek !=1.0 :
                     Xc =Xc .copy ();Xc [:,VOTES ]=Xc [:,VOTES ]*olcek 
                 sc =clf .predict_proba (Xc )[:,1 ]
-                m =sc >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
+                m =sc >=(THR ["very"]if r ["is_hi"]else THR ["low"])
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'yapilandirma':<28}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'yapilandirma':<28}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
     for lab ,n_ ,s_ in (("4 uye (urun)",4 ,1.0 ),("5 uye, olceksiz",5 ,1.0 ),
     ("5 uye, votes x4/5",5 ,0.8 )):
@@ -111,7 +111,7 @@ def main ():
     rng =np .random .RandomState (0 )
     npart =len (R ["4 uye (urun)"][0 ])
     IX =[rng .randint (0 ,npart ,npart )for _ in range (2000 )]
-    print ("\nESLI BOOTSTRAP (4 uyeye gore):")
+    print ("\nESLI BOOTSTRAP (4 uyeye according to):")
     out ={}
     for lab in ("5 uye, olceksiz","5 uye, votes x4/5"):
         for mi ,mn in ((0 ,"tespit"),(1 ,"robot")):

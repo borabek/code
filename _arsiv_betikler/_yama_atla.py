@@ -20,16 +20,16 @@ def yama (old ,new ,s ):
 s =yama (
 'ARA = "results/_g1_ara.pkl"\n',
 'ARA = "results/_g1_ara.pkl"\n'
-'# PATOLOJIK PARCALAR: tek bir part tum kosuyu rehin alabiliyor. 2026-08-03\'te\n'
+'# PATOLOJIK PARCALAR: single a part tum kosuyu rehin alabiliyor. 2026-08-03\'te\n'
 '# 2502740000 (WEI, STEP 1.2 MB) 16+ dakika %100 CPU harcadi -- KILITLENME DEGIL\n'
-'# (CPU ilerliyordu), geometride patoloji: ortalama part 3.5 sn, bu 170 fold aykiri.\n'
-'# `big_arbiter` da ayni sebeple --skip-parts bayragi tasir. Atlanan part makbuza yazilir.\n'
+'# (CPU ilerliyordu), geometride patoloji: mean part 3.5 sn, this 170 fold aykiri.\n'
+'# `big_arbiter` da same sebeple --skip-parts bayragi carries. Atlanan part makbuza yazilir.\n'
 'ATLA = {"2502740000"}\n',s )
 
 s =yama (
 '        try:\n            j = json.load(io.open(jf, encoding="utf-8-sig"))\n',
 '        if pid in ATLA:\n'
-'            print(f"    {pid}: ATLANDI (patolojik -- bkz. ATLA)", flush=True)\n'
+'            print(f"    {pid}: ATLANDI (patolojik -- see. ATLA)", flush=True)\n'
 '            continue\n'
 '        try:\n            j = json.load(io.open(jf, encoding="utf-8-sig"))\n',s )
 

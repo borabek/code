@@ -40,9 +40,9 @@ def parts (on ,kaynakli ):
         z =np .load (f"{OZ }/{f }")
         d ={"pid":f [len (on )+1 :-4 ],"X":z ["X"],"y":z ["y"]}
         if kaynakli :
-            if "kaynak"not in z :
+            if "source"not in z :
                 continue 
-            d .update ({"P":z ["P"],"D":z ["D"],"kaynak":z ["kaynak"]})
+            d .update ({"P":z ["P"],"D":z ["D"],"source":z ["source"]})
         v .append (d )
     return v 
 
@@ -74,7 +74,7 @@ def egit (segtek ):
             if k is None :
                 atlanan +=1 # tam_* for source absent -> tez-saf arm D6 with sinirli
                 continue 
-            m =k ["kaynak"]==0 
+            m =k ["source"]==0 
             X ,y =k ["X"][m ],k ["y"][m ]
         if not len (X ):
             continue 
@@ -93,7 +93,7 @@ def olc (model ,segtek ):
     [("goreli",x )for x in ((0.5 ,0.20 ),(0.5 ,0.30 ),(0.4 ,0.25 ))]):
         rob =collections .defaultdict (lambda :[0 ,0 ,0 ]);tes =[]
         for d in te :
-            m0 =d ["kaynak"]==0 if segtek else np .ones (len (d ["y"]),bool )
+            m0 =d ["source"]==0 if segtek else np .ones (len (d ["y"]),bool )
             X =np .asarray (d ["X"][m0 ],float )
             if not len (X ):
                 continue 
@@ -111,10 +111,10 @@ def olc (model ,segtek ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"kural":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
-        print (f"    {r ['kural']:<16} robot {mi :.4f} | tespit {r ['tespit']:.4f} | "
+        print (f"    {r ['rule']:<16} robot {mi :.4f} | tespit {r ['tespit']:.4f} | "
         f"makro {r ['makro']:.4f}",flush =True )
         if en is None or r ["robot"]>en ["robot"]:
             en =r 
@@ -128,7 +128,7 @@ for ad ,segtek in (("GENISLETILMIS (seg + B-rep)",False ),):
     print (f"  training {sh } | pozitif {poz :.4f}",flush =True )
     pickle .dump (model ,open ("results/brep_gate_recete.pkl","wb"))
     out [ad ]=olc (model ,segtek )
-    print (f"  EN IYI: {out [ad ]['kural']} robot {out [ad ]['robot']:.4f}",flush =True )
+    print (f"  EN IYI: {out [ad ]['rule']} robot {out [ad ]['robot']:.4f}",flush =True )
 
 g =out ["GENISLETILMIS (seg + B-rep)"]
 print (f"\nKANONIK TABAN (tez-saf, dagitilan gate v6 + NMS): robot 0.2029 / tespit 0.4523")
@@ -139,7 +139,7 @@ json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
 "taban_tez_saf":{"robot":0.2029 ,"tespit":0.4523 },
 "tavan_genisletilmis":0.5748 ,
 "not":"Urunun gate recetesi (within_part zskor PARCA PARCA, RF 400/leaf3) "
-"ve urunun decision_score ile measured. D7 brand-disi, MIKRO. "
+"ve urunun decision_score with measured. D7 brand-disi, MIKRO. "
 "B-rep TEZ TURETMESI DEGIL, ek candidate kaynagi."},
 open ("results/brep_gate_recete_d7.json","w"),indent =1 )
 print ("receipt -> results/brep_gate_recete_d7.json")

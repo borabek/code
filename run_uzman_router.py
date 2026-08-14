@@ -58,7 +58,7 @@ KURAL =("goreli",0.85 ,0.20 )
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -112,7 +112,7 @@ def egit (data_ ,ic ,cok_agirlik =1.0 ):
 def ince_ayar (genel_veri ,ic_cok ,data_ ,ek_agac =60 ):
     """UZMANLASMA, VERI PARCALAMADAN.
 
-    Uzman kolu kahin rejimle bile dustu (-0.0418) and sebep teshis edildi:
+    Uzman kolu kahin rejimle bile dustu (-0.0418) and reason teshis edildi:
     lower kumede SIFIRDAN egitmek each uzmani more few veriyle birakiyor.
     Duzeltme: genel modelden DEVAM ET (`warm_start`) and only dense
     parcalarda EK AGAC ekle. Boylece uzman TUM verinin bilgisiyle baslar,

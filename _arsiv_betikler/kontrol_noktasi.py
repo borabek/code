@@ -83,8 +83,8 @@ def main ():
     dos =os .path .join (kn ,"dosyalar")
     os .makedirs (dos ,exist_ok =True )
 
-    man ={"etiket":label_ ,"zaman":time .strftime ("%Y-%m-%d %H:%M:%S"),
-    "kopya":{},"damga":{},"parmak_izi":{},"eksik":[]}
+    man ={"label":label_ ,"zaman":time .strftime ("%Y-%m-%d %H:%M:%S"),
+    "kopya":{},"damga":{},"parmak_izi":{},"missing":[]}
     try :
         man ["git"]=subprocess .check_output (
         ["git","rev-parse","HEAD"],cwd =KOK ,text =True ).strip ()
@@ -95,7 +95,7 @@ def main ():
     for rel in KOPYALA :
         src =os .path .join (KOK ,rel )
         if not os .path .exists (src ):
-            man ["eksik"].append (rel )
+            man ["missing"].append (rel )
             print (f"  ! yok: {rel }")
             continue 
         dst =os .path .join (dos ,rel .replace ("/",os .sep ))
@@ -125,8 +125,8 @@ def main ():
     print (f"  kopya    : {len (man ['kopya'])} dosya / {top /1048576 :.0f} MB")
     print (f"  damga    : {len (man ['damga'])} dosya (kopyasiz, degisim yakalanir)")
     print (f"  parmak iz: {len (man ['parmak_izi'])} dizin")
-    if man ["eksik"]:
-        print (f"  EKSIK    : {man ['eksik']}")
+    if man ["missing"]:
+        print (f"  EKSIK    : {man ['missing']}")
     print ("\nGeri donus:  python rollback.py "+label_ )
 
 

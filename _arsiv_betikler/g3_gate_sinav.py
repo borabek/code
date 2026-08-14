@@ -61,7 +61,7 @@ def kol_puanla (DER ,gate ,W_uygula =True ):
                             c =wire_gate .pick_member_direction (X [k ],c ,r ["UYE"])
                         P =np .array ([x ["point"]for x in c ],float )
                         Pd =np .array ([x ["direction"]for x in c ],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         det .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
         rob .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ))
@@ -109,7 +109,7 @@ def main ():
     with io .open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         _gk =json .load (f )
     _tg ={r ["geo"]for r in TABAN }
-    keep_e =~np .isin (np .array ([_gk .get (x ,"yok:"+x )for x in pe_ ]),list (_tg ))
+    keep_e =~np .isin (np .array ([_gk .get (x ,"absent:"+x )for x in pe_ ]),list (_tg ))
     Ze =np .zeros ((len (Xe ),Xe .shape [1 ]*2 ))
     for u in np .unique (pe_ ):
         i =np .where (pe_ ==u )[0 ]
@@ -141,7 +141,7 @@ def main ():
     # --- YENI: 8 uye + axis pool + YENI KORPUSLA EGITILMIS gate
     g_yeni =gate_kur (np .ones (len (ytr ),bool ))
     dy ,ry ,gy =kol_puanla (YENI ,g_yeni )
-    print (f"{'B YENI (8 uye + yeni gate)':<34}{f1w (dy ):>9.4f}{f1w (ry ):>9.4f}{na1 :>8}{rc1 :>13.4f}")
+    print (f"{'B YENI (8 uye + new gate)':<34}{f1w (dy ):>9.4f}{f1w (ry ):>9.4f}{na1 :>8}{rc1 :>13.4f}")
 
     # --- URETICI-DISI (asil genelleme ekseni)
     print (f"\n{'manufacturer-disi':<34}{'tespit':>9}{'robot':>9}")
@@ -169,15 +169,15 @@ def main ():
     with io .open ("results/g3_gate_sinav.json","w",encoding ="utf-8")as f :
         json .dump ({"baseline":{"tespit":f1w (dt ),"robot":f1w (rt ),"candidate":int (na0 ),
         "aday_recall":rc0 },
-        "yeni":{"tespit":f1w (dy ),"robot":f1w (ry ),"candidate":int (na1 ),
+        "new":{"tespit":f1w (dy ),"robot":f1w (ry ),"candidate":int (na1 ),
         "aday_recall":rc1 },
         "d_tespit":dd ,"ga_tespit":[lo ,hi ],
         "d_robot":dr ,"ga_robot":[rlo ,rhi ],
         "uretici_disi":ud ,"uretici_disi_ort":ud_ort ,
         "gecti":bool (gecti ),
-        "serh":("yeni training korpusu 1179 part (eski 1709) -- fark LOCKED ve measurement "
-        "gruplarinin DOGRU cikarilmasindan; ogrenme egrisine gore ~-0.008 "
-        "bedel, yani olculen fark gercek katkidan KUCUK")},f ,indent =1 )
+        "serh":("new training korpusu 1179 part (old 1709) -- difference LOCKED and measurement "
+        "gruplarinin DOGRU cikarilmasindan; ogrenme egrisine according to ~-0.008 "
+        "bedel, i.e. olculen difference real katkidan KUCUK")},f ,indent =1 )
     print ("receipt -> results/g3_gate_sinav.json")
 
 

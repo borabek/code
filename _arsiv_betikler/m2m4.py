@@ -4,7 +4,7 @@ import os ,sys ,json ,copy
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -56,7 +56,7 @@ def main ():
     print (f"cache {len (cache )} part\n",flush =True )
 
     def score (promote ,tl ,th ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
             hi_ =r ["n"]>=8 
             per =[cp_openings .connection_points (
@@ -76,7 +76,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (G ))):
                     if d_ >r ["tol"]or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if hi_ else "dusuk"
+            tp =int (hit .sum ());k ="very"if hi_ else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (G )-tp 
         out ={}
         for k ,(T ,Fp ,Fn )in agg .items ():
@@ -87,19 +87,19 @@ def main ():
 
     res ={"base":score (0.25 ,TL ,TH )}
     print (f"TABAN (promote 0.25, threshold {TL }/{TH }): {res ['base']['w']:.4f}"
-    f"  (dusuk {res ['base']['dusuk']:.4f} cok {res ['base']['cok']:.4f})\n",flush =True )
+    f"  (dusuk {res ['base']['low']:.4f} cok {res ['base']['very']:.4f})\n",flush =True )
     print ("M2 -- conn_promote:",flush =True )
     res ["m2"]={}
     for pr in (0.10 ,0.15 ,0.20 ,0.25 ,0.35 ):
         r =score (pr ,TL ,TH );res ["m2"][str (pr )]=r 
         mk ="  <- urunde"if pr ==0.25 else ""
-        print (f"  {pr :.2f}  cok {r ['cok']:.4f}  agirlikli {r ['w']:.4f}{mk }",flush =True )
-    print ("\nM4 -- ince threshold izgarasi (dusuk-CP):",flush =True )
+        print (f"  {pr :.2f}  cok {r ['very']:.4f}  agirlikli {r ['w']:.4f}{mk }",flush =True )
+    print ("\nM4 -- ince threshold izgarasi (low-CP):",flush =True )
     res ["m4"]={}
     for tl in (0.375 ,0.40 ,0.425 ,0.45 ,0.475 ,0.50 ,0.55 ):
         r =score (0.25 ,tl ,TH );res ["m4"][str (tl )]=r 
         mk ="  <- urunde"if abs (tl -TL )<1e-9 else ""
-        print (f"  {tl :.3f}  dusuk {r ['dusuk']:.4f}  agirlikli {r ['w']:.4f}{mk }",flush =True )
+        print (f"  {tl :.3f}  dusuk {r ['low']:.4f}  agirlikli {r ['w']:.4f}{mk }",flush =True )
     json .dump (res ,open ("results/m2m4.json","w"),indent =1 )
     print ("\nmakbuz -> results/m2m4.json",flush =True )
 

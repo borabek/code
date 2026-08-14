@@ -67,14 +67,14 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     d =np .load ("results/gate_regrow_data_fiz.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }
     pids =np .array ([str (x )for x in d ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (d ["X"][keep ][:,:18 ],d ["y"][keep ])
     print (f"KUME={cluster } | {len (cache )} part | gate {int (keep .sum ())} candidate x 18 sutun",flush =True )
@@ -99,25 +99,25 @@ def main ():
             if cps :
                 Xc =wire_gate .feats_for (V ,F ,sum (plist )/len (plist ),cps ,CE ,CT ,
                 step_path =r ["stp"])
-                m =clf .predict_proba (Xc [:,:18 ])[:,1 ]>=(THR ["cok"]if is_hi else THR ["dusuk"])
+                m =clf .predict_proba (Xc [:,:18 ])[:,1 ]>=(THR ["very"]if is_hi else THR ["low"])
                 if m .any ():
                     P =np .array ([c ["point"]for c ,k_ in zip (cps ,m )if k_ ],float )
                     Pd =np .array ([c ["direction"]for c ,k_ in zip (cps ,m )if k_ ],float )
-            kk ="cok"if r ["n"]>=8 else "dusuk"
+            kk ="very"if r ["n"]>=8 else "low"
             det .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'ensemble':<28}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'ensemble':<28}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
-    for sw ,lab in ((False ,"mevcut (keig96_s0)"),(True ,"keig128_s0 ile degisik")):
+    for sw ,lab in ((False ,"mevcut (keig96_s0)"),(True ,"keig128_s0 with degisik")):
         det ,rob =kos (sw )
         R [lab ]=(det ,rob )
         p_ ,r_ =pr (det )
         print (f"{lab :<28}{f1w (det ):>9.4f}{f1w (rob ):>9.4f}{p_ :>9.3f}{r_ :>9.3f}",flush =True )
 
     pickle .dump (R ,open (f"results/s1_parca_{cluster }.pkl","wb"))
-    a_ ,b_ ="keig128_s0 ile degisik","mevcut (keig96_s0)"
+    a_ ,b_ ="keig128_s0 with degisik","mevcut (keig96_s0)"
     rng =np .random .RandomState (0 )
     n =len (R [b_ ][0 ]);IX =[rng .randint (0 ,n ,n )for _ in range (2000 )]
     print ("\nESLI BOOTSTRAP (128 - 96):")

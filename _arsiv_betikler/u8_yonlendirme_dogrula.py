@@ -46,10 +46,10 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }
     kod ={k :collections .Counter (mfg_of .get (p ,"?")for p in tr_pid [tr_mfg ==k ]).most_common (1 )[0 ][0 ]
     for k in np .unique (tr_mfg )}
     Ztr =np .zeros ((len (Xtr ),Xtr .shape [1 ]*2 ))
@@ -79,7 +79,7 @@ def main ():
                     m =(s >=ORAN *max (float (s .max ()),1e-9 ))&(s >=TABAN )
                     if m .any ():
                         P =r ["P"][m ];Pd =r ["Pd"][m ]
-                det [ad ].append (("cok"if r ["n"]>=8 else "dusuk",)
+                det [ad ].append (("very"if r ["n"]>=8 else "low",)
                 +esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
         return det ,threshold ,direction 
 
@@ -109,15 +109,15 @@ def main ():
             print (f"  {x }->{y }: {m :+.4f}  [{lo :+.4f}, {hi :+.4f}]  "
             f"{'GERCEK'if (lo >0 or hi <0 )else 'noise'}")
 
-    print ("\n=== HAKIMIYET: R, dagitilan D'yi her eksende geciyor mu? ===")
+    print ("\n=== HAKIMIYET: R, dagitilan D'yi each eksende geciyor mu? ===")
     ok =True 
     for ad in SON :
         m ,lo ,hi =boot (SON [ad ]["D"],SON [ad ]["R"])
         iyi =m >0 or (lo <0 <hi )# ya more iyi, ya farksiz
         ok &=iyi 
         print (f"  {ad :<10} D->R {m :+.4f} [{lo :+.4f}, {hi :+.4f}] -> "
-        f"{'R en az D kadar iyi'if iyi else 'R DAHA KOTU'}")
-    print (f"\nSONUC: {'R, D YERINE GECEBILIR'if ok else 'R, D yerine GECEMEZ'}")
+        f"{'R at least D up to iyi'if iyi else 'R DAHA KOTU'}")
+    print (f"\nSONUC: {'R, D YERINE GECEBILIR'if ok else 'R, D instead of GECEMEZ'}")
     with open ("results/u8_yonlendirme_dogrula.json","w",encoding ="utf-8")as f :
         json .dump ({ad :{k :float (f1w (v ))for k ,v in det .items ()}for ad ,det in SON .items ()}
         |{"hakimiyet":bool (ok ),"q":Q },f ,indent =1 )

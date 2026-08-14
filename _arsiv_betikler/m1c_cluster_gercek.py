@@ -11,7 +11,7 @@ import os ,sys ,json ,copy
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -70,7 +70,7 @@ def main ():
         conn_promote =promote )for pb in r ["pbs"]]
 
     def score (cl_low ,cl_high ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
             probs =sum (r ["pbs"])/len (r ["pbs"])
             # 1) varsayilan turetme -> router (dagitilan mantik)
@@ -89,7 +89,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (G ))):
                     if d_ >r ["tol"]or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (G )-tp 
         out ={}
         for k ,(T ,Fp ,Fn )in agg .items ():
@@ -98,12 +98,12 @@ def main ():
         out ["weighted"]=sum (W [k ]*out [k ]for k in W )
         return out 
 
-    print (f"{'cluster (dusuk/cok)':<22}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}")
+    print (f"{'cluster (low/very)':<22}{'low':>9}{'very':>9}{'agirlikli':>11}")
     res ={}
     for cl_lo ,cl_hi ,tag in ((3.0 ,3.0 ,"3.0 / 3.0  (URUNDE)"),(5.0 ,3.0 ,"5.0 / 3.0  (candidate)"),
     (5.0 ,5.0 ,"5.0 / 5.0")):
         r =score (cl_lo ,cl_hi );res [tag ]=r 
-        print (f"{tag :<22}{r ['dusuk']:>9.4f}{r ['cok']:>9.4f}{r ['weighted']:>11.4f}",flush =True )
+        print (f"{tag :<22}{r ['low']:>9.4f}{r ['very']:>9.4f}{r ['weighted']:>11.4f}",flush =True )
     b =res ["3.0 / 3.0  (URUNDE)"]["weighted"]
     c =res ["5.0 / 3.0  (candidate)"]["weighted"]
     print (f"\nrejim-kosullu katki: {c -b :+.4f}")

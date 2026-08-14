@@ -96,7 +96,7 @@ def main ():
     print (f"turetme bitti | notr-donus: {wire_gate .fallback_ozet ()or 'YOK'}",flush =True )
 
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }
 
     def puanla (clf ,alt ,R_ ):
         det ,rob =[],[]
@@ -108,17 +108,17 @@ def main ():
                 m =(s >=ORAN *max (float (s .max ()),1e-9 ))&(s >=TABAN )
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'split':<24}{'R':>6}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'split':<24}{'R':>6}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
     for R_ in R_LISTE :
         d =np .load (NPZ_OF [R_ ],allow_pickle =True )
         tr_pid =np .array ([str (x )for x in d ["pids"]])
-        tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+        tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
         tr_mfg =np .array ([str (x )for x in d ["mfg"]])
         kod ={k :collections .Counter (mfg_of .get (p ,"?")for p in tr_pid [tr_mfg ==k ]).most_common (1 )[0 ][0 ]
         for k in np .unique (tr_mfg )}

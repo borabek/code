@@ -76,7 +76,7 @@ def main ():
     m =json .load (open (yol ))
     kir =m ["sonuc"].get ("parca_kirilim")or m ["sonuc"].get ("parca_tp_fp_fn")
     if not kir :
-        sys .exit ("makbuzda `parca_kirilim` yok -- olcumu yeniden kos.")
+        sys .exit ("makbuzda `parca_kirilim` absent -- olcumu yeniden kos.")
     baseline =None 
     if len (sys .argv )>2 and os .path .exists (sys .argv [2 ]):
         t =json .load (open (sys .argv [2 ]))
@@ -97,7 +97,7 @@ def main ():
             print ("!! P6 HIC CALISMAMIS -- this number TABAN sayisidir.")
     print ()
 
-    for alan ,ad in (("rob","ROBOT (lateral<=2mm, signed aci<=10)"),
+    for alan ,ad in (("rob","ROBOT (lateral<=2mm, signed angle<=10)"),
     ("tes","TESPIT (konum, direction serbest)")):
         tp ,fp ,fn =topla (kir ,alan =alan )
         a ,b =bootstrap (kir ,alan =alan )
@@ -142,7 +142,7 @@ def main ():
             f"parcasiyla kaba iz paylasmayan)")
             print (f"  robot {f1 (tp ,fp ,fn ):.4f}   %95 GA [{a :.4f}, {b :.4f}]"
             f"   headline farki {f1 (tp ,fp ,fn )-tam :+.4f}")
-            print ("  (fark buyukse headline geometri benzerliginden besleniyor "
+            print ("  (difference buyukse headline geometri benzerliginden besleniyor "
             "demektir)")
 
 

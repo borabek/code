@@ -41,7 +41,7 @@ def yukle ():
     with io .open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tg ={r ["geo"]for r in DER }
-    keep =~np .isin (np .array ([gk .get (x ,"yok:"+x )for x in pid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (x ,"absent:"+x )for x in pid ]),list (tg ))
     Z =np .zeros ((len (X ),X .shape [1 ]*2 ))
     for u in np .unique (pid ):
         i =np .where (pid ==u )[0 ]
@@ -51,10 +51,10 @@ def yukle ():
     "n_feat":Z .shape [1 ],"donusum":"zskor"}
     try :
         import gate_bench as T 
-        ad =T .yukle ()["ad"]
+        ad =T .yukle ()["name"]
     except Exception :
         ad =None 
-    return DER ,gate ,{"Z":Z ,"y":y ,"pid":pid ,"mfg":mfg ,"keep":keep ,"ad":ad }
+    return DER ,gate ,{"Z":Z ,"y":y ,"pid":pid ,"mfg":mfg ,"keep":keep ,"name":ad }
 
 
 def puanla (DER ,gate ,karar =None ,duzelt =True ):
@@ -80,7 +80,7 @@ def puanla (DER ,gate ,karar =None ,duzelt =True ):
                             c =wire_gate .pick_member_direction (X [k ],c ,r ["UYE"])
                         P =np .array ([x ["point"]for x in c ],float )
                         Pd =np .array ([x ["direction"]for x in c ],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         det .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
         rob .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ))

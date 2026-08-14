@@ -59,7 +59,7 @@ for gi in np .unique (G ):
         # part-geneli mean (most kaba pool)
     feats .setdefault ("part",np .zeros (len (Y )))[m ]=loo_pool (np .zeros (len (m ),int ),oof [m ])
 
-print ("\n=== HAVUZLANMIS SKOR tek basina ayirici mi (AUC) ===")
+print ("\n=== HAVUZLANMIS SKOR single basina ayirici mi (AUC) ===")
 for k ,v in feats .items ():
     print (f"  {k :6s} havuzlanmis-skor AUC {roc_auc_score (Y ,v ):.4f}")
 
@@ -85,4 +85,4 @@ def topn_f1 (sc ):
 print (f"\n=== top-N (metadata-assisted) F1 ===")
 print (f"  baz gate      : {topn_f1 (oof ):.4f}")
 print (f"  13+pool      : {topn_f1 (o2 ):.4f}   KAZANC {topn_f1 (o2 )-topn_f1 (oof ):+.4f}")
-print ("\n  -> KAZANC >+0.02 ise havuzlama GERCEK lever; degilse P0 kolu tamamen kapanir (durust).")
+print ("\n  -> KAZANC >+0.02 whereas havuzlama GERCEK lever; degilse P0 kolu tamamen kapanir (durust).")

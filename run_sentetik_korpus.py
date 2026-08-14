@@ -170,7 +170,7 @@ def main ():
         "gt_olasilik":float (np .median (a [:,0 ])),
         "zemin":float (np .median (a [:,1 ])),"ratio":float (ratio ),
         "not":"Sentetik corpus duman testi. Oran ~1 ise korpusun "
-        "training degeri yok. D7'ye BAKILMADI."},
+        "training degeri none. D7'ye BAKILMADI."},
         open ("results/sentetik_duman.json","w"),indent =1 )
 
 

@@ -79,4 +79,4 @@ go1 =z_all .mean ()>5 ;go2 =fp_in_pure /max (fp_tot ,1 )>=0.40
 print (f"\nKARAR: saflik-sinyali {'GECTI'if go1 else 'ZAYIF'} (z {z_all .mean ():+.2f}, threshold >5) | "
 f"saf-FP kutlesi {'GECTI'if go2 else 'DUSUK'} ({fp_in_pure /max (fp_tot ,1 ):.2f}, threshold >=0.40)")
 print ("  IKISI DE GECTI -> P0-b/c'ye devam (cluster-havuzlu gate)."if (go1 and go2 )
-else "  -> axis tek basina zayif; P0-b'de yuz/konum ile birlestir ya da durustce kapat.")
+else "  -> axis single basina zayif; P0-b'de face/konum with birlestir ya da durustce kapat.")

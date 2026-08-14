@@ -2,7 +2,7 @@
 """DataSet 5 ENTEGRASYONU: 4788 JSON + 4788 STP (birebir eslesmis).
 
 ONEMI: korpusta STEP'i EKSIK 2120 klemens vardi and WSCAD'den indirmek KESIN KAPALIYDI
-([[wscad-indirme-conclusive-closed]]: 24 denemede 0 basari, sebep portalda 3D VERI YOKLUGU).
+([[wscad-indirme-conclusive-closed]]: 24 denemede 0 basari, reason portalda 3D VERI YOKLUGU).
 Bu paket that eksigin **2391 parcasini / 8410 CP'sini** kapatiyor + 403 tamamen new part
 (IKI YENI URETICI: WIE 280, WEG 123) getiriyor.
 

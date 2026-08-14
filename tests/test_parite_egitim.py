@@ -29,7 +29,7 @@ def test_aday_uretimi_TEK_FONKSIYONDAN ():
     with open (os .path .join (KOK ,"gate_regrow.py"),encoding ="utf-8")as f :
         gr =f .read ()
     assert "derive_candidates"in gr ,"gate_regrow ortak ureticiyi cagirmiyor"
-    assert "f1_sweep.union_all(per)"not in gr ,"gate_regrow hala union_all ile candidate uretiyor (urun _vote2 kullanir)"
+    assert "f1_sweep.union_all(per)"not in gr ,"gate_regrow hala union_all with candidate uretiyor (urun _vote2 kullanir)"
 
 
 def test_vote2_BENZERSIZ_model_sayar_ve_tavan_MODEL_SAYISI ():
@@ -59,7 +59,7 @@ def test_egitim_verisi_VOTES_tavanina_uyuyor ():
     "egitim_verisi","results/gate_regrow_data_topo.npz")
     npz =os .path .join (KOK ,_yol )
     if not os .path .exists (npz ):
-        pytest .skip ("training verisi yok")
+        pytest .skip ("training verisi none")
     d =np .load (npz ,allow_pickle =True )
     with open (os .path .join (KOK ,"cp_config.json"),encoding ="utf-8")as f :
         cfg =json .load (f )

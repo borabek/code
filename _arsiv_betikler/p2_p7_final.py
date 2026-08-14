@@ -149,6 +149,6 @@ final ["bootstrap_CI95_ALL"]=[float (lo ),float (hi )]
 final ["AUTO_precision"]=float (p_auto );final ["AUTO_n"]=int (auto .sum ())
 final ["AUTO_REVIEW"]={"P":float (p_all ),"R":float (r_all ),"F1":float (f_all )}
 final ["config"]=CFG ;final ["gate_passed"]=bool (gate )
-final ["note"]="KILITLI HOLDOUT TEK KEZ acildi; hicbir secim/tuning bu veride yapilmadi."
+final ["note"]="KILITLI HOLDOUT TEK KEZ acildi; no secim/tuning this veride yapilmadi."
 json .dump (final ,open ("results/p7_final_holdout.json","w"),indent =1 )
 print ("-> results/p7_final_holdout.json")

@@ -60,7 +60,7 @@ for f in sorted (os .listdir (OZ )):
     if f .startswith ("d7_")and f .endswith (".npz"):
         z =np .load (f"{OZ }/{f }")
         te .append ({"pid":f [3 :-4 ],"X":np .asarray (z ["X"],float ),"P":z ["P"],
-        "D":z ["D"],"kaynak":z ["kaynak"]})
+        "D":z ["D"],"source":z ["source"]})
 kay =K .yukle ([d ["pid"]for d in te ])
 for d in te :
     r =kay [d ["pid"]]
@@ -77,7 +77,7 @@ def kos (b_esik ):
     [("goreli",x )for x in ((0.5 ,0.20 ),(0.5 ,0.30 ),(0.4 ,0.25 ))]):
         rob =collections .defaultdict (lambda :[0 ,0 ,0 ]);tes =[]
         for d in te :
-            ms =d ["kaynak"]==0 
+            ms =d ["source"]==0 
             Xs =d ["X"][ms ]
             if len (Xs )<2 :
                 continue 
@@ -105,7 +105,7 @@ def kos (b_esik ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"kural":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
         if en is None or r ["robot"]>en ["robot"]:
@@ -120,7 +120,7 @@ for ad ,be in (("TEZ-SAF (B-rep KAPALI)",None ),("+B-rep threshold 0.50",0.50 ),
     out [ad ]=kos (be )
     r =out [ad ]
     print (f"{ad :<24} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | makro "
-    f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['kural']}",flush =True )
+    f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['rule']}",flush =True )
 t =out ["TEZ-SAF (B-rep KAPALI)"]
 print ()
 for ad in out :
@@ -132,7 +132,7 @@ for ad in out :
         f"{r ['tespit']-t ['tespit']:+.4f} | artan brand {art }/12"
         +(f" | YIKILAN: {','.join (yik )}"if yik else ""))
 json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
-"not":"HIBRIT: seg adaylari DAGITILAN v6 ile, B-rep adaylari AYRI "
-"model ile puanlanir. Tez-saf arm DEGISMEDI. D7 brand-disi, MIKRO."},
+"not":"HIBRIT: seg adaylari DAGITILAN v6 with, B-rep adaylari AYRI "
+"model with puanlanir. Tez-saf arm DEGISMEDI. D7 brand-disi, MIKRO."},
 open ("results/hibrit_gate_d7.json","w"),indent =1 )
 print ("receipt -> results/hibrit_gate_d7.json")

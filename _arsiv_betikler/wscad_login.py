@@ -15,7 +15,7 @@ import time
 from playwright .sync_api import sync_playwright 
 
 PROFILE =os .path .abspath ("_wscad_profile")
-URL ="https://www.wscaduniverse.com/en/"
+URL ="https://www.wscaduniverse.com/most/"
 
 
 def main ():
@@ -27,7 +27,7 @@ def main ():
         page =ctx .pages [0 ]if ctx .pages else ctx .new_page ()
         page .goto (URL ,wait_until ="domcontentloaded",timeout =90000 )
         print ("TARAYICI OPEN -- WSCAD Universe'e GIRIS YAP.")
-        print ("Giris yaptiktan sonra bu pencereyi KAPATMA; 10 dk boyunca bekliyorum.\n")
+        print ("Giris yaptiktan after this pencereyi KAPATMA; 10 dk along bekliyorum.\n")
 
         # poll for a logged-in signal: the page stops showing a login control
         deadline =time .time ()+600 

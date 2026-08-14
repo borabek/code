@@ -146,7 +146,7 @@ def exam ():
             continue 
         z =np .load (f"{OZ }/{f }")
         te .append ({"pid":f [3 :-4 ],"X":np .asarray (z ["X"],float ),
-        "P":z ["P"],"D":z ["D"],"kaynak":z ["kaynak"]})
+        "P":z ["P"],"D":z ["D"],"source":z ["source"]})
     kay =K .yukle ([d ["pid"]for d in te ])
     for d in te :
         r =kay [d ["pid"]]
@@ -162,7 +162,7 @@ def olc (model ,te ,segtek ):
         rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
         tes =[]
         for d in te :
-            m =(d ["kaynak"]==0 )if segtek else np .ones (len (d ["kaynak"]),bool )
+            m =(d ["source"]==0 )if segtek else np .ones (len (d ["source"]),bool )
             X =d ["X"][m ]
             if len (X )<2 :
                 continue 
@@ -183,7 +183,7 @@ def olc (model ,te ,segtek ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"kural":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
         if en is None or r ["robot"]>en ["robot"]:
@@ -202,7 +202,7 @@ def main ():
         out [ad ]=olc (m ,te ,segtek )
         c =out [ad ]
         print (f"  -> robot {c ['robot']:.4f} | tespit {c ['tespit']:.4f} | makro "
-        f"{c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f} | {c ['kural']}\n",
+        f"{c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f} | {c ['rule']}\n",
         flush =True )
     a =out ["A) TEZ-SAF + proje etiketi"]["robot"]
     b =out ["B) GENISLETILMIS + proje etiketi"]["robot"]
@@ -213,7 +213,7 @@ def main ():
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
     "eski_etiketle_tezsaf":0.1159 ,"v6":0.1970 ,"urun":0.2029 ,
     "not":"Etiket projenin tanimiyla (lateral + axial 40mm + acgozlu "
-    "bire-bir) yeniden uretildi; OZNITELIKLER onbellekten, "
+    "bire-a) yeniden uretildi; OZNITELIKLER onbellekten, "
     "DEGISMEDI. D7 brand-disi, MIKRO."},
     open ("results/v6_farki_C.json","w"),indent =1 )
     print ("receipt -> results/v6_farki_B.json")

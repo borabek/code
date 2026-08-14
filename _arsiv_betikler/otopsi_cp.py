@@ -136,7 +136,7 @@ def main ():
             "en_yakin_tepe_mm":float (np .linalg .norm (V -p ,axis =1 ).min ()),
             })
         R_ ={"part":pid ,"boyut_mm":[round (float (x ),1 )for x in boyut ],
-        "gt":len (G ),"tahmin":len (P ),
+        "gt":len (G ),"prediction":len (P ),
         "seat_offset_medyan":float (np .median (np .abs (seat_off ))),
         "cp":line_ }
         RAPOR [pid ]=R_ 
@@ -144,7 +144,7 @@ def main ():
         print (f"\n{'='*96 }\n{pid }  boyut {boyut .round (1 )}  GT {len (G )}  tahmin {len (P )}")
         print (f"manufacturer seat'inin KENDI agzina uzakligi (medyan): {R_ ['seat_offset_medyan']:.1f}mm")
         print (f"{'CP':>3}{'perp_seat':>10}{'ax_seat':>9}{'perp_AGIZ':>11}{'ax_AGIZ':>9}"
-        f"{'aci':>7}{'ici?':>6}{'ileri':>8}{'geri':>8}{'ic_cap':>9}{'ort_cap':>9}")
+        f"{'angle':>7}{'ici?':>6}{'ileri':>8}{'geri':>8}{'ic_cap':>9}{'ort_cap':>9}")
         for s in line_ :
             print (f"{s ['cp']:>3}{s ['perp_seat']:>10.2f}{s ['axial_seat']:>9.2f}"
             f"{s ['perp_agiz']:>11.2f}{s ['axial_agiz']:>9.2f}{s ['aci_isaretli']:>7.1f}"

@@ -15,7 +15,7 @@ import karar_olcutu as K
 
 
 def test_gecenin_kararlarini_YENIDEN_URETIYOR ():
-    assert K ._kendini_sina (),"kural, 2026-08-01 kararlariyla celisiyor"
+    assert K ._kendini_sina (),"rule, 2026-08-01 kararlariyla celisiyor"
 
 
 def test_isaret_yetmez_BUYUKLUK_sart ():

@@ -47,7 +47,7 @@ def main ():
     measure_set .rapor_bas (D ["rap"])
     X ,y ,pid ,mfg ,keep =D ["X"],D ["y"],D ["pid"],D ["mfg"],D ["keep"]
     gk =D ["gk"]
-    grup =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+    grup =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
     Z =np .zeros ((len (X ),X .shape [1 ]*2 ))
     for u in np .unique (pid ):
         i =np .where (pid ==u )[0 ]
@@ -118,7 +118,7 @@ def main ():
     with io .open ("results/q1_cesitlilik.json","w",encoding ="utf-8")as f :
         json .dump ({"sonuc":SON ,"cesitlilik_kazanci":{str (k ):float (v )
         for k ,v in KAZANC .items ()},
-        "ortalama":ort },f ,indent =1 )
+        "mean":ort },f ,indent =1 )
     print ("receipt -> results/q1_cesitlilik.json")
 
 

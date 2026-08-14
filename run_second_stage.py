@@ -53,7 +53,7 @@ def part (on ,pid ,r ,gate ,mesh =False ):
     if not os .path .exists (f2 ):
         return None 
     z =np .load (f"{OZ }/{on }_{pid }.npz")
-    m =np .isin (np .asarray (z ["kaynak"],int ),KAYNAKLAR )
+    m =np .isin (np .asarray (z ["source"],int ),KAYNAKLAR )
     T =np .asarray (np .load (f"{TAN }/{on }_{pid }.npz")["T"],float )[m ]
     X =np .hstack ([np .asarray (z ["X"],float )[m ],T ])
     if len (X )<2 :

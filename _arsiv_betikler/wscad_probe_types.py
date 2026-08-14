@@ -13,7 +13,7 @@ Kullanim: PYTHONPATH=_diffusion_net_repo/src .venv/Scripts/python.exe wscad_prob
 import os ,sys ,time ,json 
 
 PROFILE =os .path .abspath ("_wsprofile")
-HOME ="https://www.wscaduniverse.com/en/"
+HOME ="https://www.wscaduniverse.com/most/"
 MID ,PN =63 ,"3002162"# PXC, STEP'i basariyla indigi bilinen part
 
 JS ="""async ({mid, pn, pt}) => {
@@ -23,12 +23,12 @@ JS ="""async ({mid, pn, pt}) => {
     const m = v.match(/eyJ[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+/);
     if (m) { bearer = m[0]; break; }
   }
-  if (!bearer) return {err: "oturum tokeni yok"};
+  if (!bearer) return {err: "oturum tokeni absent"};
   const res = await fetch("https://bff.wscaduniverse.com/api/download/part", {
     method: "POST",
     headers: {"content-type": "application/json", "accept": "application/json",
               "authorization": "Bearer " + bearer},
-    body: JSON.stringify({manufacturerId: mid, partNumber: pn, partType: pt, norm: 0, language: "en"})
+    body: JSON.stringify({manufacturerId: mid, partNumber: pn, partType: pt, norm: 0, language: "most"})
   });
   const txt = await res.text();
   return {status: res.status, len: txt.length, head: txt.slice(0, 160)};

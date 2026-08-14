@@ -57,4 +57,4 @@ if cons :
     print ("  (low std = aile-ici tutarli = single karar ailenin tamamini temizler)")
 else :
     print ("  very-parcali aile YOK (this havuzda aileler single-parcali) -> aile kaldiraci this veride ZAYIF")
-print ("\n-> Bu cikti P1-c'nin (FAZ B) hedef listesidir; simdilik SADECE measurement.")
+print ("\n-> Bu output P1-c'nin (FAZ B) hedef listesidir; simdilik SADECE measurement.")

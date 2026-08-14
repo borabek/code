@@ -78,7 +78,7 @@ def main ():
     for r in DER :
         d_ =PARCA .get (r ["pid"])
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         if d_ is None :
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ));SK =[]
         else :
@@ -158,19 +158,19 @@ def main ():
     print (f"{'':<22}{'robot(FIZIKSEL)':>17}{'tespit':>10}")
     print (f"{'baseline':<22}{tr :>17.4f}{td :>10.4f}")
     print (f"{'konum KAHINI':<22}{kr :>17.4f}{kd :>10.4f}")
-    print (f"{'fark':<22}{kr -tr :>+17.4f}{kd -td :>+10.4f}")
+    print (f"{'difference':<22}{kr -tr :>+17.4f}{kd -td :>+10.4f}")
 
     verdict =[]
     if n_av /max (n_cift ,1 )<0.05 :
-        verdict .append ("AV SAHASI COK KUCUK -- konum kolu yapisal olarak kucuk")
+        verdict .append ("AV SAHASI COK KUCUK -- konum kolu yapisal as small")
     if n_kurtarma /max (n_av ,1 )<0.30 :
-        verdict .append ("SOZLUK KURTARAMIYOR -- zenginlestirme gerekir, selector degil")
+        verdict .append ("SOZLUK KURTARAMIYOR -- zenginlestirme is required, selector not")
     if float ((D_ >=0.999 ).mean ())>0.5 :
-        verdict .append ("ETIKET DOYMUS -- ayirt edici etiket kurulmali (direction kolundaki sign hatasinin muadili)")
+        verdict .append ("ETIKET DOYMUS -- ayirt edici label kurulmali (direction kolundaki sign hatasinin muadili)")
     if kr -tr <0.02 :
         verdict .append ("KAHIN TAVANI DUSUK -- mukemmel selector bile +0.02 vermez, KOL KAPANIR")
     if not verdict :
-        verdict .append ("KOL ACIK: av sahasi var, sozluk kurtariyor, etiket ayirt edici, ceiling yeterli")
+        verdict .append ("KOL OPEN: av sahasi present, dictionary kurtariyor, label ayirt edici, ceiling yeterli")
     print ("\nHUKUM:")
     for h in verdict :
         print ("  *",h )

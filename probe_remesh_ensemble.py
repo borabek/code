@@ -175,7 +175,7 @@ def main ():
             taban_parca =part 
         print (f"{ad :28s} {m ['tespit']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
 
-    print ("\n--- ESLI PARCA BOOTSTRAP (TABAN'a gore fark) ---")
+    print ("\n--- ESLI PARCA BOOTSTRAP (TABAN'a per fark) ---")
     print (f"{'varyant':28s} {'metrik':>8s} {'fark':>9s} "
     f"{'%95 GA':>22s} {'poz%':>6s}")
     for ad in res_ :

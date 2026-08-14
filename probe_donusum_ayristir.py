@@ -118,7 +118,7 @@ def main ():
     "yalniz_yanal_tavani":ceiling ["yalniz_yanal"]/max (n_gt ,1 ),
     "yalniz_aci_tavani":ceiling ["yalniz_aci"]/max (n_gt ,1 ),
     "not":"GT basina EN IYI adayin ihlali. 'IKISI AYRI ADAYDA' = lateral "
-    "bir adayda, aci baskasinda saglaniyor -> tek adayda "
+    "a adayda, aci baskasinda saglaniyor -> tek adayda "
     "birlestirmek kazanc olurdu."},
     open (os .environ .get ("AYR_CIKTI","results/donusum_ayristir.json"),
     "w"),indent =1 )

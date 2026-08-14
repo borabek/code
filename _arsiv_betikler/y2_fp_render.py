@@ -97,7 +97,7 @@ def main ():
     os .makedirs (DIZIN ,exist_ok =True )
     with io .open ("results/fp_denetim.json",encoding ="utf-8")as f :
         FD =json .load (f )
-    FP =FD ["hepsi"];sec =FD ["ornek_idx"]
+    FP =FD ["all of them"];sec =FD ["ornek_idx"]
     stp_of ={p :s for m ,p ,jf ,s in eligible ()}
     print (f"{len (sec )} FP render edilecek ({len ({FP [i ]['pid']for i in sec })} part)")
 
@@ -117,7 +117,7 @@ def main ():
             print (f"  {pid }: mesh HATA {type (e ).__name__ }");continue 
         for i in idxs :
             f_ =FP [i ]
-            p =np .array (f_ ["nokta"],float );d =np .array (f_ ["direction"],float )
+            p =np .array (f_ ["point"],float );d =np .array (f_ ["direction"],float )
             last_ ,olc ,_ =derinlik_haritasi (V ,F ,p ,d )
             if last_ is None :
                 continue 
@@ -142,7 +142,7 @@ def main ():
             yol =f"{DIZIN }/{pid }_{f_ ['aday_i']}.png"
             fig .savefig (yol ,dpi =88 ,bbox_inches ="tight");plt .close (fig )
             OLCUM .append ({"idx":i ,"pid":pid ,"mfg":f_ ["mfg"],"regime":f_ ["regime"],
-            "png":yol ,"merkez":None if np .isnan (center_ )else float (center_ ),
+            "png":yol ,"centre":None if np .isnan (center_ )else float (center_ ),
             "halka":None if np .isnan (halka )else float (halka ),
             "delik_orani":dor ,"gt_uzaklik":f_ ["gt_uzaklik"]})
         if k %10 ==0 :
@@ -150,9 +150,9 @@ def main ():
     with io .open ("results/fp_denetim_olcum.json","w",encoding ="utf-8")as f :
         json .dump (OLCUM ,f ,indent =1 )
     print (f"\n{len (OLCUM )} kare -> {DIZIN }/")
-    d =[o for o in OLCUM if o ["merkez"]is not None and o ["halka"]is not None ]
+    d =[o for o in OLCUM if o ["centre"]is not None and o ["halka"]is not None ]
     if d :
-        fark =np .array ([o ["merkez"]-o ["halka"]for o in d ])
+        fark =np .array ([o ["centre"]-o ["halka"]for o in d ])
         print (f"depth farki: medyan {np .median (fark ):.2f} mm | "
         f">1mm {np .mean (fark >1 ):.0%} | >3mm {np .mean (fark >3 ):.0%}")
     print ("receipt -> results/fp_denetim_olcum.json")

@@ -41,7 +41,7 @@ def test_duzeltme_EKSENE_DIK_kalir ():
     """Eksenel depth DEGISMEMELI -- only eksene dik deviation duzeltilir."""
     wg =_wg ()
     if wg ._load (wg .POSE_PATH )is None :
-        pytest .skip ("pose modeli yok")
+        pytest .skip ("pose modeli none")
     d =np .array ([0.0 ,0.0 ,1.0 ])
     cps =[{"point":np .array ([1.0 ,2.0 ,5.0 ]),"direction":d }]
     onc =cps [0 ]["point"].copy ()
@@ -54,7 +54,7 @@ def test_duzeltme_MAKS_MM_ile_sinirli ():
     wg =_wg ()
     m =wg ._load (wg .POSE_PATH )
     if m is None :
-        pytest .skip ("pose modeli yok")
+        pytest .skip ("pose modeli none")
     X =np .zeros ((5 ,m ["n_feat"]))
     cps =[{"point":np .zeros (3 ),"direction":np .array ([0.0 ,0.0 ,1.0 ])}for _ in range (5 )]
     onc =[c ["point"].copy ()for c in cps ]
@@ -75,7 +75,7 @@ def test_yanlis_genislik_SESSIZ_gecmez_ve_CP_bozmaz ():
     wg =_wg ()
     m =wg ._load (wg .POSE_PATH )
     if m is None :
-        pytest .skip ("pose modeli yok")
+        pytest .skip ("pose modeli none")
     wg .fallback_ozet ()# sayaci sifirla
     cps =[{"point":np .array ([1.0 ,2.0 ,3.0 ]),"direction":np .array ([0.0 ,0.0 ,1.0 ])}]
     out =wg .pose_correct (np .zeros ((1 ,m ["n_feat"]-3 )),cps )
@@ -89,4 +89,4 @@ def test_urun_pose_head_i_GATE_SONRASI_cagiriyor ():
     i_gate =s .index ("robot_wire_gate")
     i_pose =s .index ("pose_correct")
     assert i_pose >i_gate ,"pose duzeltmesi gate KARARINDAN ONCE cagriliyor"
-    assert '_c.get("_gate_hata")'in s or "_gate_hata"in s [:i_pose ],"gate hatasi olan parcada pose uygulanmamali"
+    assert '_c.get("_gate_hata")'in s or "_gate_hata"in s [:i_pose ],"gate hatasi which parcada pose uygulanmamali"

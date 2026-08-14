@@ -70,7 +70,7 @@ def main ():
 
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         diag =r ["diag"];tt =max (3.0 ,0.06 *diag )
         P0 =np .asarray (r ["P"],float )if r .get ("P")is not None else np .zeros ((0 ,3 ))
         # URUNUN BUGUNKU HALI: gate v5 + threshold 0.40/0.30 + ogrenilmis axis selector
@@ -137,7 +137,7 @@ def main ():
     Ta ,Ra =[],[]
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         pak =P3C .parca_adaylari (r ,gate ,ob )
         if pak is not None :
@@ -151,15 +151,15 @@ def main ():
     print ("GT KAYIP DAGILIMI:")
     for k ,v in kova .most_common ():
         print (f"  {k :<12}{v :>6}  %{100 *v /n_gt :.1f}")
-    print (f"\n{'kademe':<20}{'AGIRLIKLI':>11}{'dusuk-CP':>11}{'cok-CP':>10}{'kazanc':>9}")
+    print (f"\n{'kademe':<20}{'AGIRLIKLI':>11}{'low-CP':>11}{'very-CP':>10}{'kazanc':>9}")
     onc ,res_ =None ,{}
     for a in AD :
         v =f1w (S [a ])
-        dl =f1w (rj_s [a ]["dusuk"])if rj_s [a ]["dusuk"]else float ("nan")
-        ck =f1w (rj_s [a ]["cok"])if rj_s [a ]["cok"]else float ("nan")
+        dl =f1w (rj_s [a ]["low"])if rj_s [a ]["low"]else float ("nan")
+        ck =f1w (rj_s [a ]["very"])if rj_s [a ]["very"]else float ("nan")
         kz =""if onc is None else f"{v -onc :+.4f}"
         print (f"{a :<20}{v :>11.4f}{dl :>11.4f}{ck :>10.4f}{kz :>9}")
-        res_ [a ]={"agirlikli":v ,"dusuk":dl ,"cok":ck }
+        res_ [a ]={"agirlikli":v ,"low":dl ,"very":ck }
         onc =v 
     print (f"\nESLESTIRICI FARKI (secicisiz baseline): "
     f"tespit acgozlu {f1w (Ta ):.4f} | robot acgozlu {f1w (Ra ):.4f}")

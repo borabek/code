@@ -10,7 +10,7 @@ import os ,sys ,json
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ ="results/gate_regrow_data_rt2.npz"
 
 
@@ -31,9 +31,9 @@ def main ():
     for g ,f in zip (groups ,fams ):
         fam .setdefault (int (g ),str (f ))
     gk =np .array ([fam [int (g )]for g in groups ])
-    reg =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
-    tot ={k :sum (v for g ,v in ngt .items ()if (int (v )>=8 )==(k =="cok"))
-    for k in ("dusuk","cok")}
+    reg =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
+    tot ={k :sum (v for g ,v in ngt .items ()if (int (v )>=8 )==(k =="very"))
+    for k in ("low","very")}
     stp_of ={p :s for _ ,p ,_ ,s in eligible ()}
 
     XC =np .full ((len (y ),3 ),np .nan )
@@ -84,7 +84,7 @@ def main ():
 
     def best (s ):
         out ={}
-        for k in ("dusuk","cok"):
+        for k in ("low","very"):
             bb =0 
             for thr in np .arange (0.20 ,0.71 ,0.05 ):
                 mm =reg ==k ;sel =(s >=thr )&mm 
@@ -99,9 +99,9 @@ def main ():
     XCf =np .where (np .isnan (XC ),-1.0 ,XC )
     a =best (oof (X ))
     b =best (oof (np .hstack ([X ,XCf ,miss ])))
-    print (f"{'ozellik seti':<26}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}")
-    print (f"{'13 mevcut':<26}{a ['dusuk']:>9.4f}{a ['cok']:>9.4f}{a ['w']:>11.4f}")
-    print (f"{'13 + RENK':<26}{b ['dusuk']:>9.4f}{b ['cok']:>9.4f}{b ['w']:>11.4f}")
+    print (f"{'feature seti':<26}{'low':>9}{'very':>9}{'agirlikli':>11}")
+    print (f"{'13 mevcut':<26}{a ['low']:>9.4f}{a ['very']:>9.4f}{a ['w']:>11.4f}")
+    print (f"{'13 + RENK':<26}{b ['low']:>9.4f}{b ['very']:>9.4f}{b ['w']:>11.4f}")
     print (f"\nRENK katkisi: {b ['w']-a ['w']:+.4f}")
     print (f"KAPI (>= +0.02): {'GECTI'if b ['w']-a ['w']>=0.02 else 'OLU'}")
     json .dump ({"base":a ,"color":b ,"delta":b ["w"]-a ["w"],

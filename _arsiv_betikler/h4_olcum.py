@@ -28,7 +28,7 @@ def fire_rate (ckpt ,parts ,dev ,tag ):
     from scipy .spatial import cKDTree 
     model ,meta =load_any (ckpt ,dev =dev )[:2 ]
     k =int (meta .get ("k_eig",64 ))
-    agg ={"dusuk":[0 ,0 ],"cok":[0 ,0 ]}
+    agg ={"low":[0 ,0 ],"very":[0 ,0 ]}
     for mfg ,pid ,jf ,stp ,n in parts :
         try :
             Vr ,Fr =step_to_mesh (stp )
@@ -45,7 +45,7 @@ def fire_rate (ckpt ,parts ,dev ,tag ):
             R ,t ,_ =align_frames (Vr ,Vj );Gm =(G -t )@R ;Gdm =Gd @R 
             mth ,_ =mouths_for (trimesh .Trimesh (V ,F ,process =False ),Gm ,Gdm )
             tree =cKDTree (V )
-            key ="cok"if n >=8 else "dusuk"
+            key ="very"if n >=8 else "low"
             for b in range (len (Gm )):
                 idx =tree .query_ball_point (mth [b ],3.0 )
                 agg [key ][0 ]+=1 
@@ -53,8 +53,8 @@ def fire_rate (ckpt ,parts ,dev ,tag ):
         except Exception :
             pass 
     out ={kk :(v [1 ]/max (v [0 ],1 ),v [0 ])for kk ,v in agg .items ()}
-    print (f"{tag :<34}dusuk %{100 *out ['dusuk'][0 ]:.1f} ({out ['dusuk'][1 ]} GT) | "
-    f"cok %{100 *out ['cok'][0 ]:.1f} ({out ['cok'][1 ]} GT)",flush =True )
+    print (f"{tag :<34}dusuk %{100 *out ['low'][0 ]:.1f} ({out ['low'][1 ]} GT) | "
+    f"cok %{100 *out ['very'][0 ]:.1f} ({out ['very'][1 ]} GT)",flush =True )
     return out 
 
 
@@ -86,11 +86,11 @@ def main ():
     new ="results/seg_extra/highcp_ft_s0.pt"
     a =fire_rate (base ,sel ,dev ,"MEVCUT urun (keig96)")
     if os .path .exists (new ):
-        b =fire_rate (new ,sel ,dev ,"YENI cok-CP ince-ayarli")
-        print (f"\n{'FARK':<34}dusuk {100 *(b ['dusuk'][0 ]-a ['dusuk'][0 ]):+.1f} puan | "
-        f"cok {100 *(b ['cok'][0 ]-a ['cok'][0 ]):+.1f} puan")
-        print ("\nKAPI: cok-CP atesleme ARTMALI, dusuk-CP DUSMEMELI ->",
-        "GECTI"if (b ['cok'][0 ]>a ['cok'][0 ]and b ['dusuk'][0 ]>=a ['dusuk'][0 ]-0.02 )else "SUPHELI/OLU")
+        b =fire_rate (new ,sel ,dev ,"YENI very-CP ince-ayarli")
+        print (f"\n{'FARK':<34}dusuk {100 *(b ['low'][0 ]-a ['low'][0 ]):+.1f} puan | "
+        f"cok {100 *(b ['very'][0 ]-a ['very'][0 ]):+.1f} puan")
+        print ("\nKAPI: very-CP atesleme ARTMALI, low-CP DUSMEMELI ->",
+        "GECTI"if (b ['very'][0 ]>a ['very'][0 ]and b ['low'][0 ]>=a ['low'][0 ]-0.02 )else "SUPHELI/OLU")
         json .dump ({"base":{k :v [0 ]for k ,v in a .items ()},
         "finetuned":{k :v [0 ]for k ,v in b .items ()}},
         open ("results/h4_fire_rate.json","w"),indent =1 )

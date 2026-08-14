@@ -134,7 +134,7 @@ def main ():
             n_skip +=1 
             continue 
     print (f"{n_ok } part islendi, {n_skip } atlandi\n")
-    print (f"{'ozellik':<18}{'TP medyan':>11}{'FP medyan':>11}{'AUC':>8}{'n(TP/FP)':>14}")
+    print (f"{'feature':<18}{'TP medyan':>11}{'FP medyan':>11}{'AUC':>8}{'n(TP/FP)':>14}")
     res ={}
     for name in ("dip_dist","in_chan","frac6"):
         pos =np .array (rows [name ][1 ],float );neg =np .array (rows [name ][0 ],float )

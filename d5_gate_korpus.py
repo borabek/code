@@ -87,8 +87,8 @@ def main ():
     ap =argparse .ArgumentParser ()
     # F2-12'nin (a) kolu: new parcalari EKLEMEDEN, AYNI filtreyle baseline corpus uret.
     # Boylece (a) with (b) arasindaki TEK difference VERI becomes (see. yukaridaki kritik uyari).
-    ap .add_argument ("--yalniz-eski",action ="store_true",
-    help ="yeni parcalari EKLEME -- F2-12 baseline kolu")
+    ap .add_argument ("--only-old",action ="store_true",
+    help ="new parcalari EKLEME -- F2-12 baseline kolu")
     a =ap .parse_args ()
     import protocol 
     protocol .tez_dogrula ()
@@ -147,7 +147,7 @@ def main ():
         if r .get ("X")is None or r .get ("XR")is None :
             atlanan ["aday_yok"]+=1 ;continue 
         if r ["X"].shape [1 ]!=22 or r ["XR"].shape [1 ]!=36 :
-            atlanan ["genislik"]+=1 ;continue 
+            atlanan ["width"]+=1 ;continue 
             # GT GECERLILIK (2026-08-04): `eligible()` kapisi turetmeden SONRA eklendi, i.e.
             # `_der_yeni.pkl` still dejenere GT'li parcalari iceriyor (AL vakasi: direction (0,0,0),
             # tum CP same noktada). Onlarda HICBIR candidate eslesemez -> all of them y=0 with egitime
@@ -195,7 +195,7 @@ def main ():
     zengin_ad =d ["zengin_ad"])
     part =len (set (PID .tolist ()))
     c =collections .Counter (MFG .tolist ())
-    print (f"\nKORPUS {'TABAN (yalniz eski)'if a .yalniz_eski else 'v3'} -> {out }")
+    print (f"\nKORPUS {'TABAN (only old)'if a .yalniz_eski else 'v3'} -> {out }")
     # ORAN HANGI TABANA GORE (2026-08-04'te duzeltildi): first version v3'u FILTRELENMEMIS
     # w2 (1709 part) with kiyasliyordu and "x1.73" yaziyordu. Ama F2-12'nin kontrol kolu
     # TABAN korpusudur (same protocol filtresinden gecmis, 1190 part) -- correct ratio

@@ -28,7 +28,7 @@ for f in sorted (os .listdir (OZ )):
     if f .startswith ("d7_")and f .endswith (".npz"):
         z =np .load (f"{OZ }/{f }")
         te .append ({"pid":f [3 :-4 ],"X":z ["X"],"P":z ["P"],"D":z ["D"],
-        "kaynak":z ["kaynak"]})
+        "source":z ["source"]})
 kay =K .yukle ([d ["pid"]for d in te ])
 for d in te :
     r =kay [d ["pid"]]
@@ -45,13 +45,13 @@ def kos (segtek ,ceza ):
     [("goreli",x )for x in ((0.5 ,0.20 ),(0.5 ,0.30 ),(0.4 ,0.25 ))]):
         rob =collections .defaultdict (lambda :[0 ,0 ,0 ]);tes =[]
         for d in te :
-            m0 =(d ["kaynak"]==0 )if segtek else np .ones (len (d ["kaynak"]),bool )
+            m0 =(d ["source"]==0 )if segtek else np .ones (len (d ["source"]),bool )
             X =np .asarray (d ["X"][m0 ],float )
             if len (X )<2 :
                 continue 
             s =np .asarray (wire_gate .decision_score (g6 ,X ),float )
             if ceza and not segtek :
-                s =s -ceza *(d ["kaynak"][m0 ]==1 )
+                s =s -ceza *(d ["source"][m0 ]==1 )
             k =(s >=e )if tip =="mutlak"else maske (s ,e [0 ],e [1 ])
             P ,D =d ["P"][m0 ],d ["D"][m0 ]
             P ,D =(P [k ],D [k ])if k .any ()else (P [:0 ],D [:0 ])
@@ -65,7 +65,7 @@ def kos (segtek ,ceza ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"kural":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm }
         if en is None or r ["robot"]>en ["robot"]:
@@ -82,7 +82,7 @@ for ad ,segtek ,ceza in (("v6 | TEZ-SAF (referans)",True ,0.0 ),
     out [ad ]=kos (segtek ,ceza )
     r =out [ad ]
     print (f"{ad :<32} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | makro "
-    f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['kural']}",flush =True )
+    f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['rule']}",flush =True )
 t =out ["v6 | TEZ-SAF (referans)"]["robot"]
 print ()
 for ad in out :

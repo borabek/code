@@ -55,7 +55,7 @@ def main ():
     dev_groups ={keys [p [1 ]]for p in old_ }
     kirli =sum (1 for p in old_ if keys [p [1 ]]in seg_groups )
     print (f"\nESKI 100'luk cluster: {kirli }/100 part segmentasyon geometrisiyle ayni grupta")
-    print ("  -> this cluster DEV becomes; on karar verilebilir, MANSET as kullanilamaz")
+    print ("  -> this cluster DEV becomes; ten karar verilebilir, MANSET as kullanilamaz")
 
     # kalan gruplar: segmentasyona and DEV'e degmeyenler
     kalan =[p for p in pool 
@@ -81,17 +81,17 @@ def main ():
 
     val =pick (val_g ,70 ,30 ,7 )
     lock =pick (lock_g ,70 ,30 ,11 )
-    assert not ({keys [p [1 ]]for p in val }&{keys [p [1 ]]for p in lock }),"VAL ve LOCKED cakisiyor"
-    assert not ({keys [p [1 ]]for p in lock }&dev_groups ),"LOCKED ile DEV cakisiyor"
-    assert not ({keys [p [1 ]]for p in lock }&seg_groups ),"LOCKED ile segmentasyon cakisiyor"
+    assert not ({keys [p [1 ]]for p in val }&{keys [p [1 ]]for p in lock }),"VAL and LOCKED cakisiyor"
+    assert not ({keys [p [1 ]]for p in lock }&dev_groups ),"LOCKED with DEV cakisiyor"
+    assert not ({keys [p [1 ]]for p in lock }&seg_groups ),"LOCKED with segmentasyon cakisiyor"
 
     json .dump ({
     "created":"2026-07-31",
-    "anahtar":"keskin geometri: bbox 0.5mm + B-rep silindir/duzlem imzasi + kose/yuz kovalari",
-    "kural":{
-    "DEV":"kararlar burada verilir (J, L2, threshold, ozellik secimi). MANSET DEGIL.",
-    "VAL":"verilen kararlar burada SINANIR. Asiri-uydurma buradan gorulur.",
-    "LOCKED":"TEK ATIS. Uzerinde hicbir ayar yapilmaz; gate egitimi bu gruplari gormez.",
+    "anahtar":"keskin geometri: bbox 0.5mm + B-rep silindir/duzlem imzasi + kose/face kovalari",
+    "rule":{
+    "DEV":"kararlar here verilir (J, L2, threshold, feature secimi). MANSET DEGIL.",
+    "VAL":"verilen kararlar here SINANIR. Asiri-uydurma buradan gorulur.",
+    "LOCKED":"TEK ATIS. Uzerinde no ayar yapilmaz; gate egitimi this gruplari gormez.",
     },
     "dev":{"n":len (old_ ),"parts":[p [1 ]for p in old_ ],
     "uyari":f"{kirli }/100 parcasi segmentasyon training geometrisiyle ayni grupta"},

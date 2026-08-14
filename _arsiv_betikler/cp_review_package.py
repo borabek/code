@@ -30,7 +30,7 @@ def _angles (V ):
     thin =int (np .argmin (V .max (0 )-V .min (0 )))
     face ={0 :(0 ,0 ),1 :(0 ,-90 ),2 :(90 ,-90 )}[thin ]
     obl ={0 :(22 ,-38 ),1 :(22 ,-62 ),2 :(58 ,-62 )}[thin ]
-    return [("face-on",*face ),("oblique",*obl )]
+    return [("face-ten",*face ),("oblique",*obl )]
 
 
 def render (V ,F ,cps ,out ):

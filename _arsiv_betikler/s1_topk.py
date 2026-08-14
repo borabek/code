@@ -127,14 +127,14 @@ def main ():
                     c =wire_gate .pick_member_direction (Xr [m ],c ,r ["UYE"])
                 Pp =np .array ([x ["point"]for x in c ],float )
                 Pd =np .array ([x ["direction"]for x in c ],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
             det .append ((rj ,)+esle (Pp ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (Pp ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ))
             gg .append (r ["geo"])
         return det ,rob ,gg 
 
-    print (f"\n{'kural':<14}{'tespit':>9}{'robot':>9}{'onceki farka GA':>26}")
+    print (f"\n{'rule':<14}{'tespit':>9}{'robot':>9}{'onceki farka GA':>26}")
     d0 ,r0 ,gg =puanla ("urun")
     print (f"{'URUN':<14}{T .f1w (d0 ):>9.4f}{T .f1w (r0 ):>9.4f}")
     SON ={"urun":{"tespit":T .f1w (d0 ),"robot":T .f1w (r0 )}}

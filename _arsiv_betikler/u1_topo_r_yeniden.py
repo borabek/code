@@ -118,7 +118,7 @@ def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--dogrula",action ="store_true")
     ap .add_argument ("--r",type =float ,default =0.0 )
-    ap .add_argument ("--sinir",type =int ,default =0 )
+    ap .add_argument ("--boundary",type =int ,default =0 )
     a =ap .parse_args ()
     if a .dogrula :
         dogrula (a .bound_ or 60 );return 

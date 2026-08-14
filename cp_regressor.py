@@ -939,7 +939,7 @@ class _Bookkeeper :
         (ep %self .eval_every ==0 and ep >0 )
         or ep ==self .epochs -1 ):
             logger .info ("  epoch %d: running validation eval "
-            "(slow on large parts) ...",ep )
+            "(slow ten large parts) ...",ep )
             m =self .metrics_fn (self .model ,self .meta )or {}
             rec ={"epoch":ep ,"train_loss":float (mean_loss )}
             rec .update ({"val_"+k :v for k ,v in m .items ()})
@@ -1624,7 +1624,7 @@ collapse_gap =0.03 ):
                     if "out of memory"not in str (exc ).lower ():
                         raise 
                     torch .cuda .empty_cache ()
-                    logger .warning ("CUDA OOM on %d-vertex part -> CPU fallback",n )
+                    logger .warning ("CUDA OOM ten %d-vertex part -> CPU fallback",n )
                     parts =_accumulate (ops ,d ,"cpu",device ,accum )
                 if low_memory :
                     del ops 
@@ -1682,7 +1682,7 @@ offset_scale =1.0 ):
         if "out of memory"not in str (exc ).lower ():
             raise 
         torch .cuda .empty_cache ()
-        logger .warning ("CUDA OOM during inference on %d-vertex part -> CPU",n )
+        logger .warning ("CUDA OOM during inference ten %d-vertex part -> CPU",n )
         return _run ("cpu")
 
 
@@ -2032,7 +2032,7 @@ backbone ="knngraph"):
         logger .warning (
         "w_heat=%.1f with heat_loss=centernet is likely to cause direction-head "
         "collapse (ang>90 deg, as seen in v7 at epoch 25). CenterNet normalises "
-        "the heatmap loss by #keypoints, so once the heatmap fits its gradient "
+        "the heatmap loss by #keypoints, so before the heatmap fits its gradient "
         "approaches 0; a high w_heat then starves the direction/offset heads of "
         "gradient signal and they can invert. Recommend w_heat=1.0 (default).",
         w_heat )
@@ -2227,7 +2227,7 @@ backbone ="knngraph"):
         # geometry survives -- train and inference therefore see the same density and the
         # same intact features. A giant part (>max_patches*cap) is uniform-capped first.
     logger .info ("kNN-graph regressor: %d parts (k=%d, subsample=%d), graphs cached "
-    "on first use",len (train_samples ),meta ["k"],meta ["subsample"])
+    "ten first use",len (train_samples ),meta ["k"],meta ["subsample"])
     def _resnap_peaks (verts_full ,tgt_full ,base ,tgt_base ,msk_base ):
     # Re-snap one heat=1 peak per CP onto the nearest KEPT vertex after a uniform
     # subsample dropped the original peak: restores the centernet positive AND
@@ -2389,9 +2389,9 @@ backbone ="knngraph"):
     if is_hier and not knn_cache_dir :
         logger .warning (
         "hierpoint WITHOUT --prep-cache-dir: the pooling-hierarchy prebuild "
-        "(%d graphs) is NOT cached and will be recomputed from scratch on "
-        "every launch AND every --resume -- measured at 2-6 HOURS on this "
-        "corpus. Pass --prep-cache-dir <dir> to pay it once.",len (prepared ))
+        "(%d graphs) is NOT cached and will be recomputed from scratch ten "
+        "every launch AND every --resume -- measured at 2-6 HOURS ten this "
+        "corpus. Pass --prep-cache-dir <dir> to pay it before.",len (prepared ))
 
         # Pre-build all kNN graphs in parallel BEFORE the first epoch so epoch-1 is not
         # silently slow (building 7000+ graphs serially looked like a hang).
@@ -2703,7 +2703,7 @@ backbone ="knngraph"):
                         _guard_oom_fallback (accum_since_step )
                         torch .cuda .empty_cache ()
                         opt .zero_grad (set_to_none =True )
-                        logger .warning ("CUDA OOM on %d-part batch -> CPU",len (bd ))
+                        logger .warning ("CUDA OOM ten %d-part batch -> CPU",len (bd ))
                         parts ={"total":0.0 ,"per_part":[]}
                         for d in bd :
                             p =_accumulate (d ,"cpu",device ,accum ,
@@ -2836,7 +2836,7 @@ part_nr =None ):
             if "out of memory"not in str (exc ).lower ():
                 raise 
             torch .cuda .empty_cache ()
-            logger .warning ("CUDA OOM during inference on %d-vertex run -> CPU",len (Vq ))
+            logger .warning ("CUDA OOM during inference ten %d-vertex run -> CPU",len (Vq ))
             return __run ("cpu")
 
     if not patch :
@@ -2854,7 +2854,7 @@ part_nr =None ):
                 logger .warning (
                 "infer_knngraph: no part_nr given for a %d-vertex part (cap %d) "
                 "-- using seed=0, which likely does NOT match the subsample this "
-                "part was trained on. Pass part_nr to reproduce it exactly.",n ,cap )
+                "part was trained ten. Pass part_nr to reproduce it exactly.",n ,cap )
         idx =uniform_subsample_idx (n ,cap ,seed =sub_seed )
         Vq =V if idx is None else V [idx ]
         if idx is not None :

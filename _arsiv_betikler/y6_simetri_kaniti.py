@@ -72,7 +72,7 @@ def main ():
 
     with io .open ("results/fp_denetim.json",encoding ="utf-8")as f :
         FD =json .load (f )
-    FP =FD ["hepsi"]
+    FP =FD ["all of them"]
     DER ,_ =measure_set .cluster ("results/_der_tam.pkl")
     GT ={r ["pid"]:np .asarray (r ["G"],float )for r in DER }
 
@@ -89,12 +89,12 @@ def main ():
             atlanan_parca +=1 
             for i in idxs :
                 SONUC .append ({"idx":i ,"pid":pid ,"mfg":FP [i ]["mfg"],
-                "regime":FP [i ]["regime"],"test":"yok","k":None ,
+                "regime":FP [i ]["regime"],"test":"absent","k":None ,
                 "deviation":None })
             continue 
         step_ =float (np .linalg .norm (s ))
         for i in idxs :
-            p =np .array (FP [i ]["nokta"],float )
+            p =np .array (FP [i ]["point"],float )
             en_iyi ,en_k =None ,None 
             for g in G :
                 v =p -g 
@@ -107,10 +107,10 @@ def main ():
                     en_iyi ,en_k =sap ,k 
             SONUC .append ({"idx":i ,"pid":pid ,"mfg":FP [i ]["mfg"],
             "regime":FP [i ]["regime"],
-            "test":"orgude"if (en_iyi is not None and en_iyi <=TOL )else "degil",
+            "test":"orgude"if (en_iyi is not None and en_iyi <=TOL )else "not",
             "k":en_k ,"deviation":en_iyi ,"adim_mm":step_ })
 
-    test_edilen =[x for x in SONUC if x ["test"]!="yok"]
+    test_edilen =[x for x in SONUC if x ["test"]!="absent"]
     orgude =[x for x in test_edilen if x ["test"]=="orgude"]
     print (f"\n{len (SONUC )} FP | test edilebilen {len (test_edilen )} "
     f"({atlanan_parca } part GT<{MIN_GT } -> disarida)")
@@ -129,7 +129,7 @@ def main ():
             a =[x for x in test_edilen if x ["mfg"]==m ]
             b =[x for x in a if x ["test"]=="orgude"]
             print (f"  {m }: {len (b )}/{len (a )} = {len (b )/len (a ):.1%}")
-        for rj in ("dusuk","cok"):
+        for rj in ("low","very"):
             a =[x for x in test_edilen if x ["regime"]==rj ]
             b =[x for x in a if x ["test"]=="orgude"]
             if a :
@@ -138,14 +138,14 @@ def main ():
                 # --- DUZELTILMIS KESINLIK (ALT SINIR)
         tp ,fp =FD ["tp"],FD ["fp"]
         pay_lo ,pay ,pay_hi =lo ,p_ ,hi 
-        for ad ,q in (("alt sinir",pay_lo ),("nokta",pay ),("ust",pay_hi )):
+        for ad ,q in (("lower boundary",pay_lo ),("point",pay ),("upper",pay_hi )):
             k0 =tp /(tp +fp );k1 =(tp +fp *q )/(tp +fp )
             print (f"  {ad :<10} ratio {q :.1%} -> precision {k0 :.4f} -> {k1 :.4f}")
     with io .open ("results/y6_simetri.json","w",encoding ="utf-8")as f :
         json .dump ({"tol_mm":TOL ,"min_gt":MIN_GT ,"sonuc":SONUC ,
         "test_edilen":len (test_edilen ),"orgude":len (orgude ),
-        "not":("Bu test AGIN CIKTISINI KULLANMAZ: girdi yalniz manufacturer CP listesi "
-        "+ robot noktasinin KONUMU. Sonuc bir ALT SINIRDIR -- oruntude "
+        "not":("Bu test AGIN CIKTISINI KULLANMAZ: input only manufacturer CP listesi "
+        "+ robot noktasinin KONUMU. Sonuc a ALT SINIRDIR -- oruntude "
         "olmayan a FP de real may be, this test onu yakalamaz.")},
         f ,indent =1 )
     print ("receipt -> results/y6_simetri.json")

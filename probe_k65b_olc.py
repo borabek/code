@@ -131,8 +131,8 @@ def main ():
     with open (a .out_ ,"w")as f :
         json .dump ({"brand":brand ,"sonuc":res_ ,"baseline":TABAN_OB ,
         "not":"k=0 tabani AYNI parcalarda measured; adaptasyon parcalari "
-        "her iki kolda da DISARIDA. Son-epoch ckpt kullanildi "
-        "(genel val'e gore secim adaptasyonu cezalandirir)."},
+        "each iki kolda da DISARIDA. Son-epoch ckpt kullanildi "
+        "(genel val'e per secim adaptasyonu cezalandirir)."},
         f ,indent =1 )
     print (f"receipt -> {a .out_ }")
 

@@ -52,7 +52,7 @@ def test_varsayilanlar_ESKI_davranis ():
 def test_cp_config_P1_kazananini_tasiyor ():
     c =json .load (io .open ("cp_config.json",encoding ="utf-8"))["prediction_postproc"]
     assert c ["cluster_mm"]==1.0 and c ["dedupe_mm"]==2.0 and c ["vote_pool_mm"]==2.0 
-    assert "_superseded_2026_08_06_values"in c ,"geri alma degerleri kayitli degil"
+    assert "_superseded_2026_08_06_values"in c ,"geri alma degerleri kayitli not"
 
 
 def test_birlesme_yaricaplari_KILIT ():

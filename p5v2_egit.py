@@ -163,8 +163,8 @@ class Siralayici :
     WHY: p5-v2'nin real karari "this adayin secenekleri arasindan BIRINI sec".
     Ikili siniflandirici each secenegi BAGIMSIZ puanliyordu; ogrendigi sey
     ("this secenek correct mu") with kullanildigi sey ("hangisi EN IYI") same not.
-    Pairwise: same adayin (correct, wrong) secenek ciftleri on
-    f(correct) > f(wrong) ogretilir -- feature FARKI on ikili sinif.
+    Pairwise: same adayin (correct, wrong) secenek ciftleri ten
+    f(correct) > f(wrong) ogretilir -- feature FARKI ten ikili sinif.
     Cikarimda skor single secenek uzerinden hesaplanabilsin diye model FARKA
     egitilir and puanlama f(x) = P(x - 0 farki) instead of DOGRUDAN karar fonksiyonu
     as is used: double (x_i - x_j) -> 1 whereas x_i more iyi.
@@ -216,7 +216,7 @@ class Siralayici :
 
 def egit (data_ ,kip =None ):
     kip =kip or os .environ .get ("P5V2_KIP","ikili")
-    if kip =="siralama":
+    if kip =="ranking":
         m =Siralayici ().fit (data_ )
         return m ,(m .n_cift ,data_ [0 ]["secs"][0 ][0 ][2 ].__len__ ()),-1.0 
     X =np .vstack ([np .asarray ([s [2 ]for s in d ["secs"][i ]],float )

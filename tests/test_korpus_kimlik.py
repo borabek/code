@@ -27,7 +27,7 @@ def K ():
     return korpus_kimlik 
 
 
-@pytest .mark .parametrize ("dosya,bek_mfg,bek_pid",[
+@pytest .mark .parametrize ("file_,bek_mfg,bek_pid",[
 ("A-B_N.1492-H4_ElectricalTerminal_ElectricalTerminal.json","A-B_N","1492-H4"),
 ("ELMEX.KUT16_GY_ElectricalTerminal_ElectricalTerminal.json","ELMEX","KUT16_GY"),
 ("PXC.3271055_ElectricalTerminal_ElectricalTerminal.json","PXC","3271055"),

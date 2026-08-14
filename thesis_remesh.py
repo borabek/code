@@ -42,7 +42,7 @@ def remesh_uniform (V ,F ,target =6000 ,iterations =8 ):
     returns. Yan fayda: tekrar kosularda remesh maliyeti sifir.
     Kapatmak for: CP_REMESH_CACHE=0 (that zaman old, oynak davranis geri gelir).
     Onbellek float32/int32 saklar; DEGERLER HER IKI YOLDA DA AYNI olsun diye hesaplanan sonuc da
-    same yuvarlama uygulanarak dondurulur (otherwise first kosu sonrakilerden different olurdu).
+    same yuvarlama uygulanarak dondurulur (otherwise first run sonrakilerden different olurdu).
     """
     if ADAPTIVE_DENSITY >0 :
         target =adaptive_target (V ,F ,ADAPTIVE_DENSITY )

@@ -83,7 +83,7 @@ def main ():
             U =np .array (U ,float )if U else np .zeros ((0 ,3 ))
             tp ,fp ,fn =greedy (U ,G ,tol ,Gd ,40.0 );uT +=tp ;uFp +=fp ;uFn +=fn 
 
-            # FN teshisi (model-only FN'ler on)
+            # FN teshisi (model-only FN'ler ten)
             matched_g =match_fn (Pm ,G ,Gd ,tol )
             Gm =(G -t )@R ;Gd_m =Gd @R 
             conn_p =probs [:,CE ]+probs [:,CT ];is_conn =np .isin (lab ,(CE ,CT ))

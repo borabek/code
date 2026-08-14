@@ -68,7 +68,7 @@ def oracle_ (P ,G ,Gd ,diag ):
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--sinir",type =int ,default =0 )
+    ap .add_argument ("--boundary",type =int ,default =0 )
     a =ap .parse_args ()
     import protocol 
     protocol .tez_dogrula ()
@@ -96,8 +96,8 @@ def main ():
 
     res_ ={}
     baseline =None 
-    print (f"{'cl/de/oy':<14}{'KAHIN':>8}{'dusuk':>8}{'cok':>8}{'candidate':>8}"
-    f"{'sure_s':>8}{'fark':>9}")
+    print (f"{'cl/de/oy':<14}{'KAHIN':>8}{'low':>8}{'very':>8}{'candidate':>8}"
+    f"{'sure_s':>8}{'difference':>9}")
     for (cl ,de ,oy )in AYAR :
         t0 =time .time ()
         line_ ,n_aday =[],0 
@@ -117,34 +117,34 @@ def main ():
             P =np .array ([c ["point"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
             n_aday +=len (P )
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             tp =oracle_ (P ,G ,Gd ,r ["diag"])if len (G )else 0 
             line_ .append ((rj ,tp ,0 ,len (G )-tp ))
         v =f1w (line_ )
-        dl =f1w ([s for s in line_ if s [0 ]=="dusuk"])
-        ck =f1w ([s for s in line_ if s [0 ]=="cok"])
+        dl =f1w ([s for s in line_ if s [0 ]=="low"])
+        ck =f1w ([s for s in line_ if s [0 ]=="very"])
         sure =time .time ()-t0 
         if baseline is None :
             baseline =(v ,dl ,ck )
         fark =f"{v -baseline [0 ]:+.4f}"if baseline else ""
         print (f"{cl :.0f}/{de :.0f}/{oy :.0f}".ljust (14 )+
         f"{v :>8.4f}{dl :>8.4f}{ck :>8.4f}{n_aday :>8}{sure :>8.0f}{fark :>9}")
-        res_ [f"{cl }/{de }/{oy }"]={"kahin":v ,"dusuk":dl ,"cok":ck ,
+        res_ [f"{cl }/{de }/{oy }"]={"kahin":v ,"low":dl ,"very":ck ,
         "candidate":n_aday ,"sure_s":sure }
 
     en =max ((k for k in res_ ),key =lambda k :res_ [k ]["kahin"])
     t =res_ [f"3.0/10.0/5.0"]
     e =res_ [en ]
-    print (f"\nMEVCUT 3/10/5 : kahin {t ['kahin']:.4f} (dusuk {t ['dusuk']:.4f} "
-    f"cok {t ['cok']:.4f}) candidate {t ['candidate']}")
-    print (f"EN IYI  {en :<10}: kahin {e ['kahin']:.4f} (dusuk {e ['dusuk']:.4f} "
-    f"cok {e ['cok']:.4f}) candidate {e ['candidate']}")
-    go =(e ["kahin"]-t ["kahin"]>=0.01 and e ["cok"]-t ["cok"]>=0.015 
-    and t ["dusuk"]-e ["dusuk"]<=0.005 )
+    print (f"\nMEVCUT 3/10/5 : kahin {t ['kahin']:.4f} (dusuk {t ['low']:.4f} "
+    f"cok {t ['very']:.4f}) candidate {t ['candidate']}")
+    print (f"EN IYI  {en :<10}: kahin {e ['kahin']:.4f} (dusuk {e ['low']:.4f} "
+    f"cok {e ['very']:.4f}) candidate {e ['candidate']}")
+    go =(e ["kahin"]-t ["kahin"]>=0.01 and e ["very"]-t ["very"]>=0.015 
+    and t ["low"]-e ["low"]<=0.005 )
     print (f"\nGO OLCUTU (genel +0.01 / cok-CP +0.015 / dusuk-CP loss <=0.005): "
     f"{'GECTI'if go else 'KALDI'}")
-    print (f"  genel {e ['kahin']-t ['kahin']:+.4f} | cok-CP {e ['cok']-t ['cok']:+.4f} | "
-    f"dusuk-CP {e ['dusuk']-t ['dusuk']:+.4f} | candidate artisi "
+    print (f"  genel {e ['kahin']-t ['kahin']:+.4f} | cok-CP {e ['very']-t ['very']:+.4f} | "
+    f"dusuk-CP {e ['low']-t ['low']:+.4f} | candidate artisi "
     f"x{e ['candidate']/max (t ['candidate'],1 ):.2f}")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
         json .dump ({"sonuc":res_ ,"mevcut":"3.0/10.0/5.0","en_iyi":en ,"go":go },

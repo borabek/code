@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""MESH OLASILIK ESIGI: CWT'de pool neden still %55'te tikaniyor?
+"""MESH OLASILIK ESIGI: CWT'de pool why still %55'te tikaniyor?
 
 FINDING. CWT'de TUM mesh tepeleriyle bile konum recall 0.5532 -- NIT'te same
 kurulum 1.0000 veriyordu. Mesh adaylari `p_pos >= MESH_ESIK (0.50)` sartiyla
@@ -72,7 +72,7 @@ def main ():
         if not os .path .exists (mf ):
             continue 
         z =np .load (f"results/_tam_oz/{f }")
-        kk =np .asarray (z ["kaynak"],int )
+        kk =np .asarray (z ["source"],int )
         P01 =np .asarray (z ["P"],float )[np .isin (kk ,(0 ,1 ))]
         zz =np .load (mf )
         V =np .ascontiguousarray (zz ["V"],np .float64 )

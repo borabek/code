@@ -88,7 +88,7 @@ def secenekler (p ,d ,V ,NV ,ppos ,gate_s ,n_aday ):
 
 def parca_yukle (on ,pid ,r ):
     z =np .load (f"{OZ }/{on }_{pid }.npz")
-    m =np .isin (np .asarray (z ["kaynak"],int ),KAYNAKLAR )
+    m =np .isin (np .asarray (z ["source"],int ),KAYNAKLAR )
     T =np .asarray (np .load (f"{TAN }/{on }_{pid }.npz")["T"],float )
     X =np .hstack ([np .asarray (z ["X"],float ),T ])[m ]
     if len (X )<2 :

@@ -17,7 +17,7 @@ def main ():
     from sklearn .ensemble import RandomForestClassifier 
     D =T .yukle ();measure_set .rapor_bas (D ["rap"])
     X ,y ,pid =D ["X"],D ["y"],D ["pid"]
-    gk =D ["gk"];grup =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+    gk =D ["gk"];grup =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
     Z =np .zeros ((len (X ),X .shape [1 ]*2 ))
     for u in np .unique (pid ):
         i =np .where (pid ==u )[0 ]
@@ -39,7 +39,7 @@ def main ():
 
     T .baslik (D )
     SON ,PARCA ={},{}
-    for ad ,mod in (("G0 TABAN","yok"),("G4 grup-agirlikli","grup"),
+    for ad ,mod in (("G0 TABAN","absent"),("G4 grup-agirlikli","grup"),
     ("G4 part-agirlikli","part")):
         SON [ad ],PARCA [ad ]=T .calistir (D ,yap (mod ),ad )
     tb =SON ["G0 TABAN"]
@@ -55,7 +55,7 @@ def main ():
         lo ,hi =T .ga (PARCA ["G0 TABAN"],PARCA [ad ],"havuzlanmis")
         print (f"  {ad }: havuzlanmis GA[{lo :+.4f},{hi :+.4f}]")
     if not kaz :
-        print ("\nKILL: agirliklandirma manufacturer-disi +0.01 vermedi -> G4 KAPANDI")
+        print ("\nKILL: agirliklandirma manufacturer-disi +0.01 vermedi -> G4 CLOSED")
     with io .open ("results/g4_grup_agirlik.json","w",encoding ="utf-8")as f :
         json .dump ({ad :{"havuzlanmis":SON [ad ]["havuzlanmis"]["tespit"],
         "uretici_ort":SON [ad ]["_URETICI_DISI_ORT"],

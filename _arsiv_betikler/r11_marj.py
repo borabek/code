@@ -37,7 +37,7 @@ def main ():
     DER ,gate ,ek =T2 .yukle ()
     PARCA =pickle .load (open (R4 ,"rb"))
     YS =wire_gate ._load ("results/yon_secici.pkl")
-    assert YS is not None ,"results/yon_secici.pkl yok"
+    assert YS is not None ,"results/yon_secici.pkl absent"
     print (f"dagitilan secicinin kayitli marji: {YS .get ('marj')}",flush =True )
     s3 =json .load (io .open ("results/split3.json",encoding ="utf-8"))
     val ={str (p )for p in s3 ["val"]["parts"]}
@@ -65,7 +65,7 @@ def main ():
                 continue 
             d_ =PARCA .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d_ is None :
                 P =np .zeros ((0 ,3 ));Pn =np .zeros ((0 ,3 ))
             else :

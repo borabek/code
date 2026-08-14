@@ -17,7 +17,7 @@ WHY LEARNED, RULE DEGIL: this gece RULE tabanli four konum/direction kolu was tr
 Hepsinin ortak kusuru ayniydi: rule HERKESE uygulaniyordu. Ogrenilmis a kafa "ne up to and
 hangi yone" sorusunu ADAY BASINA cevaplar and emin degilse SIFIR correction gives.
 
-VERI: manufacturer GT'si (new insan etiketi YOK). Egitim only TESPITTE ESLESEN candidates on
+VERI: manufacturer GT'si (new insan etiketi YOK). Egitim only TESPITTE ESLESEN candidates ten
 (because residual however correct aciklikla eslesmis a candidate for tanimli).
 
 SAFETY: correction MAKS_MM with sinirli; model belirsizse (prediction buyuklugu kucukse) dokunmaz.
@@ -79,7 +79,7 @@ def main ():
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
     gk =measure_set .geo_anahtarlari ()
-    tgrp =np .array ([gk .get (p ,"yok:"+p )for p in tpid ])
+    tgrp =np .array ([gk .get (p ,"absent:"+p )for p in tpid ])
     tg ={r ["geo"]for r in DER }
     keep =~np .isin (tgrp ,list (tg ))
 

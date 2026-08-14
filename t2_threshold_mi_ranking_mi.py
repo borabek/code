@@ -22,7 +22,7 @@ def main ():
     mfg =np .array ([str (x )for x in d ["mfg"]])
     pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    grp =np .array ([gk .get (p ,"none:"+p )for p in pids ])
     THR =float (json .load (open ("cp_config.json",encoding ="utf-8"))["robot_wire_gate_threshold"])
     grid =np .arange (0.05 ,0.96 ,0.05 )
 

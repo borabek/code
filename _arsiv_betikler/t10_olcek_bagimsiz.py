@@ -31,7 +31,7 @@ def main ():
     X =d ["X"][:,:18 ].copy ();y =d ["y"].astype (bool )
     mfg =np .array ([str (x )for x in d ["mfg"]]);pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    grp =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
     THR =float (json .load (open ("cp_config.json",encoding ="utf-8"))["robot_wire_gate_threshold"])
     isim =list (wire_gate .FEAT_NAMES_13 )+list (wire_gate .FEAT_NAMES_FIZ )
 
@@ -83,8 +83,8 @@ def main ():
     print (f"\n{'arm':<30}{'TANIDIK':>9}"+"".join (f"{'uret.'+u :>10}"for u in U )+f"{'EN KOTU':>10}")
     out ={}
     out ["mevcut (mutlak)"]=olc (X ,"mevcut (mutlak)")
-    out ["normalize (yerine)"]=olc (Xn ,"normalize (yerine)")
-    out ["her ikisi (22 sutun)"]=olc (Xb ,"her ikisi (22 sutun)")
+    out ["normalize (instead of)"]=olc (Xn ,"normalize (instead of)")
+    out ["each ikisi (22 column)"]=olc (Xb ,"each ikisi (22 column)")
 
     t =out ["mevcut (mutlak)"]
     print ("\nKARAR:")

@@ -55,7 +55,7 @@ def main ():
     json .dump ({"arm":KOL ,"n_parca":len (d ),"baseline":fa ,"kol_f1":fb ,
     "fark":fb -fa ,"ga":[lo ,hi ],"pozitif_oran":float ((bs >0 ).mean ()),
     "kesin":bool (kesin ),
-    "not":"ESLI part duzeyi bootstrap. Marjinal GA degil FARKIN "
+    "not":"ESLI part duzeyi bootstrap. Marjinal GA not FARKIN "
     "GA'si. D7'ye BAKILMADI."},
     open (f"results/esli_fark_{KOL }.json","w"),indent =1 )
     print (f"receipt -> results/esli_fark_{KOL }.json")

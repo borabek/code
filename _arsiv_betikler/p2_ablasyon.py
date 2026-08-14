@@ -48,7 +48,7 @@ def main ():
     measure_set .rapor_bas (D ["rap"])
     cfg =D ["cfg"]
     X ,y ,pid ,mfg ,keep =D ["X"],D ["y"],D ["pid"],D ["mfg"],D ["keep"]
-    AD =D ["ad"]
+    AD =D ["name"]
     print (f"\nsutun haritasi: baseline {AD [:3 ]}... | FIZ {AD [13 :18 ]} | TOPO {AD [18 :22 ]} "
     f"| ZENGIN {AD [22 :25 ]}...({len (AD )-22 } sutun)")
 
@@ -112,13 +112,13 @@ def main ():
             onceki =e 
 
             # === DECISION EKSENI (only robot) ===
-    print ("\n=== KARAR EKSENI (robot; tespit bunlardan YAPISAL olarak etkilenmez) ===")
+    print ("\n=== DECISION EKSENI (robot; tespit bunlardan YAPISAL as etkilenmez) ===")
     Zt =ONB [(58 ,True )]
     gate ={"clf":RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (Zt [keep ],y [keep ]),
     "n_feat":Zt .shape [1 ],"donusum":D ["donusum"],"_n":58 }
     ADIM =[("gate (duzeltmesiz)",False ,False ,False ),("+pose",True ,False ,False ),
-    ("+pose +aci",True ,True ,False ),("+pose +aci +uye",True ,True ,True )]
+    ("+pose +angle",True ,True ,False ),("+pose +angle +uye",True ,True ,True )]
     RSON ={}
     onceki_det =None 
     for ad ,po ,ac ,uy in ADIM :
@@ -139,7 +139,7 @@ def main ():
                             c =wire_gate .pick_member_direction (Xr [k ],c ,r ["UYE"])
                         P =np .array ([x ["point"]for x in c ],float )
                         Pd =np .array ([x ["direction"]for x in c ],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             rbi .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ,
             signed =True ))
@@ -153,8 +153,8 @@ def main ():
         print (f"{ad :<24}robot {T .f1w (rob ):.4f}  signed {T .f1w (rbi ):.4f}  {ga }")
         onceki_det =rob 
     with io .open ("results/p2_ablasyon.json","w",encoding ="utf-8")as f :
-        json .dump ({"oznitelik":OZET ,"karar":RSON ,
-        "not":("TEK kosu, AYNI measurement kumesi (194 part/174 grup), AYNI corpus "
+        json .dump ({"feature":OZET ,"karar":RSON ,
+        "not":("TEK run, AYNI measurement kumesi (194 part/174 grup), AYNI corpus "
         "(zengin_parite_w2). Onceki gecelerin blok sayilari FARKLI "
         "tabanlardan geldigi for TOPLANAMAZ; this tablo toplanabilir.")},
         f ,indent =1 )

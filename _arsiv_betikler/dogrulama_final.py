@@ -15,7 +15,7 @@ import os ,sys ,json ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ ="results/gate_regrow_data_rt2.npz"
 NPZ_AX ="results/gate_regrow_data_rt2_axis.npz"
 CACHE ="results/_final_cache.pkl"
@@ -57,18 +57,18 @@ def main ():
     print (f"{len (sel )} test part | gate {int (keep .sum ())} candidate x 17 ozellik",flush =True )
 
     # esikler: large veride, test aileleri disarida, 17 ozellikle
-    reg =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])[keep ]
-    tot ={"dusuk":0 ,"cok":0 }
+    reg =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])[keep ]
+    tot ={"low":0 ,"very":0 }
     for g in {int (g )for g in groups [keep ]}:
         n =int (ngt .get (g ,0 ))
-        if n >0 :tot ["cok"if n >=8 else "dusuk"]+=n 
+        if n >0 :tot ["very"if n >=8 else "low"]+=n 
     oof =np .zeros (int (keep .sum ()))
     Xk ,yk ,fk =X17 [keep ],y [keep ],fams [keep ]
     for tr ,te in GroupKFold (n_splits =5 ).split (Xk ,yk ,fk ):
         oof [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (Xk [tr ],yk [tr ]).predict_proba (Xk [te ])[:,1 ]
     thr ={}
-    for k in ("dusuk","cok"):
+    for k in ("low","very"):
         b =(0.0 ,0.40 )
         for t in np .arange (0.20 ,0.71 ,0.05 ):
             m =reg ==k ;s_ =(oof >=t )&m 
@@ -128,14 +128,14 @@ def main ():
     # IKI GATE, AYNI ADAYLAR: E'nin uctan uca katkisi so IZOLE becomes.
     clf13 =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (X13 [keep ],y [keep ])
-    reg13 =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])[keep ]
+    reg13 =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])[keep ]
     oof13 =np .zeros (int (keep .sum ()))
     for tr ,te in GroupKFold (n_splits =5 ).split (X13 [keep ],y [keep ],fams [keep ]):
         oof13 [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (X13 [keep ][tr ],y [keep ][tr ]
         ).predict_proba (X13 [keep ][te ])[:,1 ]
     thr13 ={}
-    for k in ("dusuk","cok"):
+    for k in ("low","very"):
         b =(0.0 ,0.40 )
         for t in np .arange (0.20 ,0.71 ,0.05 ):
             m =reg13 ==k ;s_ =(oof13 >=t )&m 
@@ -147,14 +147,14 @@ def main ():
     print (f"13-ozellik esikleri: {thr13 }",flush =True )
 
     def score (model ,feat_key ,TH ,tol ,am ,pct =False ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]};ANG =[]
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]};ANG =[]
         for r in cache :
             Xk =r [feat_key ]
             if Xk is None or not len (r ["P"]):
                 Q =np .zeros ((0 ,3 ));Qd =np .zeros ((0 ,3 ))
             else :
                 sc =model .predict_proba (Xk )[:,1 ]
-                t_ =TH ["cok"]if r ["is_hi"]else TH ["dusuk"]
+                t_ =TH ["very"]if r ["is_hi"]else TH ["low"]
                 m =sc >=t_ 
                 Q =r ["P"][m ];Qd =r ["Pd"][m ]
             Gt ,Gd =r ["G"],r ["Gd"]
@@ -169,20 +169,20 @@ def main ():
                     if d_ >tt or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
                     ANG .append (np .degrees (np .arccos (min (1.0 ,abs (float (np .dot (Qd [a_ ],Gd [b_ ])))))))
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (Gt )-tp 
         o ={};TP =FP =FN =0 
         for k ,(T ,Fp ,Fn )in agg .items ():
             p =T /max (T +Fp ,1 );rc =T /max (T +Fn ,1 )
             o [k ]=2 *p *rc /max (p +rc ,1e-9 );TP +=T ;FP +=Fp ;FN +=Fn 
-        return (sum (W [k ]*o [k ]for k in W ),o ["dusuk"],o ["cok"],
+        return (sum (W [k ]*o [k ]for k in W ),o ["low"],o ["very"],
         TP /max (TP +FP ,1 ),TP /max (TP +FN ,1 ),np .array (ANG )if ANG else np .array ([0.0 ]))
 
     print ()
     print (f"{'arm':<24}{'tespit':>9}{'yanal2':>9}{'ROBOT':>9}{'ratio':>8}{'>15d':>8}")
     res ={}
-    for lab ,mdl ,fk ,TH in (("13 ozellik (E YOK)",clf13 ,"X13",thr13 ),
-    ("17 ozellik (E VAR)",clf ,"X17",thr )):
+    for lab ,mdl ,fk ,TH in (("13 feature (E YOK)",clf13 ,"X13",thr13 ),
+    ("17 feature (E VAR)",clf ,"X17",thr )):
         d_ =score (mdl ,fk ,TH ,0 ,180 ,True )
         l_ =score (mdl ,fk ,TH ,2.0 ,180 )
         r_ =score (mdl ,fk ,TH ,2.0 ,10 )
@@ -191,7 +191,7 @@ def main ():
         eksen15 =float ((d_ [5 ]>15 ).mean ()))
         print (f"{lab :<24}{d_ [0 ]:>9.4f}{l_ [0 ]:>9.4f}{r_ [0 ]:>9.4f}"
         f"{r_ [0 ]/max (d_ [0 ],1e-9 ):>8.3f}{100 *(d_ [5 ]>15 ).mean ():>7.1f}%",flush =True )
-    a =res ["17 ozellik (E VAR)"];b =res ["13 ozellik (E YOK)"]
+    a =res ["17 feature (E VAR)"];b =res ["13 feature (E YOK)"]
     print (f"E'nin UCTAN UCA katkisi: tespit {a ['tespit']-b ['tespit']:+.4f}  "
     f"robot {a ['robot']-b ['robot']:+.4f}")
     json .dump (res ,open ("results/dogrulama_final.json","w"),indent =1 )

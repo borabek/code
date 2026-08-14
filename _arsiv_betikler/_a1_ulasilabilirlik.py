@@ -3,7 +3,7 @@
 
 Kaybin most large single kalemi (GT'nin %14.2'si) and bugune up to WHY oldugu sorulmadi.
 B2 showed ki turetme esiklerini gevsetmek kurtarmiyor -> network orada CE/CT uretmiyor.
-Ama two BAMBASKA sebep may be:
+Ama two BAMBASKA reason may be:
    (a) AG HATASI      : disaridan open a channel present, network gormuyor -> KAZANILABILIR
    (b) YAPISAL        : CP malzemenin arkasinda, disaridan no opening absent
                         (manufacturer IC KONTAGI listelemis) -> no surface yontemi bulamaz
@@ -66,7 +66,7 @@ if len (D ):
 print ()
 print ("OKUMA: KAPALI orani yuksekse candidate havuzu tavani (0.8579) SAHTE DUSUK --")
 print ("       that CP'ler already ulasilamaz, recall'imiz gorundugunden IYI.")
-json .dump ({"toplam":top ,"acik":ACIK ,"kapali":KAPALI ,
+json .dump ({"total":top ,"open":ACIK ,"closed":KAPALI ,
 "acik_oran":ACIK /max (top ,1 ),"medyan_mm":float (np .median (D ))if len (D )else None },
 io .open ("results/a1_ulasilabilirlik.json","w"),indent =1 )
 print ("receipt -> results/a1_ulasilabilirlik.json")

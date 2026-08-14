@@ -27,7 +27,7 @@ def main ():
     X =d ["X"];y =d ["y"];fams =d ["fams"].astype (str )
     pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_geometry_keys.json"))
-    Gg =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    Gg =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
     names =wire_gate .FEAT_NAMES_13 
     print (f"{len (y )} candidate, {X .shape [1 ]} ozellik, TP orani %{100 *y .mean ():.1f}\n",flush =True )
 
@@ -46,7 +46,7 @@ def main ():
             o [te ]=m .fit (M [tr ],y [tr ]).predict_proba (M [te ])[:,1 ]
         return o 
 
-    print (f"{'ozellik':<12}{'AUC ezber':>11}{'AUC durust':>12}{'DUSUS':>9}")
+    print (f"{'feature':<12}{'AUC ezber':>11}{'AUC durust':>12}{'DUSUS':>9}")
     rows =[]
     for i ,nm in enumerate (names ):
         a_f =auc (oof (X [:,[i ]],fams ))
@@ -68,7 +68,7 @@ def main ():
     for lab ,mk in cfgs :
         a_f =auc (oof (X ,fams ,mk ));a_g =auc (oof (X ,Gg ,mk ))
         print (f"{lab :<34}{a_f :>11.3f}{a_g :>12.3f}{a_f -a_g :>9.3f}",flush =True )
-    print ("\nYORUM: DUSUS kucuk olan model/ozellik GENELLESIYOR; buyuk olan EZBERLIYOR.")
+    print ("\nYORUM: DUSUS small which is model/feature GENELLESIYOR; large which is EZBERLIYOR.")
 
 
 if __name__ =="__main__":

@@ -59,7 +59,7 @@ def _parse_args ():
     metavar ="DIR",help ="additional corpus directory (can be repeated)")
     ap .add_argument ("--max-bbox-mm",type =float ,default =None ,dest ="max_bbox_mm",
     help ="scope filter (mm): drop parts with bbox diagonal above this "
-    "(use ~250 to evaluate on connectors only, same as training)")
+    "(use ~250 to evaluate ten connectors only, same as training)")
     ap .add_argument ("--keep-prefixes",default =None ,
     help ="scope filter: comma-separated PartNr prefixes to KEEP "
     "(e.g. 'wscaduniverse,PXC' for terminal blocks only)")

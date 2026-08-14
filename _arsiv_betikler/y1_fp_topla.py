@@ -74,9 +74,9 @@ def main ():
         if not len (G ):
             for j in range (len (P )):
                 FP .append ({"pid":r ["pid"],"mfg":r ["mfg"],"geo":r ["geo"],
-                "nokta":P [j ].tolist (),"direction":Pd [j ].tolist (),
+                "point":P [j ].tolist (),"direction":Pd [j ].tolist (),
                 "aday_i":int (idx [j ]),"gt_uzaklik":None ,
-                "regime":"cok"if r ["n"]>=8 else "dusuk",
+                "regime":"very"if r ["n"]>=8 else "low",
                 "diag":float (r ["diag"]),"n_gt":0 })
             continue 
             # URUNLE AYNI eslestirme (lateral distance, +-40mm axial pencere, greedy)
@@ -97,9 +97,9 @@ def main ():
                 continue 
             dmin =float (np .min (np .linalg .norm (G -P [j ],axis =1 )))
             FP .append ({"pid":r ["pid"],"mfg":r ["mfg"],"geo":r ["geo"],
-            "nokta":P [j ].tolist (),"direction":Pd [j ].tolist (),
+            "point":P [j ].tolist (),"direction":Pd [j ].tolist (),
             "aday_i":int (idx [j ]),"gt_uzaklik":dmin ,
-            "regime":"cok"if r ["n"]>=8 else "dusuk",
+            "regime":"very"if r ["n"]>=8 else "low",
             "diag":float (r ["diag"]),"n_gt":int (len (G ))})
     print (f"\nTP {TP_N } | FP {len (FP )} | GT {GT_N }")
     print (f"  precision {TP_N /max (TP_N +len (FP ),1 ):.4f}  recall {TP_N /max (GT_N ,1 ):.4f}")
@@ -123,9 +123,9 @@ def main ():
         json .dump ({"tp":TP_N ,"fp":len (FP ),"gt":GT_N ,
         "precision":TP_N /max (TP_N +len (FP ),1 ),
         "recall":TP_N /max (GT_N ,1 ),
-        "hepsi":FP ,"ornek_idx":sec ,
+        "all of them":FP ,"ornek_idx":sec ,
         "not":("Ornek TABAKALI RASTGELE (manufacturer x regime). 'En emin FP'leri secmek "
-        "sismedir; yansiz tahmin + confidence araligi tek durust yol.")},f ,indent =1 )
+        "sismedir; yansiz prediction + confidence araligi single durust path.")},f ,indent =1 )
     print (f"receipt -> {OUT }")
 
 

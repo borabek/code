@@ -55,7 +55,7 @@ for t in (0.05 ,0.20 ,0.40 )])
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -170,7 +170,7 @@ def main ():
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"gamma":GAMMA ,
     "toplam":last_ ,"fold":kat_sonuc ,
     "not":"Kayip fonksiyonu kollari: alt-ornekleme / sinif "
-    "agirligi / focal / ikisi. AYNI oznitelik, fold, kural "
+    "agirligi / focal / ikisi. AYNI oznitelik, fold, rule "
     "aramasi. D7'ye BAKILMADI."},
     open (f"results/kayip_denemesi_{KUME }.json","w"),indent =1 )
     print (f"receipt -> results/kayip_denemesi_{KUME }.json")

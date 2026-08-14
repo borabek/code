@@ -82,7 +82,7 @@ def main ():
         Gd =np .asarray (r ["Gd"],float )
         dg =float (r ["diag"])
         z =np .load (f"{OZ }/d7_{pid }.npz")
-        kayn =np .asarray (z ["kaynak"],int )
+        kayn =np .asarray (z ["source"],int )
         m =np .isin (kayn ,KAYNAKLAR )
         T =np .asarray (np .load (f"{TAN }/d7_{pid }.npz")["T"],float )
         X =np .hstack ([np .asarray (z ["X"],float ),T ])[m ]
@@ -150,7 +150,7 @@ def main ():
                 # eslesen but Macar'da kaybedilenler
         kova ["ESLESME"]+=max (len (eslesen )-tp ,0 )
     print (f"D7 {n_gt } GT | FP {n_fp }\n")
-    print (f"{'kova':<14}{'sayi':>7}{'GT payi':>10}")
+    print (f"{'kova':<14}{'number':>7}{'GT payi':>10}")
     for k ,v in kova .most_common ():
         print (f"{k :<14}{v :>7}{v /max (n_gt ,1 ):>10.3f}")
     print (f"\nFP kaynagi: {dict (fp_kaynak )}")

@@ -7,7 +7,7 @@ POSE SONRASI AYRISTIRMA (867 eslesme):
     only angle'dan kaybedilen %14.2 | only yanaldan %5.7
 Yani BAGLAYICI SART residual ACI. Ve aritmetik: angle tamamen cozulse gecis %88.9 -> robot ~0.60.
 
-ACI duzeltmesi neden more before KAYBETTIRDI (q1/q2): yonlerin most ZATEN TAM DOGRU (medyan
+ACI duzeltmesi why more before KAYBETTIRDI (q1/q2): yonlerin most ZATEN TAM DOGRU (medyan
 0.00 derece) and correction HEPSINE uygulaniyordu -> medyan 0.00 -> 2.36 dereceye output.
 Bu, this gecenin four olu kolunun ortak kusuru.
 
@@ -52,7 +52,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    tgrp =np .array ([gk .get (p ,"yok:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
+    tgrp =np .array ([gk .get (p ,"absent:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -108,7 +108,7 @@ def main ():
                             d ,u ,v =yerel (Pd [i ])
                             g =d +float (pr [i ,2 ])*u +float (pr [i ,3 ])*v 
                             Pd [i ]=g /(np .linalg .norm (g )+1e-9 )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
@@ -117,7 +117,7 @@ def main ():
     print (f"\n{'arm':<22}{'tespit':>10}{'ROBOT':>10}{'d_robot':>10}")
     det0 ,rob0 =puanla (None )
     t0 ,r0 =f1w (det0 ),f1w (rob0 )
-    print (f"{'A aci duzeltmesi yok':<22}{t0 :>10.4f}{r0 :>10.4f}{0.0 :>+10.4f}")
+    print (f"{'A angle duzeltmesi absent':<22}{t0 :>10.4f}{r0 :>10.4f}{0.0 :>+10.4f}")
     SON ={"A":(float (t0 ),float (r0 ))}
     PAR ={"A":(det0 ,rob0 )}
     for e in (0.05 ,0.10 ,0.15 ,0.20 ,0.25 ,0.30 ):
@@ -145,7 +145,7 @@ def main ():
             pickle .dump ({"sec":sec ,"reg":reg ,"threshold":float (en .split ()[-1 ]),
             "n_feat":RX .shape [1 ],
             "note":("ACI SECICI 2026-08-02: before 'this angle >10 derece wrong mi' "
-            "diye sorar, yalniz oyleyse yonu duzeltir. Duzeltmeyi HERKESE "
+            "diye sorar, only oyleyse yonu fixes. Duzeltmeyi HERKESE "
             "uygulamak already correct which is yonleri bozuyordu "
             "(medyan 0.00 -> 2.36 derece).")},f )
         print ("-> results/aci_secici.pkl")

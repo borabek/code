@@ -21,7 +21,7 @@ while True :
     except :pass 
     wlog (f"disk={d :.1f}G  {ep }  {'(log akiyor)'if grew else f'(log durdu x{stale })'}")
     if stale >=3 :# 15 dk log absent -> training bitmis/olmus
-        wlog ("=== log 15dk durdu -> training yok, nobetci cikiyor ===");break 
+        wlog ("=== log 15dk durdu -> training absent, nobetci cikiyor ===");break 
     if d <1.2 :
         wlog (f"=== ACIL disk {d :.1f}G -> cokme onleme ===")
         import subprocess ;subprocess .run (["powershell","-NoProfile","-Command","Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'train_cp' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }"],timeout =30 );break 

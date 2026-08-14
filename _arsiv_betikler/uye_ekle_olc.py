@@ -4,7 +4,7 @@
 RATIONALE: gate'in 13 ozelliginden only `votes` durust bolmede transfer ediyor (AUC dususu
 0.018). `votes` = kac bagimsiz uyenin same acikligi gordugu -- i.e. single genelleyen sinyalin
 COZUNURLUGU uye sayisiyla sinirli. Turetilmis 5. uye (olasilik ortalamasi) MEASURED and KAYBETTI
-because bagimsiz degildi; this kosu gercekten ayri tohumlu a checkpoint kullanir.
+because bagimsiz degildi; this run gercekten ayri tohumlu a checkpoint kullanir.
 
 KILL (onceden yazildi): VAL kumesinde tespit F1 +0.01 gelmezse uye ALINMAZ.
 
@@ -65,16 +65,16 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     d =np .load ("results/gate_regrow_data_rt2.npz",allow_pickle =True )
     X =d ["X"];y =d ["y"]
     pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_strict_geometry_keys.json"))
     tg ={gk .get (r .get ("pid",os .path .basename (r ["stp"]).split ("_")[1 ]),
-    "yok")for r in cache }
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+    "absent")for r in cache }
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (X [keep ],y [keep ])
     print (f"KUME={cluster } | {len (cache )} part | gate {int (keep .sum ())} candidate",flush =True )
@@ -100,16 +100,16 @@ def main ():
             if cps :
                 Xc =wire_gate .feats_for (V ,F ,sum (plist )/len (plist ),cps ,CE ,CT )
                 sc =clf .predict_proba (Xc )[:,1 ]
-                m =sc >=(THR ["cok"]if is_hi else THR ["dusuk"])
+                m =sc >=(THR ["very"]if is_hi else THR ["low"])
                 if m .any ():
                     P =np .array ([c ["point"]for c ,k_ in zip (cps ,m )if k_ ],float )
                     Pd =np .array ([c ["direction"]for c ,k_ in zip (cps ,m )if k_ ],float )
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'ensemble':<20}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'ensemble':<20}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
     for n in (4 ,5 ):
         det ,rob =kos (n )

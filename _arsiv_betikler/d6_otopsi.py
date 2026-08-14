@@ -51,7 +51,7 @@ def main ():
     T ,R ,KG ,KA =[],[],[],[]# real tespit/robot + kahin satirlari
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         diag =r ["diag"];tt =max (3.0 ,0.06 *diag )
         P0 =np .asarray (r ["P"],float )if r .get ("P")is not None else np .zeros ((0 ,3 ))
         D0 =np .asarray (r ["Pd"],float )if r .get ("Pd")is not None else np .zeros ((0 ,3 ))

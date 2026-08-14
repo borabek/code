@@ -25,7 +25,7 @@ TEZE SADIK: only ADAY PUANLAMA; konum/direction uretimi and segmentasyon does no
 """
 import numpy as np 
 
-AD =["profil_ort","profil_std","daralma","dis_izi","duvar","koniklik",
+AD =["profil_ort","profil_std","daralma","dis_izi","wall","koniklik",
 "karsi_agiz","halka_duzlugu","govde_orani"]
 DERINLIKLER =(0.5 ,1.5 ,3.0 ,5.0 ,8.0 )# mm, agizdan iceri
 ISIN_SAYISI =8 # halka basina isin

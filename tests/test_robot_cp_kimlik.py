@@ -15,7 +15,7 @@ sys .path .insert (0 ,os .path .dirname (os .path .dirname (os .path .abspath (_
 
 def test_robot_cp_step_kimlik_kullaniyor ():
     s =io .open ("robot_cp.py",encoding ="utf-8").read ()
-    assert "from korpus_kimlik import step_kimlik"in s ,"tek kaynak kullanilmiyor"
+    assert "from korpus_kimlik import step_kimlik"in s ,"tek source kullanilmiyor"
     assert 'basename(path).split("_")[1]'not in s ,"eski hatali ayristirma geri gelmis"
     assert 'basename(s).split("_")[1]'not in s 
 

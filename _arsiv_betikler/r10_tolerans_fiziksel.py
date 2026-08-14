@@ -72,10 +72,10 @@ print (f"  bosluk >= 2mm olan: %{100 *(bosluk [ok ]>=2 ).mean ():.0f}   (yani 2m
 print (f"  bosluk <  1mm olan: %{100 *(bosluk [ok ]<1 ).mean ():.0f}   (yani 2mm bunlarda FAZLA GEVSEK)")
 def f1 (msk ):
     tp =int (msk .sum ());return tp 
-print (f"\n{'threshold':<34}{'gecen cift':>12}{'ratio':>8}")
+print (f"\n{'threshold':<34}{'gecen double':>12}{'ratio':>8}")
 for ad ,m_ in (("SABIT 2mm + 10deg (mevcut)",(yan <=2 )&(aci <=10 )),
 ("SABIT 3mm + 10deg",(yan <=3 )&(aci <=10 )),
 ("FIZIKSEL bosluk + 10deg",(yan <=np .maximum (bosluk ,0.5 ))&(aci <=10 )),
 ("FIZIKSEL bosluk + 15deg",(yan <=np .maximum (bosluk ,0.5 ))&(aci <=15 )),
-("yalniz FIZIKSEL bosluk",(yan <=np .maximum (bosluk ,0.5 )))):
+("only FIZIKSEL bosluk",(yan <=np .maximum (bosluk ,0.5 )))):
     print (f"{ad :<34}{f1 (m_ ):>12}{100 *m_ .mean ():>7.0f}%")

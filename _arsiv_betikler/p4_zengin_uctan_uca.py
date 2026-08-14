@@ -50,7 +50,7 @@ def main ():
     X22 =np .asarray (d ["X22"],float );XR =np .asarray (d ["XR"],float )
     ytr =np .asarray (d ["y"]);tpid =np .array ([str (x )for x in d ["pids"]])
     tmfg =np .array ([str (x )for x in d ["mfg"]])
-    tgrp =np .array ([gk .get (p ,"yok:"+p )for p in tpid ])
+    tgrp =np .array ([gk .get (p ,"absent:"+p )for p in tpid ])
     hepsi =~np .isin (tgrp ,list (tg ))
     print (f"training: {len (ytr )} candidate / {len (np .unique (tpid ))} part | "
     f"leakage disi {int (hepsi .sum ())}",flush =True )
@@ -61,7 +61,7 @@ def main ():
     for k in np .unique (tmfg )}
 
     KOL ={"A 22 temel":None ,"B +konum9":list (range (0 ,9 )),
-    "C +cokyaricap24":list (range (9 ,33 )),"D +33 hepsi":list (range (XR .shape [1 ]))}
+    "C +cokyaricap24":list (range (9 ,33 )),"D +33 all of them":list (range (XR .shape [1 ]))}
 
     def donustur (X ,pidler ):
         if not DON :
@@ -97,7 +97,7 @@ def main ():
                     k2 =wire_gate .decision_mask (s )
                     if k2 .any ():
                         P =r ["P"][k2 ];Pd =r ["Pd"][k2 ]
-                rj ="cok"if r ["n"]>=8 else "dusuk"
+                rj ="very"if r ["n"]>=8 else "low"
                 det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
                 rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             SON [ad ][b ]=float (f1w (det ))
@@ -118,7 +118,7 @@ def main ():
             out [bb ]=(lo ,hi )
         return out 
 
-    print ("\n=== KARAR ===")
+    print ("\n=== DECISION ===")
     gecen ={}
     for ad in KOL :
         if ad .startswith ("A"):

@@ -120,13 +120,13 @@ def main ():
             c =json .load (io .open (CFG ,encoding ="utf-8"))
             print (f"mevcut robot_eksen_havuz = {c .get ('robot_eksen_havuz')}")
             c ["robot_eksen_havuz"]=True 
-            c ["_t3a_gecici"]=("EKSEN HAVUZ DENEYI -- bu anahtar dosyada goruyorsan "
+            c ["_t3a_gecici"]=("EKSEN HAVUZ DENEYI -- this anahtar dosyada goruyorsan "
             "t3a yarida kesilmis demektir, cp_config.json.t3a_yedek'ten GERI AL")
             with io .open (CFG ,"w",encoding ="utf-8")as f :
                 json .dump (c ,f ,indent =1 ,ensure_ascii =False )
             print ("cp_config YAMALANDI (robot_eksen_havuz=True); turetme basliyor...",flush =True )
             t0 =time .time ()
-            r =subprocess .run ([sys .executable ,"turet.py","--cikti",CIKTI ],
+            r =subprocess .run ([sys .executable ,"turet.py","--output",CIKTI ],
             capture_output =True ,text =True )
             print (r .stdout [-2500 :])
             if r .returncode !=0 :
@@ -137,7 +137,7 @@ def main ():
             os .remove (YEDEK )
             s1 =sha (CFG )
             print (f"cp_config GERI ALINDI  sha {s0 } -> {s1 }  "
-            f"{'AYNI (dogrulandi)'if s0 ==s1 else '!!! FARKLI -- ELLE KONTROL ET'}")
+            f"{'AYNI (dogrulandi)'if s0 ==s1 else '!!! FARKLI -- ELLE CHECK ET'}")
             assert s0 ==s1 ,"cp_config geri alinamadi"
     else :
         print (f"{CIKTI } zaten var, turetme atlandi")
@@ -148,17 +148,17 @@ def main ():
     print (f"\nolcum kumesi: eski {len (ESKI )} part | yeni {len (YENI )} part")
     r0 ,na0 ,ng0 =istat (ESKI );r1 ,na1 ,ng1 =istat (YENI )
     o0 ,n0 =oy_istat (ESKI );o1 ,n1 =oy_istat (YENI )
-    print (f"\n{'':<22}{'ESKI (5mm kure)':>18}{'YENI (axis)':>15}{'fark':>10}")
+    print (f"\n{'':<22}{'ESKI (5mm kure)':>18}{'YENI (axis)':>15}{'difference':>10}")
     print (f"{'candidate recall':<22}{r0 :>18.4f}{r1 :>15.4f}{r1 -r0 :>+10.4f}")
-    print (f"{'candidate sayisi':<22}{na0 :>18}{na1 :>15}{na1 -na0 :>+10}")
+    print (f"{'candidate count':<22}{na0 :>18}{na1 :>15}{na1 -na0 :>+10}")
     print (f"{'oy / eslesen GT':<22}{o0 :>18.3f}{o1 :>15.3f}{o1 -o0 :>+10.3f}")
     print (f"{'  (n)':<22}{n0 :>18}{n1 :>15}")
     gate =(o1 -o0 )>=0.15 and (r0 -r1 )<=0.005 
     print (f"\nKAPI: oy/GT >= +0.15 VE recall dususu <= 0.005 -> "
     f"{'GECTI -- pahali gate yeniden-turetmesi HAK EDILDI'if gate else 'GECMEDI -- arm kapanir, pahali is YAPILMAZ'}")
     with io .open ("results/t3a_eksen_havuz_kapi.json","w",encoding ="utf-8")as f :
-        json .dump ({"eski":{"recall":r0 ,"candidate":na0 ,"oy":o0 ,"n_oy":n0 ,"gt":ng0 },
-        "yeni":{"recall":r1 ,"candidate":na1 ,"oy":o1 ,"n_oy":n1 ,"gt":ng1 },
+        json .dump ({"old":{"recall":r0 ,"candidate":na0 ,"oy":o0 ,"n_oy":n0 ,"gt":ng0 },
+        "new":{"recall":r1 ,"candidate":na1 ,"oy":o1 ,"n_oy":n1 ,"gt":ng1 },
         "d_oy":o1 -o0 ,"d_recall":r1 -r0 ,"gate":bool (gate )},f ,indent =1 )
     print ("receipt -> results/t3a_eksen_havuz_kapi.json")
 

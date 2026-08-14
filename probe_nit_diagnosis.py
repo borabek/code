@@ -65,7 +65,7 @@ def alt (M ,Y ,fold =6 ):
 
 def blok (d ,ad ,zskor ):
     X =np .hstack ([p6_decision .donustur (d ["X"],zskor ),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
     if ad =="hepsi":
         return X 
     if ad =="A (segmentasyon)":
@@ -113,7 +113,7 @@ def main ():
 
     out ={}
     print (f"{'kurulum':<34}{'AP':>8}{'recall@k':>10}{'rastgele':>10}{'fold':>7}")
-    for zskor in ("ab","sira","ikisi","yok"):
+    for zskor in ("ab","sira","ikisi","none"):
         for ad in ("hepsi","C (direction bankasi)"):
             M =np .vstack ([blok (d ,ad ,zskor )for d in tr ]).astype (np .float32 )
             Y =np .concatenate ([d ["y"]for d in tr ])

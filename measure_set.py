@@ -76,7 +76,7 @@ def cluster (der_yolu ="results/_u4_der.pkl",locked_cikar =True ,tekrar_cikar =T
             continue 
         r =dict (r )
         r ["cluster"]=b 
-        r ["geo"]=gk .get (pid ,"yok:"+pid )
+        r ["geo"]=gk .get (pid ,"none:"+pid )
         temiz .append (r )
 
         # KIRLILIK, PUANLAMADAN CIKARILANLARI DA KAPSAR (2026-08-02 denetimi).
@@ -86,16 +86,16 @@ def cluster (der_yolu ="results/_u4_der.pkl",locked_cikar =True ,tekrar_cikar =T
         # varlar and tarihsel as puanlandilar. Bir times dokunulan part kalici as kirlidir.
         # Etkisi: "temiz LOCKED 98" -> DOGRUSU 95.
     kullanilan_geo =({r ["geo"]for r in temiz }
-    |{gk .get (p ,"yok:"+p )for p in atilan_locked }
-    |{gk .get (p ,"yok:"+p )for p in atilan_tekrar })
+    |{gk .get (p ,"none:"+p )for p in atilan_locked }
+    |{gk .get (p ,"none:"+p )for p in atilan_tekrar })
     s3 =_oku (SPLIT )
     locked_kirli ={}
     for p in s3 ["locked"]["parts"]:
-        g =gk .get (str (p ),"yok:"+str (p ))
+        g =gk .get (str (p ),"none:"+str (p ))
         if g in kullanilan_geo :
             locked_kirli .setdefault (g ,[]).append (str (p ))
     locked_temiz =[str (p )for p in s3 ["locked"]["parts"]
-    if gk .get (str (p ),"yok:"+str (p ))not in kullanilan_geo ]
+    if gk .get (str (p ),"none:"+str (p ))not in kullanilan_geo ]
 
     rapor ={
     "girdi_satir":len (DER ),
@@ -152,7 +152,7 @@ def locked_gruplari ():
     """95 grup-temiz LOCKED parcanin GEOMETRI GRUPLARI."""
     _ ,rap =cluster ("results/_der_tam.pkl")
     gk =geo_anahtarlari ()
-    return {gk .get (p ,"yok:"+p )for p in rap ["locked_temiz"]}
+    return {gk .get (p ,"none:"+p )for p in rap ["locked_temiz"]}
 
 
 def sinav_egitim_maskesi (pidler ):
@@ -173,7 +173,7 @@ def sinav_egitim_maskesi (pidler ):
     import numpy as np 
     gk =geo_anahtarlari ()
     lg =locked_gruplari ()
-    g =np .array ([gk .get (str (p ),"yok:"+str (p ))for p in pidler ])
+    g =np .array ([gk .get (str (p ),"none:"+str (p ))for p in pidler ])
     return ~np .isin (g ,list (lg ))
 
 

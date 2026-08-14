@@ -77,7 +77,7 @@ def evaluate (score_parts ,seeds =(0 ,1 ,2 ),label =""):
         pr ,_ =_router (ps ,geom ,ncand ,hi_true ,fams ,seed =s )
         route ={ps [i ]for i in range (len (ps ))if pr [i ]>=ROUTER_THR }
         res ={}
-        for tag ,D in (("off",A ),("on",B )):
+        for tag ,D in (("off",A ),("ten",B )):
             X ,y ,pid ,_ ,_ =D 
             m =np .array ([q in parts for q in pid ])
             fam =np .array ([fams .get (q ,f"nr:{q }")for q in pid ])
@@ -91,7 +91,7 @@ def evaluate (score_parts ,seeds =(0 ,1 ,2 ),label =""):
         vals ={}
         for reg ,sel_parts in (("low",parts -hi_true ),("high",hi_true )):
             T =N =Gt =0 
-            for tag ,sel in (("off",lambda q :q not in route ),("on",lambda q :q in route )):
+            for tag ,sel in (("off",lambda q :q not in route ),("ten",lambda q :q in route )):
                 y ,oof ,pid ,G ,m =res [tag ]
                 mask =m &np .array ([(q in sel_parts )and sel (q )for q in pid ])
                 if mask .sum ()==0 :continue 
@@ -141,7 +141,7 @@ def evaluate_holdout (work_parts ,hold_parts ,seeds =(0 ,1 ,2 )):
 
         # --- gate: SADECE WORK adaylariyla egitilir; threshold de WORK'te secilir ---
         sc ={}
-        for tag ,D in (("off",A ),("on",B )):
+        for tag ,D in (("off",A ),("ten",B )):
             X ,y ,pid ,_ ,_ =D 
             mw =np .array ([q in W for q in pid ]);mh =np .array ([q in H for q in pid ])
             clf =ExtraTreesClassifier (800 ,min_samples_leaf =2 ,n_jobs =-1 ,random_state =s )
@@ -159,7 +159,7 @@ def evaluate_holdout (work_parts ,hold_parts ,seeds =(0 ,1 ,2 )):
         for reg ,ps in (("low",H -{q for q in H if NGT .get (q ,0 )>=M .HIGH_CP }),
         ("high",{q for q in H if NGT .get (q ,0 )>=M .HIGH_CP })):
             T =N =Gt =0 
-            for tag ,sel in (("off",lambda q :q not in route ),("on",lambda q :q in route )):
+            for tag ,sel in (("off",lambda q :q not in route ),("ten",lambda q :q in route )):
                 yh ,ph ,pidh ,thr =sc [tag ]
                 m =np .array ([(q in ps )and sel (q )for q in pidh ])
                 if m .sum ()==0 :continue 
@@ -180,7 +180,7 @@ def evaluate_holdout (work_parts ,hold_parts ,seeds =(0 ,1 ,2 )):
 def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--holdout",action ="store_true",
-    help ="KILITLI HOLDOUT tek atis dogrulamasi -- GERI DONUSU YOK")
+    help ="KILITLI HOLDOUT single atis dogrulamasi -- GERI DONUSU YOK")
     a =ap .parse_args ()
     lock =json .load (open ("results/split_lock.json"))
     LOCK =set (lock ["locked_parts"])
@@ -204,7 +204,7 @@ def main ():
         else :
         # GERCEK holdout: gate/threshold/router SADECE WORK'te ogrenilir (see evaluate_holdout)
             ho =evaluate_holdout (clean -LOCK ,hp )
-            ho ["label"]="KILITLI HOLDOUT (tek atis, WORK'te egitildi)"
+            ho ["label"]="KILITLI HOLDOUT (single atis, WORK'te egitildi)"
             rec ["holdout"]=ho 
             print (f"  holdout part {ho ['n_hold']} | gate/threshold/router {ho ['n_work']} WORK parcasinda egitildi")
             for k in ("low","high","corpus_weighted"):

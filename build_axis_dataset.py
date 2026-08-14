@@ -28,7 +28,7 @@ OUT ="results/axis_dataset"
 def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--radius",type =float ,default =4.0 ,
-    help ="manufacturer CP'sine bu mesafedeki koseler hedef alir (mm)")
+    help ="manufacturer CP'sine this mesafedeki koseler hedef alir (mm)")
     ap .add_argument ("--limit",type =int ,default =0 )
     ap .add_argument ("--target",type =int ,default =6000 )
     a =ap .parse_args ()

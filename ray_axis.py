@@ -103,11 +103,11 @@ def self_check ():
         T =trimesh .geometry .align_vectors ([0 ,0 ,1 ],axis )
         sil =trimesh .creation .cylinder (radius =2.0 ,height =80.0 ,transform =T )
         part =kutu .difference (sil )
-        assert part .is_watertight ,"sentetik part su gecirmez degil"
+        assert part .is_watertight ,"sentetik part su gecirmez not"
         isinci =trimesh .ray .ray_triangle .RayMeshIntersector (part )
         # hole agzi: eksenin +z yuzunu (z=15) deldigi point
         kok =axis *(15.0 /axis [2 ])
-        assert np .all (np .abs (kok [:2 ])<14.0 ),"mouth yuzde degil, kenarda"
+        assert np .all (np .abs (kok [:2 ])<14.0 ),"mouth yuzde not, kenarda"
         # 64 candidate direction (Fibonacci)
         i =np .arange (64 )+0.5 
         fi =np .arccos (1 -2 *i /64 )

@@ -61,8 +61,8 @@ print (f"ZOR medyan cevre {np .median ([k ['cevre']for k in zor ]):.2f} vs "
 f"TUM {np .median (cv ):.2f} | ZOR medyan conf {np .median ([k ['conf']for k in zor ]):.3f} "
 f"vs TUM {np .median (cf ):.3f}")
 json .dump ({"kuyruk":kuy ,"n_zor":len (zor ),"n_kolay":len (kolay ),
-"criterion":"z(kon_cevre)+z(conf) DUSUK = zayif mouth; oncelik markalari ve "
-"yuksek-CP one alinir; %25 kolay/negatif kontrol",
-"rationale":"mouth kalitesi dusuk ceyrekte lateral basari %25.8 / yuksek %75.9"},
+"criterion":"z(kon_cevre)+z(conf) DUSUK = zayif mouth; oncelik markalari and "
+"high-CP one alinir; %25 easy/negatif kontrol",
+"rationale":"mouth kalitesi low ceyrekte lateral basari %25.8 / high %75.9"},
 io .open ("results/p2_etiket_kuyrugu.json","w",encoding ="utf-8"),indent =1 )
 print ("receipt -> results/p2_etiket_kuyrugu.json")

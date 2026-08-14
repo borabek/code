@@ -40,7 +40,7 @@ os .environ ["WG_FIZ_FEATS"]="1"
 os .environ ["WG_TOPO"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 YAKIN_MM =6.0 
-OZ =["mesafe","aralik","depth","alan","fark_aci","brep_r","n_slot","yakinlik_orani"]
+OZ =["distance","aralik","depth","alan","fark_aci","brep_r","n_slot","yakinlik_orani"]
 
 
 def main ():
@@ -58,9 +58,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf0 =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -103,7 +103,7 @@ def main ():
             used .add (a_ );hit .add (b_ )
             total_ +=1 
             HEDEF [r ["pid"]].append ({"p":P [a_ ].copy (),"pd":Pd [a_ ].copy (),
-            "gd":Gd [b_ ].copy (),"aci":float (an [a_ ,b_ ]),
+            "gd":Gd [b_ ].copy (),"angle":float (an [a_ ,b_ ]),
             "brep_r":float (r ["X"][idx [a_ ],BREP_SUT ])})
     print (f"{total_ } eslesme | {len (HEDEF )} part",flush =True )
 
@@ -146,13 +146,13 @@ def main ():
             ikinci =float (dd [o [1 ]])if len (o )>1 else 999.0 
             a_yeni =float (np .degrees (np .arccos (np .clip (abs (float (SD [j ]@h ["gd"])),0 ,1 ))))
             fark =float (np .degrees (np .arccos (np .clip (abs (float (SD [j ]@h ["pd"])),0 ,1 ))))
-            SAT .append ({"pid":pid ,"geo":gk .get (pid ,"yok:"+pid ),
-            "mesafe":float (dd [j ]),"aralik":float (SR [j ]*2.0 ),
+            SAT .append ({"pid":pid ,"geo":gk .get (pid ,"absent:"+pid ),
+            "distance":float (dd [j ]),"aralik":float (SR [j ]*2.0 ),
             "depth":float (SDe [j ]),"alan":float (SA [j ]),
             "fark_aci":fark ,"brep_r":h ["brep_r"],
             "n_slot":float (len (slots )),
             "yakinlik_orani":float (dd [j ]/max (ikinci ,1e-6 )),
-            "eski_aci":h ["aci"],"yeni_aci":a_yeni })
+            "eski_aci":h ["angle"],"yeni_aci":a_yeni })
 
     print (f"\n{len (SAT )} (CP, yarik) cifti toplandi",flush =True )
     X =np .array ([[s [k ]for k in OZ ]for s in SAT ],float )

@@ -62,7 +62,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    tgrp =np .array ([gk .get (p ,"yok:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
+    tgrp =np .array ([gk .get (p ,"absent:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -133,7 +133,7 @@ def main ():
                 float (np .mean (a_ort )),float (rank_ [u_ ])]+Xk [i ].tolist ()
                 for u_ in range (len (DIR ))],float )
                 PdB [i ]=DIR [int (np .argmax (sec .predict_proba (Fm )[:,1 ]))]
-        rj ="cok"if rd ["n"]>=8 else "dusuk"
+        rj ="very"if rd ["n"]>=8 else "low"
         G =np .asarray (rd ["G"],float );Gd =np .asarray (rd ["Gd"],float )
         det ["A"].append ((rj ,)+esle (P ,Pd ,G ,Gd ,rd ["diag"],0.0 ,180.0 ,True ))
         rob ["A"].append ((rj ,)+esle (P ,Pd ,G ,Gd ,rd ["diag"],2.0 ,10.0 ,False ))
@@ -161,7 +161,7 @@ def main ():
         with open ("results/uye_secici.pkl","wb")as f :
             pickle .dump ({"sec":sec ,"n_feat":UX .shape [1 ],"yakin_mm":YAKIN ,
             "note":("UYE SECICI 2026-08-02: _vote2 birlestirmede ATILAN uye "
-            "yonlerinden en iyisini secer. Kahin +0.0536 (R7); ogrenilmis "
+            "yonlerinden most iyisini selects. Kahin +0.0536 (R7); ogrenilmis "
             f"selector {dr :+.4f} (GA [{lo :+.4f},{hi :+.4f}]). Tespit bedeli "
             "YAPISAL SIFIR: tespit olcutu aciya bakmaz.")},f )
         print ("-> results/uye_secici.pkl")

@@ -75,11 +75,11 @@ def main ():
         # AYARI MODEL TASIR: `n_feat` radius uyusmazligini YAKALAYAMAZ (column SAYISI same,
         # ANLAMI different). wire_gate._dogrula_uyum bunu okuyup patlar.
         "topo_r":float (wire_gate .TOPO_R ),
-        "note":("PARCA-ICI 2026-08-01: 22 ham sutun + 22 part-ici z-skor. Gorulmemis "
-        "ureticide EN KOTU durum 0.4832 -> 0.5702 (GA [+0.048,+0.126]), tanidik "
+        "note":("PARCA-ICI 2026-08-01: 22 ham column + 22 part-ici z-skor. Gorulmemis "
+        "ureticide EN KOTU state 0.4832 -> 0.5702 (GA [+0.048,+0.126]), tanidik "
         "-0.0023 (noise), DIGER manufacturer-disi split -0.0375 (GERCEK BEDEL). "
-        "Ureticiler arasi yayilim 0.2370 -> 0.1126. Takasi kaldirmak icin 3 arm "
-        "denendi ve basarisiz (u5_takas.json). Onceki model: "
+        "Ureticiler arasi spread 0.2370 -> 0.1126. Takasi kaldirmak for 3 arm "
+        "was tried and basarisiz (u5_takas.json). Onceki model: "
         "results/wire_gate.pkl.pre_parca_ici"),
         },f )
     print (f"model yazildi -> {PKL } ({M .shape [1 ]} sutun, donusum={DONUSUM })")
@@ -88,7 +88,7 @@ def main ():
         cfg =json .load (f )
     cfg ["gate_parca_ici"]=DONUSUM 
     cfg ["gate_parca_ici_not"]=(
-    "BILGI AMACLI: donusumu MODELIN KENDISI tasir (wire_gate.pkl['donusum']), bu alan "
+    "BILGI AMACLI: donusumu MODELIN KENDISI carries (wire_gate.pkl['donusum']), this alan "
     "degistirilerek acilip kapatilamaz. Geri alma: results/wire_gate.pkl.pre_parca_ici -> "
     "results/wire_gate.pkl. Olcum: results/u4_parca_ici_uctan_uca.json")
     with open ("cp_config.json","w",encoding ="ascii")as f :

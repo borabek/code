@@ -9,9 +9,9 @@ import d6_record
 def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--cluster",default ="results/d6_sinav_kumesi.json")
-    ap .add_argument ("--cikti",default ="results/_d6_acikliklar.pkl")
+    ap .add_argument ("--output",default ="results/_d6_acikliklar.pkl")
     ap .add_argument ("--vardiya",type =int ,default =0 )
-    ap .add_argument ("--toplam",type =int ,default =1 )
+    ap .add_argument ("--total",type =int ,default =1 )
     a =ap .parse_args ()
     import brep_aciklik 
     from korpus_kimlik import step_kimlik as SK 

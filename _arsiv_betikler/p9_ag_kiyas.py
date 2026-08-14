@@ -18,8 +18,8 @@ import d6_record
 def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--ckpt",nargs ="+",required =True )
-    ap .add_argument ("--ad",nargs ="+",required =True )
-    ap .add_argument ("--sinir",type =int ,default =0 )
+    ap .add_argument ("--name",nargs ="+",required =True )
+    ap .add_argument ("--boundary",type =int ,default =0 )
     a =ap .parse_args ()
     import protocol ;protocol .tez_dogrula ()
     import torch ,thesis_remesh ,robot_cp as RC ,diffusionnet as D_ 
@@ -56,7 +56,7 @@ def main ():
                 P =np .array ([c ["point"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
                 Dd =np .array ([c ["direction"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
                 G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-                rj ="cok"if r ["n"]>=8 else "dusuk"
+                rj ="very"if r ["n"]>=8 else "low"
                 tt =max (3.0 ,0.06 *r ["diag"])
                 if len (P )and len (G ):
                     d =P [:,None ,:]-G [None ,:,:]
@@ -71,7 +71,7 @@ def main ():
             except Exception :
                 error +=1 
         kh =f1w (K );tf =f1w (T );rf =f1w (R )
-        kc =f1w ([s for s in K if s [0 ]=="cok"]);rc =f1w ([s for s in R if s [0 ]=="cok"])
+        kc =f1w ([s for s in K if s [0 ]=="very"]);rc =f1w ([s for s in R if s [0 ]=="very"])
         print (f"\n{ad :<8} KAHIN {kh :.4f} (cok {kc :.4f}) | TESPIT {tf :.4f} | "
         f"ROBOT {rf :.4f} (cok {rc :.4f}) | error {error }")
         res_ [ad ]={"kahin":kh ,"kahin_cok":kc ,"tespit":tf ,"robot":rf ,

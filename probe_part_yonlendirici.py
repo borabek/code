@@ -31,7 +31,7 @@ for f in sorted (os .listdir (OZ )):
     if f .startswith ("d7_")and f .endswith (".npz"):
         z =np .load (f"{OZ }/{f }")
         te .append ({"pid":f [3 :-4 ],"X":np .asarray (z ["X"],float ),"P":z ["P"],
-        "D":z ["D"],"kaynak":z ["kaynak"]})
+        "D":z ["D"],"source":z ["source"]})
 kay =K .yukle ([d ["pid"]for d in te ])
 for d in te :
     r =kay [d ["pid"]]
@@ -41,7 +41,7 @@ print (f"D7 {len (te )} part",flush =True )
 
 
 def ciktilar (d ,brep ,b_esik =0.70 ):
-    ms =d ["kaynak"]==0 
+    ms =d ["source"]==0 
     Xs =d ["X"][ms ]
     if len (Xs )<2 :
         return np .zeros ((0 ,3 )),np .zeros ((0 ,3 )),np .zeros (0 )
@@ -77,7 +77,7 @@ for d in te :
     arm ["TEZ-SAF"].append (a );arm ["HIBRIT"].append (b )
     iyi =a if f (a )>=f (b )else b 
     arm ["KAHIN (part basina iyisi)"].append (iyi )
-    ms =d ["kaynak"]==0 
+    ms =d ["source"]==0 
     Xs =d ["X"][ms ]
     ss =np .asarray (wire_gate .decision_score (g6 ,Xs ),float )if len (Xs )>=2 else np .zeros (1 )
     sinyal .append ({"pid":d ["pid"],"mfg":d ["mfg"],"brep_iyi":int (f (b )>f (a )),
@@ -97,7 +97,7 @@ c =collections .Counter (s ["mfg"]for s in sinyal if s ["brep_iyi"])
 t =collections .Counter (s ["mfg"]for s in sinyal )
 for m ,k in c .most_common ():
     print (f"  {m :<8} {k :>3}/{t [m ]:<4} (%{100 *k /t [m ]:.0f})")
-print ("\nUCUZ SINYALLER (B-rep iyi vs degil, ortalama):")
+print ("\nUCUZ SINYALLER (B-rep iyi vs not, ortalama):")
 for ad in ("n_seg","n_brep","seg_max","seg_ort","n_gt","diag"):
     a =np .mean ([s [ad ]for s in sinyal if s ["brep_iyi"]])
     b =np .mean ([s [ad ]for s in sinyal if not s ["brep_iyi"]])

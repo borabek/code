@@ -137,7 +137,7 @@ snap_to_surface =False ,tta =0 ):
 
 def main (argv =None ):
     ap =argparse .ArgumentParser (
-    description ="Run a trained connection-point detector on a mesh -> JSON")
+    description ="Run a trained connection-point detector ten a mesh -> JSON")
     ap .add_argument ("model",nargs ="?",
     help ="exported .pt or any cp_regressor checkpoint "
     "(omit when using --from-cad)")
@@ -177,7 +177,7 @@ def main (argv =None ):
     ap .add_argument ("--tta",type =int ,default =0 ,
     help ="knngraph only: test-time augmentation over N random rotations "
     "(0=off). Averages predictions to suppress pose-dependent false "
-    "positives -- big precision gain on the raw-xyz model (measured "
+    "positives -- big precision gain ten the raw-xyz model (measured "
     "+7 micro-F1, FP ~70%% lower at N=8). Pair with --heatmap-thresh "
     "0.6 (the TTA-tuned point). ~N x slower; N=8 is a good default")
     # decode overrides -- default None means 'use the value bundled in the model'
@@ -242,7 +242,7 @@ def main (argv =None ):
                     if p .get ("n_detected",0 )>0 :
                         cad_results [p ["part_nr"]]=p ["connection_points"]
             except Exception as exc :
-                logger .debug ("step_openings failed on %s: %s",sf ,exc )
+                logger .debug ("step_openings failed ten %s: %s",sf ,exc )
         if cad_results :
             logger .info ("--auto: CAD extraction found CPs in %d part(s)",len (cad_results ))
 

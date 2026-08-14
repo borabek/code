@@ -75,7 +75,7 @@ def main ():
             up .add (a_ );ug .add (b_ )
             ACI .append (ac [a_ ,b_ ]);YANAL .append (pe [a_ ,b_ ])
             FEAT .append (Xk [a_ ]);GRUP .append (r ["geo"])
-            RJ .append ("cok"if r ["n"]>=8 else "dusuk")
+            RJ .append ("very"if r ["n"]>=8 else "low")
     ACI =np .array (ACI );YANAL =np .array (YANAL );FEAT =np .array (FEAT )
     GRUP =np .array (GRUP )
     print (f"\n{len (ACI )} tespit edilmis cift")
@@ -116,7 +116,7 @@ def main ():
         print (f"  KARAR: {'TAHMIN EDILEBILIR -> ogrenilmis dik-kafa yazilabilir'if auc >=0.70 else 'AYIRT EDILEMIYOR -> R1 KAPANIR'}")
     else :
         auc =None 
-        print ("\n'YANLIS EKSEN' sinifi cok kucuk -> istatistik yok")
+        print ("\n'YANLIS EKSEN' sinifi very small -> istatistik absent")
     with io .open ("results/r1_aci_artigi.json","w",encoding ="utf-8")as f :
         json .dump ({"n":len (ACI ),"aci_ok":float (a_ok .mean ()),"yanal_ok":float (y_ok .mean ()),
         "ikisi":float ((y_ok &a_ok ).mean ()),

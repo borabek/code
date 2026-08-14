@@ -18,7 +18,7 @@ import os ,sys ,json
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ ="results/gate_regrow_data_rt2.npz"
 
 # CARPAN TASARIMI: dik tolerans and axial pencere AYRI AYRI degisir.
@@ -39,18 +39,18 @@ def big_thr (npz ,test_fams ):
     keep =~np .isin (fams .astype (str ),list (test_fams ))
     X ,y ,groups ,fams =X [keep ],y [keep ],groups [keep ],fams [keep ]
     ngt =dict (zip (d ["grp_ids"].tolist (),d ["ngt"].tolist ()))
-    reg =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
-    tot ={"dusuk":0 ,"cok":0 }
+    reg =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
+    tot ={"low":0 ,"very":0 }
     for g in {int (g )for g in groups }:
         n =int (ngt .get (g ,0 ))
         if n >0 :
-            tot ["cok"if n >=8 else "dusuk"]+=n 
+            tot ["very"if n >=8 else "low"]+=n 
     oof =np .zeros (len (y ))
     for tr ,te in GroupKFold (n_splits =5 ).split (X ,y ,fams .astype (str )):
         oof [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (X [tr ],y [tr ]).predict_proba (X [te ])[:,1 ]
     out ={}
-    for k in ("dusuk","cok"):
+    for k in ("low","very"):
         best =(0.0 ,0.40 )
         for thr in np .arange (0.20 ,0.71 ,0.05 ):
             m =reg ==k 
@@ -151,7 +151,7 @@ def main ():
             if cps :
                 probs =sum (pbs )/len (pbs )
                 sc =clf .predict_proba (wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ))[:,1 ]
-                t_ =thr ["cok"]if is_hi else thr ["dusuk"]
+                t_ =thr ["very"]if is_hi else thr ["low"]
                 kept =[c for c ,s_ in zip (cps ,sc )if s_ >=t_ ]
             cache .append (dict (
             Q =np .array ([c ["point"]for c in kept ],float )if kept else np .zeros ((0 ,3 )),
@@ -173,7 +173,7 @@ def _report (cache ):
     import numpy as np 
 
     def score (tolfn ,axial ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
             Q ,G ,Gd =r ["Q"],r ["G"],r ["Gd"]
             tol =tolfn (r ["diag"])
@@ -191,7 +191,7 @@ def _report (cache ):
                     hit [b_ ]=True 
                     used .add (a_ )
             tp =int (hit .sum ())
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp 
             agg [k ][1 ]+=len (Q )-tp 
             agg [k ][2 ]+=len (G )-tp 
@@ -204,17 +204,17 @@ def _report (cache ):
         return out 
 
     print ()
-    print (f"{'dik tolerans':<14}{'axial':>9}{'dusuk-CP':>10}{'cok-CP':>9}"
+    print (f"{'dik tolerans':<14}{'axial':>9}{'low-CP':>10}{'very-CP':>9}"
     f"{'AGIRLIKLI':>11}{'precision':>10}{'recall':>8}")
     res ={}
     for ax in AXIAL :
         for name ,fn in PERP :
             r =score (fn ,ax )
             res [f"{name } / +-{ax :.0f}mm"]=r 
-            tp =r ["dusuk"]["tp"]+r ["cok"]["tp"]
-            fp =r ["dusuk"]["fp"]+r ["cok"]["fp"]
-            fn_ =r ["dusuk"]["fn"]+r ["cok"]["fn"]
-            print (f"{name :<14}{ax :>7.0f}mm{r ['dusuk']['f1']:>10.4f}{r ['cok']['f1']:>9.4f}"
+            tp =r ["low"]["tp"]+r ["very"]["tp"]
+            fp =r ["low"]["fp"]+r ["very"]["fp"]
+            fn_ =r ["low"]["fn"]+r ["very"]["fn"]
+            print (f"{name :<14}{ax :>7.0f}mm{r ['low']['f1']:>10.4f}{r ['very']['f1']:>9.4f}"
             f"{r ['w']:>11.4f}{tp /max (tp +fp ,1 ):>10.3f}"
             f"{tp /max (tp +fn_ ,1 ):>8.3f}",flush =True )
         print ()
@@ -224,7 +224,7 @@ def _report (cache ):
     f"%90 {np .percentile (ares ,90 ):.2f}mm  max {max (ares ):.2f}mm")
     print ("  -> sabit 2mm toleransin a kismi HIZALAMA hatasidir, modelin not")
     json .dump ({"sonuc":res ,"align_residual_mm":ares ,"n_parca":len (cache ),
-    "protocol":"P9 ile birebir (seed 202, 70 dusuk / 30 cok, aile-disi gate)"},
+    "protocol":"P9 with birebir (seed 202, 70 low / 30 very, aile-disi gate)"},
     open ("results/tolerans_gercegi.json","w"),indent =1 ,default =float )
     print ("receipt -> results/tolerans_gercegi.json")
 

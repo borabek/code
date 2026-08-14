@@ -11,7 +11,7 @@ import os ,sys ,json ,copy ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 HOLD_GATE ="results/_d1_gate_heldout.pkl"
 
 
@@ -78,16 +78,16 @@ def main ():
             Gd /=np .linalg .norm (Gd ,axis =1 ,keepdims =True )+1e-9 
             R ,t ,_ =align_frames (Vr ,Vj )
             cache .append (dict (V =V ,F =F ,probs =sum (pbs )/len (pbs ),cps =cps ,
-            G =(G -t )@R ,Gd =Gd @R ,regime ="cok"if hi_ else "dusuk",
+            G =(G -t )@R ,Gd =Gd @R ,regime ="very"if hi_ else "low",
             tol =max (3.0 ,0.06 *float (np .linalg .norm (V .max (0 )-V .min (0 ))))))
         except Exception :
             continue 
     print (f"cache: {len (cache )} part\n",flush =True )
 
     def score (model_path ,thr_low ,thr_hi ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
-            thr =thr_hi if r ["regime"]=="cok"else thr_low 
+            thr =thr_hi if r ["regime"]=="very"else thr_low 
             s_ =wire_gate .apply (r ["V"],r ["F"],r ["probs"],copy .deepcopy (r ["cps"]),CE ,CT ,
             threshold =thr ,model_path =model_path ,top_n =None )if r ["cps"]else []
             Q =np .array ([c ["point"]for c in s_ ],float )if s_ else np .zeros ((0 ,3 ))
@@ -108,18 +108,18 @@ def main ():
         out ["weighted"]=sum (W [k ]*out [k ]for k in W )
         return out 
 
-    print (f"{'gate':<34}{'threshold':>10}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}")
+    print (f"{'gate':<34}{'threshold':>10}{'low':>9}{'very':>9}{'agirlikli':>11}")
     res ={}
     dep =score ("results/wire_gate.pkl",0.40 ,0.25 )
     res ["deployed"]=dep 
-    print (f"{'A) DAGITILAN':<34}{'0.40/0.25':>10}{dep ['dusuk']:>9.4f}{dep ['cok']:>9.4f}"
+    print (f"{'A) DAGITILAN':<34}{'0.40/0.25':>10}{dep ['low']:>9.4f}{dep ['very']:>9.4f}"
     f"{dep ['weighted']:>11.4f}",flush =True )
     # DURUST arm: threshold BUYUK veride (1903 part, aile-disi OOF) secildi, test kumesine BAKILMADI.
     # K2d olcumu: low-CP 0.45 / very-CP 0.25.
     r =score (HOLD_GATE ,0.45 ,0.25 )
     res ["refit"]=r ;res ["refit_thr"]=[0.45 ,0.25 ]
-    print (f"{'B) YENI (threshold buyuk veriden)':<34}{'0.45/0.25':>10}{r ['dusuk']:>9.4f}"
-    f"{r ['cok']:>9.4f}{r ['weighted']:>11.4f}")
+    print (f"{'B) YENI (threshold large veriden)':<34}{'0.45/0.25':>10}{r ['low']:>9.4f}"
+    f"{r ['very']:>9.4f}{r ['weighted']:>11.4f}")
     # REFERANS: test kumesinde secilseydi ne olurdu (IYIMSER, rapor edilmez)
     best =None 
     for tl in (0.35 ,0.40 ,0.45 ,0.50 ):
@@ -129,7 +129,7 @@ def main ():
                 best =(rr ,tl ,th )
     res ["refit_testselected"]={"weighted":best [0 ]["weighted"],"thr":[best [1 ],best [2 ]]}
     print (f"{'   (test-secimli, IYIMSER)':<34}{f'{best [1 ]:.2f}/{best [2 ]:.2f}':>10}"
-    f"{best [0 ]['dusuk']:>9.4f}{best [0 ]['cok']:>9.4f}{best [0 ]['weighted']:>11.4f}")
+    f"{best [0 ]['low']:>9.4f}{best [0 ]['very']:>9.4f}{best [0 ]['weighted']:>11.4f}")
     dlt =r ["weighted"]-dep ["weighted"]
     print (f"\nB - A = {dlt :+.4f}")
     print (f"KAPI (>= +0.02): {'GECTI'if dlt >=0.02 else 'OLU'}")

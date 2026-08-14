@@ -58,7 +58,7 @@ def main ():
         if giris_var_mi (page ):
             print ("OTURUM ZATEN OPEN",flush =True )
         else :
-            print ("\n>>> ACILAN PENCEREDE GIRIS YAP. Bekliyorum (en fazla 10 dk)...",flush =True )
+            print ("\n>>> ACILAN PENCEREDE GIRIS YAP. Bekliyorum (most extra 10 dk)...",flush =True )
             t0 =time .time ()
             while time .time ()-t0 <600 :
                 time .sleep (5 )

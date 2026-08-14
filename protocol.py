@@ -42,7 +42,7 @@ def egitim_maskesi (pidler ,olcum_da =False ,der_yolu ="results/_der_tam.pkl"):
     """Egitimde KULLANILABILIR olanlar True. Grup duzeyinde works."""
     gk =OK .geo_anahtarlari ()
     yg =yasak_gruplar (olcum_da ,der_yolu )
-    g =np .array ([gk .get (str (p ),"yok:"+str (p ))for p in pidler ])
+    g =np .array ([gk .get (str (p ),"none:"+str (p ))for p in pidler ])
     return ~np .isin (g ,list (yg ))
 
 
@@ -76,25 +76,25 @@ def dogrula (pidler ,ad ="training",olcum_da =False ,sert =True ,der_yolu ="resu
     # --------------------------------------------------------------------------------------
     # F0-3 DAIMI OLCUM KURALLARI -- each arm for gecerli, istisnasiz.
 KURALLAR ="""
-1. KILL ONCEDEN YAZILIR. Kol kosmadan once "neyi gecerse yasar" yazili olmali; sonucu
+1. KILL ONCEDEN YAZILIR. Kol kosmadan first "neyi gecerse yasar" yazili olmali; sonucu
    gorup threshold belirlemek yasak. (2026-08-04: r9c'de threshold tutmadi ve KAYDIRILMADI.)
 2. AYAR = DEV + ATANMAMIS.  HUKUM = VAL.  Ayar kumesinde secilen TEK ayar VAL'de raporlanir.
-3. HAVUZLANMIS SATIR SECIM ICIN KULLANILMAZ -- ayar kumesini de icerdigi icin yaniltir.
-   Olculdu (T1): DEV'de +0.0277 gosteren kural VAL'de -0.0162 cikti; havuzlanmis +0.0011
-   diyordu. Havuzlanmis yalniz BILGI satiridir.
-4. GRUP BOOTSTRAP: part degil GEOMETRI GRUBU. Parcalarin %80'inin ikizi var; part
+3. HAVUZLANMIS SATIR SECIM ICIN KULLANILMAZ -- ayar kumesini de icerdigi for yaniltir.
+   Olculdu (T1): DEV'de +0.0277 gosteren rule VAL'de -0.0162 cikti; havuzlanmis +0.0011
+   diyordu. Havuzlanmis only BILGI satiridir.
+4. GRUP BOOTSTRAP: part not GEOMETRI GRUBU. Parcalarin %80'inin ikizi present; part
    bootstrap'i confidence araligini SAHTE DARALTIR.
-5. TEK REJIMLI ALT KUMEDE `f1w` CAGIRMA -- `f1_rejim` kullan (agirliklar var olan rejimler
+5. TEK REJIMLI ALT KUMEDE `f1w` CAGIRMA -- `f1_rejim` kullan (agirliklar present which rejimler
    uzerinden normalize edilir).
 6. DAGITIM OLURSA: smoke_test.py + pytest tests/ + headline YENIDEN URETILIR ve config'e
    provenance yazilir.
 7. ADAY-URETIMI kararlari (cluster_mm / min_vertices / dedupe / promote / havuzlama)
    ONBELLEKLE OLCULEMEZ -- yeniden turetme sart.
-8. TEZ DEGISMEZLERI (asagidaki TEZ sozlugu) her kolun basinda dogrulanir.
+8. TEZ DEGISMEZLERI (asagidaki TEZ sozlugu) each kolun basinda dogrulanir.
 9. BULUNAN HATA GOZ ARDI EDILMEZ. Bir madde biterken cikan error/uyari/tutarsizlik
-   "sonra bakariz" diye gecilmez: LISTEYE H-maddesi olarak eklenir, ETKISI OLCULUR ve
-   duzeltilir. Duzeltme measurement kumesini oynatabiliyorsa once ETKI raporlanir, sonra
-   uygulanir. (Bu proje hatalari bulup ertelediginde her seferinde bedelini odedi:
+   "then bakariz" diye gecilmez: LISTEYE H-maddesi as eklenir, ETKISI OLCULUR ve
+   duzeltilir. Duzeltme measurement kumesini oynatabiliyorsa first ETKI raporlanir, then
+   uygulanir. (Bu proje hatalari bulup ertelediginde each seferinde bedelini odedi:
    diffusion_net dususu, gate bayatlamasi, unsigned kahin, kimlik ayristirmasi.)
 """
 

@@ -40,7 +40,7 @@ for pid ,r in rows :
         pat_hits +=1 
 print (f"  acik 'pol/pole/way/Leiter' deseni: {pat_hits } part")
 
-print ("\n=== KARAR (P5) ===")
+print ("\n=== DECISION (P5) ===")
 if best and best [1 ]>=0.60 :
     print (f"  STEP PRODUCT token[{best [0 ]}] CP sayisini %{100 *best [1 ]:.0f} tam veriyor -> BAGIMSIZ KAYNAK VAR")
     print ("  -> metadata-assisted mod MESRU sayilabilir (yine de baz ayri raporlanir).")

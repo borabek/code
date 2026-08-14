@@ -51,7 +51,7 @@ print ("=== (1) NULL-DUZELTILMIS money metrik ===")
 print (f"  gozlenen: sifir-TP kumesinde FP kutlesi {obs_mass .mean ():.3f}")
 print (f"  NULL    : {null_mass .mean ():.3f}  (ayni kumeler, etiket permute)")
 print (f"  GERCEK FAZLA: {obs_mass .mean ()-null_mass .mean ():+.3f}"
-+("  <- sansin USTUNDE, gercek yapisal FP kutlesi"if obs_mass .mean ()-null_mass .mean ()>0.05 
++("  <- sansin USTUNDE, real yapisal FP kutlesi"if obs_mass .mean ()-null_mass .mean ()>0.05 
 else "  <- SANS SEVIYESI: '%60 oldurulebilir' ARTEFAKT idi"))
 print ("\n=== (2)+(3) ALET KONTROLU: direction tahminleri anlamli mi ===")
 v_tp =tp_res [~np .isnan (tp_res )];v_fp =fp_res [~np .isnan (fp_res )]

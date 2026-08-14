@@ -60,7 +60,7 @@ def test_kademe_sirasi_OCC_EN_SON ():
     assert i1 <i2 <i3 <i4 ,"backup zincirde OCC kademesi EN SONDA olmali"
 
 
-@pytest .mark .skipif (not os .path .exists ("all_wscad_stp"),reason ="STEP korpusu yok")
+@pytest .mark .skipif (not os .path .exists ("all_wscad_stp"),reason ="STEP korpusu none")
 def test_gercek_parcada_OCC_gmsh_ile_AYNI_KATIYI_verir ():
     """Kalibrasyon testi: two path da calisan a parcada bbox and hacim ortusmeli."""
     import glob 
@@ -68,7 +68,7 @@ def test_gercek_parcada_OCC_gmsh_ile_AYNI_KATIYI_verir ():
     from korpus_kimlik import step_kimlik as SK 
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     if "3024407"not in S :
-        pytest .skip ("kalibrasyon parcasi yok")
+        pytest .skip ("kalibrasyon parcasi none")
     V1 ,F1 =I ._gmsh_mesh (S ["3024407"],heal =False )
     V2 ,F2 =I ._occ_mesh (S ["3024407"])
     assert np .allclose (V1 .max (0 )-V1 .min (0 ),V2 .max (0 )-V2 .min (0 ),atol =0.05 )
@@ -93,7 +93,7 @@ def test_occ_once_ACIKKEN_OCC_ONCE_denenir (monkeypatch ):
     monkeypatch .setattr (I ,"_gmsh_mesh",lambda *a ,**k :cagri .append ("gmsh")or ("V","F"))
     monkeypatch .setenv ("MESH_OCC_ONCE","1")
     I .step_to_mesh ("x.stp")
-    assert cagri ==["occ"],"rota acikken OCC ONCE calismali, gmsh hic cagrilmamali"
+    assert cagri ==["occ"],"rota acikken OCC ONCE calismali, gmsh no cagrilmamali"
 
 
 def test_occ_once_KAPALIYKEN_gmsh_once (monkeypatch ):
@@ -102,7 +102,7 @@ def test_occ_once_KAPALIYKEN_gmsh_once (monkeypatch ):
     monkeypatch .setattr (I ,"_gmsh_mesh",lambda *a ,**k :cagri .append ("gmsh")or ("V","F"))
     monkeypatch .delenv ("MESH_OCC_ONCE",raising =False )
     I .step_to_mesh ("x.stp")
-    assert cagri ==["gmsh"],"varsayilanda gmsh once calismali"
+    assert cagri ==["gmsh"],"varsayilanda gmsh first calismali"
 
 
 def test_kaynakla_sifir_alanli_ucgeni_atar ():
@@ -111,7 +111,7 @@ def test_kaynakla_sifir_alanli_ucgeni_atar ():
     [0. ,1 ,0 ]])
     F =np .array ([[0 ,1 ,2 ],[0 ,1 ,3 ]])
     V2 ,F2 =I ._kaynakla (V ,F )
-    assert len (F2 )==1 ,"sifir alanli ucgen atilmali, saglam olan kalmali"
+    assert len (F2 )==1 ,"sifir alanli ucgen atilmali, saglam which kalmali"
     # source indisleri YENIDEN SIRALAR -- old indisler beklenmez, NOKTALAR sinanir
     kalan ={tuple (p )for p in V2 [F2 [0 ]]}
     assert kalan =={(0. ,0 ,0 ),(1. ,0 ,0 ),(0. ,1 ,0 )}

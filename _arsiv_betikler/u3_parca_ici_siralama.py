@@ -73,7 +73,7 @@ def main ():
     X =np .asarray (d ["X"],float );Y =np .asarray (d ["y"]).astype (bool )
     pids =np .array ([str (x )for x in d ["pids"]])
     mfg =np .array ([str (x )for x in d ["mfg"]])
-    geo =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    geo =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
     print (f"{len (Y )} candidate | {len (set (pids ))} part | {len (set (geo ))} geometri | "
     f"pozitif {Y .mean ():.4f}",flush =True )
 
@@ -81,8 +81,8 @@ def main ():
     SIRA =parca_ici_sira (X ,pids )
     Z =parca_ici_z (X ,pids )
     ARM ={"A ham":X ,
-    "B ham+sira":np .hstack ([X ,SIRA ]),
-    "C yalniz sira":SIRA ,
+    "B ham+order":np .hstack ([X ,SIRA ]),
+    "C only order":SIRA ,
     "D ham+zskor":np .hstack ([X ,Z ])}
 
     def karar (skor ):

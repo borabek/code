@@ -21,7 +21,7 @@ import numpy as np
 
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 NPZ ="results/gate_regrow_data.npz"
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -59,13 +59,13 @@ def main ():
     pred_n ={int (p ):int (max (1 ,round (v )))for p ,v in zip (pids ,poof )}
 
     def cp_f1 (keep_mask_fn ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for g in np .unique (groups ):
             m =groups ==g 
             n_gt =int (ngt_of .get (int (g ),0 ))
             if n_gt <=0 :
                 continue 
-            k ="cok"if n_gt >=8 else "dusuk"
+            k ="very"if n_gt >=8 else "low"
             sel =keep_mask_fn (int (g ),oof [m ],y [m ])
             tp =int ((y [m ][sel ]==1 ).sum ())
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=int (sel .sum ())-tp ;agg [k ][2 ]+=n_gt -tp 
@@ -106,13 +106,13 @@ def main ():
     "D yumusak TAHMIN":arm_soft (lambda g :pred_n .get (g ,1 )),
     }
     print (f"{len (true_n )} part | {len (y )} candidate\n")
-    print (f"{'arm':<22}{'dusuk-CP':>10}{'cok-CP':>10}{'agirlikli':>12}{'fark':>10}")
+    print (f"{'arm':<22}{'low-CP':>10}{'very-CP':>10}{'agirlikli':>12}{'difference':>10}")
     base =None ;res ={}
     for name ,fn in arms .items ():
         r =cp_f1 (fn );res [name ]=r 
         if base is None :
             base =r ["weighted"]
-        print (f"{name :<22}{r ['dusuk']:>10.4f}{r ['cok']:>10.4f}{r ['weighted']:>12.4f}"
+        print (f"{name :<22}{r ['low']:>10.4f}{r ['very']:>10.4f}{r ['weighted']:>12.4f}"
         f"{r ['weighted']-base :>+10.4f}")
     live ={k :v for k ,v in res .items ()if k .startswith (("C","D"))}
     best =max (live .items (),key =lambda kv :kv [1 ]["weighted"])

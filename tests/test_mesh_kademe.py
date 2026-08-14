@@ -67,7 +67,7 @@ def test_ucuncu_kademe_gercek_parcayi_kurtariyor ():
     """5D.202.0055.6: kademe 1 and 2 duser, kademe 3 (tol 1e-2) full mesh produces."""
     f =glob .glob ("all_wscad_stp/*5D.202.0055.6*")
     if not f :
-        pytest .skip ("part yok")
+        pytest .skip ("part none")
     from infer_step_cp import step_to_mesh 
     V ,F =step_to_mesh (f [0 ])
     assert len (V )>3000 and len (F )>6000 

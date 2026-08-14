@@ -111,7 +111,7 @@ def main ():
 # GLB tamamen CIKTI katmanidir: F1 CP'nin konumundan/yonunden is computed, cizimden
 # DEGIL. Yani this anahtar no sayiyi etkilemez -- only ne gordugunu belirler.
 #   varsayilan : sade -- kirmizi/turuncu kure + ok (tier'i gosterir)
-#   --fiz      : ustune fiziksel kusur isaretcileri (neden wrong oldugunu gosterir)
+#   --fiz      : ustune fiziksel kusur isaretcileri (why wrong oldugunu gosterir)
     argv =[a for a in sys .argv [1 :]if a not in ("--fiz","--sade")]
     FIZ ="--fiz"in sys .argv [1 :]
     # TEK RENK: tier ayrimini gosterme, only bulunan CP'leri ciz.
@@ -209,7 +209,7 @@ def main ():
             # --- M10: FIZIKSEL DEFECT ISARETCILERI (2026-08-05)
             # WHY: A4 olcumu -- wrong pozitifler fiziksel kusurda ZENGIN (body ici
             # 3.16x, dar mouth 2.18x, onu closed 1.85x). Bu F1'de gorunmuyor but GLB'ye
-            # bakan insan for "this point neden wrong" sorusunun DOGRUDAN yaniti.
+            # bakan insan for "this point why wrong" sorusunun DOGRUDAN yaniti.
             # AYRI KANAL: ana kurenin RENGI does not change (that tier'i gosterir); kusur, ustune
             # binen YARI BOYUTTA ikinci kuredir. Boylece two bilgi same anda okunur.
             for _ad ,_rgb in (_fiz_bayraklar (mesh_ham ,np .asarray (c ["point"],float ),d )
@@ -227,7 +227,7 @@ def main ():
         _tier =(""if SADE else 
         f" ({na } otonom kirmizi / {len (cps )-na } review turuncu)")
         print (f"  {pid }: {len (cps )} CP{_tier }"
-        f" | FIZIKSEL KUSUR {len (_fs )}: {dict (_fc )if _fc else 'yok'}"
+        f" | FIZIKSEL KUSUR {len (_fs )}: {dict (_fc )if _fc else 'none'}"
         f" -> {out }",flush =True )
     print (f"\n-> {OUTDIR }/  (cift tikla: Windows 3D Viewer)")
 

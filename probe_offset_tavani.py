@@ -152,7 +152,7 @@ def main ():
     for s in SIGMA :
         print (f"{s :15.2f} mm {f1 (tot [s ]['tespit']):10.4f} "
         f"{f1 (tot [s ]['rob']):10.4f}")
-    print ("\nKIYAS (ayni criterion, bugunku urun, VAL 100): "
+    print ("\nKIYAS (same criterion, bugunku urun, VAL 100): "
     "tespit 0.7878 / robot-axis 0.5764")
     print ("Pose head'in bugun OOF'ta ulastigi residual: median 0.67 mm")
     json .dump ({str (s ):{k :f1 (v )for k ,v in tot [s ].items ()}

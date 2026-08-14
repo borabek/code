@@ -101,7 +101,7 @@ def main ():
             SAY [ad ]["candidate"]+=len (P )
 
     print (f"\nGT toplam {top_gt }")
-    print (f"{'ayar':<12}{'candidate recall':>13}{'candidate sayisi':>13}{'candidate/GT':>10}")
+    print (f"{'ayar':<12}{'candidate recall':>13}{'candidate count':>13}{'candidate/GT':>10}")
     baseline =None 
     for ad ,mv ,vc ,cl in AYAR :
         s =SAY [ad ];rc =s ["ulasan"]/max (top_gt ,1 )

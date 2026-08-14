@@ -64,7 +64,7 @@ def normalle (T ):
 
 def yukle (on ,pid ,normal ,mesh =False ):
     z =np .load (f"{OZ }/{on }_{pid }.npz")
-    m =np .isin (np .asarray (z ["kaynak"],int ),KAYNAKLAR )
+    m =np .isin (np .asarray (z ["source"],int ),KAYNAKLAR )
     T =np .asarray (np .load (f"{TAN }/{on }_{pid }.npz")["T"],float )[m ]
     Xg =np .asarray (z ["X"],float )[m ]
     ham =T .copy ()
@@ -172,7 +172,7 @@ def main ():
     print ("KAYNAKLAR",KAYNAKLAR ,"-> robot",round (b ,4 ),
     "| B-rep havuzu tabani 0.3095")
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"kaynaklar":list (KAYNAKLAR ),
-    "not":"Tek degisken: tanimlayici sozlesmesi (ham vs isarete gore "
+    "not":"Tek degisken: tanimlayici sozlesmesi (ham vs isarete per "
     "normallesmis + ters bayragi). Esik D6'da. D7 brand-disi, "
     "TAM ZINCIR, MIKRO."},
     open (os .environ .get ("C3_CIKTI","results/c3_isaret_normal.json"),"w"),indent =1 )

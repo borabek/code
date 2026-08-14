@@ -4,7 +4,7 @@
 R7: kahin uye YONU robot-haziri 0.5523 -> 0.6059 does (+0.0536). Soru: OGRENILMIS a
 selector bunun ne kadarini takes?
 
-Bu betik measurement kumesinin KENDI parcalari on, GEOMETRI GRUBUNA according to capraz dogrulamayla
+Bu betik measurement kumesinin KENDI parcalari ten, GEOMETRI GRUBUNA according to capraz dogrulamayla
 a ten-kestirim gives. Dagitim for not, DECISION for: full corpus verisi (r8) arka planda
 uretiliyor and pahali; before this kolun ne vaat ettigini gormek gerek.
 
@@ -50,7 +50,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    tgrp =np .array ([gk .get (p ,"yok:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
+    tgrp =np .array ([gk .get (p ,"absent:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -89,7 +89,7 @@ def main ():
         s =wire_gate .decision_score (gate ,X58 )
         k =wire_gate .decision_mask (s )
         if not k .any ():
-            KAY .append (dict (pid =pid ,geo =rd ["geo"],rj ="cok"if rd ["n"]>=8 else "dusuk",
+            KAY .append (dict (pid =pid ,geo =rd ["geo"],rj ="very"if rd ["n"]>=8 else "low",
             P =np .zeros ((0 ,3 )),Pd =np .zeros ((0 ,3 )),UY =[],G =rd ["G"],
             Gd =rd ["Gd"],diag =rd ["diag"]))
             continue 
@@ -122,7 +122,7 @@ def main ():
             float (np .mean (a_ort )),float (rank_ [u_ ])]+Xk [i ].tolist ()
             for u_ in range (len (DIR ))],float )
             UY .append ((DIR ,F_ ))
-        KAY .append (dict (pid =pid ,geo =rd ["geo"],rj ="cok"if rd ["n"]>=8 else "dusuk",
+        KAY .append (dict (pid =pid ,geo =rd ["geo"],rj ="very"if rd ["n"]>=8 else "low",
         P =P ,Pd =Pd ,UY =UY ,G =np .asarray (rd ["G"],float ),
         Gd =np .asarray (rd ["Gd"],float ),diag =float (rd ["diag"])))
     print (f"{len (KAY )} part hazir",flush =True )
@@ -163,7 +163,7 @@ def main ():
         return det ,rob 
 
     g =[r ["geo"]for r in KAY ]
-    d0 ,r0 =puanla ("yok");d1 ,r1 =puanla ("selector")
+    d0 ,r0 =puanla ("absent");d1 ,r1 =puanla ("selector")
     print (f"\n{'arm':<24}{'tespit':>10}{'ROBOT':>10}")
     print (f"{'A mevcut':<24}{f1w (d0 ):>10.4f}{f1w (r0 ):>10.4f}")
     print (f"{'B ogrenilmis selector':<24}{f1w (d1 ):>10.4f}{f1w (r1 ):>10.4f}")

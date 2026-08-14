@@ -80,7 +80,7 @@ def main ():
 
     Z0 =donustur (X0 ,p0 )
     Z1 =donustur (X1 ,p1 )
-    grp0 =np .array ([gk .get (p ,"yok:"+p )for p in p0 ])
+    grp0 =np .array ([gk .get (p ,"absent:"+p )for p in p0 ])
     keep0 =~np .isin (grp0 ,list (tg ))
 
     # --- PROSPEKTIF TEST puanlama (part bazinda, GT'siz candidate absent)
@@ -92,7 +92,7 @@ def main ():
             k =wire_gate .decision_mask (s )
             tp =int (y1 [i ][k ].sum ());fp =int (k .sum ()-tp )
             fn =int (N1 [i ][0 ]-tp )
-            det .append (("cok"if N1 [i ][0 ]>=8 else "dusuk",tp ,fp ,max (fn ,0 )))
+            det .append (("very"if N1 [i ][0 ]>=8 else "low",tp ,fp ,max (fn ,0 )))
         return det 
 
     def gelistirme (m ,alt ):
@@ -105,7 +105,7 @@ def main ():
                 k =wire_gate .decision_mask (s )
                 if k .any ():
                     P =r ["P"][k ];Pd =r ["Pd"][k ]
-            det .append (("cok"if r ["n"]>=8 else "dusuk",)
+            det .append (("very"if r ["n"]>=8 else "low",)
             +esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
         return det 
 
@@ -134,7 +134,7 @@ def main ():
 
     SON ,PARCA ,TOHUM ={},{},{}
     print (f"\n{'arm':<20}"+"".join (f"{b :>13}"for b ,_ ,_ in BOLME )+f"{'PROSPEKTIF':>12}")
-    for ad ,ekle in (("A mevcut corpus",False ),("B +yeni WEI",True )):
+    for ad ,ekle in (("A mevcut corpus",False ),("B +new WEI",True )):
         SON [ad ]={};TOHUM [ad ]={};sat =f"{ad :<20}"
         for b ,mk ,alt in BOLME :
             kp =keep0 .copy ()
@@ -156,7 +156,7 @@ def main ():
             dp_ =prospektif (m )
             deg .append (float (f1w (dp_ )))
             if th ==0 :
-                PARCA [(ad ,"PROSPEKTIF")]=(dp_ ,[gk .get (u ,"yok:"+u )
+                PARCA [(ad ,"PROSPEKTIF")]=(dp_ ,[gk .get (u ,"absent:"+u )
                 for u in np .unique (p1 [~eg ])])
         SON [ad ]["PROSPEKTIF"]=float (np .mean (deg ));TOHUM [ad ]["PROSPEKTIF"]=deg 
         sat +=f"{np .mean (deg ):>12.4f}"
@@ -168,11 +168,11 @@ def main ():
         print (f"  {ad :<18}"+"  ".join (f"{b }={'/'.join (f'{v :.4f}'for v in TOHUM [ad ][b ])}"
         for b in SON [ad ]))
 
-    A ,B =SON ["A mevcut corpus"],SON ["B +yeni WEI"]
-    print (f"\n{'split':<16}{'A':>10}{'B':>10}{'fark':>10}{'%95 GA':>22}")
+    A ,B =SON ["A mevcut corpus"],SON ["B +new WEI"]
+    print (f"\n{'split':<16}{'A':>10}{'B':>10}{'difference':>10}{'%95 GA':>22}")
     GA ={}
     for b in list (A ):
-        da ,g =PARCA [("A mevcut corpus",b )];db ,_ =PARCA [("B +yeni WEI",b )]
+        da ,g =PARCA [("A mevcut corpus",b )];db ,_ =PARCA [("B +new WEI",b )]
         fn =lambda rows :f1w ([y for _ ,y in rows ])-f1w ([x for x ,_ in rows ])
         _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (da ,db )),g ,fn ,n =2000 )
         GA [b ]=(lo ,hi )
@@ -200,7 +200,7 @@ def main ():
     with io .open ("results/w2_veri_etkisi.json","w",encoding ="utf-8")as f :
         json .dump ({"A":A ,"B":B ,"seed":TOHUM ,"ga":{k :list (v )for k ,v in GA .items ()},
         "kazanc":bool (kazanc ),"zarar":bool (zarar ),"gecti":bool (gecti ),
-        "not":"WEI-disi bolmede yeni WEI verisi EKLENMEZ (protocol)"},
+        "not":"WEI-disi bolmede new WEI verisi EKLENMEZ (protocol)"},
         f ,indent =1 )
     print ("receipt -> results/w2_veri_etkisi.json")
 

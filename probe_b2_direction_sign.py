@@ -27,7 +27,7 @@ for pid in pids :
     if r is None or not len (r .get ("G",[])):
         continue 
     z =np .load (f"{OZ }/d7_{pid }.npz")
-    m =np .isin (np .asarray (z ["kaynak"],int ),(0 ,1 ))
+    m =np .isin (np .asarray (z ["source"],int ),(0 ,1 ))
     P ,D =np .asarray (z ["P"],float )[m ],np .asarray (z ["D"],float )[m ]
     if len (P )<2 :
         continue 

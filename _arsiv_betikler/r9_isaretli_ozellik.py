@@ -171,7 +171,7 @@ def main ():
         for r in DER :
             d_ =PARCA .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d_ is None :
                 P =np .zeros ((0 ,3 ));Pn =np .zeros ((0 ,3 ))
             else :
@@ -194,7 +194,7 @@ def main ():
     print (f"\ntaban (dagitilan zincir): robot(FIZ) {b_rob :.4f} | tespit {b_det :.4f}")
     print (f"ISARETLI ceiling (R8): 0.6580 -> kalan alan {0.6580 -b_rob :+.4f}")
     fn =lambda rows :f1w ([q for _ ,q in rows ])-f1w ([p for p ,_ in rows ])
-    print (f"\n{'oznitelik':<8}{'marj':>6}{'robot':>10}{'d':>9}{'GA':>22}{'tespit':>10}{'pay':>7}")
+    print (f"\n{'feature':<8}{'marj':>6}{'robot':>10}{'d':>9}{'GA':>22}{'tespit':>10}{'pay':>7}")
     SON ={}
     for ad in ("ESKI","YENI"):
         for marj in (0.02 ,0.05 ,0.10 ):
@@ -204,22 +204,22 @@ def main ():
             pay =100 *dr /max (0.6580 -b_rob ,1e-9 )
             print (f"{ad :<8}{marj :>6.2f}{f1w (ra ):>10.4f}{dr :>+9.4f}"
             f"   [{lo :+.4f},{hi :+.4f}]{f1w (da ):>10.4f}{pay :>6.0f}%")
-            SON [f"{ad }_{marj }"]={"oznitelik":ad ,"marj":marj ,"robot":f1w (ra ),
+            SON [f"{ad }_{marj }"]={"feature":ad ,"marj":marj ,"robot":f1w (ra ),
             "d_robot":dr ,"ga":[lo ,hi ],"tespit":f1w (da ),
             "kalan_pay_yuzde":pay }
-    e_iyi =max ((v for k ,v in SON .items ()if v ["oznitelik"]=="ESKI"),
+    e_iyi =max ((v for k ,v in SON .items ()if v ["feature"]=="ESKI"),
     key =lambda v :v ["d_robot"])
-    y_iyi =max ((v for k ,v in SON .items ()if v ["oznitelik"]=="YENI"),
+    y_iyi =max ((v for k ,v in SON .items ()if v ["feature"]=="YENI"),
     key =lambda v :v ["d_robot"])
     print (f"\nESKI en iyi {e_iyi ['d_robot']:+.4f} | YENI en iyi {y_iyi ['d_robot']:+.4f} "
     f"| FARK {y_iyi ['d_robot']-e_iyi ['d_robot']:+.4f}")
     val_ =y_iyi ["d_robot"]-e_iyi ["d_robot"]>=0.01 
-    print (f"\nHUKUM: {'ISARETLI OZNITELIKLER KAZANDIRIYOR -> R10 (training korpusunda yeniden turet + dagit)'if val_ else 'signed oznitelikler anlamli katki vermiyor'}")
+    print (f"\nHUKUM: {'ISARETLI OZNITELIKLER KAZANDIRIYOR -> R10 (training korpusunda yeniden turet + dagit)'if val_ else 'signed features anlamli katki vermiyor'}")
     with io .open ("results/r9_isaretli_ozellik.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,"ceiling":0.6580 ,
         "auc":{ad :float (roc_auc_score (LY ,o ))for ad ,o in OOF .items ()},
         "tarama":SON ,"eski_en_iyi":e_iyi ,"yeni_en_iyi":y_iyi ,
-        "deger":bool (val_ )},f ,indent =1 )
+        "value":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r9_isaretli_ozellik.json")
 
 

@@ -41,14 +41,14 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     d =np .load ("results/gate_regrow_data_rt2.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }
     pids =np .array ([str (x )for x in d ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (d ["X"][keep ],d ["y"][keep ])
     print (f"KUME={cluster } | {len (cache )} part | gate {int (keep .sum ())} candidate",flush =True )
@@ -72,16 +72,16 @@ def main ():
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             if cps :
                 Xc =wire_gate .feats_for (V ,F ,sum (plist )/len (plist ),cps ,CE ,CT )
-                m =clf .predict_proba (Xc )[:,1 ]>=(THR ["cok"]if is_hi else THR ["dusuk"])
+                m =clf .predict_proba (Xc )[:,1 ]>=(THR ["very"]if is_hi else THR ["low"])
                 if m .any ():
                     P =np .array ([c ["point"]for c ,k in zip (cps ,m )if k ],float )
                     Pd =np .array ([c ["direction"]for c ,k in zip (cps ,m )if k ],float )
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'max_off':>8}{'r_max':>8}{'tespit':>9}{'ROBOT':>9}{'kesin':>8}{'recall':>8}")
+    print (f"\n{'max_off':>8}{'r_max':>8}{'tespit':>9}{'ROBOT':>9}{'conclusive':>8}{'recall':>8}")
     R ={}
     combos =[(5.0 ,12.0 ),(5.0 ,20.0 ),(5.0 ,40.0 ),(3.0 ,20.0 ),(3.0 ,40.0 ),
     (2.0 ,20.0 ),(2.0 ,40.0 ),(1.5 ,40.0 )]

@@ -104,7 +104,7 @@ def main ():
             atlanan +=1 
             continue 
         z =np .load (f"{OZ }/{f }")
-        kay =np .asarray (z ["kaynak"],int )
+        kay =np .asarray (z ["source"],int )
         m =np .isin (kay ,KAYNAKLAR )
         if int (m .sum ())<2 :
             empty_ +=1 

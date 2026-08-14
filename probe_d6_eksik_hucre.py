@@ -46,5 +46,5 @@ print (f"\nORT   ham {np .mean (list (ham .values ())):.4f} | gate+v_o {gv :.4f}
 f"p5v2+gate {pv :.4f} | FARK {pv -gv :+.4f}")
 json .dump ({"damga":makbuz_hash .damga (),"gate_vo":sat ,"p5v2_gate":P5 ,
 "ham_vo":ham ,"ort":{"gate_vo":gv ,"p5v2_gate":pv ,"fark":pv -gv },
-"not":"MIKRO. Egitim yok; gate maskesi + v_o. p5v2 sayilari LOMO."},
+"not":"MIKRO. Egitim none; gate maskesi + v_o. p5v2 sayilari LOMO."},
 open ("results/d6_eksik_hucre.json","w"),indent =1 )

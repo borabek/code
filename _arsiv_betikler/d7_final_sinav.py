@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """P0-5: D7 FINAL SINAVI -- muhurlenir, TUNING BITENE KADAR ACILMAZ.
 
-WHY SEPARATE BIR KUME: D6 (468 part) on three arm ayarlandi (gate esigi, B-rep
+WHY SEPARATE BIR KUME: D6 (468 part) ten three arm ayarlandi (gate esigi, B-rep
 oturtma, axis selector). Ayarlar D6'nin yarisinda secilip diger yarisinda single atis
 measured -- i.e. D6 residual a DEV kumesidir, headline kumesi not.
 
@@ -108,11 +108,11 @@ def main ():
     out ={"n_parca":len (secili ),"sha16":muhur ,"manufacturer":dict (up ),
     "cp_kovasi":dict (kv ),"gt_toplam":sum (s ["cp"]for s in secili ),
     "pidler":pidler ,"parts":secili ,"min_uretici":MIN_URETICI ,
-    "durum":"MUHURLU -- ACILMADI",
-    "kosul":("Puanlama YALNIZ g6 aglariyla YENIDEN TURETILDIKTEN sonra gecerlidir. "
+    "state":"MUHURLU -- ACILMADI",
+    "condition":("Puanlama YALNIZ g6 aglariyla YENIDEN TURETILDIKTEN after gecerlidir. "
     "Bu ureticiler ESKI g5 aglarinin egitiminde VARDI."),
-    "not":("D7 FINAL sinavi. D6 artik DEV'dir (uzerinde uc arm ayarlandi). "
-    "D7 gorulduKten sonra tuning yapilirsa D7 de DEV olur ve D8 gerekir.")}
+    "not":("D7 FINAL sinavi. D6 residual DEV'dir (on three arm ayarlandi). "
+    "D7 gorulduKten after tuning yapilirsa D7 de DEV becomes and D8 is required.")}
     with io .open (CIKTI ,"w",encoding ="utf-8")as f :
         json .dump (out ,f ,indent =1 ,ensure_ascii =False )
     print (f"\nD7: {len (secili )} part | {len (up )} manufacturer | GT {out ['gt_toplam']} CP "

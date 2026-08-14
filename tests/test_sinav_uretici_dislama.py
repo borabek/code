@@ -31,7 +31,7 @@ SINAV ="results/d5_4_sinav_kumesi.json"
 
 def _sinav ():
     if not os .path .exists (SINAV ):
-        pytest .skip ("exam kumesi yok")
+        pytest .skip ("exam kumesi none")
     return json .load (io .open (SINAV ,encoding ="utf-8"))
 
 
@@ -76,7 +76,7 @@ def test_IKI_sinav_kumesi_de_dislaniyor ():
     assert "d6_sinav_kumesi.json"in src ,"yeni exam kumesi dislanmiyor"
     import re 
     atamalar =re .findall (r"^\s*SINAV_MFG\s*(\|?=)",src ,re .M )
-    assert atamalar ,"SINAV_MFG hic kurulmuyor"
+    assert atamalar ,"SINAV_MFG no kurulmuyor"
     # first kurulum `= set()` may be; SONRAKI each dokunus BIRLESIM must be
     assert all (a =="|="for a in atamalar [1 :]),(
     f"SINAV_MFG uzerine YAZILIYOR ({atamalar }) -- birlesim olmali")
@@ -90,5 +90,5 @@ def test_oto_etiket_uretici_SINAVI_disliyor ():
     """
     src =io .open ("g5_agiz_etiket.py",encoding ="utf-8").read ()
     assert "d6_sinav_kumesi.json"in src and "d5_4_sinav_kumesi.json"in src ,"iki exam kumesi de dislanmali"
-    assert "t[0] not in _SM"in src ,"URETICI duzeyi dislama yok"
-    assert "t[1] not in _SP"in src ,"PARCA duzeyi dislama yok"
+    assert "t[0] not in _SM"in src ,"URETICI duzeyi dislama none"
+    assert "t[1] not in _SP"in src ,"PARCA duzeyi dislama none"

@@ -68,9 +68,9 @@ def main ():
     DER ,rap =measure_set .cluster ("results/_der_tam.pkl")
     measure_set .rapor_bas (rap )
     tg ={r ["geo"]for r in DER }
-    lg ={gk .get (p ,"yok:"+p )for p in rap ["locked_temiz"]}
+    lg ={gk .get (p ,"absent:"+p )for p in rap ["locked_temiz"]}
     E =[(m ,p ,jf ,s )for m ,p ,jf ,s in eligible ()
-    if gk .get (p ,"yok:"+p )not in tg and gk .get (p ,"yok:"+p )not in lg ]
+    if gk .get (p ,"absent:"+p )not in tg and gk .get (p ,"absent:"+p )not in lg ]
     print (f"EGITIM havuzu: {len (E )} part (measurement + LOCKED gruplari CIKARILDI)")
 
     dev ="cuda"if torch .cuda .is_available ()else "cpu"

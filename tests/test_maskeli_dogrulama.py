@@ -28,8 +28,8 @@ def test_miou_kismi_ornekte_maskeli ():
 
 def test_val_partial_bayragi_var_ve_isleniyor ():
     s =_src ()
-    assert "--val-partial"in s ,"bayrak yok"
-    assert 'for s in va: s["partial_ce"] = True'in s ,"bayrak val orneklerine ISLENMIYOR -- maske hic devreye girmez"
+    assert "--val-partial"in s ,"bayrak none"
+    assert 'for s in va: s["partial_ce"] = True'in s ,"bayrak val orneklerine ISLENMIYOR -- maske no devreye girmez"
 
 
 def test_tam_etiketli_davranis_DEGISMEZ ():
@@ -50,5 +50,5 @@ def test_kismi_valda_secim_sinyali_EGITIM_HEDEFI ():
     i =s .index ("def miou");j =s .index ("\ndef ",i )
     g =s [i :j ]
     assert "kismi_kayip"in g ,"maskeli BCE biriktirilmiyor"
-    assert "NCLS_CE] + sm2[:, NCLS_CT]"in g ,"hedef kanal CE+CT degil"
-    assert "-np.mean(kismi_kayip)"in g ,"secim sinyali negatif loss olarak donmuyor"
+    assert "NCLS_CE] + sm2[:, NCLS_CT]"in g ,"hedef kanal CE+CT not"
+    assert "-np.mean(kismi_kayip)"in g ,"secim sinyali negatif loss as donmuyor"

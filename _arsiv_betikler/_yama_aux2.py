@@ -20,8 +20,8 @@ def yama (old ,new ,s ):
     # --- 4) modelden SONRA yardimci kafayi kur and optimize edilecekler listesine fold
 o4 ="    opt = torch.optim.Adam(model.parameters(), lr=a.lr)"
 n4 =(
-'    # FB-2: YARDIMCI KAFA. Govde paylasilir (last_lin ONCESI 128-d gizli temsil),'+N 
-+'    # cikis ayridir. Ana 5-sinif kafasi ve kaybi HIC DEGISMEZ.'+N 
+'    # FB-2: YARDIMCI KAFA. Govde paylasilir (last_lin ONCESI 128-d hidden temsil),'+N 
++'    # cikis ayridir. Ana 5-sinif kafasi and kaybi HIC DEGISMEZ.'+N 
 +'    aux_lin = None; _gizli = {}'+N 
 +'    if a.aux_wire:'+N 
 +'        _w = int(cfg.get("width", 64))'+N 
@@ -30,8 +30,8 @@ n4 =(
 +'            _gizli["z"] = giren[0]'+N 
 +'        model.last_lin.register_forward_hook(_kanca)'+N 
 +'        n_aux = sum(1 for _d in tr_d if _d.get("aux") is not None)'+N 
-+'        print(f"  [aux-wire] {n_aux}/{len(tr_d)} parcada TEL/ALET etiketi var "'+N 
-+'              f"| agirlik {a.aux_w} | pos_w {a.aux_pos_weight}", flush=True)'+N 
++'        print(f"  [aux-wire] {n_aux}/{len(tr_d)} parcada TEL/ALET etiketi present "'+N 
++'              f"| weight {a.aux_w} | pos_w {a.aux_pos_weight}", flush=True)'+N 
 +'    _par = list(model.parameters()) + (list(aux_lin.parameters()) if aux_lin else [])'+N 
 +"    opt = torch.optim.Adam(_par, lr=a.lr)")
 s =yama (o4 ,n4 ,s )
@@ -39,8 +39,8 @@ s =yama (o4 ,n4 ,s )
 # --- 5) kayba yardimci terimi EKLE (ana loss hesaplandiktan SONRA)
 o5 ="            loss.backward(); opt.step(); tot += float(loss)"
 n5 =(
-'            # FB-2 YARDIMCI KAYIP: ana loss yukarida hesaplandi ve DEGISMEDI;'+N 
-+'            # burada yalnizca USTUNE ekleniyor. Maskeli: -1 olan tepeler sinyal vermez.'+N 
+'            # FB-2 YARDIMCI KAYIP: ana loss above hesaplandi and DEGISMEDI;'+N 
++'            # here only USTUNE ekleniyor. Maskeli: -1 which is vertices sinyal vermez.'+N 
 +'            if aux_lin is not None and d.get("aux") is not None and "z" in _gizli:'+N 
 +'                ya = d["aux"].to(dev)'+N 
 +'                mk = ya >= 0'+N 

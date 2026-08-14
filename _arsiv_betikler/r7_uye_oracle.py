@@ -57,7 +57,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    tgrp =np .array ([gk .get (p ,"yok:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
+    tgrp =np .array ([gk .get (p ,"absent:"+p )for p in tpid ]);keep =~np .isin (tgrp ,list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -139,7 +139,7 @@ def main ():
             j2 =int (np .argmin (pe ))
             P2 [i ]=UP [i ][j2 ];P3 [i ]=UP [i ][j2 ]
 
-        rj ="cok"if rd ["n"]>=8 else "dusuk"
+        rj ="very"if rd ["n"]>=8 else "low"
         for ad ,(P ,Pd )in (("K0",(P0 ,Pd0 )),("K1",(P1 ,Pd1 )),
         ("K2",(P2 ,Pd2 )),("K3",(P3 ,Pd3 ))):
             det [ad ].append ((rj ,)+esle (P ,Pd ,G ,Gd ,rd ["diag"],0.0 ,180.0 ,True ))

@@ -115,6 +115,6 @@ print (f"HAM candidate + poz secenekleri (gate YOK) : {a :.4f}")
 print (f"ONCE gate, sonra poz secenekleri      : {b :.4f}")
 print (f"GATE'IN KIRPTIGI TAVAN                : {a -b :+.4f}")
 json .dump ({"ham_kahin":a ,"gate_once_kahin":b ,"fark":a -b ,"n_parca":len (pidler ),
-"not":"D6 (DEV). Kahin = ulasilabilir degil TAVAN."},
+"not":"D6 (DEV). Kahin = ulasilabilir not TAVAN."},
 open ("results/p1_sira_tavani.json","w"),indent =1 )
 print ("receipt -> results/p1_sira_tavani.json")

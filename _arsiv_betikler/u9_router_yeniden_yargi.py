@@ -62,7 +62,7 @@ def main ():
     d =np .load (_egitim_verisi (),allow_pickle =True )
     gk =measure_set .geo_anahtarlari ()
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
     tg ={r ["geo"]for r in DER }
@@ -97,7 +97,7 @@ def main ():
                 k =wire_gate .decision_mask (s )
                 if k .any ():
                     P =r ["P"][k ];Pd =r ["Pd"][k ]
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
@@ -135,7 +135,7 @@ def main ():
             out [b ]=(lo ,hi )
         return out 
 
-    print ("\n=== KARAR (karar_olcutu, GA KARARA KATILIYOR) ===")
+    print ("\n=== DECISION (karar_olcutu, GA KARARA KATILIYOR) ===")
     kararlar ={}
     for taban_kol ,aday_kol in (("A","D"),("A","R"),("D","R")):
         k =karar_olcutu .degerlendir (SON [taban_kol ],SON [aday_kol ],
@@ -143,7 +143,7 @@ def main ():
         kararlar [f"{taban_kol }->{aday_kol }"]=bool (k )
         print (f"\n{taban_kol } -> {aday_kol }:  {k }")
 
-    print ("\n=== UYGULANACAK KARAR ===")
+    print ("\n=== UYGULANACAK DECISION ===")
     # ILKE: GECEN EN BASIT KOL secilir. Daha karmasik a arm however more basitini KANITLI
     # sekilde gecerse tercih edilir. (Ilk surumde "A->R gectiyse R kalir" yaziyordu -- this,
     # R'nin D'yi gecip gecmedigini HIC sormuyordu and yonlendiricinin dagitilmasinin
@@ -153,7 +153,7 @@ def main ():
     elif kararlar ["A->D"]:
         res_ ="D'ye DON -> results/wire_gate.pkl.pre_yonlendirme (R, D'yi gecemiyor)"
     elif kararlar ["A->R"]:
-        res_ ="R KALIR (D gecmedi ama R gecti)"
+        res_ ="R KALIR (D gecmedi but R gecti)"
     else :
         res_ ="A'ya DON -> results/wire_gate.pkl.pre_parca_ici"
     print (f"  {res_ }")

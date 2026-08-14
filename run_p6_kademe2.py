@@ -121,7 +121,7 @@ def taban_satir (d ):
     and kiyas single degiskenli olmaktan cikardi.
     """
     k =kendi (d )
-    return k [d ["kaynak"][d ["idx"][k ]]!=2 ]
+    return k [d ["source"][d ["idx"][k ]]!=2 ]
 
 
 ZORNEG =os .environ .get ("P6_ZORNEG","0")=="1"
@@ -277,7 +277,7 @@ def oz (d ,arm ,kafes_blok =None ,s1 =None ):
     if arm =="TABAN":
         return p6_decision .donustur (d ["X"][taban_satir (d )][:,:AB ],"hepsi")
     X =np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
     if arm =="P6_GEO":
     # SEGMENTASYON OZNITELIKLERI ATILDI (first 58 column).
     # WHY: NIT'te rule kahini bile 0.0349 verdi -- i.e. loss esikte
@@ -307,7 +307,7 @@ def sira_bloku (d ,s1 ):
     """Sira damgalama blogu (3 column). PARCA BASINA BIR KEZ is computed.
 
     ONCE `kafes_matris` inside hesaplaniyordu and each KAT x KOL for YENIDEN
-    kosuyordu; a kosu 70 dakikada ilerlemedi. `lattice` blogu like a times
+    kosuyordu; a run 70 dakikada ilerlemedi. `lattice` blogu like a times
     hesaplanip tasinir.
     """
     Pt ,Dt =tohumla (d ,s1 )
@@ -325,7 +325,7 @@ def kafes_matris (d ,kb ,s1 ,k ,sb =None ):
     soru, birlikte kullanilirlar. `P6_SIRA=0` with kapatilir.
     """
     X =np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
     par =[X [k ],np .asarray (kb )[k ]]
     if SIRA and sb is not None :
         par .append (np .asarray (sb )[k ])
@@ -450,7 +450,7 @@ def main ():
                 for i ,s in zip (d_ ,skorla (m1 ,[tr [i ]for i in d_ ],"P6")):
                     oof [i ]=s 
             print ("  OOF: brand kati kurulamadi, 3 RASTGELE fold kullanildi "
-            "(yalniz kucuk kosularda olur)",flush =True )
+            "(only kucuk kosularda olur)",flush =True )
         else :
             m1 =egit ([tr [i ]for i in ic ],"P6")
             for i ,s in zip (kucuk ,skorla (m1 ,[tr [i ]for i in kucuk ],"P6")):
@@ -516,7 +516,7 @@ def main ():
             if m is None :
                 ayrinti [b ][arm ]={"robot":0.0 ,"TP":0 ,"FP":0 ,
                 "FN":sum (len (d ["G"])for d in TE ),
-                "kural":["yok"],"nms":0.0 }
+                "rule":["none"],"nms":0.0 }
                 continue 
             s_tr =skorla (m ,TR ,arm ,kb_tr ,s1_tr ,sb_tr )
             s_te =skorla (m ,TE ,arm ,kb_te ,s1_te ,sb_te )
@@ -576,13 +576,13 @@ def main ():
         # --- 3) NIHAI MODELLER (tum full) ---------------------------------------
     en_kol =max (KOLLAR ,key =lambda k :last_ [k ]["robot"])
     kural_sayim =collections .Counter (
-    (tuple (ayrinti [b ][en_kol ]["kural"]),ayrinti [b ][en_kol ]["nms"])
+    (tuple (ayrinti [b ][en_kol ]["rule"]),ayrinti [b ][en_kol ]["nms"])
     for b in katlar )
     rule_ ,nms =kural_sayim .most_common (1 )[0 ][0 ]
     print (f"\nSECILEN arm {en_kol } | kural {rule_ } | nms {nms } "
     f"(brand katlarinda en sik)")
     m1 =egit (tr ,"P6")
-    paket ={"kademe1":m1 ,"arm":en_kol ,"kural":list (rule_ ),"nms":nms ,
+    paket ={"kademe1":m1 ,"arm":en_kol ,"rule":list (rule_ ),"nms":nms ,
     "zskor":"ab","AB":AB ,"tohum_kural":list (TOHUM_KURAL ),
     "tohum_nms":TOHUM_NMS ,"kisa_esik":KISA_ESIK ,"sira":SIRA }
     if en_kol =="P6_KAFES":
@@ -593,8 +593,8 @@ def main ():
         pickle .dump (paket ,f )
     json .dump ({"damga":makbuz_hash .damga (),"toplam":last_ ,"brand":ayrinti ,
     "n_egitim":len (tr ),"katlar":katlar ,"secilen":en_kol ,
-    "kural":list (rule_ ),"nms":nms ,"dizin":os .environ ["P6_DIZIN"],
-    "not":"tam korpusunun MARKA KATLARINDA kural secimi + arm "
+    "rule":list (rule_ ),"nms":nms ,"dizin":os .environ ["P6_DIZIN"],
+    "not":"tam korpusunun MARKA KATLARINDA rule secimi + arm "
     "kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye "
     "BAKILMADI."},
     open ("results/p6_kademe2_tam.json","w"),indent =1 )

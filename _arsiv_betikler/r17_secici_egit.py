@@ -69,7 +69,7 @@ def kos (D ,ad ):
             Am .append (aci [0 ]);As .append (aci [int (np .argmax (s ))]);Ak .append (min (aci ))
     A ,B ,C =np .array (Am ),np .array (As ),np .array (Ak )
     print (f"\n=== {ad } (n={len (A )}) ===")
-    print (f"{'':<18}{'aci<=10':>10}{'DIK>80':>9}")
+    print (f"{'':<18}{'angle<=10':>10}{'DIK>80':>9}")
     for nm ,Z in (("MEVCUT (tez zinciri)",A ),("SECICI (ogrenilmis)",B ),("KAHIN (ceiling)",C )):
         print (f"{nm :<18}{100 *(Z <=10 ).mean ():>9.0f}%{100 *(Z >80 ).mean ():>8.0f}%")
     fark =100 *((B <=10 ).mean ()-(A <=10 ).mean ())

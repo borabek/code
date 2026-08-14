@@ -221,7 +221,7 @@ def main ():
         for r in D ["DER"]:
             d_ =PARCA .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d_ is None :
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             else :
@@ -256,7 +256,7 @@ def main ():
     gecti =(en -baseline )>=0.01 and lo >0 
     print (f"\nKILL: robot +0.01 VE GA>0 -> {'GECTI'if gecti else 'GECMEDI'}")
     with io .open ("results/c4_yon_secici.json","w",encoding ="utf-8")as f :
-        json .dump ({"baseline":baseline ,"en_iyi":en ,"marj":marj ,"fark":en -baseline ,
+        json .dump ({"baseline":baseline ,"en_iyi":en ,"marj":marj ,"difference":en -baseline ,
         "ga":[lo ,hi ],"tespit_once":T .f1w (det0 ),"tespit_sonra":T .f1w (det ),
         "gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/c4_yon_secici.json")

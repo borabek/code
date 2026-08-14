@@ -140,9 +140,9 @@ def main ():
     cfg =D ["cfg"]
     gk =D ["gk"];tg ={r ["geo"]for r in D ["DER"]}
     s3 =json .load (io .open ("results/split3.json",encoding ="utf-8"))
-    lock_geo ={gk .get (str (p ),"yok:"+str (p ))for p in s3 ["locked"]["parts"]}
+    lock_geo ={gk .get (str (p ),"none:"+str (p ))for p in s3 ["locked"]["parts"]}
     E =[(m ,p ,jf ,s )for m ,p ,jf ,s in eligible ()
-    if gk .get (p ,"yok:"+p )not in tg and gk .get (p ,"yok:"+p )not in lock_geo ]
+    if gk .get (p ,"none:"+p )not in tg and gk .get (p ,"none:"+p )not in lock_geo ]
     print (f"\nEGITIM havuzu: {len (E )} part (measurement + LOCKED gruplari CIKARILDI)")
 
     if os .path .exists (EGT ):
@@ -238,7 +238,7 @@ def main ():
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =5 ,n_jobs =-1 ,
     random_state =0 ).fit (RX ,RY )
     with open (MODEL ,"wb")as f :
-        pickle .dump ({"clf":clf ,"kaynak":KAYNAK ,"marj":MARJ ,
+        pickle .dump ({"clf":clf ,"source":KAYNAK ,"marj":MARJ ,
         "not":"D1: measurement+LOCKED gruplari DISINDA egitildi"},f )
     print (f"-> {MODEL }")
 
@@ -249,7 +249,7 @@ def main ():
     for r in D ["DER"]:
         d_ =PARCA .get (r ["pid"])
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "dusuk"
         if d_ is None :
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ));Pn =Pd 
         else :

@@ -64,7 +64,7 @@ ESIKLER =(0.20 ,0.40 ,0.60 ,0.80 ,0.90 ,0.95 )
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -238,7 +238,7 @@ def main ():
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"en_iyi":en ,
     "ustk":{m_ :{k :float (np .mean (ustk [m_ ][k ]))for k in KOLLAR }
     for m_ in ustk },
-    "not":"KONUM skoru toplama kurali. max = bugunku (her yanlis "
+    "not":"KONUM skoru toplama kurali. max = bugunku (each yanlis "
     "konuma 24 piyango bileti). D7'ye BAKILMADI."},
     open (f"results/konum_toplama_{KUME }.json","w"),indent =1 )
     print (f"receipt -> results/konum_toplama_{KUME }.json")

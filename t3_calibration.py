@@ -36,7 +36,7 @@ def main ():
             m [i ]=fn (s [i ])
         return m 
 
-    print (f"{'split':<22}{'kural':<16}{'F1':>8}{'kesin':>8}{'recall':>8}{'pozitif%':>10}")
+    print (f"{'split':<22}{'rule':<16}{'F1':>8}{'kesin':>8}{'recall':>8}{'pozitif%':>10}")
     out ={}
     for u in sorted (set (mfg )):
         te =mfg ==u 
@@ -62,14 +62,14 @@ def main ():
 
     U =sorted (set (mfg ))
     baseline =out ["sabit (mevcut)"]
-    print (f"{'kural':<18}"+"".join (f"{'manufacturer '+u :>12}"for u in U )+f"{'EN KOTU':>10}{'karar':>10}")
+    print (f"{'rule':<18}"+"".join (f"{'manufacturer '+u :>12}"for u in U )+f"{'EN KOTU':>10}{'karar':>10}")
     for ad ,v in out .items ():
         dl =[v [u ]-baseline [u ]for u in U ]
         gecti =all (x >0 for x in dl )
         print (f"{ad :<18}"+"".join (f"{v [u ]:>12.4f}"for u in U )
         +f"{min (v .values ()):>10.4f}"
         +f"{('GECTI'if gecti and ad !='sabit (mevcut)'else '-'):>10}")
-    print ("\nKILL: bir kural HER IKI bolmede de sabiti gecmezse ALINMAZ.")
+    print ("\nKILL: a rule HER IKI bolmede de sabiti gecmezse ALINMAZ.")
     json .dump (out ,open ("results/t3_calibration.json","w"),indent =1 )
     print ("receipt -> results/t3_calibration.json")
 

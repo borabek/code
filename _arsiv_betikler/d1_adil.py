@@ -12,7 +12,7 @@ import os ,sys ,json ,copy ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -91,7 +91,7 @@ def main ():
     print (f"cache {len (cache )} part\n",flush =True )
 
     def score (path ,tl ,th ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
             thr =th if r ["is_hi"]else tl 
             s_ =wire_gate .apply (r ["V"],r ["F"],r ["probs"],copy .deepcopy (r ["cps"]),CE ,CT ,
@@ -105,7 +105,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (G ))):
                     if d_ >r ["tol"]or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (G )-tp 
         out ={}
         for k ,(T ,Fp ,Fn )in agg .items ():
@@ -114,7 +114,7 @@ def main ():
         out ["w"]=sum (W [k ]*out [k ]for k in W )
         return out 
 
-    print (f"{'gate training dagilimi':<24}{'threshold':>10}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}")
+    print (f"{'gate training dagilimi':<24}{'threshold':>10}{'low':>9}{'very':>9}{'agirlikli':>11}")
     res ={}
     for tag ,path in gates .items ():
         best =None 
@@ -124,12 +124,12 @@ def main ():
                 if best is None or r ["w"]>best [0 ]["w"]:
                     best =(r ,tl ,th )
         r ,tl ,th =best ;res [tag ]={"r":r ,"thr":[tl ,th ]}
-        print (f"{tag :<24}{f'{tl :.2f}/{th :.2f}':>10}{r ['dusuk']:>9.4f}{r ['cok']:>9.4f}{r ['w']:>11.4f}",
+        print (f"{tag :<24}{f'{tl :.2f}/{th :.2f}':>10}{r ['low']:>9.4f}{r ['very']:>9.4f}{r ['w']:>11.4f}",
         flush =True )
     dlt =res ["B_yeni_mantik"]["r"]["w"]-res ["A_eski_mantik"]["r"]["w"]
     print (f"\nB - A = {dlt :+.4f}   (ADIL: ikisi de test aileleri haric egitildi)")
     print (f"KAPI (>= +0.02): {'GECTI'if dlt >=0.02 else 'OLU'}")
-    json .dump ({k :{"w":v ["r"]["w"],"dusuk":v ["r"]["dusuk"],"cok":v ["r"]["cok"],
+    json .dump ({k :{"w":v ["r"]["w"],"low":v ["r"]["low"],"very":v ["r"]["very"],
     "thr":v ["thr"]}for k ,v in res .items ()}|{"delta":dlt },
     open ("results/d1_adil.json","w"),indent =1 )
     print ("receipt -> results/d1_adil.json")

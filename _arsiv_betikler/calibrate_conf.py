@@ -5,7 +5,7 @@ conf_auto 0.75 TEK model for ayarlanmisti; vote toplulugunda temsilci-guveni = m
 guveni oldugundan semantik degisti (robot_e2e: PXC AUTO precision 0.709->0.594 dustu). Burada AUTO
 tier'i, topluluğun asil guvenilirlik sinyaliyle -- OY SAYISI + confidence -- yeniden kalibre ediyoruz.
 
-Sizinti-siz held-out (145 WEI + PXC ornegi) on each hayatta-kalan vote CP'sinin (confidence, oy,
+Sizinti-siz held-out (145 WEI + PXC ornegi) ten each hayatta-kalan vote CP'sinin (confidence, oy,
 TP/FP) kaydini BIR times cache'le; after (conf_auto x min_auto_votes) izgarasini ucuza tara and each hucre
 for AUTO precision / AUTO recall / REVIEW yuku raporla. Hedef: robotun OTONOM eyledigi noktalarin
 GERCEK opening olma orani (AUTO precision) high; AUTO recall makul.

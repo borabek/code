@@ -52,16 +52,16 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }
     CLF ={}
     for tag ,(f ,ncol )in KAYNAK .items ():
         d =np .load (f ,allow_pickle =True )
         pids =np .array ([str (x )for x in d ["pids"]])
-        keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+        keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
         Xt =d ["X"][keep ][:,:ncol ]
         CLF [tag ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (Xt ,d ["y"][keep ])
@@ -101,19 +101,19 @@ def main ():
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             if r ["X"]is not None :
                 sc =clf .predict_proba (r ["X"][:,:nc ])[:,1 ]
-                m =sc >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
+                m =sc >=(THR ["very"]if r ["is_hi"]else THR ["low"])
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'gate':<24}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'gate':<24}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
     for tag ,lab in (("rt2 13","rt2 13 (dagitilan)"),
-    ("fiz13","guncel hat, 13 sutun"),
-    ("fiz18","guncel hat, 18 sutun")):
+    ("fiz13","guncel hat, 13 column"),
+    ("fiz18","guncel hat, 18 column")):
         det ,rob =kos (tag )
         R [tag ]=(det ,rob )
         p_ ,r_ =pr (det )
@@ -127,7 +127,7 @@ def main ():
     n =len (R ["rt2 13"][0 ])
     IX =[rng .randint (0 ,n ,n )for _ in range (2000 )]
     out ={}
-    print ("\nESLI BOOTSTRAP -- iki etki AYRI:")
+    print ("\nESLI BOOTSTRAP -- two etki AYRI:")
     for lab ,a_ ,b_ in (("OZELLIK (fiz18-fiz13)","fiz18","fiz13"),
     ("VERI    (fiz13-rt2)  ","fiz13","rt2 13"),
     ("TOPLAM  (fiz18-rt2)  ","fiz18","rt2 13")):

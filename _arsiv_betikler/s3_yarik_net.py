@@ -31,7 +31,7 @@ os .environ ["WG_FIZ_FEATS"]="1"
 os .environ ["WG_TOPO"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 YAKIN_MM =6.0 
-KURAL ={"R1 her zaman":0.0 ,"R2 fark>45":45.0 ,"R3 fark>60":60.0 }
+KURAL ={"R1 always":0.0 ,"R2 difference>45":45.0 ,"R3 difference>60":60.0 }
 
 
 def main ():
@@ -48,9 +48,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -91,8 +91,8 @@ def main ():
             used .add (a_ );hit .add (b_ )
             total_ +=1 
             HEDEF [r ["pid"]].append ({"p":P [a_ ].copy (),"pd":Pd [a_ ].copy (),
-            "gd":Gd [b_ ].copy (),"aci":float (an [a_ ,b_ ])})
-    n_dik =sum (1 for v in HEDEF .values ()for h in v if h ["aci"]>45 )
+            "gd":Gd [b_ ].copy (),"angle":float (an [a_ ,b_ ])})
+    n_dik =sum (1 for v in HEDEF .values ()for h in v if h ["angle"]>45 )
     print (f"{total_ } eslesme | dik sinif {n_dik } | {len (HEDEF )} part",flush =True )
 
     VF ={}
@@ -133,7 +133,7 @@ def main ():
             yakin +=1 
             a_yeni =float (np .degrees (np .arccos (np .clip (abs (float (SD [j ]@h ["gd"])),0 ,1 ))))
             fark =float (np .degrees (np .arccos (np .clip (abs (float (SD [j ]@h ["pd"])),0 ,1 ))))
-            eski_ok =h ["aci"]<=10.0 
+            eski_ok =h ["angle"]<=10.0 
             yeni_ok =a_yeni <=10.0 
             for ad ,threshold in KURAL .items ():
                 if fark <=threshold :
@@ -145,10 +145,10 @@ def main ():
                 else :
                     say [ad ]["degismeyen"]+=1 
 
-    print ("\n=== SONUC ===")
+    print ("\n=== RESULT ===")
     print (f"{total_ } eslesme | {yakin } tanesinin {YAKIN_MM }mm icinde yarik adayi var "
     f"({yakin /max (total_ ,1 ):.1%}) | yariksiz parcada {yariksiz }")
-    print (f"\n{'kural':<16}{'duzelen':>9}{'bozulan':>9}{'NET':>7}{'gecis':>10}{'robot kest.':>13}")
+    print (f"\n{'rule':<16}{'duzelen':>9}{'bozulan':>9}{'NET':>7}{'gecis':>10}{'robot kest.':>13}")
     en_iyi ,en_iyi_ad =0 ,None 
     for ad ,v in say .items ():
         net =v ["duzelen"]-v ["bozulan"]
@@ -163,7 +163,7 @@ def main ():
     if not gecti and en_iyi_ad :
         print (f"  en iyi arm {en_iyi_ad }: {en_iyi /max (total_ ,1 ):+.2%} (bar %{bar *100 :.0f})")
     with open ("results/s3_yarik_net.json","w",encoding ="utf-8")as f :
-        json .dump ({"toplam":total_ ,"dik_sinif":n_dik ,"yakin":yakin ,
+        json .dump ({"total":total_ ,"dik_sinif":n_dik ,"yakin":yakin ,
         "kurallar":say ,"en_iyi":en_iyi_ad ,"net":en_iyi ,
         "gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/s3_yarik_net.json")

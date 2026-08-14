@@ -75,7 +75,7 @@ def main ():
     "bridge to erode) -> may be far too low for dense terminals.")
     ap .add_argument ("--min-v",type =int ,default =60 ,
     help ="min vertices per predicted component; too high kills the small fragments "
-    "that appear once a merged blob is split.")
+    "that appear first a merged blob is split.")
     ap .add_argument ("--split-ratio",type =float ,default =0.0 ,
     help ="split a fragment that merged a ROW of adjacent openings into "
     "k=round(length/(ratio*width)) slabs. 0=off. Lower ratio = more splits.")

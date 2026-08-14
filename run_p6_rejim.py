@@ -66,7 +66,7 @@ ISTATISTIKLER =("n01","mesh_oran","n_aday","n_secenek",
 
 
 def istatistik (d ,s_tb ):
-    k =d ["kaynak"]
+    k =d ["source"]
     n01 =int ((k !=2 ).sum ())
     nm =int ((k ==2 ).sum ())
     s =np .sort (np .asarray (s_tb ,float ))[::-1 ]if len (s_tb )else np .zeros (1 )
@@ -88,7 +88,7 @@ def taban_cikti (d ,model ):
     kalabalik NMS, sign correction. Mesh adaylari tabanin havuzunda YOK.
     """
     k =np .where (d ["X"][:,C0 ]==1.0 )[0 ]
-    k =k [d ["kaynak"][d ["idx"][k ]]!=2 ]
+    k =k [d ["source"][d ["idx"][k ]]!=2 ]
     empty_ =(np .zeros ((0 ,3 )),np .zeros ((0 ,3 )))
     if not len (k ):
         return empty_ ,np .zeros (0 )
@@ -109,7 +109,7 @@ def taban_cikti (d ,model ):
 
 def p6_cikti (d ,pk ):
     Xd =np .hstack ([p6_decision .donustur (d ["X"],pk .get ("zskor","ab")),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
     if pk .get ("arm")=="P6_GEO":
         Xd =np .hstack ([Xd [:,58 :AB ],Xd [:,AB :]])
     s =np .asarray (pk ["kademe1"].predict_proba (
@@ -125,7 +125,7 @@ def p6_cikti (d ,pk ):
             X2 =np .hstack ([Xd [kk ],kb [kk ],s [kk ][:,None ]])
             s2 [kk ]=pk ["kademe2"].predict_proba (X2 .astype (np .float32 ))[:,1 ]
         s =s2 
-    return p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,tuple (pk ["kural"]),
+    return p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,tuple (pk ["rule"]),
     nms_mm =float (pk ["nms"]))
 
 
@@ -148,12 +148,12 @@ def puanla (data_ ,sel_ ):
 def main ():
     t0 =time .time ()
     pk =pickle .load (open (PAKET ,"rb"))
-    print (f"paket: arm {pk .get ('arm')} | kural {pk .get ('kural')} | "
+    print (f"paket: arm {pk .get ('arm')} | kural {pk .get ('rule')} | "
     f"nms {pk .get ('nms')} | 2.kademe "
     f"{'VAR'if pk .get ('kademe2')is not None else 'YOK'}",flush =True )
     tb_model =product_genis .model_yukle ()
     if tb_model is None :
-        sys .exit ("dagitilan gate modeli yok")
+        sys .exit ("dagitilan gate modeli none")
 
     data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):

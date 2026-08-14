@@ -109,7 +109,7 @@ mfgler =None ,sayac =None ):
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         M =d6_record .x58 (r )
         if M is not None and r .get ("P")is not None and len (r ["P"])and M .shape [1 ]*2 ==model ["n_feat"]:
@@ -158,9 +158,9 @@ def main ():
         print (f"{tol :<9}"+"".join (f"{v :>10.4f}"for v in line_ ))
 
     if en_iyi is None :
-        print ("\nDEV'de hicbir ayar tabani gecmedi -> KOL KAPANDI")
+        print ("\nDEV'de no ayar tabani gecmedi -> KOL CLOSED")
         with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-            json .dump ({"karar":"KAPANDI","dev_taban_robot":d0r ,"izgara":izgara },f ,
+            json .dump ({"karar":"CLOSED","dev_taban_robot":d0r ,"izgara":izgara },f ,
             indent =1 )
         return 
     tol ,mm =en_iyi 

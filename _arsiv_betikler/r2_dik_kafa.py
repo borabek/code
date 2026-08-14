@@ -112,7 +112,7 @@ def main ():
                         c =dik_duzelt (Xr [k ],c ,threshold )
                     P =np .array ([x ["point"]for x in c ],float )
                     Pd =np .array ([x ["direction"]for x in c ],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
@@ -176,7 +176,7 @@ def main ():
     print (f"\nKILL: robot +0.01 VE GA>0 VE manufacturer-disi dusmesin")
     print (f"  robot {dr :+.4f} | GA[{lo :+.4f},{hi :+.4f}] -> {'GECTI'if gecti else 'GECMEDI'}")
     with io .open ("results/r2_dik_kafa.json","w",encoding ="utf-8")as f :
-        json .dump ({"robot_taban":T .f1w (rob_t ),"robot_r2":T .f1w (rob_c ),"fark":dr ,
+        json .dump ({"robot_taban":T .f1w (rob_t ),"robot_r2":T .f1w (rob_c ),"difference":dr ,
         "ga":[lo ,hi ],"tespit_taban":T .f1w (det_t ),"tespit_r2":T .f1w (det_c ),
         "manufacturer":{k :list (v )for k ,v in ud .items ()},
         "dik_egitim_n":int (dik [egit ].sum ()),"gecti":bool (gecti )},f ,indent =1 )

@@ -116,7 +116,7 @@ def main ():
         rows =[]
         for r in DER :
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             s =SC [ad ].get (r ["pid"])
             if s is None or r ["X"]is None :
                 rows .append ((rj ,0 ,0 ,len (G )));continue 
@@ -135,7 +135,7 @@ def main ():
     print (f"KILL: tespit >= +0.010 -> {'GECTI -- training korpusunda bayrak uretilir'if gecti else 'GECMEDI'}")
     with io .open ("results/s5_bayrak_ozellik.json","w",encoding ="utf-8")as f :
         json .dump ({"auc":{k :float (roc_auc_score (Y ,v ))for k ,v in OOF .items ()},
-        "tespit_taban":a ,"tespit_bayrak":b ,"fark":b -a ,
+        "tespit_taban":a ,"tespit_bayrak":b ,"difference":b -a ,
         "gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/s5_bayrak_ozellik.json")
 

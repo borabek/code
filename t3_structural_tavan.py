@@ -177,7 +177,7 @@ def main ():
 
     kilit =gecti_her .get ("YAPI TANIMLI (>=4 candidate)",{})
     print (f"\nB KOLUNUN KAPISI = YAPI TANIMLI rejimi -> "
-    f"{'GECTI, B KURULUR (yalniz o rejimde)'if kilit .get ('gecti')else 'GECMEDI'}")
+    f"{'GECTI, B KURULUR (only o rejimde)'if kilit .get ('gecti')else 'GECMEDI'}")
     with io .open ("results/t3_structural_tavan.json","w",encoding ="utf-8")as f :
         json .dump ({"n":int (len (Y )),"regime":S ,"karar":gecti_her ,
         "gate":kilit ,"sutunlar":AD },f ,indent =1 )

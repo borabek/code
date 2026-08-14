@@ -46,7 +46,7 @@ def test_cakisik_noktalar_reddedilir (tmp_path ):
 def test_bos_ve_bozuk_reddedilir (tmp_path ):
     from big_arbiter import gt_gecerli 
     assert not gt_gecerli (_yaz (str (tmp_path ),[]))
-    assert not gt_gecerli (os .path .join (str (tmp_path ),"yok.json"))
+    assert not gt_gecerli (os .path .join (str (tmp_path ),"none.json"))
 
 
 def test_tek_cp_cakisik_sayilmaz (tmp_path ):

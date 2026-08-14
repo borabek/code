@@ -102,7 +102,7 @@ def main ():
 
     G =geometriler ()
     rapor ={"is_inside":{},"mouth_width":{},"kill":{}}
-    print (f"{'geometri':<16}{'hal':<10}{'tepe':>7}{'watertight':>12}{'is_inside':>12}")
+    print (f"{'geometri':<16}{'hal':<10}{'vertex':>7}{'watertight':>12}{'is_inside':>12}")
     top_d =top_n =0 
     for ad ,(m ,nk )in G .items ():
         for hal in ("TAM","REMESH"):
@@ -115,8 +115,8 @@ def main ():
                 faces =np .ascontiguousarray (F ,np .int64 ),process =False )
             d ,n ,yanlis =olc (mm ,nk ,is_inside )
             top_d +=d ;top_n +=n 
-            rapor ["is_inside"][f"{ad }_{hal }"]={"dogru":d ,"toplam":n ,"yanlis":yanlis ,
-            "tepe":len (mm .vertices ),
+            rapor ["is_inside"][f"{ad }_{hal }"]={"correct":d ,"total":n ,"wrong":yanlis ,
+            "vertex":len (mm .vertices ),
             "watertight":bool (mm .is_watertight )}
             print (f"{ad :<16}{hal :<10}{len (mm .vertices ):>7}{str (mm .is_watertight ):>12}"
             f"{d }/{n }".rjust (12 ))

@@ -78,7 +78,7 @@ def check (stp ,jf ):
     j =json .load (open (jf ,encoding ="utf-8-sig"))
     pts =(j .get ("Graphic3d")or {}).get ("Points")or []
     if len (pts )<8 :
-        return None ,{"reason":"JSON'da nokta bulutu yok -- dogrulanamaz"}
+        return None ,{"reason":"JSON'da point bulutu absent -- dogrulanamaz"}
     Vj =np .array ([[q ["X"],q ["Y"],q ["Z"]]for q in pts ],float )
     Vr ,_Fr =step_to_mesh (stp )
     if len (Vr )<8 :
@@ -102,7 +102,7 @@ def check (stp ,jf ):
 def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--since",type =float ,default =0 ,
-    help ="sadece son N saniyede yazilmis dosyalari kontrol et")
+    help ="only last N saniyede yazilmis dosyalari kontrol et")
     ap .add_argument ("--quarantine",action ="store_true",
     help =f"basarisiz dosyalari {REJECT_DIR }/ altina TASI")
     ap .add_argument ("--limit",type =int ,default =0 )

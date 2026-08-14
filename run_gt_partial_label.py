@@ -67,7 +67,7 @@ def main ():
     print (f"split: tam {len (tam )} | d6 {len (d6 )} | d7 {len (d7 )}",flush =True )
     print (f"leakage bekcisi: {len (yasak )} kimlik (d6+d7) DISARIDA",
     flush =True )
-    assert tam and not (tam &yasak ),"tam kumesi d6/d7 ile KESISIYOR"
+    assert tam and not (tam &yasak ),"tam kumesi d6/d7 with KESISIYOR"
 
     yazilan =atlanan =empty_ =leakage =0 
     poz_top =tepe_top =0 

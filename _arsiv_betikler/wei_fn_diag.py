@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""WEI kacirma TESHISI: recall neden ~0.55'te takili? Iki mekanizma ayirt et:
+"""WEI kacirma TESHISI: recall why ~0.55'te takili? Iki mekanizma ayirt et:
   (A) SEGMENTASYON kacisi -- model kacan manufacturer CP'nin yakininda HIC baglanti-verteksi ateslemi_yor
       -> only VERI cozer (label).
   (B) TURETME kacisi -- model ATESLIYOR (baglanti-verteksleri present) but v_o/clustering/tolerans wrong

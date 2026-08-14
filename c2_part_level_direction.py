@@ -97,7 +97,7 @@ def main ():
         if kk %25 ==0 :
             print (f"  {kk }/{len (D ['DER'])}  {time .time ()-t0 :.0f}s",flush =True )
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "dusuk"
         P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
         SOZ1 ,SOZ2 =[],[]
         if r ["X"]is not None and r .get ("XR")is not None :

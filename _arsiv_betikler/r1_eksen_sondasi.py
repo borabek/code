@@ -3,7 +3,7 @@
 
 Gorulmemis ureticide eslesen ciftlerin %36'sinda candidate ekseni GT eksenine DIK (>80 deg).
 Bu a secim hatasi (median error 0.0 deg -- i.e. yari already mukemmel, kalan wrong axis).
-SORU: dik vakalarin adaylari on `channel_axis_robust` (mesh channel ekseni) kosulursa
+SORU: dik vakalarin adaylari ten `channel_axis_robust` (mesh channel ekseni) kosulursa
 GT eksenini buluyor mu? Buluyorsa R1 real a arm; bulmuyorsa dik vakalar kare/yay
 girisler demektir and baska mekanizma is required.
 """

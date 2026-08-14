@@ -38,7 +38,7 @@ YENI ="results/seg_g5/g5_s0.pt"
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--sinir",type =int ,default =120 )
+    ap .add_argument ("--boundary",type =int ,default =120 )
     a =ap .parse_args ()
     import protocol 
     protocol .tez_dogrula ()
@@ -117,9 +117,9 @@ def main ():
     print (f"  ADAY_YOK payi: %{100 *(1 -top [ks [0 ]]):.1f} -> %{100 *(1 -top [ks [1 ]]):.1f}")
     print (f"  {'KURTARILDI'if d >0.02 else ('DEGISMEDI'if abs (d )<=0.02 else 'KOTULESTI')}")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-        json .dump ({"n_parca":len (pid_l ),"toplam":top ,
+        json .dump ({"n_parca":len (pid_l ),"total":top ,
         "manufacturer":{k :{m :v for m ,v in R [k ].items ()}for k in R },
-        "fark":d ,"error":error },f ,indent =1 ,ensure_ascii =False )
+        "difference":d ,"error":error },f ,indent =1 ,ensure_ascii =False )
     print (f"receipt -> {MAKBUZ }")
 
 

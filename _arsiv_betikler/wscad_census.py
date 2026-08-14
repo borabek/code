@@ -25,7 +25,7 @@ import os ,sys ,csv ,json ,glob ,collections
 from playwright .sync_api import sync_playwright 
 
 PROFILE =os .path .abspath ("_wsprofile")
-HOME ="https://www.wscaduniverse.com/en/"
+HOME ="https://www.wscaduniverse.com/most/"
 OUT ="results/wscad_availability.csv"
 DELAY_MS =900 
 
@@ -33,7 +33,7 @@ SEARCH ="""async (q) => {
   let b=null; for (const k of Object.keys(localStorage)){const v=localStorage.getItem(k)||"";
     const m=v.match(/eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/); if(m){b=m[0];break;}}
   if(!b) return {err:"no session token"};
-  const r = await fetch("https://bff.wscaduniverse.com/api/search?searchText="+encodeURIComponent(q)+"&norm=0&language=en",
+  const r = await fetch("https://bff.wscaduniverse.com/api/search?searchText="+encodeURIComponent(q)+"&norm=0&language=most",
     {headers:{accept:"application/json",authorization:"Bearer "+b}});
   if(r.status!==200) return {err:"status "+r.status};
   const j = JSON.parse(await r.text());

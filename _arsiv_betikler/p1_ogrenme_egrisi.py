@@ -46,7 +46,7 @@ def main ():
     measure_set .rapor_bas (D ["rap"])
     X ,y ,pid ,mfg ,keep =D ["X"],D ["y"],D ["pid"],D ["mfg"],D ["keep"]
     gk =D ["gk"]
-    grup =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+    grup =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
     Z =np .zeros ((len (X ),X .shape [1 ]*2 ))
     for u in np .unique (pid ):
         i =np .where (pid ==u )[0 ]
@@ -115,7 +115,7 @@ def main ():
         "log_havuz":list (map (float ,kh )),"log_uretici":list (map (float ,ku )),
         "egim_son":float (egim_son ),"simdiki_grup":simdi_g ,
         "not":("Alt-ornekleme GRUP bazinda (ikizler birlikte). Ekstrapolasyon "
-        "yalniz egri doymuyorsa anlamlidir; son iki noktanin egimi "
+        "only egri doymuyorsa anlamlidir; last two noktanin egimi "
         "raporlanir.")},fjs ,indent =1 )
     print ("receipt -> results/p1_ogrenme_egrisi.json")
 

@@ -70,7 +70,7 @@ def main ():
     ap .add_argument ("--ckpt",required =True )
     ap .add_argument ("--only-mfg",default ="WEI")
     ap .add_argument ("--only-parts",nargs ="+",default =[])
-    ap .add_argument ("--vertex-conf",type =float ,default =0.5 ,help ="oy verecek verteks icin min baglanti olasiligi")
+    ap .add_argument ("--vertex-conf",type =float ,default =0.5 ,help ="oy verecek verteks for min baglanti olasiligi")
     ap .add_argument ("--radius",type =float ,default =4.0 ,help ="oy clustering yaricapi (mm)")
     ap .add_argument ("--min-votes",nargs ="+",type =int ,default =[3 ,5 ,8 ,12 ,20 ,30 ],
     help ="cluster basina min oy -- taranir (min_v'nin ogrenilmis muadili)")

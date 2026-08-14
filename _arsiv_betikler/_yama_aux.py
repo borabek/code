@@ -20,7 +20,7 @@ def yama (old ,new ,s ):
 o1 ='            rec = {"part_id": pid, "verts": V, "faces": F, "labels": L}'+N 
 n1 =(o1 
 +'            # FB-2: TEL/ALET yardimci etiketi (varsa). -1 maskeli / 0 tel / 1 alet.'+N 
-+'            # Tezin 5-sinif etiketini DEGISTIRMEZ: ayri dosya, ayri kafa, ayri loss.'+N 
++'            # Tezin 5-sinif etiketini DEGISTIRMEZ: ayri file, ayri kafa, ayri loss.'+N 
 +'            _ax = os.path.join(d, pid + ".aux.txt")'+N 
 +'            if os.path.exists(_ax):'+N 
 +'                try:'+N 
@@ -43,13 +43,13 @@ o3 ='    ap.add_argument("--partial-pos-weight", type=float, default=20.0,'
 n3 =(
 '    ap.add_argument("--aux-wire", action="store_true",'+N 
 +'                    help="FB-2 TEL/ALET yardimci supervizyonu. Paylasilan govdeye IKINCI "'+N 
-+'                         "bir kafa eklenir; ana 5-sinif kafasi ve kaybi BIT DUZEYINDE "'+N 
-+'                         "degismez (tez ihlali YOK). Gerekce: tezin Contact sinifi "'+N 
-+'                         "tasarimi geregi Kontaktierung bzw. Werkzeugeinschub -- tel ve "'+N 
-+'                         "alet TEK sinif, yani backbone ayrimi SILMEK uzere egitildi.")'+N 
++'                         "a kafa eklenir; ana 5-sinif kafasi and kaybi BIT DUZEYINDE "'+N 
++'                         "does not change (tez ihlali YOK). Gerekce: tezin Contact sinifi "'+N 
++'                         "tasarimi geregi Kontaktierung bzw. Werkzeugeinschub -- tel and "'+N 
++'                         "alet TEK sinif, i.e. backbone ayrimi SILMEK so as to egitildi.")'+N 
 +'    ap.add_argument("--aux-w", type=float, default=0.5, help="yardimci kaybin agirligi")'+N 
 +'    ap.add_argument("--aux-pos-weight", type=float, default=2.0,'+N 
-+'                    help="ALET pozitif agirligi (measured: alet/tel tepe orani ~0.46)")'+N 
++'                    help="ALET pozitif agirligi (measured: alet/tel vertex orani ~0.46)")'+N 
 +o3 )
 s =yama (o3 ,n3 ,s )
 

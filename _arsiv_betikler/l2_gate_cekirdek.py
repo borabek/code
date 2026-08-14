@@ -16,7 +16,7 @@ import numpy as np
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -54,10 +54,10 @@ def main ():
     hi =[x for x in parts if x [4 ]>=8 ]
     sel =([lo [i ]for i in rng .choice (len (lo ),70 ,replace =False )]+
     [hi [i ]for i in rng .choice (len (hi ),30 ,replace =False )])
-    tg ={gk .get (p [1 ],"yok:"+p [1 ])for p in sel }
-    Gg =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    tg ={gk .get (p [1 ],"absent:"+p [1 ])for p in sel }
+    Gg =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
     keep =~np .isin (Gg ,list (tg ))
-    reg_all =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
+    reg_all =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
 
     # Aday turetme BIR KEZ (urun hattiyla); feature kumeleri after bedava taranir.
     DER =[]
@@ -91,17 +91,17 @@ def main ():
 
     def evaluate (cols ,lab ):
         Xk =X [keep ][:,cols ];yk =y [keep ];gg =Gg [keep ];reg =reg_all [keep ]
-        tot ={"dusuk":0 ,"cok":0 }
+        tot ={"low":0 ,"very":0 }
         for g in {int (g )for g in groups [keep ]}:
             n =int (ngt .get (g ,0 ))
             if n >0 :
-                tot ["cok"if n >=8 else "dusuk"]+=n 
+                tot ["very"if n >=8 else "low"]+=n 
         o =np .zeros (len (yk ))
         for tr ,te in GroupKFold (n_splits =5 ).split (Xk ,yk ,gg ):
             o [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
             random_state =0 ).fit (Xk [tr ],yk [tr ]).predict_proba (Xk [te ])[:,1 ]
         thr ={}
-        for k in ("dusuk","cok"):
+        for k in ("low","very"):
             b =(0.0 ,0.40 )
             for t in np .arange (0.20 ,0.71 ,0.05 ):
                 m =reg ==k 
@@ -116,13 +116,13 @@ def main ():
         random_state =0 ).fit (Xk ,yk )
         out ={}
         for key ,tol ,am ,pct in (("det",0.0 ,180.0 ,True ),("rob",2.0 ,10.0 ,False )):
-            agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+            agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
             for r in DER :
                 if r ["X"]is None or not len (r ["P"]):
                     P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
                 else :
                     sc =clf .predict_proba (r ["X"][:,cols ])[:,1 ]
-                    m =sc >=(thr ["cok"]if r ["is_hi"]else thr ["dusuk"])
+                    m =sc >=(thr ["very"]if r ["is_hi"]else thr ["low"])
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
                 G ,Gd =r ["G"],r ["Gd"]
                 hit =np .zeros (len (G ),bool )
@@ -141,7 +141,7 @@ def main ():
                         hit [b_ ]=True 
                         used .add (a_ )
                 tp =int (hit .sum ())
-                k ="cok"if r ["n"]>=8 else "dusuk"
+                k ="very"if r ["n"]>=8 else "low"
                 agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (P )-tp ;agg [k ][2 ]+=len (G )-tp 
             o_ ={};TP =FP =FN =0 
             for k ,(T ,Fp ,Fn )in agg .items ():
@@ -155,11 +155,11 @@ def main ():
 
     idx ={n :i for i ,n in enumerate (names )}
     print ()
-    print (f"{'ozellik kumesi':<34}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>8}")
+    print (f"{'feature kumesi':<34}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>8}")
     # EZBER SIRALAMASI (K olcumu, AUC dususu buyukten kucuge)
     order =["depth","size","aspect","outward","flat","nn_dist","ce_frac",
     "chan_conn","ct_frac","conf","nverts","n_close","votes"]
-    evaluate (list (range (13 )),"13 ozellik (budamasiz)")
+    evaluate (list (range (13 )),"13 feature (budamasiz)")
     for k in (3 ,5 ,7 ,9 ):
         drop =set (order [:k ])
         cols =[i for i in range (13 )if names [i ]not in drop ]

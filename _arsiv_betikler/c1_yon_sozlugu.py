@@ -60,7 +60,7 @@ def yerel_yonler (V ,p ,d ):
         Q =rel [ic ]-rel [ic ].mean (0 )
         try :
             _ ,_ ,W =np .linalg .svd (Q ,full_matrices =False )
-            out ["kanal"]=_birim (W [0 ])
+            out ["channel"]=_birim (W [0 ])
         except Exception :
             pass 
     yak =(rad <=RMAX )&(np .abs (t )<=2.0 )
@@ -106,7 +106,7 @@ def main ():
     except Exception :
         brep_axes =None 
 
-    KOLLAR =["mevcut","ham","uye","brep","kanal","normal","duzlem_A","duzlem_B"]
+    KOLLAR =["mevcut","ham","uye","brep","channel","normal","duzlem_A","duzlem_B"]
     say ={k :0 for k in KOLLAR }
     det ,rob_mevcut ,rob_kahin ,rob_isar ,gg =[],[],[],[],[]
     boy =[]
@@ -177,7 +177,7 @@ def main ():
                         say [a .rstrip ("0123456789")if a .startswith ("uye")else a ]=say .get (a .rstrip ("0123456789")if a .startswith ("uye")else a ,0 )+1 
                     boy .append (len (S ))
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         det .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
         rob_mevcut .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ))
         # --- KAHIN: each candidate for sozlukten GT'ye EN YAKIN yonu sec
@@ -205,12 +205,12 @@ def main ():
     print (f"\nsozluk boyutu: medyan {np .median (boy ):.0f} | ort {np .mean (boy ):.1f}")
     print ("giris kapsami:",{k :v for k ,v in sorted (say .items (),key =lambda x :-x [1 ])})
     t_ =T .f1w (det );rm =T .f1w (rob_mevcut );rk =T .f1w (rob_kahin );ri =T .f1w (rob_isar )
-    print (f"\n{'olcu':<26}{'deger':>9}")
-    print (f"{'tespit (degismez)':<26}{t_ :>9.4f}")
+    print (f"\n{'olcu':<26}{'value':>9}")
+    print (f"{'tespit (does not change)':<26}{t_ :>9.4f}")
     print (f"{'robot MEVCUT':<26}{rm :>9.4f}")
-    print (f"{'robot KAHIN (sozluk)':<26}{rk :>9.4f}   fark {rk -rm :+.4f}")
+    print (f"{'robot KAHIN (dictionary)':<26}{rk :>9.4f}   fark {rk -rm :+.4f}")
     print (f"{'robot KAHIN signed':<26}{ri :>9.4f}")
-    print (f"{'ust sinir (=tespit)':<26}{t_ :>9.4f}")
+    print (f"{'upper boundary (=tespit)':<26}{t_ :>9.4f}")
     print (f"\nsozluk, direction boslugunun %{100 *(rk -rm )/max (t_ -rm ,1e-9 ):.0f}'ini kapsiyor")
     gecti =rk >=0.70 
     print (f"\nKILL: kahin robot >= 0.70 -> {'GECTI, ayrik selector egitilir'if gecti else 'GECMEDI, Rota C KAPANIR'}")

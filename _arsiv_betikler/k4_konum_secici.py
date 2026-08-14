@@ -32,7 +32,7 @@ os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
 ONB ="results/k4_konum_sozluk.pkl"
-KAYNAK =["mevcut","ham","uye","mouth","kirpik","cember","acik",
+KAYNAK =["mevcut","ham","uye","mouth","kirpik","cember","open",
 "kesit","acik3","acik5","axis"]
 
 
@@ -196,7 +196,7 @@ def main ():
         for r in alt :
             d_ =PARCA .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d_ is None :
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             else :
@@ -243,7 +243,7 @@ def main ():
     gecti =dk >=0.01 and lo >0 
     print (f"KILL: robot +0.01 VE GA>0 -> {'GECTI'if gecti else 'GECMEDI'}")
     with io .open ("results/k4_konum_secici.json","w",encoding ="utf-8")as f :
-        json .dump ({"baseline":T .f1w (rt ),"konum_secici":T .f1w (rc ),"fark":dk ,
+        json .dump ({"baseline":T .f1w (rt ),"konum_secici":T .f1w (rc ),"difference":dk ,
         "ga":[lo ,hi ],"gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/k4_konum_secici.json")
 

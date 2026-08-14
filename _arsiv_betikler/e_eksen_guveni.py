@@ -18,7 +18,7 @@ import os ,sys ,json ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -78,7 +78,7 @@ def main ():
                 if d_ >t or abs (al [a_ ,b_ ])>40 or a_ in used or hit [b_ ]:continue 
                 hit [b_ ]=True ;used .add (a_ );lab [a_ ]=1 
         X13 .append (f13 );XE .append (np .array (ex ,float ));y .append (lab )
-        grp +=[gi ]*len (cps );reg +=["cok"if r ["n"]>=8 else "dusuk"]*len (cps )
+        grp +=[gi ]*len (cps );reg +=["very"if r ["n"]>=8 else "low"]*len (cps )
         if (gi +1 )%25 ==0 :
             print (f"  {gi +1 } part",flush =True )
     X13 =np .vstack (X13 );XE =np .vstack (XE );y =np .concatenate (y )
@@ -94,14 +94,14 @@ def main ():
         return o 
 
     def f1_of (o ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
-        tot ={"dusuk":0 ,"cok":0 }
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
+        tot ={"low":0 ,"very":0 }
         for gi in np .unique (grp ):
             k =reg [grp ==gi ][0 ]
             tot [k ]+=ngt [gi ]
-        for k in ("dusuk","cok"):
+        for k in ("low","very"):
             m =reg ==k 
-            thr =TH if k =="cok"else TL 
+            thr =TH if k =="very"else TL 
             selm =(o >=thr )&m 
             tp =int ((y [selm ]==1 ).sum ());fp =int (selm .sum ())-tp 
             p =tp /max (tp +fp ,1 );rc =tp /max (tot [k ],1 )
@@ -110,12 +110,12 @@ def main ():
 
     a13 ,g13 =f1_of (oof (X13 ))
     aE ,gE =f1_of (oof (np .hstack ([X13 ,XE ])))
-    print (f"{'arm':<28}{'CP-F1':>9}{'dusuk':>9}{'cok':>9}")
-    print (f"{'13 ozellik (mevcut)':<28}{a13 :>9.4f}{g13 ['dusuk'][0 ]:>9.4f}{g13 ['cok'][0 ]:>9.4f}")
-    print (f"{'13 + EKSEN GUVENI (4)':<28}{aE :>9.4f}{gE ['dusuk'][0 ]:>9.4f}{gE ['cok'][0 ]:>9.4f}")
+    print (f"{'arm':<28}{'CP-F1':>9}{'low':>9}{'very':>9}")
+    print (f"{'13 feature (mevcut)':<28}{a13 :>9.4f}{g13 ['low'][0 ]:>9.4f}{g13 ['very'][0 ]:>9.4f}")
+    print (f"{'13 + EKSEN GUVENI (4)':<28}{aE :>9.4f}{gE ['low'][0 ]:>9.4f}{gE ['very'][0 ]:>9.4f}")
     print (f"\nFARK: {aE -a13 :+.4f}")
     print (f"KARAR (>= +0.005): {'E URUNE ALINIR'if aE -a13 >=0.005 else 'E DUSER'}")
-    json .dump ({"f1_13":a13 ,"f1_13_eksen":aE ,"fark":aE -a13 },
+    json .dump ({"f1_13":a13 ,"f1_13_eksen":aE ,"difference":aE -a13 },
     open ("results/e_eksen_guveni.json","w"),indent =1 )
 
 

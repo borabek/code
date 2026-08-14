@@ -34,7 +34,7 @@ def main ():
     gk =measure_set .geo_anahtarlari ()
     s3 =json .load (io .open ("results/split3.json",encoding ="utf-8"))
     locked =[str (p )for p in s3 ["locked"]["parts"]]
-    lg ={p :gk .get (p ,"yok:"+p )for p in locked }
+    lg ={p :gk .get (p ,"absent:"+p )for p in locked }
     DER ,rap =measure_set .cluster ("results/_der_tam.pkl")
     measure_set .rapor_bas (rap )
     temiz =set (rap ["locked_temiz"])
@@ -53,7 +53,7 @@ def main ():
             if "pids"not in d .files :
                 continue 
             pids ={str (x )for x in d ["pids"]}
-            gruplar ={gk .get (p ,"yok:"+p )for p in pids }
+            gruplar ={gk .get (p ,"absent:"+p )for p in pids }
         except Exception as e :
             print (f"  {n }: okunamadi ({type (e ).__name__ })");continue 
         a =sorted (p for p in temiz if p in pids )
@@ -71,7 +71,7 @@ def main ():
             with open (pk ,"rb")as f :
                 R =pickle .load (f )
             pids ={str (r ["pid"])for r in R }
-            gruplar ={gk .get (p ,"yok:"+p )for p in pids }
+            gruplar ={gk .get (p ,"absent:"+p )for p in pids }
         except Exception :
             continue 
         a =sorted (p for p in temiz if p in pids )
@@ -83,10 +83,10 @@ def main ():
         print (f"  {os .path .basename (pk ):<28} part-ihlal {len (a ):>3} | grup-ihlal {len (b ):>3}")
 
     for ad ,ih ,aciklama in (
-    ("S1 training npz'sinde PARCA yok",ihlal1 ,"LOCKED part training verisinde"),
-    ("S2 training npz'sinde GRUP yok",ihlal2 ,"LOCKED parcanin IKIZI training verisinde"),
-    ("S3 measurement onbelleginde PARCA yok",ihlal3 ,"LOCKED part puanlanmis"),
-    ("S4 measurement onbelleginde GRUP yok",ihlal4 ,"LOCKED parcanin IKIZI puanlanmis"),
+    ("S1 training npz'sinde PARCA absent",ihlal1 ,"LOCKED part training verisinde"),
+    ("S2 training npz'sinde GRUP absent",ihlal2 ,"LOCKED parcanin IKIZI training verisinde"),
+    ("S3 measurement onbelleginde PARCA absent",ihlal3 ,"LOCKED part puanlanmis"),
+    ("S4 measurement onbelleginde GRUP absent",ihlal4 ,"LOCKED parcanin IKIZI puanlanmis"),
     ):
         gecti =not ih 
         RAPOR ["sartlar"][ad ]={"gecti":gecti ,"aciklama":aciklama ,
@@ -98,7 +98,7 @@ def main ():
 
     hepsi =all (v ["gecti"]for v in RAPOR ["sartlar"].values ())
     RAPOR ["sinav_gecerli"]=hepsi 
-    print (f"\nSINAV GECERLI Mi: {'EVET -- 95 part BAKIR'if hepsi else 'HAYIR -- ihlal var'}")
+    print (f"\nSINAV GECERLI Mi: {'EVET -- 95 part BAKIR'if hepsi else 'HAYIR -- ihlal present'}")
     with io .open ("results/q2_sinav_butunlugu.json","w",encoding ="utf-8")as f :
         json .dump (RAPOR ,f ,indent =1 )
     print ("receipt -> results/q2_sinav_butunlugu.json")

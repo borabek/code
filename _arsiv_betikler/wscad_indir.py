@@ -91,7 +91,7 @@ def _step_kaydet (yol ,part ):
         shutil .copy2 (yol ,hedef )
     if os .path .getsize (hedef )<2000 :
         os .remove (hedef )
-        return None ,"dosya cok kucuk (bos/error sayfasi)"
+        return None ,"file very small (empty/error sayfasi)"
     return hedef ,None 
 
 
@@ -114,7 +114,7 @@ def indir (pg ,ctx ,part ,bekle =25000 ):
         except Exception :
             pass 
     if btn is None :
-        return "bulunamadi","indirme dugmesi yok"
+        return "bulunamadi","indirme dugmesi absent"
     btn .scroll_into_view_if_needed ()
     btn .click ()
     time .sleep (1.5 )
@@ -148,14 +148,14 @@ def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--n",type =int ,default =40 )
     ap .add_argument ("--manufacturer",default ="")
-    ap .add_argument ("--hepsi",action ="store_true")
+    ap .add_argument ("--all of them",action ="store_true")
     ap .add_argument ("--gecikme",type =float ,default =1.5 ,help ="parts arasi saniye")
     a =ap .parse_args ()
 
     os .makedirs (GECICI ,exist_ok =True )
     rec_ =_kayit_yukle ()
     hedef =hedefleri_sec (a .n ,a .manufacturer ,a .hepsi )
-    hedef =[m for m in hedef if rec_ .get (m ["part"],{}).get ("durum")!="ok"]
+    hedef =[m for m in hedef if rec_ .get (m ["part"],{}).get ("state")!="ok"]
     print (f"hedef: {len (hedef )} part | kayitta {len (rec_ )} onceki deneme",flush =True )
 
     from playwright .sync_api import sync_playwright 
@@ -176,7 +176,7 @@ def main ():
             print (f"   {c :<14}{d }  {ay [:60 ]}",flush =True )
             k_ok +=(d =="ok")
         if k_ok ==0 :
-            print ("\n!! KONTROL GRUBU TAMAMEN BASARISIZ -- arac bozuk, sonuclar GECERSIZ.")
+            print ("\n!! CHECK GRUBU TAMAMEN BASARISIZ -- arac bozuk, results INVALID.")
             print ("   Indirmeye devam EDILMIYOR (silent sifir riski).")
             ctx .close ()
             return 
@@ -189,7 +189,7 @@ def main ():
             except Exception as e :
                 d ,ay ="error",f"{type (e ).__name__ }: {str (e )[:60 ]}"
             sayac [d ]=sayac .get (d ,0 )+1 
-            rec_ [part ]={"durum":d ,"ayrinti":ay ,"manufacturer":m ["manufacturer"],
+            rec_ [part ]={"state":d ,"ayrinti":ay ,"manufacturer":m ["manufacturer"],
             "zaman":time .strftime ("%Y-%m-%d %H:%M:%S")}
             print (f"  [{i }/{len (hedef )}] {m ['manufacturer']:<7}{part :<24}{d :<12}{ay [:52 ]}",flush =True )
             if i %10 ==0 :

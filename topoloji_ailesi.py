@@ -2,7 +2,7 @@
 """ES-EKSENLI AILE / DIZI DUZENLILIGI: "this candidate only mi, otherwise a dizinin uyesi mi?"
 
 FIZIK. Klemens govdesinde tel girisleri TEK BASINA durmaz: same yuzde a SIRA
-olustururlar (dik array) and govdenin arkasinda same EKSEN on karsilik gelen
+olustururlar (dik array) and govdenin arkasinda same EKSEN ten karsilik gelen
 a ikinci acikliga (vida yuvasi / kablo kanali) bakarlar. Sahte candidates --
 plastik kenari, vida basi, model gurultusu -- this duzene uymaz.
 

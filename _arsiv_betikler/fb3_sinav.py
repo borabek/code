@@ -227,7 +227,7 @@ def main ():
             for r in K ["RJ"]:
                 n =r ["nn"];sk =o [off :off +n ];off +=n 
                 m =((sk >=0.5 *max (sk .max (),1e-9 ))&(sk >=0.25 ))if n else np .zeros (0 ,bool )
-                rj ="cok"if r ["n"]>=8 else "dusuk"
+                rj ="very"if r ["n"]>=8 else "low"
                 det .append ((rj ,)+esle (r ["P"][m ],r ["Pd"][m ],r ["G"],r ["Gd"],
                 r ["diag"],0.0 ,180.0 ,True ))
                 gg .append (r ["geo"])

@@ -85,7 +85,7 @@ def _uyumlu (sec ,X ):
     if X .shape [1 ]<n :
         raise ValueError (
         f"p3c ozellik genisligi {X .shape [1 ]} < modelin bekledigi {n }: "
-        "model ile kod uyumsuz, refit gerekli"
+        "model with kod uyumsuz, refit gerekli"
         )
     return X [:,:n ]
 
@@ -218,7 +218,7 @@ def uygula (rec_ ,model ,ob ,sec ,threshold ,match_greedy ,f1w ,mfgler =None ,sa
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "dusuk"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         pak =parca_adaylari (r ,model ,ob )
         if pak is not None :

@@ -65,7 +65,7 @@ def main ():
         for r in DER :
             h =H [r ["pid"]]
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if h is None :
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             else :
@@ -113,7 +113,7 @@ def main ():
     A_gecti =bool (kazanan and A [kazanan ]["d_robot"]>=0.01 and A [kazanan ]["ga"][0 ]>0 
     and A [kazanan ]["d_tespit"]>=-0.005 )
     print (f"\nA HUKMU: en iyi giris '{kazanan }' ({A [kazanan ]['d_robot']:+.4f}) -> "
-    f"{'GLOBAL TANIM DEGISIKLIGI GECERLI'if A_gecti else 'global kazanan YOK, B sart'}")
+    f"{'GLOBAL TANIM DEGISIKLIGI VALID'if A_gecti else 'global kazanan YOK, B sart'}")
 
     # ================= B) ATESLEME SORUSU =================
     print ("\n"+"="*74 )
@@ -151,7 +151,7 @@ def main ():
             else :
                 oz =[0 ,0.0 ,0.0 ,0.0 ,0.0 ]
             oz +=[1.0 if a in S else 0.0 for a in 
-            ("mouth","cember","acik","kirpik","axis","kesit1","kesit3","kesit5")]
+            ("mouth","cember","open","kirpik","axis","kesit1","kesit3","kesit5")]
             FX .append (np .concatenate ([X [i ],oz ]))
             FY .append (int (pe [i ,b ]>2.0 ))
             FG .append (r ["geo"])

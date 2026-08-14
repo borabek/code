@@ -61,8 +61,8 @@ def main ():
     D =T .yukle ()
     measure_set .rapor_bas (D ["rap"])
     X ,y ,pid ,mfg ,keep =D ["X"],D ["y"],D ["pid"],D ["mfg"],D ["keep"]
-    AD =D ["ad"];gk =D ["gk"]
-    grup =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+    AD =D ["name"];gk =D ["gk"]
+    grup =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
     print (f"\negitim: {int (keep .sum ())} candidate / {len (np .unique (pid [keep ]))} part "
     f"/ {len (np .unique (grup [keep ]))} geometri grubu")
 
@@ -133,7 +133,7 @@ def main ():
         f"{SON [en ]['_URETICI_DISI_ORT']:.4f}")
         print (f"  havuzlanmis GA[{lo :+.4f},{hi :+.4f}] | WEI-disi GA[{l2 :+.4f},{h2 :+.4f}]")
     else :
-        print ("\nKILL: sizintisiz secimde hicbir k +0.01 vermedi -> G1 KAPANDI")
+        print ("\nKILL: sizintisiz secimde no k +0.01 vermedi -> G1 CLOSED")
     with io .open ("results/g1b_transfer_durust.json","w",encoding ="utf-8")as f :
         json .dump ({"sonuc":{str (k ):{"havuzlanmis":SON [k ]["havuzlanmis"]["tespit"],
         "uretici_ort":SON [k ]["_URETICI_DISI_ORT"],

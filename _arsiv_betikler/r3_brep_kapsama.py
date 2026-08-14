@@ -8,7 +8,7 @@ HIPOTEZ (R0+R1'den): CP'nin ekseni three kaynaktan gelebiliyor --
 R1'de tahminler full [1,0,0]/[0,1,0] output = (c). Ayni CP'lerde point da centroid'de kaliyor,
 i.e. YANAL error da orada.
 
-Yani single a kok neden two metrigi birden dusuruyor may be: B-REP ESLESMESININ TUTMAMASI.
+Yani single a kok why two metrigi birden dusuruyor may be: B-REP ESLESMESININ TUTMAMASI.
 
 Bu onemli, because kodda ASILI a is present (cp_openings.py icindeki not): B-rep kapilari
 (BREP_MAX_OFF, BREP_R_MAX) radius YAY HATASI varken ayarlanmisti -- yaricaplar 3.5 fold small
@@ -41,9 +41,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -83,18 +83,18 @@ def main ():
                 continue 
             used .add (a_ );hit .add (b_ )
             SAT .append ({"brep_r":float (r ["X"][idx [a_ ],BREP_R_SUT ]),
-            "lateral":float (pe [a_ ,b_ ]),"aci":float (an [a_ ,b_ ]),
-            "pid":r ["pid"],"regime":"cok"if r ["n"]>=8 else "dusuk"})
+            "lateral":float (pe [a_ ,b_ ]),"angle":float (an [a_ ,b_ ]),
+            "pid":r ["pid"],"regime":"very"if r ["n"]>=8 else "low"})
 
     br =np .array ([x ["brep_r"]for x in SAT ])
     ya =np .array ([x ["lateral"]for x in SAT ])
-    ac =np .array ([x ["aci"]for x in SAT ])
+    ac =np .array ([x ["angle"]for x in SAT ])
     var =br >0 
     print (f"{len (SAT )} eslesen GT noktasi | B-rep silindiri ESLESEN: {var .sum ()} "
     f"({var .mean ():.1%}) | eslesmeYEN: {(~var ).sum ()} ({(~var ).mean ():.1%})")
 
-    print (f"\n{'grup':<22}{'n':>6}{'lateral med':>11}{'aci med':>10}{'lateral<=2':>10}"
-    f"{'aci<=10':>9}{'IKISI':>8}")
+    print (f"\n{'grup':<22}{'n':>6}{'lateral med':>11}{'angle med':>10}{'lateral<=2':>10}"
+    f"{'angle<=10':>9}{'IKISI':>8}")
     for ad ,i in (("B-rep ESLESTI",var ),("B-rep YOK",~var )):
         if not i .any ():
             continue 
@@ -116,8 +116,8 @@ def main ():
         print (f"  ikisi birden: {su :.1%} -> {i2 :.1%}  (+{(i2 -su )*100 :.1f} puan)")
         print (f"  robot-hazir 0.65 icin gereken: %87.4")
 
-    print (f"\n{'regime':<10}{'n':>6}{'B-rep var':>11}{'IKISI OK':>10}")
-    for rj in ("dusuk","cok"):
+    print (f"\n{'regime':<10}{'n':>6}{'B-rep present':>11}{'IKISI OK':>10}")
+    for rj in ("low","very"):
         i =np .array ([x ["regime"]==rj for x in SAT ])
         if i .any ():
             print (f"{rj :<10}{int (i .sum ()):>6}{var [i ].mean ():>11.1%}"

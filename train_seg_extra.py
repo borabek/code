@@ -198,29 +198,29 @@ def main ():
     # FEW-SHOT (K6.5-b): k part 200 parcalik korpusun inside KAYBOLUR. Iki kip:
     #  --only-kismi : YALNIZ k parcayla adapte ol (agresif; unutma riski VAR)
     #  --kismi-tekrar : korpusu koru but k parcayi N times tekrarla (gerceksi recete)
-    ap .add_argument ("--yalniz-kismi",action ="store_true",
+    ap .add_argument ("--only-kismi",action ="store_true",
     help ="FEW-SHOT: training kumesi YALNIZ --partial-dir olsun")
     ap .add_argument ("--kismi-tekrar",type =int ,default =1 ,
     help ="FEW-SHOT: kismi ornekleri N kez tekrarla (agirliklandirma)")
     ap .add_argument ("--init-from",default ="",
-    help ="FEW-SHOT/FINE-TUNE: bu ckpt'ten baslat (sifirdan degil). "
+    help ="FEW-SHOT/FINE-TUNE: this ckpt'ten baslat (sifirdan not). "
     "Mimari birebir same must be; strict=True with yuklenir.")
     ap .add_argument ("--train-dir",default ="",help ="RESOLUTION EXPERIMENT: load the corpus TRAIN split from a load_extra-style dir (e.g. _corpus12k_train) instead of scheffler_dataset -- lets us retrain at a different remesh resolution without touching the frozen corpus")
     ap .add_argument ("--val-dir",default ="",help ="same for VAL (must match the train resolution)")
     ap .add_argument ("--val-partial",action ="store_true",
-    help ="VAL dizini KISMI etiketli (yalniz CableEntry signed). Dogrulama "
+    help ="VAL dizini KISMI etiketli (only CableEntry signed). Dogrulama "
     "metrigi MASKELI olcer -- unsigned body metrige girmez. Bu bayrak "
-    "olmadan Conn-IoU yapay olarak COKER (0.5878 -> 0.0995 measured) ve "
+    "olmadan Conn-IoU yapay as COKER (0.5878 -> 0.0995 measured) ve "
     "secim, Contact'i AZ tahmin eden modeli odullendirir.")
     ap .add_argument ("--no-extra",action ="store_true",help ="ablation: train on our 71 only (skip the 132 EEC extra)")
     ap .add_argument ("--pseudo-dir",default ="",help ="self-training: also load MODEL-PREDICTED pseudo-labels from this dir (e.g. _pseudo_extra). NOT human labels -- only adopt if val Connection IoU improves")
     ap .add_argument ("--partial-dir",nargs ="+",default =[],help ="human PARTIAL label dir(s) (CableEntry marked, else 0). Accepts multiple dirs (e.g. _label_targets _label_targets_2). Trained with a MASKED loss that only supervises CableEntry-vs-not, so the unmarked classes are NOT taught as Housing")
     ap .add_argument ("--aux-wire",action ="store_true",
     help ="FB-2 TEL/ALET yardimci supervizyonu. Paylasilan govdeye IKINCI "
-    "bir kafa eklenir; ana 5-sinif kafasi ve kaybi BIT DUZEYINDE "
+    "a kafa eklenir; ana 5-sinif kafasi ve kaybi BIT DUZEYINDE "
     "degismez (tez ihlali YOK). Gerekce: tezin Contact sinifi "
     "tasarimi geregi Kontaktierung bzw. Werkzeugeinschub -- tel ve "
-    "alet TEK sinif, yani backbone ayrimi SILMEK uzere egitildi.")
+    "alet TEK sinif, i.e. backbone ayrimi SILMEK about to egitildi.")
     ap .add_argument ("--aux-w",type =float ,default =0.5 ,help ="yardimci kaybin agirligi")
     ap .add_argument ("--aux-pos-weight",type =float ,default =2.0 ,
     help ="ALET pozitif agirligi (measured: alet/tel tepe orani ~0.46)")

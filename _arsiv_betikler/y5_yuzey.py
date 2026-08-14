@@ -54,7 +54,7 @@ def yuzey_ciz (ax ,V ,F ,p ,d ,center_ ,baslik ,renk ):
     yak =np .linalg .norm (c -p ,axis =1 )<=KIRP 
     Fk =F [yak ]
     if not len (Fk ):
-        ax .set_axis_off ();ax .set_title (baslik +"\n(yuzey yok)",fontsize =9 );return 
+        ax .set_axis_off ();ax .set_title (baslik +"\n(surface absent)",fontsize =9 );return 
         # yerel koordinat: x=u, y=v, z=d yonunde (disari pozitif)
     R =np .stack ([u ,v ,d ])
     Y =(V -p )@R .T 
@@ -107,7 +107,7 @@ def main ():
     yuzey_ciz (ax0 ,V ,F ,G [j ],Gd [j ],center_ ,
     "URETICININ LISTELEDIGI GIRIS","#15703F")
     ax1 =fig .add_subplot (122 ,projection ="3d")
-    yuzey_ciz (ax1 ,V ,F ,P [0 ],Pd [0 ],center_ ,"ORNEK ROBOT NOKTASI","#A8332A")
+    yuzey_ciz (ax1 ,V ,F ,P [0 ],Pd [0 ],center_ ,"EXAMPLE ROBOT NOKTASI","#A8332A")
     fig .tight_layout ()
     fig .savefig ("results/_y5_deneme.png",dpi =95 ,bbox_inches ="tight")
     print ("-> results/_y5_deneme.png")

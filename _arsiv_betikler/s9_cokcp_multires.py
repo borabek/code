@@ -56,7 +56,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in tpid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in tpid ]),list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -129,17 +129,17 @@ def main ():
                         PdB =np .vstack ([PdB ,np .array (ek_d )])if len (PdB )else np .array (ek_d )
         except Exception as e :
             print (f"    {r ['pid']}: 9k atlandi ({type (e ).__name__ })")
-        rj ="cok"
+        rj ="very"
         for ad ,(P ,Pd )in (("A",(PA ,PdA )),("B",(PB ,PdB ))):
             det [ad ].append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob [ad ].append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         g .append (r ["geo"])
 
     ra =f1_rejim (det ["A"]);rb =f1_rejim (det ["B"])
-    print (f"\n{'arm':<16}{'cok-CP tespit':>15}{'cok-CP robot':>14}")
-    print (f"{'A 6k (mevcut)':<16}{ra ['F1']['cok']:>15.4f}{f1_rejim (rob ['A'])['F1']['cok']:>14.4f}")
-    print (f"{'B 6k+9k':<16}{rb ['F1']['cok']:>15.4f}{f1_rejim (rob ['B'])['F1']['cok']:>14.4f}")
-    d =rb ["F1"]["cok"]-ra ["F1"]["cok"]
+    print (f"\n{'arm':<16}{'very-CP tespit':>15}{'very-CP robot':>14}")
+    print (f"{'A 6k (mevcut)':<16}{ra ['F1']['very']:>15.4f}{f1_rejim (rob ['A'])['F1']['very']:>14.4f}")
+    print (f"{'B 6k+9k':<16}{rb ['F1']['very']:>15.4f}{f1_rejim (rob ['B'])['F1']['very']:>14.4f}")
+    d =rb ["F1"]["very"]-ra ["F1"]["very"]
     fn =lambda rows :f1w ([y for _ ,y in rows ])-f1w ([x for x ,_ in rows ])
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (det ["A"],det ["B"])),g ,fn ,n =2000 )
     print (f"\ncok-CP tespit farki {d :+.4f} | GA [{lo :+.4f}, {hi :+.4f}]")
@@ -147,8 +147,8 @@ def main ():
     print ("  (low-CP kaybi also olculmeli: this arm YALNIZ very-CP parcalarda calisiyor,")
     print ("   i.e. low-CP'ye dokunmuyor -> loss YAPISAL OLARAK SIFIR)")
     with io .open ("results/s9_cokcp_multires.json","w",encoding ="utf-8")as f :
-        json .dump ({"A_cok":float (ra ["F1"]["cok"]),"B_cok":float (rb ["F1"]["cok"]),
-        "fark":float (d ),"ga":[float (lo ),float (hi )],
+        json .dump ({"A_cok":float (ra ["F1"]["very"]),"B_cok":float (rb ["F1"]["very"]),
+        "difference":float (d ),"ga":[float (lo ),float (hi )],
         "gecti":bool (d >=0.03 ),"n_parca":len (hedef )},f ,indent =1 )
     print ("receipt -> results/s9_cokcp_multires.json")
 

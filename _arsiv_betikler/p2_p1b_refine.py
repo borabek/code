@@ -104,7 +104,7 @@ for nm ,fn in cfgs :
     print (f"{nm :30s} {roc_auc_score (Y [WORK ],sc [WORK ]):7.4f} {nested (sc ,masks ['ALL'],FG ):7.4f} "
     f"{nested (sc ,masks ['WEI'],FG ):7.4f} {nested (sc ,masks ['PXC'],FG ):7.4f} {topn (sc ,WORK ):7.4f}",flush =True )
 
-print ("\n--- ENSEMBLE (rank-ortalama, farkli error yapan modeller) ---")
+print ("\n--- ENSEMBLE (rank-mean, different error yapan models) ---")
 def rank01 (s ):
     o =np .zeros (len (s ));i =np .where (WORK )[0 ]
     o [i ]=(np .argsort (np .argsort (s [i ]))/max (len (i )-1 ,1 ));return o 

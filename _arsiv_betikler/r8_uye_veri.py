@@ -119,7 +119,7 @@ def main ():
                     X .append ([CONF [u_ ],MES [u_ ],a_ort [u_ ],a_bir [u_ ],float (len (DIR )),
                     yay ,float (rank_ [u_ ])]+X58 [ci ].tolist ())
                     Y .append (1 if a_gt [u_ ]<=10.0 else 0 )
-                    PID .append (pid );GEO .append (gk .get (pid ,"yok:"+pid ));CPI .append (f"{pid }#{ci }")
+                    PID .append (pid );GEO .append (gk .get (pid ,"absent:"+pid ));CPI .append (f"{pid }#{ci }")
         except Exception as e :
             atlanan +=1 
             if atlanan <=5 :

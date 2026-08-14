@@ -87,7 +87,7 @@ def uygula (direction ,konum ):
     for r in DER :
         d_ =PARCA .get (r ["pid"])
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         if d_ is None :P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
         else :
             P =d_ ["P"].copy ();Pd =d_ ["Pd"].copy ()

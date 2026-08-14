@@ -130,9 +130,9 @@ def obj_yaz (yol ,V ,F ):
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--cikti",default ="_p2_brep_etiket")
-    ap .add_argument ("--en-az-ratio",type =float ,default =0.5 ,
-    help ="parcanin GT'lerinin en az bu orani eslesmeli")
+    ap .add_argument ("--output",default ="_p2_brep_etiket")
+    ap .add_argument ("--most-few-ratio",type =float ,default =0.5 ,
+    help ="parcanin GT'lerinin at least this orani eslesmeli")
     a =ap .parse_args ()
     import d6_record 
     import canonical_d7 as K 
@@ -194,7 +194,7 @@ def main ():
     "esles_aci":ESLES_ACI ,"r_pay":R_PAY ,
     "band":[GERI ,ILERI ],"en_az_oran":a .en_az_oran ,
     "not":"B-rep GERCEK mouth sinirindan uretilen kismi CableEntry "
-    "etiketi. D7 kesisimi SIFIR (kod icinde assert)."},
+    "etiketi. D7 kesisimi SIFIR (kod inside assert)."},
     open ("results/p2_brep_etiket.json","w"),indent =1 )
     print (f"-> {a .out_ }")
 

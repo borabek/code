@@ -74,7 +74,7 @@ def egit (npz ,wgt_ =None ,cols =None ,depth =None ,yaprak =3 ,seed =0 ):
     elif wgt_ =="grup":
         import measure_set as OK 
         gk =OK .geo_anahtarlari ()
-        g =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+        g =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
         c =collections .Counter (g .tolist ())
         w =np .array ([1.0 /c [x ]for x in g ]);w *=len (w )/w .sum ()
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =yaprak ,
@@ -101,8 +101,8 @@ def main ():
     ("v3 TABAN (degismemis)",dict ()),
     ("G2 manufacturer-dengeli",dict (wgt_ ="manufacturer")),
     ("G3 ikiz-agirlikli",dict (wgt_ ="grup")),
-    ("G4a kapasite dusuk (depth 8, yaprak 10)",dict (depth =8 ,yaprak =10 )),
-    ("G4b kapasite cok dusuk (depth 5, yaprak 25)",dict (depth =5 ,yaprak =25 )),
+    ("G4a kapasite low (depth 8, yaprak 10)",dict (depth =8 ,yaprak =10 )),
+    ("G4b kapasite very low (depth 5, yaprak 25)",dict (depth =5 ,yaprak =25 )),
     ]
     S ={}
     print (f"{'arm':<38}{'194 F1':>9}{'SINAV F1':>10}{'exam precision':>16}")
@@ -115,10 +115,10 @@ def main ():
         print (f"{ad :<38}{r1 ['F1']:>9.4f}{r2 ['F1']:>10.4f}{kes :>16.4f}")
 
     t =S ["v3 TABAN (degismemis)"]
-    print (f"\n{'arm':<38}{'194 fark':>10}{'SINAV fark':>12}   GO")
+    print (f"\n{'arm':<38}{'194 difference':>10}{'SINAV difference':>12}   GO")
     GO ={"G2 manufacturer-dengeli":(0.020 ,-0.010 ),"G3 ikiz-agirlikli":(0.015 ,-1.0 ),
-    "G4a kapasite dusuk (depth 8, yaprak 10)":(0.025 ,-1.0 ),
-    "G4b kapasite cok dusuk (depth 5, yaprak 25)":(0.025 ,-1.0 )}
+    "G4a kapasite low (depth 8, yaprak 10)":(0.025 ,-1.0 ),
+    "G4b kapasite very low (depth 5, yaprak 25)":(0.025 ,-1.0 )}
     for ad ,(esik_s ,esik_p )in GO .items ():
         d1 =S [ad ]["m194"]-t ["m194"];d2 =S [ad ]["exam"]-t ["exam"]
         ok =d2 >=esik_s and d1 >=esik_p 

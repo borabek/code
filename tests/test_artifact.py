@@ -49,7 +49,7 @@ def test_gate_hatasi_SESSIZ_gecmez ():
     with open (os .path .join (KOK ,"robot_cp.py"),encoding ="utf-8")as f :
         s =f .read ()
     assert "_GATE_HATA"in s ,"gate hatasi kaydedilmiyor"
-    assert "wire-gate atlandi"not in s ,"eski SESSIZ atlama mesaji hala var"
+    assert "wire-gate atlandi"not in s ,"eski SESSIZ atlama mesaji hala present"
     assert 'c.get("_gate_hata")'in s ,"gate hatali CP'ler REVIEW'a dusurulmuyor"
     assert "sys.exit(3)"in s ,"gate hatasi cikis koduna yansimiyor"
 

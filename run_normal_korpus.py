@@ -65,7 +65,7 @@ def main ():
             continue 
         z =np .load (f"{KAYNAK }/{f }")
         X ,idx ,YD =z ["X"],np .asarray (z ["idx"],int ),np .asarray (z ["YD"],float )
-        P ,D ,kay =z ["P"],z ["D"],z ["kaynak"]
+        P ,D ,kay =z ["P"],z ["D"],z ["source"]
         if not len (idx ):
             empty_ +=1 
             continue 

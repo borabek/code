@@ -33,7 +33,7 @@ def yukle (on ):
             if "P"not in z :
                 continue 
             v .append ({"pid":f [len (on )+1 :-4 ],"X":z ["X"],"y":z ["y"],
-            "P":z ["P"],"D":z ["D"],"kaynak":z ["kaynak"]})
+            "P":z ["P"],"D":z ["D"],"source":z ["source"]})
     return v 
 
 
@@ -41,7 +41,7 @@ def ek (d ,kul ):
     """Yeniden hesap GEREKTIRMEYEN ek sutunlar."""
     P =d ["P"];n =len (P );sut =[]
     if "K"in kul :
-        sut .append (d ["kaynak"].reshape (-1 ,1 ).astype (float ))
+        sut .append (d ["source"].reshape (-1 ,1 ).astype (float ))
     if "Y"in kul :
         if n >1 :
             M =np .linalg .norm (P [:,None ]-P [None ],axis =-1 )

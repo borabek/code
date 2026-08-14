@@ -189,7 +189,7 @@ def main ():
     ap .add_argument ("--min-v",type =int ,default =45 )
     ap .add_argument ("--vertex-conf",type =float ,default =0.7 )
     ap .add_argument ("--remesh-target",type =int ,default =6000 )
-    ap .add_argument ("--icp",action ="store_true",help ="FAZ 1: ICP-refined hizalama ile de eslestir; coarse vs ICP F1 karsilastir")
+    ap .add_argument ("--icp",action ="store_true",help ="FAZ 1: ICP-refined hizalama with de eslestir; coarse vs ICP F1 karsilastir")
     ap .add_argument ("--skip-parts",nargs ="+",default =[],help ="hang eden patolojik parcalari atla (step_to_mesh/remesh takilan)")
     ap .add_argument ("--verbose-parts",action ="store_true",help ="each parcayi islemeden before pid head (hang teshisi)")
     ap .add_argument ("--inward-mm",type =float ,default =0.0 ,

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""R12: B-REP EKSEN KAPSAMASI -- gorulmemis ureticide neden %24?
+"""R12: B-REP EKSEN KAPSAMASI -- gorulmemis ureticide why %24?
 
 FINDING (R11): B-rep ekseni bulunan candidate orani tanidikta %47, gorulmemiste %24. B-rep
 bulunmayinca `channel_axis + _snap_axis` yoluna dusuluyor -- and that path EGIMI GOREMIYOR

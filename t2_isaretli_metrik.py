@@ -87,7 +87,7 @@ def main ():
                         c =wire_gate .pick_member_direction (Xr [k ],c ,r ["UYE"])
                     P =np .array ([x ["point"]for x in c ],float )
                     Pd =np .array ([x ["direction"]for x in c ],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "dusuk"
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         for ad ,s in KOL .items ():
             det [ad ].append ((rj ,)+match_signed (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,s ))

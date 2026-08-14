@@ -365,7 +365,7 @@ sphere_frac =0.015 ,arrow_frac =0.18 ):
         #
         # WHY GEREKLI: A4 olcumu -- FP'ler fiziksel kusurda ZENGIN (body ici 3.16x,
         # dar mouth 2.18x, onu closed 1.85x). Bu kusurlar SAYIDA gorunmuyor but GLB'ye bakan
-        # insan for "this point neden wrong" sorusunun DOGRUDAN yaniti.
+        # insan for "this point why wrong" sorusunun DOGRUDAN yaniti.
         #
         # Bayrak kaynagi: each CP sozlugunde opsiyonel `fiz_bayrak` (govde_ici/onu_kapali/
         # dar_agiz/ters_yon). Yoksa no sey cizilmez -- old GLB'ler BIT-OZDES kalir.

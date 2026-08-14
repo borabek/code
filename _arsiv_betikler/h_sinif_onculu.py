@@ -20,7 +20,7 @@ import numpy as np
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ ="results/gate_regrow_data_rt2.npz"
 CACHE ="results/_h_probs.pkl"
 
@@ -33,18 +33,18 @@ def big_thr (npz ,test_fams ):
     keep =~np .isin (fams .astype (str ),list (test_fams ))
     X ,y ,groups ,fams =X [keep ],y [keep ],groups [keep ],fams [keep ]
     ngt =dict (zip (d ["grp_ids"].tolist (),d ["ngt"].tolist ()))
-    reg =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
-    tot ={"dusuk":0 ,"cok":0 }
+    reg =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
+    tot ={"low":0 ,"very":0 }
     for g in {int (g )for g in groups }:
         n =int (ngt .get (g ,0 ))
         if n >0 :
-            tot ["cok"if n >=8 else "dusuk"]+=n 
+            tot ["very"if n >=8 else "low"]+=n 
     oof =np .zeros (len (y ))
     for tr ,te in GroupKFold (n_splits =5 ).split (X ,y ,fams .astype (str )):
         oof [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (X [tr ],y [tr ]).predict_proba (X [te ])[:,1 ]
     out ={}
-    for k in ("dusuk","cok"):
+    for k in ("low","very"):
         best =(0.0 ,0.40 )
         for thr in np .arange (0.20 ,0.71 ,0.05 ):
             m =reg ==k 
@@ -142,7 +142,7 @@ def main ():
     flush =True )
 
     def score (alpha ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         w =1.0 /np .maximum (prior ,1e-9 )**alpha 
         for r in cache :
             V =np .ascontiguousarray (r ["V"],np .float64 );F =np .ascontiguousarray (r ["F"],np .int64 )
@@ -173,7 +173,7 @@ def main ():
             if cps :
                 probs =sum (np .asarray (p_ ,np .float64 )for p_ in r ["pbs"])/len (r ["pbs"])
                 sc =clf .predict_proba (wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ))[:,1 ]
-                t_ =thr ["cok"]if is_hi else thr ["dusuk"]
+                t_ =thr ["very"]if is_hi else thr ["low"]
                 kept =[c for c ,s_ in zip (cps ,sc )if s_ >=t_ ]
             Q =np .array ([c ["point"]for c in kept ],float )if kept else np .zeros ((0 ,3 ))
             G ,Gd =r ["G"],r ["Gd"]
@@ -188,7 +188,7 @@ def main ():
                     if d_ >tol or a_ in used or hit [b_ ]:
                         continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (G )-tp 
         o ={}
         TP =FP =FN =0 
@@ -196,10 +196,10 @@ def main ():
             p =T /max (T +Fp ,1 );rc =T /max (T +Fn ,1 )
             o [k ]=2 *p *rc /max (p +rc ,1e-9 )
             TP +=T ;FP +=Fp ;FN +=Fn 
-        return (sum (W [k ]*o [k ]for k in W ),o ["dusuk"],o ["cok"],
+        return (sum (W [k ]*o [k ]for k in W ),o ["low"],o ["very"],
         TP /max (TP +FP ,1 ),TP /max (TP +FN ,1 ))
 
-    print (f"{'alpha':>7}{'tespit F1':>11}{'dusuk':>9}{'cok':>9}{'precision':>10}{'recall':>9}")
+    print (f"{'alpha':>7}{'tespit F1':>11}{'low':>9}{'very':>9}{'precision':>10}{'recall':>9}")
     res ={}
     for al in (0.0 ,0.15 ,0.3 ,0.5 ,0.7 ,1.0 ):
         w_ ,lo_ ,hi_ ,p_ ,r_ =score (al )

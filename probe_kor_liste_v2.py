@@ -85,7 +85,7 @@ with open ("results/p2_kor_v2.txt","w")as f :
     for p ,_ ,_ ,_ in sec :
         f .write (p +"\n")
 json .dump ({"secilen":[list (x )for x in sec ],"kor_havuz":len (kor ),
-"kural":{"gt":[GT_ALT ,GT_UST ],"aile_basina":1 ,
+"rule":{"gt":[GT_ALT ,GT_UST ],"aile_basina":1 ,
 "marka_tavani":MARKA_TAVANI },
 "not":"v1 en COK CP'liyi one koyuyordu (error). v2 hizli etiketlenen, "
 "aile-cesitli, markaya yayilmis parts."},

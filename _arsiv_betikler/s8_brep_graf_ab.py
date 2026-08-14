@@ -42,7 +42,7 @@ def main ():
     from sklearn .model_selection import GroupKFold 
 
     gr =np .load ("results/brep_graf.npz",allow_pickle =True )
-    GX =np .asarray (gr ["X"],float );GAD =[str (x )for x in gr ["ad"]]
+    GX =np .asarray (gr ["X"],float );GAD =[str (x )for x in gr ["name"]]
     tut =[i for i ,a in enumerate (GAD )if a not in BOS ]
     GX =GX [:,tut ]
     print (f"graf ozellikleri: {GX .shape } ({len (tut )} sutun, {len (BOS )} bos dusuruldu)")
@@ -58,7 +58,7 @@ def main ():
     for r in DER :
         r ["mfg"]=mfg_of .get (r ["pid"],"?")
     gk =measure_set .geo_anahtarlari ()
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+    grp =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
     tg ={r ["geo"]for r in DER }
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
 
@@ -141,7 +141,7 @@ def main ():
                     k2 =wire_gate .decision_mask (s )
                     if k2 .any ():
                         P =r ["P"][k2 ].copy ();Pd =r ["Pd"][k2 ].copy ()
-                rj ="cok"if r ["n"]>=8 else "dusuk"
+                rj ="very"if r ["n"]>=8 else "low"
                 det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
                 rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             SON [ad ][b ]=float (f1w (det ))
@@ -157,7 +157,7 @@ def main ():
         fn =lambda rows :f1w ([y2 for _ ,y2 in rows ])-f1w ([x for x ,_ in rows ])
         _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (da ,db )),g ,fn ,n =2000 )
         ga [b ]=(lo ,hi )
-    print ("\n=== KARAR ===")
+    print ("\n=== DECISION ===")
     k =karar_olcutu .degerlendir (SON ["A 58"],SON ["B 58+graf"],ga =ga )
     print (k )
     with io .open ("results/s8_brep_graf_ab.json","w",encoding ="utf-8")as f :

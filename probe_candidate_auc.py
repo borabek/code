@@ -49,7 +49,7 @@ NEG_KAT =int (os .environ .get ("P6_NEG_KAT","6"))
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -134,7 +134,7 @@ def main ():
         print (f"{m_ :<7}{r ['gt']:>6}{n_ :>9.0f}{r ['auc']:>12.4f}"
         f"{r ['sira_ilk']:>10.0f}{r ['sira_son']:>10.0f}"
         f"{r ['ustk']:>8.3f}{r ['gereken_auc']:>13.4f}")
-    print ("\nOKUMA: 'gereken_auc' = ilk-k'nin dogrularla dolmasi icin gereken")
+    print ("\nOKUMA: 'gereken_auc' = ilk-k'nin dogrularla dolmasi for gereken")
     print ("       kaba AUC (buyukluk mertebesi). auc_secici with arasindaki")
     print ("       difference, 0.75'e giden mesafenin TEK sayilik ifadesidir.")
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,

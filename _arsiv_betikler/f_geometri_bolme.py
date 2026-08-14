@@ -19,7 +19,7 @@ import os ,sys ,json ,glob
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ ="results/gate_regrow_data_rt2.npz"
 KEYS ="results/_geometry_keys.json"
 
@@ -54,7 +54,7 @@ def main ():
             else :
                 s_ =step .get (pid )
                 if not s_ :
-                    miss +=1 ;gk [pid ]="yok:"+pid ;continue 
+                    miss +=1 ;gk [pid ]="absent:"+pid ;continue 
                 Vr ,Fr =step_to_mesh (s_ )
                 V ,Fm =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
                 V =np .asarray (V ,float );nf =int (np .asarray (Fm ).shape [0 ])
@@ -62,11 +62,11 @@ def main ():
             gk [pid ]="g:%s|v%d|f%d"%(dims .tolist (),int (np .log2 (max (len (V ),1 ))),
             int (np .log2 (max (nf ,1 ))))
         except Exception :
-            miss +=1 ;gk [pid ]="yok:"+pid 
+            miss +=1 ;gk [pid ]="absent:"+pid 
         if (k +1 )%200 ==0 :
             print (f"  {k +1 }/{len (uniq )}",flush =True )
     json .dump (gk ,open (KEYS ,"w"))
-    G_geo =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    G_geo =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
     ng_fam =len (set (fams ));ng_geo =len (set (G_geo ))
     print (f"\ngruplama: family_key {ng_fam } grup | geometry_key {ng_geo } grup "
     f"({miss } part okunamadi)")
@@ -83,11 +83,11 @@ def main ():
     print (f"  IKIZI OLAN part sayisi: {shared }/{len (uniq )} = %{100 *shared /len (uniq ):.1f}"
     f"   <- eski bolmede bunlarin ikizi egitimde kalabiliyordu")
 
-    reg =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
-    tot ={"dusuk":0 ,"cok":0 }
+    reg =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
+    tot ={"low":0 ,"very":0 }
     for g in {int (g )for g in groups }:
         n =int (ngt .get (g ,0 ))
-        if n >0 :tot ["cok"if n >=8 else "dusuk"]+=n 
+        if n >0 :tot ["very"if n >=8 else "low"]+=n 
 
     def run (gkey ,lab ):
         o =np .zeros (len (y ))
@@ -95,7 +95,7 @@ def main ():
             o [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
             random_state =0 ).fit (X [tr ],y [tr ]).predict_proba (X [te ])[:,1 ]
         out ={}
-        for k in ("dusuk","cok"):
+        for k in ("low","very"):
             b =(0.0 ,0.40 )
             for t in np .arange (0.20 ,0.71 ,0.05 ):
                 m =reg ==k ;s_ =(o >=t )&m 
@@ -105,16 +105,16 @@ def main ():
                 if f >b [0 ]:b =(f ,float (t ))
             out [k ]=b 
         w =sum (W [k ]*out [k ][0 ]for k in W )
-        print (f"{lab :<34}{w :>9.4f}{out ['dusuk'][0 ]:>9.4f}{out ['cok'][0 ]:>9.4f}"
-        f"{str ((out ['dusuk'][1 ],out ['cok'][1 ])):>16}",flush =True )
+        print (f"{lab :<34}{w :>9.4f}{out ['low'][0 ]:>9.4f}{out ['very'][0 ]:>9.4f}"
+        f"{str ((out ['low'][1 ],out ['very'][1 ])):>16}",flush =True )
         return w 
 
-    print (f"\n{'gruplama':<34}{'CP-F1':>9}{'dusuk':>9}{'cok':>9}{'esikler':>16}")
+    print (f"\n{'gruplama':<34}{'CP-F1':>9}{'low':>9}{'very':>9}{'esikler':>16}")
     a =run (fams ,"family_key (= part no, ESKI)")
     b =run (G_geo ,"geometry_key (GERCEK koruma)")
     print (f"\nSIZINTININ BEDELI: {b -a :+.4f}")
     print ("  negatifse old numbers that up to IYIMSERDI and correct number geometri gruplamasindaki.")
-    json .dump ({"family_key":a ,"geometry_key":b ,"fark":b -a ,
+    json .dump ({"family_key":a ,"geometry_key":b ,"difference":b -a ,
     "n_grup_family":ng_fam ,"n_grup_geometry":ng_geo ,
     "ikizi_olan_parca_orani":shared /max (len (uniq ),1 )},
     open ("results/f_geometri_bolme.json","w"),indent =1 )

@@ -55,7 +55,7 @@ HEDEFLER =(0.70 ,0.80 ,0.90 ,0.95 )
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
 
 
 def yigin_f32 (ogeler ,uret ,line_ ):
@@ -124,7 +124,7 @@ def main ():
         flush =True )
 
     if not rec_ :
-        sys .exit ("hic tahmin yok")
+        sys .exit ("no tahmin none")
     sk =np .array ([a for a ,_ in rec_ ])
     dg =np .array ([b for _ ,b in rec_ ],bool )
     rank_ =np .argsort (-sk )
@@ -159,7 +159,7 @@ def main ():
     json .dump ({"damga":makbuz_hash .damga (),"dizin":os .environ ["P6_DIZIN"],
     "katlar":katlar ,"n_parca":len (data_ ),"n_tahmin":len (sk ),
     "gt_toplam":int (gt_top ),"ham_kesinlik":float (dg .mean ()),
-    "kural":list (KURAL ),"nms":NMS ,"oneri":oneri ,
+    "rule":list (KURAL ),"nms":NMS ,"oneri":oneri ,
     "not":"GORULMEMIS MARKA katlarinda (LOMO) precision-kapsama. "
     "ONAYLI katmani esigi buradan secilir. D7'ye BAKILMADI. "
     "Kapsama = ONAYLI sign / toplam GT."},

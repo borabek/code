@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """Q10: EK blok (iceri channel derinligi + renk) 18-sutunlu gate'in USTUNE a sey katiyor mu?
 
-EK bloktaki 4 feature and neden buradalar:
+EK bloktaki 4 feature and why buradalar:
   ic_derinlik   -- `bos_derinlik` yazilirken isin DISARI gonderilmisti; olcunce onun "disarisi
                    gercekten empty mu" oldugu anlasildi (TP %75.1 never carpmiyor, FP %35.6).
                    Kanal DERINLIGI never olculmemisti. Tel girisi ~5-15mm'de metalde biter.
-  c_govde / kanalda_metal / metal_mesafe -- RENK. Olculdu (q8, 62 part): adayin on
+  c_govde / kanalda_metal / metal_mesafe -- RENK. Olculdu (q8, 62 part): adayin ten
                    durdugu silindir neredeyse never metal DEGIL (c_metal AUC 0.496 = OLU) but
                    metale YAKINLIK ayiriyor (metal_mesafe ters AUC 0.639; TP 42.5mm / FP 62.0mm).
                    Aday duzeyinde 18 -> 21: F1 +0.0097 (q9).
@@ -52,16 +52,16 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }
     CLF ={}
     for tag ,(f ,ncol )in KAYNAK .items ():
         d =np .load (f ,allow_pickle =True )
         pids =np .array ([str (x )for x in d ["pids"]])
-        keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+        keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
         Xt =d ["X"][keep ][:,:ncol ]
         assert Xt .shape [1 ]==ncol ,f"{tag }: {d ['X'].shape [1 ]} sutunluk veri, {ncol } istendi"
         CLF [tag ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
@@ -106,19 +106,19 @@ def main ():
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             if r ["X"]is not None :
                 sc =clf .predict_proba (r ["X"][:,:nc ])[:,1 ]
-                m =sc >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
+                m =sc >=(THR ["very"]if r ["is_hi"]else THR ["low"])
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'gate':<26}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'gate':<26}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
-    for tag ,lab in (("fiz18","18 sutun (dagitilan)"),
-    ("ic19","19 sutun (+ic_derinlik)"),
-    ("ek22","22 sutun (+depth+renk)")):
+    for tag ,lab in (("fiz18","18 column (dagitilan)"),
+    ("ic19","19 column (+ic_derinlik)"),
+    ("ek22","22 column (+depth+renk)")):
         det ,rob =kos (tag )
         R [tag ]=(det ,rob )
         p_ ,r_ =pr (det )

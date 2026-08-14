@@ -77,7 +77,7 @@ def main ():
     d =np .load ("results/gate_regrow_data_topo.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     kod ={}
     for k in np .unique (tr_mfg ):
@@ -96,13 +96,13 @@ def main ():
                 m =(s >=ORAN *max (float (s .max ()),1e-9 ))&(s >=TABAN )
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
-    print (f"\n{'split':<22}{'sutun':>6}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }
+    print (f"\n{'split':<22}{'column':>6}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
     for nc ,ad in ((18 ,"18 (mevcut)"),(22 ,"22 (+topoloji)")):
         keep =~np .isin (tr_grp ,list (tg ))

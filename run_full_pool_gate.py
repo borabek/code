@@ -56,7 +56,7 @@ def oku (on ,kaynaklar ):
         if not (f .startswith (on +"_")and f .endswith (".npz")):
             continue 
         z =np .load (f"{OZ }/{f }")
-        kay =np .asarray (z ["kaynak"],int )
+        kay =np .asarray (z ["source"],int )
         m =np .isin (kay ,kaynaklar )
         if int (m .sum ())<2 :
             continue 
@@ -170,7 +170,7 @@ def main ():
                 en =(tip ,e ,r )
         tip ,e ,_ =en 
         r7 =olc (m ,te ,tip ,e ,tam_zincir =True ,S =S )
-        res_ [ad ]={"kural":f"{tip } {e }","aday_per_parca":ap ,"D7":r7 }
+        res_ [ad ]={"rule":f"{tip } {e }","aday_per_parca":ap ,"D7":r7 }
         print (f"  SECILEN {tip } {e } -> D7 (TAM ZINCIR) robot **{r7 ['robot']:.4f}** "
         f"| tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f} | "
         f"en kotu {r7 ['en_kotu']:.4f}",flush =True )

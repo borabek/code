@@ -17,7 +17,7 @@ import os ,sys ,json ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ ="results/gate_regrow_data_rt2.npz"
 CACHE ="results/_h_probs.pkl"
 
@@ -58,7 +58,7 @@ def main ():
     print (f"{len (cache )} part | esikler {thr }\n",flush =True )
 
     def score (alpha ,floor ,minv ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         w =1.0 /np .maximum (prior ,1e-9 )**alpha 
         for r in cache :
             V =np .ascontiguousarray (r ["V"],np .float64 );F =np .ascontiguousarray (r ["F"],np .int64 )
@@ -83,7 +83,7 @@ def main ():
             if cps :
                 probs =sum (np .asarray (p_ ,np .float64 )for p_ in r ["pbs"])/len (r ["pbs"])
                 sc =clf .predict_proba (wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ))[:,1 ]
-                t_ =thr ["cok"]if is_hi else thr ["dusuk"]
+                t_ =thr ["very"]if is_hi else thr ["low"]
                 kept =[c for c ,s_ in zip (cps ,sc )if s_ >=t_ ]
             Q =np .array ([c ["point"]for c in kept ],float )if kept else np .zeros ((0 ,3 ))
             G ,Gd =r ["G"],r ["Gd"];hit =np .zeros (len (G ),bool );used =set ()
@@ -95,7 +95,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (G ))):
                     if d_ >tol or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (G )-tp 
         o ={};TP =FP =FN =0 
         for k ,(T ,Fp ,Fn )in agg .items ():
@@ -103,7 +103,7 @@ def main ():
             o [k ]=2 *p *rc /max (p +rc ,1e-9 );TP +=T ;FP +=Fp ;FN +=Fn 
         return (sum (W [k ]*o [k ]for k in W ),TP /max (TP +FP ,1 ),TP /max (TP +FN ,1 ))
 
-    print (f"{'ayar':<34}{'tespit F1':>11}{'precision':>10}{'recall':>9}{'fark':>9}")
+    print (f"{'ayar':<34}{'tespit F1':>11}{'precision':>10}{'recall':>9}{'difference':>9}")
     base =None 
     CFG =[("MEVCUT (alpha 0)",0.0 ,0.0 ,MINV0 ),
     ("A: alpha .3 + gate .10",0.3 ,0.10 ,MINV0 ),

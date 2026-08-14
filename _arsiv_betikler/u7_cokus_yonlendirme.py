@@ -62,11 +62,11 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     tr_onek =np .array ([p [:ONEK ]for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }
     kod ={k :collections .Counter (mfg_of .get (p ,"?")for p in tr_pid [tr_mfg ==k ]).most_common (1 )[0 ][0 ]
     for k in np .unique (tr_mfg )}
 
@@ -114,7 +114,7 @@ def main ():
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
                 if s is not None and maske (s ).any ():
                     m =maske (s );P =r ["P"][m ];Pd =r ["Pd"][m ]
-                det [ad ].append (("cok"if r ["n"]>=8 else "dusuk",)
+                det [ad ].append (("very"if r ["n"]>=8 else "low",)
                 +esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
         return {k :f1w (v )for k ,v in det .items ()},yon_say ,threshold 
 

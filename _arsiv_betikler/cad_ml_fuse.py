@@ -88,7 +88,7 @@ def main (argv =None ):
     "sweep found the embedded 0.30 far from optimal -- the "
     "under-confident heat head needs a low threshold)")
     ap .add_argument ("--ml-add-thr",type =float ,default =0.30 ,dest ="ml_add_thr",
-    help ="confidence floor for ML detections ADDED on top of CAD "
+    help ="confidence floor for ML detections ADDED ten top of CAD "
     "(see fuse(); default 0.30 = hp_v22's high-precision val "
     "operating point). The ML-only column still uses --ml-thr")
     ap .add_argument ("--align-tol",type =float ,default =2.0 ,dest ="align_tol")

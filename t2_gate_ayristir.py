@@ -65,9 +65,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"none:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"none:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -86,7 +86,7 @@ def main ():
         if r ["X"]is None or not len (r ["G"]):
             continue 
         s =wire_gate .decision_score (m ,r ["X"])
-        PAR .append ({"rj":"cok"if r ["n"]>=8 else "dusuk","s":np .asarray (s ,float ),
+        PAR .append ({"rj":"very"if r ["n"]>=8 else "dusuk","s":np .asarray (s ,float ),
         "P":r ["P"],"Pd":r ["Pd"],"G":np .asarray (r ["G"],float ),
         "Gd":np .asarray (r ["Gd"],float ),"diag":float (r ["diag"]),
         "ngt":len (r ["G"])})
@@ -102,7 +102,7 @@ def main ():
         return f1w (rows )
 
     SON ={}
-    SON ["A su anki kural"]=puanla (lambda p :wire_gate .decision_mask (p ["s"]))
+    SON ["A su anki rule"]=puanla (lambda p :wire_gate .decision_mask (p ["s"]))
 
     en ,en_e =-1 ,None 
     for e in np .arange (0.05 ,0.96 ,0.05 ):
@@ -137,7 +137,7 @@ def main ():
         k =np .zeros (len (p ["s"]),bool )
         k [np .argsort (-p ["s"])[:p ["ngt"]]]=True 
         return k 
-    SON ["E KAHIN top-K (sayi bilinse)"]=puanla (kahin_topk )
+    SON ["E KAHIN top-K (number bilinse)"]=puanla (kahin_topk )
 
     def kahin_gate (p ):
         tp ,fp ,fn =match3 (p ["P"],p ["Pd"],p ["G"],p ["Gd"],p ["diag"])
@@ -156,8 +156,8 @@ def main ():
         return k 
     SON ["F KAHIN gate (tam secim)"]=puanla (kahin_gate )
 
-    print (f"\n{'arm':<34}{'TESPIT F1':>11}{'A'  'ya gore':>12}")
-    a =SON ["A su anki kural"]
+    print (f"\n{'arm':<34}{'TESPIT F1':>11}{'A'  'ya per':>12}")
+    a =SON ["A su anki rule"]
     for k ,v in SON .items ():
         print (f"{k :<34}{v :>11.4f}{(v -a ):>+12.4f}")
 
@@ -169,7 +169,7 @@ def main ():
     f"({(f_ -d_ )/max (f_ -a ,1e-9 ):.0%}) -- YENI BILGI gerekir")
     print (f"\n  gercekci threshold kollari: B {SON [f'B en iyi GLOBAL threshold ({en_e :.2f})']-a :+.4f} | "
     f"C {SON [f'C en iyi GORELI ratio ({en_o :.2f})']-a :+.4f}")
-    print (f"  E (CP sayisi bilinse) : {SON ['E KAHIN top-K (sayi bilinse)']-a :+.4f}")
+    print (f"  E (CP sayisi bilinse) : {SON ['E KAHIN top-K (number bilinse)']-a :+.4f}")
     with open ("results/t2_gate_ayristir.json","w",encoding ="utf-8")as f :
         json .dump (SON ,f ,indent =1 )
     print ("\nmakbuz -> results/t2_gate_ayristir.json")

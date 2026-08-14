@@ -196,7 +196,7 @@ def main (argv =None ):
         "whether they are even terminal blocks.")
     else :
         print ("  => SPREAD EVENLY. No family fix will move the number much: this is an "
-        "architecture/label wall. Do NOT burn 17-34h on v32/seeds expecting 0.90 "
+        "architecture/label wall. Do NOT burn 17-34h ten v32/seeds expecting 0.90 "
         "-- the remaining points are in the LABELS.")
 
     print (f"\n=== worst {args .worst } parts ===")

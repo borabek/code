@@ -7,7 +7,7 @@ einschub) whereas Contact'tir but yakininda CableEntry YOKTUR. Yani:
   Contact bileseni yakininda CableEntry VARSA -> real tel-baglantisi
   Contact bileseni YALNIZ (yakinda CableEntry absent) -> muhtemelen TOOL/actuator agzi -> CP DEGIL
 Bu dogruysa: cp-v3'un extra-saymasi = only-Contact'lari CP sayması. Fix = Contact'i CableEntry with ESLE.
-Sadece label geometrisi (GPU absent). Korpus + insan etiketleri on olcer.
+Sadece label geometrisi (GPU absent). Korpus + insan etiketleri ten olcer.
 """
 import os ,sys ,numpy as np 
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
@@ -65,7 +65,7 @@ def main ():
     print (f"\n  Contact/CableEntry orani: {tot_ct /max (tot_ce ,1 ):.2f}x  (>1.5 ise Contact'lar tel-girislerinden FAZLA = tool aglari)")
     # at most only-Contact'li parts
     per_part .sort (key =lambda r :-r [4 ])
-    print ("\n  en cok YALNIZ-Contact'li 8 part (pid, #CE, #CT, esli, yalniz):")
+    print ("\n  at most YALNIZ-Contact'li 8 part (pid, #CE, #CT, esli, only):")
     for pid ,nce ,nct ,p ,l in per_part [:8 ]:
         print (f"    {pid }: CE {nce }  CT {nct }  esli {p }  yalniz {l }")
 

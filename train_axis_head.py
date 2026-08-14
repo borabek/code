@@ -56,7 +56,7 @@ def _load_skip ():
 
     2026-07-30: training single a parcada 22 DAKIKA asili kaldi (op onbellegine new file
     yazilmadi, GPU %12). Ayni imza corpus betiklerinde de yasandi (spektral ayristirmada
-    47 dakika donen WEI parcasi). Parca ISLENMEDEN ONCE adi INFLIGHT'a yazilir; kosu yeniden
+    47 dakika donen WEI parcasi). Parca ISLENMEDEN ONCE adi INFLIGHT'a yazilir; run yeniden
     baslatildiginda orada duran part "bizi olduren part"dir.
 
     ILK kesintide kara listeye ALINMAZ: mekanizma "part asildi" with "sureci ben oldurdum"u
@@ -261,8 +261,8 @@ def main ():
             "val_median_deg":med ,"val_bad15":bad },
             os .path .join (OUTDIR ,"axis_net_best.pt"))
     print (f"\nEN IYI val medyan aci: {best :.2f}d -> {OUTDIR }/axis_net_best.pt")
-    print ("KILL kontrolu: mevcut urun ayni olcutte >15d sapmayi %16.0'ya indirmisti; "
-    "bu ag onu gecmiyorsa arm duser.")
+    print ("KILL kontrolu: mevcut urun same olcutte >15d sapmayi %16.0'ya indirmisti; "
+    "this ag onu gecmiyorsa arm duser.")
 
 
 if __name__ =="__main__":

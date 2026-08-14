@@ -94,22 +94,22 @@ def agiz_etiketle (V ,F ,mesh ,G ,Gd ,CE ,HOUSING =0 ):
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--sinir",type =int ,default =0 )
+    ap .add_argument ("--boundary",type =int ,default =0 )
     # VARDIYA: turetmedeki AYNI desen. Betik already devam edebilir (present which is .npz atlanir)
     # but vardiyasiz four kopya AYNI parcadan baslar and is bosa gider.
     ap .add_argument ("--vardiya",type =int ,default =0 )
-    ap .add_argument ("--toplam",type =int ,default =1 )
+    ap .add_argument ("--total",type =int ,default =1 )
     ap .add_argument ("--pids-file",default ="",
     help ="only this dosyadaki pid'leri etiketle (kontrollu parti for)")
     ap .add_argument ("--oz-tut-threshold",type =float ,default =0.6 ,
-    help ="oz-tutarlilik kapisi: GT'nin bu orani geri gelmeli (0.6 varsayilan)")
+    help ="oz-tutarlilik kapisi: GT'nin this orani geri gelmeli (0.6 varsayilan)")
     ap .add_argument ("--tol-carpan",type =float ,default =1.0 ,
     help ="oz-tutarlilik kapisi tolerans carpani")
     # FEW-SHOT (K6.5-b): each kosum KENDI k parcasini AYRI dizine boyamali. Sabit
     # `_label_auto` kullanilirsa onceki kosumlarin dosyalari birikir and fine-tune
     # k part instead of YUZLERCE parcayla egitilir -- error vermez, sayilari sisirir.
-    ap .add_argument ("--cikti",default =CIKTI_VARSAYILAN ,
-    help ="boyama cikti dizini (varsayilan _label_auto)")
+    ap .add_argument ("--output",default =CIKTI_VARSAYILAN ,
+    help ="boyama output dizini (varsayilan _label_auto)")
     a =ap .parse_args ()
 
     import protocol 

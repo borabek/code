@@ -61,6 +61,6 @@ print (f"  AYNI MI: {'EVET -> arm NULL'if e_ort ==e_dro else 'HAYIR -> arm ACIK'
 json .dump ({"markalar":markalar ,"esikler":ESIKLER ,
 "lomo_ort":hav ,"en_kotu":enk ,
 "secim_ort":e_ort ,"secim_dro":e_dro ,
-"ayni":bool (e_ort ==e_dro )},
+"same":bool (e_ort ==e_dro )},
 open ("results/k52_lomo.json","w"),indent =1 )
 print ("receipt -> results/k52_lomo.json")

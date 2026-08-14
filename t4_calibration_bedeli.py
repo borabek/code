@@ -21,7 +21,7 @@ def main ():
     X =d ["X"][:,:18 ];y =d ["y"].astype (bool )
     pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    grp =np .array ([gk .get (p ,"none:"+p )for p in pids ])
     THR =float (json .load (open ("cp_config.json",encoding ="utf-8"))["robot_wire_gate_threshold"])
 
     o =np .zeros (len (y ))
@@ -44,7 +44,7 @@ def main ():
     "VE(sabit, parca_orani 0.5)":(o >=THR )&part (lambda v :v >=0.5 *max (v .max (),1e-9 )),
     "VEYA(sabit, parca_orani 0.5)":(o >=THR )|part (lambda v :v >=0.5 *max (v .max (),1e-9 )),
     }
-    print (f"{'kural':<30}{'F1':>8}{'kesin':>8}{'recall':>8}{'pozitif%':>10}{'fark':>9}")
+    print (f"{'rule':<30}{'F1':>8}{'kesin':>8}{'recall':>8}{'pozitif%':>10}{'fark':>9}")
     out ={}
     baseline =None 
     for ad ,m in kur .items ():
@@ -55,7 +55,7 @@ def main ():
             baseline =f 
         print (f"{ad :<30}{f :>8.4f}{pr :>8.3f}{rc :>8.3f}{float (m .mean ()):>10.3f}{f -baseline :>+9.4f}")
         out [ad ]={"f1":f ,"precision":pr ,"recall":rc ,"fark":f -baseline }
-    print ("\nKILL: tanidik veride loss > 0.02 ise kural ALINMAZ.")
+    print ("\nKILL: tanidik veride loss > 0.02 ise rule ALINMAZ.")
     json .dump (out ,open ("results/t4_calibration_bedeli.json","w"),indent =1 )
     print ("receipt -> results/t4_calibration_bedeli.json")
 

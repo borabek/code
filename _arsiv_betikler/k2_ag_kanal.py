@@ -140,13 +140,13 @@ def main ():
             RG .append (r ["geo"]);RP .append (r ["pid"])
     RX =np .array (RX );MG =np .array (MG );RY =np .array (RY )
     RG =np .array (RG );RP =np .array (RP )
-    assert len (RY )==len (RY0 )and (RY ==RY0 ).all (),"etiket hizasi bozuk"
+    assert len (RY )==len (RY0 )and (RY ==RY0 ).all (),"label hizasi bozuk"
     tip =(BG [:,0 ]>0 )
     print (f"\n{len (RY )} candidate | mg kapsami {float ((MG !=0 ).any (1 ).mean ()):.1%} "
     f"(B-rep grafinin kapsami {float ((BG !=0 ).any (1 ).mean ()):.1%})")
 
     from t1_uretici_disi import auc_mw 
-    print (f"\n{'sutun':<14}{'AUC tum':>9}{'AUC zayif':>11}{'sifir-disi':>11}")
+    print (f"\n{'column':<14}{'AUC tum':>9}{'AUC zayif':>11}{'sifir-disi':>11}")
     for j ,a in enumerate (AD ):
         v =MG [:,j ]
         az =auc_mw (v [~tip ],RY [~tip ].astype (bool ))if (~tip ).any ()else 0.5 
@@ -176,7 +176,7 @@ def main ():
     o0 =oof (RX );o1 =oof (np .hstack ([RX ,MG ]));o2 =oof (np .hstack ([RX ,BG ,MG ]))
     m0 ,m1 ,m2 =karar (o0 ),karar (o1 ),karar (o2 )
     print (f"\n{'arm':<20}{'TUM':>9}{'yuvarlak':>10}{'ZAYIF':>9}")
-    for ad ,m in (("58 baseline",m0 ),("58+ag-kanal",m1 ),("58+bg+ag",m2 )):
+    for ad ,m in (("58 baseline",m0 ),("58+network-channel",m1 ),("58+bg+network",m2 )):
         print (f"{ad :<20}{f1m (m ):>9.4f}{f1m (m ,tip ):>10.4f}{f1m (m ,~tip ):>9.4f}")
     d_tum =f1m (m1 )-f1m (m0 );d_zayif =f1m (m1 ,~tip )-f1m (m0 ,~tip )
     print (f"\nfark: TUM {d_tum :+.4f} | ZAYIF YARI {d_zayif :+.4f}")

@@ -47,7 +47,7 @@ N_KAFES =int (os .environ .get ("KB_N","3"))
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -185,7 +185,7 @@ def main ():
     "D7'ye BAKILMADI."},
     open (f"results/kafes_bulunabilir_{KUME }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/kafes_bulunabilir_{KUME }.json")
-    print ("OKUMA: aciak KUCUKSE yayilim kolu kurulabilir; BUYUKSE once candidate "
+    print ("OKUMA: aciak KUCUKSE yayilim kolu kurulabilir; BUYUKSE first candidate "
     "kalitesi/siralamasi duzeltilmeli.")
 
 

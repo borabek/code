@@ -99,14 +99,14 @@ def main ():
 
     out ={"note":"FAZ2/P0 split kilidi. locked_parts P7'de TEK KEZ acilir.",
     "created":"2026-07-28","n_parts":len (rows ),
-    "family_source":"STEP PRODUCT adi (varyant eki soyulmus); part-no ise json_dataset.family_key fallback",
-    "geometry_source":"JSON Graphic3d bbox (0.1mm) + log2(nokta sayisi)",
+    "family_source":"STEP PRODUCT adi (varyant eki soyulmus); part-no whereas json_dataset.family_key fallback",
+    "geometry_source":"JSON Graphic3d bbox (0.1mm) + log2(point count)",
     "locked_holdout_rule":"sha256(family)%100 < 20",
     "n_families":len (fams ),"n_geometries":len (geos ),
     "locked_families":locked_f ,"locked_parts":locked_parts ,"work_parts":work_parts ,
     "parts":rows }
     json .dump (out ,open ("results/split_lock.json","w"),indent =1 )
-    print ("\n-> results/split_lock.json yazildi (tek dogruluk kaynagi)")
+    print ("\n-> results/split_lock.json yazildi (single dogruluk kaynagi)")
 
 
 if __name__ =="__main__":

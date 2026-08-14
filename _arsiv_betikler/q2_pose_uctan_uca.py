@@ -67,7 +67,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    tgrp =np .array ([gk .get (p ,"yok:"+p )for p in tpid ])
+    tgrp =np .array ([gk .get (p ,"absent:"+p )for p in tpid ])
     keep =~np .isin (tgrp ,list (tg ))
 
     def donustur (X ,pidler ):
@@ -128,12 +128,12 @@ def main ():
                                     abs (float (g @d ))/(np .linalg .norm (g )+1e-9 ),0 ,1 )))
                                     if ac >=esik_deg :
                                         Pd [i ]=g /(np .linalg .norm (g )+1e-9 )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    KOL =[("A duzeltme yok",dict ()),
+    KOL =[("A correction absent",dict ()),
     ("B lateral, esiksiz",dict (esik_mm =0.0 )),
     ("C lateral, >=0.5mm",dict (esik_mm =0.5 )),
     ("C lateral, >=1.0mm",dict (esik_mm =1.0 )),
@@ -146,15 +146,15 @@ def main ():
         det ,rob =puanla ("A"if ad .startswith ("A")else "X",**kw )
         SON [ad ]=(float (f1w (det )),float (f1w (rob )))
         PARCA [ad ]=(det ,rob ,[x ["geo"]for x in DER ])
-        a =SON ["A duzeltme yok"]
+        a =SON ["A correction absent"]
         print (f"{ad :<22}{SON [ad ][0 ]:>10.4f}{SON [ad ][1 ]:>10.4f}"
         f"{SON [ad ][0 ]-a [0 ]:>+10.4f}{SON [ad ][1 ]-a [1 ]:>+10.4f}",flush =True )
 
-    a =SON ["A duzeltme yok"]
+    a =SON ["A correction absent"]
     en =max ((k for k in SON if not k .startswith ("A")),key =lambda k :SON [k ][1 ])
     dr =SON [en ][1 ]-a [1 ];dt =SON [en ][0 ]-a [0 ]
-    da ,_ ,g =PARCA ["A duzeltme yok"];db ,rb ,_ =PARCA [en ]
-    _ ,ra ,_ =PARCA ["A duzeltme yok"]
+    da ,_ ,g =PARCA ["A correction absent"];db ,rb ,_ =PARCA [en ]
+    _ ,ra ,_ =PARCA ["A correction absent"]
     cift =list (zip (ra ,rb ))
     fn =lambda rows :f1w ([y for _ ,y in rows ])-f1w ([x for x ,_ in rows ])
     _ ,lo ,hi =measure_set .grup_bootstrap (cift ,g ,fn ,n =2000 )

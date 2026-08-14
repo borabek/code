@@ -32,13 +32,13 @@ anchor =("    allc = [dict(c, _mid=i) for i, lst in enumerate(cp_lists) for c in
 
 new_ =("    allc = [dict(c, _mid=i) for i, lst in enumerate(cp_lists) for c in lst]"+N 
 +"    allc.sort(key=lambda c: -float(c.get(\"confidence\", 0.0)))"+N 
-+"    # EKSEN-FARKINDALIKLI HAVUZLAMA (cp_config.robot_eksen_havuz): iki candidate ayni"+N 
-+"    # aciklktan sayilir -> DIK mesafe <= yanal_mm VE eksenler hizali (<=20 derece);"+N 
++"    # EKSEN-FARKINDALIKLI HAVUZLAMA (cp_config.robot_eksen_havuz): two candidate same"+N 
++"    # aciklktan sayilir -> DIK distance <= yanal_mm VE eksenler hizali (<=20 derece);"+N 
 +"    # DERINLIK farki serbest. Gerekce: tez CP'yi AGIZDA (v_o), manufacturer KONTAKTA"+N 
 +"    # tanimlar; uyeler same kanali different derinlikte isaretleyebilir. Puanlayici"+N 
 +"    # (big_arbiter.greedy) already boyle calisiyor -- this, urunun own icindeki"+N 
-+"    # tutarsizligi kapatir. Olculdu: birlesme %67.7 -> %70.7; ayrica lateral 3mm"+N 
-+"    # siniri KOMSU KUTUPLARI (adim 3.5-6mm) duz 5mm kureden daha iyi korur."+N 
++"    # tutarsizligi kapatir. Olculdu: birlesme %67.7 -> %70.7; also lateral 3mm"+N 
++"    # siniri KOMSU KUTUPLARI (step 3.5-6mm) duz 5mm kureden more iyi korur."+N 
 +"    _eks = bool(_cfg.get(\"robot_eksen_havuz\", False))"+N 
 +"    _yan = float(_cfg.get(\"robot_eksen_havuz_yanal_mm\", 3.0))"+N 
 +"    kept = []"+N 

@@ -46,7 +46,7 @@ def main ():
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
     THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     # --- TURETME a times (ozellikler saklanir) ---
     DER =[]
@@ -74,10 +74,10 @@ def main ():
 
     d =np .load ("results/gate_regrow_data_fiz.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (x ["pid"],"yok:"+x ["pid"])for x in DER }
+    tg ={gk .get (x ["pid"],"none:"+x ["pid"])for x in DER }
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"none:"+p )for p in tr_pid ])
     # training korpusundaki manufacturer kodunu ADA cevir (0/1 -> WEI/PXC)
     kod ={}
     for k in np .unique (tr_mfg ):
@@ -85,7 +85,7 @@ def main ():
         kod [k ]=adlar .most_common (1 )[0 ][0 ]
     print (f"training korpusu manufacturer kodlari: {kod }",flush =True )
 
-    print (f"\n{'manufacturer (test)':<18}{'kural':<26}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'manufacturer (test)':<18}{'rule':<26}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
     out ={}
     for k ,ad in kod .items ():
         icinde =[x for x in DER if x ["mfg"]==ad ]
@@ -101,13 +101,13 @@ def main ():
                 if r ["X"]is not None :
                     s =clf .predict_proba (r ["X"])[:,1 ]
                     if rule_ =="sabit":
-                        m =s >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
+                        m =s >=(THR ["very"]if r ["is_hi"]else THR ["dusuk"])
                     else :
                         o_ ,t_ =rule_ 
                         m =(s >=o_ *max (float (s .max ()),1e-9 ))&(s >=t_ )
                     if m .any ():
                         P =r ["P"][m ];Pd =r ["Pd"][m ]
-                kk ="cok"if r ["n"]>=8 else "dusuk"
+                kk ="very"if r ["n"]>=8 else "dusuk"
                 det .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
                 rob .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             p_ ,r_ =pr (det )

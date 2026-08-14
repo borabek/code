@@ -18,7 +18,7 @@ import numpy as np
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"dusuk":0.895 ,"very":0.105 }
 
 
 def vote_avg (cp_lists ,cluster_mm =5.0 ,min_votes =1 ,mode ="rep",dir_mode ="rep"):
@@ -124,16 +124,16 @@ def main ():
         want =set (json .load (open ("results/split3.json"))[_SET ]["parts"])
         sel =[p for p in parts if p [1 ]in want ]
         print (f"KUME={_SET }: {len (sel )} part",flush =True )
-    tg ={gk .get (p [1 ],"yok:"+p [1 ])for p in sel }
-    Gg =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    tg ={gk .get (p [1 ],"none:"+p [1 ])for p in sel }
+    Gg =np .array ([gk .get (p ,"none:"+p )for p in pids ])
     keep =~np .isin (Gg ,list (tg ))
-    reg_all =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
+    reg_all =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
     Xk ,yk ,gg ,reg =X [keep ],y [keep ],Gg [keep ],reg_all [keep ]
-    tot ={"dusuk":0 ,"cok":0 }
+    tot ={"dusuk":0 ,"very":0 }
     for g in {int (g )for g in groups [keep ]}:
         n =int (ngt .get (g ,0 ))
         if n >0 :
-            tot ["cok"if n >=8 else "dusuk"]+=n 
+            tot ["very"if n >=8 else "dusuk"]+=n 
     o =np .zeros (len (yk ))
     for tr ,te in GroupKFold (n_splits =5 ).split (Xk ,yk ,gg ):
         o [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
@@ -142,7 +142,7 @@ def main ():
         # dagitilandan different a isletim noktasinda calistirir (2026-07-31 denetimi: measurement
         # 0.35/0.20 secerken urun 0.40/0.35 kosuyordu).
     thr ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (Xk ,yk )
     print (f"GEOMETRI bolmesi | gate {int (keep .sum ())} candidate | esikler {thr }",flush =True )
@@ -151,7 +151,7 @@ def main ():
     KEYS =(("det",0.0 ,180.0 ,True ),("lat",2.0 ,180.0 ,False ),("rob",2.0 ,10.0 ,False ))
 
     def run (mode ):
-        res ={k :{"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}for k ,_ ,_ ,_ in KEYS }
+        res ={k :{"dusuk":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}for k ,_ ,_ ,_ in KEYS }
         LAT =[]
         for r in cache :
             V =np .ascontiguousarray (r ["V"],np .float64 )
@@ -178,7 +178,7 @@ def main ():
             if cps :
                 probs =sum (np .asarray (p_ ,np .float64 )for p_ in r ["pbs"])/len (r ["pbs"])
                 sc =clf .predict_proba (wire_gate .feats_for (V ,F ,probs ,cps ,CE ,CT ))[:,1 ]
-                t_ =thr ["cok"]if is_hi else thr ["dusuk"]
+                t_ =thr ["very"]if is_hi else thr ["dusuk"]
                 kept =[c for c ,s_ in zip (cps ,sc )if s_ >=t_ ]
             P =np .array ([c ["point"]for c in kept ],float )if kept else np .zeros ((0 ,3 ))
             Pd =np .array ([c ["direction"]for c in kept ],float )if kept else np .zeros ((0 ,3 ))
@@ -202,7 +202,7 @@ def main ():
                         if key =="det":
                             LAT .append (d_ )
                 tp =int (hit .sum ())
-                k ="cok"if r ["n"]>=8 else "dusuk"
+                k ="very"if r ["n"]>=8 else "dusuk"
                 res [key ][k ][0 ]+=tp 
                 res [key ][k ][1 ]+=len (P )-tp 
                 res [key ][k ][2 ]+=len (G )-tp 

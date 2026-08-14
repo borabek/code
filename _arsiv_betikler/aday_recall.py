@@ -52,13 +52,13 @@ def main ():
     DER ,rap =measure_set .cluster ()
     measure_set .rapor_bas (rap )
 
-    say ={"dusuk":[0 ,0 ],"cok":[0 ,0 ]}# [eslesen, total]
+    say ={"low":[0 ,0 ],"very":[0 ,0 ]}# [eslesen, total]
     for r in DER :
         G =np .asarray (r ["G"],float )
         if not len (G ):
             continue 
         P =r ["P"]if r ["X"]is not None else np .zeros ((0 ,3 ))
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         say [rj ][0 ]+=eslesen_gt (P ,G ,np .asarray (r ["Gd"],float ),float (r ["diag"]))
         say [rj ][1 ]+=len (G )
 
@@ -68,10 +68,10 @@ def main ():
     agir_R =sum (W [k ]*rej [k ]for k in W )
 
     f1_tavan =lambda R :2 *R /(1 +R )if R >0 else 0.0 
-    print (f"\n{'olcu':<26}{'deger':>9}{'-> F1 tavani':>14}")
+    print (f"\n{'olcu':<26}{'value':>9}{'-> F1 tavani':>14}")
     print (f"{'HAM recall (havuzlanmis)':<26}{ham_R :>9.4f}{f1_tavan (ham_R ):>14.4f}")
     print (f"{'AGIRLIKLI recall':<26}{agir_R :>9.4f}{f1_tavan (agir_R ):>14.4f}")
-    for k in ("dusuk","cok"):
+    for k in ("low","very"):
         print (f"{'  '+k +'-CP recall':<26}{rej [k ]:>9.4f}{f1_tavan (rej [k ]):>14.4f}"
         f"   ({say [k ][0 ]}/{say [k ][1 ]} GT)")
         # REJIM-AGIRLIKLI F1 TAVANI: each rejimin own F1 tavani, after agirlikli mean
@@ -83,7 +83,7 @@ def main ():
     if ceiling <0.90 :
         print (f"\n=> TESPIT 0.90 MEVCUT ADAYLARLA MATEMATIKSEL OLARAK IMKANSIZ "
         f"(ceiling {ceiling :.4f}).")
-        print (f"   Darbogaz cok-CP recall'i: {rej ['cok']:.4f} ({say ['cok'][0 ]}/{say ['cok'][1 ]} GT).")
+        print (f"   Darbogaz cok-CP recall'i: {rej ['very']:.4f} ({say ['very'][0 ]}/{say ['very'][1 ]} GT).")
     with io .open ("results/aday_recall.json","w",encoding ="utf-8")as f :
         json .dump ({"ham_recall":ham_R ,"agirlikli_recall":agir_R ,
         "rejim_recall":rej ,"rejim_sayilar":say ,

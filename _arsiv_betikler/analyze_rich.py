@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""ZENGIN TEMSIL ANALIZI (build_rich_feats.py ciktisi on, CPU).
+"""ZENGIN TEMSIL ANALIZI (build_rich_feats.py ciktisi ten, CPU).
 Sorular: (1) hangi feature BLOGU ne katiyor, (2) AILE-out'ta ayakta mi, (3) urun merdivenine
 (base 0.750 / metadata 0.775) cevrildiginde ne oluyor, (4) WEI/PXC ayri.
 Bloklar: A konum(9) | B very-radius sinif-profili(24) | C taper(5) | D egrilik(3).

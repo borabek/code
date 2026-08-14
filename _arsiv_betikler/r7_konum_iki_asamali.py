@@ -36,7 +36,7 @@ from r5_konum_teshis import yon_uygula
 ONB ="results/_r4_sozluk.pkl"
 KAYITLI_ESIK_Q =0.85 # ONCEDEN secildi
 KAYITLI_MARJ =0.15 # ONCEDEN secildi (direction kolu 0.05; here asimetri 1:20)
-GIRIS =("mouth","cember","acik","kirpik","axis",
+GIRIS =("mouth","cember","open","kirpik","axis",
 "kesit1","kesit3","kesit5","kesit7","kesit10","acik3","acik5")
 
 
@@ -141,7 +141,7 @@ def main ():
         for r in DER :
             h =H [r ["pid"]]
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if h is None :
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             else :
@@ -195,7 +195,7 @@ def main ():
     f"{'DEGER -- R8 kosulur'if val_ else 'DEGMEZ -- KOL KAPANIR'}")
     with io .open ("results/r7_konum_iki_asamali.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,"tarama":SON ,
-        "kayitli":kay ,"tarama_en_iyi":eniyi ,"deger":bool (val_ )},f ,indent =1 )
+        "kayitli":kay ,"tarama_en_iyi":eniyi ,"value":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r7_konum_iki_asamali.json")
 
 

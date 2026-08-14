@@ -53,7 +53,7 @@ MESH_DIZ ={"tam":"results/_p1_olasilik_brepegit","d6":"results/_p1_olasilik"}
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
 
 
 def yigin_f32 (ogeler ,uret ,line_ ):
@@ -286,11 +286,11 @@ def main ():
     f"({fark :+.4f})")
     print (f"KAPI: +0.01 -> {'GECTI'if fark >=0.01 else 'GECMEDI'}")
     json .dump ({"damga":makbuz_hash .damga (),"blok":BLOK ,
-    "yok":last_ ["YOK"],"var":last_ ["VAR"],"fark":fark ,
+    "none":last_ ["YOK"],"present":last_ ["VAR"],"fark":fark ,
     "gecti":bool (fark >=0.01 ),"katlar":katlar ,
     "n_parca":len (data_ ),
     "not":"Tek degiskenli ek-oznitelik kiyasi. tam brand katlari, "
-    "MAKRO kural secimi. D7'ye BAKILMADI."},
+    "MAKRO rule secimi. D7'ye BAKILMADI."},
     open (f"results/ek_blok_{BLOK }.json","w"),indent =1 )
     print (f"receipt -> results/ek_blok_{BLOK }.json")
 

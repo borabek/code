@@ -64,7 +64,7 @@ def main ():
     zen =np .load (NPZ ,allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in tpid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in tpid ]),list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -150,7 +150,7 @@ def main ():
                     if ek_p :
                         PB =np .vstack ([PB ,np .array (ek_p )])if len (PB )else np .array (ek_p )
                         PdB =np .vstack ([PdB ,np .array (ek_d )])if len (PdB )else np .array (ek_d )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         for ad ,(P ,Pd )in (("A",(PA ,PdA )),("B",(PB ,PdB ))):
             det [ad ].append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob [ad ].append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
@@ -160,13 +160,13 @@ def main ():
 
     ra ,rb =f1_rejim (det ["A"]),f1_rejim (det ["B"])
     qa ,qb =f1_rejim (rob ["A"]),f1_rejim (rob ["B"])
-    print (f"\n{'olcu':<22}{'A (urun)':>11}{'B (+9k)':>11}{'fark':>10}")
+    print (f"\n{'olcu':<22}{'A (urun)':>11}{'B (+9k)':>11}{'difference':>10}")
     for ad ,x ,y in (("tespit AGIRLIKLI",f1w (det ["A"]),f1w (det ["B"])),
-    ("  tespit dusuk-CP",ra ["F1"]["dusuk"],rb ["F1"]["dusuk"]),
-    ("  tespit cok-CP",ra ["F1"]["cok"],rb ["F1"]["cok"]),
+    ("  tespit low-CP",ra ["F1"]["low"],rb ["F1"]["low"]),
+    ("  tespit very-CP",ra ["F1"]["very"],rb ["F1"]["very"]),
     ("robot AGIRLIKLI",f1w (rob ["A"]),f1w (rob ["B"])),
-    ("  robot dusuk-CP",qa ["F1"]["dusuk"],qb ["F1"]["dusuk"]),
-    ("  robot cok-CP",qa ["F1"]["cok"],qb ["F1"]["cok"])):
+    ("  robot low-CP",qa ["F1"]["low"],qb ["F1"]["low"]),
+    ("  robot very-CP",qa ["F1"]["very"],qb ["F1"]["very"])):
         print (f"{ad :<22}{x :>11.4f}{y :>11.4f}{y -x :>+10.4f}")
 
     fn =lambda rows :f1w ([y for _ ,y in rows ])-f1w ([x for x ,_ in rows ])
@@ -183,13 +183,13 @@ def main ():
         print (f"yanlis yonlendirilen {len (idx )} dusuk-CP part: {ba :.4f} -> {bb :.4f} "
         f"({bb -ba :+.4f})  <- s9 bunu HIC olcmemisti")
     with io .open (OUT ,"w",encoding ="utf-8")as f :
-        json .dump ({"tespit_A":f1w (det ["A"]),"tespit_B":f1w (det ["B"]),"fark":d ,
+        json .dump ({"tespit_A":f1w (det ["A"]),"tespit_B":f1w (det ["B"]),"difference":d ,
         "ga":[lo ,hi ],"gecti":bool (gecti ),
         "rejim_A":ra ["F1"],"rejim_B":rb ["F1"],
         "robot_A":f1w (rob ["A"]),"robot_B":f1w (rob ["B"]),
         "yonlendirilen":len (yonlendirilen ),
-        "not":("Kol ROUTER karariyla uygulandi (GT rejimi DEGIL) ve puanlama TUM "
-        "194 parcada yapildi; genel etki agirlikla tahmin edilmedi.")},f ,indent =1 )
+        "not":("Kol ROUTER karariyla uygulandi (GT rejimi DEGIL) and puanlama TUM "
+        "194 parcada yapildi; genel etki agirlikla prediction edilmedi.")},f ,indent =1 )
     print (f"receipt -> {OUT }")
 
 

@@ -39,17 +39,17 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }
 
     CLF ={}
     for tag in ("rt2","v6"):
         d =np .load (f"results/gate_regrow_data_{tag }.npz",allow_pickle =True )
         pids =np .array ([str (x )for x in d ["pids"]])
-        keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+        keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
         CLF [tag ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (d ["X"][keep ],d ["y"][keep ])
         print (f"gate {tag }: {int (keep .sum ())}/{len (pids )} candidate ile egitildi",flush =True )
@@ -82,15 +82,15 @@ def main ():
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             if r ["X"]is not None :
                 sc =clf .predict_proba (r ["X"])[:,1 ]
-                m =sc >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
+                m =sc >=(THR ["very"]if r ["is_hi"]else THR ["low"])
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
-    print (f"\n{'gate training verisi':<24}{'tespit':>9}{'ROBOT':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'gate training verisi':<24}{'tespit':>9}{'ROBOT':>9}{'conclusive':>9}{'recall':>9}")
     R ={}
     for tag in ("rt2","v6"):
         det ,rob =kos (tag )

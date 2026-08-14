@@ -14,7 +14,7 @@ import os ,sys ,json ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -73,7 +73,7 @@ def main ():
         return np .array (A )if A else np .array ([0.0 ])
 
     def f1 (c ,tol ,am ,pct =False ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in c :
             Q ,Qd ,Gt ,Gd =r ["Q"],r ["Qd"],r ["G"],r ["Gd"]
             hit =np .zeros (len (Gt ),bool );used =set ()
@@ -86,16 +86,16 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (Gt ))):
                     if d_ >t or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (Gt )-tp 
         o ={}
         for k ,(T ,Fp ,Fn )in agg .items ():
             p =T /max (T +Fp ,1 );rc =T /max (T +Fn ,1 );o [k ]=2 *p *rc /max (p +rc ,1e-9 )
-        return sum (W [k ]*o [k ]for k in W ),o ["cok"],o ["dusuk"]
+        return sum (W [k ]*o [k ]for k in W ),o ["very"],o ["low"]
 
     A0 =ang (cache );r0 ,c0 ,l0 =f1 (cache ,2.0 ,10 );d0 ,_ ,_ =f1 (cache ,0 ,180 ,True )
-    print (f"{'ayar':<34}{'>15d':>7}{'>45d':>7}{'ROBOT':>8}{'cok':>7}{'dus':>7}{'tespit':>8}{'kullanim':>10}")
-    print (f"{'MEVCUT (yalniz silindir)':<34}{(A0 >15 ).mean ()*100 :>6.1f}%{(A0 >45 ).mean ()*100 :>6.1f}%"
+    print (f"{'ayar':<34}{'>15d':>7}{'>45d':>7}{'ROBOT':>8}{'very':>7}{'dus':>7}{'tespit':>8}{'kullanim':>10}")
+    print (f"{'MEVCUT (only silindir)':<34}{(A0 >15 ).mean ()*100 :>6.1f}%{(A0 >45 ).mean ()*100 :>6.1f}%"
     f"{r0 :>8.4f}{c0 :>7.4f}{l0 :>7.4f}{d0 :>8.4f}{'-':>10}")
     best =None 
     for dist ,minf ,flat ,turn in ((6.0 ,3 ,0.35 ,60.0 ),(8.0 ,3 ,0.35 ,60.0 ),(6.0 ,4 ,0.20 ,45.0 ),

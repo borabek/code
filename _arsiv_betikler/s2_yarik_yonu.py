@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """S2: DIK SINIFIN yonunu YARIK dedektoru veriyor mu?
 
-S1 kapatici a sey showed: last direction 45 derecenin on saptiginda zincirin HER halkasi da
+S1 kapatici a sey showed: last direction 45 derecenin ten saptiginda zincirin HER halkasi da
 sapmis (tez normali dahil, all of them %0). Yani correction, mevcut asamalari yeniden siralamakla
 olmaz -- YENI BIR OZELLIK tespit etmek is required: telin girdigi YARIGIN kendisi.
 
@@ -45,9 +45,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -89,7 +89,7 @@ def main ():
             total_ +=1 
             if an [a_ ,b_ ]>45.0 :
                 HEDEF [r ["pid"]].append ({"p":P [a_ ].copy (),"gd":Gd [b_ ].copy (),
-                "aci":float (an [a_ ,b_ ]),"V":r .get ("V")})
+                "angle":float (an [a_ ,b_ ]),"V":r .get ("V")})
     n_dik =sum (len (v )for v in HEDEF .values ())
     print (f"{total_ } eslesme | DIK sinif {n_dik } nokta, {len (HEDEF )} parcada",flush =True )
 
@@ -137,7 +137,7 @@ def main ():
                 continue 
             bulundu +=1 
             a =float (np .degrees (np .arccos (np .clip (abs (float (SD [j ]@h ["gd"])),0 ,1 ))))
-            aci_yeni .append (a );aci_eski .append (h ["aci"])
+            aci_yeni .append (a );aci_eski .append (h ["angle"])
             uyan +=int (a <=10.0 )
 
     print (f"\n=== SONUC ===")

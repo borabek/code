@@ -20,7 +20,7 @@ def main ():
         ctx =p .chromium .launch_persistent_context (
         PROFILE ,headless =not headed ,accept_downloads =True )
         page =ctx .pages [0 ]if ctx .pages else ctx .new_page ()
-        page .goto ("https://www.wscaduniverse.com/en/",wait_until ="networkidle",
+        page .goto ("https://www.wscaduniverse.com/most/",wait_until ="networkidle",
         timeout =90000 )
         page .wait_for_timeout (2500 )
 

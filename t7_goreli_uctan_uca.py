@@ -36,13 +36,13 @@ def main ():
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
     THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     d =np .load ("results/gate_regrow_data_fiz.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"none:"+r ["pid"])for r in cache }
     pids =np .array ([str (x )for x in d ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"none:"+p )for p in pids ]),list (tg ))
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (d ["X"][keep ][:,:18 ],d ["y"][keep ])
     print (f"KUME={cluster } | {len (cache )} part | gate {int (keep .sum ())} candidate",flush =True )
@@ -77,13 +77,13 @@ def main ():
             if len (s )==0 :
                 m =np .zeros (0 ,bool )
             elif rule_ =="sabit":
-                m =s >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
+                m =s >=(THR ["very"]if r ["is_hi"]else THR ["dusuk"])
             else :
                 ratio ,baseline =rule_ 
                 m =(s >=ratio *max (float (s .max ()),1e-9 ))&(s >=baseline )
             P =r ["P"][m ]if m .any ()else np .zeros ((0 ,3 ))
             Pd =r ["Pd"][m ]if m .any ()else np .zeros ((0 ,3 ))
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "dusuk"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 

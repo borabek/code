@@ -4,11 +4,11 @@
 WHY: [[robot-nondeterminism]] kaydi remesh'in SURECLER ARASI degistigini says
 (pymeshlab). Yani same part, same model, same kod -- different a Python surecinde different
 a mesh, therefore different candidates. Bu bugune up to never NOT MEASURED: mansetin own
-kosu-varyansini bilmeden "+0.008 kazandi" demek anlamsizdir.
+run-varyansini bilmeden "+0.008 kazandi" demek anlamsizdir.
 
 YONTEM: N parcayi AYNI surecte two times turet (process-ici kararlilik) and also this betigi
 IKI KEZ calistirip makbuzlari karsilastir (process-arasi). Burada process-ICI olculur;
-`--kind 2` with ikinci kosu ayri a surecte is done and difference raporlanir.
+`--kind 2` with ikinci run ayri a surecte is done and difference raporlanir.
 
 Olculen: candidate count farki, point eslesme orani, and part basina tespit F1 farki.
 """
@@ -35,7 +35,7 @@ def main ():
     from infer_step_cp import load_any ,step_to_mesh 
     from gece_kilit import guard 
 
-    tur =int (sys .argv [sys .argv .index ("--tur")+1 ])if "--tur"in sys .argv else 1 
+    tur =int (sys .argv [sys .argv .index ("--kind")+1 ])if "--kind"in sys .argv else 1 
     guard ("p4")
     with io .open ("cp_config.json",encoding ="utf-8")as f :
         cfg =json .load (f )
@@ -62,7 +62,7 @@ def main ():
                 pbs .append (np .asarray (pb ,float ))
             cps ,_ ,_ ,_ =RC .derive_candidates (V ,F ,pbs ,stp [r ["pid"]],cfg =cfg )
             KAYIT [r ["pid"]]={"n_vert":int (len (V )),"n_aday":len (cps ),
-            "noktalar":[list (map (float ,c ["point"]))for c in cps ]}
+            "points":[list (map (float ,c ["point"]))for c in cps ]}
         except Exception as e :
             KAYIT [r ["pid"]]={"error":f"{type (e ).__name__ }"}
         if k %10 ==0 :
@@ -82,7 +82,7 @@ def main ():
                 continue 
             dv .append (abs (a ["n_vert"]-b ["n_vert"]))
             da .append (abs (a ["n_aday"]-b ["n_aday"]))
-            PA =np .array (a ["noktalar"],float );PB =np .array (b ["noktalar"],float )
+            PA =np .array (a ["points"],float );PB =np .array (b ["points"],float )
             if len (PA )and len (PB ):
                 d =np .linalg .norm (PA [:,None ,:]-PB [None ,:,:],axis =-1 )
                 esl .append (float ((d .min (1 )<=1.0 ).mean ()))

@@ -50,10 +50,10 @@ def main ():
 
     MOD ={}
     g =json .load (io .open ("cp_config.json",encoding ="utf-8"))["current_product"]["wire_gate"]
-    with open (g ["yol"],"rb")as f :
+    with open (g ["path"],"rb")as f :
         MOD ["DAGITILAN (canli urun)"]=pickle .load (f )
-    for ad ,npz in (("TABAN (yalniz eski)","results/zengin_parite_v3_taban.npz"),
-    ("v3 (eski + YENI)","results/zengin_parite_v3.npz")):
+    for ad ,npz in (("TABAN (only old)","results/zengin_parite_v3_taban.npz"),
+    ("v3 (old + YENI)","results/zengin_parite_v3.npz")):
         m ,bilgi =egit (npz )
         MOD [ad ]=m 
         print (f"  {ad }: corpus {bilgi ['part']} part / {bilgi ['manufacturer']} manufacturer egitildi")

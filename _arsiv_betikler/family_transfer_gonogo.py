@@ -60,4 +60,4 @@ for m in ("WEI","PXC"):
 print (f"singleton (aile-eslesmesiz, transfer YOK): {singleton }")
 allr =np .array (res ["WEI"]+res ["PXC"])
 print (f"\nKARAR: template-transfer reach ort {allr .mean ():.3f} -> "
-+("candidate source DEGERLI (>=0.75), tam kur"if allr .mean ()>=0.75 else f"{allr .mean ():.2f} DUSUK -> aile layout yeterince transfer olmuyor, kapat"))
++("candidate source DEGERLI (>=0.75), full kur"if allr .mean ()>=0.75 else f"{allr .mean ():.2f} DUSUK -> aile layout yeterince transfer olmuyor, kapat"))

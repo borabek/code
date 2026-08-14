@@ -126,7 +126,7 @@ def main ():
     print ("  CANDIDATE recipe; validate ten more manufacturer-matched parts (both terminal types) before freezing.")
     json .dump ({"rows":[dict (f1 =r [0 ],p =r [1 ],r =r [2 ],tp =r [3 ],fp =r [4 ],fn =r [5 ],
     min_v =r [6 ],depth =r [7 ],vconf =r [8 ],cluster_mm =r [9 ])for r in rows [:20 ]],
-    "caveat":"tuned on 9 PXC clamp terminals (mfg=2 each); candidate not frozen"},
+    "caveat":"tuned ten 9 PXC clamp terminals (mfg=2 each); candidate not frozen"},
     open ("results/cp_precision_sweep.json","w"),indent =1 )
 
 

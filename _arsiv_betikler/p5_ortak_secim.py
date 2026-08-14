@@ -190,7 +190,7 @@ def main ():
             if r ["mfg"]not in alt :
                 continue 
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
             out =parca_ciftleri (r ,cyl_d6 .get (pid ),ac_d6 .get (pid ))
             if out is not None :

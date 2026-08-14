@@ -57,13 +57,13 @@ OZ_AD =["skor","skor_orani","skor_sira","skor_marj",
 def secim_ve_oznitelik (d ,pk ):
     """P6 secimini yap and HER SECILEN TAHMIN for kalibrasyon ozniteligi uret."""
     Xd =np .hstack ([p6_decision .donustur (d ["X"],pk .get ("zskor","ab")),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
     if pk .get ("arm")=="P6_GEO":
         Xd =np .hstack ([Xd [:,58 :p6_decision .AB ],Xd [:,p6_decision .AB :]])
     s =np .asarray (pk ["kademe1"].predict_proba (
     Xd .astype (np .float32 ))[:,1 ],float )
     P ,D ,ai ,sc =p6_decision .sec_ayrintili (
-    d ["P"],d ["idx"],d ["YD"],s ,tuple (pk ["kural"]),
+    d ["P"],d ["idx"],d ["YD"],s ,tuple (pk ["rule"]),
     nms_mm =float (pk ["nms"]))
     if not len (P ):
         return P ,D ,np .zeros ((0 ,len (OZ_AD )))

@@ -410,7 +410,7 @@ def make_readme (output_dir :Path ,entries :list [dict ])->None :
     "opens the QA PNG/GLB and signs them off.",
     "",
     "Red circles in the PNG mark CP locations; green arrows show outward insert direction.",
-    "The GLB uses green spheres/arrows on the complete gray STEP tessellation.",
+    "The GLB uses green spheres/arrows ten the complete gray STEP tessellation.",
     "",
     "| Part | Product | CP | Align residual (mm) | Max CP-nearest-vertex (mm) |",
     "|---|---|---:|---:|---:|",

@@ -73,16 +73,16 @@ def main ():
     rng2 =np .random .RandomState (0 )
     print (f"\n{'version':<26}{'AUC':>8}{'null p95':>10}{'TP ort':>10}{'FP ort':>10}")
     res ={}
-    for i ,nm in enumerate (["metal SILINDIR (mevcut)","TUM metal yuzler (yeni)"]):
+    for i ,nm in enumerate (["metal SILINDIR (mevcut)","TUM metal yuzler (new)"]):
         a =auc_mw (X [:,i ],Y )
         nl =np .array ([auc_mw (X [:,i ],rng2 .permutation (Y ))for _ in range (300 )])
         p95 =float (np .percentile (np .abs (nl -0.5 ),95 )+0.5 )
         print (f"{nm :<26}{a :>8.3f}{p95 :>10.3f}{X [Y ,i ].mean ():>10.1f}{X [~Y ,i ].mean ():>10.1f}")
         res [nm ]={"auc":float (a ),"null_p95":p95 }
-    d =abs (res ["TUM metal yuzler (yeni)"]["auc"]-0.5 )-abs (res ["metal SILINDIR (mevcut)"]["auc"]-0.5 )
+    d =abs (res ["TUM metal yuzler (new)"]["auc"]-0.5 )-abs (res ["metal SILINDIR (mevcut)"]["auc"]-0.5 )
     print (f"\nayirt edicilik farki (|AUC-0.5|): {d :+.4f}")
     print (f"KILL: yeni version eskiyi gecmezse DEGISIKLIK YOK -> {'DEGISTIR'if d >0 else 'BIRAK'}")
-    json .dump (res |{"fark":float (d ),"kabul_silindir":kab_c ,"kabul_tum":kab_t ,
+    json .dump (res |{"difference":float (d ),"kabul_silindir":kab_c ,"kabul_tum":kab_t ,
     "n_parca":len (parts )},
     open ("results/q11_metal_duzlem.json","w"),indent =1 )
     print ("receipt -> results/q11_metal_duzlem.json")

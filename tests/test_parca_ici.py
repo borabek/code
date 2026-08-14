@@ -47,7 +47,7 @@ def test_zskor_parca_ici_KAYMA_ve_OLCEGE_bagisik (kaydir ,olcek ):
     X =np .random .default_rng (1 ).normal (size =(7 ,4 ))
     z0 =wg .within_part (X ,"zskor")[:,4 :]
     z1 =wg .within_part (X *olcek +kaydir ,"zskor")[:,4 :]
-    assert np .allclose (z0 ,z1 ,atol =1e-9 ),"z-kismi part-ici kayma/olcege bagisik degil"
+    assert np .allclose (z0 ,z1 ,atol =1e-9 ),"z-kismi part-ici kayma/olcege bagisik not"
 
 
 def test_sabit_sutun_sifir_verir_NaN_uretmez ():
@@ -83,7 +83,7 @@ def test_dagitilan_model_donusumu_KENDI_tasiyor ():
     yol =os .path .join (os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))),
     "results","wire_gate.pkl")
     if not os .path .exists (yol ):
-        pytest .skip ("dagitilmis gate yok")
+        pytest .skip ("dagitilmis gate none")
     with open (yol ,"rb")as f :
         m =pickle .load (f )
     wg =_wg ()
@@ -132,10 +132,10 @@ def test_dagitilan_model_yaricabini_TASIYOR ():
         pytest .skip ("topoloji kapali")
     yol =os .path .join (kok ,"results","wire_gate.pkl")
     if not os .path .exists (yol ):
-        pytest .skip ("dagitilmis gate yok")
+        pytest .skip ("dagitilmis gate none")
     with open (yol ,"rb")as f :
         m =pickle .load (f )
-    assert m .get ("topo_r")is not None ,"dagitilan gate topoloji kullaniyor ama egitildigi yaricapi TASIMIYOR"
+    assert m .get ("topo_r")is not None ,"dagitilan gate topoloji kullaniyor but egitildigi yaricapi TASIMIYOR"
     assert float (m ["topo_r"])==float (cfg .get ("gate_topo_r",6.0 )),f"model {m ['topo_r']} mm ile egitildi, config {cfg .get ('gate_topo_r',6.0 )} mm diyor"
 
 
@@ -181,5 +181,5 @@ def test_dagitilan_model_yonlendirme_esigini_TASIYOR ():
         pytest .skip ("yonlendirme dagitilmamis")
     with open (os .path .join (kok ,"results","wire_gate.pkl"),"rb")as f :
         m =pickle .load (f )
-    assert m .get ("clf_z")is not None ,"yonlendirme dagitik ama z modeli YOK"
+    assert m .get ("clf_z")is not None ,"yonlendirme dagitik but z modeli YOK"
     assert 0.0 <float (m ["esik_cokus"])<1.0 ,m .get ("esik_cokus")

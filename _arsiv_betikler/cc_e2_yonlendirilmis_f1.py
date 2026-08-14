@@ -134,7 +134,7 @@ def main ():
     def weighted (route_hi ):
         """Rejim ayrimli + corpus agirlikli (duz mean very-CP'yi extra temsil eder)."""
         vals ={}
-        for reg ,ps in (("dusuk",common -hi_true ),("cok",hi_true )):
+        for reg ,ps in (("low",common -hi_true ),("very",hi_true )):
             tot_tp =tot_nk =tot_gt =0 
             for tag ,sel in (("promote_kapali",lambda q :q not in route_hi ),
             ("promote_acik",lambda q :q in route_hi )):
@@ -144,18 +144,18 @@ def main ():
                 tp ,nk ,gt =scored_f1 (y ,oof ,pid ,G ,NGT ,mask )
                 tot_tp +=tp ;tot_nk +=nk ;tot_gt +=gt 
             vals [reg ]=f1_of (tot_tp ,tot_nk ,tot_gt )
-        return (1 -W_HIGH )*vals ["dusuk"]+W_HIGH *vals ["cok"],vals 
+        return (1 -W_HIGH )*vals ["low"]+W_HIGH *vals ["very"],vals 
 
-    print (f"{'senaryo':<34}{'dusuk':>9}{'cok':>9}{'KORPUS-TEMSILI':>17}")
-    scen ={"her yerde promote KAPALI":set (),
-    "her yerde promote ACIK":set (common ),
+    print (f"{'senaryo':<34}{'low':>9}{'very':>9}{'KORPUS-TEMSILI':>17}")
+    scen ={"each places promote KAPALI":set (),
+    "each places promote OPEN":set (common ),
     "ORACLE yonlendirme":set (hi_true )}
     for thr in (0.3 ,0.4 ,0.5 ,0.6 ):
         scen [f"geometri yonlendirme (threshold {thr })"]={pids [i ]for i in range (len (pids ))if pr [i ]>=thr }
     for name ,rh in scen .items ():
         w ,vals =weighted (rh )
-        print (f"{name :<34}{vals ['dusuk']:>9.4f}{vals ['cok']:>9.4f}{w :>17.4f}")
-        out [name ]={"low":vals ["dusuk"],"high":vals ["cok"],"weighted":w ,
+        print (f"{name :<34}{vals ['low']:>9.4f}{vals ['very']:>9.4f}{w :>17.4f}")
+        out [name ]={"low":vals ["low"],"high":vals ["very"],"weighted":w ,
         "n_routed_high":len (rh )}
     json .dump ({"router_auc":float (roc_auc_score (yr ,pr )),"scenarios":out },
     open ("results/cc_e_yonlendirme.json","w"),indent =1 )

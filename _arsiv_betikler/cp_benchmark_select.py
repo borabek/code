@@ -96,7 +96,7 @@ def main ():
     assert all (r ["part_id"]not in deny_ids and r ["sha256"]not in deny_shas for r in selected )
     out ={"frozen":"2026-07-18","purpose":"NEW untouched human-CP benchmark candidates (UNLABELLED)",
     "denylist":{"scheffler_ids":len (deny_ids ),"scheffler_step_shas":len (deny_shas ),
-    "TODO":"also denylist v28/v31 train IDs once their manifests are found"},
+    "TODO":"also denylist v28/v31 train IDs before their manifests are found"},
     "pool_unique_ids":len (by_id ),"pool_after_denylist_and_sha_dedup":len (pool ),
     "n_selected":len (selected ),"overlap_with_denylist":0 ,
     "note":"labels NOT included; human point+direction labelling + 3-rater adjudication is the next (human) step",

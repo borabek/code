@@ -85,10 +85,10 @@ def main ():
         "cols":None ,"n_feat":22 ,"donusum":None ,"donusum_z":"zskor",
         "esik_cokus":threshold ,"yonlendirme_q":Q ,
         "topo_r":float (wire_gate .TOPO_R ),
-        "note":("COKUS-YONLENDIRME 2026-08-01: ham 22 sutunlu gate; parcanin en yuksek ham "
+        "note":("COKUS-YONLENDIRME 2026-08-01: ham 22 sutunlu gate; parcanin most high ham "
         f"skoru {threshold :.4f}'in altindaysa 44 sutunlu part-ici modele gecilir. "
         "Uctan uca: WEI-disi 0.4832->0.5682, PXC-disi 0.7203->0.7029, tanidik "
-        "0.7410->0.7439, 7 seri-disi ortalama -0.0029. Her parcaya z-skor "
+        "0.7410->0.7439, 7 seri-disi mean -0.0029. Her parcaya z-skor "
         "uygulayan version (D) PXC'de -0.0375 vergi odeuyordu. Onceki model: "
         "results/wire_gate.pkl.pre_yonlendirme"),
         },f )
@@ -98,7 +98,7 @@ def main ():
         cfg =json .load (f )
     cfg ["gate_parca_ici"]="yonlendirilmis-zskor"
     cfg ["gate_parca_ici_not"]=(
-    "BILGI AMACLI: yonlendirmeyi MODEL tasir (wire_gate.pkl: clf + clf_z + esik_cokus). "
+    "BILGI AMACLI: yonlendirmeyi MODEL carries (wire_gate.pkl: clf + clf_z + esik_cokus). "
     "Bu alan degistirilerek acilip kapatilamaz. Geri alma: "
     "results/wire_gate.pkl.pre_yonlendirme -> results/wire_gate.pkl. "
     "Olcum: results/u7_yonlendirme.json, results/u8_yonlendirme_dogrula.json")

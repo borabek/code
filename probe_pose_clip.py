@@ -134,7 +134,7 @@ def main ():
         print (f"{ad :>9s} {m ['tespit']:8.4f} {m ['rob']:8.4f} "
         f"{m ['rbi']:8.4f}{yz }")
 
-    print ("\n--- ESLI BOOTSTRAP (mevcut 3.0'a gore) ---")
+    print ("\n--- ESLI BOOTSTRAP (mevcut 3.0'a per) ---")
     print (f"{'maks_mm':>9s} {'metrik':>7s} {'fark':>9s} {'%95 GA':>22s} "
     f"{'poz%':>6s}")
     baseline =res_ [MEVCUT ][1 ]

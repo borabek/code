@@ -94,20 +94,20 @@ def agg (rs ):
 
 for nm ,rs in (("TUM transfer edilebilir",rows ),
 ("  |- geometri-DUPLIKE template (trivial, siskinlik)",[r for r in rows if r ["same_geom"]]),
-("  |- GERCEK farkli-geometri kardes (durust)",[r for r in rows if not r ["same_geom"]])):
+("  |- GERCEK different-geometri kardes (durust)",[r for r in rows if not r ["same_geom"]])):
     if not rs :print (f"{nm :52s} (yok)");continue 
     p ,rr ,f1 ,gt =agg (rs )
     print (f"{nm :52s} n={len (rs ):3d} GT={gt :4d} | P {p :.3f} R {rr :.3f} F1 {f1 :.3f} | hizalama-artik ort {np .mean ([r ['res']for r in rs ]):.2f}mm")
 
 CUR =0.756 # mevcut ML family-out ALL (WORK)
 gt_all =sum (META [p ]["n_cps"]for p in work )
-for nm ,rs in (("TUM",rows ),("SADECE gercek farkli-geometri",[r for r in rows if not r ["same_geom"]])):
+for nm ,rs in (("TUM",rows ),("SADECE real different-geometri",[r for r in rows if not r ["same_geom"]])):
     if not rs :continue 
     p ,rr ,f1 ,gt =agg (rs )
     w =gt /max (gt_all ,1 )
     gain =w *(f1 -CUR )
     print (f"\nAGIRLIKLI ALL kazanci ({nm }): kapsam {100 *w :.1f}% x (F1 {f1 :.3f} - mevcut {CUR :.3f}) = {gain :+.4f}"
     +("  -> GO (>=+0.010)"if gain >=0.010 else "  -> KALIR (<+0.010)"))
-print ("\nNOT: unseen-family (singleton) parts transfer ALAMAZ -> agregada SIFIR katki (kural geregi dahil).")
+print ("\nNOT: unseen-family (singleton) parts transfer ALAMAZ -> agregada SIFIR katki (rule geregi dahil).")
 print ("NOT: family-out CV'de kardesler AYNI fold'da becomes -> transfer orada TANIMSIZ; this a 'known-family' yetenegidir.")
 json .dump (rows ,open ("results/p4_transfer.json","w"),indent =1 )

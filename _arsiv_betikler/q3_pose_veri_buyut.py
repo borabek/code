@@ -48,7 +48,7 @@ def main ():
     # bilgilendirici may be. Ayni row hizasinda ekleniyor.
     try :
         _g =np .load ("results/brep_graf.npz",allow_pickle =True )
-        _ad =[str (x )for x in _g ["ad"]]
+        _ad =[str (x )for x in _g ["name"]]
         _tut =[i for i ,a in enumerate (_ad )if a not in ("g_agiz_cev","g_yuz_alan")]
         GX =np .asarray (_g ["X"],float )[:,_tut ]
         assert len (GX )==len (X58 )
@@ -117,7 +117,7 @@ def main ():
             g =Gdm [b_ ]*(1.0 if float (Gdm [b_ ]@d )>=0 else -1.0 )
             RX .append (X58 [zi [a_ ]])
             RY .append ([float (w_perp @u ),float (w_perp @v ),float (g @u ),float (g @v )])
-            RP .append (pid );RG .append (gk .get (pid ,"yok:"+pid ))
+            RP .append (pid );RG .append (gk .get (pid ,"absent:"+pid ))
     RX =np .array (RX ,float );RY =np .array (RY ,float )
     np .savez (OUT ,X =RX ,Y =RY ,pid =np .array (RP ),geo =np .array (RG ))
     yan =np .linalg .norm (RY [:,:2 ],axis =1 )

@@ -6,7 +6,7 @@ same rule aramasi, same kabul kutusu. Fark only skorlayici:
   HGB      : each secenegi TEK BASINA puanlar (bugunku urun)
   DeepSets : secenegi parcanin ORTALAMA/MAKSIMUM ozetiyle birlikte puanlar
 
-RATIONALE (S7). Secici verimliligi two kutuplu (UPUN %65.5 / NIT %0.5) and sebep
+RATIONALE (S7). Secici verimliligi two kutuplu (UPUN %65.5 / NIT %0.5) and reason
 POZ-NEG SKOR AYRIMI'nin cokmesi (0.847 -> 0.050). Noktasal model "this secenek
 this parcadaki digerlerine according to iyi mi" sorusunu goremiyor.
 
@@ -62,7 +62,7 @@ S4_NEG_KAT =int (os .environ .get ("S4_NEG_KAT","0"))
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -165,7 +165,7 @@ def main ():
             r =puanla ([data_ [i ]for i in dis ],s_dis ,rule_ )
             for k_ in ("TP","FP","FN"):
                 top [ad ][k_ ]+=r [k_ ]
-            kat_sonuc [b ][ad ]={"robot":r ["robot"],"kural":list (rule_ )}
+            kat_sonuc [b ][ad ]={"robot":r ["robot"],"rule":list (rule_ )}
         print (f"  {b :<6} HGB {kat_sonuc [b ]['HGB']['robot']:.4f} | "
         f"KUME {kat_sonuc [b ]['KUME']['robot']:.4f} "
         f"({time .time ()-t0 :.0f} s)",flush =True )

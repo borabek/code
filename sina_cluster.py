@@ -19,7 +19,7 @@ import numpy as np
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"dusuk":0.895 ,"very":0.105 }
 # L2'nin attigi ozelliklerden SONRA kalan sutunlar. Uruna bakip okumuyoruz: L2 geri alindiktan
 # after dagitilan gate 13 sutunlu, that yuzden pkl'den okumak ablasyonu VAKUM yapardi (dev kosusunda
 # full as this became: "L2 closed" satiri "URUN" with birebir same output).
@@ -188,8 +188,8 @@ def f1_rejim (rows ):
     kumede very-CP %30, korpusta %10.5) precision/recall yaniltir -- F1 agirlikli, P/R degilse
     same tabloda IKI FARKLI evren raporlanmis becomes.
     """
-    agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
-    say ={"dusuk":0 ,"cok":0 }
+    agg ={"dusuk":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
+    say ={"dusuk":0 ,"very":0 }
     for k ,t ,f ,n in rows :
         agg [k ][0 ]+=t ;agg [k ][1 ]+=f ;agg [k ][2 ]+=n ;say [k ]+=1 
     o ,pp ,rr ={},{},{}
@@ -230,15 +230,15 @@ def main ():
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
     THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     # --- gate: test geometri gruplarini disla (KESKIN anahtar) ---
     d =np .load ("results/gate_regrow_data_rt2.npz",allow_pickle =True )
     X =d ["X"];y =d ["y"]
     pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
-    Gg =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    tg ={gk .get (r ["pid"],"none:"+r ["pid"])for r in cache }
+    Gg =np .array ([gk .get (p ,"none:"+p )for p in pids ])
     keep =~np .isin (Gg ,list (tg ))
     print (f"KUME={cluster } | {len (cache )} part | gate {int (keep .sum ())}/{len (y )} candidate "
     f"({len (tg )} test geometri grubu dislandi) | esikler {THR }",flush =True )
@@ -285,10 +285,10 @@ def main ():
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             if r ["X"]is not None :
                 sc =clf .predict_proba (r ["X"][:,cols ]if cols else r ["X"])[:,1 ]
-                m =sc >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
+                m =sc >=(THR ["very"]if r ["is_hi"]else THR ["dusuk"])
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "dusuk"
             det .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((k ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
@@ -317,7 +317,7 @@ def main ():
         print (f"  URUN {mn } = {f1w (rows ):.4f}   [{lo_ :.4f}, {hi_ :.4f}]",flush =True )
         res .setdefault ("GA",{})[mn .strip ()]=[float (f1w (rows )),float (lo_ ),float (hi_ )]
 
-    print ("\nESLI BOOTSTRAP (ayni parts iki yapilandirmada da secilir):")
+    print ("\nESLI BOOTSTRAP (same parts iki yapilandirmada da secilir):")
     print (f"  {'karsilastirma':<38}{'fark':>9}{'%95 GA':>21}{'karar':>10}")
     for lab in ("J kapali","L2 acik","J kapali + L2 acik"):
         for mi ,mn in ((0 ,"tespit"),(1 ,"robot")):
@@ -330,7 +330,7 @@ def main ():
             f"{kar :>10}",flush =True )
             res .setdefault ("bootstrap",{})[f"{lab }|{mn }"]=[float (ds .mean ()),float (lo_ ),float (hi_ )]
 
-    print ("\nKARAR KURALI: bir kumede kazanip digerinde KAYBEDEN arm asiri-uydurmadir, geri alinir.")
+    print ("\nKARAR KURALI: a kumede kazanip digerinde KAYBEDEN arm asiri-uydurmadir, geri alinir.")
     json .dump (res ,open (f"results/sinav_{cluster }.json","w"),indent =1 )
     print (f"receipt -> results/sinav_{cluster }.json")
 

@@ -128,8 +128,8 @@ def main ():
                 rec_ .append (sat )
                 # poz kafasinin NOKTAYI ne up to oynattigi
             kay =float (np .linalg .norm (a [1 ][0 ]-a [0 ][0 ],axis =1 ).mean ())if len (a [0 ][0 ])else 0.0 
-            SAY [r ["pid"]]={"asama":rec_ ,"poz_kayma":kay ,
-            "regime":"cok"if r ["n"]>=8 else "dusuk"}
+            SAY [r ["pid"]]={"stage":rec_ ,"poz_kayma":kay ,
+            "regime":"very"if r ["n"]>=8 else "low"}
         with open (ONB ,"wb")as f :
             pickle .dump (SAY ,f )
         print (f"-> {ONB }",flush =True )
@@ -142,12 +142,12 @@ def main ():
 
     ADLAR =("govde_ici","onu_kapali","duvara_yapisik")
     print (f"\n{'='*74 }\nC1 -- ZINCIR ASAMALARINA GORE FIZIKSEL KUSUR\n{'='*74 }")
-    print (f"{'asama':<8}{'CP':>7}"+"".join (f"{a :>16}"for a in ADLAR )+f"{'HERHANGI':>11}")
+    print (f"{'stage':<8}{'CP':>7}"+"".join (f"{a :>16}"for a in ADLAR )+f"{'HERHANGI':>11}")
     tab ={}
     for j ,ad in enumerate (("HAM","POZ","TAM")):
         n =c =0 ;k =[0 ,0 ,0 ]
         for pid ,d in SAY .items ():
-            for s in d ["asama"][j ]:
+            for s in d ["stage"][j ]:
                 n +=1 
                 b =bayrak (s )
                 for q in range (3 ):
@@ -176,7 +176,7 @@ def main ():
         print (f"\n  -> poz kafasi kusuru ARTIRMIYOR ({hp -hh :+d}); kusur GATE/ADAY duzeyinden geliyor")
 
     with io .open ("results/c1_poz_sorusturmasi.json","w",encoding ="utf-8")as f :
-        json .dump ({"tablo":tab ,"adlar":list (ADLAR ),
+        json .dump ({"tablo":tab ,"names":list (ADLAR ),
         "poz_kayma_medyan":float (np .median (kay )),
         "esikler":{"ileri_min":ILERI_MIN ,"ic_cap_min":IC_CAP_MIN }},
         f ,indent =1 )

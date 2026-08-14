@@ -60,7 +60,7 @@ def main ():
             if len (ornek )<6 :
                 ornek .append ((os .path .basename (f ),u [:4 ]))
     tot =max (hic +tek +cok ,1 )
-    print (f"\n{'renk sayisi':<16}{'part':>8}{'ratio':>9}")
+    print (f"\n{'renk count':<16}{'part':>8}{'ratio':>9}")
     for k in sorted (hist ):
         print (f"{k :<16}{hist [k ]:>8}{hist [k ]/tot :>9.3f}")
     print (f"\nhic renk yok      : {hic :>5} ({hic /tot :.3f})")
@@ -74,7 +74,7 @@ def main ():
     ratio =cok /tot 
     print (f"\nKILL (onceden yazili): >=2 renkli part orani <0.10 ise kanal BOS -> "
     f"{ratio :.3f} => {'KANAL CANLI, matcher mesru'if ratio >=0.10 else 'KANAL BOS, ACMA'}")
-    json .dump ({"n":tot ,"hic":hic ,"tek":tek ,"cok":cok ,"oran_cok":ratio ,
+    json .dump ({"n":tot ,"never":hic ,"single":tek ,"very":cok ,"oran_cok":ratio ,
     "styled_yok":styled_yok ,
     "karar":"CANLI"if ratio >=0.10 else "BOS"},
     open ("results/q1_renk_sayimi.json","w"),indent =1 )

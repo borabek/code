@@ -37,7 +37,7 @@ def _write_partial (path ,rows ,ngt_of ):
 
 
 def test_resume_remaps_indices_when_corpus_grows (tmp_path ):
-    """Eski kosu A,B,C gormus. Yeni korpusta basa X eklenmis -> indeksler kaymis."""
+    """Eski run A,B,C gormus. Yeni korpusta basa X eklenmis -> indeksler kaymis."""
     part =str (tmp_path /"partial.npz")
     _write_partial (part ,[("A",2 ),("B",1 ),("C",3 )],{"A":5 ,"B":9 ,"C":2 })
 

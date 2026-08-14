@@ -15,25 +15,25 @@ dev ="cuda"if torch .cuda .is_available ()else "cpu"
 CASES =[
 ("2531320000","WEI normal (N~6)","base",None ),
 ("3273024","PXC high-CP aile 327x (N=12)","highcp",12 ),
-("2770943","zor aile singleton 2770 (N=32)","highcp",32 ),
-("3002926","zor aile 3002 (N=18)","highcp",18 ),
+("2770943","hard aile singleton 2770 (N=32)","highcp",32 ),
+("3002926","hard aile 3002 (N=18)","highcp",18 ),
 ]
 
 
 def validate (pid ,cps ,tag ):
     ok =True ;msgs =[]
     if not cps :
-        return False ,["CP YOK (bos cikti)"]
+        return False ,["CP YOK (empty output)"]
     P =np .array ([c ["point"]for c in cps ])
     # dup: <2mm double
     dmin =min ((float (np .linalg .norm (P [i ]-P [j ]))for i in range (len (P ))for j in range (i +1 ,len (P ))),default =99 )
     if dmin <2.0 :ok =False ;msgs .append (f"DUP: {dmin :.2f}mm cift var")
     # tier atanmis
-    if not all (c .get ("tier")in ("auto","review")for c in cps ):ok =False ;msgs .append ("tier eksik")
+    if not all (c .get ("tier")in ("auto","review")for c in cps ):ok =False ;msgs .append ("tier missing")
     # direction unit vektor
     for c in cps :
         d =np .asarray (c ["direction"],float )
-        if abs (np .linalg .norm (d )-1.0 )>0.05 :ok =False ;msgs .append ("direction birim degil");break 
+        if abs (np .linalg .norm (d )-1.0 )>0.05 :ok =False ;msgs .append ("direction unit not");break 
     na =sum (1 for c in cps if c ["tier"]=="auto")
     msgs .append (f"{len (cps )} CP ({na } auto/{len (cps )-na } review), dup-min {dmin :.1f}mm, ws {min (c ['wire_score']for c in cps ):.2f}-{max (c ['wire_score']for c in cps ):.2f}")
     return ok ,msgs 

@@ -42,7 +42,7 @@ def main ():
     import measure_set 
     measure_set .rapor_bas (D ["rap"])
     X ,y ,pid ,mfg ,keep =D ["X"],D ["y"],D ["pid"],D ["mfg"],D ["keep"]
-    AD =D ["ad"]
+    AD =D ["name"]
     print (f"\negitim: {int (keep .sum ())} candidate / {len (np .unique (pid [keep ]))} part | "
     f"{X .shape [1 ]} ham sutun -> {X .shape [1 ]*2 } donusumlu")
 
@@ -114,7 +114,7 @@ def main ():
         f"{SON [en ]['_URETICI_DISI_ORT']:.4f} | havuzlanmis GA[{lo :+.4f},{hi :+.4f}]")
     else :
         en =None 
-        print ("\nKILL: hicbir k manufacturer-disi ORT'de +0.01 vermedi -> G1 KAPANDI")
+        print ("\nKILL: no k manufacturer-disi ORT'de +0.01 vermedi -> G1 CLOSED")
     with io .open ("results/g1_transfer_secim.json","w",encoding ="utf-8")as f :
         json .dump ({"kararlilik":{AD [i ]:float (dus [i ])for i in rank_ },
         "sonuc":{str (k ):{"havuzlanmis":SON [k ]["havuzlanmis"]["tespit"],

@@ -67,7 +67,7 @@ def main ():
         ax .set_title (f"{pid }  ->  {len (cps )} CP ({na } otonom)",fontsize =10 )
 
     json .dump (allout ,open ("results/_demo_random.json","w"),indent =1 )
-    fig .suptitle ("ROBOT: random WSCAD .stp -> CP'ler (kirmizi=otonom, turuncu=insan-kontrol; ok=nokta+direction)  --  hic gorulmemis parts",
+    fig .suptitle ("ROBOT: random WSCAD .stp -> CP'ler (kirmizi=otonom, turuncu=insan-kontrol; ok=point+direction)  --  never gorulmemis parts",
     fontsize =13 )
     plt .tight_layout (rect =[0 ,0 ,1 ,0.96 ])
     plt .savefig ("results/_demo_random.png",dpi =95 ,bbox_inches ="tight")

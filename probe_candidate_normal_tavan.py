@@ -6,7 +6,7 @@ HERHANGI BIRINI kabul ediyordu -- extra comert a criterion. Korpus suzgeci
 denendiginde (each adaya bankadaki normale EN YAKIN secenek) yonlu recall
 0.8926 -> 0.3679 dustu, NIT'te 0.8429 -> 0.027.
 
-Iki ayri sebep vardi:
+Iki ayri reason vardi:
   (a) candidates 6000 tepeden ~490'a SEYRELTILMIS
   (b) "bankadaki normale most yakin secenek" != "normalin kendisi"
 

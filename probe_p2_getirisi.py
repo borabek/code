@@ -143,7 +143,7 @@ def main ():
     "kaba_f1_su_an":f1_su ,"kaba_f1_Q4":f1_ust ,
     "not":"P2'nin UST SINIRI: segmentasyon kalitesi ceyreklerinden "
     "okunan fark. Kalite olcusu GT'nin dogrulugundan BAGIMSIZ "
-    "(agin o bolgede ne kadar net konustugu). D7 brand-disi."},
+    "(agin o bolgede ne up to net konustugu). D7 brand-disi."},
     open ("results/p2_getirisi.json","w"),indent =1 )
     print ("\nmakbuz -> results/p2_getirisi.json")
 

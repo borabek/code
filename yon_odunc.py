@@ -24,7 +24,7 @@ EKSEN_R =10.0 # B-rep silindir eksenini odunc alma yaricapi (mm)
 AYIRT_ACI =5.0 # this aciya more yakin secenekler AYNI sayilir (tekrar absent)
 
 OZ_AD =["mevcut","aci_mevcuda","kaynak_komsu","kaynak_eksen","kaynak_baskin",
-"mesafe","mesafe_diag","aci_baskina","eksen_hizasi","gate_skoru",
+"distance","mesafe_diag","aci_baskina","eksen_hizasi","gate_skoru",
 "n_aday","destek"]
 
 

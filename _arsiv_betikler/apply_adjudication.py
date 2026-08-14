@@ -125,7 +125,7 @@ def main ():
     print (f"  YOKSAY isaretlenen vertex: {n_ign }   (emin degilim -> kayiptan cikarildi)")
     print (f"  negatif birakilan bolge  : {n_neg }   (zaten dogruydu)")
     if not a .dry_run and (n_pos or n_ign ):
-        print ("\n  Sonraki adim: ayni tarifle yeniden egit ve IKI olcumde de karsilastir")
+        print ("\n  Sonraki step: same tarifle yeniden egit and IKI olcumde de karsilastir")
         print ("    (manufacturer hakemi + insan held-out). Kazanmazsa geri al -- git with difference gorulebilir.")
 
 

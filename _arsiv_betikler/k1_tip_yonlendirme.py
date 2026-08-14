@@ -95,21 +95,21 @@ def main ():
     M58 =RX 
     M66 =np .hstack ([RX ,BG ])
     SON ={}
-    for ad ,M ,fn_ in (("58 tek gate",M58 ,tek_gate ),
+    for ad ,M ,fn_ in (("58 single gate",M58 ,tek_gate ),
     ("58 TIPLI gate",M58 ,tipli_gate ),
-    ("58+bg tek gate",M66 ,tek_gate ),
+    ("58+bg single gate",M66 ,tek_gate ),
     ("58+bg TIPLI gate",M66 ,tipli_gate )):
         o =fn_ (M );SON [ad ]=f1 (karar (o ))
         print (f"{ad :<22}{SON [ad ]:.4f}")
-    baseline =SON ["58 tek gate"]
-    en_iyi =max ((v ,k )for k ,v in SON .items ()if k !="58 tek gate")
+    baseline =SON ["58 single gate"]
+    en_iyi =max ((v ,k )for k ,v in SON .items ()if k !="58 single gate")
     print (f"\ntaban {baseline :.4f} -> en iyi {en_iyi [1 ]} {en_iyi [0 ]:.4f} ({en_iyi [0 ]-baseline :+.4f})")
     gecti =(en_iyi [0 ]-baseline )>=0.01 
     print (f"KARAR: {'SINYAL VAR -> uctan uca sinava'if gecti else 'SINYAL YOK -> K1 KAPANIR'}")
 
     # TIP BASINA AYRISTIRMA (nerede kazaniyor/kaybediyor)
     o1 =tek_gate (M58 );o2 =tipli_gate (M58 )
-    for t ,ad in ((True ,"yuvarlak kanal"),(False ,"diger")):
+    for t ,ad in ((True ,"yuvarlak channel"),(False ,"diger")):
         m1 =karar (o1 );m2 =karar (o2 )
         def f1_alt (m ,msk ):
             tp =int ((RY .astype (bool )&m &msk ).sum ());fp =int ((~RY .astype (bool )&m &msk ).sum ())

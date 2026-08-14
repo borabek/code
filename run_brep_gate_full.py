@@ -100,7 +100,7 @@ for f in sorted (os .listdir (OZ )):
     if f .startswith ("d7_")and f .endswith (".npz"):
         z =np .load (f"{OZ }/{f }")
         te .append ({"pid":f [3 :-4 ],"X":z ["X"],"P":z ["P"],"D":z ["D"],
-        "kaynak":z ["kaynak"]})
+        "source":z ["source"]})
 kay7 =K .yukle ([d ["pid"]for d in te ])
 for d in te :
     r =kay7 [d ["pid"]]

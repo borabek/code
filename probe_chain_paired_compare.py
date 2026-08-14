@@ -312,7 +312,7 @@ def main ():
             print (f"  {n }/{len (candidate )} ({time .time ()-t0 :.0f} s)",flush =True )
 
     print (f"\n{n } part | GT {agg ['saha']['gt']}")
-    print ("\n=== UC METRIK (ayni parts, ayni zincir) ===")
+    print ("\n=== UC METRIK (same parts, same zincir) ===")
     print (f"{'yol':<10}{'tespit':>10}{'robot ISARETSIZ':>18}"
     f"{'robot ISARETLI':>17}")
     for _ad in ("saha","olculen"):

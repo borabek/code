@@ -31,7 +31,7 @@ def main ():
     X =d ["X"][:,:18 ];y =d ["y"].astype (bool )
     mfg =np .array ([str (x )for x in d ["mfg"]]);pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    grp =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     THR =float (cfg ["robot_wire_gate_threshold"])
     ORAN =float (cfg .get ("gate_goreli_oran",0.5 ));TABAN =float (cfg .get ("gate_goreli_taban",0.25 ))
@@ -81,7 +81,7 @@ def main ():
         flush =True )
         out [ad ]={"tanidik":tan ,"manufacturer":mv ,"en_kotu":min (mv )}
     t =out ["RF leaf3 (mevcut)"]
-    print ("\nKARAR (kill: en kotu > mevcut VE tanidik loss <= 0.02):")
+    print ("\nKARAR (kill: most kotu > mevcut VE tanidik loss <= 0.02):")
     for ad ,v in out .items ():
         if ad .startswith ("RF leaf3"):
             continue 

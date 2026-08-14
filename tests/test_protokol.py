@@ -32,7 +32,7 @@ def test_bekci_kirli_parcayi_yakalar (P ):
     gk =OK .geo_anahtarlari ()
     lg =sorted (P .yasak_gruplar ())
     kirli =[p for p ,g in gk .items ()if g ==lg [0 ]]
-    assert kirli ,"LOCKED grubuna ait part yok"
+    assert kirli ,"LOCKED grubuna ait part none"
     assert not P .egitim_maskesi (kirli ).any ()
     with pytest .raises (AssertionError ):
         P .dogrula (kirli ,ad ="_pytest_kirli",sert =True )

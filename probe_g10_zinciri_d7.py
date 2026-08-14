@@ -69,8 +69,8 @@ for m in sorted (a ["brand"],key =lambda k :-a ["brand"][k ]):
     print (f"  {m :<7} {a ['brand'][m ]:.4f} -> {b ['brand'].get (m ,float ('nan')):.4f}  "
     f"{b ['brand'].get (m ,0 )-a ['brand'][m ]:+.4f}")
 json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"artan_marka":art ,
-"sizinti_denetimi":"g10 training dizini _label_auto_obj_TR ile D7 "
+"sizinti_denetimi":"g10 training dizini _label_auto_obj_TR with D7 "
 "kesisimi: part 0, brand 0 (12/12 brand temiz)",
-"not":"AYNI harness (canonical_d7), yalniz yigin degisti. Tam zincir, "
+"not":"AYNI harness (canonical_d7), only yigin degisti. Tam zincir, "
 "MIKRO, D7=DEV brand-disi."},
 open ("results/g10_zinciri_d7.json","w"),indent =1 )

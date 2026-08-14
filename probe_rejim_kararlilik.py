@@ -71,7 +71,7 @@ def main ():
         Pp ,Dp =p6_cikti (d ,pk )
         d ["_tb_c"]=say (Pt ,Dt ,d )
         d ["_p6_c"]=say (Pp ,Dp ,d )
-        d ["_n01"]=float ((d ["kaynak"]!=2 ).sum ())
+        d ["_n01"]=float ((d ["source"]!=2 ).sum ())
         if i %600 ==0 :
             print (f"  {i }/{len (data_ )} ({time .time ()-t0 :.0f} s)",flush =True )
 
@@ -106,7 +106,7 @@ def main ():
     json .dump ({"damga":makbuz_hash .damga (),"egri":egri ,"en_iyi":en ,
     "bant":bant ,"katlar":katlar ,"n_parca":len (data_ ),
     "not":"Rejim esigi kararlilik egrisi. Kat-disi measurement; D7'ye "
-    "BAKILMADI. Esik secimi bu egriden yapilir."},
+    "BAKILMADI. Esik secimi this egriden yapilir."},
     open ("results/rejim_kararlilik.json","w"),indent =1 )
     print (f"receipt -> results/rejim_kararlilik.json ({time .time ()-t0 :.0f} s)")
 

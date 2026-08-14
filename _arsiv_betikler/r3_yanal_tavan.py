@@ -118,7 +118,7 @@ def main ():
         if kk %25 ==0 :
             print (f"  {kk }/{len (D ['DER'])}  {time .time ()-t0 :.0f}s",flush =True )
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ));SOZ =[]
         if r ["X"]is not None and r .get ("XR")is not None :
             Xr =np .hstack ([r ["X"],r ["XR"]])
@@ -199,9 +199,9 @@ def main ():
     print (f"\n{'ceiling / arm':<30}{'robot':>9}")
     print (f"{'MEVCUT':<30}{F ['mevcut']:>9.4f}")
     print (f"{'ACI mukemmel olsa (lateral<=2)':<30}{F ['aci_mukemmel']:>9.4f}")
-    print (f"{'YANAL mukemmel olsa (aci<=10)':<30}{F ['yanal_mukemmel']:>9.4f}")
+    print (f"{'YANAL mukemmel olsa (angle<=10)':<30}{F ['yanal_mukemmel']:>9.4f}")
     print (f"{'IKISI mukemmel (=tespit)':<30}{F ['tespit']:>9.4f}")
-    print (f"{'KONUM KAHINI (sozluk)':<30}{F ['konum_kahin']:>9.4f}")
+    print (f"{'KONUM KAHINI (dictionary)':<30}{F ['konum_kahin']:>9.4f}")
     ac =F ["aci_mukemmel"];me =F ["mevcut"]
     kaps =(F ["konum_kahin"]-me )/max (ac -me ,1e-9 )
     print (f"\nKONUM sozlugu, ACI-MUKEMMEL tavaninin %{100 *kaps :.0f}'ini kapsiyor")

@@ -35,34 +35,34 @@ CIK ="_p2_etiket"
 CKPT ="results/seg_g7/g7_s0.pt"
 SINIF ="0=Housing 1=Contact 2=SnapPoint 3=CableEntry 4=LabelSurface"
 
-KILAVUZ ="""# P2 parti 1 -- mouth segmentasyonu duzeltme
+KILAVUZ ="""# P2 parti 1 -- mouth segmentasyonu correction
 
-**Is SIFIRDAN boyama DEGIL.** Her parcanin etiketi modelin kendi tahminiyle
+**Is SIFIRDAN boyama DEGIL.** Her parcanin etiketi modelin own tahminiyle
 doldurulmus geliyor; senin yapacagin **agizlarin kenarlarini duzeltmek**.
 
 ## Sinif sozlesmesi
 `{sinif}`
 
-* **CableEntry (3)** = telin girdigi acikligin YUZEYI. Yuvarlak delik, KARE
-  giris, push-in yarik -- hepsi CableEntry. Sadece yuvarlak delik degil.
+* **CableEntry (3)** = telin girdigi acikligin YUZEYI. Yuvarlak hole, KARE
+  giris, push-in yarik -- all of them CableEntry. Sadece yuvarlak hole not.
 * **Contact (1)** = metal kontak yuzeyi / alet yuvasi.
-* Emin olamadigin yeri **DEGISTIRME** -- yanlis etiket bosluktan kotudur.
+* Emin olamadigin yeri **DEGISTIRME** -- wrong label bosluktan kotudur.
 
-## Neden bu is
+## Neden this is
 Olculdu (D7 gorulmemis brand, 3087 CP): mouth cevresindeki segmentasyon
-kalitesinin en iyi ceyreginde robot **0.4870**, en kotu ceyrekte **0.0557**;
-medyan lateral error 1.38mm'ye karsi 8.64mm. Herkes en iyi ceyrek gibi davransa
-robot recall **0.1995 -> 0.4870**. Bugune kadar denenen tum son-islem kollari
-+-0.005 bandindaydi; bu arm iki buyukluk mertebesi daha buyuk.
+kalitesinin most iyi ceyreginde robot **0.4870**, most kotu ceyrekte **0.0557**;
+medyan lateral error 1.38mm'ye karsi 8.64mm. Herkes most iyi ceyrek like davransa
+robot recall **0.1995 -> 0.4870**. Bugune up to denenen tum last-islem kollari
++-0.005 bandindaydi; this arm two buyukluk mertebesi more large.
 
 ## Nasil
 1. `label_tool.html`'i tarayicida ac
 2. `<pid>.obj` dosyasini sec
 3. `<pid>.labels.txt` (seed) dosyasini yukle
-4. Agiz kenarlarini duzelt, indir, ayni dizine `<pid>.labels.txt` olarak kaydet
+4. Agiz kenarlarini duzelt, indir, same dizine `<pid>.labels.txt` as kaydet
 
 ## Parcalar
-{liste}
+{list}
 """
 
 
@@ -76,8 +76,8 @@ def obj_yaz (yol ,V ,F ):
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--liste",default ="results/p2_parti1_pidler.txt")
-    ap .add_argument ("--cikti",default =CIK )
+    ap .add_argument ("--list",default ="results/p2_parti1_pidler.txt")
+    ap .add_argument ("--output",default =CIK )
     ap .add_argument ("--ckpt",default =CKPT )
     a =ap .parse_args ()
 
@@ -86,7 +86,7 @@ def main ():
     eksik =[p for p in pids if p not in S ]
     if eksik :
         raise SystemExit (f"STEP bulunamayan {len (eksik )} part: {eksik [:5 ]} "
-        "-- sessiz atlamak yerine DURUYORUM")
+        "-- silent atlamak instead of DURUYORUM")
     os .makedirs (a .out_ ,exist_ok =True )
 
     cihaz ="cuda"if torch .cuda .is_available ()else "cpu"

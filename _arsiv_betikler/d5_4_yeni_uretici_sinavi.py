@@ -65,8 +65,8 @@ def kova_adi (n ):
 def main ():
     import argparse 
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--sinir",type =int ,default =250 ,
-    help ="exam kumesi ust siniri (dengeli ornekleme). 0 = sinirsiz")
+    ap .add_argument ("--boundary",type =int ,default =250 ,
+    help ="exam kumesi upper siniri (dengeli ornekleme). 0 = sinirsiz")
     a =ap .parse_args ()
     import protocol 
     protocol .tez_dogrula ()
@@ -186,14 +186,14 @@ def main ():
         "gt_toplam":int (sum (r ["n"]for r in tekil )),
         "aday_toplam":int (sum (len (r ["P"])for r in tekil )),
         "pidler":pid ,
-        "not":"GORULMEMIS URETICI sinavi. 194'luk measurement kumesi AYRI ve "
+        "not":"GORULMEMIS URETICI sinavi. 194'luk measurement kumesi AYRI and "
         "DONDURULMUS kalir. Bu cluster egitimde ASLA kullanilmaz."},
         f ,indent =1 ,ensure_ascii =False )
     print (f"\nSINAV KUMESI: {len (pid )} part / {len (mf )} manufacturer | "
     f"GT {sum (r ['n']for r in tekil )} | candidate {sum (len (r ['P'])for r in tekil )}")
     print (f"  MUHUR sha16 = {imza }")
     print (f"  -> {CIKTI }  ve  {DER_CIKTI }")
-    print ("\n  UYARI: bu cluster EGITIMDE kullanilamaz. Her arm onu AYNI haliyle kullanir;")
+    print ("\n  WARNING: this cluster EGITIMDE kullanilamaz. Her arm onu AYNI haliyle kullanir;")
     print ("         corpus buyudukce YENIDEN URETILIRSE muhur degisir and karsilastirma bozulur.")
 
 

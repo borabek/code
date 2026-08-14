@@ -73,8 +73,8 @@ for e in (0.5 ,1.0 ,2.0 ):
     print (f"  <{e }mm: {(R <e ).sum ()} part (%{100 *(R <e ).mean ():.0f})")
 
 m ,_ =egit ('results/zengin_parite_v3.npz')
-print (f"\n{'katman (MODELDEN BAGIMSIZ criterion)':<34}{'part':>7}{'tespit':>10}{'ROBOT':>9}")
-for ad ,e in (('hepsi',99. ),('residual <2mm',2.0 ),('residual <1mm',1.0 ),('residual <0.5mm',0.5 )):
+print (f"\n{'layer (MODELDEN BAGIMSIZ criterion)':<34}{'part':>7}{'tespit':>10}{'ROBOT':>9}")
+for ad ,e in (('all of them',99. ),('residual <2mm',2.0 ),('residual <1mm',1.0 ),('residual <0.5mm',0.5 )):
     alt =[r for r in SIN if res .get (r ['pid'],99. )<e ]
     if len (alt )<20 :continue 
     print (f"{ad :<34}{len (alt ):>7}{olc (m ,alt ,False ):>10.4f}{olc (m ,alt ,True ):>9.4f}")

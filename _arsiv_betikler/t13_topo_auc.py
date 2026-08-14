@@ -4,7 +4,7 @@
 Olcum order (kisayol absent): this betik ADAY DUZEYINDE AUC + null testi yapar. Gecmezse full
 corpus uretimi ACILMAZ (1.5 saat tasarruf).
 
-KILL (onceden yazili): no feature null'un on AUC >= 0.60 vermezse channel KAPANIR.
+KILL (onceden yazili): no feature null'un ten AUC >= 0.60 vermezse channel KAPANIR.
 Ayrica ARTIMLI value sart: 18 mevcut sutunun uzerine ne katiyor (grup-capraz OOF).
 """
 import os ,sys ,json ,pickle 
@@ -77,7 +77,7 @@ def main ():
     print (f"\n{len (Y )} candidate | TP {int (Y .sum ())} | {len (set (GRP ))} part")
 
     rng =np .random .RandomState (0 )
-    print (f"\n{'ozellik':<12}{'AUC':>8}{'null p95':>10}{'TP med':>10}{'FP med':>10}{'karar':>9}")
+    print (f"\n{'feature':<12}{'AUC':>8}{'null p95':>10}{'TP med':>10}{'FP med':>10}{'karar':>9}")
     out ={}
     for i ,n in enumerate (topo_feats .ISIMLER ):
         a =auc_mw (XT [:,i ],Y )
@@ -101,7 +101,7 @@ def main ():
         p_ =tp /max (tp +fp ,1 );r_ =tp /max (tp +fn ,1 )
         return auc_mw (o ,Y ),2 *p_ *r_ /max (p_ +r_ ,1e-9 ),p_ ,r_ 
 
-    print (f"\n{'gate':<22}{'OOF AUC':>10}{'F1':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'gate':<22}{'OOF AUC':>10}{'F1':>9}{'conclusive':>9}{'recall':>9}")
     a1 ,f1_ ,p1 ,r1 =oof (X18 )
     print (f"{'18 mevcut':<22}{a1 :>10.4f}{f1_ :>9.4f}{p1 :>9.3f}{r1 :>9.3f}")
     a2 ,f2_ ,p2 ,r2 =oof (np .hstack ([X18 ,XT ]))

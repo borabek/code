@@ -25,7 +25,7 @@ from big_arbiter import eligible
 from infer_step_cp import step_to_mesh 
 from r15_eksen_secici import candidates 
 
-AD =["mevcut","kanal","brep","duzlem"]
+AD =["mevcut","channel","brep","duzlem"]
 
 def ozn (mesh ,p ,v ,d0 ):
     """Aday basina GT'siz features."""

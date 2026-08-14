@@ -71,9 +71,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"none:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"none:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf0 =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -93,9 +93,9 @@ def main ():
             continue 
         s =np .asarray (wire_gate .decision_score (m ,r ["X"]),float )
         o =np .argsort (-s )
-        PAR .append ({"geo":gk .get (r ["pid"],"yok:"+r ["pid"]),
+        PAR .append ({"geo":gk .get (r ["pid"],"none:"+r ["pid"]),
         "cluster":kume_of .get (r ["pid"],"dev"),"mfg":mfg_of .get (r ["pid"],"?"),
-        "rj":"cok"if r ["n"]>=8 else "dusuk",
+        "rj":"very"if r ["n"]>=8 else "dusuk",
         "s":s [o ],"X":np .asarray (r ["X"],float )[o ],
         "P":r ["P"][o ],"Pd":r ["Pd"][o ],
         "G":np .asarray (r ["G"],float ),"Gd":np .asarray (r ["Gd"],float ),

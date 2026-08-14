@@ -202,7 +202,7 @@ def out_ (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
             X2 =np .hstack (par )
             s2 [k ]=pk ["kademe2"].predict_proba (X2 .astype (np .float32 ))[:,1 ]
         s =s2 
-    P2 ,D2 ,_ai ,S2 =p6_decision .sec_ayrintili (P ,idx ,YD ,s ,tuple (pk ["kural"]),
+    P2 ,D2 ,_ai ,S2 =p6_decision .sec_ayrintili (P ,idx ,YD ,s ,tuple (pk ["rule"]),
     nms_mm =float (pk ["nms"]))
     if ISARET and len (P2 ):
         T2 =product_genis .tanimlayici (P2 ,D2 ,*_mesh_arg (V ,F ))

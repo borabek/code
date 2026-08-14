@@ -86,7 +86,7 @@ def main ():
         if not os .path .exists (mf ):
             continue 
         z =np .load (f"{OZ }/{f }")
-        kay =np .asarray (z ["kaynak"],int )
+        kay =np .asarray (z ["source"],int )
         m =np .isin (kay ,(0 ,1 ,2 ))
         if int (m .sum ())<2 :
             continue 
@@ -157,7 +157,7 @@ def main ():
     "yelpaze":YB .FAN_N ,
     "sonuc":out ,
     "not":"Yonlu TAVAN (mukemmel selector). Kabul kutusu urun "
-    "metrigiyle ayni. D7'ye BAKILMADI."},
+    "metrigiyle same. D7'ye BAKILMADI."},
     open (_yol ,"w"),indent =1 )
     print (f"\nmakbuz -> {_yol }")
 

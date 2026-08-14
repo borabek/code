@@ -103,38 +103,38 @@ def main ():
             P ,Pd =CIKTI [r ["pid"]]
             Gd =np .asarray (r ["Gd"],float )
             G =np .asarray (r ["G"],float )if hedef =="seat"else AGIZ [r ["pid"]][0 ]
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if robot :
                 tp ,fp ,fn ,b =match_greedy (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ,
                 signed =True ,eksen_tol =eksen_tol )
             else :
                 tp ,fp ,fn ,b =match_greedy (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ,
                 eksen_tol =eksen_tol )
-            nb =b ["belirsiz"];bel +=nb ;top +=tp 
+            nb =b ["ambiguous"];bel +=nb ;top +=tp 
             if kesin and nb :
                 tp -=nb ;fp +=nb ;fn +=nb 
             rows .append ((rj ,tp ,fp ,fn ))
         return f1w (rows ),bel ,top 
 
-    print (f"\n{'measurement':<34}{'tespit F1':>11}{'F1_kesin':>11}{'TP':>6}{'belirsiz':>10}")
+    print (f"\n{'measurement':<34}{'tespit F1':>11}{'F1_kesin':>11}{'TP':>6}{'ambiguous':>10}")
     S ={}
-    for ad ,hedef ,et in (("(a) SEAT'e gore, axis 40  [BUGUN]","seat",40.0 ),
-    ("(b) SEAT'e gore, axis 15  [HATALI]","seat",15.0 ),
-    ("(c) AGIZ'a gore, axis 15","mouth",15.0 ),
-    ("(d) AGIZ'a gore, axis 10","mouth",10.0 ),
-    ("(e) AGIZ'a gore, axis  6","mouth",6.0 )):
+    for ad ,hedef ,et in (("(a) SEAT'e according to, axis 40  [BUGUN]","seat",40.0 ),
+    ("(b) SEAT'e according to, axis 15  [HATALI]","seat",15.0 ),
+    ("(c) AGIZ'a according to, axis 15","mouth",15.0 ),
+    ("(d) AGIZ'a according to, axis 10","mouth",10.0 ),
+    ("(e) AGIZ'a according to, axis  6","mouth",6.0 )):
         f1 ,bel ,top =olc (hedef ,et )
         fk ,_ ,_ =olc (hedef ,et ,kesin =True )
-        S [ad ]={"f1":f1 ,"f1_kesin":fk ,"tp":top ,"belirsiz":bel }
+        S [ad ]={"f1":f1 ,"f1_kesin":fk ,"tp":top ,"ambiguous":bel }
         print (f"{ad :<34}{f1 :>11.4f}{fk :>11.4f}{top :>6}{bel :>10}")
 
-    print (f"\n{'ROBOT (FIZIKSEL)':<34}{'robot F1':>11}{'F1_kesin':>11}{'TP':>6}{'belirsiz':>10}")
-    for ad ,hedef ,et in (("(a) SEAT'e gore, axis 40  [BUGUN]","seat",40.0 ),
-    ("(c) AGIZ'a gore, axis 15","mouth",15.0 ),
-    ("(d) AGIZ'a gore, axis 10","mouth",10.0 )):
+    print (f"\n{'ROBOT (FIZIKSEL)':<34}{'robot F1':>11}{'F1_kesin':>11}{'TP':>6}{'ambiguous':>10}")
+    for ad ,hedef ,et in (("(a) SEAT'e according to, axis 40  [BUGUN]","seat",40.0 ),
+    ("(c) AGIZ'a according to, axis 15","mouth",15.0 ),
+    ("(d) AGIZ'a according to, axis 10","mouth",10.0 )):
         f1 ,bel ,top =olc (hedef ,et ,robot =True )
         fk ,_ ,_ =olc (hedef ,et ,kesin =True ,robot =True )
-        S ["ROBOT "+ad ]={"f1":f1 ,"f1_kesin":fk ,"tp":top ,"belirsiz":bel }
+        S ["ROBOT "+ad ]={"f1":f1 ,"f1_kesin":fk ,"tp":top ,"ambiguous":bel }
         print (f"{ad :<34}{f1 :>11.4f}{fk :>11.4f}{top :>6}{bel :>10}")
 
     with io .open ("results/a1b_agiz_hizalamali.json","w",encoding ="utf-8")as f :

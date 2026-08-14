@@ -30,7 +30,7 @@ def main ():
     X =d ["X"][:,:18 ];y =d ["y"].astype (bool )
     mfg =np .array ([str (x )for x in d ["mfg"]]);pids =np .array ([str (x )for x in d ["pids"]])
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    grp =np .array ([gk .get (p ,"none:"+p )for p in pids ])
     THR =float (json .load (open ("cp_config.json",encoding ="utf-8"))["robot_wire_gate_threshold"])
 
     def rule_ (s ,p ,ratio ,baseline ):
@@ -67,7 +67,7 @@ def main ():
 
     U =sorted (set (mfg ))
     taban_f =tanidik ["sabit (mevcut)"][0 ]
-    print (f"{'kural':<26}{'TANIDIK':>9}{'fark':>8}"+"".join (f"{'uret.'+u :>10}"for u in U )
+    print (f"{'rule':<26}{'TANIDIK':>9}{'fark':>8}"+"".join (f"{'uret.'+u :>10}"for u in U )
     +f"{'EN KOTU':>9}{'karar':>9}")
     out ={}
     for ad ,_ ,_ in ADAY :
@@ -80,7 +80,7 @@ def main ():
         +f"{min (mv ):>9.4f}{('GECTI'if gecti else '-'):>9}")
         out [ad ]={"tanidik":t ,"tanidik_fark":t -taban_f ,
         "manufacturer":{u :mout [ad ][u ][0 ]for u in U },"en_kotu":min (mv ),"gecti":gecti }
-    print ("\nKILL: (a) her iki manufacturer-disi bolmede sabiti gecmeli, (b) tanidik loss <= 0.02")
+    print ("\nKILL: (a) each iki manufacturer-disi bolmede sabiti gecmeli, (b) tanidik loss <= 0.02")
     json .dump (out ,open ("results/t6_goreli_taban.json","w"),indent =1 )
     print ("receipt -> results/t6_goreli_taban.json")
 

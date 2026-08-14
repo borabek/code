@@ -105,7 +105,7 @@ def main ():
         tp ,fp ,fn =top [ad ]
         print (f"  {isim :16s} F1 {f1 (top [ad ]):.4f}   "
         f"(TP {tp } / FP {fp } / FN {fn })")
-    print ("\nNOT: 5 part KUCUK bir ornek -- bu sayilar headline DEGILDIR.")
+    print ("\nNOT: 5 part KUCUK a ornek -- this sayilar headline DEGILDIR.")
     print ("Manset VAL 100 parcadir (tespit 0.7878 / robot-ISARETLI 0.4839).")
     json .dump ({"parts":satirlar ,
     "toplam":{k :f1 (v )for k ,v in top .items ()}},

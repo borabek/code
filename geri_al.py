@@ -169,11 +169,11 @@ def main ():
         print ("\nHATA: kopya kumesi geri alinamadi.")
         sys .exit (1 )
     if ds or ps :
-        print ("\nUYARI: GERI ALINAMAZ kumede deviation var (yukarida). Kod ve model")
+        print ("\nUYARI: GERI ALINAMAZ kumede deviation present (yukarida). Kod ve model")
         print ("geri alindi, but this dosyalar kontrol noktasindaki hallerinde DEGIL.")
         print ("Yeniden uretilmeleri is required.")
         sys .exit (2 )
-    print ("\nTAM DONUS BASARILI -- her sey kontrol noktasindaki gibi.")
+    print ("\nTAM DONUS BASARILI -- each sey kontrol noktasindaki gibi.")
     print ("Kaniti for:  python probe_dagitim_dogrula.py   (beklenen robot 0.2980)")
 
 

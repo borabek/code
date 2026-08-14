@@ -42,7 +42,7 @@ def rank01 (s ):
 
 
     # DEPLOY EDILEBILIRLIK KURALI: robot TEK PARCA isler -> skor part-bagimsiz must be.
-    # rank-normalizasyon TUM KORPUS on is computed (threshold aslinda a yuzdelik) -> DEPLOY EDILEMEZ.
+    # rank-normalizasyon TUM KORPUS ten is computed (threshold aslinda a yuzdelik) -> DEPLOY EDILEMEZ.
     # Bu yuzden SADECE olasilik uzayinda birlesen konfigurasyonlar candidate.
 cands ={
 "RF(rich)":s_rf ,"MLP(rich+emb)":s_mlp ,"SetNet(3seed)":s_set ,
@@ -66,9 +66,9 @@ print (f"\n>>> KAZANAN (deploy edilebilir): {best [0 ]}  ALL {best [1 ]:.4f} "
 f"(WEI {best [2 ]:.4f} / PXC {best [3 ]:.4f}), threshold {best [4 ]:.2f}")
 json .dump ({"winner":best [0 ],"WORK_ALL":best [1 ],"WORK_WEI":best [2 ],"WORK_PXC":best [3 ],
 "locked_threshold":best [4 ],
-"deployability_rule":"rank-normalizasyonlu ensemble'lar ELENDI: rank tum korpustan hesaplanir, "
-"threshold yuzdelige donusur, robot tek part islerken TANIMSIZ. Sadece "
+"deployability_rule":"rank-normalizasyonlu ensemble'lar ELENDI: rank tum korpustan is computed, "
+"threshold yuzdelige donusur, robot single part islerken TANIMSIZ. Sadece "
 "olasilik-uzayi birlesimleri candidate alindi.",
-"note":"SADECE WORK (541 part) uzerinde secildi; kilitli holdout'a dokunulmadi."},
+"note":"SADECE WORK (541 part) on secildi; kilitli holdout'a dokunulmadi."},
 open ("results/final_config.json","w"),indent =1 )
 print ("-> results/final_config.json (KILITLENDI; P7 bunu single times holdout'ta calistiracak)")

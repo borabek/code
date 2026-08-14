@@ -16,7 +16,7 @@ OLCULEN OZELLIKLER (all of them B-rep'ten, mesh tahmini DEGIL):
   bos_derinlik: axis along first "baseline"a up to distance (kor hole) -- otherwise BOYDAN BOYA
   gecen       : boydan boya mi (0/1)
 
-YONTEM: DEV+VAL adaylari (200 part, geometri as ayrik) on TP/FP etiketiyle
+YONTEM: DEV+VAL adaylari (200 part, geometri as ayrik) ten TP/FP etiketiyle
 Mann-Whitney AUC + BAG duzeltmesi (kisayol AUC formulu dengesiz/ikili ozelliklerde SISIYOR --
 2026-07-29'da 0.953 sanip gercegi 0.563 cikmisti) + PERMUTASYON null testi.
 
@@ -146,7 +146,7 @@ def main ():
     M =np .array ([[x [n ]for n in names ]for x in X ],float )
     Y =np .array (Y ,bool )
     print (f"\n{len (Y )} candidate | TP {int (Y .sum ())} / FP {int ((~Y ).sum ())}")
-    print (f"\n{'ozellik':<16}{'AUC':>8}{'null p95':>10}{'TP med':>10}{'FP med':>10}{'karar':>10}")
+    print (f"\n{'feature':<16}{'AUC':>8}{'null p95':>10}{'TP med':>10}{'FP med':>10}{'karar':>10}")
     rng =np .random .RandomState (0 )
     out ={}
     for i ,n in enumerate (names ):

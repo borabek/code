@@ -77,7 +77,7 @@ def main ():
         if not len (G ):
             continue 
         tol =max (3.0 ,0.06 *float (r ["diag"]))
-        regime ="dusuk-CP"if len (G )<4 else "yuksek-CP"
+        regime ="low-CP"if len (G )<4 else "high-CP"
         ortak ={"pid":r ["pid"],"mfg":r ["mfg"],"geo":r ["geo"],
         "regime":regime ,"n_gt":int (len (G ))}
 
@@ -117,30 +117,30 @@ def main ():
         for b in fn_idx :
             rec_ =dict (ortak )
             if b not in gt_tum :
-                rec_ ["sebep"]="ADAY_YOK"if not yakin_var [b ]else "ADAY_KALABALIK"
+                rec_ ["reason"]="ADAY_YOK"if not yakin_var [b ]else "ADAY_KALABALIK"
             elif not k [gt_tum [b ]]:
-                rec_ ["sebep"]="GATE_REDDI"# candidate vardi, gate reddetti
+                rec_ ["reason"]="GATE_REDDI"# candidate vardi, gate reddetti
             else :
-                rec_ ["sebep"]="ATAMA"# kabul edildi but baska GT'ye gitti
+                rec_ ["reason"]="ATAMA"# kabul edildi but baska GT'ye gitti
             FN .append (rec_ )
         ortak ["_havuz_kapsama"]=float (yakin_var .mean ())if len (G )else 1.0 
         KAPSAMA .append ((len (G ),float (yakin_var .sum ())))
 
     print (f"TP {len (TP )} | FP {len (FP )} | FN {len (FN )}")
     print (f"\n{'regime':<12}{'TP':>7}{'FP':>7}{'FN':>7}{'precision':>11}{'duyarlilik':>12}")
-    for rj in ("dusuk-CP","yuksek-CP"):
+    for rj in ("low-CP","high-CP"):
         t =sum (1 for x in TP if x ["regime"]==rj )
         f_ =sum (1 for x in FP if x ["regime"]==rj )
         n =sum (1 for x in FN if x ["regime"]==rj )
         print (f"{rj :<12}{t :>7}{f_ :>7}{n :>7}{t /max (t +f_ ,1 ):>11.4f}{t /max (t +n ,1 ):>12.4f}")
 
-    print ("\nFN SEBEP DAGILIMI (hangi arm bakacak):")
-    KOL ={"ADAY_YOK":"F4/A -- TEMSIL (havuzda HIC yok)",
-    "ADAY_KALABALIK":"F1-7 -- COZUNURLUK (candidate var, PAYLASILDI)",
-    "GATE_REDDI":"C/E -- GATE (bilgi var, karar yanlis)",
+    print ("\nFN REASON DAGILIMI (hangi arm bakacak):")
+    KOL ={"ADAY_YOK":"F4/A -- TEMSIL (havuzda HIC absent)",
+    "ADAY_KALABALIK":"F1-7 -- COZUNURLUK (candidate present, PAYLASILDI)",
+    "GATE_REDDI":"C/E -- GATE (bilgi present, karar wrong)",
     "ATAMA":"METRIK -- coklu esleme"}
-    for rj in ("dusuk-CP","yuksek-CP"):
-        c =collections .Counter (x ["sebep"]for x in FN if x ["regime"]==rj )
+    for rj in ("low-CP","high-CP"):
+        c =collections .Counter (x ["reason"]for x in FN if x ["regime"]==rj )
         tp =sum (c .values ())
         print (f"  {rj } ({tp } FN):")
         for s ,n in c .most_common ():
@@ -157,7 +157,7 @@ def main ():
             print (f"  {ad :<18} FP %{100 *pf :.1f} | TP %{100 *pt :.1f} | zenginlesme {pf /max (pt ,1e-9 ):.2f}x")
 
     ng =sum (a for a ,_ in KAPSAMA );nk =sum (b for _ ,b in KAPSAMA )
-    print ("\nHAVUZ KAPSAMASI (GT'nin toleransinda HERHANGI candidate var mi):")
+    print ("\nHAVUZ KAPSAMASI (GT'nin toleransinda HERHANGI candidate present mi):")
     print (f"  {nk :.0f}/{ng } = %{100 *nk /max (ng ,1 ):.1f}   "
     f"<- hafizadaki %93.7 ile KIYASLANABILIR olan sayi budur")
     print (f"  TEKIL eslemede alinan: {len (TP )}/{ng } = %{100 *len (TP )/max (ng ,1 ):.1f}")

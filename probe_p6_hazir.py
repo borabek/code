@@ -38,12 +38,12 @@ def main ():
 
     pk =product_p6 .model_yukle ()
     if pk is None :
-        sys .exit ("HATA: model paketi YOK -- once run_p6_kademe2.py kos.")
+        sys .exit ("HATA: model paketi YOK -- first run_p6_kademe2.py kos.")
     print (f"paket anahtarlari: {sorted (pk )}")
-    for a in ("kademe1","kural","nms","tohum_kural","tohum_nms"):
+    for a in ("kademe1","rule","nms","tohum_kural","tohum_nms"):
         if a not in pk :
             sys .exit (f"HATA: pakette `{a }` yok.")
-    print (f"  arm {pk .get ('arm')} | kural {pk ['kural']} | nms {pk ['nms']} "
+    print (f"  arm {pk .get ('arm')} | kural {pk ['rule']} | nms {pk ['nms']} "
     f"| kisa threshold {pk .get ('kisa_esik')} | 2. kademe "
     f"{'VAR'if pk .get ('kademe2')is not None else 'YOK'}")
     print (f"  URUN_P6 = {'ACIK'if product_p6 .ACIK else 'KAPALI'} | mesh havuzu "

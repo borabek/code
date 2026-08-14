@@ -23,7 +23,7 @@ import numpy as np
 
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 NPZ ="results/gate_regrow_data.npz"
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 THR =0.35 
 
 
@@ -52,7 +52,7 @@ def main ():
         n_gt =int (ngt_of .get (int (g ),0 ))
         if n_gt <=0 :
             continue 
-        k ="cok"if n_gt >=8 else "dusuk"
+        k ="very"if n_gt >=8 else "low"
         a =acc [k ]
         a ["n_parts"]+=1 
         a ["n_gt"]+=n_gt 

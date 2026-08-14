@@ -53,7 +53,7 @@ def main ():
     def data_ (yol ):
         d =np .load (yol ,allow_pickle =True )
         pid =np .array ([str (x )for x in d ["pids"]])
-        grp =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+        grp =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
         mfg =np .array ([str (x )for x in d ["mfg"]])
         X =np .asarray (d ["X"],float );y =np .asarray (d ["y"])
         v =np .asarray (d ["votes"])if "votes"in d .files else X [:,11 ]
@@ -67,7 +67,7 @@ def main ():
         n_parca =len (np .unique (pid )))
 
     E ,Y =data_ (ESKI ),data_ (YENI )
-    print (f"\n{'veri':<8}{'candidate':>8}{'part':>8}{'votes maks':>12}{'pozitif':>9}")
+    print (f"\n{'data':<8}{'candidate':>8}{'part':>8}{'votes maks':>12}{'pozitif':>9}")
     for ad ,D_ in (("ESKI",E ),("YENI",Y )):
         print (f"{ad :<8}{len (D_ ['y']):>8}{D_ ['n_parca']:>8}{D_ ['votes'].max ():>12.0f}"
         f"{D_ ['y'].mean ():>9.3f}")
@@ -96,13 +96,13 @@ def main ():
                 k =wire_gate .decision_mask (s )
                 if k .any ():
                     P =r ["P"][k ];Pd =r ["Pd"][k ]
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
     SON ,PARCA ={},{}
-    print (f"\n{'veri':<8}"+"".join (f"{b :>12}"for b ,_ ,_ in BOLME )+f"{'robot':>10}")
+    print (f"\n{'data':<8}"+"".join (f"{b :>12}"for b ,_ ,_ in BOLME )+f"{'robot':>10}")
     for ad ,D_ in (("ESKI",E ),("YENI",Y )):
         SON [ad ]={};sat =f"{ad :<8}"
         for b ,mk ,alt in BOLME :
@@ -123,7 +123,7 @@ def main ():
         _ ,lo ,hi =measure_set .grup_bootstrap (cift ,g ,fn ,n =2000 )
         ga [b ]=(lo ,hi )
 
-    print ("\n=== KARAR (ESKI -> YENI) ===")
+    print ("\n=== DECISION (ESKI -> YENI) ===")
     k =karar_olcutu .degerlendir (SON ["ESKI"],SON ["YENI"],ga =ga )
     print (k )
     print (f"\nNOT: parite duzeltmesi bir KAZANC vaadi degil, TUTARLILIK duzeltmesidir. Kural")
@@ -134,8 +134,8 @@ def main ():
     with io .open ("results/p1_parite_karsilastir.json","w",encoding ="utf-8")as f :
         json .dump ({"kollar":SON ,"ga":{a :list (b )for a ,b in ga .items ()},
         "karar":bool (k ),"zarar":bool (zarar ),
-        "votes_maks":{"eski":float (E ["votes"].max ()),
-        "yeni":float (Y ["votes"].max ())}},f ,indent =1 )
+        "votes_maks":{"old":float (E ["votes"].max ()),
+        "new":float (Y ["votes"].max ())}},f ,indent =1 )
     print ("receipt -> results/p1_parite_karsilastir.json")
 
 

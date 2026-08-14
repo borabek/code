@@ -2,7 +2,7 @@
 """CWT CEPHESI: D7 GT'sinin %37'si orada and F1 0.0466. Neden?
 
 CWT 226 part / 1146 GT / 5.1 CP-part. Taban 0.0370, P6 0.0466 -- ikisi de
-neredeyse sifir. NIT'te (D6) same desen vardi and orada kok neden TEMSILDI:
+neredeyse sifir. NIT'te (D6) same desen vardi and orada kok why TEMSILDI:
 havuzda cevabin yarisi olmasina despite model ranking uretemiyordu.
 
 Bu betik CWT for AYNI three soruyu sorar and cevabi D7'ye BAKMADAN karar vermek
@@ -71,7 +71,7 @@ def main ():
         if not os .path .exists (mf ):
             continue 
         z =np .load (f"{OZ }/{f }")
-        kk =np .asarray (z ["kaynak"],int )
+        kk =np .asarray (z ["source"],int )
         P =np .asarray (z ["P"],float )
         D =np .asarray (z ["D"],float )
         zz =np .load (mf )
@@ -130,7 +130,7 @@ def main ():
         f"{o ['yon_recall_BANKA']:>10.4f}")
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
     "not":"CWT/WIE cephe TESHISI. D7 SINAV kumesidir; buradan "
-    "hicbir threshold/kural/arm secimi YAPILMAZ, yalnizca nereye "
+    "hicbir threshold/rule/arm secimi YAPILMAZ, yalnizca nereye "
     "yatirim yapilacagi belirlenir."},
     open ("results/cwt_cephesi.json","w"),indent =1 )
     print ("\nmakbuz -> results/cwt_cephesi.json")

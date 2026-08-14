@@ -53,11 +53,11 @@ def main ():
     ap .add_argument ("--epochs",type =int ,default =40 )
     ap .add_argument ("--lr",type =float ,default =2e-4 ,
     help ="fine-tune for DUSUK lr; 1e-3 with network onceki bilgisini unutur")
-    ap .add_argument ("--kip",choices =["yalniz","tekrar"],default ="tekrar",
-    help ="yalniz = SADECE k parcayla adapte (agresif, unutma riski); "
+    ap .add_argument ("--kip",choices =["only","tekrar"],default ="tekrar",
+    help ="only = SADECE k parcayla adapte (agresif, unutma riski); "
     "tekrar = corpus korunur, k part N kez tekrarlanir (gerceksi)")
     ap .add_argument ("--tekrar",type =int ,default =30 ,
-    help ="--kip tekrar icin: k part kac kez tekrarlanacak")
+    help ="--kip tekrar for: k part kac kez tekrarlanacak")
     a =ap .parse_args ()
 
     os .environ .setdefault ("BA_ALLOW_SEEN","1")
@@ -135,7 +135,7 @@ def main ():
             # bicimini reads; this step atlanirsa "0 part yuklendi" becomes and
             # --only-kismi olmasa training SESSIZCE korpusla kosardi.
             obj_dir =f"results/_fs_obj_{label_ }"
-            kos ([PY ,"-u","g5b_etiket_donustur.py","--kaynak",boya_dir ,
+            kos ([PY ,"-u","g5b_etiket_donustur.py","--source",boya_dir ,
             "--hedef",obj_dir ],f"results/_fs_{label_ }_donus.log")
             n_boya =len ([x for x in os .listdir (boya_dir )if x .endswith (".npz")])
             # BOYANAN > ISTENEN olursa SESSIZ SISME demektir -> DUR.
@@ -157,7 +157,7 @@ def main ():
             egit =[PY ,"-u","train_seg_extra.py","--init-from",URUN_CKPT ,
             "--partial-dir",obj_dir ,"--epochs",str (a .epochs ),
             "--lr",str (a .lr ),"--val-partial","--checkpoint-out",ck ]
-            egit +=["--yalniz-kismi"]if a .kip =="yalniz"else ["--kismi-tekrar",str (a .tekrar )]
+            egit +=["--only-kismi"]if a .kip =="only"else ["--kismi-tekrar",str (a .tekrar )]
             kos (egit ,f"results/_fs_{label_ }_train.log")
 
             # 3) OLASILIK ONBELLEGI
@@ -190,10 +190,10 @@ def main ():
         "kosumlar":res_ ,
         "uyari":"k_gercek < k_istenen olabilir: oto-boyayici INSAN "
         "etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri "
-        "algilanan bir acikliga dusmez. Olculen egri, gercek "
+        "algilanan a acikliga dusmez. Olculen egri, gercek "
         "insan etiketine according to a ALT SINIRDIR.",
         "not":"Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM "
-        "ayri adimdir (probe_k65b_olc.py) -- boylece training bir kez "
+        "ayri adimdir (probe_k65b_olc.py) -- thus training a kez "
         "kosar, measurement tekrar tekrar kosulabilir."},f ,indent =1 )
     print (f"\nmakbuz -> {CIKTI }")
     print ("SIRADAKI: probe_k65b_olc.py (uctan uca measurement, k=0 tabaniyla birlikte)")

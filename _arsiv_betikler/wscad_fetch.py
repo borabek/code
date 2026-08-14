@@ -29,7 +29,7 @@ from datetime import datetime
 PROFILE =os .path .abspath ("_wsprofile")
 OUT ="all_wscad_stp"
 LIST ="results/eksik_step_listesi.csv"
-HOME ="https://www.wscaduniverse.com/en/"
+HOME ="https://www.wscaduniverse.com/most/"
 MFG_ID ={"PXC":63 ,"WEI":88 ,"ABB":1 ,"A-B":5 ,"SIE":77 }
 # ids confirmed by querying /api/search and reading manufacturerName back -- NEVER guess one: part
 # numbers collide across manufacturers (searching a KLM number returned "Gira"), and a wrong id would
@@ -57,7 +57,7 @@ JS ="""async ({mid, pn}) => {
     method: "POST",
     headers: {"content-type": "application/json", "accept": "application/json",
               "authorization": "Bearer " + bearer},
-    body: JSON.stringify({manufacturerId: mid, partNumber: pn, partType: 2, norm: 0, language: "en"})
+    body: JSON.stringify({manufacturerId: mid, partNumber: pn, partType: 2, norm: 0, language: "most"})
   });
   const txt = await res.text();
   return {status: res.status, len: txt.length, body: txt};
@@ -140,15 +140,15 @@ def main ():
     ap .add_argument ("--list",default =LIST ,help ="hangi CSV listesinden indirilecek")
     ap .add_argument ("--from-census",action ="store_true",
     help =f"part+manufacturer-id'sini {CENSUS } makbuzundan al (API'nin dogruladigi id; "
-    "orada olmayan parts hic denenmez)")
+    "orada olmayan parts never denenmez)")
     a =ap .parse_args ()
     from playwright .sync_api import sync_playwright 
 
     rows =todo_census (a .mfg ,a .limit )if a .from_census else todo (a .mfg ,a .limit ,a .list )
     if not rows :
         print ("indirilecek part absent (all of them diskte may be)");return 
-    src ="census (API-dogrulanmis id)"if a .from_census else "eksik listesi (MFG_ID tablosu)"
-    print (f"{len (rows )} part indirilecek ({a .mfg or 'hepsi'}) | kaynak: {src } | "
+    src ="census (API-dogrulanmis id)"if a .from_census else "missing listesi (MFG_ID tablosu)"
+    print (f"{len (rows )} part indirilecek ({a .mfg or 'all of them'}) | kaynak: {src } | "
     f"zaten diskte olanlar atlaniyor",flush =True )
     os .makedirs (OUT ,exist_ok =True )
     ok =fail =nostep =0 ;streak =0 ;t0 =time .time ()

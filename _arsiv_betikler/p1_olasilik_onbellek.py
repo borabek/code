@@ -41,7 +41,7 @@ def main ():
     ap .add_argument ("--ckpt",nargs ="+",
     default =["results/seg_g5/g5_s0.pt","results/seg_g5/g5_s1.pt"])
     ap .add_argument ("--vardiya",type =int ,default =0 )
-    ap .add_argument ("--toplam",type =int ,default =1 )
+    ap .add_argument ("--total",type =int ,default =1 )
     ap .add_argument ("--ek",default ="")
     a =ap .parse_args ()
     import protocol 

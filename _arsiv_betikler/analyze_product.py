@@ -37,7 +37,7 @@ for name ,m in (("WEI",mfg ==1 ),("PXC",mfg ==0 )):
 print (f"  (mevcut ortak threshold 0.35; per-mfg ayirmak F1 artirir mi -> yukaridaki en-iyiler)")
 
 # --- P1.4 CP-count prior (metadata-assisted) ---
-print ("\n=== P1.4 CP-COUNT PRIOR (manufacturer CP sayisi kadar en-guvenli CP tut) ===")
+print ("\n=== P1.4 CP-COUNT PRIOR (manufacturer CP count up to most-safe CP tut) ===")
 def count_prior (mask ):
     tp =nk =gt =0 
     for g in np .unique (grp [mask ]):

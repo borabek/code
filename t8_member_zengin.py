@@ -53,7 +53,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in tpid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"none:"+p )for p in tpid ]),list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -102,7 +102,7 @@ def main ():
                                 uy .append ((np .asarray (m ["direction"],float ),
                                 float (m .get ("confidence",1.0 )),dd ))
                     HAV .append ((uy ,Xk [i ]))
-        KAY .append (dict (geo =r ["geo"],rj ="cok"if r ["n"]>=8 else "dusuk",P =P ,Pd =Pd ,
+        KAY .append (dict (geo =r ["geo"],rj ="very"if r ["n"]>=8 else "dusuk",P =P ,Pd =Pd ,
         HAV =HAV ,G =np .asarray (r ["G"],float ),Gd =np .asarray (r ["Gd"],float ),
         diag =float (r ["diag"])))
     print (f"{len (KAY )} part | {sum (len (k ['HAV'])for k in KAY )} CP",flush =True )
@@ -172,7 +172,7 @@ def main ():
         rob0 .append ((r ["rj"],)+esle (r ["P"],r ["Pd"],r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
     t0 =f1w (rob0 )
     g =[r ["geo"]for r in KAY ]
-    print (f"\n{'arm':<20}{'robot':>9}{'tabana gore':>13}{'kahinin':>10}")
+    print (f"\n{'arm':<20}{'robot':>9}{'tabana per':>13}{'kahinin':>10}")
     print (f"{'baseline (secicisiz)':<20}{t0 :>9.4f}")
     for ad in SON :
         d =SON [ad ][1 ]-t0 

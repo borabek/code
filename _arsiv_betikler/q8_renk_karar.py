@@ -2,7 +2,7 @@
 """Q8: RENK tel girisi with vidayi ayiriyor mu? -- DECISION OLCUMU.
 
 Q7 "OLCULEMEDI" dedi: silindir MERKEZLERINI eslestirmeye calisiyordum, oysa metnin
-AXIS2_PLACEMENT_3D noktasi with bizim cember-oturtma noktamiz same axis on FARKLI
+AXIS2_PLACEMENT_3D noktasi with bizim cember-oturtma noktamiz same axis ten FARKLI
 points; hizalama %12'de kaldi.
 
 COZUM: hizalamaya never gerek absent. `step_face_colors.read_by_order` rengi metinden (face order),
@@ -16,7 +16,7 @@ OZELLIKLER (each candidate for):
   kanalda_metal : same axis cizgisi uzerindeki silindirlerden biri metal mi (kanalin dibi)
   metal_mesafe  : most yakin metal yuze uzaklik (mm)
 
-KILL (onceden yazili, degismedi): null'un on AUC >= 0.60 veren renk ozelligi otherwise RENK
+KILL (onceden yazili, degismedi): null'un ten AUC >= 0.60 veren renk ozelligi otherwise RENK
 tel/vida ayrimi for OLU. Verirse listeye kaldirac as girer and gate'e feature as eklenir.
 """
 import os ,sys ,json ,pickle 
@@ -123,14 +123,14 @@ def main ():
 
     print (f"sira DOGRULANAN part: {kabul } | atlanan: {red }")
     if kabul <8 or len (Y )<200 :
-        print ("\nOLCULEMEDI (yetersiz part/candidate) -- 'renk ise yaramaz' DEMEK DEGILDIR.")
+        print ("\nOLCULEMEDI (yetersiz part/candidate) -- 'renk whereas yaramaz' DEMEK DEGILDIR.")
         json .dump ({"kabul":kabul ,"red":red ,"n":len (Y ),"karar":"OLCULEMEDI"},
         open ("results/q8_renk_karar.json","w"),indent =1 )
         return 
     X =np .array (X ,float );Y =np .array (Y ,bool )
     names =["c_metal","c_govde","kanalda_metal","metal_mesafe"]
     print (f"\n{len (Y )} candidate | TP {int (Y .sum ())} | {kabul } part")
-    print (f"\n{'ozellik':<16}{'AUC':>8}{'null p95':>10}{'TP ort':>10}{'FP ort':>10}{'karar':>9}")
+    print (f"\n{'feature':<16}{'AUC':>8}{'null p95':>10}{'TP ort':>10}{'FP ort':>10}{'karar':>9}")
     rng2 =np .random .RandomState (0 );out ={}
     for i ,n in enumerate (names ):
         a =auc_mw (X [:,i ],Y )

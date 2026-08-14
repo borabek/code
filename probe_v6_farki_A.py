@@ -63,9 +63,9 @@ def exam ():
         if not (f .startswith ("d7_")and f .endswith (".npz")):
             continue 
         z =np .load (f"{OZ }/{f }")
-        if "kaynak"not in z :
+        if "source"not in z :
             continue 
-        m =z ["kaynak"]==0 # TEZ-SAF pool
+        m =z ["source"]==0 # TEZ-SAF pool
         te .append ({"pid":f [3 :-4 ],"X":np .asarray (z ["X"],float )[m ],
         "P":z ["P"][m ],"D":z ["D"][m ]})
     kay =K .yukle ([d ["pid"]for d in te ])
@@ -102,7 +102,7 @@ def olc (model ,te ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"kural":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ()))}
         if en is None or r ["robot"]>en ["robot"]:
@@ -118,14 +118,14 @@ def main ():
     out ["v6 (DAGITILAN)"]=olc (g6 ,te )
     print (f"{'v6 (DAGITILAN)':<34} robot {out ['v6 (DAGITILAN)']['robot']:.4f} | "
     f"tespit {out ['v6 (DAGITILAN)']['tespit']:.4f} | "
-    f"{out ['v6 (DAGITILAN)']['kural']}",flush =True )
+    f"{out ['v6 (DAGITILAN)']['rule']}",flush =True )
     for yol in ("results/zengin_parite_v6.npz","results/zengin_parite_v3.npz"):
         ad =f"benim recete + {os .path .basename (yol )}"
         m ,sh ,poz ,np_ =korpustan_egit (yol )
         out [ad ]=olc (m ,te )
         c =out [ad ]
         print (f"{ad :<34} robot {c ['robot']:.4f} | tespit {c ['tespit']:.4f} | "
-        f"{c ['kural']} | training {sh } part {np_ } pozitif {poz :.4f}",flush =True )
+        f"{c ['rule']} | training {sh } part {np_ } pozitif {poz :.4f}",flush =True )
     v =out ["v6 (DAGITILAN)"]["robot"]
     b =out ["benim recete + zengin_parite_v6.npz"]["robot"]
     print (f"\nBENIM KORPUSUMLA (onceki measurement): 0.1159")
@@ -137,7 +137,7 @@ def main ():
     "oznitelik kaynaginda, ADIM B'ye gecilir"))
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
     "benim_korpusum_robot":0.1159 ,
-    "not":"ADIM A: ayni recete, FARKLI corpus. D7 tez-saf pool, MIKRO. "
+    "not":"ADIM A: same recete, FARKLI corpus. D7 tez-saf pool, MIKRO. "
     "Sizinti denetimi: corpus-D7 kesisimi part 0, brand 0."},
     open ("results/v6_farki_A.json","w"),indent =1 )
     print ("receipt -> results/v6_farki_A.json")

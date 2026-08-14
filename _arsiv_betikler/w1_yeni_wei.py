@@ -56,16 +56,16 @@ def main ():
     kul ={r ["geo"]for r in sat }
     s3 =json .load (io .open ("results/split3.json",encoding ="utf-8"))
     lock ={str (p )for p in s3 ["locked"]["parts"]}
-    lock_geo ={gk .get (p ,"yok:"+p )for p in lock }
+    lock_geo ={gk .get (p ,"absent:"+p )for p in lock }
 
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     var ={str (x )for x in zen ["pids"]}
     E =list (eligible ())
     new_ =[(m ,p ,jf ,s )for m ,p ,jf ,s in E 
     if m =="WEI"and p not in var and p not in lock 
-    and gk .get (p ,"yok:"+p )not in kul 
-    and gk .get (p ,"yok:"+p )not in lock_geo ]
-    gruplar =sorted ({gk .get (p ,"yok:"+p )for _ ,p ,_ ,_ in new_ })
+    and gk .get (p ,"absent:"+p )not in kul 
+    and gk .get (p ,"absent:"+p )not in lock_geo ]
+    gruplar =sorted ({gk .get (p ,"absent:"+p )for _ ,p ,_ ,_ in new_ })
     print (f"GERCEKTEN YENI: {len (new_ )} part / {len (gruplar )} grup",flush =True )
 
     # GRUP bazinda ikiye bol (part not grup -- ikizler same tarafta kalsin)
@@ -82,7 +82,7 @@ def main ():
     X22 ,XR ,YY ,PID ,BOL ,PTS ,DIRS ,NGT =[],[],[],[],[],[],[],{}
     t0 =time .time ();atlanan =0 
 
-    # ZEHIRLI PARCA KORUMASI + ARA KAYIT (2026-08-02: first kosu 100/222'de takildi and
+    # ZEHIRLI PARCA KORUMASI + ARA KAYIT (2026-08-02: first run 100/222'de takildi and
     # ara kayit OLMADIGI for 100 parcalik is kayboldu -- gate_regrow'da this already cozulmustu).
     ATLA ="results/yeni_wei_atla.txt"
     ISLENEN ="results/yeni_wei_islenen.txt"
@@ -123,7 +123,7 @@ def main ():
         if k %25 ==0 :
             print (f"  {k }/{len (new_ )}  {time .time ()-t0 :.0f}s (atlanan {atlanan })",flush =True )
             _ara_kayit ()
-            # SU AN ISLENEN parcayi diske yaz: kosu takilip oldurulurse a sonraki calistirmada
+            # SU AN ISLENEN parcayi diske yaz: run takilip oldurulurse a sonraki calistirmada
             # this part kalici atlama listesine girer and is a more same places durmaz.
         with io .open (ISLENEN ,"w",encoding ="utf-8")as _f :
             _f .write (pid )
@@ -167,7 +167,7 @@ def main ():
                 if dd >tol or a_ in up or b_ in ug :
                     continue 
                 up .add (a_ );ug .add (b_ );yy [a_ ]=1 
-            g =gk .get (pid ,"yok:"+pid )
+            g =gk .get (pid ,"absent:"+pid )
             X22 .append (xb );XR .append (xr );YY .append (yy )
             PID +=[pid ]*len (cps )
             BOL +=["test"if g in test_grup else "training"]*len (cps )

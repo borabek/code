@@ -97,8 +97,8 @@ def main ():
     base =np .clip (np .rint (Pf [:,0 ]),1 ,None )
     base_mae =float (np .abs (base -target ).mean ())
 
-    print (f"\n{'yontem':<28}{'MAE':>8}{'+-1 icinde':>12}{'tam isabet':>12}")
-    print (f"{'candidate sayisi (baseline)':<28}{base_mae :>8.2f}"
+    print (f"\n{'yontem':<28}{'MAE':>8}{'+-1 inside':>12}{'full isabet':>12}")
+    print (f"{'candidate count (baseline)':<28}{base_mae :>8.2f}"
     f"{100 *np .mean (np .abs (base -target )<=1 ):>11.0f}%{100 *np .mean (base ==target ):>11.0f}%")
     print (f"{'geometri tahmincisi':<28}{mae :>8.2f}"
     f"{100 *np .mean (np .abs (err )<=1 ):>11.0f}%{100 *np .mean (err ==0 ):>11.0f}%")

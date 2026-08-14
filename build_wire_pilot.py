@@ -28,7 +28,7 @@ def pack (a ,dt ):
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--n",type =int ,default =30 ,help ="kac part (15-20 dk icin ~30 uygun)")
+    ap .add_argument ("--n",type =int ,default =30 ,help ="kac part (15-20 dk for ~30 uygun)")
     ap .add_argument ("--seed",type =int ,default =0 )
     a =ap .parse_args ()
 
@@ -100,7 +100,7 @@ small{color:#999;display:block;margin-top:6px;line-height:1.45}
 <h3>Bu acikliga TEL girer mi?</h3>
 <small>Sari kure = degerlendirilecek opening. Surukle=dondur, tekerlek=zoom.
 <b>TEL</b>=kablo girisi &nbsp; <b>ALET</b>=tornavida/test/vida/montaj &nbsp; <b>?</b>=emin degilim.
-Cevap anahtarini GORMUYORSUN -- bu kor test.</small>
+Cevap anahtarini GORMUYORSUN -- this kor test.</small>
 <div id=pg></div><div id=q></div>
 <button id=exp>CEVAPLARI INDIR (bitince)</button></div>
 <script>

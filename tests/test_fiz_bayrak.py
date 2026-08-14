@@ -71,7 +71,7 @@ def test_dar_agiz_delikte_atesler ():
         try :
             m =kutu .difference (sil )
         except Exception :
-            pytest .skip ("boolean motoru yok")
+            pytest .skip ("boolean motoru none")
         if m is None or not len (getattr (m ,"faces",[])):
             pytest .skip ("boolean basarisiz")
             # z=5.0 AGIZ DUZLEMI (kutu 10mm high -> z in [-5,+5]). Ilk surumde z=8 verilmisti,

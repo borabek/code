@@ -44,7 +44,7 @@ def main ():
     S =K .step_map ()
     modeller =pickle .load (open ("results/v6_farki_E_modeller.pkl","rb"))if os .path .exists ("results/v6_farki_E_modeller.pkl")else None 
     if modeller is None :
-        raise SystemExit ("Modeller kaydedilmemis -- probe_v6_farki_E.py once "
+        raise SystemExit ("Modeller kaydedilmemis -- probe_v6_farki_E.py first "
         "modelleri diske yazmali (asagida duzeltildi)")
     pidler =[f [3 :-4 ]for f in sorted (os .listdir (OZ ))
     if f .startswith ("d7_")and f .endswith (".npz")]
@@ -62,7 +62,7 @@ def main ():
             if not len (G ):
                 continue 
             z =np .load (f"{OZ }/d7_{pid }.npz")
-            m =(z ["kaynak"]==0 )if ad =="TEZ-SAF"else np .ones (len (z ["kaynak"]),bool )
+            m =(z ["source"]==0 )if ad =="TEZ-SAF"else np .ones (len (z ["source"]),bool )
             X =np .asarray (z ["X"],float )[m ]
             if len (X )<2 :
                 continue 
@@ -98,10 +98,10 @@ def main ():
         out [ad ]={"robot":mi ,"tespit":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ())),"brand":pm ,
-        "kural":f"{tip } {e }","poz_kafasiz":pozsuz }
+        "rule":f"{tip } {e }","poz_kafasiz":pozsuz }
         c =out [ad ]
         print (f"{ad :<16} robot {mi :.4f} | tespit {c ['tespit']:.4f} | makro "
-        f"{c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f} | {c ['kural']}",
+        f"{c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f} | {c ['rule']}",
         flush =True )
     a ,b =out ["TEZ-SAF"]["robot"],out ["GENISLETILMIS"]["robot"]
     print (f"\nTAM ZINCIRDE: tez-saf {a :.4f} | genisletilmis {b :.4f} "

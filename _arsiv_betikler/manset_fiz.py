@@ -13,7 +13,7 @@ from sina_cluster import f1w ,pr
 d ={k :json .load (open (f"results/q6_fiz_uctan_uca_{k }.json"))for k in ("dev","val")}
 print (f"{'arm':<22}{'DEV tespit':>12}{'VAL tespit':>12}{'ort':>9}"
 f"{'DEV robot':>11}{'VAL robot':>11}{'ort':>9}")
-for tag ,lab in (("rt2 13","onceki (13 sutun)"),("fiz18","YENI (18 sutun)")):
+for tag ,lab in (("rt2 13","onceki (13 column)"),("fiz18","YENI (18 column)")):
     dt ,vt =d ["dev"]["tespit"][tag ],d ["val"]["tespit"][tag ]
     dr ,vr =d ["dev"]["robot"][tag ],d ["val"]["robot"][tag ]
     print (f"{lab :<22}{dt :>12.4f}{vt :>12.4f}{(dt +vt )/2 :>9.4f}"
@@ -22,7 +22,7 @@ o ={}
 for m in ("tespit","robot"):
     a =(d ["dev"][m ]["rt2 13"]+d ["val"][m ]["rt2 13"])/2 
     b =(d ["dev"][m ]["fiz18"]+d ["val"][m ]["fiz18"])/2 
-    o [m ]={"onceki":a ,"yeni":b ,"fark":b -a }
+    o [m ]={"onceki":a ,"new":b ,"difference":b -a }
     print (f"\n{m }: {a :.4f} -> {b :.4f}  ({b -a :+.4f})")
 o ["bootstrap_dev"]=d ["dev"]["bootstrap"];o ["bootstrap_val"]=d ["val"]["bootstrap"]
 o ["kesinlik_yeni"]={k :d [k ]["precision"]["fiz18"]for k in ("dev","val")}

@@ -165,14 +165,14 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"none:"+p )for p in tr_pid ])
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     tr_onek =np .array ([p [:ONEK ]for p in tr_pid ])
     # Egitim matrisi: zengin npz X22+XR carries, old npz single X.
     Xtr =(np .hstack ([np .asarray (d ["X22"],float ),np .asarray (d ["XR"],float )])
     if "X22"in d .files else np .asarray (d ["X"],float ))
     ytr =np .asarray (d ["y"])
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
+    tg ={gk .get (r ["pid"],"none:"+r ["pid"])for r in DER }
     kod ={k :collections .Counter (mfg_of .get (p ,"?")for p in tr_pid [tr_mfg ==k ]).most_common (1 )[0 ][0 ]
     for k in np .unique (tr_mfg )}
 
@@ -275,7 +275,7 @@ def main ():
                                             _c [_i ]["direction"]=_SY [_i ][_g ][1 ]
                         P =np .array ([x ["point"]for x in _c ],float )
                         Pd =np .array ([x ["direction"]for x in _c ],float )
-            rej ="cok"if r ["n"]>=8 else "dusuk"
+            rej ="very"if r ["n"]>=8 else "dusuk"
             det .append ((rej ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rej ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             # ISARETLI (FIZIKSEL) robot metrigi: prediction ureticinin InsertDirection'iyla AYNI
@@ -306,8 +306,8 @@ def main ():
         "ham_recall":round (rj ["ham_recall"],3 ),
         "dusuk_CP_F1":(round (rj ["F1"]["dusuk"],4 )if rj ["F1"]["dusuk"]is not None 
         else None ),"n_dusuk":rj ["n"]["dusuk"],
-        "cok_CP_F1":(round (rj ["F1"]["cok"],4 )if rj ["F1"]["cok"]is not None 
-        else None ),"n_cok":rj ["n"]["cok"]}
+        "cok_CP_F1":(round (rj ["F1"]["very"],4 )if rj ["F1"]["very"]is not None 
+        else None ),"n_cok":rj ["n"]["very"]}
         s =SON [ad ]
         nn =lambda v :v if v is not None else float ("nan")
         print (f"{ad :<22}{len (alt ):>5}{t :>9.4f}  [{tlo :.4f},{thi :.4f}]{rb :>9.4f}"
@@ -317,7 +317,7 @@ def main ():
 
     hepsi =~np .isin (tr_grp ,list (tg ))
     print (f"\n{'split':<22}{'n':>5}{'tespit':>9}{'  %95 GA':>18}{'robot':>9}"
-    f"{'kesin*':>8}{'recall*':>8}{'dusuk-CP':>9}{'cok-CP':>9}{'robot-ISRT':>10}")
+    f"{'kesin*':>8}{'recall*':>8}{'dusuk-CP':>9}{'very-CP':>9}{'robot-ISRT':>10}")
     print ("-- 1. TANIDIK (manufacturer-karisik, geometri-ayrik) "+"-"*45 )
     for cluster in ("dev","val","atanmamis"):
         alt =[r for r in DER if r .get ("cluster")==cluster ]
@@ -388,9 +388,9 @@ def main ():
         "md5":_h .md5 (open (_p ,"rb").read ()).hexdigest (),
         "egitim_verisi":NPZ ,
         "tarif":str (dag .get ("note",""))[:400 ],
-        "URETIM":"headline.py --yaz ile ARTEFAKTTAN okunur; elle yazilmaz.",
+        "URETIM":"headline.py --yaz with ARTEFAKTTAN okunur; elle yazilmaz.",
         }
-        h ["URETIM"]=("Bu blok headline.py --yaz ile URETILIR, ELLE YAZILMAZ. Elle guncelleme "
+        h ["URETIM"]=("Bu blok headline.py --yaz with URETILIR, ELLE YAZILMAZ. Elle guncelleme "
         "2026-08-01'de kollari karistirmisti (tespit yeni koldan, robot eskisinden).")
         with io .open ("cp_config.json","w",encoding ="ascii")as f :
             json .dump (cfg ,f ,indent =1 ,ensure_ascii =True )

@@ -66,9 +66,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -116,7 +116,7 @@ def main ():
                     P =np .array ([c ["point"]for c in cps ],float )[k ]
                     Pd =np .array ([c ["direction"]for c in cps ],float )[k ]
             km =kume_of .get (r ["pid"],"dev")
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det [km ].append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob [km ].append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             if len (P )and len (r ["Gd"]):
@@ -136,7 +136,7 @@ def main ():
 
     t =SONUC [5.0 ]
     print (f"\n{'gate':<8}{'tespit':>9}{'robot':>9}{'d_tespit':>10}{'d_robot':>9}"
-    f"{'aci<=10':>9}{'KILL':>10}")
+    f"{'angle<=10':>9}{'KILL':>10}")
     kazanan =None 
     for gate in KAPILAR :
         s_ =SONUC [gate ]

@@ -26,7 +26,7 @@ def build (ctx ):
     bar .fill .solid ();bar .fill .fore_color .rgb =CYAN 
     bar .line .fill .background ();bar .shadow .inherit =False 
     txt (s ,1.00 ,3.27 ,11.30 ,0.52 ,
-    "Finding wire entry points on terminal blocks, straight from the CAD file",18 ,GREY )
+    "Finding wire entry points ten terminal blocks, straight from the CAD file",18 ,GREY )
     txt (s ,1.00 ,4.05 ,11.30 ,0.40 ,AUTHOR ,16 ,DARK ,True )
     txt (s ,1.00 ,4.40 ,11.30 ,0.35 ,"R&D RAS  |  Friedhelm Loh Group  |  29 July 2026",12 ,LIGHT )
 
@@ -49,7 +49,7 @@ def build (ctx ):
     ("","A wire opening and a screwdriver opening have the same shape. Only their purpose "
     "differs, and shape alone cannot tell you the purpose."),
     ("","The manufacturer marks the contact seat, which sits 5 to 25 mm inside the part. "
-    "The robot needs the mouth on the surface. My system converts one to the other."),
+    "The robot needs the mouth ten the surface. My system converts one to the other."),
     ],size =14 ,gap =9 )
 
     # ---- 3  PIPELINE ---------------------------------------------------------------------------
@@ -80,7 +80,7 @@ def build (ctx ):
     15 ,NAVY ,True )
     bullets (s ,0.60 ,3.98 ,12.10 ,2.3 ,[
     ("Remesh:"," I rebuild every CAD surface at the same point density the network was "
-    "trained on. Before I did this, the model did not work on real CAD files at "
+    "trained ten. Before I did this, the model did not work ten real CAD files at "
     "all. This one step is what made it work."),
     ("Wire / tool filter:"," the network can find an opening but cannot say whether a wire "
     "or a screwdriver goes in. So I trained a second, small model "
@@ -129,7 +129,7 @@ def build (ctx ):
     txt (s ,0.60 ,4.85 ,12.10 ,0.35 ,"Two words about how I test",15 ,NAVY ,True )
     bullets (s ,0.60 ,5.25 ,12.10 ,1.4 ,[
     ("Out-of-fold:"," a part is only ever scored by a model that never saw it in training."),
-    ("Hold-out:"," a set of parts I locked away before training and opened once, at the end. "
+    ("Hold-out:"," a set of parts I locked away before training and opened before, at the end. "
     "I did not tune anything against it."),
     ],size =14 ,gap =8 )
 
@@ -146,7 +146,7 @@ def build (ctx ):
     ],[3.30 ,4.40 ,4.40 ])
     txt (s ,0.60 ,4.60 ,12.10 ,0.35 ,"How I got from the thesis result to mine",15 ,NAVY ,True )
     bullets (s ,0.60 ,5.00 ,12.10 ,1.7 ,[
-    ("1."," I rebuilt every mesh at one fixed density. The thesis trained and tested on "
+    ("1."," I rebuilt every mesh at one fixed density. The thesis trained and tested ten "
     "similar meshes; real CAD files look different, and that gap was the whole problem."),
     ("2."," I replaced CAD-derived labels with real catalogue data. CAD labels only agree "
     "with a human 46% of the time, so they capped the result."),
@@ -167,11 +167,11 @@ def build (ctx ):
     "look alike; production STEP files do not. I rebuild every surface at one fixed vertex "
     "density before inference, and that is what made the model transfer at all."),
     ("One split can hide a leak."," Terminal variants differ by millimetres, so a sibling part "
-    "on the other side of a random split inflates the score. I group by product family, score "
-    "out-of-fold, and keep a hold-out that was opened once."),
+    "ten the other side of a random split inflates the score. I group by product family, score "
+    "out-of-fold, and keep a hold-out that was opened before."),
     ("The product metric is never measured."," The thesis reports IoU only, which says how "
     "well the surface is labelled, not whether the openings are found. I measure CP-F1 "
-    "against manufacturer data on 1 906 parts: 76.0%."),
+    "against manufacturer data ten 1 906 parts: 76.0%."),
     ],size =14 ,gap =13 )
     # ---- 6  PARAMETERS -------------------------------------------------------------------------
     s =new_slide ("5  Settings","The Settings I Run With")
@@ -195,7 +195,7 @@ def build (ctx ):
     ],[3.70 ,2.10 ])
     bullets (s ,0.60 ,5.20 ,12.10 ,1.4 ,[
     ("I did not pick these thresholds by eye."," I searched them with the part families kept "
-    "apart, so the search could not cheat. It landed on the value already in the product in "
+    "apart, so the search could not cheat. It landed ten the value already in the product in "
     "5 out of 5 folds."),
     ],size =14 )
 
@@ -222,8 +222,8 @@ def build (ctx ):
     ("","50% IoU is the bar the thesis itself calls usable: above it, the labelled area "
     "matches the true area more than it misses it."),
     ("","4 of my 5 classes clear it. The one that does not is SnapPoint, the clip that "
-    "holds the terminal on the rail. It has nothing to do with finding wire openings."),
-    ("","CableEntry, the class the robot actually depends on, sits at 68.8%."),
+    "holds the terminal ten the rail. It has nothing to do with finding wire openings."),
+    ("","CableEntry, the class the robot actually depends ten, sits at 68.8%."),
     ],size =13 ,gap =7 )
     txt (s ,0.60 ,5.35 ,6.10 ,0.33 ,"Accuracy 83.1%   ·   Dice 74.6%",14 ,DARK ,True )
     bullets (s ,0.60 ,5.72 ,6.10 ,1.0 ,[
@@ -235,7 +235,7 @@ def build (ctx ):
     table (s ,0.60 ,1.50 ,12.10 ,[
     ["Evaluation frame","CP-F1","Definition"],
     ["The running system","76.0%","what the robot gets today"],
-    ["Locked hold-out, opened once","76.0%","a clean second confirmation"],
+    ["Locked hold-out, opened before","76.0%","a clean second confirmation"],
     ["My development number","82.8%","internal only, I do not quote it as the result"],
     ["Ceiling with a perfect filter","89.4%","the best this design could ever reach"],
     ],[4.30 ,2.00 ,5.80 ])
@@ -277,7 +277,7 @@ def build (ctx ):
     bullets (s ,0.60 ,1.95 ,5.80 ,2.6 ,[
     ("","4 openings out of 4 found, nothing invented. F1 100%."),
     ("","Direction error 0 degrees, position error 1.3 mm. The robot needs under 2 mm."),
-    ("","Round, recessed openings on one face, well separated."),
+    ("","Round, recessed openings ten one face, well separated."),
     ],size =14 ,gap =9 )
     txt (s ,6.90 ,1.50 ,5.80 ,0.4 ,"Wrong:  PXC 3071356",17 ,RED ,True )
     bullets (s ,6.90 ,1.95 ,5.80 ,2.6 ,[
@@ -285,19 +285,19 @@ def build (ctx ):
     ("","Spring-clamp openings with no round hole. The network does not react to them."),
     ("","The two wrong picks are screw openings that look the same as wire openings."),
     ],size =14 ,gap =9 )
-    txt (s ,0.60 ,4.55 ,12.10 ,0.35 ,"I show the failure on purpose",15 ,NAVY ,True )
+    txt (s ,0.60 ,4.55 ,12.10 ,0.35 ,"I show the failure ten purpose",15 ,NAVY ,True )
     bullets (s ,0.60 ,4.95 ,12.10 ,1.5 ,[
     ("","Because I know why it fails. It is the wire-versus-tool confusion, not random error."),
-    ("","And I checked that it is not a lack of data. Letting the model train on the exact "
-    "parts it is tested on only gains 0.3 points."),
+    ("","And I checked that it is not a lack of data. Letting the model train ten the exact "
+    "parts it is tested ten only gains 0.3 points."),
     ],size =14 ,gap =8 )
 
     # ---- 12  NEXT STEPS ------------------------------------------------------------------------
     s =new_slide ("8  Next","What I Would Do Next")
     table (s ,0.60 ,1.55 ,12.10 ,[
     ["Next step","Expected effect","Status"],
-    ["Retrain the filter on all 1 906 parts","it still runs on 1 041","running now"],
-    ["Turn on two modes I already measured","+2.8 points, code is ready","ready"],
+    ["Retrain the filter ten all 1 906 parts","it still runs ten 1 041","running now"],
+    ["Turn ten two modes I already measured","+2.8 points, code is ready","ready"],
     ["Try my better segmentation model","4.8 IoU points higher, never tested for F1","untested"],
     ["Higher mesh resolution for high-CP-density parts","recovers sub-threshold openings","designed"],
     ["A signal that is not geometric","the only way past the precision ceiling","open"],

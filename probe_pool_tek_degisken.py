@@ -41,19 +41,19 @@ for f in sorted (os .listdir (OZ )):
         if nseg >len (X ):
             continue # tutarsiz cache -> atla (silent kabul YOK)
         kay =np .zeros (len (X ),int );kay [nseg :]=1 
-        tr .append ({"pid":pid ,"X":X ,"y":z ["y"],"kaynak":kay })
+        tr .append ({"pid":pid ,"X":X ,"y":z ["y"],"source":kay })
 te =[]
 for f in sorted (os .listdir (OZ )):
     if f .startswith ("d7_")and f .endswith (".npz"):
         z =np .load (f"{OZ }/{f }")
         te .append ({"pid":f [3 :-4 ],"X":z ["X"],"y":z ["y"],"P":z ["P"],
-        "D":z ["D"],"kaynak":z ["kaynak"]})
+        "D":z ["D"],"source":z ["source"]})
 kay7 =K .yukle ([d ["pid"]for d in te ])
 for d in te :
     r =kay7 [d ["pid"]]
     d .update ({"mfg":r ["mfg"],"G":np .asarray (r ["G"],float ),
     "Gd":np .asarray (r ["Gd"],float ),"diag":r ["diag"]})
-segp =sum (int ((d ["kaynak"]==0 ).sum ())for d in tr )
+segp =sum (int ((d ["source"]==0 ).sum ())for d in tr )
 print (f"EGITIM {len (tr )} part | seg candidate {segp } | toplam candidate "
 f"{sum (len (d ['X'])for d in tr )} | SINAV {len (te )}",flush =True )
 
@@ -61,7 +61,7 @@ f"{sum (len (d ['X'])for d in tr )} | SINAV {len (te )}",flush =True )
 def egit (segtek ):
     M ,Y =[],[]
     for d in tr :
-        m =(d ["kaynak"]==0 )if segtek else np .ones (len (d ["X"]),bool )
+        m =(d ["source"]==0 )if segtek else np .ones (len (d ["X"]),bool )
         X ,y =np .asarray (d ["X"][m ],float ),d ["y"][m ]
         if len (X )<2 :
             continue 
@@ -79,7 +79,7 @@ def olc (model ,segtek ):
     [("goreli",x )for x in ((0.5 ,0.20 ),(0.5 ,0.30 ))]):
         rob =collections .defaultdict (lambda :[0 ,0 ,0 ]);tes =[]
         for d in te :
-            m0 =(d ["kaynak"]==0 )if segtek else np .ones (len (d ["y"]),bool )
+            m0 =(d ["source"]==0 )if segtek else np .ones (len (d ["y"]),bool )
             X =np .asarray (d ["X"][m0 ],float )
             if len (X )<2 :
                 continue 
@@ -97,7 +97,7 @@ def olc (model ,segtek ):
         pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
         mi =float (2 *sum (a [0 ]for a in rob .values ())/
         max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-        r ={"kural":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+        r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
         "makro":float (np .mean (list (pm .values ()))),
         "en_kotu":float (min (pm .values ()))}
         if en is None or r ["robot"]>en ["robot"]:
@@ -111,7 +111,7 @@ for ad ,segtek in (("TEZ-SAF pool",True ),("GENISLETILMIS pool",False )):
     out [ad ]=olc (model ,segtek )
     r =out [ad ]
     print (f"{ad :<22} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | makro "
-    f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['kural']} | "
+    f"{r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['rule']} | "
     f"training {sh } poz {poz :.4f}",flush =True )
 a ,b =out ["TEZ-SAF pool"],out ["GENISLETILMIS pool"]
 print (f"\nHAVUZUN TEK-DEGISKENLI ETKISI: robot {b ['robot']-a ['robot']:+.4f} | "
@@ -122,5 +122,5 @@ json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
 "havuz_etkisi_robot":b ["robot"]-a ["robot"],
 "havuz_etkisi_tespit":b ["tespit"]-a ["tespit"],
 "not":"TEK DEGISKEN = pool. Ayni parts, same recete, same threshold "
-"taramasi, ayni NMS. D7 brand-disi, MIKRO."},
+"taramasi, same NMS. D7 brand-disi, MIKRO."},
 open ("results/havuz_tek_degisken.json","w"),indent =1 )

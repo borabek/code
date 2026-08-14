@@ -304,7 +304,7 @@ def face_vertices_from_text (step_path ):
     a DUZLEMIN yerel orijini yuzeyin UZERINDE not; parcanin tamamen outside may be.
     O points X'te 38mm yayilirken mesh only 7mm idi.
 
-    Dogru temsilci: yuzeyin SINIR KOSELERI (VERTEX_POINT). Onlar tanim geregi surface on.
+    Dogru temsilci: yuzeyin SINIR KOSELERI (VERTEX_POINT). Onlar tanim geregi surface ten.
     Zincir: ADVANCED_FACE -> FACE_BOUND -> EDGE_LOOP -> ORIENTED_EDGE -> EDGE_CURVE
             -> VERTEX_POINT -> CARTESIAN_POINT
     Doner: [{'entity','rgb','is_metal','pts'(N,3),'center'}]

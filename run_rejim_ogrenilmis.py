@@ -49,7 +49,7 @@ OZ_AD =["n01","nmesh","mesh_oran","n_aday","n_secenek",
 
 
 def oznitelik (d ,s_tb ,V ):
-    k =d ["kaynak"]
+    k =d ["source"]
     n01 =int ((k !=2 ).sum ())
     nm =int ((k ==2 ).sum ())
     s =np .sort (np .asarray (s_tb ,float ))[::-1 ]if len (s_tb )else np .zeros (1 )
@@ -164,7 +164,7 @@ def main ():
     "katlar":katlar ,"n_parca":len (data_ ),
     "p6_daha_iyi_orani":float (Y .mean ()),
     "not":"Ogrenilmis regime router. Etiket EGITIM verisinden "
-    "(part basina F1 farki); urun yalniz istatistikleri "
+    "(part basina F1 farki); urun only istatistikleri "
     "gorur. D7'ye BAKILMADI. HEPSI/v1 satirlari ORNEKLEM-ICI."},
     open ("results/rejim2.json","w"),indent =1 )
     print (f"receipt -> results/rejim2.json  ({time .time ()-t0 :.0f} s)")

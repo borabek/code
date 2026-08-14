@@ -69,7 +69,7 @@ def main ():
         for r in DER :
             d_ =PARCA .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d_ is None :
                 P =np .zeros ((0 ,3 ));Pn =np .zeros ((0 ,3 ))
             else :
@@ -87,7 +87,7 @@ def main ():
         return rob ,gg 
 
     fn =lambda rows :f1w ([q for _ ,q in rows ])-f1w ([p for p ,_ in rows ])
-    print (f"\n{'pay':>6}{'satir':>8}{'ESKI':>9}{'YENI':>9}{'FARK':>9}"
+    print (f"\n{'pay':>6}{'row':>8}{'ESKI':>9}{'YENI':>9}{'FARK':>9}"
     f"{'ESLESTIRILMIS GA (YENI-ESKI)':>32}{'AUC E':>8}{'AUC Y':>8}")
     SON ={}
     for pay in (0.25 ,0.50 ,1.00 ):
@@ -99,18 +99,18 @@ def main ():
         gerc ="GERCEK"if (lo >0 or hi <0 )else "noise"
         print (f"{pay :>6.2f}{int (len (LY )*pay ):>8}{fE :>9.4f}{fY :>9.4f}{fY -fE :>+9.4f}"
         f"        [{lo :+.4f},{hi :+.4f}] {gerc :<8}{aE :>8.4f}{aY :>8.4f}")
-        SON [str (pay )]={"eski":fE ,"yeni":fY ,"fark":fY -fE ,"ga":[lo ,hi ],
-        "auc_eski":aE ,"auc_yeni":aY ,"gercek":bool (lo >0 or hi <0 )}
-    f25 =SON ["0.25"]["fark"];f50 =SON ["0.5"]["fark"];f100 =SON ["1.0"]["fark"]
+        SON [str (pay )]={"old":fE ,"new":fY ,"difference":fY -fE ,"ga":[lo ,hi ],
+        "auc_eski":aE ,"auc_yeni":aY ,"real":bool (lo >0 or hi <0 )}
+    f25 =SON ["0.25"]["difference"];f50 =SON ["0.5"]["difference"];f100 =SON ["1.0"]["difference"]
     buyuyor =f100 >f50 >f25 
     tam =SON ["1.0"]
     print (f"\nFARK egrisi: %25 {f25 :+.4f} -> %50 {f50 :+.4f} -> %100 {f100 :+.4f} "
     f"-> {'BUYUYOR'if buyuyor else 'BUYUMUYOR'}")
-    karar =bool (tam ["gercek"]and buyuyor )
-    print (f"\nKARAR: fark GERCEK mi={tam ['gercek']} & veriyle BUYUYOR mu={buyuyor } "
+    karar =bool (tam ["real"]and buyuyor )
+    print (f"\nKARAR: fark GERCEK mi={tam ['real']} & veriyle BUYUYOR mu={buyuyor } "
     f"-> R10 {'HAK EDILDI'if karar else 'KOSULMAZ'}")
-    if not karar and tam ["gercek"]:
-        print ("  (fark gercek ama veriyle buyumuyor: 154k satirda esigi asacagi "
+    if not karar and tam ["real"]:
+        print ("  (difference real but veriyle buyumuyor: 154k satirda esigi asacagi "
         "cikarimi DAYANAKSIZ -- esigi kaydirmiyorum)")
     with io .open ("results/r9c_karar.json","w",encoding ="utf-8")as f :
         json .dump ({"marj":MARJ ,"egri":SON ,"buyuyor":bool (buyuyor ),

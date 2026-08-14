@@ -3,7 +3,7 @@
 
 WHY BU MADDE HAYATI: korpusta 4706 part present but **2759'unun STEP'i YOK** (A-B'nin
 822'si, CWT'nin 785'i, ABB 324, KLM 101 TAMAMEN). Ve WSCAD'den indirmek KESIN KAPALI
-([[wscad-indirme-conclusive-closed]]: 24 denemede 0 basari, sebep 3D VERI YOKLUGU).
+([[wscad-indirme-conclusive-closed]]: 24 denemede 0 basari, reason 3D VERI YOKLUGU).
 Hepsinde `Graphic3d` UCGEN AGI VAR (Points + Indices). Yani this veriyi kullanmanin TEK
 yolu JSON agini STEP remesh'inin instead of koyabilmek.
 
@@ -57,7 +57,7 @@ def json_mesh (jf ):
 def main ():
     ap =argparse .ArgumentParser ()
     ap .add_argument ("--arm",choices =["B","C"],default ="B")
-    ap .add_argument ("--sinir",type =int ,default =0 )
+    ap .add_argument ("--boundary",type =int ,default =0 )
     a =ap .parse_args ()
 
     import protocol 

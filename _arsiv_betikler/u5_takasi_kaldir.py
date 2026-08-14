@@ -118,12 +118,12 @@ def main ():
     d =np .load ("results/gate_regrow_data_topo.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
     kod ={k :collections .Counter (mfg_of .get (p ,"?")for p in tr_pid [tr_mfg ==k ]).most_common (1 )[0 ][0 ]
     for k in np .unique (tr_mfg )}
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }
 
     def egit_veri (fn ):
         if fn is None :
@@ -157,7 +157,7 @@ def main ():
                 m =(s >=ORAN *max (float (s .max ()),1e-9 ))&(s >=TABAN )
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            det .append (("cok"if r ["n"]>=8 else "dusuk",)
+            det .append (("very"if r ["n"]>=8 else "low",)
             +esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
         return det 
 

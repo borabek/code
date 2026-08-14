@@ -40,8 +40,8 @@ def main ():
     "clf":clf ,
     "feat_names":list (wire_gate .FEAT_NAMES_13 ),
     "cols":None ,
-    "note":("L2 GERI ALINDI 2026-07-31: 13 ozellik. L2 (depth/size/aspect atma) DEV'de "
-    "+0.0066 kazanmisti ama SECILDIGI kumeydi; ayrik VAL kumesinde -0.0111 tespit "
+    "note":("L2 REVERTED 2026-07-31: 13 feature. L2 (depth/size/aspect atma) DEV'de "
+    "+0.0066 kazanmisti but SECILDIGI kumeydi; ayrik VAL kumesinde -0.0111 tespit "
     "/ -0.0104 robot KAYBETTI (results/sinav_val.json). Onceden yazili kill kurali "
     "uygulandi. Eski model: results/wire_gate.pkl.l2_2026_07_31"),
     },open (PKL ,"wb"))
@@ -50,7 +50,7 @@ def main ():
     m =pickle .load (open (PKL ,"rb"))
     assert m ["cols"]is None and len (m ["feat_names"])==13 
     Xs =X [:5 ]
-    assert m ["clf"].predict_proba (Xs ).shape ==(5 ,2 ),"13 sutunlu tahmin calismiyor"
+    assert m ["clf"].predict_proba (Xs ).shape ==(5 ,2 ),"13 sutunlu prediction does not work"
     print ("dogrulama: cols=None, 13 name, prediction 13 sutunla calisiyor")
 
 

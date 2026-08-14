@@ -60,7 +60,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in tpid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in tpid ]),list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -72,9 +72,9 @@ def main ():
     print ("gate hazir\n",flush =True )
 
     su ,oracle_ ,ceiling =[],[],[]
-    rec ={"dusuk":[0 ,0 ],"cok":[0 ,0 ]}
+    rec ={"low":[0 ,0 ],"very":[0 ,0 ]}
     for r in DER :
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         Pt =r ["P"]if r ["X"]is not None else np .zeros ((0 ,3 ))
         Pdt =r ["Pd"]if r ["X"]is not None else np .zeros ((0 ,3 ))
@@ -96,41 +96,41 @@ def main ():
         ceiling .append ((rj ,tp ,0 ,len (G )-tp ))
         rec [rj ][0 ]+=tp ;rec [rj ][1 ]+=len (G )
 
-    print (f"{'olcu':<24}{'dusuk-CP':>10}{'cok-CP':>10}{'AGIRLIKLI':>12}")
+    print (f"{'olcu':<24}{'low-CP':>10}{'very-CP':>10}{'AGIRLIKLI':>12}")
     S ={}
     for ad ,rows in (("1 SU AN",su ),("2 KAHIN GATE",oracle_ ),("4 ADAY TAVANI",ceiling )):
         rr =f1_rejim (rows )
         S [ad ]=rr 
-        print (f"{ad :<24}{rr ['F1']['dusuk']:>10.4f}{rr ['F1']['cok']:>10.4f}"
+        print (f"{ad :<24}{rr ['F1']['low']:>10.4f}{rr ['F1']['very']:>10.4f}"
         f"{rr ['agirlikli_F1']:>12.4f}")
     R ={k :rec [k ][0 ]/max (rec [k ][1 ],1 )for k in rec }
-    print (f"{'3 ADAY RECALL':<24}{R ['dusuk']:>10.4f}{R ['cok']:>10.4f}"
+    print (f"{'3 ADAY RECALL':<24}{R ['low']:>10.4f}{R ['very']:>10.4f}"
     f"{sum (W [k ]*R [k ]for k in W ):>12.4f}")
 
     print (f"\n=== 0.85 NEREDEN GELMELI ===")
-    d0 ,c0 =S ["1 SU AN"]["F1"]["dusuk"],S ["1 SU AN"]["F1"]["cok"]
-    dT ,cT =S ["4 ADAY TAVANI"]["F1"]["dusuk"],S ["4 ADAY TAVANI"]["F1"]["cok"]
+    d0 ,c0 =S ["1 SU AN"]["F1"]["low"],S ["1 SU AN"]["F1"]["very"]
+    dT ,cT =S ["4 ADAY TAVANI"]["F1"]["low"],S ["4 ADAY TAVANI"]["F1"]["very"]
     print (f"  su an   : dusuk {d0 :.4f} | cok {c0 :.4f} -> agirlikli {S ['1 SU AN']['agirlikli_F1']:.4f}")
     print (f"  TAVAN   : dusuk {dT :.4f} | cok {cT :.4f} -> agirlikli "
-    f"{W ['dusuk']*dT +W ['cok']*cT :.4f}")
+    f"{W ['low']*dT +W ['very']*cT :.4f}")
     # very-CP tavanda olsa, low-CP ne must be?
-    ger_d =(0.85 -W ["cok"]*cT )/W ["dusuk"]
+    ger_d =(0.85 -W ["very"]*cT )/W ["low"]
     print (f"\n  cok-CP TAVANINDA ({cT :.4f}) olsaydi, dusuk-CP {ger_d :.4f} olmali")
     print (f"    -> dusuk-CP tavani {dT :.4f} | {'MUMKUN'if ger_d <=dT else 'IMKANSIZ'}")
-    ger_c =(0.85 -W ["dusuk"]*dT )/W ["cok"]
+    ger_c =(0.85 -W ["low"]*dT )/W ["very"]
     print (f"  dusuk-CP TAVANINDA ({dT :.4f}) olsaydi, cok-CP {ger_c :.4f} olmali")
     print (f"    -> cok-CP tavani {cT :.4f} | {'MUMKUN'if ger_c <=cT else 'IMKANSIZ'}")
-    ust =W ["dusuk"]*dT +W ["cok"]*cT 
+    ust =W ["low"]*dT +W ["very"]*cT 
     print (f"\n  MUTLAK UST SINIR (iki regime de kendi ADAY tavaninda): {ust :.4f}")
-    print (f"  0.85 {'BU SINIRIN ALTINDA -> yapisal olarak mumkun'if ust >=0.85 else 'BU SINIRIN USTUNDE -> ADAY URETIMI degismeden IMKANSIZ'}")
+    print (f"  0.85 {'BU SINIRIN ALTINDA -> yapisal as mumkun'if ust >=0.85 else 'BU SINIRIN USTUNDE -> ADAY URETIMI degismeden IMKANSIZ'}")
     print (f"\n  KAHIN GATE (mevcut adaylardan mukemmel secim): "
     f"{S ['2 KAHIN GATE']['agirlikli_F1']:.4f}")
     print (f"    -> 0.85 icin kahin gate'in {0.85 /S ['2 KAHIN GATE']['agirlikli_F1']:.0%}'i gerekli")
     with io .open ("results/v1_tespit_085.json","w",encoding ="utf-8")as f :
-        json .dump ({"su_an":{"dusuk":d0 ,"cok":c0 ,
+        json .dump ({"su_an":{"low":d0 ,"very":c0 ,
         "agirlikli":S ["1 SU AN"]["agirlikli_F1"]},
         "kahin_gate":S ["2 KAHIN GATE"]["agirlikli_F1"],
-        "aday_recall":R ,"aday_tavani":{"dusuk":dT ,"cok":cT ,"agirlikli":ust },
+        "aday_recall":R ,"aday_tavani":{"low":dT ,"very":cT ,"agirlikli":ust },
         "085_mumkun":bool (ust >=0.85 )},f ,indent =1 )
     print ("receipt -> results/v1_tespit_085.json")
 

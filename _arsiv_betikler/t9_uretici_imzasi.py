@@ -33,7 +33,7 @@ def main ():
     isim =list (wire_gate .FEAT_NAMES_13 )+list (wire_gate .FEAT_NAMES_FIZ )
     u0 =mfg ==sorted (set (mfg ))[0 ]
 
-    print (f"{'sutun':<16}{'URETICI imzasi':>15}{'TP/FP ic':>10}{'TP/FP disi':>12}{'transfer':>10}")
+    print (f"{'column':<16}{'URETICI imzasi':>15}{'TP/FP ic':>10}{'TP/FP disi':>12}{'transfer':>10}")
     out ={}
     for i ,n in enumerate (isim ):
         imza =abs (auc_mw (X [:,i ],u0 )-0.5 )+0.5 # ureticiyi ne up to ele veriyor
@@ -46,12 +46,12 @@ def main ():
     print ("\nEN COK URETICI IMZASI TASIYAN 6 SUTUN:")
     for n ,v in sirali [:6 ]:
         print (f"  {n :<16} imza {v ['imza']:.3f}")
-    print ("\nEN AZ TASIYANLAR (guvenli cekirdek):")
+    print ("\nEN AZ TASIYANLAR (safe cekirdek):")
     for n ,v in sirali [-6 :]:
         print (f"  {n :<16} imza {v ['imza']:.3f}")
 
         # Ezberci sutunlari ATMAK transferi fixes mi? (L2 dersi: tanidik veride kaybettirmisti)
-    print (f"\n{'cluster':<34}{'manufacturer-disi F1 (en kotu)':>26}")
+    print (f"\n{'cluster':<34}{'manufacturer-disi F1 (most kotu)':>26}")
     THR =float (json .load (open ("cp_config.json",encoding ="utf-8"))["robot_wire_gate_threshold"])
     def kotu (cols ):
         v =[]
@@ -66,14 +66,14 @@ def main ():
             v .append (2 *p_ *r_ /max (p_ +r_ ,1e-9 ))
         return min (v ),v 
     tum =list (range (18 ))
-    b ,v =kotu (tum );print (f"{'18 sutun (mevcut)':<34}{b :>26.4f}   {[round (x ,4 )for x in v ]}")
+    b ,v =kotu (tum );print (f"{'18 column (mevcut)':<34}{b :>26.4f}   {[round (x ,4 )for x in v ]}")
     for k in (2 ,3 ,4 ):
         at ={isim .index (n )for n ,_ in sirali [:k ]}
         cols =[i for i in tum if i not in at ]
         b2 ,v2 =kotu (cols )
-        print (f"{'en imzali '+str (k )+' atildi ('+str (18 -k )+')':<34}{b2 :>26.4f}"
+        print (f"{'most imzali '+str (k )+' atildi ('+str (18 -k )+')':<34}{b2 :>26.4f}"
         f"   {[round (x ,4 )for x in v2 ]}")
-        out [f"at{k }"]={"en_kotu":b2 ,"hepsi":v2 }
+        out [f"at{k }"]={"en_kotu":b2 ,"all of them":v2 }
     json .dump (out ,open ("results/t9_uretici_imzasi.json","w"),indent =1 )
     print ("\nmakbuz -> results/t9_uretici_imzasi.json")
 

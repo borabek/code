@@ -124,7 +124,7 @@ def main ():
     for s ,auc ,nm ,ma ,mb in rows [:8 ]:
         print (f"      {nm :<10} AUC {auc :.3f}   FP med {ma :9.3f}   TP med {mb :9.3f}")
     print (f"      ... en iyi mevcut ozellik bile AUC {rows [0 ][1 ]:.3f} "
-    f"({'ZAYIF'if abs (rows [0 ][1 ]-0.5 )<0.15 else 'kayda deger'})\n")
+    f"({'ZAYIF'if abs (rows [0 ][1 ]-0.5 )<0.15 else 'kayda value'})\n")
 
     json .dump ({"threshold":float (thr ),"f1":f1 ,"n_tp":n_tp ,"n_fp":n_fp ,
     "parts_scored":parts_scored ,"parts_with_fp":len (per ),

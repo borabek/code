@@ -64,7 +64,7 @@ def _birim (v ):
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -234,7 +234,7 @@ def main ():
         print (f"  {'kahin':<12}{out ['NIT']['kahin']:.4f}   (ust sinir)")
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
     "maks_konum":MAKS_KONUM ,"maks_yon":MAKS_YON ,
-    "not":"Isin atma ile delik ekseni. CARPIM kabul kutusu "
+    "not":"Isin atma with delik ekseni. CARPIM kabul kutusu "
     "(lateral 2mm / axial 40mm) -- Oklid DEGIL. "
     "Sentetik yetenek testi GECTI. D7'ye BAKILMADI."},
     open (f"results/isin_ekseni_{KUME }.json","w"),indent =1 )

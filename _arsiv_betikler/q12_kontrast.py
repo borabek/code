@@ -76,17 +76,17 @@ def main ():
     rng2 =np .random .RandomState (0 )
     print (f"\n{'criterion':<28}{'AUC':>8}{'null p95':>10}{'TP ort':>10}{'FP ort':>10}{'|AUC-.5|':>10}")
     res ={}
-    for i ,nm in enumerate (["metal-tonu mesafesi (eski)","KONTRAST mesafesi (yeni)"]):
+    for i ,nm in enumerate (["metal-tonu mesafesi (old)","KONTRAST mesafesi (new)"]):
         a =auc_mw (X [:,i ],Y )
         nl =np .array ([auc_mw (X [:,i ],rng2 .permutation (Y ))for _ in range (300 )])
         p95 =float (np .percentile (np .abs (nl -0.5 ),95 )+0.5 )
         print (f"{nm :<28}{a :>8.3f}{p95 :>10.3f}{X [Y ,i ].mean ():>10.1f}{X [~Y ,i ].mean ():>10.1f}"
         f"{abs (a -0.5 ):>10.4f}")
         res [nm ]={"auc":float (a ),"null_p95":p95 ,"ayirt":float (abs (a -0.5 ))}
-    d =res ["KONTRAST mesafesi (yeni)"]["ayirt"]-res ["metal-tonu mesafesi (eski)"]["ayirt"]
+    d =res ["KONTRAST mesafesi (new)"]["ayirt"]-res ["metal-tonu mesafesi (old)"]["ayirt"]
     print (f"\nayirt edicilik farki: {d :+.4f}")
     print (f"KILL: kontrast eskiyi gecmezse yeniden uretim ACILMAZ -> {'AC'if d >0 else 'ACMA'}")
-    json .dump (res |{"fark":float (d ),"kapsama_metal":kap_m ,"kapsama_kontrast":kap_k },
+    json .dump (res |{"difference":float (d ),"kapsama_metal":kap_m ,"kapsama_kontrast":kap_k },
     open ("results/q12_kontrast.json","w"),indent =1 )
     print ("receipt -> results/q12_kontrast.json")
 

@@ -80,6 +80,6 @@ print (f"1) eski yigin (g7 + gate v5)      tespit {t :.4f} | robot {r :.4f}",flu
 t ,r =kos (OB_YENI ,g7g );res_ ["2_A3A4 (g10+gate v7)"]={"tespit":t ,"robot":r }
 print (f"2) g10 + gate v7 (A3-A4)          tespit {t :.4f} | robot {r :.4f}",flush =True )
 json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"n_parca":len (pidler ),
-"not":"D7 = DEV (harcandi). FINAL DEGIL. 0.2344 ile AYNI cluster."},
+"not":"D7 = DEV (harcandi). FINAL DEGIL. 0.2344 with AYNI cluster."},
 open ("results/d7_yeni_yigin.json","w"),indent =1 )
 print ("receipt -> results/d7_yeni_yigin.json")

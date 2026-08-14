@@ -10,7 +10,7 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 CACHE ="results/pitstop2_cache"
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -75,12 +75,12 @@ def main ():
                 used .add (a );hit [b ]=True ;lab [a ]=1 
         X13 .append (feats );XC .append (col );Y .append (lab )
         GRP +=[pid ]*len (cps );FAM +=[family_key (pid )]*len (cps )
-        REG +=[("cok"if n >=8 else "dusuk")]*len (cps )
-        NGT [pid ]=(len (G ),"cok"if n >=8 else "dusuk")
+        REG +=[("very"if n >=8 else "low")]*len (cps )
+        NGT [pid ]=(len (G ),"very"if n >=8 else "low")
     X13 =np .vstack (X13 );XC =np .vstack (XC );y =np .concatenate (Y )
     fam =np .array (FAM );reg =np .array (REG )
     print (f"{len (NGT )} part ({n_col } tanesinde renk) | {len (y )} candidate | pozitif %{100 *y .mean ():.0f}\n")
-    tot ={k :sum (v [0 ]for v in NGT .values ()if v [1 ]==k )for k in ("dusuk","cok")}
+    tot ={k :sum (v [0 ]for v in NGT .values ()if v [1 ]==k )for k in ("low","very")}
 
     def oof (Xm ):
         s =np .zeros (len (y ))
@@ -91,7 +91,7 @@ def main ():
 
     def best_f1 (s ):
         out ={}
-        for k in ("dusuk","cok"):
+        for k in ("low","very"):
             bb =0 
             for thr in np .arange (0.20 ,0.71 ,0.05 ):
                 m =reg ==k ;sel =(s >=thr )&m 
@@ -107,9 +107,9 @@ def main ():
     XCf =np .where (np .isnan (XC ),-1.0 ,XC )
     a =best_f1 (oof (X13 ))
     b =best_f1 (oof (np .hstack ([X13 ,XCf ,miss ])))
-    print (f"{'ozellik seti':<28}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}")
-    print (f"{'13 mevcut':<28}{a ['dusuk']:>9.4f}{a ['cok']:>9.4f}{a ['w']:>11.4f}")
-    print (f"{'13 + RENK (3+bayrak)':<28}{b ['dusuk']:>9.4f}{b ['cok']:>9.4f}{b ['w']:>11.4f}")
+    print (f"{'feature seti':<28}{'low':>9}{'very':>9}{'agirlikli':>11}")
+    print (f"{'13 mevcut':<28}{a ['low']:>9.4f}{a ['very']:>9.4f}{a ['w']:>11.4f}")
+    print (f"{'13 + RENK (3+bayrak)':<28}{b ['low']:>9.4f}{b ['very']:>9.4f}{b ['w']:>11.4f}")
     print (f"\nRENK katkisi: {b ['w']-a ['w']:+.4f}")
     print (f"KAPI (>= +0.02): {'GECTI'if b ['w']-a ['w']>=0.02 else 'OLU'}   [KUCUK ORNEKLEM]")
     json .dump ({"base":a ,"color":b ,"delta":b ["w"]-a ["w"],"n_parts":len (NGT ),

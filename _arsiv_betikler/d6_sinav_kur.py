@@ -148,10 +148,10 @@ def main ():
     "cp_kovasi":dict (kv ),"gt_toplam":sum (s ["cp"]for s in secili ),
     "pidler":pidler ,"parts":secili ,
     "min_uretici":MIN_URETICI ,
-    "not":("TEMIZ gorulmemis-URETICI sinavi (D6). Bu ureticiler hicbir training "
+    "not":("TEMIZ gorulmemis-URETICI sinavi (D6). Bu ureticiler no training "
     "yapitinda YOK. Eski d5_4 kumesi URETICI duzeyinde kirlenmisti "
-    "(seg korpusu sinavin 169/250 parcasini iceriyordu) ve onunla "
-    "KIYASLANAMAZ. 194'luk measurement kumesi AYRI ve dondurulmus kalir.")}
+    "(seg korpusu sinavin 169/250 parcasini iceriyordu) and onunla "
+    "KIYASLANAMAZ. 194'luk measurement kumesi AYRI and dondurulmus kalir.")}
     with io .open (CIKTI ,"w",encoding ="utf-8")as f :
         json .dump (out ,f ,indent =1 ,ensure_ascii =False )
     print (f"\nSINAV KUMESI: {len (secili )} part | {len (up )} manufacturer | "

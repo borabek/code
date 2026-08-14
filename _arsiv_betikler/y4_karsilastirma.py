@@ -65,7 +65,7 @@ def main ():
     os .makedirs (DIZIN ,exist_ok =True )
     with io .open ("results/fp_denetim.json",encoding ="utf-8")as f :
         FD =json .load (f )
-    FP =FD ["hepsi"];sec =FD ["ornek_idx"]
+    FP =FD ["all of them"];sec =FD ["ornek_idx"]
     stp_of ={p :s for m ,p ,jf ,s in eligible ()}
     DER ,_ =measure_set .cluster ("results/_der_tam.pkl")
     GT ={r ["pid"]:(np .asarray (r ["G"],float ),np .asarray (r ["Gd"],float ))for r in DER }
@@ -96,7 +96,7 @@ def main ():
 
         for i in idxs :
             f_ =FP [i ]
-            p =np .array (f_ ["nokta"],float );d =np .array (f_ ["direction"],float )
+            p =np .array (f_ ["point"],float );d =np .array (f_ ["direction"],float )
             last_ ,olc ,_ =derinlik_haritasi (V ,F ,p ,d )
             if last_ is None :
                 continue 
@@ -127,7 +127,7 @@ def main ():
             fontsize =9.5 ,color ="#A8332A",fontweight ="bold")
             ax1 .set_xticks ([]);ax1 .set_yticks ([])
             cb =fig .colorbar (im ,ax =ax1 ,fraction =0.046 )
-            cb .set_label ("cevre yuzeyine gore depth (mm)",fontsize =8 )
+            cb .set_label ("cevre yuzeyine according to depth (mm)",fontsize =8 )
             fig .suptitle (f"{pid } · {f_ ['mfg']} · "
             +("aynı renk ölçeği · sıfır = çevredeki yüzey"if ref is not None else "REFERANS YOK"),
             fontsize =9 ,y =0.99 )

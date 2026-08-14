@@ -50,10 +50,10 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     tr_onek =np .array ([p [:ONEK ]for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }
 
     # HANGI SERILER: hem testte hem egitimde yeterli kutle must be
     te_say =collections .Counter (r ["pid"][:ONEK ]for r in DER )
@@ -76,11 +76,11 @@ def main ():
                 m =(s >=ORAN *max (float (s .max ()),1e-9 ))&(s >=TABAN )
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            det .append (("cok"if r ["n"]>=8 else "dusuk",)
+            det .append (("very"if r ["n"]>=8 else "low",)
             +esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
         return det 
 
-    print (f"\n{'seri':<8}{'manufacturer':>9}{'n':>5}{'A ham':>9}{'D zskor':>10}{'fark':>9}")
+    print (f"\n{'seri':<8}{'manufacturer':>9}{'n':>5}{'A ham':>9}{'D zskor':>10}{'difference':>9}")
     S ,farklar ={},[]
     for k in seriler :
         alt =[r for r in DER if r ["pid"][:ONEK ]==k ]
@@ -96,7 +96,7 @@ def main ():
         print (f"{k :<8}{mf :>9}{len (alt ):>5}{v ['A ham']:>9.4f}{v ['D zskor']:>10.4f}{fark :>+9.4f}",
         flush =True )
         S [k ]={"manufacturer":mf ,"n":len (alt ),"A":float (v ["A ham"]),"D":float (v ["D zskor"]),
-        "fark":float (fark )}
+        "difference":float (fark )}
 
     f =np .array (farklar )
     kazanan =int ((f >0 ).sum ());kaybeden =int ((f <0 ).sum ())
@@ -112,9 +112,9 @@ def main ():
     else "TEK BOLMEYE FIT -- karar kirilgan"if kazanan <=len (f )//2 
     else "KARISIK: cogunlukta kazaniyor but tekduze not")
     print (f"YORUM: {yorum }")
-    print ("\nNOT: seri-disi, manufacturer-disindan DAHA KOLAY bir eksendir (ayni ureticinin\n"
+    print ("\nNOT: seri-disi, manufacturer-disindan DAHA KOLAY a eksendir (same ureticinin\n"
     "istatistigi egitimde kalir). Yerine gecmez; kararin TEK bolmeye fit olup olmadigini\n"
-    "sinamak icin kullanilir.")
+    "sinamak for is used.")
     with open ("results/u6_seri_disi.json","w",encoding ="utf-8")as fh :
         json .dump ({"seriler":S ,"kazanan_seri":kazanan ,"n_seri":len (f ),
         "ortalama_fark":float (f .mean ()),"medyan_fark":float (np .median (f )),

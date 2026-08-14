@@ -2,7 +2,7 @@
 """D20: MESH-ONLY KORPUS -- STEP olmadan segmentasyon training verisi.
 
 `_ds1/DataSet/*.json` dosyalarinda Graphic3d (Points+Indices) VE ConnectionPoints
-AYNI dosyada. STEP GEREKMEZ -- segmentasyon already mesh on calisiyor.
+AYNI dosyada. STEP GEREKMEZ -- segmentasyon already mesh ten calisiyor.
 
 WHY IMPORTANT: FN'lerin %57'si ADAY_YOK (temsil). Ve lateral error SEG KALITESIYLE
 aciklanıyor ([[lateral-error-segmentasyon-kalitesiyle-aciklanir]]) -- i.e. this corpus
@@ -97,7 +97,7 @@ def main ():
     SINAV_PID =_sinav_pidleri ()
     print (f"exam pid yasagi: {len (SINAV_PID )} part",flush =True )
     say ={"yazildi":0 ,"sinav_markasi":0 ,"sinav_parcasi":0 ,"terminal_degil":0 ,
-    "cp_yok":0 ,"mesh_yok":0 ,"remesh_hata":0 ,"boya_yok":0 ,"zaten":0 }
+    "cp_yok":0 ,"mesh_yok":0 ,"remesh_hata":0 ,"boya_yok":0 ,"already":0 }
     t0 =time .time ()
     for i ,f in enumerate (fs ,1 ):
         b =os .path .basename (f )
@@ -111,7 +111,7 @@ def main ():
         if _kim in SINAV_PID :
             say ["sinav_parcasi"]+=1 ;continue 
         if pid in var :
-            say ["zaten"]+=1 ;continue 
+            say ["already"]+=1 ;continue 
         try :
             d =json .load (io .open (f ,encoding ="utf-8"))
         except Exception :

@@ -28,7 +28,7 @@ os .environ ["WG_TOPO"]="1"
 os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"dusuk":0.895 ,"very":0.105 }
 
 
 def yukle ():
@@ -51,7 +51,7 @@ def yukle ():
     y =np .asarray (zen ["y"])
     pid =np .array ([str (x )for x in zen ["pids"]])
     mk =np .array ([str (x )for x in zen ["mfg"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"none:"+p )for p in pid ]),list (tg ))
     kod ={k :collections .Counter (mfg_of .get (p ,"?")for p in pid [mk ==k ]).most_common (1 )[0 ][0 ]
     for k in np .unique (mk )}
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
@@ -81,7 +81,7 @@ def puanla (model ,alt ,cfg ):
                         c =wire_gate .pick_member_direction (Xr [k ],c ,r ["UYE"])
                     P =np .array ([x ["point"]for x in c ],float )
                     Pd =np .array ([x ["direction"]for x in c ],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "dusuk"
         det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
         rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
     return det ,rob 

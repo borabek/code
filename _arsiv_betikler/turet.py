@@ -41,10 +41,10 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--cikti",required =True )
+    ap .add_argument ("--output",required =True )
     ap .add_argument ("--ckpt",nargs ="*",default =None ,
-    help ="ensemble; verilmezse cp_config'teki dagitilan liste")
-    ap .add_argument ("--sinir",type =int ,default =0 ,help ="ilk N part (deneme icin)")
+    help ="ensemble; verilmezse cp_config'teki dagitilan list")
+    ap .add_argument ("--boundary",type =int ,default =0 ,help ="first N part (deneme for)")
     a =ap .parse_args ()
 
     import cad_eval 

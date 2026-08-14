@@ -47,11 +47,11 @@ def onar_hepsi (mesh ,p ,d ):
         p =p2 ;uyg .append ("body")
     p2 ,ok ,_ =S1 .onar_merkezle (mesh ,p ,d )
     if ok :
-        p =p2 ;uyg .append ("merkez")
+        p =p2 ;uyg .append ("centre")
     d2 ,ok ,msj =S1 .onar_yon_cevir (mesh ,p ,d )
     if ok :
         d =d2 ;uyg .append ("direction")
-    elif msj =="iki taraf kapali":
+    elif msj =="two taraf closed":
         uyg .append ("KANAL_DEGIL")
     return p ,d ,uyg 
 
@@ -124,7 +124,7 @@ def main ():
     ADLAR =("govde_ici","onu_kapali","duvara_yapisik")
     n =sum (len (d ["B0"])for d in R .values ())
     print (f"\n{'='*76 }\nS2 -- ONARIM SONRASI BAYRAKLAR ({len (R )} part / {n } CP)\n{'='*76 }")
-    print (f"{'bayrak':<18}{'once':>8}{'sonra':>8}{'fark':>8}")
+    print (f"{'bayrak':<18}{'before':>8}{'after':>8}{'difference':>8}")
     for q ,ad in enumerate (ADLAR ):
         a =sum (1 for d in R .values ()for b in d ["B0"]if b [q ])
         b_ =sum (1 for d in R .values ()for b in d ["B1"]if b [q ])
@@ -139,7 +139,7 @@ def main ():
             uyg [tuple (u )]=uyg .get (tuple (u ),0 )+1 
     print (f"\nuygulanan operator dagilimi:")
     for k ,v in sorted (uyg .items (),key =lambda x :-x [1 ])[:8 ]:
-        print (f"   {('hicbiri'if not k else '+'.join (k )):<28}{v :>5}")
+        print (f"   {('none of them'if not k else '+'.join (k )):<28}{v :>5}")
 
     print (f"\n{'='*76 }\nS3 -- METRIGE ETKI (gecis sayimi)\n{'='*76 }")
     for ad ,robot in (("TESPIT",False ),("ROBOT(FIZ)",True )):
@@ -148,7 +148,7 @@ def main ():
         for r in DER :
             d =R .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d is None :
                 P0 =P1 =np .zeros ((0 ,3 ));D0 =D1 =np .zeros ((0 ,3 ))
             else :
@@ -171,7 +171,7 @@ def main ():
     with io .open ("results/s2s3_onarim.json","w",encoding ="utf-8")as f :
         json .dump ({"n_cp":n ,"kusur_once":ha ,"kusur_sonra":hb ,
         "fp2tp":KILL [0 ],"tp2fp":KILL [1 ],"gecti":bool (KILL [2 ]),
-        "operator_dagilimi":{"+".join (k )or "hicbiri":v for k ,v in uyg .items ()}},
+        "operator_dagilimi":{"+".join (k )or "none of them":v for k ,v in uyg .items ()}},
         f ,indent =1 ,ensure_ascii =False )
     print ("receipt -> results/s2s3_onarim.json")
 

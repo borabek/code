@@ -56,6 +56,6 @@ k =u -max (a ,b )
 print (f"KARAR: {'EGIT (>=+0.05)'if k >=0.05 else ('KAPAT (<+0.02)'if k <0.02 else 'BELIRSIZ (0.02-0.05)')}")
 json .dump ({"damga":makbuz_hash .damga (),"g10":a ,"g7":b ,"birlesim":u ,
 "kazanc":k ,"n_parca":len (T_a ),
-"not":"g7+g10 birlesimi, IKI SEED birlesimi icin ALT SINIR"},
+"not":"g7+g10 birlesimi, IKI SEED birlesimi for ALT SINIR"},
 open ("results/p3c_uye_kahin.json","w"),indent =1 )
 print ("receipt -> results/p3c_uye_kahin.json")

@@ -72,11 +72,11 @@ def main ():
     d =np .load ("results/gate_regrow_data_topo.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     tr_mfg =np .array ([str (x )for x in d ["mfg"]])
     kod ={k :collections .Counter (mfg_of .get (p ,"?")for p in tr_pid [tr_mfg ==k ]).most_common (1 )[0 ][0 ]
     for k in np .unique (tr_mfg )}
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }
 
     def skorla (keep ,alt ):
         clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
@@ -93,7 +93,7 @@ def main ():
                 m =(s >=o_ *max (float (s .max ()),1e-9 ))&(s >=TABAN )
                 if m .any ():
                     P =r ["P"][m ];Pd =r ["Pd"][m ]
-            det .append (("cok"if r ["n"]>=8 else "dusuk",)+
+            det .append (("very"if r ["n"]>=8 else "low",)+
             esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
         return det 
 
@@ -105,7 +105,7 @@ def main ():
 
     CIFT =[(0.5 ,0.5 ),(0.5 ,0.4 ),(0.5 ,0.35 ),(0.5 ,0.3 ),(0.55 ,0.4 ),(0.45 ,0.4 ),(0.6 ,0.4 )]
     ad =sorted (S )
-    print (f"\n{'dusuk/cok ratio':<16}"+"".join (f"{a :>11}"for a in ad )+f"{'EN KOTU URT':>13}")
+    print (f"\n{'low/very ratio':<16}"+"".join (f"{a :>11}"for a in ad )+f"{'EN KOTU URT':>13}")
     out ={}
     for od ,oc in CIFT :
         v ={a :f1w (puanla (S [a ],od ,oc ))for a in ad }
@@ -114,7 +114,7 @@ def main ():
         flush =True )
         out [f"{od }/{oc }"]={"degerler":v ,"en_kotu_uretici":ek }
     t =out ["0.5/0.5"]
-    print ("\nKARAR (kill: tanidik >= -0.005 VE en kotu manufacturer artmali):")
+    print ("\nKARAR (kill: tanidik >= -0.005 VE most kotu manufacturer artmali):")
     for k ,v in out .items ():
         if k =="0.5/0.5":
             continue 

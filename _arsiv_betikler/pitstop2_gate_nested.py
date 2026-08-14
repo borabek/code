@@ -10,7 +10,7 @@ KILL (olcumden ONCE yazildi):
   * VEYA very-CP'de -0.01'den extra loss -> REDDEDILIR
 
 CIKTI: results/pitstop2_gate_nested.json (receipt)
-ONBELLEK: results/pitstop2_cache/<pid>.npz  -- ikinci kosu bedava
+ONBELLEK: results/pitstop2_cache/<pid>.npz  -- ikinci run bedava
 """
 import os ,sys ,json ,glob 
 import numpy as np 
@@ -20,7 +20,7 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
 CACHE ="results/pitstop2_cache"
 GRID =(0.15 ,0.25 ,0.30 ,0.35 ,0.40 ,0.45 ,0.50 ,0.55 )
-DEPLOYED ={"dusuk":0.35 ,"cok":0.25 }# this an urunde which is
+DEPLOYED ={"low":0.35 ,"very":0.25 }# this an urunde which is
 
 
 def build_cache (n_low =40 ,n_high =24 ,seed =0 ):
@@ -116,7 +116,7 @@ def load_cache (pids ):
                 raise RuntimeError (f"{pid }: onbellekte eksik CP alani {miss } -- gate ozellikleri bozulur")
         out .append ({"pid":pid ,"V":d ["V"],"F":d ["F"],"probs":d ["probs"],"cps":cps ,
         "G":d ["G"],"Gd":d ["Gd"],"n":int (d ["n"]),"tol":float (d ["tol"]),
-        "fam":str (d ["fam"]),"regime":"cok"if int (d ["n"])>=8 else "dusuk"})
+        "fam":str (d ["fam"]),"regime":"very"if int (d ["n"])>=8 else "low"})
     return out 
 
 
@@ -177,11 +177,11 @@ def main ():
     rows =load_cache (pids )
     gc_ ={}
     print (f"\nyuklenen: {len (rows )} part "
-    f"({sum (r ['regime']=='dusuk'for r in rows )} dusuk / "
-    f"{sum (r ['regime']=='cok'for r in rows )} cok)\n",flush =True )
+    f"({sum (r ['regime']=='low'for r in rows )} dusuk / "
+    f"{sum (r ['regime']=='very'for r in rows )} cok)\n",flush =True )
 
     rec ={"grid":list (GRID ),"deployed":DEPLOYED ,"regimes":{}}
-    for reg in ("dusuk","cok"):
+    for reg in ("low","very"):
         sub =[r for r in rows if r ["regime"]==reg ]
         if not sub :
             continue 
@@ -205,13 +205,13 @@ def main ():
         "nested_picks":picks ,"honest_gain":nf1 -dep }
 
     if len (rec ["regimes"])==2 :
-        w ={"dusuk":0.895 ,"cok":0.105 }
+        w ={"low":0.895 ,"very":0.105 }
         dep_w =sum (w [k ]*v ["deployed_f1"]for k ,v in rec ["regimes"].items ())
         nes_w =sum (w [k ]*v ["nested_f1"]for k ,v in rec ["regimes"].items ())
         rec ["corpus_weighted"]={"deployed":dep_w ,"nested":nes_w ,"gain":nes_w -dep_w }
         print (f"KORPUS-AGIRLIKLI (%89.5 dusuk / %10.5 cok)")
         print (f"  urunde  {dep_w :.4f}   ->  ice-ice {nes_w :.4f}   ({nes_w -dep_w :+.4f})")
-        kill =rec ["regimes"]["dusuk"]["honest_gain"]>=0.02 and rec ["regimes"]["cok"]["honest_gain"]>=-0.01 
+        kill =rec ["regimes"]["low"]["honest_gain"]>=0.02 and rec ["regimes"]["very"]["honest_gain"]>=-0.01 
         rec ["kill_criterion_passed"]=bool (kill )
         print (f"\nKAPI (dusuk >= +0.02 VE cok >= -0.01): {'GECTI'if kill else 'OLU'}")
 

@@ -62,7 +62,7 @@ def main ():
         ax .add_collection3d (Poly3DCollection (tri ,facecolors =np .clip (col ,0 ,1 ),edgecolors ="none",alpha =0.9 ))
         ext =V .max (0 )-V .min (0 );L =ext .max ()*0.22 ;c0 =V .mean (0 );rr =ext .max ()*0.55 
         if len (G ):
-            ax .scatter (G [:,0 ],G [:,1 ],G [:,2 ],s =90 ,c ="lime",marker ="o",
+            ax .scatter (G [:,0 ],G [:,1 ],G [:,2 ],s =90 ,c ="lime",marker ="that",
             depthshade =False ,edgecolors ="black",linewidths =1 ,zorder =5 )
         for i in range (len (P )):
             p =P [i ];d =Pd [i ]/(np .linalg .norm (Pd [i ])+1e-9 )*L 
@@ -77,7 +77,7 @@ def main ():
         cbar =f" | confidence {min (conf ):.2f}-{max (conf ):.2f}"if conf else ""
         ax .set_title (f"{pid } ({mfg })  manufacturer {len (G )} / model {len (P )}{cbar }",fontsize =9 )
         print (f"  {pid } ({mfg }): manufacturer {len (G )} CP, model {len (P )} CP bulundu",flush =True )
-    fig .suptitle ("ROBOT DEMO: STEP -> model CP'leri (kirmizi ok=model nokta+direction, yesil=manufacturer gercegi)  --  hic egitilmemis parts",
+    fig .suptitle ("ROBOT DEMO: STEP -> model CP'leri (kirmizi ok=model point+direction, yesil=manufacturer gercegi)  --  never egitilmemis parts",
     fontsize =13 )
     plt .tight_layout (rect =[0 ,0 ,1 ,0.96 ])
     plt .savefig ("results/_robot_demo.png",dpi =95 ,bbox_inches ="tight");print ("-> results/_robot_demo.png")

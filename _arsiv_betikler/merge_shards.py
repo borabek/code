@@ -43,7 +43,7 @@ def main ():
     help ="signature cache. A resumed/incremental merge normally "
     "re-lists --out as a shard so new parts dedup against the "
     "parts already there -- but that re-PARSES the whole corpus "
-    "(0.5-14MB of mesh JSON each) on every invocation: 3010 "
+    "(0.5-14MB of mesh JSON each) ten every invocation: 3010 "
     "parts took the full 10min and only 24 new ones landed. "
     "Cached by (name, size, mtime), so a re-run pays only for "
     "files it has not seen.")

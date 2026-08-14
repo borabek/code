@@ -13,8 +13,8 @@ each two metrik for same merdiveni kurar and each basamakta KIM sinirliyor onu g
 Merdivenin mantigi: 1. basamak GATE'in, 4. basamak TURETMENIN (network + cp_openings) tavanidir.
 Ikisi arasindaki difference, gate'i mukemmellestirerek kazanilabilecek each seydir.
 
-IMPORTANT: kahin sayilari ULASILABILIR TARGET DEGIL, UST SINIRDIR. Ayni data on olculdugu
-for iyimserdir. Ama a hedefin (0.90 / 0.75) hangi basamagin on oldugunu SOYLER --
+IMPORTANT: kahin sayilari ULASILABILIR TARGET DEGIL, UST SINIRDIR. Ayni data ten olculdugu
+for iyimserdir. Ama a hedefin (0.90 / 0.75) hangi basamagin ten oldugunu SOYLER --
 tavanin altindaysa calisilabilir, ustundeyse before ceiling yukseltilmelidir.
 """
 import json 
@@ -62,9 +62,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -82,7 +82,7 @@ def main ():
     BAS =["0 SU AN","1 +kahin GATE","2 +kahin YON","3 +kahin KONUM","4 ADAY TAVANI"]
     det ={b :[]for b in BAS };rob ={b :[]for b in BAS }
     for r in DER :
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         Pt =r ["P"]if r ["X"]is not None else np .zeros ((0 ,3 ))
         Pdt =r ["Pd"]if r ["X"]is not None else np .zeros ((0 ,3 ))
@@ -126,7 +126,7 @@ def main ():
         det ["4 ADAY TAVANI"].append ((rj ,n_es ,0 ,len (G )-n_es ))
         rob ["4 ADAY TAVANI"].append ((rj ,n_es ,0 ,len (G )-n_es ))
 
-    print (f"{'basamak':<18}{'TESPIT F1':>11}{'ROBOT F1':>11}{'tespit fark':>13}{'robot fark':>12}")
+    print (f"{'basamak':<18}{'TESPIT F1':>11}{'ROBOT F1':>11}{'tespit difference':>13}{'robot difference':>12}")
     onc_d =onc_r =None 
     OUT ={}
     for b in BAS :
@@ -142,9 +142,9 @@ def main ():
     at_d =OUT ["4 ADAY TAVANI"]["tespit"]
     print (f"\nHEDEFLERE GORE:")
     print (f"  TESPIT 0.90 : candidate tavani {at_d :.4f} -> "
-    f"{'MUMKUN (ceiling ustunde)'if at_d >=0.90 else 'TAVANIN USTUNDE -- once TURETME recall'  'i artmali'}")
+    f"{'MUMKUN (ceiling ustunde)'if at_d >=0.90 else 'TAVANIN USTUNDE -- before TURETME recall'  'i artmali'}")
     print (f"                kahin GATE {kg_d :.4f} -> gate'i mukemmellestirmek "
-    f"{'0.90 icin YETER'if kg_d >=0.90 else 'YETMEZ'}")
+    f"{'0.90 for YETER'if kg_d >=0.90 else 'YETMEZ'}")
     print (f"  ROBOT  0.75 : kahin direction+konum {OUT ['3 +kahin KONUM']['robot']:.4f} -> "
     f"{'MUMKUN'if OUT ['3 +kahin KONUM']['robot']>=0.75 else 'TAVANIN USTUNDE'}")
     print (f"\nNEREDE KILITLI:")

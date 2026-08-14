@@ -47,7 +47,7 @@ print (f"  insan-precision {prec :.3f} | insan-recall {rec :.3f} | insan-F1 {f1 
 print (f"\n  KIYAS: mevcut MODEL ayni gorevde family-out F1 ~0.752")
 print (f"         insan-F1 modelden YUKSEKse -> ogrenilecek sinyal VAR (ceiling insan seviyesi)")
 print (f"         insan-F1 modele YAKINSA    -> model zaten insan seviyesinde")
-print ("\n=== KARAR ===")
+print ("\n=== DECISION ===")
 if acc >=0.90 :
     print (f"  GECTI (%{100 *acc :.0f}) -> insan etiketi ureticinin tanimini yeniden uretiyor.")
     print ("  => 2838 STEP'i insan etiketiyle acmak MESRU. Olcek plani yapilabilir.")

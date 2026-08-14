@@ -60,7 +60,7 @@ def channel_feats (V ,F ,probs ,point ,direction ,CE ,CT ,max_mm =25.0 ):
     n_cross =int (len (hits_in ))
     has_bottom =1.0 if n_cross >0 else 0.0 
 
-    # channel genisligi: axis on belli derinliklerde, DIK yonlerde first yuzeye distance
+    # channel genisligi: axis ten belli derinliklerde, DIK yonlerde first yuzeye distance
     a =np .array ([1.0 ,0.0 ,0.0 ])
     if abs (float (din @a ))>0.9 :
         a =np .array ([0.0 ,1.0 ,0.0 ])

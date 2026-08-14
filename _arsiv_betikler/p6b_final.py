@@ -14,7 +14,7 @@ import os ,sys ,json ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ4 ="results/gate_regrow_data_rt2.npz"
 NPZ5 ="results/gate_regrow_data_p5.npz"
 
@@ -29,21 +29,21 @@ def big_thr (npz ,test_fams ):
     X ,y ,groups ,fams =X [keep ],y [keep ],groups [keep ],fams [keep ]
     ngt =dict (zip (d ["grp_ids"].tolist (),d ["ngt"].tolist ()))
     gk =fams .astype (str )
-    reg =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
-    tot ={k :0 for k in ("dusuk","cok")}
+    reg =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
+    tot ={k :0 for k in ("low","very")}
     seen =set ()
     for g in groups :
         g =int (g )
         if g in seen :continue 
         seen .add (g )
         n =int (ngt .get (g ,0 ))
-        if n >0 :tot ["cok"if n >=8 else "dusuk"]+=n 
+        if n >0 :tot ["very"if n >=8 else "low"]+=n 
     oof =np .zeros (len (y ))
     for tr ,te in GroupKFold (n_splits =5 ).split (X ,y ,gk ):
         oof [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (X [tr ],y [tr ]).predict_proba (X [te ])[:,1 ]
     out ={}
-    for k in ("dusuk","cok"):
+    for k in ("low","very"):
         best =(0 ,0.40 )
         for thr in np .arange (0.20 ,0.71 ,0.05 ):
             m =reg ==k ;sel =(oof >=thr )&m 
@@ -147,7 +147,7 @@ def main ():
 
     def score (mode ,gtag ,thr ):
         clf =gates [gtag ]
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
             cps ,is_hi =cands (r ,mode )
             keep =[]
@@ -155,7 +155,7 @@ def main ():
                 probs =sum (r ["pbs"])/len (r ["pbs"])
                 X =wire_gate .feats_for (r ["V"],r ["F"],probs ,cps ,CE ,CT )
                 sc =clf .predict_proba (X )[:,1 ]
-                t =thr ["cok"]if is_hi else thr ["dusuk"]
+                t =thr ["very"]if is_hi else thr ["low"]
                 keep =[c for c ,s_ in zip (cps ,sc )if s_ >=t ]
             Q =np .array ([c ["point"]for c in keep ],float )if keep else np .zeros ((0 ,3 ))
             G ,Gd =r ["G"],r ["Gd"];hit =np .zeros (len (G ),bool );used =set ()
@@ -166,7 +166,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (G ))):
                     if d_ >r ["tol"]or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (G )-tp 
         out ={}
         for k ,(T ,Fp ,Fn )in agg .items ():
@@ -178,17 +178,17 @@ def main ():
     ARMS =(("A_urun_4uye",4 ,"A",thrA ),("B_P1_5uye",5 ,"B",thrB ),
     ("C_P7_6uye_ilkSinyal",6 ,"B",thrB ))
     res ={}
-    print (f"{'arm':<22}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}{'fark':>10}")
+    print (f"{'arm':<22}{'low':>9}{'very':>9}{'agirlikli':>11}{'difference':>10}")
     base =None 
     for name ,mode ,gtag ,thr in ARMS :
         r =score (mode ,gtag ,thr );res [name ]=r 
         if base is None :base =r ["w"]
-        print (f"{name :<22}{r ['dusuk']:>9.4f}{r ['cok']:>9.4f}{r ['w']:>11.4f}{r ['w']-base :>+10.4f}",
+        print (f"{name :<22}{r ['low']:>9.4f}{r ['very']:>9.4f}{r ['w']:>11.4f}{r ['w']-base :>+10.4f}",
         flush =True )
     dB =res ["B_P1_5uye"]["w"]-base 
     print (f"\nFINAL: urun {base :.4f} -> P1 {res ['B_P1_5uye']['w']:.4f}  ({dB :+.4f})")
     print ("DECISION (>= +0.005 and low-CP gerilemiyor): "
-    +("URUNE GIRER"if dB >=0.005 and res ["B_P1_5uye"]["dusuk"]>=res ["A_urun_4uye"]["dusuk"]-0.005 
+    +("URUNE GIRER"if dB >=0.005 and res ["B_P1_5uye"]["low"]>=res ["A_urun_4uye"]["low"]-0.005 
     else "GIRMEZ"))
     json .dump ({k :v for k ,v in res .items ()}|{"delta_B":dB ,
     "thrA":thrA ,"thrB":thrB },

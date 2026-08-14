@@ -96,9 +96,9 @@ def yukle (on ,bound_ =0 ):
         YD =np .asarray (z ["YD"],float )
         P =np .asarray (z ["P"],float )
         Dham =np .asarray (z ["D"],float )
-        kayn =(np .asarray (z ["kaynak"],int )if "kaynak"in z 
+        kayn =(np .asarray (z ["source"],int )if "source"in z 
         else np .zeros (len (P ),int ))
-        if KAYNAK_SUZ is not None and "kaynak"in z :
+        if KAYNAK_SUZ is not None and "source"in z :
             kay =kayn 
             tut =np .isin (kay ,KAYNAK_SUZ )
             # secenekler ADAY indeksine bagli; before secenekleri suz, after
@@ -116,7 +116,7 @@ def yukle (on ,bound_ =0 ):
         Gd =np .asarray (r ["Gd"],float )
         y ,_ =YB .etiketle (P [idx ],YD ,G ,Gd )
         out .append ({"pid":pid ,"mfg":r ["mfg"],"X":X ,"idx":idx ,"YD":YD ,
-        "P":P ,"D":Dham ,"y":y ,"kaynak":kayn ,
+        "P":P ,"D":Dham ,"y":y ,"source":kayn ,
         "G":G ,"Gd":Gd ,"diag":float (r ["diag"])})
     print (f"  {on }: {len (fs )} dosya -> {len (out )} part "
     f"(kayit yok {yok_kayit }, GT yok {yok_gt })",flush =True )
@@ -199,7 +199,7 @@ def main ():
     print (f"training {len (tr )} part | dev {len (dev )} part "
     f"({time .time ()-t0 :.0f} s)",flush =True )
     if not tr or not dev :
-        sys .exit ("VERI YOK -- once `python run_p6_feature.py tam` kos.")
+        sys .exit ("VERI YOK -- first `python run_p6_feature.py tam` kos.")
 
     M =np .vstack ([donustur (d ["X"])for d in tr ])
     Y =np .concatenate ([d ["y"]for d in tr ])

@@ -2,7 +2,7 @@
 """Q5: B-rep fiziksel ozellikleri gate'e ARTIMLI a sey katiyor mu?
 
 Q4 OLCTU: `brep_r` AUC 0.707 (TP medyan 1.80mm, FP medyan 0.15mm), `bos_derinlik` 0.290
-(ters yonde 0.710), `esesenli` 0.603 -- ucu de null'un (p95 ~0.52) very on.
+(ters yonde 0.710), `esesenli` 0.603 -- ucu de null'un (p95 ~0.52) very ten.
 
 AMA BU YETMEZ: gate'te ZATEN `size` (mesh mouth genisligi) and `depth` (isin sondaji) present.
 Yeni ozellikler onlarin more temiz a kopyasiysa artimli degeri SIFIR may be. Tek basina
@@ -86,8 +86,8 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
 
     X13 ,XF ,Y ,GRP ,HI =[],[],[],[],[]
     for cluster in ("dev","val"):
@@ -163,11 +163,11 @@ def main ():
             random_state =0 ).fit (X [tr ],Y [tr ]).predict_proba (X [te ])[:,1 ]
         return o 
 
-    print (f"\n{'gate':<22}{'OOF AUC':>10}{'F1':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'gate':<22}{'OOF AUC':>10}{'F1':>9}{'conclusive':>9}{'recall':>9}")
     res ={}
     for lab ,X in (("13 mevcut",X13 ),("13 + 5 fiziksel",X18 )):
         o =oof (X )
-        thr =np .where (HI ,THR ["cok"],THR ["dusuk"])
+        thr =np .where (HI ,THR ["very"],THR ["low"])
         s =o >=thr 
         tp =int ((Y &s ).sum ());fp =int ((~Y &s ).sum ());fn =int ((Y &~s ).sum ())
         p_ =tp /max (tp +fp ,1 );r_ =tp /max (tp +fn ,1 )

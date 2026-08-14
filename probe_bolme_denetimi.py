@@ -107,7 +107,7 @@ def main ():
     print (f"D7: kaba eslesen {out ['d7_kaba_eslesen_parca']} / "
     f"TEMIZ {out ['d7_temiz_n']}")
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
-    "not":"Gercek leakage TAM GEOMETRI (alt sinir) ile KABA IZ "
+    "not":"Gercek leakage TAM GEOMETRI (alt sinir) with KABA IZ "
     "(ust sinir) ARASINDADIR. Manset yaninda `d7_temiz` alt "
     "kumesinde de olculur."},
     open ("results/bolme_denetimi.json","w"),indent =1 )

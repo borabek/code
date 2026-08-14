@@ -27,7 +27,7 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 ARMS ={
 "urun (4 ckpt)":None ,# cp_config'ten okunur
 "+best_full (5)":["results/seg_extra/recall_hard_s2.pt",
@@ -50,7 +50,7 @@ def run_arm (cks ,parts ,dev ):
     cfg =json .load (open ("cp_config.json"))
     pp =cfg ["prediction_postproc"]
     models =[load_any (c ,dev =dev )[:2 ]for c in cks ]
-    agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+    agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
     for mfg ,pid ,jf ,stp ,n in parts :
         try :
             Vr ,Fr =step_to_mesh (stp )
@@ -96,7 +96,7 @@ def run_arm (cks ,parts ,dev ):
                     if d_ >tol or a_ in used or hit [b_ ]:
                         continue 
                     hit [b_ ]=True ;used .add (a_ )
-            k ="cok"if hi else "dusuk"
+            k ="very"if hi else "low"
             tp =int (hit .sum ())
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (P )-tp ;agg [k ][2 ]+=len (Gm )-tp 
         except Exception :
@@ -130,7 +130,7 @@ def main ():
     dev ="cuda"if torch .cuda .is_available ()else "cpu"
     cfg =json .load (open ("cp_config.json"))
     print (f"{len (sel )} part (30 dusuk / 18 cok)\n",flush =True )
-    print (f"{'arm':<18}{'dusuk-CP':>10}{'cok-CP':>10}{'agirlikli':>12}")
+    print (f"{'arm':<18}{'low-CP':>10}{'very-CP':>10}{'agirlikli':>12}")
     res ={}
     base =None 
     for name ,cks in ARMS .items ():
@@ -144,7 +144,7 @@ def main ():
         if base is None :
             base =r ["weighted"]
         delta =""if r ["weighted"]==base else f"   ({r ['weighted']-base :+.4f})"
-        print (f"{name :<18}{r ['dusuk']:>10.4f}{r ['cok']:>10.4f}{r ['weighted']:>12.4f}{delta }",
+        print (f"{name :<18}{r ['low']:>10.4f}{r ['very']:>10.4f}{r ['weighted']:>12.4f}{delta }",
         flush =True )
     if res :
         best =max (res .items (),key =lambda kv :kv [1 ]["weighted"])

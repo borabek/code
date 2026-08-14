@@ -60,9 +60,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }))
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (M [keep ],ytr [keep ])
@@ -106,10 +106,10 @@ def main ():
             if dd >tt or a_ in used or b_ in hit :
                 continue 
             used .add (a_ );hit .add (b_ )
-            kay ={"lateral":float (pe [a_ ,b_ ]),"aci":float (an [a_ ,b_ ]),
-            "regime":"cok"if r ["n"]>=8 else "dusuk","pid":r ["pid"]}
+            kay ={"lateral":float (pe [a_ ,b_ ]),"angle":float (an [a_ ,b_ ]),
+            "regime":"very"if r ["n"]>=8 else "low","pid":r ["pid"]}
             for mo ,rx in KAPILAR :
-                yeni_y ,yeni_a =kay ["lateral"],kay ["aci"]
+                yeni_y ,yeni_a =kay ["lateral"],kay ["angle"]
                 if len (C ):
                     j =sec (P [a_ ],Pd [a_ ],C ,A ,R ,mo ,rx )
                     if j is not None :
@@ -123,12 +123,12 @@ def main ():
                 kay [f"a_{mo }_{rx }"]=yeni_a 
             SAT .append (kay )
 
-    ya =np .array ([x ["lateral"]for x in SAT ]);ac =np .array ([x ["aci"]for x in SAT ])
+    ya =np .array ([x ["lateral"]for x in SAT ]);ac =np .array ([x ["angle"]for x in SAT ])
     su =float (((ya <=2 )&(ac <=10 )).mean ())
     print (f"\n{len (SAT )} eslesen nokta | SU AN: lateral<=2 {(ya <=2 ).mean ():.1%} | "
     f"aci<=10 {(ac <=10 ).mean ():.1%} | IKISI {su :.1%}")
-    print (f"\n{'gate (off,rmax)':<18}{'lateral med':>11}{'lateral<=2':>10}{'aci<=10':>9}"
-    f"{'IKISI':>8}{'fark':>9}")
+    print (f"\n{'gate (off,rmax)':<18}{'lateral med':>11}{'lateral<=2':>10}{'angle<=10':>9}"
+    f"{'IKISI':>8}{'difference':>9}")
     en_iyi ,en_iyi_ad =su ,"IZDUSUMSUZ"
     OUT ={}
     for mo ,rx in KAPILAR :

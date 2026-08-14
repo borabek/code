@@ -37,7 +37,7 @@ t0 =time .time ()
 for kk ,r in enumerate (DER ,1 ):
     if kk %30 ==0 :print (f"  {kk }/{len (DER )} {time .time ()-t0 :.0f}s",flush =True )
     G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-    rj ="cok"if r ["n"]>=8 else "dusuk"
+    rj ="very"if r ["n"]>=8 else "low"
     P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ));SY =[];SK =[]
     if r ["X"]is not None and r .get ("XR")is not None :
         X =np .hstack ([r ["X"],r ["XR"]])

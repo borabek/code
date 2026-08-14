@@ -44,7 +44,7 @@ def main ():
     # --- skorlari and duzeltilmis CP'leri BIR KEZ hesapla (rule skoru degistirmez)
     HAZ =[]
     for r in DER :
-        rec ={"pid":r ["pid"],"geo":r ["geo"],"rj":"cok"if r ["n"]>=8 else "dusuk",
+        rec ={"pid":r ["pid"],"geo":r ["geo"],"rj":"very"if r ["n"]>=8 else "dusuk",
         "G":np .asarray (r ["G"],float ),"Gd":np .asarray (r ["Gd"],float ),
         "diag":r ["diag"],"sk":None }
         if r ["X"]is not None and r .get ("XR")is not None :
@@ -106,7 +106,7 @@ def main ():
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (d0 ,d1 )),gg ,fn ,n =3000 )
     _ ,rlo ,rhi =measure_set .grup_bootstrap (list (zip (r0 ,r1 )),gg ,fn ,n =3000 )
     dd =f1w (d1 )-f1w (d0 )
-    print (f"{'kural':<20}{'tespit':>10}{'robot(FIZ)':>13}")
+    print (f"{'rule':<20}{'tespit':>10}{'robot(FIZ)':>13}")
     print (f"{'mevcut 0.50/0.25':<20}{f1w (d0 ):>10.4f}{f1w (r0 ):>13.4f}")
     print (f"{f'DEV-secimi {en [0 ]:.2f}/{en [1 ]:.2f}':<20}{f1w (d1 ):>10.4f}{f1w (r1 ):>13.4f}")
     print (f"\nVAL tespit farki: {dd :+.4f}  GA[{lo :+.4f},{hi :+.4f}] "
@@ -122,7 +122,7 @@ def main ():
 
     gecti =dd >=0.005 and lo >0 
     print (f"\nKILL: VAL tespit +0.005 VE GA>0 -> "
-    f"{'GECTI -- kural guncellenir'if gecti else 'GECMEDI -- mevcut kural KALIR'}")
+    f"{'GECTI -- rule guncellenir'if gecti else 'GECMEDI -- mevcut rule KALIR'}")
     with io .open ("results/t1_decision_kurali.json","w",encoding ="utf-8")as f :
         json .dump ({"dev_tarama":{f"{o }_{t }":v for (o ,t ),v in TAR .items ()},
         "dev_mevcut":mev ,"dev_en_iyi":{"ratio":en [0 ],"baseline":en [1 ],

@@ -203,9 +203,9 @@ def main ():
 
     json .dump ({"tol":TOL ,"n_kafes":N_KAFES ,"min_adim":MIN_ADIM ,
     "brand":out ,
-    "not":"ARAMA GT'SIZ: izgara 'isabet x doluluk' ile puanlanir, "
-    "GT yalniz DEGERLENDIRMEDE. Adaylar skorla "
-    "FILTRELENMEZ (lattice geometrik bir ozelliktir). "
+    "not":"ARAMA GT'SIZ: izgara 'isabet x doluluk' with puanlanir, "
+    "GT only DEGERLENDIRMEDE. Adaylar skorla "
+    "FILTRELENMEZ (lattice geometrik a ozelliktir). "
     "D7'ye BAKILMADI."},
     open (f"results/kafes_v2_{KUME }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/kafes_v2_{KUME }.json")

@@ -74,7 +74,7 @@ def main ():
                 atlanan +=1 
                 continue 
             z =np .load (f"{OZ }/{on }_{pid }.npz")
-            m =np .isin (np .asarray (z ["kaynak"],int ),KAYNAKLAR )
+            m =np .isin (np .asarray (z ["source"],int ),KAYNAKLAR )
             T =np .asarray (np .load (f"{TAN }/{on }_{pid }.npz")["T"],float )[m ]
             Xg =np .asarray (z ["X"],float )[m ]
             # BIRINCI KADEME MODELI HAM tanimlayici sozlesmesinde egitildi

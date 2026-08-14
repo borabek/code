@@ -48,7 +48,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in tpid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in tpid ]),list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -104,7 +104,7 @@ def main ():
                                     float (m .get ("confidence",1.0 )),dd ))
                         if len (hav )>1 :
                             Pd [i ]=sec_yon (Xk [i ],hav )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
@@ -113,7 +113,7 @@ def main ():
     dB ,rB =puanla (True )
     print (f"\n{'arm':<34}{'tespit':>10}{'ROBOT':>10}")
     print (f"{'A dagitilan (pool: duzeltilmis)':<34}{f1w (dA ):>10.4f}{f1w (rA ):>10.4f}")
-    print (f"{'B +duzeltme ONCESI direction de':<34}{f1w (dB ):>10.4f}{f1w (rB ):>10.4f}")
+    print (f"{'B +correction ONCESI direction de':<34}{f1w (dB ):>10.4f}{f1w (rB ):>10.4f}")
     dr =f1w (rB )-f1w (rA );dt =f1w (dB )-f1w (dA )
     fn =lambda rows :f1w ([y for _ ,y in rows ])-f1w ([x for x ,_ in rows ])
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (rA ,rB )),g ,fn ,n =2000 )
@@ -123,7 +123,7 @@ def main ():
     f"{'GECTI'if gecti else 'GECMEDI'}")
     with io .open ("results/t9_havuza_ikisi.json","w",encoding ="utf-8")as f :
         json .dump ({"A_robot":float (f1w (rA )),"B_robot":float (f1w (rB )),
-        "fark":float (dr ),"ga":[float (lo ),float (hi )],
+        "difference":float (dr ),"ga":[float (lo ),float (hi )],
         "gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/t9_havuza_ikisi.json")
 

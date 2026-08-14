@@ -145,7 +145,7 @@ def uygula (rec_ ,gate ,cyl ,ob_kok ,sec ,threshold ,match_hungarian ,f1w ,mfgle
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         pak =P3C .parca_adaylari (r ,gate ,cyl )
         if pak is not None :
@@ -218,9 +218,9 @@ def main ():
         if rf >en_r :
             en_r ,en =rf ,threshold 
     if en is None :
-        print ("\nDEV'de hicbir threshold tabani gecmedi -> KOL KAPANDI")
+        print ("\nDEV'de no threshold tabani gecmedi -> KOL CLOSED")
         with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-            json .dump ({"karar":"KAPANDI","dev_taban":d0r ,"izgara":izg },f ,indent =1 )
+            json .dump ({"karar":"CLOSED","dev_taban":d0r ,"izgara":izg },f ,indent =1 )
         return 
     s0t ,s0r =uygula (sin ,gate ,cyl_d6 ,OB_D6 ,None ,0 ,match_hungarian ,f1w )
     s1t ,s1r =uygula (sin ,gate ,cyl_d6 ,OB_D6 ,sec ,en ,match_hungarian ,f1w )

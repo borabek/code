@@ -15,7 +15,7 @@ Oznitelik (candidate basina 4 column):
   sim_var        parcada simetri duzlemi was found mu
   sim_es_mesafe  this adayin YANSIMASINA most yakin adayin mesafesi
   sim_es_skor    that adayin (varsa) skoru -- "esim de guclu mu"
-  sim_kendi      candidate duzlemin on mi (own kendinin esi)
+  sim_kendi      candidate duzlemin ten mi (own kendinin esi)
 
 TEZ: turetme/remesh does not change; this a puanlama olcusudur.
 """

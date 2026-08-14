@@ -30,7 +30,7 @@ UC SISME KAYNAGI VE NASIL KAPATILDIGI (this measurement kolayca yaniltir):
      WEI'nin +0.0094'u TAMAMEN this may be -- real ustunluk not, EKSIK HATA KAYNAGI.
      Bu yuzden JSON recall'i STEP'ten YUKSEK cikan no sonuc "iyilesme" sayilmaz.
 
-  3. EN TEHLIKELISI -- URETICI TANIDIKLIGI. Ag agirlikli as WEI and PXC on
+  3. EN TEHLIKELISI -- URETICI TANIDIKLIGI. Ag agirlikli as WEI and PXC ten
      egitildi (1926 uygun parcanin 1011'i WEI, 896'si PXC). SIE/A-B/CWT'de low recall
      "JSON agi kotu" mu demek, "network that ureticiyi tanimiyor" mu? YALNIZ JSON ILE AYRISTIRILAMAZ.
 
@@ -101,7 +101,7 @@ def main ():
     for k ,m in enumerate (hedef ,1 ):
         if k %15 ==0 :
             print (f"  {k }/{len (hedef )}  {time .time ()-t0 :.0f}s  error={error }",flush =True )
-        jf =os .path .join ("_ds1/DataSet",m ["dosya"])
+        jf =os .path .join ("_ds1/DataSet",m ["file"])
         try :
             Vj ,Fj ,j =json_mesh (jf )
             if Vj is None or len (Fj )<4 :
@@ -137,11 +137,11 @@ def main ():
 
     print (f"\n{'='*84 }\nESLESTIRILMEMIS KOL -- STEP'SIZ URETICILERDE JSON-AGI ADAY RECALL\n"
     f"{'='*84 }")
-    print ("NOTE: this satirlar TANIDIKLIKLA KARISIK. Ag agirlikli as WEI+PXC on")
+    print ("NOTE: this satirlar TANIDIKLIKLA KARISIK. Ag agirlikli as WEI+PXC ten")
     print ("egitildi; gorulmemis a ureticide low recall 'JSON agi kotu' DEGIL 'network this")
-    print ("ureticiyi tanimiyor' da olabilir. TEK BASINA KANIT DEGIL -- gosterge.\n")
+    print ("ureticiyi tanimiyor' da may be. TEK BASINA KANIT DEGIL -- gosterge.\n")
     print (f"{'manufacturer':<10}{'part':>6}{'GT':>6}{'candidate':>7}{'candidate/GT':>9}{'RECALL':>9}"
-    f"{'JSON tepe':>11}   gosterge")
+    f"{'JSON vertex':>11}   gosterge")
     R ={}
     for u in sorted (SON ,key =lambda x :-SON [x ][1 ]):
         h ,n ,na ,jt =SON [u ]
@@ -167,7 +167,7 @@ def main ():
         json .dump ({"referans_eslestirilmis":{"WEI":{"step":0.8764 ,"json":0.8858 },
         "PXC":{"step":0.8450 ,"json":0.2999 }},
         "eslestirilmemis_gosterge":R ,"wei_benzeri":ok ,
-        "uyari":"tanidiklikla karisik; tek basina evidence degil"},
+        "uyari":"tanidiklikla karisik; single basina evidence not"},
         f ,indent =1 ,ensure_ascii =False )
     print ("receipt -> results/f2_11b_stepsiz_recall.json")
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""R1: ACIDAKI ~90 DERECE POPULASYONU -- kim, nerede, neden?
+"""R1: ACIDAKI ~90 DERECE POPULASYONU -- kim, nerede, why?
 
 R0 bulgusu: angle medyani 0.00 deg (i.e. cogunlukla MUKEMMEL) but %90'lik dilim 89.73 and maksimum
 90.00. Acidan kaybedilen 162 noktanin %66'si 45-90 between and 90'da YIGILIYOR.
@@ -30,7 +30,7 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 def main ():
     with open ("results/r0_kayit.pkl","rb")as f :
         K =pickle .load (f )
-    ac =np .array ([e ["aci"]for e in K ])
+    ac =np .array ([e ["angle"]for e in K ])
     kotu =ac >10.0 
     dik =ac >45.0 
     print (f"{len (K )} eslesme | aci>10: {int (kotu .sum ())} | aci>45: {int (dik .sum ())} "
@@ -60,11 +60,11 @@ def main ():
         print ("  "+alan +": "+" | ".join (
         f"{k } {c .get (k ,0 )}/{t [k ]} ({c .get (k ,0 )/t [k ]:.1%})"for k in sorted (t )))
 
-    print ("\n4) DIK OLANLARIN YANAL MESAFESI farkli mi?")
+    print ("\n4) DIK OLANLARIN YANAL MESAFESI different mi?")
     ya =np .array ([e ["lateral"]for e in K ])
     print (f"  dik olanlar   : medyan {np .median (ya [dik ]):.2f}mm (n={int (dik .sum ())})")
     print (f"  digerleri     : medyan {np .median (ya [~dik ]):.2f}mm (n={int ((~dik ).sum ())})")
-    print ("  -> yanali da kotuyse same kok neden; iyiyse SADECE axis sorunu")
+    print ("  -> yanali da kotuyse same kok why; iyiyse SADECE axis sorunu")
 
     print ("\n5) GT EKSENLERI: dik-eslesmelerde GT ekseni ozel mi?")
     with open ("results/_u4_der.pkl","rb")as f :
@@ -84,14 +84,14 @@ def main ():
         f"{np .median (eks_iyi ):.3f}")
         print ("  -> 1.0'a yakin = parcadaki tum CP'ler same yone bakiyor")
 
-    print ("\n6) TEK PARCA ORNEGI (en cok dik eksenli part)")
+    print ("\n6) TEK PARCA ORNEGI (at most dik eksenli part)")
     if etkilenen :
         pid =max (etkilenen ,key =lambda p :etkilenen [p ][1 ])
         alt =[e for e in K if e ["pid"]==pid ]
         r =DER .get (pid )
         print (f"  {pid } | {etkilenen [pid ][1 ]}/{etkilenen [pid ][0 ]} dik | "
         f"regime {alt [0 ]['regime']} | diag {alt [0 ]['diag']:.0f}mm")
-        print (f"  acilar: {sorted (round (e ['aci'],1 )for e in alt )}")
+        print (f"  acilar: {sorted (round (e ['angle'],1 )for e in alt )}")
         if r is not None and len (r ["Gd"]):
             print (f"  GT eksenleri (ilk 4): {np .round (r ['Gd'][:4 ],3 ).tolist ()}")
             print (f"  tahmin eksenleri (ilk 4): {np .round (r ['Pd'][:4 ],3 ).tolist ()}")

@@ -666,7 +666,7 @@ op_cache_dir =None ,mc_dropout =0 ):
             if _m .__class__ .__name__ =="Dropout":
                 _m .train ()
                 _n_do +=1 
-        assert _n_do >0 ,"MC dropout istendi ama modelde Dropout katmani YOK"
+        assert _n_do >0 ,"MC dropout istendi but modelde Dropout katmani YOK"
     with torch .no_grad ():
         if _mc >0 :
             _gir =_model_input (ops ,meta )

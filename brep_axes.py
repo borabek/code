@@ -7,7 +7,7 @@ ray-probe hole koni acisindan (atan(r/L) ~ 11 derece) more keskin olamaz, normal
 only silindirik kanallarda tanimli (300 candidate "silindirik not" diye reddedildi).
 Oysa STEP dosyasi silindir yuzeyleri ZATEN analitik tasiyor -- prediction etmeye gerek absent.
 
-WHY gmsh, neden regex DEGIL: first deneme STEP metnini regex with okudu and CP'den silindire
+WHY gmsh, why regex DEGIL: first deneme STEP metnini regex with okudu and CP'den silindire
 distance medyan 21mm / %75'i 111mm output. Sebep MONTAJ DONUSUMU: AXIS2_PLACEMENT_3D koordinatlari
 parcanin YEREL cercevesinde yazili. gmsh'in OCC cekirdegi donusumleri uygular; dogrulandi:
 3211485 for global bbox [0,0,0]-[8.2,74.1,42.2], meshin bbox'i with BIREBIR same.

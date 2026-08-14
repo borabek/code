@@ -116,5 +116,5 @@ for sp in ("part-out","family-out"):
         go_any |=ok 
         print (f"  {sp :11s} {kind :4s}: dALL {dA :+.4f} | dWEI {dW :+.4f} | dPXC {dP :+.4f}  -> {'GO'if ok else 'no'}")
 json .dump (res ,open ("results/p1_embed_eval.json","w"),indent =1 )
-print (f"\nKARAR: {'EMBEDDING KOLU ACIK (GO)'if go_any else 'GO SAGLANMADI -> embedding kolunu KAPAT (kullanici kurali)'}")
+print (f"\nKARAR: {'EMBEDDING KOLU OPEN (GO)'if go_any else 'GO SAGLANMADI -> embedding kolunu KAPAT (kullanici kurali)'}")
 print ("-> results/p1_embed_eval.json")

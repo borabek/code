@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """CC-A: each GT acikligina 6000-vertex mesh'te KAC VERTEX dusuyor? (regime ayrimli)
 
-SORU: very-CP parcalarda candidate uretimi neden yetmiyor -- network mi kor, otherwise threshold mi IMKANSIZ?
+SORU: very-CP parcalarda candidate uretimi why yetmiyor -- network mi kor, otherwise threshold mi IMKANSIZ?
 
 BU OLCUM MODEL KULLANMAZ. Sadece geometri: GT acikliginin cevresinde kac mesh vertex'i VAR?
 Bu number min_v esiginin altindaysa, segmentasyon MUKEMMEL olsa bile candidate olusamaz -- because

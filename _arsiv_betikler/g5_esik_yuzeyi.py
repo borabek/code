@@ -79,9 +79,9 @@ def main ():
         for r in alt :
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             v =SKOR [b ].get (r ["pid"])
-            rj ="cok"if r ["n"]>=8 else "dusuk"
-            c =carpan_cok if (rj =="cok"and carpan_cok is not None )else carpan 
-            t =taban_cok if (rj =="cok"and taban_cok is not None )else baseline 
+            rj ="very"if r ["n"]>=8 else "low"
+            c =carpan_cok if (rj =="very"and carpan_cok is not None )else carpan 
+            t =taban_cok if (rj =="very"and taban_cok is not None )else baseline 
             if v is not None :
                 s ,P_ ,Pd_ =v # P_/Pd_ pose duzeltmesi UYGULANMIS halde onbellekte
                 k =(s >=c *max (float (s .max ()),1e-9 ))&(s >=t )

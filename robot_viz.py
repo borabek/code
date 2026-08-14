@@ -2,7 +2,7 @@
 """ROBOT GORSELLESTIRME -- ince terminallerde GERCEKTEN gorunen GLB.
 
 WHY BU ARAC (2026-07-28 FBI):
-  Onceki denemeler basarisizdi. Kok neden: trimesh GLB'yi MATERYALSIZ yaziyor (only COLON_0 vertex
+  Onceki denemeler basarisizdi. Kok why: trimesh GLB'yi MATERYALSIZ yaziyor (only COLON_0 vertex
   rengi) -> alphaMode tanimsiz -> Windows 3D Viewer govdeyi OPAK render ediyor. "Seffaf body" never
   seffaf olmadi and isaretciler govdenin inside kayboldu. Terminaller 8mm INCE, CP'ler full ortasinda.
 
@@ -339,7 +339,7 @@ def visualize (pid ,models =None ,dev =None ,mode ="robot_only"):
 
     n_out =sum (0 if is_inside (body ,t )else 1 for t in tips )
     print (f"   visibility: {n_out }/{len (tips )} needle tips outside body"
-    +(""if n_out ==len (tips )else "   <-- UYARI: icerde kalan var"))
+    +(""if n_out ==len (tips )else "   <-- UYARI: icerde kalan present"))
 
     for a ,b ,_ ,_ in (pairs if draw_gt else []):# mavi eslesme cizgisi
         v =Gm [b ]-P [a ];n =float (np .linalg .norm (v ))

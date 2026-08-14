@@ -201,7 +201,7 @@ def main ():
         f"{max (v ['f1_tavani']for v in out .values ()):.4f})")
     json .dump ({"damga":makbuz_hash .damga (),"n_gt":n_gt ,"n_parca":n_parca ,
     "sonuc":out ,
-    "not":"Mesh tepeleri p_pos ile filtrelendi + YEREL NORMAL direction "
+    "not":"Mesh tepeleri p_pos with filtrelendi + YEREL NORMAL direction "
     "kaynagi eklendi. ISARETLI aci. D7 brand-disi. TAVAN."},
     open ("results/tavan_080_dagitilabilir.json","w"),indent =1 )
     print ("receipt -> results/tavan_080_dagitilabilir.json")

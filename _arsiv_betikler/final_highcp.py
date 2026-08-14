@@ -56,5 +56,5 @@ for lam in [0.0 ,1.5 ]:
         hc_tp +=int ((yexp [p ][keep ]==1 ).sum ());hc_nk +=len (keep );hc_gt +=N 
     hr =hc_tp /max (hc_gt ,1 )
     o =f1 (nh_tp +hc_tp ,nh_nk +hc_nk ,nh_gt +hc_gt )
-    tag ="sadece expanded-gate"if lam ==0 else f"expanded-gate + lattice(lam{lam })"
+    tag ="only expanded-gate"if lam ==0 else f"expanded-gate + lattice(lam{lam })"
     print (f"[{tag }] high-CP recall {hr :.3f} F1 {f1 (hc_tp ,hc_nk ,hc_gt )[2 ]:.3f} | OVERALL metadata P{o [0 ]:.3f} R{o [1 ]:.3f} F1 {o [2 ]:.3f} | 0.80 {'GECILDI'if o [2 ]>=0.80 else 'kaldi '+str (round (0.80 -o [2 ],3 ))}")

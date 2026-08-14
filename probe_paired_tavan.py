@@ -72,7 +72,7 @@ def main ():
     print (f"A={A_DIZ } ({len (pa )} part)  B={B_DIZ } ({len (pb )} part)")
     print (f"ORTAK: {len (ortak )} part -- kiyas YALNIZ bunlar uzerinde\n")
     if not ortak :
-        sys .exit ("ortak part yok")
+        sys .exit ("ortak part none")
     kay =kayitlar (ortak )
     out ={}
     print (f"{'corpus':<26}{'GT':>7}{'konum':>9}{'YONLU':>9}"
@@ -94,9 +94,9 @@ def main ():
     f"{b ['secenek_parca']/max (a ['secenek_parca'],1e-9 ):.2f}x")
     json .dump ({"on":ON ,"n_ortak":len (ortak ),"A":A_DIZ ,"B":B_DIZ ,
     "sonuc":out ,
-    "not":"ESLI kiyas: yalniz IKI korpusta da bulunan parts. "
+    "not":"ESLI kiyas: only IKI korpusta da bulunan parts. "
     "Yarim korpusu tam korpusla kiyaslamak alt cluster "
-    "yanliligi uretir; bu measurement onu kaldirir. D7'ye "
+    "yanliligi uretir; this measurement onu kaldirir. D7'ye "
     "BAKILMADI."},
     open (f"results/esli_tavan_{ON }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/esli_tavan_{ON }.json")

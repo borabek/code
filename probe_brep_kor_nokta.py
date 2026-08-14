@@ -63,6 +63,6 @@ with open ("results/p2_kor_nokta_pidler.txt","w")as f :
         f .write (p +"\n")
 json .dump ({"n_kor":len (kor ),"ilk60":[list (x )for x in kor [:60 ]],
 "not":"B-rep oto-etiketinin eslestiremedigi parts -- insan etiketi "
-"ONCELIGI. Otomatigin zaten yaptigi yere emek harcanmaz."},
+"ONCELIGI. Otomatigin already yaptigi yere emek harcanmaz."},
 open ("results/p2_kor_nokta.json","w"),indent =1 )
 print ("-> results/p2_kor_nokta_pidler.txt (first 60)")

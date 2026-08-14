@@ -48,7 +48,7 @@ EKSEN_TOL =40.0
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])])
 
 
 def dogru_maske (d ):
@@ -168,7 +168,7 @@ def main ():
 
     json .dump ({"dizin":os .environ ["P6_DIZIN"],"cluster":KUME ,"brand":out ,
     "not":"S7 cokus teshisi. `havuzda` = GT'nin kabul kutusunda "
-    "en az bir secenegi olma orani (pool tavani). "
+    "en az a secenegi olma orani (pool tavani). "
     "`ilk10/ilk50` = DOGRU secenegin part icinde ilk 10/50'ye "
     "girme orani. `sira%` = dogru secenegin ortalama sira "
     "yuzdeligi (0 = tepe). D7'ye BAKILMADI."},

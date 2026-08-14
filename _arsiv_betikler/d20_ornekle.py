@@ -39,7 +39,7 @@ def main ():
         if n_ce ==0 :
             continue 
         mfg =ad .split (".",1 )[0 ]
-        rec_ .append ({"ad":ad ,"mfg":mfg ,"n_ce":n_ce ,"n_v":len (L ),
+        rec_ .append ({"name":ad ,"mfg":mfg ,"n_ce":n_ce ,"n_v":len (L ),
         "ratio":n_ce /max (len (L ),1 )})
     print (f"okunabilen {len (rec_ )}")
     # DUSUK 'ratio' = mouth zayif yakalanmis -> ONCELIKLI
@@ -54,16 +54,16 @@ def main ():
         sec +=lst [:pay [m ]]
     os .makedirs (HEDEF ,exist_ok =True )
     for k in sec :
-        h =os .path .join (HEDEF ,k ["ad"])
+        h =os .path .join (HEDEF ,k ["name"])
         if not os .path .exists (h ):
-            shutil .copytree (os .path .join (KAYNAK ,k ["ad"]),h )
+            shutil .copytree (os .path .join (KAYNAK ,k ["name"]),h )
     d =collections .Counter (k ["mfg"]for k in sec )
     print (f"SECILDI {len (sec )} part -> {HEDEF }")
     print (f"brand dagilimi: {dict (d )}")
     print (f"secilen medyan mouth orani {np .median ([k ['ratio']for k in sec ]):.4f} | "
     f"TUM corpus medyani {np .median ([k ['ratio']for k in rec_ ]):.4f}")
     json .dump ({"n":len (sec ),"brand":dict (d ),"N_hedef":N ,
-    "criterion":"mouth orani (boyanan tepe / toplam tepe) DUSUK oncelikli"},
+    "criterion":"mouth orani (boyanan vertex / total vertex) DUSUK oncelikli"},
     io .open ("results/d20_ornek.json","w",encoding ="utf-8"),indent =1 )
 
 

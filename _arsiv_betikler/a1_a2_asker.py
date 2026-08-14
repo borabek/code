@@ -18,7 +18,7 @@ import os ,sys ,json ,copy
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -98,7 +98,7 @@ def main ():
 
     # ---------------- A2: min_v 2/3/4, calisma mantigiyla (router + promote) -----------------
     def score (mv ,add_avg =False ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         v1_tp =n_tp =0 # eslesen GERCEKLERIN kaci single-oy (mekanizma kaniti)
         for r in cache :
             plist =r ["pbs"]+[sum (r ["pbs"])/len (r ["pbs"])]if add_avg else r ["pbs"]
@@ -128,7 +128,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (G ))):
                     if d_ >r ["tol"]or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            t_ =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            t_ =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=t_ ;agg [k ][1 ]+=len (Q )-t_ ;agg [k ][2 ]+=len (G )-t_ 
         out ={}
         for k ,(T ,Fp ,Fn )in agg .items ():
@@ -139,16 +139,16 @@ def main ():
         return out 
 
     print ("=== A2 min_v izgara kenari (SEVIYE sismis, DELTA gecerli) ===")
-    print (f"{'min_v':>7}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}")
+    print (f"{'min_v':>7}{'low':>9}{'very':>9}{'agirlikli':>11}")
     res ={}
     for mv in (2 ,3 ,4 ):
         r =score (mv );res [mv ]=r 
         mk ="  <- urunde"if mv ==4 else ""
-        print (f"{mv :>7}{r ['dusuk']:>9.4f}{r ['cok']:>9.4f}{r ['w']:>11.4f}{mk }",flush =True )
+        print (f"{mv :>7}{r ['low']:>9.4f}{r ['very']:>9.4f}{r ['w']:>11.4f}{mk }",flush =True )
     best =max (res .items (),key =lambda kv :kv [1 ]["w"])
     d =best [1 ]["w"]-res [4 ]["w"]
     print (f"\nen iyi min_v {best [0 ]} -> fark {d :+.4f}")
-    print (f"KAPI (>= +0.01): {'GECTI'if d >=0.01 and best [0 ]!=4 else 'OLU / degisiklik yok'}")
+    print (f"KAPI (>= +0.01): {'GECTI'if d >=0.01 and best [0 ]!=4 else 'OLU / degisiklik absent'}")
     # ---------------- A5: UZLASMA YUKSELTICI (5. uye = mean harita) ----------------------
     # K2: gate'in oldurdugu gercekler TEK-OY (votes AUC 0.86). Ortalama haritanin adaylari,
     # sinirda-real acikliklari 1 oydan 2 oya removes; single-model gurultusu ortalamada kaybolur
@@ -157,10 +157,10 @@ def main ():
     print (chr (10 )+"=== A5 uzlasma yukseltici (4 uye vs 4+mean) ===")
     r4 =res [4 ]
     r5 =score (4 ,add_avg =True )
-    print (f"{'arm':>16}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}{'tek-oy gercek':>15}")
-    print (f"{'4 uye (urun)':>16}{r4 ['dusuk']:>9.4f}{r4 ['cok']:>9.4f}{r4 ['w']:>11.4f}"
+    print (f"{'arm':>16}{'low':>9}{'very':>9}{'agirlikli':>11}{'single-oy real':>15}")
+    print (f"{'4 uye (urun)':>16}{r4 ['low']:>9.4f}{r4 ['very']:>9.4f}{r4 ['w']:>11.4f}"
     f"{100 *r4 ['v1_share']:>14.0f}%")
-    print (f"{'4+ORT (5 uye)':>16}{r5 ['dusuk']:>9.4f}{r5 ['cok']:>9.4f}{r5 ['w']:>11.4f}"
+    print (f"{'4+ORT (5 uye)':>16}{r5 ['low']:>9.4f}{r5 ['very']:>9.4f}{r5 ['w']:>11.4f}"
     f"{100 *r5 ['v1_share']:>14.0f}%")
     d5 =r5 ["w"]-r4 ["w"]
     print (chr (10 )+f"  A5 fark: {d5 :+.4f}  (mekanizma: tek-oy gercek payi "

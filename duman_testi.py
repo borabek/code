@@ -51,7 +51,7 @@ def main ():
     else :
         from big_arbiter import eligible 
         E =eligible ()
-        assert E ,"korpusta uygun part yok"
+        assert E ,"korpusta uygun part none"
         stp =E [0 ][3 ]
     print (f"part: {os .path .basename (stp )}")
 
@@ -105,7 +105,7 @@ def main ():
     P =np .array ([x ["point"]for x in c ],float )
     D =np .array ([x ["direction"]for x in c ],float )
     assert len (P )and np .isfinite (P ).all (),"CP konumlari gecersiz"
-    assert np .allclose (np .linalg .norm (D ,axis =1 ),1.0 ,atol =1e-3 ),"yonler birim degil"
+    assert np .allclose (np .linalg .norm (D ,axis =1 ),1.0 ,atol =1e-3 ),"yonler birim not"
     print (f"[5/5] URUN CIKTISI: {len (P )} CP")
     for i in range (min (3 ,len (P ))):
         print (f"      CP{i }  ({P [i ,0 ]:8.2f},{P [i ,1 ]:8.2f},{P [i ,2 ]:8.2f})  "

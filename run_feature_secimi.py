@@ -32,7 +32,7 @@ NMS =5.0 ;KURAL =("goreli",0.85 ,0.20 )
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (np .float32 )
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (np .float32 )
 
 def yap ():
     return HistGradientBoostingClassifier (max_iter =ITER ,learning_rate =LR ,
@@ -51,7 +51,7 @@ def main ():
         d ["y"]=np .asarray (d ["y"],int );d ["_M"]=temel (d )
     n_sut =data_ [0 ]["_M"].shape [1 ]
     print (f"{len (data_ )} part | {n_sut } sutun",flush =True )
-    # KAT TOHUMU (2026-08-13). Ilk kosu +0.0097 verdi but single tohumluydu
+    # KAT TOHUMU (2026-08-13). Ilk run +0.0097 verdi but single tohumluydu
     # and noise bandindaydi. `Y7_TOHUM` with fold bolunmesi degistirilip
     # same arm tekrarlanir; three tohumda da pozitifse karar verilebilir.
     _tohum =int (os .environ .get ("Y7_TOHUM","1"))

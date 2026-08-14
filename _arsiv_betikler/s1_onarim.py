@@ -39,7 +39,7 @@ def onar_govde_ici (mesh ,p ,d ,maks_mm =MAKS_TASIMA_MM ):
     from cp_geometry import is_inside ,seat_to_mouth 
     try :
         if not is_inside (mesh ,p ):
-            return p ,False ,"zaten disarida"
+            return p ,False ,"already disarida"
         new_ ,off =seat_to_mouth (mesh ,p ,d )
         new_ =np .asarray (new_ ,float )
         if not np .isfinite (new_ ).all ()or np .linalg .norm (new_ -p )>maks_mm :
@@ -69,7 +69,7 @@ def onar_merkezle (mesh ,p ,d ,maks_mm =MAKS_MERKEZLEME_MM ,n_dirs =24 ):
         u =_birim (np .cross (d ,a ));v =_birim (np .cross (d ,u ))
         ic ,ort =mouth_width (mesh ,p ,d ,n_dirs =n_dirs )
         if not (0 <ic <IC_CAP_MIN ):
-            return p ,False ,"duvara yapisik degil"
+            return p ,False ,"duvara yapisik not"
         from cp_geometry import ray_hits 
         aci =np .linspace (0 ,2 *np .pi ,n_dirs ,endpoint =False )
         mes ,direction =[],[]
@@ -107,10 +107,10 @@ def onar_yon_cevir (mesh ,p ,d ,ileri_min =ILERI_MIN ):
     d =_birim (d )
     ileri =acik (d )
     if not np .isfinite (ileri )or ileri >=ileri_min :
-        return d ,False ,"on zaten acik"
+        return d ,False ,"ten already open"
     geri =acik (-d )
     if np .isfinite (geri )and geri <ileri_min :
-        return d ,False ,"iki taraf kapali"
+        return d ,False ,"two taraf closed"
     if (not np .isfinite (geri ))or geri >ileri :
         return -d ,True ,f"cevrildi ({ileri :.1f} -> {geri :.1f}mm)"
     return d ,False ,"cevirmek iyilestirmiyor"

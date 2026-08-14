@@ -52,7 +52,7 @@ lo ,hi =T2 .ga (dt ,dc ,gg2 )
 print (f"\nDURUST: {f1w (dt ):.4f} -> {f1w (dc ):.4f}  ({f1w (dc )-f1w (dt ):+.4f})  GA[{lo :+.4f},{hi :+.4f}]")
 gecti =(f1w (dc )-f1w (dt ))>=0.01 and lo >0 
 print (f"KILL: tespit +0.01 VE GA>0 -> {'GECTI'if gecti else 'GECMEDI'}")
-json .dump ({"tam":{str (k ):{"tespit":v [0 ],"robot":v [1 ]}for k ,v in TAM .items ()},
+json .dump ({"full":{str (k ):{"tespit":v [0 ],"robot":v [1 ]}for k ,v in TAM .items ()},
 "durust_taban":f1w (dt ),"durust_aday":f1w (dc ),"ga":[lo ,hi ],
 "gecti":bool (gecti )},io .open ("results/k3_recall_tabani.json","w"),indent =1 )
 print ("receipt -> results/k3_recall_tabani.json")

@@ -26,7 +26,7 @@ def donustur (X ,zskor ="ab"):
     X =np .asarray (X ,float )
     if zskor =="hepsi":
         return wire_gate .within_part (X ,"zskor")
-    if zskor =="yok":
+    if zskor =="none":
         return X 
     if zskor =="sira":
     # PARCA-ICI SIRA (yuzdelik). Z-skor parcanin ORTALAMA and SAPMASINA

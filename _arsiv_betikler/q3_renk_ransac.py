@@ -24,7 +24,7 @@ from q2_renk_alignment import parse ,yerel_silindirler ,kabsch
 
 
 def ransac (lc ,lr ,la ,gc ,gr ,ga ,tol =0.5 ,iters =4000 ,rng =None ,karistir =False ):
-    """Yaricap-uyumlu ciftler on RANSAC rijit donusum. Doner: (R,t,ic_nokta,toplam_cift)."""
+    """Yaricap-uyumlu ciftler ten RANSAC rijit donusum. Doner: (R,t,ic_nokta,toplam_cift)."""
     rng =rng or np .random .RandomState (0 )
     pairs =[(i ,j )for i in range (len (lc ))for j in range (len (gc ))
     if abs (lr [i ]-gr [j ])<0.01 ]
@@ -60,7 +60,7 @@ def main ():
     rng =np .random .RandomState (0 )
     sel =[files [i ]for i in rng .choice (len (files ),min (n ,len (files )),replace =False )]
     print (f"{len (sel )} parcada RANSAC hizalama\n")
-    print (f"{'part':<14}{'cift':>6}{'ic-nokta':>10}{'ratio':>7}{'artik':>10}"
+    print (f"{'part':<14}{'double':>6}{'ic-point':>10}{'ratio':>7}{'residual':>10}"
     f"{'NULL ic':>9}{'NULL ratio':>11}")
     iyi =nul =tot =0 
     rec_ =[]
@@ -70,7 +70,7 @@ def main ():
             C ,A ,R_ =B .cylinders (f )
             loc =yerel_silindirler (parse (f ))
             if len (C )<6 or len (loc )<6 :
-                print (f"{pid :<14}{'-':>6}{'az silindir':>10}")
+                print (f"{pid :<14}{'-':>6}{'few silindir':>10}")
                 continue 
             lc =np .array ([x [1 ]for x in loc ]);lr =np .array ([x [3 ]for x in loc ])
             la =np .array ([x [2 ]for x in loc ])
@@ -93,14 +93,14 @@ def main ():
         iyi +=ok ;nul +=nok 
         print (f"{pid :<14}{np_ :>6}{ic :>10}{ratio :>7.2f}{art :>10}{icn :>9}{noran :>11.2f}"
         f"{'  <- GECTI'if ok else ''}",flush =True )
-        rec_ .append ({"pid":pid ,"cift":np_ ,"ic":ic ,"ratio":ratio ,
+        rec_ .append ({"pid":pid ,"double":np_ ,"ic":ic ,"ratio":ratio ,
         "null_ic":icn ,"null_oran":noran ,"gecti":bool (ok )})
     o =iyi /max (tot ,1 );no =nul /max (tot ,1 )
     print (f"\nGERCEK: {iyi }/{tot } ({o :.3f}) hizalandi")
     print (f"NULL  : {nul }/{tot } ({no :.3f})   <- bu da yuksekse test DEGERSIZ")
     kar ="AC"if (o >=0.60 and no <o -0.3 )else "KAPAT"
     print (f"\nKILL: gercek >=0.60 VE null gercekten >=0.3 dusuk olmali -> {kar }")
-    json .dump ({"n":tot ,"gercek":o ,"null":no ,"karar":kar ,"kayit":rec_ },
+    json .dump ({"n":tot ,"real":o ,"null":no ,"karar":kar ,"kayit":rec_ },
     open ("results/q3_renk_ransac.json","w"),indent =1 )
     print ("receipt -> results/q3_renk_ransac.json")
 

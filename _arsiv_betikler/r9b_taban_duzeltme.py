@@ -220,7 +220,7 @@ def main ():
         for r in DER :
             d_ =PARCA .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d_ is None :
                 P =np .zeros ((0 ,3 ));Pn =np .zeros ((0 ,3 ))
             else :
@@ -244,7 +244,7 @@ def main ():
     print (f"dagitilan selector bu tabandan 0.6181'e cikardi (+{0.6181 -b_rob :.4f}); "
     f"ISARETLI ceiling 0.6580")
     fn =lambda rows :f1w ([q for _ ,q in rows ])-f1w ([p for p ,_ in rows ])
-    print (f"\n{'oznitelik':<8}{'marj':>6}{'robot':>10}{'d':>9}{'GA':>22}{'tespit':>10}")
+    print (f"\n{'feature':<8}{'marj':>6}{'robot':>10}{'d':>9}{'GA':>22}{'tespit':>10}")
     SON ={}
     for ad in ("ESKI","YENI"):
         for marj in (0.02 ,0.05 ,0.10 ):
@@ -252,21 +252,21 @@ def main ():
             _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (r0 ,ra )),gg ,fn ,n =1500 )
             print (f"{ad :<8}{marj :>6.2f}{f1w (ra ):>10.4f}{f1w (ra )-b_rob :>+9.4f}"
             f"   [{lo :+.4f},{hi :+.4f}]{f1w (da ):>10.4f}")
-            SON [f"{ad }_{marj }"]={"oznitelik":ad ,"marj":marj ,"robot":f1w (ra ),
+            SON [f"{ad }_{marj }"]={"feature":ad ,"marj":marj ,"robot":f1w (ra ),
             "d_robot":f1w (ra )-b_rob ,"ga":[lo ,hi ],
             "tespit":f1w (da )}
-    e =max ((v for v in SON .values ()if v ["oznitelik"]=="ESKI"),key =lambda v :v ["d_robot"])
-    y =max ((v for v in SON .values ()if v ["oznitelik"]=="YENI"),key =lambda v :v ["d_robot"])
+    e =max ((v for v in SON .values ()if v ["feature"]=="ESKI"),key =lambda v :v ["d_robot"])
+    y =max ((v for v in SON .values ()if v ["feature"]=="YENI"),key =lambda v :v ["d_robot"])
     print (f"\nESKI en iyi {e ['robot']:.4f} ({e ['d_robot']:+.4f}) | "
     f"YENI en iyi {y ['robot']:.4f} ({y ['d_robot']:+.4f}) | "
     f"FARK {y ['d_robot']-e ['d_robot']:+.4f}")
     val_ =(y ["d_robot"]-e ["d_robot"])>=0.01 
-    print (f"\nHUKUM: {'R10 HAK EDILDI -- training korpusunda ISARETLI oznitelikle yeniden turet ve dagit'if val_ else 'signed oznitelik farki < 0.01 -- R10 kosulmaz'}")
+    print (f"\nHUKUM: {'R10 HAK EDILDI -- training korpusunda ISARETLI oznitelikle yeniden turet and dagit'if val_ else 'signed feature farki < 0.01 -- R10 kosulmaz'}")
     with io .open ("results/r9b_taban_duzeltme.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,
         "auc":{a :float (roc_auc_score (LY ,o ))for a ,o in OOF .items ()},
-        "tarama":SON ,"eski":e ,"yeni":y ,
-        "fark":y ["d_robot"]-e ["d_robot"],"deger":bool (val_ )},f ,indent =1 )
+        "tarama":SON ,"old":e ,"new":y ,
+        "difference":y ["d_robot"]-e ["d_robot"],"value":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r9b_taban_duzeltme.json")
 
 

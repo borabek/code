@@ -20,7 +20,7 @@ logging .basicConfig (level =logging .ERROR )
 
 
 def main (argv =None ):
-    ap =argparse .ArgumentParser (description ="infer-once decode-many threshold "
+    ap =argparse .ArgumentParser (description ="infer-first decode-many threshold "
     "sweep per checkpoint")
     ap .add_argument ("--gt-dir",required =True ,dest ="gt_dir")
     ap .add_argument ("--extra-source",action ="append",default =[],

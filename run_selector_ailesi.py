@@ -53,7 +53,7 @@ def oku (on ):
         if not (f .startswith (on +"_")and f .endswith (".npz")):
             continue 
         z =np .load (f"{OZ }/{f }")
-        kay =np .asarray (z ["kaynak"],int )
+        kay =np .asarray (z ["source"],int )
         m =np .isin (kay ,KAYNAKLAR )
         if int (m .sum ())<2 :
             continue 
@@ -183,7 +183,7 @@ def main ():
         pickle .dump (egitilmis ,f )
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"en_iyi":iyi ,
     "urun":0.2029 ,
-    "not":"Ayni pool (B-rep + tanimlayici), ayni etiket; TEK DEGISKEN "
+    "not":"Ayni pool (B-rep + tanimlayici), same etiket; TEK DEGISKEN "
     "siniflandirici. Esik each model for D6'da ayri secildi. "
     "D7 brand-disi, TAM ZINCIR, MIKRO."},
     open ("results/secici_ailesi.json","w"),indent =1 )

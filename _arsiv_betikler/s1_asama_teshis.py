@@ -26,7 +26,7 @@ os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ ["WG_FIZ_FEATS"]="1"
 os .environ ["WG_TOPO"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-ASAMALAR =["tez_normali","channel_axis","yuvarlanmis","normal_kovaryans","brep_eksen","son"]
+ASAMALAR =["tez_normali","channel_axis","yuvarlanmis","normal_kovaryans","brep_eksen","last"]
 
 
 def main ():
@@ -73,14 +73,14 @@ def main ():
             continue 
             # Her IZ kaydini EN YAKIN GT'ye bagla (clustering sonrasi CP listesiyle not, iz noktasiyla)
         for z in iz :
-            q =z .get ("nokta")
+            q =z .get ("point")
             if q is None :
                 continue 
             dd =np .linalg .norm (G -q ,axis =1 )
             b =int (np .argmin (dd ))
             if dd [b ]>max (3.0 ,0.06 *float (r ["diag"])):
                 continue # GT'ye eslesmeyen candidate -- direction dogrulugu tanimsiz
-            kay ={"pid":r ["pid"],"mesafe":float (dd [b ])}
+            kay ={"pid":r ["pid"],"distance":float (dd [b ])}
             for a in ASAMALAR :
                 v =z .get (a )
                 kay [a ]=(float (np .degrees (np .arccos (np .clip (
@@ -88,7 +88,7 @@ def main ():
             KAY .append (kay )
 
     print (f"\n{len (KAY )} candidate GT'ye eslendi\n")
-    print (f"{'asama':<20}{'var':>7}{'<=10 deg':>10}{'medyan':>9}{'>45 deg':>9}")
+    print (f"{'stage':<20}{'present':>7}{'<=10 deg':>10}{'medyan':>9}{'>45 deg':>9}")
     ozet ={}
     for a in ASAMALAR :
         v =np .array ([k [a ]for k in KAY if k [a ]is not None ])
@@ -99,20 +99,20 @@ def main ():
         "medyan":float (np .median (v )),"kirkbes_ustu":float ((v >45 ).mean ())}
         print (f"{a :<20}{len (v ):>7}{(v <=10 ).mean ():>10.1%}{np .median (v ):>9.2f}{(v >45 ).mean ():>9.1%}")
 
-    print ("\nORACLE: her CP icin ASAMALARIN EN IYISI secilseydi")
+    print ("\nORACLE: each CP for ASAMALARIN EN IYISI secilseydi")
     en_iyi =[]
     for k in KAY :
         v =[k [a ]for a in ASAMALAR if k [a ]is not None ]
         if v :
             en_iyi .append (min (v ))
     en_iyi =np .array (en_iyi )
-    last_ =np .array ([k ["son"]for k in KAY if k ["son"]is not None ])
+    last_ =np .array ([k ["last"]for k in KAY if k ["last"]is not None ])
     print (f"  su anki 'son'      : {(last_ <=10 ).mean ():.1%} <=10 deg")
     print (f"  ORACLE (en iyi)    : {(en_iyi <=10 ).mean ():.1%} <=10 deg  "
     f"(+{((en_iyi <=10 ).mean ()-(last_ <=10 ).mean ())*100 :.1f} puan)")
 
-    print ("\nSON asama KOTUYKEN (>45 deg) hangi asama IYIYDI?")
-    kotu =[k for k in KAY if k ["son"]is not None and k ["son"]>45 ]
+    print ("\nSON stage KOTUYKEN (>45 deg) hangi stage IYIYDI?")
+    kotu =[k for k in KAY if k ["last"]is not None and k ["last"]>45 ]
     print (f"  {len (kotu )} kotu CP")
     for a in ASAMALAR [:-1 ]:
         v =[k [a ]for k in kotu if k [a ]is not None ]

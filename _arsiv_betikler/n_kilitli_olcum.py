@@ -5,7 +5,7 @@ IKI DEFECT DUZELTILIYOR:
  1) `geometry_key` only BBOX olculeri + log2 kose/face kovalari kullaniyor. Ayni anahtardaki
     some parcalarin yuzeyi birkac mm different olabiliyor -- i.e. gruplama hem KABA hem de real
     mesh kimligi not.
- 2) Mevcut 100 parcalik cluster residual holdout DEGIL: J and L2 kararlari onun on secildi, and
+ 2) Mevcut 100 parcalik cluster residual holdout DEGIL: J and L2 kararlari onun ten secildi, and
     denetime according to ~40 parcasi SEGMENTASYON EGITIM geometrileriyle cakisiyor. Yani "tamamen
     gorulmemis geometri" iddiasi kanitlanmis not.
 
@@ -17,7 +17,7 @@ KILITLI KUME KURALI: test grubu, SU UCUNUN HICBIRIYLE same geometri grubunu payl
     - segmentasyon training + val (91 part)
     - gate training havuzu
     - kalibrasyon/karar alinan each sey
-Cikti: results/locked_split_v2.json  (a more on AYAR YAPILMAZ)
+Cikti: results/locked_split_v2.json  (a more ten AYAR YAPILMAZ)
 """
 import os ,sys ,json ,glob 
 import numpy as np 
@@ -144,8 +144,8 @@ def main ():
     # gate egitimi this gruplarin HICBIRINI gormeyecek
     json .dump ({
     "created":"2026-07-31",
-    "kural":("Bu cluster UZERINDE AYAR YAPILMAZ: threshold secimi, ozellik secimi, model secimi, "
-    "hicbiri. Yalnizca TEK ATISLIK final measurement. Gate egitimi ve kalibrasyon bu "
+    "rule":("Bu cluster UZERINDE AYAR YAPILMAZ: threshold secimi, feature secimi, model secimi, "
+    "none of them. Yalnizca TEK ATISLIK final measurement. Gate egitimi and kalibrasyon this "
     "geometri gruplarinin hicbirini gormemeli."),
     "anahtar":"keskin geometri (bbox 0.5mm + B-rep silindir/duzlem imzasi + kovalar)",
     "n_test":len (test ),

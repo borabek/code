@@ -52,7 +52,7 @@ DIK_TOL =float (os .environ .get ("KY_DIK","15.0"))# 90 dereceden deviation
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 

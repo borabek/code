@@ -181,7 +181,7 @@ def main ():
     ap .add_argument ("--mfg",default ="",help ="restrict to one manufacturer")
     ap .add_argument ("--radius-mm",type =float ,default =6.0 )
     ap .add_argument ("--target",type =int ,default =6000 )
-    ap .add_argument ("--list",default ="",help ="sadece bu dosyadaki part no'lari (satir/bosluk ayrik)")
+    ap .add_argument ("--list",default ="",help ="only this dosyadaki part no'lari (row/bosluk ayrik)")
     a =ap .parse_args ()
 
     step ={os .path .basename (s ).split ("_")[1 ]:s for s in glob .glob ("all_wscad_stp/*.stp")}

@@ -47,7 +47,7 @@ def puanla (rec_ ,model ,ratio ,baseline ,match_greedy ,f1w ,mfgler =None ):
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "dusuk"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         M =d6_record .x58 (r )
         if M is not None and r .get ("P")is not None and len (r ["P"])and M .shape [1 ]*2 ==model ["n_feat"]:

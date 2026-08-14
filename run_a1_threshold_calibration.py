@@ -60,7 +60,7 @@ def oku (on ):
         if not (f .startswith (on +"_")and f .endswith (".npz")):
             continue 
         z =np .load (f"{OZ }/{f }")
-        kay =np .asarray (z ["kaynak"],int )
+        kay =np .asarray (z ["source"],int )
         m =np .isin (kay ,KAYNAKLAR )
         if int (m .sum ())<2 :
             continue 

@@ -406,7 +406,7 @@ def main (argv =None ):
     if arrs is None :
         infer =_build_infer (backbone ,model ,meta ,args .device ,
         args .op_cache_dir ,args .max_gpu_verts )
-        logger .info ("running inference once per part ...")
+        logger .info ("running inference first per part ...")
         arrs =[infer (s ,pm )for s ,pm in zip (samples ,metas )]
         _save_arrs_cache (args .cache_arrs ,signature ,arrs )
 

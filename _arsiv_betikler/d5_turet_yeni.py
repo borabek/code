@@ -64,23 +64,23 @@ def dengeli_sira (E ):
 
 def main ():
     ap =argparse .ArgumentParser ()
-    ap .add_argument ("--sinir",type =int ,default =0 )
+    ap .add_argument ("--boundary",type =int ,default =0 )
     # VARDIYA (2026-08-04): measured -- 16 cekirdegin only %12'si, GPU %24 is used.
     # Darbogaz spektral operator kurulumu and SERI calisiyor. Is N vardiyaya bolununce
     # neredeyse dogrusal hizlaniyor: 13 saat -> ~3.5 saat (4 vardiya, 8 cekirdek, %50 pay durur).
     # CKPT OVERRIDE (G6): new seg agiyla YENIDEN turetme for. Gate'in new candidate
     # dagilimiyla egitilmesi SART -- old gate'e new adaylari vermek [[gate-refit-minv4]]
     # dersinin ihlali becomes (two gate AYNI dagilimda egitilmeli).
-    ap .add_argument ("--ckpt",nargs ="+",default =[],help ="cp_config yerine bu ckpt'leri kullan")
+    ap .add_argument ("--ckpt",nargs ="+",default =[],help ="cp_config instead of this ckpt'leri kullan")
     # G6: TUM corpus YENI agla yeniden turetilir -- old turetme "already present" SAYILMAZ,
     # because old candidates old agin ciktisi. Karistirmak gate'i two different dagilimla egitir.
-    ap .add_argument ("--hepsi",action ="store_true",help ="eski turetmeyi 'var' sayma")
+    ap .add_argument ("--all of them",action ="store_true",help ="old turetmeyi 'present' sayma")
     # PID FILTRESI (R4a): TOPLULUK olcumu for TUM korpusu turetmeye gerek absent --
     # only two OLCUM kumesi (250 exam + 194) yeter, ~444 part.
     ap .add_argument ("--pids-file",default ="",help ="only this dosyadaki pid'leri turet")
-    ap .add_argument ("--cikti-eki",default ="",help ="output file adina ek (G6 for _g6)")
+    ap .add_argument ("--output-eki",default ="",help ="output file adina ek (G6 for _g6)")
     ap .add_argument ("--vardiya",type =int ,default =0 )
-    ap .add_argument ("--toplam",type =int ,default =1 )
+    ap .add_argument ("--total",type =int ,default =1 )
     a =ap .parse_args ()
 
     import protocol 

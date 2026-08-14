@@ -131,7 +131,7 @@ def main ():
     for m ,(g ,tp ,fp )in per_mfg .items ():
         p =tp /max (tp +fp ,1 )
         print (f"    {m }: {g } CP, AUTO precision {p :.3f} ({tp } dogru / {fp } yanlis otonom)")
-    print ("\n  ROBOT OKUMASI: AUTO precision = robot teli GERCEK acikliga sokma orani (yuksek olmali).")
+    print ("\n  ROBOT OKUMASI: AUTO precision = robot teli GERCEK acikliga sokma orani (high must be).")
     print ("  Dusuk-confidence CP'ler REVIEW'e dusuyor -> insana; robotun otonom hatasi not.")
 
 

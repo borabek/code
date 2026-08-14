@@ -47,7 +47,7 @@ def eslesme_ayrinti (P ,Pd ,G ,Gd ,diag ):
         if d_ >tt or a_ in used or b_ in hit :
             continue 
         used .add (a_ );hit .add (b_ )
-        out .append ({"lateral":float (pe [a_ ,b_ ]),"aci":float (an [a_ ,b_ ]),
+        out .append ({"lateral":float (pe [a_ ,b_ ]),"angle":float (an [a_ ,b_ ]),
         "axial":float (abs (al [a_ ,b_ ])),"tol":float (tt )})
     return out 
 
@@ -66,9 +66,9 @@ def main ():
     with open ("results/_strict_geometry_keys.json",encoding ="utf-8")as f :
         gk =json .load (f )
     tr_pid =np .array ([str (x )for x in d ["pids"]])
-    tr_grp =np .array ([gk .get (p ,"yok:"+p )for p in tr_pid ])
+    tr_grp =np .array ([gk .get (p ,"absent:"+p )for p in tr_pid ])
     Xtr =np .asarray (d ["X"],float );ytr =np .asarray (d ["y"])
-    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"yok:"+r ["pid"])for r in DER }))
+    keep =~np .isin (tr_grp ,list ({gk .get (r ["pid"],"absent:"+r ["pid"])for r in DER }))
 
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     rf =lambda M :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
@@ -94,13 +94,13 @@ def main ():
             if k .any ():
                 P =r ["P"][k ];Pd =r ["Pd"][k ]
         for e in eslesme_ayrinti (P ,Pd ,r ["G"],r ["Gd"],r ["diag"]):
-            e .update (pid =r ["pid"],regime ="cok"if r ["n"]>=8 else "dusuk",
+            e .update (pid =r ["pid"],regime ="very"if r ["n"]>=8 else "low",
             cluster =kume_of .get (r ["pid"]),mfg =mfg_of .get (r ["pid"],"?"),
             diag =float (r ["diag"]))
             KAYIT .append (e )
 
     ya =np .array ([e ["lateral"]for e in KAYIT ])
-    ac =np .array ([e ["aci"]for e in KAYIT ])
+    ac =np .array ([e ["angle"]for e in KAYIT ])
     to =np .array ([e ["tol"]for e in KAYIT ])
     print (f"\nTESPITTE ESLESEN {len (KAYIT )} GT noktasi")
     print (f"  tespit toleransi   : medyan {np .median (to ):.2f}mm  (2.0mm'nin "
@@ -127,22 +127,22 @@ def main ():
         print (f"    lateral sucu     : {int ((~y_ok ).sum ())/loss :.1%}")
         print (f"    aci sucu       : {int ((~a_ok ).sum ())/loss :.1%}")
 
-    print ("\n  'lateral 2mm'ye ne kadar yakin?' (kaybedilenler icinde):")
+    print ("\n  'lateral 2mm'ye ne up to yakin?' (kaybedilenler inside):")
     kb =ya [~y_ok ]
     if len (kb ):
         for u in (2.5 ,3.0 ,4.0 ,6.0 ,10.0 ):
             print (f"    <= {u :>4.1f}mm : {(kb <=u ).mean ():>6.1%}  "
             f"({int ((kb <=u ).sum ())}/{len (kb )})")
 
-    print ("\n  'aci 10 dereceye ne kadar yakin?' (kaybedilenler icinde):")
+    print ("\n  'angle 10 dereceye ne up to yakin?' (kaybedilenler inside):")
     ab =ac [~a_ok ]
     if len (ab ):
         for u in (15 ,20 ,30 ,45 ,90 ):
             print (f"    <= {u :>3} deg : {(ab <=u ).mean ():>6.1%}  ({int ((ab <=u ).sum ())}/{len (ab )})")
 
-    print (f"\n{'kirilim':<16}{'n':>6}{'lateral med':>11}{'aci med':>9}{'lateral OK':>10}{'aci OK':>9}"
+    print (f"\n{'kirilim':<16}{'n':>6}{'lateral med':>11}{'angle med':>9}{'lateral OK':>10}{'angle OK':>9}"
     f"{'ikisi OK':>10}")
-    for alan ,adlar in (("regime",["dusuk","cok"]),("cluster",["dev","val"]),
+    for alan ,adlar in (("regime",["low","very"]),("cluster",["dev","val"]),
     ("mfg",["PXC","WEI"])):
         for ad in adlar :
             i =np .array ([e [alan ]==ad for e in KAYIT ])

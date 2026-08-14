@@ -84,7 +84,7 @@ def olc (model ,rec_ ,match_greedy ,f1w ):
     Tm =collections .defaultdict (list )
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         if r .get ("X")is not None and r .get ("P")is not None and len (r ["P"]):
             M =d6_record .x58 (r )

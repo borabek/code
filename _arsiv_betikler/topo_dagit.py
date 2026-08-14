@@ -48,14 +48,14 @@ def main ():
 
     "note":("TOPO 2026-08-01: 13 + 5 B-rep fiziksel + 4 icbukey topoloji. Uctan uca UC "
     "eksende birden kazandi: tanidik +0.0123, PXC-disi +0.0155, WEI-disi +0.0096. "
-    "kon_cevre = icbukey kenarlarin axis etrafindaki acisal kapsamasi; gercek "
+    "kon_cevre = icbukey kenarlarin axis etrafindaki acisal kapsamasi; real "
     "acikliklarda TAM TUR (medyan 1.000), yanlislarda 0.833. Onceki model: "
     "results/wire_gate.pkl.pre_topo"),
     },open (PKL ,"wb"))
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     cfg ["gate_topo_feats"]=True 
-    cfg ["gate_topo_not"]=("wire_gate.USE_TOPO_FEATS bu bayrakla ACIK olmali; kapatirsan "
-    "results/wire_gate.pkl.pre_topo'yu geri koy (18 sutun).")
+    cfg ["gate_topo_not"]=("wire_gate.USE_TOPO_FEATS this bayrakla OPEN must be; kapatirsan "
+    "results/wire_gate.pkl.pre_topo'yu geri koy (18 column).")
     json .dump (cfg ,open ("cp_config.json","w",encoding ="ascii"),indent =1 ,ensure_ascii =True )
     print ("cp_config.gate_topo_feats = true")
 

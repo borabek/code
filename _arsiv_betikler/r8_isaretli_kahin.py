@@ -150,7 +150,7 @@ def main ():
         for r in DER :
             d_ =PARCA .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d_ is None :
                 P =np .zeros ((0 ,3 ));Pn =np .zeros ((0 ,3 ))
             else :
@@ -187,19 +187,19 @@ def main ():
     for r in DER :
         d_ =PARCA .get (r ["pid"])
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =d_ ["P"]if d_ else np .zeros ((0 ,3 ));Pn =d_ ["Pd"]if d_ else np .zeros ((0 ,3 ))
         rob0 .append ((rj ,)+esle (P ,Pn ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ,signed =True ))
     b =f1w (rob0 )
     print (f"\nTABAN (dagitilan zincir, ISARETLI metrik): {b :.4f}")
-    print (f"\n{'sozluk':<12}{'ISARETLI kahin':>16}{'ISARETSIZ kahin':>17}{'artefakt':>11}")
+    print (f"\n{'dictionary':<12}{'ISARETLI kahin':>16}{'ISARETSIZ kahin':>17}{'artefakt':>11}")
     S ={"baseline":b }
     for h in ("D1","C1","BIRLESIK"):
         ri ,_ =oracle_ (h ,True )
         ru ,_ =oracle_ (h ,False )
         S [h ]={"signed":f1w (ri ),"unsigned":f1w (ru )}
         print (f"{h :<12}{f1w (ri ):>16.4f}{f1w (ru ):>17.4f}{f1w (ru )-f1w (ri ):>+11.4f}")
-    print ("\n('artefakt' = unsigned kahinin SISIRDIGI miktar; secim ters yonu de dogru sayiyor)")
+    print ("\n('artefakt' = unsigned kahinin SISIRDIGI miktar; secim ters yonu de correct sayiyor)")
     d1i =S ["D1"]["signed"];bri =S ["BIRLESIK"]["signed"]
     print (f"\nDAGITILAN selector {b :.4f}; D1 sozlugunun ISARETLI tavani {d1i :.4f} "
     f"-> yakalanan pay %{100 *(b -0.5818 )/max (d1i -0.5818 ,1e-9 ):.0f} "

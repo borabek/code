@@ -2,7 +2,7 @@
 """Q9: RENK, 18 ozellige (13 mevcut + 5 fiziksel) ARTIMLI a sey katiyor mu?
 
 Q8 OLCTU (62 order-dogrulanmis part, 1038 candidate): `metal_mesafe` AUC 0.639 (ters yonde),
-`c_govde` 0.622 -- ikisi de null'un on. Yani "renk ayirmaz" varsayimim YANLISTI.
+`c_govde` 0.622 -- ikisi de null'un ten. Yani "renk ayirmaz" varsayimim YANLISTI.
 Ama two uyari:
   * adayin UZERINDE durdugu silindir neredeyse never metal not (c_metal AUC 0.496, OLU) --
     i.e. "kanalin dibinde metal" sinyali dogrudan not, UZAKLIK uzerinden geliyor.
@@ -35,8 +35,8 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
     nmax =int (sys .argv [1 ])if len (sys .argv )>1 else 120 
 
     parts =[]
@@ -129,11 +129,11 @@ def main ():
             random_state =0 ).fit (X [tr ],Y [tr ]).predict_proba (X [te ])[:,1 ]
         return o 
 
-    print (f"\n{'gate':<26}{'OOF AUC':>10}{'F1':>9}{'kesin':>9}{'recall':>9}")
+    print (f"\n{'gate':<26}{'OOF AUC':>10}{'F1':>9}{'conclusive':>9}{'recall':>9}")
     res ={}
     for lab_ ,X in (("18 (13+fiziksel)",X18 ),("21 (+3 renk)",X21 )):
         o =oof (X )
-        thr =np .where (HI ,THR ["cok"],THR ["dusuk"])
+        thr =np .where (HI ,THR ["very"],THR ["low"])
         s =o >=thr 
         tp =int ((Y &s ).sum ());fp =int ((~Y &s ).sum ());fn =int ((Y &~s ).sum ())
         p_ =tp /max (tp +fp ,1 );r_ =tp /max (tp +fn ,1 )

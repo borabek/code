@@ -70,7 +70,7 @@ def main ():
         f"{b :>21.3f}")
     json .dump ({"brand":out ,
     "not":"disari_orani = GT yonunun part merkezinden DISARI "
-    "bakma orani. parca_ici_baskinlik = her parcada "
+    "bakma orani. parca_ici_baskinlik = each parcada "
     "cogunluk yonun payi (1.0 = part icinde tam tutarli). "
     "D7'ye BAKILMADI."},
     open ("results/gt_yon_sozlesmesi.json","w"),indent =1 )

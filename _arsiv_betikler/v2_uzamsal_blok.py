@@ -68,7 +68,7 @@ def main ():
     PTS =np .asarray (par ["pts"],float )
     ortak ={p for p in np .unique (pid )if (ppid ==p ).sum ()==(pid ==p ).sum ()}
     print (f"candidate sayisi ESLESEN part: {len (ortak )}/{len (np .unique (pid ))}",flush =True )
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+    grp =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
 
     def donustur (X ,pidler ):
@@ -109,7 +109,7 @@ def main ():
             BOLME .append ((mad ,k ,alt ))
 
     SON ,PARCA ={},{}
-    print (f"\n{'arm':<16}"+"".join (f"{b :>12}"for b ,_ ,_ in BOLME )+f"{'dusuk':>9}{'cok':>9}")
+    print (f"\n{'arm':<16}"+"".join (f"{b :>12}"for b ,_ ,_ in BOLME )+f"{'low':>9}{'very':>9}")
     for ad ,ek in (("A 58",False ),("B 58+uzamsal",True )):
         Xt =np .hstack ([X58 ,SP ])if ek else X58 
         Mt =donustur (Xt ,pid )
@@ -137,14 +137,14 @@ def main ():
                     k2 =wire_gate .decision_mask (s )
                     if k2 .any ():
                         P =r ["P"][k2 ];Pd =r ["Pd"][k2 ]
-                rj ="cok"if r ["n"]>=8 else "dusuk"
+                rj ="very"if r ["n"]>=8 else "low"
                 det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
                 rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             SON [ad ][b ]=float (f1w (det ))
             PARCA [(ad ,b )]=(det ,rob ,[x ["geo"]for x in alt ])
             sat +=f"{f1w (det ):>12.4f}"
         rr =f1_rejim (PARCA [(ad ,"tanidik")][0 ])
-        sat +=f"{rr ['F1']['dusuk']:>9.4f}{rr ['F1']['cok']:>9.4f}"
+        sat +=f"{rr ['F1']['low']:>9.4f}{rr ['F1']['very']:>9.4f}"
         print (sat ,flush =True )
 
     ga ={}
@@ -155,7 +155,7 @@ def main ():
         fn =lambda rows :f1w ([y2 for _ ,y2 in rows ])-f1w ([x for x ,_ in rows ])
         _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (da ,db )),g ,fn ,n =2000 )
         ga [b ]=(lo ,hi )
-    print ("\n=== KARAR ===")
+    print ("\n=== DECISION ===")
     k =karar_olcutu .degerlendir (SON ["A 58"],SON ["B 58+uzamsal"],ga =ga )
     print (k )
     with io .open ("results/v2_uzamsal.json","w",encoding ="utf-8")as f :

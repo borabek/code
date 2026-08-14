@@ -47,8 +47,8 @@ def ek_bloklar ():
         if n <EN_AZ_PARCA :
             out .append ((ad ,None ,None ,None ,f"GECERSIZ (duman, {n } part)"))
             continue 
-        f =float (d .get ("fark",0.0 ))
-        out .append ((ad ,float (d .get ("yok",0 )),float (d .get ("var",0 )),f ,
+        f =float (d .get ("difference",0.0 ))
+        out .append ((ad ,float (d .get ("absent",0 )),float (d .get ("present",0 )),f ,
         "GECTI"if f >=KAPI_EK else "gecmedi"))
     return out 
 
@@ -66,26 +66,26 @@ def pool (dir_ ="_p6_oz_tam3",cluster =None ):
             break 
     if not d :
         return None 
-    t =d .get ("toplam",{})
+    t =d .get ("total",{})
     return (t .get ("konum_recall"),t .get ("yonlu_recall"),t .get ("f1_tavani"),
     t .get ("aday_parca"),bool (d .get ("kapi_a_gecti")))
 
 
 def kademe2 ():
     out =[]
-    for ad ,y in (("SIRA kapali (u25 baseline)","p6_kademe2_sira0.json"),
-    ("SIRA acik (u25)","p6_kademe2_sira1.json"),
+    for ad ,y in (("SIRA closed (u25 baseline)","p6_kademe2_sira0.json"),
+    ("SIRA open (u25)","p6_kademe2_sira1.json"),
     ("tam3 TABAN (duz ayar)","p6_kademe2_tam3_taban.json"),
-    ("B1 zor negatif (tam3)","p6_kademe2_B1_zorneg.json"),
+    ("B1 hard negatif (tam3)","p6_kademe2_B1_zorneg.json"),
     ("B6 ensemble (tam3)","p6_kademe2_B6_ensemble.json"),
-    ("son kosu (uzerine yazilan)","p6_kademe2_tam.json")):
+    ("last run (uzerine yazilan)","p6_kademe2_tam.json")):
         d =oku (os .path .join (KOK ,"results",y ))
         if not d :
             continue 
-        t =d .get ("toplam",{})
+        t =d .get ("total",{})
         kollar ={k :v .get ("robot")for k ,v in t .items ()
         if isinstance (v ,dict )and "robot"in v }
-        out .append ((ad ,d .get ("dizin","?"),d .get ("secilen"),kollar ))
+        out .append ((ad ,d .get ("directory","?"),d .get ("secilen"),kollar ))
     return out 
 
 
@@ -102,23 +102,23 @@ def main ():
     L =[]
     L .append ("# SABAH RAPORU -- "+time .strftime ("%Y-%m-%d %H:%M"))
     L .append ("")
-    L .append ("Butun sayilar `tam` MARKA KATLARINDA (LOMO). D7 SINAVINA "
+    L .append ("Butun numbers `full` MARKA KATLARINDA (LOMO). D7 SINAVINA "
     "BAKILMADI. Manset metrik MIKRO robot F1.")
     L .append ("")
 
-    L .append ("## 1. KAPI A -- tam-acik havuzun yonlu recall'u")
+    L .append ("## 1. KAPI A -- full-open havuzun yonlu recall'u")
     # TUM pool makbuzlari single tabloda: new a corpus (for example ceiling-24
     # `tam4`) olculunce elle kod degistirmeden raporda gorunsun.
     ETIKET ={"_p6_oz_u25":"onceki pool",
-    "_p6_oz_tam3":"tam-acik, ceiling 12",
-    "_p6_oz_tam4":"tam-acik, TAVAN 24"}
+    "_p6_oz_tam3":"full-open, ceiling 12",
+    "_p6_oz_tam4":"full-open, TAVAN 24"}
     sat =[]
     for y in sorted (glob .glob (os .path .join (KOK ,"results",
     "havuz_tavani_*.json"))):
         d =oku (y )
         if not d :
             continue 
-        t =d .get ("toplam",{})
+        t =d .get ("total",{})
         ad =os .path .basename (y )[len ("havuz_tavani_"):-len (".json")]
         dz ,_ ,km =ad .rpartition ("_")
         sat .append ((ETIKET .get (dz ,dz ),km ,t ,bool (d .get ("kapi_a_gecti"))))
@@ -137,8 +137,8 @@ def main ():
         L .append (f"KAPI A esigi: yonlu recall >= {KAPI_HAVUZ }.")
         L .append ("")
         L .append ("Kapi gecmezse pool genisletme kolu KAPANIR: ceiling "
-        "yetmiyorsa selector ne kadar iyilesirse iyilessin hedefe "
-        "ulasilamaz. TAVAN, mukemmel bir secicinin alacagi F1'dir -- "
+        "yetmiyorsa selector ne up to iyilesirse iyilessin hedefe "
+        "ulasilamaz. TAVAN, mukemmel a secicinin alacagi F1'dir -- "
         "VAAT DEGIL, UST SINIR.")
     L .append ("")
 
@@ -146,7 +146,7 @@ def main ():
     ms =sorted (glob .glob (os .path .join (KOK ,"results",
     "max_sec_sondasi*.json")))
     if not ms :
-        L .append ("- measurement yok (`MS_MARKA=NIT python probe_max_sec.py`)")
+        L .append ("- measurement absent (`MS_MARKA=NIT python probe_max_sec.py`)")
     for y in ms :
         d =oku (y )
         if not d :
@@ -162,26 +162,26 @@ def main ():
         L .append ("")
     if ms :
         L .append ("> Bugunku ceiling **12**. Tavan bagliyorsa direction kaynagi "
-        "eklemek (yelpaze cozunurlugu) recall'u ARTIRMAZ -- yeni "
-        "yonler tavana takilip mevcutlarin yerini alir. "
-        "`YB_MAX_SEC` ile ayarlanir.")
+        "eklemek (yelpaze cozunurlugu) recall'u ARTIRMAZ -- new "
+        "yonler tavana takilip mevcutlarin yerini takes. "
+        "`YB_MAX_SEC` with ayarlanir.")
     L .append ("")
 
     L .append ("## 2. EK OZNITELIK BLOKLARI (gate +0.01)")
     ACIKLAMA ={
     "kanonik":"parcayi KENDI ana eksenlerine oturtur (brand bagimsizlik)",
-    "cluster":"candidates arasi rekabet: ayni adayin obur yonleri, 5mm rakip",
-    "topoloji":"es-eksenli aile / dizi duzenliligi (yalniz mi, uye mi)",
-    "simetri":"ayna simetri esi var mi (klemensler simetriktir)",
-    "depth":"axis boyu yaricap profili (tel / vida / alet ayrimi)",
-    "kafes_adet":"lattice adimindan BEKLENEN CP sayisi -> secim baskisi",
-    "ozkalib":"part-ici oz-kalibrasyon (skor yuzdeligi, en iyiye fark)",
+    "cluster":"candidates arasi rekabet: same adayin obur yonleri, 5mm rakip",
+    "topoloji":"es-eksenli aile / array duzenliligi (only mi, uye mi)",
+    "simetri":"ayna simetri esi present mi (klemensler simetriktir)",
+    "depth":"axis boyu radius profili (tel / vida / alet ayrimi)",
+    "kafes_adet":"lattice adimindan BEKLENEN CP count -> secim baskisi",
+    "ozkalib":"part-ici oz-kalibrasyon (skor yuzdeligi, most iyiye difference)",
     }
     eb =ek_bloklar ()
     if not eb :
-        L .append ("Henuz receipt yok.")
+        L .append ("Henuz receipt absent.")
     else :
-        L .append ("| blok | ne olcer | bloksuz | blokla | fark | karar |")
+        L .append ("| blok | ne olcer | bloksuz | blokla | difference | karar |")
         L .append ("|---|---|---|---|---|---|")
         for ad ,y0 ,v0 ,f ,k in sorted (
         eb ,key =lambda r :(-(r [3 ]if r [3 ]is not None else -9 ))):
@@ -198,7 +198,7 @@ def main ():
     L .append ("")
 
     L .append ("## 3b. SECICI VERIMLILIGI -- 0.50 nereden gelebilir?")
-    tv =pool ("_p6_oz_u25","tam")or pool ("_p6_oz_tam3","tam")
+    tv =pool ("_p6_oz_u25","full")or pool ("_p6_oz_tam3","full")
     ger =None 
     for ad ,_dz ,_sec ,kollar in kademe2 ():
         if "P6"in kollar :
@@ -222,28 +222,28 @@ def main ():
         f"**{ger_verim :.1%}** olmasi gerekir "
         f"({ger_verim /max (verim ,1e-9 ):.2f}x iyilesme)")
         L .append ("")
-        L .append ("> Havuz kolu tek basina hedefe goturmuyor; SECICI kolu "
-        "zorunlu. Bu, EK bloklarina ve candidate-kumesi modeline "
+        L .append ("> Havuz kolu single basina hedefe goturmuyor; SECICI kolu "
+        "zorunlu. Bu, EK bloklarina and candidate-kumesi modeline "
         "(D2) verilen onceligi belirler.")
     else :
-        L .append ("- `tam` kumesinde ceiling olcumu henuz yok "
-        "(`HT_ONLER=tam python probe_pool_tavani.py`)")
+        L .append ("- `full` kumesinde ceiling olcumu yet absent "
+        "(`HT_ONLER=full python probe_pool_tavani.py`)")
     L .append ("")
 
     L .append ("## 4. GECE FAZLARI")
     fz =gece_fazlari ()
-    L .extend (f"- {s }"for s in fz )if fz else L .append ("- log yok")
+    L .extend (f"- {s }"for s in fz )if fz else L .append ("- log absent")
     L .append ("")
 
     L .append ("## 4b. SAHA -- AUTO KATMANI (tier cokusu)")
     tc =oku (os .path .join (KOK ,"results","tier_cokusu_d7.json"))
     if not tc :
-        L .append ("- measurement yok (`python probe_tier_cokusu.py`)")
+        L .append ("- measurement absent (`python probe_tier_cokusu.py`)")
     else :
         L .append (f"Dagitilan AUTO esigi = **{tc .get ('dagitilan_esik')}**")
         for ad ,k in tc .get ("kumeler",{}).items ():
-            if k .get ("durum"):
-                L .append (f"- `{ad }`: **{k ['durum']}** "
+            if k .get ("state"):
+                L .append (f"- `{ad }`: **{k ['state']}** "
                 f"({k ['n_isaret']} isaretin hepsi ayni skor)")
                 continue 
             de =k .get ("dagitilan_esikte",{})
@@ -253,7 +253,7 @@ def main ():
         L .append ("")
         L .append ("> Gorulmemis markada robot HER isarete otonom guveniyor. "
         "Esigi yukseltmek kurtarmiyor (0.95'te bile precision ~0.47). "
-        "Oneri: gorulmemis brand icin AUTO katmani KAPATILSIN.")
+        "Oneri: gorulmemis brand for AUTO katmani KAPATILSIN.")
     L .append ("")
 
     L .append ("## 5. D7 OKUMA #2 KARARI")
@@ -264,15 +264,15 @@ def main ():
     f"(gate +{KAPI_D7 :.2f})")
     L .append ("")
     if top >=KAPI_D7 :
-        L .append ("**KARAR: D7 OKUMA #2 HAK EDILDI.** Yine de okuma ancak "
-        "kanonik zincirle (`canonical_d7.mikro()`) yapilir.")
+        L .append ("**DECISION: D7 OKUMA #2 HAK EDILDI.** Yine de okuma however "
+        "kanonik zincirle (`canonical_d7.mikro()`) is done.")
     else :
-        L .append ("**KARAR: D7 OKUNMAZ.** Kumulatif kazanc kapinin altinda; "
-        "okuma HARCANMAZ. Butcede kalan okuma sayisi degismez.")
+        L .append ("**DECISION: D7 OKUNMAZ.** Kumulatif kazanc kapinin under; "
+        "okuma HARCANMAZ. Butcede kalan okuma count does not change.")
     L .append ("")
-    L .append ("> Kazanclar TOPLANARAK tahmin edilir; gercek birlesik kazanc "
-    "genellikle DAHA AZ olur (bloklar ayni hatalari duzeltir). "
-    "Toplam yalnizca KAPI kararidir, VAAT DEGILDIR.")
+    L .append ("> Kazanclar TOPLANARAK prediction edilir; real birlesik kazanc "
+    "genellikle DAHA AZ becomes (bloklar same hatalari fixes). "
+    "Toplam only KAPI kararidir, VAAT DEGILDIR.")
 
     metin ="\n".join (L )
     y =os .path .join (KOK ,"docs","SABAH_RAPORU.md")

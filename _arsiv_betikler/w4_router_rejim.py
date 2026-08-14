@@ -97,7 +97,7 @@ def main ():
     fn =sum (1 for s in sat if not s ["router"]and s ["gt_cok"])
     tn =sum (1 for s in sat if not s ["router"]and not s ["gt_cok"])
     print (f"\nROUTER vs GT REJIM ({len (sat )} part)")
-    print (f"{'':>14}{'GT cok-CP':>12}{'GT dusuk-CP':>13}")
+    print (f"{'':>14}{'GT very-CP':>12}{'GT low-CP':>13}")
     print (f"{'router +':>14}{tp :>12}{fp :>13}   <- multires BURAYA uygulanir")
     print (f"{'router -':>14}{fn :>12}{tn :>13}")
     kes =tp /max (tp +fp ,1 );rec =tp /max (tp +fn ,1 )

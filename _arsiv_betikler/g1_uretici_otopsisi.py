@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""G1: URETICI OTOPSISI -- neden ELMEX 0.615 but most kotusu 0.054?
+"""G1: URETICI OTOPSISI -- why ELMEX 0.615 but most kotusu 0.054?
 
 Gorulmemis manufacturer sinavinda spread 0.5613 (most iyi 0.6154 / most kotu 0.0541). Ortalamayi
 kovalamadan ONCE this yayilimin SEBEBINI bilmek is required: kotu ureticilerde kaybin baskin

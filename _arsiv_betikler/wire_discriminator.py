@@ -40,7 +40,7 @@ def feats_for (V ,F ,probs ,cps ):
             nn =float (dd .min ());nclose =int ((dd <=12.0 ).sum ())
         else :
             nn =50.0 ;nclose =0 
-            # disa-dogruluk: own disa-isini on konumu
+            # disa-dogruluk: own disa-isini ten konumu
         u =(p -ctr );mo =np .abs ((V -ctr )@d ).max ()
         outward =float ((u @d )/(mo +1e-9 ))
         # yerel region: p'nin 6mm cevresi

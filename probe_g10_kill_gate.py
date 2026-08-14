@@ -46,7 +46,7 @@ def main ():
 
     res_ ={}
     for ad ,yol in KOLLAR .items ():
-        T ,regime =[],{"dusuk":[],"cok":[]}
+        T ,regime =[],{"dusuk":[],"very":[]}
         error =0 # residual only raporlanir; no istisna yutulmaz
         for pid in ortak :
             r =rec_ [pid ]
@@ -67,11 +67,11 @@ def main ():
             D =np .asarray ([c .get ("dir",[0 ,0 ,1 ])for c in cps ],float )if cps else np .zeros ((0 ,3 ))
             oge =(len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True )[:3 ]
             T .append (oge )
-            (regime ["cok"]if len (G )>=8 else regime ["dusuk"]).append (oge )
+            (regime ["very"]if len (G )>=8 else regime ["dusuk"]).append (oge )
         res_ [ad ]={
         "kahin_F1":f1w (T ),
         "dusuk_CP":f1w (regime ["dusuk"])if regime ["dusuk"]else None ,
-        "cok_CP":f1w (regime ["cok"])if regime ["cok"]else None ,
+        "cok_CP":f1w (regime ["very"])if regime ["very"]else None ,
         "n_parca":len (T ),"error":error ,
         }
         s =res_ [ad ]
@@ -86,8 +86,8 @@ def main ():
     print (f"KARAR: {'GECTI -- sig boyama KALIR'if gecti else 'KALDI -- sig boyama GERI ALINIR'}")
     with open (CIKTI ,"w")as f :
         json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"fark":fark ,"gecti":bool (gecti ),
-        "criterion":"candidate kahini, bire-bir Macar, tespit toleransi, aci serbest",
-        "not":"gate/p3c YENIDEN FIT EDILMEDI; uctan uca F1 bu kapiyla "
+        "criterion":"candidate kahini, bire-a Macar, tespit toleransi, aci serbest",
+        "not":"gate/p3c YENIDEN FIT EDILMEDI; uctan uca F1 this kapiyla "
         "olculmez"},f ,indent =1 )
     print (f"receipt -> {CIKTI }")
 

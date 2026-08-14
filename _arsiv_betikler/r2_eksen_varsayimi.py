@@ -61,15 +61,15 @@ def main ():
     f"%90 {np .percentile (s ,90 ):.2f} | %99 {np .percentile (s ,99 ):.2f} | maks {s .max ():.2f}")
     print (f"  10 derece icinde kalan CP orani: {(s <=10 ).mean ():.1%}")
 
-    print ("\n2) KARISIK PARCALAR (en cok sapan 10)")
+    print ("\n2) KARISIK PARCALAR (at most sapan 10)")
     for pid ,ncp ,mx ,kac in sorted (karisik ,key =lambda x :-x [2 ])[:10 ]:
         print (f"    {pid :<14} {ncp :>3} CP | maks deviation {mx :>6.1f} deg | {kac } CP disarida")
 
-    print ("\n3) UZLASI TAVANI: her CP'ye parcanin BASKIN GT ekseni verilseydi")
+    print ("\n3) UZLASI TAVANI: each CP'ye parcanin BASKIN GT ekseni verilseydi")
     print (f"  10 derece icinde kalirdi: {(s <=10 ).mean ():.1%} (su anki aci gecisi %81.4)")
     print ("  NOT: this a TAVAN -- gercekte baskin ekseni GT'den not TAHMINLERDEN kestirecegiz.")
 
-    print ("\n4) TAHMINLERDEN kestirilen baskin axis GT baskin eksenine ne kadar yakin?")
+    print ("\n4) TAHMINLERDEN kestirilen baskin axis GT baskin eksenine ne up to yakin?")
     fark =[]
     for r in DER :
         G =np .asarray (r ["Gd"],float );P =np .asarray (r ["Pd"],float )
@@ -82,7 +82,7 @@ def main ():
     f"%90 {np .percentile (f ,90 ):.2f}")
     print (f"  10 derece icinde: {(f <=10 ).mean ():.1%}  <- uzlasinin GERCEKCI tavani")
 
-    print ("\n5) UZLASI KIMI DUZELTIR, KIMI BOZAR? (tespitte eslesen noktalar uzerinde)")
+    print ("\n5) UZLASI KIMI DUZELTIR, KIMI BOZAR? (tespitte eslesen points on)")
     # Her eslesme for: mevcut angle vs parcanin TAHMIN-baskin ekseni kullanilsaydi olacak angle
     per =collections .defaultdict (list )
     for e in K :
@@ -102,7 +102,7 @@ def main ():
         a_yeni =float (np .degrees (np .arccos (np .clip (np .abs (G @bp ),0 ,1 )).min ()))if len (G )else 90.0 
         for e in es :
             yeni_aci .append (a_yeni )
-            eski_ok =e ["aci"]<=10.0 
+            eski_ok =e ["angle"]<=10.0 
             yeni_ok =a_yeni <=10.0 
             duzelen +=int (yeni_ok and not eski_ok )
             bozulan +=int (eski_ok and not yeni_ok )

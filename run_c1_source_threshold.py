@@ -44,7 +44,7 @@ for e1 in (0.05 ,0.08 ,0.12 ,0.18 ,0.25 )]
 
 def yukle (on ,pid ):
     z =np .load (f"{OZ }/{on }_{pid }.npz")
-    kay =np .asarray (z ["kaynak"],int )
+    kay =np .asarray (z ["source"],int )
     m =np .isin (kay ,KAYNAKLAR )
     T =np .asarray (np .load (f"{TAN }/{on }_{pid }.npz")["T"],float )
     X =np .hstack ([np .asarray (z ["X"],float ),T ])[m ]
@@ -140,7 +140,7 @@ def main ():
     print (f"KAYNAK (e0={e0 } e1={e1 }) robot {new_ ['robot']:.4f} | tespit "
     f"{new_ ['tespit']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']}")
     print (f"\nFARK {new_ ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02")
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"kaynak":new_ ,
+    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"source":new_ ,
     "secilen":[e0 ,e1 ],
     "not":"Kaynak-duyarli threshold (seg vs B-rep). Izgara D6'da, D7'de "
     "yeniden taranmadi. Isaret duzeltmesi IKI kolda da acik. "

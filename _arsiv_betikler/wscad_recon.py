@@ -16,7 +16,7 @@ Usage: PYTHONPATH=_diffusion_net_repo/src .venv/Scripts/python.exe wscad_recon.p
 import os ,json ,argparse 
 
 PROFILE =os .path .abspath ("_wsprofile")
-HOME ="https://www.wscaduniverse.com/en/"
+HOME ="https://www.wscaduniverse.com/most/"
 
 
 def main ():

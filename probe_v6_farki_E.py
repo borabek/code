@@ -172,7 +172,7 @@ def sinav_kur (segtek ):
     for pid in te :
         r =rec_ [pid ]
         z =np .load (f"{OZ }/d7_{pid }.npz")
-        m =(z ["kaynak"]==0 )if segtek else np .ones (len (z ["kaynak"]),bool )
+        m =(z ["source"]==0 )if segtek else np .ones (len (z ["source"]),bool )
         if int (m .sum ())<2 :
             continue 
         out .append ({"pid":pid ,"mfg":r ["mfg"],
@@ -215,7 +215,7 @@ def main ():
     if b >0.2029 else 
     "urunu GECEMEDI -- dagitilmaz"))
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"urun":0.2029 ,
-    "not":"Esik D6'da secildi (D7'den brand olarak AYRIK), training "
+    "not":"Esik D6'da secildi (D7'den brand as AYRIK), training "
     "korpusu D6'yi ICERMEZ. D7 brand-disi, MIKRO."},
     open ("results/v6_farki_E.json","w"),indent =1 )
     with open ("results/v6_farki_E_modeller.pkl","wb")as f :

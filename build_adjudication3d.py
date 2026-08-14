@@ -166,7 +166,7 @@ function show(i){
       <div class=meta>${q.src}, ${q.nv} vertex, en yakin isaretin ${q.near}mm</div></div>
       <div class=opts>
       <label><input type=radio name="${id}" value=opening ${v==="opening"?"checked":""}>gercek opening (atlamisim)</label>
-      <label><input type=radio name="${id}" value=not_cp ${v==="not_cp"?"checked":""}>CP degil (vida/yuva)</label>
+      <label><input type=radio name="${id}" value=not_cp ${v==="not_cp"?"checked":""}>CP not (vida/yuva)</label>
       <label><input type=radio name="${id}" value=unsure ${v==="unsure"?"checked":""}>emin degilim</label></div>`;
     el.onmouseenter=()=>highlight(k); el.onclick=()=>highlight(k);
     qs.appendChild(el);

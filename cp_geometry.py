@@ -413,7 +413,7 @@ max_turn_deg =90.0 ):
     "silindirik not" deyip REDDEDER. Red whereas wrong tohumu oldugu like birakir.
     Kendi kendini besleyen a loop: wrong seed -> red -> wrong seed. Cok-CP parcalarda
     eslesen CP'lerin %22.3'u 45 dereceden extra sapiyordu and this ratio yaricaptan BAGIMSIZDI
-    (radius taramasi: %22.1-22.3 arasi never kipirdamadi) -- i.e. sebep komsu hole kirliligi
+    (radius taramasi: %22.1-22.3 arasi never kipirdamadi) -- i.e. reason komsu hole kirliligi
     not, full as this loop.
 
     YONTEM: candidate tohumlar = verilen seed + six koordinat yonu. Her biri for yuzler secilir

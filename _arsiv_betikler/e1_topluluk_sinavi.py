@@ -102,7 +102,7 @@ def main ():
                     c =wire_gate .pick_member_direction (X ,c ,r ["UYE"])
                 P =np .array ([x ["point"]for x in c ],float )
                 Pd =np .array ([x ["direction"]for x in c ],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
             det .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ))

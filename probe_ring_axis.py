@@ -133,7 +133,7 @@ def main ():
         m ,p =olc (rec_ ,arm )
         res_ [arm ]=(m ,p )
         print (f"{arm :14s} {m ['tespit']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
-    print ("\n--- ESLI BOOTSTRAP (tabana gore) ---")
+    print ("\n--- ESLI BOOTSTRAP (tabana per) ---")
     print (f"{'arm':14s} {'metrik':>7s} {'fark':>9s} {'%95 GA':>22s} {'poz%':>6s}")
     for arm in KOLLAR [1 :]:
         for ad in ("rob","rbi"):

@@ -72,7 +72,7 @@ input[type=range]{width:100%}
   <div id=prog></div>
   <div class=sub style="margin-top:14px">
     Sari okun <b>gosterdigi yondeki yuzey acikligini</b> boya. Kirmizi kure manufacturer CP-si ve parcanin icinde durur (temas noktasi) &mdash; boyanacak yer okun cikis yaptigi <b>dis yuzey</b>. Model burayi kaciriyor; senin boyadigin sekil
-    egitime <b>pozitif</b> olarak girecek.<br><br>
+    egitime <b>pozitif</b> as girecek.<br><br>
     Aciklik gorunmuyorsa ya da emin degilsen <b>bos birak</b> ve gec &mdash; bos olanlar kullanilmaz.
   </div>
 </div>
@@ -148,7 +148,7 @@ function show(i){
   resize();
   document.getElementById("title").textContent=`${cur+1}/${ITEMS.length}  ${it.pid} (${it.mfg})`;
   document.getElementById("sub").textContent=
-    `manufacturer bu parcada ${it.n_mfg} CP tanimliyor, model ${it.n_pred} buldu -- bu kacan biri`;
+    `manufacturer this parcada ${it.n_mfg} CP tanimliyor, model ${it.n_pred} buldu -- this kacan biri`;
   prog();
 }
 let RAD=1;
@@ -188,7 +188,7 @@ function paintAt(e){
   }
   if(changed.length){ undo.push(changed); recolor(); save();
     st.textContent = "boyandi: " + changed.length + " vertex (firca " + BR.toFixed(1) + "mm)"; }
-  else st.textContent = "bu noktada zaten boyali";
+  else st.textContent = "this noktada already boyali";
 }
 let painting=false;
 cv.addEventListener("pointerdown",e=>{
@@ -215,7 +215,7 @@ function prog(){
   const n=Object.keys(store).length;
   const here=(store[ITEMS[cur].key]||[]).length;
   document.getElementById("prog").innerHTML=
-    `<b>${n}</b> / ${ITEMS.length} boyandi` + (here?` &nbsp;<span class=ok>&#10003; bu parcada ${here} vertex</span>`:"");
+    `<b>${n}</b> / ${ITEMS.length} boyandi` + (here?` &nbsp;<span class=ok>&#10003; this parcada ${here} vertex</span>`:"");
 }
 function go(d){show(cur+d);}
 function dl(){

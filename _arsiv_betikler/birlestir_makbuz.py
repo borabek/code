@@ -64,7 +64,7 @@ def main ():
     "p6_sayac":dict (sayac ),**bayrak }
     json .dump ({"damga":damga ,"sonuc":out ,
     "not":f"{len (paylar )} paydan birlestirildi. Mikro F1 part "
-    "basina toplam oldugu icin birlestirme kayipsizdir."},
+    "basina total oldugu for birlestirme kayipsizdir."},
     open (cik ,"w"),indent =1 )
     print (f"{len (kir )} part | robot {out ['robot']:.4f} | tespit "
     f"{out ['tespit']:.4f} | makro {out ['makro']:.4f} | "

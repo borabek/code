@@ -617,7 +617,7 @@ def evaluate (scored ,lam :float ,threshold :float ):
     accepted =0 
     for row ,(points ,directions )in zip (scored ,predictions ):
         part =row ["part"]
-        regime ="cok"if len (part .gt_points )>=8 else "dusuk"
+        regime ="very"if len (part .gt_points )>=8 else "low"
         tp ,fp ,fn ,_ =match_hungarian (
         points ,directions ,part .gt_points ,part .gt_directions ,part .diag ,
         ROBOT_LATERAL_MM ,ROBOT_ANGLE_DEG ,False ,signed =True ,

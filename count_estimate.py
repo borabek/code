@@ -54,7 +54,7 @@ def estimate (P ,ws =None ,min_n =1 ):
     P =np .asarray (P ,float ).reshape (-1 ,3 )
     n =len (P )
     if n <2 :
-        return max (n ,min_n ),{"sebep":"cok az nokta"}
+        return max (n ,min_n ),{"reason":"very az nokta"}
     pu ,pv =_eksenler (P )
     span_u =float (pu .max ()-pu .min ())
     span_v =float (pv .max ()-pv .min ())

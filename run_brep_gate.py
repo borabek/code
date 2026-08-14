@@ -39,7 +39,7 @@ def cluster (ad ,kayitlar ,ob ,cylf ,acf ):
             try :
                 z =np .load (yol )
                 cik .append ({"pid":pid ,"mfg":r ["mfg"],"X":z ["X"],"y":z ["y"],
-                "P":z ["P"],"D":z ["D"],"kaynak":z ["kaynak"],
+                "P":z ["P"],"D":z ["D"],"source":z ["source"],
                 "G":G ,"Gd":np .asarray (r ["Gd"],float ),
                 "diag":r ["diag"]})
                 continue 
@@ -66,7 +66,7 @@ def cluster (ad ,kayitlar ,ob ,cylf ,acf ):
         y =(d .min (1 )<=tol ).astype (np .int8 )
         np .savez_compressed (yol ,X =X ,y =y ,P =P ,D =D ,src_ =kay )
         cik .append ({"pid":pid ,"mfg":r ["mfg"],"X":X ,"y":y ,"P":P ,"D":D ,
-        "kaynak":kay ,"G":G ,"Gd":np .asarray (r ["Gd"],float ),
+        "source":kay ,"G":G ,"Gd":np .asarray (r ["Gd"],float ),
         "diag":r ["diag"]})
         if (i +1 )%25 ==0 :
             print (f"  {ad } {i +1 }/{len (kayitlar )} ({time .time ()-t0 :.0f}s, "

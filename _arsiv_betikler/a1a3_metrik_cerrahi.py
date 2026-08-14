@@ -67,14 +67,14 @@ def main ():
         for r in DER :
             P ,Pd =CIKTI [r ["pid"]]
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if robot :
                 tp ,fp ,fn ,b =match_greedy (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ,
                 signed =True ,eksen_tol =eksen_tol )
             else :
                 tp ,fp ,fn ,b =match_greedy (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ,
                 eksen_tol =eksen_tol )
-            nb =b ["belirsiz"];belirsiz +=nb ;total_ +=tp 
+            nb =b ["ambiguous"];belirsiz +=nb ;total_ +=tp 
             if kesin and nb :
                 tp -=nb ;fp +=nb ;fn +=nb 
             rows .append ((rj ,tp ,fp ,fn ))
@@ -87,7 +87,7 @@ def main ():
     R ={}
     for et in (40.0 ,25.0 ,15.0 ,10.0 ):
         rows ,aci ,bel ,top =olc (et )
-        R [et ]={"f1":f1w (rows ),"belirsiz":bel ,"tp":top }
+        R [et ]={"f1":f1w (rows ),"ambiguous":bel ,"tp":top }
         rj =f1_rejim (rows )if callable (globals ().get ("f1_rejim"))else {}
         print (f"  eksen_tol {et :>5.1f}mm -> tespit F1 {f1w (rows ):.4f} | TP {top } | "
         f"belirsiz {bel } (%{100 *bel /max (top ,1 ):.1f})")
@@ -127,7 +127,7 @@ def main ():
         json .dump ({"tespit":{str (k ):v for k ,v in R .items ()},
         "aci_p90":float (np .percentile (aci ,90 ))if len (aci )else None ,
         "aci_60_ustu":int ((aci >60 ).sum ())if len (aci )else 0 ,
-        "not":"A1 axis 40->15, A2 belirsiz bayragi, A3 aci gorunurlugu"},
+        "not":"A1 axis 40->15, A2 ambiguous bayragi, A3 angle gorunurlugu"},
         f ,indent =1 ,ensure_ascii =False )
     print ("\nmakbuz -> results/a1a3_metrik_cerrahi.json")
 

@@ -31,7 +31,7 @@ def candidates (mesh ,cyl ,p ,d0 ):
     out =[("mevcut",d0 )]
     try :
         a =channel_axis (mesh ,p ,fallback =None )
-        if a is not None :out .append (("kanal",np .asarray (a ,float ).reshape (3 )))
+        if a is not None :out .append (("channel",np .asarray (a ,float ).reshape (3 )))
     except Exception :pass 
     if cyl is not None and len (cyl [0 ]):
         C =np .asarray (cyl [0 ],float );A =np .asarray (cyl [1 ],float )
@@ -105,7 +105,7 @@ def main ():
             A_kah .append (min (aci .values ()))# KAHIN: adaylarin EN IYISI
     Am ,As ,Ak =np .array (A_mev ),np .array (A_sec ),np .array (A_kah )
     print (f"\n{len (Am )} cift")
-    print (f"{'':<22}{'aci<=10':>10}{'DIK>80':>9}{'ortanca':>10}")
+    print (f"{'':<22}{'angle<=10':>10}{'DIK>80':>9}{'median':>10}")
     for ad ,A in (("MEVCUT",Am ),("SECICI",As ),("KAHIN (ceiling)",Ak )):
         print (f"{ad :<22}{100 *(A <=10 ).mean ():>9.0f}%{100 *(A >80 ).mean ():>8.0f}%{np .median (A ):>10.1f}")
     print (f"\nGO: selector MEVCUT'u >=5 puan gecmeli -> "

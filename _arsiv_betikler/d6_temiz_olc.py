@@ -62,7 +62,7 @@ def main ():
     atlanan =collections .Counter ()
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         if r .get ("X")is not None :
         # DAGITILAN gate 58 sutunla egitildi and part-ici z-skor onu 116'ya removes.
@@ -74,7 +74,7 @@ def main ():
                 if k .any ():
                     P =np .asarray (r ["P"],float )[k ];D =np .asarray (r ["Pd"],float )[k ]
             else :
-                atlanan ["genislik"]+=1 
+                atlanan ["width"]+=1 
         else :
             atlanan ["aday_yok"]+=1 
             # TESPIT: angle serbest, unsigned
@@ -104,7 +104,7 @@ def main ():
         "uretici_tespit":{m :f1w (v )for m ,v in Tm .items ()},
         "uretici_robot":{m :f1w (v )for m ,v in Rm .items ()},
         "not":("TEMIZ cluster. Eski d5_4 kumesindeki sayilarla KIYASLANAMAZ -- "
-        "o cluster manufacturer duzeyinde kirliydi.")},f ,indent =1 ,
+        "that cluster manufacturer duzeyinde kirliydi.")},f ,indent =1 ,
         ensure_ascii =False )
     print (f"receipt -> {MAKBUZ }")
 

@@ -23,7 +23,7 @@ MM_MAX =8.0 # mouth-candidate distance siniri
 P5V2_PLANAR =os .environ .get ("P5V2_PLANAR","1")=="1"
 TUR_MEVCUT ,TUR_SILINDIR ,TUR_PLANAR ,TUR_NULL =0 ,1 ,2 ,3 
 OZ_AD =["tur_silindir","tur_planar","tur_null",
-"mesafe","mesafe_norm","aci_mevcut","yaricap","uzunluk",
+"distance","mesafe_norm","aci_mevcut","radius","uzunluk",
 "esd_r","cevre","alan","eksen_hiza","komsu_uyum",
 "gate_skoru","votes","n_aday","n_secenek"]
 # PARCA-ICI GORELI OZNITELIKLER: DENENDI, REVERTED (2026-08-09).
@@ -33,7 +33,7 @@ OZ_AD =["tur_silindir","tur_planar","tur_null",
 # MEASURED (LOMO, same kurulum, single degisken):
 #     ham 23 column -> secim +0.0391 | uctan uca 0.1465
 #     ham 17 column -> secim +0.0501 | uctan uca 0.1649   <- IYI OLAN
-# BOZDU. Muhtemel sebep: gate'in oznitelikleri markalar arasi kiyaslanamaz
+# BOZDU. Muhtemel reason: gate'in oznitelikleri markalar arasi kiyaslanamaz
 # MUTLAK buyukluklerdi; p5-v2'ninkiler ZATEN goreli (this adaydan this agza distance).
 # Siralama bilgi katmiyor, RF'nin asiri uyacagi 6 column noise katiyor.
 # TEKRAR DENEME -- before feature uzayini degistir, after normalizasyonu.

@@ -152,14 +152,14 @@ def main ():
 
     print (f"\n{'uzay':<34}{'uyusmazlik':>12}{'ayrilamaz':>11}{'ceiling':>9}")
     SON ={}
-    for ad ,S in (("EL-YAPIMI (73 sutun)",HX ),
+    for ad ,S in (("EL-YAPIMI (73 column)",HX ),
     ("EMBEDDING (256, havuzlanmis)",EMB ),
     ("IKISI BIRDEN",np .hstack ([HX ,EMB ]))):
         u ,a =uyusmazlik (S )
         SON [ad ]={"uyusmazlik":u ,"ayrilamaz":a ,"ceiling":1 -u /2 }
         print (f"{ad :<34}{u :>11.1%}{a :>11.1%}{1 -u /2 :>9.3f}")
 
-    e =SON ["EL-YAPIMI (73 sutun)"]["ceiling"];z =SON ["EMBEDDING (256, havuzlanmis)"]["ceiling"]
+    e =SON ["EL-YAPIMI (73 column)"]["ceiling"];z =SON ["EMBEDDING (256, havuzlanmis)"]["ceiling"]
     print (f"\nEMBEDDING TAVANI - EL-YAPIMI TAVANI = {z -e :+.3f}")
     print ()
     if z -e >=0.02 :

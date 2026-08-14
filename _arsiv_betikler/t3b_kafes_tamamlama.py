@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """T3b: KACIRILAN CP'ler KAFES DUGUMLERINDE MI? (B kolunun IKINCI, ayri kapisi)
 
-WHY SEPARATE OLCUM: T3 yapisal oznitelikleri gate'in KABUL ETTIGI candidates on sinadi
+WHY SEPARATE OLCUM: T3 yapisal oznitelikleri gate'in KABUL ETTIGI candidates ten sinadi
 and gecmedi. Ama that popülasyonda **FN HIC YOK** -- kacirilan CP'ler ya reddedildi ya never
 candidate olmadi. Kafes TAMAMLAMA fikri full da onlari hedefliyor, therefore T3 onu OLCEMEZ.
 Kendi sondamin kor noktasi; ayri kapatiliyor.
@@ -103,21 +103,21 @@ def main ():
         print ("olculecek FN absent");return 
     of =float ((kf <=ESIK ).mean ());orst =float ((kr <=ESIK ).mean ())
     ot =float ((kt <=ESIK ).mean ())
-    print (f"\n{'cluster':<22}{'kafese oturan':>16}{'ortanca kalinti':>18}")
-    for ad ,v in (("KACIRILAN (FN)",kf ),("rastgele nokta",kr ),("eslesen (TP)",kt )):
+    print (f"\n{'cluster':<22}{'kafese oturan':>16}{'median kalinti':>18}")
+    for ad ,v in (("KACIRILAN (FN)",kf ),("rastgele point",kr ),("eslesen (TP)",kt )):
         print (f"{ad :<22}{100 *(v <=ESIK ).mean ():>15.1f}%{np .median (v ):>17.2f}mm")
     kazanc =of -orst 
     print (f"\nFN kafese oturma %{100 *of :.1f} | rastgele %{100 *orst :.1f} | "
     f"FARK {100 *kazanc :+.1f} puan")
     gecti =of >=0.40 and kazanc >=0.15 
     print (f"GO (FN >=%40 VE rastgeleden >=15 puan yuksek) -> "
-    f"{'GECTI -- lattice TAMAMLAMA gercek FN ilaci'if gecti else 'GECMEDI -- B TAMAMEN KAPANIR'}")
+    f"{'GECTI -- lattice TAMAMLAMA real FN ilaci'if gecti else 'GECMEDI -- B TAMAMEN KAPANIR'}")
     if not gecti and of >=0.40 :
         print ("  NOT: FN orani high but rastgele de high -> lattice very sik, AYIRT ETMIYOR")
     with io .open ("results/t3b_kafes_tamamlama.json","w",encoding ="utf-8")as f :
         json .dump ({"part":parca_ok ,"n_fn":len (kf ),"esik_mm":ESIK ,
         "fn_oturan":of ,"rastgele_oturan":orst ,"tp_oturan":ot ,
-        "fark":kazanc ,"gecti":bool (gecti )},f ,indent =1 )
+        "difference":kazanc ,"gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/t3b_kafes_tamamlama.json")
 
 

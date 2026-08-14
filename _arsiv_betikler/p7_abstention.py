@@ -58,7 +58,7 @@ def main ():
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         gt_top +=len (G )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         pak =P3C .parca_adaylari (r ,gate ,cyl )
         if pak is None :
             continue 
@@ -123,9 +123,9 @@ def main ():
         # PARCA DUZEYI YONLENDIRME: very-CP and silindirsiz parcalari REVIEW'a yolla
     print (f"\nPARCA DUZEYI REVIEW YONLENDIRMESI (threshold 0.50):")
     m0 =A [:,0 ]>=0.50 
-    for ad ,msk in (("hepsi",m0 ),
-    ("yalniz dusuk-CP",m0 &(RJ =="dusuk")),
-    ("dusuk-CP + silindiri VAR",m0 &(RJ =="dusuk")&(A [:,3 ]>0 ))):
+    for ad ,msk in (("all of them",m0 ),
+    ("only low-CP",m0 &(RJ =="low")),
+    ("low-CP + silindiri VAR",m0 &(RJ =="low")&(A [:,3 ]>0 ))):
         if msk .sum ()==0 :
             continue 
         print (f"  {ad :<26}candidate {int (msk .sum ()):>5}  kesinlik_T {A [msk ,1 ].mean ():.3f}  "

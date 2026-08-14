@@ -52,7 +52,7 @@ def oku (on ):
         if not (f .startswith (on +"_")and f .endswith (".npz")):
             continue 
         z =np .load (f"{OZ }/{f }")
-        kay =np .asarray (z ["kaynak"],int )
+        kay =np .asarray (z ["source"],int )
         m =np .isin (kay ,KAYNAKLAR )
         if int (m .sum ())<2 :
             continue 
@@ -193,7 +193,7 @@ def main ():
     print (f"\nFARK {d :+.4f} | urun 0.2029")
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"fark":d ,
     "not":"Kazanan arm (B-rep + tanimlayici) uzerinde direction odunc alma, "
-    "DUZELTILMIS etiketli gate ile. D7 brand-disi, TAM ZINCIR."},
+    "DUZELTILMIS etiketli gate with. D7 brand-disi, TAM ZINCIR."},
     open ("results/kazanan_yon_odunc.json","w"),indent =1 )
     print ("receipt -> results/kazanan_yon_odunc.json")
 

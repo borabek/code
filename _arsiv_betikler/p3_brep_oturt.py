@@ -108,7 +108,7 @@ mfgler =None ,sayac =None ):
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         M =d6_record .x58 (r )
         if M is not None and r .get ("P")is not None and len (r ["P"])and M .shape [1 ]*2 ==model ["n_feat"]:
@@ -144,7 +144,7 @@ def main ():
 
     d0t ,d0r =puanla (dev ,model ,ob ,None ,0 ,match_greedy ,f1w )
     print (f"\nDEV oturtmasiz: tespit {d0t :.4f} robot {d0r :.4f}")
-    print (f"\n{'aci\\mm':<9}"+"".join (f"{m :>10.0f}"for m in (2 ,4 ,6 ,10 )))
+    print (f"\n{'angle\\mm':<9}"+"".join (f"{m :>10.0f}"for m in (2 ,4 ,6 ,10 )))
     en_iyi ,en_iyi_r =None ,d0r 
     izgara ={}
     for ac in (10 ,20 ,30 ,45 ):
@@ -158,9 +158,9 @@ def main ():
         print (f"{ac :<9}"+"".join (f"{v :>10.4f}"for v in line_ ))
 
     if en_iyi is None :
-        print ("\nDEV'de HICBIR ayar oturtmasizi gecmedi -> KOL KAPANDI")
+        print ("\nDEV'de HICBIR ayar oturtmasizi gecmedi -> KOL CLOSED")
         with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-            json .dump ({"karar":"KAPANDI","dev_taban_robot":d0r ,"izgara":izgara },
+            json .dump ({"karar":"CLOSED","dev_taban_robot":d0r ,"izgara":izgara },
             f ,indent =1 )
         return 
     ac ,mm =en_iyi 
@@ -179,7 +179,7 @@ def main ():
     karar ="DAGIT"if s1r >s0r and s1t >=s0t -0.01 else "GERI AL"
     print (f"\nKARAR: {karar }")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-        json .dump ({"model":a .model ,"izgara":izgara ,"dev_secim":{"aci":ac ,"mm":mm },
+        json .dump ({"model":a .model ,"izgara":izgara ,"dev_secim":{"angle":ac ,"mm":mm },
         "dev_taban_robot":d0r ,"sinav_oturtmasiz":{"tespit":s0t ,"robot":s0r },
         "sinav_oturtmali":{"tespit":s1t ,"robot":s1r },
         "oturan":sc ["oturan"],"candidate":sc ["candidate"],"karar":karar },

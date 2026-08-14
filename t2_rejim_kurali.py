@@ -48,7 +48,7 @@ def main ():
     val ={str (p )for p in s3 ["val"]["parts"]}
     HAZ =[]
     for r in DER :
-        h ={"pid":r ["pid"],"geo":r ["geo"],"rj":"cok"if r ["n"]>=8 else "dusuk",
+        h ={"pid":r ["pid"],"geo":r ["geo"],"rj":"very"if r ["n"]>=8 else "dusuk",
         "G":np .asarray (r ["G"],float ),"Gd":np .asarray (r ["Gd"],float ),
         "diag":r ["diag"],"sk":None ,"na":0 }
         if r ["X"]is not None and r .get ("XR")is not None :
@@ -62,7 +62,7 @@ def main ():
         HAZ .append (h )
         # yonlendirmenin GT rejimiyle uyumu (only RAPOR)
     a =np .array ([h ["arm"]=="cok_aday"for h in HAZ ])
-    b =np .array ([h ["rj"]=="cok"for h in HAZ ])
+    b =np .array ([h ["rj"]=="very"for h in HAZ ])
     print (f"yonlendirme (candidate>={AYIRIM }): cok_aday {int (a .sum ())} / az_aday {int ((~a ).sum ())}")
     print (f"  GT rejimiyle uyum: {float ((a ==b ).mean ()):.1%} "
     f"(yonlendirme GT GORMEZ, bu yalniz bilgi)")
@@ -127,8 +127,8 @@ def main ():
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (D0 ,D1 )),gg ,fn ,n =3000 )
     _ ,rlo ,rhi =measure_set .grup_bootstrap (list (zip (R0 ,R1 )),gg ,fn ,n =3000 )
     print (f"\n--- HUKUM: VAL ({len (verdict )} part) ---")
-    print (f"{'kural':<26}{'tespit':>10}{'robot(FIZ)':>13}")
-    print (f"{'mevcut (tek kural)':<26}{d0 :>10.4f}{r0 :>13.4f}")
+    print (f"{'rule':<26}{'tespit':>10}{'robot(FIZ)':>13}")
+    print (f"{'mevcut (tek rule)':<26}{d0 :>10.4f}{r0 :>13.4f}")
     print (f"{'rejime kosullu':<26}{d1 :>10.4f}{r1 :>13.4f}")
     print (f"\nVAL tespit farki: {d1 -d0 :+.4f}  GA[{lo :+.4f},{hi :+.4f}] "
     f"{'GERCEK'if (lo >0 or hi <0 )else 'noise'}")
@@ -138,7 +138,7 @@ def main ():
     f"robot {ha0 [1 ]:.4f} -> {ha1 [1 ]:.4f}   (HUKUM DEGIL: ayar kumesi havuzda)")
     gecti =(d1 -d0 )>=0.005 and lo >0 
     print (f"\nKILL: VAL tespit +0.005 VE GA>0 -> "
-    f"{'GECTI'if gecti else 'GECMEDI -- tek kural KALIR'}")
+    f"{'GECTI'if gecti else 'GECMEDI -- tek rule KALIR'}")
     with io .open ("results/t2_rejim_kurali.json","w",encoding ="utf-8")as f :
         json .dump ({"ayirim_aday":AYIRIM ,"secilen":{k :list (v )for k ,v in EN .items ()},
         "val_mevcut":{"tespit":d0 ,"robot":r0 },

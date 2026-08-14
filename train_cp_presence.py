@@ -79,7 +79,7 @@ def main ():
     help ="0 = veriden otomatik hesapla (negatif/pozitif orani)")
     ap .add_argument ("--limit",type =int ,default =0 )
     ap .add_argument ("--fire-budget",type =float ,default =0.15 ,
-    help ="en iyi checkpoint yalnizca bu atesleme oraninin ALTINDA secilir")
+    help ="en iyi checkpoint yalnizca this atesleme oraninin ALTINDA secilir")
     ap .add_argument ("--resume",action ="store_true")
     a =ap .parse_args ()
 

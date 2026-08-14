@@ -20,8 +20,8 @@ import numpy as np
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 from sina_cluster import f1w ,pr 
 
-URUN ="URUN (J, 13 ozellik)"
-KAPALI ="J kapali"
+URUN ="URUN (J, 13 feature)"
+KAPALI ="J closed"
 
 
 def main ():
@@ -32,14 +32,14 @@ def main ():
             print (f"eksik: {f } -- once `python sina_cluster.py {k }` kosulmali");return 
         P [k ]=pickle .load (open (f ,"rb"))
 
-    print (f"{'cluster':<10}{'n':>5}{'J acik tespit':>15}{'J kapali':>11}{'fark':>9}")
+    print (f"{'cluster':<10}{'n':>5}{'J open tespit':>15}{'J closed':>11}{'difference':>9}")
     for k in ("dev","val"):
         a =P [k ][URUN ][0 ];b =P [k ][KAPALI ][0 ]
         print (f"{k :<10}{len (a ):>5}{f1w (a ):>15.4f}{f1w (b ):>11.4f}{f1w (a )-f1w (b ):>+9.4f}")
 
     out ={}
     print (f"\nHAVUZLANMIS (DEV+VAL), esli bootstrap 4000 tekrar:")
-    print (f"  {'criterion':<10}{'J acik':>9}{'J kapali':>10}{'fark':>9}{'%95 GA':>21}{'karar':>10}")
+    print (f"  {'criterion':<10}{'J open':>9}{'J closed':>10}{'difference':>9}{'%95 GA':>21}{'karar':>10}")
     for mi ,mn in ((0 ,"tespit"),(1 ,"robot")):
         a =P ["dev"][URUN ][mi ]+P ["val"][URUN ][mi ]
         b =P ["dev"][KAPALI ][mi ]+P ["val"][KAPALI ][mi ]
@@ -52,7 +52,7 @@ def main ():
         print (f"  {mn :<10}{f1w (a ):>9.4f}{f1w (b ):>10.4f}{ds .mean ():>+9.4f}"
         f"{'['+format (lo_ ,'+.4f')+', '+format (hi_ ,'+.4f')+']':>21}{kar :>10}")
         out [mn ]={"j_acik":float (f1w (a )),"j_kapali":float (f1w (b )),
-        "fark":float (ds .mean ()),"ga":[float (lo_ ),float (hi_ )],"karar":kar ,
+        "difference":float (ds .mean ()),"ga":[float (lo_ ),float (hi_ )],"karar":kar ,
         "n_parca":n }
 
         # HAVUZLANMIS MANSET: 200 parcalik durust prediction (two ayrik geometri kumesi)

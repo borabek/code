@@ -51,7 +51,7 @@ maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
     mean kazancin gercekligi this araliklarla degerlendirilir.
     """
     bolmeler =[k for k in baseline if k !=tanidik_anahtar ]
-    assert bolmeler ,"en az bir gorulmemis-manufacturer bolmesi gerekir"
+    assert bolmeler ,"at least a gorulmemis-manufacturer bolmesi is required"
     d ={k :candidate [k ]-baseline [k ]for k in baseline }
     t =d .get (tanidik_anahtar ,0.0 )
     ort =float (np .mean ([d [k ]for k in bolmeler ]))
@@ -64,10 +64,10 @@ maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
     k3 =ek_a >=ek_t -en_kotu_tolerans 
     k4 =en_kotu_bolme >=-maks_bolme_kaybi 
     ayr ={
-    "(1) tanidik fark":f"{t :+.4f}  (>= {-tanidik_tolerans :+.4f})  {'OK'if k1 else 'X'}",
+    "(1) tanidik difference":f"{t :+.4f}  (>= {-tanidik_tolerans :+.4f})  {'OK'if k1 else 'X'}",
     "(2) split ORTALAMASI":f"{ort :+.4f}  (>= {min_kazanc :+.4f})  {'OK'if k2 else 'X'}",
-    "(3) en kotu split":f"{ek_t :.4f} -> {ek_a :.4f}  {'OK'if k3 else 'X'}",
-    "(4) en buyuk split kaybi":f"{en_kotu_bolme :+.4f}  (>= {-maks_bolme_kaybi :+.4f})  "
+    "(3) most kotu split":f"{ek_t :.4f} -> {ek_a :.4f}  {'OK'if k3 else 'X'}",
+    "(4) most large split kaybi":f"{en_kotu_bolme :+.4f}  (>= {-maks_bolme_kaybi :+.4f})  "
     f"{'OK'if k4 else 'X'}",
     }
     if ga :
@@ -90,7 +90,7 @@ maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
         k5 =kanitli_kazanc and not kanitli_kayip 
         ayr ["(5) KANIT (GA)"]=(f"kanitli kazanc {'VAR'if kanitli_kazanc else 'YOK'}"
         f" | kanitli buyuk loss "
-        f"{'VAR'if kanitli_kayip else 'yok'}  {'OK'if k5 else 'X'}")
+        f"{'VAR'if kanitli_kayip else 'absent'}  {'OK'if k5 else 'X'}")
     elif kanit_gerekli :
         k5 =False 
         ayr ["(5) KANIT (GA)"]="GA VERILMEDI -> karar KANITSIZ  X"
@@ -98,12 +98,12 @@ maks_bolme_kaybi =0.05 ,kanit_gerekli =True ):
         ayr ["(5) KANIT (GA)"]="evidence araniyor DEGIL (kanit_gerekli=False)"
 
     ok =all ([k1 ,k2 ,k3 ,k4 ,k5 ])
-    neden =("bes sart da saglandi"if ok else 
-    "; ".join (x for x ,c in (("tanidik veride loss fazla",not k1 ),
+    neden =("five sart da saglandi"if ok else 
+    "; ".join (x for x ,c in (("tanidik veride loss extra",not k1 ),
     ("split ortalamasi yeterince artmadi",not k2 ),
-    ("en kotu split kotulesti",not k3 ),
-    ("bir bolmede buyuk loss",not k4 ),
-    ("evidence yok (GA sifiri iceriyor ya da verilmedi)",
+    ("most kotu split kotulesti",not k3 ),
+    ("a bolmede large loss",not k4 ),
+    ("evidence absent (GA sifiri iceriyor ya da verilmedi)",
     not k5 ))if c ))
     return Karar (ok ,neden ,ayr )
 
@@ -117,17 +117,17 @@ def _kendini_sina ():
     ("topoloji (GECMESI bekleniyor)",
     {"tanidik":0.7287 ,"WEI":0.4736 ,"PXC":0.7048 },
     {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },True ),
-    ("R=8 yaricap (KILL bekleniyor: kazanc noise)",
+    ("R=8 radius (KILL bekleniyor: kazanc noise)",
     {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
     {"tanidik":0.7422 ,"WEI":0.5013 ,"PXC":0.6961 },False ),
-    ("her parcaya z-skor (SINIRDA)",
+    ("each parcaya z-skor (SINIRDA)",
     {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
     {"tanidik":0.7390 ,"WEI":0.5702 ,"PXC":0.6828 },True ),
     ("cokus yonlendirme (GECMESI bekleniyor)",
     {"tanidik":0.7410 ,"WEI":0.4832 ,"PXC":0.7203 },
     {"tanidik":0.7439 ,"WEI":0.5682 ,"PXC":0.7029 },True ),
     ]
-    print ("KURAL KENDINI SINIYOR (gecenin gercek kollari):\n")
+    print ("RULE KENDINI SINIYOR (gecenin real kollari):\n")
     hepsi =True 
     for ad ,t ,a ,bek in olay :
     # TARIHSEL kollar GA KAPISI OLMADAN karara baglanmisti -- bulgunun kendisi this.
@@ -137,8 +137,8 @@ def _kendini_sina ():
         hepsi &=uy 
         print (f"{ad }\n  {k }\n  beklenen {'GECSIN'if bek else 'KALSIN'} -> "
         f"{'TUTARLI'if uy else 'TUTARSIZ <<<'}\n")
-    print ("KURAL, gecenin kararlarini yeniden uretiyor"if hepsi else 
-    "KURAL gecenin kararlariyla CELISIYOR -- kural ya da karar yanlisti")
+    print ("RULE, gecenin kararlarini yeniden uretiyor"if hepsi else 
+    "RULE gecenin kararlariyla CELISIYOR -- rule ya da karar yanlisti")
     return hepsi 
 
 

@@ -197,7 +197,7 @@ def main ():
     else f"ULASILMADI ({out [en ]['f1_tavani']:.4f})"))
     json .dump ({"damga":makbuz_hash .damga (),"n_gt":n_gt ,"sonuc":out ,
     "not":"TAVAN olcumu, mukemmel selector. P3 kolu part basina binlerce "
-    "konum -- dagitilabilir sistem DEGIL, 'bilgi meshte var mi' "
+    "konum -- dagitilabilir sistem DEGIL, 'bilgi meshte present mi' "
     "sorusunun cevabi. D7 brand-disi."},
     open ("results/tavan_085.json","w"),indent =1 )
     print ("receipt -> results/tavan_085.json")

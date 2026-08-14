@@ -95,7 +95,7 @@ def main ():
                         continue 
                     seen .add (art )
                     if art in have :
-                        stats ["zaten elimizde"]+=1 
+                        stats ["already elimizde"]+=1 
                         continue 
                     if art in guard :
                         stats ["kara listede"]+=1 
@@ -108,7 +108,7 @@ def main ():
             fh .write (f"{a }\t{t }\n")
 
     print (f"YENI KLEMENS: {len (keep )} -> {args .out }")
-    print ("  already elimizde:",stats ["zaten elimizde"],
+    print ("  already elimizde:",stats ["already elimizde"],
     "| kara listede:",stats ["kara listede"])
     print ("  aile dagilimi:",", ".join (
     f"{k .split (':')[1 ]}:{v }"for k ,v in stats .most_common (40 )

@@ -13,7 +13,7 @@ import os ,sys ,json ,pickle
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -42,8 +42,8 @@ def main ():
     [hi [i ]for i in rng .choice (len (hi ),30 ,replace =False )])
     test_pids =[p [1 ]for p in sel ]
     test_fams ={family_key (p )for p in test_pids }
-    test_geo ={gk .get (p ,"yok:"+p )for p in test_pids }
-    G_geo =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    test_geo ={gk .get (p ,"absent:"+p )for p in test_pids }
+    G_geo =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
 
     keep_fam =~np .isin (fams ,list (test_fams ))
     keep_geo =~np .isin (G_geo ,list (test_geo ))
@@ -52,21 +52,21 @@ def main ():
     print (f"  geometry_key ile disarida birakilan: {int ((~keep_geo ).sum ())} "
     f"(+{int ((~keep_geo ).sum ())-int ((~keep_fam ).sum ())} IKIZ)\n",flush =True )
 
-    reg_all =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
+    reg_all =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
 
     def build (keep ,gkey ):
         Xk ,yk ,gg =X [keep ],y [keep ],gkey [keep ]
         reg =reg_all [keep ]
-        tot ={"dusuk":0 ,"cok":0 }
+        tot ={"low":0 ,"very":0 }
         for g in {int (g )for g in groups [keep ]}:
             n =int (ngt .get (g ,0 ))
-            if n >0 :tot ["cok"if n >=8 else "dusuk"]+=n 
+            if n >0 :tot ["very"if n >=8 else "low"]+=n 
         o =np .zeros (len (yk ))
         for tr ,te in GroupKFold (n_splits =5 ).split (Xk ,yk ,gg ):
             o [te ]=RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
             random_state =0 ).fit (Xk [tr ],yk [tr ]).predict_proba (Xk [te ])[:,1 ]
         thr ={}
-        for k in ("dusuk","cok"):
+        for k in ("low","very"):
             b =(0.0 ,0.40 )
             for t in np .arange (0.20 ,0.71 ,0.05 ):
                 m =reg ==k ;s_ =(o >=t )&m 
@@ -80,14 +80,14 @@ def main ():
         return clf ,thr 
 
     def score (model ,TH ,tol ,am ,pct =False ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in cache :
             Xc =r ["X13"]
             if Xc is None or not len (r ["P"]):
                 Q =np .zeros ((0 ,3 ));Qd =np .zeros ((0 ,3 ))
             else :
                 sc =model .predict_proba (Xc )[:,1 ]
-                m =sc >=(TH ["cok"]if r ["is_hi"]else TH ["dusuk"])
+                m =sc >=(TH ["very"]if r ["is_hi"]else TH ["low"])
                 Q =r ["P"][m ];Qd =r ["Pd"][m ]
             Gt ,Gd =r ["G"],r ["Gd"]
             hit =np .zeros (len (Gt ),bool );used =set ()
@@ -100,7 +100,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (Gt ))):
                     if d_ >tt or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (Gt )-tp 
         o ={};TP =FP =FN =0 
         for k ,(T ,Fp ,Fn )in agg .items ():
@@ -108,7 +108,7 @@ def main ():
             o [k ]=2 *p *rc /max (p +rc ,1e-9 );TP +=T ;FP +=Fp ;FN +=Fn 
         return sum (W [k ]*o [k ]for k in W ),TP /max (TP +FP ,1 ),TP /max (TP +FN ,1 )
 
-    print (f"{'gate bolmesi':<28}{'tespit':>9}{'yanal2':>9}{'ROBOT':>9}{'kesin':>8}{'recall':>8}")
+    print (f"{'gate bolmesi':<28}{'tespit':>9}{'yanal2':>9}{'ROBOT':>9}{'conclusive':>8}{'recall':>8}")
     res ={}
     for lab ,keep ,gkey in (("family_key (ESKI)",keep_fam ,fams ),
     ("geometry_key (GERCEK)",keep_geo ,G_geo )):

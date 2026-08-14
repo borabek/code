@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Gate v7 REFIT: g10 with yeniden turetilmis corpus on.
+"""Gate v7 REFIT: g10 with yeniden turetilmis corpus ten.
 
 `parca_ici_dagit.py` with AYNI recete (within_part PARCA PARCA + RF 400/leaf3), but
 input/output PARAMETRIK -- dagitilan gate'in uzerine YAZMAZ, A/B yapilabilsin.
@@ -13,7 +13,7 @@ import wire_gate
 
 ap =argparse .ArgumentParser ()
 ap .add_argument ("--corpus",default ="results/zengin_parite_v4_g10.npz")
-ap .add_argument ("--cikti",default ="results/wire_gate_v7.pkl")
+ap .add_argument ("--output",default ="results/wire_gate_v7.pkl")
 ap .add_argument ("--donusum",default ="zskor")
 a =ap .parse_args ()
 
@@ -36,6 +36,6 @@ with open (a .out_ ,"wb")as f :
     "cols":None ,"n_feat":M .shape [1 ],"donusum":a .donusum ,
     "topo_r":float (wire_gate .TOPO_R ),
     "corpus":a .corpus ,
-    "note":"gate v7: g10 ile yeniden turetilmis corpus (44675 candidate / "
-    "2596 part). parca_ici_dagit.py ile ayni recete."},f )
+    "note":"gate v7: g10 with yeniden turetilmis corpus (44675 candidate / "
+    "2596 part). parca_ici_dagit.py with same recete."},f )
 print (f"-> {a .out_ }")

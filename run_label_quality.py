@@ -35,7 +35,7 @@ NMS =5.0 ;KURAL =("goreli",0.85 ,0.20 )
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (np .float32 )
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (np .float32 )
 
 def yakinlik (d ):
     """each POZITIF secenek for GT'ye YANAL uzaklik (0 = full ustunde)."""
@@ -59,7 +59,7 @@ def main ():
         d ["y"]=np .asarray (d ["y"],int );d ["_M"]=temel (d )
         d ["_yak"]=yakinlik (d )
     print (f"{len (data_ )} part",flush =True )
-    # KAT TOHUMU: first kosu +0.0144 with kapiyi gecti but TEK tohumluydu.
+    # KAT TOHUMU: first run +0.0144 with kapiyi gecti but TEK tohumluydu.
     # Uc tohumda da gecerse karar verilebilir.
     _t =int (os .environ .get ("Y8_TOHUM","1"))
     rng =np .random .default_rng (_t );pay =rng .permutation (len (data_ ))%3 

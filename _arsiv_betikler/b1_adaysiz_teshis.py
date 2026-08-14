@@ -98,7 +98,7 @@ def main ():
             rec_ ={"pid":r ["pid"],"cect_max":float (cect [yak ].max ()),
             "cect_ort":float (cect [yak ].mean ()),
             "ce_ct_tepe":int (np .isin (arg [yak ],[CE ,CT ]).sum ()),
-            "tepe":int (yak .sum ())}
+            "vertex":int (yak .sum ())}
             (ULASAN if ul [b ]else ADAYSIZ ).append (rec_ )
     print (f"\nULASAN CP {len (ULASAN )} | ADAYSIZ CP {len (ADAYSIZ )}")
     if not ADAYSIZ :

@@ -29,7 +29,7 @@ def test_ayni_agiz_ayni_kimlik ():
     P =np .array ([[0. ,0 ,0 ]]);D =np .array ([[0. ,0 ,1 ]])
     o =PS .secenekler (P ,D ,[_cy ([1 ,0 ,0 ],[1 ,0 ,0 ],2.0 )],[],50.0 )[0 ]
     kim =[s [3 ]for s in o if s [3 ]>=0 ]
-    assert len (kim )>len (set (kim )),"sign ciftleri ayni kimligi paylasmali"
+    assert len (kim )>len (set (kim )),"sign ciftleri same kimligi paylasmali"
 
 
 def test_etiket_BIRE_BIR ():
@@ -52,7 +52,7 @@ def test_secim_agzi_TEK_adaya_verir ():
         s [1 :-1 ]=0.9 
     Pf ,Df =PE .sec (secs ,skor )
     kullanilan =[tuple (np .round (p ,3 ))for p in Pf ]
-    assert len (kullanilan )==len (set (kullanilan )),"ayni mouth iki adaya verilmis"
+    assert len (kullanilan )==len (set (kullanilan )),"same mouth iki adaya verilmis"
 
 
 def test_mevcut_GERCEK_fallback ():

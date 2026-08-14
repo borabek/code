@@ -46,7 +46,7 @@ KIND ={CE :"CableEntry",CT :"Contact"}
 
 
 _CFG_ONBELLEK ={}
-# Gate hatasi which is parts. Bos DEGILSE kosu sifir olmayan cikis kodu returns (fail-safe).
+# Gate hatasi which is parts. Bos DEGILSE run sifir olmayan cikis kodu returns (fail-safe).
 _GATE_HATA =[]
 # GATE ONCESI ADAY HAVUZU -- only `CP_HAVUZ_KANCA` set edilince dolar.
 # Teshis icindir; urun yolunu DEGISTIRMEZ.
@@ -711,7 +711,7 @@ def main ():
         na =sum (1 for c in cps if c ["tier"]=="auto")
         print (f"  {pid }: {len (cps )} CP  ({na } auto / {len (cps )-na } review)",flush =True )
 
-        # FAIL-SAFE OZETI: gate hatasi yasandiysa kosu SESSIZ BASARILI donmez.
+        # FAIL-SAFE OZETI: gate hatasi yasandiysa run SESSIZ BASARILI donmez.
     if _GATE_HATA :
         print ("",file =sys .stderr )
         print (f"!! WIRE-GATE {len (_GATE_HATA )} PARCADA CALISMADI -- o parts HAM BIRLESIM "

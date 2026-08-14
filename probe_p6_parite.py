@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """P6 PARITE TESTI: egitimdeki pool = urundeki pool mu?
 
-FINDING (2026-08-11, first kosu): AYRISIYOR and sebebi benim eklemem DEGIL.
+FINDING (2026-08-11, first run): AYRISIYOR and sebebi benim eklemem DEGIL.
 `_tam_oz` onbellegi `cp_config.json`'un ESKI halinde turetilmis; segmentasyon
 adaylari that gunden beri kaymis (ornek 016029: cache 7, canli 12). B-rep tarafi
 BIREBIR same (silindir 50/50, opening 0/0) -- i.e. difference tamamen segmentasyon
@@ -106,7 +106,7 @@ def main ():
         print ("!! AYRISMA VAR -- D7 OKUMASI YAPILMAZ, before sebebi bulunur.")
     json .dump ({"damga":makbuz_hash .damga (),"cluster":on ,"rapor":rapor ,
     "birebir":len (same_ ),"bakilan":len (rapor ),
-    "not":"Egitim onbellegi ile urun yolunun oznitelik paritesi."},
+    "not":"Egitim onbellegi with urun yolunun oznitelik paritesi."},
     open (f"results/p6_parite_{on }.json","w"),indent =1 )
     print (f"receipt -> results/p6_parite_{on }.json")
 

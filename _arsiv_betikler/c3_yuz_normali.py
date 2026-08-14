@@ -97,7 +97,7 @@ def main ():
         if kk %25 ==0 :
             print (f"  {kk }/{len (D ['DER'])}  {time .time ()-t0 :.0f}s",flush =True )
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
         SOZ1 ,SOZ2 =[],[]
         if r ["X"]is not None and r .get ("XR")is not None :
@@ -221,9 +221,9 @@ def main ():
     ust =0.7584 
     print (f"\n{'arm':<28}{'robot':>9}")
     print (f"{'MEVCUT':<28}{rm :>9.4f}")
-    print (f"{'KAHIN yerel sozluk (C1)':<28}{r1 :>9.4f}   direction boslugunun %{100 *(r1 -rm )/max (ust -rm ,1e-9 ):.0f}'i")
+    print (f"{'KAHIN yerel dictionary (C1)':<28}{r1 :>9.4f}   direction boslugunun %{100 *(r1 -rm )/max (ust -rm ,1e-9 ):.0f}'i")
     print (f"{'KAHIN +PARCA DUZEYI (C2)':<28}{r2 :>9.4f}   direction boslugunun %{100 *(r2 -rm )/max (ust -rm ,1e-9 ):.0f}'i")
-    print (f"{'ust sinir (=tespit)':<28}{ust :>9.4f}")
+    print (f"{'upper boundary (=tespit)':<28}{ust :>9.4f}")
     gecti =r2 >=0.70 
     print (f"\nKILL: kahin >= 0.70 -> {'GECTI, ayrik selector egitilir'if gecti else 'GECMEDI'}")
     with io .open ("results/c3_parca_yon.json","w",encoding ="utf-8")as f :

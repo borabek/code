@@ -7,7 +7,7 @@ KUME: `results/d7_sinav_kumesi.json` (838 part / 12 manufacturer / 3201 CP, muhu
   * g7 seg agi'nin oto-label korpusunda YOK (ETIKET_DISLA with dislandi)
 Yani YENI boru hattinin no bileseni this ureticilerden single part gormedi.
 
-DEGERLENDIRILEN YIGIN (all of them D6 on ya da D7'ye dokunmadan secildi):
+DEGERLENDIRILEN YIGIN (all of them D6 ten ya da D7'ye dokunmadan secildi):
   seg      : g7_s0 (16 manufacturer / 2367 label)
   radius  : cluster 1 / dedupe 2 / oy havuzu 2   (P1, D6'da secildi)
   gate     : wire_gate_v6 (new candidate dagiliminda refit; manufacturer-disi AUC 0.8379)
@@ -75,7 +75,7 @@ def main ():
     pid_sira =[]
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         pak =P3C .parca_adaylari (r ,gate ,cyl ,ratio =ORAN ,baseline =TABAN )
         if pak is not None :
@@ -105,7 +105,7 @@ def main ():
     print (f"{'ROBOT':<22}{rf :>9.4f}{rp_ :>10.4f}{rr_ :>9.4f}")
     print (f"{'donusum':<22}{rf /max (tf ,1e-9 ):>8.1%}")
     print (f"\n{'regime':<10}{'n':>6}{'TESPIT':>9}{'ROBOT':>9}")
-    for rj in ("dusuk","cok"):
+    for rj in ("low","very"):
         if Tr [rj ]:
             print (f"{rj :<10}{len (Tr [rj ]):>6}{f1w (Tr [rj ]):>9.4f}{f1w (Rr [rj ]):>9.4f}")
     print (f"\n{'manufacturer':<8}{'n':>5}{'TESPIT':>9}{'ROBOT':>9}")
@@ -125,11 +125,11 @@ def main ():
 
     kabul ={
     "robot >= 0.75":rf >=0.75 ,
-    "bootstrap alt >= 0.70":alt >=0.70 ,
+    "bootstrap lower >= 0.70":alt >=0.70 ,
     "precision >= 0.70":rp_ >=0.70 ,
     "recall >= 0.70":rr_ >=0.70 ,
-    "dusuk-CP >= 0.80":(f1w (Rr ["dusuk"])>=0.80 )if Rr ["dusuk"]else False ,
-    "cok-CP >= 0.50":(f1w (Rr ["cok"])>=0.50 )if Rr ["cok"]else False ,
+    "low-CP >= 0.80":(f1w (Rr ["low"])>=0.80 )if Rr ["low"]else False ,
+    "very-CP >= 0.50":(f1w (Rr ["very"])>=0.50 )if Rr ["very"]else False ,
     ">=20 parcali manufacturer < 0.50 YOK":
     all (f1w (Rm [m ])>=0.50 for m in Rm if len (Rm [m ])>=20 ),
     }
@@ -147,9 +147,9 @@ def main ():
         for rj in Tr },
         "manufacturer":{m :{"n":len (Tm [m ]),"tespit":f1w (Tm [m ]),
         "robot":f1w (Rm [m ])}for m in Tm },
-        "bootstrap":{"alt":alt ,"ust":ust },
+        "bootstrap":{"lower":alt ,"upper":ust },
         "kabul":kabul ,"hash":kod_muhru (),
-        "yigin":{"seg":"g7_s0","yaricap":"1/2/2","gate":"wire_gate_v6",
+        "yigin":{"seg":"g7_s0","radius":"1/2/2","gate":"wire_gate_v6",
         "threshold":f"{ORAN }/{TABAN }","selector":"p3c"},
         "sinirlilik":("axis selector g5 candidate dagiliminda egitildi; "
         "muhafazakar secim -- etkisi varsa sayiyi DUSURUR")},

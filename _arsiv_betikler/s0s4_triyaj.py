@@ -60,7 +60,7 @@ def main ():
             t =tpfp .setdefault (k ,[0 ,0 ])
             t [0 if i in es else 1 ]+=1 
     print (f"{'='*72 }\nS0 -- KUSUR YOGUNLUGU HARITASI\n{'='*72 }")
-    print (f"{'bayrak sayisi':<16}{'CP':>7}{'TP':>7}{'FP':>7}{'FP orani':>11}")
+    print (f"{'bayrak count':<16}{'CP':>7}{'TP':>7}{'FP':>7}{'FP orani':>11}")
     for k in sorted (say ):
         t ,f =tpfp [k ]
         print (f"{k :<16}{say [k ]:>7}{t :>7}{f :>7}{100 *f /max (t +f ,1 ):>10.1f}%")
@@ -75,7 +75,7 @@ def main ():
         for r in DER :
             d =R .get (r ["pid"])
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if d is None :
                 P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
             else :
@@ -112,7 +112,7 @@ def main ():
     # baseline: never onarim absent
     tb_d ,tb_r ,_ ,_ ,tb_k ,_ =kos (en_az =99 )
     print (f"{'triyaj':<28}{'tespit':>9}{'robot':>9}{'kusur%':>9}{'TP->FP':>8}{'FP->TP':>8}")
-    print (f"{'TABAN (onarim yok)':<28}{tb_d :>9.4f}{tb_r :>9.4f}{100 *tb_k :>8.1f}%{'-':>8}{'-':>8}")
+    print (f"{'TABAN (onarim absent)':<28}{tb_d :>9.4f}{tb_r :>9.4f}{100 *tb_k :>8.1f}%{'-':>8}{'-':>8}")
     SON ={}
     for ad ,kw in (("T1 >=1 bayrak ONAR",dict (en_az =1 )),
     ("T2 >=2 bayrak ONAR",dict (en_az =2 )),

@@ -97,15 +97,15 @@ def main ():
     "locked_celiskisi":celiski ,
     "dogrulanan_denetim_bulgulari":{
     "s7_brep_graf_eksik":("g_agiz_cev ve g_yuz_alan HIC hesaplanmiyor (graf_ozellik "
-    "10 slot acip yalniz 0-7'yi dolduruyor) ve gercek yuz-kenar "
+    "10 slot acip only 0-7'yi dolduruyor) ve gercek yuz-kenar "
     "komsulugu YOK -> BOSLUK GRAFI DENENMEMIS"),
-    "yon_sozlesmesi_bozuk":("robot_cp docstring 'the way the wire goes in' diyor ama "
+    "yon_sozlesmesi_bozuk":("robot_cp docstring 'the way the wire goes in' diyor but "
     "measured: candidate yonleri DISARI bakiyor ((p-merkez).d=+3.99), "
     "manufacturer InsertDirection ICERI (-4.8). sina_cluster abs() "
-    "kullandigi icin metrik bunu GOREMIYOR."),
+    "kullandigi for metrik bunu GOREMIYOR."),
     },
-    "prospektif_109_durumu":("EGITIME GIRMEDI ama W2'yi dagitma KARARINDA kullanildi -> "
-    "model secimi acisindan HARCANMISTIR. Bakir exam yalniz 95 LOCKED."),
+    "prospektif_109_durumu":("EGITIME GIRMEDI but W2'yi dagitma KARARINDA kullanildi -> "
+    "model secimi acisindan HARCANMISTIR. Bakir exam only 95 LOCKED."),
     }
     with io .open (OUT ,"w",encoding ="utf-8")as f :
         json .dump (kilit ,f ,indent =1 ,ensure_ascii =False )

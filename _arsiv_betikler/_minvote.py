@@ -24,7 +24,7 @@ ytr =np .asarray (d ["y"]);ptr =np .array ([str (x )for x in d ["pids"]]);vtr =n
 DER ,rap =measure_set .cluster ("results/_der_8uye.pkl");measure_set .rapor_bas (rap )
 AD =None 
 try :
-    import gate_bench as T ;AD =T .yukle ()["ad"]
+    import gate_bench as T ;AD =T .yukle ()["name"]
 except Exception :pass 
 i_vot =AD .index ("votes")if AD and "votes"in AD else 11 
 
@@ -58,7 +58,7 @@ def puanla (mv ,alt ):
                     c =wire_gate .pose_correct (X [idx ],c );c =wire_gate .angle_correct (X [idx ],c )
                     if r .get ("UYE"):c =wire_gate .pick_member_direction (X [idx ],c ,r ["UYE"])
                     P =np .array ([x ["point"]for x in c ],float );Pd =np .array ([x ["direction"]for x in c ],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         det .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
         rob .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ))
@@ -88,6 +88,6 @@ for sec ,olc in ((altA ,altB ),(altB ,altA )):
     dc +=d1 ;gg2 +=g1 
     print (f"  yarida secilen min_votes {ea } -> diger yaride measured ({len (olc )} part)")
 print (f"\nDURUST (capraz secim) TESPIT: {f1w (dc ):.4f}   [baseline 0.7584]")
-json .dump ({"tam":{str (k ):{"tespit":v [0 ],"robot":v [1 ]}for k ,v in TAM .items ()},
+json .dump ({"full":{str (k ):{"tespit":v [0 ],"robot":v [1 ]}for k ,v in TAM .items ()},
 "durust_tespit":f1w (dc )},io .open ("results/g4_minvotes.json","w"),indent =1 )
 print ("receipt -> results/g4_minvotes.json")

@@ -47,7 +47,7 @@ def insample_best (m ,oof ):
     return max (THRS ,key =lambda t :metrics (m ,oof ,t )[2 ])
 
 
-print ("\n=== (2) IN-SAMPLE optimal threshold (ust-sinir referans, deploy EDILEMEZ) ===")
+print ("\n=== (2) IN-SAMPLE optimal threshold (upper-boundary referans, deploy EDILEMEZ) ===")
 for nm ,m in masks .items ():
     bt =insample_best (m ,OOF );p ,r ,f =metrics (m ,OOF ,bt )
     print (f"  {nm :4s}: thr={bt :.2f} -> P={p :.3f} R={r :.3f} F1={f :.3f}")
@@ -81,7 +81,7 @@ def nested_cv (m ,K =5 ):
     return p ,r ,ff ,float (np .median (chosen )),[round (c ,2 )for c in chosen ]
 
 
-print ("\n=== (3) NESTED-CV per-mfg threshold (DURUST, deployable eger mfg biliniyorsa) ===")
+print ("\n=== (3) NESTED-CV per-mfg threshold (DURUST, deployable if mfg biliniyorsa) ===")
 report ={}
 for nm ,m in masks .items ():
     p ,r ,f ,mt ,ch =nested_cv (m )

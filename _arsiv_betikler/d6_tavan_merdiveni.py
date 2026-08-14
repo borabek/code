@@ -50,7 +50,7 @@ def main ():
 
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         diag =r ["diag"];tt =max (3.0 ,0.06 *diag )
         P0 =np .asarray (r ["P"],float )if r .get ("P")is not None else np .zeros ((0 ,3 ))
         D0 =np .asarray (r ["Pd"],float )if r .get ("Pd")is not None else np .zeros ((0 ,3 ))
@@ -98,16 +98,16 @@ def main ():
         ekle (AD [6 ],(rj ,len (G ),0 ,0 ))
 
     print (f"TEMIZ SINAV: {len (rec_ )} part, {sum (len (np .asarray (r ['G']))for r in rec_ .values ())} GT CP\n")
-    print (f"{'kademe':<20}{'AGIRLIKLI':>11}{'dusuk-CP':>11}{'cok-CP':>10}{'kazanc':>9}")
+    print (f"{'kademe':<20}{'AGIRLIKLI':>11}{'low-CP':>11}{'very-CP':>10}{'kazanc':>9}")
     onc =None 
     res_ ={}
     for a in AD :
         v =f1w (S [a ])
-        dl =f1w (rejim_s [a ]["dusuk"])if rejim_s [a ]["dusuk"]else float ("nan")
-        ck =f1w (rejim_s [a ]["cok"])if rejim_s [a ]["cok"]else float ("nan")
+        dl =f1w (rejim_s [a ]["low"])if rejim_s [a ]["low"]else float ("nan")
+        ck =f1w (rejim_s [a ]["very"])if rejim_s [a ]["very"]else float ("nan")
         kz =""if onc is None else f"{v -onc :+.4f}"
         print (f"{a :<20}{v :>11.4f}{dl :>11.4f}{ck :>10.4f}{kz :>9}")
-        res_ [a ]={"agirlikli":v ,"dusuk":dl ,"cok":ck }
+        res_ [a ]={"agirlikli":v ,"low":dl ,"very":ck }
         onc =v 
     json .dump (res_ ,io .open (MAKBUZ ,"w",encoding ="utf-8"),indent =1 )
     print (f"\nmakbuz -> {MAKBUZ }")

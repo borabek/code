@@ -76,7 +76,7 @@ gt_tot =int (sum (ngt_of .values ()))
 print (f"{NPZ }: {len (Y )} candidate ({len (Y )/max (gt_tot ,1 ):.2f}x GT) | {len (ngt_of )} part | {len (uf )} aile"
 f" | ADAY-TAVAN recall {int (Y .sum ())}/{gt_tot } = {Y .sum ()/max (gt_tot ,1 ):.3f}"
 f" (mukemmel-gate F1 tavani {2 *Y .sum ()/max (gt_tot ,1 )/(1 +Y .sum ()/max (gt_tot ,1 )):.3f})\n")
-for split_nm ,groups in (("PARCA-out (canonical ile kiyaslanabilir)",G ),("AILE-out (KATI)",FG )):
+for split_nm ,groups in (("PARCA-out (canonical with kiyaslanabilir)",G ),("AILE-out (KATI)",FG )):
     print (f"================ {split_nm } ================")
     for nm ,Xa in (("13 BAZ",X13 ),("13+A+B (46d)",AB ),("13+HEPSI (54d)",ALLF )):
         sc =oof (Xa ,groups )

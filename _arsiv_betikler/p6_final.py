@@ -23,7 +23,7 @@ import numpy as np
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 os .environ .setdefault ("CP_METAL_WIDE","0")# dar rule: olculen most iyi varyant
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 N_TRAIN =500 
 
 
@@ -169,7 +169,7 @@ def main ():
 
     def score (name ):
         avg ,col =ARMS [name ];clf =gates [name ]
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in tests :
             cps ,is_hi =cands (r ,avg )
             keep =[]
@@ -186,7 +186,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (G ))):
                     if d_ >r ["tol"]or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());kk ="cok"if r ["n"]>=8 else "dusuk"
+            tp =int (hit .sum ());kk ="very"if r ["n"]>=8 else "low"
             agg [kk ][0 ]+=tp ;agg [kk ][1 ]+=len (Q )-tp ;agg [kk ][2 ]+=len (G )-tp 
         out ={}
         for kk ,(T ,Fp ,Fn )in agg .items ():
@@ -196,11 +196,11 @@ def main ():
         return out 
 
     res ={name :score (name )for name in ARMS }
-    print (f"{'arm':<16}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}{'fark':>10}")
+    print (f"{'arm':<16}{'low':>9}{'very':>9}{'agirlikli':>11}{'difference':>10}")
     base =res ["A_4uye_13"]["w"]
     for name in ("A_4uye_13","B_5uye_13","D_4uye_RENK","C_5uye_RENK"):
         r =res [name ]
-        print (f"{name :<16}{r ['dusuk']:>9.4f}{r ['cok']:>9.4f}{r ['w']:>11.4f}{r ['w']-base :>+10.4f}")
+        print (f"{name :<16}{r ['low']:>9.4f}{r ['very']:>9.4f}{r ['w']:>11.4f}{r ['w']-base :>+10.4f}")
     dC =res ["C_5uye_RENK"]["w"]-base 
     print (f"\nYIGIN (C-A): {dC :+.4f}")
     print (f"KAPI (>= +0.02): {'GECTI -- finale girer'if dC >=0.02 else 'OLU'}")

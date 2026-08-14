@@ -36,14 +36,14 @@ def main ():
     v =robot_cp ._vote2 (fake ,cluster_mm =5.0 ,min_votes =1 )
     print (f"2) benzersiz oy       : tek modelden 2 yakin candidate -> votes={v [0 ]['_votes']} (1 olmali)")
     if v [0 ]["_votes"]!=1 :
-        fails .append ("ayni model iki oy veriyor")
+        fails .append ("same model two oy veriyor")
     for lst in ([fake [0 ][:1 ]]*n_ck ):
         pass 
     many =[[dict (fake [0 ][0 ])]for _ in range (n_ck )]
     v2 =robot_cp ._vote2 (many ,cluster_mm =5.0 ,min_votes =1 )
     print (f"   {n_ck } farkli modelden ayni candidate -> votes={v2 [0 ]['_votes']} ({n_ck } olmali)")
     if v2 [0 ]["_votes"]!=n_ck :
-        fails .append ("farkli modeller tek oy sayiliyor")
+        fails .append ("different models single oy sayiliyor")
 
     t_lo =cfg .get ("robot_wire_gate_threshold")
     t_hi =cfg .get ("robot_wire_gate_threshold_highcp")
@@ -58,7 +58,7 @@ def main ():
     import cp_openings 
     print (f"5) B-rep axis bayragi: {cp_openings .USE_BREP_AXIS }")
     if not cp_openings .USE_BREP_AXIS :
-        fails .append ("USE_BREP_AXIS kapali")
+        fails .append ("USE_BREP_AXIS closed")
 
     print ()
     if fails :

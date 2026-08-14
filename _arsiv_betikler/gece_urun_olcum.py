@@ -13,7 +13,7 @@ import os ,sys ,json ,copy
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -41,7 +41,7 @@ def main ():
     print (f"{len (sel )} part (80 dusuk / 40 cok) | threshold {thr_lo }/{thr_hi } | min_v {pp ['min_vertices']}",
     flush =True )
 
-    agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+    agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
     per_part =[]
     for i ,(mfg ,pid ,jf ,stp ,n )in enumerate (sel ,1 ):
         try :
@@ -81,7 +81,7 @@ def main ():
                 for d_ ,a_ ,b_ in sorted ((pe [a ,b ],a ,b )for a in range (len (Q ))for b in range (len (Gm ))):
                     if d_ >tol or a_ in used or hit [b_ ]:continue 
                     hit [b_ ]=True ;used .add (a_ )
-            tp =int (hit .sum ());k ="cok"if hi_ else "dusuk"
+            tp =int (hit .sum ());k ="very"if hi_ else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (Q )-tp ;agg [k ][2 ]+=len (Gm )-tp 
             pr =tp /max (len (Q ),1 );rc =tp /max (len (Gm ),1 )
             per_part .append ({"pid":pid ,"regime":k ,"gt":len (Gm ),"pred":len (Q ),
@@ -97,7 +97,7 @@ def main ():
         out [k ]={"P":p ,"R":r ,"F1":2 *p *r /max (p +r ,1e-9 ),"TP":T ,"FP":Fp ,"FN":Fn }
     wf1 =sum (W [k ]*out [k ]["F1"]for k in W )
     print (f"\n{'regime':<8}{'part':>7}{'P':>8}{'R':>8}{'F1':>9}")
-    for k in ("dusuk","cok"):
+    for k in ("low","very"):
         n =sum (1 for r in per_part if r ["regime"]==k )
         print (f"{k :<8}{n :>7}{out [k ]['P']:>8.3f}{out [k ]['R']:>8.3f}{out [k ]['F1']:>9.4f}")
     print (f"\nKORPUS-AGIRLIKLI CP-F1: {wf1 :.4f}   ({len (per_part )} part)")

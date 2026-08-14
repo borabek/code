@@ -97,20 +97,20 @@ def main ():
         fid ={v :i for i ,v in enumerate (sorted (set (fam )))}
         G =np .array ([fid [v ]for v in fam ])
         row ={}
-        for tag ,ps in [("dusuk",lo ),("cok",hi ),("hepsi",common )]:
+        for tag ,ps in [("low",lo ),("very",hi ),("all of them",common )]:
             mask =np .array ([q in ps for q in PID ])
             if mask .sum ()<30 :
                 row [tag ]=(float ("nan"),0.0 );continue 
             row [tag ]=evaluate (X ,Y ,PID ,NGT ,G ,mask )
         res [label ]=row 
-        print (f"{label :<24}{row ['dusuk'][0 ]:>12.4f}{row ['cok'][0 ]:>12.4f}{row ['hepsi'][0 ]:>12.4f}")
+        print (f"{label :<24}{row ['low'][0 ]:>12.4f}{row ['very'][0 ]:>12.4f}{row ['all of them'][0 ]:>12.4f}")
 
     a ,b =list (ARMS )
     print (f"\n{'FARK (min_v10 - min_v30)':<24}"
-    f"{res [b ]['dusuk'][0 ]-res [a ]['dusuk'][0 ]:>+12.4f}"
-    f"{res [b ]['cok'][0 ]-res [a ]['cok'][0 ]:>+12.4f}"
-    f"{res [b ]['hepsi'][0 ]-res [a ]['hepsi'][0 ]:>+12.4f}")
-    print (f"{'(seed sd)':<24}{res [b ]['dusuk'][1 ]:>12.4f}{res [b ]['cok'][1 ]:>12.4f}{res [b ]['hepsi'][1 ]:>12.4f}")
+    f"{res [b ]['low'][0 ]-res [a ]['low'][0 ]:>+12.4f}"
+    f"{res [b ]['very'][0 ]-res [a ]['very'][0 ]:>+12.4f}"
+    f"{res [b ]['all of them'][0 ]-res [a ]['all of them'][0 ]:>+12.4f}")
+    print (f"{'(seed sd)':<24}{res [b ]['low'][1 ]:>12.4f}{res [b ]['very'][1 ]:>12.4f}{res [b ]['all of them'][1 ]:>12.4f}")
 
     w =len (hi )/max (len (common ),1 )
     print (f"\ncok-CP orani skor kumesinde %{100 *w :.1f}")

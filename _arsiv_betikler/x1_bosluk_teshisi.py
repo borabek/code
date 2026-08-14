@@ -24,7 +24,7 @@ os .environ ["WG_TOPO"]="1"
 os .environ ["WG_ZENGIN"]="1"
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def f1 (tp ,fp ,fn ):
@@ -56,7 +56,7 @@ def main ():
     zen =np .load (NPZ ,allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tp_ =np .array ([str (x )for x in zen ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in tp_ ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in tp_ ]),list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tp_ ):
@@ -70,7 +70,7 @@ def main ():
     yanal_hepsi ,aci_hepsi ,aci_kahin =[],[],[]
     R_urun ,R_kahin_yon ,R_kahin_gate =[],[],[]
     for r in DER :
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         nG =len (G )
         if r ["X"]is None or r .get ("XR")is None or nG ==0 :
@@ -126,7 +126,7 @@ def main ():
         D_kahin .append ((rj ,len (c_hep ),0 ,nG -len (c_hep )))
         D_recall .append ((rj ,len (c_hep ),0 ,nG -len (c_hep )))
 
-        # --- B: ROBOT (lateral<=2 VE angle<=10), URUNUN sectikleri on
+        # --- B: ROBOT (lateral<=2 VE angle<=10), URUNUN sectikleri ten
         m_rob =(pe <=2.0 )&(aci <=10.0 );m_rob [~k ]=False 
         c_rob =greedy (m_rob )
         R_urun .append ((rj ,len (c_rob ),int (k .sum ())-len (c_rob ),nG -len (c_rob )))

@@ -102,7 +102,7 @@ def konum_sozlugu (V ,p ,d ,cyl ,ba ):
             S ["cember"]=p +c2 [0 ]*u +c2 [1 ]*v 
         a2 =en_acik_nokta (Q2 )
         if a2 is not None :
-            S ["acik"]=p +a2 [0 ]*u +a2 [1 ]*v 
+            S ["open"]=p +a2 [0 ]*u +a2 [1 ]*v 
     for dep in (1.0 ,3.0 ,5.0 ,7.0 ,10.0 ):
         m2 =(np .abs (t +dep )<=1.0 )&(rad <=9.0 )
         if m2 .sum ()>=5 :
@@ -165,7 +165,7 @@ def main ():
         if kk %25 ==0 :
             print (f"  {kk }/{len (D ['DER'])}  {time .time ()-t0 :.0f}s",flush =True )
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ));SOZ =[]
         if r ["X"]is not None and r .get ("XR")is not None :
             Xr =np .hstack ([r ["X"],r ["XR"]])
@@ -244,9 +244,9 @@ def main ():
     print (f"\nsozluk kapsami: {dict (sorted (say .items (),key =lambda x :-x [1 ]))}")
     print (f"\n{'arm':<26}{'robot':>9}{'kapsam':>9}")
     print (f"{'MEVCUT':<26}{me :>9.4f}")
-    print (f"{'KAHIN eski sozluk':<26}{F ['kahin_eski']:>9.4f}"
+    print (f"{'KAHIN old dictionary':<26}{F ['kahin_eski']:>9.4f}"
     f"{100 *(F ['kahin_eski']-me )/max (ya -me ,1e-9 ):>8.0f}%")
-    print (f"{'KAHIN ZENGIN sozluk':<26}{F ['kahin_yeni']:>9.4f}"
+    print (f"{'KAHIN ZENGIN dictionary':<26}{F ['kahin_yeni']:>9.4f}"
     f"{100 *(F ['kahin_yeni']-me )/max (ya -me ,1e-9 ):>8.0f}%")
     print (f"{'YANAL tavani':<26}{ya :>9.4f}")
     kaps =(F ["kahin_yeni"]-me )/max (ya -me ,1e-9 )

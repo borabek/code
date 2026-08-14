@@ -72,7 +72,7 @@ def main ():
         if not os .path .exists (mf ):
             continue 
         z =np .load (f"{OZ }/{f }")
-        kk =np .asarray (z ["kaynak"],int )
+        kk =np .asarray (z ["source"],int )
         P =np .asarray (z ["P"],float )
         zz =np .load (mf )
         V =np .asarray (zz ["V"],float )
@@ -104,7 +104,7 @@ def main ():
         if i %250 ==0 :
             print (f"  {i }/{len (fs )}",flush =True )
 
-    print (f"\n{'kural':<24}{'KONUM recall':>14}{'candidate/part':>13}")
+    print (f"\n{'rule':<24}{'KONUM recall':>14}{'candidate/part':>13}")
     out ={}
     for ad in KURALLAR :
         a =agg [ad ]

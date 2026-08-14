@@ -44,7 +44,7 @@ def main ():
     R0 ,R1 ,R2 =[],[],[]# real / hepsini-cevir / MUKEMMEL sign
     for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         diag =r ["diag"]
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         if r .get ("X")is not None and r .get ("P")is not None and len (r ["P"]):

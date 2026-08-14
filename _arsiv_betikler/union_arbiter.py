@@ -116,7 +116,7 @@ def main ():
     n =len (models );best =None ;sweep ={}
     for mv in range (1 ,n +1 ):
         f1 ,pr ,rc ,T ,Fp ,Fn ,rows =score (parts ,models ,a ,"union",mv )
-        tag =f"vote>={mv }"+("  (tam union)"if mv ==1 else "  (hepsi anlasir)"if mv ==n else "")
+        tag =f"vote>={mv }"+("  (full union)"if mv ==1 else "  (all of them anlasir)"if mv ==n else "")
         print (f"  UNION {tag :22s}  F1={f1 :.3f}  P={pr :.3f}  R={rc :.3f}  (TP{T } FP{Fp } FN{Fn })")
         sweep [f"vote{mv }"]={"f1":f1 ,"p":pr ,"r":rc }
         if best is None or f1 >best [0 ]:best =(f1 ,mv )

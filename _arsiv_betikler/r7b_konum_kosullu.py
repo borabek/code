@@ -126,7 +126,7 @@ def main ():
         for r in DER :
             h =H [r ["pid"]]
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             if h is None :
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
             else :
@@ -187,7 +187,7 @@ def main ():
     with io .open ("results/r7b_konum_kosullu.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,"auc_asama1":aucA ,
         "auc_asama2_kosullu":aucB ,"tarama":SON ,"en_iyi":eniyi ,
-        "deger":bool (val_ )},f ,indent =1 )
+        "value":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r7b_konum_kosullu.json")
 
 

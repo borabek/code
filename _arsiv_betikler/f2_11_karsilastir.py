@@ -81,7 +81,7 @@ def puanla (DER ,gate ):
     rows ,mfg_rows =[],{}
     for r in DER :
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
         if r ["X"]is not None and r .get ("XR")is not None :
             M =np .hstack ([r ["X"],r ["XR"]])
@@ -128,7 +128,7 @@ def main ():
         print (f"  candidate recall farki : {dr :+.4f}   (threshold <= 0.01)  "
         f"{'OK'if abs (dr )<=0.01 else 'KALDI'}")
         print (f"  tespit F1 farki   : {b ['tespit']-a ['tespit']:+.4f}")
-        print (f"\n  {'manufacturer':<10}{'A_STEP':>9}{'B_JSON':>9}{'fark':>9}")
+        print (f"\n  {'manufacturer':<10}{'A_STEP':>9}{'B_JSON':>9}{'difference':>9}")
         enb =0.0 
         for m in sorted (set (a ["manufacturer"])|set (b ["manufacturer"])):
             va ,vb =a ["manufacturer"].get (m ,0 ),b ["manufacturer"].get (m ,0 )

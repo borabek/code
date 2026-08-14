@@ -77,12 +77,12 @@ def main ():
     T .baslik (D )
     SON ,PARCA ={},{}
     KOLLAR =[("G0 TABAN  zskor+rf","zskor","rf")]
-    for mod in ("sira","ham"):
+    for mod in ("order","ham"):
         KOLLAR .append ((f"G2 {mod }+rf",mod ,"rf"))
     for m in ("rf_sig","gbm","lojistik"):
         KOLLAR .append ((f"G3 zskor+{m }","zskor",m ))
         # most umutlu caprazlama: order donusumu + duzenli model
-    KOLLAR +=[("G2xG3 sira+gbm","sira","gbm"),("G2xG3 sira+lojistik","sira","lojistik")]
+    KOLLAR +=[("G2xG3 order+gbm","order","gbm"),("G2xG3 order+lojistik","order","lojistik")]
 
     for ad ,mod ,m in KOLLAR :
         try :
@@ -107,7 +107,7 @@ def main ():
         l2 ,h2 =T .ga (PARCA ["G0 TABAN  zskor+rf"],PARCA [ad ],"WEI-disi")
         print (f"  {ad }: pool GA[{lo :+.4f},{hi :+.4f}] | WEI-disi GA[{l2 :+.4f},{h2 :+.4f}]")
     if not kazanan :
-        print ("\nKILL: hicbir donusum/model kolu manufacturer-disi +0.01 vermedi")
+        print ("\nKILL: no donusum/model kolu manufacturer-disi +0.01 vermedi")
     with io .open ("results/g2g3_donusum_model.json","w",encoding ="utf-8")as f :
         json .dump ({ad :{"havuzlanmis":SON [ad ]["havuzlanmis"]["tespit"],
         "uretici_ort":SON [ad ]["_URETICI_DISI_ORT"],

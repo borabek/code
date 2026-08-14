@@ -60,7 +60,7 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     Xt =np .hstack ([np .asarray (zen ["X22"],float ),np .asarray (zen ["XR"],float )])
     ytr =np .asarray (zen ["y"]);tpid =np .array ([str (x )for x in zen ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in tpid ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in tpid ]),list (tg ))
     dag =wire_gate ._load (wire_gate .MODEL_PATH );DON =dag .get ("donusum")
     Z =np .zeros ((len (Xt ),Xt .shape [1 ]*2 ))
     for u in np .unique (tpid ):
@@ -117,14 +117,14 @@ def main ():
                             b =int (np .argmin (np .linalg .norm (G -P [i ],axis =1 )))
                             a =np .degrees (np .arccos (np .clip (np .abs (DIR @Gd [b ]),0 ,1 )))
                             Pd [i ]=DIR [int (np .argmin (a ))]
-            rj ="cok"if r ["n"]>=8 else "dusuk"
+            rj ="very"if r ["n"]>=8 else "low"
             det .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
             rob .append ((rj ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
         return det ,rob 
 
     R ={}
     for mod ,ad in (("baseline","T baseline (selector KAPALI)"),("arm","K dagitilan selector"),
-    ("kahin","O KAHIN (ust sinir)")):
+    ("kahin","O KAHIN (upper boundary)")):
         d ,rr =puanla (mod )
         R [mod ]=(float (f1w (d )),float (f1w (rr )),rr )
         print (f"{ad :<26}tespit {R [mod ][0 ]:.4f} | ROBOT {R [mod ][1 ]:.4f}",flush =True )

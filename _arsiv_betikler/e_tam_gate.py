@@ -16,7 +16,7 @@ import os ,sys ,json ,glob
 import numpy as np 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 NPZ ="results/gate_regrow_data_rt2.npz"
 OUT ="results/gate_regrow_data_rt2_axis.npz"
 
@@ -69,12 +69,12 @@ def main ():
     print (f"  axis BELIRLI  TP orani %{100 *y [det ].mean ():.1f} (n={int (det .sum ())})")
     print (f"  axis BELIRSIZ TP orani %{100 *y [~det ].mean ():.1f} (n={int ((~det ).sum ())})\n")
 
-    reg =np .array ([("cok"if int (ngt .get (int (g ),0 ))>=8 else "dusuk")for g in groups ])
-    tot ={"dusuk":0 ,"cok":0 }
+    reg =np .array ([("very"if int (ngt .get (int (g ),0 ))>=8 else "low")for g in groups ])
+    tot ={"low":0 ,"very":0 }
     for g in {int (g )for g in groups }:
         n =int (ngt .get (g ,0 ))
         if n >0 :
-            tot ["cok"if n >=8 else "dusuk"]+=n 
+            tot ["very"if n >=8 else "low"]+=n 
     gk =fams .astype (str )
 
     def oof (M ):
@@ -86,7 +86,7 @@ def main ():
 
     def best_f1 (o ):
         out ={}
-        for k in ("dusuk","cok"):
+        for k in ("low","very"):
             b =(0.0 ,0.40 )
             for thr in np .arange (0.20 ,0.71 ,0.05 ):
                 m =reg ==k ;s =(o >=thr )&m 
@@ -99,14 +99,14 @@ def main ():
 
     a13 ,d13 =best_f1 (oof (X ))
     aE ,dE =best_f1 (oof (np .hstack ([X ,XE ])))
-    print (f"{'arm':<26}{'CP-F1':>9}{'dusuk':>9}{'cok':>9}{'esikler':>18}")
-    print (f"{'13 ozellik (dagitilan)':<26}{a13 :>9.4f}{d13 ['dusuk'][0 ]:>9.4f}{d13 ['cok'][0 ]:>9.4f}"
-    f"{str ((d13 ['dusuk'][1 ],d13 ['cok'][1 ])):>18}")
-    print (f"{'13 + EKSEN GUVENI':<26}{aE :>9.4f}{dE ['dusuk'][0 ]:>9.4f}{dE ['cok'][0 ]:>9.4f}"
-    f"{str ((dE ['dusuk'][1 ],dE ['cok'][1 ])):>18}")
+    print (f"{'arm':<26}{'CP-F1':>9}{'low':>9}{'very':>9}{'esikler':>18}")
+    print (f"{'13 feature (dagitilan)':<26}{a13 :>9.4f}{d13 ['low'][0 ]:>9.4f}{d13 ['very'][0 ]:>9.4f}"
+    f"{str ((d13 ['low'][1 ],d13 ['very'][1 ])):>18}")
+    print (f"{'13 + EKSEN GUVENI':<26}{aE :>9.4f}{dE ['low'][0 ]:>9.4f}{dE ['very'][0 ]:>9.4f}"
+    f"{str ((dE ['low'][1 ],dE ['very'][1 ])):>18}")
     print (f"\nTAM KORPUS FARKI: {aE -a13 :+.4f}")
     print (f"KARAR (>= +0.005): {'E URUNE ALINIR'if aE -a13 >=0.005 else 'E DUSER'}")
-    json .dump ({"f1_13":a13 ,"f1_axis":aE ,"fark":aE -a13 ,
+    json .dump ({"f1_13":a13 ,"f1_axis":aE ,"difference":aE -a13 ,
     "thr_13":{k :v [1 ]for k ,v in d13 .items ()},
     "thr_axis":{k :v [1 ]for k ,v in dE .items ()}},
     open ("results/e_tam_gate.json","w"),indent =1 )

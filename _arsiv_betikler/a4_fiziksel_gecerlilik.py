@@ -111,7 +111,7 @@ def main ():
         G =AGIZ [r ["pid"]][0 ];Gd =np .asarray (r ["Gd"],float )
         tp ,fp ,fn ,bi =match_greedy (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True )
         eslesen ={e [0 ]:(e [3 ],e [4 ])for e in bi ["eslesme"]}
-        rj ="cok"if r ["n"]>=8 else "dusuk"
+        rj ="very"if r ["n"]>=8 else "low"
         for i in range (len (P )):
             b =bl [i ]
             ax ,ac =eslesen .get (i ,(None ,None ))
@@ -126,7 +126,7 @@ def main ():
     BAY =("govde_ici","onu_kapali","duvara_yapisik","eksenel_buyuk")
     kusur =lambda s :any (s [k ]for k in BAY )
     print (f"\n{'='*78 }\nA4 -- FIZIKSEL GECERLILIK (194 part, {n } uretilen CP)\n{'='*78 }")
-    print (f"{'bayrak':<18}{'sayi':>7}{'ratio':>8}   {'TP icinde':>10}{'FP icinde':>11}")
+    print (f"{'bayrak':<18}{'number':>7}{'ratio':>8}   {'TP inside':>10}{'FP inside':>11}")
     ntp =sum (1 for s in line_ if s ["tp"]);nfp =n -ntp 
     for k in BAY :
         c =sum (1 for s in line_ if s [k ])
@@ -140,7 +140,7 @@ def main ():
     print (f"  FP'lerin kusurlu orani: %{100 *(ck -ckt )/max (nfp ,1 ):.1f}")
 
     print (f"\n{'regime':<10}{'CP':>7}{'kusurlu':>9}{'ratio':>8}{'TP kusur':>10}{'FP kusur':>10}")
-    for rj in ("dusuk","cok"):
+    for rj in ("low","very"):
         alt =[s for s in line_ if s ["regime"]==rj ]
         c =sum (1 for s in alt if kusur (s ))
         t =sum (1 for s in alt if kusur (s )and s ["tp"])
@@ -165,9 +165,9 @@ def main ():
         f =sum (1 for s in line_ if s [k ]and not s ["tp"])
         rt =t /max (ntp ,1 );rf =f /max (nfp ,1 )
         z =rf /max (rt ,1e-9 )
-        hkm =("YAPISAL (yalniz TP'de tanimli)"if k =="eksenel_buyuk"else 
+        hkm =("YAPISAL (only TP'de tanimli)"if k =="eksenel_buyuk"else 
         "AYIRT EDICI -- arm yasar"if z >=1.5 else 
-        "ZAYIF"if z >=1.0 else "TERS (TP'de daha sik)")
+        "ZAYIF"if z >=1.0 else "TERS (TP'de more sik)")
         print (f"  {k :<16}{100 *rf :>8.1f}%{100 *rt :>8.1f}%{z :>12.2f}x   {hkm }")
         # BIRLESIK satiri EKSENEL HARIC is computed: that bayrak only eslesen CP'lerde tanimli,
         # birlige katilinca ratio yapisal as TP'ye kayar and kolu haksiz yere olu gosterir.
@@ -177,12 +177,12 @@ def main ():
     rk_t =ckt2 /max (ntp ,1 );rk_f =(ck2 -ckt2 )/max (nfp ,1 )
     print (f"  {'BIRLESIK(fiz)':<16}{100 *rk_f :>8.1f}%{100 *rk_t :>8.1f}%{rk_f /max (rk_t ,1e-9 ):>12.2f}x"
     f"   {ck2 } CP (%{100 *ck2 /max (n ,1 ):.1f})")
-    print ("\n  KURAL: zenginlesme >= 1.5x ise bayrak FP'yi ayirt eder -> ONARIM/RED kolu mesru")
+    print ("\n  RULE: zenginlesme >= 1.5x whereas bayrak FP'yi ayirt eder -> FIX/RED kolu mesru")
 
     with io .open ("results/a4_fiziksel_gecerlilik.json","w",encoding ="utf-8")as f :
         json .dump ({"n_cp":n ,"tp":ntp ,"fp":nfp ,
         "kusurlu":ck ,"kusurlu_tp":ckt ,
-        "bayraklar":{k :{"toplam":sum (1 for s in line_ if s [k ]),
+        "bayraklar":{k :{"total":sum (1 for s in line_ if s [k ]),
         "tp":sum (1 for s in line_ if s [k ]and s ["tp"]),
         "fp":sum (1 for s in line_ if s [k ]and not s ["tp"])}
         for k in BAY },

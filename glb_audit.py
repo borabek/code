@@ -60,7 +60,7 @@ def audit_one (glb_path ):
         return False ,["DENETLENEMEDI: GLB'den mesh cikarilamadi"],{}
     cols =getattr (mesh .visual ,"vertex_colors",None )
     if cols is None or len (cols )!=len (mesh .vertices ):
-        return False ,["DENETLENEMEDI: GLB'de vertex rengi yok -- roller ayirt edilemez"],{}
+        return False ,["DENETLENEMEDI: GLB'de vertex rengi none -- roller ayirt edilemez"],{}
 
     roles =classify_colors (cols )
     unknown =int ((roles ==None ).sum ())# noqa: E711
@@ -71,7 +71,7 @@ def audit_one (glb_path ):
     body_v =(roles =="body")
     fmask =body_v [mesh .faces ].all (axis =1 )
     if not fmask .any ():
-        return False ,["DENETLENEMEDI: GLB'de body (gri) yuzeyi yok"],{}
+        return False ,["DENETLENEMEDI: GLB'de body (gri) yuzeyi none"],{}
     body =mesh .submesh ([np .where (fmask )[0 ]],append =True ,repair =False )
     if rec .get ("body_faces")and abs (len (body .faces )-rec ["body_faces"])>0 :
         v .append (f"body yuzey sayisi tutmuyor: GLB {len (body .faces )} vs receipt {rec ['body_faces']}")

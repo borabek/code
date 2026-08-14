@@ -44,5 +44,5 @@ for m in sorted (a ["brand"],key =lambda k :-a ["brand"][k ]):
     f"{b ['brand'].get (m ,0 )-a ['brand'][m ]:>+8.4f}")
 json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
 "not":"HAVUZ GERI CAGIRMA (F1 DEGIL). D7 brand-disi, tespit tolerans, "
-"aci serbest, bire-bir Macar."},
+"aci serbest, bire-a Macar."},
 open ("results/havuz_recall_d7.json","w"),indent =1 )

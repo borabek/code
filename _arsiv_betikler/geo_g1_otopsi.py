@@ -46,7 +46,7 @@ def main (n_parts =60 ):
     dev =[parts [i ]for i in idx [:n_parts ]]
     print (f"dev kumesi {len (dev )} part (eval yarisi bu fazda DOKUNULMADI)\n",flush =True )
 
-    sig_count ={k :0 for k in ("gecen","eksen_dik","cok_kucuk","cok_buyuk","sig","yalniz","diger")}
+    sig_count ={k :0 for k in ("gecen","eksen_dik","cok_kucuk","cok_buyuk","sig","only","diger")}
     n_fp =n_tp =0 
     fn_near_cyl =fn_total =0 
     rows =[]
@@ -103,7 +103,7 @@ def main (n_parts =60 ):
                 elif rad <1.0 :sig_count ["cok_kucuk"]+=1 
                 elif rad >3.0 :sig_count ["cok_buyuk"]+=1 
                 elif dep <3.0 :sig_count ["sig"]+=1 
-                elif same ==0 :sig_count ["yalniz"]+=1 
+                elif same ==0 :sig_count ["only"]+=1 
                 else :sig_count ["diger"]+=1 
 
                 # FN otopsisi: kacan GT silindirik yuzeye yakin mi
@@ -129,7 +129,7 @@ def main (n_parts =60 ):
         if i <=4 and kk !="diger":cum +=pc 
         print (f"  {kk :<12}{v :>6}  %{pc :5.1f}")
     print (f"\n  ILK 4 IMZANIN KAPSAMI (diger haric): %{cum :.1f}")
-    print (f"  KAPI 1 (>=%60): {'GECTI'if cum >=60 else 'KALDI -> plan burada KAPANIR'}")
+    print (f"  KAPI 1 (>=%60): {'GECTI'if cum >=60 else 'KALDI -> plan here KAPANIR'}")
 
     print (f"\n=== FN OTOPSISI ({fn_total } kacan GT) ===")
     pc_cyl =100 *fn_near_cyl /max (fn_total ,1 )

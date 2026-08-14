@@ -92,14 +92,14 @@ def sinav_seti ():
         pid =f [3 :-4 ]
         z =np .load (f"{OZ }/{f }")
         X =np .asarray (z ["X"],float )
-        kay =z ["kaynak"]
+        kay =z ["source"]
         nb =int ((kay ==1 ).sum ())
         T =tanim ("d7",pid ,nb )if nb else np .zeros ((0 ,len (AT .AD )))
         if T is None :
             atlanan +=1 
             continue 
         te .append ({"pid":pid ,"X":X ,"T":T ,"P":z ["P"],"D":z ["D"],
-        "kaynak":kay })
+        "source":kay })
     print (f"  tanimlayicisi eksik exam parcasi: {atlanan }",flush =True )
     return te 
 
@@ -129,7 +129,7 @@ def main ():
             rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
             tes =[]
             for d in te :
-                ms =d ["kaynak"]==0 
+                ms =d ["source"]==0 
                 Xs =d ["X"][ms ]
                 if len (Xs )<2 :
                     continue 
@@ -158,7 +158,7 @@ def main ():
             for m ,a in rob .items ()}
             mi =float (2 *sum (a [0 ]for a in rob .values ())/
             max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-            r ={"kural":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
+            r ={"rule":f"{tip } {e }","robot":mi ,"tespit":K .mikro (tes ),
             "makro":float (np .mean (list (pm .values ()))),
             "en_kotu":float (min (pm .values ())),"brand":pm }
             if en is None or r ["robot"]>en ["robot"]:
@@ -172,7 +172,7 @@ def main ():
         out [ad ]=kos (be )
         r =out [ad ]
         print (f"{ad :<24} robot {r ['robot']:.4f} | tespit {r ['tespit']:.4f} | "
-        f"makro {r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['kural']}",
+        f"makro {r ['makro']:.4f} | en kotu {r ['en_kotu']:.4f} | {r ['rule']}",
         flush =True )
     t =out ["TEZ-SAF (B-rep KAPALI)"]
     print ()

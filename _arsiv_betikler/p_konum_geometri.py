@@ -38,13 +38,13 @@ def hatalar (cluster ):
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
     d =np .load ("results/gate_regrow_data_rt2.npz",allow_pickle =True )
     gk =json .load (open ("results/_strict_geometry_keys.json"))
-    tg ={gk .get (r ["pid"],"yok:"+r ["pid"])for r in cache }
+    tg ={gk .get (r ["pid"],"absent:"+r ["pid"])for r in cache }
     pids =np .array ([str (x )for x in d ["pids"]])
-    keep =~np .isin (np .array ([gk .get (p ,"yok:"+p )for p in pids ]),list (tg ))
+    keep =~np .isin (np .array ([gk .get (p ,"absent:"+p )for p in pids ]),list (tg ))
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (d ["X"][keep ],d ["y"][keep ])
 
@@ -64,7 +64,7 @@ def hatalar (cluster ):
         if not cps :
             continue 
         Xc =wire_gate .feats_for (V ,F ,sum (plist )/len (plist ),cps ,CE ,CT )
-        m =clf .predict_proba (Xc )[:,1 ]>=(THR ["cok"]if is_hi else THR ["dusuk"])
+        m =clf .predict_proba (Xc )[:,1 ]>=(THR ["very"]if is_hi else THR ["low"])
         if not m .any ():
             continue 
         P =np .array ([c ["point"]for c ,k in zip (cps ,m )if k ],float )
@@ -86,14 +86,14 @@ def hatalar (cluster ):
                 continue 
             us .add (a_ );ug .add (b_ )
             lat .append (float (pe [a_ ,b_ ]));ang .append (float (an [a_ ,b_ ]))
-            rej .append ("cok"if r ["n"]>=8 else "dusuk")
+            rej .append ("very"if r ["n"]>=8 else "low")
     return np .array (lat ),np .array (ang ),np .array (rej )
 
 
 def main ():
     out ={}
     print (f"{'cluster':<6}{'n':>6}{'lateral med':>11}{'lateral p90':>11}{'<=2mm':>8}"
-    f"{'aci med':>10}{'aci p90':>10}{'<=10d':>8}{'IKISI':>8}")
+    f"{'angle med':>10}{'angle p90':>10}{'<=10d':>8}{'IKISI':>8}")
     D ={}
     for k in ("dev","val"):
         lat ,ang ,rej =hatalar (k )
@@ -108,7 +108,7 @@ def main ():
         "aci_10d_orani":a10 ,"ikisi_orani":ik }
 
     print ("\nKAYBIN AYRISTIRILMASI (DEV -> VAL, esles"
-    "mis candidates uzerinde):")
+    "mis candidates on):")
     dv ,vv =out ["dev"],out ["val"]
     print (f"  yalniz lateral esigi (<=2mm) : {dv ['yanal_2mm_orani']:.3f} -> {vv ['yanal_2mm_orani']:.3f}"
     f"  ({vv ['yanal_2mm_orani']-dv ['yanal_2mm_orani']:+.3f})")
@@ -122,8 +122,8 @@ def main ():
     out ["baskin"]=dom 
 
     # regime ayrimi: low-CP mi very-CP mi bozuluyor?
-    print (f"\n{'regime':<8}{'DEV ikisi':>11}{'VAL ikisi':>11}{'fark':>9}")
-    for rk in ("dusuk","cok"):
+    print (f"\n{'regime':<8}{'DEV ikisi':>11}{'VAL ikisi':>11}{'difference':>9}")
+    for rk in ("low","very"):
         v =[]
         for k in ("dev","val"):
             lat ,ang ,rej =D [k ]

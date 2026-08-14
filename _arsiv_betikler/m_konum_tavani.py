@@ -19,7 +19,7 @@ import numpy as np
 
 os .environ .setdefault ("BA_ALLOW_SEEN","1")
 sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
-W ={"dusuk":0.895 ,"cok":0.105 }
+W ={"low":0.895 ,"very":0.105 }
 
 
 def main ():
@@ -31,8 +31,8 @@ def main ():
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     pp =cfg ["prediction_postproc"]
     MINV =int (pp ["min_vertices"]);VC =float (pp ["vertex_confidence_mask"]);CL =float (pp ["cluster_mm"])
-    THR ={"dusuk":float (cfg ["robot_wire_gate_threshold"]),
-    "cok":float (cfg ["robot_wire_gate_threshold_highcp"])}
+    THR ={"low":float (cfg ["robot_wire_gate_threshold"]),
+    "very":float (cfg ["robot_wire_gate_threshold_highcp"])}
     cache =pickle .load (open ("results/_h_probs.pkl","rb"))
     d =np .load ("results/gate_regrow_data_rt2.npz",allow_pickle =True )
     X =d ["X"];y =d ["y"]
@@ -55,8 +55,8 @@ def main ():
     hi =[x for x in parts if x [4 ]>=8 ]
     sel =([lo [i ]for i in rng .choice (len (lo ),70 ,replace =False )]+
     [hi [i ]for i in rng .choice (len (hi ),30 ,replace =False )])
-    tg ={gk .get (p [1 ],"yok:"+p [1 ])for p in sel }
-    Gg =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
+    tg ={gk .get (p [1 ],"absent:"+p [1 ])for p in sel }
+    Gg =np .array ([gk .get (p ,"absent:"+p )for p in pids ])
     keep =~np .isin (Gg ,list (tg ))
     cols =None 
     try :
@@ -96,7 +96,7 @@ def main ():
             if cols :
                 Xc =Xc [:,cols ]
             sc =clf .predict_proba (Xc )[:,1 ]
-            t_ =THR ["cok"]if is_hi else THR ["dusuk"]
+            t_ =THR ["very"]if is_hi else THR ["low"]
             kept =[c for c ,s_ in zip (cps ,sc )if s_ >=t_ ]
         DER .append (dict (
         P =np .array ([c ["point"]for c in kept ],float )if kept else np .zeros ((0 ,3 )),
@@ -106,7 +106,7 @@ def main ():
     f"{sum (len (r ['P'])for r in DER )}\n",flush =True )
 
     def score (fix_pos =False ,fix_axis =False ,tol =2.0 ,am =10.0 ,pct =False ):
-        agg ={"dusuk":[0 ,0 ,0 ],"cok":[0 ,0 ,0 ]}
+        agg ={"low":[0 ,0 ,0 ],"very":[0 ,0 ,0 ]}
         for r in DER :
             P =r ["P"].copy ();Pd =r ["Pd"].copy ()
             G ,Gd =r ["G"],r ["Gd"]
@@ -144,15 +144,15 @@ def main ():
                         continue 
                     hit [b_ ]=True ;used .add (a_ )
             tp =int (hit .sum ())
-            k ="cok"if r ["n"]>=8 else "dusuk"
+            k ="very"if r ["n"]>=8 else "low"
             agg [k ][0 ]+=tp ;agg [k ][1 ]+=len (P )-tp ;agg [k ][2 ]+=len (G )-tp 
         o ={}
         for k ,(T ,Fp ,Fn )in agg .items ():
             p_ =T /max (T +Fp ,1 );rc =T /max (T +Fn ,1 )
             o [k ]=2 *p_ *rc /max (p_ +rc ,1e-9 )
-        return sum (W [k ]*o [k ]for k in W ),o ["dusuk"],o ["cok"]
+        return sum (W [k ]*o [k ]for k in W ),o ["low"],o ["very"]
 
-    print (f"{'senaryo':<38}{'robot-hazir':>13}{'dusuk':>9}{'cok':>9}")
+    print (f"{'senaryo':<38}{'robot-hazir':>13}{'low':>9}{'very':>9}")
     rows =[
     ("MEVCUT",False ,False ),
     ("+ EKSEN kusursuz (oracle)",False ,True ),
@@ -165,7 +165,7 @@ def main ():
         res [lab ]=w 
         print (f"{lab :<38}{w :>13.4f}{l_ :>9.4f}{h_ :>9.4f}",flush =True )
     det ,dl ,dh =score (tol =0.0 ,am =180.0 ,pct =True )
-    print (f"\n{'TESPIT (ayni candidates, gevsek criterion)':<38}{det :>13.4f}{dl :>9.4f}{dh :>9.4f}")
+    print (f"\n{'TESPIT (same candidates, gevsek criterion)':<38}{det :>13.4f}{dl :>9.4f}{dh :>9.4f}")
     print ("  ^ this row candidate+gate kalitesinin tavani: no konum/axis duzeltmesi bunu asamaz")
     base =res ["MEVCUT"]
     print (f"\nMADDE 9/10'un ORACLE degeri : {res ['+ KONUM kusursuz (oracle, madde 9/10)']-base :+.4f}")

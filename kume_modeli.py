@@ -71,9 +71,9 @@ def loss (logit ,y ,lam =0.5 ,bce_maske =None ):
     ogreniyor. Iki arm EGITIM DENGESI bakimindan equal degildi -- haksiz kiyas.
 
     KRITIK AYRIM: maske only KAYBI daraltir. Ileri gecis (and therefore
-    part ozeti/baglam) HER ZAMAN TUM part on is computed; aksi halde
+    part ozeti/baglam) HER ZAMAN TUM part ten is computed; aksi halde
     modelin varlik sebebi which is baglam absent olurdu. LISTWISE de tum part
-    on kalir -- ranking however full cluster on anlamlidir.
+    ten kalir -- ranking however full cluster ten anlamlidir.
     """
     if bce_maske is None :
         bce =F .binary_cross_entropy_with_logits (logit ,y )

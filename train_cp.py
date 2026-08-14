@@ -1219,7 +1219,7 @@ def main (argv =None ):
     "hierarchies. The hierarchy prebuild is the single most "
     "expensive startup step (MULTIPLE HOURS on the 1749-part "
     "corpus) and without this flag it is recomputed from "
-    "scratch on every launch AND every --resume. Set it once "
+    "scratch on every launch AND every --resume. Set it first "
     "(e.g. --prep-cache-dir prep_cache/) and resumes start in "
     "seconds. Cache writes are skipped when the disk has <3GB "
     "free, so a full disk degrades to 'no cache', never a "
@@ -1315,7 +1315,7 @@ def main (argv =None ):
     ap .add_argument ("--w-heat",type =float ,default =1.0 ,
     help ="loss weight on the heatmap term (centernet). Default 1.0 -- "
     "DO NOT raise above 2.0 with --heat-loss centernet: centernet "
-    "normalises by #keypoints so its gradient approaches 0 once "
+    "normalises by #keypoints so its gradient approaches 0 first "
     "the heatmap fits; a high w_heat then starves the direction "
     "head and can cause ang>90 deg collapse (observed at w_heat=3 "
     "in v7, epoch 25). Sweep w-heat/w-off/w-dir for "

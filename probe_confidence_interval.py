@@ -57,7 +57,7 @@ def main ():
     print ("     measured; real GA bundan GENIS may be.")
     json .dump ({"yol":YOL ,"n_parca":len (d ),"n_boot":N_BOOT ,"sonuc":out ,
     "not":"Parca duzeyi bootstrap %95 GA. Geometrik ikiz "
-    "sizintisi nedeniyle gercek GA daha genis olabilir."},
+    "sizintisi nedeniyle gercek GA more genis olabilir."},
     open (f"results/guven_araligi_{YOL }.json","w"),indent =1 )
     print (f"receipt -> results/guven_araligi_{YOL }.json")
 

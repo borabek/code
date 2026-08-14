@@ -33,7 +33,7 @@ def yukle (ad ):
             continue 
         z =np .load (f"{OZ }/{f }")
         v .append ({"pid":f [len (ad )+1 :-4 ],"X":z ["X"],"y":z ["y"],"P":z ["P"],
-        "D":z ["D"],"kaynak":z ["kaynak"]})
+        "D":z ["D"],"source":z ["source"]})
     return v 
 
 
@@ -54,7 +54,7 @@ print (f"D6 {len (tr )} | D7 {len (te )}",flush =True )
 def egit (segtek ):
     X ,y =[],[]
     for d in tr :
-        m =d ["kaynak"]==0 if segtek else np .ones (len (d ["y"]),bool )
+        m =d ["source"]==0 if segtek else np .ones (len (d ["y"]),bool )
         X .append (d ["X"][m ]);y .append (d ["y"][m ])
     X =np .vstack (X );y =np .concatenate (y )
     c =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =2 ,n_jobs =-1 ,
@@ -68,7 +68,7 @@ def olc (skorla ,segtek ,esikler ):
     for e in esikler :
         rob =collections .defaultdict (lambda :[0 ,0 ,0 ]);tes =[]
         for d in te :
-            m0 =d ["kaynak"]==0 if segtek else np .ones (len (d ["y"]),bool )
+            m0 =d ["source"]==0 if segtek else np .ones (len (d ["y"]),bool )
             s =skorla (d ["X"][m0 ]);P ,D =d ["P"][m0 ],d ["D"][m0 ]
             k =s >=e 
             P2 ,D2 =(P [k ],D [k ])if k .any ()else (P [:0 ],D [:0 ])
@@ -115,5 +115,5 @@ f"tespit {A ['tespit']-C ['tespit']:+.4f}")
 json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
 "havuz_etkisi":B ["robot"]-A ["robot"],
 "egitim_buyuklugu_etkisi":A ["robot"]-C ["robot"],
-"not":"Ayni onbellekli oznitelikler, ayni threshold taramasi. D7 brand-disi, MIKRO."},
+"not":"Ayni onbellekli oznitelikler, same threshold taramasi. D7 brand-disi, MIKRO."},
 open ("results/brep_kontrol.json","w"),indent =1 )

@@ -103,13 +103,13 @@ def main ():
 
     wei =mfg =="WEI"
     det =A [:,0 ]==1 
-    print ("\n=== WEI (C icin gorulmemis -- KARAR BUNA gore) ===")
+    print ("\n=== WEI (C for gorulmemis -- DECISION BUNA according to) ===")
     show (wei &~det ,"B-rep SUSUYOR (asil soru)")
     show (wei &det ,"B-rep konusuyor (C girmemeli)")
     show (wei ,"WEI tumu")
     print ("\n=== PXC/diger (C'nin EGITIMINDE -- sizintili, bilgi amacli) ===")
     show (~wei &~det ,"B-rep SUSUYOR")
-    print ("\nKILL: WEI + B-rep susan alt kumede C'nin >15d hatasi URUNUNKINDEN kucuk olmali.")
+    print ("\nKILL: WEI + B-rep susan lower kumede C'nin >15d hatasi URUNUNKINDEN small must be.")
 
 
 if __name__ =="__main__":

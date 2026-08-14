@@ -58,7 +58,7 @@ def main ():
     KONUM =list (range (0 ,9 ))# A1(3) + A2(6)
     CYARI =list (range (9 ,33 ))# B (24)
     KOL ={"A 22 temel":None ,"B +konum9":KONUM ,"C +cokyaricap24":CYARI ,
-    "D +33 hepsi":list (range (XR .shape [1 ]))}
+    "D +33 all of them":list (range (XR .shape [1 ]))}
 
     mfg_of ={p :m for m ,p ,jf ,s in eligible ()}
     DER ,rap =measure_set .cluster ()
@@ -66,13 +66,13 @@ def main ():
     for r in DER :
         r ["mfg"]=mfg_of .get (r ["pid"],"?")
     gk =measure_set .geo_anahtarlari ()
-    grp =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
+    grp =np .array ([gk .get (p ,"absent:"+p )for p in pid ])
     tg ={r ["geo"]for r in DER }
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     DON =dag .get ("donusum")
 
     # OLCUM tarafinda zengin sutunlar YOK (DER onbellegi only 22 column tasiyor).
-    # Bu yuzden A/B ADAY DUZEYINDE not, ZENGIN NPZ'nin KENDI parcalari on,
+    # Bu yuzden A/B ADAY DUZEYINDE not, ZENGIN NPZ'nin KENDI parcalari ten,
     # grup-capraz OOF with is done; after kazanan arm uctan uca dogrulanir.
     from sklearn .model_selection import GroupKFold 
 
@@ -121,7 +121,7 @@ def main ():
         print (line_ ,flush =True )
 
     a =SON ["A 22 temel"]
-    print (f"\n{'arm':<18}{'genel fark':>12}"+"".join (f"{k :>10}"for k in kodlar ))
+    print (f"\n{'arm':<18}{'genel difference':>12}"+"".join (f"{k :>10}"for k in kodlar ))
     for k in KOL :
         if k .startswith ("A"):
             continue 
@@ -133,7 +133,7 @@ def main ():
     print (f"ESKI KANIT (13 sutun zamani): part-out +0.0351 / family-out +0.0489")
     print (f"KARAR: {'UCTAN UCA DOGRULA'if fark >=0.01 else 'KAZANC KUCUK -- uctan uca degmez'}")
     with io .open ("results/p2_zengin_ab.json","w",encoding ="utf-8")as f :
-        json .dump ({"kollar":SON ,"en_iyi":en ,"fark":float (fark )},f ,indent =1 )
+        json .dump ({"kollar":SON ,"en_iyi":en ,"difference":float (fark )},f ,indent =1 )
     print ("receipt -> results/p2_zengin_ab.json")
 
 

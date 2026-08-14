@@ -81,6 +81,6 @@ K .x58 ,"D7 (DEV, 835 part, brand-disi)")
 d6 =kos (d6_record .yukle (set (d6_record .exam ()["pidler"])),d6_record .x58 ,
 "D6 (468 part) -- BAGIMSIZ DOGRULAMA")
 json .dump ({"damga":makbuz_hash .damga (),"D7":d7 ,"D6":d6 ,"yaricaplar":RS ,
-"not":"mesafe-NMS, gate skoruna gore. Yaricap D7'de secilirse D6 "
+"not":"mesafe-NMS, gate skoruna per. Yaricap D7'de secilirse D6 "
 "dogrulamasi ZORUNLU. MIKRO."},
 open ("results/nms_tarama.json","w"),indent =1 )

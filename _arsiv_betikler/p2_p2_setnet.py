@@ -137,7 +137,7 @@ def oof_setnet (groups ,seed ,listwise ):
     return o 
 
 
-print ("\n================ family-out (KARAR SPLIT'I) ================")
+print ("\n================ family-out (DECISION SPLIT'I) ================")
 base =oof_rf (FG )
 print (f"{'model':22s} {'ALL':>7s} {'WEI':>7s} {'PXC':>7s} {'topN':>7s}")
 print (f"{'RF (baseline)':22s} {nested (base ,masks ['ALL'],FG ):7.4f} {nested (base ,masks ['WEI'],FG ):7.4f} "

@@ -14,7 +14,7 @@ hassasiyet ~1 mm. Kiyas: pose head'in bugun ulastigi residual 0.67 mm.
 BU BETIGIN CEVAPLADIGI SORU (mutlak, threshold sorusu):
     **Ag, vertex basina offseti <=1.0 mm with prediction edebiliyor mu?**
 Bu a "small difference" sorusu DEGIL; that is why seed gurultusu (0.046, F1
-farklari for) here BAGLAYICI DEGIL and single kosu verdict verebilir.
+farklari for) here BAGLAYICI DEGIL and single run verdict verebilir.
 
 CIKTI: 4 channel -- [ox, oy, oz, seed_logit].
 KAYIP: seed tepelerinde offset for L1 + tum tepelerde seed for BCE.

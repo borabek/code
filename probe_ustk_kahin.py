@@ -54,7 +54,7 @@ EKSEN_TOL =40.0
 
 def temel (d ):
     return np .hstack ([p6_decision .donustur (d ["X"]),
-    p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])]).astype (
+    p6_decision .kaynak_blok (d ["source"][d ["idx"]])]).astype (
     np .float32 )
 
 
@@ -161,7 +161,7 @@ def main ():
         uf =f1 (a ["u_tp"],a ["u_fp"],a ["u_fn"])
         tv =a ["ceiling"]/max (a ["gt"],1 )
         tv =2 *tv /(1 +tv )
-        out [m_ ]={"gt":a ["gt"],"kural":kf ,"ustk_kahin":uf ,"ceiling":tv }
+        out [m_ ]={"gt":a ["gt"],"rule":kf ,"ustk_kahin":uf ,"ceiling":tv }
         print (f"{m_ :<7}{a ['gt']:>7}{kf :>9.4f}{uf :>12.4f}{tv :>9.4f}"
         f"{uf -kf :>+9.4f}")
     kf =f1 (T ["k_tp"],T ["k_fp"],T ["k_fn"])
@@ -174,10 +174,10 @@ def main ():
     print ("  BUYUKSE -> sorun ADET/ESIK (lattice + count tahmini kolu ACILIR)")
     print ("  ~0 ISE  -> sorun SIRALAMA (secicinin kendisi degismeli)")
     json .dump ({"dizin":os .environ ["P6_DIZIN"],"cluster":KUME ,"brand":out ,
-    "toplam":{"kural":kf ,"ustk_kahin":uf ,"ceiling":tv ,
+    "toplam":{"rule":kf ,"ustk_kahin":uf ,"ceiling":tv ,
     "gt":T ["gt"]},
-    "not":"USTK_KAHIN: ayni skorla ilk k, k = GERCEK CP sayisi. "
-    "KAHIN'dir, urun degil. Amac SIRALAMA ile ADET/ESIK "
+    "not":"USTK_KAHIN: same skorla ilk k, k = GERCEK CP sayisi. "
+    "KAHIN'dir, urun not. Amac SIRALAMA with ADET/ESIK "
     "sorununu ayirmak. D7'ye BAKILMADI."},
     open (f"results/ustk_kahin_{KUME }.json","w"),indent =1 )
     print (f"receipt -> results/ustk_kahin_{KUME }.json")

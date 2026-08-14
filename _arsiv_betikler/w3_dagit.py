@@ -32,7 +32,7 @@ ESKI ="results/zengin_parite.npz"
 YENI ="results/yeni_wei.npz"
 BIRLESIK ="results/zengin_parite_w2.npz"
 GATE ="results/wire_gate.pkl"
-EK =(" | W2 2026-08-02: +110 yeni WEI parcasi (1343 candidate); "
+EK =(" | W2 2026-08-02: +110 new WEI parcasi (1343 candidate); "
 "prospektif 109 part EGITIME GIRMEDI")
 
 
@@ -73,7 +73,7 @@ def geri ():
     with io .open ("cp_config.json",encoding ="utf-8")as f :
         cfg =json .load (f )
     wg =cfg .setdefault ("current_product",{}).setdefault ("wire_gate",{})
-    wg ["egitim_verisi"]=ESKI ;wg ["md5"]=md5 ;wg ["yol"]=GATE 
+    wg ["egitim_verisi"]=ESKI ;wg ["md5"]=md5 ;wg ["path"]=GATE 
     wg .pop ("gate_kimlik",None )
     with io .open ("cp_config.json","w",encoding ="utf-8")as f :
         json .dump (cfg ,f ,indent =1 ,ensure_ascii =False )
@@ -166,13 +166,13 @@ def main ():
     # Ilk yazimda only ic ice `gate_kimlik` blogunu guncelledigim for damga bayat kaldi and
     # test kirmizi yandi (correct davranis) -- damga residual DOGRUDAN buraya da yaziliyor.
     cfg ["current_product"]["wire_gate"]["md5"]=md5 
-    cfg ["current_product"]["wire_gate"]["yol"]=GATE 
+    cfg ["current_product"]["wire_gate"]["path"]=GATE 
     cfg ["current_product"]["wire_gate"]["gate_kimlik"]={
-    "dosya":GATE ,"md5":md5 ,"sutun":int (Z .shape [1 ]),
+    "file":GATE ,"md5":md5 ,"column":int (Z .shape [1 ]),
     "egitim_verisi":BIRLESIK ,"candidate":int (len (y )),"part":int (len (np .unique (pids ))),
     "donusum":DON ,"router":False ,"tarih":"2026-08-02",
     "evidence":"results/w2_veri_etkisi.json",
-    "not":("W2: +110 yeni WEI parcasi. Prospektif 109 part (results/yeni_wei.npz "
+    "not":("W2: +110 new WEI parcasi. Prospektif 109 part (results/yeni_wei.npz "
     "split=='test') EGITIME GIRMEDI, harcanmamis test kumesidir."),
     }
     with io .open ("cp_config.json","w",encoding ="utf-8")as f :

@@ -32,19 +32,19 @@ def test_f1w_TEK_REJIMDE_o_rejimin_F1ini_verir ():
     that bolmenin F1'i, present which is rejimin F1'idir. Agirliklar VAR OLAN rejimler uzerinden
     yeniden normalize edilir.
     """
-    cok =_satir ("cok",3 ,1 ,2 ,10 )
-    dogru =f1_rejim (cok )["F1"]["cok"]
+    cok =_satir ("very",3 ,1 ,2 ,10 )
+    dogru =f1_rejim (cok )["F1"]["very"]
     assert abs (f1w (cok )-dogru )<1e-9 ,"tek rejimde f1w o rejimin F1'ini vermeli"
     dusuk =_satir ("dusuk",8 ,2 ,1 ,10 )
     assert abs (f1w (dusuk )-f1_rejim (dusuk )["F1"]["dusuk"])<1e-9 
 
 
 def test_f1_rejim_dogru_kirilim_ve_agirlikli_toplam_verir ():
-    rows =_satir ("cok",3 ,1 ,2 ,10 )+_satir ("dusuk",8 ,2 ,1 ,10 )
+    rows =_satir ("very",3 ,1 ,2 ,10 )+_satir ("dusuk",8 ,2 ,1 ,10 )
     r =f1_rejim (rows )
-    assert r ["n"]=={"dusuk":10 ,"cok":10 }
-    assert abs (r ["agirlikli_F1"]-f1w (rows ))<1e-9 ,"agirlikli toplam f1w ile tutmuyor"
-    for k in ("dusuk","cok"):
+    assert r ["n"]=={"dusuk":10 ,"very":10 }
+    assert abs (r ["agirlikli_F1"]-f1w (rows ))<1e-9 ,"agirlikli toplam f1w with tutmuyor"
+    for k in ("dusuk","very"):
         tek =f1_rejim ([x for x in rows if x [0 ]==k ])["F1"][k ]
         assert abs (r ["F1"][k ]-tek )<1e-9 ,f"{k } kirilimi alt kumeyle tutmuyor"
 
@@ -52,25 +52,25 @@ def test_f1_rejim_dogru_kirilim_ve_agirlikli_toplam_verir ():
 def test_f1_rejim_tek_rejimde_agirligi_YENIDEN_NORMALLESTIRIR ():
     """Alt cluster single regime iceriyorsa agirlikli value that rejimin own F1'i must be (0.105 with
     carpilmis hali not) -- f1w'nin tuzagina dusmeyen davranis."""
-    cok =_satir ("cok",3 ,1 ,2 ,10 )
+    cok =_satir ("very",3 ,1 ,2 ,10 )
     r =f1_rejim (cok )
-    assert abs (r ["agirlikli_F1"]-r ["F1"]["cok"])<1e-9 
+    assert abs (r ["agirlikli_F1"]-r ["F1"]["very"])<1e-9 
     assert r ["F1"]["dusuk"]is None 
 
 
 def test_carpik_kumede_HAM_ve_AGIRLIKLI_PR_ayrisir ():
     """Puanlanan kumede very-CP %30, korpusta %10.5. Ham P/R korpusu temsil etmez; same tabloda
     agirlikli F1 with ham P/R yan yana konursa IKI FARKLI evren raporlanmis becomes."""
-    rows =_satir ("cok",1 ,9 ,9 ,30 )+_satir ("dusuk",9 ,1 ,1 ,70 )
+    rows =_satir ("very",1 ,9 ,9 ,30 )+_satir ("dusuk",9 ,1 ,1 ,70 )
     r =f1_rejim (rows )
     assert r ["ham_kesinlik"]<r ["agirlikli_kesinlik"],"carpiklik etkisi kaybolmus"
-    assert abs (r ["agirlikli_kesinlik"]-(W ["dusuk"]*0.9 +W ["cok"]*0.1 ))<1e-9 
+    assert abs (r ["agirlikli_kesinlik"]-(W ["dusuk"]*0.9 +W ["very"]*0.1 ))<1e-9 
 
 
 def test_rejim_agirliklari_korpusla_tutuyor ():
     """W, corpus oranlarini temsil eder (low 0.895 / very 0.105). Degisirse headline degisir."""
     assert abs (sum (W .values ())-1.0 )<1e-9 
-    assert abs (W ["dusuk"]-0.895 )<1e-6 and abs (W ["cok"]-0.105 )<1e-6 
+    assert abs (W ["dusuk"]-0.895 )<1e-6 and abs (W ["very"]-0.105 )<1e-6 
 
 
 def test_LOCKED_kirliligi_CIKARILANLARI_da_kapsar ():
@@ -89,7 +89,7 @@ def test_LOCKED_kirliligi_CIKARILANLARI_da_kapsar ():
     os .path .dirname (os .path .dirname (os .path .abspath (__file__ ))),
     "results","_der_tam.pkl")):
         import pytest 
-        pytest .skip ("measurement onbellegi yok")
+        pytest .skip ("measurement onbellegi none")
     _ ,rap =measure_set .cluster ("results/_der_tam.pkl")
     atilan =set (rap ["atilan_locked"])
     assert atilan ,"this testin anlamli olmasi for at least a LOCKED cikarilmali"
@@ -110,15 +110,15 @@ def test_SINAV_egitim_maskesi_LOCKED_gruplarini_atar ():
     import measure_set 
     npz =os .path .join (KOK ,"results","zengin_parite_w2.npz")
     if not os .path .exists (npz ):
-        pytest .skip ("training npz yok")
+        pytest .skip ("training npz none")
     d =np .load (npz ,allow_pickle =True )
     pids =np .array ([str (x )for x in d ["pids"]])
     m =measure_set .sinav_egitim_maskesi (pids )
     assert m .sum ()>0 and m .sum ()<len (m ),"maske ya hepsini atiyor ya hicbirini"
     _ ,rap =measure_set .cluster ("results/_der_tam.pkl")
     gk =measure_set .geo_anahtarlari ()
-    kalan ={gk .get (x ,"yok:"+x )for x in np .unique (pids [m ])}
-    ihlal =[x for x in rap ["locked_temiz"]if gk .get (x ,"yok:"+x )in kalan ]
+    kalan ={gk .get (x ,"none:"+x )for x in np .unique (pids [m ])}
+    ihlal =[x for x in rap ["locked_temiz"]if gk .get (x ,"none:"+x )in kalan ]
     assert not ihlal ,f"maskeden sonra hala {len (ihlal )} LOCKED grubu egitimde: {ihlal [:5 ]}"
 
 
@@ -135,9 +135,9 @@ def test_f1w_TEK_REJIMLI_bolmede_agirligi_YENIDEN_NORMALLESTIRIR ():
     tek =[("dusuk",8 ,2 ,2 )]
     assert abs (f1w (tek )-0.8 )<1e-6 ,f"tek rejimde F1 0.8 olmali, {f1w (tek )} geldi"
     # only very-CP parts da same sekilde
-    tek_cok =[("cok",8 ,2 ,2 )]
+    tek_cok =[("very",8 ,2 ,2 )]
     assert abs (f1w (tek_cok )-0.8 )<1e-6 ,f"tek rejimde (cok) 0.8 olmali, {f1w (tek_cok )}"
     # IKI regime varsa AGIRLIKLI mean: 0.895*0.8 + 0.105*0.5
-    iki =[("dusuk",8 ,2 ,2 ),("cok",5 ,5 ,5 )]
+    iki =[("dusuk",8 ,2 ,2 ),("very",5 ,5 ,5 )]
     bek =0.895 *0.8 +0.105 *0.5 
     assert abs (f1w (iki )-bek )<1e-6 ,f"iki rejimde {bek } olmali, {f1w (iki )} geldi"
