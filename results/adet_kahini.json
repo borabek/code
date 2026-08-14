@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "4b163aec3b7aba99",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -25,9 +25,9 @@
   "python": "3.12.10"
  },
  "mikro": {
-  "esik (urun)": 0.19144884888350355,
+  "threshold (urun)": 0.19144884888350355,
   "adet kahini (top-N)": 0.1795644891122278,
-  "tum havuz (esiksiz)": 0.08869953904176561
+  "tum pool (esiksiz)": 0.08869953904176561
  },
  "kazanc": -0.011884359771275749,
  "adet_MAE": 2.3892215568862274,

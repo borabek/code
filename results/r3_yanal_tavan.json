@@ -9,5 +9,5 @@
  "gecti": false,
  "yon_kahin_c3": 0.6635,
  "yon_kapsam": 0.9001643727132489,
- "DUZELTME": "ilk yazimda paydalar TERS baglanmisti: konum sozlugu YANAL tavanina (0.6469), yon sozlugu ACI tavanina (0.6717) bolunmelidir. Ayrica yon kolunun kill bari 0.70 idi ama yalniz aciyi duzelterek ulasilabilecek EN YUKSEK deger 0.6717 -- bar YAPISAL OLARAK IMKANSIZDI."
+ "DUZELTME": "ilk yazimda paydalar TERS baglanmisti: konum sozlugu YANAL tavanina (0.6469), direction sozlugu ACI tavanina (0.6717) bolunmelidir. Ayrica direction kolunun kill bari 0.70 idi ama yalniz aciyi duzelterek ulasilabilecek EN YUKSEK deger 0.6717 -- bar YAPISAL OLARAK IMKANSIZDI."
 }

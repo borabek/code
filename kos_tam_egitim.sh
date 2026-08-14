@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# GERCEK MODEL: 2583 parcalik `tam` korpusu, marka katlarinda kural secimi.
+# GERCEK MODEL: 2583 parcalik `tam` korpusu, brand katlarinda kural secimi.
 #
-# Katlar (P6_KAT_MIN=200): TOGI 810 / PXC 713 / WEI 686 / SIE 262 = 2471 parca.
+# Katlar (P6_KAT_MIN=200): TOGI 810 / PXC 713 / WEI 686 / SIE 262 = 2471 part.
 # Kollar: TABAN (dagitilan kural) | P6 | P6_KAFES (kaskad) | P6_GEO (segmentasyonsuz)
 # Kural secim olcutu MAKRO -- tek markada cokmeyen kurali tercih eder.
 # NMS her D6 kivriminda 5.0 secildi; tam kosuda sabitlenir (tarama maliyeti 3x).
@@ -11,7 +11,7 @@
 set -u
 cd "$(dirname "$0")"
 # EGITIM KORPUSU: `tam` + `d6`. D6 SINAV DEGIL -- gelistirme kumesi; egitime
-# katmak D7 icin mesru ve marka cesitliligini 9 -> 17 yapar. D7'ye DOKUNULMAZ.
+# katmak D7 icin mesru ve brand cesitliligini 9 -> 17 yapar. D7'ye DOKUNULMAZ.
 export P6_KUME=${P6_KUME:-tam,d6}
 export P6_DIZIN=results/_p6_oz_u25
 export P6_KAT_MIN=${P6_KAT_MIN:-200}
@@ -22,11 +22,11 @@ export P6_KAHIN=0
 export P6_ARAMA_N=${P6_ARAMA_N:-250}
 export P6_NEG_KAT=${P6_NEG_KAT:-6}
 export P6_ITER=${P6_ITER:-200}
-# NOT: ITER 400 -> 200 ve ARAMA_N 600 -> 250 SURE icin. 4 kol x 4 kat = 16 model
-# + 4 OOF modeli; 2583 parca x ~2000 secenek = ~5M satir. Ogrenme egrisi
+# NOT: ITER 400 -> 200 ve ARAMA_N 600 -> 250 SURE icin. 4 arm x 4 fold = 16 model
+# + 4 OOF modeli; 2583 part x ~2000 secenek = ~5M satir. Ogrenme egrisi
 # logaritmik oldugu icin 200 iterasyon 400'un cok altinda degil, ama kosu
 # suresi yariya iniyor.
 n=$(ls results/_p6_oz_u25/tam_*.npz 2>/dev/null | wc -l)
-echo "egitim korpusu: $n / 2583 parca hazir"
-echo "katlar >= $P6_KAT_MIN | olcut $P6_OLCUT | kollar $P6_KOLLAR"
-python kos_p6_kademe2.py
+echo "training korpusu: $n / 2583 part hazir"
+echo "katlar >= $P6_KAT_MIN | criterion $P6_OLCUT | kollar $P6_KOLLAR"
+python run_p6_kademe2.py

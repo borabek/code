@@ -1,5 +1,5 @@
 {
- "not": "SINIF DENGELEME olculdu ve ALINMADI. Aday duzeyi (t17) UC eksende birden kazaniyordu (tanidik +0.0011, PXC +0.010, WEI +0.021) ama UCTAN UCA yalniz WEI'de kazandi.",
+ "not": "SINIF DENGELEME measured ve ALINMADI. Aday duzeyi (t17) UC eksende birden kazaniyordu (tanidik +0.0011, PXC +0.010, WEI +0.021) ama UCTAN UCA yalniz WEI'de kazandi.",
  "uctan_uca": {
   "agirlik yok (mevcut)": {
    "tanidik": 0.741,
@@ -17,6 +17,6 @@
    "WEI_disarida": 0.5042
   }
  },
- "kill": "tanidik >= -0.01 VE HER IKI uretici-disi bolmede de gecmeli -> IKISI DE GECMEDI (tanidik -0.020/-0.043, PXC -0.008/-0.057)",
+ "kill": "tanidik >= -0.01 VE HER IKI manufacturer-disi bolmede de gecmeli -> IKISI DE GECMEDI (tanidik -0.020/-0.043, PXC -0.008/-0.057)",
  "ders": "Aday duzeyi bu gece UCUNCU kez yaniltti (EK blogu, goreli esigin bedeli, sinif dengeleme). Aday duzeyi bir ELEME kapisidir, karar kapisi DEGIL."
 }

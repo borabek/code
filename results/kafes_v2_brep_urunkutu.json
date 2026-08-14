@@ -2,7 +2,7 @@
  "tol": 1.0,
  "n_kafes": 6,
  "min_adim": 2.0,
- "marka": {
+ "brand": {
   "NIT": {
    "gt": 1210,
    "aday_parca": 129.86363636363637,
@@ -56,5 +56,5 @@
    "adim1_ortanca": 5.166600634599122
   }
  },
- "not": "ARAMA GT'SIZ: izgara 'isabet x doluluk' ile puanlanir, GT yalniz DEGERLENDIRMEDE. Adaylar skorla FILTRELENMEZ (kafes geometrik bir ozelliktir). D7'ye BAKILMADI."
+ "not": "ARAMA GT'SIZ: izgara 'isabet x doluluk' ile puanlanir, GT yalniz DEGERLENDIRMEDE. Adaylar skorla FILTRELENMEZ (lattice geometrik bir ozelliktir). D7'ye BAKILMADI."
 }

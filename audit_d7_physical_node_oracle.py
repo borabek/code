@@ -38,7 +38,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import maximum_bipartite_matching
 from scipy.spatial import cKDTree
 
-from sina_kume import f1_rejim, f1w
+from sina_cluster import f1_rejim, f1w
 
 
 ROOT = Path(__file__).resolve().parent

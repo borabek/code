@@ -1,9 +1,9 @@
 {
  "tol": 1.0,
  "n_kafes": 3,
- "marka": {
+ "brand": {
   "NIT": {
-   "parca": 44,
+   "part": 44,
    "gt": 1210,
    "kafes1": 0.5,
    "kafes2": 0.9834710743801653,
@@ -11,7 +11,7 @@
    "adim1_ortanca": 10.5
   },
   "SUPU": {
-   "parca": 94,
+   "part": 94,
    "gt": 509,
    "kafes1": 0.6227897838899804,
    "kafes2": 0.8605108055009824,
@@ -19,7 +19,7 @@
    "adim1_ortanca": 10.0
   },
   "MOR": {
-   "parca": 83,
+   "part": 83,
    "gt": 492,
    "kafes1": 0.49796747967479676,
    "kafes2": 0.7987804878048781,
@@ -27,7 +27,7 @@
    "adim1_ortanca": 6.37
   },
   "UPUN": {
-   "parca": 81,
+   "part": 81,
    "gt": 331,
    "kafes1": 0.6888217522658611,
    "kafes2": 0.8096676737160121,
@@ -36,5 +36,5 @@
   }
  },
  "nit_3kafes_f1_tavani": 0.9916666666666667,
- "not": "Acgozlu coklu kafes: en iyi izgarayi bul, kapsananlari cikar, tekrarla. Alt harmonikler (L/2, L/3) de aday. MODEL YOK -- yalnizca GT geometrisi. D7'ye BAKILMADI."
+ "not": "Acgozlu coklu lattice: en iyi izgarayi bul, kapsananlari cikar, tekrarla. Alt harmonikler (L/2, L/3) de candidate. MODEL YOK -- yalnizca GT geometrisi. D7'ye BAKILMADI."
 }

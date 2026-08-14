@@ -2,25 +2,25 @@
  "keig96_s0": {
   "val": 0.6378,
   "tespit": 0.6167403687335388,
-  "aday": 1348,
+  "candidate": 1348,
   "aday_recall": 0.5620272314674736
  },
  "keig96_s3": {
   "val": 0.6676,
   "tespit": 0.5984243377509227,
-  "aday": 835,
+  "candidate": 835,
   "aday_recall": 0.4370257966616085
  },
  "keig128_s0": {
   "val": 0.6237,
   "tespit": 0.6300340887267141,
-  "aday": 1225,
+  "candidate": 1225,
   "aday_recall": 0.516641452344932
  },
  "keig128_s1": {
   "val": 0.7079,
   "tespit": 0.6092848980309423,
-  "aday": 1109,
+  "candidate": 1109,
   "aday_recall": 0.5200605601816806
  }
 }

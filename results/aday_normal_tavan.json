@@ -1,6 +1,6 @@
 {
- "korpus": "results/_p6_oz_tam4",
- "marka": {
+ "corpus": "results/_p6_oz_tam4",
+ "brand": {
   "NIT": {
    "gt": 1222,
    "konum": 0.8428805237315876,
@@ -62,5 +62,5 @@
   "aday_normali": 0.3338323353293413,
   "banka": 0.8933383233532934
  },
- "not": "ADAYIN KENDI mesh normali vs 24 secenekli yon bankasi. Yeniden cikarimin TAVANI. D7'ye BAKILMADI."
+ "not": "ADAYIN KENDI mesh normali vs 24 secenekli direction bankasi. Yeniden cikarimin TAVANI. D7'ye BAKILMADI."
 }

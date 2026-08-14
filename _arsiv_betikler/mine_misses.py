@@ -117,10 +117,10 @@ def main():
             try: return len(json.load(open(item[1], encoding="utf-8-sig")).get("ConnectionPoints", []))
             except Exception: return 0
         cand = sorted(cand, key=ncp, reverse=True)
-        print(f"  [hard] {len(cand)} aday, en cok-CP (en zor) parcalar once", flush=True)
+        print(f"  [hard] {len(cand)} candidate, en cok-CP (en zor) parts once", flush=True)
     elif a.diverse:
         cand = diversify(cand)
-        print(f"  [diverse] {len(cand)} aday parca cesitlilik sirasina dizildi", flush=True)
+        print(f"  [diverse] {len(cand)} candidate part cesitlilik sirasina dizildi", flush=True)
     rows = []; n_parts = 0; n_cp = 0
     for _f_item in cand:
         f = _f_item[1]
@@ -179,8 +179,8 @@ def main():
               open(a.out, "w"), indent=1)
     from collections import Counter
     c = Counter(r["mfg"] for r in rows)
-    print(f"\n{n_parts} parcada {n_cp} KACIRILAN uretici CP-si")
-    print("  uretici dagilimi: " + ", ".join(f"{k}:{v}" for k, v in c.most_common()))
+    print(f"\n{n_parts} parcada {n_cp} KACIRILAN manufacturer CP-si")
+    print("  manufacturer dagilimi: " + ", ".join(f"{k}:{v}" for k, v in c.most_common()))
     print(f"  -> {a.out}")
 
 

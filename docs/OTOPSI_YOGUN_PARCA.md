@@ -1,13 +1,13 @@
 # OTOPSI RAPORU — YOGUN PARCA DUVARI (NIT / CWT tipi)
 
-Tarih: 2026-08-12 · Kume: d6 (gorulmemis marka kosulu) · D7'ye BAKILMADI
+Tarih: 2026-08-12 · Kume: d6 (gorulmemis brand kosulu) · D7'ye BAKILMADI
 
 ---
 
 ## 0. Olu ilan
 
-Gorulmemis marka robot F1'i 0.50'nin uzerine cikaramamamizin sebebi tek bir
-parca ailesidir. NIT tipi **yogun klemensler** (parca basina ~24 CP) d6'daki
+Gorulmemis brand robot F1'i 0.50'nin uzerine cikaramamamizin sebebi tek bir
+part ailesidir. NIT tipi **dense klemensler** (part basina ~24 CP) d6'daki
 GT'nin **%46'sini** tasir (1222 / 2660). Duvar oradadir.
 
 Bu ailede **BES ayri mekanizma** tek tek denendi ve **besi de dustu**:
@@ -15,8 +15,8 @@ Bu ailede **BES ayri mekanizma** tek tek denendi ve **besi de dustu**:
 | # | mekanizma | olculen | sonuc |
 |---|-----------|---------|-------|
 | 1 | baglam modeli (S4, DeepSets) | −0.0194 / −0.0380 | KAPANDI |
-| 2 | kafes yayilimi | konum 0.676 → uctan uca 0.077 | YON'de coktu |
-| 3 | analitik yon (B-rep agzi) | agiz CP'de bulunma 0.011 | YOK |
+| 2 | lattice yayilimi | konum 0.676 → uctan uca 0.077 | YON'de coktu |
+| 3 | analitik direction (B-rep agzi) | mouth CP'de bulunma 0.011 | YOK |
 | 4 | mesh normali | 0.334 (secili adaylarda) | OLU |
 | 5 | adet kisiti | adet hatasi 18.0 | CURUDU |
 
@@ -24,11 +24,11 @@ Bu ailede **BES ayri mekanizma** tek tek denendi ve **besi de dustu**:
 
 ## 1. Otopsinin birinci bulgusu: besi de ZINCIRIN SONUNDAYDI
 
-Hicbiri zincirin **basina** bakmadi. Hepsi asagi akista, ayni secici skorunu
+Hicbiri zincirin **basina** bakmadi. Hepsi asagi akista, ayni selector skorunu
 tuketerek calisiyordu:
 
 ```
-  mesh -> SEGMENTASYON -> aday havuzu -> oznitelik -> SECICI -> secim -> yon
+  mesh -> SEGMENTASYON -> candidate havuzu -> oznitelik -> SECICI -> secim -> direction
           ^^^^^^^^^^^^                               ^^^^^^
           hic bakilmadi                              bes mekanizma burada
 ```
@@ -39,9 +39,9 @@ tuketerek calisiyordu:
 
 ## 2. Ilk teshis ve NEDEN DUZELTILDI
 
-`sonda_otopsi_segmentasyon.py` mesh tepelerinde olctu (412 parca):
+`probe_autopsy_segmentation.py` mesh tepelerinde olctu (412 part):
 
-| marka | GT'de olasilik | RASTGELE yuzeyde | oran | tepe AUC |
+| brand | GT'de olasilik | RASTGELE yuzeyde | ratio | tepe AUC |
 |-------|------|------|------|------|
 | SUPU | 0.4815 | 0.0058 | 83× | 0.8395 |
 | UPUN | 0.4448 | 0.0219 | 20× | 0.8636 |
@@ -53,16 +53,16 @@ Ilk okumam: "NIT'te segmentasyon tum govdeyi boyuyor, kaynak bozuk".
 **Bu okuma eksikti ve duzeltildi.** Sebebi, bugun bir kez daha yakalanan ayni
 tuzak: **mesh TEPESINDE olculen sey ADAY duzeyinde gecerli degildir.** (Ayni
 hatayi bugun mesh normalinde yapmistim: tepelerde 0.800, secili adaylarda
-0.334.) Bu yuzden ayni sey aday duzeyinde ayrica olculdu.
+0.334.) Bu yuzden ayni sey candidate duzeyinde ayrica measured.
 
 ---
 
 ## 3. Duzeltilmis teshis: darbogaz SECICI DEGIL, ADAY/GT ORANI
 
-`sonda_aday_auc.py` — egitilmis secici, gorulmemis marka katlari,
-**aday duzeyinde** (`results/aday_auc_d6.json`):
+`probe_candidate_auc.py` — egitilmis selector, gorulmemis brand katlari,
+**candidate duzeyinde** (`results/aday_auc_d6.json`):
 
-| marka | GT | n_aday | **auc_secici** | sira_ilk | sira_son | ilk-k orani | gereken auc |
+| brand | GT | n_aday | **auc_secici** | sira_ilk | sira_son | ilk-k orani | gereken auc |
 |---|---|---|---|---|---|---|---|
 | NIT | 1222 | **6322** | **0.8854** | 19 | 2222 | 0.049 | 0.9968 |
 | SUPU | 539 | 1600 | **0.9696** | 1 | 27 | 0.561 | 0.9981 |
@@ -70,15 +70,15 @@ hatayi bugun mesh normalinde yapmistim: tepelerde 0.800, secili adaylarda
 | MOR | 240 | **11555** | **0.9657** | 8 | 624 | 0.202 | 0.9997 |
 
 **Secici kotu degil.** AUC 0.885–0.988. Bagliyan sey ayirt edicilik degil,
-**aday sayisinin GT sayisina orani**:
+**candidate sayisinin GT sayisina orani**:
 
-- MOR'da ~9 CP icin **11.555 aday** var. AUC 0.9657 olsa bile beklenen
+- MOR'da ~9 CP icin **11.555 candidate** var. AUC 0.9657 olsa bile beklenen
   "bir pozitifin ustundeki negatif sayisi" ≈ (1−0.9657)×11555 ≈ **396**;
   olculen ortanca son-dogru sirasi **624**. Ayni mertebe.
 - NIT'te (1−0.8854)×6322 ≈ **725**; olculen **2222**. Ayni mertebe.
 - UPUN'da (1−0.9877)×2098 ≈ **26**; olculen **75**. Ayni mertebe.
 
-Yani **uc markada da uctan uca davranis, AUC ve aday sayisindan onceden
+Yani **uc markada da uctan uca davranis, AUC ve candidate sayisindan onceden
 kestirilebiliyor.** Duvarin denklemi budur.
 
 ---
@@ -86,7 +86,7 @@ kestirilebiliyor.** Duvarin denklemi budur.
 ## 4. Mekanizma: her yanlis konuma 24 PIYANGO BILETI
 
 `n_aday` **konum** sayisi degil **secenek** sayisidir. Her konum
-`MAX_SEC = 24` yon secenegi uretir: 6322 ≈ **260 konum × 24 yon**.
+`MAX_SEC = 24` direction secenegi uretir: 6322 ≈ **260 konum × 24 direction**.
 
 Konum-GT orani 260/24 ≈ **11:1** — gayet yonetilebilir.
 Secenek-GT orani 6322/24 ≈ **263:1** — yonetilemez.
@@ -96,7 +96,7 @@ Bugun konumlar **en yuksek skorlu secenekleriyle** siralaniyor. Bu, her
 denemeden birinde yuksek skor kapma olasiligi, dogru konumun tek gercek
 sinyalini bastirir. Klasik coklu-karsilastirma sismesi.
 
-Bu, bagimsiz bir bilmeceyi de cozer: **MAX_SEC 12→24 yonlu havuz recall'unu
+Bu, bagimsiz bir bilmeceyi de cozer: **MAX_SEC 12→24 yonlu pool recall'unu
 0.5913→0.8755 yukseltti ama gerceklesen F1'i acmadi.** Cunku ayni degisiklik
 tavani acarken yanlis konumlarin bilet sayisini da ikiye katladi.
 
@@ -117,21 +117,21 @@ de aynidir: urettigi konumlarda yonu yine ayni sismis siralamadan sordu.
 
 1. **Mikro toplama NIT'i gizledi** — GT'nin %46'si kendi cokusunu kendi
    agirligiyla seyreltiyor.
-2. **Havuz tavani "iyi" gorunuyordu** (0.843). O tavan KONUM tavaniydi;
-   secenek/GT orani hic tavan olarak okunmadi.
-3. **Rastgele taban cizgisi hic konmadi** — GT'de 0.52 olcup "yuksek" demek,
+2. **Havuz tavani "iyi" gorunuyordu** (0.843). O ceiling KONUM tavaniydi;
+   secenek/GT orani hic ceiling olarak okunmadi.
+3. **Rastgele baseline cizgisi hic konmadi** — GT'de 0.52 olcup "yuksek" demek,
    yanindaki 0.44'luk zemin olculmedigi surece anlamsizdir.
-4. **AUC ile aday sayisi birlikte hic okunmadi** — ikisi ayri ayri
+4. **AUC ile candidate sayisi birlikte hic okunmadi** — ikisi ayri ayri
    "iyi/kotu" diye yorumlandi; belirleyici olan carpimlaridir.
 
 ---
 
 ## 7. Denenen ve DUSEN kaldiraclar (bu otopsiden sonra)
 
-| kol | ilan edilen kapi | olculen | hukum |
+| arm | ilan edilen gate | olculen | verdict |
 |---|---|---|---|
 | yerel karsitlik (p − yerel ortanca, R=2/5/10) | NIT AUC +0.05 | **−0.033** (en iyi) | DUSTU, blok yazilmadi |
-| dik-yon kisiti (eksen siraya diktir) | bugunkuyu asmak | NIT +0.017, SUPU/UPUN'da DUSURUYOR | DUSTU |
+| dik-direction kisiti (axis siraya diktir) | bugunkuyu asmak | NIT +0.017, SUPU/UPUN'da DUSURUYOR | DUSTU |
 
 Yerel karsitligin dusmesi bilgi verdi: alan yalnizca "yukari kaymis" degil,
 **yerel olarak da duz**. Yani segmentasyonun uzamsal yapisinda kullanilmamis
@@ -142,7 +142,7 @@ bir rezerv yok.
 ## 8. Gecebilecek kaldirac: TOPLAMA KURALI
 
 Otopsinin dogrudan sonucu. Piyango sismesi **modelden degil, KARAR
-kuralindan** geliyor — yani yeniden egitim gerektirmiyor.
+kuralindan** geliyor — yani yeniden training gerektirmiyor.
 
 Konum skoru `max` yerine sisme yapmayan bir toplamayla kurulur:
 
@@ -166,11 +166,11 @@ ortanca); **dogru** konumda bircok secenek makul skor alir (yuksek ortanca).
   %55'i.
 
 **Kapi (once ilan edildi):** mikro robot F1'de **+0.01**.
-Sonda: `sonda_konum_toplama.py` → `results/konum_toplama_d6.json`
+Sonda: `probe_position_toplama.py` → `results/konum_toplama_d6.json`
 
-**Ikinci kaldirac (sirada):** isaretsiz eksen + "disari" isareti
-(`sonda_bimodal_yon.py`). Gerekce: NIT'te yon kahini 0.593, gerceklesen
-0.150. Klemens girisleri tek yonlu degildir; isaretli acida 180 derece tam
+**Ikinci kaldirac (sirada):** unsigned axis + "disari" isareti
+(`probe_bimodal_direction.py`). Gerekce: NIT'te direction kahini 0.593, gerceklesen
+0.150. Klemens girisleri tek yonlu degildir; signed acida 180 derece tam
 basarisizliktir, modal oylama parcanin yarisini ters isaretler. Bu, K2.1'in
 `robot −0.0100` vermesini ve `dik_kipsel`in 0.064'e dusmesini birlikte
 aciklar.
@@ -183,10 +183,10 @@ Asagidakiler "KAPANDI" degil, **"SISMIS SIRALAMA ALTINDA KAPANDI"** olarak
 isaretlenir. Toplama kurali gecerse **yeniden denenmeleri gerekir**:
 
 - baglam modeli (S4)
-- kafes yayilimi
+- lattice yayilimi
 - adet kisiti
-- zor negatif / focal kayip / sinif agirligi
-- dik-yon kisiti
+- zor negatif / focal loss / sinif agirligi
+- dik-direction kisiti
 
 Bu, `docs/KAPANAN_KOLLAR_DENETIMI.md`'deki hukmun tekrari: **kapatma hukmu
 sondanin kusuru olabilir.**

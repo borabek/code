@@ -1,6 +1,6 @@
 {
- "kume": "d6",
- "marka": {
+ "cluster": "d6",
+ "brand": {
   "NIT": {
    "seg_10": {
     "recall": 0.9218461538461539,
@@ -818,5 +818,5 @@
    }
   }
  },
- "not": "GT'siz konum suzgecleri: recall / havuz kucultme takasi. Hedef: gereken AUC 0.705 altina inerken recall >= 0.95. D7'ye BAKILMADI."
+ "not": "GT'siz konum suzgecleri: recall / pool kucultme takasi. Hedef: gereken AUC 0.705 altina inerken recall >= 0.95. D7'ye BAKILMADI."
 }

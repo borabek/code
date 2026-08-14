@@ -15,23 +15,23 @@ The camera opens already aimed at the missed CP, marked with a red sphere, so ea
 seconds of painting rather than a hunt.
 
 Also the first human supervision WEI will ever have -- and WEI is where the model collapses
-(F1 0.157 vs PXC 0.620 on the manufacturer arbiter).
+(F1 0.157 vs PXC 0.620 ten the manufacturer arbiter).
 
 Usage: PYTHONPATH=_diffusion_net_repo/src .venv/Scripts/python.exe build_recall_tool.py \
          [--input results/misses_wei.json] [--out results/recall/paint.html]
 """
-import os, sys, json, base64, argparse
-import numpy as np
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import thesis_remesh
-from infer_step_cp import step_to_mesh
+import os ,sys ,json ,base64 ,argparse 
+import numpy as np 
+sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
+import thesis_remesh 
+from infer_step_cp import step_to_mesh 
 
 
-def pack(a, dtype):
-    return base64.b64encode(np.ascontiguousarray(a, dtype).tobytes()).decode("ascii")
+def pack (a ,dtype ):
+    return base64 .b64encode (np .ascontiguousarray (a ,dtype ).tobytes ()).decode ("ascii")
 
 
-HTML = """<!doctype html><meta charset=utf-8><title>Recall boyama</title>
+HTML ="""<!doctype html><meta charset=utf-8><title>Recall boyama</title>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <style>
@@ -52,7 +52,7 @@ input[type=range]{width:100%}
 </style>
 <div id=left><canvas id=cv></canvas><div id=stat>boya modu KAPALI</div><div id=hint>
 <b>sol tik + surukle</b> = boya &nbsp;|&nbsp; <b>sag tik surukle</b> = dondur &nbsp;|&nbsp; tekerlek = yakinlas<br>
-<b>R</b> = delige bak &nbsp;|&nbsp; <b>B</b> = boya modu ac/kapa &nbsp;|&nbsp; <b>Z</b> = geri al &nbsp;|&nbsp; <b>Space</b> = sonraki &nbsp;|&nbsp; kirmizi kure = uretici CP-si (<b>parcanin ICINDE</b>, temas noktasi) &nbsp;|&nbsp; <b>sari ok</b> = disari, boyanacak yuzeye dogru
+<b>R</b> = delige bak &nbsp;|&nbsp; <b>B</b> = boya modu ac/kapa &nbsp;|&nbsp; <b>Z</b> = geri al &nbsp;|&nbsp; <b>Space</b> = sonraki &nbsp;|&nbsp; kirmizi kure = manufacturer CP-si (<b>parcanin ICINDE</b>, temas noktasi) &nbsp;|&nbsp; <b>sari ok</b> = disari, boyanacak yuzeye dogru
 </div></div>
 <div id=side>
   <h2 id=title>-</h2>
@@ -71,7 +71,7 @@ input[type=range]{width:100%}
   </div>
   <div id=prog></div>
   <div class=sub style="margin-top:14px">
-    Sari okun <b>gosterdigi yondeki yuzey acikligini</b> boya. Kirmizi kure uretici CP-si ve parcanin icinde durur (temas noktasi) &mdash; boyanacak yer okun cikis yaptigi <b>dis yuzey</b>. Model burayi kaciriyor; senin boyadigin sekil
+    Sari okun <b>gosterdigi yondeki yuzey acikligini</b> boya. Kirmizi kure manufacturer CP-si ve parcanin icinde durur (temas noktasi) &mdash; boyanacak yer okun cikis yaptigi <b>dis yuzey</b>. Model burayi kaciriyor; senin boyadigin sekil
     egitime <b>pozitif</b> olarak girecek.<br><br>
     Aciklik gorunmuyorsa ya da emin degilsen <b>bos birak</b> ve gec &mdash; bos olanlar kullanilmaz.
   </div>
@@ -148,7 +148,7 @@ function show(i){
   resize();
   document.getElementById("title").textContent=`${cur+1}/${ITEMS.length}  ${it.pid} (${it.mfg})`;
   document.getElementById("sub").textContent=
-    `uretici bu parcada ${it.n_mfg} CP tanimliyor, model ${it.n_pred} buldu -- bu kacan biri`;
+    `manufacturer bu parcada ${it.n_mfg} CP tanimliyor, model ${it.n_pred} buldu -- bu kacan biri`;
   prog();
 }
 let RAD=1;
@@ -226,38 +226,38 @@ show(0);
 </script>"""
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--input", default="results/misses_wei.json")
-    ap.add_argument("--out", default="results/recall/paint.html")
-    ap.add_argument("--key", default="cp_recall_v1")
-    ap.add_argument("--limit", type=int, default=0)
-    a = ap.parse_args()
+def main ():
+    ap =argparse .ArgumentParser ()
+    ap .add_argument ("--input",default ="results/misses_wei.json")
+    ap .add_argument ("--out",default ="results/recall/paint.html")
+    ap .add_argument ("--key",default ="cp_recall_v1")
+    ap .add_argument ("--limit",type =int ,default =0 )
+    a =ap .parse_args ()
 
-    d = json.load(open(a.input))
-    items = d["items"][:a.limit] if a.limit else d["items"]
-    cache = {}
-    out = []
-    for k, it in enumerate(items):
-        pid = it["part_id"]
-        if pid not in cache:
-            Vr, Fr = step_to_mesh(it["step"])
-            V, F = thesis_remesh.remesh_uniform(Vr, Fr, target=6000)
-            cache[pid] = (np.ascontiguousarray(V, float), np.ascontiguousarray(F, np.int64))
-            print(f"  {pid}: {len(V)}v", flush=True)
-        V, F = cache[pid]
-        c = V.mean(0)
-        out.append({"key": f"{pid}__{k}", "pid": pid, "mfg": it["mfg"],
-                    "v": pack(V - c, np.float32), "f": pack(F, np.uint32),
-                    "cp": (np.asarray(it["cp"]) - c).round(3).tolist(),
-                    "dir": np.asarray(it["dir"]).round(4).tolist(),
-                    "n_mfg": it["n_mfg_cps"], "n_pred": it["n_pred"]})
-    doc = HTML.replace("__DATA__", json.dumps(out, separators=(",", ":"))).replace("__KEY__", a.key)
-    os.makedirs(os.path.dirname(a.out), exist_ok=True)
-    open(a.out, "w", encoding="utf-8").write(doc)
-    print(f"\n-> {a.out}  ({len(out)} kacan CP, {len(cache)} parca, "
-          f"{os.path.getsize(a.out)/1e6:.1f} MB)")
+    d =json .load (open (a .input ))
+    items =d ["items"][:a .limit ]if a .limit else d ["items"]
+    cache ={}
+    out =[]
+    for k ,it in enumerate (items ):
+        pid =it ["part_id"]
+        if pid not in cache :
+            Vr ,Fr =step_to_mesh (it ["step"])
+            V ,F =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
+            cache [pid ]=(np .ascontiguousarray (V ,float ),np .ascontiguousarray (F ,np .int64 ))
+            print (f"  {pid }: {len (V )}v",flush =True )
+        V ,F =cache [pid ]
+        c =V .mean (0 )
+        out .append ({"key":f"{pid }__{k }","pid":pid ,"mfg":it ["mfg"],
+        "v":pack (V -c ,np .float32 ),"f":pack (F ,np .uint32 ),
+        "cp":(np .asarray (it ["cp"])-c ).round (3 ).tolist (),
+        "dir":np .asarray (it ["dir"]).round (4 ).tolist (),
+        "n_mfg":it ["n_mfg_cps"],"n_pred":it ["n_pred"]})
+    doc =HTML .replace ("__DATA__",json .dumps (out ,separators =(",",":"))).replace ("__KEY__",a .key )
+    os .makedirs (os .path .dirname (a .out ),exist_ok =True )
+    open (a .out ,"w",encoding ="utf-8").write (doc )
+    print (f"\n-> {a .out }  ({len (out )} kacan CP, {len (cache )} part, "
+    f"{os .path .getsize (a .out )/1e6 :.1f} MB)")
 
 
-if __name__ == "__main__":
-    main()
+if __name__ =="__main__":
+    main ()

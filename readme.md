@@ -4,19 +4,19 @@
 
 | dizin | icerik |
 |---|---|
-| **kok** | urun cekirdegi (60 modul, calisma aninda import edilen) + olcum araclari (`sonda_*`, `kos_*`) + `cp_config.json` |
+| **kok** | urun cekirdegi (60 modul, calisma aninda import edilen) + measurement araclari (`sonda_*`, `kos_*`) + `cp_config.json` |
 | `results/` | **makbuzlar** -- raporlanan her sayinin kaynagi (JSON) |
 | `docs/` | kampanya raporu, sunum paketi, otopsiler, devam notlari |
 | `tests/` | birim testler |
-| `ayarlar/` | egitim/kosum yapilandirmalari (YAML) |
-| `listeler/` | parca listeleri (TXT) |
+| `ayarlar/` | training/kosum yapilandirmalari (YAML) |
+| `listeler/` | part listeleri (TXT) |
 | `veri/` | koddan okunmayan yardimci JSON'lar |
 | `_arsiv_betikler/` | eski deney betikleri -- kampanya tarihi, urun bunlari IMPORT ETMEZ |
 
 **Giris noktalari:** `robot_cp.py` (urun), `export_robot_glb.py` (GLB ciktisi),
-`robot_viz.py --compare` (GT ile karsilastirmali gorsel), `duman_testi.py`
-(uctan uca saglik kontrolu), `geri_al.py --kontrol` (durum denetimi),
-`manset.py` (manset metrikleri).
+`robot_viz.py --compare` (GT ile karsilastirmali gorsel), `smoke_test.py`
+(uctan uca saglik kontrolu), `rollback.py --kontrol` (durum denetimi),
+`headline.py` (headline metrikleri).
 
 **Onemli:** kokteki araclar `sys.path.insert(dirname(__file__))` kullanir --
 alt klasore tasinirlarsa urun modullerini bulamazlar. Bu yuzden kod duz

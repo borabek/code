@@ -8,7 +8,7 @@ finds a maximum-cardinality one-to-one matching.  Two ceilings are reported:
 * ``oracle_null``: unmatched candidates may be suppressed (ideal final selector);
 * ``keep_all``: all input candidates survive (isolates pose selection from precision).
 
-The metric matches ``results/metrik_dondurulmus.json`` / ``sina_kume.esle_macar``:
+The metric matches ``results/metrik_dondurulmus.json`` / ``sina_cluster.match_hungarian``:
 lateral distance is measured around the GT axis, signed angle <= 10 degrees, absolute
 axial offset <= 40 mm.  It intentionally does *not* reuse p5-v2's label helper, whose
 lateral/axial decomposition currently uses the predicted direction.
@@ -31,7 +31,7 @@ import numpy as np
 from scipy.optimize import linear_sum_assignment
 
 import audit_d7_pose_options as PO
-import d6_kayit
+import d6_record
 
 
 DEFAULT_BRANCHES = tuple(PO.BRANCH_BUILDERS)
@@ -236,16 +236,16 @@ def _aggregate(rows: Iterable[tuple[str, int, int, int]]) -> dict[str, object]:
 
 def _gate_mask(record: dict[str, object], gate: object) -> np.ndarray:
     import wire_gate
-    from p1c_esik import maske
+    from p1c_threshold import maske
 
-    X = d6_kayit.x58(record)
+    X = d6_record.x58(record)
     n = len(record.get("P", ()))
     if X is None or len(X) != n:
         return np.zeros(n, dtype=bool)
     expected = int(gate.get("n_feat", X.shape[1] * 2)) if isinstance(gate, dict) else X.shape[1] * 2
     if X.shape[1] * 2 != expected:
         return np.zeros(n, dtype=bool)
-    scores = np.asarray(wire_gate.karar_skoru(gate, X), dtype=float)
+    scores = np.asarray(wire_gate.decision_score(gate, X), dtype=float)
     return np.asarray(maske(scores, 0.40, 0.30), dtype=bool)
 
 

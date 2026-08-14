@@ -7,17 +7,17 @@
 ## ✅ CURRENT PRODUCT (2026-08-02) = `vote1_union + 116-sütunlu gate + pose head + açı seçici`
 
 **Pipeline:** STEP → `thesis_remesh(6000)` → 4-model segmentasyon →
-**`robot_cp.adaylari_uret`** (tek kaynak; gate eğitimi de aynı fonksiyonu çağırır) →
-**wire-gate** → **göreli eşik** → **POSE HEAD** (yanal düzeltme) → **SEÇİCİ AÇI DÜZELTMESİ** →
+**`robot_cp.derive_candidates`** (tek kaynak; gate eğitimi de aynı fonksiyonu çağırır) →
+**wire-gate** → **göreli eşik** → **POSE HEAD** (lateral düzeltme) → **SEÇİCİ AÇI DÜZELTMESİ** →
 iki katman.
 
 **Gate:** `results/wire_gate.pkl` — **58 ham × 2 (parça-içi z-skor) = 116 sütun**
- (13 taban + 5 B-rep fiziksel + 4 içbükey topoloji + **36 zengin**: konum9 + çok-yarıçap24 + normal-std3)
-**Pose head:** `results/pose_head.pkl` — gate kararından sonra yanal düzeltme, ≤3mm, eksenel derinlik sabit
+ (13 baseline + 5 B-rep fiziksel + 4 içbükey topoloji + **36 zengin**: konum9 + çok-yarıçap24 + normal-std3)
+**Pose head:** `results/pose_head.pkl` — gate kararından sonra lateral düzeltme, ≤3mm, axial depth sabit
 **Açı seçici:** `results/aci_secici.pkl` — önce "bu açı yanlış mı", yalnız öyleyse düzelt
 Hepsi MD5 damgalı ve `tests/test_artifact.py` ile doğrulanıyor.
 
-### 📊 MANŞET — `manset.py --yaz` ÜRETİR (194 parça / 171 grup, **grup** bootstrap)
+### 📊 MANŞET — `headline.py --yaz` ÜRETİR (194 parça / 171 grup, **grup** bootstrap)
 
 | bölme | n | tespit F1 | %95 GA | robot-hazır | düşük-CP | çok-CP |
 |---|---|---|---|---|---|---|
@@ -32,10 +32,10 @@ Hepsi MD5 damgalı ve `tests/test_artifact.py` ile doğrulanıyor.
 
 ### 🔧 GECENİN ÜÇ KOLU
 
-| kol | etki | kanıt |
+| arm | etki | kanıt |
 |---|---|---|
 | **zengin bloklar** (+36 sütun) | tespit **+0.0233** | GA(WEI) [+0.0005, +0.0697] · `karar_olcutu` 5/5 şart |
-| **pose head** (yanal) | robot **+0.0428** | GA [+0.0220, +0.0680] · tespit +0.0001 |
+| **pose head** (lateral) | robot **+0.0428** | GA [+0.0220, +0.0680] · tespit +0.0001 |
 | **seçici açı** | robot **+0.0126** | GA [+0.0002, +0.0325] · tespit bedeli **yapısal sıfır** |
 | **üye yön seçici** | robot **+0.0278** | GA [+0.0105, +0.0490] · kâhin +0.0536'nın %52'si
 
@@ -43,15 +43,15 @@ Hepsi MD5 damgalı ve `tests/test_artifact.py` ile doğrulanıyor.
 6330 satırla **kanıtlı** (+0.0428). Veri, ölçüm belirsizliğini kapattı.
 
 **Neden öğrenme, kural değil:** 2026-08-01'de kural tabanlı dört konum/yön kolu denendi, dördü
-de öldü (izdüşüm −0.045, eksen uzlaşısı −110 nokta, yarık yönü −187, B-rep kapısı 0.000).
+de öldü (izdüşüm −0.045, axis uzlaşısı −110 nokta, yarık yönü −187, B-rep kapısı 0.000).
 Ortak kusur: düzeltme herkese aynı uygulanıyordu.
 
 ### 🔑 PARÇA-İÇİ Z-SKOR BİR **KURTARMA**, GENEL İYİLEŞTİRME DEĞİL
 
-9 bölmede (7 seri-dışı + 2 üretici-dışı) desen tekdüze — **taban zayıfken kazanıyor,
+9 bölmede (7 seri-dışı + 2 üretici-dışı) desen tekdüze — **baseline zayıfken kazanıyor,
 sağlıklıyken kaybediyor**:
 
-| bölme | taban | her parçaya z-skorun farkı |
+| bölme | baseline | her parçaya z-skorun farkı |
 |---|---|---|
 | WEI dışarıda | 0.4832 (çöküş) | **+0.0869** |
 | seri 25 | 0.5654 | **+0.0639** |
@@ -64,7 +64,7 @@ sezer (ölçülmüş teşhis: çöküşte model adayların %10.3'üne pozitif di
 kazancın **%98'ini** korurken PXC vergisinin **yarısını**, seri vergisinin **%60'ını** geri alır.
 Metadata gerektirmez.
 
-> **Dürüst not (kendi çubuğum):** *"yönlendirmeli kol her eksende en az z-skor kadar iyi olmalı"*
+> **Dürüst not (kendi çubuğum):** *"yönlendirmeli arm her eksende en az z-skor kadar iyi olmalı"*
 > testim WEI'de kıl payı düştü — fark −0.0020, %95 GA [−0.0066, **+0.0000**], üst uç tam sıfır.
 > Ürün kararını bir `>0`/`>=0` sınır artefaktına bırakmadım: yönlendirme WEI'de 0.0020 verip
 > PXC'de 0.0201 ve tanıdıkta 0.0049 alıyor (10'a 1) ve üretici ortalamasında en iyisi.
@@ -91,7 +91,7 @@ Dağıtılan ürün (`recall_hard_s2`): IoU 0.633 / Dice 0.746 / acc 0.831 — o
 `seg_thesis_eval.py` · `results/seg_thesis_val.json`
 
 **📌 0.80 ÖZETİ (hangi sayı ≥0.80, dürüst):** tez-native segmentasyon acc 0.86/Dice 0.79 ✅ · PXC-tipik CP-F1 0.823 ✅ ·
-count-assisted full-stack 0.807 ✅. **ALL CP-nokta-F1 0.756 etiketsiz 0.80 OLMAZ** (top-N tavan 0.775, 5 yolla kanıtlı).
+count-assisted full-stack 0.807 ✅. **ALL CP-nokta-F1 0.756 etiketsiz 0.80 OLMAZ** (top-N ceiling 0.775, 5 yolla kanıtlı).
 
 **Primary metric (user decision 2026-07-24): AUTO+REVIEW F1** vs manufacturer ConnectionPoints,
 leakage-free GroupKFold-OOF. **AUTO precision = separate safety metric.**

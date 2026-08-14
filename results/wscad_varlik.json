@@ -1,19 +1,19 @@
 {
  "CWT": [
   {
-   "parca": "CB43",
+   "part": "CB43",
    "bulundu": true,
    "kart": 25,
    "url": "https://www.wscaduniverse.com/search?searchText=CB43&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "CX6_3BK",
+   "part": "CX6_3BK",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=CX6_3BK&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "DDDL4UBK",
+   "part": "DDDL4UBK",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=DDDL4UBK&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -21,19 +21,19 @@
  ],
  "A-B": [
   {
-   "parca": "1492-LG6",
+   "part": "1492-LG6",
    "bulundu": true,
    "kart": 2,
    "url": "https://www.wscaduniverse.com/search?searchText=1492-LG6&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "1492-J3P-RE",
+   "part": "1492-J3P-RE",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=1492-J3P-RE&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "1492-JKD3",
+   "part": "1492-JKD3",
    "bulundu": true,
    "kart": 2,
    "url": "https://www.wscaduniverse.com/search?searchText=1492-JKD3&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -41,19 +41,19 @@
  ],
  "A-B_N": [
   {
-   "parca": "1492-LSG2",
+   "part": "1492-LSG2",
    "bulundu": true,
    "kart": 3,
    "url": "https://www.wscaduniverse.com/search?searchText=1492-LSG2&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "1492-W4",
+   "part": "1492-W4",
    "bulundu": true,
    "kart": 18,
    "url": "https://www.wscaduniverse.com/search?searchText=1492-W4&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "1492-J6",
+   "part": "1492-J6",
    "bulundu": true,
    "kart": 9,
    "url": "https://www.wscaduniverse.com/search?searchText=1492-J6&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -61,19 +61,19 @@
  ],
  "KLM": [
   {
-   "parca": "304204",
+   "part": "304204",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=304204&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "304123",
+   "part": "304123",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=304123&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "304130",
+   "part": "304130",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=304130&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -81,19 +81,19 @@
  ],
  "SIE": [
   {
-   "parca": "8WH2000-0AM01",
+   "part": "8WH2000-0AM01",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=8WH2000-0AM01&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "8WH2035-0AF01",
+   "part": "8WH2035-0AF01",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=8WH2035-0AF01&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "8WH1201-0CM07",
+   "part": "8WH1201-0CM07",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=8WH1201-0CM07&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -101,19 +101,19 @@
  ],
  "CCD": [
   {
-   "parca": "1005.2",
+   "part": "1005.2",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=1005.2&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "27012.5",
+   "part": "27012.5",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=27012.5&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "17145.2",
+   "part": "17145.2",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=17145.2&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -121,19 +121,19 @@
  ],
  "ELMEX": [
   {
-   "parca": "KUDD4D1_GY",
+   "part": "KUDD4D1_GY",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=KUDD4D1_GY&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "KUPTD6S_GY",
+   "part": "KUPTD6S_GY",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=KUPTD6S_GY&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "KUT50_GY",
+   "part": "KUT50_GY",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=KUT50_GY&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -141,19 +141,19 @@
  ],
  "ABB": [
   {
-   "parca": "1SDA107385R1",
+   "part": "1SDA107385R1",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=1SDA107385R1&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "1SDA068126R1",
+   "part": "1SDA068126R1",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=1SDA068126R1&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "1SDA067395R1",
+   "part": "1SDA067395R1",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=1SDA067395R1&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -161,19 +161,19 @@
  ],
  "AL": [
   {
-   "parca": "ALPT 42 PV",
+   "part": "ALPT 42 PV",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=ALPT%2042%20PV&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "ALPP-H4",
+   "part": "ALPP-H4",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=ALPP-H4&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "ALTD 200-200A",
+   "part": "ALTD 200-200A",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=ALTD%20200-200A&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -181,19 +181,19 @@
  ],
  "DIN": [
   {
-   "parca": "AK1.5-TN",
+   "part": "AK1.5-TN",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=AK1.5-TN&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "DKTD6",
+   "part": "DKTD6",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=DKTD6&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "DP16-PE",
+   "part": "DP16-PE",
    "bulundu": false,
    "kart": 0,
    "url": "https://www.wscaduniverse.com/search?searchText=DP16-PE&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -201,13 +201,13 @@
  ],
  "KONTROL_PXC": [
   {
-   "parca": "3031759",
+   "part": "3031759",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=3031759&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "3209520",
+   "part": "3209520",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=3209520&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
@@ -215,13 +215,13 @@
  ],
  "KONTROL_WEI": [
   {
-   "parca": "2881490000",
+   "part": "2881490000",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=2881490000&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"
   },
   {
-   "parca": "1021560000",
+   "part": "1021560000",
    "bulundu": true,
    "kart": 1,
    "url": "https://www.wscaduniverse.com/search?searchText=1021560000&norm=IEC&format=WSCAD&manufacturerIds=&symbolsInTechnologies=&category=&limit=96&offset=0"

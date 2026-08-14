@@ -23,5 +23,5 @@ for CK in ab_A_s0 ab_A_s0_last ab_B_s0 ab_B_s0_last; do
      --axis-aware --cluster-mm 5 --min-v 30 --vertex-conf 0.5 --tag ab_$CK 2>&1 | grep -E "WEI:|ARBITER" | tail -2
 done
 echo "############ KARAR ############"
-echo "B (best VEYA last) > A > baseline 0.563 ise -> 95 etiket CALISTI (confound'suz kanit)"
+echo "B (best VEYA last) > A > baseline 0.563 ise -> 95 etiket CALISTI (confound'suz evidence)"
 echo "B <= A ise -> etiket bu recete/secimle yardim etmiyor (daha cok etiket/aux-head)"

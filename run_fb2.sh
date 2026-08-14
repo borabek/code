@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# FB-2: TEL/ALET yardimci supervizyonuyla 4 uyeli topluluk.
+# FB-2: TEL/ALET yardimci supervizyonuyla 4 uyeli ensemble.
 #
 # TESHIS: tezin Contact sinifi "Kontaktierung bzw. Werkzeugeinschub" -- tel girisi ve alet
 # agzi TEK SINIF. Backbone, bizim ayirmak istedigimiz iki seyi BIRLESTIRMEK uzere egitildi.
@@ -19,12 +19,12 @@ IZ=results/_fb2_ilerleme.txt
 : > "$IZ"
 for SEED in 0 1 2 3; do
   OUT=results/seg_extra/fb2_aux_s${SEED}.pt
-  echo "tohum ${SEED} BASLADI $(date +%H:%M:%S)" >> "$IZ"
+  echo "seed ${SEED} BASLADI $(date +%H:%M:%S)" >> "$IZ"
   $PY train_seg_extra.py --no-extra --k-eig 96 \
       --partial-dir $DIRS --partial-target connection --seed ${SEED} \
       --select-metric connection_iou \
       --aux-wire --aux-w 0.5 --aux-pos-weight 0.54 \
       --checkpoint-out "$OUT"
-  echo "tohum ${SEED} BITTI   $(date +%H:%M:%S) cikis=$?" >> "$IZ"
+  echo "seed ${SEED} BITTI   $(date +%H:%M:%S) cikis=$?" >> "$IZ"
 done
 echo "TUMU BITTI $(date +%H:%M:%S)" >> "$IZ"

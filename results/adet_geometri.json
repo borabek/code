@@ -1,9 +1,9 @@
 {
  "r_tol": 0.15,
  "a_tol": 12.0,
- "marka": {
+ "brand": {
   "NIT": {
-   "parca": 50,
+   "part": 50,
    "gercek_ort": 24.44,
    "n_hepsi": {
     "ort": 119.64,
@@ -22,7 +22,7 @@
    }
   },
   "SUPU": {
-   "parca": 163,
+   "part": 163,
    "gercek_ort": 3.2699386503067487,
    "n_hepsi": {
     "ort": 175.920245398773,
@@ -41,7 +41,7 @@
    }
   },
   "UPUN": {
-   "parca": 115,
+   "part": 115,
    "gercek_ort": 3.1478260869565218,
    "n_hepsi": {
     "ort": 156.28695652173914,
@@ -60,7 +60,7 @@
    }
   },
   "MOR": {
-   "parca": 69,
+   "part": 69,
    "gercek_ort": 3.8115942028985508,
    "n_hepsi": {
     "ort": 215.18840579710144,
@@ -79,5 +79,5 @@
    }
   }
  },
- "not": "Ogrenmesiz adet tahmini: kipsel yaricapli silindir sayisi. |hata| = ortanca mutlak hata, <=1 = tam isabete yakin oran. D7'ye BAKILMADI."
+ "not": "Ogrenmesiz adet tahmini: kipsel yaricapli silindir sayisi. |error| = ortanca mutlak error, <=1 = tam isabete yakin ratio. D7'ye BAKILMADI."
 }

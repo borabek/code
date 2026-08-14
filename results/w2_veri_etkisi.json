@@ -11,8 +11,8 @@
   "WEI": 0.595487548666991,
   "PROSPEKTIF": 0.6900700478071365
  },
- "tohum": {
-  "A mevcut korpus": {
+ "seed": {
+  "A mevcut corpus": {
    "havuzlanmis": [
     0.753404650403735,
     0.7540088701817822,
@@ -78,5 +78,5 @@
  "kazanc": true,
  "zarar": false,
  "gecti": true,
- "not": "WEI-disi bolmede yeni WEI verisi EKLENMEZ (protokol)"
+ "not": "WEI-disi bolmede yeni WEI verisi EKLENMEZ (protocol)"
 }

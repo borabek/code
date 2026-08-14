@@ -1,5 +1,5 @@
 {
  "hedef_kesinlik": 0.9,
- "esik": null,
+ "threshold": null,
  "kalibrasyon": "results/d7_p6.json"
 }

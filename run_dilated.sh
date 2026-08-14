@@ -17,7 +17,7 @@ run () {   # run <name> <ckpt> <extra args...>
 }
 
 echo "=== DILATED LABELS $(date) ==="
-run "A2: 71 korpus + 20 genisletilmis insan" results/seg_extra/human20d.pt
+run "A2: 71 corpus + 20 genisletilmis insan" results/seg_extra/human20d.pt
 run "B2: 71 + 450 pseudo + 20 genisletilmis insan" results/seg_extra/human20d_pseudo.pt \
     --pseudo-dir _pseudo_extra
 echo "=== DONE $(date) ==="

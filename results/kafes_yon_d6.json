@@ -1,9 +1,9 @@
 {
- "yanal": 2.0,
- "eksenel": 40.0,
+ "lateral": 2.0,
+ "axial": 40.0,
  "aci": 10.0,
  "yakin_r": 2.0,
- "marka": {
+ "brand": {
   "NIT": {
    "gt": 1210,
    "konum": 0.6760330578512397,
@@ -33,5 +33,5 @@
    "uret_parca": 107.87878787878788
   }
  },
- "not": "Uretilen izgara noktalarinda YON, cevredeki adaylarin yon-bankasi seceneklerinden KAHIN gibi secilir. TAVAN olcumudur: dogru yon MEVCUT MU? D7'ye BAKILMADI."
+ "not": "Uretilen izgara noktalarinda YON, cevredeki adaylarin direction-bankasi seceneklerinden KAHIN gibi secilir. TAVAN olcumudur: dogru direction MEVCUT MU? D7'ye BAKILMADI."
 }

@@ -2,7 +2,7 @@
  "note": "FAZ2/P0 split kilidi. locked_parts P7'de TEK KEZ acilir.",
  "created": "2026-07-28",
  "n_parts": 670,
- "family_source": "STEP PRODUCT adi (varyant eki soyulmus); parca-no ise json_dataset.family_key fallback",
+ "family_source": "STEP PRODUCT adi (varyant eki soyulmus); part-no ise json_dataset.family_key fallback",
  "geometry_source": "JSON Graphic3d bbox (0.1mm) + log2(nokta sayisi)",
  "locked_holdout_rule": "sha256(family)%100 < 20",
  "n_families": 595,

@@ -1,10 +1,10 @@
 {
  "current_product": {
   "frozen": "2026-07-30",
-  "id": "urun_v5 = B-rep eksen (silindir+duzlem) + agirlikli konum ortalamasi + 10-ozellikli gate",
-  "primary_metric": "AUTO+REVIEW F1 vs uretici ConnectionPoints, korpus-agirlikli (dusuk 0.895 / cok 0.105), sizintisiz",
+  "id": "urun_v5 = B-rep axis (silindir+duzlem) + agirlikli konum ortalamasi + 10-ozellikli gate",
+  "primary_metric": "AUTO+REVIEW F1 vs manufacturer ConnectionPoints, corpus-agirlikli (dusuk 0.895 / cok 0.105), sizintisiz",
   "headline_F1": {
-   "OLCUT": "IKI SAYI birden. (1) TANIDIK: DEV+VAL 200 parca, geometri-ayrik ama URETICI-KARISIK. (2) GORULMEMIS URETICI: gate o ureticiyi HIC gormeden egitilir -- gercek dunya beklentisi budur. Karar kurali: parca-ici GORELI esik (0.5) + mutlak taban (0.25). LOCKED harcanmadi.",
+   "OLCUT": "IKI SAYI birden. (1) TANIDIK: DEV+VAL 200 part, geometri-ayrik ama URETICI-KARISIK. (2) GORULMEMIS URETICI: gate o ureticiyi HIC gormeden egitilir -- gercek dunya beklentisi budur. Karar kurali: part-ici GORELI threshold (0.5) + mutlak baseline (0.25). LOCKED harcanmadi.",
    "gate": {
     "n_feat": 116,
     "topo_r": 6.0,
@@ -13,8 +13,8 @@
     "dosya": "results/wire_gate.pkl",
     "md5": "6cbcc16db49708982b12730c70e50e8c",
     "egitim_verisi": "results/zengin_parite_w2.npz",
-    "tarif": "ZENGIN 2026-08-02: 22 temel + 36 zengin (konum9 + cok-yaricap24 + normal-std3), x2 parca-ici z-skor = 116 sutun. UCTAN UCA (kilitli kume 194 parca/171 grup, GRUP bootstrap, karar_olcutu 5 sart): tanidik 0.7301->0.7534 (+0.0233), WEI-disi 0.5593->0.5946, PXC-disi 0.6619->0.6743; GA(WEI) [+0.0005,+0.0697] KANITLI. Taper BILEREK yok (olculmus olu). Geri alma: results/wire_gate.pkl.pre_zengin | W2 202",
-    "URETIM": "manset.py --yaz ile ARTEFAKTTAN okunur; elle yazilmaz."
+    "tarif": "ZENGIN 2026-08-02: 22 temel + 36 zengin (konum9 + cok-yaricap24 + normal-std3), x2 part-ici z-skor = 116 sutun. UCTAN UCA (kilitli cluster 194 part/171 grup, GRUP bootstrap, karar_olcutu 5 sart): tanidik 0.7301->0.7534 (+0.0233), WEI-disi 0.5593->0.5946, PXC-disi 0.6619->0.6743; GA(WEI) [+0.0005,+0.0697] KANITLI. Taper BILEREK yok (olculmus olu). Geri alma: results/wire_gate.pkl.pre_zengin | W2 202",
+    "URETIM": "headline.py --yaz ile ARTEFAKTTAN okunur; elle yazilmaz."
    },
    "tanidik": {
     "tespit_F1": 0.7584,
@@ -27,7 +27,7 @@
      0.572,
      0.6885
     ],
-    "kesinlik": 0.745,
+    "precision": 0.745,
     "recall": 0.774,
     "n_parca": 194,
     "dusuk_CP_F1": 0.7701,
@@ -54,14 +54,14 @@
      "robot_hazir_F1": 0.5591,
      "n_parca": 90
     },
-    "OKUMA": "Iki sayi BIRLIKTE okunur. Ortalama 0.6018 -> 0.6356, en kotu 0.4832 -> 0.5682, yayilim 0.2370 -> 0.1347. Elimizde IKI uretici oldugu icin 'uretici-disi' fiilen 'TEK uretici ile egit' demektir = mumkun olan en zor ayar; ucuncu bir uretici IKISIYLE egitilmis modelle karsilasacak, yani bu sayilar KOTUMSER ALT SINIR."
+    "OKUMA": "Iki sayi BIRLIKTE okunur. Ortalama 0.6018 -> 0.6356, en kotu 0.4832 -> 0.5682, yayilim 0.2370 -> 0.1347. Elimizde IKI manufacturer oldugu icin 'manufacturer-disi' fiilen 'TEK manufacturer ile egit' demektir = mumkun olan en zor ayar; ucuncu bir manufacturer IKISIYLE egitilmis modelle karsilasacak, yani bu sayilar KOTUMSER ALT SINIR."
    },
    "gece_ilerlemesi_2026_08_01": {
     "baslangic": {
      "tanidik": 0.7437,
      "WEI_disarida": 0.315,
      "PXC_disarida": 0.7037,
-     "not": "sabit esik + 18 sutun"
+     "not": "sabit threshold + 18 sutun"
     },
     "adim1_goreli_esik": {
      "WEI_disarida": 0.4736,
@@ -73,21 +73,21 @@
      "WEI_disarida": 0.4832,
      "PXC_disarida": 0.7203
     },
-    "toplam": "gorulmemis uretici EN KOTU 0.3150 -> 0.5682 (+0.2532), ORTALAMA 0.5094 -> 0.6356; tanidik 0.7437 -> 0.7439 (degismedi). Yayilim 0.389 -> 0.135.",
+    "toplam": "gorulmemis manufacturer EN KOTU 0.3150 -> 0.5682 (+0.2532), ORTALAMA 0.5094 -> 0.6356; tanidik 0.7437 -> 0.7439 (degismedi). Yayilim 0.389 -> 0.135.",
     "adim3_parca_ici_zskor": {
      "tanidik": 0.739,
      "WEI_disarida": 0.5702,
      "PXC_disarida": 0.6828,
-     "not": "ozellik duzeyinde parca-ici baglam; goreli esigin (skor duzeyi) ozellik karsiligi"
+     "not": "ozellik duzeyinde part-ici baglam; goreli esigin (skor duzeyi) ozellik karsiligi"
     },
     "adim4_cokus_yonlendirme": {
      "tanidik": 0.7439,
      "WEI_disarida": 0.5682,
      "PXC_disarida": 0.7029,
-     "not": "parca-ici z-skor HER PARCAYA degil YALNIZ COKUSTE. 9 bolmede olculen desen: z-skor taban zayifken kazaniyor, saglikliyken kaybediyor -> bir KURTARMA, genel iyilestirme degil. Yonlendirme, her-parcaya surumun (D) PXC vergisinin yarisini ve seri vergisinin %60'ini geri aldi; tanidikta HAM gate'ten de iyi."
+     "not": "part-ici z-skor HER PARCAYA degil YALNIZ COKUSTE. 9 bolmede olculen desen: z-skor baseline zayifken kazaniyor, saglikliyken kaybediyor -> bir KURTARMA, genel iyilestirme degil. Yonlendirme, her-parcaya surumun (D) PXC vergisinin yarisini ve seri vergisinin %60'ini geri aldi; tanidikta HAM gate'ten de iyi."
     }
    },
-   "makbuz": [
+   "receipt": [
     "results/u8_yonlendirme_dogrula.json",
     "results/u7_yonlendirme.json",
     "results/u6_seri_disi.json",
@@ -95,12 +95,12 @@
     "results/u2_topo_r_uctan_uca.json",
     "results/u5_takas.json"
    ],
-   "geri_alma": "yonlendirme: results/wire_gate.pkl.pre_yonlendirme -> results/wire_gate.pkl (TEK ADIM, DENENDI) | her-parcaya z-skor: wire_gate.pkl.pre_parca_ici | topoloji: wire_gate.pkl.pre_topo + gate_topo_feats=false | goreli esik: gate_goreli_esik=false | fiziksel: wire_gate.pkl.pre_fiz",
-   "not": "robot-hazir = yanal <=2mm VE eksen <=10 derece. tespit = max(3mm, %6 x kosegen).",
+   "geri_alma": "yonlendirme: results/wire_gate.pkl.pre_yonlendirme -> results/wire_gate.pkl (TEK ADIM, DENENDI) | her-parcaya z-skor: wire_gate.pkl.pre_parca_ici | topoloji: wire_gate.pkl.pre_topo + gate_topo_feats=false | goreli threshold: gate_goreli_esik=false | fiziksel: wire_gate.pkl.pre_fiz",
+   "not": "robot-hazir = lateral <=2mm VE axis <=10 derece. tespit = max(3mm, %6 x kosegen).",
    "kapatilan_dallar": {
     "topoloji_yaricapi_R": "KAPANDI 2026-08-01. Aday duzeyi R=12'yi kazanan gosterdi (+0.0100) ama UCTAN UCA R=12 tanidikta -0.0109 ile DUSTU; R=8'in kazanci GURULTU (WEI +0.018 GA [-0.007,+0.044]) ama bedeli GERCEK (PXC -0.024 GA [-0.044,-0.006]). R=6.0 KALIR. Makbuz: results/u2_topo_r_uctan_uca.json",
-    "takasi_kaldirma": "COZULDU 2026-08-01 (once KAPALI sanilmisti). Ozellik secimiyle (yalniz-ezber / yalniz-fiziksel / topluluk) kaldirilamadi; YONLENDIRME ile kaldirildi: z-skor yalniz gate'in kararsiz oldugu parcalarda uygulanir. Makbuz: results/u7_yonlendirme.json, results/u8_yonlendirme_dogrula.json",
-    "z_skorun_gercek_dogasi": "OLCULDU 2026-08-01, 9 bolme (7 seri-disi + 2 uretici-disi): parca-ici z-skor GENEL bir iyilestirme DEGIL, bir KURTARMA. Taban <0.60 iken kazaniyor (+0.009..+0.087), taban >0.65 iken kaybediyor (-0.008..-0.060). Bu yuzden her parcaya uygulanmaz. Makbuz: results/u6_seri_disi.json"
+    "takasi_kaldirma": "COZULDU 2026-08-01 (once KAPALI sanilmisti). Ozellik secimiyle (yalniz-ezber / yalniz-fiziksel / ensemble) kaldirilamadi; YONLENDIRME ile kaldirildi: z-skor yalniz gate'in kararsiz oldugu parcalarda uygulanir. Makbuz: results/u7_yonlendirme.json, results/u8_yonlendirme_dogrula.json",
+    "z_skorun_gercek_dogasi": "OLCULDU 2026-08-01, 9 split (7 seri-disi + 2 manufacturer-disi): part-ici z-skor GENEL bir iyilestirme DEGIL, bir KURTARMA. Taban <0.60 iken kazaniyor (+0.009..+0.087), baseline >0.65 iken kaybediyor (-0.008..-0.060). Bu yuzden her parcaya uygulanmaz. Makbuz: results/u6_seri_disi.json"
    },
    "gorulmemis_seri": {
     "seri 10": {
@@ -136,9 +136,9 @@
     "seri_disi_EN_KOTU": 0.6196,
     "seri_disi_MEDYAN": 0.7127
    },
-   "URETIM": "Bu blok manset.py --yaz ile URETILIR, ELLE YAZILMAZ. Elle guncelleme 2026-08-01'de kollari karistirmisti (tespit yeni koldan, robot eskisinden).",
-   "KUME_ADI": "194 parcalik havuzun TAMAMI GELISTIRME verisidir. VAL artik SINAV DEGIL: gece boyunca kararlar DEV+VAL havuzuna bakilarak verildi (DEV/VAL ucurumu 0.076 ile olculdu). Tek gercek sinav, HIC DOKUNULMAMIS 95 grup-temiz LOCKED parcadir.",
-   "LOCKED_DURUMU": "95 grup-temiz LOCKED parca HARCANMADI. (Onceki '98' YANLISTI: dogrudan kullanilip puanlamadan cikarilan 3 parca yeniden 'temiz' sayiliyordu -- bir kez dokunulan parca KALICI olarak kirlidir. 2026-08-02 denetimi.)"
+   "URETIM": "Bu blok headline.py --yaz ile URETILIR, ELLE YAZILMAZ. Elle guncelleme 2026-08-01'de kollari karistirmisti (tespit yeni koldan, robot eskisinden).",
+   "KUME_ADI": "194 parcalik havuzun TAMAMI GELISTIRME verisidir. VAL artik SINAV DEGIL: gece boyunca kararlar DEV+VAL havuzuna bakilarak verildi (DEV/VAL ucurumu 0.076 ile measured). Tek gercek exam, HIC DOKUNULMAMIS 95 grup-temiz LOCKED parcadir.",
+   "LOCKED_DURUMU": "95 grup-temiz LOCKED part HARCANMADI. (Onceki '98' YANLISTI: dogrudan kullanilip puanlamadan cikarilan 3 part yeniden 'temiz' sayiliyordu -- bir kez dokunulan part KALICI olarak kirlidir. 2026-08-02 denetimi.)"
   },
   "pipeline": "STEP -> gmsh 0.5mm -> thesis_remesh 6000 -> 4 model seg -> cp_openings (model basina) -> UNION(vote>=1) -> wire-gate -> tier",
   "checkpoints": [
@@ -157,10 +157,10 @@
    "wire_gate_threshold": 0.4,
    "wire_gate_threshold_highcp": 0.35,
    "conn_promote": 0.25,
-   "conn_promote_applies": "SADECE yonlendirici cok-CP derse (thr 0.30)",
+   "conn_promote_applies": "SADECE router cok-CP derse (thr 0.30)",
    "geo_orient": "ACIK (CP_GEO_ORIENT=1)",
    "channel_axis": "ACIK (CP_CHANNEL_AXIS=1)",
-   "axis_normals": "ACIK (CP_AXIS_NORMALS=1) -- eksen normal-kovaryanstan ince ayarlanir"
+   "axis_normals": "ACIK (CP_AXIS_NORMALS=1) -- axis normal-kovaryanstan ince ayarlanir"
   },
   "wire_gate": {
    "dosya": "results/wire_gate.pkl",
@@ -171,45 +171,45 @@
    "yol": "results/wire_gate.pkl",
    "egitim_verisi": "results/zengin_parite_w2.npz",
    "n_feat": 116,
-   "yapi": "58 ham (13 taban + 5 B-rep fiziksel + 4 icbukey topoloji + 36 zengin) x2 parca-ici z-skor",
+   "yapi": "58 ham (13 baseline + 5 B-rep fiziksel + 4 icbukey topoloji + 36 zengin) x2 part-ici z-skor",
    "cokus_yonlendirme": false,
    "gate_kimlik": {
     "dosya": "results/wire_gate.pkl",
     "md5": "6cbcc16db49708982b12730c70e50e8c",
     "sutun": 116,
     "egitim_verisi": "results/zengin_parite_w2.npz",
-    "aday": 20974,
-    "parca": 1709,
+    "candidate": 20974,
+    "part": 1709,
     "donusum": "zskor",
     "router": false,
     "tarih": "2026-08-02",
-    "kanit": "results/w2_veri_etkisi.json",
-    "not": "W2: +110 yeni WEI parcasi. Prospektif 109 parca (results/yeni_wei.npz bolme=='test') EGITIME GIRMEDI **ama W2'yi dagitma KARARINDA kullanildi** -> model secimi acisindan HARCANMISTIR; FINAL SINAVI OLARAK TEKRAR KULLANILAMAZ (F0-2, 2026-08-04). W2'nin gercek kaniti: prospektif alt kumede 0.6510 -> 0.6901; HAVUZLANMIS kazanc yalniz +0.0044 ve GA [-0.0071,+0.0155] SIFIRI ICIYOR. Bakir sinav yalniz 95 grup-temiz LOCKED."
+    "evidence": "results/w2_veri_etkisi.json",
+    "not": "W2: +110 yeni WEI parcasi. Prospektif 109 part (results/yeni_wei.npz split=='test') EGITIME GIRMEDI **ama W2'yi dagitma KARARINDA kullanildi** -> model secimi acisindan HARCANMISTIR; FINAL SINAVI OLARAK TEKRAR KULLANILAMAZ (F0-2, 2026-08-04). W2'nin gercek kaniti: prospektif alt kumede 0.6510 -> 0.6901; HAVUZLANMIS kazanc yalniz +0.0044 ve GA [-0.0071,+0.0155] SIFIRI ICIYOR. Bakir exam yalniz 95 grup-temiz LOCKED."
    }
   },
   "router": "geometry-only high-CP router (STEP bbox + candidate density), family-out AUC 0.9945, needs NO metadata",
   "olculen_degisiklikler_2026_07_30": {
    "gate_yeniden_egitim_guncel_aday_havuzunda": "+0.1273",
    "min_vertices_10_to_4": "+0.0224",
-   "AUTO_tier = wire_score>=0.60 (eski: segmentasyon guveni)": "kesinlik 0.86 -> 1.00",
-   "P9 geo-orient ACIK + eslesen gate + esik 0.40/0.35": "+0.0151",
-   "eksen normal-kovaryans ince ayari": "robot-hazir F1 +0.0227 (0.4677->0.4904), tespit F1 +0.0008"
+   "AUTO_tier = wire_score>=0.60 (eski: segmentasyon guveni)": "precision 0.86 -> 1.00",
+   "P9 geo-orient ACIK + eslesen gate + threshold 0.40/0.35": "+0.0151",
+   "axis normal-kovaryans ince ayari": "robot-hazir F1 +0.0227 (0.4677->0.4904), tespit F1 +0.0008"
   },
   "holdout_status": "SPENT 2026-07-29 -- urun_v3 holdout ile DOGRULANAMAZ; yukaridaki sayi 100-parcalik sizintisiz OOF olcumdur",
   "rollback": "cp_config.json.bak_p9_2026_07_30 (P9 oncesi) / cp_config.json.bak_2026_07_29 (v2.1 oncesi)",
   "uyari": "Bir onceki current_product bloku (v2.1, headline 0.75) BAYATTI -- _superseded_current_product_2026_07_29_v2_1 altina tasindi.",
   "applied": "2026-07-31 09:22:50",
   "metrik_ailesi_2026_07_30": {
-   "neden": "Tek bir CP-F1 sayisi yaniltiyordu: eslesme olcutu parca boyutuyla olcekleniyor (%6 x kosegen) ve EKSEN YONUNE hic bakmiyordu. 90 derece ters bir tahmin bile 'dogru' sayiliyordu. Artik iki sayi birden raporlanir.",
+   "neden": "Tek bir CP-F1 sayisi yaniltiyordu: eslesme olcutu part boyutuyla olcekleniyor (%6 x kosegen) ve EKSEN YONUNE hic bakmiyordu. 90 derece ters bir tahmin bile 'dogru' sayiliyordu. Artik iki sayi birden raporlanir.",
    "tespit_F1": {
     "deger": 0.7792,
-    "olcut": "yanal <= %6 x parca kosegeni, eksenel +-40mm, aci serbest",
+    "criterion": "lateral <= %6 x part kosegeni, axial +-40mm, aci serbest",
     "not": "projenin bastan beri kullandigi konvansiyon; tez karsilastirmasi bununla"
    },
    "robot_hazir_F1": {
     "deger": 0.4904,
-    "olcut": "yanal <= 2mm VE eksen acisi <= 10 derece",
-    "not": "robotun gercek gereksinimi; 2026-07-30'da ilk kez olculdu"
+    "criterion": "lateral <= 2mm VE axis acisi <= 10 derece",
+    "not": "robotun gercek gereksinimi; 2026-07-30'da ilk kez measured"
    },
    "ara_degerler": {
     "yanal_3mm": 0.6916,
@@ -223,15 +223,15 @@
     "sonra": 0.249,
     "hizalama_residual_medyan_mm": 0.17
    },
-   "makbuz": [
+   "receipt": [
     "results/tolerans_gercegi.json",
     "results/_tolerans_cache2.pkl (once)",
-    "results/_tolerans_cache4.pkl (eksen duzeltmesi)"
+    "results/_tolerans_cache4.pkl (axis duzeltmesi)"
    ]
   },
   "OLCUM_DUZELTMESI_2026_07_31": {
    "bulgu": "Bugune kadarki tum 'sizintisiz' sayilar GEOMETRIK IKIZ sizintisi tasiyordu.",
-   "neden": "json_dataset.family_key bu korpusta parca numarasinin KENDISINI donduruyor (1903 parca -> 1903 'aile'). Gercek gruplama geometry_key: 1903 parca yalnizca 765 GEOMETRI grubuna dusuyor ve parcalarin %80.1'inin korpusta neredeyse birebir bir IKIZI var (eksen farki 0.000 derece, hizalama residual 0.3mm). 'Test aileleri gate egitiminden cikarildi' derken gercekte yalniz test PARCALARI cikariliyordu; ikizleri egitim tarafinda kaliyordu.",
+   "neden": "json_dataset.family_key bu korpusta part numarasinin KENDISINI donduruyor (1903 part -> 1903 'aile'). Gercek gruplama geometry_key: 1903 part yalnizca 765 GEOMETRI grubuna dusuyor ve parcalarin %80.1'inin korpusta neredeyse birebir bir IKIZI var (axis farki 0.000 derece, hizalama residual 0.3mm). 'Test aileleri gate egitiminden cikarildi' derken gercekte yalniz test PARCALARI cikariliyordu; ikizleri training tarafinda kaliyordu.",
    "uctan_uca_olcum": {
     "family_key_ESKI": {
      "tespit": 0.779,
@@ -242,10 +242,10 @@
      "robot_hazir": 0.4159
     }
    },
-   "kontrol": "Dusus VERI AZLIGINDAN degil: geometry_key 17043 aday birakiyor, family_key 21979. family_key'i AYNI 17043 aday sayisina indirince tespit 0.7566 (A 0.7790) -- yani veri azliginin payi -0.022, SIZINTININ payi -0.132.",
+   "kontrol": "Dusus VERI AZLIGINDAN degil: geometry_key 17043 candidate birakiyor, family_key 21979. family_key'i AYNI 17043 candidate sayisina indirince tespit 0.7566 (A 0.7790) -- yani veri azliginin payi -0.022, SIZINTININ payi -0.132.",
    "sonuc": "DOGRU MANSET: tespit 0.625 / robot-hazir 0.416 (geometry_key bolmesi).",
    "urun_degismedi": "Dagitilan urun aynen calisiyor ve dagitilan gate TUM veriyle egitilir (dagitim icin dogrusu bu). Degisen sey OLCUM PROTOKOLU: bundan sonra her sizintisiz iddia geometry_key ile kurulur.",
-   "makbuz": [
+   "receipt": [
     "results/f_geometri_bolme.json",
     "results/f_manset_geometri.json"
    ],
@@ -253,19 +253,19 @@
   },
   "gece_2026_07_31": {
    "KAZANANLAR": {
-    "I duzlem-cifti yuva ekseni": "silindir susunca analitik eksen; robot-hazir +0.0143 (family bolmesi)",
-    "J guven-agirlikli konum ortalamasi": "tespit +0.0072, yanal2mm +0.0192, robot +0.0164 (geometri bolmesi)",
-    "L2 gate ozellik budama": "en cok EZBERLEYEN 3 ozellik (depth/size/aspect) atildi -> tespit 0.6308->0.6374, robot 0.4314->0.4382. 'yalniz votes' ise COKUYOR (0.5587): budama secici olmali."
+    "I duzlem-cifti yuva ekseni": "silindir susunca analitik axis; robot-hazir +0.0143 (family bolmesi)",
+    "J confidence-agirlikli konum ortalamasi": "tespit +0.0072, yanal2mm +0.0192, robot +0.0164 (geometri bolmesi)",
+    "L2 gate ozellik budama": "en cok EZBERLEYEN 3 ozellik (depth/size/aspect) atildi -> tespit 0.6308->0.6374, robot 0.4314->0.4382. 'yalniz votes' ise COKUYOR (0.5587): budama selector olmali."
    },
    "OLENLER": {
-    "C eksen agi": "global >15d %30.2 vs urun %15.8; alt kumede de kaybetti. Kok neden: YUVADA egitilip AGIZDA sorgulandi",
-    "E gate eksen guveni": "gate duzeyinde +0.0068 ama UCTAN UCA tespit -0.0125 -> GERI ALINDI",
+    "C axis agi": "global >15d %30.2 vs urun %15.8; alt kumede de kaybetti. Kok neden: YUVADA egitilip AGIZDA sorgulandi",
+    "E gate axis guveni": "gate duzeyinde +0.0068 ama UCTAN UCA tespit -0.0125 -> GERI ALINDI",
     "H sinif-onculu karar": "recall'i HIC artirmadi (0.747->0.722), precision yikildi",
-    "H2 kapili oncul + min_v": "kapi vakum cikti (donusen koselerde p_CE zaten >0.26); min_v de kurtarmadi",
+    "H2 kapili oncul + min_v": "gate vakum cikti (donusen koselerde p_CE zaten >0.26); min_v de kurtarmadi",
     "B-rep merkeze izdusurme": "eslesen silindir cogu zaman komsu vida -> konum bozuldu",
-    "yon ortalamasi": "robot 0.4558 -> 0.3954; temsilcinin ekseni ANALITIK, ortalamak suluyor",
-    "L 5. uye (ortalama harita)": "durust bolmede de kaybetti (0.6308->0.6034). Turetilmis uye BAGIMSIZ degil; oy cozunurlugu katmiyor. Bagimsiz yeni tohum gerekir.",
-    "G uretici-CP tespit egitimi": "1734 parca/525699 hedef kose, hedefler AGIZDA, uretici-disi bolme, 26 epoch. Ayni metrikte MEVCUT ag yarim atesleme ile daha iyi: mevcut 0.313@%7.3 ve 0.449@%14.7, G 0.274@%12.7. 8534 uretici CP'si, 102 insan-etiketli parcayi GECEMIYOR."
+    "direction ortalamasi": "robot 0.4558 -> 0.3954; temsilcinin ekseni ANALITIK, ortalamak suluyor",
+    "L 5. uye (ortalama harita)": "durust bolmede de kaybetti (0.6308->0.6034). Turetilmis uye BAGIMSIZ degil; oy cozunurlugu katmiyor. Bagimsiz yeni seed gerekir.",
+    "G manufacturer-CP tespit egitimi": "1734 part/525699 hedef kose, hedefler AGIZDA, manufacturer-disi split, 26 epoch. Ayni metrikte MEVCUT ag yarim atesleme ile daha iyi: mevcut 0.313@%7.3 ve 0.449@%14.7, G 0.274@%12.7. 8534 manufacturer CP'si, 102 insan-etiketli parcayi GECEMIYOR."
    },
    "EN BUYUK BULGU": "F: geometrik ikiz sizintisi -- tum eski sayilar ~0.13 sisikti"
   },
@@ -277,19 +277,19 @@
     "size",
     "aspect"
    ],
-   "yedek": "results/wire_gate.pkl.bak_13feat_full"
+   "backup": "results/wire_gate.pkl.bak_13feat_full"
   },
   "denetim_2026_07_31": {
    "kaynak": "dis otopsi + kod dogrulamasi",
    "duzeltilen": {
     "parite_step_path": "robot_cp'nin 3 cagrisindan 1'i step_path aliyordu -> 3/3. B-rep ekseni parcalarin ~%89.5'inde HIC calismiyordu.",
     "benzersiz_oy": "_votes ayni modelin yakin iki adayini iki oy sayiyordu (4 checkpoint, votes=5 gorulduyordu). Artik benzersiz MODEL sayiliyor.",
-    "esik_uyumsuzlugu": "olcum 0.35/0.20 seciyordu, urun 0.40/0.35 kosuyordu -> olcum artik cp_config'den okuyor.",
+    "esik_uyumsuzlugu": "measurement 0.35/0.20 seciyordu, urun 0.40/0.35 kosuyordu -> measurement artik cp_config'den okuyor.",
     "config_kodlamasi": "cp_config.json cp1252 olmustu (ensure_ascii=False + Windows varsayilani); saf ASCII'ye cevrildi."
    },
    "etkisi": "tespit 0.6374 -> 0.6705, robot-hazir 0.4382 -> 0.4634",
    "korumasi": "tests/test_parite.py (5 test) -- bir daha sessizce ayrisamazlar",
-   "ACIK_KALAN": "gate verisi hala ESKI hattan: B-rep'siz, J'siz ve ESKI oy semantigiyle uretildi. Yani gate'in en cok genellesen ozelligi (votes) egitim ve calisma zamaninda FARKLI dagilimda. Guncel hatla yeniden uretilmeli -- onceki gate tazelemesi +0.127 vermisti."
+   "ACIK_KALAN": "gate verisi hala ESKI hattan: B-rep'siz, J'siz ve ESKI oy semantigiyle uretildi. Yani gate'in en cok genellesen ozelligi (votes) training ve calisma zamaninda FARKLI dagilimda. Guncel hatla yeniden uretilmeli -- onceki gate tazelemesi +0.127 vermisti."
   },
   "highcp_router": {
    "md5": "391ab4fa5fec9497435265b396c76948",
@@ -298,20 +298,20 @@
   "pose_head": {
    "yol": "results/pose_head.pkl",
    "md5": "f1bb3f3c68eedb26ffdf129e83660d52",
-   "olcum": "robot-hazir +0.0428 GA [+0.0220,+0.0680]; tespit +0.0001",
+   "measurement": "robot-hazir +0.0428 GA [+0.0220,+0.0680]; tespit +0.0001",
    "geri_alma": "cp_config.robot_pose_head=false"
   },
   "aci_secici": {
    "yol": "results/aci_secici.pkl",
    "md5": "ec4d8080b824e7c7314a5bee617d5d81",
-   "esik": 0.1,
-   "olcum": "robot-hazir +0.0126 GA [+0.0002,+0.0325]; tespit bedeli YAPISAL SIFIR",
+   "threshold": 0.1,
+   "measurement": "robot-hazir +0.0126 GA [+0.0002,+0.0325]; tespit bedeli YAPISAL SIFIR",
    "geri_alma": "cp_config.robot_aci_secici=false"
   },
   "uye_secici": {
    "yol": "results/uye_secici.pkl",
    "md5": "780b0cf389a5605a7de08994d97629ba",
-   "olcum": "robot-hazir 0.5523 -> 0.5801 (+0.0278, GA [+0.0105,+0.0490]); tespit bedeli YAPISAL SIFIR",
+   "measurement": "robot-hazir 0.5523 -> 0.5801 (+0.0278, GA [+0.0105,+0.0490]); tespit bedeli YAPISAL SIFIR",
    "geri_alma": "cp_config.robot_uye_secici=false"
   },
   "operasyon_085": {
@@ -320,7 +320,7 @@
     "dusuk_CP": ">= 0.848",
     "cok_CP": ">= 0.77",
     "agirlikli": ">= 0.85",
-    "zorunlu": "3 tohum + GEOMETRI GRUBU bootstrap; alt sinir > 0; iki uretici bolmesinde de pozitif"
+    "zorunlu": "3 seed + GEOMETRI GRUBU bootstrap; alt sinir > 0; iki manufacturer bolmesinde de pozitif"
    },
    "acilis_durumu": {
     "dusuk_CP": 0.7656,
@@ -333,36 +333,36 @@
     "agirlikli": 0.9354
    },
    "not": "Hedef YAPISAL olarak mumkun (0.85 < 0.9354) ama kahin gate'in %91'i gerekiyor (su an %80.5). Olcut ONCEDEN yazildi ki sonuca gore ayarlanmasin.",
-   "LOCKED_KURALI": "Iki bagimsiz gelistirme olcumu >= 0.84 VE uretici kirilimlari pozitif VE bootstrap alt siniri > 0 olmadan 95 temiz LOCKED'a DOKUNULMAZ."
+   "LOCKED_KURALI": "Iki bagimsiz gelistirme olcumu >= 0.84 VE manufacturer kirilimlari pozitif VE bootstrap alt siniri > 0 olmadan 95 temiz LOCKED'a DOKUNULMAZ."
   },
   "SINAV_PROTOKOLU": {
-   "kural": "LOCKED uzerinde olculecek her gate olcum_kumesi.sinav_egitim_maskesi() ile egitilmek ZORUNDADIR.",
-   "neden": "2026-08-03: dagitilan egitim verisi (zengin_parite_w2.npz) 95 grup-temiz LOCKED parcasinin 77sini iceriyordu (grup uzerinden 80). Dagitilan gate ile kosulsa sinavin 80/95i KIRLI olurdu.",
-   "kanit": "results/q2_sinav_butunlugu.json",
+   "kural": "LOCKED uzerinde olculecek her gate measure_set.sinav_egitim_maskesi() ile egitilmek ZORUNDADIR.",
+   "neden": "2026-08-03: dagitilan training verisi (zengin_parite_w2.npz) 95 grup-temiz LOCKED parcasinin 77sini iceriyordu (grup uzerinden 80). Dagitilan gate ile kosulsa sinavin 80/95i KIRLI olurdu.",
+   "evidence": "results/q2_sinav_butunlugu.json",
    "bekci_testi": "tests/test_metrik_tuzaklari.py::test_SINAV_egitim_maskesi_LOCKED_gruplarini_atar",
-   "maske_sonrasi": "19090/20974 aday, 1581 parca, LOCKED ihlali 0"
+   "maske_sonrasi": "19090/20974 candidate, 1581 part, LOCKED ihlali 0"
   },
   "yon_secici": {
    "dosya": "results/yon_secici.pkl",
    "marj": 0.05,
-   "egitim": "1175 parca (olcum + LOCKED geometri gruplari CIKARILDI), 148.494 satir, ISARETLI etiket",
-   "olculdu_fiziksel": "robot-isaretli 0.5818 -> 0.6181 (+0.0363, GA [+0.0160,+0.0594] KANITLI)",
+   "training": "1175 part (measurement + LOCKED geometri gruplari CIKARILDI), 148.494 satir, ISARETLI etiket",
+   "olculdu_fiziksel": "robot-signed 0.5818 -> 0.6181 (+0.0363, GA [+0.0160,+0.0594] KANITLI)",
    "olculdu_eksen": "robot 0.5893 -> 0.6303 (+0.0410)",
    "tespit_bedeli": "+0.000000 (YAPISAL: tespit olcutu aciya bakmaz)",
    "uretici_disi": "DORDU DE YUKSELIYOR: PXC +0.019, SIE +0.019, WAGO +0.032, WEI +0.010 (fiziksel metrik)",
-   "kanit": "results/r4_birlesik_secici.json + results/r4_dogrulama.json",
-   "kok_duzeltme": "Onceki surumun etiketi ISARETSIZDI (|v.Gd|). Sozluk BILEREK +- ciftleri iceriyor (obb/dik/yuzn), dolayisiyla +a ve -a AYNI etiketi aliyordu ve model ikisini ayirt etmeyi ASLA ogrenemiyordu. Sonuc SAHTE kazancti: eksen metriginde +0.0319, fiziksel metrikte 0.5818->0.5813. Etiket v.Gd>=cos10 yapilinca egitim pozitif orani %31.4 -> %12.7 dustu (BEKLENEN) ve kazanc GERCEK oldu.",
-   "tez": "Tez cizgisi korunur: ag, remesh ve v_o turetmesi DEGISMEZ. Bu bir SON ISLEM secicisidir ve fiziksel olarak turetilmis yonlerden BIRINI secer, yon URETMEZ."
+   "evidence": "results/r4_birlesik_secici.json + results/r4_dogrulama.json",
+   "kok_duzeltme": "Onceki surumun etiketi ISARETSIZDI (|v.Gd|). Sozluk BILEREK +- ciftleri iceriyor (obb/dik/yuzn), dolayisiyla +a ve -a AYNI etiketi aliyordu ve model ikisini ayirt etmeyi ASLA ogrenemiyordu. Sonuc SAHTE kazancti: axis metriginde +0.0319, fiziksel metrikte 0.5818->0.5813. Etiket v.Gd>=cos10 yapilinca training pozitif orani %31.4 -> %12.7 dustu (BEKLENEN) ve kazanc GERCEK oldu.",
+   "tez": "Tez cizgisi korunur: ag, remesh ve v_o turetmesi DEGISMEZ. Bu bir SON ISLEM secicisidir ve fiziksel olarak turetilmis yonlerden BIRINI secer, direction URETMEZ."
   },
   "MAKBUZ_CELISKILERI": {
    "aci_secici": {
     "celiski": "results/q4_aci_secici.json gecti=false (d_robot 0.0126 < bar 0.02) ama aci_secici.pkl 7 dk SONRA yazilmis ve robot_aci_secici=True",
-    "cozum": "p2_ablasyon.json AYNI bileseni TEK kosudan CI ile olcuyor: +pose -> +pose+aci = +0.0244, GA [+0.0069,+0.0477] (sifiri disliyor). Bu olcum q4nun basarisiz barini GECERSIZ KILMAZ ama bileseni SAVUNULABILIR kilar.",
+    "cozum": "p2_ablasyon.json AYNI bileseni TEK kosudan CI ile olcuyor: +pose -> +pose+aci = +0.0244, GA [+0.0069,+0.0477] (sifiri disliyor). Bu measurement q4nun basarisiz barini GECERSIZ KILMAZ ama bileseni SAVUNULABILIR kilar.",
     "karar": "DAGITIMDA KALIYOR. Gerekce p2 ablasyonudur, q4 DEGIL. q4 makbuzu tek basina okunursa YANILTIR.",
     "tarih": "2026-08-03 denetimi"
    }
   },
-  "EKSEN_HAVUZ_NOTU": "GERI ALINDI 2026-08-03. 8 uyeli topluluk + eksen-farkindalikli havuz aday havuzu recall'ini 0.8579 -> 0.9516 CIKARDI ama uctan uca tespit 0.7584 -> 0.7276 (-0.031, GA sifiri iceriyor) ve robot 0.5893 -> 0.5110 (-0.078, GERCEK dusus). min_votes taramasi tekduze dustu (1:0.7276, 2:0.6842, 3:0.6510, 4:0.5762), durust capraz secimde iki yari da 1 sectI. HUKUM: aday havuzunu zenginlestirmek TESPITI ARTIRMIYOR -- bagliyici kisit gate'in ayirt etme gucu. Makbuz: results/g3_gate_sinav.json + g4_minvotes.json"
+  "EKSEN_HAVUZ_NOTU": "GERI ALINDI 2026-08-03. 8 uyeli ensemble + axis-farkindalikli pool candidate havuzu recall'ini 0.8579 -> 0.9516 CIKARDI ama uctan uca tespit 0.7584 -> 0.7276 (-0.031, GA sifiri iceriyor) ve robot 0.5893 -> 0.5110 (-0.078, GERCEK dusus). min_votes taramasi tekduze dustu (1:0.7276, 2:0.6842, 3:0.6510, 4:0.5762), durust capraz secimde iki yari da 1 sectI. HUKUM: candidate havuzunu zenginlestirmek TESPITI ARTIRMIYOR -- bagliyici kisit gate'in ayirt etme gucu. Makbuz: results/g3_gate_sinav.json + g4_minvotes.json"
  },
  "cp_def_version": "cp-v3-thesis-connection-classes",
  "frozen": "2026-07-20",
@@ -405,7 +405,7 @@
   }
  },
  "prediction_postproc": {
-  "comment": "urun v2.1 (2026-07-29). min_v10/vc0.30/cluster3.0 -- CC-D olcumu: cok-CP +0.221, dusuk-CP -0.0025 (gurultu), korpus-temsili +0.021; kilitli holdout cok-CP 0.212->0.635 ile DOGRULADI. Onceki 30/0.5/5.0 degerleri _superseded_2026_07_24_values altinda duruyor. conn_promote current_product.params altinda ve SADECE yonlendirici cok-CP dedigi parcalarda uygulanir.",
+  "comment": "urun v2.1 (2026-07-29). min_v10/vc0.30/cluster3.0 -- CC-D olcumu: cok-CP +0.221, dusuk-CP -0.0025 (noise), corpus-temsili +0.021; kilitli holdout cok-CP 0.212->0.635 ile DOGRULADI. Onceki 30/0.5/5.0 degerleri _superseded_2026_07_24_values altinda duruyor. conn_promote current_product.params altinda ve SADECE router cok-CP dedigi parcalarda uygulanir.",
   "min_vertices": 4,
   "vertex_confidence_mask": 0.3,
   "cluster_mm": 1.0,
@@ -426,7 +426,7 @@
   },
   "dedupe_mm": 2.0,
   "vote_pool_mm": 2.0,
-  "p1_2026_08_06": "P1 taramasi (D6 468 parca, aday kahini one-to-one Macar): cluster/dedupe/oy 3/10/5 -> 1/2/2 ile kahin 0.8808->0.8966, COK-CP 0.4740->0.5071 (+0.0331), dusuk-CP kayipsiz (+0.0138), aday x1.46. GO olcutunun UCU DE gecti. Suclu 10mm CE-CT dedupe (komsu iki gercek girisi tek adaya yutuyordu) ve 5mm oy havuzu. Makbuz results/p1_birlesme_tarama.json. GERI AL: cp_config.json.bak_p1_2026_08_06"
+  "p1_2026_08_06": "P1 taramasi (D6 468 part, candidate kahini one-to-one Macar): cluster/dedupe/oy 3/10/5 -> 1/2/2 ile kahin 0.8808->0.8966, COK-CP 0.4740->0.5071 (+0.0331), dusuk-CP kayipsiz (+0.0138), candidate x1.46. GO olcutunun UCU DE gecti. Suclu 10mm CE-CT dedupe (komsu iki gercek girisi tek adaya yutuyordu) ve 5mm oy havuzu. Makbuz results/p1_birlesme_tarama.json. GERI AL: cp_config.json.bak_p1_2026_08_06"
  },
  "checkpoint": [
   "results/seg_extra/recall_hard_keig96_s2.pt"
@@ -484,10 +484,10 @@
  "spatial_rerank_2026_07_26": "op2_spatial verified 5/5 seed-robust on standard metadata top-N (+0.002 ALL, WEI +0.01-0.02, PXC ~flat). VERIFIED opt-in lever; kept opt-in (base product unchanged) given marginal ROI. Applies to top-N mode only (base threshold gain negligible +0.0009).",
  "robot_spatial_rerank_2026_07_27": "OPT-IN top-N mode: robot_cp.py --cp-count N --spatial-rerank uses results/wire_gate_spatial.pkl (13 wire_gate + 6 spatial feats, 2-stage). 5/5 seed-robust +0.002 ALL / WEI +0.01-0.02. NOT for base threshold (negligible there). wire_gate.apply_spatial.",
  "robot_auto_tier_2026_07_28": {
-  "rule": "AUTO tier = wire_score (gate skoru) >= robot_auto_gate_threshold. ONCEKI KUSUR: tier segmentasyon guvenine (confidence>=0.5) bakiyordu -> kilitli holdout'ta REVIEW BOS cikti, her sey AUTO isaretlendi (precision 0.7735, yani 4 yerlestirmede 1 hata, insana hic sorulmadan).",
+  "rule": "AUTO tier = wire_score (gate skoru) >= robot_auto_gate_threshold. ONCEKI KUSUR: tier segmentasyon guvenine (confidence>=0.5) bakiyordu -> kilitli holdout'ta REVIEW BOS cikti, her sey AUTO isaretlendi (precision 0.7735, yani 4 yerlestirmede 1 error, insana hic sorulmadan).",
   "robot_auto_gate_threshold": 0.66,
   "target_auto_precision": 0.95,
-  "validation": "NESTED-CV (esik train-fold'da secilir, test-fold'da olculur), WORK 541 parca, family-out OOF: test-fold AUTO precision 0.9807, AUTO 724 aday, uretici CP'lerinin %38'i otonom kapsaniyor. Secilen esikler fold'lar arasi [0.80,0.86,0.86,0.80,0.80] = kararli.",
+  "validation": "NESTED-CV (threshold train-fold'da secilir, test-fold'da olculur), WORK 541 part, family-out OOF: test-fold AUTO precision 0.9807, AUTO 724 candidate, manufacturer CP'lerinin %38'i otonom kapsaniyor. Secilen esikler fold'lar arasi [0.80,0.86,0.86,0.80,0.80] = kararli.",
   "alternative_measured": {
    "target_0.95": {
     "threshold": 0.66,
@@ -511,7 +511,7 @@
    },
    "candidate_ceiling_base_6k": 0.8,
    "candidate_ceiling_aggressive_multires_WEI": 0.965,
-   "note": "Kapsama VERIYLE buyuyor (%51->%59, 2.8x veri). Ama BAZ aday-tavani %80 -> veri tek basina en fazla %80'e tasir. %100 icin AGRESIF aday havuzu (tavan %96.5) sart. Iki asamali yol."
+   "note": "Kapsama VERIYLE buyuyor (%51->%59, 2.8x veri). Ama BAZ candidate-tavani %80 -> veri tek basina en fazla %80'e tasir. %100 icin AGRESIF candidate havuzu (ceiling %96.5) sart. Iki asamali yol."
   }
  },
  "robot_auto_gate_threshold": 0.6,
@@ -519,7 +519,7 @@
  "locked_holdout_policy_2026_07_28": {
   "decision": "KILITLI HOLDOUT YENIDEN KULLANILMAYACAK",
   "why": "2026-07-28'de tek-atis olarak zaten harcandi (ALL 0.7476). Her ek bakis iyimserlik katar.",
-  "when_to_spend": "TUM urun degisiklikleri (min_v10, buyutulmus korpus, segmentasyon yeniden egitimi) DONDUKTAN sonra, TEK seferde.",
+  "when_to_spend": "TUM urun degisiklikleri (min_v10, buyutulmus corpus, segmentasyon yeniden egitimi) DONDUKTAN sonra, TEK seferde.",
   "meanwhile": "Ara kararlar WORK setinde family-out + nested-CV ile olculur; bu sonuclar 'WORK OOF' diye etiketlenir, holdout sayisi gibi sunulmaz.",
   "user_confirmed": "2026-07-28"
  },
@@ -600,12 +600,12 @@
   "status": "SUPERSEDED 2026-07-29 by urun_v2_1; kept verbatim for rollback"
  },
  "robot_wire_gate_threshold_highcp": 0.35,
- "_esik_notu": "dusuk-CP 0.40. K1 dogrulamasi: dun gece konan 0.45 CALISAN HATTA -0.0010 verdi. Sebep: 0.45, 1903-parcalik BASKA bir gate icin optimaldi; uründe 1041-parcalik gate var. Iki bagimsiz olcum (calisan hat 64 parca + dagitilan gate 1903 parca) 0.40 diyor. cok-CP 0.25 degismedi, iki olcumde de optimal.",
- "_minv_notu": "min_vertices 10->4. K4c: GERCEK boru hattinda (4-model union, 44 parca) +0.0224 agirlikli, +0.02 kapisini gecti. Kazanc DUSUK-CP den geliyor (0.7164->0.7424); tek-turetmeli olcum bunun TERSINI soylemisti -- min_v her modelin kendi turetmesinde uygulaniyor, union yolu onbellekten dogrulanamiyor. Geri al: cp_config.json.bak_minv_2026_07_29",
- "_gate_notu": "wire_gate.pkl min_v=4 dagilimiyla yeniden egitildi (1903 parca, 20574 aday). NEDEN: bugun min_v 10->4 yapilinca aday havuzu 4 katina cikti; dagitilan gate min_v=30 doneminin havuzuyla egitilmisti ve hic gormedigi kucuk adaylarla karsilasti. K2c dogrulamasi (GERCEK 4-model boru hatti, test aileleri gate egitiminden CIKARILMIS, esik buyuk veride secilmis): 0.6544 -> 0.7817 = +0.1273. Geri al: results/wire_gate.pkl.bak_2026_07_29 + cp_config.json.bak_gate_2026_07_29",
- "_auto_thr_notu": "AUTO esigi 0.66->0.60. N1: 0.66 ESKI gate skor dagiliminda kalibre edilmisti; gate 2026-07-29 gecesi yeniden uyduruldu. Yeni gate ile 0.66 -> precision 0.966/kapsama 0.484 (hedefin ustunde ama cimri), 0.60 -> 0.9575/0.521. Belgelenen politika: precision %95te sabit, KAPSAMA buyutulur. Aile-disi OOF, 20574 aday. Geri al: cp_config.json.bak_gate_2026_07_29",
+ "_esik_notu": "dusuk-CP 0.40. K1 dogrulamasi: dun gece konan 0.45 CALISAN HATTA -0.0010 verdi. Sebep: 0.45, 1903-parcalik BASKA bir gate icin optimaldi; uründe 1041-parcalik gate var. Iki bagimsiz measurement (calisan hat 64 part + dagitilan gate 1903 part) 0.40 diyor. cok-CP 0.25 degismedi, iki olcumde de optimal.",
+ "_minv_notu": "min_vertices 10->4. K4c: GERCEK boru hattinda (4-model union, 44 part) +0.0224 agirlikli, +0.02 kapisini gecti. Kazanc DUSUK-CP den geliyor (0.7164->0.7424); tek-turetmeli measurement bunun TERSINI soylemisti -- min_v her modelin kendi turetmesinde uygulaniyor, union yolu onbellekten dogrulanamiyor. Geri al: cp_config.json.bak_minv_2026_07_29",
+ "_gate_notu": "wire_gate.pkl min_v=4 dagilimiyla yeniden egitildi (1903 part, 20574 candidate). NEDEN: bugun min_v 10->4 yapilinca candidate havuzu 4 katina cikti; dagitilan gate min_v=30 doneminin havuzuyla egitilmisti ve hic gormedigi kucuk adaylarla karsilasti. K2c dogrulamasi (GERCEK 4-model boru hatti, test aileleri gate egitiminden CIKARILMIS, threshold buyuk veride secilmis): 0.6544 -> 0.7817 = +0.1273. Geri al: results/wire_gate.pkl.bak_2026_07_29 + cp_config.json.bak_gate_2026_07_29",
+ "_auto_thr_notu": "AUTO esigi 0.66->0.60. N1: 0.66 ESKI gate skor dagiliminda kalibre edilmisti; gate 2026-07-29 gecesi yeniden uyduruldu. Yeni gate ile 0.66 -> precision 0.966/kapsama 0.484 (hedefin ustunde ama cimri), 0.60 -> 0.9575/0.521. Belgelenen politika: precision %95te sabit, KAPSAMA buyutulur. Aile-disi OOF, 20574 candidate. Geri al: cp_config.json.bak_gate_2026_07_29",
  "cp_geo_orient": true,
- "_p9_notu": "P9 HIZALAMA (2026-07-30): urun, gate in EGITILDIGI aday dagilimiyla calismiyordu. rt2 verisi GEOMETRIK yonlendirmeyle cikarilmisti, urun onu KAPALI calistiriyordu. Ayni 100 parcalik sizintisiz testte: 0.7865 -> 0.8016 (+0.0151), HER IKI rejim de yukseldi (dusuk 0.802->0.817, cok 0.655->0.672). Uygulananlar: (a) CP_GEO_ORIENT acik, (b) gate = wire_gate_regrow_rt2.pkl, (c) esikler 0.40/0.35 (P8, buyuk veride secildi). Geri al: cp_config.json.bak_p9_2026_07_30 + results/wire_gate.pkl.bak_p9_2026_07_30",
+ "_p9_notu": "P9 HIZALAMA (2026-07-30): urun, gate in EGITILDIGI candidate dagilimiyla calismiyordu. rt2 verisi GEOMETRIK yonlendirmeyle cikarilmisti, urun onu KAPALI calistiriyordu. Ayni 100 parcalik sizintisiz testte: 0.7865 -> 0.8016 (+0.0151), HER IKI regime de yukseldi (dusuk 0.802->0.817, cok 0.655->0.672). Uygulananlar: (a) CP_GEO_ORIENT acik, (b) gate = wire_gate_regrow_rt2.pkl, (c) esikler 0.40/0.35 (P8, buyuk veride secildi). Geri al: cp_config.json.bak_p9_2026_07_30 + results/wire_gate.pkl.bak_p9_2026_07_30",
  "_superseded_current_product_2026_07_29_v2_1": {
   "frozen": "2026-07-29",
   "id": "urun_v2_1 = min_v10 + geometry-routed conn_promote + RandomForest",
@@ -634,7 +634,7 @@
    "conn_promote": 0.25,
    "conn_promote_applies": "ONLY where the geometry router predicts high-CP (router thr 0.30)",
    "wire_gate_threshold_highcp": 0.25,
-   "wire_gate_threshold_note": "cok-CP: 0.25 (olculdu +0.047 vs 0.35); dusuk-CP: 0.35. Rejim yonlendirici ile belirlenir."
+   "wire_gate_threshold_note": "cok-CP: 0.25 (measured +0.047 vs 0.35); dusuk-CP: 0.35. Rejim router ile belirlenir."
   },
   "wire_gate": "results/wire_gate.pkl (full-trained for deploy; OOF for scoring)",
   "receipt": "results/urun_v2_makbuz.json + results/holdout_taban_kolu.json",
@@ -696,15 +696,15 @@
  "gate_fiz_feats": true,
  "gate_fiz_feats_not": "wire_gate.USE_FIZ_FEATS bu bayrakla ACIK olmali; kapatirsan results/wire_gate.pkl.pre_fiz'i geri koy (13 sutun).",
  "gate_ek_feats": false,
- "gate_ek_feats_not": "EK blok (ic_derinlik + 3 renk) OLCULDU ve DAGITILMADI. Havuzlanmis 200 parca: tespit +0.0054 (GURULTU, kill olcutu buydu), robot +0.0107 (belirgin ama 6 testten biri; yokluk altinda beklenen). Ayristirma: derinlik +0.0069/+0.0003, renk -0.0015/+0.0103 -- hicbir bilesen tek basina belirgin degil. Veri results/gate_regrow_data_ek.npz, model results/wire_gate_regrow_ek.pkl. NOT: renk kapsamasi duzeltmeleri (kati-seviyesi renk + renk-bagimsiz kontrast) bu veriden SONRA yazildi; yeniden uretilirse sonuc degisebilir.",
+ "gate_ek_feats_not": "EK blok (ic_derinlik + 3 renk) OLCULDU ve DAGITILMADI. Havuzlanmis 200 part: tespit +0.0054 (GURULTU, kill olcutu buydu), robot +0.0107 (belirgin ama 6 testten biri; yokluk altinda beklenen). Ayristirma: depth +0.0069/+0.0003, renk -0.0015/+0.0103 -- hicbir bilesen tek basina belirgin degil. Veri results/gate_regrow_data_ek.npz, model results/wire_gate_regrow_ek.pkl. NOT: renk kapsamasi duzeltmeleri (kati-seviyesi renk + renk-bagimsiz kontrast) bu veriden SONRA yazildi; yeniden uretilirse sonuc degisebilir.",
  "gate_goreli_esik": true,
  "gate_goreli_oran": 0.6,
  "gate_goreli_taban": 0.25,
- "gate_goreli_not": "GORELI ESIK (2026-07-31): sabit esik yerine parca-ici goreli karar + mutlak taban. Aday, kendi PARCASINDAKI en yuksek skorun 0.5 katini gecmeli VE 0.25 tabanini asmali. NEDEN: sabit esik gorulmemis URETICIDE cokuyordu. UCTAN UCA olculdu (uretici-disi, gate o ureticiyi hic gormeden egitildi): WEI disarida 0.3150 -> 0.4736 (+0.1586), PXC disarida 0.7037 -> 0.7048 (+0.0011). Onceden yazili kill 'her iki uretici-disi bolmede de sabiti gecmeli' -- taban 0.20 PXC'de -0.0061 ile TAKILDI, taban 0.25 GECTI. Tanidik veride bedel: DEV -0.0140, VAL -0.0022. TABAN SART: onsuz kural, hic gercek CP olmayan parcada bile 'en yuksegin yarisi'ni kabul edip garanti yanlis uretir. Makbuz: results/t8_uretici_disi_uctan_uca.json, results/t7_goreli_{dev,val}.json",
+ "gate_goreli_not": "GORELI ESIK (2026-07-31): sabit threshold yerine part-ici goreli karar + mutlak baseline. Aday, kendi PARCASINDAKI en yuksek skorun 0.5 katini gecmeli VE 0.25 tabanini asmali. NEDEN: sabit threshold gorulmemis URETICIDE cokuyordu. UCTAN UCA measured (manufacturer-disi, gate o ureticiyi hic gormeden egitildi): WEI disarida 0.3150 -> 0.4736 (+0.1586), PXC disarida 0.7037 -> 0.7048 (+0.0011). Onceden yazili kill 'her iki manufacturer-disi bolmede de sabiti gecmeli' -- baseline 0.20 PXC'de -0.0061 ile TAKILDI, baseline 0.25 GECTI. Tanidik veride bedel: DEV -0.0140, VAL -0.0022. TABAN SART: onsuz kural, hic gercek CP olmayan parcada bile 'en yuksegin yarisi'ni kabul edip garanti yanlis uretir. Makbuz: results/t8_uretici_disi_uctan_uca.json, results/t7_goreli_{dev,val}.json",
  "gate_topo_feats": true,
  "gate_topo_not": "wire_gate.USE_TOPO_FEATS bu bayrakla ACIK olmali; kapatirsan results/wire_gate.pkl.pre_topo'yu geri koy (18 sutun).",
  "gate_parca_ici": "zskor",
- "gate_parca_ici_not": "D kolu (her parcaya parca-ici z-skor, 44 sutun). Cokus YONLENDIRMESI 2026-08-01 denetiminden sonra GERI ALINDI: temiz protokolde D->R gecmedi (ortalama -0.0012, en kotu bolme dustu, kanitli kazanc yok). Makbuz: results/u9_router_yargi.json. Yonlendirmeli surum results/wire_gate.pkl.r_2026_08_01 olarak duruyor.",
+ "gate_parca_ici_not": "D kolu (her parcaya part-ici z-skor, 44 sutun). Cokus YONLENDIRMESI 2026-08-01 denetiminden sonra GERI ALINDI: temiz protokolde D->R gecmedi (ortalama -0.0012, en kotu split dustu, kanitli kazanc yok). Makbuz: results/u9_router_yargi.json. Yonlendirmeli version results/wire_gate.pkl.r_2026_08_01 olarak duruyor.",
  "gate_topo_r": 6.0,
  "gate_topo_r_not": "Topoloji ozelliklerinin yaricapi (mm). DAGITILAN MODEL bu degerle EGITILDI ve degeri KENDI icinde tasiyor (wire_gate.pkl[topo_r]); uyusmazlik wire_gate._dogrula_uyum ile PATLAR. Taranip kapatildi: R=8/12 uctan uca kaybetti (results/u2_topo_r_uctan_uca.json).",
  "gate_zengin_feats": true,
@@ -716,8 +716,8 @@
  "robot_eksen_havuz_yanal_mm": 3.0,
  "harcanmis_sinav_kumeleri": {
   "prospektif_wei_109": {
-   "kaynak": "results/yeni_wei.npz (bolme=='test')",
-   "parca": 109,
+   "kaynak": "results/yeni_wei.npz (split=='test')",
+   "part": 109,
    "durum": "HARCANDI -- model secimi karari",
    "tarih": "2026-08-04",
    "madde": "F0-2"
@@ -729,16 +729,16 @@
    "durum": "HARCANDI -- urun v2 karari"
   },
   "bakir": {
-   "locked_95_grup_temiz": "TEK bakir sinav; F5-22 kapisi gecmeden ACILMAZ"
+   "locked_95_grup_temiz": "TEK bakir exam; F5-22 kapisi gecmeden ACILMAZ"
   }
  },
  "robot_cp_nms_mm": 5.0,
- "robot_cp_nms_note_2026_08_10": "Gate SONRASI kalabalik bastirma (NMS): birbirine 5mm'den yakin CP'lerden en yuksek wire_score'lu kalir. Ayni fiziksel agza yigilan adaylar bire-bir Macar eslesmede ZORUNLU FP uretiyordu. OLCULDU (TAM urun zinciri, D7 marka-disi 835 parca, MIKRO): robot 0.1956->0.2029 (+0.0072), tespit 0.4314->0.4523 (+0.0210), 12 markanin 10'u artida, YIKILAN MARKA YOK. Yaricap D7 ARGMAX'i DEGIL (o r=10): kural 'hicbir markayi yikmayan en buyuk yaricap'; r=6 daha yuksek ama CEM'i sifirliyor. D6'da bagimsiz dogrulandi (+0.0005, 6/8 marka artida, yikim yok). Makbuzlar: results/nms_tarama.json, results/urun_nms_uctan_uca*.json. Kapatmak icin 0 yap.",
+ "robot_cp_nms_note_2026_08_10": "Gate SONRASI kalabalik bastirma (NMS): birbirine 5mm'den yakin CP'lerden en yuksek wire_score'lu kalir. Ayni fiziksel agza yigilan candidates bire-bir Macar eslesmede ZORUNLU FP uretiyordu. OLCULDU (TAM urun zinciri, D7 brand-disi 835 part, MIKRO): robot 0.1956->0.2029 (+0.0072), tespit 0.4314->0.4523 (+0.0210), 12 markanin 10'u artida, YIKILAN MARKA YOK. Yaricap D7 ARGMAX'i DEGIL (o r=10): kural 'hicbir markayi yikmayan en buyuk yaricap'; r=6 daha yuksek ama CEM'i sifirliyor. D6'da bagimsiz dogrulandi (+0.0005, 6/8 brand artida, yikim yok). Makbuzlar: results/nms_tarama.json, results/urun_nms_uctan_uca*.json. Kapatmak icin 0 yap.",
  "robot_genis_havuz": true,
- "robot_genis_havuz_note_2026_08_11": "GENISLETILMIS URUN YOLU (`urun_genis.py`): tezin `v_o` adaylarina B-rep agiz onerileri eklenir (silindir agizlari + duzlemsel aciklik merkezleri, 3mm dedupe), gate girdisine 9 AGIZ TANIMLAYICISI katilir, secici HGB-derin olur ve son adimda FIZIKSEL ISARET DUZELTMESI uygulanir (disari yolu iceriden kisaysa yon ters cevrilir). OLCULDU (D7 835 parca marka-disi, TAM ZINCIR, MIKRO, esik D6'da secildi): robot 0.2029 -> 0.3090, tespit 0.4523 -> 0.4813, makro 0.2146 -> 0.3142; 10/12 marka artida, gercek kayip yok (CCD -0.007 duz, C3 -0.009 bes parcada). MESH TEPELERI KASTEN YOK: havuz recall'u 0.6654->0.8465 acar ama uctan uca UC bagimsiz olcumde zarar verdi. TEZE SADIK: 5 sinif, ~6000 remesh, `v_o` turetmesi DEGISMEDI; B-rep EK aday kaynagi ve `kaynak==0` tezin kendi cevabi. Makbuzlar: results/secici_ailesi.json, results/b2a_isaret.json, results/tam_havuz_gate.json. Kapatmak icin false (ya da URUN_GENIS=0).",
+ "robot_genis_havuz_note_2026_08_11": "GENISLETILMIS URUN YOLU (`product_genis.py`): tezin `v_o` adaylarina B-rep mouth onerileri eklenir (silindir agizlari + duzlemsel opening merkezleri, 3mm dedupe), gate girdisine 9 AGIZ TANIMLAYICISI katilir, selector HGB-derin olur ve son adimda FIZIKSEL ISARET DUZELTMESI uygulanir (disari yolu iceriden kisaysa direction ters cevrilir). OLCULDU (D7 835 part brand-disi, TAM ZINCIR, MIKRO, threshold D6'da secildi): robot 0.2029 -> 0.3090, tespit 0.4523 -> 0.4813, makro 0.2146 -> 0.3142; 10/12 brand artida, gercek loss yok (CCD -0.007 duz, C3 -0.009 bes parcada). MESH TEPELERI KASTEN YOK: pool recall'u 0.6654->0.8465 acar ama uctan uca UC bagimsiz olcumde zarar verdi. TEZE SADIK: 5 sinif, ~6000 remesh, `v_o` turetmesi DEGISMEDI; B-rep EK candidate kaynagi ve `kaynak==0` tezin kendi cevabi. Makbuzlar: results/secici_ailesi.json, results/b2a_isaret.json, results/tam_havuz_gate.json. Kapatmak icin false (ya da URUN_GENIS=0).",
  "glb_kanonik_zincir": false,
- "glb_kanonik_zincir_gerekce": "GERI ALINDI 2026-08-13. Iki POPULASYONDA ters yonde:\n * ZOR/gorulmemis markalar (80 parca, NIT/MOR/SUPU/UPUN/UTL/ONV/S+S): olculen zincir F1 0.1309 -> 0.1677 (+0.0368), kesinlik 0.1592 -> 0.5467.\n * TANIDIK marka (VAL 100 parca, geometri-ayrik, secici egitiminde 0): saha F1 0.4839 / kesinlik 0.5008 vs olculen F1 0.4668 / kesinlik 0.5605 -> F1 **-0.0171**, recall 0.4682 -> 0.4000.\nTek KURESEL bayrak yanlis karardi: olculen zincir daha KESIN ama daha dusuk RECALL'li; zor markada bu takas kazandiriyor, tanidik markada kaybettiriyor. Varsayilan FALSE (tanidik marka performansi korunur). Dogru cozum REJIM KAPISI olabilir -- olculmeden acilmaz.\nMakbuzlar: results/zincir_esli_kiyas.json (son kosu VAL).",
- "halka_isaret": false,
- "halka_isaret_gerekce": "2026-08-14. Agiz cevresi yuz normaliyle isaret duzeltmesi. OLCULEN (VAL 100, esli bootstrap): tanidik marka/olculen zincir +0.0195 GA [+0.0030,+0.0378] KESIN; tanidik/saha +0.0329 GA sifiri iceriyor; zor-gorulmemis marka (150 parca) +0.0023/-0.0016 NOTR. VARSAYILAN KAPALI: kanit yalniz olculen zincirde ve tanidik markada kesin. Modul: halka_isaret.py (parametresiz, sentetik duman testi GECTI).",
- "gate_goreli_oran_gerekce_2026_08_14": "DAGITILDI 2026-08-14: 0.50 -> 0.60. Gate kabul kurali GORELI (skor >= ORAN * parca_maksimumu VE skor >= TABAN); sabit esikler (robot_wire_gate_threshold 0.40 / _highcp 0.35) 2026-07-31 GORELI_ESIK dagitimindan beri OLU. Tarama bu yuzden CANLI parametre uzerinde yapildi. OLCULDU (esli parca bootstrap, robot-ISARETLI): VAL yogun (n_gt>=8, 14 parca) +0.0162 GA [+0.0046,+0.0328] %100 poz; VAL seyrek (n_gt<8, 26 parca) +0.0374 GA [+0.0167,+0.0608] %100 poz; **VAL ve LOCKED DISI 30 parca +0.0212 GA [+0.0043,+0.0445] %99.5 poz**. UCU DE GA kapisini gecti. Bagimsiz kume SART kosuldu cunku parametre VAL uzerinde tarandi ve bu kampanyada tarama iki kez yaniltmisti (vc0.35: taramada +0.01, tam dagitimda WEI 0.641->0.629; k_eig128). TESPIT bedeli: VAL yogun -0.0129, VAL seyrek -0.0100 (ikisi de GA sifiri iciyor = kesin degil), VAL disi +0.0131 (pozitif). Yani tespitten kesin bir sey goturmuyor. Makbuzlar: results/gate_esik_yogun.json, results/gate_esik_seyrek.json. GERI AL: cp_config.json.oncesi_goreli060"
+ "glb_kanonik_zincir_gerekce": "GERI ALINDI 2026-08-13. Iki POPULASYONDA ters yonde:\n * ZOR/gorulmemis markalar (80 part, NIT/MOR/SUPU/UPUN/UTL/ONV/S+S): olculen zincir F1 0.1309 -> 0.1677 (+0.0368), precision 0.1592 -> 0.5467.\n * TANIDIK brand (VAL 100 part, geometri-ayrik, selector egitiminde 0): saha F1 0.4839 / precision 0.5008 vs olculen F1 0.4668 / precision 0.5605 -> F1 **-0.0171**, recall 0.4682 -> 0.4000.\nTek KURESEL bayrak yanlis karardi: olculen zincir daha KESIN ama daha dusuk RECALL'li; zor markada bu takas kazandiriyor, tanidik markada kaybettiriyor. Varsayilan FALSE (tanidik brand performansi korunur). Dogru cozum REJIM KAPISI olabilir -- olculmeden acilmaz.\nMakbuzlar: results/zincir_esli_kiyas.json (son kosu VAL).",
+ "ring_sign": false,
+ "halka_isaret_gerekce": "2026-08-14. Agiz cevresi yuz normaliyle sign duzeltmesi. OLCULEN (VAL 100, esli bootstrap): tanidik brand/olculen zincir +0.0195 GA [+0.0030,+0.0378] KESIN; tanidik/saha +0.0329 GA sifiri iceriyor; zor-gorulmemis brand (150 part) +0.0023/-0.0016 NOTR. VARSAYILAN KAPALI: evidence yalniz olculen zincirde ve tanidik markada kesin. Modul: ring_sign.py (parametresiz, sentetik duman testi GECTI).",
+ "gate_goreli_oran_gerekce_2026_08_14": "DAGITILDI 2026-08-14: 0.50 -> 0.60. Gate kabul kurali GORELI (skor >= ORAN * parca_maksimumu VE skor >= TABAN); sabit esikler (robot_wire_gate_threshold 0.40 / _highcp 0.35) 2026-07-31 GORELI_ESIK dagitimindan beri OLU. Tarama bu yuzden CANLI parametre uzerinde yapildi. OLCULDU (esli part bootstrap, robot-ISARETLI): VAL dense (n_gt>=8, 14 part) +0.0162 GA [+0.0046,+0.0328] %100 poz; VAL sparse (n_gt<8, 26 part) +0.0374 GA [+0.0167,+0.0608] %100 poz; **VAL ve LOCKED DISI 30 part +0.0212 GA [+0.0043,+0.0445] %99.5 poz**. UCU DE GA kapisini gecti. Bagimsiz cluster SART kosuldu cunku parametre VAL uzerinde tarandi ve bu kampanyada tarama iki kez yaniltmisti (vc0.35: taramada +0.01, tam dagitimda WEI 0.641->0.629; k_eig128). TESPIT bedeli: VAL dense -0.0129, VAL sparse -0.0100 (ikisi de GA sifiri iciyor = kesin degil), VAL disi +0.0131 (pozitif). Yani tespitten kesin bir sey goturmuyor. Makbuzlar: results/gate_esik_yogun.json, results/gate_esik_seyrek.json. GERI AL: cp_config.json.oncesi_goreli060"
 }

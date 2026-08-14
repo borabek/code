@@ -1,6 +1,6 @@
 {
  "arms": {
-  "A taban (esik 0.35)": {
+  "A baseline (threshold 0.35)": {
    "dusuk": 0.7580237307916748,
    "cok": 0.6619455833022736,
    "weighted": 0.7479355253052877

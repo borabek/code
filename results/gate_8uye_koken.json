@@ -11,7 +11,7 @@
  ],
  "n_parca": 1179,
  "n_aday": 22911,
- "kismi": "1304 parcanin ilk 1180i; kalan 124 patolojik-parca avina degmedi (~0.003 F1)",
+ "kismi": "1304 parcanin ilk 1180i; kalan 124 patolojik-part avina degmedi (~0.003 F1)",
  "atlanan_patolojik": [
   "2502740000",
   "2502870000",
@@ -20,7 +20,7 @@
  "eksen_havuz": true,
  "yanal_mm": 3.0,
  "postproc": {
-  "comment": "urun v2.1 (2026-07-29). min_v10/vc0.30/cluster3.0 -- CC-D olcumu: cok-CP +0.221, dusuk-CP -0.0025 (gurultu), korpus-temsili +0.021; kilitli holdout cok-CP 0.212->0.635 ile DOGRULADI. Onceki 30/0.5/5.0 degerleri _superseded_2026_07_24_values altinda duruyor. conn_promote current_product.params altinda ve SADECE yonlendirici cok-CP dedigi parcalarda uygulanir.",
+  "comment": "urun v2.1 (2026-07-29). min_v10/vc0.30/cluster3.0 -- CC-D olcumu: cok-CP +0.221, dusuk-CP -0.0025 (noise), corpus-temsili +0.021; kilitli holdout cok-CP 0.212->0.635 ile DOGRULADI. Onceki 30/0.5/5.0 degerleri _superseded_2026_07_24_values altinda duruyor. conn_promote current_product.params altinda ve SADECE router cok-CP dedigi parcalarda uygulanir.",
   "min_vertices": 4,
   "vertex_confidence_mask": 0.3,
   "cluster_mm": 3.0,

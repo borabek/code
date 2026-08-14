@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Y13 — SINIR-FARKINDALI KAYIP
-# CP fiziksel olarak bir SINIRDIR (agiz cemberi) ama mevcut kayip
+# CP fiziksel olarak bir SINIRDIR (mouth cemberi) ama mevcut loss
 # (NLL + Tversky) BOLGEYI hedefler. Ek terim, komsusu farkli sinifta olan
 # tepelere odaklanir. Taban: hafif augmentasyon 0.15 (0.6528).
 set -u

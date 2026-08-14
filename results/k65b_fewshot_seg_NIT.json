@@ -1,5 +1,5 @@
 {
- "marka": "NIT",
+ "brand": "NIT",
  "klar": [
   1,
   5
@@ -20,7 +20,7 @@
     "k_istenen": 1,
     "ckpt": "results/seg_fs/NIT_k1_c0.pt",
     "ckpt_kullanilan": "results/seg_fs/NIT_k1_c0_last.pt",
-    "onbellek": "results/_p1_olasilik_fs_NIT_k1_c0"
+    "cache": "results/_p1_olasilik_fs_NIT_k1_c0"
    },
    {
     "cekilis": 1,
@@ -32,7 +32,7 @@
     "k_istenen": 1,
     "ckpt": "results/seg_fs/NIT_k1_c1.pt",
     "ckpt_kullanilan": "results/seg_fs/NIT_k1_c1_last.pt",
-    "onbellek": "results/_p1_olasilik_fs_NIT_k1_c1"
+    "cache": "results/_p1_olasilik_fs_NIT_k1_c1"
    }
   ],
   "5": [
@@ -50,7 +50,7 @@
     "k_istenen": 5,
     "ckpt": "results/seg_fs/NIT_k5_c0.pt",
     "ckpt_kullanilan": "results/seg_fs/NIT_k5_c0_last.pt",
-    "onbellek": "results/_p1_olasilik_fs_NIT_k5_c0"
+    "cache": "results/_p1_olasilik_fs_NIT_k5_c0"
    },
    {
     "cekilis": 1,
@@ -66,10 +66,10 @@
     "k_istenen": 5,
     "ckpt": "results/seg_fs/NIT_k5_c1.pt",
     "ckpt_kullanilan": "results/seg_fs/NIT_k5_c1_last.pt",
-    "onbellek": "results/_p1_olasilik_fs_NIT_k5_c1"
+    "cache": "results/_p1_olasilik_fs_NIT_k5_c1"
    }
   ]
  },
  "uyari": "k_gercek < k_istenen olabilir: oto-boyayici INSAN etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri algilanan bir acikliga dusmez. Olculen egri, gercek insan etiketine gore bir ALT SINIRDIR.",
- "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (sonda_k65b_olc.py) -- boylece egitim bir kez kosar, olcum tekrar tekrar kosulabilir."
+ "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (probe_k65b_olc.py) -- boylece training bir kez kosar, measurement tekrar tekrar kosulabilir."
 }

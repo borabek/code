@@ -1,8 +1,8 @@
 {
- "marka": {
+ "brand": {
   "NIT": {
    "konum": 0.11129296235679215,
-   "eksen": 0.0,
+   "axis": 0.0,
    "kuresel_disari": 0.0,
    "kuresel_iceri": 0.0,
    "yerel": 0.0,
@@ -11,7 +11,7 @@
   },
   "SUPU": {
    "konum": 0.776735459662289,
-   "eksen": 0.6116322701688556,
+   "axis": 0.6116322701688556,
    "kuresel_disari": 0.5403377110694184,
    "kuresel_iceri": 0.29080675422138835,
    "yerel": 0.6116322701688556,
@@ -20,7 +20,7 @@
   },
   "UPUN": {
    "konum": 0.9502762430939227,
-   "eksen": 0.7928176795580111,
+   "axis": 0.7928176795580111,
    "kuresel_disari": 0.20441988950276244,
    "kuresel_iceri": 0.7430939226519337,
    "yerel": 0.7928176795580111,
@@ -29,7 +29,7 @@
   },
   "MOR": {
    "konum": 0.7452471482889734,
-   "eksen": 0.6996197718631179,
+   "axis": 0.6996197718631179,
    "kuresel_disari": 0.5893536121673004,
    "kuresel_iceri": 0.5855513307984791,
    "yerel": 0.6996197718631179,
@@ -37,5 +37,5 @@
    "gt": 263
   }
  },
- "not": "Isaret kaynaklari: kuresel (merkezden agza) vs YEREL (mesh dis normali). 'eksen' = isaretsiz tavan. D7'ye BAKILMADI."
+ "not": "Isaret kaynaklari: kuresel (merkezden agza) vs YEREL (mesh dis normali). 'axis' = unsigned ceiling. D7'ye BAKILMADI."
 }

@@ -58,7 +58,7 @@ powershell -NoProfile -Command "compact /c '/s:c:\Users\DE00024082\Desktop\code\
   wscad_corpus_new_p1 wscad_corpus_new_p2 wscad_corpus_new_p3 wscad_corpus_new_p4 \
   wscad_corpus_new_p5 --out wscad_corpus_v6 --move 2>&1 | tee _v6_merge.log
 n6=$(ls wscad_corpus_v6 | wc -l)
-echo "corpus v6: $n6 parca"
+echo "corpus v6: $n6 part"
 if [ "$n6" -lt 2500 ]; then echo "HATA: corpus v6 eksik ($n6) -- v31 BASLATILMADI"; exit 1; fi
 rm -rf wscad_corpus_new_p* _nshard_dir_* _nshard_0* wscad_corpus_v5
 

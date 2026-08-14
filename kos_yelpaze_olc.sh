@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 0.75/A: YELPAZE uctan uca. Tek degisken -- ayni korpus, ayni katlar, ayni
+# 0.75/A: YELPAZE uctan uca. Tek degisken -- ayni corpus, ayni katlar, ayni
 # kurallar; fark yalniz `P6_DIZIN` (yelpazesiz `_p6_oz_u25` vs yelpazeli
 # `_p6_oz_fan`).
 #
@@ -29,7 +29,7 @@ export P6_SIRA=0
 
 for d in _p6_oz_u25 _p6_oz_fan; do
   echo "=== P6_DIZIN=results/$d ==="
-  P6_DIZIN="results/$d" python kos_p6_kademe2.py 2>&1 | tail -8
+  P6_DIZIN="results/$d" python run_p6_kademe2.py 2>&1 | tail -8
   cp results/p6_kademe2_tam.json "results/p6_yelpaze_$d.json"
 done
 echo

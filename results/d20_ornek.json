@@ -1,6 +1,6 @@
 {
  "n": 1496,
- "marka": {
+ "brand": {
   "ABB": 1,
   "HORA": 1,
   "MDI": 1,
@@ -13,5 +13,5 @@
   "WEI": 468
  },
  "N_hedef": 1500,
- "olcut": "agiz orani (boyanan tepe / toplam tepe) DUSUK oncelikli"
+ "criterion": "mouth orani (boyanan tepe / toplam tepe) DUSUK oncelikli"
 }

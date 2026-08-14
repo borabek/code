@@ -1,7 +1,7 @@
 {
  "n_parca": 250,
  "sha16": "1c26a66e4c4e6160",
- "uretici": {
+ "manufacturer": {
   "A-B": 31,
   "C3": 5,
   "CCD": 26,
@@ -275,5 +275,5 @@
   "PC6-01P-1Y-00AH",
   "Z6-10D"
  ],
- "not": "GORULMEMIS URETICI sinavi. 194'luk olcum kumesi AYRI ve DONDURULMUS kalir. Bu kume egitimde ASLA kullanilmaz."
+ "not": "GORULMEMIS URETICI sinavi. 194'luk measurement kumesi AYRI ve DONDURULMUS kalir. Bu cluster egitimde ASLA kullanilmaz."
 }

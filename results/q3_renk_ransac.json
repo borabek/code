@@ -8,7 +8,7 @@
    "pid": "1561750000",
    "cift": 19680,
    "ic": 27,
-   "oran": 0.001371951219512195,
+   "ratio": 0.001371951219512195,
    "null_ic": 6,
    "null_oran": 0.0003048780487804878,
    "gecti": false
@@ -17,7 +17,7 @@
    "pid": "2534520000",
    "cift": 4654,
    "ic": 74,
-   "oran": 0.015900300816501935,
+   "ratio": 0.015900300816501935,
    "null_ic": 4,
    "null_oran": 0.0008594757198109154,
    "gecti": false
@@ -26,7 +26,7 @@
    "pid": "3213961",
    "cift": 532,
    "ic": 23,
-   "oran": 0.043233082706766915,
+   "ratio": 0.043233082706766915,
    "null_ic": 6,
    "null_oran": 0.011278195488721804,
    "gecti": false
@@ -35,7 +35,7 @@
    "pid": "3076042",
    "cift": 31,
    "ic": 10,
-   "oran": 0.3225806451612903,
+   "ratio": 0.3225806451612903,
    "null_ic": 2,
    "null_oran": 0.06451612903225806,
    "gecti": true
@@ -44,7 +44,7 @@
    "pid": "3100075",
    "cift": 76,
    "ic": 16,
-   "oran": 0.21052631578947367,
+   "ratio": 0.21052631578947367,
    "null_ic": 5,
    "null_oran": 0.06578947368421052,
    "gecti": false
@@ -53,7 +53,7 @@
    "pid": "280-905",
    "cift": 211,
    "ic": 27,
-   "oran": 0.12796208530805686,
+   "ratio": 0.12796208530805686,
    "null_ic": 10,
    "null_oran": 0.04739336492890995,
    "gecti": false
@@ -62,7 +62,7 @@
    "pid": "3031429",
    "cift": 269,
    "ic": 22,
-   "oran": 0.08178438661710037,
+   "ratio": 0.08178438661710037,
    "null_ic": 4,
    "null_oran": 0.01486988847583643,
    "gecti": false
@@ -71,7 +71,7 @@
    "pid": "3248030",
    "cift": 38,
    "ic": 8,
-   "oran": 0.21052631578947367,
+   "ratio": 0.21052631578947367,
    "null_ic": 3,
    "null_oran": 0.07894736842105263,
    "gecti": false
@@ -80,7 +80,7 @@
    "pid": "279-685",
    "cift": 181,
    "ic": 28,
-   "oran": 0.15469613259668508,
+   "ratio": 0.15469613259668508,
    "null_ic": 7,
    "null_oran": 0.03867403314917127,
    "gecti": false
@@ -89,7 +89,7 @@
    "pid": "1088740",
    "cift": 107,
    "ic": 13,
-   "oran": 0.12149532710280374,
+   "ratio": 0.12149532710280374,
    "null_ic": 3,
    "null_oran": 0.028037383177570093,
    "gecti": false
@@ -98,7 +98,7 @@
    "pid": "3037012",
    "cift": 67,
    "ic": 7,
-   "oran": 0.1044776119402985,
+   "ratio": 0.1044776119402985,
    "null_ic": 2,
    "null_oran": 0.029850746268656716,
    "gecti": false
@@ -107,7 +107,7 @@
    "pid": "3208524",
    "cift": 313,
    "ic": 28,
-   "oran": 0.08945686900958466,
+   "ratio": 0.08945686900958466,
    "null_ic": 4,
    "null_oran": 0.012779552715654952,
    "gecti": false
@@ -116,7 +116,7 @@
    "pid": "1029800000",
    "cift": 1240,
    "ic": 58,
-   "oran": 0.0467741935483871,
+   "ratio": 0.0467741935483871,
    "null_ic": 3,
    "null_oran": 0.0024193548387096775,
    "gecti": false
@@ -125,7 +125,7 @@
    "pid": "3213944",
    "cift": 607,
    "ic": 8,
-   "oran": 0.013179571663920923,
+   "ratio": 0.013179571663920923,
    "null_ic": 3,
    "null_oran": 0.004942339373970346,
    "gecti": false
@@ -134,14 +134,14 @@
    "pid": "1050070000",
    "cift": 296,
    "ic": 16,
-   "oran": 0.05405405405405406,
+   "ratio": 0.05405405405405406,
    "null_ic": 9,
    "null_oran": 0.030405405405405407,
    "gecti": false
   }
  ],
  "DUZELTME": {
-  "neden": "ilk karar ic-nokta ORANI ile verildi; 19680 aday ciftin cogu insaat geregi yanlis oldugu icin bu oran hicbir zaman yuksek cikamaz -- olcut yanlisti (AUC formulu dersinin ayni hali). Dogru olcut: donusum sonrasi en-yakin-silindir ARTIGI.",
+  "neden": "ilk karar ic-nokta ORANI ile verildi; 19680 candidate ciftin cogu insaat geregi yanlis oldugu icin bu ratio hicbir zaman yuksek cikamaz -- criterion yanlisti (AUC formulu dersinin ayni hali). Dogru criterion: donusum sonrasi en-yakin-silindir ARTIGI.",
   "artik<0.5mm": 5,
   "artik 0.5-1.5mm": 2,
   "n": 15,

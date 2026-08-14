@@ -1,40 +1,40 @@
 {
  "v3 TABAN (degismemis)": {
   "m194": 0.6836248012718601,
-  "sinav": 0.40095923261390887,
-  "kesinlik": 0.4976190476190476,
+  "exam": 0.40095923261390887,
+  "precision": 0.4976190476190476,
   "TP": 418,
   "FP": 422,
   "FN": 827
  },
- "G2 uretici-dengeli": {
+ "G2 manufacturer-dengeli": {
   "m194": 0.664391353811149,
-  "sinav": 0.4021215043394407,
-  "kesinlik": 0.503015681544029,
+  "exam": 0.4021215043394407,
+  "precision": 0.503015681544029,
   "TP": 417,
   "FP": 412,
   "FN": 828
  },
  "G3 ikiz-agirlikli": {
   "m194": 0.6800606520090978,
-  "sinav": 0.39797794117647056,
-  "kesinlik": 0.46509129967776586,
+  "exam": 0.39797794117647056,
+  "precision": 0.46509129967776586,
   "TP": 433,
   "FP": 498,
   "FN": 812
  },
- "G4a kapasite dusuk (derinlik 8, yaprak 10)": {
+ "G4a kapasite dusuk (depth 8, yaprak 10)": {
   "m194": 0.6567287784679089,
-  "sinav": 0.36147186147186144,
-  "kesinlik": 0.5538971807628524,
+  "exam": 0.36147186147186144,
+  "precision": 0.5538971807628524,
   "TP": 334,
   "FP": 269,
   "FN": 911
  },
- "G4b kapasite cok dusuk (derinlik 5, yaprak 25)": {
+ "G4b kapasite cok dusuk (depth 5, yaprak 25)": {
   "m194": 0.6492146596858639,
-  "sinav": 0.34894991922455576,
-  "kesinlik": 0.5294117647058824,
+  "exam": 0.34894991922455576,
+  "precision": 0.5294117647058824,
   "TP": 324,
   "FP": 288,
   "FN": 921

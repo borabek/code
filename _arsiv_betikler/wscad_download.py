@@ -82,7 +82,7 @@ def main():
                 btn = page.locator("button:has-text('download')").first
                 if not btn.count():
                     skip += 1
-                    print(f"[{i}/{len(todo)}] {art}: parca/indirme yok", flush=True)
+                    print(f"[{i}/{len(todo)}] {art}: part/indirme yok", flush=True)
                     continue
                 btn.click()
                 page.wait_for_timeout(900)
@@ -120,7 +120,7 @@ def main():
         ctx.close()
 
     shutil.rmtree(tmp, ignore_errors=True)
-    print(f"\nBITTI: {ok} indi, {skip} atlandi (STEP yok), {fail} hata "
+    print(f"\nBITTI: {ok} indi, {skip} atlandi (STEP yok), {fail} error "
           f"-> {args.out}", flush=True)
     return 0 if ok else 1
 

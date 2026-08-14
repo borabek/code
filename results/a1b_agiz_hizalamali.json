@@ -2,49 +2,49 @@
  "seat_agiz_medyan": 5.297866884391683e-05,
  "seat_agiz_p90": 13.081531784269123,
  "olcumler": {
-  "(a) SEAT'e gore, eksen 40  [BUGUN]": {
+  "(a) SEAT'e gore, axis 40  [BUGUN]": {
    "f1": 0.7583943683019512,
    "f1_kesin": 0.6149524571965329,
    "tp": 873,
    "belirsiz": 220
   },
-  "(b) SEAT'e gore, eksen 15  [HATALI]": {
+  "(b) SEAT'e gore, axis 15  [HATALI]": {
    "f1": 0.5213962896545835,
    "f1_kesin": 0.48593550659664403,
    "tp": 702,
    "belirsiz": 123
   },
-  "(c) AGIZ'a gore, eksen 15": {
+  "(c) AGIZ'a gore, axis 15": {
    "f1": 0.528011101148542,
    "f1_kesin": 0.4934332009734853,
    "tp": 707,
    "belirsiz": 116
   },
-  "(d) AGIZ'a gore, eksen 10": {
+  "(d) AGIZ'a gore, axis 10": {
    "f1": 0.43136770419708814,
    "f1_kesin": 0.4062822253533154,
    "tp": 605,
    "belirsiz": 104
   },
-  "(e) AGIZ'a gore, eksen  6": {
+  "(e) AGIZ'a gore, axis  6": {
    "f1": 0.3518968020152854,
    "f1_kesin": 0.33294492122454206,
    "tp": 481,
    "belirsiz": 87
   },
-  "ROBOT (a) SEAT'e gore, eksen 40  [BUGUN]": {
+  "ROBOT (a) SEAT'e gore, axis 40  [BUGUN]": {
    "f1": 0.5817988557277657,
    "f1_kesin": 0.5795518765210709,
    "tp": 659,
    "belirsiz": 2
   },
-  "ROBOT (c) AGIZ'a gore, eksen 15": {
+  "ROBOT (c) AGIZ'a gore, axis 15": {
    "f1": 0.41407875410955985,
    "f1_kesin": 0.41183177490286493,
    "tp": 547,
    "belirsiz": 2
   },
-  "ROBOT (d) AGIZ'a gore, eksen 10": {
+  "ROBOT (d) AGIZ'a gore, axis 10": {
    "f1": 0.32430242090431666,
    "f1_kesin": 0.3220554416976218,
    "tp": 452,

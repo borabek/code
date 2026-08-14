@@ -1,5 +1,5 @@
 {
- "kume": "val",
+ "cluster": "val",
  "tespit": {
   "4 uye (urun)": 0.6529097364726212,
   "5 uye, olceksiz": 0.6736924235901851,
@@ -10,7 +10,7 @@
   "5 uye, olceksiz": 0.35730700243937435,
   "5 uye, votes x4/5": 0.3576805929919138
  },
- "kesinlik": {
+ "precision": {
   "4 uye (urun)": 0.6785714285714286,
   "5 uye, olceksiz": 0.6416083916083916,
   "5 uye, votes x4/5": 0.6660341555977229

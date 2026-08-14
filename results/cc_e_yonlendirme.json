@@ -19,25 +19,25 @@
    "weighted": 0.8232940232148198,
    "n_routed_high": 141
   },
-  "geometri yonlendirme (esik 0.3)": {
+  "geometri yonlendirme (threshold 0.3)": {
    "low": 0.824660633484163,
    "high": 0.8413405202718537,
    "weighted": 0.8264120215968704,
    "n_routed_high": 148
   },
-  "geometri yonlendirme (esik 0.4)": {
+  "geometri yonlendirme (threshold 0.4)": {
    "low": 0.8209244395239413,
    "high": 0.8397920604914934,
    "weighted": 0.8229055397255343,
    "n_routed_high": 141
   },
-  "geometri yonlendirme (esik 0.5)": {
+  "geometri yonlendirme (threshold 0.5)": {
    "low": 0.8189461883408072,
    "high": 0.840217134765164,
    "weighted": 0.8211796377153647,
    "n_routed_high": 139
   },
-  "geometri yonlendirme (esik 0.6)": {
+  "geometri yonlendirme (threshold 0.6)": {
    "low": 0.8227777777777777,
    "high": 0.8405729044376614,
    "weighted": 0.8246462660770655,

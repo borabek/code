@@ -1,4 +1,4 @@
-"""Goreli esik: NESTED-CV dogrulamasi (oran train-fold'da secilir, test-fold'da uygulanir)."""
+"""Goreli threshold: NESTED-CV dogrulamasi (ratio train-fold'da secilir, test-fold'da uygulanir)."""
 import json, numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GroupKFold
@@ -32,7 +32,7 @@ GLOB=[np.round(x,2) for x in np.arange(0.10,0.71,0.02)]
 FRAC=[np.round(x,2) for x in np.arange(0.30,0.91,0.05)]
 parts=np.unique(G[WORK]); rs=np.random.RandomState(0); parts=parts[rs.permutation(len(parts))]
 folds=np.array_split(parts,5)
-for name in ('GLOBAL esik','GORELI esik (parca-ici)'):
+for name in ('GLOBAL threshold','GORELI threshold (part-ici)'):
     TP=NK=GT=Z=0; picks=[]
     for f_ in folds:
         te=set(f_.tolist()); trp=[g for g in parts if g not in te]; tep=list(f_)

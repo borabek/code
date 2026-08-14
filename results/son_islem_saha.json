@@ -2,35 +2,35 @@
  "yol": "saha",
  "n_parca": 100,
  "sonuc": {
-  "taban": {
+  "baseline": {
    "tespit": 0.7877838684416602,
-   "isaretsiz": 0.5763508222396241,
-   "isaretli": 0.4839467501957713
+   "unsigned": 0.5763508222396241,
+   "signed": 0.4839467501957713
   },
   "disari_normal": {
    "tespit": 0.7877838684416602,
-   "isaretsiz": 0.5763508222396241,
-   "isaretli": 0.4573218480814409
+   "unsigned": 0.5763508222396241,
+   "signed": 0.4573218480814409
   },
   "halka_disari": {
    "tespit": 0.7877838684416602,
-   "isaretsiz": 0.5763508222396241,
-   "isaretli": 0.5168363351605325
+   "unsigned": 0.5763508222396241,
+   "signed": 0.5168363351605325
   },
   "halka_kesin": {
    "tespit": 0.7877838684416602,
-   "isaretsiz": 0.5763508222396241,
-   "isaretli": 0.4792482380579483
+   "unsigned": 0.5763508222396241,
+   "signed": 0.4792482380579483
   },
   "mesh_kesin": {
    "tespit": 0.7877838684416602,
-   "isaretsiz": 0.5763508222396241,
-   "isaretli": 0.48238057948316365
+   "unsigned": 0.5763508222396241,
+   "signed": 0.48238057948316365
   },
   "gt_isaret": {
    "tespit": 0.7877838684416602,
-   "isaretsiz": 0.5763508222396241,
-   "isaretli": 0.5732184808144087
+   "unsigned": 0.5763508222396241,
+   "signed": 0.5732184808144087
   }
  },
  "not": "Son-islem kollari, cevrimdisi. gt_isaret UST SINIRDIR (dagitilamaz). D7'ye BAKILMADI."

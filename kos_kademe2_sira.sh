@@ -3,10 +3,10 @@
 #
 # Onceki kosuda kademe2 (P6_KAFES) 0.3045, kademe1 (P6) 0.3091 verdi -- kaskad
 # 0.0046 GERIDEYDI. Sira damgalama blogu (3 sutun) tam da kaskadin zayif oldugu
-# yeri hedefler: yogun parcada sira uyeligi, aday-basina skorun goremedigi
-# parca-duzeyi bilgidir.
+# yeri hedefler: dense parcada sira uyeligi, candidate-basina skorun goremedigi
+# part-duzeyi bilgidir.
 #
-# TEK DEGISKEN: `P6_SIRA`. Ayni korpus, ayni katlar, ayni kurallar.
+# TEK DEGISKEN: `P6_SIRA`. Ayni corpus, ayni katlar, ayni kurallar.
 # Cikti ayri dosyaya yazilir; mevcut model paketi EZILMEZ.
 set -u
 cd "$(dirname "$0")"
@@ -21,8 +21,8 @@ export P6_ARAMA_N=250
 export P6_NEG_KAT=6
 export P6_ITER=200
 
-# DAGITILAN PAKETI KORU. `kos_p6_kademe2.py` cikti yolunu sabit yaziyor ve
-# `rejim` alanini URETMIYOR; korumasiz kosarsak D7'de olculen paketin rejim
+# DAGITILAN PAKETI KORU. `run_p6_kademe2.py` cikti yolunu sabit yaziyor ve
+# `regime` alanini URETMIYOR; korumasiz kosarsak D7'de olculen paketin regime
 # kapisi SESSIZCE kaybolurdu.
 KORU=results/_paket_koruma_$(date +%s).pkl
 cp results/p6_kademe2_model.pkl "$KORU"
@@ -33,7 +33,7 @@ trap geri EXIT
 
 for s in 1 0; do
   echo "=== P6_SIRA=$s ==="
-  P6_SIRA=$s python kos_p6_kademe2.py 2>&1 | tail -12
+  P6_SIRA=$s python run_p6_kademe2.py 2>&1 | tail -12
   cp results/p6_kademe2_tam.json "results/p6_kademe2_sira$s.json"
   cp results/p6_kademe2_model.pkl "results/p6_kademe2_model_sira$s.pkl"
 done

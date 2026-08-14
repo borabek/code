@@ -1,6 +1,6 @@
 {
  "dik_tol": 15.0,
- "marka": {
+ "brand": {
   "NIT": {
    "hepsi": 0.14958677685950414,
    "dik_suzgec": 0.16611570247933885,
@@ -30,5 +30,5 @@
    "gt": 208
   }
  },
- "not": "Kafes adimi yonu kisitlar: eksen siraya DIKTIR. Uretilen konumlarda yon secimi. D7'ye BAKILMADI."
+ "not": "Kafes adimi yonu kisitlar: axis siraya DIKTIR. Uretilen konumlarda direction secimi. D7'ye BAKILMADI."
 }

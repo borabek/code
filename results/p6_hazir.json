@@ -2,7 +2,7 @@
  "rapor": [
   {
    "pid": "016029",
-   "aday": 41,
+   "candidate": 41,
    "secenek": 281,
    "mesh_aday": 3,
    "s1_min": 0.0003484909752154617,
@@ -13,7 +13,7 @@
   },
   {
    "pid": "016030",
-   "aday": 40,
+   "candidate": 40,
    "secenek": 277,
    "mesh_aday": 2,
    "s1_min": 0.00029082260844136894,
@@ -24,7 +24,7 @@
   },
   {
    "pid": "016031",
-   "aday": 40,
+   "candidate": 40,
    "secenek": 344,
    "mesh_aday": 2,
    "s1_min": 0.0002940674152455751,
@@ -35,7 +35,7 @@
   },
   {
    "pid": "204921",
-   "aday": 78,
+   "candidate": 78,
    "secenek": 557,
    "mesh_aday": 6,
    "s1_min": 9.110230068047188e-05,

@@ -1,5 +1,5 @@
 {
- "kume": "dev",
+ "cluster": "dev",
  "tespit": {
   "4 uye (urun)": 0.708895781637717,
   "5 uye, olceksiz": 0.7050778708133971,
@@ -10,7 +10,7 @@
   "5 uye, olceksiz": 0.4589248803827751,
   "5 uye, votes x4/5": 0.45380166141432887
  },
- "kesinlik": {
+ "precision": {
   "4 uye (urun)": 0.8283433133732535,
   "5 uye, olceksiz": 0.7799642218246869,
   "5 uye, votes x4/5": 0.7988505747126436

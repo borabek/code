@@ -1,7 +1,7 @@
 {
  "n_parca": 165,
  "sha16": "db4a953864172fde",
- "uretici": {
+ "manufacturer": {
   "MOR": 80,
   "NIT": 50,
   "ONV": 8,
@@ -184,7 +184,7 @@
   "TU95-2-GY",
   "TU95-2-PE"
  ],
- "parcalar": [
+ "parts": [
   {
    "pid": "204921",
    "mfg": "SUPU",

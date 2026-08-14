@@ -1,7 +1,7 @@
 {
  "n_parca": 838,
  "sha16": "4bdb5c2ed81fe89f",
- "uretici": {
+ "manufacturer": {
   "A-B": 124,
   "C3": 5,
   "CCD": 47,
@@ -861,7 +861,7 @@
   "WS2.5-01P-1Y-00AH",
   "Z6-10D"
  ],
- "parcalar": [
+ "parts": [
   {
    "pid": "1492-HC6",
    "mfg": "A-B",
@@ -5894,5 +5894,5 @@
  "min_uretici": 5,
  "durum": "MUHURLU -- ACILMADI",
  "kosul": "Puanlama YALNIZ g6 aglariyla YENIDEN TURETILDIKTEN sonra gecerlidir. Bu ureticiler ESKI g5 aglarinin egitiminde VARDI.",
- "not": "D7 FINAL sinavi. D6 artik DEV'dir (uzerinde uc kol ayarlandi). D7 gorulduKten sonra tuning yapilirsa D7 de DEV olur ve D8 gerekir."
+ "not": "D7 FINAL sinavi. D6 artik DEV'dir (uzerinde uc arm ayarlandi). D7 gorulduKten sonra tuning yapilirsa D7 de DEV olur ve D8 gerekir."
 }

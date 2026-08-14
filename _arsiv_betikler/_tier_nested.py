@@ -1,4 +1,4 @@
-"""AUTO esigi (%98 precision hedefi) KARARLI mi? Nested: esik train-fold'da secilir, test-fold'da olculur."""
+"""AUTO esigi (%98 precision hedefi) KARARLI mi? Nested: threshold train-fold'da secilir, test-fold'da olculur."""
 import json, numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GroupKFold
@@ -23,7 +23,7 @@ for target in (0.95,0.98):
     for f_ in folds:
         te=set(f_.tolist())
         trm=kept&np.array([g not in te for g in G]); tem=kept&np.array([g in te for g in G])
-        # train-fold'da hedefi saglayan EN DUSUK esik
+        # train-fold'da hedefi saglayan EN DUSUK threshold
         thr=0.99
         for t in np.arange(0.34,0.99,0.01):
             a=trm&(o>=t); n=int(a.sum())
@@ -32,4 +32,4 @@ for target in (0.95,0.98):
         a=tem&(o>=thr); TPa+=int(Y[a].sum()); NAa+=int(a.sum())
         GTt+=int(sum(ngt[int(g)] for g in np.unique(G[tem])))
     pa=TPa/max(NAa,1)
-    print(f'hedef %{int(target*100)}: TEST-fold AUTO precision {pa:.4f} | AUTO {NAa} aday | CP kapsama %{100*TPa/max(GTt,1):.0f} | secilen esikler {picks}', flush=True)
+    print(f'hedef %{int(target*100)}: TEST-fold AUTO precision {pa:.4f} | AUTO {NAa} candidate | CP kapsama %{100*TPa/max(GTt,1):.0f} | secilen esikler {picks}', flush=True)

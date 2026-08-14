@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -25,11 +25,11 @@
   "python": "3.12.10"
  },
  "dizin": "results/_p6_oz_u25",
- "kume": [
+ "cluster": [
   "d6"
  ],
  "toplam": {
-  "parca": 468,
+  "part": 468,
   "gt": 2672,
   "konum_recall": 0.8712574850299402,
   "yonlu_recall": 0.7264221556886228,
@@ -37,9 +37,9 @@
   "aday_parca": 250.9017094017094,
   "secenek_parca": 2735.175213675214
  },
- "marka": {
+ "brand": {
   "NIT": {
-   "parca": 50,
+   "part": 50,
    "gt": 1222,
    "konum_recall": 0.7806873977086743,
    "yonlu_recall": 0.5253682487725041,
@@ -48,7 +48,7 @@
    "secenek_parca": 4467.24
   },
   "SUPU": {
-   "parca": 165,
+   "part": 165,
    "gt": 547,
    "konum_recall": 0.9506398537477148,
    "yonlu_recall": 0.8884826325411335,
@@ -57,7 +57,7 @@
    "secenek_parca": 1524.9575757575758
   },
   "UPUN": {
-   "parca": 117,
+   "part": 117,
    "gt": 370,
    "konum_recall": 0.9648648648648649,
    "yonlu_recall": 0.8810810810810811,
@@ -66,7 +66,7 @@
    "secenek_parca": 2035.5128205128206
   },
   "MOR": {
-   "parca": 80,
+   "part": 80,
    "gt": 274,
    "konum_recall": 0.8686131386861314,
    "yonlu_recall": 0.8686131386861314,
@@ -75,7 +75,7 @@
    "secenek_parca": 5168.5625
   },
   "UTL": {
-   "parca": 31,
+   "part": 31,
    "gt": 84,
    "konum_recall": 1.0,
    "yonlu_recall": 1.0,
@@ -84,7 +84,7 @@
    "secenek_parca": 2281.0
   },
   "SE": {
-   "parca": 8,
+   "part": 8,
    "gt": 82,
    "konum_recall": 1.0,
    "yonlu_recall": 0.9146341463414634,
@@ -93,7 +93,7 @@
    "secenek_parca": 2682.375
   },
   "ONV": {
-   "parca": 8,
+   "part": 8,
    "gt": 67,
    "konum_recall": 1.0,
    "yonlu_recall": 0.9552238805970149,
@@ -102,7 +102,7 @@
    "secenek_parca": 5269.5
   },
   "S+S": {
-   "parca": 9,
+   "part": 9,
    "gt": 26,
    "konum_recall": 1.0,
    "yonlu_recall": 1.0,
@@ -112,5 +112,5 @@
   }
  },
  "kapi_a_gecti": false,
- "not": "Havuz TAVANI (mukemmel secici). Kabul kutusu urun metrigiyle birebir. D7'ye BAKILMADI."
+ "not": "Havuz TAVANI (mukemmel selector). Kabul kutusu urun metrigiyle birebir. D7'ye BAKILMADI."
 }

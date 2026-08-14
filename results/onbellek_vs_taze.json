@@ -1,7 +1,7 @@
 {
  "onbellek_model": 2,
  "canli_model": 4,
- "marka": {
+ "brand": {
   "NIT": {
    "onbellek_oran": 1.128332995683274,
    "onbellek_auc": 0.7429092045454545,
@@ -35,5 +35,5 @@
    "auc_farki": -0.2846416666666668
   }
  },
- "not": "Onbellekteki pbs vs canli modellerle taze cikarim, AYNI parcalarda. D7'ye BAKILMADI."
+ "not": "Onbellekteki pbs vs canli modellerle taze inference, AYNI parcalarda. D7'ye BAKILMADI."
 }

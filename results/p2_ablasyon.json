@@ -1,6 +1,6 @@
 {
  "oznitelik": {
-  "13 taban [ham]": {
+  "13 baseline [ham]": {
    "havuzlanmis": 0.6485740793011752,
    "uretici_ort": 0.5367907074636146,
    "robot": 0.5068768588534162
@@ -20,7 +20,7 @@
    "uretici_ort": 0.586945069694671,
    "robot": 0.6063194002477048
   },
-  "13 taban [z-skor]": {
+  "13 baseline [z-skor]": {
    "havuzlanmis": 0.6678102662759997,
    "uretici_ort": 0.560992292287832,
    "robot": 0.513482355592762
@@ -59,5 +59,5 @@
    "robot_isaretli": 0.5817988557277657
   }
  },
- "not": "TEK kosu, AYNI olcum kumesi (194 parca/174 grup), AYNI korpus (zengin_parite_w2). Onceki gecelerin blok sayilari FARKLI tabanlardan geldigi icin TOPLANAMAZ; bu tablo toplanabilir."
+ "not": "TEK kosu, AYNI measurement kumesi (194 part/174 grup), AYNI corpus (zengin_parite_w2). Onceki gecelerin blok sayilari FARKLI tabanlardan geldigi icin TOPLANAMAZ; bu tablo toplanabilir."
 }

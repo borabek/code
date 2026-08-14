@@ -4,17 +4,17 @@
    "robot_cp.py": "81bced9a2b2a5466",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -24,41 +24,41 @@
   },
   "python": "3.12.10"
  },
- "kume": "d6",
- "marka": {
+ "cluster": "d6",
+ "brand": {
   "NIT": {
    "gt": 1222,
    "adet_ortanca_hata": 18.0,
-   "esik": 0.008935219657483246,
+   "threshold": 0.008935219657483246,
    "ilk_k": 0.006051437216338881,
-   "rejim": 0.006051437216338881
+   "regime": 0.006051437216338881
   },
   "SUPU": {
    "gt": 547,
    "adet_ortanca_hata": 1.0,
-   "esik": 0.44938271604938274,
+   "threshold": 0.44938271604938274,
    "ilk_k": 0.4717391304347826,
-   "rejim": 0.4717391304347826
+   "regime": 0.4717391304347826
   },
   "UPUN": {
    "gt": 370,
    "adet_ortanca_hata": 0.0,
-   "esik": 0.5359361135758651,
+   "threshold": 0.5359361135758651,
    "ilk_k": 0.6818791946308724,
-   "rejim": 0.6818791946308724
+   "regime": 0.6818791946308724
   },
   "MOR": {
    "gt": 274,
    "adet_ortanca_hata": 1.0,
-   "esik": 0.17834394904458598,
+   "threshold": 0.17834394904458598,
    "ilk_k": 0.1519756838905775,
-   "rejim": 0.14930015552099535
+   "regime": 0.14930015552099535
   }
  },
  "toplam": {
-  "esik": 0.295386042198006,
+  "threshold": 0.295386042198006,
   "ilk_k": 0.2880658436213992,
-  "rejim": 0.2881542699724518
+  "regime": 0.2881542699724518
  },
- "not": "Adet OGRENMELI tahmin (parca oznitelikleri, marka disarida). Uctan uca robot F1. D7'ye BAKILMADI."
+ "not": "Adet OGRENMELI tahmin (part oznitelikleri, brand disarida). Uctan uca robot F1. D7'ye BAKILMADI."
 }

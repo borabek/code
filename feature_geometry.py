@@ -1,58 +1,58 @@
 # geometry helpers: centroids, normals, convex hull
 
-import logging
-import numpy as np
-from collections import Counter
-from connector_constants import MIN_VOLUME_THRESHOLD, VERTEX_NORMAL_EPSILON
+import logging 
+import numpy as np 
+from collections import Counter 
+from connector_constants import MIN_VOLUME_THRESHOLD ,VERTEX_NORMAL_EPSILON 
 
-logger = logging.getLogger(__name__)
+logger =logging .getLogger (__name__ )
 
-def _principal_axes(points):
-    c = points.mean(0)
-    _, vecs = np.linalg.eigh((points - c).T @ (points - c) / max(len(points), 1))
-    return vecs.T
+def _principal_axes (points ):
+    c =points .mean (0 )
+    _ ,vecs =np .linalg .eigh ((points -c ).T @(points -c )/max (len (points ),1 ))
+    return vecs .T 
 
-def align_to_bbox(points, rough):
-    axes = _principal_axes(points)
-    k = int(np.argmax(np.abs(axes @ rough)))
-    n = axes[k].copy()
-    if (axes[k] @ rough) < 0:
-        n = -n
-    return n
+def align_to_bbox (points ,rough ):
+    axes =_principal_axes (points )
+    k =int (np .argmax (np .abs (axes @rough )))
+    n =axes [k ].copy ()
+    if (axes [k ]@rough )<0 :
+        n =-n 
+    return n 
 
-def normal_stability_score(points, rough):
+def normal_stability_score (points ,rough ):
     """Reliability of the bbox-aligned normal, in [0, 1].
 
     Measures how unambiguously one principal axis dominates the rough
     direction: a value near 1 means a single axis carries almost all of the
     rough vector (stable), near 0 means it is split across axes (unreliable,
-    e.g. on a near-spherical or skewed feature).
+    e.g. ten a near-spherical or skewed feature).
     """
-    rough = np.asarray(rough, dtype=float)
-    rn = np.linalg.norm(rough)
-    if rn < VERTEX_NORMAL_EPSILON or len(points) < 3:
-        return 0.0
-    proj = np.abs(_principal_axes(points) @ (rough / rn))
-    proj = np.sort(proj)[::-1]
+    rough =np .asarray (rough ,dtype =float )
+    rn =np .linalg .norm (rough )
+    if rn <VERTEX_NORMAL_EPSILON or len (points )<3 :
+        return 0.0 
+    proj =np .abs (_principal_axes (points )@(rough /rn ))
+    proj =np .sort (proj )[::-1 ]
     # dominance of the strongest axis over the runner-up
-    return float(np.clip(proj[0] - proj[1], 0.0, 1.0))
+    return float (np .clip (proj [0 ]-proj [1 ],0.0 ,1.0 ))
 
-# A robot approaching from the wrong side of the normal would collide with the
-# housing, so the approach vector must point away from the component body.
-def orient_outward(normal, feature_center, body_center):
+    # A robot approaching from the wrong side of the normal would collide with the
+    # housing, so the approach vector must point away from the component body.
+def orient_outward (normal ,feature_center ,body_center ):
     """Flip `normal` so it points away from the component body center."""
-    n = np.asarray(normal, dtype=float)
-    outward = np.asarray(feature_center, dtype=float) - np.asarray(body_center, dtype=float)
-    if float(np.dot(n, outward)) < 0.0:
-        n = -n
-    return n
+    n =np .asarray (normal ,dtype =float )
+    outward =np .asarray (feature_center ,dtype =float )-np .asarray (body_center ,dtype =float )
+    if float (np .dot (n ,outward ))<0.0 :
+        n =-n 
+    return n 
 
-def insertion_depth(v_o, v_s):
+def insertion_depth (v_o ,v_s ):
     """Insertion depth = distance between the opening midpoint v_o and the
     surface centroid v_s (Scheffler §5.3.6 / Abb.44)."""
-    return float(np.linalg.norm(np.asarray(v_o, dtype=float) - np.asarray(v_s, dtype=float)))
+    return float (np .linalg .norm (np .asarray (v_o ,dtype =float )-np .asarray (v_s ,dtype =float )))
 
-def insertion_depth_along_axis(points, insertion_axis):
+def insertion_depth_along_axis (points ,insertion_axis ):
     """Physical insertion depth: the extent of the feature's vertices measured
     along the insertion axis (the inward direction the tool travels).
 
@@ -62,15 +62,15 @@ def insertion_depth_along_axis(points, insertion_axis):
     or off-centre openings. Sign-invariant (max - min projection), so passing the
     inward or outward axis gives the same value. Returns 0.0 for degenerate input.
     """
-    a = np.asarray(insertion_axis, dtype=float)
-    na = np.linalg.norm(a)
-    P = np.asarray(points, dtype=float).reshape(-1, 3)
-    if na < VERTEX_NORMAL_EPSILON or len(P) < 2:
-        return 0.0
-    proj = P @ (a / na)
-    return float(proj.max() - proj.min())
+    a =np .asarray (insertion_axis ,dtype =float )
+    na =np .linalg .norm (a )
+    P =np .asarray (points ,dtype =float ).reshape (-1 ,3 )
+    if na <VERTEX_NORMAL_EPSILON or len (P )<2 :
+        return 0.0 
+    proj =P @(a /na )
+    return float (proj .max ()-proj .min ())
 
-def validate_feature_geometry(points, max_skew_deg=75.0):
+def validate_feature_geometry (points ,max_skew_deg =75.0 ):
     """Check whether a feature's geometry is suitable for robotic interaction.
 
     Rejects features whose principal axes are extremely skewed/elongated
@@ -78,108 +78,108 @@ def validate_feature_geometry(points, max_skew_deg=75.0):
     (is_valid, info) where info carries the principal extents, aspect ratio
     and the planarity/skew angle.
     """
-    P = np.asarray(points, dtype=float).reshape(-1, 3)
-    if len(P) < 3:
-        return False, {"reason": "too_few_points", "aspect_ratio": float("inf"),
-                       "extents": np.zeros(3), "skew_deg": 90.0}
-    c = P.mean(0)
-    cov = (P - c).T @ (P - c) / len(P)
-    eigval = np.sort(np.clip(np.linalg.eigvalsh(cov), 0.0, None))[::-1]
-    extents = np.sqrt(eigval) * 2.0
-    major, minor = extents[0], extents[1]
-    aspect_ratio = float(major / minor) if minor > 1e-9 else float("inf")
+    P =np .asarray (points ,dtype =float ).reshape (-1 ,3 )
+    if len (P )<3 :
+        return False ,{"reason":"too_few_points","aspect_ratio":float ("inf"),
+        "extents":np .zeros (3 ),"skew_deg":90.0 }
+    c =P .mean (0 )
+    cov =(P -c ).T @(P -c )/len (P )
+    eigval =np .sort (np .clip (np .linalg .eigvalsh (cov ),0.0 ,None ))[::-1 ]
+    extents =np .sqrt (eigval )*2.0 
+    major ,minor =extents [0 ],extents [1 ]
+    aspect_ratio =float (major /minor )if minor >1e-9 else float ("inf")
     # skew: how far the in-plane shape departs from a clean planar patch.
-    thickness = extents[2]
-    skew_deg = float(np.degrees(np.arctan2(thickness, major + 1e-12)))
-    is_valid = aspect_ratio <= 50.0 and skew_deg <= max_skew_deg
-    return is_valid, {"aspect_ratio": aspect_ratio, "extents": extents,
-                      "skew_deg": skew_deg}
+    thickness =extents [2 ]
+    skew_deg =float (np .degrees (np .arctan2 (thickness ,major +1e-12 )))
+    is_valid =aspect_ratio <=50.0 and skew_deg <=max_skew_deg 
+    return is_valid ,{"aspect_ratio":aspect_ratio ,"extents":extents ,
+    "skew_deg":skew_deg }
 
-def convex_hull_volume_centroid(points):
-    P = np.asarray(points, dtype=float).reshape(-1, 3)
-    if len(P) < 4:
-        return P.mean(0) if len(P) else np.zeros(3)
-    try:
-        from scipy.spatial import ConvexHull
-        hull = ConvexHull(P)
-    except ImportError:
-        return P.mean(0)
-    except Exception:
-        return P.mean(0)
-    apex = P[hull.vertices].mean(0)
-    w = 0.0
-    centroid = np.zeros(3)
-    for ai, bi, ci in hull.simplices:
-        a, b, c_ = P[ai], P[bi], P[ci]
-        v = abs(np.dot(a - apex, np.cross(b - apex, c_ - apex))) / 6.0
-        w += v; centroid += v * (apex + a + b + c_) / 4.0
-    if w < MIN_VOLUME_THRESHOLD:
-        return P.mean(0)
-    return centroid / w
+def convex_hull_volume_centroid (points ):
+    P =np .asarray (points ,dtype =float ).reshape (-1 ,3 )
+    if len (P )<4 :
+        return P .mean (0 )if len (P )else np .zeros (3 )
+    try :
+        from scipy .spatial import ConvexHull 
+        hull =ConvexHull (P )
+    except ImportError :
+        return P .mean (0 )
+    except Exception :
+        return P .mean (0 )
+    apex =P [hull .vertices ].mean (0 )
+    w =0.0 
+    centroid =np .zeros (3 )
+    for ai ,bi ,ci in hull .simplices :
+        a ,b ,c_ =P [ai ],P [bi ],P [ci ]
+        v =abs (np .dot (a -apex ,np .cross (b -apex ,c_ -apex )))/6.0 
+        w +=v ;centroid +=v *(apex +a +b +c_ )/4.0 
+    if w <MIN_VOLUME_THRESHOLD :
+        return P .mean (0 )
+    return centroid /w 
 
-def _boundary_vertices(tris):
-    cnt = Counter()
-    for a, b, c in tris:
-        for e in ((a, b), (b, c), (a, c)):
-            cnt[tuple(sorted(e))] += 1
-    return {u for (u, v), c in cnt.items() if c == 1} | {v for (u, v), c in cnt.items() if c == 1}
+def _boundary_vertices (tris ):
+    cnt =Counter ()
+    for a ,b ,c in tris :
+        for e in ((a ,b ),(b ,c ),(a ,c )):
+            cnt [tuple (sorted (e ))]+=1 
+    return {u for (u ,v ),c in cnt .items ()if c ==1 }|{v for (u ,v ),c in cnt .items ()if c ==1 }
 
-def _peel_to_centroid(V, sub):
-    active = set(np.unique(sub).tolist())
-    outer_ring = None
-    Nloc = len(V)
+def _peel_to_centroid (V ,sub ):
+    active =set (np .unique (sub ).tolist ())
+    outer_ring =None 
+    Nloc =len (V )
     # bounded: a feature cannot have more concentric boundary layers than it has vertices.
-    for _ in range(len(active) + 2):
-        mask = np.zeros(Nloc, dtype=bool)
-        mask[list(active)] = True
-        cur = sub[mask[sub].all(1)]
-        if not len(cur):
-            break
-        rand = _boundary_vertices(cur)
-        if outer_ring is None:
-            outer_ring = rand
-        inner = active - rand
+    for _ in range (len (active )+2 ):
+        mask =np .zeros (Nloc ,dtype =bool )
+        mask [list (active )]=True 
+        cur =sub [mask [sub ].all (1 )]
+        if not len (cur ):
+            break 
+        rand =_boundary_vertices (cur )
+        if outer_ring is None :
+            outer_ring =rand 
+        inner =active -rand 
         # STOP if peeling no longer shrinks the set -- e.g. a CLOSED fragment (no boundary edges,
-        # `rand` empty) so `inner == active`. Without this the old `while True` spun forever on
+        # `rand` empty) so `inner == active`. Without this the old `while True` spun forever ten
         # multi-pole terminals whose predicted connection region wraps into a closed surface.
-        if not inner or len(inner) >= len(active):
-            break
-        active = inner
-    return V[list(active)].mean(0), outer_ring
+        if not inner or len (inner )>=len (active ):
+            break 
+        active =inner 
+    return V [list (active )].mean (0 ),outer_ring 
 
-# Returns (v_o, v_s, normal, depth_mm, depth_axis_mm, stability):
-#   depth_mm      – thesis insertion depth |v_o - v_s| (§5.3.6),
-#   depth_axis_mm – physical travel span of the feature along the insertion axis,
-#   stability     – in [0, 1], rates the bbox-aligned normal's reliability.
-def feature_direction(idx, vertices, faces, fallback_normal, smooth_subdiv=0):
-    idx = np.asarray(idx)
-    N = len(vertices)
-    inside = np.zeros(N, dtype=bool)
-    inside[idx] = True
-    sub = faces[inside[faces].all(1)]
-    if not len(sub):
-        c = vertices[idx].mean(0)
-        return c, c, fallback_normal, 0.0, 0.0, 0.0
-    v_s, outer_ring = _peel_to_centroid(vertices, sub)
-    v_o = vertices[list(outer_ring)].mean(0) if outer_ring else vertices[idx].mean(0)
-    if smooth_subdiv > 0:
-        from remesh import subdivide_loop
-        loc = np.unique(sub)
-        remap = np.full(N, -1, dtype=int)
-        remap[loc] = np.arange(len(loc))
-        Vl, Fl = vertices[loc], remap[sub]
-        for _ in range(smooth_subdiv):
-            Vl, Fl = subdivide_loop(Vl, Fl)
-        v_s, _ = _peel_to_centroid(Vl, Fl)
-    center = vertices[idx].mean(0)
-    scale = float(np.linalg.norm(vertices[idx] - center, axis=1).max()) or 1.0
-    d = v_o - v_s
-    nl = np.linalg.norm(d)
-    rough = (d / nl) if nl >= 0.02 * scale else np.asarray(fallback_normal, dtype=float)
-    rn = np.linalg.norm(rough)
-    if rn > VERTEX_NORMAL_EPSILON: rough = rough / rn
-    normal = align_to_bbox(vertices[idx], rough)
-    depth_mm = insertion_depth(v_o, v_s)                              # thesis proxy |v_o - v_s|
-    depth_axis_mm = insertion_depth_along_axis(vertices[idx], normal)  # physical travel span
-    stability = normal_stability_score(vertices[idx], rough)
-    return v_o, v_s, normal, depth_mm, depth_axis_mm, stability
+    # Returns (v_o, v_s, normal, depth_mm, depth_axis_mm, stability):
+    #   depth_mm      – thesis insertion depth |v_o - v_s| (§5.3.6),
+    #   depth_axis_mm – physical travel span of the feature along the insertion axis,
+    #   stability     – in [0, 1], rates the bbox-aligned normal's reliability.
+def feature_direction (idx ,vertices ,faces ,fallback_normal ,smooth_subdiv =0 ):
+    idx =np .asarray (idx )
+    N =len (vertices )
+    inside =np .zeros (N ,dtype =bool )
+    inside [idx ]=True 
+    sub =faces [inside [faces ].all (1 )]
+    if not len (sub ):
+        c =vertices [idx ].mean (0 )
+        return c ,c ,fallback_normal ,0.0 ,0.0 ,0.0 
+    v_s ,outer_ring =_peel_to_centroid (vertices ,sub )
+    v_o =vertices [list (outer_ring )].mean (0 )if outer_ring else vertices [idx ].mean (0 )
+    if smooth_subdiv >0 :
+        from remesh import subdivide_loop 
+        loc =np .unique (sub )
+        remap =np .full (N ,-1 ,dtype =int )
+        remap [loc ]=np .arange (len (loc ))
+        Vl ,Fl =vertices [loc ],remap [sub ]
+        for _ in range (smooth_subdiv ):
+            Vl ,Fl =subdivide_loop (Vl ,Fl )
+        v_s ,_ =_peel_to_centroid (Vl ,Fl )
+    center =vertices [idx ].mean (0 )
+    scale =float (np .linalg .norm (vertices [idx ]-center ,axis =1 ).max ())or 1.0 
+    d =v_o -v_s 
+    nl =np .linalg .norm (d )
+    rough =(d /nl )if nl >=0.02 *scale else np .asarray (fallback_normal ,dtype =float )
+    rn =np .linalg .norm (rough )
+    if rn >VERTEX_NORMAL_EPSILON :rough =rough /rn 
+    normal =align_to_bbox (vertices [idx ],rough )
+    depth_mm =insertion_depth (v_o ,v_s )# thesis proxy |v_o - v_s|
+    depth_axis_mm =insertion_depth_along_axis (vertices [idx ],normal )# physical travel span
+    stability =normal_stability_score (vertices [idx ],rough )
+    return v_o ,v_s ,normal ,depth_mm ,depth_axis_mm ,stability 

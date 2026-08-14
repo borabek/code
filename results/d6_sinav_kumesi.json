@@ -1,7 +1,7 @@
 {
  "n_parca": 468,
  "sha16": "71364f2a1718bba4",
- "uretici": {
+ "manufacturer": {
   "MOR": 80,
   "NIT": 50,
   "ONV": 8,
@@ -487,7 +487,7 @@
   "VG03-0052",
   "VG03-0059"
  ],
- "parcalar": [
+ "parts": [
   {
    "pid": "MAA1016A10",
    "mfg": "MOR",
@@ -3766,5 +3766,5 @@
   }
  ],
  "min_uretici": 5,
- "not": "TEMIZ gorulmemis-URETICI sinavi (D6). Bu ureticiler hicbir egitim yapitinda YOK. Eski d5_4 kumesi URETICI duzeyinde kirlenmisti (seg korpusu sinavin 169/250 parcasini iceriyordu) ve onunla KIYASLANAMAZ. 194'luk olcum kumesi AYRI ve dondurulmus kalir."
+ "not": "TEMIZ gorulmemis-URETICI sinavi (D6). Bu ureticiler hicbir training yapitinda YOK. Eski d5_4 kumesi URETICI duzeyinde kirlenmisti (seg korpusu sinavin 169/250 parcasini iceriyordu) ve onunla KIYASLANAMAZ. 194'luk measurement kumesi AYRI ve dondurulmus kalir."
 }

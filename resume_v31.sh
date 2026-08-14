@@ -3,7 +3,7 @@
 #
 #   bash resume_v31.sh
 #
-# Neden bu 3 env degiskeni: corpus v8 (3033 parca) 12.556 egitim grafigine
+# Neden bu 3 env degiskeni: corpus v8 (3033 part) 12.556 training grafigine
 # yamalaniyor ve varsayilan yol 31GB'a SIGMIYOR -- commit %99'a yapisir, Windows
 # pagefile'i buyutur, disk biter. Ikisi de matematiksel olarak notr (ayni tohumla
 # kayiplar birebir ayni olcüldü):
@@ -15,7 +15,7 @@
 #                         ve prep commit'i patlatir.
 #
 # --resume: checkpoints/cp_hp_v31_ftc6_last.ckpt'ten devam eder ve DONMUS split
-# manifest'ini geri oynatir (corpus'a parca eklense bile egitilmis bir parca val'e
+# manifest'ini geri oynatir (corpus'a part eklense bile egitilmis bir part val'e
 # kayamaz).
 #
 # Beklenen: hazirlik ~40dk (hiyerarsiler onbellekli; kNN + oznitelik yeniden kurulur,
@@ -36,7 +36,7 @@ fi
 
 free_gb=$(df -BG /c | tail -1 | awk '{print $4}' | tr -d 'G')
 if [ "${free_gb:-0}" -lt 4 ]; then
-  echo "HATA: disk sadece ${free_gb}GB -- egitim pagefile'i buyutup diski doldurur. Once yer ac."
+  echo "HATA: disk sadece ${free_gb}GB -- training pagefile'i buyutup diski doldurur. Once yer ac."
   exit 1
 fi
 

@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# FINAL ZINCIR -- egitim bitiminden D7 mansetine kadar, elle mudahalesiz.
+# FINAL ZINCIR -- training bitiminden D7 mansetine kadar, elle mudahalesiz.
 #
 #  1. egitimin model paketini yazmasini bekle
 #  2. POZ KAFASI karari: D6 alt kumesinde URUN_P6=1 iken POZ acik/kapali olc,
-#     KAZANANI sabitle  (gerekce: `yon_sozluk_sec` yon bankasinin sectigi yonu
+#     KAZANANI sabitle  (rationale: `pick_direction_from_dictionary` direction bankasinin sectigi yonu
 #     ezebilir; bu belirsizlikle SINAV okumasi harcanmaz)
 #  3. hazirlik kontrolu -- urun yolu calisiyor mu, sutun sayisi tutuyor mu,
 #     skorlar dejenere mi
-#  4. D7 OKUMA #1: taban + P6 ayni kosuda, 8 pay
-#  5. manset: bootstrap GA + marka kirilimi + temiz-703 duyarliligi
+#  4. D7 OKUMA #1: baseline + P6 ayni kosuda, 8 pay
+#  5. headline: bootstrap GA + brand kirilimi + temiz-703 duyarliligi
 #
 # Karar kurallari `docs/KAMPANYA_050_RAPOR.md` bolum 5'te OKUMADAN ONCE ilan
 # edildi. Bu betik onlari uygular, yeniden secmez.
@@ -29,7 +29,7 @@ while true; do
     [ "$a" = "$b" ] && break        # boyut sabitlendi = yazim bitti
   fi
   if [ $(( $(date +%s) - t0 )) -gt "$BEKLE_MAKS" ]; then
-    echo "!! egitim ${BEKLE_MAKS}s icinde model yazmadi -- ZINCIR DURDU"
+    echo "!! training ${BEKLE_MAKS}s icinde model yazmadi -- ZINCIR DURDU"
     exit 1
   fi
   sleep 20
@@ -38,17 +38,17 @@ echo "model yazildi: $(date)"
 python - <<'PY'
 import json, pickle
 d = pickle.load(open("results/p6_kademe2_model.pkl", "rb"))
-print("  kol", d.get("kol"), "| kural", d.get("kural"), "| nms", d.get("nms"),
+print("  arm", d.get("arm"), "| kural", d.get("kural"), "| nms", d.get("nms"),
       "| 2.kademe", "VAR" if d.get("kademe2") is not None else "YOK")
 PY
 
 echo
-echo "=== 2/5 POZ KAFASI KARARI (D6 alt kumesi, 150 parca) ==="
+echo "=== 2/5 POZ KAFASI KARARI (D6 alt kumesi, 150 part) ==="
 for poz in 1 0; do
   for i in 0 1 2 3; do
     ( URUN_P6=1 DOG_N=150 DOG_POZ=$poz DOG_SHARD="$i/4" \
       DOG_CIKTI="results/_poz${poz}_$i.json" \
-      python sonda_d6_urun.py > "results/_poz${poz}_$i.log" 2>&1 ) &
+      python probe_d6_product.py > "results/_poz${poz}_$i.log" 2>&1 ) &
   done
   wait
   python birlestir_makbuz.py "results/poz_$poz.json" results/_poz${poz}_*.json
@@ -66,7 +66,7 @@ echo "  DOG_POZ=$POZ sabitlendi"
 
 echo
 echo "=== 3/5 HAZIRLIK KONTROLU ==="
-if ! URUN_P6=1 python sonda_p6_hazir.py 3; then
+if ! URUN_P6=1 python probe_p6_hazir.py 3; then
   echo "!! HAZIR DEGIL -- D7 OKUMASI YAPILMADI"; exit 2
 fi
 

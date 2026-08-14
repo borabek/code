@@ -2,7 +2,7 @@
  "created": "2026-07-31",
  "anahtar": "keskin geometri: bbox 0.5mm + B-rep silindir/duzlem imzasi + kose/yuz kovalari",
  "kural": {
-  "DEV": "kararlar burada verilir (J, L2, esik, ozellik secimi). MANSET DEGIL.",
+  "DEV": "kararlar burada verilir (J, L2, threshold, ozellik secimi). MANSET DEGIL.",
   "VAL": "verilen kararlar burada SINANIR. Asiri-uydurma buradan gorulur.",
   "LOCKED": "TEK ATIS. Uzerinde hicbir ayar yapilmaz; gate egitimi bu gruplari gormez."
  },
@@ -110,7 +110,7 @@
    "3273127",
    "3273558"
   ],
-  "uyari": "4/100 parcasi segmentasyon egitim geometrisiyle ayni grupta"
+  "uyari": "4/100 parcasi segmentasyon training geometrisiyle ayni grupta"
  },
  "val": {
   "n": 100,

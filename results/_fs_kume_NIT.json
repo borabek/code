@@ -1,7 +1,7 @@
 {
  "n_parca": 50,
  "sha16": "d0c9867631ab81b5",
- "uretici": {
+ "manufacturer": {
   "MOR": 80,
   "NIT": 50,
   "ONV": 8,
@@ -69,7 +69,7 @@
   "TBU-30RU",
   "TBU-50RU"
  ],
- "parcalar": [
+ "parts": [
   {
    "pid": "BP43-4T(TBF)",
    "mfg": "NIT",

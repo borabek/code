@@ -3,15 +3,15 @@
  "sonuc": {
   "URUN     ": {
    "ulasan": 1001,
-   "aday": 2328
+   "candidate": 2328
   },
   "GEVSEK-1 ": {
    "ulasan": 1007,
-   "aday": 2471
+   "candidate": 2471
   },
   "GEVSEK-2 ": {
    "ulasan": 1026,
-   "aday": 2636
+   "candidate": 2636
   }
  },
  "recall_kazanci": 0.018896447467876,

@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -28,13 +28,13 @@
   "P6": {
    "robot": 0.29908256880733947,
    "recall": 0.2026523000414422,
-   "kesinlik": 0.5705950991831972,
+   "precision": 0.5705950991831972,
    "TP": 489,
    "FP": 368,
    "FN": 1924
   }
  },
- "marka": {
+ "brand": {
   "UPUN": {
    "P6": {
     "robot": 0.6194895591647331,
@@ -43,10 +43,10 @@
     "FP": 225,
     "FN": 103,
     "recall": 0.7216216216216216,
-    "kesinlik": 0.5426829268292683,
+    "precision": 0.5426829268292683,
     "makro": 0.6194895591647331,
     "en_kotu": 0.6194895591647331,
-    "marka": {
+    "brand": {
      "UPUN": 0.6194895591647331
     },
     "kural": [
@@ -65,10 +65,10 @@
     "FP": 121,
     "FN": 343,
     "recall": 0.37294332723948814,
-    "kesinlik": 0.6276923076923077,
+    "precision": 0.6276923076923077,
     "makro": 0.46788990825688076,
     "en_kotu": 0.46788990825688076,
-    "marka": {
+    "brand": {
      "SUPU": 0.46788990825688076
     },
     "kural": [
@@ -87,10 +87,10 @@
     "FP": 4,
     "FN": 1220,
     "recall": 0.0016366612111292963,
-    "kesinlik": 0.3333333333333333,
+    "precision": 0.3333333333333333,
     "makro": 0.003257328990228013,
     "en_kotu": 0.003257328990228013,
-    "marka": {
+    "brand": {
      "NIT": 0.003257328990228013
     },
     "kural": [
@@ -109,10 +109,10 @@
     "FP": 18,
     "FN": 258,
     "recall": 0.058394160583941604,
-    "kesinlik": 0.47058823529411764,
+    "precision": 0.47058823529411764,
     "makro": 0.1038961038961039,
     "en_kotu": 0.1038961038961039,
-    "marka": {
+    "brand": {
      "MOR": 0.1038961038961039
     },
     "kural": [
@@ -138,5 +138,5 @@
  ],
  "nms": 5.0,
  "dizin": "results/_p6_oz_tam3",
- "not": "tam korpusunun MARKA KATLARINDA kural secimi + kol kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
+ "not": "tam korpusunun MARKA KATLARINDA kural secimi + arm kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
 }

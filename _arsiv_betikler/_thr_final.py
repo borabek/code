@@ -1,4 +1,4 @@
-"""IKI PARAMETRELI nested-CV: (goreli oran, mutlak taban) train-fold'da secilir, test-fold'da uygulanir."""
+"""IKI PARAMETRELI nested-CV: (goreli ratio, mutlak baseline) train-fold'da secilir, test-fold'da uygulanir."""
 import json, numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GroupKFold

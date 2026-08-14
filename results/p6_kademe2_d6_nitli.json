@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -28,7 +28,7 @@
   "TABAN": {
    "robot": 0.1654357459379616,
    "recall": 0.09283050145047658,
-   "kesinlik": 0.7593220338983051,
+   "precision": 0.7593220338983051,
    "TP": 224,
    "FP": 71,
    "FN": 2189
@@ -36,7 +36,7 @@
   "P6": {
    "robot": 0.2958472264322522,
    "recall": 0.20223787815996686,
-   "kesinlik": 0.5507900677200903,
+   "precision": 0.5507900677200903,
    "TP": 488,
    "FP": 398,
    "FN": 1925
@@ -44,13 +44,13 @@
   "P6_KAFES": {
    "robot": 0.27453537658950117,
    "recall": 0.17447161210111894,
-   "kesinlik": 0.6437308868501529,
+   "precision": 0.6437308868501529,
    "TP": 421,
    "FP": 233,
    "FN": 1992
   }
  },
- "marka": {
+ "brand": {
   "UPUN": {
    "TABAN": {
     "robot": 0.5384615384615384,
@@ -59,7 +59,7 @@
     "FP": 29,
     "FN": 223,
     "recall": 0.3972972972972973,
-    "kesinlik": 0.8352272727272727,
+    "precision": 0.8352272727272727,
     "kural": [
      "mutlak",
      0.99
@@ -73,7 +73,7 @@
     "FP": 243,
     "FN": 97,
     "recall": 0.7378378378378379,
-    "kesinlik": 0.5290697674418605,
+    "precision": 0.5290697674418605,
     "kural": [
      "mutlak",
      0.97
@@ -87,7 +87,7 @@
     "FP": 123,
     "FN": 121,
     "recall": 0.672972972972973,
-    "kesinlik": 0.6693548387096774,
+    "precision": 0.6693548387096774,
     "kural": [
      "goreli",
      0.85,
@@ -104,7 +104,7 @@
     "FP": 14,
     "FN": 473,
     "recall": 0.13528336380255943,
-    "kesinlik": 0.8409090909090909,
+    "precision": 0.8409090909090909,
     "kural": [
      "mutlak",
      0.99
@@ -118,7 +118,7 @@
     "FP": 127,
     "FN": 345,
     "recall": 0.3692870201096892,
-    "kesinlik": 0.6139817629179332,
+    "precision": 0.6139817629179332,
     "kural": [
      "mutlak",
      0.97
@@ -132,7 +132,7 @@
     "FP": 61,
     "FN": 384,
     "recall": 0.2979890310786106,
-    "kesinlik": 0.7276785714285714,
+    "precision": 0.7276785714285714,
     "kural": [
      "goreli",
      0.95,
@@ -149,7 +149,7 @@
     "FP": 0,
     "FN": 1222,
     "recall": 0.0,
-    "kesinlik": 0.0,
+    "precision": 0.0,
     "kural": [
      "mutlak",
      0.99
@@ -163,7 +163,7 @@
     "FP": 2,
     "FN": 1221,
     "recall": 0.0008183306055646482,
-    "kesinlik": 0.3333333333333333,
+    "precision": 0.3333333333333333,
     "kural": [
      "mutlak",
      0.99
@@ -177,7 +177,7 @@
     "FP": 16,
     "FN": 1221,
     "recall": 0.0008183306055646482,
-    "kesinlik": 0.058823529411764705,
+    "precision": 0.058823529411764705,
     "kural": [
      "goreli",
      0.85,
@@ -194,7 +194,7 @@
     "FP": 28,
     "FN": 271,
     "recall": 0.010948905109489052,
-    "kesinlik": 0.0967741935483871,
+    "precision": 0.0967741935483871,
     "kural": [
      "mutlak",
      0.99
@@ -208,7 +208,7 @@
     "FP": 26,
     "FN": 262,
     "recall": 0.043795620437956206,
-    "kesinlik": 0.3157894736842105,
+    "precision": 0.3157894736842105,
     "kural": [
      "mutlak",
      0.97
@@ -222,7 +222,7 @@
     "FP": 33,
     "FN": 266,
     "recall": 0.029197080291970802,
-    "kesinlik": 0.1951219512195122,
+    "precision": 0.1951219512195122,
     "kural": [
      "mutlak",
      0.6
@@ -245,5 +245,5 @@
  ],
  "nms": 5.0,
  "dizin": "results/_p6_oz_u25",
- "not": "tam korpusunun MARKA KATLARINDA kural secimi + kol kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
+ "not": "tam korpusunun MARKA KATLARINDA kural secimi + arm kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
 }

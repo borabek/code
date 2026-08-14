@@ -32,9 +32,9 @@ $env:PYTHONPATH = "_diffusion_net_repo/src"
 
 ```
 === PXC.0311087 | [8.2 71.8 50.4] mm ===
-  uretici CP 2 | robot 2 | TP 2 FP 0 FN 0 -> F1 1.000
-   tahmin1 -> GT2 ('2') dik 0.2mm, eksen +8.4mm  [DOGRU]
-   tahmin2 -> GT1 ('1') dik 1.1mm, eksen +5.5mm  [DOGRU]
+  manufacturer CP 2 | robot 2 | TP 2 FP 0 FN 0 -> F1 1.000
+   tahmin1 -> GT2 ('2') dik 0.2mm, axis +8.4mm  [DOGRU]
+   tahmin2 -> GT1 ('1') dik 1.1mm, axis +5.5mm  [DOGRU]
    -> results/robot_glb/PXC_0311087_F1_1.00.glb
 ```
 
@@ -107,7 +107,7 @@ Görselleştirme bunu her CP için tek tek sınar; içerideyse ağza taşır, de
 
 Delik (**ağız**) oradan **5–25 mm** ötede, yüzeydedir. **Robot ağzı tahmin eder.**
 
-Bu yüzden raporda `eksen +8.4mm` gibi bir sayı görürsün — o **hata değil**, ağız ile yuva arasındaki
+Bu yüzden raporda `axis +8.4mm` gibi bir sayı görürsün — o **error değil**, ağız ile yuva arasındaki
 mesafedir. Görselde de GT iğnesi ağza taşınmış çizilir (`cp_geometry.seat_to_mouth`), yoksa gövdenin
 içinde kalıp görünmezdi — senin "bu dosyalarda CP yok gibi" demenin sebebi tam olarak buydu.
 

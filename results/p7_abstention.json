@@ -1,58 +1,58 @@
 {
  "gt": 2672,
- "aday": 1809,
+ "candidate": 1809,
  "tablo": [
   {
-   "esik": 0.3,
-   "aday": 1809,
+   "threshold": 0.3,
+   "candidate": 1809,
    "kesinlik_tespit": 0.5953565505804311,
    "kesinlik_robot": 0.23659480375898287,
    "kapsama_tespit": 0.4030688622754491,
    "kapsama_robot": 0.1601796407185629
   },
   {
-   "esik": 0.4,
-   "aday": 1084,
+   "threshold": 0.4,
+   "candidate": 1084,
    "kesinlik_tespit": 0.7260147601476015,
    "kesinlik_robot": 0.3173431734317343,
    "kapsama_tespit": 0.2945359281437126,
    "kapsama_robot": 0.12874251497005987
   },
   {
-   "esik": 0.5,
-   "aday": 646,
+   "threshold": 0.5,
+   "candidate": 646,
    "kesinlik_tespit": 0.8374613003095975,
    "kesinlik_robot": 0.4024767801857585,
    "kapsama_tespit": 0.20247005988023953,
    "kapsama_robot": 0.09730538922155689
   },
   {
-   "esik": 0.6,
-   "aday": 363,
+   "threshold": 0.6,
+   "candidate": 363,
    "kesinlik_tespit": 0.9035812672176309,
    "kesinlik_robot": 0.4628099173553719,
    "kapsama_tespit": 0.12275449101796407,
    "kapsama_robot": 0.06287425149700598
   },
   {
-   "esik": 0.7,
-   "aday": 180,
+   "threshold": 0.7,
+   "candidate": 180,
    "kesinlik_tespit": 0.9722222222222222,
    "kesinlik_robot": 0.5333333333333333,
    "kapsama_tespit": 0.0654940119760479,
    "kapsama_robot": 0.03592814371257485
   },
   {
-   "esik": 0.8,
-   "aday": 51,
+   "threshold": 0.8,
+   "candidate": 51,
    "kesinlik_tespit": 0.9803921568627451,
    "kesinlik_robot": 0.43137254901960786,
    "kapsama_tespit": 0.0187125748502994,
    "kapsama_robot": 0.008233532934131737
   },
   {
-   "esik": 0.9,
-   "aday": 1,
+   "threshold": 0.9,
+   "candidate": 1,
    "kesinlik_tespit": 1.0,
    "kesinlik_robot": 1.0,
    "kapsama_tespit": 0.00037425149700598805,

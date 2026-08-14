@@ -60,7 +60,7 @@ Bayrak yoksa hiçbir şey çizilmez — bayraksız GLB'ler **bit-özdeş** kalı
 
 ## İHLAL POLİTİKASI
 
-**Bir madde bile geçmezse GLB yazılmaz / silinir ve süreç hata koduyla biter.**
+**Bir madde bile geçmezse GLB yazılmaz / silinir ve süreç error koduyla biter.**
 
 Sessiz geçiş imkânsızdır:
 - Denetçi hiçbir yerde `except: pass` kullanmaz.

@@ -1,14 +1,14 @@
 {
- "taban": {
+ "baseline": {
   "tespit": 0.7583943683019512,
   "robot": 0.5893431322317577,
-  "aday": 3217,
+  "candidate": 3217,
   "aday_recall": 0.8578987150415722
  },
  "yeni": {
   "tespit": 0.7276323393077874,
   "robot": 0.5109976050679852,
-  "aday": 6079,
+  "candidate": 6079,
   "aday_recall": 0.9516250944822373
  },
  "d_tespit": -0.030762028994163804,
@@ -41,5 +41,5 @@
  },
  "uretici_disi_ort": 0.6848374819692697,
  "gecti": false,
- "serh": "yeni egitim korpusu 1179 parca (eski 1709) -- fark LOCKED ve olcum gruplarinin DOGRU cikarilmasindan; ogrenme egrisine gore ~-0.008 bedel, yani olculen fark gercek katkidan KUCUK"
+ "serh": "yeni training korpusu 1179 part (eski 1709) -- fark LOCKED ve measurement gruplarinin DOGRU cikarilmasindan; ogrenme egrisine gore ~-0.008 bedel, yani olculen fark gercek katkidan KUCUK"
 }

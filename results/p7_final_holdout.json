@@ -48,8 +48,8 @@
   "WORK_WEI": 0.7420814479638008,
   "WORK_PXC": 0.7733151803948263,
   "locked_threshold": 0.34,
-  "deployability_rule": "rank-normalizasyonlu ensemble'lar ELENDI: rank tum korpustan hesaplanir, esik yuzdelige donusur, robot tek parca islerken TANIMSIZ. Sadece olasilik-uzayi birlesimleri aday alindi.",
-  "note": "SADECE WORK (541 parca) uzerinde secildi; kilitli holdout'a dokunulmadi."
+  "deployability_rule": "rank-normalizasyonlu ensemble'lar ELENDI: rank tum korpustan hesaplanir, threshold yuzdelige donusur, robot tek part islerken TANIMSIZ. Sadece olasilik-uzayi birlesimleri candidate alindi.",
+  "note": "SADECE WORK (541 part) uzerinde secildi; kilitli holdout'a dokunulmadi."
  },
  "gate_passed": false,
  "note": "KILITLI HOLDOUT TEK KEZ acildi; hicbir secim/tuning bu veride yapilmadi."

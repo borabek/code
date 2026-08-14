@@ -1,89 +1,89 @@
 # -*- coding: utf-8 -*-
 """WIRE-PILOT: 'Insan, geometriden ureticinin CP listesini uretebilir mi?' -- HIC SORULMAMIS soru.
 
-NEDEN ONEMLI (2026-07-28 bulgulari):
-  * Ogrenme egrisi duzlesmiyor -> VERI acligi ana teshis; 2838 STEP'imiz var ama CP'si yok.
+WHY IMPORTANT (2026-07-28 bulgulari):
+  * Ogrenme egrisi duzlesmiyor -> VERI acligi ana teshis; 2838 STEP'imiz present but CP'si absent.
   * O 2838'i INSAN etiketiyle acabilir miyiz? Ancak insan ureticinin tanimini yeniden
-    uretebiliyorsa. Eski adjudication 'gercek aciklik mi?' diye sordu ('burada TEL var mi?' degil)
-    ve o yuzden precision %98'e sisti -- yani bu soru dogru bicimde HIC sorulmadi.
-KARAR KAPISI:
-  uyum >= %90  -> insan etiketi gecerli ikame; 2838 parca acilabilir (veri acligina ilac)
-  uyum <  %75  -> ureticinin listesinde geometride OLMAYAN katalog bilgisi var (R4 kesinlesir);
-                  insan etiketi GURULTU ekler -> yol kapatilir, 100 saat bosa gitmez
-Tasarim: GT'si BILINEN parcalar kullanilir ama kullaniciya GOSTERILMEZ (kor test).
-Cikti: results/wire_pilot/wire_pilot.html (tek dosya, three.js, localStorage, JSON export)
-       + results/wire_pilot/truth.json (cevap anahtari -- ACMA, sadece skorlayici okur)
+    uretebiliyorsa. Eski adjudication 'real opening mi?' diye sordu ('here TEL present mi?' not)
+    and that yuzden precision %98'e sisti -- i.e. this soru correct bicimde HIC sorulmadi.
+DECISION KAPISI:
+  uyum >= %90  -> insan etiketi gecerli ikame; 2838 part acilabilir (data acligina ilac)
+  uyum <  %75  -> ureticinin listesinde geometride OLMAYAN katalog bilgisi present (R4 kesinlesir);
+                  insan etiketi GURULTU adds -> path kapatilir, 100 saat bosa gitmez
+Tasarim: GT'si BILINEN parts is used but kullaniciya GOSTERILMEZ (kor test).
+Cikti: results/wire_pilot/wire_pilot.html (single file, three.js, localStorage, JSON export)
+       + results/wire_pilot/truth.json (cevap anahtari -- ACMA, only skorlayici reads)
 Kullanim: PYTHONPATH=_diffusion_net_repo/src .venv/Scripts/python.exe build_wire_pilot.py [--n 30]
 """
-import os, sys, json, base64, argparse
-import numpy as np
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import os ,sys ,json ,base64 ,argparse 
+import numpy as np 
+sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 
-OUT_DIR = "results/wire_pilot"
-
-
-def pack(a, dt):
-    return base64.b64encode(np.ascontiguousarray(a, dt).tobytes()).decode()
+OUT_DIR ="results/wire_pilot"
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--n", type=int, default=30, help="kac parca (15-20 dk icin ~30 uygun)")
-    ap.add_argument("--seed", type=int, default=0)
-    a = ap.parse_args()
+def pack (a ,dt ):
+    return base64 .b64encode (np .ascontiguousarray (a ,dt ).tobytes ()).decode ()
 
-    r = np.load("results/rich_feats.npz", allow_pickle=True)
-    lock = json.load(open("results/split_lock.json"))
-    LOCKED = set(lock["locked_parts"])
-    Y, G, MF = r["y"], r["groups"], r["mfg"]
-    pids = [str(x) for x in r["part_ids"]]
-    seen = r["seen"]
-    ngt = dict(zip(r["grp_ids"].tolist(), r["ngt"].tolist()))
 
-    # aday sayisi 4-10 arasi, KILITLI OLMAYAN, temiz parcalar (kisa ve ogretici)
-    cand_g = [int(g) for g in np.unique(G)
-              if 4 <= int((G == g).sum()) <= 10 and seen[int(g)] == 0 and pids[int(g)] not in LOCKED]
-    rs = np.random.RandomState(a.seed); rs.shuffle(cand_g)
-    chosen = cand_g[:a.n]
-    print(f"{len(chosen)} parca secildi (aday 4-10, kilitli degil)", flush=True)
+def main ():
+    ap =argparse .ArgumentParser ()
+    ap .add_argument ("--n",type =int ,default =30 ,help ="kac part (15-20 dk icin ~30 uygun)")
+    ap .add_argument ("--seed",type =int ,default =0 )
+    a =ap .parse_args ()
 
-    import thesis_remesh
-    from infer_step_cp import step_to_mesh
-    from big_arbiter import eligible
-    os.environ["BA_ALLOW_SEEN"] = "1"
-    paths = {p: s for m, p, jf, s in eligible()}
+    r =np .load ("results/rich_feats.npz",allow_pickle =True )
+    lock =json .load (open ("results/split_lock.json"))
+    LOCKED =set (lock ["locked_parts"])
+    Y ,G ,MF =r ["y"],r ["groups"],r ["mfg"]
+    pids =[str (x )for x in r ["part_ids"]]
+    seen =r ["seen"]
+    ngt =dict (zip (r ["grp_ids"].tolist (),r ["ngt"].tolist ()))
 
-    parts, truth = [], {}
-    for gi in chosen:
-        pid = pids[gi]
-        if pid not in paths: continue
-        try:
-            Vr, Fr = step_to_mesh(paths[pid])
-            V, F = thesis_remesh.remesh_uniform(Vr, Fr, target=6000)
-            V = np.ascontiguousarray(V, np.float64); F = np.ascontiguousarray(F, np.int64)
-        except Exception:
-            continue
-        idx = np.where(G == gi)[0]
-        P = r["pos"][idx]                      # JSON frame konumlari
-        # mesh'i ayni frame'e tasi: pos JSON frame'de, mesh STEP frame'de -> align_frames ile
-        from cad_eval import align_frames
-        import json as _j
-        jf = [x for m, p, x, s in eligible() if p == pid]
-        if not jf: continue
-        jj = _j.load(open(jf[0], encoding="utf-8-sig"))
-        Vj = np.array([[q["X"], q["Y"], q["Z"]] for q in jj["Graphic3d"]["Points"]], float)
-        R, t, _ = align_frames(Vr, Vj)
-        Vm = V @ R.T + t                        # mesh -> JSON frame (adaylarla ayni)
-        c = Vm.mean(0)
-        parts.append({"pid": pid, "v": pack(Vm - c, np.float32), "f": pack(F, np.uint32),
-                      "pts": [(P[k] - c).round(3).tolist() for k in range(len(idx))]})
-        truth[pid] = [int(Y[i]) for i in idx]
-        print(f"  {pid}: {len(V)}v, {len(idx)} aday, {ngt[gi]} uretici-CP", flush=True)
+    # candidate count 4-10 arasi, KILITLI OLMAYAN, temiz parts (kisa and ogretici)
+    cand_g =[int (g )for g in np .unique (G )
+    if 4 <=int ((G ==g ).sum ())<=10 and seen [int (g )]==0 and pids [int (g )]not in LOCKED ]
+    rs =np .random .RandomState (a .seed );rs .shuffle (cand_g )
+    chosen =cand_g [:a .n ]
+    print (f"{len (chosen )} part secildi (candidate 4-10, kilitli degil)",flush =True )
 
-    os.makedirs(OUT_DIR, exist_ok=True)
-    json.dump(truth, open(os.path.join(OUT_DIR, "truth.json"), "w"))
-    data = json.dumps(parts, separators=(",", ":"))
-    doc = """<!doctype html><meta charset=utf-8><title>WIRE PILOT -- tel mi alet mi?</title>
+    import thesis_remesh 
+    from infer_step_cp import step_to_mesh 
+    from big_arbiter import eligible 
+    os .environ ["BA_ALLOW_SEEN"]="1"
+    paths ={p :s for m ,p ,jf ,s in eligible ()}
+
+    parts ,truth =[],{}
+    for gi in chosen :
+        pid =pids [gi ]
+        if pid not in paths :continue 
+        try :
+            Vr ,Fr =step_to_mesh (paths [pid ])
+            V ,F =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
+            V =np .ascontiguousarray (V ,np .float64 );F =np .ascontiguousarray (F ,np .int64 )
+        except Exception :
+            continue 
+        idx =np .where (G ==gi )[0 ]
+        P =r ["pos"][idx ]# JSON frame konumlari
+        # mesh'i same frame'e tasi: pos JSON frame'de, mesh STEP frame'de -> align_frames with
+        from cad_eval import align_frames 
+        import json as _j 
+        jf =[x for m ,p ,x ,s in eligible ()if p ==pid ]
+        if not jf :continue 
+        jj =_j .load (open (jf [0 ],encoding ="utf-8-sig"))
+        Vj =np .array ([[q ["X"],q ["Y"],q ["Z"]]for q in jj ["Graphic3d"]["Points"]],float )
+        R ,t ,_ =align_frames (Vr ,Vj )
+        Vm =V @R .T +t # mesh -> JSON frame (adaylarla same)
+        c =Vm .mean (0 )
+        parts .append ({"pid":pid ,"v":pack (Vm -c ,np .float32 ),"f":pack (F ,np .uint32 ),
+        "pts":[(P [k ]-c ).round (3 ).tolist ()for k in range (len (idx ))]})
+        truth [pid ]=[int (Y [i ])for i in idx ]
+        print (f"  {pid }: {len (V )}v, {len (idx )} candidate, {ngt [gi ]} manufacturer-CP",flush =True )
+
+    os .makedirs (OUT_DIR ,exist_ok =True )
+    json .dump (truth ,open (os .path .join (OUT_DIR ,"truth.json"),"w"))
+    data =json .dumps (parts ,separators =(",",":"))
+    doc ="""<!doctype html><meta charset=utf-8><title>WIRE PILOT -- tel mi alet mi?</title>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <style>
@@ -98,7 +98,7 @@ small{color:#999;display:block;margin-top:6px;line-height:1.45}
 </style>
 <div id=v></div><div id=s>
 <h3>Bu acikliga TEL girer mi?</h3>
-<small>Sari kure = degerlendirilecek aciklik. Surukle=dondur, tekerlek=zoom.
+<small>Sari kure = degerlendirilecek opening. Surukle=dondur, tekerlek=zoom.
 <b>TEL</b>=kablo girisi &nbsp; <b>ALET</b>=tornavida/test/vida/montaj &nbsp; <b>?</b>=emin degilim.
 Cevap anahtarini GORMUYORSUN -- bu kor test.</small>
 <div id=pg></div><div id=q></div>
@@ -128,7 +128,7 @@ function show(){
   });
   cam.position.set(sz,sz*.8,sz);ctr.target.set(0,0,0);ctr.update();
   const done=Object.keys(ans).length, tot=PARTS.reduce((s,p)=>s+p.pts.length,0);
-  document.getElementById('pg').textContent=`parca ${pi+1}/${PARTS.length} -- cevaplanan ${done}/${tot}`;
+  document.getElementById('pg').textContent=`part ${pi+1}/${PARTS.length} -- cevaplanan ${done}/${tot}`;
   let h='';
   P.pts.forEach((p,i)=>{
     const k=P.pid+'#'+i, v=ans[k]||'';
@@ -150,14 +150,14 @@ document.getElementById('exp').onclick=()=>{
   const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wire_pilot_answers.json';a.click();};
 rs();show();(function loop(){requestAnimationFrame(loop);ctr.update();rd.render(sc,cam)})();
 </script>"""
-    doc = doc.replace("DATA_HERE", data)
-    p = os.path.join(OUT_DIR, "wire_pilot.html")
-    open(p, "w", encoding="utf-8").write(doc)
-    n = sum(len(x["pts"]) for x in parts)
-    print(f"\n-> {p}  ({len(parts)} parca, {n} aciklik, {os.path.getsize(p)/1e6:.1f} MB)")
-    print("   Tarayicida ac, her acikliga TEL/ALET/? de, bitince 'CEVAPLARI INDIR'.")
-    print("   Sonra: python score_wire_pilot.py <indirilen json>")
+    doc =doc .replace ("DATA_HERE",data )
+    p =os .path .join (OUT_DIR ,"wire_pilot.html")
+    open (p ,"w",encoding ="utf-8").write (doc )
+    n =sum (len (x ["pts"])for x in parts )
+    print (f"\n-> {p }  ({len (parts )} part, {n } opening, {os .path .getsize (p )/1e6 :.1f} MB)")
+    print ("   Tarayicida ac, her acikliga TEL/ALET/? de, bitince 'CEVAPLARI INDIR'.")
+    print ("   Sonra: python score_wire_pilot.py <indirilen json>")
 
 
-if __name__ == "__main__":
-    main()
+if __name__ =="__main__":
+    main ()

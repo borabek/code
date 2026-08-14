@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+"""P3-a: `split_ratio` taramasi (birlesmis komsu agizlari ayirma).
+
+`cp_openings._split_elongated` urun yolunda HIC gecirilmiyordu (varsayilan 0.0 =
+KAPALI, olu kod). `robot_cp.py` 2026-08-09'da config'ten gecirilebilir yapildi.
+
+KAPI (plan): genel candidate tavani +0.02 VEYA kalabalik (very-CP) recall +0.05
+getirmezse OLDUR.
+
+Olcum COK-CP parcalarda: split oralarda anlamli (komsu kutuplar birlesiyor).
+"""
+import glob ,json ,os ,sys 
+import numpy as np 
+import makbuz_hash 
+os .environ .setdefault ("BA_ALLOW_SEEN","1")
+sys .path .insert (0 ,".")
+import d6_record ,robot_cp ,cp_openings 
+from sina_cluster import match_hungarian ,f1w 
+from korpus_kimlik import step_kimlik as SK 
+
+OB ="results/_p1_olasilik_g10"
+sv =d6_record .exam ();kayit =d6_record .yukle (set (sv ["pidler"]))
+S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
+# COK-CP parts (>=8 GT) -- bolmenin anlamli oldugu regime
+pidler =sorted ([p for p in {f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}
+&set (kayit )if len (kayit [p ].get ("G",[]))>=8 ])
+print (f"cok-CP part {len (pidler )}",flush =True )
+
+cfg =robot_cp ._load_cfg ()
+sonuc ={}
+for sr in (0.0 ,0.4 ,0.5 ,0.6 ):
+    cfg .setdefault ("prediction_postproc",{})["split_ratio"]=sr 
+    T =[]
+    for pid in pidler :
+        r =kayit [pid ]
+        G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
+        d =np .load (f"{OB }/{pid }.npz")
+        V =np .ascontiguousarray (d ["V"],np .float64 )
+        F =np .ascontiguousarray (d ["F"],np .int64 )
+        cps ,_o ,_c ,_p =robot_cp .derive_candidates (
+        V ,F ,[np .asarray (q ,float )for q in d ["pbs"]],S .get (pid ),cfg =cfg )
+        P =np .asarray ([c ["point"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
+        D =np .asarray ([c ["direction"]for c in cps ],float )if cps else np .zeros ((0 ,3 ))
+        T .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],0. ,180. ,True )[:3 ])
+    n_aday =sum (int (t [1 ]+t [2 ])for t in T )
+    tp =sum (int (t [1 ])for t in T );fn =sum (int (t [3 ])for t in T )
+    rec =tp /max (tp +fn ,1 )
+    sonuc [str (sr )]={"kahin":f1w (T ),"recall":rec ,"candidate":n_aday }
+    print (f"  split_ratio={sr }: kahin {f1w (T ):.4f} | recall {rec :.4f} | candidate {n_aday }",
+    flush =True )
+t0 =sonuc ["0.0"]
+en =max ((k for k in sonuc if k !="0.0"),key =lambda k :sonuc [k ]["kahin"])
+dk =sonuc [en ]["kahin"]-t0 ["kahin"];dr =sonuc [en ]["recall"]-t0 ["recall"]
+print (f"\nEN IYI split_ratio={en }: kahin {dk :+.4f} | recall {dr :+.4f}")
+print (f"KARAR: {'ACIK'if (dk >=0.02 or dr >=0.05 )else 'OLDUR (<+0.02 kahin ve <+0.05 recall)'}")
+json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,"en_iyi":en ,
+"kahin_fark":dk ,"recall_fark":dr ,"n_parca":len (pidler ),
+"not":"COK-CP rejimi (>=8 GT). Kapi: kahin +0.02 VEYA recall +0.05"},
+open ("results/p3a_split_ratio.json","w"),indent =1 )
+print ("receipt -> results/p3a_split_ratio.json")

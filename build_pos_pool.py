@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Op 2 enabling: f1_sweep.extract'in POZISYONLU kopyasi. Standart havuzu (tum parca) X+y+grp+mfg+ngt
-YANINDA aday POZISYONLARINI (JSON frame) da kaydet -> results/f1_pool_pos.npz. Deployed
+"""Op 2 enabling: f1_sweep.extract'in POZISYONLU kopyasi. Standart havuzu (tum part) X+y+grp+mfg+ngt
+YANINDA candidate POZISYONLARINI (JSON frame) da kaydet -> results/f1_pool_pos.npz. Deployed
 f1_sweep_data.npz'ye DOKUNMAZ. Sonra op2_spatial.py offline spatial-rerank dener. Op-cache'ler sicak."""
 import os, sys, json, time
 import numpy as np, torch
@@ -20,7 +20,7 @@ def main():
     models = [load_any(c, dev=dev)[:2] for c in cks]
     os.environ["BA_ALLOW_SEEN"] = "1"
     parts = [p for p in eligible() if (p[0] == "WEI" and p[1] in HELD)] + [p for p in eligible() if p[0] == "PXC"]
-    print(f"{len(parts)} parca | pozisyonlu havuz (GPU, sicak cache)", flush=True)
+    print(f"{len(parts)} part | pozisyonlu pool (GPU, sicak cache)", flush=True)
     _pp = json.load(open("cp_config.json")).get("prediction_postproc", {})
     MV = int(_pp.get("min_vertices", 30)); VC = float(_pp.get("vertex_confidence_mask", 0.5)); CL = float(_pp.get("cluster_mm", 5.0))
     Xs, votes, tp, grp, mfgs, Ps, ngt = [], [], [], [], [], [], {}

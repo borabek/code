@@ -78,7 +78,7 @@
    "glb": "WEI_1562140000_F1_0.62.glb",
    "ok": false,
    "violations": [
-    "M8: dosya adi F1 0.62 vs makbuz 0.625"
+    "M8: dosya adi F1 0.62 vs receipt 0.625"
    ],
    "part": "1562140000",
    "mfg": "WEI",

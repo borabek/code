@@ -1,7 +1,7 @@
 {
  "dizin": "results/_p6_oz_tam4",
- "kume": "d6",
- "marka": {
+ "cluster": "d6",
+ "brand": {
   "NIT": {
    "cp_parca": 24.44,
    "ilk_gt_sira": 18.0,

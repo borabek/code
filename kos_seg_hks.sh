@@ -7,11 +7,11 @@
 #
 # NEDEN ONEMLI. `xyz` DISSALDIR -- model MUTLAK KONUMA baglanir. `hks`
 # (isi cekirdegi imzasi, 16 kanal) ICSELDIR: donme ve otelemeye duyarsiz,
-# yalnizca yuzeyin kendi geometrisini tasir. Gorulmemis marka kosulunda
+# yalnizca yuzeyin kendi geometrisini tasir. Gorulmemis brand kosulunda
 # istenen tam olarak budur.
 #
 # TEK DEGISKEN: input_features. Etiket dizinleri, seed, k-eig, epoch AYNI.
-# Taban = A kolu receteси (189 parca, 200 epoch, val Conn_IoU 0.6232).
+# Taban = A kolu receteси (189 part, 200 epoch, val Conn_IoU 0.6232).
 set -u
 cd "$(dirname "$0")"
 export PYTHONPATH=_diffusion_net_repo/src PYTHONWARNINGS=ignore

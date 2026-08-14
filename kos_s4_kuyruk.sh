@@ -14,10 +14,10 @@ bos() { powershell.exe -NoProfile -Command "[math]::Round((Get-CimInstance Win32
 # BU FONKSIYON BIR KEZ CAGRILDI AMA TANIMLANMAMISTI (python str.replace
 # eslesmeyi bulamayinca sessizce hicbir sey yapmadi; ben de dogrulamadan
 # "guncellendi" dedim). Bash'te tanimsiz fonksiyon BOS doner, `${a:-0}` onu
-# 0 yapar ve kapi ACILIR -- koruma varmis gibi gorunup hic calismaz.
+# 0 yapar ve gate ACILIR -- koruma varmis gibi gorunup hic calismaz.
 baska() {
   powershell.exe -NoProfile -Command \
-    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'kos_ek_oznitelik' } | Measure-Object).Count" \
+    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'run_extra_feature' } | Measure-Object).Count" \
     2>/dev/null | tr -d '\r'
 }
 
@@ -42,7 +42,7 @@ done
 t0=$(date +%s)
 if P6_DIZIN=results/_p6_oz_tam3 P6_KUME=tam,d6 P6_KAT_MIN=200 \
    P6_ARAMA_N=200 P6_ITER=200 P6_NEG_KAT=6 S4_DEVIR=25 \
-   python kos_s4_kume_modeli.py >> "$L" 2>&1; then
+   python run_s4_cluster_modeli.py >> "$L" 2>&1; then
   say "BITTI ($(( $(date +%s) - t0 ))s)"
   tail -6 "$L" | sed 's/^/    /'
 else

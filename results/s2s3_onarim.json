@@ -9,14 +9,14 @@
   "hicbiri": 976,
   "KANAL_DEGIL": 29,
   "merkez+KANAL_DEGIL": 7,
-  "govde+merkez": 41,
-  "govde+yon": 8,
-  "govde": 48,
+  "body+merkez": 41,
+  "body+direction": 8,
+  "body": 48,
   "merkez": 39,
-  "yon": 10,
-  "govde+merkez+KANAL_DEGIL": 4,
-  "govde+merkez+yon": 15,
-  "merkez+yon": 3,
-  "govde+KANAL_DEGIL": 6
+  "direction": 10,
+  "body+merkez+KANAL_DEGIL": 4,
+  "body+merkez+direction": 15,
+  "merkez+direction": 3,
+  "body+KANAL_DEGIL": 6
  }
 }

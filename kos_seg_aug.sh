@@ -8,7 +8,7 @@
 #
 # TEK DEGISKEN: augment (0.3 rad ~ 17 derece). Etiket dizinleri, seed,
 # k-eig, epoch, girdi ozniteligi AYNI.
-# Taban = A kolu: 189 parca, 200 epoch, val Conn_IoU 0.6232.
+# Taban = A kolu: 189 part, 200 epoch, val Conn_IoU 0.6232.
 set -u
 cd "$(dirname "$0")"
 export PYTHONPATH=_diffusion_net_repo/src PYTHONWARNINGS=ignore

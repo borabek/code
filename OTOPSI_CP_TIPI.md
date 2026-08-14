@@ -26,14 +26,14 @@ cp-v2 (yalnız CableEntry) manufacturer PXC setinde **F1 = 0.000** almıştı �
 **PXC push-in/kelepçe tel-girişleri Contact etiketli** (ayrı bir CableEntry yok). Yani sınıf düzeyinde
 **tel-girişi ile tool ağzı AYNI sınıf (Contact)** → segmentasyon ikisini ayıramaz.
 
-### L3 — VERİ sinyali (korpus geometrisi, _autopsy_pairing.py)
-91 tam-etiketli korpus parçası: Contact bileşeni **258** vs CableEntry bileşeni **173** → oran **1.49x**
+### L3 — VERİ sinyali (corpus geometrisi, _autopsy_pairing.py)
+91 tam-etiketli corpus parçası: Contact bileşeni **258** vs CableEntry bileşeni **173** → ratio **1.49x**
 (Contact'lar tel-girişlerinden ~%50 fazla). Contact→en yakın CableEntry medyanı **17mm** (= ağız→kontakt
-eksen mesafesi; aynı tel-yolu). Fazladan Contact'ların bir kısmı tool ağzı. (Uyarı: korpus etiketlemesi
+axis mesafesi; aynı tel-yolu). Fazladan Contact'ların bir kısmı tool ağzı. (Uyarı: corpus etiketlemesi
 tutarsız — bazı parçalarda CableEntry hiç işaretlenmemiş; bu ölçüm yön verir, tek başına kanıt değil.)
 
 ### L4 — TÜRETME (cp_openings)
-cp-v3 = CableEntry VEYA derinlik-kapılı Contact. Her derinlik-kapılı Contact bölgesinden bir CP üretir
+cp-v3 = CableEntry VEYA depth-kapılı Contact. Her depth-kapılı Contact bölgesinden bir CP üretir
 → **tool ağzını da CP üretir.** ct_depth_min_mm=1.0 kapısı düz pad'i eler ama tool ağzının da derinliği
 var → geçer.
 
@@ -43,7 +43,7 @@ Sınıflar **etiket düzeyinde birleşik** (tez tasarımı). Bu yüzden:
 - "Yalnız CableEntry" kullan → PXC tel-girişlerini kaçırır (F1 0.000).
 - "Contact'ı at" → gerçek push-in tel-girişlerini kaçırır.
 Ayrım **fonksiyonel** (biri tel alır, biri alet) — yerel geometriden gelmeyebilir. O yüzden karar deneyi
-şart: geometri (boyut/derinlik) bu ikisini ayırıyor mu?
+şart: geometri (boyut/depth) bu ikisini ayırıyor mu?
 
 ## KARAR DENEYİ (recon_wire_vs_tool.py — KOŞUYOR)
 Üretici CP'sini ayraç-etiketi al: robot-CP'si üretici CP'ye eşleşiyorsa TEL, değilse TOOL/fazla.
@@ -69,7 +69,7 @@ sonuç değişmez: bu iki grup GEOMETRİK olarak ayrılamıyor.
 Amaç: 2-3 modeli değil, **kodun (cp_openings + tanım) genelini** bu sorunu aşacak hale getirmek.
 
 1. **[KOŞUYOR] RECON** — geometri tel/tool'u ayırıyor mu (AUC).
-2. **DAL A (AUC yüksek):** cp_openings'e **wire-vs-tool geometrik kapısı** ekle (boyut/derinlik/eşlik
+2. **DAL A (AUC yüksek):** cp_openings'e **wire-vs-tool geometrik kapısı** ekle (boyut/depth/eşlik
    eşiği). Yeniden eğitim yok → her modele uygulanır. Hakemde precision↑ / tel-recall sabit doğrula.
 3. **DAL B (AUC düşük):** sınıfı **un-merge et** — bir parça setinde tool ağzını ayrı işaretle (insan),
    6. sınıf/alt-baş olarak öğret; VEYA **eşleme sezgiseli**: kutup başına tel+tool çifti tespit et,
@@ -91,8 +91,8 @@ P1.3 per-mfg gate (WEI/PXC ikisi de 0.35 optimum, ayirmak kazanc YOK) · P1.4 CP
 NIHAI URUN: vote1_union + wire-gate 0.35, OOF F1 0.693 (ALL) / WEI 0.641 / PXC 0.703.
 
 BEKLEYEN (insan/pahali, self-executable DEGIL):
-- P1.1 recall labeling: en cok FN veren WEI/PXC ailelerinden 40-80 parca (cok-CP/push-in). Recall tavani icin.
+- P1.1 recall labeling: en cok FN veren WEI/PXC ailelerinden 40-80 part (cok-CP/push-in). Recall tavani icin.
 - P1.2 wire/tool alt-sinif (6. sinif veya aux head): Contact'i wire_contact vs tool_actuator ayir. Precision sicramasi.
   (wire-gate simdilik post-hoc bunu yapiyor; egitimde ayirmak daha guclu ama insan etiketi ister.)
-- P2.1 Manifold remesh (current product + OOF ile); P2.2 YOLOv6 2D kol (ciddi proje, klasik CV hack YOK).
-- Final holdout korunacak: model/gate/esik seciminde KULLANILMAZ.
+- P2.1 Manifold remesh (current product + OOF ile); P2.2 YOLOv6 2D arm (ciddi proje, klasik CV hack YOK).
+- Final holdout korunacak: model/gate/threshold seciminde KULLANILMAZ.

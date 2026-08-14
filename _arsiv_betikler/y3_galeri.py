@@ -1,53 +1,53 @@
 # -*- coding: utf-8 -*-
-"""Y3: FP DENETIM GALERISI -- insan kararini toplayan sayfayi uretir.
+"""Y3: FP DENETIM GALERISI -- insan kararini toplayan sayfayi produces.
 
-Sayfa 81 kareyi RASTGELE sirayla gosterir (derinlige gore siralamak KARARI YONLENDIRIR).
-Her kare icin uc secenek: ACIKLIK / DEGIL / EMIN DEGILIM. Sayfa canli olarak oran ve
-BINOM GUVEN ARALIGI hesaplar; sonuc JSON olarak disari verilir ve olcume ISLENIR.
+Sayfa 81 kareyi RASTGELE sirayla gosterir (derinlige according to siralamak KARARI YONLENDIRIR).
+Her kare for three secenek: ACIKLIK / DEGIL / EMIN DEGILIM. Sayfa canli as ratio and
+BINOM GUVEN ARALIGI hesaplar; sonuc JSON as disari verilir and olcume ISLENIR.
 
-Sayfa hicbir on-siniflandirma GOSTERMEZ: derinlik sayilari karenin kendi basliginda zaten
-var (olculmus veri), ama "bence bu aciklik" demez -- yoksa insan denetimi benim tahminimi
-onaylamaya donusur ve sisme tuzagina geri duseriz.
+Sayfa no ten-siniflandirma GOSTERMEZ: depth sayilari karenin own basliginda already
+present (olculmus data), but "bence this opening" demez -- otherwise insan denetimi benim tahminimi
+onaylamaya donusur and sisme tuzagina geri duseriz.
 """
-import base64
-import io
-import json
-import os
-import sys
+import base64 
+import io 
+import json 
+import os 
+import sys 
 
-import numpy as np
+import numpy as np 
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-OUT = "results/fp_galeri.html"
+sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
+OUT ="results/fp_galeri.html"
 
 
-def main():
-    with io.open("results/fp_denetim_olcum.json", encoding="utf-8") as f:
-        O = json.load(f)
-    with io.open("results/fp_denetim.json", encoding="utf-8") as f:
-        FD = json.load(f)
-    rng = np.random.default_rng(7)
-    sira = list(rng.permutation(len(O)))
+def main ():
+    with io .open ("results/fp_denetim_olcum.json",encoding ="utf-8")as f :
+        O =json .load (f )
+    with io .open ("results/fp_denetim.json",encoding ="utf-8")as f :
+        FD =json .load (f )
+    rng =np .random .default_rng (7 )
+    sira =list (rng .permutation (len (O )))
 
-    kart = []
-    for n, i in enumerate(sira, 1):
-        o = O[i]
-        with open(o["png"], "rb") as fh:
-            b64 = base64.b64encode(fh.read()).decode()
-        gt = o["gt_uzaklik"]
-        kart.append({
-            "n": n, "id": f"{o['pid']}_{o['idx']}", "pid": o["pid"], "mfg": o["mfg"],
-            "rejim": o["rejim"], "img": b64,
-            "gt": (f"{gt:.1f} mm" if gt is not None else "GT yok"),
-            "merkez": o["merkez"], "halka": o["halka"], "delik": o["delik_orani"],
+    kart =[]
+    for n ,i in enumerate (sira ,1 ):
+        o =O [i ]
+        with open (o ["png"],"rb")as fh :
+            b64 =base64 .b64encode (fh .read ()).decode ()
+        gt =o ["gt_uzaklik"]
+        kart .append ({
+        "n":n ,"id":f"{o ['pid']}_{o ['idx']}","pid":o ["pid"],"mfg":o ["mfg"],
+        "regime":o ["regime"],"img":b64 ,
+        "gt":(f"{gt :.1f} mm"if gt is not None else "GT yok"),
+        "merkez":o ["merkez"],"halka":o ["halka"],"delik":o ["delik_orani"],
         })
 
-    kartlar_js = json.dumps(kart, ensure_ascii=False)
-    toplam_fp = FD["fp"]
-    tp = FD["tp"]
-    gt_n = FD["gt"]
+    kartlar_js =json .dumps (kart ,ensure_ascii =False )
+    toplam_fp =FD ["fp"]
+    tp =FD ["tp"]
+    gt_n =FD ["gt"]
 
-    html = """<title>Yanlis pozitif denetimi — 81 ornek</title>
+    html ="""<title>Yanlis pozitif denetimi — 81 ornek</title>
 <style>
 :root{
   --zemin:#F6F7F9; --kart:#FFFFFF; --murekkep:#0E1218; --soluk:#5A6472;
@@ -178,7 +178,7 @@ kbd{font-family:"Cascadia Mono",ui-monospace,monospace; font-size:11px;
     </div>
     <div class="cubuk"><i id="ilerleme"></i></div>
   </div>
-  <div class="tahmin" id="tahmin">Karar verdikçe tahmini oran ve %95 güven aralığı burada
+  <div class="tahmin" id="tahmin">Karar verdikçe tahmini ratio ve %95 güven aralığı burada
     güncellenir.</div>
 </header>
 
@@ -189,7 +189,7 @@ kbd{font-family:"Cascadia Mono",ui-monospace,monospace; font-size:11px;
   (girdi yalnızca üretici listesi + noktanın konumu; ağ, gate ve öznitelikler kullanılmadı).
   <span class="ol">Listelenmiş CP&#39;ler örgüde: <b>%70.1</b> (795/1134, birini-dışarıda-bırak kontrolü)
   &nbsp;·&nbsp; Yanlış pozitifler örgüde: <b>%0.4</b> (1/253)</span>
-  Yani yanlış pozitifler üreticinin unuttuğu kutuplar değil. Düzeltilmiş kesinlik üst sınırda
+  Yani yanlış pozitifler üreticinin unuttuğu kutuplar değil. Düzeltilmiş precision üst sınırda
   bile 0.7361 &rarr; 0.7419. <b>Ölçülen 0.7584 dürüst bir sayı; geri kazanılacak şişme yok.</b>
   Kareler aşağıda duruyor — istersen tek tek bakabilirsin, ama karar için gerekli değil.
 </div>
@@ -221,10 +221,10 @@ for (const k of KART) {
       <span class="no mono">${String(k.n).padStart(2,"0")}</span>
       <span class="pid mono">${k.pid}</span>
       <span class="etiket">${k.mfg}</span>
-      <span class="etiket">${k.rejim}-CP</span>
+      <span class="etiket">${k.regime}-CP</span>
       <span class="olcu mono">en yakın GT ${k.gt}</span>
     </div>
-    <img alt="Parça ${k.pid} için derinlik haritası ve konum" src="data:image/png;base64,${k.img}">
+    <img alt="Parça ${k.pid} için depth haritası ve konum" src="data:image/png;base64,${k.img}">
     <div class="dugmeler">
       <button class="b1" data-v="acik">Açıklık</button>
       <button class="b2" data-v="degil">Değil</button>
@@ -264,7 +264,7 @@ function guncelle() {
   const n = a + d;
   const t = document.getElementById("tahmin");
   if (n < 5) {
-    t.innerHTML = "Karar verdikçe tahmini oran ve %95 güven aralığı burada güncellenir.";
+    t.innerHTML = "Karar verdikçe tahmini ratio ve %95 güven aralığı burada güncellenir.";
     return;
   }
   const [lo, hi] = wilson(a, n);
@@ -274,7 +274,7 @@ function guncelle() {
   const kesinlik1 = (TP + FP * pay) / (TP + FP);
   t.innerHTML = `Kararlaştırılan ${n} örneğin <b>${(100*pay).toFixed(0)}%</b>&#39;i gerçek açıklık `
     + `(%95 GA ${(100*lo).toFixed(0)}&ndash;${(100*hi).toFixed(0)}%). `
-    + `Bu oran 313 FP&#39;nin tamamına taşınırsa kesinlik `
+    + `Bu ratio 313 FP&#39;nin tamamına taşınırsa precision `
     + `<b>${kesinlik0.toFixed(3)} &rarr; ${kesinlik1.toFixed(3)}</b> olur `
     + `(emin olunamayan ${b} kare hesaba katılmadı).`;
 }
@@ -310,17 +310,17 @@ document.getElementById("btn-kopyala").addEventListener("click", async (e) => {
 guncelle();
 </script>
 """
-    html = (html.replace("__KARTLAR__", kartlar_js)
-                .replace("__TP__", str(tp)).replace("__FP__", str(toplam_fp)))
-    with io.open(OUT, "w", encoding="utf-8") as f:
-        f.write(html)
-    print(f"-> {OUT}  ({os.path.getsize(OUT)/1048576:.1f} MB, {len(kart)} kare)")
-    print(f"   TP {tp} | FP {toplam_fp} | GT {gt_n} | su anki kesinlik {tp/(tp+toplam_fp):.4f}")
+    html =(html .replace ("__KARTLAR__",kartlar_js )
+    .replace ("__TP__",str (tp )).replace ("__FP__",str (toplam_fp )))
+    with io .open (OUT ,"w",encoding ="utf-8")as f :
+        f .write (html )
+    print (f"-> {OUT }  ({os .path .getsize (OUT )/1048576 :.1f} MB, {len (kart )} kare)")
+    print (f"   TP {tp } | FP {toplam_fp } | GT {gt_n } | su anki precision {tp /(tp +toplam_fp ):.4f}")
 
 
-if __name__ == "__main__":
-    import traceback
-    try:
-        main()
-    except BaseException:
-        traceback.print_exc(); raise
+if __name__ =="__main__":
+    import traceback 
+    try :
+        main ()
+    except BaseException :
+        traceback .print_exc ();raise 

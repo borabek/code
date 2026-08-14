@@ -6,12 +6,12 @@
 #
 # TEZ NE DIYOR (durustce): 128 tezin kendi arama uzayinda (Tablo 3: 32/64/128/256/512/1024)
 # AMA tez §1945 o aramayi kosmus ve "64'ten fazla ozvektor asiri ogrenmeye yol acmistir"
-# demis; en iyi modelini 64'te birakmis. Yani bu kol tezin YONTEMINE sadik, SONUCUNA degil.
+# demis; en iyi modelini 64'te birakmis. Yani bu arm tezin YONTEMINE sadik, SONUCUNA degil.
 # Mesruiyeti tezden degil, bizim 3/3 tohumlu 96 olcumumuzden geliyor -- orada tezin hukmu
-# bizim veride tutmadi (muhtemel sebep: korpus 1913 parcaya cikti, daha cok veri daha cok
+# bizim veride tutmadi (muhtemel sebep: corpus 1913 parcaya cikti, daha cok veri daha cok
 # kapasite kaldirir).
 #
-# TEK DEGISKEN: tohum 0, cunku karsilastirilacagi uye recall_hard_keig96_s0 -- ayni tohum,
+# TEK DEGISKEN: seed 0, cunku karsilastirilacagi uye recall_hard_keig96_s0 -- ayni seed,
 # ayni etiket dizinleri, ayni secim metrigi. Tek fark k_eig.
 #
 # KILL (onceden yazili): VAL kumesinde uctan uca TESPIT F1 +0.01 gelmezse uye ALINMAZ.
@@ -23,7 +23,7 @@ PY=.venv/Scripts/python.exe
 DIRS="_label_targets _label_targets_2 _label_targets_3 _label_targets_recall _label_targets_recall_hard"
 OUT=results/seg_extra/recall_hard_keig128_s0.pt
 
-echo "=== k_eig 128, tohum 0 (karsilastirma: recall_hard_keig96_s0) $(date) ==="
+echo "=== k_eig 128, seed 0 (karsilastirma: recall_hard_keig96_s0) $(date) ==="
 $PY train_seg_extra.py --no-extra --k-eig 128 \
     --partial-dir $DIRS --partial-target connection --seed 0 \
     --select-metric connection_iou \

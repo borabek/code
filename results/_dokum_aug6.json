@@ -36,7 +36,7 @@
 0.0237
 ]
 ],
-"guven": [
+"confidence": [
 0.717,
 0.64,
 0.661
@@ -365,7 +365,7 @@ NaN
 -0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -987,7 +987,7 @@ NaN
 0.9995
 ]
 ],
-"guven": [
+"confidence": [
 0.398,
 0.422,
 0.419,
@@ -2487,7 +2487,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -3792,7 +3792,7 @@ NaN
 0.9975
 ]
 ],
-"guven": [
+"confidence": [
 0.81,
 0.828,
 0.641
@@ -4071,7 +4071,7 @@ NaN
 0.9999999999989999
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -4350,7 +4350,7 @@ NaN
 -0.0155
 ]
 ],
-"guven": [
+"confidence": [
 0.913,
 0.871,
 0.773
@@ -4679,7 +4679,7 @@ NaN
 -0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -5398,7 +5398,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.71,
 0.336,
 0.875,
@@ -8110,7 +8110,7 @@ NaN
 -9.77111325615556e-11
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -10477,7 +10477,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.98,
 0.975,
 0.967
@@ -10636,7 +10636,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -10855,7 +10855,7 @@ NaN
 -0.0244
 ]
 ],
-"guven": [
+"confidence": [
 0.574,
 0.394,
 0.391,
@@ -11526,7 +11526,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -12331,7 +12331,7 @@ NaN
 -0.167
 ]
 ],
-"guven": [
+"confidence": [
 0.455,
 0.306,
 0.608,
@@ -13708,7 +13708,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -14973,7 +14973,7 @@ NaN
 0.9511
 ]
 ],
-"guven": [
+"confidence": [
 0.677,
 0.575,
 0.431,
@@ -15756,7 +15756,7 @@ NaN
 -0.9999999999989996
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -16531,7 +16531,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.888,
 0.788,
 0.745
@@ -16710,7 +16710,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -16922,7 +16922,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.776,
 0.612,
 0.677,
@@ -17252,7 +17252,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -17571,7 +17571,7 @@ NaN
 0.9999
 ]
 ],
-"guven": [
+"confidence": [
 0.953,
 0.953,
 0.901,
@@ -17817,7 +17817,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -18053,7 +18053,7 @@ NaN
 0.998
 ]
 ],
-"guven": [
+"confidence": [
 0.847,
 0.766,
 0.729
@@ -18222,7 +18222,7 @@ NaN
 0.9999999999989999
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -18424,7 +18424,7 @@ NaN
 0.9939
 ]
 ],
-"guven": [
+"confidence": [
 0.958,
 0.819,
 0.785,
@@ -18594,7 +18594,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -18749,7 +18749,7 @@ NaN
 0.9239
 ]
 ],
-"guven": [
+"confidence": [
 0.638,
 0.738,
 0.661
@@ -18978,7 +18978,7 @@ NaN
 0.9238795325103526
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -19190,7 +19190,7 @@ NaN
 0.9774
 ]
 ],
-"guven": [
+"confidence": [
 0.613
 ],
 "votes": [
@@ -19385,7 +19385,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -19601,7 +19601,7 @@ NaN
 -0.0025
 ]
 ],
-"guven": [
+"confidence": [
 0.717,
 0.661,
 0.645,
@@ -19947,7 +19947,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -20299,7 +20299,7 @@ NaN
 0.9967
 ]
 ],
-"guven": [
+"confidence": [
 0.806,
 0.741,
 0.674,
@@ -20625,7 +20625,7 @@ NaN
 -1.92597044202e-15
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -20977,7 +20977,7 @@ NaN
 -0.9129
 ]
 ],
-"guven": [
+"confidence": [
 0.769,
 0.816,
 0.771,
@@ -21277,7 +21277,7 @@ NaN
 0.9238795325112765
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -21550,7 +21550,7 @@ NaN
 -0.5308
 ]
 ],
-"guven": [
+"confidence": [
 0.617,
 0.698,
 0.683
@@ -22029,7 +22029,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -22522,7 +22522,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.863,
 0.671,
 0.875,
@@ -22865,7 +22865,7 @@ NaN
 -1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -23261,7 +23261,7 @@ NaN
 0.9998
 ]
 ],
-"guven": [
+"confidence": [
 0.709,
 0.727,
 0.867,
@@ -23769,7 +23769,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -24213,7 +24213,7 @@ NaN
 -0.0399
 ]
 ],
-"guven": [
+"confidence": [
 0.632,
 0.401,
 0.35
@@ -24920,7 +24920,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -25735,7 +25735,7 @@ NaN
 -0.0467
 ]
 ],
-"guven": [
+"confidence": [
 0.459,
 0.796,
 0.576,
@@ -26592,7 +26592,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -27397,7 +27397,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.671,
 0.645,
 0.625,
@@ -27551,7 +27551,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -27716,7 +27716,7 @@ NaN
 0.9239
 ]
 ],
-"guven": [
+"confidence": [
 0.693,
 0.629,
 0.647,
@@ -28052,7 +28052,7 @@ NaN
 0.9238795325112765
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -28375,7 +28375,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.85,
 0.766,
 0.769
@@ -28664,7 +28664,7 @@ NaN
 6.123233995733877e-17
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -28963,7 +28963,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.924,
 0.713,
 0.677,
@@ -29229,7 +29229,7 @@ NaN
 0.999999999999
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -29674,7 +29674,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.544,
 0.454,
 0.408,
@@ -30749,7 +30749,7 @@ NaN
 1.1010550219684822e-31
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -31715,7 +31715,7 @@ NaN
 -0.0188
 ]
 ],
-"guven": [
+"confidence": [
 0.635,
 0.569,
 0.507,
@@ -32108,7 +32108,7 @@ NaN
 -0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -32583,7 +32583,7 @@ NaN
 0.9224
 ]
 ],
-"guven": [
+"confidence": [
 0.704,
 0.7,
 0.652,
@@ -33495,7 +33495,7 @@ NaN
 0.866025403784329
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -34389,7 +34389,7 @@ NaN
 -0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.357,
 0.349,
 0.306,
@@ -35360,7 +35360,7 @@ NaN
 -3.74939945668e-33
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -36284,7 +36284,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.846,
 0.737,
 0.804,
@@ -36510,7 +36510,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -36846,7 +36846,7 @@ NaN
 -0.0439
 ]
 ],
-"guven": [
+"confidence": [
 0.329,
 0.276,
 0.251,
@@ -38019,7 +38019,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -39157,7 +39157,7 @@ NaN
 0.9397
 ]
 ],
-"guven": [
+"confidence": [
 0.531,
 0.656,
 0.602,
@@ -39835,7 +39835,7 @@ NaN
 0.9396926207964421
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -40439,7 +40439,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.963,
 0.945
 ],
@@ -40531,7 +40531,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -40636,7 +40636,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.924,
 0.828,
 0.708
@@ -40765,7 +40765,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -40947,7 +40947,7 @@ NaN
 -0.0172
 ]
 ],
-"guven": [
+"confidence": [
 0.833,
 0.869,
 0.728,
@@ -41361,7 +41361,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -41735,7 +41735,7 @@ NaN
 0.9848
 ]
 ],
-"guven": [
+"confidence": [
 0.971,
 0.897,
 0.883,
@@ -42011,7 +42011,7 @@ NaN
 0.9396926207858843
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -42443,7 +42443,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.495,
 0.299,
 0.677,
@@ -43414,7 +43414,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -44388,7 +44388,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.494,
 0.677,
 0.594,
@@ -45399,7 +45399,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -46303,7 +46303,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.699,
 0.821,
 0.586,
@@ -46887,7 +46887,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -47548,7 +47548,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.382,
 0.822,
 0.629,
@@ -48448,7 +48448,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -49326,7 +49326,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.34,
 0.298,
 0.624,
@@ -50309,7 +50309,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -51349,7 +51349,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.625,
 0.577,
 0.625,
@@ -52605,7 +52605,7 @@ NaN
 0.9999999999999986
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -53826,7 +53826,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.628,
 0.577,
 0.625,
@@ -55048,7 +55048,7 @@ NaN
 0.9999999999999986
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -56112,7 +56112,7 @@ NaN
 0.8829
 ]
 ],
-"guven": [
+"confidence": [
 0.702,
 0.733,
 0.69,
@@ -56516,7 +56516,7 @@ NaN
 0.981627183447591
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -56886,7 +56886,7 @@ NaN
 0.9997
 ]
 ],
-"guven": [
+"confidence": [
 0.594,
 0.672,
 0.58,
@@ -57172,7 +57172,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -57471,7 +57471,7 @@ NaN
 0.5818
 ]
 ],
-"guven": [
+"confidence": [
 0.802,
 0.743,
 0.858,
@@ -57874,7 +57874,7 @@ NaN
 -4.930380657626393e-32
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -58263,7 +58263,7 @@ NaN
 0.9959
 ]
 ],
-"guven": [
+"confidence": [
 0.961,
 0.918,
 0.757
@@ -58422,7 +58422,7 @@ NaN
 -0.13177797410335032
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -58694,7 +58694,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.586,
 0.787,
 0.641,
@@ -59480,7 +59480,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -60273,7 +60273,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.591,
 0.636,
 0.618,
@@ -61156,7 +61156,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -61950,7 +61950,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.816,
 0.708,
 0.895,
@@ -62497,7 +62497,7 @@ NaN
 0.9999999999999989
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -63038,7 +63038,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.866,
 0.842,
 0.795,
@@ -63313,7 +63313,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -63578,7 +63578,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.974,
 0.973,
 0.969,
@@ -63754,7 +63754,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -63943,7 +63943,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.872,
 0.818,
 0.813,
@@ -64236,7 +64236,7 @@ NaN
 8.253306382578408e-14
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -64515,7 +64515,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.878,
 0.659,
 0.768
@@ -64734,7 +64734,7 @@ NaN
 0.0078047639469926745
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -65076,7 +65076,7 @@ NaN
 -0.0439
 ]
 ],
-"guven": [
+"confidence": [
 0.329,
 0.276,
 0.251,
@@ -66249,7 +66249,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -67327,7 +67327,7 @@ NaN
 0.9962
 ]
 ],
-"guven": [
+"confidence": [
 0.89,
 0.854,
 0.853,
@@ -67473,7 +67473,7 @@ NaN
 0.9510565162634562
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -67608,7 +67608,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.981,
 0.972
 ],
@@ -67720,7 +67720,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -67942,7 +67942,7 @@ NaN
 -0.0467
 ]
 ],
-"guven": [
+"confidence": [
 0.459,
 0.796,
 0.576,
@@ -68799,7 +68799,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -69604,7 +69604,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.966,
 0.952,
 0.95,
@@ -69790,7 +69790,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -69956,7 +69956,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.973,
 0.957
 ],
@@ -70138,7 +70138,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -70330,7 +70330,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.924,
 0.828,
 0.708
@@ -70459,7 +70459,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -70621,7 +70621,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.724,
 0.863,
 0.749,
@@ -70889,7 +70889,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -71144,7 +71144,7 @@ NaN
 0.9239
 ]
 ],
-"guven": [
+"confidence": [
 0.844,
 0.822,
 0.87
@@ -71363,7 +71363,7 @@ NaN
 0.9238795325112765
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -71582,7 +71582,7 @@ NaN
 0.9999
 ]
 ],
-"guven": [
+"confidence": [
 0.703,
 0.783,
 0.693
@@ -71689,7 +71689,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -71824,7 +71824,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.753,
 0.673,
 0.627,
@@ -72207,7 +72207,7 @@ NaN
 0.9999999999986299
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -72573,7 +72573,7 @@ NaN
 0.9998
 ]
 ],
-"guven": [
+"confidence": [
 0.626,
 0.773,
 0.576
@@ -72752,7 +72752,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -72921,7 +72921,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.953,
 0.851
 ],
@@ -73093,7 +73093,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -73299,7 +73299,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.665,
 0.615,
 0.652,
@@ -73679,7 +73679,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -74041,7 +74041,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.766,
 0.76,
 0.632
@@ -74280,7 +74280,7 @@ NaN
 0.999999999999
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -74522,7 +74522,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.919,
 0.918,
 0.856
@@ -74711,7 +74711,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -74910,7 +74910,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.863,
 0.836,
 0.74,
@@ -75166,7 +75166,7 @@ NaN
 0.999999999999
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -75531,7 +75531,7 @@ NaN
 -0.0391
 ]
 ],
-"guven": [
+"confidence": [
 0.373,
 0.538,
 0.52,
@@ -76357,7 +76357,7 @@ NaN
 3.2208327508991015e-09
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -77349,7 +77349,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.566,
 0.504,
 0.497,
@@ -78896,7 +78896,7 @@ NaN
 0.9999999999989999
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -80321,7 +80321,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.66,
 0.624,
 0.705,
@@ -80668,7 +80668,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -81223,7 +81223,7 @@ NaN
 0.0408
 ]
 ],
-"guven": [
+"confidence": [
 0.388,
 0.274,
 0.24,
@@ -82511,7 +82511,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -83646,7 +83646,7 @@ NaN
 0.9239
 ]
 ],
-"guven": [
+"confidence": [
 0.803,
 0.862,
 0.59
@@ -83935,7 +83935,7 @@ NaN
 0.9238795325112765
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -84208,7 +84208,7 @@ NaN
 -0.029
 ]
 ],
-"guven": [
+"confidence": [
 0.623,
 0.506
 ],
@@ -84428,7 +84428,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -84913,7 +84913,7 @@ NaN
 0.1029
 ]
 ],
-"guven": [
+"confidence": [
 0.451,
 0.45,
 0.508,
@@ -86177,7 +86177,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [
@@ -87272,7 +87272,7 @@ NaN
 -0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.746,
 0.627,
 0.586
@@ -87561,7 +87561,7 @@ NaN
 -6.36654154673e-17
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -87877,7 +87877,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.724,
 0.863,
 0.749,
@@ -88145,7 +88145,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -88490,7 +88490,7 @@ NaN
 0.9042
 ]
 ],
-"guven": [
+"confidence": [
 0.518,
 0.511,
 0.422,
@@ -89612,7 +89612,7 @@ NaN
 0.9135454576425927
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -90666,7 +90666,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.895,
 0.852,
 0.735,
@@ -90932,7 +90932,7 @@ NaN
 0.9999999999989999
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -91198,7 +91198,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.966,
 0.877,
 0.721,
@@ -91444,7 +91444,7 @@ NaN
 3.170731430491805e-14
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -91683,7 +91683,7 @@ NaN
 0.9995
 ]
 ],
-"guven": [
+"confidence": [
 0.976,
 0.97,
 0.968
@@ -91822,7 +91822,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN
@@ -91981,7 +91981,7 @@ NaN
 0.0201
 ]
 ],
-"guven": [
+"confidence": [
 0.658,
 0.538,
 0.509,
@@ -92244,7 +92244,7 @@ NaN
 -0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -92470,7 +92470,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.981
 ],
 "votes": [
@@ -92533,7 +92533,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -92618,7 +92618,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.924,
 0.828,
 0.708
@@ -92747,7 +92747,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN
 ],
@@ -92919,7 +92919,7 @@ NaN
 0.2676
 ]
 ],
-"guven": [
+"confidence": [
 0.935,
 0.916,
 0.899,
@@ -93276,7 +93276,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -93579,7 +93579,7 @@ NaN
 0.9998
 ]
 ],
-"guven": [
+"confidence": [
 0.672
 ],
 "votes": [
@@ -93782,7 +93782,7 @@ NaN
 "yol": "olculen",
 "P": [],
 "D": [],
-"guven": [],
+"confidence": [],
 "votes": [],
 "G": [
 [
@@ -94167,7 +94167,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.494,
 0.301,
 0.597,
@@ -95168,7 +95168,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -96172,7 +96172,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.494,
 0.684,
 0.597,
@@ -97173,7 +97173,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -98138,7 +98138,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.34,
 0.298,
 0.62,
@@ -99138,7 +99138,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -100092,7 +100092,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.374,
 0.297,
 0.643,
@@ -101055,7 +101055,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -102058,7 +102058,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.633,
 0.584,
 0.614,
@@ -103330,7 +103330,7 @@ NaN
 0.9999999999999986
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -104592,7 +104592,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.626,
 0.576,
 0.629,
@@ -105838,7 +105838,7 @@ NaN
 0.9999999999999986
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -106866,7 +106866,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 0.778,
 0.794,
 0.767,
@@ -107192,7 +107192,7 @@ NaN
 1.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN,
 NaN,
 NaN,
@@ -107508,7 +107508,7 @@ NaN
 0.0
 ]
 ],
-"guven": [
+"confidence": [
 0.673,
 0.562,
 0.418
@@ -107817,7 +107817,7 @@ NaN
 -0.0
 ]
 ],
-"guven": [
+"confidence": [
 NaN
 ],
 "votes": [

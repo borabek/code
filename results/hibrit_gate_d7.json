@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -31,7 +31,7 @@
    "tespit": 0.42923857868020304,
    "makro": 0.22497285858696772,
    "en_kotu": 0.012253233492171545,
-   "marka": {
+   "brand": {
     "CCD": 0.547085201793722,
     "KLM": 0.06722689075630252,
     "A-B": 0.32653061224489793,
@@ -46,13 +46,13 @@
     "C3": 0.056910569105691054
    }
   },
-  "+B-rep esik 0.50": {
+  "+B-rep threshold 0.50": {
    "kural": "goreli (0.5, 0.3)",
    "robot": 0.193293142426526,
    "tespit": 0.41409193669932176,
    "makro": 0.2272594737178587,
    "en_kotu": 0.012170385395537525,
-   "marka": {
+   "brand": {
     "CCD": 0.5172413793103449,
     "KLM": 0.06666666666666667,
     "A-B": 0.34459459459459457,
@@ -67,13 +67,13 @@
     "C3": 0.03608247422680412
    }
   },
-  "+B-rep esik 0.60": {
+  "+B-rep threshold 0.60": {
    "kural": "goreli (0.5, 0.3)",
    "robot": 0.19498931831423577,
    "tespit": 0.4171683822101379,
    "makro": 0.22499610375114132,
    "en_kotu": 0.012244897959183673,
-   "marka": {
+   "brand": {
     "CCD": 0.5446428571428571,
     "KLM": 0.06722689075630252,
     "A-B": 0.33559322033898303,
@@ -88,13 +88,13 @@
     "C3": 0.040345821325648415
    }
   },
-  "+B-rep esik 0.70": {
+  "+B-rep threshold 0.70": {
    "kural": "mutlak 0.3",
    "robot": 0.19568231332937217,
    "tespit": 0.4226579520697168,
    "makro": 0.22542550123153163,
    "en_kotu": 0.012253233492171545,
-   "marka": {
+   "brand": {
     "CCD": 0.547085201793722,
     "KLM": 0.06722689075630252,
     "A-B": 0.33276740237691,
@@ -109,13 +109,13 @@
     "C3": 0.046357615894039736
    }
   },
-  "+B-rep esik 0.80": {
+  "+B-rep threshold 0.80": {
    "kural": "mutlak 0.3",
    "robot": 0.19593643130154897,
    "tespit": 0.42727821363910684,
    "makro": 0.225870805108619,
    "en_kotu": 0.012253233492171545,
-   "marka": {
+   "brand": {
     "CCD": 0.547085201793722,
     "KLM": 0.06722689075630252,
     "A-B": 0.32653061224489793,
@@ -130,13 +130,13 @@
     "C3": 0.054901960784313725
    }
   },
-  "+B-rep esik 0.90": {
+  "+B-rep threshold 0.90": {
    "kural": "mutlak 0.3",
    "robot": 0.19655521783181357,
    "tespit": 0.4299898682877406,
    "makro": 0.22490395247155,
    "en_kotu": 0.012253233492171545,
-   "marka": {
+   "brand": {
     "CCD": 0.547085201793722,
     "KLM": 0.06722689075630252,
     "A-B": 0.32653061224489793,
@@ -152,5 +152,5 @@
    }
   }
  },
- "not": "HIBRIT: seg adaylari DAGITILAN v6 ile, B-rep adaylari AYRI model ile puanlanir. Tez-saf kol DEGISMEDI. D7 marka-disi, MIKRO."
+ "not": "HIBRIT: seg adaylari DAGITILAN v6 ile, B-rep adaylari AYRI model ile puanlanir. Tez-saf arm DEGISMEDI. D7 brand-disi, MIKRO."
 }

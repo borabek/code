@@ -1,5 +1,5 @@
 {
- "marka": "SUPU",
+ "brand": "SUPU",
  "klar": [
   12
  ],
@@ -30,7 +30,7 @@
     "k_istenen": 12,
     "ckpt": "results/seg_fs/SUPU_k12_c0.pt",
     "ckpt_kullanilan": "results/seg_fs/SUPU_k12_c0_last.pt",
-    "onbellek": "results/_p1_olasilik_fs_SUPU_k12_c0"
+    "cache": "results/_p1_olasilik_fs_SUPU_k12_c0"
    },
    {
     "cekilis": 1,
@@ -53,10 +53,10 @@
     "k_istenen": 12,
     "ckpt": "results/seg_fs/SUPU_k12_c1.pt",
     "ckpt_kullanilan": "results/seg_fs/SUPU_k12_c1_last.pt",
-    "onbellek": "results/_p1_olasilik_fs_SUPU_k12_c1"
+    "cache": "results/_p1_olasilik_fs_SUPU_k12_c1"
    }
   ]
  },
  "uyari": "k_gercek < k_istenen olabilir: oto-boyayici INSAN etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri algilanan bir acikliga dusmez. Olculen egri, gercek insan etiketine gore bir ALT SINIRDIR.",
- "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (sonda_k65b_olc.py) -- boylece egitim bir kez kosar, olcum tekrar tekrar kosulabilir."
+ "not": "Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM ayri adimdir (probe_k65b_olc.py) -- boylece training bir kez kosar, measurement tekrar tekrar kosulabilir."
 }

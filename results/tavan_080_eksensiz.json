@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -33,7 +33,7 @@
    "aday_per_parca": 101.69580838323353,
    "kirilim": {
     "KONUM YOK": 1133,
-    "Y3 ana eksen": 101,
+    "Y3 ana axis": 101,
     "Y0 kendi": 1249,
     "Y2 silindir ekseni": 223,
     "Y1 komsu": 268,
@@ -50,7 +50,7 @@
     "Y0 kendi": 1249,
     "Y1 komsu": 268,
     "YON YOK": 88,
-    "Y3 ana eksen": 64,
+    "Y3 ana axis": 64,
     "Y2 silindir ekseni": 155
    }
   },
@@ -65,7 +65,7 @@
     "Y2 silindir ekseni": 162,
     "Y1 komsu": 268,
     "YON YOK": 90,
-    "Y3 ana eksen": 68
+    "Y3 ana axis": 68
    }
   },
   "0.5|1.5": {
@@ -79,7 +79,7 @@
     "Y2 silindir ekseni": 168,
     "Y1 komsu": 268,
     "YON YOK": 92,
-    "Y3 ana eksen": 73
+    "Y3 ana axis": 73
    }
   },
   "0.5|2.0": {
@@ -93,7 +93,7 @@
     "Y2 silindir ekseni": 193,
     "Y1 komsu": 268,
     "YON YOK": 97,
-    "Y3 ana eksen": 81
+    "Y3 ana axis": 81
    }
   },
   "0.2|0.0": {
@@ -101,7 +101,7 @@
    "f1_tavani": 0.8897680273332134,
    "aday_per_parca": 1852.0047904191617,
    "kirilim": {
-    "Y3 ana eksen": 49,
+    "Y3 ana axis": 49,
     "Y_normal": 785,
     "Y0 kendi": 1249,
     "KONUM YOK": 543,
@@ -115,7 +115,7 @@
    "f1_tavani": 0.8873670931699406,
    "aday_per_parca": 1138.097005988024,
    "kirilim": {
-    "Y3 ana eksen": 51,
+    "Y3 ana axis": 51,
     "Y_normal": 760,
     "Y0 kendi": 1249,
     "KONUM YOK": 549,
@@ -129,7 +129,7 @@
    "f1_tavani": 0.8855595667870036,
    "aday_per_parca": 739.3556886227545,
    "kirilim": {
-    "Y3 ana eksen": 66,
+    "Y3 ana axis": 66,
     "Y_normal": 720,
     "Y0 kendi": 1249,
     "KONUM YOK": 555,
@@ -143,7 +143,7 @@
    "f1_tavani": 0.8805077062556663,
    "aday_per_parca": 547.7221556886227,
    "kirilim": {
-    "Y3 ana eksen": 75,
+    "Y3 ana axis": 75,
     "Y_normal": 659,
     "Y0 kendi": 1249,
     "KONUM YOK": 575,
@@ -157,7 +157,7 @@
    "f1_tavani": 0.9375322663913268,
    "aday_per_parca": 2995.380838323353,
    "kirilim": {
-    "Y3 ana eksen": 38,
+    "Y3 ana axis": 38,
     "Y_normal": 1093,
     "Y0 kendi": 1249,
     "KONUM YOK": 301,
@@ -171,7 +171,7 @@
    "f1_tavani": 0.9340469613259669,
    "aday_per_parca": 1858.1676646706587,
    "kirilim": {
-    "Y3 ana eksen": 40,
+    "Y3 ana axis": 40,
     "Y_normal": 1054,
     "Y0 kendi": 1249,
     "KONUM YOK": 314,
@@ -185,7 +185,7 @@
    "f1_tavani": 0.9307239348804988,
    "aday_per_parca": 1157.0706586826348,
    "kirilim": {
-    "Y3 ana eksen": 49,
+    "Y3 ana axis": 49,
     "Y_normal": 1016,
     "Y0 kendi": 1249,
     "KONUM YOK": 326,
@@ -199,7 +199,7 @@
    "f1_tavani": 0.9234524847428073,
    "aday_per_parca": 829.0598802395209,
    "kirilim": {
-    "Y3 ana eksen": 61,
+    "Y3 ana axis": 61,
     "Y_normal": 931,
     "Y0 kendi": 1249,
     "KONUM YOK": 356,
@@ -209,5 +209,5 @@
    }
   }
  },
- "not": "Mesh tepeleri p_pos ile filtrelendi + YEREL NORMAL yon kaynagi eklendi. ISARETLI aci. D7 marka-disi. TAVAN."
+ "not": "Mesh tepeleri p_pos ile filtrelendi + YEREL NORMAL direction kaynagi eklendi. ISARETLI aci. D7 brand-disi. TAVAN."
 }

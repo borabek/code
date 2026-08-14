@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # L1: BAGIMSIZ 5. TOPLULUK UYESI (k_eig 96, seed 3).
 #
-# GEREKCE (bu gece olculdu, results/k_log.txt): gate'in 13 ozelliginden yalnizca `votes` durust
+# GEREKCE (bu gece measured, results/k_log.txt): gate'in 13 ozelliginden yalnizca `votes` durust
 # geometri bolmesinde transfer ediyor (AUC dususu 0.018; digerleri 0.12-0.18 dusuyor). `votes`
 # = kac bagimsiz uyenin ayni acikligi gordugu. Yani tek gercekten genelleyen sinyalin
 # COZUNURLUGU uye sayisiyla sinirli: 4 uye ile oy yalniz {1,2,3,4} degerlerini alabiliyor.

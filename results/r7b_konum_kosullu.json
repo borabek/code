@@ -6,7 +6,7 @@
  "tarama": {
   "0.7_0.0": {
    "esikQ": 0.7,
-   "guven": 0.0,
+   "confidence": 0.0,
    "ates": 294,
    "kotuya": 107,
    "iyiye": 187,
@@ -21,7 +21,7 @@
   },
   "0.7_0.15": {
    "esikQ": 0.7,
-   "guven": 0.15,
+   "confidence": 0.15,
    "ates": 226,
    "kotuya": 76,
    "iyiye": 150,
@@ -36,7 +36,7 @@
   },
   "0.7_0.25": {
    "esikQ": 0.7,
-   "guven": 0.25,
+   "confidence": 0.25,
    "ates": 75,
    "kotuya": 25,
    "iyiye": 50,
@@ -51,7 +51,7 @@
   },
   "0.7_0.35": {
    "esikQ": 0.7,
-   "guven": 0.35,
+   "confidence": 0.35,
    "ates": 8,
    "kotuya": 3,
    "iyiye": 5,
@@ -66,7 +66,7 @@
   },
   "0.8_0.0": {
    "esikQ": 0.8,
-   "guven": 0.0,
+   "confidence": 0.0,
    "ates": 191,
    "kotuya": 76,
    "iyiye": 115,
@@ -81,7 +81,7 @@
   },
   "0.8_0.15": {
    "esikQ": 0.8,
-   "guven": 0.15,
+   "confidence": 0.15,
    "ates": 151,
    "kotuya": 59,
    "iyiye": 92,
@@ -96,7 +96,7 @@
   },
   "0.8_0.25": {
    "esikQ": 0.8,
-   "guven": 0.25,
+   "confidence": 0.25,
    "ates": 49,
    "kotuya": 18,
    "iyiye": 31,
@@ -111,7 +111,7 @@
   },
   "0.8_0.35": {
    "esikQ": 0.8,
-   "guven": 0.35,
+   "confidence": 0.35,
    "ates": 4,
    "kotuya": 2,
    "iyiye": 2,
@@ -126,7 +126,7 @@
   },
   "0.85_0.0": {
    "esikQ": 0.85,
-   "guven": 0.0,
+   "confidence": 0.0,
    "ates": 139,
    "kotuya": 65,
    "iyiye": 74,
@@ -141,7 +141,7 @@
   },
   "0.85_0.15": {
    "esikQ": 0.85,
-   "guven": 0.15,
+   "confidence": 0.15,
    "ates": 113,
    "kotuya": 54,
    "iyiye": 59,
@@ -156,7 +156,7 @@
   },
   "0.85_0.25": {
    "esikQ": 0.85,
-   "guven": 0.25,
+   "confidence": 0.25,
    "ates": 36,
    "kotuya": 16,
    "iyiye": 20,
@@ -171,7 +171,7 @@
   },
   "0.85_0.35": {
    "esikQ": 0.85,
-   "guven": 0.35,
+   "confidence": 0.35,
    "ates": 3,
    "kotuya": 1,
    "iyiye": 2,
@@ -186,7 +186,7 @@
   },
   "0.9_0.0": {
    "esikQ": 0.9,
-   "guven": 0.0,
+   "confidence": 0.0,
    "ates": 90,
    "kotuya": 49,
    "iyiye": 41,
@@ -201,7 +201,7 @@
   },
   "0.9_0.15": {
    "esikQ": 0.9,
-   "guven": 0.15,
+   "confidence": 0.15,
    "ates": 73,
    "kotuya": 41,
    "iyiye": 32,
@@ -216,7 +216,7 @@
   },
   "0.9_0.25": {
    "esikQ": 0.9,
-   "guven": 0.25,
+   "confidence": 0.25,
    "ates": 23,
    "kotuya": 12,
    "iyiye": 11,
@@ -231,7 +231,7 @@
   },
   "0.9_0.35": {
    "esikQ": 0.9,
-   "guven": 0.35,
+   "confidence": 0.35,
    "ates": 1,
    "kotuya": 1,
    "iyiye": 0,
@@ -247,7 +247,7 @@
  },
  "en_iyi": {
   "esikQ": 0.9,
-  "guven": 0.15,
+  "confidence": 0.15,
   "ates": 73,
   "kotuya": 41,
   "iyiye": 32,

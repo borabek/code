@@ -21,7 +21,7 @@
     0.8266
    ],
    "robot_ISARETLI_F1": 0.7082,
-   "kesinlik": 0.792,
+   "precision": 0.792,
    "recall": 0.824,
    "ham_kesinlik": 0.809,
    "ham_recall": 0.669,
@@ -44,7 +44,7 @@
     0.6811
    ],
    "robot_ISARETLI_F1": 0.5884,
-   "kesinlik": 0.74,
+   "precision": 0.74,
    "recall": 0.768,
    "ham_kesinlik": 0.687,
    "ham_recall": 0.632,
@@ -67,7 +67,7 @@
     0.7491
    ],
    "robot_ISARETLI_F1": 0.6178,
-   "kesinlik": 0.716,
+   "precision": 0.716,
    "recall": 0.768,
    "ham_kesinlik": 0.716,
    "ham_recall": 0.768,
@@ -90,7 +90,7 @@
     0.6885
    ],
    "robot_ISARETLI_F1": 0.6181,
-   "kesinlik": 0.745,
+   "precision": 0.745,
    "recall": 0.774,
    "ham_kesinlik": 0.736,
    "ham_recall": 0.66,
@@ -113,7 +113,7 @@
     0.6581
    ],
    "robot_ISARETLI_F1": 0.5528,
-   "kesinlik": 0.622,
+   "precision": 0.622,
    "recall": 0.726,
    "ham_kesinlik": 0.637,
    "ham_recall": 0.576,
@@ -136,7 +136,7 @@
     0.4658
    ],
    "robot_ISARETLI_F1": 0.4029,
-   "kesinlik": 0.518,
+   "precision": 0.518,
    "recall": 0.71,
    "ham_kesinlik": 0.51,
    "ham_recall": 0.596,
@@ -159,7 +159,7 @@
     0.7021
    ],
    "robot_ISARETLI_F1": 0.4282,
-   "kesinlik": 0.524,
+   "precision": 0.524,
    "recall": 0.757,
    "ham_kesinlik": 0.427,
    "ham_recall": 0.638,
@@ -182,7 +182,7 @@
     0.9316
    ],
    "robot_ISARETLI_F1": 0.4595,
-   "kesinlik": 0.837,
+   "precision": 0.837,
    "recall": 0.52,
    "ham_kesinlik": 0.559,
    "ham_recall": 0.388,
@@ -205,7 +205,7 @@
     0.9412
    ],
    "robot_ISARETLI_F1": 0.7586,
-   "kesinlik": 0.931,
+   "precision": 0.931,
    "recall": 0.931,
    "ham_kesinlik": 0.931,
    "ham_recall": 0.931,
@@ -228,7 +228,7 @@
     0.7018
    ],
    "robot_ISARETLI_F1": 0.5946,
-   "kesinlik": 0.711,
+   "precision": 0.711,
    "recall": 0.75,
    "ham_kesinlik": 0.711,
    "ham_recall": 0.75,
@@ -251,7 +251,7 @@
     0.758
    ],
    "robot_ISARETLI_F1": 0.6021,
-   "kesinlik": 0.628,
+   "precision": 0.628,
    "recall": 0.792,
    "ham_kesinlik": 0.636,
    "ham_recall": 0.683,
@@ -274,7 +274,7 @@
     0.7793
    ],
    "robot_ISARETLI_F1": 0.6218,
-   "kesinlik": 0.758,
+   "precision": 0.758,
    "recall": 0.792,
    "ham_kesinlik": 0.734,
    "ham_recall": 0.681,
@@ -292,5 +292,5 @@
   "seri_disi_EN_KOTU": 0.6196,
   "seri_disi_MEDYAN": 0.7127
  },
- "not": "Tum sayilar TEK kosudan; olcum urunun kendi karar yolunu (wire_gate.karar_skoru + karar_maskesi) kullanir, taklit etmez. LOCKED harcanmadi."
+ "not": "Tum sayilar TEK kosudan; measurement urunun kendi karar yolunu (wire_gate.decision_score + decision_mask) kullanir, taklit etmez. LOCKED harcanmadi."
 }

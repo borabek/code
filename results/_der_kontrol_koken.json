@@ -8,9 +8,9 @@
  "n_parca": 194,
  "X_yok": 0,
  "XR_yok": 0,
- "hata": 0,
+ "error": 0,
  "postproc": {
-  "comment": "urun v2.1 (2026-07-29). min_v10/vc0.30/cluster3.0 -- CC-D olcumu: cok-CP +0.221, dusuk-CP -0.0025 (gurultu), korpus-temsili +0.021; kilitli holdout cok-CP 0.212->0.635 ile DOGRULADI. Onceki 30/0.5/5.0 degerleri _superseded_2026_07_24_values altinda duruyor. conn_promote current_product.params altinda ve SADECE yonlendirici cok-CP dedigi parcalarda uygulanir.",
+  "comment": "urun v2.1 (2026-07-29). min_v10/vc0.30/cluster3.0 -- CC-D olcumu: cok-CP +0.221, dusuk-CP -0.0025 (noise), corpus-temsili +0.021; kilitli holdout cok-CP 0.212->0.635 ile DOGRULADI. Onceki 30/0.5/5.0 degerleri _superseded_2026_07_24_values altinda duruyor. conn_promote current_product.params altinda ve SADECE router cok-CP dedigi parcalarda uygulanir.",
   "min_vertices": 4,
   "vertex_confidence_mask": 0.3,
   "cluster_mm": 3.0,

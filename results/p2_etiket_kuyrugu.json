@@ -2643,6 +2643,6 @@
  ],
  "n_zor": 180,
  "n_kolay": 60,
- "olcut": "z(kon_cevre)+z(conf) DUSUK = zayif agiz; oncelik markalari ve yuksek-CP one alinir; %25 kolay/negatif kontrol",
- "gerekce": "agiz kalitesi dusuk ceyrekte yanal basari %25.8 / yuksek %75.9"
+ "criterion": "z(kon_cevre)+z(conf) DUSUK = zayif mouth; oncelik markalari ve yuksek-CP one alinir; %25 kolay/negatif kontrol",
+ "rationale": "mouth kalitesi dusuk ceyrekte lateral basari %25.8 / yuksek %75.9"
 }

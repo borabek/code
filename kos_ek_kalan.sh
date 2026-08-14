@@ -6,7 +6,7 @@
 # 27 dk) YENIDEN kosuyor -- ~2.2 saat mukerrer is. Bu betik her blogun
 # makbuzuna bakar ve VAR OLANI ATLAR.
 #
-# `derinlik` icin EK_ISCI=4: paralel yol bit-ayni sonuc verdigi DOGRULANDI
+# `depth` icin EK_ISCI=4: paralel yol bit-ayni sonuc verdigi DOGRULANDI
 # (tests/test_ek_paralel_esdeger.py). Tek cekirdekte ~8.5 saat, 4 iscide ~2.
 set -u
 cd "$(dirname "$0")"
@@ -35,11 +35,11 @@ bos_ram() {
 #
 # NOT: bu fonksiyon bir kez CAGRILDI ama TANIMLANMAMISTI (python str.replace
 # eslesmeyi bulamayinca SESSIZCE hicbir sey yapmamisti). Bash'te tanimsiz
-# fonksiyon bos doner, `${a:-0}` onu 0 yapar ve kapi ACILIR -- yani koruma
+# fonksiyon bos doner, `${a:-0}` onu 0 yapar ve gate ACILIR -- yani koruma
 # varmis gibi gorunup hic calismaz.
 baska_ek() {
   powershell.exe -NoProfile -Command \
-    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'kos_ek_oznitelik|kos_s4_kume' } | Measure-Object).Count" \
+    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'run_extra_feature|kos_s4_kume' } | Measure-Object).Count" \
     2>/dev/null | tr -d '\r'
 }
 
@@ -52,7 +52,7 @@ esac
 say "koruma dogrulandi (baska_ek -> $_t)"
 
 say "=== KALAN EK BLOKLARI ==="
-for blok in kafes_adet simetri derinlik; do
+for blok in kafes_adet simetri depth; do
   if [ -f "results/ek_blok_$blok.json" ]; then
     say "ATLANDI: $blok (makbuzu var)"
     continue
@@ -72,12 +72,12 @@ for blok in kafes_adet simetri derinlik; do
   done
 
   isci=1
-  [ "$blok" = "derinlik" ] && isci=4      # dogrulanmis paralel yol
+  [ "$blok" = "depth" ] && isci=4      # dogrulanmis paralel yol
   say "BASLIYOR: $blok (isci $isci)"
   t0=$(date +%s)
   if EK_BLOK="$blok" EK_ISCI=$isci P6_DIZIN=results/_p6_oz_tam3 \
        P6_KUME=tam,d6 P6_KAT_MIN=200 P6_ARAMA_N=200 P6_ITER=200 \
-       P6_NEG_KAT=6 python kos_ek_oznitelik.py > "$G/EK_$blok.log" 2>&1; then
+       P6_NEG_KAT=6 python run_extra_feature.py > "$G/EK_$blok.log" 2>&1; then
     say "BITTI: $blok ($(( $(date +%s) - t0 ))s) -- $(tail -3 "$G/EK_$blok.log" | head -2 | tr '\n' ' ')"
   else
     say "DUSTU: $blok ($(( $(date +%s) - t0 ))s)"

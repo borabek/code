@@ -2,145 +2,145 @@
  "1492-L6T-W": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download EDZ']",
-  "uretici": "A-B",
+  "manufacturer": "A-B",
   "zaman": "2026-08-04 10:25:16"
  },
  "1492-LD2-BL": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download EDZ']",
-  "uretici": "A-B",
+  "manufacturer": "A-B",
   "zaman": "2026-08-04 10:25:24"
  },
  "800F-X01": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download EDZ']",
-  "uretici": "A-B",
+  "manufacturer": "A-B",
   "zaman": "2026-08-04 10:25:32"
  },
  "1492-W16S": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download EDZ']",
-  "uretici": "A-B_N",
+  "manufacturer": "A-B_N",
   "zaman": "2026-08-04 10:25:40"
  },
  "1492-JD4-W": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download EDZ']",
-  "uretici": "A-B_N",
+  "manufacturer": "A-B_N",
   "zaman": "2026-08-04 10:25:49"
  },
  "2CCA703025R0001": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download DWG']",
-  "uretici": "ABB",
+  "manufacturer": "ABB",
   "zaman": "2026-08-04 10:25:57"
  },
  "1SDA066808R1": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download DWG']",
-  "uretici": "ABB",
+  "manufacturer": "ABB",
   "zaman": "2026-08-04 10:26:05"
  },
  "2CSF204101R1400": {
   "durum": "step_yok",
   "ayrinti": "menu: ['Download WSCAD', 'Download EDZ', 'Download DWG']",
-  "uretici": "ABB",
+  "manufacturer": "ABB",
   "zaman": "2026-08-04 10:26:13"
  },
  "ALPT 10-1-2 PE": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "AL",
+  "manufacturer": "AL",
   "zaman": "2026-08-04 10:26:20"
  },
  "ALPT 1.5S2PE": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "AL",
+  "manufacturer": "AL",
   "zaman": "2026-08-04 10:26:27"
  },
  "ALPTFIX 618x2.5": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "AL",
+  "manufacturer": "AL",
   "zaman": "2026-08-04 10:26:34"
  },
  "HDTB-SB-2": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "C3",
+  "manufacturer": "C3",
   "zaman": "2026-08-04 10:26:41"
  },
  "HDTB-4": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "C3",
+  "manufacturer": "C3",
   "zaman": "2026-08-04 10:26:47"
  },
  "17100.6": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "CCD",
+  "manufacturer": "CCD",
   "zaman": "2026-08-04 10:26:54"
  },
  "1127.2": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "CCD",
+  "manufacturer": "CCD",
   "zaman": "2026-08-04 10:27:00"
  },
  "DB250-111N": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "CEM",
+  "manufacturer": "CEM",
   "zaman": "2026-08-04 10:27:07"
  },
  "CX10_3Y": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "CWT",
+  "manufacturer": "CWT",
   "zaman": "2026-08-04 10:27:14"
  },
  "CMDB6_3": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "CWT",
+  "manufacturer": "CWT",
   "zaman": "2026-08-04 10:27:20"
  },
  "CMST16W": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "CWT",
+  "manufacturer": "CWT",
   "zaman": "2026-08-04 10:27:27"
  },
  "WS10-01P-1Y-00AH": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "DEG",
+  "manufacturer": "DEG",
   "zaman": "2026-08-04 10:27:33"
  },
  "DSKK2.5-PE-01P-1C-00AH": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "DEG",
+  "manufacturer": "DEG",
   "zaman": "2026-08-04 10:27:40"
  },
  "DK4-PE": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "DIN",
+  "manufacturer": "DIN",
   "zaman": "2026-08-04 10:27:46"
  },
  "DK2.5N-TR": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "DIN",
+  "manufacturer": "DIN",
   "zaman": "2026-08-04 10:27:53"
  },
  "DP2.5PG-08P": {
   "durum": "bulunamadi",
   "ayrinti": "",
-  "uretici": "DIN",
+  "manufacturer": "DIN",
   "zaman": "2026-08-04 10:28:00"
  }
 }

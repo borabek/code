@@ -1,18 +1,18 @@
 {
- "taban": {
+ "baseline": {
   "F1": 0.677786818551668,
   "TP": 833,
   "FP": 302,
   "FN": 490,
-  "uretici": {
+  "manufacturer": {
    "WEI": 0.6362672322375398,
    "PXC": 0.7033112582781457,
    "WAGO": 0.8
   },
-  "korpus": {
-   "aday": 12991,
-   "parca": 1190,
-   "uretici": 4,
+  "corpus": {
+   "candidate": 12991,
+   "part": 1190,
+   "manufacturer": 4,
    "pozitif": 0.26472173042875835
   }
  },
@@ -21,15 +21,15 @@
   "TP": 860,
   "FP": 333,
   "FN": 463,
-  "uretici": {
+  "manufacturer": {
    "WEI": 0.6343975283213182,
    "PXC": 0.7146562905317769,
    "WAGO": 0.6666666666666666
   },
-  "korpus": {
-   "aday": 21377,
-   "parca": 2955,
-   "uretici": 15,
+  "corpus": {
+   "candidate": 21377,
+   "part": 2955,
+   "manufacturer": 15,
    "pozitif": 0.27061795387566073
   }
  },

@@ -1,4 +1,4 @@
-# WSCAD Universe'den indirilecek parca numaralari
+# WSCAD Universe'den indirilecek part numaralari
 # Kaynak: ureticilerin KENDI katalog PDF'leri -- hicbiri uydurma degil
 # 3D (.stp) modeli olmayanlar WSCAD'da inmez; inen bozuk dosyalari audit_batch.py eler
 
@@ -1076,8 +1076,8 @@
 1071360000	WPE
 1072300000	WPE
 1072400000	WPE 120/150
-1020060000	WDU 2.5 OR oran
-1023760000	WDU 2.5 OR oran
+1020060000	WDU 2.5 OR ratio
+1023760000	WDU 2.5 OR ratio
 1037710000	WDU 2.5 BR brow
 1023790000	WDU 2.5 BR brow
 1020020000	WDU 2.5 GE yell
@@ -1088,7 +1088,7 @@
 1020010000	WDU 2.5 SW blac
 1037700000	WDU 2.5 VI viol
 1036800000	WDU 2.5 WS whit
-1021560000	WDK 2.5 OR oran
+1021560000	WDK 2.5 OR ratio
 1790900000	WDK 2.5 WS whit
 1022360000	WDK 2.5 V OR or
 1022350000	WDK 2.5 V GE ye
@@ -1131,7 +1131,7 @@
 1784400000	SAK 35/EN BL 20
 1853970000	SAK4
 1817860000	SAK 2.5 BL
-1326360000	SAK 2.5 OR oran
+1326360000	SAK 2.5 OR ratio
 1799920000	SAK 2.5/35 DBL
 1821480000	SAK 2.5/35 GE y
 1799910000	SAK 2.5/35 RT r

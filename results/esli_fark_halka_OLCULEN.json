@@ -1,7 +1,7 @@
 {
- "kol": "halka_disari",
+ "arm": "halka_disari",
  "n_parca": 100,
- "taban": 0.46684350132625996,
+ "baseline": 0.46684350132625996,
  "kol_f1": 0.48629531388152075,
  "fark": 0.019451812555260795,
  "ga": [
@@ -10,5 +10,5 @@
  ],
  "pozitif_oran": 0.985,
  "kesin": true,
- "not": "ESLI parca duzeyi bootstrap. Marjinal GA degil FARKIN GA'si. D7'ye BAKILMADI."
+ "not": "ESLI part duzeyi bootstrap. Marjinal GA degil FARKIN GA'si. D7'ye BAKILMADI."
 }

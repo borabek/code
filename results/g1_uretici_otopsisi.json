@@ -9,7 +9,7 @@
    "GATE_REDDI": 27,
    "ATAMA": 2
   },
-  "parca": 43,
+  "part": 43,
   "ort_diag": 94.23548167832513,
   "ort_gt": 7.209302325581396,
   "cerceve_ortanca": 9.02324423180985
@@ -23,7 +23,7 @@
    "ADAY_KALABALIK": 4,
    "GATE_REDDI": 7
   },
-  "parca": 20,
+  "part": 20,
   "ort_diag": 92.54431582983926,
   "ort_gt": 2.85,
   "cerceve_ortanca": 13.336128028386714
@@ -38,7 +38,7 @@
    "ATAMA": 1,
    "ADAY_KALABALIK": 1
   },
-  "parca": 15,
+  "part": 15,
   "ort_diag": 171.88922013779512,
   "ort_gt": 3.066666666666667,
   "cerceve_ortanca": 8.187177089039059
@@ -52,7 +52,7 @@
    "GATE_REDDI": 6,
    "ADAY_YOK": 41
   },
-  "parca": 22,
+  "part": 22,
   "ort_diag": 81.46392854324591,
   "ort_gt": 2.909090909090909,
   "cerceve_ortanca": 12.008850862208359
@@ -66,7 +66,7 @@
    "ADAY_YOK": 8,
    "GATE_REDDI": 1
   },
-  "parca": 2,
+  "part": 2,
   "ort_diag": 88.69210429708002,
   "ort_gt": 7.0,
   "cerceve_ortanca": 4.971312763971839
@@ -80,7 +80,7 @@
    "GATE_REDDI": 5,
    "ADAY_KALABALIK": 2
   },
-  "parca": 19,
+  "part": 19,
   "ort_diag": 73.97531585154596,
   "ort_gt": 3.210526315789474,
   "cerceve_ortanca": 7.589910735946
@@ -94,7 +94,7 @@
    "ADAY_YOK": 86,
    "ADAY_KALABALIK": 11
   },
-  "parca": 30,
+  "part": 30,
   "ort_diag": 87.78183770331133,
   "ort_gt": 5.333333333333333,
   "cerceve_ortanca": 9.677451361869199
@@ -108,7 +108,7 @@
    "ADAY_YOK": 31,
    "GATE_REDDI": 7
   },
-  "parca": 26,
+  "part": 26,
   "ort_diag": 87.48164562445172,
   "ort_gt": 3.0,
   "cerceve_ortanca": 3.905447133628591
@@ -122,7 +122,7 @@
    "GATE_REDDI": 16,
    "ADAY_YOK": 39
   },
-  "parca": 31,
+  "part": 31,
   "ort_diag": 87.87828973149917,
   "ort_gt": 3.5161290322580645,
   "cerceve_ortanca": 2.500301359547192
@@ -134,7 +134,7 @@
   "fn": {
    "GATE_REDDI": 2
   },
-  "parca": 5,
+  "part": 5,
   "ort_diag": 110.46783277127531,
   "ort_gt": 11.2,
   "cerceve_ortanca": 1.8453853103270765
@@ -149,7 +149,7 @@
    "ADAY_KALABALIK": 44,
    "GATE_REDDI": 7
   },
-  "parca": 6,
+  "part": 6,
   "ort_diag": 138.112540693021,
   "ort_gt": 37.0,
   "cerceve_ortanca": 4.171278578051059
@@ -163,7 +163,7 @@
    "ADAY_YOK": 4,
    "GATE_REDDI": 1
   },
-  "parca": 14,
+  "part": 14,
   "ort_diag": 68.6802127171878,
   "ort_gt": 2.0,
   "cerceve_ortanca": 2.534173607664371
@@ -177,7 +177,7 @@
    "GATE_REDDI": 5,
    "ADAY_YOK": 4
   },
-  "parca": 17,
+  "part": 17,
   "ort_diag": 79.70850276113106,
   "ort_gt": 2.3529411764705883,
   "cerceve_ortanca": 1.1364561824460861

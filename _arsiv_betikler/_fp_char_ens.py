@@ -60,7 +60,7 @@ for name, rows in [("TP", TP), ("FP", FP)]:
     if not rows: continue
     print(f"  {name}: " + "  ".join(f"{k}={np.mean([r[k] for r in rows]):.3f}" for k in ("conf", "nv", "area", "outward"))
           + f"  | CE {sum(r['src']=='CE' for r in rows)}/CT {sum(r['src']=='CT' for r in rows)}")
-print("\n=== tum TP'yi koruyan tek-esik FP kirimi (F1 etkisi) ===")
+print("\n=== tum TP'yi koruyan tek-threshold FP kirimi (F1 etkisi) ===")
 nT = len(TP); nF = len(FP); FN = 18 - nT
 for k in ("conf", "nv", "area", "outward"):
     if not TP or not FP: break

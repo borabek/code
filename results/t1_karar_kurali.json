@@ -38,8 +38,8 @@
  },
  "dev_mevcut": 0.8059710965726004,
  "dev_en_iyi": {
-  "oran": 0.6,
-  "taban": 0.35,
+  "ratio": 0.6,
+  "baseline": 0.35,
   "f1": 0.8336312615178422
  },
  "val_mevcut_tespit": 0.7534847783818321,

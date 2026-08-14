@@ -10,5 +10,5 @@
  "in_sample_delta_for_reference": 0.0166,
  "learning_curve_note": "+0.015/katlama ongorulmustu; 0.92 katlama icin +0.0107 gerceklesti -> egri hafif duzlesiyor",
  "locked_holdout": "DOKUNULMADI (cp_config.locked_holdout_policy_2026_07_28)",
- "corpus_recovered_by_gmsh_fix": "~415 parca; bu olcumdeki +839 parcanin buyuk kismi o kayip havuzdu"
+ "corpus_recovered_by_gmsh_fix": "~415 part; bu olcumdeki +839 parcanin buyuk kismi o loss havuzdu"
 }

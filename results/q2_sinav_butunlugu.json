@@ -98,9 +98,9 @@
   "9915820001"
  ],
  "sartlar": {
-  "S1 egitim npz'sinde PARCA yok": {
+  "S1 training npz'sinde PARCA yok": {
    "gecti": false,
-   "aciklama": "LOCKED parca egitim verisinde",
+   "aciklama": "LOCKED part training verisinde",
    "ihlal": {
     "results\\gate_regrow_data_ek.npz": [
      "0421061",
@@ -1135,9 +1135,9 @@
     ]
    }
   },
-  "S2 egitim npz'sinde GRUP yok": {
+  "S2 training npz'sinde GRUP yok": {
    "gecti": false,
-   "aciklama": "LOCKED parcanin IKIZI egitim verisinde",
+   "aciklama": "LOCKED parcanin IKIZI training verisinde",
    "ihlal": {
     "results\\gate_regrow_data_ek.npz": [
      "0421061",
@@ -2178,12 +2178,12 @@
     ]
    }
   },
-  "S3 olcum onbelleginde PARCA yok": {
+  "S3 measurement onbelleginde PARCA yok": {
    "gecti": true,
-   "aciklama": "LOCKED parca puanlanmis",
+   "aciklama": "LOCKED part puanlanmis",
    "ihlal": {}
   },
-  "S4 olcum onbelleginde GRUP yok": {
+  "S4 measurement onbelleginde GRUP yok": {
    "gecti": true,
    "aciklama": "LOCKED parcanin IKIZI puanlanmis",
    "ihlal": {}

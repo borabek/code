@@ -1,5 +1,5 @@
 {
- "marka": "SUPU",
+ "brand": "SUPU",
  "sonuc": {
   "12": {
    "tespit_k0": 0.5127354556448409,
@@ -12,6 +12,6 @@
    "n_cekilis": 2
   }
  },
- "taban": "results/_p1_olasilik_g10",
- "not": "k=0 tabani AYNI parcalarda olculdu; adaptasyon parcalari her iki kolda da DISARIDA. Son-epoch ckpt kullanildi (genel val'e gore secim adaptasyonu cezalandirir)."
+ "baseline": "results/_p1_olasilik_g10",
+ "not": "k=0 tabani AYNI parcalarda measured; adaptasyon parcalari her iki kolda da DISARIDA. Son-epoch ckpt kullanildi (genel val'e gore secim adaptasyonu cezalandirir)."
 }

@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -55,7 +55,7 @@
    "tespit": 0.49671621154510887,
    "makro": 0.27535624538937403,
    "en_kotu": 0.0,
-   "marka": {
+   "brand": {
     "CCD": 0.506578947368421,
     "KLM": 0.1839080459770115,
     "A-B": 0.42431466030989273,
@@ -77,7 +77,7 @@
    "tespit": 0.4708870652598671,
    "makro": 0.2609533605839077,
    "en_kotu": 0.0,
-   "marka": {
+   "brand": {
     "CCD": 0.55,
     "KLM": 0.138996138996139,
     "A-B": 0.40953716690042075,
@@ -99,7 +99,7 @@
    "tespit": 0.468110353010976,
    "makro": 0.23900144243375002,
    "en_kotu": 0.0,
-   "marka": {
+   "brand": {
     "CCD": 0.4342857142857143,
     "KLM": 0.11797752808988764,
     "A-B": 0.4027777777777778,
@@ -121,7 +121,7 @@
    "tespit": 0.43236842105263157,
    "makro": 0.21973387859297766,
    "en_kotu": 0.0,
-   "marka": {
+   "brand": {
     "CCD": 0.4051948051948052,
     "KLM": 0.12224938875305623,
     "A-B": 0.3667334669338677,
@@ -139,7 +139,7 @@
    "d6": 0.19136960600375236
   }
  },
- "taban": 0.2773,
+ "baseline": 0.2773,
  "en_iyi": "mutlak",
- "not": "Karar kurali ailesi kiyasi. Parametre D6'da secildi, D7'de yeniden taranmadi. TAM ZINCIR, MIKRO, D7 marka-disi."
+ "not": "Karar kurali ailesi kiyasi. Parametre D6'da secildi, D7'de yeniden taranmadi. TAM ZINCIR, MIKRO, D7 brand-disi."
 }

@@ -5,7 +5,7 @@
 > seçim-aşırı-uyumu riski), (3) öğrenilmiş EMBEDDING'ler (benim feature'larım el-yapımıydı).
 
 ## P0 — Ölçümü Kilitle
-- [ ] `P` ve `direction` aynı koordinat frame'inde olacak şekilde aday verisini doğrula.
+- [ ] `P` ve `direction` aynı koordinat frame'inde olacak şekilde candidate verisini doğrula.
 - [ ] Ürün ailelerini STEP `PRODUCT` bilgisinden belirle.
 - [ ] Geometry-hash tekrarlarını tespit et.
 - [ ] Part-out, geometry-out ve family-out splitlerini sabitle.
@@ -18,14 +18,14 @@
 - [ ] Her CP adayı için opening-region embedding ortalama/maksimum değerlerini oluştur.
 - [ ] 3/6/12/24 mm çevre halkalarından semantik bağlam özellikleri çıkar.
 - [ ] Insert-channel boyunca sınıf olasılığı profili çıkar.
-- [ ] Global parça embedding'ini aday özelliklerine ekle.
+- [ ] Global parça embedding'ini candidate özelliklerine ekle.
 - [ ] Linear probe, RF ve küçük MLP'yi aynı OOF splitlerinde karşılaştır.
 - [ ] GO: ALL en az `+0.015`, WEI en az `+0.020`, PXC kaybı en fazla `0.005`.
 - [ ] GO başarısızsa embedding kolunu kapat.
 
 ## P2 — Part-Level Set/Graph Seçici
-- [ ] Her parçayı aday CP düğümlerinden oluşan graph/set olarak temsil et.
-- [ ] Göreli konum, yön açısı, aynı yüz, aynı eksen, pitch ve sıra ilişkilerini edge özelliği yap.
+- [ ] Her parçayı candidate CP düğümlerinden oluşan graph/set olarak temsil et.
+- [ ] Göreli konum, yön açısı, aynı yüz, aynı axis, pitch ve sıra ilişkilerini edge özelliği yap.
 - [ ] Eksen/yüz özelliklerini yalnız küçük yardımcı sinyal olarak kullan.
 - [ ] Binary sınıflandırma yerine part-içi listwise/top-N ranking loss dene.
 - [ ] CP-count bilinen ve bilinmeyen modları ayrı eğit ve ölç.
@@ -37,7 +37,7 @@
 - [ ] Yeni seçiciyi önce mevcut WEI agresif havuzunda test et.
 - [ ] WEI metadata tabanı `0.723` ile karşılaştır.
 - [ ] End-to-end kazanım en az `+0.020` değilse ALL multires koşusunu iptal et.
-- [ ] Başarılıysa 6k+9k+12k aday havuzunu PXC ve ALL'a genişlet.
+- [ ] Başarılıysa 6k+9k+12k candidate havuzunu PXC ve ALL'a genişlet.
 - [ ] Precision çöküşü, duplicate oranı ve inference maliyetini ölç.
 - [ ] AUTO'ya yalnız yüksek güvenli adayları geçir; diğerlerini REVIEW'da tut.
 
@@ -76,6 +76,6 @@
 ### Faz A'dan devralınan durum (bu listeye girdi)
 - Ürün: base 0.750 → **zengin gate 0.789 (parça-out) / 0.769 (aile-out, bbox-proxy aile)**; WEI aile-out 0.717.
 - Baseline reprodüksiyonu: ALL 0.7535 ✓, metadata top-N 0.7757 ✓ (P0'ın doğrulama maddesi kısmen hazır).
-- Öldürülenler: eksen-kümeleme, skor-havuzlama, huni/taper (B-rep+mesh), bağlam feature'ları, "%60 FP öldürülebilir" (artefakt).
+- Öldürülenler: axis-kümeleme, skor-havuzlama, huni/taper (B-rep+mesh), bağlam feature'ları, "%60 FP öldürülebilir" (artefakt).
 - P6 ön-koşulu ÖLÇÜLDÜ: FP kütlesinin %86'sı 40 ailede, aile-içi std 0.001 (ama bbox-proxy aile ile — P0'da PRODUCT-ailesiyle YENİLENECEK).
-- P3 girdisi hazırlanıyor: `build_aggr_rich.py WEI` (agresif havuz + zengin feature) koşuyor.
+- P3 girdisi hazırlanıyor: `build_aggr_rich.py WEI` (agresif pool + zengin feature) koşuyor.

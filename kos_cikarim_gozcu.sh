@@ -2,7 +2,7 @@
 # TAM4 CIKARIMINI, AGIR ISLER BITINCE OTOMATIK SURDUR.
 #
 # NEDEN DURDURULDU (2026-08-12 10:32): S4 (~6 GB) + EK blogu (~6 GB) + 6
-# cikarim iscisi (~6 GB) 31 GB RAM'i zorladi; Windows `pagefile.sys`'i
+# inference iscisi (~6 GB) 31 GB RAM'i zorladi; Windows `pagefile.sys`'i
 # 23.9 GB'a buyuttu ve C: bos alani 7.28 -> 3.34 GB'a dustu. Cikarim
 # durdurulunca disk 13.11 GB'a FIRLADI -- yani disk sorunu bir veri sismesi
 # degil, BELLEK BASKISININ yan etkisiydi.
@@ -16,7 +16,7 @@ say() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$L"; }
 
 agir() {
   powershell.exe -NoProfile -Command \
-    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'kos_ek_oznitelik|kos_s4_kume|kademe2' } | Measure-Object).Count" \
+    "(Get-CimInstance Win32_Process | Where-Object { \$_.Name -match 'python' -and \$_.CommandLine -match 'run_extra_feature|kos_s4_kume|kademe2' } | Measure-Object).Count" \
     2>/dev/null | tr -d '\r'
 }
 bos() {
@@ -35,13 +35,13 @@ say "gozcu basladi (agir is -> $_t)"
 bek=0
 while [ $bek -lt 43200 ]; do
   n=$(ls results/_p6_oz_tam4 2>/dev/null | grep -c '^tam_')
-  if [ "$n" -ge 2570 ]; then say "cikarim ZATEN TAM ($n/2583)"; exit 0; fi
+  if [ "$n" -ge 2570 ]; then say "inference ZATEN TAM ($n/2583)"; exit 0; fi
   a=$(agir); a=${a:-0}
   r=$(bos);  r=${r:-0}
   if [ "$a" -eq 0 ] && [ "${r%%.*}" -ge 12 ]; then
-    say "AGIR IS YOK (${r}GB bos) -- cikarim surduruluyor ($n/2583)"
+    say "AGIR IS YOK (${r}GB bos) -- inference surduruluyor ($n/2583)"
     bash kos_tam4_devam.sh
-    say "cikarim turu bitti"
+    say "inference turu bitti"
     exit 0
   fi
   say "bekliyor: $n/2583 dosya, agir is $a, ${r}GB bos"

@@ -60,42 +60,42 @@
  "mouth_width": {
   "gecisli_delik_TAM": {
    "beklenen": 6.0,
-   "olcum": {
+   "measurement": {
     "12": 5.97,
     "24": 5.97,
     "48": 5.97
    },
-   "sapma": 0.005000000000000042,
+   "deviation": 0.005000000000000042,
    "isin_duyarliligi": 0.0
   },
   "gecisli_delik_REMESH": {
    "beklenen": 6.0,
-   "olcum": {
+   "measurement": {
     "12": 5.96,
     "24": 5.96,
     "48": 5.96
    },
-   "sapma": 0.006666666666666672,
+   "deviation": 0.006666666666666672,
    "isin_duyarliligi": 0.0
   },
   "kor_cep_TAM": {
    "beklenen": 5.0,
-   "olcum": {
+   "measurement": {
     "12": 4.98,
     "24": 4.98,
     "48": 4.98
    },
-   "sapma": 0.003999999999999915,
+   "deviation": 0.003999999999999915,
    "isin_duyarliligi": 0.0
   },
   "kor_cep_REMESH": {
    "beklenen": 5.0,
-   "olcum": {
+   "measurement": {
     "12": 4.95,
     "24": 4.95,
     "48": 4.95
    },
-   "sapma": 0.009999999999999964,
+   "deviation": 0.009999999999999964,
    "isin_duyarliligi": 0.0
   }
  },

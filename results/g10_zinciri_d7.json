@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -31,7 +31,7 @@
    "aday_kahini": 0.28691157982958515,
    "makro": 0.21462866219902388,
    "en_kotu": 0.008,
-   "marka": {
+   "brand": {
     "A-B": 0.3185840707964602,
     "EFX": 0.0427807486631016,
     "CCD": 0.5593869731800766,
@@ -53,7 +53,7 @@
    "aday_kahini": 0.3183702266513802,
    "makro": 0.23668403727756013,
    "en_kotu": 0.0,
-   "marka": {
+   "brand": {
     "C3": 0.0,
     "CCD": 0.5364238410596026,
     "CWT": 0.022261277094317515,
@@ -71,6 +71,6 @@
   }
  },
  "artan_marka": 7,
- "sizinti_denetimi": "g10 egitim dizini _label_auto_obj_TR ile D7 kesisimi: parca 0, marka 0 (12/12 marka temiz)",
- "not": "AYNI harness (kanonik_d7), yalniz yigin degisti. Tam zincir, MIKRO, D7=DEV marka-disi."
+ "sizinti_denetimi": "g10 training dizini _label_auto_obj_TR ile D7 kesisimi: part 0, brand 0 (12/12 brand temiz)",
+ "not": "AYNI harness (canonical_d7), yalniz yigin degisti. Tam zincir, MIKRO, D7=DEV brand-disi."
 }

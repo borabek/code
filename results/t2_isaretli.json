@@ -1,9 +1,9 @@
 {
- "eksen-hazir (isaretsiz)": 0.5893431322317577,
+ "axis-hazir (unsigned)": 0.5893431322317577,
  "takma-hazir (-disari)": 0.09065921608812604,
  "takma-hazir (+disari)": 0.5817988557277657,
  "negatif_pay": 0.09987029831387809,
  "medyan_dot": 0.9999999979998823,
  "dogru_sozlesme": "+disari",
- "kayip": 0.007544276503992031
+ "loss": 0.007544276503992031
 }

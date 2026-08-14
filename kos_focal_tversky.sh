@@ -3,7 +3,7 @@
 #
 # Tversky ZATEN acik (agirlik 0.25, alpha 0.3, beta 0.7). Focal varyanti
 # (1-TI)^gamma ile kolay orneklerin katkisini bastirir. gamma=1 klasik
-# Tversky'dir, yani varsayilan davranis DEGISMEZ -- kol tek degiskenli.
+# Tversky'dir, yani varsayilan davranis DEGISMEZ -- arm tek degiskenli.
 #
 # Taban: hafif augmentasyon 0.15 (bugunun kazanani, 0.6528).
 set -u

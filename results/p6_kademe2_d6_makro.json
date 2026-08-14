@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -28,7 +28,7 @@
   "TABAN": {
    "robot": 0.1654357459379616,
    "recall": 0.09283050145047658,
-   "kesinlik": 0.7593220338983051,
+   "precision": 0.7593220338983051,
    "TP": 224,
    "FP": 71,
    "FN": 2189
@@ -36,7 +36,7 @@
   "P6": {
    "robot": 0.29522081064730793,
    "recall": 0.20223787815996686,
-   "kesinlik": 0.5464725643896976,
+   "precision": 0.5464725643896976,
    "TP": 488,
    "FP": 405,
    "FN": 1925
@@ -44,13 +44,13 @@
   "P6_KAFES": {
    "robot": 0.2733812949640288,
    "recall": 0.1732283464566929,
-   "kesinlik": 0.648062015503876,
+   "precision": 0.648062015503876,
    "TP": 418,
    "FP": 227,
    "FN": 1995
   }
  },
- "marka": {
+ "brand": {
   "UPUN": {
    "TABAN": {
     "robot": 0.5384615384615384,
@@ -59,10 +59,10 @@
     "FP": 29,
     "FN": 223,
     "recall": 0.3972972972972973,
-    "kesinlik": 0.8352272727272727,
+    "precision": 0.8352272727272727,
     "makro": 0.5384615384615384,
     "en_kotu": 0.5384615384615384,
-    "marka": {
+    "brand": {
      "UPUN": 0.5384615384615384
     },
     "kural": [
@@ -79,10 +79,10 @@
     "FP": 243,
     "FN": 97,
     "recall": 0.7378378378378379,
-    "kesinlik": 0.5290697674418605,
+    "precision": 0.5290697674418605,
     "makro": 0.6162528216704289,
     "en_kotu": 0.6162528216704289,
-    "marka": {
+    "brand": {
      "UPUN": 0.6162528216704289
     },
     "kural": [
@@ -99,10 +99,10 @@
     "FP": 114,
     "FN": 128,
     "recall": 0.654054054054054,
-    "kesinlik": 0.6797752808988764,
+    "precision": 0.6797752808988764,
     "makro": 0.6666666666666666,
     "en_kotu": 0.6666666666666666,
-    "marka": {
+    "brand": {
      "UPUN": 0.6666666666666666
     },
     "kural": [
@@ -121,10 +121,10 @@
     "FP": 14,
     "FN": 473,
     "recall": 0.13528336380255943,
-    "kesinlik": 0.8409090909090909,
+    "precision": 0.8409090909090909,
     "makro": 0.23307086614173228,
     "en_kotu": 0.23307086614173228,
-    "marka": {
+    "brand": {
      "SUPU": 0.23307086614173228
     },
     "kural": [
@@ -141,10 +141,10 @@
     "FP": 127,
     "FN": 345,
     "recall": 0.3692870201096892,
-    "kesinlik": 0.6139817629179332,
+    "precision": 0.6139817629179332,
     "makro": 0.4611872146118721,
     "en_kotu": 0.4611872146118721,
-    "marka": {
+    "brand": {
      "SUPU": 0.4611872146118721
     },
     "kural": [
@@ -161,10 +161,10 @@
     "FP": 55,
     "FN": 384,
     "recall": 0.2979890310786106,
-    "kesinlik": 0.7477064220183486,
+    "precision": 0.7477064220183486,
     "makro": 0.4261437908496732,
     "en_kotu": 0.4261437908496732,
-    "marka": {
+    "brand": {
      "SUPU": 0.4261437908496732
     },
     "kural": [
@@ -183,10 +183,10 @@
     "FP": 0,
     "FN": 1222,
     "recall": 0.0,
-    "kesinlik": 0.0,
+    "precision": 0.0,
     "makro": 0.0,
     "en_kotu": 0.0,
-    "marka": {
+    "brand": {
      "NIT": 0.0
     },
     "kural": [
@@ -203,10 +203,10 @@
     "FP": 9,
     "FN": 1221,
     "recall": 0.0008183306055646482,
-    "kesinlik": 0.1,
+    "precision": 0.1,
     "makro": 0.0016233766233766235,
     "en_kotu": 0.0016233766233766235,
-    "marka": {
+    "brand": {
      "NIT": 0.0016233766233766235
     },
     "kural": [
@@ -223,10 +223,10 @@
     "FP": 16,
     "FN": 1221,
     "recall": 0.0008183306055646482,
-    "kesinlik": 0.058823529411764705,
+    "precision": 0.058823529411764705,
     "makro": 0.0016142050040355124,
     "en_kotu": 0.0016142050040355124,
-    "marka": {
+    "brand": {
      "NIT": 0.0016142050040355124
     },
     "kural": [
@@ -246,10 +246,10 @@
     "FP": 28,
     "FN": 271,
     "recall": 0.010948905109489052,
-    "kesinlik": 0.0967741935483871,
+    "precision": 0.0967741935483871,
     "makro": 0.019672131147540985,
     "en_kotu": 0.019672131147540985,
-    "marka": {
+    "brand": {
      "MOR": 0.019672131147540985
     },
     "kural": [
@@ -266,10 +266,10 @@
     "FP": 26,
     "FN": 262,
     "recall": 0.043795620437956206,
-    "kesinlik": 0.3157894736842105,
+    "precision": 0.3157894736842105,
     "makro": 0.07692307692307693,
     "en_kotu": 0.07692307692307693,
-    "marka": {
+    "brand": {
      "MOR": 0.07692307692307693
     },
     "kural": [
@@ -286,10 +286,10 @@
     "FP": 42,
     "FN": 262,
     "recall": 0.043795620437956206,
-    "kesinlik": 0.2222222222222222,
+    "precision": 0.2222222222222222,
     "makro": 0.07317073170731707,
     "en_kotu": 0.07317073170731707,
-    "marka": {
+    "brand": {
      "MOR": 0.07317073170731707
     },
     "kural": [
@@ -315,5 +315,5 @@
  ],
  "nms": 5.0,
  "dizin": "results/_p6_oz_u25",
- "not": "tam korpusunun MARKA KATLARINDA kural secimi + kol kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
+ "not": "tam korpusunun MARKA KATLARINDA kural secimi + arm kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye BAKILMADI."
 }

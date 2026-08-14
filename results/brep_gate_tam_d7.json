@@ -4,17 +4,17 @@
    "robot_cp.py": "0bc837c9dde1199e",
    "wire_gate.py": "b67507021092f07a",
    "cp_openings.py": "d6bc011bd794a5c6",
-   "urun_zinciri.py": "79be7a2ca2ca2e21",
-   "p3c_eksen_secici.py": "e233507ddcc691e1",
+   "product_zinciri.py": "79be7a2ca2ca2e21",
+   "p3c_axis_selector.py": "e233507ddcc691e1",
    "p5v2_secenek.py": "f5f3fa1817568f71",
    "p5v2_egit.py": "47fdec33f407f9d2",
-   "sina_kume.py": "5ae95338c0f94024",
-   "p1c_esik.py": "abd8c689ddec7166"
+   "sina_cluster.py": "5ae95338c0f94024",
+   "p1c_threshold.py": "abd8c689ddec7166"
   },
   "model": {
    "results/wire_gate_v5.pkl": "e9539f3c4e57701f",
    "results/wire_gate_v7.pkl": "00161e0f415d61e5",
-   "results/p3c_eksen_secici.pkl": "ebc2190c6167eea3",
+   "results/p3c_axis_selector.pkl": "ebc2190c6167eea3",
    "results/seg_g10/g10_s0.pt": "27f1780f4c723ae6",
    "results/seg_g7/g7_s0.pt": "35fd8a66afcbe825"
   },
@@ -30,7 +30,7 @@
    "tespit": 0.22742899455228222,
    "makro": 0.09592857385567309,
    "en_kotu": 0.013552758954501452,
-   "marka": {
+   "brand": {
     "CCD": 0.18098510882016036,
     "KLM": 0.03581267217630854,
     "A-B": 0.11911911911911911,
@@ -50,7 +50,7 @@
    "tespit": 0.28556383058752727,
    "makro": 0.12232298469185865,
    "en_kotu": 0.015217391304347827,
-   "marka": {
+   "brand": {
     "CCD": 0.2576271186440678,
     "KLM": 0.03913894324853229,
     "A-B": 0.1452513966480447,
@@ -70,7 +70,7 @@
    "tespit": 0.330367734282325,
    "makro": 0.14359108032803,
    "en_kotu": 0.017114914425427872,
-   "marka": {
+   "brand": {
     "CCD": 0.3087557603686636,
     "KLM": 0.045454545454545456,
     "A-B": 0.16878402903811252,
@@ -90,7 +90,7 @@
    "tespit": 0.35684848484848486,
    "makro": 0.15312708908088715,
    "en_kotu": 0.019801980198019802,
-   "marka": {
+   "brand": {
     "CCD": 0.3407821229050279,
     "KLM": 0.04833836858006042,
     "A-B": 0.1796276013143483,
@@ -110,7 +110,7 @@
    "tespit": 0.3699757869249395,
    "makro": 0.15941304309890178,
    "en_kotu": 0.021836865767501604,
-   "marka": {
+   "brand": {
     "CCD": 0.3715415019762846,
     "KLM": 0.038910505836575876,
     "A-B": 0.18208092485549132,
@@ -130,7 +130,7 @@
    "tespit": 0.32730883813306855,
    "makro": 0.14439685680938313,
    "en_kotu": 0.014958863126402393,
-   "marka": {
+   "brand": {
     "CCD": 0.3121951219512195,
     "KLM": 0.035555555555555556,
     "A-B": 0.18150087260034903,
@@ -150,7 +150,7 @@
    "tespit": 0.39748898090022705,
    "makro": 0.16212260480352478,
    "en_kotu": 0.02654867256637168,
-   "marka": {
+   "brand": {
     "CCD": 0.30959752321981426,
     "KLM": 0.05325443786982249,
     "A-B": 0.1855421686746988,
@@ -170,7 +170,7 @@
    "tespit": 0.4012642572488663,
    "makro": 0.1646038068320297,
    "en_kotu": 0.02654867256637168,
-   "marka": {
+   "brand": {
     "CCD": 0.31446540880503143,
     "KLM": 0.05521472392638037,
     "A-B": 0.1917808219178082,
@@ -190,7 +190,7 @@
    "tespit": 0.3825671941723185,
    "makro": 0.1639741058326403,
    "en_kotu": 0.025024061597690085,
-   "marka": {
+   "brand": {
     "CCD": 0.33146067415730335,
     "KLM": 0.05405405405405406,
     "A-B": 0.19090909090909092,
@@ -210,7 +210,7 @@
    "tespit": 0.3660490736104156,
    "makro": 0.1558494370470981,
    "en_kotu": 0.022257551669316374,
-   "marka": {
+   "brand": {
     "CCD": 0.3380281690140845,
     "KLM": 0.048484848484848485,
     "A-B": 0.17713004484304934,
@@ -230,5 +230,5 @@
  "n_egitim_parca": 3051,
  "taban_kanonik_robot": 0.2029,
  "tavan_genisletilmis": 0.5748,
- "not": "TAM OLCEKLI gate, genisletilmis havuz (seg + B-rep). D7 marka-disi, MIKRO. B-rep TEZ TURETMESI DEGIL, ek aday kaynagi."
+ "not": "TAM OLCEKLI gate, genisletilmis pool (seg + B-rep). D7 brand-disi, MIKRO. B-rep TEZ TURETMESI DEGIL, ek candidate kaynagi."
 }

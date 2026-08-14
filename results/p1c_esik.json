@@ -109,8 +109,8 @@
   }
  },
  "dev_secim": {
-  "oran": 0.4,
-  "taban": 0.3,
+  "ratio": 0.4,
+  "baseline": 0.3,
   "dev_tespit": 0.6092132168240509
  },
  "sinav_mevcut": {

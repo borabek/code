@@ -16,10 +16,10 @@ diffusionnet.predict               → gate'e giden tek şey: 5 sınıf olasıl�
 
 **Öğrenilen temsil 71 parçayla eğitildi; türetme korpusu 4432.** Kapanan dokuz kolun
 hepsi bu 71 parçanın ürettiği beş olasılığın *üstünde* oynuyordu. Bayes tavanı modelin
-değil öznitelik uzayının özelliğidir; uzay beş olasılık + el yapımı skalerlerse tavan
+değil öznitelik uzayının özelliğidir; uzay beş olasılık + el yapımı skalerlerse ceiling
 oradan gelir.
 
-Bu tasarım üç kol açar. Üçü de **tez-değişmezlerine dokunmaz**: DiffusionNet mimarisi,
+Bu tasarım üç arm açar. Üçü de **tez-değişmezlerine dokunmaz**: DiffusionNet mimarisi,
 5 sınıf, ~6000 uniform izotropik remesh ve `v_o` ağız-ortası türetmesi aynen kalır.
 
 ## Kollar
@@ -40,27 +40,27 @@ zengin bir geometri kodlaması taşıyor ve hiç kullanılmadı.
   üreticide çökebilir. Bu yüzden üretici-dışı şartı GO'nun içinde, sonradan bakılacak
   bir kontrol değil.
 
-### B — Skaler yerine yapı (kafes / periyodiklik / komşuluk)
+### B — Skaler yerine yapı (lattice / periyodiklik / komşuluk)
 
-`wire_gate`'de komşu özniteliği yok: her aday tek başına karar veriliyor. Ama klemens
+`wire_gate`'de komşu özniteliği yok: her candidate tek başına karar veriliyor. Ama klemens
 blokları düzenli dizidir. On kutbun sekizi ateşlediyse eksik ikisinin nerede olduğu
 komşularından bellidir.
 
-- **Öznitelikler (aday başına, ilişkisel):** baskın adımın (pitch) ana eksen
-  izdüşümünden tespiti; adayın en yakın kafes düğümüne uzaklığı; aynı sırada eş-doğrusal
+- **Öznitelikler (candidate başına, ilişkisel):** baskın adımın (pitch) ana axis
+  izdüşümünden tespiti; adayın en yakın lattice düğümüne uzaklığı; aynı sırada eş-doğrusal
   komşu sayısı; sıra içi rank; ayna simetrisi tutarlılığı.
-- **Tez etkisi:** yok. Yalnız gate/son-işlem katmanı; `v_o` türetmesi ve aday üretici
+- **Tez etkisi:** yok. Yalnız gate/son-işlem katmanı; `v_o` türetmesi ve candidate üretici
   aynen kalır.
 - **Tavan sondası T3:** aynı kNN protokolü. **Bedava** — `_der_tam.pkl` içindeki `P`/`Pd`
   yeterli, ağ çıkarımı gerekmez.
 - **GO:** ayrılamaz pay ≥%20 göreli azalsın **ve** havuzlanmış ≥ +0.015.
-- **Yan ürün (AYRI ölçülür): kafes tamamlama.** Komşuları ateşlemiş boş kafes
-  düğümlerine aday öner. 366 yüksek-CP FN'nin doğal hedefi. Ayrı GO: yüksek-CP
+- **Yan ürün (AYRI ölçülür): lattice tamamlama.** Komşuları ateşlemiş boş lattice
+  düğümlerine candidate öner. 366 yüksek-CP FN'nin doğal hedefi. Ayrı GO: yüksek-CP
   ≥ +0.020 ve düşük-CP ≥ -0.005. C/B ile karıştırılmaz.
 
 ### A — Temsili büyüt (ağız-çevrimi oto-etiket)
 
-En yüksek tavanlı, en pahalı kol. Seg korpusu 71 → ~1500+.
+En yüksek tavanlı, en pahalı arm. Seg korpusu 71 → ~1500+.
 
 - **Nasıl:** her üretici CP'sinden ekleme yönü boyunca ışın; yüzeye çarptığı açıklığın
   **sınır çevrimi** CableEntry boyanır.
@@ -78,9 +78,9 @@ En yüksek tavanlı, en pahalı kol. Seg korpusu 71 → ~1500+.
 ## Sıra ve gerekçesi
 
 ```
-ŞİMDİ    T3  yapısal tavan ölçümü          bedava, önbellekten, GPU kullanmaz
-~3 saat  türetme biter → D5-3 → F2-12      ölçülmüş kazancı olan tek kol (veri)
-sonra    T2  gizli öznitelik tavan ölçümü   ağ boşalınca
+ŞİMDİ    T3  yapısal ceiling ölçümü          bedava, önbellekten, GPU kullanmaz
+~3 saat  türetme biter → D5-3 → F2-12      ölçülmüş kazancı olan tek arm (veri)
+sonra    T2  gizli öznitelik ceiling ölçümü   ağ boşalınca
          geçen kolu TEK BAŞINA dağıt        atıf korunur
 GECE     A   oto-etiket + seg eğitimi       uzun eğitim uykuya
 ```
@@ -96,15 +96,15 @@ Kritik yol aç bırakılır: veri kolu şu an koşuyor ve ölçülmüş kazancı
 
 - Veri kolu: +0.03 ~ +0.05 (eğriden, ölçülmüş)
 - B: havuzlanmış katkısı sınırlı olabilir — yüksek-CP rejiminin ağırlığı %10.5
-- C: ölçülmemiş; tavan sorusunun gerçek cevabı burada
-- A: ölçülmemiş; düşük-CP'de aday tavanında +0.129 alınmamış pay var ve ona **yalnız
+- C: ölçülmemiş; ceiling sorusunun gerçek cevabı burada
+- A: ölçülmemiş; düşük-CP'de candidate tavanında +0.129 alınmamış pay var ve ona **yalnız
   temsil** dokunabiliyor
 
 0.85'i gören senaryo: veri + A + C. B tek başına 0.85 getirmez ama FN kovasını açar.
 
 ## Doğrulama
 
-- Her kol için önce tavan sondası; ≥%20 göreli azalma yoksa **kurulmaz**
-- Dağıtım kararları grup-bootstrap ile, `protokol.dogrula()` zorunlu
-- LOCKED'e dokunulmaz; [[locked-sinav-kirliligi-yakalandi]] bekçisi açık kalır
+- Her arm için önce ceiling sondası; ≥%20 göreli azalma yoksa **kurulmaz**
+- Dağıtım kararları grup-bootstrap ile, `protocol.dogrula()` zorunlu
+- LOCKED'e dokunulmaz; [[locked-exam-kirliligi-yakalandi]] bekçisi açık kalır
 - `pytest tests/` yeşil kalır

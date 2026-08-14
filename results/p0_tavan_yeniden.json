@@ -1,5 +1,5 @@
 {
- "kume": "d6",
+ "cluster": "d6",
  "muhur": "71364f2a1718bba4",
  "kova": {
   "KALABALIK": 328,
@@ -52,8 +52,8 @@
  "hash": {
   "cp_config.json": "324844cda502",
   "wire_gate_v5.pkl": "e9539f3c4e57",
-  "p3c_eksen_secici.pkl": "ebc2190c6167",
-  "sina_kume.py": "5ae95338c0f9",
+  "p3c_axis_selector.pkl": "ebc2190c6167",
+  "sina_cluster.py": "5ae95338c0f9",
   "wire_gate.py": "4b163aec3b7a",
   "cp_openings.py": "d6bc011bd794",
   "robot_cp.py": "49678bc11bc6"

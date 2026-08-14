@@ -1,8 +1,8 @@
 {
- "korpus": "results/zengin_parite_v6.npz",
- "aday": 53036,
- "parca": 2583,
- "uretici": [
+ "corpus": "results/zengin_parite_v6.npz",
+ "candidate": 53036,
+ "part": 2583,
+ "manufacturer": [
   "ABB",
   "MDI",
   "PXC",

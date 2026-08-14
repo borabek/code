@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Interactive 3D adjudication page for the model-vs-human disagreements.
 
-Two static renders are not enough to judge whether a red marker sits on a real wire opening or on a
+Two static renders are not enough to judge whether a red marker sits ten a real wire opening or ten a
 screw head -- you have to turn the part. This builds ONE self-contained page (three.js from CDN, same
 engine and controls as label_tool.html, which the annotator already knows: drag = rotate, wheel =
 zoom) holding every part's mesh, with the annotator's own marks in green and each disputed model CP
@@ -12,60 +12,60 @@ Meshes are packed as base64 Float32/Uint32 so the page stays a few MB rather tha
 
 Usage: PYTHONPATH=_diffusion_net_repo/src .venv/Scripts/python.exe build_adjudication3d.py
 """
-import os, sys, json, base64
-import numpy as np
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from region_label_helper import load_obj
-import connector3d
+import os ,sys ,json ,base64 
+import numpy as np 
+sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
+from region_label_helper import load_obj 
+import connector3d 
 
-CE = int(connector3d.CABLE_ENTRY)
-OUT = "results/adjudicate/adjudicate3d.html"
-
-
-def pack(a, dtype):
-    return base64.b64encode(np.ascontiguousarray(a, dtype).tobytes()).decode("ascii")
+CE =int (connector3d .CABLE_ENTRY )
+OUT ="results/adjudicate/adjudicate3d.html"
 
 
-def main():
-    import argparse
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--input", default="results/disagreements.json")
-    ap.add_argument("--out", default=OUT)
-    ap.add_argument("--key", default="cp_adjudication_v1",
-                    help="localStorage key -- give each round its OWN key so a later round never "
-                         "shows (or overwrites) the previous round's answers")
-    a = ap.parse_args()
-    out_path = a.out
-    dis = json.load(open(a.input))
-    by_part = {}
-    for it in dis["items"]:
-        by_part.setdefault((it["part_id"], it["dir"]), []).append(it)
+def pack (a ,dtype ):
+    return base64 .b64encode (np .ascontiguousarray (a ,dtype ).tobytes ()).decode ("ascii")
 
-    parts = []
-    for (pid, root), items in sorted(by_part.items()):
-        of = os.path.join(root, pid, f"{pid}.obj")
-        lf = os.path.join(root, pid, f"{pid}.labels.txt")
-        if not (os.path.exists(of) and os.path.exists(lf)):
-            continue
-        V, F = load_obj(of)
-        L = np.array([int(x) for x in open(lf).read().split()], np.int64)
-        if len(L) != len(V):
-            continue
-        c = V.mean(0)
-        parts.append({
-            "pid": pid,
-            "v": pack(V - c, np.float32),          # centre it so the camera framing is trivial
-            "f": pack(F, np.uint32),
-            "m": pack((L == CE).astype(np.uint8), np.uint8),   # the annotator's own marks
-            "pts": [{"p": (np.asarray(it["point"], float) - c).round(3).tolist(),
-                     "src": it["source"], "nv": it["n_verts"],
-                     "near": it["nearest_human_mm"]} for it in items],
+
+def main ():
+    import argparse 
+    ap =argparse .ArgumentParser ()
+    ap .add_argument ("--input",default ="results/disagreements.json")
+    ap .add_argument ("--out",default =OUT )
+    ap .add_argument ("--key",default ="cp_adjudication_v1",
+    help ="localStorage key -- give each round its OWN key so a later round never "
+    "shows (or overwrites) the previous round's answers")
+    a =ap .parse_args ()
+    out_path =a .out 
+    dis =json .load (open (a .input ))
+    by_part ={}
+    for it in dis ["items"]:
+        by_part .setdefault ((it ["part_id"],it ["dir"]),[]).append (it )
+
+    parts =[]
+    for (pid ,root ),items in sorted (by_part .items ()):
+        of =os .path .join (root ,pid ,f"{pid }.obj")
+        lf =os .path .join (root ,pid ,f"{pid }.labels.txt")
+        if not (os .path .exists (of )and os .path .exists (lf )):
+            continue 
+        V ,F =load_obj (of )
+        L =np .array ([int (x )for x in open (lf ).read ().split ()],np .int64 )
+        if len (L )!=len (V ):
+            continue 
+        c =V .mean (0 )
+        parts .append ({
+        "pid":pid ,
+        "v":pack (V -c ,np .float32 ),# centre it so the camera framing is trivial
+        "f":pack (F ,np .uint32 ),
+        "m":pack ((L ==CE ).astype (np .uint8 ),np .uint8 ),# the annotator's own marks
+        "pts":[{"p":(np .asarray (it ["point"],float )-c ).round (3 ).tolist (),
+        "src":it ["source"],"nv":it ["n_verts"],
+        "near":it ["nearest_human_mm"]}for it in items ],
         })
-        print(f"  {pid}: {len(V)}v, {len(items)} anlasmazlik", flush=True)
+        print (f"  {pid }: {len (V )}v, {len (items )} anlasmazlik",flush =True )
 
-    n_items = sum(len(p["pts"]) for p in parts)
-    data = json.dumps(parts, separators=(",", ":"))
-    doc = """<!doctype html><meta charset=utf-8><title>CP hakemleme 3D</title>
+    n_items =sum (len (p ["pts"])for p in parts )
+    data =json .dumps (parts ,separators =(",",":"))
+    doc ="""<!doctype html><meta charset=utf-8><title>CP hakemleme 3D</title>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 <style>
@@ -165,7 +165,7 @@ function show(i){
     el.innerHTML=`<div class=qh><div class=dot>${k+1}</div>
       <div class=meta>${q.src}, ${q.nv} vertex, en yakin isaretin ${q.near}mm</div></div>
       <div class=opts>
-      <label><input type=radio name="${id}" value=opening ${v==="opening"?"checked":""}>gercek aciklik (atlamisim)</label>
+      <label><input type=radio name="${id}" value=opening ${v==="opening"?"checked":""}>gercek opening (atlamisim)</label>
       <label><input type=radio name="${id}" value=not_cp ${v==="not_cp"?"checked":""}>CP degil (vida/yuva)</label>
       <label><input type=radio name="${id}" value=unsure ${v==="unsure"?"checked":""}>emin degilim</label></div>`;
     el.onmouseenter=()=>highlight(k); el.onclick=()=>highlight(k);
@@ -196,12 +196,12 @@ function dl(){
 addEventListener("keydown",e=>{if(e.key==="ArrowRight")go(1);if(e.key==="ArrowLeft")go(-1);});
 show(0);
 </script>"""
-    doc = doc.replace("__DATA__", data).replace("__NITEMS__", str(n_items)).replace("__KEY__", a.key)
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    open(OUT, "w", encoding="utf-8").write(doc)
-    mb = os.path.getsize(OUT) / 1e6
-    print(f"\n-> {OUT}  ({len(parts)} parca, {n_items} anlasmazlik, {mb:.1f} MB)")
+    doc =doc .replace ("__DATA__",data ).replace ("__NITEMS__",str (n_items )).replace ("__KEY__",a .key )
+    os .makedirs (os .path .dirname (OUT ),exist_ok =True )
+    open (OUT ,"w",encoding ="utf-8").write (doc )
+    mb =os .path .getsize (OUT )/1e6 
+    print (f"\n-> {OUT }  ({len (parts )} part, {n_items } anlasmazlik, {mb :.1f} MB)")
 
 
-if __name__ == "__main__":
-    main()
+if __name__ =="__main__":
+    main ()

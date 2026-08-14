@@ -1,19 +1,19 @@
 {
- "kume": "results/d7_sinav_kumesi.json",
+ "cluster": "results/d7_sinav_kumesi.json",
  "muhur": "4bdb5c2ed81fe89f",
  "n": 835,
  "tespit": {
   "f1": 0.4645591634952307,
-  "kesinlik": 0.4687732342007435,
+  "precision": 0.4687732342007435,
   "recall": 0.40848720440557174
  },
  "robot": {
   "f1": 0.22003457532195017,
-  "kesinlik": 0.20297397769516728,
+  "precision": 0.20297397769516728,
   "recall": 0.17687074829931973
  },
  "donusum": 0.473641664210137,
- "rejim": {
+ "regime": {
   "cok": {
    "tespit": 0.3092917478882391,
    "robot": 0.04808317089018843
@@ -23,7 +23,7 @@
    "robot": 0.24020764511562054
   }
  },
- "uretici": {
+ "manufacturer": {
   "A-B": {
    "n": 124,
    "tespit": 0.5559694950911641,
@@ -92,17 +92,17 @@
  "kabul": {
   "robot >= 0.75": false,
   "bootstrap alt >= 0.70": false,
-  "kesinlik >= 0.70": false,
+  "precision >= 0.70": false,
   "recall >= 0.70": false,
   "dusuk-CP >= 0.80": false,
   "cok-CP >= 0.50": false,
-  ">=20 parcali uretici < 0.50 YOK": false
+  ">=20 parcali manufacturer < 0.50 YOK": false
  },
  "hash": {
   "cp_config.json": "9c42853b08b7",
   "wire_gate_v5.pkl": "e9539f3c4e57",
-  "p3c_eksen_secici.pkl": "ebc2190c6167",
-  "sina_kume.py": "5ae95338c0f9",
+  "p3c_axis_selector.pkl": "ebc2190c6167",
+  "sina_cluster.py": "5ae95338c0f9",
   "wire_gate.py": "4b163aec3b7a",
   "cp_openings.py": "d6bc011bd794",
   "robot_cp.py": "af5706c6e7ff"
@@ -111,8 +111,8 @@
   "seg": "g7_s0",
   "yaricap": "1/2/2",
   "gate": "wire_gate_v6",
-  "esik": "0.4/0.3",
-  "secici": "p3c"
+  "threshold": "0.4/0.3",
+  "selector": "p3c"
  },
- "sinirlilik": "eksen secici g5 aday dagiliminda egitildi; muhafazakar secim -- etkisi varsa sayiyi DUSURUR"
+ "sinirlilik": "axis selector g5 candidate dagiliminda egitildi; muhafazakar secim -- etkisi varsa sayiyi DUSURUR"
 }
