@@ -325,7 +325,7 @@ gamma =1.0 ):
     return loss 
 
 
-def sinir_kaybi (probs ,target ,kenar ,eps =1e-6 ):
+def sinir_kaybi (probs ,target ,edge_ ,eps =1e-6 ):
     """Y13 -- SINIR-FARKINDALI KAYIP.
 
     CP fiziksel as a SINIRDIR (hole mouth cemberi), but mevcut loss
@@ -337,12 +337,12 @@ def sinir_kaybi (probs ,target ,kenar ,eps =1e-6 ):
     ek a odak terimi. Sinir kumesi bossa 0 returns (loss DEGISMEZ).
     """
     torch =_require ("torch","pip install torch")
-    if kenar is None or not bool (kenar .any ()):
+    if edge_ is None or not bool (edge_ .any ()):
         return probs .sum ()*0.0 
     import torch .nn .functional as Fnn 
     t =Fnn .one_hot (target ,probs .shape [-1 ]).to (probs .dtype )
     p_dogru =(probs *t ).sum (-1 ).clamp (eps ,1.0 )
-    return -(torch .log (p_dogru [kenar ])).mean ()
+    return -(torch .log (p_dogru [edge_ ])).mean ()
 
 
 def _kenar_maskesi (lab ,F ):
@@ -351,10 +351,10 @@ def _kenar_maskesi (lab ,F ):
     if F is None or not len (F ):
         return None 
     e =torch .cat ([F [:,[0 ,1 ]],F [:,[1 ,2 ]],F [:,[2 ,0 ]]],0 )
-    farkli =lab [e [:,0 ]]!=lab [e [:,1 ]]
+    diff_ =lab [e [:,0 ]]!=lab [e [:,1 ]]
     m =torch .zeros_like (lab ,dtype =torch .bool )
-    m [e [farkli ][:,0 ]]=True 
-    m [e [farkli ][:,1 ]]=True 
+    m [e [diff_ ][:,0 ]]=True 
+    m [e [diff_ ][:,1 ]]=True 
     return m 
 
 
@@ -749,7 +749,7 @@ def _demo ():
     except ImportError as exc :
         print ("note:",exc )
         print ("-> without torch/diffusion_net only the integration is provided;")
-        print ("   train/predict/checkpoint work once torch + diffusion_net are installed.")
+        print ("   train/predict/checkpoint work before torch + diffusion_net are installed.")
 
 
 if __name__ =="__main__":

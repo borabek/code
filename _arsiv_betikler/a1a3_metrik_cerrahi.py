@@ -63,7 +63,7 @@ def main ():
 
     def olc (eksen_tol ,kesin =False ,robot =False ):
         """conclusive=True: ambiguous eslesmeler TP sayilmaz (lower boundary)."""
-        rows ,aci ,belirsiz ,toplam =[],[],0 ,0 
+        rows ,aci ,belirsiz ,total_ =[],[],0 ,0 
         for r in DER :
             P ,Pd =CIKTI [r ["pid"]]
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
@@ -74,12 +74,12 @@ def main ():
             else :
                 tp ,fp ,fn ,b =match_greedy (P ,Pd ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True ,
                 eksen_tol =eksen_tol )
-            nb =b ["belirsiz"];belirsiz +=nb ;toplam +=tp 
+            nb =b ["belirsiz"];belirsiz +=nb ;total_ +=tp 
             if kesin and nb :
                 tp -=nb ;fp +=nb ;fn +=nb 
             rows .append ((rj ,tp ,fp ,fn ))
             aci +=[e [4 ]for e in b ["eslesme"]]
-        return rows ,np .array (aci ),belirsiz ,toplam 
+        return rows ,np .array (aci ),belirsiz ,total_ 
 
     print ("="*78 )
     print ("A1 -- EKSENEL TOLERANS (tespit)")
@@ -115,7 +115,7 @@ def main ():
             f" (%{100 *(aci >threshold ).mean ():.1f})")
 
     print ("\n"+"="*78 )
-    print ("ROBOT (FIZIKSEL) metrigi ayni cerrahi ile")
+    print ("ROBOT (FIZIKSEL) metrigi same cerrahi with")
     print ("="*78 )
     for et in (40.0 ,15.0 ):
         rows ,_ ,bel ,top =olc (et ,robot =True )

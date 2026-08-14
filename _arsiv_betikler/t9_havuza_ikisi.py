@@ -67,9 +67,9 @@ def main ():
         ort =DIR .mean (0 );ort /=np .linalg .norm (ort )+1e-9 
         a_ort =np .degrees (np .arccos (np .clip (np .abs (DIR @ort ),0 ,1 )))
         a_bir =np .degrees (np .arccos (np .clip (np .abs (DIR @DIR [0 ]),0 ,1 )))
-        sira =np .argsort (np .argsort (-CONF ))
+        rank_ =np .argsort (np .argsort (-CONF ))
         F =np .array ([[CONF [u ],MES [u ],a_ort [u ],a_bir [u ],float (len (DIR )),
-        float (np .mean (a_ort )),float (sira [u ])]+X58i .tolist ()
+        float (np .mean (a_ort )),float (rank_ [u ])]+X58i .tolist ()
         for u in range (len (DIR ))],float )
         if F .shape [1 ]!=uye_m ["n_feat"]:
             return DIR [0 ]

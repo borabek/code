@@ -65,7 +65,7 @@ if len (D ):
     print (f"\n  isin carpma noktasinin CP'ye uzakligi: medyan {np .median (D ):.1f}mm  %90 {np .percentile (D ,90 ):.1f}mm")
 print ()
 print ("OKUMA: KAPALI orani yuksekse candidate havuzu tavani (0.8579) SAHTE DUSUK --")
-print ("       o CP'ler zaten ulasilamaz, recall'imiz gorundugunden IYI.")
+print ("       that CP'ler already ulasilamaz, recall'imiz gorundugunden IYI.")
 json .dump ({"toplam":top ,"acik":ACIK ,"kapali":KAPALI ,
 "acik_oran":ACIK /max (top ,1 ),"medyan_mm":float (np .median (D ))if len (D )else None },
 io .open ("results/a1_ulasilabilirlik.json","w"),indent =1 )

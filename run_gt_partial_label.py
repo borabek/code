@@ -69,7 +69,7 @@ def main ():
     flush =True )
     assert tam and not (tam &yasak ),"tam kumesi d6/d7 ile KESISIYOR"
 
-    yazilan =atlanan =bos =leakage =0 
+    yazilan =atlanan =empty_ =leakage =0 
     poz_top =tepe_top =0 
     for pid ,r in sorted (kay .items ()):
         pid =str (pid )
@@ -83,13 +83,13 @@ def main ():
         G =np .asarray (r .get ("G",[]),float )
         mf =f"{MESH }/{pid }.npz"
         if not len (G )or not os .path .exists (mf ):
-            bos +=1 
+            empty_ +=1 
             continue 
         z =np .load (mf )
         V =np .asarray (z ["V"],float )
         F =np .asarray (z ["F"],int )
         if not len (V )or not len (F ):
-            bos +=1 
+            empty_ +=1 
             continue 
         L =np .zeros (len (V ),np .int64 )
         agac =cKDTree (V )
@@ -119,7 +119,7 @@ def main ():
                 m_ =(yan <=PAINT_R )&(al <=AGIZ_PAY )&(al >=-DERIN )
             L [kom [m_ ]]=CE 
         if not (L >0 ).any ():
-            bos +=1 
+            empty_ +=1 
             continue 
         os .makedirs (hedef ,exist_ok =True )
         with open (f"{hedef }/{pid }.obj","w")as f :
@@ -136,12 +136,12 @@ def main ():
             print (f"  {yazilan } yazildi ({time .time ()-t0 :.0f} s)",
             flush =True )
 
-    print (f"\nBITTI: yazilan {yazilan } | cache {atlanan } | bos {bos }")
+    print (f"\nBITTI: yazilan {yazilan } | cache {atlanan } | bos {empty_ }")
     print (f"SIZINTI BEKCISI: {leakage } part (d6/d7) DISARIDA BIRAKILDI")
     if tepe_top :
         print (f"signed tepe orani: {poz_top /tepe_top :.4f} "
         f"({poz_top } / {tepe_top })")
-        print ("  (elle etiketli korpusta kablo girisi ~%1.5; benzer olmali)")
+        print ("  (elle etiketli korpusta kablo girisi ~%1.5; benzer must be)")
     print (f"-> {CIK }")
 
 

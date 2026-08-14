@@ -67,8 +67,8 @@ def dengele (mfg ,pid ,tavan_pay =0.25 ,rng =0 ):
     parts =collections .defaultdict (list )
     for p ,m in parca_mfg .items ():
         parts [m ].append (p )
-    toplam =len (parca_mfg )
-    ceiling =max (1 ,int (tavan_pay *toplam ))
+    total_ =len (parca_mfg )
+    ceiling =max (1 ,int (tavan_pay *total_ ))
     tut =set ()
     for m ,ps in parts .items ():
         ps =sorted (ps )
@@ -78,11 +78,11 @@ def dengele (mfg ,pid ,tavan_pay =0.25 ,rng =0 ):
     return np .isin (pid ,sorted (tut ))
 
 
-def olc (model ,kayit ,match_greedy ,f1w ):
+def olc (model ,rec_ ,match_greedy ,f1w ):
     import wire_gate 
     T ,R =[],[]
     Tm =collections .defaultdict (list )
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
@@ -110,8 +110,8 @@ def main ():
     sv =json .load (io .open (KUME ,encoding ="utf-8"))
     PID =set (sv ["pidler"])
     import d6_record 
-    kayit =d6_record .yukle (PID )
-    print (f"TEMIZ SINAV: {len (kayit )} part | muhur {sv ['sha16']}\n")
+    rec_ =d6_record .yukle (PID )
+    print (f"TEMIZ SINAV: {len (rec_ )} part | muhur {sv ['sha16']}\n")
 
     d =np .load (V3 ,allow_pickle =True )
     X =np .hstack ([d ["X22"],d ["XR"]]).astype (float )
@@ -130,31 +130,31 @@ def main ():
     kollar ["v5-DENGE"]=egit (X [msk ],y [msk ],pid [msk ])
 
     print (f"\n{'arm':<20}{'TESPIT':>9}{'ROBOT':>9}{'kill':>8}")
-    sonuc ={}
+    res_ ={}
     for ad ,m in kollar .items ():
-        tf ,rf ,um =olc (m ,kayit ,match_greedy ,f1w )
+        tf ,rf ,um =olc (m ,rec_ ,match_greedy ,f1w )
         kill =""if ad .startswith ("TABAN")else ("GECTI"if tf >TABAN_TESPIT else "KALDI")
         print (f"{ad :<20}{tf :>9.4f}{rf :>9.4f}{kill :>8}")
-        sonuc [ad ]={"tespit":tf ,"robot":rf ,"manufacturer":um }
+        res_ [ad ]={"tespit":tf ,"robot":rf ,"manufacturer":um }
 
     print (f"\n{'manufacturer':<8}"+"".join (f"{k [:12 ]:>14}"for k in kollar ))
-    urs =sorted ({u for k in sonuc for u in sonuc [k ]["manufacturer"]})
+    urs =sorted ({u for k in res_ for u in res_ [k ]["manufacturer"]})
     for u in urs :
-        print (f"{u :<8}"+"".join (f"{sonuc [k ]['manufacturer'].get (u ,float ('nan')):>14.4f}"
+        print (f"{u :<8}"+"".join (f"{res_ [k ]['manufacturer'].get (u ,float ('nan')):>14.4f}"
         for k in kollar ))
 
     en_iyi =max ((k for k in kollar if not k .startswith ("TABAN")),
-    key =lambda k :sonuc [k ]["tespit"])
-    print (f"\nEN IYI YENI KOL: {en_iyi } tespit {sonuc [en_iyi ]['tespit']:.4f} "
-    f"(baseline {TABAN_TESPIT :.4f}, fark {sonuc [en_iyi ]['tespit']-TABAN_TESPIT :+.4f})")
-    if sonuc [en_iyi ]["tespit"]>TABAN_TESPIT :
+    key =lambda k :res_ [k ]["tespit"])
+    print (f"\nEN IYI YENI KOL: {en_iyi } tespit {res_ [en_iyi ]['tespit']:.4f} "
+    f"(baseline {TABAN_TESPIT :.4f}, fark {res_ [en_iyi ]['tespit']-TABAN_TESPIT :+.4f})")
+    if res_ [en_iyi ]["tespit"]>TABAN_TESPIT :
         with open ("results/wire_gate_v5.pkl","wb")as f :
             pickle .dump (kollar [en_iyi ],f )
-        print ("  -> results/wire_gate_v5.pkl yazildi (DAGITILMADI; wire_gate.pkl dokunulmadi)")
+        print ("  -> results/wire_gate_v5.pkl yazildi (NOT DEPLOYED; wire_gate.pkl dokunulmadi)")
     else :
-        print ("  -> KILL: hicbir arm tabani gecmedi, model YAZILMADI")
+        print ("  -> KILL: no arm tabani gecmedi, model YAZILMADI")
     json .dump ({k :{"tespit":v ["tespit"],"robot":v ["robot"],"manufacturer":v ["manufacturer"]}
-    for k ,v in sonuc .items ()}|{"taban_tespit":TABAN_TESPIT ,
+    for k ,v in res_ .items ()}|{"taban_tespit":TABAN_TESPIT ,
     "muhur":sv ["sha16"],"tavan_pay":a .tavan_pay },
     io .open (MAKBUZ ,"w",encoding ="utf-8"),indent =1 )
     print (f"receipt -> {MAKBUZ }")

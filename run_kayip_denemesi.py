@@ -65,10 +65,10 @@ def yap (**kw ):
     l2_regularization =1.0 ,random_state =0 ,**kw )
 
 
-def puanla (veri ,skor ,kural ):
+def puanla (data_ ,skor ,rule_ ):
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,s in zip (veri ,skor ):
-        P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,kural ,nms_mm =NMS )
+    for d ,s in zip (data_ ,skor ):
+        P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =NMS )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
         q =per [d ["mfg"]]
@@ -82,28 +82,28 @@ def puanla (veri ,skor ,kural ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } | gamma={GAMMA }",flush =True )
+    print (f"{len (data_ )} part | katlar {katlar } | gamma={GAMMA }",flush =True )
 
     KOLLAR =("baseline","agirlik","focal","agirlik_focal")
     top ={k :collections .Counter ()for k in KOLLAR }
     kat_sonuc ={}
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_s =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_s =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         alt =np .concatenate ([poz ,rng .choice (
@@ -143,14 +143,14 @@ def main ():
 
         kat_sonuc [b ]={}
         for ad ,m in modeller .items ():
-            s_ic =[m .predict_proba (veri [i ]["_M"])[:,1 ]for i in ic ]
-            s_dis =[m .predict_proba (veri [i ]["_M"])[:,1 ]for i in dis ]
+            s_ic =[m .predict_proba (data_ [i ]["_M"])[:,1 ]for i in ic ]
+            s_dis =[m .predict_proba (data_ [i ]["_M"])[:,1 ]for i in dis ]
             ar =np .random .default_rng (0 ).choice (
             len (ic ),min (120 ,len (ic )),replace =False )
-            AR =[veri [ic [j ]]for j in ar ]
+            AR =[data_ [ic [j ]]for j in ar ]
             AS =[s_ic [j ]for j in ar ]
-            kural =max (KURALLAR ,key =lambda k :puanla (AR ,AS ,k )["makro"])
-            r =puanla ([veri [i ]for i in dis ],s_dis ,kural )
+            rule_ =max (KURALLAR ,key =lambda k :puanla (AR ,AS ,k )["makro"])
+            r =puanla ([data_ [i ]for i in dis ],s_dis ,rule_ )
             for k_ in ("TP","FP","FN"):
                 top [ad ][k_ ]+=r [k_ ]
             kat_sonuc [b ][ad ]=r ["robot"]
@@ -158,17 +158,17 @@ def main ():
         f"{a } {kat_sonuc [b ][a ]:.4f}"for a in KOLLAR )
         +f"  ({time .time ()-t0 :.0f} s)",flush =True )
 
-    son ={}
+    last_ ={}
     for ad in KOLLAR :
         c =top [ad ]
-        son [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
+        last_ [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
     print (f"\n=== KAYIP DENEMESI (MIKRO) ===")
     for ad in KOLLAR :
-        fark =son [ad ]-son ["baseline"]
-        print (f"  {ad :<15}{son [ad ]:.4f}   {fark :+.4f}"
+        fark =last_ [ad ]-last_ ["baseline"]
+        print (f"  {ad :<15}{last_ [ad ]:.4f}   {fark :+.4f}"
         +("  <- KAPI GECTI"if fark >=0.01 else ""))
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"gamma":GAMMA ,
-    "toplam":son ,"fold":kat_sonuc ,
+    "toplam":last_ ,"fold":kat_sonuc ,
     "not":"Kayip fonksiyonu kollari: alt-ornekleme / sinif "
     "agirligi / focal / ikisi. AYNI oznitelik, fold, kural "
     "aramasi. D7'ye BAKILMADI."},

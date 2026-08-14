@@ -102,7 +102,7 @@ def main ():
     B =bayraklari_uret (DER ,CIKTI )
     AGIZ =pickle .load (open ("results/_gt_agiz.pkl","rb"))
 
-    satir =[]
+    line_ =[]
     for r in DER :
         P ,Pd =CIKTI [r ["pid"]]
         bl =B .get (r ["pid"])or []
@@ -115,25 +115,25 @@ def main ():
         for i in range (len (P )):
             b =bl [i ]
             ax ,ac =eslesen .get (i ,(None ,None ))
-            satir .append ({"pid":r ["pid"],"mfg":r .get ("mfg","?"),"regime":rj ,
+            line_ .append ({"pid":r ["pid"],"mfg":r .get ("mfg","?"),"regime":rj ,
             "tp":i in eslesen ,
             "govde_ici":bool (b ["govde_ici"]),
             "onu_kapali":bool (np .isfinite (b ["ileri"])and b ["ileri"]<ILERI_MIN ),
             "duvara_yapisik":bool (np .isfinite (b ["ic_cap"])and 0 <b ["ic_cap"]<IC_CAP_MIN ),
             "eksenel_buyuk":bool (ax is not None and abs (ax )>EKSEN_MAX ),
             "ic_cap":float (b ["ic_cap"]),"ileri":float (b ["ileri"])})
-    n =len (satir )
+    n =len (line_ )
     BAY =("govde_ici","onu_kapali","duvara_yapisik","eksenel_buyuk")
     kusur =lambda s :any (s [k ]for k in BAY )
     print (f"\n{'='*78 }\nA4 -- FIZIKSEL GECERLILIK (194 part, {n } uretilen CP)\n{'='*78 }")
     print (f"{'bayrak':<18}{'sayi':>7}{'ratio':>8}   {'TP icinde':>10}{'FP icinde':>11}")
-    ntp =sum (1 for s in satir if s ["tp"]);nfp =n -ntp 
+    ntp =sum (1 for s in line_ if s ["tp"]);nfp =n -ntp 
     for k in BAY :
-        c =sum (1 for s in satir if s [k ])
-        t =sum (1 for s in satir if s [k ]and s ["tp"])
+        c =sum (1 for s in line_ if s [k ])
+        t =sum (1 for s in line_ if s [k ]and s ["tp"])
         print (f"{k :<18}{c :>7}{100 *c /max (n ,1 ):>7.1f}%   {t :>10}{c -t :>11}")
-    ck =sum (1 for s in satir if kusur (s ))
-    ckt =sum (1 for s in satir if kusur (s )and s ["tp"])
+    ck =sum (1 for s in line_ if kusur (s ))
+    ckt =sum (1 for s in line_ if kusur (s )and s ["tp"])
     print (f"{'HERHANGI BIRI':<18}{ck :>7}{100 *ck /max (n ,1 ):>7.1f}%   {ckt :>10}{ck -ckt :>11}")
     print (f"\nTP {ntp } | FP {nfp }")
     print (f"  TP'lerin kusurlu orani: %{100 *ckt /max (ntp ,1 ):.1f}")
@@ -141,14 +141,14 @@ def main ():
 
     print (f"\n{'regime':<10}{'CP':>7}{'kusurlu':>9}{'ratio':>8}{'TP kusur':>10}{'FP kusur':>10}")
     for rj in ("dusuk","cok"):
-        alt =[s for s in satir if s ["regime"]==rj ]
+        alt =[s for s in line_ if s ["regime"]==rj ]
         c =sum (1 for s in alt if kusur (s ))
         t =sum (1 for s in alt if kusur (s )and s ["tp"])
         print (f"{rj :<10}{len (alt ):>7}{c :>9}{100 *c /max (len (alt ),1 ):>7.1f}%{t :>10}{c -t :>10}")
 
     print (f"\n{'manufacturer':<10}{'CP':>7}{'kusurlu':>9}{'ratio':>8}")
-    for m in sorted ({s ["mfg"]for s in satir }):
-        alt =[s for s in satir if s ["mfg"]==m ]
+    for m in sorted ({s ["mfg"]for s in line_ }):
+        alt =[s for s in line_ if s ["mfg"]==m ]
         c =sum (1 for s in alt if kusur (s ))
         print (f"{m :<10}{len (alt ):>7}{c :>9}{100 *c /max (len (alt ),1 ):>7.1f}%")
 
@@ -161,8 +161,8 @@ def main ():
     print (f"\n{'='*78 }\nB KOLU ICIN HUKUM (ZENGINLESME ORANI)\n{'='*78 }")
     print (f"  {'bayrak':<16}{'FP ratio':>9}{'TP ratio':>9}{'zenginlesme':>13}   verdict")
     for k in BAY :
-        t =sum (1 for s in satir if s [k ]and s ["tp"])
-        f =sum (1 for s in satir if s [k ]and not s ["tp"])
+        t =sum (1 for s in line_ if s [k ]and s ["tp"])
+        f =sum (1 for s in line_ if s [k ]and not s ["tp"])
         rt =t /max (ntp ,1 );rf =f /max (nfp ,1 )
         z =rf /max (rt ,1e-9 )
         hkm =("YAPISAL (yalniz TP'de tanimli)"if k =="eksenel_buyuk"else 
@@ -173,7 +173,7 @@ def main ():
         # birlige katilinca ratio yapisal as TP'ye kayar and kolu haksiz yere olu gosterir.
     FIZ =("govde_ici","onu_kapali","duvara_yapisik")
     fk =lambda s :any (s [k ]for k in FIZ )
-    ck2 =sum (1 for s in satir if fk (s ));ckt2 =sum (1 for s in satir if fk (s )and s ["tp"])
+    ck2 =sum (1 for s in line_ if fk (s ));ckt2 =sum (1 for s in line_ if fk (s )and s ["tp"])
     rk_t =ckt2 /max (ntp ,1 );rk_f =(ck2 -ckt2 )/max (nfp ,1 )
     print (f"  {'BIRLESIK(fiz)':<16}{100 *rk_f :>8.1f}%{100 *rk_t :>8.1f}%{rk_f /max (rk_t ,1e-9 ):>12.2f}x"
     f"   {ck2 } CP (%{100 *ck2 /max (n ,1 ):.1f})")
@@ -182,9 +182,9 @@ def main ():
     with io .open ("results/a4_fiziksel_gecerlilik.json","w",encoding ="utf-8")as f :
         json .dump ({"n_cp":n ,"tp":ntp ,"fp":nfp ,
         "kusurlu":ck ,"kusurlu_tp":ckt ,
-        "bayraklar":{k :{"toplam":sum (1 for s in satir if s [k ]),
-        "tp":sum (1 for s in satir if s [k ]and s ["tp"]),
-        "fp":sum (1 for s in satir if s [k ]and not s ["tp"])}
+        "bayraklar":{k :{"toplam":sum (1 for s in line_ if s [k ]),
+        "tp":sum (1 for s in line_ if s [k ]and s ["tp"]),
+        "fp":sum (1 for s in line_ if s [k ]and not s ["tp"])}
         for k in BAY },
         "esikler":{"ileri_min":ILERI_MIN ,"ic_cap_min":IC_CAP_MIN ,
         "eksen_max":EKSEN_MAX }},f ,indent =1 )

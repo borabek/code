@@ -43,16 +43,16 @@ def egit_ve_yaz (npz_yolu ,not_ek ):
     d =np .load (npz_yolu ,allow_pickle =True )
     XF =np .hstack ([np .asarray (d ["X22"],float ),np .asarray (d ["XR"],float )])
     y =np .asarray (d ["y"]);pid =np .array ([str (x )for x in d ["pids"]])
-    eski =pickle .load (open (GATE ,"rb"))
+    old_ =pickle .load (open (GATE ,"rb"))
     Z =np .zeros ((len (XF ),XF .shape [1 ]*2 ))
     for u in np .unique (pid ):
         i =np .where (pid ==u )[0 ]
-        Z [i ]=wire_gate .within_part (XF [i ],eski .get ("donusum"))
-    assert Z .shape [1 ]==eski ["n_feat"],(Z .shape ,eski ["n_feat"])
+        Z [i ]=wire_gate .within_part (XF [i ],old_ .get ("donusum"))
+    assert Z .shape [1 ]==old_ ["n_feat"],(Z .shape ,old_ ["n_feat"])
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (Z ,y )
-    yd =dict (eski );yd ["clf"]=clf 
-    n =eski .get ("note","")
+    yd =dict (old_ );yd ["clf"]=clf 
+    n =old_ .get ("note","")
     while EK in n :
         n =n .replace (EK ,"")
     yd ["note"]=n +not_ek 
@@ -78,7 +78,7 @@ def geri ():
     with io .open ("cp_config.json","w",encoding ="utf-8")as f :
         json .dump (cfg ,f ,indent =1 ,ensure_ascii =False )
     print (f"GERI ALINDI -> {ESKI } | {na } candidate / {np_ } part | MD5 {md5 [:12 ]}")
-    print ("  headline.py --yaz ile mansetı yeniden uretin.")
+    print ("  headline.py --yaz with mansetı yeniden uretin.")
 
 
 def main ():
@@ -134,20 +134,20 @@ def main ():
     print (f"  pozitif orani {y .mean ():.3%} (oncesi {np .asarray (zen ['y']).mean ():.3%})")
 
     # --- URUN GATE'INI YENIDEN EGIT (yapisi birebir korunur)
-    eski =pickle .load (open (GATE ,"rb"))
-    DON =eski .get ("donusum")
+    old_ =pickle .load (open (GATE ,"rb"))
+    DON =old_ .get ("donusum")
     XF =np .hstack ([X22 ,XR ])
     Z =np .zeros ((len (XF ),XF .shape [1 ]*2 ))
     for u in np .unique (pids ):
         i =np .where (pids ==u )[0 ]
         Z [i ]=wire_gate .within_part (XF [i ],DON )
-    assert Z .shape [1 ]==eski ["n_feat"]==116 ,(Z .shape ,eski ["n_feat"])
+    assert Z .shape [1 ]==old_ ["n_feat"]==116 ,(Z .shape ,old_ ["n_feat"])
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (Z ,y )
     # NOT'U BIR KEZ EKLE. Betigi ikinci times calistirinca `old` already W2 gate'i becomes and
     # duz birlestirme notu IKI KEZ writes (first kosuda became). Ek already varsa yeniden eklenmez.
-    yeni_d =dict (eski );yeni_d ["clf"]=clf 
-    n =eski .get ("note","")
+    yeni_d =dict (old_ );yeni_d ["clf"]=clf 
+    n =old_ .get ("note","")
     while EK in n :
         n =n .replace (EK ,"")
     yeni_d ["note"]=n +EK 

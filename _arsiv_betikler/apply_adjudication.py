@@ -126,7 +126,7 @@ def main ():
     print (f"  negatif birakilan bolge  : {n_neg }   (zaten dogruydu)")
     if not a .dry_run and (n_pos or n_ign ):
         print ("\n  Sonraki adim: ayni tarifle yeniden egit ve IKI olcumde de karsilastir")
-        print ("    (manufacturer hakemi + insan held-out). Kazanmazsa geri al -- git ile fark gorulebilir.")
+        print ("    (manufacturer hakemi + insan held-out). Kazanmazsa geri al -- git with difference gorulebilir.")
 
 
 if __name__ =="__main__":

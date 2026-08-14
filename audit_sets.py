@@ -13,7 +13,7 @@ def parts (tag ):
 tags =sys .argv [1 :]
 sets ={t :parts (t )for t in tags if parts (t )is not None }
 if len (sets )<2 :
-    print ("en az 2 gecerli tag gerekli");sys .exit (1 )
+    print ("at least 2 gecerli tag gerekli");sys .exit (1 )
 ref =next (iter (sets .values ()))
 allsame =True 
 for t ,s in sets .items ():

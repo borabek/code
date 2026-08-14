@@ -64,7 +64,7 @@ def main ():
     for k in sorted (say ):
         t ,f =tpfp [k ]
         print (f"{k :<16}{say [k ]:>7}{t :>7}{f :>7}{100 *f /max (t +f ,1 ):>10.1f}%")
-    print ("  -> bayrak sayisi arttikca FP olma olasiligi artiyorsa triyaj MESRU")
+    print ("  -> bayrak count arttikca FP olma olasiligi artiyorsa triyaj MESRU")
 
     # ---------- S4: TRIYAJ
     def kos (en_az ,red_esigi =None ):

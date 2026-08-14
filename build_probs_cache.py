@@ -63,7 +63,7 @@ def main ():
     todo =[p for p in parts if p [1 ]not in done and p [1 ]not in skip ]# KIMLIGE according to
     print (f"  bitmis {len (done )} | atlanan {len (skip )} | kalan {len (todo )}",flush =True )
     if not todo :
-        print ("yapacak is yok");return 
+        print ("yapacak is absent");return 
 
     models =[load_any (c ,dev =dev )[:2 ]for c in cfg ["current_product"]["checkpoints"]]
     for k ,(mfg ,pid ,jf ,stp ,n )in enumerate (todo ,1 ):

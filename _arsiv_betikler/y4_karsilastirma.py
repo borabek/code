@@ -37,7 +37,7 @@ from y2_fp_render import derinlik_haritasi ,YARICAP ,N # noqa: E402
 DIZIN ="results/fp_karsilastirma"
 
 
-def yuzeye_gore (son ):
+def yuzeye_gore (last_ ):
     """Derinligi NOKTAYA according to not CEVREDEKI YUZEYE according to ifade et.
 
     WHY REQUIRED: manufacturer CP'si kanalin ICINDE tanimli (isinlar ona varmadan ~5mm before yuzeye
@@ -49,11 +49,11 @@ def yuzeye_gore (son ):
     g =np .linspace (-YARICAP ,YARICAP ,N )
     yy ,xx =np .meshgrid (g ,g ,indexing ="ij")
     rr =np .sqrt (xx **2 +yy **2 )
-    halka =son [(rr >=6.0 )&(rr <=9.0 )]
+    halka =last_ [(rr >=6.0 )&(rr <=9.0 )]
     halka =halka [np .isfinite (halka )]
     if not len (halka ):
-        return son 
-    return son -float (np .median (halka ))
+        return last_ 
+    return last_ -float (np .median (halka ))
 
 
 def main ():
@@ -97,12 +97,12 @@ def main ():
         for i in idxs :
             f_ =FP [i ]
             p =np .array (f_ ["nokta"],float );d =np .array (f_ ["direction"],float )
-            son ,olc ,_ =derinlik_haritasi (V ,F ,p ,d )
-            if son is None :
+            last_ ,olc ,_ =derinlik_haritasi (V ,F ,p ,d )
+            if last_ is None :
                 continue 
-            son =yuzeye_gore (son )
+            last_ =yuzeye_gore (last_ )
             # ORTAK RENK OLCEGI: ayri olcekte two harita gorsel as KIYASLANAMAZ
-            hep =[son ]+([ref [0 ]]if ref is not None else [])
+            hep =[last_ ]+([ref [0 ]]if ref is not None else [])
             vv =np .concatenate ([x [np .isfinite (x )].ravel ()for x in hep 
             if np .isfinite (x ).any ()])
             lo ,hi =(float (np .percentile (vv ,2 )),float (np .percentile (vv ,98 )))if len (vv )>10 else (0.0 ,1.0 )
@@ -120,7 +120,7 @@ def main ():
                 fontsize =9.5 ,color ="#15703F",fontweight ="bold")
                 ax0 .set_xticks ([]);ax0 .set_yticks ([])
             ax1 =fig .add_subplot (1 ,n ,n )
-            im =ax1 .imshow (son ,origin ="lower",vmin =lo ,vmax =hi ,cmap ="viridis",
+            im =ax1 .imshow (last_ ,origin ="lower",vmin =lo ,vmax =hi ,cmap ="viridis",
             extent =[-YARICAP ,YARICAP ,-YARICAP ,YARICAP ])
             ax1 .plot (0 ,0 ,"w+",ms =15 ,mew =2.2 )
             ax1 .set_title ("ROBOTUN BULDUĞU\nüretici listesinde YOK",

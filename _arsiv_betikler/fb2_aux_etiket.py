@@ -72,8 +72,8 @@ def main ():
         if pid not in E :
             continue 
         jf ,stp =E [pid ]
-        cikti =os .path .join (yol ,f"{pid }.aux.txt")
-        if os .path .exists (cikti ):
+        out_ =os .path .join (yol ,f"{pid }.aux.txt")
+        if os .path .exists (out_ ):
             ok +=1 ;continue 
         try :
             m =trimesh .load (os .path .join (yol ,f"{pid }.obj"),process =False )
@@ -122,7 +122,7 @@ def main ():
                     continue 
                 y [r ]=0 if i in eslesen else 1 
             tel_t +=int ((y ==0 ).sum ());alet_t +=int ((y ==1 ).sum ())
-            np .savetxt (cikti ,y ,fmt ="%d")
+            np .savetxt (out_ ,y ,fmt ="%d")
             ok +=1 
         except Exception as e :
             print (f"    {pid }: {type (e ).__name__ }: {e }")

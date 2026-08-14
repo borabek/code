@@ -111,7 +111,7 @@ def main (limit =60 ):
             f"{time .time ()-t0 :.0f}s",flush =True )
 
     if not missed :
-        print ("kacirilan GT yok -- measurement anlamsiz");return 
+        print ("kacirilan GT absent -- measurement anlamsiz");return 
     print (f"\n=== {len (found )} BULUNAN vs {len (missed )} KACIRILAN GT ===\n")
     print (f"{'criterion':<22}{'BULUNAN':>10}{'KACIRILAN':>11}   yorum")
     out ={}

@@ -148,11 +148,11 @@ def main ():
                     K =0 
                     while K <len (pr )and pr [K ]>=0.60 :
                         K +=1 
-                    yeni =np .zeros (len (v ),bool )
+                    new_ =np .zeros (len (v ),bool )
                     if K :
-                        yeni [o [:K ]]=True 
+                        new_ [o [:K ]]=True 
                         # YIGIN KURALI: kesim only DARALTIR (mevcut kabulun lower kumesi)
-                    k =k &yeni if yeni .any ()else k 
+                    k =k &new_ if new_ .any ()else k 
                 if k .any ():
                     P =r ["P"][k ].copy ();Pd =r ["Pd"][k ].copy ()
                     cps =[{"point":P [i ],"direction":Pd [i ]}for i in range (len (P ))]

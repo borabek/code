@@ -119,11 +119,11 @@ def cluster (on ):
     return out 
 
 
-def kos (gate ,veri ,yapi_esik ,S ,tam =False ):
+def kos (gate ,data_ ,yapi_esik ,S ,tam =False ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
     silinen =0 
-    for d in veri :
+    for d in data_ :
         s =np .asarray (gate .predict_proba (
         wire_gate .within_part (d ["X"],"zskor"))[:,1 ],float )
         k =s >=ESIK 
@@ -175,15 +175,15 @@ def main ():
             en =(ye ,r )
     ye =en [0 ]
     baseline =kos (gate ,te ,None ,S ,tam =True )
-    yeni =kos (gate ,te ,ye ,S ,tam =True )
+    new_ =kos (gate ,te ,ye ,S ,tam =True )
     print (f"\nTABAN (arm kapali)   robot {baseline ['robot']:.4f} | tespit "
     f"{baseline ['tespit']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
-    print (f"YAPI  (threshold={ye })       robot {yeni ['robot']:.4f} | tespit "
-    f"{yeni ['tespit']:.4f} | TP {yeni ['TP']} FP {yeni ['FP']} | "
-    f"silinen {yeni ['silinen']}")
-    print (f"\nFARK {yeni ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02 "
+    print (f"YAPI  (threshold={ye })       robot {new_ ['robot']:.4f} | tespit "
+    f"{new_ ['tespit']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']} | "
+    f"silinen {new_ ['silinen']}")
+    print (f"\nFARK {new_ ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02 "
     f"(threshold gurultusu ~0.015)")
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"yapi":yeni ,
+    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"yapi":new_ ,
     "secilen_esik":ye ,
     "not":"Yapisal FP bastirma: parcanin baskin ekseninde es-aralikli "
     "komsu sayisi. Esik D6'da secildi. Isaret duzeltmesi IKI "

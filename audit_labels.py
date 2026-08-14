@@ -95,4 +95,4 @@ for d in DIRS :
     f"URETICI CP'ye YAKIN %{100 *len (near_all )/tot :5.1f} | UZAK %{100 *len (far_all )/tot :5.1f} | "
     f"manufacturer CP kapsamasi %{100 *np .mean (cov_all ):5.1f}")
 print ("\nYORUM: 'UZAK' orani yuksekse ya listelenmemis gercek opening ya ETIKET HATASI.")
-print ("       Kiyas icin ayni olcumu ESKI (guvenilen) turlarda da yap -- fark varsa yeni tur supheli.")
+print ("       Kiyas for same olcumu ESKI (guvenilen) turlarda da yap -- difference varsa new kind supheli.")

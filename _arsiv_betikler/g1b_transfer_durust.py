@@ -90,16 +90,16 @@ def main ():
     def yap (k ):
         def arm (X_ ,y_ ,pid_ ,mfg_ ,kp ,th ):
         # BU BOLMENIN own siralamasi (sizintisiz): kp'den turetilmis olani sec
-            anahtar =None 
+            key_ =None 
             for b ,mk in [("havuzlanmis",None )]+[(m +"-disi",kk )
             for kk ,m in D ["kod"].items ()]:
                 test =keep .copy ()
                 if mk is not None :
                     test =test &(mfg !=mk )
                 if np .array_equal (test ,kp )and b in SIRA :
-                    anahtar =b ;break 
-            sira =SIRA [anahtar if anahtar else "havuzlanmis"]
-            idx =np .array (sorted (sira [:k ]))
+                    key_ =b ;break 
+            rank_ =SIRA [key_ if key_ else "havuzlanmis"]
+            idx =np .array (sorted (rank_ [:k ]))
             Xs =X_ [:,idx ]
             Z =np .zeros ((len (Xs ),Xs .shape [1 ]*2 ))
             for u in np .unique (pid_ ):

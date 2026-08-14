@@ -102,4 +102,4 @@ for m in ("WEI","PXC"):
     if mk .sum ()>10 and Y [mk ].sum ()>3 and (Y [mk ]==0 ).sum ()>3 :
         print (f"    {m }: has_cone AUC {roc_auc_score (Y [mk ],HC [mk ]):.3f} (wire koni-ratio {HC [mk &(Y ==1 )].mean ():.2f} vs non {HC [mk &(Y ==0 )].mean ():.2f})")
 print ("\nKARAR: has_cone AUC >~0.65 -> HUNI GERCEK SINYAL, mevcut 13 feature'a ekle+olc degerli.")
-print ("       ~0.5 -> huni yok/ayirt etmiyor, bu lever de olu (durustce kapat).")
+print ("       ~0.5 -> huni absent/ayirt etmiyor, this lever de olu (durustce kapat).")

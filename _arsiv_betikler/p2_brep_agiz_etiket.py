@@ -137,7 +137,7 @@ def main ():
     import d6_record 
     import canonical_d7 as K 
 
-    os .makedirs (a .cikti ,exist_ok =True )
+    os .makedirs (a .out_ ,exist_ok =True )
     d7 ={str (p )for p in json .load (
     open ("results/d7_sinav_kumesi.json"))["pidler"]}
 
@@ -175,7 +175,7 @@ def main ():
             if ng ==0 or es /ng <a .en_az_oran :
                 top ["atlanan"]+=1 
                 continue 
-            d =os .path .join (a .cikti ,pid )
+            d =os .path .join (a .out_ ,pid )
             os .makedirs (d ,exist_ok =True )
             obj_yaz (os .path .join (d ,f"{pid }.obj"),V ,F )
             np .savetxt (os .path .join (d ,f"{pid }.labels.txt"),L ,fmt ="%d")
@@ -196,7 +196,7 @@ def main ():
     "not":"B-rep GERCEK mouth sinirindan uretilen kismi CableEntry "
     "etiketi. D7 kesisimi SIFIR (kod icinde assert)."},
     open ("results/p2_brep_etiket.json","w"),indent =1 )
-    print (f"-> {a .cikti }")
+    print (f"-> {a .out_ }")
 
 
 if __name__ =="__main__":

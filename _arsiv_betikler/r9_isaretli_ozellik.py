@@ -213,13 +213,13 @@ def main ():
     key =lambda v :v ["d_robot"])
     print (f"\nESKI en iyi {e_iyi ['d_robot']:+.4f} | YENI en iyi {y_iyi ['d_robot']:+.4f} "
     f"| FARK {y_iyi ['d_robot']-e_iyi ['d_robot']:+.4f}")
-    deger =y_iyi ["d_robot"]-e_iyi ["d_robot"]>=0.01 
-    print (f"\nHUKUM: {'ISARETLI OZNITELIKLER KAZANDIRIYOR -> R10 (training korpusunda yeniden turet + dagit)'if deger else 'signed oznitelikler anlamli katki vermiyor'}")
+    val_ =y_iyi ["d_robot"]-e_iyi ["d_robot"]>=0.01 
+    print (f"\nHUKUM: {'ISARETLI OZNITELIKLER KAZANDIRIYOR -> R10 (training korpusunda yeniden turet + dagit)'if val_ else 'signed oznitelikler anlamli katki vermiyor'}")
     with io .open ("results/r9_isaretli_ozellik.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,"ceiling":0.6580 ,
         "auc":{ad :float (roc_auc_score (LY ,o ))for ad ,o in OOF .items ()},
         "tarama":SON ,"eski_en_iyi":e_iyi ,"yeni_en_iyi":y_iyi ,
-        "deger":bool (deger )},f ,indent =1 )
+        "deger":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r9_isaretli_ozellik.json")
 
 

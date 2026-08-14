@@ -120,14 +120,14 @@ def oz2 (d ):
     """Ikinci kademe oznitelikleri: pahali olculer + kademe-1 skoru + baglam."""
     n =len (d ["s1"])
     s =d ["s1"][:,None ]
-    sira =(np .argsort (np .argsort (-d ["s1"]))/max (n -1 ,1 ))[:,None ]
-    return np .hstack ([d ["Z"],s ,sira ,np .full ((n ,1 ),float (n ))])
+    rank_ =(np .argsort (np .argsort (-d ["s1"]))/max (n -1 ,1 ))[:,None ]
+    return np .hstack ([d ["Z"],s ,rank_ ,np .full ((n ,1 ),float (n ))])
 
 
-def olc (veri ,s2clf ,e2 ,S ,tam =False ):
+def olc (data_ ,s2clf ,e2 ,S ,tam =False ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         if d .get ("bos"):
             tp ,fp ,fn =0 ,0 ,len (d ["G"])
             a =rob [d ["mfg"]]
@@ -194,14 +194,14 @@ def main ():
             en =(e2 ,r )
     e2 =en [0 ]
     baseline =olc (te ,None ,0.0 ,S ,tam =True )
-    yeni =olc (te ,s2 ,e2 ,S ,tam =True )
+    new_ =olc (te ,s2 ,e2 ,S ,tam =True )
     print (f"\nTABAN (tek kademe)  robot {baseline ['robot']:.4f} | tespit "
     f"{baseline ['tespit']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
-    print (f"IKI KADEME (e2={e2 }) robot {yeni ['robot']:.4f} | tespit "
-    f"{yeni ['tespit']:.4f} | TP {yeni ['TP']} FP {yeni ['FP']}")
-    print (f"\nFARK {yeni ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02 "
+    print (f"IKI KADEME (e2={e2 }) robot {new_ ['robot']:.4f} | tespit "
+    f"{new_ ['tespit']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']}")
+    print (f"\nFARK {new_ ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02 "
     f"(threshold gurultusu ~0.015)")
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"iki_kademe":yeni ,
+    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"iki_kademe":new_ ,
     "e2":e2 ,
     "not":"Ikinci kademe: kisa listeye pahali fiziksel olculer. Esik "
     "D6'da secildi. D7 brand-disi, TAM ZINCIR, MIKRO."},

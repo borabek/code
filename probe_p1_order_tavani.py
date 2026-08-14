@@ -22,11 +22,11 @@ from korpus_kimlik import step_kimlik as SK
 
 OB ="results/_p1_olasilik_g10";GATE ="results/wire_gate_v7.pkl"
 YANAL ,ACI =2.0 ,10.0 
-sv =d6_record .exam ();kayit =d6_record .yukle (set (sv ["pidler"]))
+sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))
 gate =pickle .load (open (GATE ,"rb"))
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 cyl =pickle .load (open ("results/_d6_silindirler.pkl","rb"))
-pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (kayit ))
+pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (rec_ ))
 print (f"part {len (pidler )}\n",flush =True )
 
 
@@ -46,7 +46,7 @@ def secenekler (P ,D ,cyls ,mm =8.0 ):
     return out 
 
 
-def kahin (P ,D ,cyls ,G ,Gd ,diag ):
+def oracle_ (P ,D ,cyls ,G ,Gd ,diag ):
     """ORTAK (bipartite) kahin -- candidate BASINA acgozlu DEGIL.
 
     ILK SURUMUM YANLISTI: each candidate KENDI most iyi secenegini bagimsiz seciyordu.
@@ -89,7 +89,7 @@ def kahin (P ,D ,cyls ,G ,Gd ,diag ):
 
 R_ham ,R_gate =[],[]
 for pid in pidler :
-    r =kayit [pid ]
+    r =rec_ [pid ]
     G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
     if not len (G ):continue 
     d =np .load (f"{OB }/{pid }.npz")
@@ -101,13 +101,13 @@ for pid in pidler :
     P =np .asarray ([c ["point"]for c in cps ],float )
     D =np .asarray ([c ["direction"]for c in cps ],float )
     cy =cyl .get (pid )
-    R_ham .append (kahin (P ,D ,cy ,G ,Gd ,r ["diag"]))
+    R_ham .append (oracle_ (P ,D ,cy ,G ,Gd ,r ["diag"]))
     avg =np .asarray (d ["pbs"],float ).mean (0 )
     Xp =np .asarray (wire_gate .feats_for (V ,F ,avg ,cps ,robot_cp .CE ,robot_cp .CT ,
     step_path =S .get (pid )),float )
     k =maske (np .asarray (wire_gate .decision_score (gate ,Xp ),float ),0.40 ,0.30 )
     if k .any ():
-        R_gate .append (kahin (P [k ],D [k ],cy ,G ,Gd ,r ["diag"]))
+        R_gate .append (oracle_ (P [k ],D [k ],cy ,G ,Gd ,r ["diag"]))
     else :
         R_gate .append ((len (G ),0. ,0. ,0. ))
 a ,b =f1w (R_ham ),f1w (R_gate )

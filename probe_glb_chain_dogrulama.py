@@ -125,8 +125,8 @@ def main ():
     and say ["YON_BIRIM_DEGIL"]==0 
     and say ["cikti_var"]==say ["part"])
     print (f"\nSAGLAMLIK: {'GECTI'if saglam else 'KALDI'}")
-    print ("Bayrak `glb_kanonik_zincir` ancak SAGLAMLIK GECTI ve robot F1")
-    print ("tabani astiktan sonra acilir.")
+    print ("Bayrak `glb_kanonik_zincir` however SAGLAMLIK GECTI and robot F1")
+    print ("tabani astiktan after acilir.")
     json .dump ({"damga":makbuz_hash .damga (),"n_parca":say ["part"],
     "coken":say ["COKTU"],"sonsuz":say ["SONSUZ"],
     "yon_birim_degil":say ["YON_BIRIM_DEGIL"],

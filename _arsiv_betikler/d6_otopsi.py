@@ -42,14 +42,14 @@ def main ():
     sv =json .load (io .open (KUME ,encoding ="utf-8"))
     PID =set (sv ["pidler"])
     import d6_record 
-    kayit =d6_record .yukle (PID )
+    rec_ =d6_record .yukle (PID )
     with open ("results/wire_gate.pkl","rb")as f :
         gate =pickle .load (f )
 
     kova =collections .Counter ()# GT duzeyi loss nedeni
     rb =collections .Counter ()# tespit-TP robot kirilimi
     T ,R ,KG ,KA =[],[],[],[]# real tespit/robot + kahin satirlari
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         diag =r ["diag"];tt =max (3.0 ,0.06 *diag )
@@ -110,7 +110,7 @@ def main ():
         KA .append ((rj ,ka ,fp ,len (G )-ka ))
 
     n_gt =sum (kova .values ());n_tp =sum (rb .values ())
-    print (f"TEMIZ SINAV {len (kayit )} part, {n_gt } GT CP\n")
+    print (f"TEMIZ SINAV {len (rec_ )} part, {n_gt } GT CP\n")
     print ("GT KAYIP DAGILIMI (tespit kutusu):")
     for k ,v in kova .most_common ():
         print (f"  {k :<12}{v :>6}  %{100 *v /n_gt :.1f}")

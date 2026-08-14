@@ -35,14 +35,14 @@ def main ():
     sv =json .load (io .open (KUME ,encoding ="utf-8"))
     PID =set (sv ["pidler"])
     import d6_record 
-    kayit =d6_record .yukle (PID )
+    rec_ =d6_record .yukle (PID )
     with open ("results/wire_gate.pkl","rb")as f :
         gate =pickle .load (f )
 
     umf =collections .defaultdict (lambda :[0 ,0 ])# mfg -> [ters, total TP]
     ceviri_kazanci =collections .Counter ()
     R0 ,R1 ,R2 =[],[],[]# real / hepsini-cevir / MUKEMMEL sign
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         diag =r ["diag"]
@@ -87,7 +87,7 @@ def main ():
                     else :
                         ceviri_kazanci ["ikisi_de_kotu"]+=1 
 
-    print ("TERS ISARET URETICI KIRILIMI (tespit TP'leri icinde):")
+    print ("TERS ISARET URETICI KIRILIMI (tespit TP'leri inside):")
     print (f"{'manufacturer':<8}{'ters':>7}{'TP':>7}{'ratio':>8}")
     for m ,(t ,n )in sorted (umf .items (),key =lambda kv :-kv [1 ][1 ]):
         print (f"{m :<8}{t :>7}{n :>7}{100 *t /max (n ,1 ):>7.1f}%")

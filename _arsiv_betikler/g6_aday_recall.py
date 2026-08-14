@@ -65,7 +65,7 @@ def main ():
     MOD ={"ESKI (203 part training)":[load_any (c ,dev =dev )[:2 ]for c in ESKI ],
     "YENI (1826 part training)":[load_any (YENI ,dev =dev )[:2 ]]}
 
-    pid_l =sorted (hedef )[:a .sinir ]
+    pid_l =sorted (hedef )[:a .bound_ ]
     R ={k :collections .defaultdict (lambda :[0 ,0 ])for k in MOD }# mfg -> [kapsanan, GT]
     t0 =time .time ();error =0 
     for i ,p in enumerate (pid_l ,1 ):

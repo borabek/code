@@ -114,9 +114,9 @@ def main ():
         ort =DIR .mean (0 );ort /=np .linalg .norm (ort )+1e-9 
         a_ort =np .degrees (np .arccos (np .clip (np .abs (DIR @ort ),0 ,1 )))
         a_bir =np .degrees (np .arccos (np .clip (np .abs (DIR @DIR [0 ]),0 ,1 )))
-        sira =np .argsort (np .argsort (-CONF ))
+        rank_ =np .argsort (np .argsort (-CONF ))
         F =[[CONF [u_ ],MES [u_ ],a_ort [u_ ],a_bir [u_ ],float (len (DIR )),
-        float (np .mean (a_ort )),float (sira [u_ ])]for u_ in range (len (DIR ))]
+        float (np .mean (a_ort )),float (rank_ [u_ ])]for u_ in range (len (DIR ))]
         if zengin :
         # UZLASMA: this yone 10 derece inside kac uye present (KENDISI HARIC)
             M =np .degrees (np .arccos (np .clip (np .abs (DIR @DIR .T ),0 ,1 )))

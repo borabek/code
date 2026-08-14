@@ -20,18 +20,18 @@ from korpus_kimlik import step_kimlik as SK
 OB ="results/_p1_olasilik_g10";GATE ="results/wire_gate_v7.pkl"
 ROBOT_YANAL ,ROBOT_ACI =2.0 ,10.0 
 
-sv =d6_record .exam ();kayit =d6_record .yukle (set (sv ["pidler"]))
+sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))
 gate =pickle .load (open (GATE ,"rb"))
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
-pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (kayit ))
+pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (rec_ ))
 print (f"part {len (pidler )} | yigin g10 + gate v7\n",flush =True )
 
-sonuc ={}
+res_ ={}
 for ad ,yayilim in (("yayilim YOK",0 ),("yayilim VAR (+-1)",1 )):
     T ,R =[],[]
     ek_toplam =0 
     for pid in pidler :
-        r =kayit [pid ]
+        r =rec_ [pid ]
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         if not len (G ):
             continue 
@@ -60,10 +60,10 @@ for ad ,yayilim in (("yayilim YOK",0 ),("yayilim VAR (+-1)",1 )):
         R .append ((len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],ROBOT_YANAL ,
         ROBOT_ACI ,False ,signed =True )[:3 ])
     t ,rr =f1w (T ),f1w (R )
-    sonuc [ad ]={"tespit":t ,"robot":rr ,"eklenen_nokta":ek_toplam }
+    res_ [ad ]={"tespit":t ,"robot":rr ,"eklenen_nokta":ek_toplam }
     print (f"{ad :<20} tespit {t :.4f} | robot {rr :.4f} | eklenen {ek_toplam }",flush =True )
 
-a ,b =sonuc ["yayilim YOK"],sonuc ["yayilim VAR (+-1)"]
+a ,b =res_ ["yayilim YOK"],res_ ["yayilim VAR (+-1)"]
 print (f"\nFARK: tespit {b ['tespit']-a ['tespit']:+.4f} | robot {b ['robot']-a ['robot']:+.4f}")
-json .dump (sonuc ,open ("results/k22_periyodik_yayilim.json","w"),indent =1 )
+json .dump (res_ ,open ("results/k22_periyodik_yayilim.json","w"),indent =1 )
 print ("receipt -> results/k22_periyodik_yayilim.json")

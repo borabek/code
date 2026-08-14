@@ -66,10 +66,10 @@ def temel (d ):
     np .float32 )
 
 
-def puanla (veri ,skor ,kural ):
+def puanla (data_ ,skor ,rule_ ):
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,s in zip (veri ,skor ):
-        P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,kural ,nms_mm =NMS )
+    for d ,s in zip (data_ ,skor ):
+        P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =NMS )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
         q =per [d ["mfg"]]
@@ -81,21 +81,21 @@ def puanla (veri ,skor ,kural ):
     "TP":T [0 ],"FP":T [1 ],"FN":T [2 ]}
 
 
-def en_iyi_kural (veri ,skor ,rng ):
-    ar =(rng .choice (len (veri ),ARAMA_N ,replace =False )
-    if len (veri )>ARAMA_N else np .arange (len (veri )))
-    AR =[veri [i ]for i in ar ]
+def en_iyi_kural (data_ ,skor ,rng ):
+    ar =(rng .choice (len (data_ ),ARAMA_N ,replace =False )
+    if len (data_ )>ARAMA_N else np .arange (len (data_ )))
+    AR =[data_ [i ]for i in ar ]
     AS =[skor [i ]for i in ar ]
     return max (KURALLAR ,key =lambda k :puanla (AR ,AS ,k )["makro"])
 
 
 def main ():
     t0 =time .time ()
-    veri =[]
+    data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):
         for d in yukle (cluster .strip (),int (os .environ .get ("P6_TR","0"))):
-            veri .append (d )
-    for d in veri :
+            data_ .append (d )
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
         # HAM `X` ARTIK GEREKMIYOR: puanlama P/idx/YD/G/Gd with calisiyor.
@@ -103,28 +103,28 @@ def main ():
         # 3051 part x ~2600 secenek x 162 column), this da this gece three sureci
         # olduren bellek darligini tekrar dogururdu.
         d ["X"]=None 
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    n_giris =veri [0 ]["_M"].shape [1 ]
-    print (f"{len (veri )} part | {n_giris } sutun | katlar {katlar } "
+    n_giris =data_ [0 ]["_M"].shape [1 ]
+    print (f"{len (data_ )} part | {n_giris } sutun | katlar {katlar } "
     f"({time .time ()-t0 :.0f} s)",flush =True )
 
     top ={"HGB":collections .Counter (),"KUME":collections .Counter ()}
     kat_sonuc ={}
     rng0 =np .random .default_rng (0 )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
 
         # ---------- NOKTASAL HGB (bugunku urun)
-        n_satir =sum (len (veri [i ]["y"])for i in ic )
+        n_satir =sum (len (data_ [i ]["y"])for i in ic )
         M =np .empty ((n_satir ,n_giris ),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz =np .where (Y ==1 )[0 ]
         neg =np .where (Y ==0 )[0 ]
@@ -134,14 +134,14 @@ def main ():
         max_iter =ITER ,learning_rate =0.06 ,max_leaf_nodes =63 ,
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
-        s_ic_h =[hgb .predict_proba (veri [i ]["_M"])[:,1 ]for i in ic ]
-        s_dis_h =[hgb .predict_proba (veri [i ]["_M"])[:,1 ]for i in dis ]
+        s_ic_h =[hgb .predict_proba (data_ [i ]["_M"])[:,1 ]for i in ic ]
+        s_dis_h =[hgb .predict_proba (data_ [i ]["_M"])[:,1 ]for i in dis ]
         print (f"  {b } HGB egitildi ({time .time ()-t0 :.0f} s)",flush =True )
 
         # ---------- ADAY-KUMESI (DeepSets)
         training =[]
         for i in ic :
-            X ,y =veri [i ]["_M"],veri [i ]["y"].astype (np .float32 )
+            X ,y =data_ [i ]["_M"],data_ [i ]["y"].astype (np .float32 )
             if len (X )>EGIT_MAKS :
                 p_ =np .where (y >0 )[0 ]
                 n_ =np .where (y ==0 )[0 ]
@@ -152,8 +152,8 @@ def main ():
             training .append ((X ,y ))
         m =KM .egit (training ,n_giris ,d =BOYUT ,devir =DEVIR ,lr =LR ,lam =LAM ,
         seed =0 ,neg_kat =S4_NEG_KAT )
-        s_ic_k =[KM .tahmin (m ,veri [i ]["_M"])for i in ic ]
-        s_dis_k =[KM .tahmin (m ,veri [i ]["_M"])for i in dis ]
+        s_ic_k =[KM .pred_ (m ,data_ [i ]["_M"])for i in ic ]
+        s_dis_k =[KM .pred_ (m ,data_ [i ]["_M"])for i in dis ]
         print (f"  {b } KUME egitildi ({time .time ()-t0 :.0f} s)",flush =True )
 
         # ---------- AYNI rule aramasi, AYNI kabul kutusu
@@ -161,33 +161,33 @@ def main ():
         for ad ,s_ic ,s_dis in (("HGB",s_ic_h ,s_dis_h ),
         ("KUME",s_ic_k ,s_dis_k )):
             rng =np .random .default_rng (0 )
-            kural =en_iyi_kural ([veri [i ]for i in ic ],s_ic ,rng )
-            r =puanla ([veri [i ]for i in dis ],s_dis ,kural )
+            rule_ =en_iyi_kural ([data_ [i ]for i in ic ],s_ic ,rng )
+            r =puanla ([data_ [i ]for i in dis ],s_dis ,rule_ )
             for k_ in ("TP","FP","FN"):
                 top [ad ][k_ ]+=r [k_ ]
-            kat_sonuc [b ][ad ]={"robot":r ["robot"],"kural":list (kural )}
+            kat_sonuc [b ][ad ]={"robot":r ["robot"],"kural":list (rule_ )}
         print (f"  {b :<6} HGB {kat_sonuc [b ]['HGB']['robot']:.4f} | "
         f"KUME {kat_sonuc [b ]['KUME']['robot']:.4f} "
         f"({time .time ()-t0 :.0f} s)",flush =True )
 
-    son ={}
+    last_ ={}
     for ad in ("HGB","KUME"):
         c =top [ad ]
-        son [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
-    fark =son ["KUME"]-son ["HGB"]
+        last_ [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
+    fark =last_ ["KUME"]-last_ ["HGB"]
     print (f"\n=== S4 SONUC (MIKRO, {len (katlar )} brand kati) ===")
-    print (f"  HGB (noktasal)   {son ['HGB']:.4f}")
-    print (f"  KUME (DeepSets)  {son ['KUME']:.4f}")
+    print (f"  HGB (noktasal)   {last_ ['HGB']:.4f}")
+    print (f"  KUME (DeepSets)  {last_ ['KUME']:.4f}")
     print (f"  FARK             {fark :+.4f}   KAPI +0.05 -> "
     f"{'GECTI'if fark >=0.05 else 'GECMEDI'}")
     json .dump ({"damga":makbuz_hash .damga (),"dizin":os .environ ["P6_DIZIN"],
-    "katlar":katlar ,"n_parca":len (veri ),
-    "hgb":son ["HGB"],"cluster":son ["KUME"],"fark":fark ,
+    "katlar":katlar ,"n_parca":len (data_ ),
+    "hgb":last_ ["HGB"],"cluster":last_ ["KUME"],"fark":fark ,
     "gecti":bool (fark >=0.05 ),"fold":kat_sonuc ,
     "ayar":{"devir":DEVIR ,"lr":LR ,"lam":LAM ,"d":BOYUT ,
     "egit_maks":EGIT_MAKS ,"neg_kat":S4_NEG_KAT },
     "not":"S4: candidate-kumesi modeli vs noktasal HGB, AYNI protocol "
-    "(ayni katlar, oznitelikler, kural aramasi, kabul "
+    "(same katlar, features, rule aramasi, kabul "
     "kutusu). Tek degisken MODEL SINIFI. D7'ye BAKILMADI."},
     open ("results/s4_kume_modeli.json","w"),indent =1 )
     print ("receipt -> results/s4_kume_modeli.json")

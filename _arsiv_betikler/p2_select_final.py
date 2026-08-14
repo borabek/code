@@ -71,4 +71,4 @@ json .dump ({"winner":best [0 ],"WORK_ALL":best [1 ],"WORK_WEI":best [2 ],"WORK_
 "olasilik-uzayi birlesimleri candidate alindi.",
 "note":"SADECE WORK (541 part) uzerinde secildi; kilitli holdout'a dokunulmadi."},
 open ("results/final_config.json","w"),indent =1 )
-print ("-> results/final_config.json (KILITLENDI; P7 bunu tek kez holdout'ta calistiracak)")
+print ("-> results/final_config.json (KILITLENDI; P7 bunu single times holdout'ta calistiracak)")

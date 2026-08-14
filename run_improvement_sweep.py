@@ -70,8 +70,8 @@ def negatif_sec (M ,Y ,agirlik_p ,neg_kat ,zor ,rng ,on_skor =None ):
     if zor and on_skor is not None :
     # ZOR NEGATIF: ten gecisin most high skorlu negatifleri. Yarisini
     # hard, yarisini rastgele al -- salt hard secim dagilimi breaks.
-        sira =neg [np .argsort (-on_skor [neg ])]
-        z =sira [:n_al //2 ]
+        rank_ =neg [np .argsort (-on_skor [neg ])]
+        z =rank_ [:n_al //2 ]
         kalan =np .setdiff1d (neg ,z ,assume_unique =False )
         r =rng .choice (kalan ,min (len (kalan ),n_al -len (z )),replace =False )
         sec =np .concatenate ([poz ,z ,r ])
@@ -86,13 +86,13 @@ def f1 (c ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=np .hstack ([temel (d ),kanonik_blok (d )])
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } | baseline = temel + kanonik",
+    print (f"{len (data_ )} part | katlar {katlar } | baseline = temel + kanonik",
     flush =True )
 
     # ---- taranan yapilandirmalar (TABAN first sirada)
@@ -136,25 +136,25 @@ def main ():
         {**TABAN ,"lr":0.03 ,"iter":400 ,"esit":True },
         ]
 
-    sonuc =[]
+    res_ =[]
     for ci ,c in enumerate (ADAYLAR ):
         agg =collections .Counter ()
         for b in katlar :
-            ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-            dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-            n_s =sum (len (veri [i ]["y"])for i in ic )
-            M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+            ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+            dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+            n_s =sum (len (data_ [i ]["y"])for i in ic )
+            M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
             W =np .empty (n_s ,np .float32 )
             o =0 
             for i in ic :
-                m_ =veri [i ]["_M"]
+                m_ =data_ [i ]["_M"]
                 M [o :o +len (m_ )]=m_ 
                 # PARCA-ESITLEYICI AGIRLIK: each parcanin total agirligi 1.
                 # Boylece 24 CP'li NIT parcasi 3 CP'li parcadan 8 fold extra
                 # soz sahibi olmaz.
                 W [o :o +len (m_ )]=(1.0 /len (m_ ))if c ["esit"]else 1.0 
                 o +=len (m_ )
-            Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+            Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
             rng =np .random .default_rng (0 )
             on =None 
             if c ["zor"]:
@@ -176,8 +176,8 @@ def main ():
             random_state =0 ).fit (M [sec ],Y [sec ],sample_weight =w )
             del M ,W 
             for i in dis :
-                s =m .predict_proba (veri [i ]["_M"])[:,1 ]
-                d =veri [i ]
+                s =m .predict_proba (data_ [i ]["_M"])[:,1 ]
+                d =data_ [i ]
                 P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,KURAL ,
                 nms_mm =NMS )
                 tp ,fp ,fn =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],
@@ -185,23 +185,23 @@ def main ():
                 signed =True )[:3 ]
                 agg ["tp"]+=tp ;agg ["fp"]+=fp ;agg ["fn"]+=fn 
         r =f1 (agg )
-        sonuc .append ((r ,c ))
-        etiket =("TABAN"if ci ==0 else 
+        res_ .append ((r ,c ))
+        label_ =("TABAN"if ci ==0 else 
         " ".join (f"{k }={v }"for k ,v in c .items ()
         if v !=TABAN [k ]))
-        print (f"  {r :.4f}  {etiket }   ({time .time ()-t0 :.0f} s)",flush =True )
+        print (f"  {r :.4f}  {label_ }   ({time .time ()-t0 :.0f} s)",flush =True )
 
-    baseline =sonuc [0 ][0 ]
-    sonuc .sort (key =lambda x :-x [0 ])
+    baseline =res_ [0 ][0 ]
+    res_ .sort (key =lambda x :-x [0 ])
     print (f"\n=== TABAN {baseline :.4f} ===")
-    for r ,c in sonuc [:5 ]:
+    for r ,c in res_ [:5 ]:
         fark =r -baseline 
         et =" ".join (f"{k }={v }"for k ,v in c .items ()if v !=TABAN [k ])
         print (f"  {r :.4f}  {fark :+.4f}  {et or 'TABAN'}"
         +("  <- KAZANC"if fark >=0.01 else ""))
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"baseline":baseline ,
-    "en_iyi":{"f1":sonuc [0 ][0 ],"yapilandirma":sonuc [0 ][1 ]},
-    "hepsi":[{"f1":r ,"c":c }for r ,c in sonuc ],
+    "en_iyi":{"f1":res_ [0 ][0 ],"yapilandirma":res_ [0 ][1 ]},
+    "hepsi":[{"f1":r ,"c":c }for r ,c in res_ ],
     "not":"HPO + zor negatif + part-esitleyici agirlik, baseline "
     "temel+kanonik. UCTAN UCA robot F1. Kazanan `tam` "
     "katlarinda AYRICA dogrulanmadan urune girmez. "

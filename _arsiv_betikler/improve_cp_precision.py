@@ -122,8 +122,8 @@ def main ():
     f"F1={f1 :.3f} P={pr :.3f} R={rc :.3f} (tp{tp } fp{fp } fn{fn })")
     best =rows [0 ]
     print (f"\n  BEST (fine-tuned, OVERFIT to 9 parts): F1={best [0 ]:.3f} @ min_v{best [6 ]} depth{best [7 ]} vconf{best [8 ]} cluster{best [9 ]}mm")
-    print ("  HONEST: tuned on 9 PXC clamp-terminals only (all mfg=2). Overfitting risk -- treat as a")
-    print ("  CANDIDATE recipe; validate on more manufacturer-matched parts (both terminal types) before freezing.")
+    print ("  HONEST: tuned ten 9 PXC clamp-terminals only (all mfg=2). Overfitting risk -- treat as a")
+    print ("  CANDIDATE recipe; validate ten more manufacturer-matched parts (both terminal types) before freezing.")
     json .dump ({"rows":[dict (f1 =r [0 ],p =r [1 ],r =r [2 ],tp =r [3 ],fp =r [4 ],fn =r [5 ],
     min_v =r [6 ],depth =r [7 ],vconf =r [8 ],cluster_mm =r [9 ])for r in rows [:20 ]],
     "caveat":"tuned on 9 PXC clamp terminals (mfg=2 each); candidate not frozen"},

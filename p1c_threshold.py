@@ -40,10 +40,10 @@ def maske (skor ,ratio ,baseline ):
     return (skor >=ratio *float (np .max (skor )))&(skor >=baseline )
 
 
-def puanla (kayit ,model ,ratio ,baseline ,match_greedy ,f1w ,mfgler =None ):
+def puanla (rec_ ,model ,ratio ,baseline ,match_greedy ,f1w ,mfgler =None ):
     import wire_gate 
     T ,R =[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
@@ -70,11 +70,11 @@ def main ():
     from sina_cluster import match_greedy ,f1w 
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     with open (a .model ,"rb")as f :
         model =pickle .load (f )
-    dev ={p :r for p ,r in kayit .items ()if r ["mfg"]in DEV_MFG }
-    sin ={p :r for p ,r in kayit .items ()if r ["mfg"]not in DEV_MFG }
+    dev ={p :r for p ,r in rec_ .items ()if r ["mfg"]in DEV_MFG }
+    sin ={p :r for p ,r in rec_ .items ()if r ["mfg"]not in DEV_MFG }
     print (f"model: {a .model }")
     print (f"DEV   {len (dev )} part {sorted ({r ['mfg']for r in dev .values ()})}")
     print (f"SINAV {len (sin )} part {sorted ({r ['mfg']for r in sin .values ()})}\n")
@@ -85,14 +85,14 @@ def main ():
     en_iyi ,en_iyi_skor =None ,-1.0 
     izgara ={}
     for o in oranlar :
-        satir =[]
+        line_ =[]
         for t in tabanlar :
             tf ,rf =puanla (dev ,model ,o ,t ,match_greedy ,f1w )
             izgara [f"{o }/{t }"]={"tespit":tf ,"robot":rf }
-            satir .append (tf )
+            line_ .append (tf )
             if tf >en_iyi_skor :
                 en_iyi_skor ,en_iyi =tf ,(o ,t )
-        print (f"{o :<12.2f}"+"".join (f"{v :>9.4f}"for v in satir ))
+        print (f"{o :<12.2f}"+"".join (f"{v :>9.4f}"for v in line_ ))
 
     o0 ,t0 =0.50 ,0.25 
     dt0 ,dr0 =puanla (dev ,model ,o0 ,t0 ,match_greedy ,f1w )

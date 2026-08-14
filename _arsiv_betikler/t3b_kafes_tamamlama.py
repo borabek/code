@@ -36,12 +36,12 @@ from t3_structural_tavan import _baskin_adim
 ESIK =1.0 # mm -- lattice dugumune oturma toleransi
 
 
-def kafes_kalinti (nokta ,TP ,e0 ,ort ,adim ):
+def kafes_kalinti (pt_ ,TP ,e0 ,ort ,step_ ):
     """Noktanin array ekseni along most yakin lattice dugumune uzakligi (mm)."""
-    if adim <=1e-6 :
+    if step_ <=1e-6 :
         return np .inf 
-    t =(nokta -ort )@e0 
-    return abs (t /adim -round (t /adim ))*adim 
+    t =(pt_ -ort )@e0 
+    return abs (t /step_ -round (t /step_ ))*step_ 
 
 
 def main ():
@@ -83,24 +83,24 @@ def main ():
         ort =TP .mean (0 )
         _ ,_ ,Vt =np .linalg .svd (TP -ort ,full_matrices =False )
         e0 =Vt [0 ]
-        adim =_baskin_adim ((TP -ort )@e0 )
-        if adim <=1e-6 :
+        step_ =_baskin_adim ((TP -ort )@e0 )
+        if step_ <=1e-6 :
             continue 
         parca_ok +=1 
         for b in fn :
-            kalinti_fn .append (kafes_kalinti (G [b ],TP ,e0 ,ort ,adim ))
+            kalinti_fn .append (kafes_kalinti (G [b ],TP ,e0 ,ort ,step_ ))
         for a in tp :
-            kalinti_tp .append (kafes_kalinti (P [a ],TP ,e0 ,ort ,adim ))
+            kalinti_tp .append (kafes_kalinti (P [a ],TP ,e0 ,ort ,step_ ))
             # SAHTE-KAFES KONTROLU: same parcanin boundary kutusunda rastgele points
         lo ,hi =G .min (0 ),G .max (0 )
         for _ in range (len (fn )):
             q =lo +rng .rand (3 )*(hi -lo )
-            kalinti_rast .append (kafes_kalinti (q ,TP ,e0 ,ort ,adim ))
+            kalinti_rast .append (kafes_kalinti (q ,TP ,e0 ,ort ,step_ ))
 
     kf =np .array (kalinti_fn );kr =np .array (kalinti_rast );kt =np .array (kalinti_tp )
     print (f"dizi konusulabilen part: {parca_ok } | FN {len (kf )} | TP {len (kt )}")
     if not len (kf ):
-        print ("olculecek FN yok");return 
+        print ("olculecek FN absent");return 
     of =float ((kf <=ESIK ).mean ());orst =float ((kr <=ESIK ).mean ())
     ot =float ((kt <=ESIK ).mean ())
     print (f"\n{'cluster':<22}{'kafese oturan':>16}{'ortanca kalinti':>18}")
@@ -113,7 +113,7 @@ def main ():
     print (f"GO (FN >=%40 VE rastgeleden >=15 puan yuksek) -> "
     f"{'GECTI -- lattice TAMAMLAMA gercek FN ilaci'if gecti else 'GECMEDI -- B TAMAMEN KAPANIR'}")
     if not gecti and of >=0.40 :
-        print ("  NOT: FN orani yuksek ama rastgele de yuksek -> lattice cok sik, AYIRT ETMIYOR")
+        print ("  NOT: FN orani high but rastgele de high -> lattice very sik, AYIRT ETMIYOR")
     with io .open ("results/t3b_kafes_tamamlama.json","w",encoding ="utf-8")as f :
         json .dump ({"part":parca_ok ,"n_fn":len (kf ),"esik_mm":ESIK ,
         "fn_oturan":of ,"rastgele_oturan":orst ,"tp_oturan":ot ,

@@ -64,7 +64,7 @@ def cluster (ad ,kayitlar ,ob ,cylf ,acf ):
         tol =max (3.0 ,0.06 *r ["diag"])
         d =np .linalg .norm (P [:,None ]-G [None ],axis =-1 )
         y =(d .min (1 )<=tol ).astype (np .int8 )
-        np .savez_compressed (yol ,X =X ,y =y ,P =P ,D =D ,kaynak =kay )
+        np .savez_compressed (yol ,X =X ,y =y ,P =P ,D =D ,src_ =kay )
         cik .append ({"pid":pid ,"mfg":r ["mfg"],"X":X ,"y":y ,"P":P ,"D":D ,
         "kaynak":kay ,"G":G ,"Gd":np .asarray (r ["Gd"],float ),
         "diag":r ["diag"]})
@@ -95,7 +95,7 @@ open ("results/brep_gate_d6.pkl","wb"))
 print ("gate egitildi -> results/brep_gate_d6.pkl",flush =True )
 
 import collections 
-sonuc ={}
+res_ ={}
 for threshold in (0.30 ,0.40 ,0.50 ,0.60 ,0.70 ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ]);tes =[]
     for d in te :
@@ -112,13 +112,13 @@ for threshold in (0.30 ,0.40 ,0.50 ,0.60 ,0.70 ):
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    sonuc [threshold ]={"robot":mi ,"tespit":K .mikro (tes ),
+    res_ [threshold ]={"robot":mi ,"tespit":K .mikro (tes ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm }
-    c =sonuc [threshold ]
+    c =res_ [threshold ]
     print (f"threshold {threshold :.2f}  robot {mi :.4f} | tespit {c ['tespit']:.4f} | "
     f"makro {c ['makro']:.4f} | en kotu {c ['en_kotu']:.4f}",flush =True )
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":{str (k ):v for k ,v in sonuc .items ()},
+json .dump ({"damga":makbuz_hash .damga (),"sonuc":{str (k ):v for k ,v in res_ .items ()},
 "taban_kanonik":{"robot":0.2029 ,"tespit":0.4523 },
 "not":"GENISLETILMIS HAVUZ (seg + B-rep) + D6'da REFIT gate. D7 brand-disi. "
 "MIKRO. Tez turetmesi DEGISMEDI; B-rep EK candidate kaynagi."},

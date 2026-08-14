@@ -38,8 +38,8 @@ class Karar :
         return self .gecti 
 
     def __str__ (self ):
-        satir ="\n".join (f"    {k :<28}{v }"for k ,v in self .ayrinti .items ())
-        return f"{'GECTI'if self .gecti else 'GECMEDI'} -- {self .rationale }\n{satir }"
+        line_ ="\n".join (f"    {k :<28}{v }"for k ,v in self .ayrinti .items ())
+        return f"{'GECTI'if self .gecti else 'GECMEDI'} -- {self .rationale }\n{line_ }"
 
 
 def degerlendir (baseline ,candidate ,tanidik_anahtar ="tanidik",*,ga =None ,

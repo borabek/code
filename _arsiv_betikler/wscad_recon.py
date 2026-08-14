@@ -67,12 +67,12 @@ def main ():
         page .goto (HOME ,wait_until ="domcontentloaded",timeout =60000 )
 
         print ("\n"+"="*70 )
-        print ("  TARAYICI ACIK.  Sirasiyla:")
+        print ("  TARAYICI OPEN.  Sirasiyla:")
         print ("   1) wscaduniverse'e GIRIS YAP")
         print ("   2) Bir part ARA  (ornek WEI part no: 1010100000)")
         print ("   3) O parcanin STEP / 3D dosyasini NORMAL SEKILDE INDIR")
         print (f"  Pencere {a .minutes } dakika acik kalacak, sonra kendim kapatacagim.")
-        print ("  Ben bu sirada butun ag isteklerini kaydediyorum.")
+        print ("  Ben this sirada butun network isteklerini kaydediyorum.")
         print ("="*70 +"\n",flush =True )
 
         for m in range (a .minutes ):

@@ -23,12 +23,12 @@ def kos (blok ,n ,isci ):
     import run_extra_feature as EK 
     importlib .reload (EK )
     EK .ISCI =isci 
-    veri =yukle ("d6",n )
-    for d in veri :
+    data_ =yukle ("d6",n )
+    for d in data_ :
         d ["_kume"]="d6"
-    oof =[np .full (len (d ["idx"]),0.5 )for d in veri ]
+    oof =[np .full (len (d ["idx"]),0.5 )for d in data_ ]
     t =time .time ()
-    out =EK .ek_hepsi (veri ,oof )
+    out =EK .ek_hepsi (data_ ,oof )
     return np .vstack (out ),time .time ()-t 
 
 

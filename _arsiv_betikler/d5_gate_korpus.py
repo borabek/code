@@ -102,7 +102,7 @@ def main ():
 
     if a .yalniz_eski :
         R =[]
-        print ("YALNIZ ESKI: yeni parts eklenmiyor (F2-12 baseline kolu)")
+        print ("YALNIZ ESKI: new parts eklenmiyor (F2-12 baseline kolu)")
     else :
         with open (YENI ,"rb")as f :
             R =pickle .load (f )

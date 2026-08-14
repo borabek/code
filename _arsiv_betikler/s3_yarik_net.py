@@ -65,7 +65,7 @@ def main ():
     m ["esik_cokus"]=float (np .quantile (mx ,dag .get ("yonlendirme_q",0.10 )))
 
     HEDEF =collections .defaultdict (list )
-    toplam =0 
+    total_ =0 
     for r in DER :
         if r ["X"]is None :
             continue 
@@ -89,11 +89,11 @@ def main ():
             if dd >tt or a_ in used or b_ in hit :
                 continue 
             used .add (a_ );hit .add (b_ )
-            toplam +=1 
+            total_ +=1 
             HEDEF [r ["pid"]].append ({"p":P [a_ ].copy (),"pd":Pd [a_ ].copy (),
             "gd":Gd [b_ ].copy (),"aci":float (an [a_ ,b_ ])})
     n_dik =sum (1 for v in HEDEF .values ()for h in v if h ["aci"]>45 )
-    print (f"{toplam } eslesme | dik sinif {n_dik } | {len (HEDEF )} part",flush =True )
+    print (f"{total_ } eslesme | dik sinif {n_dik } | {len (HEDEF )} part",flush =True )
 
     VF ={}
     for cluster in ("dev","val"):
@@ -146,24 +146,24 @@ def main ():
                     say [ad ]["degismeyen"]+=1 
 
     print ("\n=== SONUC ===")
-    print (f"{toplam } eslesme | {yakin } tanesinin {YAKIN_MM }mm icinde yarik adayi var "
-    f"({yakin /max (toplam ,1 ):.1%}) | yariksiz parcada {yariksiz }")
+    print (f"{total_ } eslesme | {yakin } tanesinin {YAKIN_MM }mm icinde yarik adayi var "
+    f"({yakin /max (total_ ,1 ):.1%}) | yariksiz parcada {yariksiz }")
     print (f"\n{'kural':<16}{'duzelen':>9}{'bozulan':>9}{'NET':>7}{'gecis':>10}{'robot kest.':>13}")
     en_iyi ,en_iyi_ad =0 ,None 
     for ad ,v in say .items ():
         net =v ["duzelen"]-v ["bozulan"]
         print (f"{ad :<16}{v ['duzelen']:>9}{v ['bozulan']:>9}{net :>+7}"
-        f"{net /max (toplam ,1 ):>+10.2%}{0.4500 +0.673 *net /max (toplam ,1 ):>13.4f}")
+        f"{net /max (total_ ,1 ):>+10.2%}{0.4500 +0.673 *net /max (total_ ,1 ):>13.4f}")
         if net >en_iyi :
             en_iyi ,en_iyi_ad =net ,ad 
     bar =0.02 
-    gecti =en_iyi_ad is not None and en_iyi /max (toplam ,1 )>=bar 
+    gecti =en_iyi_ad is not None and en_iyi /max (total_ ,1 )>=bar 
     print (f"\nKILL: net kazanc >= %{bar *100 :.0f} -> "
     f"{('GECTI: '+en_iyi_ad )if gecti else 'GECMEDI'}")
     if not gecti and en_iyi_ad :
-        print (f"  en iyi arm {en_iyi_ad }: {en_iyi /max (toplam ,1 ):+.2%} (bar %{bar *100 :.0f})")
+        print (f"  en iyi arm {en_iyi_ad }: {en_iyi /max (total_ ,1 ):+.2%} (bar %{bar *100 :.0f})")
     with open ("results/s3_yarik_net.json","w",encoding ="utf-8")as f :
-        json .dump ({"toplam":toplam ,"dik_sinif":n_dik ,"yakin":yakin ,
+        json .dump ({"toplam":total_ ,"dik_sinif":n_dik ,"yakin":yakin ,
         "kurallar":say ,"en_iyi":en_iyi_ad ,"net":en_iyi ,
         "gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/s3_yarik_net.json")

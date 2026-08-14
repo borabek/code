@@ -71,19 +71,19 @@ def yapisal (P ,Pd ):
     else :
         e0 =np .array ([1.0 ,0 ,0 ])
     t =C @e0 
-    adim =_baskin_adim (t )
+    step_ =_baskin_adim (t )
     for i in range (n ):
         d =np .linalg .norm (P -P [i ],axis =1 )
         d [i ]=np .inf 
         yakin =np .sort (d )[:min (3 ,n -1 )]if n >1 else np .array ([np .inf ])
         km =float (yakin [0 ])if np .isfinite (yakin [0 ])else 0.0 
-        if adim >1e-6 :
+        if step_ >1e-6 :
         # lattice dugune uzaklik: t[i] adimin full kati mi?
-            kalan =abs (t [i ]/adim -round (t [i ]/adim ))*adim 
+            kalan =abs (t [i ]/step_ -round (t [i ]/step_ ))*step_ 
             F [i ,0 ]=kalan 
-            F [i ,1 ]=1.0 if kalan <0.25 *adim else 0.0 
+            F [i ,1 ]=1.0 if kalan <0.25 *step_ else 0.0 
             # same sirada esdogrusal komsu count (adimin katlarinda duranlar)
-            dt =np .abs (t -t [i ])/adim 
+            dt =np .abs (t -t [i ])/step_ 
             dik =np .linalg .norm ((P -P [i ])-np .outer (t -t [i ],e0 ),axis =1 )
             F [i ,2 ]=float (np .sum ((np .abs (dt -np .round (dt ))<0.25 )&(dik <2.0 )&
             (np .arange (n )!=i )))
@@ -169,7 +169,7 @@ def main ():
         print (f"AYRILAMAZ: %{100 *a0 :.1f} -> %{100 *a1 :.1f}  (GORELI %{100 *gor :+.1f})  "
         f"-> {'GECTI'if g else 'gecmedi'}")
         if rad .startswith ("YAPI TANIMLI"):
-            print ("  tek tek katki:")
+            print ("  single single katki:")
             for j ,ad in enumerate (AD ):
                 _ ,a =ayrilamaz_pay (np .hstack ([X0 [msk ],YP [msk ][:,[j ]]]),Y [msk ],GR [msk ])
                 print (f"    {ad :<16} ayrilamaz %{100 *a :.1f}  "

@@ -155,7 +155,7 @@ rs();show();(function loop(){requestAnimationFrame(loop);ctr.update();rd.render(
     open (p ,"w",encoding ="utf-8").write (doc )
     n =sum (len (x ["pts"])for x in parts )
     print (f"\n-> {p }  ({len (parts )} part, {n } opening, {os .path .getsize (p )/1e6 :.1f} MB)")
-    print ("   Tarayicida ac, her acikliga TEL/ALET/? de, bitince 'CEVAPLARI INDIR'.")
+    print ("   Tarayicida ac, each acikliga TEL/ALET/? de, bitince 'CEVAPLARI INDIR'.")
     print ("   Sonra: python score_wire_pilot.py <indirilen json>")
 
 

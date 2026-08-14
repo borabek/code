@@ -50,12 +50,12 @@ def main ():
     pool =[p for p in parts if p [1 ]not in LOCK ]
     rng =np .random .RandomState (202 )
     lo =[x for x in pool if x [4 ]<8 ];hi =[x for x in pool if x [4 ]>=8 ]
-    eski =([lo [i ]for i in rng .choice (len (lo ),70 ,replace =False )]+
+    old_ =([lo [i ]for i in rng .choice (len (lo ),70 ,replace =False )]+
     [hi [i ]for i in rng .choice (len (hi ),30 ,replace =False )])
-    dev_groups ={keys [p [1 ]]for p in eski }
-    kirli =sum (1 for p in eski if keys [p [1 ]]in seg_groups )
+    dev_groups ={keys [p [1 ]]for p in old_ }
+    kirli =sum (1 for p in old_ if keys [p [1 ]]in seg_groups )
     print (f"\nESKI 100'luk cluster: {kirli }/100 part segmentasyon geometrisiyle ayni grupta")
-    print ("  -> bu cluster DEV olur; uzerinde karar verilebilir, MANSET olarak kullanilamaz")
+    print ("  -> this cluster DEV becomes; on karar verilebilir, MANSET as kullanilamaz")
 
     # kalan gruplar: segmentasyona and DEV'e degmeyenler
     kalan =[p for p in pool 
@@ -93,14 +93,14 @@ def main ():
     "VAL":"verilen kararlar burada SINANIR. Asiri-uydurma buradan gorulur.",
     "LOCKED":"TEK ATIS. Uzerinde hicbir ayar yapilmaz; gate egitimi bu gruplari gormez.",
     },
-    "dev":{"n":len (eski ),"parts":[p [1 ]for p in eski ],
+    "dev":{"n":len (old_ ),"parts":[p [1 ]for p in old_ ],
     "uyari":f"{kirli }/100 parcasi segmentasyon training geometrisiyle ayni grupta"},
     "val":{"n":len (val ),"parts":[p [1 ]for p in val ],
     "groups":sorted ({keys [p [1 ]]for p in val })},
     "locked":{"n":len (lock ),"parts":[p [1 ]for p in lock ],
     "groups":sorted ({keys [p [1 ]]for p in lock })},
     },open (OUT ,"w"),indent =1 )
-    print (f"\nDEV {len (eski )} | VAL {len (val )} | LOCKED {len (lock )}")
+    print (f"\nDEV {len (old_ )} | VAL {len (val )} | LOCKED {len (lock )}")
     print (f"  VAL gruplari {len ({keys [p [1 ]]for p in val })} | "
     f"LOCKED gruplari {len ({keys [p [1 ]]for p in lock })}")
     print (f"  ucu de AYRIK dogrulandi (assert gecti)")

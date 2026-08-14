@@ -73,9 +73,9 @@ def main ():
             rapor .append ({"pid":pid ,"durum":"secenek_tablosu None"})
             bakilan +=1 
             continue 
-        P ,idx ,YD ,X ,kaynak =tab 
+        P ,idx ,YD ,X ,src_ =tab 
         Xd =np .hstack ([p6_decision .donustur (X ,pk .get ("zskor","ab")),
-        p6_decision .kaynak_blok (kaynak [idx ])])
+        p6_decision .kaynak_blok (src_ [idx ])])
         if pk .get ("arm")=="P6_GEO":# urun yolundakiyle AYNI dilim
             ab =int (pk .get ("AB",67 ))
             Xd =np .hstack ([Xd [:,58 :ab ],Xd [:,ab :]])
@@ -85,7 +85,7 @@ def main ():
         s1 =pk ["kademe1"].predict_proba (Xd )[:,1 ]
         out =canonical_chain .product_output (V ,F ,pbs ,S [pid ],cfg =cfg )
         r ={"pid":pid ,"candidate":len (P ),"secenek":len (idx ),
-        "mesh_aday":int ((kaynak ==2 ).sum ()),
+        "mesh_aday":int ((src_ ==2 ).sum ()),
         "s1_min":float (s1 .min ()),"s1_ort":float (s1 .mean ()),
         "s1_maks":float (s1 .max ()),
         "s1_kisa_liste":int ((s1 >=float (pk .get ("kisa_esik",0.2 ))).sum ()),
@@ -100,9 +100,9 @@ def main ():
     if dej :
         print (f"!! {len (dej )} parcada skorlar DEJENERE (hepsi ayni)")
     if pk .get ("kademe2")is not None :
-        bos =[r for r in rapor if r .get ("s1_kisa_liste",0 )==0 ]
-        if bos :
-            print (f"!! {len (bos )} parcada KISA LISTE BOS -- 2. kademe devre disi")
+        empty_ =[r for r in rapor if r .get ("s1_kisa_liste",0 )==0 ]
+        if empty_ :
+            print (f"!! {len (empty_ )} parcada KISA LISTE BOS -- 2. kademe devre disi")
     karar ="HAZIR"if ok and not dej else "HAZIR DEGIL"
     print (f"\nKARAR: {karar }")
     json .dump ({"rapor":rapor ,"karar":karar },

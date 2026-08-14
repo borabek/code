@@ -121,7 +121,7 @@ def main ():
         print (f"\nKAPI: NIT orani >= 2.0 (bugunku baseline 1.19x)")
         print (f"  olculen {o :.2f}x -> "
         f"{'GECTI'if o >=2.0 else 'KALDI'}")
-    ad =a .etiket or os .path .basename (a .ckpt [0 ]).replace (".pt","")
+    ad =a .label_ or os .path .basename (a .ckpt [0 ]).replace (".pt","")
     json .dump ({"ckpt":a .ckpt ,"brand":out ,
     "not":"Yeni kontrol noktasiyla segmentasyon ayrimi. Olcum "
     "d6 parcalarinda; d6 egitime GIRMEDI. D7'ye BAKILMADI."},

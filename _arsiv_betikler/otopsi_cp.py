@@ -110,7 +110,7 @@ def main ():
         Gmouth =np .array ([m for m ,_ in Gm ],float )
         seat_off =np .array ([o for _ ,o in Gm ],float )
 
-        satir =[]
+        line_ =[]
         for i in range (len (P )):
             p ,d =P [i ],Dd [i ]
             # most yakin GT (seat) -- metrigin kullandigi criterion
@@ -120,7 +120,7 @@ def main ():
             # same GT'nin AGZINA uzaklik -- H1'in sinavi
             db =p -Gmouth [b ]
             al_m =float (db @Gd [b ]);perp_m =float (np .linalg .norm (db -al_m *Gd [b ]))
-            satir .append ({
+            line_ .append ({
             "cp":i +1 ,
             "perp_seat":float (perp [b ]),"axial_seat":float (al [b ]),
             "perp_agiz":perp_m ,"axial_agiz":al_m ,
@@ -138,14 +138,14 @@ def main ():
         R_ ={"part":pid ,"boyut_mm":[round (float (x ),1 )for x in boyut ],
         "gt":len (G ),"tahmin":len (P ),
         "seat_offset_medyan":float (np .median (np .abs (seat_off ))),
-        "cp":satir }
+        "cp":line_ }
         RAPOR [pid ]=R_ 
 
         print (f"\n{'='*96 }\n{pid }  boyut {boyut .round (1 )}  GT {len (G )}  tahmin {len (P )}")
         print (f"manufacturer seat'inin KENDI agzina uzakligi (medyan): {R_ ['seat_offset_medyan']:.1f}mm")
         print (f"{'CP':>3}{'perp_seat':>10}{'ax_seat':>9}{'perp_AGIZ':>11}{'ax_AGIZ':>9}"
         f"{'aci':>7}{'ici?':>6}{'ileri':>8}{'geri':>8}{'ic_cap':>9}{'ort_cap':>9}")
-        for s in satir :
+        for s in line_ :
             print (f"{s ['cp']:>3}{s ['perp_seat']:>10.2f}{s ['axial_seat']:>9.2f}"
             f"{s ['perp_agiz']:>11.2f}{s ['axial_agiz']:>9.2f}{s ['aci_isaretli']:>7.1f}"
             f"{str (s ['iceride_mi']):>6}{s ['serbest_ileri']:>8.1f}{s ['serbest_geri']:>8.1f}"
@@ -155,10 +155,10 @@ def main ():
         json .dump (RAPOR ,f ,indent =1 )
     print ("\nmakbuz -> results/otopsi_cp.json")
     print ("\nOKUMA KILAVUZU:")
-    print ("  perp_AGIZ ~ perp_seat AMA ax_AGIZ ~ 0  -> H1 DOGRU (tanim farki, error degil)")
-    print ("  ax_AGIZ hala buyuk                     -> H1 YANLIS, gercek yerlesim hatasi")
-    print ("  serbest_ileri kucuk / geri buyuk       -> direction TERS (H2)")
-    print ("  iceride_mi True                        -> nokta body icinde (H3)")
+    print ("  perp_AGIZ ~ perp_seat AMA ax_AGIZ ~ 0  -> H1 DOGRU (tanim farki, error not)")
+    print ("  ax_AGIZ still large                     -> H1 YANLIS, real yerlesim hatasi")
+    print ("  serbest_ileri small / geri large       -> direction TERS (H2)")
+    print ("  iceride_mi True                        -> point body inside (H3)")
 
 
 if __name__ =="__main__":

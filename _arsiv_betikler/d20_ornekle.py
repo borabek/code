@@ -27,7 +27,7 @@ N =int (os .environ .get ("D20_N","1500"))
 def main ():
     adlar =[d for d in os .listdir (KAYNAK )if os .path .isdir (os .path .join (KAYNAK ,d ))]
     print (f"kaynak {len (adlar )} part | hedef ~{N }")
-    kayit =[]
+    rec_ =[]
     for ad in adlar :
         lf =os .path .join (KAYNAK ,ad ,ad +".labels.txt")
         if not os .path .exists (lf ):
@@ -39,14 +39,14 @@ def main ():
         if n_ce ==0 :
             continue 
         mfg =ad .split (".",1 )[0 ]
-        kayit .append ({"ad":ad ,"mfg":mfg ,"n_ce":n_ce ,"n_v":len (L ),
+        rec_ .append ({"ad":ad ,"mfg":mfg ,"n_ce":n_ce ,"n_v":len (L ),
         "ratio":n_ce /max (len (L ),1 )})
-    print (f"okunabilen {len (kayit )}")
+    print (f"okunabilen {len (rec_ )}")
     # DUSUK 'ratio' = mouth zayif yakalanmis -> ONCELIKLI
-    say =collections .Counter (k ["mfg"]for k in kayit )
-    pay ={m :max (1 ,int (N *c /len (kayit )))for m ,c in say .items ()}
+    say =collections .Counter (k ["mfg"]for k in rec_ )
+    pay ={m :max (1 ,int (N *c /len (rec_ )))for m ,c in say .items ()}
     grup =collections .defaultdict (list )
-    for k in kayit :
+    for k in rec_ :
         grup [k ["mfg"]].append (k )
     sec =[]
     for m ,lst in grup .items ():
@@ -61,7 +61,7 @@ def main ():
     print (f"SECILDI {len (sec )} part -> {HEDEF }")
     print (f"brand dagilimi: {dict (d )}")
     print (f"secilen medyan mouth orani {np .median ([k ['ratio']for k in sec ]):.4f} | "
-    f"TUM corpus medyani {np .median ([k ['ratio']for k in kayit ]):.4f}")
+    f"TUM corpus medyani {np .median ([k ['ratio']for k in rec_ ]):.4f}")
     json .dump ({"n":len (sec ),"brand":dict (d ),"N_hedef":N ,
     "criterion":"mouth orani (boyanan tepe / toplam tepe) DUSUK oncelikli"},
     io .open ("results/d20_ornek.json","w",encoding ="utf-8"),indent =1 )

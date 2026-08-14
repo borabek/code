@@ -33,7 +33,7 @@ def main ():
     grp =np .array ([gk .get (p ,"yok:"+p )for p in pids ])
     THR =float (json .load (open ("cp_config.json",encoding ="utf-8"))["robot_wire_gate_threshold"])
 
-    def kural (s ,p ,ratio ,baseline ):
+    def rule_ (s ,p ,ratio ,baseline ):
         m =np .zeros (len (s ),bool )
         for u in np .unique (p ):
             i =p ==u 
@@ -52,7 +52,7 @@ def main ():
         random_state =0 ).fit (X [tr ],y [tr ]).predict_proba (X [te ])[:,1 ]
     tanidik ={}
     for ad ,orn ,tb in ADAY :
-        m =(o_ >=THR )if orn is None else kural (o_ ,pids ,orn ,tb )
+        m =(o_ >=THR )if orn is None else rule_ (o_ ,pids ,orn ,tb )
         tanidik [ad ]=sk (m ,y )
 
         # B) URETICI-DISI
@@ -62,7 +62,7 @@ def main ():
         s =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (X [~te ],y [~te ]).predict_proba (X [te ])[:,1 ]
         for ad ,orn ,tb in ADAY :
-            m =(s >=THR )if orn is None else kural (s ,pids [te ],orn ,tb )
+            m =(s >=THR )if orn is None else rule_ (s ,pids [te ],orn ,tb )
             mout .setdefault (ad ,{})[u ]=sk (m ,y [te ])
 
     U =sorted (set (mfg ))

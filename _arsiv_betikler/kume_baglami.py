@@ -58,22 +58,22 @@ def oznitelik (P ,D ,idx ,s ,diag ):
     n_ad =ters .max ()+1 
     en_iyi =np .full (n_ad ,-np .inf )
     np .maximum .at (en_iyi ,ters ,s )
-    sayi =np .bincount (ters ,minlength =n_ad )
-    X [:,2 ]=sayi [ters ]
+    cnt_ =np .bincount (ters ,minlength =n_ad )
+    X [:,2 ]=cnt_ [ters ]
     X [:,4 ]=s -en_iyi [ters ]
 
     # candidate ici order: before adaya, after skora according to sirala
     duz =np .lexsort ((-s ,ters ))
-    sira =np .empty (n ,float )
+    rank_ =np .empty (n ,float )
     k =0 
     while k <n :
         j =k 
         a =ters [duz [k ]]
         while j <n and ters [duz [j ]]==a :
             j +=1 
-        sira [duz [k :j ]]=np .arange (j -k )
+        rank_ [duz [k :j ]]=np .arange (j -k )
         k =j 
-    X [:,3 ]=sira 
+    X [:,3 ]=rank_ 
 
     # --- PARCANIN EN IYI SECENEGI with iliski
     b =int (np .argmax (s ))

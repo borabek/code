@@ -1538,7 +1538,7 @@ def main (argv =None ):
     print ("  # NOT plain `git add` (every epoch rewrites last.ckpt and bloats history).")
     print ("  # one-time LFS setup:  git lfs install && git lfs track '*.ckpt'")
     print ("  #   (commit .gitattributes; then add/commit/push the .ckpt as usual)")
-    print ("  # then on the other machine: pull the checkpoints and run:")
+    print ("  # then ten the other machine: pull the checkpoints and run:")
     print ("  python train_cp.py %s --backbone %s --resume --epochs <target>"
     %(args .source ,args .backbone ))
 

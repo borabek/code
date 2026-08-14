@@ -64,9 +64,9 @@ def orgu_uydur (A ,tol =TOL ):
         return None ,0 ,0.0 
     candidate =np .array (candidate )
     # kisa vektorleri before dene (kutup adimi most kisa tekrarli farktir)
-    sira =np .argsort (np .linalg .norm (candidate ,axis =1 ))
+    rank_ =np .argsort (np .linalg .norm (candidate ,axis =1 ))
     en_iyi ,en_s ,en_o =None ,0 ,0.0 
-    for idx in sira [:min (60 ,len (sira ))]:
+    for idx in rank_ [:min (60 ,len (rank_ ))]:
         s =candidate [idx ];L2 =float (s @s )
         if L2 <1e-9 :
             continue 

@@ -33,7 +33,7 @@ for k ,v in ans .items ():
 
 n =tp +fp +fn +tn 
 if n ==0 :
-    print ("cevap yok");sys .exit ()
+    print ("cevap absent");sys .exit ()
 acc =(tp +tn )/n 
 prec =tp /max (tp +fp ,1 );rec =tp /max (tp +fn ,1 )
 f1 =2 *prec *rec /max (prec +rec ,1e-9 )
@@ -53,10 +53,10 @@ if acc >=0.90 :
     print ("  => 2838 STEP'i insan etiketiyle acmak MESRU. Olcek plani yapilabilir.")
 elif acc >=0.75 :
     print (f"  KISMI (%{100 *acc :.0f}) -> sadece 'unsure' disi yuksek-guvenli cevaplar kullanilabilir;")
-    print ("  => sinirli olcekte dene, noise etkisini ayrica olc.")
+    print ("  => sinirli olcekte dene, noise etkisini also olc.")
 else :
     print (f"  KALDI (%{100 *acc :.0f}) -> manufacturer listesi geometriden turetilemiyor (katalog bilgisi).")
-    print ("  => insan etiketi GURULTU ekler. YOL KAPATILIR (R4 teshisi kesinlesir).")
+    print ("  => insan etiketi GURULTU adds. YOL KAPATILIR (R4 teshisi kesinlesir).")
 json .dump ({"accuracy":acc ,"tp":tp ,"fp":fp ,"fn":fn ,"tn":tn ,"unsure":uns ,
 "human_f1":f1 ,"human_precision":prec ,"human_recall":rec },
 open ("results/wire_pilot/score.json","w"),indent =1 )

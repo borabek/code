@@ -193,7 +193,7 @@ def main ():
         flush =True )
     dB =res ["B_P1_5uye"]["w"]-base 
     print (f"\nFINAL: urun {base :.4f} -> P1 {res ['B_P1_5uye']['w']:.4f}  ({dB :+.4f})")
-    print ("KARAR (>= +0.005 ve dusuk-CP gerilemiyor): "
+    print ("DECISION (>= +0.005 and low-CP gerilemiyor): "
     +("URUNE GIRER"if dB >=0.005 and res ["B_P1_5uye"]["dusuk"]>=res ["A_urun_4uye"]["dusuk"]-0.005 
     else "GIRMEZ"))
     json .dump ({k :v for k ,v in res .items ()}|{"delta_B":dB ,

@@ -55,17 +55,17 @@ def yukle (pidler =None ,desen ="results/_der_yeni*.pkl"):
     dosyalar =sorted (glob .glob (desen ))
     shard =[f for f in dosyalar if os .path .basename (f )!="_der_yeni.pkl"]
     birlesik =[f for f in dosyalar if os .path .basename (f )=="_der_yeni.pkl"]
-    kayit ={}
+    rec_ ={}
     for f in shard +birlesik :
         try :
             with open (f ,"rb")as h :
                 for r in pickle .load (h ):
                     if P is not None and r ["pid"]not in P :
                         continue 
-                    kayit .setdefault (r ["pid"],r )
+                    rec_ .setdefault (r ["pid"],r )
         except (OSError ,ValueError ,EOFError ,pickle .UnpicklingError ):
             continue 
-    return kayit 
+    return rec_ 
 
 
 def exam (yol ="results/d6_sinav_kumesi.json"):

@@ -54,7 +54,7 @@ def main ():
     from sina_cluster import match_greedy ,match_hungarian ,f1w 
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     with open ("results/wire_gate_v5.pkl","rb")as f :
         gate =pickle .load (f )
     with open ("results/_d6_silindirler.pkl","rb")as f :
@@ -68,7 +68,7 @@ def main ():
     rj_s ={a :collections .defaultdict (list )for a in AD }
     kova =collections .Counter ()
 
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         diag =r ["diag"];tt =max (3.0 ,0.06 *diag )
@@ -90,8 +90,8 @@ def main ():
                     P2 [i ]=opt [j ][0 ];D2 [i ]=opt [j ][1 ]
             P ,D =P2 ,D2 
 
-        def ek (ad ,satir ):
-            S [ad ].append (satir );rj_s [ad ][rj ].append (satir )
+        def ek (ad ,line_ ):
+            S [ad ].append (line_ );rj_s [ad ][rj ].append (line_ )
 
         ek (AD [0 ],(rj ,)+match_hungarian (P ,D ,G ,Gd ,diag ,2.0 ,10.0 ,False ,
         signed =True )[:3 ])
@@ -119,13 +119,13 @@ def main ():
             al =(dd *Gd [None ,:,:]).sum (-1 )
             pe =np .linalg .norm (dd -al [...,None ]*Gd [None ,:,:],axis =-1 )
             return np .where (np .abs (al )<=40.0 ,pe ,np .inf ).min (0 )<=tt 
-        on =kapsanan (P0 );son =kapsanan (P )
+        on =kapsanan (P0 );last_ =kapsanan (P )
         for gi in range (len (G )):
             if gi in es_gt :
                 kova ["ESLESTI"]+=1 
             elif not on [gi ]:
                 kova ["ADAY_YOK"]+=1 
-            elif not son [gi ]:
+            elif not last_ [gi ]:
                 kova ["GATE_REDDI"]+=1 
             else :
                 kova ["KALABALIK"]+=1 
@@ -135,7 +135,7 @@ def main ():
 
         # --- acgozlu with difference (only tespit and robot for)
     Ta ,Ra =[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
@@ -147,25 +147,25 @@ def main ():
         signed =True )[:3 ])
 
     n_gt =sum (kova .values ())
-    print (f"TEMIZ SINAV {len (kayit )} part, {n_gt } GT CP  (eslestirici: MACAR)\n")
+    print (f"TEMIZ SINAV {len (rec_ )} part, {n_gt } GT CP  (eslestirici: MACAR)\n")
     print ("GT KAYIP DAGILIMI:")
     for k ,v in kova .most_common ():
         print (f"  {k :<12}{v :>6}  %{100 *v /n_gt :.1f}")
     print (f"\n{'kademe':<20}{'AGIRLIKLI':>11}{'dusuk-CP':>11}{'cok-CP':>10}{'kazanc':>9}")
-    onc ,sonuc =None ,{}
+    onc ,res_ =None ,{}
     for a in AD :
         v =f1w (S [a ])
         dl =f1w (rj_s [a ]["dusuk"])if rj_s [a ]["dusuk"]else float ("nan")
         ck =f1w (rj_s [a ]["cok"])if rj_s [a ]["cok"]else float ("nan")
         kz =""if onc is None else f"{v -onc :+.4f}"
         print (f"{a :<20}{v :>11.4f}{dl :>11.4f}{ck :>10.4f}{kz :>9}")
-        sonuc [a ]={"agirlikli":v ,"dusuk":dl ,"cok":ck }
+        res_ [a ]={"agirlikli":v ,"dusuk":dl ,"cok":ck }
         onc =v 
     print (f"\nESLESTIRICI FARKI (secicisiz baseline): "
     f"tespit acgozlu {f1w (Ta ):.4f} | robot acgozlu {f1w (Ra ):.4f}")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
         json .dump ({"cluster":"d6","muhur":sv ["sha16"],"kova":dict (kova ),
-        "merdiven":sonuc ,"hash":kod_muhru ()},f ,indent =1 ,
+        "merdiven":res_ ,"hash":kod_muhru ()},f ,indent =1 ,
         ensure_ascii =False )
     print (f"receipt -> {MAKBUZ }")
 

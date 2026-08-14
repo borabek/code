@@ -108,10 +108,10 @@ def sec (s ,tip ,p ):
     raise ValueError (tip )
 
 
-def olc (model ,veri ,tip ,p ,tam_zincir =False ,S =None ):
+def olc (model ,data_ ,tip ,p ,tam_zincir =False ,S =None ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =np .asarray (model .predict_proba (
         wire_gate .within_part (d ["X"],"zskor"))[:,1 ],float )
         k =sec (s ,tip ,p )
@@ -169,7 +169,7 @@ def main ():
     iyi =max (out ,key =lambda k :out [k ]["robot"])
     print (f"\nEN IYI KURAL: {iyi } -> {out [iyi ]['robot']:.4f} "
     f"(baseline mutlak 0.05 = 0.2773, fark {out [iyi ]['robot']-0.2773 :+.4f})")
-    print ("KAPI: >= +0.02 ise A1/A2 KABUL")
+    print ("KAPI: >= +0.02 whereas A1/A2 KABUL")
     json .dump ({"damga":makbuz_hash .damga (),"D6":d6skor ,"D7":out ,
     "baseline":0.2773 ,"en_iyi":iyi ,
     "not":"Karar kurali ailesi kiyasi. Parametre D6'da secildi, D7'de "

@@ -62,13 +62,13 @@ def nms_kimlik (P ,gs ,cyl ,R ):
 
 
 def nms_mesafe (P ,gs ,r ):
-    sira =np .argsort (-gs );tut =np .ones (len (P ),bool )
-    for a in range (len (sira )):
-        i =sira [a ]
+    rank_ =np .argsort (-gs );tut =np .ones (len (P ),bool )
+    for a in range (len (rank_ )):
+        i =rank_ [a ]
         if not tut [i ]:
             continue 
-        for b in range (a +1 ,len (sira )):
-            j =sira [b ]
+        for b in range (a +1 ,len (rank_ )):
+            j =rank_ [b ]
             if tut [j ]and np .linalg .norm (P [i ]-P [j ])<r :
                 tut [j ]=False 
     return tut 
@@ -110,7 +110,7 @@ for ad in arm :
     print (f"  {ad :<18} MIKRO {res [ad ]:.4f}  {d :+.4f}")
 en =max ((a for a in res if a !="threshold (urun)"),key =lambda a :res [a ])
 print (f"\nEN IYI: {en } {res [en ]-baseline :+.4f}")
-print ("KARAR: "+("madde 6 ACIK"if res [en ]-baseline >=0.01 else "madde 6 OLU"))
+print ("DECISION: "+("madde 6 ACIK"if res [en ]-baseline >=0.01 else "madde 6 OLU"))
 json .dump ({"damga":makbuz_hash .damga (),"mikro":res ,"baseline":baseline ,
 "en_iyi":en ,"kazanc":res [en ]-baseline ,"n":len (arm ["threshold (urun)"]),
 "not":"URUN zincirine tek basina NMS. D7=DEV. MIKRO."},

@@ -126,9 +126,9 @@ def main ():
     pool =[p for p in parts if p [1 ]not in LOCK ]
     rng =np .random .RandomState (202 )
     lo =[x for x in pool if x [4 ]<8 ];hi =[x for x in pool if x [4 ]>=8 ]
-    eski =([lo [i ]for i in rng .choice (len (lo ),70 ,replace =False )]+
+    old_ =([lo [i ]for i in rng .choice (len (lo ),70 ,replace =False )]+
     [hi [i ]for i in rng .choice (len (hi ),30 ,replace =False )])
-    kirli =sum (1 for p in eski if keys .get (p [1 ])in seg_groups )
+    kirli =sum (1 for p in old_ if keys .get (p [1 ])in seg_groups )
     print (f"\nMEVCUT 100 parcalik cluster: {kirli }/100 part segmentasyon training geometrisiyle "
     f"AYNI grupta  <- 'gorulmemis geometri' iddiasi bu kadar zayif",flush =True )
 

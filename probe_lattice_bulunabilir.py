@@ -51,12 +51,12 @@ def temel (d ):
     np .float32 )
 
 
-def _izgara (P ,seed ,adim ,n_max =60 ):
+def _izgara (P ,seed ,step_ ,n_max =60 ):
     """seed + n*step noktalari (each two yonde), part sinirlari inside."""
-    L =float (np .linalg .norm (adim ))
+    L =float (np .linalg .norm (step_ ))
     if L <0.5 :
         return np .zeros ((0 ,3 ))
-    u =adim /L 
+    u =step_ /L 
     t =(P -seed )@u 
     n0 ,n1 =int (np .floor (t .min ()/L ))-1 ,int (np .ceil (t .max ()/L ))+1 
     n0 ,n1 =max (n0 ,-n_max ),min (n1 ,n_max )
@@ -90,9 +90,9 @@ def kafes_bul (P ,G ,n_kafes =N_KAFES ):
     tohumlar =P [::max (1 ,len (P )//10 )]
     for _ in range (n_kafes ):
         en_m ,en_n =None ,0 
-        for adim in candidate :
+        for step_ in candidate :
             for seed in tohumlar :
-                uret =_izgara (P ,seed ,adim )
+                uret =_izgara (P ,seed ,step_ )
                 m =_kapsa (uret ,G )&kalan 
                 n =int (m .sum ())
                 if n >en_n :
@@ -108,27 +108,27 @@ def kafes_bul (P ,G ,n_kafes =N_KAFES ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
+    print (f"{len (data_ )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
     flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_satir =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_satir ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_satir =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_satir ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -138,12 +138,12 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         G =np .asarray (d ["G"],float )
@@ -151,8 +151,8 @@ def main ():
             continue 
             # EN YUKSEK SKORLU adaylarin KONUMLARI (secenek -> candidate)
         P =d ["P"][d ["idx"]]
-        sira =np .argsort (-np .asarray (s ))[:UST_N ]
-        Pu =np .unique (np .round (P [sira ],3 ),axis =0 )
+        rank_ =np .argsort (-np .asarray (s ))[:UST_N ]
+        Pu =np .unique (np .round (P [rank_ ],3 ),axis =0 )
         kaps =kafes_bul (Pu ,G )
         a =ist [d ["mfg"]]
         a ["gt"].append (len (G ))
@@ -163,7 +163,7 @@ def main ():
             print (f"  {n } part ({time .time ()-t0 :.0f} s)",flush =True )
 
             # VII.0'daki KAHIN tavani (karsilastirma for)
-    kahin ={"NIT":0.983 ,"SUPU":0.864 ,"MOR":0.811 ,"UPUN":0.810 }
+    oracle_ ={"NIT":0.983 ,"SUPU":0.864 ,"MOR":0.811 ,"UPUN":0.810 }
     print (f"\n{'brand':<7}{'GT':>7}{'1 lattice':>9}{'2 lattice':>9}{'3 lattice':>9}"
     f"{'KAHIN':>8}{'ULASIM ACIGI':>14}")
     out ={}
@@ -173,7 +173,7 @@ def main ():
         r ={"gt":g }
         for i in (1 ,2 ,3 ):
             r [f"lattice{i }"]=sum (a [f"k{i }"])/max (g ,1 )
-        kh =kahin .get (m_ ,0.0 )
+        kh =oracle_ .get (m_ ,0.0 )
         r ["kahin"]=kh 
         r ["ulasim_acigi"]=kh -r ["kafes3"]
         out [m_ ]=r 

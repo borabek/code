@@ -53,10 +53,10 @@ def main ():
     ref =out ["geometri-disi"]
     for u in sorted (set (mfg )):
         k =out [f"manufacturer{u }"]
-        toplam =k ["f1_sabit"]-ref ["f1_sabit"]
+        total_ =k ["f1_sabit"]-ref ["f1_sabit"]
         kalib =k ["kalibrasyon_bedeli"]
-        siralama =toplam +kalib # threshold duzeltilse bile kalan loss
-        print (f"  manufacturer {u }: toplam {toplam :+.4f} = KALIBRASYON {-kalib :+.4f} "
+        siralama =total_ +kalib # threshold duzeltilse bile kalan loss
+        print (f"  manufacturer {u }: toplam {total_ :+.4f} = KALIBRASYON {-kalib :+.4f} "
         f"+ SIRALAMA {siralama :+.4f}   (AUC {ref ['auc']:.3f} -> {k ['auc']:.3f})")
     json .dump (out ,open ("results/t2_esik_siralama.json","w"),indent =1 )
     print ("\nmakbuz -> results/t2_esik_siralama.json")

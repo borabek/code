@@ -54,23 +54,23 @@ def yap ():
 
 def main ():
     t0 =time .time ()
-    veri =yukle ("d6",0 )
-    for d in veri :
+    data_ =yukle ("d6",0 )
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int );d ["_M"]=temel (d )
         d ["_yak"]=yakinlik (d )
-    print (f"{len (veri )} part",flush =True )
+    print (f"{len (data_ )} part",flush =True )
     # KAT TOHUMU: first kosu +0.0144 with kapiyi gecti but TEK tohumluydu.
     # Uc tohumda da gecerse karar verilebilir.
     _t =int (os .environ .get ("Y8_TOHUM","1"))
-    rng =np .random .default_rng (_t );pay =rng .permutation (len (veri ))%3 
+    rng =np .random .default_rng (_t );pay =rng .permutation (len (data_ ))%3 
     KOLLAR =("baseline","lineer","karesel")
     agg ={k :collections .Counter ()for k in KOLLAR }
     for f_ in range (3 ):
-        ic =[i for i in range (len (veri ))if pay [i ]!=f_ ]
-        dis =[i for i in range (len (veri ))if pay [i ]==f_ ]
-        M =np .vstack ([veri [i ]["_M"]for i in ic ])
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
-        YK =np .concatenate ([veri [i ]["_yak"]for i in ic ])
+        ic =[i for i in range (len (data_ ))if pay [i ]!=f_ ]
+        dis =[i for i in range (len (data_ ))if pay [i ]==f_ ]
+        M =np .vstack ([data_ [i ]["_M"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
+        YK =np .concatenate ([data_ [i ]["_yak"]for i in ic ])
         rr =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rr .choice (neg ,min (len (neg ),NEG_KAT *max (len (poz ),1 )),replace =False )])
@@ -84,7 +84,7 @@ def main ():
                 W =np .where (Y [sec ]==1 ,W ,1.0 ).astype (np .float32 )
             m =yap ().fit (M [sec ],Y [sec ],sample_weight =W )
             for i in dis :
-                d =veri [i ]
+                d =data_ [i ]
                 s =m .predict_proba (d ["_M"])[:,1 ]
                 P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,KURAL ,nms_mm =NMS )
                 tp ,fp ,fn =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],
@@ -93,13 +93,13 @@ def main ():
         del M 
         print (f"  fold{f_ } bitti ({time .time ()-t0 :.0f} s)",flush =True )
     def f1 (c ):return 2 *c ["tp"]/max (2 *c ["tp"]+c ["fp"]+c ["fn"],1 )
-    son ={k :f1 (agg [k ])for k in KOLLAR }
-    print (f"\n=== TABAN {son ['baseline']:.4f} ===")
+    last_ ={k :f1 (agg [k ])for k in KOLLAR }
+    print (f"\n=== TABAN {last_ ['baseline']:.4f} ===")
     for k in KOLLAR [1 :]:
-        fark =son [k ]-son ["baseline"]
-        print (f"  {k :<10}{son [k ]:.4f}   {fark :+.4f}"
+        fark =last_ [k ]-last_ ["baseline"]
+        print (f"  {k :<10}{last_ [k ]:.4f}   {fark :+.4f}"
         +("  <- KAPI GECTI"if fark >=0.01 else ""))
-    json .dump ({"damga":makbuz_hash .damga (),"kat_tohumu":_t ,"toplam":son ,
+    json .dump ({"damga":makbuz_hash .damga (),"kat_tohumu":_t ,"toplam":last_ ,
     "not":"Etiket kalitesi agirliklandirma: pozitife GT'ye "
     "YAKINLIGIYLA orantili agirlik. Metrik DEGISMEZ, "
     "yalnizca training agirligi. D7'ye BAKILMADI."},

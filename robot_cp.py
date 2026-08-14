@@ -682,7 +682,7 @@ def main ():
         if a .cp_count is None :
             print ("  [high-CP mode --cp-count gerektirir; base moda dusuldu]",file =sys .stderr );use_highcp =False 
         elif not hc_ready :
-            print ("  [high-CP artefact/checkpoint eksik; base moda dusuldu]",file =sys .stderr );use_highcp =False 
+            print ("  [high-CP artefact/checkpoint missing; base moda dusuldu]",file =sys .stderr );use_highcp =False 
         else :
             extra =[load_any (c ,dev =a .device )[:2 ]for c in hc ["extra_checkpoints"]]
             models7 =models +extra 

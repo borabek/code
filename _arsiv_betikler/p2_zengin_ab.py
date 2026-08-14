@@ -112,13 +112,13 @@ def main ():
     for k ,sec in KOL .items ():
         M =matris (sec )
         genel =olc (M )
-        satir =f"{k :<18}{genel :>9.4f}"
+        line_ =f"{k :<18}{genel :>9.4f}"
         SON [k ]={"genel":float (genel )}
         for kk in kodlar :
             v =olc (M ,maske =(mfg ==kk ))
             SON [k ][kk ]=float (v )
-            satir +=f"{v :>12.4f}"
-        print (satir ,flush =True )
+            line_ +=f"{v :>12.4f}"
+        print (line_ ,flush =True )
 
     a =SON ["A 22 temel"]
     print (f"\n{'arm':<18}{'genel fark':>12}"+"".join (f"{k :>10}"for k in kodlar ))

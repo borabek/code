@@ -11,8 +11,8 @@ import pytest
 import p3c_axis_selector as P3C 
 
 
-def _cyl (merkez ,axis ,yaricap ,boy =4.0 ):
-    m =np .asarray (merkez ,float )
+def _cyl (center_ ,axis ,yaricap ,boy =4.0 ):
+    m =np .asarray (center_ ,float )
     e =np .asarray (axis ,float )
     e =e /np .linalg .norm (e )
     return {"axis":e ,"radius":yaricap ,

@@ -78,9 +78,9 @@ def parca_oz (d ,s ):
 def sec_ustk (d ,s ,k ):
     P =d ["P"][d ["idx"]]
     YD =d ["YD"]
-    sira =np .argsort (-np .asarray (s ))
+    rank_ =np .argsort (-np .asarray (s ))
     sp ,sd =[],[]
-    for j in sira :
+    for j in rank_ :
         if len (sp )>=k :
             break 
         p =P [j ]
@@ -93,28 +93,28 @@ def sec_ustk (d ,s ,k ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar }",flush =True )
+    print (f"{len (data_ )} part | katlar {katlar }",flush =True )
 
-    oof =[None ]*len (veri )
-    adet_tah =[None ]*len (veri )
+    oof =[None ]*len (data_ )
+    adet_tah =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
         # --- 1) secenek skorlayici
-        n_s =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        n_s =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -124,24 +124,24 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in ic +dis :
-            veri [i ]["_s"]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            data_ [i ]["_s"]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         for i in dis :
-            oof [i ]=veri [i ]["_s"]
+            oof [i ]=data_ [i ]["_s"]
             # --- 2) ADET regresyonu (log uzayinda)
-        XA =np .vstack ([parca_oz (veri [i ],veri [i ]["_s"])for i in ic ])
-        YA =np .log1p ([len (veri [i ]["G"])for i in ic ])
+        XA =np .vstack ([parca_oz (data_ [i ],data_ [i ]["_s"])for i in ic ])
+        YA =np .log1p ([len (data_ [i ]["G"])for i in ic ])
         rg =HistGradientBoostingRegressor (
         max_iter =300 ,learning_rate =0.06 ,max_leaf_nodes =31 ,
         l2_regularization =1.0 ,random_state =0 ).fit (XA ,YA )
         for i in dis :
             adet_tah [i ]=float (np .expm1 (rg .predict (
-            parca_oz (veri [i ],veri [i ]["_s"])[None ])[0 ]))
+            parca_oz (data_ [i ],data_ [i ]["_s"])[None ])[0 ]))
         print (f"  {b } bitti ({time .time ()-t0 :.0f} s)",flush =True )
 
         # --- degerlendirme
     agg =collections .defaultdict (lambda :collections .Counter ())
     error =collections .defaultdict (list )
-    for d ,s ,kt in zip (veri ,oof ,adet_tah ):
+    for d ,s ,kt in zip (data_ ,oof ,adet_tah ):
         if s is None :
             continue 
         G =np .asarray (d ["G"],float )

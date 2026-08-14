@@ -70,16 +70,16 @@ def main ():
         Pd =np .array ([c ["direction"]for c in cps ],float )if cps else np .zeros ((0 ,3 )),
         G =r ["G"],Gd =r ["Gd"],n =r ["n"],diag =r ["diag"]))
 
-    def kos (kural ):
+    def kos (rule_ ):
         det ,rob =[],[]
         for r in DER :
             s =r ["s"]
             if len (s )==0 :
                 m =np .zeros (0 ,bool )
-            elif kural =="sabit":
+            elif rule_ =="sabit":
                 m =s >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
             else :
-                ratio ,baseline =kural 
+                ratio ,baseline =rule_ 
                 m =(s >=ratio *max (float (s .max ()),1e-9 ))&(s >=baseline )
             P =r ["P"][m ]if m .any ()else np .zeros ((0 ,3 ))
             Pd =r ["Pd"][m ]if m .any ()else np .zeros ((0 ,3 ))

@@ -65,7 +65,7 @@ def birim (V ):
     return V /np .maximum (np .linalg .norm (V ,axis =1 ,keepdims =True ),1e-12 )
 
 
-def dedupe (Y ,kaynak ,tol_der =DEDUPE_DER ):
+def dedupe (Y ,src_ ,tol_der =DEDUPE_DER ):
     """ISARETLI dedupe. +u and -u AYRI yonlerdir; measurement signed angle kullaniyor.
 
     Ilk gelen kazanir; source order (own<komsu<silindir<ana) cagiranda kurulur,
@@ -80,7 +80,7 @@ def dedupe (Y ,kaynak ,tol_der =DEDUPE_DER ):
         if tut and float (np .max (np .asarray (tut )@Y [i ]))>=cos_tol :
             continue 
         tut .append (Y [i ])
-        tk .append (int (kaynak [i ]))
+        tk .append (int (src_ [i ]))
     return np .asarray (tut ,float ),np .asarray (tk ,int )
 
 

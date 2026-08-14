@@ -24,20 +24,20 @@ RS =[0.0 ,1.0 ,2.0 ,3.0 ,4.0 ,5.0 ,6.0 ,8.0 ,10.0 ]
 def nms (P ,gs ,r ):
     if r <=0 :
         return np .ones (len (P ),bool )
-    sira =np .argsort (-gs );tut =np .ones (len (P ),bool )
-    for a ,i in enumerate (sira ):
+    rank_ =np .argsort (-gs );tut =np .ones (len (P ),bool )
+    for a ,i in enumerate (rank_ ):
         if not tut [i ]:
             continue 
-        for j in sira [a +1 :]:
+        for j in rank_ [a +1 :]:
             if tut [j ]and np .linalg .norm (P [i ]-P [j ])<r :
                 tut [j ]=False 
     return tut 
 
 
-def kos (kayit ,x58f ,ad ):
+def kos (rec_ ,x58f ,ad ):
     rob ={r :collections .defaultdict (lambda :[0 ,0 ,0 ])for r in RS }
     tes ={r :[]for r in RS }
-    for pid ,rec in kayit .items ():
+    for pid ,rec in rec_ .items ():
         X =x58f (rec );G =np .asarray (rec .get ("G",[]),float )
         if X is None or not len (G ):
             continue 

@@ -46,14 +46,14 @@ def agiz_ve_eksen (sil ):
     P ,A ,C =[],[],[]
     for c in sil :
         ax =_birim (np .asarray (c ["axis"],float ))
-        merkez =np .asarray (c ["center"],float )
+        center_ =np .asarray (c ["center"],float )
         for k in ("mouth_a","mouth_b"):
             m =c .get (k )
             if m is None :
                 continue 
             P .append (np .asarray (m ,float ))
             A .append (ax )
-            C .append (merkez )
+            C .append (center_ )
     if not P :
         return (np .zeros ((0 ,3 )),)*3 
     return np .asarray (P ),np .asarray (A ),np .asarray (C )
@@ -87,8 +87,8 @@ def main ():
             continue 
             # YEREL DIS NORMAL: mouth noktasina most yakin yuzeyin normali
         try :
-            _ ,_ ,yuz =mesh .nearest .on_surface (AP )
-            NN =_birim (mesh .face_normals [yuz ])
+            _ ,_ ,face_ =mesh .nearest .on_surface (AP )
+            NN =_birim (mesh .face_normals [face_ ])
         except Exception :
             atlanan +=1 
             continue 
@@ -98,7 +98,7 @@ def main ():
         yan =np .linalg .norm (v -al [...,None ]*Gn [None ,:,:],axis =-1 )
         konum =(yan <=YANAL )&(np .abs (al )<=EKSENEL )
 
-        def puan (D ):
+        def score_ (D ):
             aci =np .degrees (np .arccos (np .clip (_birim (D )@Gn .T ,-1 ,1 )))
             return int ((konum &(aci <=K .ACI )).any (0 ).sum ())
 
@@ -110,12 +110,12 @@ def main ():
         a ["axis"].append (int ((konum &(unsigned <=K .ACI )).any (0 ).sum ()))
         # kuresel: merkezden agza
         d_kur =np .where (((AP -AC )*AX ).sum (1 ,keepdims =True )>0 ,AX ,-AX )
-        a ["kuresel_disari"].append (puan (d_kur ))
-        a ["kuresel_iceri"].append (puan (-d_kur ))
+        a ["kuresel_disari"].append (score_ (d_kur ))
+        a ["kuresel_iceri"].append (score_ (-d_kur ))
         # YEREL: mesh dis normaliyle same signed
         d_yer =np .where ((NN *AX ).sum (1 ,keepdims =True )>0 ,AX ,-AX )
-        a ["yerel"].append (puan (d_yer ))
-        a ["yerel_ters"].append (puan (-d_yer ))
+        a ["yerel"].append (score_ (d_yer ))
+        a ["yerel_ters"].append (score_ (-d_yer ))
         n +=1 
     print (f"{n } part islendi, {atlanan } atlandi\n")
     print (f"{'brand':<7}{'GT':>7}{'KONUM':>8}{'axis':>8}{'kur.disari':>11}"

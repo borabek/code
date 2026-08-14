@@ -82,7 +82,7 @@ def _mesafe (mesh ,O ,D ,uzak ):
     return out 
 
 
-def tanimla (P ,D ,mesh ,diag ,merkez =None ):
+def tanimla (P ,D ,mesh ,diag ,center_ =None ):
     """(n, 9) matris. `D` DISARI bakan direction (sign duzeltmesinden SONRA)."""
     P =np .asarray (P ,float ).reshape (-1 ,3 )
     D =np .asarray (D ,float ).reshape (-1 ,3 )
@@ -91,8 +91,8 @@ def tanimla (P ,D ,mesh ,diag ,merkez =None ):
     if n ==0 :
         return X 
     uzak =float (diag )
-    if merkez is None :
-        merkez =np .asarray (mesh .vertices ,float ).mean (0 )
+    if center_ is None :
+        center_ =np .asarray (mesh .vertices ,float ).mean (0 )
     yari =0.5 *uzak 
     for i in range (n ):
         d =_birim (D [i ])
@@ -130,5 +130,5 @@ def tanimla (P ,D ,mesh ,diag ,merkez =None ):
         O =np .repeat ((P [i ]+0.05 *d )[None ],ISIN_SAYISI ,axis =0 )
         h =_mesafe (mesh ,O ,yon_halka ,uzak )
         X [i ,7 ]=float (h .std ()/max (h .mean (),1e-6 ))
-        X [i ,8 ]=float (np .linalg .norm (P [i ]-merkez )/max (yari ,1e-6 ))
+        X [i ,8 ]=float (np .linalg .norm (P [i ]-center_ )/max (yari ,1e-6 ))
     return X 

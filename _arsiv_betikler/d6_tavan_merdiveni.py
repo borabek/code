@@ -39,7 +39,7 @@ def main ():
     sv =json .load (io .open (KUME ,encoding ="utf-8"))
     PID =set (sv ["pidler"])
     import d6_record 
-    kayit =d6_record .yukle (PID )
+    rec_ =d6_record .yukle (PID )
     with open ("results/wire_gate.pkl","rb")as f :
         gate =pickle .load (f )
 
@@ -48,7 +48,7 @@ def main ():
     S ={a :[]for a in AD }
     rejim_s ={a :collections .defaultdict (list )for a in AD }
 
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         diag =r ["diag"];tt =max (3.0 ,0.06 *diag )
@@ -62,8 +62,8 @@ def main ():
                 if k .any ():
                     P =P0 [k ];D =D0 [k ]
 
-        def ekle (ad ,satir ):
-            S [ad ].append (satir );rejim_s [ad ][rj ].append (satir )
+        def ekle (ad ,line_ ):
+            S [ad ].append (line_ );rejim_s [ad ][rj ].append (line_ )
 
             # 0 GERCEK
         ekle (AD [0 ],(rj ,)+match_greedy (P ,D ,G ,Gd ,diag ,2.0 ,10.0 ,False ,
@@ -97,19 +97,19 @@ def main ():
         # 6 mutlak
         ekle (AD [6 ],(rj ,len (G ),0 ,0 ))
 
-    print (f"TEMIZ SINAV: {len (kayit )} part, {sum (len (np .asarray (r ['G']))for r in kayit .values ())} GT CP\n")
+    print (f"TEMIZ SINAV: {len (rec_ )} part, {sum (len (np .asarray (r ['G']))for r in rec_ .values ())} GT CP\n")
     print (f"{'kademe':<20}{'AGIRLIKLI':>11}{'dusuk-CP':>11}{'cok-CP':>10}{'kazanc':>9}")
     onc =None 
-    sonuc ={}
+    res_ ={}
     for a in AD :
         v =f1w (S [a ])
         dl =f1w (rejim_s [a ]["dusuk"])if rejim_s [a ]["dusuk"]else float ("nan")
         ck =f1w (rejim_s [a ]["cok"])if rejim_s [a ]["cok"]else float ("nan")
         kz =""if onc is None else f"{v -onc :+.4f}"
         print (f"{a :<20}{v :>11.4f}{dl :>11.4f}{ck :>10.4f}{kz :>9}")
-        sonuc [a ]={"agirlikli":v ,"dusuk":dl ,"cok":ck }
+        res_ [a ]={"agirlikli":v ,"dusuk":dl ,"cok":ck }
         onc =v 
-    json .dump (sonuc ,io .open (MAKBUZ ,"w",encoding ="utf-8"),indent =1 )
+    json .dump (res_ ,io .open (MAKBUZ ,"w",encoding ="utf-8"),indent =1 )
     print (f"\nmakbuz -> {MAKBUZ }")
 
 

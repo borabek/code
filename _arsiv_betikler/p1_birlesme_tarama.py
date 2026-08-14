@@ -57,7 +57,7 @@ def pool (V ,F ,pbs ,step_path ,cluster_mm ,dedupe_mm ,oy_mm ,min_v =4 ,vc =0.3 
     return cps 
 
 
-def kahin (P ,G ,Gd ,diag ):
+def oracle_ (P ,G ,Gd ,diag ):
     """MUKEMMEL gate: havuzda toleransta candidate which is each GT a TP (one-to-one, Macar)."""
     from sina_cluster import match_hungarian 
     D =np .tile ([0.0 ,0 ,1 ],(len (P ),1 ))if len (P )else np .zeros ((0 ,3 ))
@@ -76,11 +76,11 @@ def main ():
     from sina_cluster import f1w 
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     dosyalar =sorted (glob .glob (os .path .join (ONBELLEK ,"*.npz")))
-    if a .sinir :
-        dosyalar =dosyalar [:a .sinir ]
+    if a .bound_ :
+        dosyalar =dosyalar [:a .bound_ ]
     print (f"onbellekte {len (dosyalar )} part\n")
 
     # (cluster, dedupe, oy) uclulerI -- mevcut urun first sirada
@@ -94,16 +94,16 @@ def main ():
     AYAR .append ((1.0 ,2.0 ,2.0 ))# ucu birden dar
     AYAR .append ((2.0 ,3.0 ,3.0 ))
 
-    sonuc ={}
+    res_ ={}
     baseline =None 
     print (f"{'cl/de/oy':<14}{'KAHIN':>8}{'dusuk':>8}{'cok':>8}{'candidate':>8}"
     f"{'sure_s':>8}{'fark':>9}")
     for (cl ,de ,oy )in AYAR :
         t0 =time .time ()
-        satir ,n_aday =[],0 
+        line_ ,n_aday =[],0 
         for f in dosyalar :
             pid =os .path .splitext (os .path .basename (f ))[0 ]
-            r =kayit .get (pid )
+            r =rec_ .get (pid )
             if r is None or pid not in S :
                 continue 
             d =np .load (f )
@@ -118,23 +118,23 @@ def main ():
             n_aday +=len (P )
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
             rj ="cok"if r ["n"]>=8 else "dusuk"
-            tp =kahin (P ,G ,Gd ,r ["diag"])if len (G )else 0 
-            satir .append ((rj ,tp ,0 ,len (G )-tp ))
-        v =f1w (satir )
-        dl =f1w ([s for s in satir if s [0 ]=="dusuk"])
-        ck =f1w ([s for s in satir if s [0 ]=="cok"])
+            tp =oracle_ (P ,G ,Gd ,r ["diag"])if len (G )else 0 
+            line_ .append ((rj ,tp ,0 ,len (G )-tp ))
+        v =f1w (line_ )
+        dl =f1w ([s for s in line_ if s [0 ]=="dusuk"])
+        ck =f1w ([s for s in line_ if s [0 ]=="cok"])
         sure =time .time ()-t0 
         if baseline is None :
             baseline =(v ,dl ,ck )
         fark =f"{v -baseline [0 ]:+.4f}"if baseline else ""
         print (f"{cl :.0f}/{de :.0f}/{oy :.0f}".ljust (14 )+
         f"{v :>8.4f}{dl :>8.4f}{ck :>8.4f}{n_aday :>8}{sure :>8.0f}{fark :>9}")
-        sonuc [f"{cl }/{de }/{oy }"]={"kahin":v ,"dusuk":dl ,"cok":ck ,
+        res_ [f"{cl }/{de }/{oy }"]={"kahin":v ,"dusuk":dl ,"cok":ck ,
         "candidate":n_aday ,"sure_s":sure }
 
-    en =max ((k for k in sonuc ),key =lambda k :sonuc [k ]["kahin"])
-    t =sonuc [f"3.0/10.0/5.0"]
-    e =sonuc [en ]
+    en =max ((k for k in res_ ),key =lambda k :res_ [k ]["kahin"])
+    t =res_ [f"3.0/10.0/5.0"]
+    e =res_ [en ]
     print (f"\nMEVCUT 3/10/5 : kahin {t ['kahin']:.4f} (dusuk {t ['dusuk']:.4f} "
     f"cok {t ['cok']:.4f}) candidate {t ['candidate']}")
     print (f"EN IYI  {en :<10}: kahin {e ['kahin']:.4f} (dusuk {e ['dusuk']:.4f} "
@@ -147,7 +147,7 @@ def main ():
     f"dusuk-CP {e ['dusuk']-t ['dusuk']:+.4f} | candidate artisi "
     f"x{e ['candidate']/max (t ['candidate'],1 ):.2f}")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-        json .dump ({"sonuc":sonuc ,"mevcut":"3.0/10.0/5.0","en_iyi":en ,"go":go },
+        json .dump ({"sonuc":res_ ,"mevcut":"3.0/10.0/5.0","en_iyi":en ,"go":go },
         f ,indent =1 ,ensure_ascii =False )
     print (f"receipt -> {MAKBUZ }")
 

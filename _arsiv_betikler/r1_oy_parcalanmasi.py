@@ -125,8 +125,8 @@ def main ():
     print ()
     if par >=0.15 :
         print (f"HUKUM: >=2 uyenin buldugu CP'lerin %{100 *par :.0f}'inde yayilim 5mm'yi asiyor")
-        print ("       -> OY PARCALANIYOR. Genellesen tek sinyal bozuluyor.")
-        print ("       Sonraki adim: cluster_mm'yi buyutup UCTAN UCA olc.")
+        print ("       -> OY PARCALANIYOR. Genellesen single sinyal bozuluyor.")
+        print ("       Sonraki step: cluster_mm'yi buyutup UCTAN UCA olc.")
     else :
         print (f"HUKUM: yalniz %{100 *par :.0f} parcalaniyor -> cluster_mm 5.0 makul, hipotez ZAYIF.")
     with io .open ("results/r1_oy_parcalanmasi.json","w",encoding ="utf-8")as f :

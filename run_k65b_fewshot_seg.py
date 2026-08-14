@@ -52,7 +52,7 @@ def main ():
     ap .add_argument ("--cekilis",type =int ,default =2 )
     ap .add_argument ("--epochs",type =int ,default =40 )
     ap .add_argument ("--lr",type =float ,default =2e-4 ,
-    help ="fine-tune icin DUSUK lr; 1e-3 ile ag onceki bilgisini unutur")
+    help ="fine-tune for DUSUK lr; 1e-3 with network onceki bilgisini unutur")
     ap .add_argument ("--kip",choices =["yalniz","tekrar"],default ="tekrar",
     help ="yalniz = SADECE k parcayla adapte (agresif, unutma riski); "
     "tekrar = corpus korunur, k part N kez tekrarlanir (gerceksi)")
@@ -65,8 +65,8 @@ def main ():
     import d6_record 
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
-    pidler =sorted (p for p ,r in kayit .items ()if r ["mfg"]==a .brand )
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
+    pidler =sorted (p for p ,r in rec_ .items ()if r ["mfg"]==a .brand )
     if len (pidler )<max (a .klar )+10 :
         raise SystemExit (f"{a .brand }: yalniz {len (pidler )} part, yetersiz")
     kume_yolu =f"results/_fs_kume_{a .brand }.json"
@@ -78,14 +78,14 @@ def main ():
     f"{n_beklenen } ===",flush =True )
 
     rng =np .random .RandomState (0 )
-    sonuc ={}
+    res_ ={}
     for k in a .klar :
-        sonuc [k ]=[]
+        res_ [k ]=[]
         for c in range (a .cekilis ):
-            etiket =f"{a .brand }_k{k }_c{c }"
+            label_ =f"{a .brand }_k{k }_c{c }"
             adapt =sorted (rng .choice (pidler ,k ,replace =False ))
             olc =[p for p in pidler if p not in adapt ]
-            print (f"\n--- {etiket }: adapt {adapt } | measurement {len (olc )} part ---",
+            print (f"\n--- {label_ }: adapt {adapt } | measurement {len (olc )} part ---",
             flush =True )
 
             # DEVAM EDILEBILIRLIK -- SIKI CHECK.
@@ -95,31 +95,31 @@ def main ():
             # geliyordu, "last"dan not, (c) yarida kesilmisti (327/468).
             # Olcum onunla kosulsaydi SESSIZCE wrong number verirdi.
             # Simdi: part count TAM eslesmeli VE cache ckpt'ten YENI must be.
-            _ob =f"results/_p1_olasilik_fs_{etiket }"
-            _ck_son =f"results/seg_fs/{etiket }_last.pt"
+            _ob =f"results/_p1_olasilik_fs_{label_ }"
+            _ck_son =f"results/seg_fs/{label_ }_last.pt"
             _tamam =False 
             if os .path .exists (_ck_son )and os .path .isdir (_ob ):
                 _n =len ([x for x in os .listdir (_ob )if x .endswith (".npz")])
                 _yeni =os .path .getmtime (_ob )>=os .path .getmtime (_ck_son )
                 _tamam =(_n ==n_beklenen )and _yeni 
                 if not _tamam :
-                    print (f"  YENIDEN KOSULACAK {etiket }: cache {_n }/"
+                    print (f"  YENIDEN KOSULACAK {label_ }: cache {_n }/"
                     f"{n_beklenen } part, ckpt'ten yeni={_yeni }",flush =True )
             if _tamam :
-                _nb =len ([x for x in os .listdir (f"results/_fs_boya_{etiket }")
+                _nb =len ([x for x in os .listdir (f"results/_fs_boya_{label_ }")
                 if x .endswith (".npz")])
-                print (f"  ATLANDI (dogrulandi): {etiket }",flush =True )
-                sonuc [k ].append ({"cekilis":c ,"adapt":adapt ,"n_olc":len (olc ),
+                print (f"  ATLANDI (dogrulandi): {label_ }",flush =True )
+                res_ [k ].append ({"cekilis":c ,"adapt":adapt ,"n_olc":len (olc ),
                 "k_gercek":_nb ,"k_istenen":len (adapt ),
-                "ckpt":f"results/seg_fs/{etiket }.pt",
+                "ckpt":f"results/seg_fs/{label_ }.pt",
                 "ckpt_kullanilan":_ck_son ,"cache":_ob })
                 continue 
 
-            pf =f"results/_fs_{etiket }_pids.txt"
+            pf =f"results/_fs_{label_ }_pids.txt"
             with open (pf ,"w")as f :
                 f .write ("\n".join (adapt ))
-            boya_dir =f"results/_fs_boya_{etiket }"
-            ck =f"results/seg_fs/{etiket }.pt"
+            boya_dir =f"results/_fs_boya_{label_ }"
+            ck =f"results/seg_fs/{label_ }.pt"
             os .makedirs ("results/seg_fs",exist_ok =True )
 
             # 1) BOYA -- oz-tutarlilik kapisi KAPALI (dongusellik onlemi)
@@ -130,13 +130,13 @@ def main ():
             # Senaryo already "this k parcayi sisteme VERIYORUZ" demek; dislama bunu bloke eder.
             kos ([PY ,"-u","g5_agiz_etiket.py","--pids-file",pf ,
             "--oz-tut-threshold","0.0","--cikti",boya_dir ],
-            f"results/_fs_{etiket }_boya.log",ek_env ={"ETIKET_DISLA":""})
+            f"results/_fs_{label_ }_boya.log",ek_env ={"ETIKET_DISLA":""})
             # 1b) NPZ -> OBJ+labels.txt. train_seg_extra.load_extra YALNIZ directory
             # bicimini reads; this step atlanirsa "0 part yuklendi" becomes and
             # --only-kismi olmasa training SESSIZCE korpusla kosardi.
-            obj_dir =f"results/_fs_obj_{etiket }"
+            obj_dir =f"results/_fs_obj_{label_ }"
             kos ([PY ,"-u","g5b_etiket_donustur.py","--kaynak",boya_dir ,
-            "--hedef",obj_dir ],f"results/_fs_{etiket }_donus.log")
+            "--hedef",obj_dir ],f"results/_fs_{label_ }_donus.log")
             n_boya =len ([x for x in os .listdir (boya_dir )if x .endswith (".npz")])
             # BOYANAN > ISTENEN olursa SESSIZ SISME demektir -> DUR.
             # BOYANAN < ISTENEN whereas: oto-boyayici INSAN ETIKETININ VEKILI and some
@@ -146,9 +146,9 @@ def main ():
             # egri so real insan etiketine according to a ALT SINIR becomes.
             if n_boya >len (adapt ):
                 raise RuntimeError (
-                f"{etiket }: {len (adapt )} istendi, {n_boya } boyandi -- SISME, durduruldu.")
+                f"{label_ }: {len (adapt )} istendi, {n_boya } boyandi -- SISME, durduruldu.")
             if n_boya ==0 :
-                raise RuntimeError (f"{etiket }: hicbir part boyanamadi")
+                raise RuntimeError (f"{label_ }: hicbir part boyanamadi")
             if n_boya <len (adapt ):
                 print (f"  UYARI: {len (adapt )} istendi, {n_boya } boyandi "
                 f"(oto-boyayici vekil; gercek k={n_boya })",flush =True )
@@ -158,7 +158,7 @@ def main ():
             "--partial-dir",obj_dir ,"--epochs",str (a .epochs ),
             "--lr",str (a .lr ),"--val-partial","--checkpoint-out",ck ]
             egit +=["--yalniz-kismi"]if a .kip =="yalniz"else ["--kismi-tekrar",str (a .tekrar )]
-            kos (egit ,f"results/_fs_{etiket }_train.log")
+            kos (egit ,f"results/_fs_{label_ }_train.log")
 
             # 3) OLASILIK ONBELLEGI
             # ONBELLEK YALNIZ BU MARKANIN PARCALARI ICIN: full exam kumesi 468
@@ -176,22 +176,22 @@ def main ():
             if not os .path .exists (ck_son ):
                 raise RuntimeError (f"{ck_son } yok -- training son ckpt yazmadi")
             kos ([PY ,"-u","p1_olasilik_onbellek.py","--ckpt",ck_son ,
-            "--cluster",cluster ,"--ek",f"_fs_{etiket }"],
-            f"results/_fs_{etiket }_p1.log")
+            "--cluster",cluster ,"--ek",f"_fs_{label_ }"],
+            f"results/_fs_{label_ }_p1.log")
 
-            sonuc [k ].append ({"cekilis":c ,"adapt":adapt ,"n_olc":len (olc ),
+            res_ [k ].append ({"cekilis":c ,"adapt":adapt ,"n_olc":len (olc ),
             "k_gercek":n_boya ,"k_istenen":len (adapt ),
-            "ckpt":ck ,"ckpt_kullanilan":ck .replace (".pt","_last.pt"),"cache":f"results/_p1_olasilik_fs_{etiket }"})
+            "ckpt":ck ,"ckpt_kullanilan":ck .replace (".pt","_last.pt"),"cache":f"results/_p1_olasilik_fs_{label_ }"})
             print (f"  HAZIR -> {ck }",flush =True )
 
     with open (CIKTI ,"w")as f :
         json .dump ({"brand":a .brand ,"klar":a .klar ,"cekilis":a .cekilis ,
         "epochs":a .epochs ,"lr":a .lr ,"taban_ckpt":URUN_CKPT ,
-        "kosumlar":sonuc ,
+        "kosumlar":res_ ,
         "uyari":"k_gercek < k_istenen olabilir: oto-boyayici INSAN "
         "etiketinin VEKILIDIR ve bazi parcalarda GT'nin hicbiri "
         "algilanan bir acikliga dusmez. Olculen egri, gercek "
-        "insan etiketine gore bir ALT SINIRDIR.",
+        "insan etiketine according to a ALT SINIRDIR.",
         "not":"Bu betik ADAPTASYON+ONBELLEK uretir. UCTAN UCA OLCUM "
         "ayri adimdir (probe_k65b_olc.py) -- boylece training bir kez "
         "kosar, measurement tekrar tekrar kosulabilir."},f ,indent =1 )

@@ -61,33 +61,33 @@ def test_KONUM_asla_degismez_ve_SAYI_sabit ():
     P =np .array ([[0.0 ,0 ,0 ],[3.0 ,0 ,0 ]])
     D =np .array ([[0.0 ,0 ,1.0 ],[1.0 ,0 ,0.0 ]])
     P0 =P .copy ()
-    yeni =YO .uygula (P ,D ,[],[0.9 ,0.9 ],lambda X :np .arange (len (X )))
+    new_ =YO .uygula (P ,D ,[],[0.9 ,0.9 ],lambda X :np .arange (len (X )))
     assert np .allclose (P ,P0 )
-    assert len (yeni )==len (D )
+    assert len (new_ )==len (D )
 
 
 def test_esitlikte_MEVCUT_kazanir ():
     """Tezin cevabi varsayilan kalmali: new direction however KESIN more iyiyse alinir."""
     P =np .array ([[0.0 ,0 ,0 ],[3.0 ,0 ,0 ]])
     D =np .array ([[0.0 ,0 ,1.0 ],[1.0 ,0 ,0.0 ]])
-    yeni =YO .uygula (P ,D ,[],[0.9 ,0.9 ],lambda X :np .ones (len (X )))
-    assert np .allclose (yeni ,D )
+    new_ =YO .uygula (P ,D ,[],[0.9 ,0.9 ],lambda X :np .ones (len (X )))
+    assert np .allclose (new_ ,D )
 
 
 def test_daha_iyi_skor_yonu_DEGISTIRIR ():
     P =np .array ([[0.0 ,0 ,0 ],[3.0 ,0 ,0 ]])
     D =np .array ([[0.0 ,0 ,1.0 ],[1.0 ,0 ,0.0 ]])
-    yeni =YO .uygula (P ,D ,[],[0.9 ,0.9 ],
+    new_ =YO .uygula (P ,D ,[],[0.9 ,0.9 ],
     lambda X :np .arange (len (X ),dtype =float ))
-    assert not np .allclose (yeni [0 ],D [0 ])
+    assert not np .allclose (new_ [0 ],D [0 ])
 
 
 def test_ciktilar_birim_vektor ():
     P =np .array ([[0.0 ,0 ,0 ],[3.0 ,0 ,0 ]])
     D =np .array ([[0.0 ,0 ,2.0 ],[5.0 ,0 ,0.0 ]])
-    yeni =YO .uygula (P ,D ,[sil ()],[0.5 ,0.5 ],
+    new_ =YO .uygula (P ,D ,[sil ()],[0.5 ,0.5 ],
     lambda X :np .arange (len (X ),dtype =float ))
-    assert np .allclose (np .linalg .norm (yeni ,axis =1 ),1.0 )
+    assert np .allclose (np .linalg .norm (new_ ,axis =1 ),1.0 )
 
 
 def test_bos_havuz_ve_tek_aday_PATLAMAZ ():

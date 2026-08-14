@@ -91,15 +91,15 @@ def oof_degerlendir (X ,Y ,g ,ad ,Xd =None ,Yd =None ,gd =None ,**kw ):
         tah [te ]=m .predict (Xd [te ])
         # lateral residual: duzeltmeden ONCE |Y|, duzeltmeden SONRA |Y - prediction|
     onc =np .linalg .norm (Yd [:,:2 ],axis =1 )
-    son =np .linalg .norm (Yd [:,:2 ]-tah [:,:2 ],axis =1 )
+    last_ =np .linalg .norm (Yd [:,:2 ]-tah [:,:2 ],axis =1 )
     oner =np .linalg .norm (tah [:,:2 ],axis =1 )
     print (f"{ad :34s} kutuda(<=2mm) {100 *(onc <=2 ).mean ():5.1f}% -> "
-    f"{100 *(son <=2 ).mean ():5.1f}%  | artik ortanca "
-    f"{np .median (onc ):.2f} -> {np .median (son ):.2f} mm | "
+    f"{100 *(last_ <=2 ).mean ():5.1f}%  | artik ortanca "
+    f"{np .median (onc ):.2f} -> {np .median (last_ ):.2f} mm | "
     f"oneri maks {oner .max ():5.2f} >3mm {100 *(oner >3 ).mean ():4.1f}%")
     return {"kutu_once":float ((onc <=2 ).mean ()),
-    "kutu_sonra":float ((son <=2 ).mean ()),
-    "artik_ortanca":float (np .median (son )),
+    "kutu_sonra":float ((last_ <=2 ).mean ()),
+    "artik_ortanca":float (np .median (last_ )),
     "oneri_maks":float (oner .max ()),
     "oneri_buyuk_oran":float ((oner >3 ).mean ())}
 
@@ -107,7 +107,7 @@ def oof_degerlendir (X ,Y ,g ,ad ,Xd =None ,Yd =None ,gd =None ,**kw ):
 def main ():
     VG =val_gruplari ()
     print (f"leakage kapisi: {len (VG )} VAL geometri grubu egitimden CIKARILDI\n")
-    kaynak =[("TABAN veri (tol ~3-6mm)","results/pose_veri_graf.npz"),
+    src_ =[("TABAN veri (tol ~3-6mm)","results/pose_veri_graf.npz"),
     ("GENIS veri (tol 15mm)","results/pose_veri_tol15.npz")]
     ayar =[("orman yaprak>=5 (MEVCUT)",dict (n_estimators =400 ,
     min_samples_leaf =5 )),
@@ -115,14 +115,14 @@ def main ():
     ("orman yaprak>=1",dict (n_estimators =400 ,min_samples_leaf =1 ))]
     # ORTAK DEGERLENDIRME KUMESI: each candidate AYNI satirlarda puanlanir.
     # Taban data secildi because dagitilan modelin gordugu populasyon odur.
-    Xd ,Yd ,gd ,_ =yukle (kaynak [0 ][1 ])
+    Xd ,Yd ,gd ,_ =yukle (src_ [0 ][1 ])
     _t =~np .isin (gd ,list (VG ))
     Xd ,Yd ,gd =Xd [_t ],Yd [_t ],gd [_t ]
     print (f"ORTAK DEGERLENDIRME KUMESI: {len (Yd )} satir / "
     f"{len (set (gd ))} grup\n")
 
     rapor ={}
-    for vad ,vfp in kaynak :
+    for vad ,vfp in src_ :
         if not os .path .exists (vfp ):
             print (f"EKSIK: {vfp }")
             continue 
@@ -142,7 +142,7 @@ def main ():
     en =max (rapor ,key =lambda k :rapor [k ]["kutu_sonra"])
     print (f"\nEN IYI: {en }  (kutuda {100 *rapor [en ]['kutu_sonra']:.1f}%)")
     vad ,aad =[x .strip ()for x in en .split ("|")]
-    vfp =dict (kaynak )[vad ]
+    vfp =dict (src_ )[vad ]
     kw =dict (ayar )[aad ]
     X ,Y ,g ,p =yukle (vfp )
     tut =~np .isin (g ,list (VG ))
@@ -157,7 +157,7 @@ def main ():
     f"{100 *rapor [en ]['kutu_sonra']:.1f}%.")}
     with open ("results/pose_head_yeni.pkl","wb")as fh :
         pickle .dump (cik ,fh )
-    print ("-> results/pose_head_yeni.pkl (DAGITILMADI, measurement icin)")
+    print ("-> results/pose_head_yeni.pkl (NOT DEPLOYED, measurement for)")
     return 0 
 
 

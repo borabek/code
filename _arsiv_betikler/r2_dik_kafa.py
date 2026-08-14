@@ -55,7 +55,7 @@ def main ():
     print (f"  DIK sinif (>= {DIK_ESIK :.0f} derece): {int (dik [egit ].sum ())} "
     f"({dik [egit ].mean ():.2%})")
     if dik [egit ].sum ()<40 :
-        print ("KILL: egitimde DIK ornek sayisi cok az -> R2 kapanir")
+        print ("KILL: egitimde DIK ornek count very few -> R2 kapanir")
         return 
 
     snf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,

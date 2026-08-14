@@ -80,23 +80,23 @@ def yap ():
     l2_regularization =L2R ,random_state =0 )
 
 
-def egit (veri ,ic ,cok_agirlik =1.0 ):
+def egit (data_ ,ic ,cok_agirlik =1.0 ):
     """cok_agirlik > 1 whereas COK-CP parcalarindan gelen orneklerin agirligi
     artirilir. Y23: veriyi BOLMEK instead of AGIRLIKLANDIRMAK. Uzman kolu
     kahin rejimle bile dustu (-0.0418) and sebebi data parcalanmasiydi;
     agirliklandirma parcalamaz."""
-    n_s =sum (len (veri [i ]["y"])for i in ic )
+    n_s =sum (len (data_ [i ]["y"])for i in ic )
     if not n_s :
         return None 
-    M =np .empty ((n_s ,veri [ic [0 ]]["_M"].shape [1 ]),np .float32 )
+    M =np .empty ((n_s ,data_ [ic [0 ]]["_M"].shape [1 ]),np .float32 )
     o =0 
     for i in ic :
-        m_ =veri [i ]["_M"]
+        m_ =data_ [i ]["_M"]
         M [o :o +len (m_ )]=m_ 
         o +=len (m_ )
-    Y =np .concatenate ([veri [i ]["y"]for i in ic ])
-    W =np .concatenate ([np .full (len (veri [i ]["y"]),
-    cok_agirlik if veri [i ]["_cok"]else 1.0 ,
+    Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
+    W =np .concatenate ([np .full (len (data_ [i ]["y"]),
+    cok_agirlik if data_ [i ]["_cok"]else 1.0 ,
     np .float32 )for i in ic ])
     if Y .sum ()==0 or Y .sum ()==len (Y ):
         return None 
@@ -109,7 +109,7 @@ def egit (veri ,ic ,cok_agirlik =1.0 ):
     return m 
 
 
-def ince_ayar (genel_veri ,ic_cok ,veri ,ek_agac =60 ):
+def ince_ayar (genel_veri ,ic_cok ,data_ ,ek_agac =60 ):
     """UZMANLASMA, VERI PARCALAMADAN.
 
     Uzman kolu kahin rejimle bile dustu (-0.0418) and sebep teshis edildi:
@@ -125,16 +125,16 @@ def ince_ayar (genel_veri ,ic_cok ,veri ,ek_agac =60 ):
         return None 
     import copy 
     m =copy .deepcopy (genel_veri )
-    n_s =sum (len (veri [i ]["y"])for i in ic_cok )
+    n_s =sum (len (data_ [i ]["y"])for i in ic_cok )
     if not n_s :
         return None 
-    M =np .empty ((n_s ,veri [ic_cok [0 ]]["_M"].shape [1 ]),np .float32 )
+    M =np .empty ((n_s ,data_ [ic_cok [0 ]]["_M"].shape [1 ]),np .float32 )
     o =0 
     for i in ic_cok :
-        mm =veri [i ]["_M"]
+        mm =data_ [i ]["_M"]
         M [o :o +len (mm )]=mm 
         o +=len (mm )
-    Y =np .concatenate ([veri [i ]["y"]for i in ic_cok ])
+    Y =np .concatenate ([data_ [i ]["y"]for i in ic_cok ])
     if Y .sum ()==0 or Y .sum ()==len (Y ):
         return None 
     rng =np .random .default_rng (0 )
@@ -159,38 +159,38 @@ def f1 (c ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
         d ["_cok"]=int (len (d ["G"])>=COK_ESIK )
-    n_cok =sum (d ["_cok"]for d in veri )
-    print (f"{len (veri )} part | cok-CP {n_cok } ({n_cok /len (veri ):.1%}) "
+    n_cok =sum (d ["_cok"]for d in data_ )
+    print (f"{len (data_ )} part | cok-CP {n_cok } ({n_cok /len (data_ ):.1%}) "
     f"| threshold n_gt>={COK_ESIK }",flush =True )
 
     # TANIDIK MARKA kosulu: rastgele 3 fold (brand-KARISIK)
     # KAT TOHUMU: very-CP agirligi 2x single tohumda +0.0065 verdi; fold
     # gurultusu +-0.008 oldugu for very tohumlu dogrulama SART.
     rng =np .random .default_rng (int (os .environ .get ("UR_TOHUM","1")))
-    pay =rng .permutation (len (veri ))%3 
+    pay =rng .permutation (len (data_ ))%3 
     KOLLAR =("baseline","uzman_gt","uzman","agirlik2","agirlik4",
     "agirlik8","ince_ayar_gt","ince_ayar")
     agg ={k :collections .Counter ()for k in KOLLAR }
     yon_dogru =yon_top =0 
     for f_ in range (3 ):
-        ic =[i for i in range (len (veri ))if pay [i ]!=f_ ]
-        dis =[i for i in range (len (veri ))if pay [i ]==f_ ]
-        genel =egit (veri ,ic )
-        agirlikli ={a :egit (veri ,ic ,cok_agirlik =a )for a in (2.0 ,4.0 ,8.0 )}
-        uz_cok =egit (veri ,[i for i in ic if veri [i ]["_cok"]])
-        ia_cok =ince_ayar (genel ,[i for i in ic if veri [i ]["_cok"]],veri )
-        uz_dus =egit (veri ,[i for i in ic if not veri [i ]["_cok"]])
+        ic =[i for i in range (len (data_ ))if pay [i ]!=f_ ]
+        dis =[i for i in range (len (data_ ))if pay [i ]==f_ ]
+        genel =egit (data_ ,ic )
+        agirlikli ={a :egit (data_ ,ic ,cok_agirlik =a )for a in (2.0 ,4.0 ,8.0 )}
+        uz_cok =egit (data_ ,[i for i in ic if data_ [i ]["_cok"]])
+        ia_cok =ince_ayar (genel ,[i for i in ic if data_ [i ]["_cok"]],data_ )
+        uz_dus =egit (data_ ,[i for i in ic if not data_ [i ]["_cok"]])
         # YONLENDIRICI: part duzeyi, GT'siz
-        XR =np .vstack ([parca_oz (veri [i ])for i in ic ])
-        YR =np .asarray ([veri [i ]["_cok"]for i in ic ],int )
+        XR =np .vstack ([parca_oz (data_ [i ])for i in ic ])
+        YR =np .asarray ([data_ [i ]["_cok"]for i in ic ],int )
         direction =yap ().fit (XR ,YR )if 0 <YR .sum ()<len (YR )else None 
         for i in dis :
-            d =veri [i ]
+            d =data_ [i ]
             tah =(int (direction .predict (parca_oz (d )[None ])[0 ])if direction is not None 
             else 0 )
             yon_dogru +=int (tah ==d ["_cok"])
@@ -218,19 +218,19 @@ def main ():
                 c ["tp"]+=tp ;c ["fp"]+=fp ;c ["fn"]+=fn 
         print (f"  fold{f_ } bitti ({time .time ()-t0 :.0f} s)",flush =True )
 
-    son ={k :f1 (agg [k ])for k in KOLLAR }
+    last_ ={k :f1 (agg [k ])for k in KOLLAR }
     print (f"\nyonlendirici dogrulugu: {yon_dogru }/{yon_top } "
     f"({yon_dogru /max (yon_top ,1 ):.3f})")
-    print (f"\n=== TABAN {son ['baseline']:.4f} (TANIDIK brand kosulu) ===")
+    print (f"\n=== TABAN {last_ ['baseline']:.4f} (TANIDIK brand kosulu) ===")
     for k in KOLLAR [1 :]:
-        fark =son [k ]-son ["baseline"]
+        fark =last_ [k ]-last_ ["baseline"]
         et ="  <- KAPI GECTI"if fark >=0.01 else ""
         ust ="  (UST SINIR, dagitilamaz)"if k =="uzman_gt"else ""
-        print (f"  {k :<10}{son [k ]:.4f}   {fark :+.4f}{et }{ust }")
+        print (f"  {k :<10}{last_ [k ]:.4f}   {fark :+.4f}{et }{ust }")
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,
     "cok_esik":COK_ESIK ,"n_cok":n_cok ,
     "yonlendirici_dogruluk":yon_dogru /max (yon_top ,1 ),
-    "toplam":son ,
+    "toplam":last_ ,
     "not":"Yogun-part UZMANI + ogrenilmis router. TANIDIK "
     "brand kosulu (rastgele katlar). uzman_gt UST SINIRDIR. "
     "D7'ye BAKILMADI."},

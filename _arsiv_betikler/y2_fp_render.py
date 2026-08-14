@@ -79,14 +79,14 @@ def derinlik_haritasi (V ,F ,p ,d ):
         for j ,xx in enumerate (g ):
             o =p +d *GERI +u *xx +v *yy 
             D [i ,j ]=kesisim (o ,-d ,V ,Fk )
-    son =np .where (np .isfinite (D ),D -GERI ,np .nan )# yuzeye according to depth
+    last_ =np .where (np .isfinite (D ),D -GERI ,np .nan )# yuzeye according to depth
     yy ,xx =np .meshgrid (g ,g ,indexing ="ij")
     rr =np .sqrt (xx **2 +yy **2 )
-    merkez =np .nanmedian (son [rr <=2.0 ])if np .isfinite (son [rr <=2.0 ]).any ()else np .nan 
-    halka =np .nanmedian (son [(rr >=5.0 )&(rr <=8.0 )])if np .isfinite (
-    son [(rr >=5.0 )&(rr <=8.0 )]).any ()else np .nan 
+    center_ =np .nanmedian (last_ [rr <=2.0 ])if np .isfinite (last_ [rr <=2.0 ]).any ()else np .nan 
+    halka =np .nanmedian (last_ [(rr >=5.0 )&(rr <=8.0 )])if np .isfinite (
+    last_ [(rr >=5.0 )&(rr <=8.0 )]).any ()else np .nan 
     delik_orani =float (np .mean (~np .isfinite (D [rr <=2.0 ])))
-    return son ,(merkez ,halka ,delik_orani ),(u ,v )
+    return last_ ,(center_ ,halka ,delik_orani ),(u ,v )
 
 
 def main ():
@@ -118,17 +118,17 @@ def main ():
         for i in idxs :
             f_ =FP [i ]
             p =np .array (f_ ["nokta"],float );d =np .array (f_ ["direction"],float )
-            son ,olc ,_ =derinlik_haritasi (V ,F ,p ,d )
-            if son is None :
+            last_ ,olc ,_ =derinlik_haritasi (V ,F ,p ,d )
+            if last_ is None :
                 continue 
-            merkez ,halka ,dor =olc 
+            center_ ,halka ,dor =olc 
             fig =plt .figure (figsize =(9.0 ,4.2 ))
             ax =fig .add_subplot (121 )
-            im =ax .imshow (son ,origin ="lower",extent =[-YARICAP ,YARICAP ,-YARICAP ,YARICAP ],
+            im =ax .imshow (last_ ,origin ="lower",extent =[-YARICAP ,YARICAP ,-YARICAP ,YARICAP ],
             cmap ="viridis")
             ax .plot (0 ,0 ,"r+",ms =14 ,mew =2 )
-            ax .set_title (f"depth (mm)  merkez {merkez :.2f} / halka {halka :.2f}"
-            f"\nfark {merkez -halka :+.2f} mm | delik {dor :.0%}",fontsize =9 )
+            ax .set_title (f"depth (mm)  merkez {center_ :.2f} / halka {halka :.2f}"
+            f"\nfark {center_ -halka :+.2f} mm | delik {dor :.0%}",fontsize =9 )
             ax .set_xlabel ("mm");fig .colorbar (im ,ax =ax ,fraction =0.046 )
             # baglam: parcanin siluetii + FP
             ax2 =fig .add_subplot (122 )
@@ -142,7 +142,7 @@ def main ():
             yol =f"{DIZIN }/{pid }_{f_ ['aday_i']}.png"
             fig .savefig (yol ,dpi =88 ,bbox_inches ="tight");plt .close (fig )
             OLCUM .append ({"idx":i ,"pid":pid ,"mfg":f_ ["mfg"],"regime":f_ ["regime"],
-            "png":yol ,"merkez":None if np .isnan (merkez )else float (merkez ),
+            "png":yol ,"merkez":None if np .isnan (center_ )else float (center_ ),
             "halka":None if np .isnan (halka )else float (halka ),
             "delik_orani":dor ,"gt_uzaklik":f_ ["gt_uzaklik"]})
         if k %10 ==0 :

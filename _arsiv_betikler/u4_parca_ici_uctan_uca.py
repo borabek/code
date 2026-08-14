@@ -156,20 +156,20 @@ def main ():
             R [(ad ,mad )]=(det2 ,rob2 )
         print ()
 
-    anahtar =sorted ({k [1 ]for k in R if k [1 ]!="tanidik"})
+    key_ =sorted ({k [1 ]for k in R if k [1 ]!="tanidik"})
     t_tan =f1w (R [("A ham","tanidik")][0 ])
-    t_kotu =min (f1w (R [("A ham",a )][0 ])for a in anahtar )
+    t_kotu =min (f1w (R [("A ham",a )][0 ])for a in key_ )
     print (f"KARAR (baseline A ham: tanidik {t_tan :.4f} | gorulmemis en kotu {t_kotu :.4f})")
     kazanan =None 
     for ad in DONUSUM :
         if ad =="A ham":
             continue 
         dt =f1w (R [(ad ,"tanidik")][0 ])-t_tan 
-        ek =min (f1w (R [(ad ,a )][0 ])for a in anahtar )
+        ek =min (f1w (R [(ad ,a )][0 ])for a in key_ )
         gecti =(dt >=-0.01 )and (ek -t_kotu >=0.01 )
         print (f"  {ad :<14} tanidik {dt :+.4f} | en kotu {t_kotu :.4f} -> {ek :.4f} "
         f"({ek -t_kotu :+.4f}) -> {'GECTI'if gecti else 'GECMEDI'}")
-        if gecti and (kazanan is None or ek >min (f1w (R [(kazanan ,a )][0 ])for a in anahtar )):
+        if gecti and (kazanan is None or ek >min (f1w (R [(kazanan ,a )][0 ])for a in key_ )):
             kazanan =ad 
     print (f"\nSONUC: {(kazanan +' DAGITILABILIR')if kazanan else 'HICBIRI GECMEDI'}")
     json .dump ({f"{k [0 ]}|{k [1 ]}":{"tespit":float (f1w (v [0 ])),"robot":float (f1w (v [1 ]))}

@@ -56,7 +56,7 @@ def main():
     print(f"\nDOWNLOADED {ok} new human-labelled EEC parts -> {OUT}/  (bad {len(bad)})")
     if bad:
         print("  bad:", bad[:10])
-    print("These are EXTRA training data (same 5-class scheme). Next: pretrain on 102+extra, keep locked-11 test.")
+    print("These are EXTRA training data (same 5-class scheme). Next: pretrain ten 102+extra, keep locked-11 test.")
 
 
 if __name__ == "__main__":

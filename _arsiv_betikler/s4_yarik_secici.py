@@ -75,7 +75,7 @@ def main ():
     m ["esik_cokus"]=float (np .quantile (mx ,dag .get ("yonlendirme_q",0.10 )))
 
     HEDEF =collections .defaultdict (list )
-    toplam =0 
+    total_ =0 
     BREP_SUT =13 
     for r in DER :
         if r ["X"]is None :
@@ -101,11 +101,11 @@ def main ():
             if dd >tt or a_ in used or b_ in hit :
                 continue 
             used .add (a_ );hit .add (b_ )
-            toplam +=1 
+            total_ +=1 
             HEDEF [r ["pid"]].append ({"p":P [a_ ].copy (),"pd":Pd [a_ ].copy (),
             "gd":Gd [b_ ].copy (),"aci":float (an [a_ ,b_ ]),
             "brep_r":float (r ["X"][idx [a_ ],BREP_SUT ])})
-    print (f"{toplam } eslesme | {len (HEDEF )} part",flush =True )
+    print (f"{total_ } eslesme | {len (HEDEF )} part",flush =True )
 
     VF ={}
     for cluster in ("dev","val"):
@@ -156,15 +156,15 @@ def main ():
 
     print (f"\n{len (SAT )} (CP, yarik) cifti toplandi",flush =True )
     X =np .array ([[s [k ]for k in OZ ]for s in SAT ],float )
-    eski =np .array ([s ["eski_aci"]for s in SAT ])
-    yeni =np .array ([s ["yeni_aci"]for s in SAT ])
+    old_ =np .array ([s ["eski_aci"]for s in SAT ])
+    new_ =np .array ([s ["yeni_aci"]for s in SAT ])
     grp =np .array ([s ["geo"]for s in SAT ])
-    y =(yeni <eski ).astype (int )# TARGET: yarik yonu more mi yakin?
+    y =(new_ <old_ ).astype (int )# TARGET: yarik yonu more mi yakin?
 
-    duz_kahin =int (((yeni <=10 )&(eski >10 )).sum ())
-    boz_kahin =int (((eski <=10 )&(yeni >10 )).sum ())
+    duz_kahin =int (((new_ <=10 )&(old_ >10 )).sum ())
+    boz_kahin =int (((old_ <=10 )&(new_ >10 )).sum ())
     print (f"KAHIN (yalniz faydaliyken al): +{duz_kahin } nokta = gecis "
-    f"+{duz_kahin /max (toplam ,1 ):.2%} -> robot ~{0.4500 +0.673 *duz_kahin /max (toplam ,1 ):.4f}")
+    f"+{duz_kahin /max (total_ ,1 ):.2%} -> robot ~{0.4500 +0.673 *duz_kahin /max (total_ ,1 ):.4f}")
     print (f"  (her zaman al: +{duz_kahin } / -{boz_kahin } = net {duz_kahin -boz_kahin :+d})")
     print (f"  hedef dengesi: {y .mean ():.1%} pozitif")
 
@@ -178,21 +178,21 @@ def main ():
     en_iyi ,en_iyi_esik =-10 **9 ,None 
     for threshold in (0.5 ,0.6 ,0.7 ,0.8 ,0.9 ):
         al =oof >=threshold 
-        duz =int ((al &(yeni <=10 )&(eski >10 )).sum ())
-        boz =int ((al &(eski <=10 )&(yeni >10 )).sum ())
+        duz =int ((al &(new_ <=10 )&(old_ >10 )).sum ())
+        boz =int ((al &(old_ <=10 )&(new_ >10 )).sum ())
         net =duz -boz 
         print (f"{threshold :>6.2f}{int (al .sum ()):>9}{duz :>9}{boz :>9}{net :>+7}"
-        f"{net /max (toplam ,1 ):>+9.2%}{0.4500 +0.673 *net /max (toplam ,1 ):>13.4f}")
+        f"{net /max (total_ ,1 ):>+9.2%}{0.4500 +0.673 *net /max (total_ ,1 ):>13.4f}")
         if net >en_iyi :
             en_iyi ,en_iyi_esik =net ,threshold 
     bar =0.02 
-    gecti =en_iyi /max (toplam ,1 )>=bar 
+    gecti =en_iyi /max (total_ ,1 )>=bar 
     print (f"\nKILL: net >= %{bar *100 :.0f} -> "
     f"{('GECTI (threshold '+str (en_iyi_esik )+')')if gecti else 'GECMEDI'}")
-    print (f"  en iyi {en_iyi :+d} nokta = {en_iyi /max (toplam ,1 ):+.2%} | "
+    print (f"  en iyi {en_iyi :+d} nokta = {en_iyi /max (total_ ,1 ):+.2%} | "
     f"kahinin {en_iyi /max (duz_kahin ,1 ):.0%}'i yakalandi")
     with open ("results/s4_yarik_secici.json","w",encoding ="utf-8")as f :
-        json .dump ({"n_cift":len (SAT ),"toplam_eslesme":toplam ,"kahin":duz_kahin ,
+        json .dump ({"n_cift":len (SAT ),"toplam_eslesme":total_ ,"kahin":duz_kahin ,
         "en_iyi_net":int (en_iyi ),"en_iyi_esik":en_iyi_esik ,
         "gecti":bool (gecti )},f ,indent =1 )
     print ("receipt -> results/s4_yarik_secici.json")

@@ -99,13 +99,13 @@ def main ():
         print (json .dumps (d ,ensure_ascii =False ),flush =True )
         bak +=1 
 
-    ayni =[r for r in rapor if r .get ("oz_maks_fark")is not None 
+    same_ =[r for r in rapor if r .get ("oz_maks_fark")is not None 
     and r ["oz_maks_fark"]<1e-6 ]
-    print (f"\n{len (ayni )}/{len (rapor )} parcada oznitelikler BIREBIR ayni")
-    if len (ayni )!=len (rapor ):
-        print ("!! AYRISMA VAR -- D7 OKUMASI YAPILMAZ, once sebebi bulunur.")
+    print (f"\n{len (same_ )}/{len (rapor )} parcada oznitelikler BIREBIR ayni")
+    if len (same_ )!=len (rapor ):
+        print ("!! AYRISMA VAR -- D7 OKUMASI YAPILMAZ, before sebebi bulunur.")
     json .dump ({"damga":makbuz_hash .damga (),"cluster":on ,"rapor":rapor ,
-    "birebir":len (ayni ),"bakilan":len (rapor ),
+    "birebir":len (same_ ),"bakilan":len (rapor ),
     "not":"Egitim onbellegi ile urun yolunun oznitelik paritesi."},
     open (f"results/p6_parite_{on }.json","w"),indent =1 )
     print (f"receipt -> results/p6_parite_{on }.json")

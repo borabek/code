@@ -92,13 +92,13 @@ def main ():
                 "regime":FP [i ]["regime"],"test":"yok","k":None ,
                 "deviation":None })
             continue 
-        adim =float (np .linalg .norm (s ))
+        step_ =float (np .linalg .norm (s ))
         for i in idxs :
             p =np .array (FP [i ]["nokta"],float )
             en_iyi ,en_k =None ,None 
             for g in G :
                 v =p -g 
-                t =float (v @s )/(adim **2 +1e-12 )# kac step otede
+                t =float (v @s )/(step_ **2 +1e-12 )# kac step otede
                 k =int (round (t ))
                 if k ==0 :
                     continue 
@@ -108,7 +108,7 @@ def main ():
             SONUC .append ({"idx":i ,"pid":pid ,"mfg":FP [i ]["mfg"],
             "regime":FP [i ]["regime"],
             "test":"orgude"if (en_iyi is not None and en_iyi <=TOL )else "degil",
-            "k":en_k ,"deviation":en_iyi ,"adim_mm":adim })
+            "k":en_k ,"deviation":en_iyi ,"adim_mm":step_ })
 
     test_edilen =[x for x in SONUC if x ["test"]!="yok"]
     orgude =[x for x in test_edilen if x ["test"]=="orgude"]
@@ -146,7 +146,7 @@ def main ():
         "test_edilen":len (test_edilen ),"orgude":len (orgude ),
         "not":("Bu test AGIN CIKTISINI KULLANMAZ: girdi yalniz manufacturer CP listesi "
         "+ robot noktasinin KONUMU. Sonuc bir ALT SINIRDIR -- oruntude "
-        "olmayan bir FP de gercek olabilir, bu test onu yakalamaz.")},
+        "olmayan a FP de real may be, this test onu yakalamaz.")},
         f ,indent =1 )
     print ("receipt -> results/y6_simetri.json")
 

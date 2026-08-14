@@ -88,4 +88,4 @@ for split_nm ,groups in (("PARCA-out (canonical ile kiyaslanabilir)",G ),("AILE-
         print ("  "+" ".join (line ))
     print ()
 print ("KIYAS: canonical base ALL 0.750 (fixed 0.35) | metadata-assisted ALL 0.775 (topN)")
-print ("KARAR: 13+A+B nested-thr ALL, 0.750'yi materyal geciyorsa -> DEPLOY ADAYI (receipt + cp_config).")
+print ("DECISION: 13+A+B nested-thr ALL, 0.750'yi materyal geciyorsa -> DEPLOY ADAYI (receipt + cp_config).")

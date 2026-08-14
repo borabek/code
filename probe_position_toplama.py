@@ -70,10 +70,10 @@ def temel (d ):
 
 def konum_skoru (s ,idx ,arm ):
     """each BENZERSIZ konum for (skor, that konumun most iyi secenek indisi)."""
-    sira =np .argsort (idx ,kind ="stable")
-    idx_s ,s_s =idx [sira ],s [sira ]
-    sinir =np .flatnonzero (np .diff (idx_s ))+1 
-    parts =np .split (np .arange (len (idx_s )),sinir )
+    rank_ =np .argsort (idx ,kind ="stable")
+    idx_s ,s_s =idx [rank_ ],s [rank_ ]
+    bound_ =np .flatnonzero (np .diff (idx_s ))+1 
+    parts =np .split (np .arange (len (idx_s )),bound_ )
     konum ,skor ,en_iyi =[],[],[]
     for p in parts :
         q =s_s [p ]
@@ -95,7 +95,7 @@ def konum_skoru (s ,idx ,arm ):
             raise ValueError (arm )
         konum .append (idx_s [p [0 ]])
         skor .append (float (v ))
-        en_iyi .append (int (sira [p [int (np .argmax (q ))]]))
+        en_iyi .append (int (rank_ [p [int (np .argmax (q ))]]))
     return (np .asarray (konum ,int ),np .asarray (skor ,float ),
     np .asarray (en_iyi ,int ))
 
@@ -108,11 +108,11 @@ def konum_dogru (y ,idx ):
     7 arm x 468 part = milyarlarca islem ederdi; also kola bagli
     olmadigi for part basina BIR times is computed.
     """
-    sira =np .argsort (idx ,kind ="stable")
-    idx_s ,y_s =idx [sira ],y [sira ]
-    sinir =np .flatnonzero (np .diff (idx_s ))+1 
+    rank_ =np .argsort (idx ,kind ="stable")
+    idx_s ,y_s =idx [rank_ ],y [rank_ ]
+    bound_ =np .flatnonzero (np .diff (idx_s ))+1 
     return np .asarray ([bool (q .max ())if len (q )else False 
-    for q in np .split (y_s ,sinir )],bool )
+    for q in np .split (y_s ,bound_ )],bool )
 
 
 def sec_esik (P ,YD ,idx ,ks ,en_iyi ,threshold ):
@@ -133,26 +133,26 @@ def sec_esik (P ,YD ,idx ,ks ,en_iyi ,threshold ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar }",flush =True )
+    print (f"{len (data_ )} part | katlar {katlar }",flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_s =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_s =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -162,7 +162,7 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
         # threshold, KAT-DISI secilir: each arm for training markalarindan not,
@@ -172,7 +172,7 @@ def main ():
     for e in ESIKLER }for k in KOLLAR }
     ustk =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         G =np .asarray (d ["G"],float )
@@ -195,9 +195,9 @@ def main ():
                 ks =np .argsort (np .argsort (ks ))/(len (ks )-1.0 )
             assert len (dogru )==len (kon ),"konum sirasi tutmuyor"
             # konum duzeyinde first-k dogruluk orani
-            sira =np .argsort (-ks )
+            rank_ =np .argsort (-ks )
             k =max (len (G ),1 )
-            ustk [d ["mfg"]][arm ].append (float (dogru [sira [:k ]].sum ())/k )
+            ustk [d ["mfg"]][arm ].append (float (dogru [rank_ [:k ]].sum ())/k )
             for e in ESIKLER :
                 Ps ,Ds =sec_esik (P [kon ],YD ,idx ,ks ,en_iyi ,e )
                 tp ,fp ,fn =match_hungarian (Ps ,Ds ,G ,Gd ,d ["diag"],K .YANAL ,
@@ -221,14 +221,14 @@ def main ():
     print (f"{'threshold':<7}"+"".join (f"{k :>10}"for k in KOLLAR ))
     en ={}
     for e in ESIKLER :
-        satir ={}
+        line_ ={}
         for arm in KOLLAR :
             T =collections .Counter ()
             for q in agg [arm ][e ].values ():
                 T +=q 
-            satir [arm ]=f1 (T )
-            en [arm ]=max (en .get (arm ,0.0 ),satir [arm ])
-        print (f"{e :<7.2f}"+"".join (f"{satir [k ]:>10.4f}"for k in KOLLAR ))
+            line_ [arm ]=f1 (T )
+            en [arm ]=max (en .get (arm ,0.0 ),line_ [arm ])
+        print (f"{e :<7.2f}"+"".join (f"{line_ [k ]:>10.4f}"for k in KOLLAR ))
     print (f"\n{'EN IYI':<7}"+"".join (f"{en [k ]:>10.4f}"for k in KOLLAR ))
     print ("\n=== max'A GORE ===")
     for arm in KOLLAR [1 :]:

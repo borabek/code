@@ -112,10 +112,10 @@ def egit (tr ):
     "donusum":DONUSUM },M .shape ,float (Y .mean ()))
 
 
-def olc (model ,veri ,tip ,e ,tam_zincir =False ,S =None ):
+def olc (model ,data_ ,tip ,e ,tam_zincir =False ,S =None ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =np .asarray (wire_gate .decision_score (model ,d ["X"]),float )
         k =(s >=e )if tip =="mutlak"else maske (s ,e [0 ],e [1 ])
         P ,D =(d ["P"][k ],d ["D"][k ])if k .any ()else (d ["P"][:0 ],d ["D"][:0 ])
@@ -148,7 +148,7 @@ def olc (model ,veri ,tip ,e ,tam_zincir =False ,S =None ):
 
 def main ():
     S =K .step_map ()
-    sonuc ={}
+    res_ ={}
     modeller ={}
     for ad ,kaynaklar in KOLLAR .items ():
         tr =kimlikle (oku ("tam",kaynaklar ))
@@ -170,20 +170,20 @@ def main ():
                 en =(tip ,e ,r )
         tip ,e ,_ =en 
         r7 =olc (m ,te ,tip ,e ,tam_zincir =True ,S =S )
-        sonuc [ad ]={"kural":f"{tip } {e }","aday_per_parca":ap ,"D7":r7 }
+        res_ [ad ]={"kural":f"{tip } {e }","aday_per_parca":ap ,"D7":r7 }
         print (f"  SECILEN {tip } {e } -> D7 (TAM ZINCIR) robot **{r7 ['robot']:.4f}** "
         f"| tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f} | "
         f"en kotu {r7 ['en_kotu']:.4f}",flush =True )
     print ("\n"+"="*64 )
     print (f"{'arm':<14}{'candidate/part':>12}{'robot':>9}{'tespit':>9}{'makro':>9}")
-    for ad ,c in sonuc .items ():
+    for ad ,c in res_ .items ():
         print (f"{ad :<14}{c ['aday_per_parca']:>12.1f}{c ['D7']['robot']:>9.4f}"
         f"{c ['D7']['tespit']:>9.4f}{c ['D7']['makro']:>9.4f}")
     print (f"{'URUN (v6+NMS)':<14}{13.4 :>12.1f}{0.2029 :>9.4f}{0.4523 :>9.4f}"
     f"{0.2146 :>9.4f}")
     with open (os .environ .get ("TG_MODEL","results/tam_havuz_gate_modeller.pkl"),"wb")as f :
         pickle .dump (modeller ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,
+    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,
     "urun":{"robot":0.2029 ,"tespit":0.4523 ,"makro":0.2146 },
     "not":"Esik D6'da secildi, D7'de yeniden taranmadi. Egitim D6'yi "
     "icermez. TAM URUN ZINCIRI (poz kafasi). MIKRO."},

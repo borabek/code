@@ -100,7 +100,7 @@ def main ():
     ap .add_argument ("--vardiya",type =int ,default =0 )
     ap .add_argument ("--toplam",type =int ,default =1 )
     ap .add_argument ("--pids-file",default ="",
-    help ="yalniz bu dosyadaki pid'leri etiketle (kontrollu parti icin)")
+    help ="only this dosyadaki pid'leri etiketle (kontrollu parti for)")
     ap .add_argument ("--oz-tut-threshold",type =float ,default =0.6 ,
     help ="oz-tutarlilik kapisi: GT'nin bu orani geri gelmeli (0.6 varsayilan)")
     ap .add_argument ("--tol-carpan",type =float ,default =1.0 ,
@@ -122,7 +122,7 @@ def main ():
     from infer_step_cp import step_to_mesh 
     import cad_eval 
 
-    CIKTI =a .cikti 
+    CIKTI =a .out_ 
     os .makedirs (CIKTI ,exist_ok =True )
     var ={os .path .splitext (x )[0 ]for x in os .listdir (CIKTI )if x .endswith (".npz")}
     E =[t for t in eligible ()if t [1 ]not in var ]
@@ -160,11 +160,11 @@ def main ():
     # URETICI-DENGELI SIRA: yarida kesilse bile corpus dengeli olsun (turetmedeki same fikir)
     from d5_turet_yeni import dengeli_sira 
     E =dengeli_sira (E )
-    if a .toplam >1 :
-        E =[t for i ,t in enumerate (E )if i %a .toplam ==a .vardiya ]
-        print (f"VARDIYA {a .vardiya }/{a .toplam }",flush =True )
-    if a .sinir :
-        E =E [:a .sinir ]
+    if a .total_ >1 :
+        E =[t for i ,t in enumerate (E )if i %a .total_ ==a .vardiya ]
+        print (f"VARDIYA {a .vardiya }/{a .total_ }",flush =True )
+    if a .bound_ :
+        E =E [:a .bound_ ]
     print (f"etiketlenecek {len (E )} part (zaten var {len (var )})",flush =True )
 
     say =collections .Counter ();t0 =time .time ();UR =collections .Counter ()

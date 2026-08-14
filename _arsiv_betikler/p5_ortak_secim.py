@@ -68,10 +68,10 @@ def poz_secenekleri (cyl ,ac ,p ,d ,diag ):
     return out 
 
 
-def cift_ozellik (X58_satir ,pp ,dd ,mevcut ,mesafe ,yaricap ,p0 ,d0 ,diag ,n_aday ):
+def cift_ozellik (X58_satir ,pp ,dd ,mevcut ,dist_ ,yaricap ,p0 ,d0 ,diag ,n_aday ):
     """Gate ozellikleri (58) + POZ ozellikleri. Uretici kimligi YOK."""
     aci =float (np .degrees (np .arccos (np .clip (abs (float (dd @d0 )),-1 ,1 ))))
-    return np .concatenate ([X58_satir ,[mevcut ,mesafe ,mesafe /max (diag ,1e-6 ),
+    return np .concatenate ([X58_satir ,[mevcut ,dist_ ,dist_ /max (diag ,1e-6 ),
     yaricap ,aci ,float (n_aday ),diag ]])
 
 
@@ -183,10 +183,10 @@ def main ():
 
         # OLCUM: D6, DEV yarisinda threshold
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     def olc (alt ,threshold ):
         T ,R =[],[]
-        for pid ,r in kayit .items ():
+        for pid ,r in rec_ .items ():
             if r ["mfg"]not in alt :
                 continue 
             G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
@@ -200,7 +200,7 @@ def main ():
             R .append ((rj ,)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],ROBOT_YANAL ,ROBOT_ACI ,
             False ,signed =True )[:3 ])
         return f1w (T ),f1w (R )
-    tum ={r ["mfg"]for r in kayit .values ()}
+    tum ={r ["mfg"]for r in rec_ .values ()}
     sin_mfg =tum -DEV_MFG 
     print (f"\n{'threshold':<8}{'DEV tespit':>12}{'DEV robot':>11}")
     en ,en_r ,izg =None ,-1.0 ,{}

@@ -77,7 +77,7 @@ def test_siralayici_dogruyu_UST_SIRAYA_koyar ():
     import numpy as np 
     import p5v2_egit as PE 
     rng =np .random .RandomState (0 )
-    veri =[]
+    data_ =[]
     for _ in range (40 ):
     # 4 secenek; DOGRU which is 3. sutunu (distance) EN KUCUK which is
         F =rng .rand (4 ,len (PS .OZ_AD ))
@@ -85,14 +85,14 @@ def test_siralayici_dogruyu_UST_SIRAYA_koyar ():
         secs =[[(np .zeros (3 ),np .array ([0. ,0 ,1 ]),list (F [k ]),-1 )for k in range (4 )]]
         y =[np .zeros (4 ,int )]
         y [0 ][dogru ]=1 
-        veri .append ({"secs":secs ,"y":y })
-    m =PE .Siralayici (n =60 ,leaf =2 ).fit (veri )
+        data_ .append ({"secs":secs ,"y":y })
+    m =PE .Siralayici (n =60 ,leaf =2 ).fit (data_ )
     dogru_ust =0 
-    for d in veri :
+    for d in data_ :
         s =m .skorla ([o [2 ]for o in d ["secs"][0 ]])
         if int (np .argmax (s ))==int (np .argmax (d ["y"][0 ])):
             dogru_ust +=1 
-    assert dogru_ust /len (veri )>0.7 ,f"yalniz {dogru_ust }/{len (veri )} dogru"
+    assert dogru_ust /len (data_ )>0.7 ,f"yalniz {dogru_ust }/{len (data_ )} dogru"
 
 
 def test_siralayici_tek_secenekte_patlamaz ():

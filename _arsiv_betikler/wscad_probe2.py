@@ -23,7 +23,7 @@ def main():
         print("URL:", page.url)
         print("baslik:", page.title())
         body = page.inner_text("body")
-        print("metin (ilk 500):", body[:500].replace("\n", " | "))
+        print("metin (first 500):", body[:500].replace("\n", " | "))
         print("\n--- 3D / STEP izleri ---")
         for kw in ("3D", "STEP", "stp", "Download", "CAD", "Geometry", "Macro"):
             if kw.lower() in body.lower():

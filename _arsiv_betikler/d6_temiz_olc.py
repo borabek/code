@@ -50,8 +50,8 @@ def main ():
     print (f"  manufacturer: {sv ['manufacturer']}\n")
 
     import d6_record 
-    kayit =d6_record .yukle (PID )
-    print (f"turetme kaydi bulunan: {len (kayit )}/{len (PID )}")
+    rec_ =d6_record .yukle (PID )
+    print (f"turetme kaydi bulunan: {len (rec_ )}/{len (PID )}")
 
     with open ("results/wire_gate.pkl","rb")as f :
         gate =pickle .load (f )
@@ -60,7 +60,7 @@ def main ():
     T ,R =[],[]# (regime, tp, fp, fn)
     Tm =collections .defaultdict (list );Rm =collections .defaultdict (list )
     atlanan =collections .Counter ()
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
@@ -99,7 +99,7 @@ def main ():
     print (f"\nURETICI YAYILIMI (n>=5): en kotu {min (yay ):.4f} | en iyi {max (yay ):.4f}")
 
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-        json .dump ({"cluster":KUME ,"muhur":sv ["sha16"],"n":len (kayit ),
+        json .dump ({"cluster":KUME ,"muhur":sv ["sha16"],"n":len (rec_ ),
         "tespit":tf ,"robot":rf ,
         "uretici_tespit":{m :f1w (v )for m ,v in Tm .items ()},
         "uretici_robot":{m :f1w (v )for m ,v in Rm .items ()},

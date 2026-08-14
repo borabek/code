@@ -67,7 +67,7 @@ def main ():
 
     print ("\n3) UZLASI TAVANI: her CP'ye parcanin BASKIN GT ekseni verilseydi")
     print (f"  10 derece icinde kalirdi: {(s <=10 ).mean ():.1%} (su anki aci gecisi %81.4)")
-    print ("  NOT: bu bir TAVAN -- gercekte baskin ekseni GT'den degil TAHMINLERDEN kestirecegiz.")
+    print ("  NOT: this a TAVAN -- gercekte baskin ekseni GT'den not TAHMINLERDEN kestirecegiz.")
 
     print ("\n4) TAHMINLERDEN kestirilen baskin axis GT baskin eksenine ne kadar yakin?")
     fark =[]
@@ -88,7 +88,7 @@ def main ():
     for e in K :
         per [e ["pid"]].append (e )
     DERD ={r ["pid"]:r for r in DER }
-    duzelen =bozulan =ayni =0 
+    duzelen =bozulan =same_ =0 
     yeni_aci =[]
     for pid ,es in per .items ():
         r =DERD .get (pid )
@@ -106,12 +106,12 @@ def main ():
             yeni_ok =a_yeni <=10.0 
             duzelen +=int (yeni_ok and not eski_ok )
             bozulan +=int (eski_ok and not yeni_ok )
-            ayni +=int (eski_ok ==yeni_ok )
-    tot =duzelen +bozulan +ayni 
+            same_ +=int (eski_ok ==yeni_ok )
+    tot =duzelen +bozulan +same_ 
     print (f"  {tot } eslesme | DUZELEN {duzelen } ({duzelen /max (tot ,1 ):.1%}) | "
-    f"BOZULAN {bozulan } ({bozulan /max (tot ,1 ):.1%}) | degismeyen {ayni }")
+    f"BOZULAN {bozulan } ({bozulan /max (tot ,1 ):.1%}) | degismeyen {same_ }")
     print (f"  NET: {duzelen -bozulan :+d} nokta")
-    print ("  -> BOZULAN sayisi buyukse uzlasi HERKESE degil, yalniz GUVENSIZ eksenlere "
+    print ("  -> BOZULAN count buyukse uzlasi HERKESE not, only GUVENSIZ eksenlere "
     "uygulanmali (selector uzlasi).")
 
     with open ("results/r2_eksen_varsayimi.json","w",encoding ="utf-8")as f_ :

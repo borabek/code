@@ -67,9 +67,9 @@ def f1p (P ,D ,d ):
     return 2 *tp /max (2 *tp +fp +fn ,1 ),(tp ,fp ,fn )
 
 
-def puanla (veri ,secim ):
+def puanla (data_ ,sel_ ):
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,p6 in zip (veri ,secim ):
+    for d ,p6 in zip (data_ ,sel_ ):
         t =d ["_p6_c"]if p6 else d ["_tb_c"]
         q =per [d ["mfg"]]
         for i in range (3 ):
@@ -88,16 +88,16 @@ def main ():
     tb_model =product_genis .model_yukle ()
     mesh_diz ={"tam":"results/_p1_olasilik_brepegit",
     "d6":"results/_p1_olasilik"}
-    veri =[]
+    data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):
         cluster =cluster .strip ()
         for d in yukle (cluster ,int (os .environ .get ("P6_TR","0"))):
             d ["_kume"]=cluster 
-            veri .append (d )
-    print (f"{len (veri )} part ({time .time ()-t0 :.0f} s)",flush =True )
+            data_ .append (d )
+    print (f"{len (data_ )} part ({time .time ()-t0 :.0f} s)",flush =True )
 
     X ,Y ,W =[],[],[]
-    for i ,d in enumerate (veri ,1 ):
+    for i ,d in enumerate (data_ ,1 ):
         (Pt ,Dt ),s_tb =taban_cikti (d ,tb_model )
         Pp ,Dp =p6_cikti (d ,pk )
         f_t ,c_t =f1p (Pt ,Dt ,d )
@@ -110,58 +110,58 @@ def main ():
         Y .append (int (f_p >f_t ))
         W .append (abs (f_p -f_t ))# farkin BUYUKLUGU up to onemli
         if i %500 ==0 :
-            print (f"  {i }/{len (veri )} ({time .time ()-t0 :.0f} s)",flush =True )
+            print (f"  {i }/{len (data_ )} ({time .time ()-t0 :.0f} s)",flush =True )
     X =np .asarray (X ,float )
     Y =np .asarray (Y ,int )
     W =np .asarray (W ,float )
     print (f"P6 daha iyi olan part: {Y .mean ():.3f} | ortalama |fark| "
     f"{W .mean ():.4f}",flush =True )
 
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=200 ]
     print (f"katlar: {katlar }",flush =True )
 
-    hep_t =puanla (veri ,[False ]*len (veri ))
-    hep_p =puanla (veri ,[True ]*len (veri ))
-    v1 =puanla (veri ,[X [i ,0 ]>=90.0 for i in range (len (veri ))])
+    hep_t =puanla (data_ ,[False ]*len (data_ ))
+    hep_p =puanla (data_ ,[True ]*len (data_ ))
+    v1 =puanla (data_ ,[X [i ,0 ]>=90.0 for i in range (len (data_ ))])
     print (f"\nHEPSI TABAN  robot {hep_t ['robot']:.4f} makro {hep_t ['makro']:.4f}")
     print (f"HEPSI P6     robot {hep_p ['robot']:.4f} makro {hep_p ['makro']:.4f}")
     print (f"v1 (n01>=90) robot {v1 ['robot']:.4f} makro {v1 ['makro']:.4f}")
 
     top =collections .Counter ()
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
         m =HistGradientBoostingClassifier (
         max_iter =200 ,learning_rate =0.06 ,max_leaf_nodes =15 ,
         l2_regularization =1.0 ,random_state =0 ).fit (
         X [ic ],Y [ic ],sample_weight =np .maximum (W [ic ],1e-4 ))
         p =m .predict_proba (X [dis ])[:,1 ]>=0.5 
-        r =puanla ([veri [i ]for i in dis ],list (p ))
+        r =puanla ([data_ [i ]for i in dis ],list (p ))
         for k_ in ("TP","FP","FN"):
             top [k_ ]+=r [k_ ]
-        v1b =puanla ([veri [i ]for i in dis ],[X [i ,0 ]>=90.0 for i in dis ])
+        v1b =puanla ([data_ [i ]for i in dis ],[X [i ,0 ]>=90.0 for i in dis ])
         print (f"  {b :<6} v1 {v1b ['robot']:.4f} -> v2 {r ['robot']:.4f} "
         f"({r ['robot']-v1b ['robot']:+.4f}) | P6 secim orani "
         f"{p .mean ():.2f}",flush =True )
     f1 =2 *top ["TP"]/max (2 *top ["TP"]+top ["FP"]+top ["FN"],1 )
-    v1k =puanla ([veri [i ]for i ,d in enumerate (veri )if d ["mfg"]in katlar ],
-    [X [i ,0 ]>=90.0 for i ,d in enumerate (veri )
+    v1k =puanla ([data_ [i ]for i ,d in enumerate (data_ )if d ["mfg"]in katlar ],
+    [X [i ,0 ]>=90.0 for i ,d in enumerate (data_ )
     if d ["mfg"]in katlar ])
     print (f"\nKAT-DISI HAVUZLANMIS: v1 {v1k ['robot']:.4f} -> v2 {f1 :.4f} "
     f"({f1 -v1k ['robot']:+.4f})")
 
-    son =HistGradientBoostingClassifier (
+    last_ =HistGradientBoostingClassifier (
     max_iter =200 ,learning_rate =0.06 ,max_leaf_nodes =15 ,
     l2_regularization =1.0 ,random_state =0 ).fit (
     X ,Y ,sample_weight =np .maximum (W ,1e-4 ))
-    pk ["rejim2"]={"model":son ,"oz_ad":OZ_AD ,"threshold":0.5 }
+    pk ["rejim2"]={"model":last_ ,"oz_ad":OZ_AD ,"threshold":0.5 }
     with open (PAKET .replace (".pkl","_rejim2.pkl"),"wb")as f :
         pickle .dump (pk ,f )
     json .dump ({"damga":makbuz_hash .damga (),
     "hepsi_taban":hep_t ,"hepsi_p6":hep_p ,"v1_tek_esik":v1 ,
     "v2_kat_disi_robot":f1 ,"v1_kat_disi_robot":v1k ["robot"],
-    "katlar":katlar ,"n_parca":len (veri ),
+    "katlar":katlar ,"n_parca":len (data_ ),
     "p6_daha_iyi_orani":float (Y .mean ()),
     "not":"Ogrenilmis regime router. Etiket EGITIM verisinden "
     "(part basina F1 farki); urun yalniz istatistikleri "

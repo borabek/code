@@ -67,7 +67,7 @@ def main ():
     random_state =0 ).fit (M ,y )
     print (f"training: {len (X )} candidate | {len (np .unique (pids ))} part | pozitif {y .mean ():.4f}")
     clf =rf (X );clf_z =rf (Z )
-    print ("iki model egitildi (ham 22 / part-ici 44)")
+    print ("two model egitildi (ham 22 / part-ici 44)")
 
     # ESIK: training parcalarinin ham-gate maks skorlarinin Q'inci yuzdeligi.
     # NOT: this skorlar EGITIM UZERINDE (modelin gordugu data) -- high cikarlar. Bu SORUN DEGIL,

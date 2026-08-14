@@ -136,13 +136,13 @@ def main ():
     d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
     Rk =K .yukle (None )
 
-    def kayit (p ):
+    def rec_ (p ):
         return Rk .get (p )or d6 .get (p )
 
     X ,Y =[],[]
     for pid in [f [4 :-4 ]for f in sorted (os .listdir (OZ ))
     if f .startswith ("tam_")]:
-        r =kayit (pid )
+        r =rec_ (pid )
         if r is None or not len (r .get ("G",[])):
             continue 
         d =yukle ("tam",pid )
@@ -191,7 +191,7 @@ def main ():
         tes =[]
         for pid in [f [3 :-4 ]for f in sorted (os .listdir (OZ ))
         if f .startswith ("d7_")]:
-            r =kayit (pid )
+            r =rec_ (pid )
             if r is None or not len (r .get ("G",[])):
                 continue 
             d =yukle ("d7",pid )

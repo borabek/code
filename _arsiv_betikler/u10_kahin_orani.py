@@ -31,14 +31,14 @@ sys .path .insert (0 ,os .path .dirname (os .path .abspath (__file__ )))
 YAKIN =5.0 
 
 
-def kahin_orani (baseline ,arm ,kahin ):
+def kahin_orani (baseline ,arm ,oracle_ ):
     """(arm - baseline) / (kahin - baseline). UCU DE AYNI KOSUDAN gelmeli.
 
     Sabit a kahin degerine bolmek YANLISTIR: baseline degisince ratio anlamini yitirir
     (2026-08-02'de full this error yapildi). Bu fonksiyon ucunu birden ister ki ayrisamasinlar.
     """
     pay =arm -baseline 
-    payda =kahin -baseline 
+    payda =oracle_ -baseline 
     if payda <=1e-9 :
         return float ("nan")
     return pay /payda 

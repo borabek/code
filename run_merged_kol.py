@@ -120,32 +120,32 @@ def f1 (t ,f ,n ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
         d ["_K"]=kanonik_blok (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } | ayrim esigi {AYRIM_ESIK }",
+    print (f"{len (data_ )} part | katlar {katlar } | ayrim esigi {AYRIM_ESIK }",
     flush =True )
 
-    skor ={"baseline":[None ]*len (veri ),"kanonik":[None ]*len (veri )}
+    skor ={"baseline":[None ]*len (data_ ),"kanonik":[None ]*len (data_ )}
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
         for ad in ("baseline","kanonik"):
             def mat (i ):
-                return (veri [i ]["_M"]if ad =="baseline"
-                else np .hstack ([veri [i ]["_M"],veri [i ]["_K"]]))
-            n_s =sum (len (veri [i ]["y"])for i in ic )
+                return (data_ [i ]["_M"]if ad =="baseline"
+                else np .hstack ([data_ [i ]["_M"],data_ [i ]["_K"]]))
+            n_s =sum (len (data_ [i ]["y"])for i in ic )
             M =np .empty ((n_s ,mat (ic [0 ]).shape [1 ]),np .float32 )
             o =0 
             for i in ic :
                 m_ =mat (i )
                 M [o :o +len (m_ )]=m_ 
                 o +=len (m_ )
-            Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+            Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
             rng =np .random .default_rng (0 )
             poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
             sec =np .concatenate ([poz ,rng .choice (
@@ -160,10 +160,10 @@ def main ():
 
     KOLLAR =("baseline","kanonik","yayilim","birlesik")
     agg =collections .defaultdict (lambda :collections .Counter ())
-    for d in veri :
-        if skor ["baseline"][veri .index (d )]is None :
+    for d in data_ :
+        if skor ["baseline"][data_ .index (d )]is None :
             continue 
-        i =veri .index (d )
+        i =data_ .index (d )
         G =np .asarray (d ["G"],float )
         Gd =np .asarray (d ["Gd"],float )
         dg =d ["diag"]
@@ -198,17 +198,17 @@ def main ():
         out [m_ ]=r 
         print (f"{m_ :<7}{a ['gt']:>7}"+
         "".join (f"{r [k ]:>11.4f}"for k in KOLLAR ))
-    son ={arm :f1 (T [f"{arm }_tp"],T [f"{arm }_fp"],T [f"{arm }_fn"])
+    last_ ={arm :f1 (T [f"{arm }_tp"],T [f"{arm }_fp"],T [f"{arm }_fn"])
     for arm in KOLLAR }
     print (f"{'TOPLAM':<7}{T ['gt']:>7}"+
-    "".join (f"{son [k ]:>11.4f}"for k in KOLLAR ))
+    "".join (f"{last_ [k ]:>11.4f}"for k in KOLLAR ))
     print ("\n=== TABANA GORE ===")
     for arm in KOLLAR [1 :]:
-        fark =son [arm ]-son ["baseline"]
-        print (f"  {arm :<12}{son [arm ]:.4f}   {fark :+.4f}"
+        fark =last_ [arm ]-last_ ["baseline"]
+        print (f"  {arm :<12}{last_ [arm ]:.4f}   {fark :+.4f}"
         +("  <- KAZANC"if fark >0 else ""))
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,
-    "ayrim_esik":AYRIM_ESIK ,"toplam":son ,"brand":out ,
+    "ayrim_esik":AYRIM_ESIK ,"toplam":last_ ,"brand":out ,
     "not":"Gecen iki kaldirac BIRLIKTE: kanonik blogu + regime "
     "kapili lattice yayilimi. D7'ye BAKILMADI."},
     open (f"results/birlesik_kol_{KUME }.json","w"),indent =1 )

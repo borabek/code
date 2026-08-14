@@ -144,9 +144,9 @@ def main ():
         with open ("results/aci_secici.pkl","wb")as f :
             pickle .dump ({"sec":sec ,"reg":reg ,"threshold":float (en .split ()[-1 ]),
             "n_feat":RX .shape [1 ],
-            "note":("ACI SECICI 2026-08-02: once 'bu aci >10 derece yanlis mi' "
+            "note":("ACI SECICI 2026-08-02: before 'this angle >10 derece wrong mi' "
             "diye sorar, yalniz oyleyse yonu duzeltir. Duzeltmeyi HERKESE "
-            "uygulamak zaten dogru olan yonleri bozuyordu "
+            "uygulamak already correct which is yonleri bozuyordu "
             "(medyan 0.00 -> 2.36 derece).")},f )
         print ("-> results/aci_secici.pkl")
     print ("receipt -> results/q4_aci_secici.json")

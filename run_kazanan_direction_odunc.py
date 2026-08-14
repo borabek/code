@@ -94,9 +94,9 @@ def warn_position (p ,g ,gd ):
     return (np .linalg .norm (v -e *u )<=YANAL )and (abs (e )<=EKSENEL )
 
 
-def yon_egitim (veri ,gate ,cyl ):
+def yon_egitim (data_ ,gate ,cyl ):
     X ,Y =[],[]
-    for d in veri :
+    for d in data_ :
         s =np .asarray (wire_gate .decision_score (gate ,d ["X"]),float )
         k =s >=KURAL [1 ]
         if not k .any ():
@@ -127,10 +127,10 @@ def yon_egitim (veri ,gate ,cyl ):
     return np .asarray (X ,float ),np .asarray (Y ,int )
 
 
-def olc (veri ,gate ,cyl ,S ,yon_clf =None ):
+def olc (data_ ,gate ,cyl ,S ,yon_clf =None ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =np .asarray (wire_gate .decision_score (gate ,d ["X"]),float )
         k =s >=KURAL [1 ]
         P ,D ,sk =((d ["P"][k ],d ["D"][k ],s [k ])if k .any ()

@@ -73,7 +73,7 @@ def main ():
     print (f"\nGATE/SKORUN ATTIGI DOGRU ADAY: {loss :.4f}")
     print ("OKUMA:")
     print ("  havuz_yonlu DUSUK  -> onarim ADAY URETIMINDE (pahali)")
-    print ("  fark BUYUK         -> onarim SKOR/GATE'te (ucuz olabilir)")
+    print ("  difference BUYUK         -> onarim SKOR/GATE'te (ucuz may be)")
     json .dump ({"yol":YOL ,"n_parca":len (d ),
     "recall":{k :top [k ]/g for k in top if k !="gt"},
     "gate_attigi":loss ,

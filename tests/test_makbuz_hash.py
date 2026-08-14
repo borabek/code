@@ -20,7 +20,7 @@ def test_degisiklik_YAKALANIR (tmp_path ):
     f .write_text ("a",encoding ="utf-8")
     h1 =makbuz_hash ._h (str (f ))
     f .write_text ("b",encoding ="utf-8")
-    assert makbuz_hash ._h (str (f ))!=h1 ,"icerik degisti ama hash ayni"
+    assert makbuz_hash ._h (str (f ))!=h1 ,"icerik degisti but hash same"
 
 
 def test_olmayan_dosya_None ():

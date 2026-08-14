@@ -94,7 +94,7 @@ print (f"\n--- GATE ETKISI (threshold {THR }) ---")
 print (f"  PRE-gate : P={pp :.3f} R={pr :.3f} F1={pf :.3f}  (TP{pre_tp } FP{pre_fp } FN{pre_fn })")
 print (f"  POST-gate: P={qp :.3f} R={qr :.3f} F1={qf :.3f}  (TP{post_tp } FP{post_fp } FN{post_fn })")
 print (f"  gate'e KURBAN giden gercek TP: {tp_lost }/{pre_tp } ({100 *tp_lost /max (pre_tp ,1 ):.0f}%)  "
-+("<- gate recall'u kesiyor, tuning lever'i"if tp_lost >pre_tp *0.15 else "<- gate TP'yi koruyor, recall lever'i = daha cok bul (W2)"))
++("<- gate recall'u kesiyor, tuning lever'i"if tp_lost >pre_tp *0.15 else "<- gate TP'yi koruyor, recall lever'i = more very bul (W2)"))
 
 np .savez ("results/w1_wei_scores.npz",tp =tp_ws ,fp =fp_ws ,total_G =total_G )# sweep for cache
 print (f"\n--- WEI GATE ESIK SWEEP (F1-optimal ara) ---")
@@ -111,8 +111,8 @@ f"vs mevcut 0.35 F1={qf :.3f}  ->  KAZANC {best [0 ]-qf :+.3f}")
 gap =tp_ws .mean ()-fp_ws .mean ()
 print (f"\nKARAR (TP-FP wire_score farki = {gap :+.3f}):")
 if gap >0.10 :
-    print ("  -> FP'ler BELIRGIN dusuk skor: gate onlari zaten eliyor. Ham 0.58 = gate-ONCESI.")
-    print ("  -> GT-eksikligi DEGIL; 0.58 pesimist ama urun 0.69 bunu yakaliyor. W1 kapan -> W2(recall)/W4(wire).")
+    print ("  -> FP'ler BELIRGIN low skor: gate onlari already eliyor. Ham 0.58 = gate-ONCESI.")
+    print ("  -> GT-eksikligi DEGIL; 0.58 pesimist but urun 0.69 bunu yakaliyor. W1 kapan -> W2(recall)/W4(wire).")
 else :
-    print ("  -> FP skorlari TP'ye yakin: gate ayirt EDEMIYOR. Ya GT-eksik ya gate kor.")
+    print ("  -> FP skorlari TP'ye yakin: gate ayirt EDEMIYOR. Ya GT-missing ya gate kor.")
     print (f"  -> {fp_hi } yuksek-skorlu FP GORSEL adjudication gerektirir (gercek kablo girisi mi?).")

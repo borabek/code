@@ -77,8 +77,8 @@ def main ():
     ap .add_argument ("--hepsi",action ="store_true",help ="eski turetmeyi 'var' sayma")
     # PID FILTRESI (R4a): TOPLULUK olcumu for TUM korpusu turetmeye gerek absent --
     # only two OLCUM kumesi (250 exam + 194) yeter, ~444 part.
-    ap .add_argument ("--pids-file",default ="",help ="yalniz bu dosyadaki pid'leri turet")
-    ap .add_argument ("--cikti-eki",default ="",help ="cikti dosya adina ek (G6 icin _g6)")
+    ap .add_argument ("--pids-file",default ="",help ="only this dosyadaki pid'leri turet")
+    ap .add_argument ("--cikti-eki",default ="",help ="output file adina ek (G6 for _g6)")
     ap .add_argument ("--vardiya",type =int ,default =0 )
     ap .add_argument ("--toplam",type =int ,default =1 )
     a =ap .parse_args ()
@@ -94,7 +94,7 @@ def main ():
     from big_arbiter import eligible 
     from build_zengin_parite import _normaller ,zengin 
     from connector_constants import CABLE_ENTRY as CE ,CONTACT as CT 
-    from geometri_anahtar import anahtar 
+    from geometri_anahtar import key_ 
     from infer_step_cp import load_any ,step_to_mesh 
 
     os .makedirs (OPS_TMP ,exist_ok =True )
@@ -102,7 +102,7 @@ def main ():
         shutil .rmtree (os .path .join (OPS_TMP ,_e ),ignore_errors =True )
     global CIKTI ,GEO ,ISARET 
     ek =a .cikti_eki 
-    if a .toplam >1 :
+    if a .total_ >1 :
         CIKTI =f"results/_der_yeni{ek }_{a .vardiya }.pkl"
         GEO =f"results/_geo_yeni{ek }_{a .vardiya }.json"
         ISARET =f"results/_d5_su_an{ek }_{a .vardiya }.txt"
@@ -131,8 +131,8 @@ def main ():
                     # (Belirti: hedef toplami 2484, oysa 2690-823 = 1867 olmaliydi.)
                     # Dogrusu: bolmeyi belirleyen `present` kumesi TUM vardiyalarin ciktisini icermeli;
                     # `OUT` whereas only this vardiyanin kayitlarini tutmaya devam eder.
-    for _k in range (a .toplam if a .toplam >1 else 1 ):
-        _f =f"results/_der_yeni{ek }_{_k }.pkl"if a .toplam >1 else CIKTI 
+    for _k in range (a .total_ if a .total_ >1 else 1 ):
+        _f =f"results/_der_yeni{ek }_{_k }.pkl"if a .total_ >1 else CIKTI 
         if os .path .exists (_f ):
             with open (_f ,"rb")as _h :
                 var |={r ["pid"]for r in pickle .load (_h )}
@@ -150,13 +150,13 @@ def main ():
         E =[t for t in E if t [1 ]in _sec ]
         print (f"PID FILTRESI: {len (_sec )} istendi -> {len (E )} bulundu",flush =True )
     hedef =dengeli_sira ([t for t in E if t [1 ]not in var ])
-    if a .toplam >1 :
-        hedef =[t for i ,t in enumerate (hedef )if i %a .toplam ==a .vardiya ]
-        print (f"VARDIYA {a .vardiya }/{a .toplam }",flush =True )
-    if a .sinir :
-        hedef =hedef [:a .sinir ]
+    if a .total_ >1 :
+        hedef =[t for i ,t in enumerate (hedef )if i %a .total_ ==a .vardiya ]
+        print (f"VARDIYA {a .vardiya }/{a .total_ }",flush =True )
+    if a .bound_ :
+        hedef =hedef [:a .bound_ ]
     print (f"uygun corpus {len (E )} | zaten var {len (var )} | TURETILECEK {len (hedef )}")
-    print ("  ilk 12 (manufacturer-dengeli):",[t [0 ]for t in hedef [:12 ]],flush =True )
+    print ("  first 12 (manufacturer-dengeli):",[t [0 ]for t in hedef [:12 ]],flush =True )
 
     dev ="cuda"if torch .cuda .is_available ()else "cpu"
     cks =a .ckpt or cfg ["current_product"].get ("checkpoints")or cfg ["robot_vote2_checkpoints"]
@@ -192,7 +192,7 @@ def main ():
             continue 
         try :
             Vr ,Fr =step_to_mesh (stp )
-            GEOD [pid ]=anahtar (Vr ,Fr )# D5-1 same gecisde
+            GEOD [pid ]=key_ (Vr ,Fr )# D5-1 same gecisde
             V ,F =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
             V =np .ascontiguousarray (V ,np .float64 );F =np .ascontiguousarray (F ,np .int64 )
             # OPERATOR ONBELLEGI PARCA-YEREL VE GECICI (2026-08-04, DISK ACIL DURUMU):

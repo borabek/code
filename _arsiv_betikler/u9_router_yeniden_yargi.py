@@ -149,16 +149,16 @@ def main ():
     # R'nin D'yi gecip gecmedigini HIC sormuyordu and yonlendiricinin dagitilmasinin
     # gerekcesindeki kusurun ta kendisiydi.)
     if kararlar ["D->R"]:
-        sonuc ="R KALIR (D'yi kanitli sekilde geciyor)"
+        res_ ="R KALIR (D'yi kanitli sekilde geciyor)"
     elif kararlar ["A->D"]:
-        sonuc ="D'ye DON -> results/wire_gate.pkl.pre_yonlendirme (R, D'yi gecemiyor)"
+        res_ ="D'ye DON -> results/wire_gate.pkl.pre_yonlendirme (R, D'yi gecemiyor)"
     elif kararlar ["A->R"]:
-        sonuc ="R KALIR (D gecmedi ama R gecti)"
+        res_ ="R KALIR (D gecmedi ama R gecti)"
     else :
-        sonuc ="A'ya DON -> results/wire_gate.pkl.pre_parca_ici"
-    print (f"  {sonuc }")
+        res_ ="A'ya DON -> results/wire_gate.pkl.pre_parca_ici"
+    print (f"  {res_ }")
     with io .open ("results/u9_router_yargi.json","w",encoding ="utf-8")as f :
-        json .dump ({"kollar":SON ,"kararlar":kararlar ,"sonuc":sonuc ,
+        json .dump ({"kollar":SON ,"kararlar":kararlar ,"sonuc":res_ ,
         "cluster":{k :rap [k ]for k in ("puanlanan_parca","geometri_grubu",
         "kume_dagilimi")}},f ,indent =1 )
     print ("receipt -> results/u9_router_yargi.json")

@@ -129,7 +129,7 @@ def main ():
     print (f"\nGO: havuzlanmis >= +0.015  -> {'GECTI'if d >=0.015 else 'gecmedi'}")
     print (f"    hicbir manufacturer < -0.005 -> {'GECTI'if not kotu else 'GECMEDI '+str (kotu )}")
     print ("\nNOT: bu ARA olcumdur -- turetme %62'de durdu, corpus henuz tam degil.")
-    print ("     Ayrica measurement kumesi PXC+WEI agirlikli; gorulmemis manufacturer sorusu D5-4 ile yanitlanir.")
+    print ("     Ayrica measurement kumesi PXC+WEI agirlikli; gorulmemis manufacturer sorusu D5-4 with yanitlanir.")
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
         json .dump ({"baseline":a ,"v3":b ,"fark":d ,"kotulesen_uretici":kotu ,
         "ara_olcum":True },f ,indent =1 ,ensure_ascii =False )

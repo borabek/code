@@ -49,7 +49,7 @@ def _mesh (pid ,stp =None ):
     return V ,F 
 
 
-def hesapla (R ,sinir =0 ,ilerleme =True ):
+def hesapla (R ,bound_ =0 ,ilerleme =True ):
     """Her candidate for 4 topoloji sutununu R yaricapiyla hesapla. (X_topo, islenen_pid_maskesi)"""
     import topo_feats 
 
@@ -65,8 +65,8 @@ def hesapla (R ,sinir =0 ,ilerleme =True ):
         print (f"  (uyari: STEP haritasi yok -> {type (e ).__name__ }; yalniz cache kullanilir)")
 
     benzersiz =list (dict .fromkeys (pids .tolist ()))
-    if sinir :
-        benzersiz =benzersiz [:sinir ]
+    if bound_ :
+        benzersiz =benzersiz [:bound_ ]
     out =np .zeros ((len (pids ),4 ),float )
     tamam =np .zeros (len (pids ),bool )
     t0 =time .time ();atlanan =0 
@@ -92,15 +92,15 @@ def hesapla (R ,sinir =0 ,ilerleme =True ):
     return out ,tamam 
 
 
-def dogrula (sinir =60 ):
+def dogrula (bound_ =60 ):
     """R=6.0 with yeniden uret and npz'deki mevcut sutunlarla karsilastir."""
     d =np .load (NPZ ,allow_pickle =True )
     X =np .asarray (d ["X"],float )
-    eski =X [:,TOPO_SUT ]
-    yeni ,tamam =hesapla (6.0 ,sinir =sinir )
+    old_ =X [:,TOPO_SUT ]
+    new_ ,tamam =hesapla (6.0 ,bound_ =bound_ )
     if not tamam .any ():
         print ("HIC part islenemedi -- yeniden uretim yolu KULLANILAMAZ");return False 
-    e ,y =eski [tamam ],yeni [tamam ]
+    e ,y =old_ [tamam ],new_ [tamam ]
     fark =np .abs (e -y )
     tam =float ((fark .max (1 )<1e-6 ).mean ())
     yakin =float ((fark .max (1 )<1e-3 ).mean ())
@@ -121,18 +121,18 @@ def main ():
     ap .add_argument ("--sinir",type =int ,default =0 )
     a =ap .parse_args ()
     if a .dogrula :
-        dogrula (a .sinir or 60 );return 
+        dogrula (a .bound_ or 60 );return 
     assert a .r >0 ,"--r ver"
-    X_topo ,tamam =hesapla (a .r ,sinir =a .sinir )
+    X_topo ,tamam =hesapla (a .r ,bound_ =a .bound_ )
     d =np .load (NPZ ,allow_pickle =True )
     X =np .asarray (d ["X"],float ).copy ()
     # ISLENEMEYEN parcalarin sutunlarini ESKISIYLE birak: karsilastirmayi R farkina odaklar,
     # loss part etkisini karistirmaz.
     X [tamam ,TOPO_SUT ]=X_topo [tamam ]
     out =f"results/gate_regrow_data_topo_r{a .r :g}.npz".replace (".npz",".npz")
-    kayit ={k :d [k ]for k in d .files }
-    kayit ["X"]=X 
-    np .savez_compressed (out ,**kayit )
+    rec_ ={k :d [k ]for k in d .files }
+    rec_ ["X"]=X 
+    np .savez_compressed (out ,**rec_ )
     print (f"\nyazildi -> {out } | guncellenen satir {int (tamam .sum ())}/{len (X )}")
 
 

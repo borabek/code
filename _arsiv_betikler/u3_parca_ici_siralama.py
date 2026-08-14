@@ -77,7 +77,7 @@ def main ():
     print (f"{len (Y )} candidate | {len (set (pids ))} part | {len (set (geo ))} geometri | "
     f"pozitif {Y .mean ():.4f}",flush =True )
 
-    print ("part-ici donusumler hesaplaniyor...",flush =True )
+    print ("part-ici donusumler is computed...",flush =True )
     SIRA =parca_ici_sira (X ,pids )
     Z =parca_ici_z (X ,pids )
     ARM ={"A ham":X ,
@@ -103,7 +103,7 @@ def main ():
     rf =lambda :RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,
     n_jobs =NJOB ,random_state =0 )
     print (f"\n{'arm':<16}{'tanidik':>10}{'mfg0-disi':>11}{'mfg1-disi':>11}{'EN KOTU':>10}")
-    sonuc ={}
+    res_ ={}
     for ad ,M in ARM .items ():
         o =np .zeros (len (Y ))
         for tr ,te in GroupKFold (n_splits =5 ).split (M ,Y ,geo ):
@@ -117,23 +117,23 @@ def main ():
             dis [k ]=f1 (karar (s ),te )
         ek =min (dis .values ())
         print (f"{ad :<16}{tan :>10.4f}{dis ['0']:>11.4f}{dis ['1']:>11.4f}{ek :>10.4f}",flush =True )
-        sonuc [ad ]={"tanidik":float (tan ),"mfg0_disi":float (dis ["0"]),
+        res_ [ad ]={"tanidik":float (tan ),"mfg0_disi":float (dis ["0"]),
         "mfg1_disi":float (dis ["1"]),"en_kotu":float (ek )}
 
-    t =sonuc ["A ham"]
+    t =res_ ["A ham"]
     print (f"\nKARAR (baseline A: tanidik {t ['tanidik']:.4f} | en kotu {t ['en_kotu']:.4f})")
     kazanan =None 
-    for ad ,s in sonuc .items ():
+    for ad ,s in res_ .items ():
         if ad .startswith ("A"):
             continue 
         dt =s ["tanidik"]-t ["tanidik"];dk =s ["en_kotu"]-t ["en_kotu"]
         gecti =(dk >=0.01 )and (dt >=-0.01 )
         print (f"  {ad :<16} tanidik {dt :+.4f} | en kotu {dk :+.4f} -> "
         f"{'GECTI'if gecti else 'GECMEDI'}")
-        if gecti and (kazanan is None or s ["en_kotu"]>sonuc [kazanan ]["en_kotu"]):
+        if gecti and (kazanan is None or s ["en_kotu"]>res_ [kazanan ]["en_kotu"]):
             kazanan =ad 
     print (f"\nSONUC: {(kazanan +' -> UCTAN UCA DOGRULA')if kazanan else 'HICBIRI GECMEDI'}")
-    json .dump (sonuc |{"kazanan":kazanan },open ("results/u3_parca_ici.json","w"),indent =1 )
+    json .dump (res_ |{"kazanan":kazanan },open ("results/u3_parca_ici.json","w"),indent =1 )
     print ("receipt -> results/u3_parca_ici.json")
 
 

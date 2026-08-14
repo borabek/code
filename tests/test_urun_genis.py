@@ -55,17 +55,17 @@ def test_isaret_duzeltme_bos_girdide_PATLAMAZ ():
 
 
 def test_kol_cevre_degiskeniyle_kapanir ():
-    eski =os .environ .get ("URUN_GENIS")
+    old_ =os .environ .get ("URUN_GENIS")
     try :
         os .environ ["URUN_GENIS"]="0"
         assert UG ._cfg ("robot_genis_havuz","URUN_GENIS",True )is False 
         os .environ ["URUN_GENIS"]="1"
         assert UG ._cfg ("robot_genis_havuz","URUN_GENIS",True )is True 
     finally :
-        if eski is None :
+        if old_ is None :
             os .environ .pop ("URUN_GENIS",None )
         else :
-            os .environ ["URUN_GENIS"]=eski 
+            os .environ ["URUN_GENIS"]=old_ 
 
 
 def test_tanimlayici_sutun_sayisi ():

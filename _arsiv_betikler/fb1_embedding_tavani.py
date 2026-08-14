@@ -163,15 +163,15 @@ def main ():
     print (f"\nEMBEDDING TAVANI - EL-YAPIMI TAVANI = {z -e :+.3f}")
     print ()
     if z -e >=0.02 :
-        print ("HUKUM: TEMSIL uzayi DAHA AYRILABILIR. ~0.86 ceiling EL-YAPIMI uzayin tavaniydi;")
+        print ("VERDICT: TEMSIL uzayi DAHA AYRILABILIR. ~0.86 ceiling EL-YAPIMI uzayin tavaniydi;")
         print ("       problem doymus DEGIL. Tespit 0.84 (robot 0.80'in sarti) ULASILABILIR")
-        print ("       ve yol TEMSILDEN gecer -> FB-2 (tel-farkindalikli yardimci supervizyon).")
+        print ("       and path TEMSILDEN gecer -> FB-2 (tel-farkindalikli yardimci supervizyon).")
     elif z -e >=0.005 :
-        print ("HUKUM: ZAYIF ama pozitif fark. Temsil biraz daha ayrilabilir; FB-2 makul ama")
+        print ("VERDICT: ZAYIF but pozitif difference. Temsil biraz more ayrilabilir; FB-2 makul but")
         print ("       beklenti olculu tutulmali.")
     else :
-        print ("HUKUM: TEMSIL DE AYNI TAVANDA. Backbone gercekten ayrimi tasimiyor ->")
-        print ("       0.80 mevcut bilgi rejiminde YOK; tek yol yeni veri/yeni etiket.")
+        print ("VERDICT: TEMSIL DE AYNI TAVANDA. Backbone gercekten ayrimi tasimiyor ->")
+        print ("       0.80 mevcut bilgi rejiminde YOK; single path new data/new label.")
     with io .open ("results/fb1_embedding_tavani.json","w",encoding ="utf-8")as f :
         json .dump (SON ,f ,indent =1 ,ensure_ascii =False )
     print ("receipt -> results/fb1_embedding_tavani.json")

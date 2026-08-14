@@ -433,10 +433,10 @@ if __name__ =="__main__":
         rc =subprocess .call ([sys .executable ,"glb_audit.py",*written ,
         "--json","results/_audit_last.json"])
         if rc !=0 :
-            print ("AUDIT FAILED -- bkz results/_audit_last.json",flush =True )
+            print ("AUDIT FAILED -- see results/_audit_last.json",flush =True )
             n_fail +=1 
     elif not n_fail :
-        print ("Hic GLB uretilmedi -- denetlenecek sey yok (bu bir BASARISIZLIK).")
+        print ("Hic GLB uretilmedi -- denetlenecek sey absent (this a BASARISIZLIK).")
         n_fail +=1 
 
     if n_fail :

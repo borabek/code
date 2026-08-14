@@ -182,12 +182,12 @@ def main ():
     print (f"\nTARAMA en iyisi (UST SINIR, secim yanlisi var): robot {eniyi ['d_robot']:+.4f} "
     f"(threshold %{100 *eniyi ['esikQ']:.0f}, confidence {eniyi ['confidence']}) "
     f"GA[{eniyi ['ga'][0 ]:+.4f},{eniyi ['ga'][1 ]:+.4f}] | tespit {eniyi ['d_tespit']:+.4f}")
-    deger =eniyi ["d_robot"]>=0.01 and eniyi ["ga"][0 ]>0 and eniyi ["d_tespit"]>=-0.005 
-    print (f"\nHUKUM: {'UST SINIR bile gecerse training-korpusu turetmesi DEGER'if deger else 'UST SINIR bile GECMIYOR -- KONUM KOLU KAPANIR'}")
+    val_ =eniyi ["d_robot"]>=0.01 and eniyi ["ga"][0 ]>0 and eniyi ["d_tespit"]>=-0.005 
+    print (f"\nHUKUM: {'UST SINIR bile gecerse training-korpusu turetmesi DEGER'if val_ else 'UST SINIR bile GECMIYOR -- KONUM KOLU KAPANIR'}")
     with io .open ("results/r7b_konum_kosullu.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,"auc_asama1":aucA ,
         "auc_asama2_kosullu":aucB ,"tarama":SON ,"en_iyi":eniyi ,
-        "deger":bool (deger )},f ,indent =1 )
+        "deger":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r7b_konum_kosullu.json")
 
 

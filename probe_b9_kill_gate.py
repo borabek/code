@@ -32,7 +32,7 @@ CIKTI ="results/b9_kill_kapisi.json"
 
 def main ():
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 
     # SADECE each two onbellekte de bulunan parts -- kiyas same kumede must be
@@ -40,15 +40,15 @@ def main ():
     for ad ,yol in KOLLAR .items ():
         p ={f [:-4 ]for f in os .listdir (yol )if f .endswith (".npz")}
         ortak =p if ortak is None else (ortak &p )
-    ortak =sorted (ortak &set (kayit ))
+    ortak =sorted (ortak &set (rec_ ))
     print (f"ortak part: {len (ortak )}")
 
-    sonuc ={}
+    res_ ={}
     for ad ,yol in KOLLAR .items ():
         T ,regime =[],{"dusuk":[],"cok":[]}
         error =0 # residual only raporlanir; no istisna yutulmaz
         for pid in ortak :
-            r =kayit [pid ]
+            r =rec_ [pid ]
             G =np .asarray (r ["G"],float )
             Gd =np .asarray (r ["Gd"],float )
             if not len (G ):
@@ -67,24 +67,24 @@ def main ():
             oge =(len (G ),)+match_hungarian (P ,D ,G ,Gd ,r ["diag"],0.0 ,180.0 ,True )[:3 ]
             T .append (oge )
             (regime ["cok"]if len (G )>=8 else regime ["dusuk"]).append (oge )
-        sonuc [ad ]={
+        res_ [ad ]={
         "kahin_F1":f1w (T ),
         "dusuk_CP":f1w (regime ["dusuk"])if regime ["dusuk"]else None ,
         "cok_CP":f1w (regime ["cok"])if regime ["cok"]else None ,
         "n_parca":len (T ),"error":error ,
         }
-        s =sonuc [ad ]
+        s =res_ [ad ]
         _f =lambda v :"  --  "if v is None else f"{v :.4f}"# noqa: E731
         print (f"{ad :>4}: kahin {_f (s ['kahin_F1'])} | dusuk-CP "
         f"{_f (s ['dusuk_CP'])} | cok-CP {_f (s ['cok_CP'])} "
         f"({s ['n_parca']} part, {error } error)",flush =True )
 
-    fark =sonuc ["b9"]["kahin_F1"]-sonuc ["g10"]["kahin_F1"]
+    fark =res_ ["b9"]["kahin_F1"]-res_ ["g10"]["kahin_F1"]
     gecti =fark >0 
     print (f"\nFARK (g10 - g7): {fark :+.4f}")
     print (f"KARAR: {'GECTI -- augmentation KALIR'if gecti else 'KALDI -- augmentation GERI ALINIR'}")
     with open (CIKTI ,"w")as f :
-        json .dump ({"sonuc":sonuc ,"fark":fark ,"gecti":bool (gecti ),
+        json .dump ({"sonuc":res_ ,"fark":fark ,"gecti":bool (gecti ),
         "criterion":"candidate kahini, bire-bir Macar, tespit toleransi, aci serbest",
         "not":"gate/p3c YENIDEN FIT EDILMEDI; uctan uca F1 bu kapiyla "
         "olculmez"},f ,indent =1 )

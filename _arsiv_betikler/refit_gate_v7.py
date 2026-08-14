@@ -29,7 +29,7 @@ print (f"training: {M .shape [0 ]} candidate x {M .shape [1 ]} sutun | "
 f"{len (np .unique (pids ))} part | pozitif {y .mean ():.4f}",flush =True )
 clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
 random_state =0 ).fit (M ,y )
-with open (a .cikti ,"wb")as f :
+with open (a .out_ ,"wb")as f :
     pickle .dump ({"clf":clf ,
     "feat_names":list (wire_gate .FEAT_NAMES )+
     [n +"_z"for n in wire_gate .FEAT_NAMES ],
@@ -38,4 +38,4 @@ with open (a .cikti ,"wb")as f :
     "corpus":a .corpus ,
     "note":"gate v7: g10 ile yeniden turetilmis corpus (44675 candidate / "
     "2596 part). parca_ici_dagit.py ile ayni recete."},f )
-print (f"-> {a .cikti }")
+print (f"-> {a .out_ }")

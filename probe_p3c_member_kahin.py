@@ -18,10 +18,10 @@ from sina_cluster import match_hungarian ,f1w
 from korpus_kimlik import step_kimlik as SK 
 
 A ,B ="results/_p1_olasilik_g10","results/_p1_olasilik_g7"
-sv =d6_record .exam ();kayit =d6_record .yukle (set (sv ["pidler"]))
+sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 ortak =sorted ({f [:-4 ]for f in os .listdir (A )if f .endswith (".npz")}
-&{f [:-4 ]for f in os .listdir (B )if f .endswith (".npz")}&set (kayit ))
+&{f [:-4 ]for f in os .listdir (B )if f .endswith (".npz")}&set (rec_ ))
 print (f"ortak part {len (ortak )}",flush =True )
 
 
@@ -38,7 +38,7 @@ def candidates (ob ,pid ):
 
 T_a ,T_b ,T_u =[],[],[]
 for pid in ortak :
-    r =kayit [pid ]
+    r =rec_ [pid ]
     G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
     if not len (G ):
         continue 

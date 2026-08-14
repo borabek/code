@@ -53,12 +53,12 @@ def ek_bloklar ():
     return out 
 
 
-def pool (dizin ="_p6_oz_tam3",cluster =None ):
+def pool (dir_ ="_p6_oz_tam3",cluster =None ):
     """Degerler KOKTE not `total` under: konum_recall / yonlu_recall /
     f1_tavani. (Ilk yazimda kokte aranmisti and rapor empty gosteriyordu.)
 
     Makbuz adi residual kumeyi de tasiyor; old (kumesiz) ada da bakilir."""
-    adlar =([f"havuz_tavani_{dizin }_{cluster }.json"]if cluster else [])+[f"havuz_tavani_{dizin }_d6.json",f"havuz_tavani_{dizin }.json"]
+    adlar =([f"havuz_tavani_{dir_ }_{cluster }.json"]if cluster else [])+[f"havuz_tavani_{dir_ }_d6.json",f"havuz_tavani_{dir_ }.json"]
     d =None 
     for a in adlar :
         d =oku (os .path .join (KOK ,"results",a ))

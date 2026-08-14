@@ -36,26 +36,26 @@ def main ():
             src =io .open (f ,encoding ="utf-8",errors ="ignore").read ()
         except Exception :
             continue 
-        yeni =cevir (src )
-        if yeni ==src :
+        new_ =cevir (src )
+        if new_ ==src :
             continue 
         n =len (DESEN .findall (src ))
         if f .endswith (".py"):
             try :
-                ast .parse (yeni )
+                ast .parse (new_ )
             except SyntaxError as e :
                 bozuk .append ((f ,str (e )[:50 ]))
                 continue 
         if f .endswith (".json"):
             import json 
             try :
-                json .loads (yeni )
+                json .loads (new_ )
             except Exception as e :
                 bozuk .append ((f ,"json: "+str (e )[:40 ]))
                 continue 
         deg +=1 ;top +=n 
         if uygula :
-            io .open (f ,"w",encoding ="utf-8").write (yeni )
+            io .open (f ,"w",encoding ="utf-8").write (new_ )
     print (f"dosya: {len (dosyalar )} tarandi | {deg } degisecek | {top } degisim")
     if bozuk :
         print (f"ATLANDI ({len (bozuk )}) -- ayristirma bozulurdu:")

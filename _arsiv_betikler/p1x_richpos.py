@@ -67,5 +67,5 @@ for nm ,Xa in sets :
     print (f"  {nm :26s} AUC {a :.4f} ({a -a0 :+.4f})  top-N F1 {f :.4f} ({f -f0 :+.4f})")
     if f >best [1 ]:best =(a ,f ,nm )
 print (f"\n  EN IYI: {best [2 ]}  AUC {best [0 ]:.4f}  top-N F1 {best [1 ]:.4f}  (baz F1 {f0 :.4f}, kazanc {best [1 ]-f0 :+.4f})")
-print ("  -> top-N F1 kazanci >+0.02 ise TEMSIL DARBOGAZI GERCEK: GPU'lu zengin inference HAKLI.")
-print ("     <+0.02 ise ucuz zenginlestirme yetmiyor; karar GPU-zengin inference (cok-yaricap/taper) ya da temsil-tavani.")
+print ("  -> top-N F1 kazanci >+0.02 whereas TEMSIL DARBOGAZI GERCEK: GPU'lu zengin inference HAKLI.")
+print ("     <+0.02 whereas ucuz zenginlestirme yetmiyor; karar GPU-zengin inference (very-radius/taper) ya da temsil-tavani.")

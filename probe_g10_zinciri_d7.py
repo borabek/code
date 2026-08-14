@@ -34,7 +34,7 @@ for ad ,env in YIGINLAR :
     import canonical_d7 as K ;importlib .reload (K )
     assert K .KAYIT ==env ["KD7_KAYIT"]and K .GATE ==env ["KD7_GATE"]
     gate =K .gate_yukle ();S =K .step_map ();kay =K .yukle (d7p )
-    rob ,tes ,kahin =collections .defaultdict (lambda :[0 ,0 ,0 ]),[],[]
+    rob ,tes ,oracle_ =collections .defaultdict (lambda :[0 ,0 ,0 ]),[],[]
     for pid ,r in kay .items ():
         G =np .asarray (r .get ("G",[]),float )
         if K .x58 (r )is None or not len (G ):
@@ -48,12 +48,12 @@ for ad ,env in YIGINLAR :
         180.0 ,True )[:3 ])
         # ADAY KAHINI: gate'ten ONCE pool GT'yi ne up to kapsiyor (temsil olcusu)
         Ph =np .asarray (r ["P"],float );Dh =np .asarray (r ["Pd"],float )
-        kahin .append ((len (G ),)+match_hungarian (Ph ,Dh ,G ,Gd ,dg ,
+        oracle_ .append ((len (G ),)+match_hungarian (Ph ,Dh ,G ,Gd ,dg ,
         max (3.0 ,0.06 *dg ),180.0 ,True )[:3 ])
     pm ={m :2 *a [0 ]/max (2 *a [0 ]+a [1 ]+a [2 ],1 )for m ,a in rob .items ()}
     mi =float (2 *sum (a [0 ]for a in rob .values ())/
     max (sum (2 *a [0 ]+a [1 ]+a [2 ]for a in rob .values ()),1 ))
-    out [ad ]={"robot":mi ,"tespit":K .mikro (tes ),"aday_kahini":K .mikro (kahin ),
+    out [ad ]={"robot":mi ,"tespit":K .mikro (tes ),"aday_kahini":K .mikro (oracle_ ),
     "makro":float (np .mean (list (pm .values ()))),
     "en_kotu":float (min (pm .values ())),"brand":pm ,"n":len (tes )}
     c =out [ad ]

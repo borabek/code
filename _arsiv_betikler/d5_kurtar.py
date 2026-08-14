@@ -60,7 +60,7 @@ def main ():
     with io .open (CIKTI ,"w",encoding ="utf-8")as f :
         f .write ("\n".join (p for _m ,p in eksik_a )+"\n")
     print (f"\n-> {CIKTI } ({len (eksik_a )} pid)")
-    print ("   d5_turet_yeni.py --pids-file "+CIKTI +" --vardiya K --toplam N")
+    print ("   d5_turet_yeni.py --pids-file "+CIKTI +" --vardiya K --total N")
 
 
 if __name__ =="__main__":

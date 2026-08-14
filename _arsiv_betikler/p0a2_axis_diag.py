@@ -61,8 +61,8 @@ print (f"  TP kac axis-kumesine yayiliyor: ort {tp_span .mean ():.2f} (1.0 = hep
 print (f"  TP'nin tek-eksende oldugu part orani: {np .mean (tp_span ==1 ):.2f}")
 if v_tp .mean ()>0.85 :
     print ("  -> TP yonleri COK YOGUN: alet calisiyor, wire girisleri ortak axis paylasiyor.")
-    print ("     O HALDE ayirici guc yoklugu = FP'ler de AYNI eksende (ayni yuzde, tel deliklerinin yaninda).")
+    print ("     O HALDE ayirici guc yoklugu = FP'ler de AYNI eksende (same yuzde, tel deliklerinin next to).")
 elif v_tp .mean ()>0.6 :
     print ("  -> TP yonleri ORTA dense: kismen ortak axis; alet muhtemelen calisiyor.")
 else :
-    print ("  -> TP yonleri DAGINIK: ya cok-yonlu urunler ya YON TAHMINI GURULTU -> hipotez test EDILEMEDI.")
+    print ("  -> TP yonleri DAGINIK: ya very-yonlu urunler ya YON TAHMINI GURULTU -> hipotez test EDILEMEDI.")

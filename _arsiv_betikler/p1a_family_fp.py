@@ -54,7 +54,7 @@ for f in np .unique (fam ):
     cons .append (float (np .std (rates )))
 if cons :
     print (f"  cok-parcali aile sayisi {len (cons )} | aile-ici FP-orani std ort {np .mean (cons ):.3f}")
-    print ("  (dusuk std = aile-ici tutarli = tek karar ailenin tamamini temizler)")
+    print ("  (low std = aile-ici tutarli = single karar ailenin tamamini temizler)")
 else :
-    print ("  cok-parcali aile YOK (bu havuzda aileler tek-parcali) -> aile kaldiraci bu veride ZAYIF")
+    print ("  very-parcali aile YOK (this havuzda aileler single-parcali) -> aile kaldiraci this veride ZAYIF")
 print ("\n-> Bu cikti P1-c'nin (FAZ B) hedef listesidir; simdilik SADECE measurement.")

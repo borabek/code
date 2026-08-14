@@ -124,10 +124,10 @@ def main ():
             R [(nc ,mad )]=(det2 ,rob2 )
         print ()
 
-    print ("KARAR:")
-    anahtar =sorted ({k [1 ]for k in R })
+    print ("DECISION:")
+    key_ =sorted ({k [1 ]for k in R })
     ok_tan =f1w (R [(22 ,"tanidik")][0 ])-f1w (R [(18 ,"tanidik")][0 ])
-    mout =[(a ,f1w (R [(22 ,a )][0 ])-f1w (R [(18 ,a )][0 ]))for a in anahtar if a !="tanidik"]
+    mout =[(a ,f1w (R [(22 ,a )][0 ])-f1w (R [(18 ,a )][0 ]))for a in key_ if a !="tanidik"]
     for a ,v in [("tanidik",ok_tan )]+mout :
         print (f"  {a :<16}{v :+.4f}")
     en_kotu18 =min (f1w (R [(18 ,a )][0 ])for a ,_ in mout )

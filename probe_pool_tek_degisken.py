@@ -121,6 +121,6 @@ f"AYRI RECETE, kiyas icin degil referans)")
 json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,
 "havuz_etkisi_robot":b ["robot"]-a ["robot"],
 "havuz_etkisi_tespit":b ["tespit"]-a ["tespit"],
-"not":"TEK DEGISKEN = pool. Ayni parts, ayni recete, ayni threshold "
+"not":"TEK DEGISKEN = pool. Ayni parts, same recete, same threshold "
 "taramasi, ayni NMS. D7 brand-disi, MIKRO."},
 open ("results/havuz_tek_degisken.json","w"),indent =1 )

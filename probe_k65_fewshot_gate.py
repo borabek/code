@@ -87,12 +87,12 @@ def main ():
     f"{len (np .unique (pb_ids ))} part")
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 
-    sonuc ={}
+    res_ ={}
     for M in MARKALAR :
-        pidler =sorted (p for p ,r in kayit .items ()
+        pidler =sorted (p for p ,r in rec_ .items ()
         if r ["mfg"]==M and os .path .exists (f"{OB }/{p }.npz"))
         if len (pidler )<max (KLAR )+10 :
             print (f"{M }: {len (pidler )} part, ATLANDI")
@@ -108,7 +108,7 @@ def main ():
             np .asarray (d ["pbs"],float ).mean (0 ))
 
         rng =np .random .RandomState (0 )
-        sonuc [M ]={}
+        res_ [M ]={}
         for k in KLAR :
             cekilisler =1 if k ==0 else CEKILIS 
             tf ,rf =[],[]
@@ -124,7 +124,7 @@ def main ():
                 if adapt :
                     Xa ,ya =[],[]
                     for p in adapt :
-                        r =kayit [p ]
+                        r =rec_ [p ]
                         Mx =d6_record .x58 (r )
                         if Mx is None or r .get ("P")is None or not len (r ["P"]):
                             continue 
@@ -146,7 +146,7 @@ def main ():
                 # --- measurement: TAM zincir
                 T ,R =[],[]
                 for p in olc :
-                    r =kayit [p ]
+                    r =rec_ [p ]
                     Mx =d6_record .x58 (r )
                     if Mx is None or r .get ("P")is None or not len (r ["P"]):
                         continue 
@@ -172,19 +172,19 @@ def main ():
                     rf .append (f1w (R ))
                 del g 
             if tf :
-                sonuc [M ][k ]={"tespit":float (np .mean (tf )),
+                res_ [M ][k ]={"tespit":float (np .mean (tf )),
                 "tespit_std":float (np .std (tf )),
                 "robot":float (np .mean (rf )),
                 "robot_std":float (np .std (rf )),
                 "n_olc":len (olc ),"cekilis":cekilisler }
-                s =sonuc [M ][k ]
+                s =res_ [M ][k ]
                 print (f"  k={k }: tespit {s ['tespit']:.4f}+-{s ['tespit_std']:.4f} | "
                 f"robot {s ['robot']:.4f}+-{s ['robot_std']:.4f} "
                 f"(measurement {s ['n_olc']} part)",flush =True )
         del ob 
 
     print ("\n=== OZET: k part etiketlemenin robot F1 kazanci ===")
-    for M ,d in sonuc .items ():
+    for M ,d in res_ .items ():
         if 0 in d :
             t0 =d [0 ]["robot"]
             art ="  ".join (f"k={k }:{d [k ]['robot']:+.4f}"
@@ -195,7 +195,7 @@ def main ():
             print (f"       fark: "+"  ".join (
             f"k={k }:{d [k ]['robot']-t0 :+.4f}"for k in KLAR if k in d and k >0 ))
     with open (CIKTI ,"w")as f :
-        json .dump ({"sonuc":sonuc ,"not":"GATE-only few-shot; seg fine-tune AYRI. "
+        json .dump ({"sonuc":res_ ,"not":"GATE-only few-shot; seg fine-tune AYRI. "
         "Alt sinirdir.","markalar":MARKALAR ,"klar":KLAR ,
         "cekilis":CEKILIS },f ,indent =1 )
     print (f"\nmakbuz -> {CIKTI }")

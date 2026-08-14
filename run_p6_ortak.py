@@ -70,12 +70,12 @@ def kayitlar (pidler ):
     return kay 
 
 
-def yukle (on ,sinir =0 ):
+def yukle (on ,bound_ =0 ):
     """Secenek tablolarini oku and etiketle. Doner: list[part sozlugu]."""
     fs =sorted (f for f in os .listdir (P6 )
     if f .startswith (on +"_")and f .endswith (".npz"))
-    if sinir :
-        fs =fs [:sinir ]
+    if bound_ :
+        fs =fs [:bound_ ]
     pidler =[f [len (on )+1 :-4 ]for f in fs ]
     kay =kayitlar (pidler )
     out =[]
@@ -105,10 +105,10 @@ def yukle (on ,sinir =0 ):
             # candidate indekslerini YENIDEN NUMARALA (aksi halde `idx` empty adaylara
             # sign eder and secim sessizce wrong konumu returns).
             ysec =tut [idx ]
-            yeni =-np .ones (len (P ),int )
-            yeni [np .where (tut )[0 ]]=np .arange (int (tut .sum ()))
+            new_ =-np .ones (len (P ),int )
+            new_ [np .where (tut )[0 ]]=np .arange (int (tut .sum ()))
             X ,YD =X [ysec ],YD [ysec ]
-            idx =yeni [idx [ysec ]]
+            idx =new_ [idx [ysec ]]
             P =P [tut ]
             Dham =Dham [tut ]
             kayn =kayn [tut ]
@@ -128,10 +128,10 @@ def donustur (X ):
     return p6_decision .donustur (X ,ZSKOR )
 
 
-def olc (veri ,skorlar ,threshold ):
+def olc (data_ ,skorlar ,threshold ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d ,s in zip (veri ,skorlar ):
+    for d ,s in zip (data_ ,skorlar ):
         P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,threshold )
         tp ,fp ,fn =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,
         K .ACI ,False ,signed =True )[:3 ]
@@ -151,7 +151,7 @@ def olc (veri ,skorlar ,threshold ):
     "FP":sum (a [1 ]for a in rob .values ())}
 
 
-def baseline (veri ):
+def baseline (data_ ):
     """DAGITILAN path, same onbellekten yeniden kurulmus.
 
     `product_genis.sec` with same: X = A+B, part-ici z-skor, HGB-derin, threshold 0.05,
@@ -162,7 +162,7 @@ def baseline (veri ):
         return None 
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         kendi =np .where (d ["X"][:,AB ]==1.0 )[0 ]# C blogunun first sutunu
         AB_ =d ["X"][kendi ,:AB ]
         s =np .asarray (model .predict_proba (
@@ -216,11 +216,11 @@ def main ():
     f"tespit {tb ['tespit']:.4f} | makro {tb ['makro']:.4f} | "
     f"TP {tb ['TP']} FP {tb ['FP']}",flush =True )
     print (f"\n{'threshold':>6} {'robot':>8} {'tespit':>8} {'makro':>8} {'TP':>6} {'FP':>6}")
-    sonuc ={}
+    res_ ={}
     en =None 
     for e in ESIKLER :
         r =olc (dev ,sk ,e )
-        sonuc [f"{e :.2f}"]=r 
+        res_ [f"{e :.2f}"]=r 
         print (f"{e :>6.2f} {r ['robot']:>8.4f} {r ['tespit']:>8.4f} "
         f"{r ['makro']:>8.4f} {r ['TP']:>6} {r ['FP']:>6}",flush =True )
         if en is None or r ["robot"]>en [1 ]["robot"]:
@@ -230,7 +230,7 @@ def main ():
     f"(baseline {tb ['robot']:.4f}, fark {r ['robot']-tb ['robot']:+.4f})")
     with open ("results/p6_ortak_model.pkl","wb")as f :
         pickle .dump ({"model":m ,"threshold":e ,"zskor":ZSKOR ,"AB":AB },f )
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":tb ,"esik_taramasi":sonuc ,
+    json .dump ({"damga":makbuz_hash .damga (),"baseline":tb ,"esik_taramasi":res_ ,
     "en_iyi_esik":e ,"zskor":ZSKOR ,"n_dev":len (dev ),
     "n_egitim":len (tr ),
     "not":"P6 ortak (konum x direction) siralayici. D6 DEV -- D7'ye "

@@ -101,12 +101,12 @@ cihaz =None ,seed =0 ,ilerle =None ,neg_kat =0 ):
     m =KumeSkorlayici (n_giris ,d ).to (cihaz )
     opt =torch .optim .AdamW (m .parameters (),lr =lr ,weight_decay =1e-4 )
     rng =np .random .default_rng (seed )
-    sira =np .arange (len (parts ))
+    rank_ =np .arange (len (parts ))
     for e in range (devir ):
-        rng .shuffle (sira )
+        rng .shuffle (rank_ )
         m .train ()
         top =n =0.0 
-        for i in sira :
+        for i in rank_ :
             X ,y =parts [i ]
             if len (X )<2 or not y .any ():
                 continue 
@@ -133,7 +133,7 @@ cihaz =None ,seed =0 ,ilerle =None ,neg_kat =0 ):
 
 
 @torch .no_grad ()
-def tahmin (m ,X ,cihaz =None ):
+def pred_ (m ,X ,cihaz =None ):
     """Tek parcanin secenek olasiliklari."""
     cihaz =cihaz or next (m .parameters ()).device 
     m .eval ()

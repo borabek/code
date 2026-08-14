@@ -116,7 +116,7 @@ def main ():
     print (f"{len (sel )} parcada donusum kurtarma testi\n",flush =True )
     print (f"{'part':<16}{'esl':>5}{'GERCEK artik':>15}{'NULL (rastgele)':>18}")
     iyi =nul_iyi =tot =0 
-    kayit =[]
+    rec_ =[]
     for f in sel :
         pid =os .path .basename (f ).split ("_")[1 ]
         try :
@@ -133,14 +133,14 @@ def main ():
         nok =msg2 .endswith ("mm")and float (msg2 [:-2 ])<1.0 
         iyi +=ok ;nul_iyi +=nok 
         print (f"{pid :<16}{k :>5}{msg :>15}{msg2 :>18}{'  <- GECTI'if ok else ''}",flush =True )
-        kayit .append ({"pid":pid ,"eslesme":k ,"artik":msg ,"null":msg2 ,"gecti":bool (ok )})
+        rec_ .append ({"pid":pid ,"eslesme":k ,"artik":msg ,"null":msg2 ,"gecti":bool (ok )})
     o =iyi /max (tot ,1 );no =nul_iyi /max (tot ,1 )
     print (f"\nGERCEK esleme: {iyi }/{tot } ({o :.3f}) <1.0mm")
     print (f"NULL  esleme : {nul_iyi }/{tot } ({no :.3f}) <1.0mm   "
     f"<- bu da yuksekse test DEGERSIZ")
     print (f"\nKILL: gercek ratio <0.60 ya da null ratio gercege yakinsa is KAPANIR -> "
     f"{'AC'if (o >=0.60 and no <o -0.3 )else 'KAPAT'}")
-    json .dump ({"n":tot ,"gercek_oran":o ,"null_oran":no ,"kayit":kayit ,
+    json .dump ({"n":tot ,"gercek_oran":o ,"null_oran":no ,"kayit":rec_ ,
     "karar":"AC"if (o >=0.60 and no <o -0.3 )else "KAPAT"},
     open ("results/q2_renk_alignment.json","w"),indent =1 )
     print ("receipt -> results/q2_renk_alignment.json")

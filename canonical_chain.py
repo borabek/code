@@ -36,14 +36,14 @@ def product_output (V ,F ,pbs ,step_path ,cfg =None ,cp_count =None ):
         # `URUN_P6=0`.
     import product_p6 
     if product_p6 .ACIK :# cevre degiskeni VE config, single places
-        _p =product_p6 .cikti (V ,F ,avg ,cps ,step_path ,
+        _p =product_p6 .out_ (V ,F ,avg ,cps ,step_path ,
         robot_cp .CE ,robot_cp .CT )
         if _p is not None :
             return _p 
     if _cfg .get ("robot_genis_havuz",False ):
         import product_genis 
         if product_genis .ACIK :
-            _g =product_genis .cikti (V ,F ,avg ,cps ,step_path ,
+            _g =product_genis .out_ (V ,F ,avg ,cps ,step_path ,
             robot_cp .CE ,robot_cp .CT )
             if _g is not None :
                 return _g 

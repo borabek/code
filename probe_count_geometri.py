@@ -118,8 +118,8 @@ def main ():
     "isabete yakin ratio. D7'ye BAKILMADI."},
     open ("results/adet_geometri.json","w"),indent =1 )
     print ("\nmakbuz -> results/adet_geometri.json")
-    print ("OKUMA: <=1 orani yuksekse adet OGRENMEDEN okunabiliyor demektir;")
-    print ("       ust-k deneyi bunun UPUN'da +0.1533 degerinde oldugunu gosterdi.")
+    print ("OKUMA: <=1 orani yuksekse count OGRENMEDEN okunabiliyor demektir;")
+    print ("       upper-k deneyi bunun UPUN'da +0.1533 degerinde oldugunu showed.")
 
 
 if __name__ =="__main__":

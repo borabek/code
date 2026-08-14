@@ -27,10 +27,10 @@ def main ():
     with io .open ("results/fp_denetim.json",encoding ="utf-8")as f :
         FD =json .load (f )
     rng =np .random .default_rng (7 )
-    sira =list (rng .permutation (len (O )))
+    rank_ =list (rng .permutation (len (O )))
 
     kart =[]
-    for n ,i in enumerate (sira ,1 ):
+    for n ,i in enumerate (rank_ ,1 ):
         o =O [i ]
         with open (o ["png"],"rb")as fh :
             b64 =base64 .b64encode (fh .read ()).decode ()

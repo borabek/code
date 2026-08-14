@@ -128,9 +128,9 @@ def main ():
                 ort =DIR .mean (0 );ort /=np .linalg .norm (ort )+1e-9 
                 a_ort =np .degrees (np .arccos (np .clip (np .abs (DIR @ort ),0 ,1 )))
                 a_bir =np .degrees (np .arccos (np .clip (np .abs (DIR @Pd [i ]),0 ,1 )))
-                sira =np .argsort (np .argsort (-CONF ))
+                rank_ =np .argsort (np .argsort (-CONF ))
                 Fm =np .array ([[CONF [u_ ],MES [u_ ],a_ort [u_ ],a_bir [u_ ],float (len (DIR )),
-                float (np .mean (a_ort )),float (sira [u_ ])]+Xk [i ].tolist ()
+                float (np .mean (a_ort )),float (rank_ [u_ ])]+Xk [i ].tolist ()
                 for u_ in range (len (DIR ))],float )
                 PdB [i ]=DIR [int (np .argmax (sec .predict_proba (Fm )[:,1 ]))]
         rj ="cok"if rd ["n"]>=8 else "dusuk"

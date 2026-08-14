@@ -52,7 +52,7 @@ def periyot_ve_yon (X ):
 
 def main ():
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     gate =pickle .load (open ("results/wire_gate_v5.pkl","rb"))
 
     # 1) GT'nin own periyodikligi
@@ -61,7 +61,7 @@ def main ():
     fn_top ,fn_kurtarilan =0 ,0 
     part =0 
 
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r .get ("G",[]),float )
         if len (G )<3 :
             continue 
@@ -98,14 +98,14 @@ def main ():
             continue 
 
             # --- KAHIN spread
-        direction ,adim =periyot_ve_yon (tp_nokta )
-        if direction is None or adim <=1e-6 :
+        direction ,step_ =periyot_ve_yon (tp_nokta )
+        if direction is None or step_ <=1e-6 :
             continue 
         uret =[]
         for b in tp_nokta :
             for s in range (-ADIM_N ,ADIM_N +1 ):
                 if s :
-                    uret .append (b +s *adim *direction )
+                    uret .append (b +s *step_ *direction )
         if not uret :
             continue 
         U =np .asarray (uret ,float )
@@ -116,7 +116,7 @@ def main ():
 
     dz =np .asarray (duzenlilik )
     print (f"part {part }\n")
-    print ("1) GT PERIYODIKLIGI (adim std / adim medyan; 0 = kusursuz periyodik)")
+    print ("1) GT PERIYODIKLIGI (step std / step medyan; 0 = kusursuz periyodik)")
     print (f"   medyan {np .median (dz ):.3f} | p25 {np .percentile (dz ,25 ):.3f} | "
     f"p75 {np .percentile (dz ,75 ):.3f}")
     print (f"   'duzenli' (<0.25) part orani: %{100 *(dz <0.25 ).mean ():.1f}")

@@ -74,4 +74,4 @@ for split_nm ,groups in (("PARCA-out",G ),("AILE-out (KATI)",FG )):
         print (f"{nm :16s} {row [0 ]:7.4f} {row [1 ]:11.4f} {row [2 ]:9.4f} {row [3 ]:9.4f} {row [4 ]:9.4f}{dz }")
     print ()
 print ("KIYAS (canonical receipt): base urun ALL 0.750 (thr) | metadata-assisted ALL 0.775 (top-N)")
-print ("KARAR: 13+HEPSI, AILE-out'ta bile bazi materyal geciyorsa -> gate'i zengin feature'la yeniden egit (deploy adayi).")
+print ("DECISION: 13+HEPSI, AILE-out'ta bile some materyal geciyorsa -> gate'i zengin feature'la yeniden egit (deploy adayi).")

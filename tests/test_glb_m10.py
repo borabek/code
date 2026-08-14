@@ -41,7 +41,7 @@ def test_bayraksiz_cikti_bit_ozdes (tmp_path ):
     """Bayrak YOKSA no sey cizilmez -- old GLB'ler aynen kalmali."""
     a =open (_yaz (str (tmp_path ),[_cp (0 ),_cp (5 )],"a.glb"),"rb").read ()
     b =open (_yaz (str (tmp_path ),[_cp (0 ),_cp (5 )],"b.glb"),"rb").read ()
-    assert a ==b ,"ayni girdi ayni cikti vermeli (M9)"
+    assert a ==b ,"same input same output vermeli (M9)"
 
 
 def test_bayrak_ayri_dugum_uretir (tmp_path ):

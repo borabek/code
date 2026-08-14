@@ -44,18 +44,18 @@ def _birim (V ):
 
 
 def main ():
-    kayit =os .environ .get ("AYR_KAYIT","results/_der_yeni.pkl")
+    rec_ =os .environ .get ("AYR_KAYIT","results/_der_yeni.pkl")
     cluster =os .environ .get ("AYR_KUME","results/val_kumesi.json")
     silf =os .environ .get ("AYR_SIL","")
     pids ={str (p )for p in json .load (open (cluster ))["pidler"]}
-    R =[r for r in pickle .load (open (kayit ,"rb"))if str (r ["pid"])in pids ]
+    R =[r for r in pickle .load (open (rec_ ,"rb"))if str (r ["pid"])in pids ]
     cy =pickle .load (open (silf ,"rb"))if silf and os .path .exists (silf )else {}
     acf =os .environ .get ("AYR_AC","")
     ac =pickle .load (open (acf ,"rb"))if acf and os .path .exists (acf )else {}
     GENIS =os .environ .get ("AYR_GENIS","0")not in ("0","","false")
     SIK =os .environ .get ("AYR_SIK","0")not in ("0","","false")
     SIK_T =[float (x )for x in os .environ .get ("AYR_SIK_T","0.05,0.15,0.3").split (",")]
-    print (f"kayit {kayit } | cluster {cluster } | part {len (R )} | "
+    print (f"kayit {rec_ } | cluster {cluster } | part {len (R )} | "
     f"silindir {len (cy )} | opening {len (ac )} | direction yaricapi {YON_R }mm | pool {'GENISLETILMIS'if GENIS else 'TEZ-SAF'}",flush =True )
 
     say =collections .Counter ()
@@ -104,7 +104,7 @@ def main ():
             if np .linalg .norm (a )>1e-9 :
                 eks .append (a )
         eks =_birim (eks )if eks else np .zeros ((0 ,3 ))
-        merkez =np .asarray ([c ["center"]for c in (cy .get (pid )or [])
+        center_ =np .asarray ([c ["center"]for c in (cy .get (pid )or [])
         if np .linalg .norm (np .asarray (c ["axis"],float ))>1e-9 ],
         float ).reshape (-1 ,3 )
         bask =D .mean (0 )if len (D )>1 else D [0 ]
@@ -152,8 +152,8 @@ def main ():
                 # K2: yakindaki B-rep silindir eksenleri (+/-)
             if len (eks ):
                 for i in idx :
-                    if len (merkez ):
-                        d =np .linalg .norm (merkez -P [i ],axis =1 )
+                    if len (center_ ):
+                        d =np .linalg .norm (center_ -P [i ],axis =1 )
                         yakin =eks [d <=YON_R ]
                     else :
                         yakin =eks 
@@ -181,7 +181,7 @@ def main ():
     t =kum /max (n_gt ,1 )
     f1 =2 *kum /max (2 *kum +(n_gt -kum ),1 )
     print (f"\nrobot recall tavani {t :.4f} -> robot F1 tavani {f1 :.4f}")
-    json .dump ({"damga":makbuz_hash .damga (),"kayit":kayit ,"cluster":cluster ,
+    json .dump ({"damga":makbuz_hash .damga (),"kayit":rec_ ,"cluster":cluster ,
     "yon_yaricapi":YON_R ,"n_gt":n_gt ,"sayim":dict (say ),
     "robot_recall_tavani":t ,"robot_f1_tavani":f1 ,
     "genisletilmis_havuz":GENIS ,

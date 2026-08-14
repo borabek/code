@@ -101,11 +101,11 @@ def dizi_oz (Pk_tekil ):
         p =Pk_tekil [i ]
         en_uye ,en_adim ,en_kalinti ,en_yer ,yon_say =1 ,0.0 ,0.0 ,0.0 ,0 
         for j in kom [i ][1 :]:
-            adim =Pk_tekil [j ]-p 
-            s =float (np .linalg .norm (adim ))
+            step_ =Pk_tekil [j ]-p 
+            s =float (np .linalg .norm (step_ ))
             if s <1e-6 :
                 continue 
-            hedef =p [None ,:]+np .arange (-ADIM_K ,ADIM_K +1 )[:,None ]*adim [None ,:]
+            hedef =p [None ,:]+np .arange (-ADIM_K ,ADIM_K +1 )[:,None ]*step_ [None ,:]
             uz ,_ =agac .query (hedef )
             var =uz <=DIZI_TOL 
             u =int (var .sum ())
@@ -134,8 +134,8 @@ def yap ():
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         base =np .hstack ([temel (d ),kanonik_blok (d )])
         d ["_M"]=base 
@@ -143,28 +143,28 @@ def main ():
         tek ,ters =np .unique (idx ,return_inverse =True )
         dz =dizi_oz (np .asarray (d ["P"],float )[tek ])
         d ["_D"]=np .hstack ([base ,dz [ters ]]).astype (np .float32 )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } | neg={NEG_KAT } "
+    print (f"{len (data_ )} part | katlar {katlar } | neg={NEG_KAT } "
     f"({time .time ()-t0 :.0f} s)",flush =True )
 
     KOLLAR =("baseline","yerel_neg","lambda","dizi","dizi_yerel")
     agg ={k :collections .Counter ()for k in KOLLAR }
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
         for arm in KOLLAR :
             alan ="_D"if arm .startswith ("dizi")else "_M"
-            n_s =sum (len (veri [i ]["y"])for i in ic )
-            M =np .empty ((n_s ,veri [ic [0 ]][alan ].shape [1 ]),np .float32 )
+            n_s =sum (len (data_ [i ]["y"])for i in ic )
+            M =np .empty ((n_s ,data_ [ic [0 ]][alan ].shape [1 ]),np .float32 )
             PA =np .empty (n_s ,np .int32 )# part kimligi
             o =0 
             for pi ,i in enumerate (ic ):
-                m_ =veri [i ][alan ]
+                m_ =data_ [i ][alan ]
                 M [o :o +len (m_ )]=m_ 
                 PA [o :o +len (m_ )]=pi 
                 o +=len (m_ )
-            Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+            Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
             rng =np .random .default_rng (0 )
             poz =np .where (Y ==1 )[0 ]
             if arm in ("yerel_neg","dizi_yerel"):
@@ -207,7 +207,7 @@ def main ():
             m =yap ().fit (M [sec ],Y [sec ],sample_weight =w )
             del M ,PA 
             for i in dis :
-                d =veri [i ]
+                d =data_ [i ]
                 s =m .predict_proba (d [alan ])[:,1 ]
                 P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,KURAL ,
                 nms_mm =NMS )
@@ -218,14 +218,14 @@ def main ():
                 c ["tp"]+=tp ;c ["fp"]+=fp ;c ["fn"]+=fn 
         print (f"  {b } bitti ({time .time ()-t0 :.0f} s)",flush =True )
 
-    son ={k :f1 (agg [k ])for k in KOLLAR }
-    print (f"\n=== TABAN {son ['baseline']:.4f} ===")
+    last_ ={k :f1 (agg [k ])for k in KOLLAR }
+    print (f"\n=== TABAN {last_ ['baseline']:.4f} ===")
     for k in KOLLAR [1 :]:
-        fark =son [k ]-son ["baseline"]
-        print (f"  {k :<12}{son [k ]:.4f}   {fark :+.4f}"
+        fark =last_ [k ]-last_ ["baseline"]
+        print (f"  {k :<12}{last_ [k ]:.4f}   {fark :+.4f}"
         +("  <- KAPI GECTI"if fark >=0.01 else ""))
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"neg":NEG_KAT ,
-    "toplam":son ,
+    "toplam":last_ ,
     "not":"L1 part-ici siralama (yerel negatif / lambda "
     "agirligi) + L2 dizi uyeligi oznitelikleri. Taban = "
     "temel + kanonik + neg12. D7'ye BAKILMADI."},

@@ -77,4 +77,4 @@ for ad ,ob ,cylf ,acf ,cluster in ISLER :
             f"{(time .time ()-t0 )/max (yazilan ,1 ):.2f}s/part",flush =True )
     print (f"{ad } BITTI: yazilan {yazilan } | onbellekte {atlanan } | "
     f"olasiligi yok {hatali }",flush =True )
-print ("hepsi bitti ->",CIK )
+print ("all of them bitti ->",CIK )

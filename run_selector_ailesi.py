@@ -94,10 +94,10 @@ def skorla (modeller ,X ):
     return np .asarray (s ,float )
 
 
-def olc (modeller ,veri ,e ,tam_zincir =False ,S =None ):
+def olc (modeller ,data_ ,e ,tam_zincir =False ,S =None ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =skorla (modeller ,d ["X"])
         k =s >=e 
         P ,D =(d ["P"][k ],d ["D"][k ])if k .any ()else (d ["P"][:0 ],d ["D"][:0 ])
@@ -150,7 +150,7 @@ def main ():
     l2_regularization =1.0 ,random_state =0 ),
     }
     egitilmis ={}
-    sonuc ={}
+    res_ ={}
     for ad ,yap in kurulum .items ():
         m =yap ().fit (M ,Y )
         egitilmis [ad ]=m 
@@ -161,7 +161,7 @@ def main ():
                 en =(e ,r )
         e ,_ =en 
         r7 =olc ([m ],te ,e ,tam_zincir =True ,S =S )
-        sonuc [ad ]=dict (r7 ,threshold =e )
+        res_ [ad ]=dict (r7 ,threshold =e )
         print (f"{ad :<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | tespit "
         f"{r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f} | en kotu "
         f"{r7 ['en_kotu']:.4f}",flush =True )
@@ -173,18 +173,18 @@ def main ():
             en =(e ,r )
     e ,_ =en 
     r7 =olc (ens ,te ,e ,tam_zincir =True ,S =S )
-    sonuc ["ENSEMBLE RF+HGB"]=dict (r7 ,threshold =e )
+    res_ ["ENSEMBLE RF+HGB"]=dict (r7 ,threshold =e )
     print (f"{'ENSEMBLE':<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | "
     f"tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
-    iyi =max (sonuc ,key =lambda k :sonuc [k ]["robot"])
-    print (f"\nEN IYI: {iyi } robot {sonuc [iyi ]['robot']:.4f} | urun 0.2029 "
-    f"({sonuc [iyi ]['robot']-0.2029 :+.4f})")
+    iyi =max (res_ ,key =lambda k :res_ [k ]["robot"])
+    print (f"\nEN IYI: {iyi } robot {res_ [iyi ]['robot']:.4f} | urun 0.2029 "
+    f"({res_ [iyi ]['robot']-0.2029 :+.4f})")
     with open ("results/secici_ailesi_modeller.pkl","wb")as f :
         pickle .dump (egitilmis ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,"en_iyi":iyi ,
+    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"en_iyi":iyi ,
     "urun":0.2029 ,
     "not":"Ayni pool (B-rep + tanimlayici), ayni etiket; TEK DEGISKEN "
-    "siniflandirici. Esik her model icin D6'da ayri secildi. "
+    "siniflandirici. Esik each model for D6'da ayri secildi. "
     "D7 brand-disi, TAM ZINCIR, MIKRO."},
     open ("results/secici_ailesi.json","w"),indent =1 )
     print ("receipt -> results/secici_ailesi.json")

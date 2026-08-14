@@ -95,21 +95,21 @@ def main ():
     print (f"\n{'deneme':<24}{'tespit':>9}{'unsigned':>11}{'ISARETLI':>10}"
     f"{'precision':>10}{'recall':>9}{'CP':>7}")
     baseline =None 
-    sonuc ={}
+    res_ ={}
     for ad ,fn in denemeler :
         r =olc (kayitlar ,fn )
         if baseline is None :
             baseline =r 
-        sonuc [ad ]=r 
+        res_ [ad ]=r 
         yildiz ="  <-"if r ["signed"]>baseline ["signed"]+1e-9 else ""
         print (f"{ad :<24}{r ['tespit']:>9.4f}{r ['unsigned']:>11.4f}"
         f"{r ['signed']:>10.4f}{r ['precision']:>10.4f}"
         f"{r ['recall']:>9.4f}{r ['cp']:>7}{yildiz }")
-    en =max (sonuc .items (),key =lambda kv :kv [1 ]["signed"])
+    en =max (res_ .items (),key =lambda kv :kv [1 ]["signed"])
     print (f"\nEN IYI (robot ISARETLI): {en [0 ]} -> {en [1 ]['signed']:.4f} "
     f"(baseline {baseline ['signed']:.4f}, fark "
     f"{en [1 ]['signed']-baseline ['signed']:+.4f})")
-    json .dump ({"yol":YOL ,"n_parca":len (kayitlar ),"sonuc":sonuc ,
+    json .dump ({"yol":YOL ,"n_parca":len (kayitlar ),"sonuc":res_ ,
     "en_iyi":{"ad":en [0 ],**en [1 ]},
     "not":"Cevrimdisi calisma noktasi taramasi; uretilen CP'ler "
     "SABIT, yalnizca tutma kurali degisir. D7'ye BAKILMADI."},

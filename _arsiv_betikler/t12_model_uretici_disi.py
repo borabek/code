@@ -133,7 +133,7 @@ def main ():
             out .setdefault (ad ,{})[nm ]={"tespit":float (f1w (det )),"robot":float (f1w (rob ))}
         print ()
 
-    print ("KARAR:")
+    print ("DECISION:")
     ok =True 
     for ad ,v in out .items ():
         sb =v ["RF leaf3 (mevcut)"]["tespit"]

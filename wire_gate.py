@@ -121,13 +121,13 @@ def _ek_default ():
 USE_EK_FEATS =_ek_default ()
 
 
-def _cfg_get (anahtar ,ortam ,varsayilan ):
+def _cfg_get (key_ ,ortam ,varsayilan ):
     v =os .environ .get (ortam )
     if v is not None :
         return type (varsayilan )(v )
     try :
         with open ("cp_config.json",encoding ="utf-8")as f :# see. [[file-tanitici-sizintisi]]
-            return type (varsayilan )(json .load (f ).get (anahtar ,varsayilan ))
+            return type (varsayilan )(json .load (f ).get (key_ ,varsayilan ))
     except Exception :
         return varsayilan 
 
@@ -706,9 +706,9 @@ def pick_member_direction (X ,cps ,uye_listeleri ,model_path =UYE_PATH ,yakin_mm
         ort =DIR .mean (0 );ort /=np .linalg .norm (ort )+1e-9 
         a_ort =np .degrees (np .arccos (np .clip (np .abs (DIR @ort ),0 ,1 )))
         a_bir =np .degrees (np .arccos (np .clip (np .abs (DIR @d0 ),0 ,1 )))
-        sira =np .argsort (np .argsort (-CONF ))
+        rank_ =np .argsort (np .argsort (-CONF ))
         F =np .array ([[CONF [u_ ],MES [u_ ],a_ort [u_ ],a_bir [u_ ],float (len (DIR )),
-        float (np .mean (a_ort )),float (sira [u_ ])]+X [i ].tolist ()
+        float (np .mean (a_ort )),float (rank_ [u_ ])]+X [i ].tolist ()
         for u_ in range (len (DIR ))],float )
         if m .get ("n_feat")is not None and F .shape [1 ]!=m ["n_feat"]:
             FALLBACK [f"uye:genislik:{F .shape [1 ]}!={m ['n_feat']}"]+=1 
@@ -797,11 +797,11 @@ def crowd_mask (P ,skor ,r_mm =None ):
     tut =np .ones (len (P ),bool )
     if r <=0 or len (P )<2 :
         return tut 
-    sira =np .argsort (-skor )
-    for a ,i in enumerate (sira ):
+    rank_ =np .argsort (-skor )
+    for a ,i in enumerate (rank_ ):
         if not tut [i ]:
             continue 
-        for j in sira [a +1 :]:
+        for j in rank_ [a +1 :]:
             if tut [j ]and np .linalg .norm (P [i ]-P [j ])<r :
                 tut [j ]=False 
     return tut 

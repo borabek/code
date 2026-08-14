@@ -26,7 +26,7 @@ def main ():
 
         # the toolbar 'download' icon-button ten the part card
         btn =page .locator ("button:has-text('download')").first 
-        print ("download butonu bulundu:",btn .count ()>0 )
+        print ("download butonu was found:",btn .count ()>0 )
         btn .click ()
         page .wait_for_timeout (4000 )
         print ("tiklandi -- acilan icerik:\n")

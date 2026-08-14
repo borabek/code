@@ -166,7 +166,7 @@ def main ():
         print (f"{lab :<38}{w :>13.4f}{l_ :>9.4f}{h_ :>9.4f}",flush =True )
     det ,dl ,dh =score (tol =0.0 ,am =180.0 ,pct =True )
     print (f"\n{'TESPIT (ayni candidates, gevsek criterion)':<38}{det :>13.4f}{dl :>9.4f}{dh :>9.4f}")
-    print ("  ^ bu satir candidate+gate kalitesinin tavani: hicbir konum/axis duzeltmesi bunu asamaz")
+    print ("  ^ this row candidate+gate kalitesinin tavani: no konum/axis duzeltmesi bunu asamaz")
     base =res ["MEVCUT"]
     print (f"\nMADDE 9/10'un ORACLE degeri : {res ['+ KONUM kusursuz (oracle, madde 9/10)']-base :+.4f}")
     print (f"MADDE 8'in (axis) oracle degeri: {res ['+ EKSEN kusursuz (oracle)']-base :+.4f}")

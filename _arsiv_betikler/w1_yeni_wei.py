@@ -61,12 +61,12 @@ def main ():
     zen =np .load ("results/zengin_parite.npz",allow_pickle =True )
     var ={str (x )for x in zen ["pids"]}
     E =list (eligible ())
-    yeni =[(m ,p ,jf ,s )for m ,p ,jf ,s in E 
+    new_ =[(m ,p ,jf ,s )for m ,p ,jf ,s in E 
     if m =="WEI"and p not in var and p not in lock 
     and gk .get (p ,"yok:"+p )not in kul 
     and gk .get (p ,"yok:"+p )not in lock_geo ]
-    gruplar =sorted ({gk .get (p ,"yok:"+p )for _ ,p ,_ ,_ in yeni })
-    print (f"GERCEKTEN YENI: {len (yeni )} part / {len (gruplar )} grup",flush =True )
+    gruplar =sorted ({gk .get (p ,"yok:"+p )for _ ,p ,_ ,_ in new_ })
+    print (f"GERCEKTEN YENI: {len (new_ )} part / {len (gruplar )} grup",flush =True )
 
     # GRUP bazinda ikiye bol (part not grup -- ikizler same tarafta kalsin)
     rng =np .random .default_rng (0 )
@@ -117,11 +117,11 @@ def main ():
         pids =np .array (PID ),split =np .array (BOL ),pts =np .vstack (PTS ),
         dirs =np .vstack (DIRS ),
         ngt =np .array ([NGT .get (p ,0 )for p in np .array (PID )]))
-    for k ,(mfg ,pid ,jf ,stp )in enumerate (yeni ,1 ):
+    for k ,(mfg ,pid ,jf ,stp )in enumerate (new_ ,1 ):
         if pid in atla :
             atlanan +=1 ;continue 
         if k %25 ==0 :
-            print (f"  {k }/{len (yeni )}  {time .time ()-t0 :.0f}s (atlanan {atlanan })",flush =True )
+            print (f"  {k }/{len (new_ )}  {time .time ()-t0 :.0f}s (atlanan {atlanan })",flush =True )
             _ara_kayit ()
             # SU AN ISLENEN parcayi diske yaz: kosu takilip oldurulurse a sonraki calistirmada
             # this part kalici atlama listesine girer and is a more same places durmaz.

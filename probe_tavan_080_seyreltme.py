@@ -130,10 +130,10 @@ def main ():
             k =ppos >=e 
             Pm ,Nm0 =V [k ],NV [k ]
             if dd >0 and len (Pm )>1 :
-                sira =np .argsort (-ppos [k ])
+                rank_ =np .argsort (-ppos [k ])
                 tut =np .ones (len (Pm ),bool )
-                for a_ in range (len (sira )):
-                    i_ =sira [a_ ]
+                for a_ in range (len (rank_ )):
+                    i_ =rank_ [a_ ]
                     if not tut [i_ ]:
                         continue 
                     uz =np .linalg .norm (Pm -Pm [i_ ],axis =1 )

@@ -56,7 +56,7 @@ def main ():
     print (f"veri: {len (y )} candidate ({int (y .sum ())} TP / {int ((y ==0 ).sum ())} FP), "
     f"{len (set (pid ))} part, {len (set (fam ))} aile\n")
     if y .sum ()<20 or (y ==0 ).sum ()<20 :
-        print ("YETERSIZ ORNEK -- measurement yapilmadi");return 
+        print ("YETERSIZ EXAMPLE -- measurement yapilmadi");return 
 
         # --- 1. single basina guc -------------------------------------------------------------------
     from scipy .stats import mannwhitneyu 
@@ -89,9 +89,9 @@ def main ():
     verdict ="YASIYOR"if delta >=KILL else "OLU"
     print (f"\n>>> KANAL OZELLIKLERI: {verdict }")
     if delta <KILL :
-        print ("    Kill kriteri geregi bu aile OLU ilan edildi. Ek ugras YOK.")
+        print ("    Kill kriteri geregi this aile OLU ilan edildi. Ek ugras YOK.")
         print ("    (Hipotez: tel girisi kontakta biter, alet agzi arm yuvasinda -- measured, tutmadi")
-        print ("     ya da mevcut set bu bilgiyi zaten baska yoldan iceriyor.)")
+        print ("     ya da mevcut set this bilgiyi already baska yoldan iceriyor.)")
 
     json .dump ({"n_cand":int (len (y )),"n_tp":int (y .sum ()),"n_parts":len (set (pid )),
     "auc_base":a_base ,"auc_channel_only":a_chan ,"auc_combined":a_comb ,

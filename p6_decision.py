@@ -46,7 +46,7 @@ def donustur (X ,zskor ="ab"):
 KAYNAK_AD =["kay_seg","kay_brep","kay_mesh"]
 
 
-def kaynak_blok (kaynak ):
+def kaynak_blok (src_ ):
     """Aday kaynagi -> 3 sutunluk gosterge (0 seg / 1 B-rep / 2 mesh tepesi).
 
     WHY GEREKLI: mesh tepeleri havuzun cogunlugunu olusturur (part basina
@@ -55,11 +55,11 @@ def kaynak_blok (kaynak ):
     modele soylememek, ona same isi ogrenmeyi features uzerinden zorlamak
     demek. Onbellek `source` alanini already tasiyor -- yeniden inference gerekmez.
     """
-    k =np .asarray (kaynak ,int ).reshape (-1 )
+    k =np .asarray (src_ ,int ).reshape (-1 )
     return np .stack ([(k ==0 ),(k ==1 ),(k ==2 )],axis =1 ).astype (float )
 
 
-def kabul_maskesi (s ,kural ):
+def kabul_maskesi (s ,rule_ ):
     """Skorlardan KABUL maskesi. `rule` = ("mutlak", e) ya da ("goreli", ratio, baseline).
 
     GORELI rule urunun own kuralidir (`p1c_threshold.maske`): candidate, KENDI
@@ -70,9 +70,9 @@ def kabul_maskesi (s ,kural ):
     s =np .asarray (s ,float )
     if not len (s ):
         return np .zeros (0 ,bool )
-    if kural [0 ]=="mutlak":
-        return s >=kural [1 ]
-    return (s >=kural [1 ]*float (np .max (s )))&(s >=kural [2 ])
+    if rule_ [0 ]=="mutlak":
+        return s >=rule_ [1 ]
+    return (s >=rule_ [1 ]*float (np .max (s )))&(s >=rule_ [2 ])
 
 
 def sec_ayrintili (P ,idx ,YD ,s ,threshold ,nms_mm =NMS_MM ):
@@ -86,8 +86,8 @@ def sec_ayrintili (P ,idx ,YD ,s ,threshold ,nms_mm =NMS_MM ):
     idx =np .asarray (idx ,int )
     YD =np .asarray (YD ,float ).reshape (-1 ,3 )
     s =np .asarray (s ,float )
-    kural =("mutlak",float (threshold ))if np .isscalar (threshold )else tuple (threshold )
-    k =np .where (kabul_maskesi (s ,kural ))[0 ]
+    rule_ =("mutlak",float (threshold ))if np .isscalar (threshold )else tuple (threshold )
+    k =np .where (kabul_maskesi (s ,rule_ ))[0 ]
     if not len (k ):
     # DORT value: erken cikis dali da normal dalla AYNI imzayi dondurmeli.
     # Skor alani eklendiginde burasi 3'te kalmisti and D7 okumasinin P6 kolu
@@ -95,9 +95,9 @@ def sec_ayrintili (P ,idx ,YD ,s ,threshold ,nms_mm =NMS_MM ):
     # gozden kaciyor -- test bunu yakalar.
         return (np .zeros ((0 ,3 )),np .zeros ((0 ,3 )),np .zeros (0 ,int ),
         np .zeros (0 ,float ))
-    sira =k [np .argsort (-s [k ])]
+    rank_ =k [np .argsort (-s [k ])]
     ap ,ad ,ai ,asc ,kapali =[],[],[],[],set ()
-    for j in sira :
+    for j in rank_ :
         i =int (idx [j ])
         if i in kapali :
             continue 

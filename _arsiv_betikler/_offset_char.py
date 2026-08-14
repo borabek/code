@@ -51,4 +51,4 @@ print(f"  TEGET (duzlem): medyan {np.median(a[:,2]):.2f}mm  ort {a[:,2].mean():.
 pos = (a[:, 1] > 0).sum()
 print(f"  axis yonu: {pos}/{len(rows)} tahmin DISARIDA (+), {len(rows)-pos} iceride (-)")
 print("\n  -> axis ortalamasi |buyuk| ve tek yonlu ise SISTEMATIK (duzeltilebilir);")
-print("     teget baskin ve direction dagilmissa RASTGELE (duzeltilemez).")
+print("     teget baskin and direction dagilmissa RASTGELE (duzeltilemez).")

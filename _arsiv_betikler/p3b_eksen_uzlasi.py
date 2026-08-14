@@ -100,12 +100,12 @@ def uzlasiya_oturt (cyls ,P ,D ,tol_der ,mm_max ,min_uye =2 ):
     return P2 ,D2 ,n 
 
 
-def puanla (kayit ,model ,ob ,tol ,mm ,match_greedy ,f1w ,ratio =0.40 ,baseline =0.30 ,
+def puanla (rec_ ,model ,ob ,tol ,mm ,match_greedy ,f1w ,ratio =0.40 ,baseline =0.30 ,
 mfgler =None ,sayac =None ):
     import wire_gate 
     from p1c_threshold import maske 
     T ,R =[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
@@ -135,27 +135,27 @@ def main ():
     from sina_cluster import match_greedy ,f1w 
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     with open (a .model ,"rb")as f :
         model =pickle .load (f )
     with open ("results/_d6_silindirler.pkl","rb")as f :
         ob =pickle .load (f )
-    dev ={p :r for p ,r in kayit .items ()if r ["mfg"]in DEV_MFG }
-    sin ={p :r for p ,r in kayit .items ()if r ["mfg"]not in DEV_MFG }
+    dev ={p :r for p ,r in rec_ .items ()if r ["mfg"]in DEV_MFG }
+    sin ={p :r for p ,r in rec_ .items ()if r ["mfg"]not in DEV_MFG }
 
     d0t ,d0r =puanla (dev ,model ,ob ,None ,0 ,match_greedy ,f1w )
     print (f"DEV oturtmasiz: tespit {d0t :.4f} robot {d0r :.4f}\n")
     print (f"{'tol\\mm':<9}"+"".join (f"{m :>10.0f}"for m in (4 ,6 ,8 ,12 )))
     en_iyi ,en_iyi_r ,izgara =None ,d0r ,{}
     for tol in (5 ,10 ,15 ,25 ):
-        satir =[]
+        line_ =[]
         for mm in (4 ,6 ,8 ,12 ):
             tf ,rf =puanla (dev ,model ,ob ,tol ,mm ,match_greedy ,f1w )
             izgara [f"{tol }/{mm }"]={"tespit":tf ,"robot":rf }
-            satir .append (rf )
+            line_ .append (rf )
             if rf >en_iyi_r :
                 en_iyi_r ,en_iyi =rf ,(tol ,mm )
-        print (f"{tol :<9}"+"".join (f"{v :>10.4f}"for v in satir ))
+        print (f"{tol :<9}"+"".join (f"{v :>10.4f}"for v in line_ ))
 
     if en_iyi is None :
         print ("\nDEV'de hicbir ayar tabani gecmedi -> KOL KAPANDI")

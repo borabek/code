@@ -19,9 +19,9 @@ def _girdi ():
 
 def test_erken_cikis_ve_normal_dal_AYNI_sayida_deger_dondurur ():
     P ,idx ,YD =_girdi ()
-    bos =p6_decision .sec_ayrintili (P ,idx ,YD ,np .zeros (3 ),0.9 )
+    empty_ =p6_decision .sec_ayrintili (P ,idx ,YD ,np .zeros (3 ),0.9 )
     dolu =p6_decision .sec_ayrintili (P ,idx ,YD ,np .ones (3 ),0.1 )
-    assert len (bos )==len (dolu )==4 
+    assert len (empty_ )==len (dolu )==4 
 
 
 def test_sec_govdesizdir_ve_ayrintiliyla_AYNI_secimi_verir ():
@@ -31,9 +31,9 @@ def test_sec_govdesizdir_ve_ayrintiliyla_AYNI_secimi_verir ():
     YD =rng .normal (size =(200 ,3 ))
     YD /=np .linalg .norm (YD ,axis =1 ,keepdims =True )
     s =rng .uniform (0 ,1 ,200 )
-    for kural in (0.3 ,("mutlak",0.5 ),("goreli",0.7 ,0.2 )):
-        a =p6_decision .sec (P ,idx ,YD ,s ,kural )
-        b =p6_decision .sec_ayrintili (P ,idx ,YD ,s ,kural )
+    for rule_ in (0.3 ,("mutlak",0.5 ),("goreli",0.7 ,0.2 )):
+        a =p6_decision .sec (P ,idx ,YD ,s ,rule_ )
+        b =p6_decision .sec_ayrintili (P ,idx ,YD ,s ,rule_ )
         assert np .array_equal (a [0 ],b [0 ])and np .array_equal (a [1 ],b [1 ])
 
 

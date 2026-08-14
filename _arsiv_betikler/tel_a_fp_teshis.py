@@ -78,7 +78,7 @@ def main ():
     per =collections .Counter (PID [is_fp ])
     parts_scored =len (set (PID [clean ]))
     print (f"S1  FP'li part {len (per )}/{parts_scored }  |  part basi ort {n_fp /max (parts_scored ,1 ):.2f}")
-    print ("    en cok FP ureten 8 part:",", ".join (f"{k }({v })"for k ,v in per .most_common (8 )))
+    print ("    at most FP ureten 8 part:",", ".join (f"{k }({v })"for k ,v in per .most_common (8 )))
     hi =sum (v for k ,v in per .items ()if v >=3 )
     print (f"    FP'lerin %{100 *hi /max (n_fp ,1 ):.0f}'i, 3+ FP ureten parcalardan geliyor "
     f"({sum (1 for v in per .values ()if v >=3 )} part)\n")

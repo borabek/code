@@ -137,8 +137,8 @@ def main ():
 
     print (f"\n{'='*84 }\nESLESTIRILMEMIS KOL -- STEP'SIZ URETICILERDE JSON-AGI ADAY RECALL\n"
     f"{'='*84 }")
-    print ("DIKKAT: bu satirlar TANIDIKLIKLA KARISIK. Ag agirlikli olarak WEI+PXC uzerinde")
-    print ("egitildi; gorulmemis bir ureticide dusuk recall 'JSON agi kotu' DEGIL 'ag bu")
+    print ("NOTE: this satirlar TANIDIKLIKLA KARISIK. Ag agirlikli as WEI+PXC on")
+    print ("egitildi; gorulmemis a ureticide low recall 'JSON agi kotu' DEGIL 'network this")
     print ("ureticiyi tanimiyor' da olabilir. TEK BASINA KANIT DEGIL -- gosterge.\n")
     print (f"{'manufacturer':<10}{'part':>6}{'GT':>6}{'candidate':>7}{'candidate/GT':>9}{'RECALL':>9}"
     f"{'JSON tepe':>11}   gosterge")
@@ -162,7 +162,7 @@ def main ():
     print (f"    candidate/GT referansi: STEP kolu 2.43 | JSON kolu 1.67")
     ok =[u for u ,v in R .items ()if v ["recall"]>=0.70 and v ["aday_per_gt"]<=3.5 ]
     print (f"\n  WEI-benzeri davranan (gosterge): {ok if ok else 'YOK'}")
-    print ("  KESIN HUKUM ICIN o ureticiden STEP'li birkac part gerekir (eslestirilmis measurement).")
+    print ("  KESIN VERDICT ICIN that ureticiden STEP'li birkac part is required (eslestirilmis measurement).")
     with io .open ("results/f2_11b_stepsiz_recall.json","w",encoding ="utf-8")as f :
         json .dump ({"referans_eslestirilmis":{"WEI":{"step":0.8764 ,"json":0.8858 },
         "PXC":{"step":0.8450 ,"json":0.2999 }},

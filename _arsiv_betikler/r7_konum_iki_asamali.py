@@ -91,8 +91,8 @@ def main ():
             AX .append (np .concatenate ([X [i ],oz ]));AY .append (int (pe [i ,b ]>2.0 ))
             AG .append (r ["geo"]);AK .append ((r ["pid"],i ))
             # giris 0 = mevcut, after dictionary
-            liste =[("mevcut",P [i ])]+[(a ,np .asarray (S [a ],float ))for a in GIRIS if a in S ]
-            for gi ,(ad ,q )in enumerate (liste ):
+            lst_ =[("mevcut",P [i ])]+[(a ,np .asarray (S [a ],float ))for a in GIRIS if a in S ]
+            for gi ,(ad ,q )in enumerate (lst_ ):
                 w =q -G [b ]
                 yy =float (np .linalg .norm (w -float (w @Gd [b ])*Gd [b ]))
                 e =[1.0 if ad ==t2 else 0.0 for t2 in ("mevcut",)+GIRIS ]
@@ -190,12 +190,12 @@ def main ():
     f"tespit {kay ['d_tespit']:+.4f}")
     print (f"TARAMA en iyisi (UST SINIR): robot {eniyi ['d_robot']:+.4f} "
     f"(threshold %{100 *eniyi ['esikQ']:.0f}, marj {eniyi ['marj']})")
-    deger =kay ["d_robot"]>=0.01 and kay ["ga"][0 ]>0 and kay ["d_tespit"]>=-0.005 
+    val_ =kay ["d_robot"]>=0.01 and kay ["ga"][0 ]>0 and kay ["d_tespit"]>=-0.005 
     print (f"\nHUKUM: 45 dakikalik training-korpusu turetmesi "
-    f"{'DEGER -- R8 kosulur'if deger else 'DEGMEZ -- KOL KAPANIR'}")
+    f"{'DEGER -- R8 kosulur'if val_ else 'DEGMEZ -- KOL KAPANIR'}")
     with io .open ("results/r7_konum_iki_asamali.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,"tarama":SON ,
-        "kayitli":kay ,"tarama_en_iyi":eniyi ,"deger":bool (deger )},f ,indent =1 )
+        "kayitli":kay ,"tarama_en_iyi":eniyi ,"deger":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r7_konum_iki_asamali.json")
 
 

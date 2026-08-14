@@ -59,9 +59,9 @@ def main ():
         dg =float (r ["diag"])
         if not len (G ):
             continue 
-        sonuc =match_hungarian (P ,D ,G ,Gd ,dg ,K .YANAL ,K .ACI ,False ,
+        res_ =match_hungarian (P ,D ,G ,Gd ,dg ,K .YANAL ,K .ACI ,False ,
         signed =True )
-        tp ,fp ,fn =sonuc [:3 ]
+        tp ,fp ,fn =res_ [:3 ]
         tp_top +=tp ;fp_top +=fp ;fn_top +=fn 
         if not len (P ):
             fn_tur ["bos"]+=len (G )
@@ -112,12 +112,12 @@ def main ():
     for k ,v in fn_tur .most_common ():
         print (f"  {k :<10}{v :>6}  {v /tn :>7.1%}")
     print ("\nOKUMA:")
-    print ("  cift YUKSEK      -> birlestirme/NMS yaricapi ONARILABILIR")
+    print ("  double YUKSEK      -> birlestirme/NMS yaricapi ONARILABILIR")
     print ("  sign YUKSEK    -> sign kurali ONARILABILIR")
-    print ("  aci YUKSEK       -> direction tahmini sorunu (model isi)")
+    print ("  angle YUKSEK       -> direction tahmini sorunu (model isi)")
     print ("  hayalet YUKSEK   -> pool/gate sorunu")
-    print ("  FN yakin_var     -> tahmin VAR, kabul kutusuna sokulamiyor")
-    print ("  FN bos           -> pool o acikligi HIC uretmemis")
+    print ("  FN yakin_var     -> prediction VAR, kabul kutusuna sokulamiyor")
+    print ("  FN empty           -> pool that acikligi HIC uretmemis")
     json .dump ({"yol":YOL ,"n_parca":len (d ),"tp":tp_top ,"fp":fp_top ,
     "fn":fn_top ,"f1":f1 ,"fp_tur":dict (fp_tur ),
     "fn_tur":dict (fn_tur ),

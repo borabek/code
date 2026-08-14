@@ -40,11 +40,11 @@ def onar_govde_ici (mesh ,p ,d ,maks_mm =MAKS_TASIMA_MM ):
     try :
         if not is_inside (mesh ,p ):
             return p ,False ,"zaten disarida"
-        yeni ,off =seat_to_mouth (mesh ,p ,d )
-        yeni =np .asarray (yeni ,float )
-        if not np .isfinite (yeni ).all ()or np .linalg .norm (yeni -p )>maks_mm :
-            return p ,False ,f"tasima {np .linalg .norm (yeni -p ):.1f}mm > {maks_mm }"
-        return yeni ,True ,f"{np .linalg .norm (yeni -p ):.2f}mm tasindi"
+        new_ ,off =seat_to_mouth (mesh ,p ,d )
+        new_ =np .asarray (new_ ,float )
+        if not np .isfinite (new_ ).all ()or np .linalg .norm (new_ -p )>maks_mm :
+            return p ,False ,f"tasima {np .linalg .norm (new_ -p ):.1f}mm > {maks_mm }"
+        return new_ ,True ,f"{np .linalg .norm (new_ -p ):.2f}mm tasindi"
     except Exception as e :
         return p ,False ,f"error {type (e ).__name__ }"
 
@@ -80,11 +80,11 @@ def onar_merkezle (mesh ,p ,d ,maks_mm =MAKS_MERKEZLEME_MM ,n_dirs =24 ):
             direction .append (w )
         mes =np .array (mes )
         i_min =int (np .argmin (mes ));i_max =int (np .argmax (mes ))
-        adim =min ((mes [i_max ]-mes [i_min ])/2.0 ,maks_mm )
-        if adim <=1e-3 :
+        step_ =min ((mes [i_max ]-mes [i_min ])/2.0 ,maks_mm )
+        if step_ <=1e-3 :
             return p ,False ,"hareket gereksiz"
-        yeni =p +adim *direction [i_max ]
-        return yeni ,True ,f"{adim :.2f}mm merkeze"
+        new_ =p +step_ *direction [i_max ]
+        return new_ ,True ,f"{step_ :.2f}mm merkeze"
     except Exception as e :
         return p ,False ,f"error {type (e ).__name__ }"
 
@@ -126,8 +126,8 @@ def _selftest ():
     # 1) body ICINDEKI point agza tasinmali
     p =np .array ([9.0 ,9.0 ,0.0 ])# kose -> malzeme inside
     assert is_inside (m ,p )
-    yeni ,ok ,_ =onar_govde_ici (m ,p ,np .array ([0. ,0. ,1. ]))
-    assert ok and not is_inside (m ,yeni ),"body ici onarimi calismadi"
+    new_ ,ok ,_ =onar_govde_ici (m ,p ,np .array ([0. ,0. ,1. ]))
+    assert ok and not is_inside (m ,new_ ),"body ici onarimi calismadi"
     # 2) hole ekseninde, duvara YAKIN point merkeze cekilmeli
     p2 =np .array ([2.6 ,0.0 ,5.7 ])# r=3 deligin duvarina 0.4mm
     yeni2 ,ok2 ,_ =onar_merkezle (m ,p2 ,np .array ([0. ,0. ,1. ]))

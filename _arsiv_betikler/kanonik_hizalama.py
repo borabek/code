@@ -34,10 +34,10 @@ def _birim (V ):
 def cerceve (V ):
     """(centre, E, uzanim). `E` satirlari unit eksenler, uzunlugu azalan sirada."""
     V =np .asarray (V ,float ).reshape (-1 ,3 )
-    merkez =V .mean (0 )
-    Q =V -merkez 
+    center_ =V .mean (0 )
+    Q =V -center_ 
     if len (V )<3 :
-        return merkez ,np .eye (3 ),np .ones (3 )
+        return center_ ,np .eye (3 ),np .ones (3 )
         # kovaryansin ozvektorleri = ana eksenler
     _ ,s ,Vt =np .linalg .svd (Q ,full_matrices =False )
     E =Vt [:3 ]
@@ -55,7 +55,7 @@ def cerceve (V ):
     if float (np .dot (np .cross (E [0 ],E [1 ]),E [2 ]))<0 :
         E [2 ]=-E [2 ]
     uzanim =np .array ([max (float (np .ptp (Q @E [i ])),1e-9 )for i in range (3 )])
-    return merkez ,E ,uzanim 
+    return center_ ,E ,uzanim 
 
 
 def oznitelik (P ,D ,V ):
@@ -69,8 +69,8 @@ def oznitelik (P ,D ,V ):
     V =np .asarray (V ,float ).reshape (-1 ,3 )
     if len (V )<3 :
         V =P if len (P )>=3 else np .vstack ([P ,P +1.0 ])
-    merkez ,E ,uzanim =cerceve (V )
-    Q =P -merkez 
+    center_ ,E ,uzanim =cerceve (V )
+    Q =P -center_ 
     for i in range (3 ):
         X [:,i ]=np .clip ((Q @E [i ])/(0.5 *uzanim [i ]),-3.0 ,3.0 )
         X [:,3 +i ]=D @E [i ]

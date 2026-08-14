@@ -132,7 +132,7 @@ def main ():
         p =tp /max (tp +fp ,1 )
         print (f"    {m }: {g } CP, AUTO precision {p :.3f} ({tp } dogru / {fp } yanlis otonom)")
     print ("\n  ROBOT OKUMASI: AUTO precision = robot teli GERCEK acikliga sokma orani (yuksek olmali).")
-    print ("  Dusuk-confidence CP'ler REVIEW'e dusuyor -> insana; robotun otonom hatasi degil.")
+    print ("  Dusuk-confidence CP'ler REVIEW'e dusuyor -> insana; robotun otonom hatasi not.")
 
 
 if __name__ =="__main__":

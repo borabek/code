@@ -42,7 +42,7 @@ def oof (extras ):
     return o 
 
 print (f"%{int (TARGET *100 )} PRECISION'DA OTONOM KAPSAMA (veri arttikca)")
-print ("ADAY-TAVAN (mukemmel gate ile ulasilabilecek max kapsama): %.0f%%"%(100 *Y [WORK ].sum ()/GT ))
+print ("ADAY-TAVAN (mukemmel gate with ulasilabilecek max kapsama): %.0f%%"%(100 *Y [WORK ].sum ()/GT ))
 print ("%-34s %8s %10s %12s"%("training havuzu","training GT","AUTO prec","CP kapsama"))
 for nm ,ex in (('TABAN (541 part)',[]),('+ yeni 220',['yeni220']),('+ yeni + seen220',['yeni220','seen220'])):
     if any (t not in EX for t in ex ):continue 

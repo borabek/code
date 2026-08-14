@@ -146,7 +146,7 @@ def main ():
 
     rows =todo_census (a .mfg ,a .limit )if a .from_census else todo (a .mfg ,a .limit ,a .list )
     if not rows :
-        print ("indirilecek part yok (hepsi diskte olabilir)");return 
+        print ("indirilecek part absent (all of them diskte may be)");return 
     src ="census (API-dogrulanmis id)"if a .from_census else "eksik listesi (MFG_ID tablosu)"
     print (f"{len (rows )} part indirilecek ({a .mfg or 'hepsi'}) | kaynak: {src } | "
     f"zaten diskte olanlar atlaniyor",flush =True )

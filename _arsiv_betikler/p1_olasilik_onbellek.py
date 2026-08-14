@@ -59,8 +59,8 @@ def main ():
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     var ={os .path .splitext (x )[0 ]for x in os .listdir (kok )if x .endswith (".npz")}
     hedef =[p for p in sv ["pidler"]if p in S and p not in var ]
-    if a .toplam >1 :
-        hedef =[p for i ,p in enumerate (hedef )if i %a .toplam ==a .vardiya ]
+    if a .total_ >1 :
+        hedef =[p for i ,p in enumerate (hedef )if i %a .total_ ==a .vardiya ]
     print (f"cluster {a .cluster } muhur {sv ['sha16']} | onbellekte {len (var )} | "
     f"HESAPLANACAK {len (hedef )}",flush =True )
 

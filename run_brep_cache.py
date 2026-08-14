@@ -45,8 +45,8 @@ for ad ,yol ,fn in ISLER :
             f"error {len (error )}",flush =True )
     with open (yol ,"wb")as f :
         pickle .dump (ob ,f )
-    bos =sum (1 for p in ob if not ob [p ])
-    print (f"{ad } BITTI: {len (ob )} part | BOS {bos } | HATA {len (error )}",flush =True )
-    json .dump ({"n":len (ob ),"bos":bos ,"hata_sayisi":len (error ),
+    empty_ =sum (1 for p in ob if not ob [p ])
+    print (f"{ad } BITTI: {len (ob )} part | BOS {empty_ } | HATA {len (error )}",flush =True )
+    json .dump ({"n":len (ob ),"bos":empty_ ,"hata_sayisi":len (error ),
     "hatalar":dict (list (error .items ())[:40 ])},
     open (f"results/brep_onbellek_{ad }.json","w"),indent =1 )

@@ -79,7 +79,7 @@ for k in np.unique(mfg):
     print(f"{'  '+str(k)+' disarida (+selector)':<26}{f1w(db):>9.4f}{f1w(rb):>9.4f}{f1w(ib):>10.4f}")
 dus=[k for k,v in UD.items() if v["yeni"]["fiziksel"] < v["baseline"]["fiziksel"]-0.002]
 print(f"\nFIZIKSEL metrikte DUSEN manufacturer: {dus if dus else 'YOK'}")
-print("KARAR:", "DAGITILABILIR" if not dus and abs(f1w(d1)-f1w(d0))<1e-6 else "DIKKAT")
+print("DECISION:", "DAGITILABILIR" if not dus and abs(f1w(d1)-f1w(d0))<1e-6 else "DIKKAT")
 json.dump({"pool":{"baseline":{"tespit":f1w(d0),"robot":f1w(r0),"fiziksel":f1w(i0)},
                     "yeni":{"tespit":f1w(d1),"robot":f1w(r1),"fiziksel":f1w(i1)}},
            "uretici_disi":UD,"dusen":dus},io.open("results/r4_dogrulama.json","w"),indent=1)

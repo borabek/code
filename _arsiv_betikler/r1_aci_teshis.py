@@ -64,7 +64,7 @@ def main ():
     ya =np .array ([e ["lateral"]for e in K ])
     print (f"  dik olanlar   : medyan {np .median (ya [dik ]):.2f}mm (n={int (dik .sum ())})")
     print (f"  digerleri     : medyan {np .median (ya [~dik ]):.2f}mm (n={int ((~dik ).sum ())})")
-    print ("  -> yanali da kotuyse ayni kok neden; iyiyse SADECE axis sorunu")
+    print ("  -> yanali da kotuyse same kok neden; iyiyse SADECE axis sorunu")
 
     print ("\n5) GT EKSENLERI: dik-eslesmelerde GT ekseni ozel mi?")
     with open ("results/_u4_der.pkl","rb")as f :
@@ -82,7 +82,7 @@ def main ():
         f"{np .median (eks_dik ):.3f}")
         print (f"  iyi eslesmelerin parcasinda                                  : "
         f"{np .median (eks_iyi ):.3f}")
-        print ("  -> 1.0'a yakin = parcadaki tum CP'ler ayni yone bakiyor")
+        print ("  -> 1.0'a yakin = parcadaki tum CP'ler same yone bakiyor")
 
     print ("\n6) TEK PARCA ORNEGI (en cok dik eksenli part)")
     if etkilenen :

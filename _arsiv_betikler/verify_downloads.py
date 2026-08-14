@@ -153,7 +153,7 @@ def main ():
     print (f"\ngecti {npass } | KALDI {nfail } | atlandi (JSON yok) {nskip }")
     print (f"receipt -> {OUT }")
     if nfail and not a .quarantine :
-        print ("NOT: basarisizlar YERINDE DURUYOR. Karantinaya almak icin --quarantine ile kosun.")
+        print ("NOT: basarisizlar YERINDE DURUYOR. Karantinaya almak for --quarantine with kosun.")
     return 1 if nfail else 0 
 
 

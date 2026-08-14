@@ -260,13 +260,13 @@ def main ():
     print (f"\nESKI en iyi {e ['robot']:.4f} ({e ['d_robot']:+.4f}) | "
     f"YENI en iyi {y ['robot']:.4f} ({y ['d_robot']:+.4f}) | "
     f"FARK {y ['d_robot']-e ['d_robot']:+.4f}")
-    deger =(y ["d_robot"]-e ["d_robot"])>=0.01 
-    print (f"\nHUKUM: {'R10 HAK EDILDI -- training korpusunda ISARETLI oznitelikle yeniden turet ve dagit'if deger else 'signed oznitelik farki < 0.01 -- R10 kosulmaz'}")
+    val_ =(y ["d_robot"]-e ["d_robot"])>=0.01 
+    print (f"\nHUKUM: {'R10 HAK EDILDI -- training korpusunda ISARETLI oznitelikle yeniden turet ve dagit'if val_ else 'signed oznitelik farki < 0.01 -- R10 kosulmaz'}")
     with io .open ("results/r9b_taban_duzeltme.json","w",encoding ="utf-8")as f :
         json .dump ({"taban_robot":b_rob ,"taban_tespit":b_det ,
         "auc":{a :float (roc_auc_score (LY ,o ))for a ,o in OOF .items ()},
         "tarama":SON ,"eski":e ,"yeni":y ,
-        "fark":y ["d_robot"]-e ["d_robot"],"deger":bool (deger )},f ,indent =1 )
+        "fark":y ["d_robot"]-e ["d_robot"],"deger":bool (val_ )},f ,indent =1 )
     print ("receipt -> results/r9b_taban_duzeltme.json")
 
 

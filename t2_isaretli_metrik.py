@@ -124,7 +124,7 @@ def main ():
     print (f"\nHUKUM: dogru sozlesme takma_yonu = {en_iyi }")
     print (f"  signed metrik {max (m ,p ):.4f} vs unsigned {e :.4f} -> loss {loss :+.4f}")
     if loss <=0.01 :
-        print ("  -> Sozlesme TUTARLI. Metrik zaten fiziksel; eksik olan yalniz ILAN.")
+        print ("  -> Sozlesme TUTARLI. Metrik already fiziksel; missing which is only ILAN.")
     else :
         print ("  -> Yonler candidate BASINA TUTARSIZ. Robot hedefi signed metrikle YENIDEN tabanlanmali.")
     with io .open ("results/t2_isaretli.json","w",encoding ="utf-8")as f :

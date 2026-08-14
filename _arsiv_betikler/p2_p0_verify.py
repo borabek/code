@@ -27,12 +27,12 @@ gseen =np .array ([seen_of_g [int (g )]for g in G ])
 is_locked =np .array ([p in LOCKED for p in gpid ])
 
 # --- (1) FRAME dogrulama (statik denetim + data kontrolu) ---
-print ("=== (1) FRAME DOGRULAMA ===")
+print ("=== (1) FRAME VERIFICATION ===")
 print ("  build_rich_feats.rich_feats(): V/F/cps HEPSI mesh frame -> konum+direction TUTARLI  [OK]")
-print ("  build_rich_feats 'pos' alani  : JSON frame (SADECE GT eslesme + aile anahtari icin)  [OK, ayri kullanim]")
-print ("  UYARI/BULGU: build_wei_aggr.py + build_aggr_rich.py havuzlarinda P=JSON frame ama dir=MESH frame")
-print ("               -> P ve dir'i BIRLIKTE kullanan bir feature YAZILMAMALI. (P0-a analizim sadece dir")
-print ("                  kullandi, part-ici tutarli oldugu icin gecerliydi; yine de not edildi.)")
+print ("  build_rich_feats 'pos' alani  : JSON frame (SADECE GT eslesme + aile anahtari for)  [OK, ayri kullanim]")
+print ("  WARNING/FINDING: build_wei_aggr.py + build_aggr_rich.py havuzlarinda P=JSON frame but dir=MESH frame")
+print ("               -> P and dir'i BIRLIKTE kullanan a feature YAZILMAMALI. (P0-a analizim only dir")
+print ("                  kullandi, part-ici tutarli oldugu for gecerliydi; yine de not edildi.)")
 
 # --- (4) split anahtarlari ---
 fam =np .array ([META .get (p ,{}).get ("family",f"nr:{p }")for p in gpid ])
@@ -117,5 +117,5 @@ for set_nm ,mk in sets .items ():
 json .dump (report ,open ("results/p0_verified_baselines.json","w"),indent =1 )
 print ("\n-> results/p0_verified_baselines.json")
 print ("KIYAS: canonical receipt ALL 0.750 / metadata 0.775 / WEI 0.696 / PXC-tipik 0.823")
-print ("NOT: canonical sayilar BA_ALLOW_SEEN=1 ile uretilmisti (153 parcanin etiketleri segmentasyon")
-print ("     egitiminde gorulmus). WORK satiri bu sizintiyi DISLAR = daha durust baseline.")
+print ("NOT: canonical numbers BA_ALLOW_SEEN=1 with uretilmisti (153 parcanin etiketleri segmentasyon")
+print ("     egitiminde gorulmus). WORK satiri this sizintiyi DISLAR = more durust baseline.")

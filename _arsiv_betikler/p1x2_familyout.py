@@ -58,4 +58,4 @@ for split_name ,groups in (("PARCA-out (onceki)",G ),("AILE-out (KATI)",FG )):
     print (f"  13 feature      AUC {a0 :.4f}  top-N F1 {f0 :.4f}")
     print (f"  13 + konum      AUC {a1 :.4f}  top-N F1 {f1 :.4f}   KAZANC {f1 -f0 :+.4f}")
 print ("\nKARAR: AILE-out kazanci >= PARCA-out'un yarisi ise GERCEK sinyal (genellenir).")
-print ("       AILE-out'ta cokuyorsa -> aile-ezberi, deploy'da ise yaramaz (durustce kapat).")
+print ("       AILE-out'ta cokuyorsa -> aile-ezberi, deploy'da whereas yaramaz (durustce kapat).")

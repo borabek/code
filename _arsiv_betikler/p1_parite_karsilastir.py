@@ -50,7 +50,7 @@ def main ():
     dag =wire_gate ._load (wire_gate .MODEL_PATH )
     DON =dag .get ("donusum")# dagitilan yapiyi KORU (this an "zskor")
 
-    def veri (yol ):
+    def data_ (yol ):
         d =np .load (yol ,allow_pickle =True )
         pid =np .array ([str (x )for x in d ["pids"]])
         grp =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
@@ -66,7 +66,7 @@ def main ():
         return dict (pid =pid ,grp =grp ,mfg =mfg ,X =X ,y =y ,Z =Z ,votes =v ,
         n_parca =len (np .unique (pid )))
 
-    E ,Y =veri (ESKI ),veri (YENI )
+    E ,Y =data_ (ESKI ),data_ (YENI )
     print (f"\n{'veri':<8}{'candidate':>8}{'part':>8}{'votes maks':>12}{'pozitif':>9}")
     for ad ,D_ in (("ESKI",E ),("YENI",Y )):
         print (f"{ad :<8}{len (D_ ['y']):>8}{D_ ['n_parca']:>8}{D_ ['votes'].max ():>12.0f}"

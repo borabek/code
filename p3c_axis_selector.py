@@ -117,16 +117,16 @@ def secenekler (cyls ,p ,d ,diag ,gate_s ,komsu ,n_aday ):
         par =int ((np .abs (A @aa )>=np .cos (np .radians (10 ))).sum ())if len (A )else 0 
         if len (yerel )and not mevcut :
             ratio =yar /max (r_max ,1e-6 )
-            sira =float ((yerel >yar ).sum ())/max (len (yerel ),1 )
+            rank_ =float ((yerel >yar ).sum ())/max (len (yerel ),1 )
             enb =float (yar >=r_max -1e-9 )
         else :
-            ratio ,sira ,enb =0.0 ,1.0 ,0.0 
+            ratio ,rank_ ,enb =0.0 ,1.0 ,0.0 
         v =[aci ,mes ,mes /max (diag ,1e-6 ),yar ,uzn ,float (mevcut ),
         par ,par /max (len (A ),1 ),float (np .max (np .abs (aa ))),
         abs (float (aa @komsu ))if komsu is not None else 0.0 ,
         gate_s ,n_aday ,len (A )]
         if P3C_YEREL_YARICAP :
-            v +=[ratio ,sira ,enb ,len (yerel )]
+            v +=[ratio ,rank_ ,enb ,len (yerel )]
         return v 
 
     out =[(p ,d ,oz (p ,d ,True ,0.0 ,0.0 ,0.0 ))]
@@ -188,10 +188,10 @@ def silindir_onbellek (pidler ,yol ):
     return ob 
 
 
-def veri_kur (kayit ,model ,ob ,match_greedy ):
+def veri_kur (rec_ ,model ,ob ,match_greedy ):
     """(feature, label) ciftleri. Etiket: this secenek adayi ROBOT-HAZIR yapar mi."""
     X ,y ,grp =[],[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         pak =parca_adaylari (r ,model ,ob )
         if pak is None :
             continue 
@@ -212,9 +212,9 @@ def veri_kur (kayit ,model ,ob ,match_greedy ):
     return np .asarray (X ,float ),np .asarray (y ,int ),np .asarray (grp ,str )
 
 
-def uygula (kayit ,model ,ob ,sec ,threshold ,match_greedy ,f1w ,mfgler =None ,sayac =None ):
+def uygula (rec_ ,model ,ob ,sec ,threshold ,match_greedy ,f1w ,mfgler =None ,sayac =None ):
     T ,R =[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
@@ -298,11 +298,11 @@ def main ():
 
         # --- OLCUM: temiz exam, DEV yarisinda threshold secimi
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     with open (SILINDIR_SIN ,"rb")as f :
         ob_s =pickle .load (f )
-    dev ={p :r for p ,r in kayit .items ()if r ["mfg"]in DEV_MFG }
-    sin ={p :r for p ,r in kayit .items ()if r ["mfg"]not in DEV_MFG }
+    dev ={p :r for p ,r in rec_ .items ()if r ["mfg"]in DEV_MFG }
+    sin ={p :r for p ,r in rec_ .items ()if r ["mfg"]not in DEV_MFG }
     d0t ,d0r =uygula (dev ,gate ,ob_s ,None ,0 ,match_greedy ,f1w )
     print (f"\nDEV secicisiz: tespit {d0t :.4f} robot {d0r :.4f}")
     en ,en_r ,izgara =None ,d0r ,{}

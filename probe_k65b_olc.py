@@ -38,14 +38,14 @@ ROBOT_YANAL ,ROBOT_ACI =2.0 ,10.0
 TABAN_OB ="results/_p1_olasilik_g10"# k=0: degistirilmemis urun agi
 
 
-def olc (pidler ,ob_dir ,kayit ,gate ,S ):
+def olc (pidler ,ob_dir ,rec_ ,gate ,S ):
     """Bir cache dizini for (tespit_F1, robot_F1). Hata YUTULMAZ."""
     T ,R =[],[]
     for pid in pidler :
         f =f"{ob_dir }/{pid }.npz"
         if not os .path .exists (f ):
             raise RuntimeError (f"onbellekte YOK: {f } -- measurement eksik kalirdi")
-        r =kayit [pid ]
+        r =rec_ [pid ]
         G =np .asarray (r ["G"],float )
         Gd =np .asarray (r ["Gd"],float )
         if not len (G ):
@@ -97,14 +97,14 @@ def main ():
         mk =json .load (f )
     brand =mk ["brand"]
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     gate =pickle .load (open ("results/wire_gate_v5.pkl","rb"))
     import glob 
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
-    hepsi =sorted (p for p ,r in kayit .items ()if r ["mfg"]==brand )
+    hepsi =sorted (p for p ,r in rec_ .items ()if r ["mfg"]==brand )
     print (f"=== {brand }: {len (hepsi )} part ===\n")
 
-    sonuc ={}
+    res_ ={}
     for k ,kosumlar in sorted (mk ["kosumlar"].items (),key =lambda t :int (t [0 ])):
         tl ,rl =[],[]
         for ko in kosumlar :
@@ -112,8 +112,8 @@ def main ():
             olcp =[p for p in hepsi if p not in adapt ]
             # k=0 TABANI AYNI PARCALARDA: adaptasyon parcalari here da disarida,
             # otherwise two arm FARKLI kumede olculur and difference anlamsizlasir.
-            t0 ,r0 =olc (olcp ,TABAN_OB ,kayit ,gate ,S )
-            t1 ,r1 =olc (olcp ,ko ["cache"],kayit ,gate ,S )
+            t0 ,r0 =olc (olcp ,TABAN_OB ,rec_ ,gate ,S )
+            t1 ,r1 =olc (olcp ,ko ["cache"],rec_ ,gate ,S )
             tl .append ((t0 ,t1 ))
             rl .append ((r0 ,r1 ))
             print (f"  k={k } cekilis {ko ['cekilis']}: tespit {t0 :.4f} -> {t1 :.4f} "
@@ -121,20 +121,20 @@ def main ():
             flush =True )
         t0m =float (np .mean ([x [0 ]for x in tl ]));t1m =float (np .mean ([x [1 ]for x in tl ]))
         r0m =float (np .mean ([x [0 ]for x in rl ]));r1m =float (np .mean ([x [1 ]for x in rl ]))
-        sonuc [k ]={"tespit_k0":t0m ,"tespit_k":t1m ,"tespit_fark":t1m -t0m ,
+        res_ [k ]={"tespit_k0":t0m ,"tespit_k":t1m ,"tespit_fark":t1m -t0m ,
         "robot_k0":r0m ,"robot_k":r1m ,"robot_fark":r1m -r0m ,
         "robot_std":float (np .std ([x [1 ]for x in rl ])),
         "n_cekilis":len (kosumlar )}
         print (f"  --> k={k } ORTALAMA: tespit {t1m -t0m :+.4f} | robot {r1m -r0m :+.4f} "
-        f"(std {sonuc [k ]['robot_std']:.4f})\n",flush =True )
+        f"(std {res_ [k ]['robot_std']:.4f})\n",flush =True )
 
-    with open (a .cikti ,"w")as f :
-        json .dump ({"brand":brand ,"sonuc":sonuc ,"baseline":TABAN_OB ,
+    with open (a .out_ ,"w")as f :
+        json .dump ({"brand":brand ,"sonuc":res_ ,"baseline":TABAN_OB ,
         "not":"k=0 tabani AYNI parcalarda measured; adaptasyon parcalari "
         "her iki kolda da DISARIDA. Son-epoch ckpt kullanildi "
         "(genel val'e gore secim adaptasyonu cezalandirir)."},
         f ,indent =1 )
-    print (f"receipt -> {a .cikti }")
+    print (f"receipt -> {a .out_ }")
 
 
 if __name__ =="__main__":

@@ -159,12 +159,12 @@ def main ():
 
     a =puanla (su_K )
     kah =puanla (yk )
-    yeni =puanla (oof )
+    new_ =puanla (oof )
     print (f"\n{'arm':<26}{'TESPIT':>9}{'DEV':>9}{'VAL':>9}{'PXC':>9}{'WEI':>9}")
     for ad ,K in (("A su anki kural",su_K ),("B ogrenilmis kesim",oof ),("F KAHIN K",yk )):
         print (f"{ad :<26}{puanla (K ):>9.4f}{puanla_kume (K ,'dev'):>9.4f}{puanla_kume (K ,'val'):>9.4f}"
         f"{puanla (K ,'PXC'):>9.4f}{puanla (K ,'WEI'):>9.4f}")
-    d_ =yeni -a 
+    d_ =new_ -a 
     dev_ok =puanla_kume (oof ,"dev")-puanla_kume (su_K ,"dev")
     val_ok =puanla_kume (oof ,"val")-puanla_kume (su_K ,"val")
     mfg_a =np .mean ([puanla (su_K ,"PXC"),puanla (su_K ,"WEI")])
@@ -175,7 +175,7 @@ def main ():
     f"manufacturer ort {mfg_b -mfg_a :+.4f} -> {'GECTI'if gecti else 'GECMEDI'}")
     print (f"  kahinin {d_ /max (kah -a ,1e-9 ):.0%}'i yakalandi (kahin {kah -a :+.4f})")
     with open ("results/t3_part_kesimi.json","w",encoding ="utf-8")as f :
-        json .dump ({"su_an":float (a ),"ogrenilmis":float (yeni ),"kahin":float (kah ),
+        json .dump ({"su_an":float (a ),"ogrenilmis":float (new_ ),"kahin":float (kah ),
         "dev":float (dev_ok ),"val":float (val_ok ),
         "uretici_ort_fark":float (mfg_b -mfg_a ),"gecti":bool (gecti )},f ,indent =1 )
     print ("\nmakbuz -> results/t3_part_kesimi.json")

@@ -77,15 +77,15 @@ def blok (d ,ad ,zskor ):
     raise ValueError (ad )
 
 
-def ap_ve_recall_k (veri ,skor ):
+def ap_ve_recall_k (data_ ,skor ):
     """Esikten BAGIMSIZ ranking olcutleri. Doner: (AP, recall@k, rastgele)."""
     aps ,rk ,rnd =[],[],[]
-    for d ,s in zip (veri ,skor ):
+    for d ,s in zip (data_ ,skor ):
         y =np .asarray (d ["y"],int )
         if not y .any ():
             continue 
-        sira =np .argsort (-np .asarray (s ,float ))
-        ys =y [sira ]
+        rank_ =np .argsort (-np .asarray (s ,float ))
+        ys =y [rank_ ]
         kum =np .cumsum (ys )
         kes =kum /np .arange (1 ,len (ys )+1 )
         aps .append (float ((kes *ys ).sum ()/max (ys .sum (),1 )))
@@ -122,10 +122,10 @@ def main ():
             sk =[m .predict_proba (blok (d ,ad ,zskor ).astype (np .float32 ))[:,1 ]
             for d in te ]
             ap ,rk ,rnd =ap_ve_recall_k (te ,sk )
-            etiket =f"{ad } / zskor={zskor }"
-            out [etiket ]={"AP":ap ,"recall@k":rk ,"rastgele":rnd ,
+            label_ =f"{ad } / zskor={zskor }"
+            out [label_ ]={"AP":ap ,"recall@k":rk ,"rastgele":rnd ,
             "fold":rk /max (rnd ,1e-9 )}
-            print (f"{etiket :<34}{ap :>8.4f}{rk :>10.4f}{rnd :>10.4f}"
+            print (f"{label_ :<34}{ap :>8.4f}{rk :>10.4f}{rnd :>10.4f}"
             f"{rk /max (rnd ,1e-9 ):>7.1f}x",flush =True )
 
     json .dump ({"damga":makbuz_hash .damga (),"brand":HEDEF ,"sonuc":out ,

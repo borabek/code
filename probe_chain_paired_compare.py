@@ -78,7 +78,7 @@ def _yerel_normal (V ,F ,P ):
     import numpy as _np 
     if not len (P ):
         return _np .zeros ((0 ,3 ))
-    anahtar =(len (V ),len (F ))
+    key_ =(len (V ),len (F ))
     try :
         import trimesh 
         ag =trimesh .Trimesh (vertices =V ,faces =F ,process =False )
@@ -86,7 +86,7 @@ def _yerel_normal (V ,F ,P ):
     except Exception :# noqa: BLE001
         return _np .zeros ((len (P ),3 ))
     from scipy .spatial import cKDTree 
-    _ =anahtar 
+    _ =key_ 
     return N [cKDTree (V ).query (_np .asarray (P ,float ))[1 ]]
 
 
@@ -172,14 +172,14 @@ def main ():
     # geometri-ayrik, manufacturer-KARISIK) and measured ki VAL parcalarinin
     # HICBIRI secicinin training kumesinde DEGIL (DEV'de 37 tanesi vardi --
     # DEV that is why KULLANILMAZ).
-    liste =os .environ .get ("EZ_LISTE","")
-    if liste :
+    lst_ =os .environ .get ("EZ_LISTE","")
+    if lst_ :
         import json as _j 
-        _s =_j .load (open (liste ,encoding ="utf-8"))
+        _s =_j .load (open (lst_ ,encoding ="utf-8"))
         istenen =set (_s [os .environ .get ("EZ_BOLME","val")]["parts"])
         candidate =[(p ,r )for p ,r in kay .items ()
         if str (p )in istenen and len (r .get ("G",[]))and p in STEP ]
-        print (f"part listesi: {liste } / "
+        print (f"part listesi: {lst_ } / "
         f"{os .environ .get ('EZ_BOLME','val')} -> {len (candidate )} part "
         f"(STEP'i ve GT'si olan)",flush =True )
     else :
@@ -262,13 +262,13 @@ def main ():
             # sayilir. Robot for correct criterion ISARETLI olandir.
             # Ikisi de raporlanir ki sunulan sayinin hangisi oldugu
             # ASLA ambiguous kalmasin.
-            for etiket ,im in (("robot_isaretli",True ),
+            for label_ ,im in (("robot_isaretli",True ),
             ("robot_isaretsiz",False )):
                 tp ,fp ,fn =match_hungarian (P ,D ,G ,Gd ,dg ,K .YANAL ,K .ACI ,
                 False ,signed =im )[:3 ]
-                c [etiket +"_tp"]+=tp 
-                c [etiket +"_fp"]+=fp 
-                c [etiket +"_fn"]+=fn 
+                c [label_ +"_tp"]+=tp 
+                c [label_ +"_fp"]+=fp 
+                c [label_ +"_fn"]+=fn 
             tp ,fp ,fn =match_hungarian (P ,D ,G ,Gd ,dg ,0.0 ,180.0 ,True )[:3 ]
             c ["tespit_tp"]+=tp ;c ["tespit_fp"]+=fp ;c ["tespit_fn"]+=fn 
             tp ,fp ,fn =match_hungarian (P ,D ,G ,Gd ,dg ,K .YANAL ,K .ACI ,False ,
@@ -324,7 +324,7 @@ def main ():
         f"{_f ('robot_isaretsiz'):>18.4f}"
         f"{_f ('robot_isaretli'):>17.4f}")
     print ("  NOT: yapilandirmadaki `robot_hazir_F1` ISARETSIZ olandir;")
-    print ("       robot icin gecerli criterion ISARETLI olandir.")
+    print ("       robot for gecerli criterion ISARETLI olandir.")
     print (f"{'yol':<10}{'robot F1':>10}{'precision':>10}{'recall':>9}"
     f"{'uretilen CP':>13}")
     out ={}
@@ -343,8 +343,8 @@ def main ():
     print (f"  precision farki {dke :+.4f}")
     ac =df1 >0 and dke >=-0.02 
     print (f"\nBAYRAK KARARI: {'ACILABILIR'if ac else 'ACILMAZ'}")
-    print ("  Kural: F1 ARTTI **VE** precision 0.02'den fazla GERILEMEDI.")
-    print ("  Gerekce: yanlis CP = robotun bos yere hareketi; F1 ayni kalsa")
+    print ("  Kural: F1 ARTTI **VE** precision 0.02'den extra GERILEMEDI.")
+    print ("  Gerekce: wrong CP = robotun empty yere hareketi; F1 same kalsa")
     print ("           bile precision dususu sahada GERILEMEDIR.")
     json .dump ({"damga":makbuz_hash .damga (),"n_parca":n ,
     "gt":int (agg ["saha"]["gt"]),"yollar":out ,

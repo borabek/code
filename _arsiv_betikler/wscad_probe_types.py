@@ -68,7 +68,7 @@ def main ():
     json .dump ({str (k ):{"len":v [0 ],"kind":v [1 ],"head":v [2 ]}for k ,v in hits .items ()},
     open ("results/wscad_parttypes.json","w"),indent =1 )
     print (f"\n-> results/wscad_parttypes.json  ({len (hits )} calisan format)")
-    print ("   STEP disinda 200 donen bir format varsa, icerigini acip CP tasiyor mu bakariz.")
+    print ("   STEP outside 200 donen a format varsa, icerigini acip CP tasiyor mu bakariz.")
 
 
 if __name__ =="__main__":

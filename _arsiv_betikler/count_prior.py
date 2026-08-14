@@ -113,7 +113,7 @@ def main ():
     rec ["usable_for_topn"]=bool (ok )
     print (f"\nKAPI (+-1 icinde >= %60 VE tabani gecsin): {'GECTI'if ok else 'KALDI'}")
     if not ok :
-        print ("  -> sert top-N riskli; yumusak threshold kaydirmasi denenmeli (B yolu)")
+        print ("  -> sert top-N risky; yumusak threshold kaydirmasi denenmeli (B yolu)")
 
     json .dump (rec ,open (OUT ,"w"),indent =1 )
     print (f"receipt -> {OUT }")

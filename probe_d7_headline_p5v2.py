@@ -39,9 +39,9 @@ ac7 =pickle .load (open ("results/_d7_acikliklar.pkl","rb"))
 print (f"D6 training {len (k6 )} part | D7 measurement {len (k7 )} part",flush =True )
 
 
-def kur (kayit ,cy ,ac ,etiketli ):
-    veri =[]
-    for pid ,r in kayit .items ():
+def kur (rec_ ,cy ,ac ,etiketli ):
+    data_ =[]
+    for pid ,r in rec_ .items ():
         X =d6_record .x58 (r )
         if X is None or r .get ("P")is None or not len (r ["P"]):
             continue 
@@ -61,8 +61,8 @@ def kur (kayit ,cy ,ac ,etiketli ):
         "P":P ,"D":D ,"X":X }
         if etiketli :
             d ["y"]=PE .etiketle (secs ,G ,d ["Gd"])
-        veri .append (d )
-    return veri 
+        data_ .append (d )
+    return data_ 
 
 
 print ("D6 training verisi kuruluyor...",flush =True )

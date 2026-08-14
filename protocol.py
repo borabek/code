@@ -55,14 +55,14 @@ def dogrula (pidler ,ad ="training",olcum_da =False ,sert =True ,der_yolu ="resu
     pidler =[str (p )for p in pidler ]
     m =egitim_maskesi (pidler ,olcum_da ,der_yolu )
     ihlal =sorted (set (np .array (pidler )[~m ].tolist ()))
-    kayit ={"ad":ad ,"n_parca":len (set (pidler )),"n_ihlal_parca":len (ihlal ),
+    rec_ ={"ad":ad ,"n_parca":len (set (pidler )),"n_ihlal_parca":len (ihlal ),
     "olcum_da_yasak":bool (olcum_da ),"ilk_ihlaller":ihlal [:20 ]}
     try :
         with io .open (MAKBUZ ,encoding ="utf-8")as f :
             hepsi =json .load (f )
     except Exception :
         hepsi =[]
-    hepsi =[h for h in hepsi if h .get ("ad")!=ad ][-49 :]+[kayit ]
+    hepsi =[h for h in hepsi if h .get ("ad")!=ad ][-49 :]+[rec_ ]
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
         json .dump (hepsi ,f ,indent =1 ,ensure_ascii =False )
     if ihlal and sert :

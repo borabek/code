@@ -55,22 +55,22 @@ def main ():
     OP =os .environ .get ("SK_OP","results/_op_cache_sentetik")
     os .makedirs (OP ,exist_ok =True )
 
-    kayit ,cyl ,ack ={},{},{}
+    rec_ ,cyl ,ack ={},{},{}
     if os .path .exists (KAYIT ):
-        kayit =pickle .load (open (KAYIT ,"rb"))
-        print (f"cache: {len (kayit )} kayit",flush =True )
-    yazilan =atlanan =bos =0 
+        rec_ =pickle .load (open (KAYIT ,"rb"))
+        print (f"cache: {len (rec_ )} kayit",flush =True )
+    yazilan =atlanan =empty_ =0 
     tani =[]
     for t in range (TOHUM0 ,TOHUM0 +N_PARCA ):
         pid =f"SYN{t }"
         yol =f"{MESH_CIK }/{pid }.npz"
-        if os .path .exists (yol )and pid in kayit :
+        if os .path .exists (yol )and pid in rec_ :
             atlanan +=1 
             continue 
         try :
             m ,G ,Gd ,kun =SK .uret (t )
         except Exception as e :# noqa: BLE001
-            bos +=1 
+            empty_ +=1 
             print (f"  {pid }: URETIM HATASI {type (e ).__name__ }: {e }",
             flush =True )
             continue 
@@ -131,12 +131,12 @@ def main ():
             Pd_ =np .asarray ([c ["direction"]for c in ham ],
             float ).reshape (-1 ,3 )
         if len (P_ )<2 :
-            bos +=1 
+            empty_ +=1 
             continue 
         np .savez_compressed (yol ,V =V .astype (np .float32 ),
         F =F .astype (np .int32 ),
         pbs =np .asarray (pbs ,np .float32 ))
-        kayit [pid ]={"pid":pid ,"mfg":"SYN","geo":pid ,
+        rec_ [pid ]={"pid":pid ,"mfg":"SYN","geo":pid ,
         "diag":float (np .linalg .norm (V .max (0 )-V .min (0 ))),
         "n":len (G ),"P":P_ ,"Pd":Pd_ ,"G":G ,"Gd":Gd ,
         "metadata":kun }
@@ -150,12 +150,12 @@ def main ():
             h =(time .time ()-t0 )/yazilan 
             print (f"  {yazilan } yazildi {h :.2f}s/part "
             f"kalan ~{h *(N_PARCA -yazilan )/60 :.0f}dk",flush =True )
-            pickle .dump (kayit ,open (KAYIT ,"wb"))
-    pickle .dump (kayit ,open (KAYIT ,"wb"))
+            pickle .dump (rec_ ,open (KAYIT ,"wb"))
+    pickle .dump (rec_ ,open (KAYIT ,"wb"))
     pickle .dump (cyl ,open (CY_PKL ,"wb"))
     pickle .dump (ack ,open (AC_PKL ,"wb"))
 
-    print (f"\nBITTI: yazilan {yazilan } | cache {atlanan } | bos {bos } "
+    print (f"\nBITTI: yazilan {yazilan } | cache {atlanan } | bos {empty_ } "
     f"({time .time ()-t0 :.0f} s)")
     if tani :
         a =np .asarray (tani )
@@ -164,7 +164,7 @@ def main ():
         print (f"  rastgele yuzeyde (ortanca)    : {np .median (a [:,1 ]):.4f}")
         ratio =np .median (a [:,0 ])/max (np .median (a [:,1 ]),1e-6 )
         print (f"  ratio                          : {ratio :.2f}x")
-        print ("  OKUMA: ratio ~1 ise model sentetik geometride AYIRT ETMIYOR,")
+        print ("  OKUMA: ratio ~1 whereas model sentetik geometride AYIRT ETMIYOR,")
         print ("         korpusun training degeri yoktur -- SIMDI bilinmeli.")
         json .dump ({"n":yazilan ,
         "gt_olasilik":float (np .median (a [:,0 ])),

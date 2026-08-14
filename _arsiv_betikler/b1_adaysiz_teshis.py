@@ -95,11 +95,11 @@ def main ():
                 yak =d <=(YARICAP *2 )
             if yak .sum ()<1 :
                 continue 
-            kayit ={"pid":r ["pid"],"cect_max":float (cect [yak ].max ()),
+            rec_ ={"pid":r ["pid"],"cect_max":float (cect [yak ].max ()),
             "cect_ort":float (cect [yak ].mean ()),
             "ce_ct_tepe":int (np .isin (arg [yak ],[CE ,CT ]).sum ()),
             "tepe":int (yak .sum ())}
-            (ULASAN if ul [b ]else ADAYSIZ ).append (kayit )
+            (ULASAN if ul [b ]else ADAYSIZ ).append (rec_ )
     print (f"\nULASAN CP {len (ULASAN )} | ADAYSIZ CP {len (ADAYSIZ )}")
     if not ADAYSIZ :
         print ("adaysiz CP bulunamadi");return 
@@ -124,10 +124,10 @@ def main ():
     print (f"  (b) SEGMENTASYON KONUSUYOR : {b_pay :.1%}  -> ADAY URETIMI eliyor (ucuz duzeltme)")
     print ()
     if b_pay >0.5 :
-        print ("KARAR: (b) BASKIN -> etiket kampanyasi ACILMAZ. Once candidate uretimi esikleri.")
+        print ("DECISION: (b) BASKIN -> label kampanyasi ACILMAZ. Once candidate uretimi esikleri.")
     else :
-        print ("KARAR: (a) BASKIN -> segmentasyon o acikliklari GORMUYOR.")
-        print ("       Hedefli etiket kampanyasi HAKLI: bu 188 CP'nin turu ogretilmeli.")
+        print ("DECISION: (a) BASKIN -> segmentasyon that acikliklari GORMUYOR.")
+        print ("       Hedefli label kampanyasi HAKLI: this 188 CP'nin turu ogretilmeli.")
     with io .open ("results/b1_adaysiz_teshis.json","w",encoding ="utf-8")as f :
         json .dump ({"ulasan":len (ULASAN ),"adaysiz":len (ADAYSIZ ),"threshold":threshold ,
         "b_pay_uretim":b_pay ,"a_pay_segmentasyon":1 -b_pay ,

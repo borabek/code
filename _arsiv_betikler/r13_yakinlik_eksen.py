@@ -22,11 +22,11 @@ G6 ={r ['pid']:r for r in pickle .load (open ('results/_der_yeni_g6.pkl','rb'))}
 yol ={p :s for m ,p ,jf ,s in eligible ()}
 m ,_ =egit ('results/zengin_parite_v3.npz')
 
-def kos (DER ,ad ,sinir =70 ,maxoff =5.0 ):
+def kos (DER ,ad ,bound_ =70 ,maxoff =5.0 ):
     A_mev =[];A_yak =[];kur =0 ;boz =0 ;yok =0 
     n =0 
     for r in DER :
-        if n >=sinir :break 
+        if n >=bound_ :break 
         if r ['X']is None or r .get ('XR')is None :continue 
         M =np .hstack ([r ['X'],r ['XR']]).astype (float )
         if M .shape [1 ]*2 !=m ['n_feat']:continue 

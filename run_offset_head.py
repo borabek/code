@@ -131,8 +131,8 @@ def main ():
     for ep in range (EPOK ):
         model .train ()
         top_l ,top_mm ,n =0.0 ,[],0 
-        sira =rng .permutation (len (hazir ))
-        for k in sira :
+        rank_ =rng .permutation (len (hazir ))
+        for k in rank_ :
             V ,F ,off ,seed =hazir [k ]
             ops =D .precompute_operators (V ,F ,KEIG ,OPS_DIR )
             o ={kk :(v .to (dev )if hasattr (v ,"to")else v )
@@ -162,9 +162,9 @@ def main ():
         "meta":meta ,"epok":ep +1 ,"ortanca_mm":ort },
         CIKTI )
     print (f"\n-> {CIKTI }")
-    print ("SORU: ag tepe basina offseti <=1.0 mm ile tahmin edebiliyor mu?")
+    print ("SORU: network vertex basina offseti <=1.0 mm with prediction edebiliyor mu?")
     print (f"CEVAP (training kumesi ortancasi): {ort :.3f} mm")
-    print ("NOT: bu EGITIM kumesi hatasidir; genelleme icin VAL'de "
+    print ("NOT: this EGITIM kumesi hatasidir; genelleme for VAL'de "
     "olculmelidir (sonraki adim).")
     return 0 
 

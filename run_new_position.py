@@ -73,9 +73,9 @@ def yap ():
 def main ():
     t0 =time .time ()
     import trimesh 
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
     n_ok =0 
-    for _i ,d in enumerate (veri ):
+    for _i ,d in enumerate (data_ ):
         d ["y"]=np .asarray (d ["y"],int )
         idx =np .asarray (d ["idx"],int )
         P =np .asarray (d ["P"],float )
@@ -104,9 +104,9 @@ def main ():
         # `data.index(d)` KULLANILMAZ: O(n^2) and dictionary inside numpy dizisi
         # oldugu for karsilastirmasi da pahalidir.
         if (_i +1 )%100 ==0 :
-            print (f"  oznitelik {_i +1 }/{len (veri )} "
+            print (f"  oznitelik {_i +1 }/{len (data_ )} "
             f"({time .time ()-t0 :.0f} s)",flush =True )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     # KAT TURU (2026-08-13). Varsayilan MARKA-DISI katlar = GORULMEMIS
     # brand kosulu. `YK_RASTGELE_KAT=1` with RASTGELE 3 fold is used =
     # brand-KARISIK, i.e. TANIDIK brand kosulu.
@@ -117,16 +117,16 @@ def main ():
     # etmek becomes.
     if os .environ .get ("YK_RASTGELE_KAT")=="1":
         _rng =np .random .default_rng (1 )
-        _pay =_rng .permutation (len (veri ))%3 
-        for _i ,_d in enumerate (veri ):
+        _pay =_rng .permutation (len (data_ ))%3 
+        for _i ,_d in enumerate (data_ ):
             _d ["mfg"]=f"fold{_pay [_i ]}"
-        brand =collections .Counter (d ["mfg"]for d in veri )
+        brand =collections .Counter (d ["mfg"]for d in data_ )
         katlar =[f"fold{i }"for i in range (3 )]
         print ("  KATLAR RASTGELE (brand-karisik = TANIDIK brand kosulu)",
         flush =True )
     else :
         katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | mesh {n_ok } | katlar {katlar } | "
+    print (f"{len (data_ )} part | mesh {n_ok } | katlar {katlar } | "
     f"neg={NEG_KAT } ({time .time ()-t0 :.0f} s)",flush =True )
 
     def mat (d ,arm ):
@@ -142,19 +142,19 @@ def main ():
 
     agg ={k :collections .Counter ()for k in KOLLAR }
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
         for arm in KOLLAR :
-            n_s =sum (len (veri [i ]["y"])for i in ic )
-            M =np .empty ((n_s ,mat (veri [ic [0 ]],arm ).shape [1 ]),np .float32 )
+            n_s =sum (len (data_ [i ]["y"])for i in ic )
+            M =np .empty ((n_s ,mat (data_ [ic [0 ]],arm ).shape [1 ]),np .float32 )
             PA =np .empty (n_s ,np .int32 )
             o =0 
             for pi ,i in enumerate (ic ):
-                m_ =mat (veri [i ],arm )
+                m_ =mat (data_ [i ],arm )
                 M [o :o +len (m_ )]=m_ 
                 PA [o :o +len (m_ )]=pi 
                 o +=len (m_ )
-            Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+            Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
             rng =np .random .default_rng (0 )
             poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
             if arm .endswith ("yerelneg"):
@@ -176,7 +176,7 @@ def main ():
             m =yap ().fit (M [sec ],Y [sec ])
             del M ,PA 
             for i in dis :
-                d =veri [i ]
+                d =data_ [i ]
                 s =m .predict_proba (mat (d ,arm ))[:,1 ]
                 P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,KURAL ,
                 nms_mm =NMS )
@@ -187,14 +187,14 @@ def main ():
                 c ["tp"]+=tp ;c ["fp"]+=fp ;c ["fn"]+=fn 
         print (f"  {b } bitti ({time .time ()-t0 :.0f} s)",flush =True )
 
-    son ={k :f1 (agg [k ])for k in KOLLAR }
-    print (f"\n=== TABAN {son ['baseline']:.4f} ===")
+    last_ ={k :f1 (agg [k ])for k in KOLLAR }
+    print (f"\n=== TABAN {last_ ['baseline']:.4f} ===")
     for k in KOLLAR [1 :]:
-        fark =son [k ]-son ["baseline"]
-        print (f"  {k :<8}{son [k ]:.4f}   {fark :+.4f}"
+        fark =last_ [k ]-last_ ["baseline"]
+        print (f"  {k :<8}{last_ [k ]:.4f}   {fark :+.4f}"
         +("  <- KAPI GECTI"if fark >=0.01 else ""))
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"neg":NEG_KAT ,
-    "toplam":son ,
+    "toplam":last_ ,
     "not":"L3 ayna esi + L4 vida cifti + L5 isin-temas. Taban = "
     "temel + kanonik + neg12. Hepsi GT'siz. "
     "D7'ye BAKILMADI."},

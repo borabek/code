@@ -89,11 +89,11 @@ def main ():
     egitim_anah ={r ["geo"]for r in R if r ["pid"]in egitim_pid and r .get ("geo")}
     gk =OK .geo_anahtarlari ()
     egitim_anah |={gk [p ]for p in egitim_pid if p in gk }
-    once =len (candidate )
+    pre_ =len (candidate )
     candidate =[r for r in candidate 
     if r .get ("geo")and r ["geo"]not in YASAK and r ["geo"]not in egitim_anah ]
-    print (f"KATMAN 2 geometri: {once } -> {len (candidate )} part "
-    f"({once -len (candidate )} carpisma atildi)")
+    print (f"KATMAN 2 geometri: {pre_ } -> {len (candidate )} part "
+    f"({pre_ -len (candidate )} carpisma atildi)")
 
     # --- KATMAN 3: grup-ici tekillik (same gruptan only BIR part)
     gor ,tekil =set (),[]
@@ -126,7 +126,7 @@ def main ():
     # basarisizligidir. Bu parts sinavda kalirsa "gorulmemis ureticide cokuyor"
     # sonucu SAHTE as agirlasir.
     # NOT: this parts KAYBEDILMIYOR -- hizalama duzeltilince geri alinabilirler.
-    once =len (tekil )
+    pre_ =len (tekil )
     saglam =[]
     for r in tekil :
         P =np .asarray (r ["P"],float );G =np .asarray (r ["G"],float )
@@ -139,8 +139,8 @@ def main ():
         if float (np .median (lateral ))<=CERCEVE_ESIK :
             saglam .append (r )
     tekil =saglam 
-    print (f"KATMAN 4 cerceve: {once } -> {len (tekil )} part "
-    f"({once -len (tekil )} hizalamasi BOZUK, threshold {CERCEVE_ESIK }mm)")
+    print (f"KATMAN 4 cerceve: {pre_ } -> {len (tekil )} part "
+    f"({pre_ -len (tekil )} hizalamasi BOZUK, threshold {CERCEVE_ESIK }mm)")
 
     # --- SINIRLAMA: DENGELI ORNEKLEME (2026-08-04'te eklendi)
     #
@@ -150,19 +150,19 @@ def main ():
     # DENGELI olmasi is required. Uretici x CP-kovasi dongusel secimle kuculturuz:
     # each turda each ureticiden, that ureticinin at least temsil edilen kovasindan a part.
     # Deterministik (pid'e according to sirali), i.e. muhur tekrarlanabilir.
-    if a .sinir and len (tekil )>a .sinir :
+    if a .bound_ and len (tekil )>a .bound_ :
         pool =collections .defaultdict (list )
         for r in sorted (tekil ,key =lambda x :x ["pid"]):
             pool [(r ["mfg"],kova_adi (int (r ["n"])))].append (r )
         mfgler =sorted ({k [0 ]for k in pool })
         kovalar =[f"{lo }-{hi if hi <10 **9 else '8+'}"for lo ,hi in KOVA ]
         sec ,i =[],0 
-        while len (sec )<a .sinir :
+        while len (sec )<a .bound_ :
             eklendi =False 
             for m in mfgler :
                 for kv_ in kovalar :
                     L =pool [(m ,kv_ )]
-                    if i <len (L )and len (sec )<a .sinir :
+                    if i <len (L )and len (sec )<a .bound_ :
                         sec .append (L [i ]);eklendi =True 
             if not eklendi :
                 break 
@@ -194,7 +194,7 @@ def main ():
     print (f"  MUHUR sha16 = {imza }")
     print (f"  -> {CIKTI }  ve  {DER_CIKTI }")
     print ("\n  UYARI: bu cluster EGITIMDE kullanilamaz. Her arm onu AYNI haliyle kullanir;")
-    print ("         corpus buyudukce YENIDEN URETILIRSE muhur degisir ve karsilastirma bozulur.")
+    print ("         corpus buyudukce YENIDEN URETILIRSE muhur degisir and karsilastirma bozulur.")
 
 
 if __name__ =="__main__":

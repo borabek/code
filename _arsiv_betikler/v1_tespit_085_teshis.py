@@ -71,7 +71,7 @@ def main ():
     gate ={"clf":clf ,"n_feat":Z .shape [1 ],"donusum":DON }
     print ("gate hazir\n",flush =True )
 
-    su ,kahin ,ceiling =[],[],[]
+    su ,oracle_ ,ceiling =[],[],[]
     rec ={"dusuk":[0 ,0 ],"cok":[0 ,0 ]}
     for r in DER :
         rj ="cok"if r ["n"]>=8 else "dusuk"
@@ -91,14 +91,14 @@ def main ():
         m =np .zeros (len (Pt ),bool )
         for a_ in sec :
             m [a_ ]=True 
-        kahin .append ((rj ,)+esle (Pt [m ],Pdt [m ],G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
+        oracle_ .append ((rj ,)+esle (Pt [m ],Pdt [m ],G ,Gd ,r ["diag"],0.0 ,180.0 ,True ))
         # ADAY TAVANI: each eslesen GT TP, kalani FN, FP=0
         ceiling .append ((rj ,tp ,0 ,len (G )-tp ))
         rec [rj ][0 ]+=tp ;rec [rj ][1 ]+=len (G )
 
     print (f"{'olcu':<24}{'dusuk-CP':>10}{'cok-CP':>10}{'AGIRLIKLI':>12}")
     S ={}
-    for ad ,rows in (("1 SU AN",su ),("2 KAHIN GATE",kahin ),("4 ADAY TAVANI",ceiling )):
+    for ad ,rows in (("1 SU AN",su ),("2 KAHIN GATE",oracle_ ),("4 ADAY TAVANI",ceiling )):
         rr =f1_rejim (rows )
         S [ad ]=rr 
         print (f"{ad :<24}{rr ['F1']['dusuk']:>10.4f}{rr ['F1']['cok']:>10.4f}"

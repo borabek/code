@@ -71,9 +71,9 @@ n40 =cum [min (39 ,len (cum )-1 )]
 ok =n40 >=0.60 
 print (f"\n=== P6 KAPISI: >=%60 kutle <=40 tipte? -> {'GECTI'if ok else 'KALDI'} (%{100 *n40 :.0f}) ===")
 if ok :
-    print ("  -> insan adjudication'i MESRU (50-100 hedefli 'wire/tool/unsure' sorusu). Yine de EN SON yapilir.")
+    print ("  -> insan adjudication'i MESRU (50-100 hedefli 'wire/tool/unsure' sorusu). Yine de EN SON is done.")
     json .dump ([{"type":k ,"n_fp":int (c )}for k ,c in zip (kk [:60 ],cc [:60 ])],
     open ("results/p6_target_types.json","w"),indent =1 )
-    print ("  -> results/p6_target_types.json (hedef liste, FAZ B icin hazir)")
+    print ("  -> results/p6_target_types.json (hedef list, FAZ B for hazir)")
 else :
-    print ("  -> KURAL GEREGI ADJUDICATION YAPILMAZ (FP dagilmis, tek kararlar kutleyi temizlemez).")
+    print ("  -> RULE GEREGI ADJUDICATION YAPILMAZ (FP dagilmis, single kararlar kutleyi temizlemez).")

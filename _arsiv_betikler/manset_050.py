@@ -94,7 +94,7 @@ def main ():
         f"({100 *p6 /sy ['cagri']:.1f}%) | regime disi "
         f"{sy .get ('rejim_disi',0 )} | tablo yok {sy .get ('tablo_yok',0 )}")
         if p6 ==0 :
-            print ("!! P6 HIC CALISMAMIS -- bu sayi TABAN sayisidir.")
+            print ("!! P6 HIC CALISMAMIS -- this number TABAN sayisidir.")
     print ()
 
     for alan ,ad in (("rob","ROBOT (lateral<=2mm, signed aci<=10)"),
@@ -113,12 +113,12 @@ def main ():
     tb =marka_tablo (baseline )if baseline else {}
     art =0 
     for k ,v in sorted (mt .items (),key =lambda x :-x [1 ]["FN"]-x [1 ]["TP"]):
-        satir =(f"{k :<8}{v ['n']:>5}{v ['f1']:>10.4f}{v ['TP']:>7}{v ['FP']:>7}"
+        line_ =(f"{k :<8}{v ['n']:>5}{v ['f1']:>10.4f}{v ['TP']:>7}{v ['FP']:>7}"
         f"{v ['FN']:>7}")
         if baseline and k in tb :
-            satir +=f"{tb [k ]['f1']:>10.4f}"
+            line_ +=f"{tb [k ]['f1']:>10.4f}"
             art +=int (v ["f1"]>tb [k ]["f1"])
-        print (satir )
+        print (line_ )
     print (f"{'MAKRO':<8}{'':>5}{np .mean ([v ['f1']for v in mt .values ()]):>10.4f}")
     print (f"{'EN KOTU':<8}{'':>5}{min (v ['f1']for v in mt .values ()):>10.4f}")
     if baseline :

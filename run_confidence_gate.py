@@ -73,7 +73,7 @@ def esik_sec (S ,Y ,n_gt ,hedef ):
 def bas (ad ,S ,Y ,n_gt ,threshold =None ,hedef =HEDEF ):
     print (f"\n--- {ad } ---")
     if not len (S ):
-        print ("  skor/dogru verisi YOK (receipt eski surumle uretilmis)")
+        print ("  skor/correct verisi YOK (receipt old surumle uretilmis)")
         return None 
     print (f"  tahmin {len (S )} | dogru {int (Y .sum ())} | GT {n_gt } | "
     f"ham precision {Y .mean ():.4f}")

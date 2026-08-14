@@ -189,7 +189,7 @@ def main ():
 
     t0 =time .time ()
     rec ={"config":CONFIG ,"generated":time .strftime ("%Y-%m-%d %H:%M:%S")}
-    print ("=== URUN v2 DOGRULAMA (WORK OOF) ===",flush =True )
+    print ("=== URUN v2 VERIFICATION (WORK OOF) ===",flush =True )
     work =evaluate (clean -LOCK ,label ="WORK (kilitli haric, temiz)")
     rec ["work"]=work 
     print (f"  part {work ['n_parts']} (cok-CP {work ['n_high_cp']})")
@@ -200,7 +200,7 @@ def main ():
         print ("\n=== KILITLI HOLDOUT -- TEK ATIS ===",flush =True )
         hp =clean &LOCK 
         if not hp :
-            print ("  kilitli holdout parcasi bulunamadi (temiz kesisim bos)")
+            print ("  kilitli holdout parcasi bulunamadi (temiz kesisim empty)")
         else :
         # GERCEK holdout: gate/threshold/router SADECE WORK'te ogrenilir (see evaluate_holdout)
             ho =evaluate_holdout (clean -LOCK ,hp )

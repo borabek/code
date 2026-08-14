@@ -51,8 +51,8 @@ def main ():
         print (f"  PAY {i_ }/{n_ }",flush =True )
     print (f"{ON }: {len (fs )} part | {KAYNAK } -> {CIK }",flush =True )
     t0 =time .time ()
-    yaz =atla =bos =0 
-    once =sonra =0 
+    yaz =atla =empty_ =0 
+    pre_ =post_ =0 
     for i ,f in enumerate (fs ,1 ):
         hedef =f"{CIK }/{f }"
         if os .path .exists (hedef ):
@@ -61,13 +61,13 @@ def main ():
         pid =f [len (ON )+1 :-4 ]
         mf =f"{MESH }/{pid }.npz"
         if not os .path .exists (mf ):
-            bos +=1 
+            empty_ +=1 
             continue 
         z =np .load (f"{KAYNAK }/{f }")
         X ,idx ,YD =z ["X"],np .asarray (z ["idx"],int ),np .asarray (z ["YD"],float )
         P ,D ,kay =z ["P"],z ["D"],z ["kaynak"]
         if not len (idx ):
-            bos +=1 
+            empty_ +=1 
             continue 
         zz =np .load (mf )
         V =np .ascontiguousarray (zz ["V"],np .float64 )
@@ -84,24 +84,24 @@ def main ():
         cos =(YDn *AN [idx ]).sum (1 )
         # candidate basina EN YAKIN secenegi tut
         tut =np .zeros (len (idx ),bool )
-        sira =np .lexsort ((-cos ,idx ))
-        _ ,ilk =np .unique (idx [sira ],return_index =True )
-        tut [sira [ilk ]]=True 
-        once +=len (idx )
-        sonra +=int (tut .sum ())
+        rank_ =np .lexsort ((-cos ,idx ))
+        _ ,first_ =np .unique (idx [rank_ ],return_index =True )
+        tut [rank_ [first_ ]]=True 
+        pre_ +=len (idx )
+        post_ +=int (tut .sum ())
         np .savez_compressed (hedef +".tmp",
         X =X [tut ],idx =idx [tut ],YD =YD [tut ],
-        P =P ,D =D ,kaynak =kay )
+        P =P ,D =D ,src_ =kay )
         os .replace (hedef +".tmp.npz",hedef )
         yaz +=1 
         if i %50 ==0 :
             print (f"  {i }/{len (fs )} yazilan {yaz } | secenek "
-            f"{once /max (yaz ,1 ):.0f} -> {sonra /max (yaz ,1 ):.0f} "
+            f"{pre_ /max (yaz ,1 ):.0f} -> {post_ /max (yaz ,1 ):.0f} "
             f"({time .time ()-t0 :.0f} s)",flush =True )
-    print (f"\nBITTI: yazilan {yaz } | atlanan {atla } | bos {bos }")
+    print (f"\nBITTI: yazilan {yaz } | atlanan {atla } | bos {empty_ }")
     if yaz :
-        print (f"secenek/part: {once /yaz :.0f} -> {sonra /yaz :.0f} "
-        f"({once /max (sonra ,1 ):.1f}x azalma)")
+        print (f"secenek/part: {pre_ /yaz :.0f} -> {post_ /yaz :.0f} "
+        f"({pre_ /max (post_ ,1 ):.1f}x azalma)")
 
 
 if __name__ =="__main__":

@@ -113,7 +113,7 @@ def main ():
     a =run (fams ,"family_key (= part no, ESKI)")
     b =run (G_geo ,"geometry_key (GERCEK koruma)")
     print (f"\nSIZINTININ BEDELI: {b -a :+.4f}")
-    print ("  negatifse eski sayilar o kadar IYIMSERDI ve dogru sayi geometri gruplamasindaki.")
+    print ("  negatifse old numbers that up to IYIMSERDI and correct number geometri gruplamasindaki.")
     json .dump ({"family_key":a ,"geometry_key":b ,"fark":b -a ,
     "n_grup_family":ng_fam ,"n_grup_geometry":ng_geo ,
     "ikizi_olan_parca_orani":shared /max (len (uniq ),1 )},

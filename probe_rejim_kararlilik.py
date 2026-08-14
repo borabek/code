@@ -49,9 +49,9 @@ def say (P ,D ,d ):
     False ,signed =True )[:3 ]
 
 
-def puanla (veri ,secim ):
+def puanla (data_ ,sel_ ):
     T =[0 ,0 ,0 ]
-    for d ,p6 in zip (veri ,secim ):
+    for d ,p6 in zip (data_ ,sel_ ):
         c =d ["_p6_c"]if p6 else d ["_tb_c"]
         for i in range (3 ):
             T [i ]+=c [i ]
@@ -62,20 +62,20 @@ def main ():
     t0 =time .time ()
     pk =pickle .load (open (PAKET ,"rb"))
     tb =product_genis .model_yukle ()
-    veri =[]
+    data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):
-        veri +=yukle (cluster .strip (),int (os .environ .get ("P6_TR","0")))
-    print (f"{len (veri )} part ({time .time ()-t0 :.0f} s)",flush =True )
-    for i ,d in enumerate (veri ,1 ):
+        data_ +=yukle (cluster .strip (),int (os .environ .get ("P6_TR","0")))
+    print (f"{len (data_ )} part ({time .time ()-t0 :.0f} s)",flush =True )
+    for i ,d in enumerate (data_ ,1 ):
         (Pt ,Dt ),_s =taban_cikti (d ,tb )
         Pp ,Dp =p6_cikti (d ,pk )
         d ["_tb_c"]=say (Pt ,Dt ,d )
         d ["_p6_c"]=say (Pp ,Dp ,d )
         d ["_n01"]=float ((d ["kaynak"]!=2 ).sum ())
         if i %600 ==0 :
-            print (f"  {i }/{len (veri )} ({time .time ()-t0 :.0f} s)",flush =True )
+            print (f"  {i }/{len (data_ )} ({time .time ()-t0 :.0f} s)",flush =True )
 
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=200 ]
     print (f"katlar: {katlar }\n",flush =True )
     print (f"{'threshold':>6}{'fold-disi robot':>16}{'P6 orani':>10}")
@@ -84,7 +84,7 @@ def main ():
         T =[0 ,0 ,0 ]
         p6n =tot =0 
         for b in katlar :
-            dis =[d for d in veri if d ["mfg"]==b ]
+            dis =[d for d in data_ if d ["mfg"]==b ]
             for d in dis :
                 c =d ["_p6_c"]if d ["_n01"]>=e else d ["_tb_c"]
                 for i in range (3 ):
@@ -96,15 +96,15 @@ def main ():
         print (f"{e :>6}{f1 :>16.4f}{p6n /max (tot ,1 ):>10.2f}")
 
     en =max (egri ,key =lambda k :egri [k ]["robot"])
-    tepe =egri [en ]["robot"]
-    bant =[e for e in ESIKLER if egri [e ]["robot"]>=tepe -0.01 ]
-    print (f"\nEN IYI threshold {en } -> {tepe :.4f}")
+    vtx_ =egri [en ]["robot"]
+    bant =[e for e in ESIKLER if egri [e ]["robot"]>=vtx_ -0.01 ]
+    print (f"\nEN IYI threshold {en } -> {vtx_ :.4f}")
     print (f"TEPEDEN 0.01 ICINDE kalan esikler: {bant }")
     print (f"90'in degeri: {egri .get (90 ,{}).get ('robot',0 ):.4f} "
-    f"(tepeden {tepe -egri .get (90 ,{}).get ('robot',0 ):+.4f})")
-    print ("YORUM: bant genisse threshold KARARLI, dar ise KIRILGAN.")
+    f"(tepeden {vtx_ -egri .get (90 ,{}).get ('robot',0 ):+.4f})")
+    print ("YORUM: bant genisse threshold KARARLI, dar whereas KIRILGAN.")
     json .dump ({"damga":makbuz_hash .damga (),"egri":egri ,"en_iyi":en ,
-    "bant":bant ,"katlar":katlar ,"n_parca":len (veri ),
+    "bant":bant ,"katlar":katlar ,"n_parca":len (data_ ),
     "not":"Rejim esigi kararlilik egrisi. Kat-disi measurement; D7'ye "
     "BAKILMADI. Esik secimi bu egriden yapilir."},
     open ("results/rejim_kararlilik.json","w"),indent =1 )

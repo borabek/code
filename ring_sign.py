@@ -104,8 +104,8 @@ def self_check ():
     dogru =np .array ([0.0 ,0.0 ,1.0 ])# DISARI
     cps =[{"point":mouth .tolist (),"direction":(-dogru ).tolist ()}]
     cps ,n =duzelt (cps ,V ,F )
-    yeni =np .asarray (cps [0 ]["direction"],float )
-    ok =float (yeni @dogru )>0.9 
+    new_ =np .asarray (cps [0 ]["direction"],float )
+    ok =float (new_ @dogru )>0.9 
     print (f"  ters verilen direction duzeltildi mi: {'EVET'if ok else 'HAYIR'} "
     f"(cevrilen {n })")
     # correct verilen direction BOZULMAMALI

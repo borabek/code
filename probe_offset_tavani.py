@@ -54,7 +54,7 @@ def kumelen (Q ,bant =BANT ,min_uye =MIN_UYE ):
     if not len (Q ):
         return np .zeros ((0 ,3 )),[]
     kalan =np .ones (len (Q ),bool )
-    merkez ,uyeler =[],[]
+    center_ ,uyeler =[],[]
     while kalan .any ():
         idx =np .where (kalan )[0 ]
         P =Q [idx ]
@@ -64,10 +64,10 @@ def kumelen (Q ,bant =BANT ,min_uye =MIN_UYE ):
         i =int (np .argmax (say ))
         uye =idx [d [i ]<=bant ]
         if len (uye )>=min_uye :
-            merkez .append (Q [uye ].mean (0 ))
+            center_ .append (Q [uye ].mean (0 ))
             uyeler .append (len (uye ))
         kalan [uye ]=False 
-    return np .asarray (merkez ).reshape (-1 ,3 ),uyeler 
+    return np .asarray (center_ ).reshape (-1 ,3 ),uyeler 
 
 
 def main ():
@@ -106,8 +106,8 @@ def main ():
         # (Gercekte bunu `seed` head ogrenir; here ceiling olculuyor.)
         d =np .linalg .norm (V [:,None ,:]-G [None ,:,:],axis =-1 )
         en_yakin =d .argmin (1 )
-        mesafe =d .min (1 )
-        oy =mesafe <=6.0 
+        dist_ =d .min (1 )
+        oy =dist_ <=6.0 
         if oy .sum ()<MIN_UYE :
             continue 
         atama =en_yakin [oy ].copy ()
@@ -154,7 +154,7 @@ def main ():
         f"{f1 (tot [s ]['rob']):10.4f}")
     print ("\nKIYAS (ayni criterion, bugunku urun, VAL 100): "
     "tespit 0.7878 / robot-axis 0.5764")
-    print ("Pose head'in bugun OOF'ta ulastigi artik: ortanca 0.67 mm")
+    print ("Pose head'in bugun OOF'ta ulastigi residual: median 0.67 mm")
     json .dump ({str (s ):{k :f1 (v )for k ,v in tot [s ].items ()}
     for s in SIGMA },
     io .open ("results/offset_tavani.json","w",encoding ="utf-8"),

@@ -51,7 +51,7 @@ def obb_eksenleri (V ):
         return []
 
 
-def uzlasi_yonu (D ,agirlik =None ):
+def uzlasi_yonu (D ,wgt_ =None ):
     """Yonlerin EN BUYUK kumesinin medyani (sign duyarli not -> hizala)."""
     if not len (D ):
         return None 
@@ -149,9 +149,9 @@ def main ():
                     if OBB and len (P )>2 :
                         n0 =OBB [0 ]
                         t_ =P @n0 
-                        ayni =np .abs (t_ -t_ [i ])<=3.0 
-                        if ayni .sum ()>=2 :
-                            fu =uzlasi_yonu (Pd [ayni ])
+                        same_ =np .abs (t_ -t_ [i ])<=3.0 
+                        if same_ .sum ()>=2 :
+                            fu =uzlasi_yonu (Pd [same_ ])
                             if fu is not None :
                                 S2 ["yuz_uzlasi"]=fu 
                                 # adayin eksenine DIK duzlemde, OBB eksenlerine most yakin yonler

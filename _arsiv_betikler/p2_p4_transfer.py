@@ -109,5 +109,5 @@ for nm ,rs in (("TUM",rows ),("SADECE gercek farkli-geometri",[r for r in rows i
     print (f"\nAGIRLIKLI ALL kazanci ({nm }): kapsam {100 *w :.1f}% x (F1 {f1 :.3f} - mevcut {CUR :.3f}) = {gain :+.4f}"
     +("  -> GO (>=+0.010)"if gain >=0.010 else "  -> KALIR (<+0.010)"))
 print ("\nNOT: unseen-family (singleton) parts transfer ALAMAZ -> agregada SIFIR katki (kural geregi dahil).")
-print ("NOT: family-out CV'de kardesler AYNI fold'da olur -> transfer orada TANIMSIZ; bu bir 'known-family' yetenegidir.")
+print ("NOT: family-out CV'de kardesler AYNI fold'da becomes -> transfer orada TANIMSIZ; this a 'known-family' yetenegidir.")
 json .dump (rows ,open ("results/p4_transfer.json","w"),indent =1 )

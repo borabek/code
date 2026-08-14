@@ -110,7 +110,7 @@ def main ():
     print (f"sign testi: {kazanan }/{n } pozitif -> p = {p_iki_yonlu :.4f}")
     yorum =("GENEL saglamlik kazanci"if (kazanan >=len (f )-1 and f .mean ()>0 )
     else "TEK BOLMEYE FIT -- karar kirilgan"if kazanan <=len (f )//2 
-    else "KARISIK: cogunlukta kazaniyor ama tekduze degil")
+    else "KARISIK: cogunlukta kazaniyor but tekduze not")
     print (f"YORUM: {yorum }")
     print ("\nNOT: seri-disi, manufacturer-disindan DAHA KOLAY bir eksendir (ayni ureticinin\n"
     "istatistigi egitimde kalir). Yerine gecmez; kararin TEK bolmeye fit olup olmadigini\n"

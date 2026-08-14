@@ -87,7 +87,7 @@ def main ():
         "G":d ["G"],"Gd":d ["Gd"],"n":int (d ["n"]),"tol":float (d ["tol"]),
         "regime":"cok"if int (d ["n"])>=8 else "dusuk"})
     if not rows :
-        print ("cache bos -- once pitstop2_gate_nested.py cikarimini kos");return 1 
+        print ("cache empty -- before pitstop2_gate_nested.py cikarimini kos");return 1 
     print (f"{len (rows )} part ({sum (r ['regime']=='dusuk'for r in rows )} dusuk / "
     f"{sum (r ['regime']=='cok'for r in rows )} cok)\n",flush =True )
 

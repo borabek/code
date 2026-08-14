@@ -42,7 +42,7 @@ DEV_MFG ={"SUPU","NIT","S+S","SE"}
 ROBOT_YANAL ,ROBOT_ACI =2.0 ,10.0 
 
 
-def silindir_onbellek (kayit ,yenile =False ):
+def silindir_onbellek (rec_ ,yenile =False ):
     """Parca basina B-rep silindirlerini BIR KEZ cikar, diske yaz."""
     import brep_snap 
     from korpus_kimlik import step_kimlik as SK 
@@ -51,7 +51,7 @@ def silindir_onbellek (kayit ,yenile =False ):
     if os .path .exists (ONBELLEK )and not yenile :
         with open (ONBELLEK ,"rb")as f :
             ob =pickle .load (f )
-    eksik =[p for p in kayit if p not in ob and p in S ]
+    eksik =[p for p in rec_ if p not in ob and p in S ]
     if eksik :
         print (f"silindir cikariliyor: {len (eksik )} part",flush =True )
         t0 =time .time ()
@@ -66,8 +66,8 @@ def silindir_onbellek (kayit ,yenile =False ):
                     pickle .dump (ob ,f )
         with open (ONBELLEK ,"wb")as f :
             pickle .dump (ob ,f )
-    n =sum (1 for p in kayit if ob .get (p ))
-    print (f"silindir onbellegi: {len (ob )} part | silindiri OLAN {n }/{len (kayit )}")
+    n =sum (1 for p in rec_ if ob .get (p ))
+    print (f"silindir onbellegi: {len (ob )} part | silindiri OLAN {n }/{len (rec_ )}")
     return ob 
 
 
@@ -99,12 +99,12 @@ def oturt (cyls ,P ,D ,aci_max ,mm_max ):
     return P2 ,D2 ,n 
 
 
-def puanla (kayit ,model ,ob ,aci_max ,mm_max ,match_greedy ,f1w ,ratio =0.40 ,baseline =0.30 ,
+def puanla (rec_ ,model ,ob ,aci_max ,mm_max ,match_greedy ,f1w ,ratio =0.40 ,baseline =0.30 ,
 mfgler =None ,sayac =None ):
     import wire_gate 
     from p1c_threshold import maske 
     T ,R =[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
@@ -135,12 +135,12 @@ def main ():
     from sina_cluster import match_greedy ,f1w 
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     with open (a .model ,"rb")as f :
         model =pickle .load (f )
-    ob =silindir_onbellek (kayit ,a .yenile )
-    dev ={p :r for p ,r in kayit .items ()if r ["mfg"]in DEV_MFG }
-    sin ={p :r for p ,r in kayit .items ()if r ["mfg"]not in DEV_MFG }
+    ob =silindir_onbellek (rec_ ,a .yenile )
+    dev ={p :r for p ,r in rec_ .items ()if r ["mfg"]in DEV_MFG }
+    sin ={p :r for p ,r in rec_ .items ()if r ["mfg"]not in DEV_MFG }
 
     d0t ,d0r =puanla (dev ,model ,ob ,None ,0 ,match_greedy ,f1w )
     print (f"\nDEV oturtmasiz: tespit {d0t :.4f} robot {d0r :.4f}")
@@ -148,14 +148,14 @@ def main ():
     en_iyi ,en_iyi_r =None ,d0r 
     izgara ={}
     for ac in (10 ,20 ,30 ,45 ):
-        satir =[]
+        line_ =[]
         for mm in (2 ,4 ,6 ,10 ):
             tf ,rf =puanla (dev ,model ,ob ,ac ,mm ,match_greedy ,f1w )
             izgara [f"{ac }/{mm }"]={"tespit":tf ,"robot":rf }
-            satir .append (rf )
+            line_ .append (rf )
             if rf >en_iyi_r :
                 en_iyi_r ,en_iyi =rf ,(ac ,mm )
-        print (f"{ac :<9}"+"".join (f"{v :>10.4f}"for v in satir ))
+        print (f"{ac :<9}"+"".join (f"{v :>10.4f}"for v in line_ ))
 
     if en_iyi is None :
         print ("\nDEV'de HICBIR ayar oturtmasizi gecmedi -> KOL KAPANDI")

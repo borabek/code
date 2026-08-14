@@ -17,14 +17,14 @@ def main ():
     from korpus_kimlik import step_kimlik as SK 
     sv =d6_record .exam (a .cluster )
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
-    yol =a .cikti if a .toplam ==1 else a .cikti .replace (".pkl",f"_{a .vardiya }.pkl")
+    yol =a .out_ if a .total_ ==1 else a .out_ .replace (".pkl",f"_{a .vardiya }.pkl")
     ob ={}
     if os .path .exists (yol ):
         with open (yol ,"rb")as f :
             ob =pickle .load (f )
     hedef =[p for p in sv ["pidler"]if p in S and p not in ob ]
-    if a .toplam >1 :
-        hedef =[p for i ,p in enumerate (hedef )if i %a .toplam ==a .vardiya ]
+    if a .total_ >1 :
+        hedef =[p for i ,p in enumerate (hedef )if i %a .total_ ==a .vardiya ]
     print (f"cikarilacak {len (hedef )} part",flush =True )
     t0 =time .time ()
     for i ,p in enumerate (hedef ,1 ):

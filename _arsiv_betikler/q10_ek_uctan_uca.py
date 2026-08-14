@@ -97,7 +97,7 @@ def main ():
         for k ,v in sorted (_fb .items (),key =lambda x :-x [1 ]):
             print (f'    {k :<28}{v :>6}  (%{100.0 *v /max (_nad ,1 ):.1f})')
     else :
-        print ('  NOTR-DONUS yok: tum ozellikler her adayda hesaplandi')
+        print ('  NOTR-DONUS absent: tum ozellikler each adayda hesaplandi')
 
     def kos (tag ):
         clf =CLF [tag ];nc =KAYNAK [tag ][1 ]

@@ -59,7 +59,7 @@ def main ():
                 adlar [a ]=adlar .get (a ,0 )+1 
     print (f"sozluk girisleri: {dict (sorted (adlar .items (),key =lambda x :-x [1 ]))}\n")
 
-    def kos (secim ):
+    def kos (sel_ ):
         """secim(i, S, p) -> point. Robot(FIZIKSEL) + tespit returns."""
         rob ,det ,gg =[],[],[]
         for r in DER :
@@ -72,7 +72,7 @@ def main ():
                 P0 ,Pd ,SK ,_X =h 
                 P =P0 .copy ()
                 for i in range (len (P )):
-                    q =secim (i ,SK [i ]if i <len (SK )else {},P0 [i ])
+                    q =sel_ (i ,SK [i ]if i <len (SK )else {},P0 [i ])
                     if q is not None :
                         P [i ]=q 
             rob .append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ,signed =True ))
@@ -82,7 +82,7 @@ def main ():
 
         # ================= A) TANIM SORUSU =================
     print ("="*74 )
-    print ("A) TANIM: her girisi GLOBAL olarak v_o yerine koy (ogrenme YOK)")
+    print ("A) TANIM: each girisi GLOBAL as v_o instead of koy (ogrenme YOK)")
     print ("="*74 )
     r0 ,d0 ,gg =kos (lambda i ,S ,p :None )
     b_rob ,b_det =f1w (r0 ),f1w (d0 )
@@ -117,7 +117,7 @@ def main ():
 
     # ================= B) ATESLEME SORUSU =================
     print ("\n"+"="*74 )
-    print ("B) ATESLEME: 'mevcut nokta kotu mu' OGRENILEBILIR mi (grup-capraz AUC)")
+    print ("B) ATESLEME: 'mevcut point kotu mu' OGRENILEBILIR mi (grup-capraz AUC)")
     print ("="*74 )
     FX ,FY ,FG =[],[],[]
     for r in DER :

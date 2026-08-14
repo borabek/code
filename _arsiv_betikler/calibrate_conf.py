@@ -113,7 +113,7 @@ def main ():
         f"WEI AUTO P{wp :.3f}/R{wr :.3f}, PXC AUTO P{pp :.3f}/R{pr :.3f}")
         print (f"  (hedef: iki manufacturer AUTO precision >=0.75, sonra AUTO recall max)")
     else :
-        print ("  UYARI: hicbir hucre iki ureticide de AUTO P>=0.75 vermedi -- esigi dusur veya oyu artir")
+        print ("  WARNING: no hucre two ureticide de AUTO P>=0.75 vermedi -- esigi dusur or oyu artir")
 
 
 if __name__ =="__main__":

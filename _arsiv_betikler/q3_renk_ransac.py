@@ -63,7 +63,7 @@ def main ():
     print (f"{'part':<14}{'cift':>6}{'ic-nokta':>10}{'ratio':>7}{'artik':>10}"
     f"{'NULL ic':>9}{'NULL ratio':>11}")
     iyi =nul =tot =0 
-    kayit =[]
+    rec_ =[]
     for f in sel :
         pid =os .path .basename (f ).split ("_")[1 ]
         try :
@@ -93,14 +93,14 @@ def main ():
         iyi +=ok ;nul +=nok 
         print (f"{pid :<14}{np_ :>6}{ic :>10}{ratio :>7.2f}{art :>10}{icn :>9}{noran :>11.2f}"
         f"{'  <- GECTI'if ok else ''}",flush =True )
-        kayit .append ({"pid":pid ,"cift":np_ ,"ic":ic ,"ratio":ratio ,
+        rec_ .append ({"pid":pid ,"cift":np_ ,"ic":ic ,"ratio":ratio ,
         "null_ic":icn ,"null_oran":noran ,"gecti":bool (ok )})
     o =iyi /max (tot ,1 );no =nul /max (tot ,1 )
     print (f"\nGERCEK: {iyi }/{tot } ({o :.3f}) hizalandi")
     print (f"NULL  : {nul }/{tot } ({no :.3f})   <- bu da yuksekse test DEGERSIZ")
     kar ="AC"if (o >=0.60 and no <o -0.3 )else "KAPAT"
     print (f"\nKILL: gercek >=0.60 VE null gercekten >=0.3 dusuk olmali -> {kar }")
-    json .dump ({"n":tot ,"gercek":o ,"null":no ,"karar":kar ,"kayit":kayit },
+    json .dump ({"n":tot ,"gercek":o ,"null":no ,"karar":kar ,"kayit":rec_ },
     open ("results/q3_renk_ransac.json","w"),indent =1 )
     print ("receipt -> results/q3_renk_ransac.json")
 

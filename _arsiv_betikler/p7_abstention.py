@@ -44,7 +44,7 @@ def main ():
     from sina_cluster import match_hungarian 
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
     with open ("results/wire_gate_v5.pkl","rb")as f :
         gate =pickle .load (f )
     with open ("results/_d6_silindirler.pkl","rb")as f :
@@ -55,7 +55,7 @@ def main ():
         # Her candidate for: (gate skoru, tespit_dogru_mu, robot_dogru_mu, regime, silindir_var_mi)
     kayitlar =[]
     gt_top =0 
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         gt_top +=len (G )
         rj ="cok"if r ["n"]>=8 else "dusuk"
@@ -84,7 +84,7 @@ def main ():
             int (sil >0 ),pid ))
     A =np .asarray ([(k [0 ],k [1 ],k [2 ],k [4 ])for k in kayitlar ],float )
     RJ =np .asarray ([k [3 ]for k in kayitlar ])
-    print (f"D6: {len (kayit )} part | {gt_top } GT CP | {len (A )} gate-gecen candidate\n")
+    print (f"D6: {len (rec_ )} part | {gt_top } GT CP | {len (A )} gate-gecen candidate\n")
 
     print (f"{'threshold':<7}{'candidate':>7}{'kesinlik_T':>12}{'kesinlik_R':>12}"
     f"{'kapsama_T':>11}{'kapsama_R':>11}")

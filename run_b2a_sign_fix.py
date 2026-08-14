@@ -37,7 +37,7 @@ gate =pickle .load (open ("results/kazanan_hgb_derin.pkl","rb"))["HGB-derin"]
 S =K .step_map ()
 _D6 ={str (p ):r for p ,r in d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
 Rk =K .yukle (None )
-kayit =lambda p :Rk .get (p )or _D6 .get (p )# noqa: E731
+rec_ =lambda p :Rk .get (p )or _D6 .get (p )# noqa: E731
 
 
 def yukle (on ,pid ):
@@ -68,7 +68,7 @@ def fiziksel_ters (T ):
 def olc (arm ,clf =None ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ]);tes =[]
     for pid in [f [3 :-4 ]for f in sorted (os .listdir (OZ ))if f .startswith ("d7_")]:
-        r =kayit (pid )
+        r =rec_ (pid )
         if r is None or not len (r .get ("G",[])):continue 
         d =yukle ("d7",pid )
         if d is None :continue 
@@ -98,7 +98,7 @@ def olc (arm ,clf =None ):
     # --- ogrenilmis sign siniflandiricisi (korpusta egitilir)
 X ,Y =[],[]
 for pid in [f [4 :-4 ]for f in sorted (os .listdir (OZ ))if f .startswith ("tam_")]:
-    r =kayit (pid )
+    r =rec_ (pid )
     if r is None or not len (r .get ("G",[])):continue 
     d =yukle ("tam",pid )
     if d is None :continue 

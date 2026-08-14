@@ -71,20 +71,20 @@ def main ():
     measure_set .rapor_bas (rap )
     hedef ={r ["pid"]:r for r in ESKI }
     E ={p :(jf ,s )for m ,p ,jf ,s in eligible ()}
-    sira =[p for p in hedef if p in E ]
-    if a .sinir :
-        sira =sira [:a .sinir ]
-    print (f"\n{len (sira )} part turetilecek",flush =True )
+    rank_ =[p for p in hedef if p in E ]
+    if a .bound_ :
+        rank_ =rank_ [:a .bound_ ]
+    print (f"\n{len (rank_ )} part turetilecek",flush =True )
 
     dev ="cuda"if torch .cuda .is_available ()else "cpu"
     models =[load_any (c ,dev =dev )[:2 ]for c in cks ]
     OUT ,error =[],0 
     t0 =time .time ()
-    for k ,pid in enumerate (sira ,1 ):
+    for k ,pid in enumerate (rank_ ,1 ):
         if k %20 ==0 :
-            print (f"  {k }/{len (sira )}  {time .time ()-t0 :.0f}s  error={error }",flush =True )
+            print (f"  {k }/{len (rank_ )}  {time .time ()-t0 :.0f}s  error={error }",flush =True )
         jf ,stp =E [pid ]
-        eski =hedef [pid ]
+        old_ =hedef [pid ]
         try :
             Vr ,Fr =step_to_mesh (stp )
             V ,F =thesis_remesh .remesh_uniform (Vr ,Fr ,target =6000 )
@@ -115,27 +115,27 @@ def main ():
             Vj =np .array ([[q ["X"],q ["Y"],q ["Z"]]for q in j ["Graphic3d"]["Points"]],float )
             R ,t_ ,_ =cad_eval .align_frames (Vr ,Vj )
             G =(G -t_ )@R ;Gd =Gd @R 
-            OUT .append ({"pid":pid ,"mfg":eski ["mfg"],"geo":eski ["geo"],
-            "cluster":eski .get ("cluster"),"diag":float (np .linalg .norm (V .max (0 )-V .min (0 ))),
+            OUT .append ({"pid":pid ,"mfg":old_ ["mfg"],"geo":old_ ["geo"],
+            "cluster":old_ .get ("cluster"),"diag":float (np .linalg .norm (V .max (0 )-V .min (0 ))),
             "n":len (G ),"P":P ,"Pd":Pd ,"X":X ,"XR":XR ,
             "G":G ,"Gd":Gd ,"UYE":uyeler })
         except Exception as e :
             error +=1 
             print (f"    {pid }: {type (e ).__name__ }: {e }")
-    with open (a .cikti ,"wb")as f :
+    with open (a .out_ ,"wb")as f :
         pickle .dump (OUT ,f )
     nx =sum (1 for r in OUT if r ["X"]is None )
     nxr =sum (1 for r in OUT if r ["XR"]is None )
-    print (f"\n{len (OUT )} kayit -> {a .cikti }")
+    print (f"\n{len (OUT )} kayit -> {a .out_ }")
     print (f"  X yok: {nx } | XR yok: {nxr } | error: {error }")
     print (f"  GT toplam: {sum (r ['n']for r in OUT )} | candidate toplam: {sum (len (r ['P'])for r in OUT )}")
-    with io .open (a .cikti .replace (".pkl","_koken.json"),"w",encoding ="utf-8")as f :
+    with io .open (a .out_ .replace (".pkl","_koken.json"),"w",encoding ="utf-8")as f :
         json .dump ({"ckpt":cks ,"n_parca":len (OUT ),"X_yok":nx ,"XR_yok":nxr ,
         "error":error ,"postproc":cfg .get ("prediction_postproc",{}),
         "robot_min_votes":cfg .get ("robot_min_votes"),
         "conn_promote":cfg .get ("current_product",{}).get ("params",{}).get ("conn_promote")},
         f ,indent =1 )
-    print (f"  koken -> {a .cikti .replace ('.pkl','_koken.json')}")
+    print (f"  koken -> {a .out_ .replace ('.pkl','_koken.json')}")
 
 
 if __name__ =="__main__":

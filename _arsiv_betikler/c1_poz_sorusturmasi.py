@@ -106,7 +106,7 @@ def main ():
                 faces =np .ascontiguousarray (F ,np .int64 ),process =False )
             except Exception :
                 continue 
-            kayit =[]
+            rec_ =[]
             for ad ,(P ,D )in zip (("HAM","POZ","TAM"),a ):
                 sat =[]
                 for i in range (len (P )):
@@ -125,10 +125,10 @@ def main ():
                     except Exception :
                         cp =float ("nan")
                     sat .append ((ic ,il ,cp ))
-                kayit .append (sat )
+                rec_ .append (sat )
                 # poz kafasinin NOKTAYI ne up to oynattigi
             kay =float (np .linalg .norm (a [1 ][0 ]-a [0 ][0 ],axis =1 ).mean ())if len (a [0 ][0 ])else 0.0 
-            SAY [r ["pid"]]={"asama":kayit ,"poz_kayma":kay ,
+            SAY [r ["pid"]]={"asama":rec_ ,"poz_kayma":kay ,
             "regime":"cok"if r ["n"]>=8 else "dusuk"}
         with open (ONB ,"wb")as f :
             pickle .dump (SAY ,f )

@@ -43,4 +43,4 @@ for m ,pid ,jf ,stp in parts :
     trimesh .util .concatenate (scene ).export (out )
     print (f"{pid }: {len (G )} manufacturer(yesil) | {len (P )} model(kirmizi) -> {out }")
 print ("\n-> results/w1_glb/*.glb  Windows 3D Viewer'da ac. KIRMIZI-only kureler = FP (model buldu, manufacturer listelemedi)")
-print ("-> Bak: kirmizilar gercek KABLO GIRISI mi (GT eksik) yoksa test-point/vida/montaj mi (model yanlis)?")
+print ("-> Bak: kirmizilar real KABLO GIRISI mi (GT missing) otherwise test-point/vida/montaj mi (model wrong)?")

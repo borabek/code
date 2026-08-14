@@ -131,10 +131,10 @@ def puanla (d ,s ,threshold ,nms ,arm ):
     return P ,D 
 
 
-def olc (veri ,skor ,threshold ,nms ,arm ):
+def olc (data_ ,skor ,threshold ,nms ,arm ):
     tp =fp =fn =0 
     tes =[]
-    for d ,s in zip (veri ,skor ):
+    for d ,s in zip (data_ ,skor ):
         P ,D =puanla (d ,s ,threshold ,nms ,arm )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
@@ -157,9 +157,9 @@ def egit (tr ,baseline ):
     return yap ().fit (M ,Y )
 
 
-def skorla (m ,veri ,baseline ):
+def skorla (m ,data_ ,baseline ):
     out =[]
-    for d in veri :
+    for d in data_ :
         if baseline :
             k =kendi (d )
             s =np .zeros (len (d ["X"]))
@@ -195,7 +195,7 @@ def main ():
             r =olc (te ,s_te ,en [0 ],en [1 ],arm )
             for k in ("TP","FP","FN"):
                 top [arm ][k ]+=r [k ]
-            ayrinti [b ][arm ]=dict (r ,kural =list (en [0 ]),nms =en [1 ])
+            ayrinti [b ][arm ]=dict (r ,rule_ =list (en [0 ]),nms =en [1 ])
         t ,p ,o =(ayrinti [b ]["TABAN"],ayrinti [b ]["P6"],ayrinti [b ]["P6_KAHIN"])
         print (f"  {b :<6} n={len (te ):<4} TABAN {t ['robot']:.4f} -> "
         f"P6 {p ['robot']:.4f} ({p ['kural']}, nms {p ['nms']})  "
@@ -203,22 +203,22 @@ def main ():
         flush =True )
 
     print (f"\n{'arm':<10} {'robot':>8} {'TP':>6} {'FP':>6} {'FN':>6} {'recall':>8} {'precision':>9}")
-    son ={}
+    last_ ={}
     for arm in KOLLAR :
         c =top [arm ]
         f1 =2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
         rc =c ["TP"]/max (c ["TP"]+c ["FN"],1 )
         pr =c ["TP"]/max (c ["TP"]+c ["FP"],1 )
-        son [arm ]={"robot":f1 ,"recall":rc ,"precision":pr ,**dict (c )}
+        last_ [arm ]={"robot":f1 ,"recall":rc ,"precision":pr ,**dict (c )}
         print (f"{arm :<10} {f1 :>8.4f} {c ['TP']:>6} {c ['FP']:>6} {c ['FN']:>6} "
         f"{rc :>8.4f} {pr :>9.4f}")
     print (f"\nYON SECIM KAYBI (P6_KAHIN - P6): "
-    f"{son ['P6_KAHIN']['robot']-son ['P6']['robot']:+.4f}")
-    d =son ["P6"]["robot"]-son ["TABAN"]["robot"]
+    f"{last_ ['P6_KAHIN']['robot']-last_ ['P6']['robot']:+.4f}")
+    d =last_ ["P6"]["robot"]-last_ ["TABAN"]["robot"]
     art =sum (1 for b in kivrimlar 
     if ayrinti [b ]["P6"]["robot"]>ayrinti [b ]["TABAN"]["robot"])
     print (f"P6 - TABAN = {d :+.4f} | {art }/{len (kivrimlar )} markada ARTI")
-    json .dump ({"damga":makbuz_hash .damga (),"toplam":son ,"brand":ayrinti ,
+    json .dump ({"damga":makbuz_hash .damga (),"toplam":last_ ,"brand":ayrinti ,
     "n_parca":len (dev ),"kivrim":kivrimlar ,
     "kurallar":[list (k )for k in KURALLAR ],"nmsler":list (NMSLER ),
     "not":"D6-ICI LOMO on okumasi. Esik VE NMS her arm/kivrim icin "

@@ -23,18 +23,18 @@ def _satirlar (P ,D ,tol_mm =4.0 ,aci_cos =0.90 ):
     while len (kalan )>=3 :
         i0 =kalan [0 ]
         # same yone bakanlar
-        ayni =[i for i in kalan 
+        same_ =[i for i in kalan 
         if abs (float (D [i ]@D [i0 ]))>=aci_cos ]
-        if len (ayni )<3 :
+        if len (same_ )<3 :
             kalan .remove (i0 );continue 
-        Q =P [ayni ]
+        Q =P [same_ ]
         C =Q -Q .mean (0 )
         _u ,_s ,Vt =np .linalg .svd (C ,full_matrices =False )
         eks =Vt [0 ]
         # dogruya dik distance <= tol olanlar SATIRI olusturur
         t =C @eks 
         dik =np .linalg .norm (C -np .outer (t ,eks ),axis =1 )
-        grup =[ayni [k ]for k in range (len (ayni ))if dik [k ]<=tol_mm ]
+        grup =[same_ [k ]for k in range (len (same_ ))if dik [k ]<=tol_mm ]
         if len (grup )>=3 :
             out .append ((grup ,eks ))
             for g in grup :
@@ -57,14 +57,14 @@ def yay (P ,D ,adim_n =1 ,tol_mm =4.0 ,min_adim =2.0 ,maks_adim =40.0 ):
         f =np .diff (t );f =f [f >1e-6 ]
         if not len (f ):
             continue 
-        adim =float (np .median (f ))
-        if not (min_adim <=adim <=maks_adim ):
+        step_ =float (np .median (f ))
+        if not (min_adim <=step_ <=maks_adim ):
             continue 
         for gi in grup :
             for s in range (-adim_n ,adim_n +1 ):
                 if s ==0 :
                     continue 
-                yeniP .append (P [gi ]+s *adim *eks )
+                yeniP .append (P [gi ]+s *step_ *eks )
                 yeniD .append (D [gi ])
     if not yeniP :
         return np .zeros ((0 ,3 )),np .zeros ((0 ,3 ))

@@ -92,7 +92,7 @@ def test_LOCKED_kirliligi_CIKARILANLARI_da_kapsar ():
         pytest .skip ("measurement onbellegi yok")
     _ ,rap =measure_set .cluster ("results/_der_tam.pkl")
     atilan =set (rap ["atilan_locked"])
-    assert atilan ,"bu testin anlamli olmasi icin en az bir LOCKED cikarilmali"
+    assert atilan ,"this testin anlamli olmasi for at least a LOCKED cikarilmali"
     temiz =set (rap ["locked_temiz"])
     assert not (atilan &temiz ),f"DOGRUDAN kullanilan LOCKED parts TEMIZ sayiliyor: {sorted (atilan &temiz )}"
     assert rap ["locked_temiz_n"]<=100 -len (atilan )

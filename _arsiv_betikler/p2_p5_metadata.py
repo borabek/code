@@ -47,7 +47,7 @@ if best and best [1 ]>=0.60 :
 else :
     e =best [1 ]if best else 0.0 
     print (f"  STEP PRODUCT adindan CP sayisi TURETILEMIYOR (en iyi tam-esitlik %{100 *e :.0f}).")
-    print ("  -> Olcumlerdeki CP-count GT-TUREVLI. Metadata-assisted sayilar 'VARSAYIMSAL' etiketlenir;")
-    print ("     BIRINCIL sayi = BAZ (geometri-only). Robot hucresi katalogdan kutup sayisi saglayabilirse")
-    print ("     mod gecerli olur ama bu DOGRULANMADI.")
-print ("  YON-PRIOR: InsertDirection yalnizca GT JSON'inda -> bagimsiz kaynak YOK -> KULLANILMAYACAK (kural).")
+    print ("  -> Olcumlerdeki CP-count GT-TUREVLI. Metadata-assisted numbers 'VARSAYIMSAL' etiketlenir;")
+    print ("     BIRINCIL number = BAZ (geometri-only). Robot hucresi katalogdan kutup count saglayabilirse")
+    print ("     mod gecerli becomes but this DOGRULANMADI.")
+print ("  YON-PRIOR: InsertDirection only GT JSON'inda -> bagimsiz source YOK -> KULLANILMAYACAK (rule).")

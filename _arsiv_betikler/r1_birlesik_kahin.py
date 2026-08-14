@@ -77,7 +77,7 @@ for kk ,r in enumerate (DER ,1 ):
                     s ={"mevcut":P [i ]}
                     s .update (konum_sozlugu (V ,P [i ],Pd [i ],cyl ,ba ))
                     SK .append (s )
-    def kahin (direction ,konum ):
+    def oracle_ (direction ,konum ):
         Pk =P .copy ();Dk =Pd .copy ()
         if len (P )and len (G ):
             diff =P [:,None ,:]-G [None ,:,:];al =(diff *Gd [None ,:,:]).sum (-1 )
@@ -101,9 +101,9 @@ for kk ,r in enumerate (DER ,1 ):
                     if ep is not None :Pk [i ]=ep 
         return (rj ,)+esle (Pk ,Dk ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False )
     KOL ["mevcut"].append ((rj ,)+esle (P ,Pd ,G ,Gd ,r ["diag"],2.0 ,10.0 ,False ))
-    KOL ["yon_kahin"].append (kahin (True ,False ))
-    KOL ["konum_kahin"].append (kahin (False ,True ))
-    KOL ["IKISI"].append (kahin (True ,True ))
+    KOL ["yon_kahin"].append (oracle_ (True ,False ))
+    KOL ["konum_kahin"].append (oracle_ (False ,True ))
+    KOL ["IKISI"].append (oracle_ (True ,True ))
 
 TESPIT =f1w ([(x [0 ],)+esle (np .zeros ((0 ,3 )),np .zeros ((0 ,3 )),np .zeros ((0 ,3 )),np .zeros ((0 ,3 )),1 ,0 ,180 ,True )for x in []])if False else None 
 det ,_ ,_ =T2 .puanla (DER ,gate )
@@ -117,10 +117,10 @@ for ad in ("mevcut","yon_kahin","konum_kahin","IKISI"):
 K =np .array (KAYMA )
 print (f"\nPOZ KAFASI KAYMASI ({len (K )} candidate): medyan {np .median (K ):.2f}mm | "
 f"%90 {np .percentile (K ,90 ):.2f}mm | max {K .max ():.2f}mm")
-print ("  (tezin v_o'sundan ne kadar uzaklastigimiz -- 'agzin icinde merkezleme' savunmasi icin)")
+print ("  (tezin v_o'sundan ne up to uzaklastigimiz -- 'agzin inside merkezleme' savunmasi for)")
 hedef =0.90 *tesp 
 print (f"\n%90 gecis orani icin robot {hedef :.4f} gerekir; birlesik kahin {S ['IKISI']:.4f}")
-print ("HUKUM:","%90 MUMKUN (kahin asiyor)"if S ["IKISI"]>=hedef else "%90 SOZLUKLERLE ULASILAMAZ")
+print ("VERDICT:","%90 MUMKUN (kahin asiyor)"if S ["IKISI"]>=hedef else "%90 SOZLUKLERLE ULASILAMAZ")
 json .dump ({k :float (v )for k ,v in S .items ()}|{"tespit":tesp ,
 "gecis_ikisi":S ["IKISI"]/tesp ,"kayma_medyan":float (np .median (K )),
 "kayma_p90":float (np .percentile (K ,90 ))},

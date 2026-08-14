@@ -44,7 +44,7 @@ def oneriler (P_capa ,D_capa ,P_havuz ,maks_adim =MAKS_ADIM ,tol =TOL_MM ):
     tler =lattice .otelemeler (P_capa )
     if not tler :
         return np .zeros (0 ,int ),np .zeros (0 ,int ),np .zeros (0 ,float )
-    idx ,kayn ,adim =[],[],[]
+    idx ,kayn ,step_ =[],[],[]
     gorulen =set ()
     # ALT ADIMLAR: 1/2 VE 1/3. Birim test showed ki capalar 18mm arayla
     # dususe most sik oteleme 18mm cikiyor; half step 9mm gives but real step
@@ -65,9 +65,9 @@ def oneriler (P_capa ,D_capa ,P_havuz ,maks_adim =MAKS_ADIM ,tol =TOL_MM ):
                     gorulen .add (i )
                     idx .append (int (i ))
                     kayn .append (int (j [i ]))
-                    adim .append (float (sg *k ))
+                    step_ .append (float (sg *k ))
     return (np .asarray (idx ,int ),np .asarray (kayn ,int ),
-    np .asarray (adim ,float ))
+    np .asarray (step_ ,float ))
 
 
 def oznitelik (P_havuz ,D_havuz ,P_capa ,D_capa ,**kw ):

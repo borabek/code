@@ -110,9 +110,9 @@ def main ():
     for i ,f in enumerate (FP ):
         tab .setdefault ((f ["mfg"],f ["regime"]),[]).append (i )
     sec =[]
-    toplam =len (FP )
+    total_ =len (FP )
     for k_ ,v in sorted (tab .items ()):
-        n =max (1 ,int (round (ORNEK *len (v )/toplam )))
+        n =max (1 ,int (round (ORNEK *len (v )/total_ )))
         n =min (n ,len (v ))
         sec +=list (rng .choice (v ,size =n ,replace =False ))
         print (f"  tabaka {k_ }: {len (v )} FP -> {n } ornek")

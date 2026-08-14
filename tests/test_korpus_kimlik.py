@@ -34,13 +34,13 @@ def K ():
 ("WEI.2847370000_ElectricalTerminal_ElectricalTerminal.json","WEI","2847370000"),
 ("CWT.CX2.5_4BU_ElectricalTerminal_ElectricalTerminal.json","CWT","CX2.5_4BU"),
 ])
-def test_kimlik_alt_cizgiyi_bozmaz (K ,dosya ,bek_mfg ,bek_pid ):
-    assert K .kimlik (dosya )==(bek_mfg ,bek_pid )
+def test_kimlik_alt_cizgiyi_bozmaz (K ,file_ ,bek_mfg ,bek_pid ):
+    assert K .kimlik (file_ )==(bek_mfg ,bek_pid )
 
 
 def test_eski_ayristirma_gercekten_bozuktu (K ):
     """Regresyon nobetcisi: old rule this two durumu KAYBEDIYORDU."""
-    assert K .kimlik_eski ("A-B_N.1492-H4_ElectricalTerminal_x.json")[1 ]=="","eski kural artik bozuk degilse bu test guncellenmeli"
+    assert K .kimlik_eski ("A-B_N.1492-H4_ElectricalTerminal_x.json")[1 ]=="","old rule residual bozuk degilse this test guncellenmeli"
     assert K .kimlik_eski ("ELMEX.KUT16_GY_ElectricalTerminal_x.json")[1 ]=="KUT16"
 
 

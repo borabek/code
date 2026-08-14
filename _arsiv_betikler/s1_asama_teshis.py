@@ -106,10 +106,10 @@ def main ():
         if v :
             en_iyi .append (min (v ))
     en_iyi =np .array (en_iyi )
-    son =np .array ([k ["son"]for k in KAY if k ["son"]is not None ])
-    print (f"  su anki 'son'      : {(son <=10 ).mean ():.1%} <=10 deg")
+    last_ =np .array ([k ["son"]for k in KAY if k ["son"]is not None ])
+    print (f"  su anki 'son'      : {(last_ <=10 ).mean ():.1%} <=10 deg")
     print (f"  ORACLE (en iyi)    : {(en_iyi <=10 ).mean ():.1%} <=10 deg  "
-    f"(+{((en_iyi <=10 ).mean ()-(son <=10 ).mean ())*100 :.1f} puan)")
+    f"(+{((en_iyi <=10 ).mean ()-(last_ <=10 ).mean ())*100 :.1f} puan)")
 
     print ("\nSON asama KOTUYKEN (>45 deg) hangi asama IYIYDI?")
     kotu =[k for k in KAY if k ["son"]is not None and k ["son"]>45 ]
@@ -120,12 +120,12 @@ def main ():
             v =np .array (v )
             print (f"    {a :<20} n={len (v ):>4} | <=10 deg {(v <=10 ).mean ():>6.1%} | "
             f"medyan {np .median (v ):>6.2f}")
-    print ("  -> bir asama burada belirgin iyiyse, o asamayi KORUMAK duzeltmedir")
+    print ("  -> a stage here belirgin iyiyse, that asamayi KORUMAK duzeltmedir")
 
     with open ("results/s1_asama.json","w",encoding ="utf-8")as f :
         json .dump ({"n":len (KAY ),"asamalar":ozet ,
         "oracle_on_alti":float ((en_iyi <=10 ).mean ()),
-        "son_on_alti":float ((son <=10 ).mean ())},f ,indent =1 )
+        "son_on_alti":float ((last_ <=10 ).mean ())},f ,indent =1 )
     with open ("results/s1_kayit.pkl","wb")as f :
         pickle .dump (KAY ,f )
     print ("\nmakbuz -> results/s1_asama.json")

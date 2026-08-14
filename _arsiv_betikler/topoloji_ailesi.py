@@ -44,7 +44,7 @@ def oznitelik (P ,D ,Pu ,diag ):
     if not n or len (Pu )<2 :
         return X 
     diag =max (float (diag ),1e-6 )
-    merkez =Pu .mean (0 )
+    center_ =Pu .mean (0 )
     # Cok large havuzlarda referans kumesini seyrelt: maliyet n x m.
     if len (Pu )>4000 :
         Pu =Pu [np .random .default_rng (0 ).choice (len (Pu ),4000 ,replace =False )]
@@ -64,6 +64,6 @@ def oznitelik (P ,D ,Pu ,diag ):
             ara =ara [ara >1e-6 ]
             if len (ara )>=2 :
                 X [i ,3 ]=float (ara .std ()/max (ara .mean (),1e-9 ))
-        X [i ,4 ]=float ((P [i ]-merkez )@D [i ])/diag 
+        X [i ,4 ]=float ((P [i ]-center_ )@D [i ])/diag 
         X [i ,5 ]=(float (dd [0 ])/diag )if len (dd )else 1.0 
     return X 

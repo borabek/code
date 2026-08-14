@@ -33,7 +33,7 @@ ACI =10.0 # correct sayilma esigi (urun robot toleransi)
 KOMSU_MM =10.0 
 
 sv =d6_record .exam ()
-kayit =d6_record .yukle (set (sv ["pidler"]))
+rec_ =d6_record .yukle (set (sv ["pidler"]))
 gate =pickle .load (open ("results/wire_gate_v5.pkl","rb"))
 cyl =pickle .load (open ("results/_d6_silindirler.pkl","rb"))
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
@@ -45,7 +45,7 @@ siralar =[]
 yaricap_sirasi =[]# correct secenegin yerel radius order (0 = most large)
 yerel_n =[]
 
-for pid ,r in kayit .items ():
+for pid ,r in rec_ .items ():
     f =f"{OB }/{pid }.npz"
     if not os .path .exists (f ):
         continue 
@@ -114,7 +114,7 @@ for pid ,r in kayit .items ():
 siralar =np .asarray (siralar )
 yr =np .asarray (yaricap_sirasi )
 print (f"eslesme {n_es } | havuzda dogru axis VAR: {havuzda } (%{100 *havuzda /max (n_es ,1 ):.1f})\n")
-print ("YARICAP-SIRALI havuzda dogru eksenin recall@k:")
+print ("YARICAP-SIRALI havuzda correct eksenin recall@k:")
 for kk in (1 ,2 ,3 ,5 ,10 ):
     print (f"  recall@{kk :<3} = %{100 *(siralar <kk ).mean ():.1f}")
 print (f"\ndogru secenegin YEREL yaricap sirasi (0 = komsulugun EN BUYUGU):")

@@ -130,13 +130,13 @@ def main ():
     # feature onemleri
     clf =GradientBoostingClassifier (n_estimators =200 ,max_depth =3 ,learning_rate =0.05 ).fit (X ,y )
     imp =sorted (zip (FEAT_NAMES ,clf .feature_importances_ ),key =lambda z :-z [1 ])
-    print ("  en onemli ozellikler:",", ".join (f"{n }={v :.2f}"for n ,v in imp [:6 ]))
+    print ("  most onemli ozellikler:",", ".join (f"{n }={v :.2f}"for n ,v in imp [:6 ]))
     json .dump ({"auc":float (auc ),"n":len (y ),"importances":dict (zip (FEAT_NAMES ,clf .feature_importances_ .tolist ()))},
     open ("results/wire_discriminator.json","w"),indent =1 )
     ngt_arr =np .array ([ngt .get (g ,0 )for g in sorted (ngt )]);grp_ids =np .array (sorted (ngt ))
     np .savez ("results/wire_discr_data.npz",X =X ,y =y ,groups =groups ,mfg =np .array (mfgall ),
     ngt =ngt_arr ,grp_ids =grp_ids ,feat_names =np .array (FEAT_NAMES ))
-    print ("  -> results/wire_discr_data.npz (uctan-uca dogrulama icin)")
+    print ("  -> results/wire_discr_data.npz (uctan-uca dogrulama for)")
 
 
 if __name__ =="__main__":

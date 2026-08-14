@@ -91,8 +91,8 @@ def main ():
 
     # --- 1) ESKI vs YENI ayristirma farki
     fark =[f for f in js if kimlik (f )[1 ]!=kimlik_eski (f )[1 ]]
-    bos =[f for f in js if not kimlik_eski (f )[1 ]]
-    print (f"\nayristirma FARKI olan dosya: {len (fark )}  (bunlarin {len (bos )}'i eski yontemde BOS)")
+    empty_ =[f for f in js if not kimlik_eski (f )[1 ]]
+    print (f"\nayristirma FARKI olan dosya: {len (fark )}  (bunlarin {len (empty_ )}'i eski yontemde BOS)")
 
     # --- 2) CAKISMA: two different part same ESKI kimlige dusuyor mu?
     esk =collections .defaultdict (set )

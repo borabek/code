@@ -101,7 +101,7 @@ def main ():
         n =sum (1 for r in per_part if r ["regime"]==k )
         print (f"{k :<8}{n :>7}{out [k ]['P']:>8.3f}{out [k ]['R']:>8.3f}{out [k ]['F1']:>9.4f}")
     print (f"\nKORPUS-AGIRLIKLI CP-F1: {wf1 :.4f}   ({len (per_part )} part)")
-    print ("UYARI: gate bu parcalari egitimde gordu -> UST SINIR. Sizintisiz sayi K2c = 0.7817")
+    print ("WARNING: gate this parcalari egitimde gordu -> UST SINIR. Sizintisiz number K2c = 0.7817")
     json .dump ({"weighted":wf1 ,"regimes":out ,"n_parts":len (per_part ),
     "per_part":per_part ,"leakage":"gate saw these parts; upper bound"},
     open ("results/gece_urun_olcum.json","w"),indent =1 )

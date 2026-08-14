@@ -79,27 +79,27 @@ def main ():
     measure_set .rapor_bas (rap )
     hedef ={r ["pid"]:r for r in ESKI }
     E ={p :(jf ,s )for m ,p ,jf ,s in eligible ()}
-    sira =[p for p in hedef if p in E ]
-    if a .sinir :
-        sira =sira [:a .sinir ]
+    rank_ =[p for p in hedef if p in E ]
+    if a .bound_ :
+        rank_ =rank_ [:a .bound_ ]
     step_ver =(a .arm =="B")
     print (f"\nKOL {a .arm }: JSON agi + {'STEP ozellikleri'if step_ver else 'STEP YOK'}"
-    f" | {len (sira )} part",flush =True )
+    f" | {len (rank_ )} part",flush =True )
 
     dev ="cuda"if torch .cuda .is_available ()else "cpu"
     cks =cfg ["current_product"].get ("checkpoints")or cfg ["robot_vote2_checkpoints"]
     models =[load_any (c ,dev =dev )[:2 ]for c in cks ]
-    OUT ,error ,bos =[],0 ,0 
+    OUT ,error ,empty_ =[],0 ,0 
     t0 =time .time ()
-    for k ,pid in enumerate (sira ,1 ):
+    for k ,pid in enumerate (rank_ ,1 ):
         if k %20 ==0 :
-            print (f"  {k }/{len (sira )}  {time .time ()-t0 :.0f}s  error={error } bos={bos }",flush =True )
+            print (f"  {k }/{len (rank_ )}  {time .time ()-t0 :.0f}s  error={error } bos={empty_ }",flush =True )
         jf ,stp =E [pid ]
-        eski =hedef [pid ]
+        old_ =hedef [pid ]
         try :
             Vj ,Fj ,j =json_mesh (jf )
             if Vj is None or len (Fj )<4 :
-                bos +=1 
+                empty_ +=1 
                 continue 
             V ,F =thesis_remesh .remesh_uniform (Vj ,Fj ,target =6000 )
             V =np .ascontiguousarray (V ,np .float64 );F =np .ascontiguousarray (F ,np .int64 )
@@ -126,8 +126,8 @@ def main ():
             G =np .array ([[c ["Point"][q ]for q in "XYZ"]for c in g ],float )
             Gd =np .array ([[c ["InsertDirection"][q ]for q in "XYZ"]for c in g ],float )
             Gd =Gd /(np .linalg .norm (Gd ,axis =1 ,keepdims =True )+1e-9 )
-            OUT .append ({"pid":pid ,"mfg":eski ["mfg"],"geo":eski ["geo"],
-            "cluster":eski .get ("cluster"),
+            OUT .append ({"pid":pid ,"mfg":old_ ["mfg"],"geo":old_ ["geo"],
+            "cluster":old_ .get ("cluster"),
             "diag":float (np .linalg .norm (V .max (0 )-V .min (0 ))),
             "n":len (G ),"P":P ,"Pd":Pd ,"X":X ,"XR":XR ,
             "G":G ,"Gd":Gd ,"UYE":uyeler ,
@@ -139,7 +139,7 @@ def main ():
     yol =CIKTI .format (a .arm )
     with open (yol ,"wb")as f :
         pickle .dump (OUT ,f )
-    print (f"\n{len (OUT )} kayit -> {yol } | error {error } | bos mesh {bos }")
+    print (f"\n{len (OUT )} kayit -> {yol } | error {error } | bos mesh {empty_ }")
     print (f"  GT toplam {sum (r ['n']for r in OUT )} | candidate toplam {sum (len (r ['P'])for r in OUT )}")
     jt =np .array ([r ["json_tepe"]for r in OUT ])
     print (f"  JSON agi tepe sayisi: medyan {np .median (jt ):.0f} | %10 {np .percentile (jt ,10 ):.0f}"

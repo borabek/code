@@ -59,8 +59,8 @@ def main ():
     sv =json .load (io .open (KUME ,encoding ="utf-8"))
     print (f"D7 FINAL: {sv ['n_parca']} part | {len (sv ['manufacturer'])} manufacturer | "
     f"GT {sv ['gt_toplam']} CP | muhur {sv ['sha16']}")
-    kayit =d6_record .yukle (set (sv ["pidler"]),desen =DESEN )
-    print (f"turetme kaydi: {len (kayit )}/{sv ['n_parca']}  (g7 + yaricap 1/2/2)\n")
+    rec_ =d6_record .yukle (set (sv ["pidler"]),desen =DESEN )
+    print (f"turetme kaydi: {len (rec_ )}/{sv ['n_parca']}  (g7 + yaricap 1/2/2)\n")
 
     with open ("results/wire_gate_v6.pkl","rb")as f :
         gate =pickle .load (f )
@@ -73,7 +73,7 @@ def main ():
     Tm =collections .defaultdict (list );Rm =collections .defaultdict (list )
     Tr =collections .defaultdict (list );Rr =collections .defaultdict (list )
     pid_sira =[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         rj ="cok"if r ["n"]>=8 else "dusuk"
         P =np .zeros ((0 ,3 ));D =np .zeros ((0 ,3 ))
@@ -118,8 +118,8 @@ def main ():
     boot =[]
     for _ in range (2000 ):
         sec_u =rng .choice (urs ,len (urs ),replace =True )
-        satir =[s for u in sec_u for s in Rm [u ]]
-        boot .append (f1w (satir ))
+        line_ =[s for u in sec_u for s in Rm [u ]]
+        boot .append (f1w (line_ ))
     alt =float (np .percentile (boot ,2.5 ));ust =float (np .percentile (boot ,97.5 ))
     print (f"\nURETICI BOOTSTRAP robot F1: {rf :.4f}  %95 arali [{alt :.4f}, {ust :.4f}]")
 
@@ -139,7 +139,7 @@ def main ():
     print (f"\nSONUC: {'KABUL'if all (kabul .values ())else 'KABUL EDILMEDI'}")
 
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
-        json .dump ({"cluster":KUME ,"muhur":sv ["sha16"],"n":len (kayit ),
+        json .dump ({"cluster":KUME ,"muhur":sv ["sha16"],"n":len (rec_ ),
         "tespit":{"f1":tf ,"precision":tp_ ,"recall":tr_ },
         "robot":{"f1":rf ,"precision":rp_ ,"recall":rr_ },
         "donusum":rf /max (tf ,1e-9 ),

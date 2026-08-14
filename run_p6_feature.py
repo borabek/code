@@ -96,7 +96,7 @@ def main ():
     print (f"{on }: {len (dosyalar )} part | cikti {CIK }",flush =True )
 
     t0 =time .time ()
-    yazilan =atlanan =bos =0 
+    yazilan =atlanan =empty_ =0 
     for i ,f in enumerate (dosyalar ,1 ):
         pid =f [len (on )+1 :-4 ]
         hedef =f"{CIK }/{on }_{pid }.npz"
@@ -107,16 +107,16 @@ def main ():
         kay =np .asarray (z ["kaynak"],int )
         m =np .isin (kay ,KAYNAKLAR )
         if int (m .sum ())<2 :
-            bos +=1 
+            empty_ +=1 
             continue 
         T =np .asarray (np .load (f"{TAN }/{f }")["T"],float )
         if len (T )!=len (z ["X"]):
             print (f"  ! {pid }: HIZALAMA BOZUK, atlandi",flush =True )
-            bos +=1 
+            empty_ +=1 
             continue 
         mf =f"{ob }/{pid }.npz"
         if not os .path .exists (mf ):
-            bos +=1 
+            empty_ +=1 
             continue 
         zz =np .load (mf )
         V =np .ascontiguousarray (zz ["V"],np .float64 )
@@ -168,7 +168,7 @@ def main ():
         idx ,YD ,C =YB .secenekler (P ,D ,cyl ,V ,mesh =mesh ,diag =diag ,
         fan_maske =fmask )
         if not len (idx ):
-            bos +=1 
+            empty_ +=1 
             continue 
             # D blogu: mouth tanimlayicilari SECENEK YONUYLE
         Dblok =product_genis .tanimlayici (P [idx ],YD ,cyl ,mesh ,diag )
@@ -182,14 +182,14 @@ def main ():
         np .savez_compressed (gec ,X =X ,idx =idx .astype (np .int32 ),
         YD =YD .astype (np .float32 ),P =P .astype (np .float32 ),
         D =D .astype (np .float32 ),
-        kaynak =kay [m ].astype (np .int8 ))
+        src_ =kay [m ].astype (np .int8 ))
         os .replace (gec +".npz"if os .path .exists (gec +".npz")else gec ,hedef )
         yazilan +=1 
         if i %25 ==0 :
             hz =(time .time ()-t0 )/max (yazilan ,1 )
             print (f"  {i }/{len (dosyalar )}  yazilan {yazilan } atlanan {atlanan } "
-            f"bos {bos }  {hz :.2f} s/part",flush =True )
-    print (f"\nBITTI: yazilan {yazilan } | atlanan {atlanan } | bos {bos } | "
+            f"bos {empty_ }  {hz :.2f} s/part",flush =True )
+    print (f"\nBITTI: yazilan {yazilan } | atlanan {atlanan } | bos {empty_ } | "
     f"{time .time ()-t0 :.0f} s",flush =True )
     print (f"sutun: 58 (A) + 9 (B) + {len (YB .OZ_AD )} (C) + "
     f"{len (mouth_descriptor .AD )} (D)")

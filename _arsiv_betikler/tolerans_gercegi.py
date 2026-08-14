@@ -222,7 +222,7 @@ def _report (cache ):
     ares =[r ["ares"]for r in cache ]
     print (f"\nhizalama residual (STEP<->JSON): medyan {np .median (ares ):.2f}mm  "
     f"%90 {np .percentile (ares ,90 ):.2f}mm  max {max (ares ):.2f}mm")
-    print ("  -> sabit 2mm toleransin bir kismi HIZALAMA hatasidir, modelin degil")
+    print ("  -> sabit 2mm toleransin a kismi HIZALAMA hatasidir, modelin not")
     json .dump ({"sonuc":res ,"align_residual_mm":ares ,"n_parca":len (cache ),
     "protocol":"P9 ile birebir (seed 202, 70 dusuk / 30 cok, aile-disi gate)"},
     open ("results/tolerans_gercegi.json","w"),indent =1 ,default =float )

@@ -23,9 +23,9 @@ def main ():
     from sklearn .ensemble import RandomForestClassifier 
     import wire_gate 
 
-    eski =pickle .load (open (PKL ,"rb"))
-    if eski .get ("cols")is None :
-        print ("gate zaten 13 ozellikli, yapacak is yok");return 
+    old_ =pickle .load (open (PKL ,"rb"))
+    if old_ .get ("cols")is None :
+        print ("gate already 13 ozellikli, yapacak is absent");return 
     if not os .path .exists (BAK ):
         shutil .copy (PKL ,BAK )
         print (f"backup -> {BAK }")
@@ -33,7 +33,7 @@ def main ():
     d =np .load ("results/gate_regrow_data_rt2.npz",allow_pickle =True )
     X =d ["X"];y =d ["y"]
     print (f"training: {X .shape [0 ]} candidate x {X .shape [1 ]} ozellik "
-    f"(eski gate {len (eski ['cols'])} sutun kullaniyordu)")
+    f"(eski gate {len (old_ ['cols'])} sutun kullaniyordu)")
     clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
     random_state =0 ).fit (X ,y )
     pickle .dump ({
@@ -45,13 +45,13 @@ def main ():
     "/ -0.0104 robot KAYBETTI (results/sinav_val.json). Onceden yazili kill kurali "
     "uygulandi. Eski model: results/wire_gate.pkl.l2_2026_07_31"),
     },open (PKL ,"wb"))
-    print ("gate 13 ozellikle yeniden egitildi ve yazildi")
+    print ("gate 13 ozellikle yeniden egitildi and yazildi")
 
     m =pickle .load (open (PKL ,"rb"))
     assert m ["cols"]is None and len (m ["feat_names"])==13 
     Xs =X [:5 ]
     assert m ["clf"].predict_proba (Xs ).shape ==(5 ,2 ),"13 sutunlu tahmin calismiyor"
-    print ("dogrulama: cols=None, 13 ad, tahmin 13 sutunla calisiyor")
+    print ("dogrulama: cols=None, 13 name, prediction 13 sutunla calisiyor")
 
 
 if __name__ =="__main__":

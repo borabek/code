@@ -40,12 +40,12 @@ N_KAFES =int (os .environ .get ("CK_N","3"))
 KATALOG =(3.5 ,3.81 ,5.0 ,5.08 ,6.2 ,7.5 ,7.62 ,10.16 ,12.7 )
 
 
-def _izgara_tut (G ,seed ,adim ):
+def _izgara_tut (G ,seed ,step_ ):
     """`seed + n*step` izgarasina TOL inside dusen GT maskesi."""
-    L =float (np .linalg .norm (adim ))
+    L =float (np .linalg .norm (step_ ))
     if L <1e-6 :
         return np .zeros (len (G ),bool )
-    u =adim /L 
+    u =step_ /L 
     v =G -seed 
     t =v @u 
     dik =np .linalg .norm (v -t [:,None ]*u [None ,:],axis =1 )
@@ -74,12 +74,12 @@ def _en_iyi_kafes (G ,kalan ):
         genis .append (candidate /b )
     candidate =np .vstack (genis )
     en_maske ,en_n ,en_L =None ,0 ,0.0 
-    for adim in candidate :
+    for step_ in candidate :
         for seed in Gk [::max (1 ,len (Gk )//8 )]:
-            m =_izgara_tut (G ,seed ,adim )&kalan 
+            m =_izgara_tut (G ,seed ,step_ )&kalan 
             n =int (m .sum ())
             if n >en_n :
-                en_maske ,en_n ,en_L =m ,n ,float (np .linalg .norm (adim ))
+                en_maske ,en_n ,en_L =m ,n ,float (np .linalg .norm (step_ ))
     return en_maske ,en_n ,en_L 
 
 
@@ -115,13 +115,13 @@ def main ():
         G =np .asarray (r .get ("G",[]),float )
         if len (G )<3 :
             continue 
-        kaps ,adim =coklu (G )
+        kaps ,step_ =coklu (G )
         a =ist [mfg ]
         a ["gt"].append (len (G ))
         for i ,k in enumerate (kaps ):
             a [f"lattice{i +1 }"].append (k *len (G ))
-        if adim :
-            a ["adim1"].append (adim [0 ])
+        if step_ :
+            a ["adim1"].append (step_ [0 ])
         n +=1 
         if n %50 ==0 :
             print (f"  {n } part ({time .time ()-t0 :.0f} s)",flush =True )

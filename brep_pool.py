@@ -66,8 +66,8 @@ def brep_adaylari (cyl ,acik ,dedupe_mm =DEDUPE_MM ,meta =False ):
             D .append (nn /m if m >1e-9 else np .array ([0.0 ,0.0 ,1.0 ]))
             MET .append (o )
     if not P :
-        bos =(np .zeros ((0 ,3 )),np .zeros ((0 ,3 )))
-        return bos +([],)if meta else bos 
+        empty_ =(np .zeros ((0 ,3 )),np .zeros ((0 ,3 )))
+        return empty_ +([],)if meta else empty_ 
     P =np .asarray (P ,float );D =np .asarray (D ,float )
     k =_dedupe (P ,dedupe_mm )
     if meta :
@@ -92,8 +92,8 @@ def merged_pool (P_seg ,D_seg ,cyl ,acik ,dedupe_mm =DEDUPE_MM ):
         Pb ,Db =Pb [k ],Db [k ]
     P =np .vstack ([P_seg ,Pb ])if len (Pb )else P_seg 
     D =np .vstack ([D_seg ,Db ])if len (Db )else D_seg 
-    kaynak =np .concatenate ([np .zeros (len (P_seg ),int ),np .ones (len (Pb ),int )])
-    return P ,D ,kaynak 
+    src_ =np .concatenate ([np .zeros (len (P_seg ),int ),np .ones (len (Pb ),int )])
+    return P ,D ,src_ 
 
 
     # --- MESH TEPESI KAYNAGI ---------------------------------------------------
@@ -142,9 +142,9 @@ def mesh_adaylari (V ,F ,ppos ,threshold =MESH_ESIK ,dedupe_mm =MESH_DEDUPE_MM )
     N =vertex_normals_at (V ,F )[k ]
     s =ppos [k ]
     if dedupe_mm >0 and len (P )>1 :
-        sira =np .argsort (-s )
+        rank_ =np .argsort (-s )
         tut =np .ones (len (P ),bool )
-        for i in sira :
+        for i in rank_ :
             if not tut [i ]:
                 continue 
             uz =np .linalg .norm (P -P [i ],axis =1 )

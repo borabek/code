@@ -62,10 +62,10 @@ def yukle (on ,pid ):
     "pb":np .asarray (zz ["pbs"],float ).mean (0 )}
 
 
-def kos (gate ,veri ,e0 ,e1 ,S ,tam =False ):
+def kos (gate ,data_ ,e0 ,e1 ,S ,tam =False ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =np .asarray (gate .predict_proba (
         wire_gate .within_part (d ["X"],"zskor"))[:,1 ],float )
         threshold =np .where (d ["kay"]==0 ,e0 ,e1 )
@@ -134,13 +134,13 @@ def main ():
             en =(e0 ,e1 ,r )
     e0 ,e1 ,_ =en 
     baseline =kos (gate ,te ,0.05 ,0.05 ,S ,tam =True )
-    yeni =kos (gate ,te ,e0 ,e1 ,S ,tam =True )
+    new_ =kos (gate ,te ,e0 ,e1 ,S ,tam =True )
     print (f"\nTABAN  (e0=e1=0.05) robot {baseline ['robot']:.4f} | tespit "
     f"{baseline ['tespit']:.4f} | TP {baseline ['TP']} FP {baseline ['FP']}")
-    print (f"KAYNAK (e0={e0 } e1={e1 }) robot {yeni ['robot']:.4f} | tespit "
-    f"{yeni ['tespit']:.4f} | TP {yeni ['TP']} FP {yeni ['FP']}")
-    print (f"\nFARK {yeni ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02")
-    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"kaynak":yeni ,
+    print (f"KAYNAK (e0={e0 } e1={e1 }) robot {new_ ['robot']:.4f} | tespit "
+    f"{new_ ['tespit']:.4f} | TP {new_ ['TP']} FP {new_ ['FP']}")
+    print (f"\nFARK {new_ ['robot']-baseline ['robot']:+.4f} | KAPI >= +0.02")
+    json .dump ({"damga":makbuz_hash .damga (),"baseline":baseline ,"kaynak":new_ ,
     "secilen":[e0 ,e1 ],
     "not":"Kaynak-duyarli threshold (seg vs B-rep). Izgara D6'da, D7'de "
     "yeniden taranmadi. Isaret duzeltmesi IKI kolda da acik. "

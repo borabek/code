@@ -60,4 +60,4 @@ for mfg in ["WEI","PXC","ALL"]:
     "insample_f1":iff ,"insample_thr":float (isb ),"cv_gain":cvf -g35 [2 ]}
 json .dump (report ,open ("results/gate_thr_report.json","w"),indent =2 )
 print ("\n-> results/gate_thr_report.json")
-print ("DURUST NOT: CV kazanci gercek (in-sample degil). in-sample = ulasilamaz ust-sinir.")
+print ("DURUST NOT: CV kazanci real (in-sample not). in-sample = ulasilamaz upper-boundary.")

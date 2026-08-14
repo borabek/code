@@ -109,10 +109,10 @@ def cluster (on ,normal ,mesh =False ):
     return out 
 
 
-def olc (model ,veri ,e ,S ,tam =False ):
+def olc (model ,data_ ,e ,S ,tam =False ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =np .asarray (model .predict_proba (
         wire_gate .within_part (d ["X"],"zskor"))[:,1 ],float )
         k =s >=e 
@@ -146,7 +146,7 @@ def olc (model ,veri ,e ,S ,tam =False ):
 
 def main ():
     S =K .step_map ()
-    sonuc ={}
+    res_ ={}
     for ad ,normal in (("ISARET-NORMAL tanimlayici",True ),):
         tr =cluster ("tam",normal )
         dev =cluster ("d6",normal ,mesh =True )
@@ -163,15 +163,15 @@ def main ():
                 en =(e ,r )
         e ,_ =en 
         r7 =olc (m ,te ,e ,S ,tam =True )
-        sonuc [ad ]=dict (r7 ,threshold =e ,sutun =int (M .shape [1 ]))
+        res_ [ad ]=dict (r7 ,threshold =e ,col_ =int (M .shape [1 ]))
         print (f"{ad :<28} sutun {M .shape [1 ]} | threshold {e :.2f} -> D7 robot "
         f"**{r7 ['robot']:.4f}** | tespit {r7 ['tespit']:.4f} | makro "
         f"{r7 ['makro']:.4f} | TP {r7 ['TP']} FP {r7 ['FP']}",flush =True )
-    b =sonuc ["ISARET-NORMAL tanimlayici"]["robot"]
+    b =res_ ["ISARET-NORMAL tanimlayici"]["robot"]
     print ("")
     print ("KAYNAKLAR",KAYNAKLAR ,"-> robot",round (b ,4 ),
     "| B-rep havuzu tabani 0.3095")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,"kaynaklar":list (KAYNAKLAR ),
+    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"kaynaklar":list (KAYNAKLAR ),
     "not":"Tek degisken: tanimlayici sozlesmesi (ham vs isarete gore "
     "normallesmis + ters bayragi). Esik D6'da. D7 brand-disi, "
     "TAM ZINCIR, MIKRO."},

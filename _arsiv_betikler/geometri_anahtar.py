@@ -36,7 +36,7 @@ BBOX_KOVA =0.5 # mm -- remesh gurultusu ~0.4mm, kova ondan large must be
 HACIM_KOVA =0.02 # doluluk orani kovasi
 
 
-def anahtar (V ,F ):
+def key_ (V ,F ):
     """Rotasyon-bagimsiz, remesh-gurultusune dayanikli geometri imzasi."""
     V =np .asarray (V ,float )
     bb =np .sort (V .max (0 )-V .min (0 ))
@@ -70,28 +70,28 @@ def dogrula (n =300 ,seed =0 ):
     import glob 
     from infer_step_cp import step_to_mesh 
     from korpus_kimlik import step_kimlik 
-    eski =json .load (io .open ("results/_strict_geometry_keys.json",encoding ="utf-8"))
+    old_ =json .load (io .open ("results/_strict_geometry_keys.json",encoding ="utf-8"))
     sm ={step_kimlik (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
-    ortak =[p for p in eski if p in sm ]
+    ortak =[p for p in old_ if p in sm ]
     rng =np .random .RandomState (seed )
     sec =[ortak [i ]for i in rng .permutation (len (ortak ))[:n ]]
-    yeni ={}
+    new_ ={}
     for i ,p in enumerate (sec ,1 ):
         if i %50 ==0 :
             print (f"  {i }/{len (sec )}",flush =True )
         try :
             V ,F =step_to_mesh (sm [p ])
-            yeni [p ]=anahtar (V ,F )
+            new_ [p ]=key_ (V ,F )
         except Exception :
             pass 
-    ok =[p for p in sec if p in yeni ]
+    ok =[p for p in sec if p in new_ ]
     # CIFT bazinda uyum: same old grupta olanlar new anahtarda da same mi?
     ee =ey =ye =0 
     for i in range (len (ok )):
         for j in range (i +1 ,len (ok )):
             a ,b =ok [i ],ok [j ]
-            e =eski [a ]==eski [b ]
-            y =yeni [a ]==yeni [b ]
+            e =old_ [a ]==old_ [b ]
+            y =new_ [a ]==new_ [b ]
             if e and y :
                 ee +=1 
             elif e and not y :

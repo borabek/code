@@ -137,9 +137,9 @@ def main ():
                 except Exception as e :
                     print (f"    {r ['pid']}: 9k atlandi ({type (e ).__name__ }: {e })",flush =True )
                     K9 [r ["pid"]]=None 
-            veri =K9 .get (r ["pid"])
-            if veri is not None :
-                X9 ,P9a ,Pd9a =veri 
+            data_ =K9 .get (r ["pid"])
+            if data_ is not None :
+                X9 ,P9a ,Pd9a =data_ 
                 k9 =wire_gate .decision_mask (wire_gate .decision_score (gate ,X9 ))
                 if k9 .any ():
                     P9 ,Pd9 =son_islem (X9 [k9 ],P9a [k9 ],Pd9a [k9 ])

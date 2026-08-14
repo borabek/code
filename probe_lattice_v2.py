@@ -43,11 +43,11 @@ MARKALAR =set (os .environ .get ("KV_MARKA","NIT,MOR,SUPU,UPUN").split (","))
 KAYNAK =os .environ .get ("KV_KAYNAK","candidate")
 
 
-def _izgara (P ,seed ,adim ,n_max =80 ):
-    L =float (np .linalg .norm (adim ))
+def _izgara (P ,seed ,step_ ,n_max =80 ):
+    L =float (np .linalg .norm (step_ ))
     if L <MIN_ADIM :
         return np .zeros ((0 ,3 )),0 
-    u =adim /L 
+    u =step_ /L 
     t =(P -seed )@u 
     n0 =max (int (np .floor (t .min ()/L ))-1 ,-n_max )
     n1 =min (int (np .ceil (t .max ()/L ))+1 ,n_max )
@@ -110,11 +110,11 @@ def kafes_ara (P ,n_kafes =N_KAFES ,rng =None ):
         candidate =np .vstack ([candidate ,candidate /2.0 ,candidate /3.0 ])# lower harmonikler
         tohumlar =Pk [::max (1 ,len (Pk )//12 )]
         en =(None ,-1.0 ,None )
-        for adim in candidate :
-            if np .linalg .norm (adim )<MIN_ADIM :
+        for step_ in candidate :
+            if np .linalg .norm (step_ )<MIN_ADIM :
                 continue 
             for seed in tohumlar :
-                uret ,n_gr =_izgara (P ,seed ,adim )
+                uret ,n_gr =_izgara (P ,seed ,step_ )
                 if n_gr <3 :
                     continue 
                 isabet =_yakin (uret ,P ,TOL )
@@ -122,9 +122,9 @@ def kafes_ara (P ,n_kafes =N_KAFES ,rng =None ):
                 if n_hit <3 :
                     continue 
                 doluluk =n_hit /max (n_gr ,1 )
-                puan =n_hit *doluluk # GT KULLANILMIYOR
-                if puan >en [1 ]:
-                    en =((seed ,adim ),puan ,uret )
+                score_ =n_hit *doluluk # GT KULLANILMIYOR
+                if score_ >en [1 ]:
+                    en =((seed ,step_ ),score_ ,uret )
         if en [0 ]is None :
             break 
         bulunan .append (en )
@@ -145,10 +145,10 @@ def main ():
         _CY =pickle .load (open (os .environ .get (
         "KV_SIL","results/_d6_silindirler.pkl"),"rb"))
         print (f"B-rep silindir onbellegi: {len (_CY )} part",flush =True )
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
-    for d in veri :
+    for d in data_ :
         if d ["mfg"]not in MARKALAR :
             continue 
         G =np .asarray (d ["G"],float )
@@ -179,7 +179,7 @@ def main ():
         if n %40 ==0 :
             print (f"  {n } part ({time .time ()-t0 :.0f} s)",flush =True )
 
-    kahin ={"NIT":0.983 ,"SUPU":0.864 ,"MOR":0.811 ,"UPUN":0.810 }
+    oracle_ ={"NIT":0.983 ,"SUPU":0.864 ,"MOR":0.811 ,"UPUN":0.810 }
     bas ="".join (f"{i }k".rjust (7 )for i in range (1 ,N_KAFES +1 ))
     print (f"\n{'brand':<7}{'GT':>6}{'candidate':>6}{bas }{'KAHIN':>8}{'acik':>7}"
     f"{'adim1':>8}")
@@ -193,7 +193,7 @@ def main ():
             v =sum (a [f"k{i }"])/max (g ,1 )
             r [f"lattice{i }"]=v 
             sat +=f"{v :>7.3f}"
-        kh =kahin .get (m_ ,0.0 )
+        kh =oracle_ .get (m_ ,0.0 )
         r ["kahin"]=kh 
         r ["acik"]=kh -r [f"lattice{N_KAFES }"]
         r ["adim1_ortanca"]=float (np .median (a ["adim1"]))if a ["adim1"]else 0.0 

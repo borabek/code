@@ -65,8 +65,8 @@ def profil (P ,D ,mesh ,diag ):
         ac =np .linspace (0 ,2 *np .pi ,N_ISIN ,endpoint =False )
         direction =(np .cos (ac )[:,None ]*u [None ]+np .sin (ac )[:,None ]*v [None ])
         for t in DERINLIKLER :
-            merkez =P [i ]-t *D [i ]# ICERI correct
-            O .append (np .repeat (merkez [None ],N_ISIN ,axis =0 )+eps *direction )
+            center_ =P [i ]-t *D [i ]# ICERI correct
+            O .append (np .repeat (center_ [None ],N_ISIN ,axis =0 )+eps *direction )
             Dv .append (direction )
     O =np .vstack (O )
     Dv =np .vstack (Dv )
@@ -81,8 +81,8 @@ def profil (P ,D ,mesh ,diag ):
     X [:,len (DERINLIKLER )+1 ]=(r [:,0 ]-r [:,-1 ])/r0 
     # profilin bittigi depth: radius r0'in %30'unun altina dustugu first t
     dus =r <(0.30 *r0 [:,None ])
-    ilk =np .where (dus .any (1 ),np .argmax (dus ,axis =1 ),len (DERINLIKLER )-1 )
-    X [:,len (DERINLIKLER )+2 ]=np .asarray (DERINLIKLER ,float )[ilk ]
+    first_ =np .where (dus .any (1 ),np .argmax (dus ,axis =1 ),len (DERINLIKLER )-1 )
+    X [:,len (DERINLIKLER )+2 ]=np .asarray (DERINLIKLER ,float )[first_ ]
     X [:,len (DERINLIKLER )+3 ]=r0 /max (diag ,1e-6 )
     X [:,len (DERINLIKLER )+4 ]=np .abs (
     r -np .median (r ,axis =1 ,keepdims =True )).mean (1 )

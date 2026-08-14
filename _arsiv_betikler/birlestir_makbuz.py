@@ -76,7 +76,7 @@ def main ():
         +(f" | dusenler: {dict ((k ,v )for k ,v in sayac .items ()if k .endswith ('_yok')and v )}"
         if p6 <sayac ["cagri"]else ""))
         if p6 ==0 and bayrak .get ("p6_acik"):
-            print ("!! P6 ACIK ama HIC CALISMAMIS -- bu sayi TABAN sayisidir.")
+            print ("!! P6 OPEN but HIC CALISMAMIS -- this number TABAN sayisidir.")
     print (f"receipt -> {cik }")
 
 

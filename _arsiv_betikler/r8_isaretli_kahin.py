@@ -144,7 +144,7 @@ def main ():
     f"{np .median ([len (S )for d_ in PARCA .values ()for S in d_ ['SD']]):.0f} | "
     f"C1 medyan {np .median ([len (S )for d_ in PARCA .values ()for S in d_ ['SC']]):.0f}")
 
-    def kahin (hangi ,isaretli_secim ):
+    def oracle_ (hangi ,isaretli_secim ):
         """hangi: 'D1'|'C1'|'BIRLESIK'. isaretli_secim: True whereas v.Gd, False whereas |v.Gd|."""
         rob ,gg =[],[]
         for r in DER :
@@ -181,7 +181,7 @@ def main ():
             gg .append (r ["geo"])
         return rob ,gg 
 
-    t0 ,gg =kahin ("D1",True )
+    t0 ,gg =oracle_ ("D1",True )
     # baseline: no kahin absent
     rob0 =[]
     for r in DER :
@@ -195,8 +195,8 @@ def main ():
     print (f"\n{'sozluk':<12}{'ISARETLI kahin':>16}{'ISARETSIZ kahin':>17}{'artefakt':>11}")
     S ={"baseline":b }
     for h in ("D1","C1","BIRLESIK"):
-        ri ,_ =kahin (h ,True )
-        ru ,_ =kahin (h ,False )
+        ri ,_ =oracle_ (h ,True )
+        ru ,_ =oracle_ (h ,False )
         S [h ]={"signed":f1w (ri ),"unsigned":f1w (ru )}
         print (f"{h :<12}{f1w (ri ):>16.4f}{f1w (ru ):>17.4f}{f1w (ru )-f1w (ri ):>+11.4f}")
     print ("\n('artefakt' = unsigned kahinin SISIRDIGI miktar; secim ters yonu de dogru sayiyor)")

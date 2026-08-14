@@ -154,7 +154,7 @@ def main ():
     # sinirda-real acikliklari 1 oydan 2 oya removes; single-model gurultusu ortalamada kaybolur
     # and oyu YUKSELMEZ. best_full/keig128'den farki: yabanci uye not, uyelerin own ortalamasi
     # -> uzlasmayi sulandirmaz, keskinlestirir. Mekanizma kaniti = single-oy real payinin dusmesi.
-    print (chr (10 )+"=== A5 uzlasma yukseltici (4 uye vs 4+ortalama) ===")
+    print (chr (10 )+"=== A5 uzlasma yukseltici (4 uye vs 4+mean) ===")
     r4 =res [4 ]
     r5 =score (4 ,add_avg =True )
     print (f"{'arm':>16}{'dusuk':>9}{'cok':>9}{'agirlikli':>11}{'tek-oy gercek':>15}")
@@ -194,7 +194,7 @@ def main ():
             vals =[float (np .mean (c [idx ]))for c in conn ]
             (pos if lab [i ]else neg ).append (float (np .std (vals )))
     a6 =_auc (np .array (pos ),np .array (neg ))if pos and neg else float ("nan")
-    print (chr (10 )+"=== A6 modeller-arasi anlasmazlik (CE+CT std) ===")
+    print (chr (10 )+"=== A6 models-arasi anlasmazlik (CE+CT std) ===")
     print (f"  TP medyan {np .median (pos ):.3f} | FP medyan {np .median (neg ):.3f} | AUC {a6 :.3f}")
     print (f"  KAPI (|AUC-0.5| anlamli ve votes'un otesinde olmali; referans votes 0.86)")
 

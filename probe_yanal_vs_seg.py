@@ -45,7 +45,7 @@ lat =np .asarray (lat );Fm =np .asarray (feats )
 print (f"eslesen candidate {len (lat )} | lateral medyan {np .median (lat ):.3f}mm | "
 f"<=2mm %{100 *(lat <=2 ).mean ():.1f}\n")
 
-print ("YANAL HATA ile KORELASYON (Spearman, |rho| buyuk = aciklayici):")
+print ("YANAL HATA with KORELASYON (Spearman, |rho| large = aciklayici):")
 from scipy .stats import spearmanr 
 sk =[]
 for c in range (Fm .shape [1 ]):

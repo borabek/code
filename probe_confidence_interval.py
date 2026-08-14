@@ -54,7 +54,7 @@ def main ():
         out [m_ ]={"f1":float (f1 ),"ga":[float (lo ),float (hi )]}
         print (f"{m_ :<12}{f1 :>9.4f}   [{lo :.4f}, {hi :.4f}]")
     print ("\nNOT: part duzeyi bootstrap. Projede %80 GEOMETRIK IKIZ")
-    print ("     measured; gercek GA bundan GENIS olabilir.")
+    print ("     measured; real GA bundan GENIS may be.")
     json .dump ({"yol":YOL ,"n_parca":len (d ),"n_boot":N_BOOT ,"sonuc":out ,
     "not":"Parca duzeyi bootstrap %95 GA. Geometrik ikiz "
     "sizintisi nedeniyle gercek GA daha genis olabilir."},

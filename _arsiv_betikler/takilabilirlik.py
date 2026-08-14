@@ -98,7 +98,7 @@ def yon_ara (mesh ,p ,yonler =None ,depth =DERINLIK ,n_yon =26 ):
     return en 
 
 
-def kanal_var_mi (mesh ,p ,d ,r ,once =1.0 ,sonra =5.0 ,n_ac =8 ):
+def kanal_var_mi (mesh ,p ,d ,r ,pre_ =1.0 ,post_ =5.0 ,n_ac =8 ):
     """FIZIKSEL SORU: this noktada, this yonde yaricapi r which is a KANAL present mi?
 
     Iki wrong kurgudan after correct formulasyon (2026-08-07):
@@ -114,7 +114,7 @@ def kanal_var_mi (mesh ,p ,d ,r ,once =1.0 ,sonra =5.0 ,n_ac =8 ):
     e1 ,e2 =_dik_taban (d )
     ac =np .linspace (0 ,2 *np .pi ,n_ac ,endpoint =False )
     cev =np .stack ([np .cos (a )*e1 +np .sin (a )*e2 for a in ac ],0 )
-    ts =np .linspace (-once ,sonra ,max (3 ,int ((once +sonra )/0.8 )))
+    ts =np .linspace (-pre_ ,post_ ,max (3 ,int ((pre_ +post_ )/0.8 )))
     O ,D =[],[]
     for t in ts :
         m =np .asarray (p ,float )+t *d 

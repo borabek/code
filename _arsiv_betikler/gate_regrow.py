@@ -183,7 +183,7 @@ def extract ():
                 #        bolmede GENELLESEN TEK ozelligi oldugu for this ozellikle agir a sapmaydi.
             if os .environ .get ("GATE_AVG_MEMBER","0")not in ("0","false","False"):
                 raise SystemExit ("GATE_AVG_MEMBER PARITEYI BOZAR (urun 4 uye kullanir). "
-                "Acmak icin once urun tarafina 5. uye eklenmeli.")
+                "Acmak for before urun tarafina 5. uye eklenmeli.")
             cps ,probs ,_is_hi ,_ =_RC .derive_candidates (V ,F ,pbs ,stp ,cfg =cfg )
             if not cps :
                 continue 

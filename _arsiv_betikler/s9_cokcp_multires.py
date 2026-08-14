@@ -144,8 +144,8 @@ def main ():
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (det ["A"],det ["B"])),g ,fn ,n =2000 )
     print (f"\ncok-CP tespit farki {d :+.4f} | GA [{lo :+.4f}, {hi :+.4f}]")
     print (f"KABUL BARI (denetim): cok-CP +0.03 -> {'GECTI'if d >=0.03 else 'GECMEDI'}")
-    print ("  (dusuk-CP kaybi ayrica olculmeli: bu arm YALNIZ cok-CP parcalarda calisiyor,")
-    print ("   yani dusuk-CP'ye dokunmuyor -> loss YAPISAL OLARAK SIFIR)")
+    print ("  (low-CP kaybi also olculmeli: this arm YALNIZ very-CP parcalarda calisiyor,")
+    print ("   i.e. low-CP'ye dokunmuyor -> loss YAPISAL OLARAK SIFIR)")
     with io .open ("results/s9_cokcp_multires.json","w",encoding ="utf-8")as f :
         json .dump ({"A_cok":float (ra ["F1"]["cok"]),"B_cok":float (rb ["F1"]["cok"]),
         "fark":float (d ),"ga":[float (lo ),float (hi )],

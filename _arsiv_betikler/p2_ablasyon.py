@@ -63,10 +63,10 @@ def main ():
     ONB ={}
 
     def arm (n_sut ,donusumlu ):
-        anahtar =(n_sut ,donusumlu )
+        key_ =(n_sut ,donusumlu )
 
         def f (X_ ,y_ ,pid_ ,mfg_ ,kp ,th ):
-            if anahtar not in ONB :
+            if key_ not in ONB :
                 Xs =X_ [:,:n_sut ]
                 if donusumlu :
                     Zz =np .zeros ((len (Xs ),n_sut *2 ))
@@ -75,8 +75,8 @@ def main ():
                         Zz [i ]=wire_gate .within_part (Xs [i ],D ["donusum"])
                 else :
                     Zz =Xs 
-                ONB [anahtar ]=Zz 
-            Zz =ONB [anahtar ]
+                ONB [key_ ]=Zz 
+            Zz =ONB [key_ ]
             clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
             random_state =th ).fit (Zz [kp ],y_ [kp ])
             return {"clf":clf ,"n_feat":Zz .shape [1 ],
@@ -88,9 +88,9 @@ def main ():
     SON ,PARCA ={},{}
     for don in (False ,True ):
         for ad ,n in BLOK :
-            etiket =f"{ad }{' [z-skor]'if don else ' [ham]'}"
-            SON [etiket ],PARCA [etiket ]=T .calistir (D ,arm (n ,don ),etiket )
-            guard ("p2 "+etiket )
+            label_ =f"{ad }{' [z-skor]'if don else ' [ham]'}"
+            SON [label_ ],PARCA [label_ ]=T .calistir (D ,arm (n ,don ),label_ )
+            guard ("p2 "+label_ )
 
     print (f"\n{'blok':<30}{'pool':>9}{'PXC-d':>9}{'WEI-d':>9}{'onceki farka GA':>24}")
     onceki =None 
@@ -156,7 +156,7 @@ def main ():
         json .dump ({"oznitelik":OZET ,"karar":RSON ,
         "not":("TEK kosu, AYNI measurement kumesi (194 part/174 grup), AYNI corpus "
         "(zengin_parite_w2). Onceki gecelerin blok sayilari FARKLI "
-        "tabanlardan geldigi icin TOPLANAMAZ; bu tablo toplanabilir.")},
+        "tabanlardan geldigi for TOPLANAMAZ; this tablo toplanabilir.")},
         f ,indent =1 )
     print ("receipt -> results/p2_ablasyon.json")
 

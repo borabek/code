@@ -141,10 +141,10 @@ def main ():
             while k <len (pr )and pr [k ]>=ESIK :
                 k +=1 
             return k 
-        yeni =satirlar (dur )
-        kollar .append (yeni )
-        farklar .append (f1w (yeni )-f1w (baseline ))
-        print (f"{seed :<8}{f1w (yeni ):>9.4f}{farklar [-1 ]:>+9.4f}",flush =True )
+        new_ =satirlar (dur )
+        kollar .append (new_ )
+        farklar .append (f1w (new_ )-f1w (baseline ))
+        print (f"{seed :<8}{f1w (new_ ):>9.4f}{farklar [-1 ]:>+9.4f}",flush =True )
 
     f =np .array (farklar )
     print (f"\nTOHUM DAYANIKLILIGI: ort {f .mean ():+.4f} | sd {f .std ():.4f} | "
@@ -166,15 +166,15 @@ def main ():
     print (f"  bar (+0.02)          : {'GECTI'if f .mean ()>=0.02 else 'GECMEDI'}")
     print (f"  gercek mi (GA)       : {'EVET'if gercek else 'HAYIR'}")
     print (f"  seed dayanikli mi   : {'EVET'if (f >0 ).all ()else 'HAYIR'}")
-    sonuc =("ISTIFLENEBILIR ADAY (gercek ama bar alti)"if (gercek and (f >0 ).all ()
+    res_ =("ISTIFLENEBILIR ADAY (gercek ama bar alti)"if (gercek and (f >0 ).all ()
     and f .mean ()<0.02 )else 
     "DAGITILABILIR"if f .mean ()>=0.02 and gercek else "OLU")
-    print (f"  -> {sonuc }")
+    print (f"  -> {res_ }")
     with open ("results/t7_durdurma_dogrula.json","w",encoding ="utf-8")as fh :
         json .dump ({"baseline":float (f1w (baseline )),"farklar":[float (x )for x in f ],
         "ort":float (f .mean ()),"sd":float (f .std ()),
         "bootstrap":[float (v .mean ()),float (lo ),float (hi )],
-        "gercek":bool (gercek ),"sonuc":sonuc },fh ,indent =1 )
+        "gercek":bool (gercek ),"sonuc":res_ },fh ,indent =1 )
     print ("receipt -> results/t7_durdurma_dogrula.json")
 
 

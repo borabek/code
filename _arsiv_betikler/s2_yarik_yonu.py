@@ -63,7 +63,7 @@ def main ():
 
     # 1) DIK sinifi topla (part basina)
     HEDEF =collections .defaultdict (list )
-    toplam =0 
+    total_ =0 
     for r in DER :
         if r ["X"]is None :
             continue 
@@ -86,12 +86,12 @@ def main ():
             if dd >tt or a_ in used or b_ in hit :
                 continue 
             used .add (a_ );hit .add (b_ )
-            toplam +=1 
+            total_ +=1 
             if an [a_ ,b_ ]>45.0 :
                 HEDEF [r ["pid"]].append ({"p":P [a_ ].copy (),"gd":Gd [b_ ].copy (),
                 "aci":float (an [a_ ,b_ ]),"V":r .get ("V")})
     n_dik =sum (len (v )for v in HEDEF .values ())
-    print (f"{toplam } eslesme | DIK sinif {n_dik } nokta, {len (HEDEF )} parcada",flush =True )
+    print (f"{total_ } eslesme | DIK sinif {n_dik } nokta, {len (HEDEF )} parcada",flush =True )
 
     # 2) O parcalarda yarik adaylari uret and yonleri karsilastir
     with open ("results/_u4_der.pkl","rb")as f :
@@ -151,12 +151,12 @@ def main ():
         f"(mevcut direction: {np .median (ae ):.1f} deg)")
         print (f"\nKAZANC KESTIRIMI: {uyan } nokta duzelirse dik sinif "
         f"{n_dik } -> {n_dik -uyan }")
-        print (f"  eslesmelerin {uyan /max (toplam ,1 ):.1%}'i kurtulur")
+        print (f"  eslesmelerin {uyan /max (total_ ,1 ):.1%}'i kurtulur")
     else :
-        print ("  -> yarik dedektoru bu sinifa ULASAMIYOR")
+        print ("  -> yarik dedektoru this sinifa ULASAMIYOR")
     with open ("results/s2_yarik_yonu.json","w",encoding ="utf-8")as f :
         json .dump ({"dik_sinif":n_dik ,"yarik_var":bulundu ,"uyan":uyan ,
-        "hic_yarik_yok":hic_yarik_yok ,"toplam_eslesme":toplam ,
+        "hic_yarik_yok":hic_yarik_yok ,"toplam_eslesme":total_ ,
         "ratio":(uyan /bulundu )if bulundu else None },f ,indent =1 )
     print ("\nmakbuz -> results/s2_yarik_yonu.json")
 

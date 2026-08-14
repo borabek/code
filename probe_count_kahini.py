@@ -63,11 +63,11 @@ for ad ,rows in arm .items ():
     print (f"  {ad :<22} MIKRO {res [ad ]:.4f}")
 d =res ["adet kahini (top-N)"]-res ["threshold (urun)"]
 print (f"\nADET KAHININ KAZANCI: {d :+.4f}")
-print ("KARAR: "+("madde 4-5 ACIK -- yapisal adet karari insa edilir"
+print ("DECISION: "+("madde 4-5 ACIK -- yapisal adet karari insa edilir"
 if d >=0.02 else 
 "madde 4-5 OLU -- MUKEMMEL adet bile esigi gecmiyor"))
 json .dump ({"damga":makbuz_hash .damga (),"mikro":res ,"kazanc":d ,
 "adet_MAE":float (np .mean (adet_hata )),"n":len (adet_hata ),
-"not":"TAVAN olcumu: gercek adet kahin olarak verildi. Gercek bir "
+"not":"TAVAN olcumu: real count kahin as verildi. Gercek a "
 "adet tahmincisi bunun ALTINDA kalir. D7=DEV."},
 open ("results/adet_kahini.json","w"),indent =1 )

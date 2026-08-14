@@ -80,7 +80,7 @@ def main ():
             continue 
         if k %20 ==0 :print (f"  {k }/{len (wei )}  base {bt /max (GT ,1 ):.3f} aggr {at /max (GT ,1 ):.3f}  {time .time ()-t0 :.0f}s",flush =True )
     print (f"\nWEI TIPIK candidate oracle ({GT } CP): baseline {bt /max (GT ,1 ):.3f} -> agresif {at /max (GT ,1 ):.3f}  (+{(at -bt )/max (GT ,1 ):.3f})")
-    print ("KARAR: "+("agresif WEI oracle >=0.88 -> WEI 0.80 MUMKUN, selector'a gec"if at /max (GT ,1 )>=0.88 else 
+    print ("DECISION: "+("agresif WEI oracle >=0.88 -> WEI 0.80 MUMKUN, selector'a gec"if at /max (GT ,1 )>=0.88 else 
     "agresif WEI oracle <0.88 -> segmentasyon susuyor, WEI 0.80 = ETIKET (145 parcada kanitli)"))
 
 

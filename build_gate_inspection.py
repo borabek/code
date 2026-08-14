@@ -91,7 +91,7 @@ def main ():
         ax .view_init (elev =ev ,azim =az );ax .set_axis_off ()
         ng =cats .count (1 );no =cats .count (2 )
         ax .set_title (f"{pid } ({mfg })  yesil-dropped:{ng } turuncu-keptFP:{no }",fontsize =9 )
-    fig .suptitle ("WIRE-GATE INCELEME: YESIL=gate-atti-ama-mfg-eslesen (gercek tel mi?) TURUNCU=gate-tuttu-ama-eslesmeyen (tool mu, listelenmemis tel mi?)",
+    fig .suptitle ("WIRE-GATE INCELEME: YESIL=gate-atti-but-mfg-eslesen (real tel mi?) TURUNCU=gate-tuttu-but-eslesmeyen (tool mu, listelenmemis tel mi?)",
     fontsize =12 )
     plt .tight_layout (rect =[0 ,0 ,1 ,0.96 ])
     plt .savefig ("results/_gate_inspection.png",dpi =95 ,bbox_inches ="tight")

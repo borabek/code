@@ -56,7 +56,7 @@ def temel (d ):
     p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
 
 
-def yigin_f32 (ogeler ,uret ,satir ):
+def yigin_f32 (ogeler ,uret ,line_ ):
     """float64 ARA YIGIN OLMADAN float32 matris kur.
 
     `np.vstack([...]).astype(np.float32)` before HEPSINI float64 merges:
@@ -67,11 +67,11 @@ def yigin_f32 (ogeler ,uret ,satir ):
 
     `uret(oge)` matris, `row(oge)` that ogenin row sayisini gives.
     """
-    n_satir =sum (satir (o )for o in ogeler )
-    ilk =np .asarray (uret (ogeler [0 ]),np .float32 )
-    M =np .empty ((n_satir ,ilk .shape [1 ]),np .float32 )
-    M [:len (ilk )]=ilk 
-    y =len (ilk )
+    n_satir =sum (line_ (o )for o in ogeler )
+    first_ =np .asarray (uret (ogeler [0 ]),np .float32 )
+    M =np .empty ((n_satir ,first_ .shape [1 ]),np .float32 )
+    M [:len (first_ )]=first_ 
+    y =len (first_ )
     for o in ogeler [1 :]:
         b =uret (o )
         M [y :y +len (b )]=b 
@@ -111,11 +111,11 @@ def ek_blok (d ,s1 ):
         t =lattice .otelemeler (Pt )if len (Pt )>=2 else []
         if not t :
             return np .zeros ((len (P ),3 ))
-        adim =float (np .linalg .norm (t [0 ][0 ]))
-        u =t [0 ][0 ]/max (adim ,1e-9 )
+        step_ =float (np .linalg .norm (t [0 ][0 ]))
+        u =t [0 ][0 ]/max (step_ ,1e-9 )
         pr =Pt @u 
         uzanim =float (pr .max ()-pr .min ())if len (pr )>1 else 0.0 
-        bek =uzanim /adim +1.0 
+        bek =uzanim /step_ +1.0 
         n_tohum =float (len (Pt ))
         return np .tile ([bek ,n_tohum ,bek -n_tohum ],(len (P ),1 ))
     if BLOK =="cluster":
@@ -144,8 +144,8 @@ def ek_blok (d ,s1 ):
         s =np .asarray (s1 ,float )
         if not len (s ):
             return np .zeros ((len (P ),3 ))
-        sira =np .argsort (np .argsort (-s ))/max (len (s )-1 ,1 )
-        return np .stack ([sira ,s /max (s .max (),1e-9 ),
+        rank_ =np .argsort (np .argsort (-s ))/max (len (s )-1 ,1 )
+        return np .stack ([rank_ ,s /max (s .max (),1e-9 ),
         s -float (np .median (s ))],axis =1 )
     raise ValueError (BLOK )
 
@@ -176,8 +176,8 @@ def _ek_bir (a ):
     return ek_blok (a [0 ],a [1 ])
 
 
-def ek_hepsi (veri ,oof ):
-    isler =[(_slim (d ),np .asarray (s ,float ))for d ,s in zip (veri ,oof )]
+def ek_hepsi (data_ ,oof ):
+    isler =[(_slim (d ),np .asarray (s ,float ))for d ,s in zip (data_ ,oof )]
     if ISCI <=1 :
         return [_ek_bir (a )for a in isler ]
     import multiprocessing as mp 
@@ -185,10 +185,10 @@ def ek_hepsi (veri ,oof ):
         return p .map (_ek_bir ,isler ,chunksize =2 )
 
 
-def puanla (veri ,skor ,kural ):
+def puanla (data_ ,skor ,rule_ ):
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,s in zip (veri ,skor ):
-        P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,kural ,nms_mm =NMS )
+    for d ,s in zip (data_ ,skor ):
+        P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =NMS )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
         q =per [d ["mfg"]]
@@ -202,29 +202,29 @@ def puanla (veri ,skor ,kural ):
 
 def main ():
     t0 =time .time ()
-    veri =[]
+    data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):
         cluster =cluster .strip ()
         for d in yukle (cluster ,int (os .environ .get ("P6_TR","0"))):
             d ["_kume"]=cluster 
-            veri .append (d )
-    for d in veri :
+            data_ .append (d )
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
-    print (f"BLOK={BLOK } | {len (veri )} part ({time .time ()-t0 :.0f} s)",
+    print (f"BLOK={BLOK } | {len (data_ )} part ({time .time ()-t0 :.0f} s)",
     flush =True )
 
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
     print (f"katlar: {katlar }",flush =True )
 
     # OOF birinci kademe skorlari (blok tohumu for) -- brand katli
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        M =yigin_f32 (ic ,lambda i :temel (veri [i ]),
-        lambda i :len (veri [i ]["y"]))
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        M =yigin_f32 (ic ,lambda i :temel (data_ [i ]),
+        lambda i :len (data_ [i ]["y"]))
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz =np .where (Y ==1 )[0 ]
         neg =np .where (Y ==0 )[0 ]
@@ -235,26 +235,26 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         for i in dis :
             oof [i ]=m .predict_proba (
-            temel (veri [i ]).astype (np .float32 ))[:,1 ]
+            temel (data_ [i ]).astype (np .float32 ))[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
     for i ,s in enumerate (oof ):
         if s is None :
-            oof [i ]=np .full (len (veri [i ]["X"]),0.5 )
+            oof [i ]=np .full (len (data_ [i ]["X"]),0.5 )
 
     print (f"ek blok hesaplaniyor ({ISCI } isci)...",flush =True )
-    EK =ek_hepsi (veri ,oof )
+    EK =ek_hepsi (data_ ,oof )
     print (f"blok {np .vstack (EK ).shape } ({time .time ()-t0 :.0f} s)",flush =True )
 
     top ={"YOK":collections .Counter (),"VAR":collections .Counter ()}
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
         for ad in ("YOK","VAR"):
             def mat (i ):
-                return (np .hstack ([temel (veri [i ]),EK [i ]])if ad =="VAR"
-                else temel (veri [i ])).astype (np .float32 )
-            M =yigin_f32 (ic ,mat ,lambda i :len (veri [i ]["y"]))
-            Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+                return (np .hstack ([temel (data_ [i ]),EK [i ]])if ad =="VAR"
+                else temel (data_ [i ])).astype (np .float32 )
+            M =yigin_f32 (ic ,mat ,lambda i :len (data_ [i ]["y"]))
+            Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
             rng =np .random .default_rng (0 )
             poz =np .where (Y ==1 )[0 ]
             neg =np .where (Y ==0 )[0 ]
@@ -267,28 +267,28 @@ def main ():
             s_dis =[m .predict_proba (mat (i ))[:,1 ]for i in dis ]
             ar =(np .random .default_rng (0 ).choice (len (ic ),ARAMA_N ,False )
             if len (ic )>ARAMA_N else np .arange (len (ic )))
-            AR =[veri [ic [i ]]for i in ar ]
+            AR =[data_ [ic [i ]]for i in ar ]
             AS =[s_ic [i ]for i in ar ]
             en =max (KURALLAR ,key =lambda k :puanla (AR ,AS ,k )["makro"])
-            r =puanla ([veri [i ]for i in dis ],s_dis ,en )
+            r =puanla ([data_ [i ]for i in dis ],s_dis ,en )
             for k_ in ("TP","FP","FN"):
                 top [ad ][k_ ]+=r [k_ ]
         print (f"  {b :<6} YOK {2 *top ['YOK']['TP']:.0f}TP | "
         f"VAR {2 *top ['VAR']['TP']:.0f}TP ({time .time ()-t0 :.0f} s)",
         flush =True )
 
-    son ={}
+    last_ ={}
     for ad in ("YOK","VAR"):
         c =top [ad ]
-        son [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
-    fark =son ["VAR"]-son ["YOK"]
-    print (f"\nBLOK {BLOK }: YOK {son ['YOK']:.4f} -> VAR {son ['VAR']:.4f} "
+        last_ [ad ]=2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
+    fark =last_ ["VAR"]-last_ ["YOK"]
+    print (f"\nBLOK {BLOK }: YOK {last_ ['YOK']:.4f} -> VAR {last_ ['VAR']:.4f} "
     f"({fark :+.4f})")
     print (f"KAPI: +0.01 -> {'GECTI'if fark >=0.01 else 'GECMEDI'}")
     json .dump ({"damga":makbuz_hash .damga (),"blok":BLOK ,
-    "yok":son ["YOK"],"var":son ["VAR"],"fark":fark ,
+    "yok":last_ ["YOK"],"var":last_ ["VAR"],"fark":fark ,
     "gecti":bool (fark >=0.01 ),"katlar":katlar ,
-    "n_parca":len (veri ),
+    "n_parca":len (data_ ),
     "not":"Tek degiskenli ek-oznitelik kiyasi. tam brand katlari, "
     "MAKRO kural secimi. D7'ye BAKILMADI."},
     open (f"results/ek_blok_{BLOK }.json","w"),indent =1 )

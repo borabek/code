@@ -81,13 +81,13 @@ def main ():
     ap .add_argument ("--ckpt",default =CKPT )
     a =ap .parse_args ()
 
-    pids =[x .strip ()for x in open (a .liste )if x .strip ()]
+    pids =[x .strip ()for x in open (a .lst_ )if x .strip ()]
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     eksik =[p for p in pids if p not in S ]
     if eksik :
         raise SystemExit (f"STEP bulunamayan {len (eksik )} part: {eksik [:5 ]} "
         "-- sessiz atlamak yerine DURUYORUM")
-    os .makedirs (a .cikti ,exist_ok =True )
+    os .makedirs (a .out_ ,exist_ok =True )
 
     cihaz ="cuda"if torch .cuda .is_available ()else "cpu"
     # URUNUN own yukleyicisi -- k_eig/meta ckpt'ten gelir. Elle `n_eig`
@@ -98,7 +98,7 @@ def main ():
     t0 =time .time ()
     basarili =[]
     for i ,pid in enumerate (pids ,1 ):
-        d =os .path .join (a .cikti ,pid )
+        d =os .path .join (a .out_ ,pid )
         os .makedirs (d ,exist_ok =True )
         obj =os .path .join (d ,f"{pid }.obj")
         seed =os .path .join (d ,f"{pid }.labels.txt")
@@ -120,10 +120,10 @@ def main ():
         if i %5 ==0 :
             print (f"  {i }/{len (pids )}  {(time .time ()-t0 )/i :.1f}s/part",flush =True )
 
-    with open (os .path .join (a .cikti ,"README.md"),"w",encoding ="utf-8")as f :
+    with open (os .path .join (a .out_ ,"README.md"),"w",encoding ="utf-8")as f :
         f .write (KILAVUZ .format (sinif =SINIF ,
-        liste ="\n".join (f"* {p }"for p in basarili )))
-    print (f"\nBITTI: {len (basarili )} part -> {a .cikti }")
+        lst_ ="\n".join (f"* {p }"for p in basarili )))
+    print (f"\nBITTI: {len (basarili )} part -> {a .out_ }")
     print (f"Etiket araci: label_tool.html")
 
 

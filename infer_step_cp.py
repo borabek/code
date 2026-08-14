@@ -163,8 +163,8 @@ def _occ_mesh (path ):
 def _kaynakla (V ,F ,tol =1e-6 ):
     """Ayni konumdaki tepeleri birlestir (face-face tessellasyonun dikisini kapat)."""
     q =np .round (V /max (tol ,1e-9 )).astype (np .int64 )
-    _ ,ilk ,ters =np .unique (q ,axis =0 ,return_index =True ,return_inverse =True )
-    V2 =V [ilk ]
+    _ ,first_ ,ters =np .unique (q ,axis =0 ,return_index =True ,return_inverse =True )
+    V2 =V [first_ ]
     F2 =ters [F ]
     F2 =F2 [(F2 [:,0 ]!=F2 [:,1 ])&(F2 [:,1 ]!=F2 [:,2 ])&(F2 [:,0 ]!=F2 [:,2 ])]
     # SIFIR ALANLI ucgen: source sonrasi kose indisleri FARKLI kalir but points

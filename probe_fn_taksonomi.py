@@ -21,14 +21,14 @@ from sina_cluster import match_hungarian
 from korpus_kimlik import step_kimlik as SK 
 
 OB ="results/_p1_olasilik_g10";GATE ="results/wire_gate_v7.pkl"
-sv =d6_record .exam ();kayit =d6_record .yukle (set (sv ["pidler"]))
+sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))
 gate =pickle .load (open (GATE ,"rb"))
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
-pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (kayit ))
+pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (rec_ ))
 
 kova =collections .Counter ();n_gt =0 
 for pid in pidler :
-    r =kayit [pid ]
+    r =rec_ [pid ]
     G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
     if not len (G ):continue 
     d =np .load (f"{OB }/{pid }.npz")

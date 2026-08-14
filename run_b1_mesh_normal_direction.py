@@ -136,14 +136,14 @@ def main ():
     d6_record .yukle (set (d6_record .exam ()["pidler"])).items ()}
     Rk =K .yukle (None )
 
-    def kayit (pid ):
+    def rec_ (pid ):
         return Rk .get (pid )or _D6 .get (pid )
 
         # --- EGITIM: corpus
     X ,Y =[],[]
     pid_tam =[f [4 :-4 ]for f in sorted (os .listdir (OZ ))if f .startswith ("tam_")]
     for i ,pid in enumerate (pid_tam ):
-        r =kayit (pid )
+        r =rec_ (pid )
         if r is None or not len (r .get ("G",[])):
             continue 
         d =parca_yukle ("tam",pid ,r )
@@ -187,7 +187,7 @@ def main ():
         tes =[]
         for pid in [f [3 :-4 ]for f in sorted (os .listdir (OZ ))
         if f .startswith ("d7_")]:
-            r =kayit (pid )
+            r =rec_ (pid )
             if r is None or not len (r .get ("G",[])):
                 continue 
             d =parca_yukle ("d7",pid ,r )
@@ -228,7 +228,7 @@ def main ():
         flush =True )
     a ,b =out ["YON SABIT"]["robot"],out ["MESH NORMALI"]["robot"]
     print (f"\nFARK {b -a :+.4f} | kova aritmetigi beklentisi ~0.407")
-    print ("KAPI: >= +0.02 ise KABUL")
+    print ("KAPI: >= +0.02 whereas KABUL")
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"fark":b -a ,
     "not":"Yon secenekleri = mevcut + 2mm icindeki mesh tepelerinin "
     "+/- normalleri. Konum ve candidate sayisi DEGISMEZ. "

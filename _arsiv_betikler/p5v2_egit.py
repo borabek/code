@@ -118,16 +118,16 @@ def sec (secs ,skor ,gate_skor =None ,gate_esik =None ):
     np .asarray ([D [i ]for i in tut ],float )if tut else np .zeros ((0 ,3 )))
 
 
-def veri_kur (pidler ,kayit ,ob_dir ,cyl ,acik ,S ,gate ):
+def veri_kur (pidler ,rec_ ,ob_dir ,cyl ,acik ,S ,gate ):
     """Her part for (secenekler, labels, manufacturer). Gate SKOR ozniteligi
     for is used but ADAY ELEMEZ -- eleme p5-v2'nin isi."""
     from p1c_threshold import maske # noqa: F401  (kullanilmiyor; gate ELEMEZ)
-    veri =[]
+    data_ =[]
     for pid in pidler :
         f =f"{ob_dir }/{pid }.npz"
         if not os .path .exists (f ):
             continue 
-        r =kayit [pid ]
+        r =rec_ [pid ]
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         if not len (G ):
             continue 
@@ -151,10 +151,10 @@ def veri_kur (pidler ,kayit ,ob_dir ,cyl ,acik ,S ,gate ):
             komsu =B .mean (0 );komsu /=(np .linalg .norm (komsu )+1e-12 )
         secs =PS .secenekler (P ,D ,cyl .get (pid ),acik .get (pid ),r ["diag"],
         gate_s =gs ,votes =vt ,komsu =komsu )
-        veri .append ({"pid":pid ,"mfg":r ["mfg"],"secs":secs ,"gate_skor":gs ,
+        data_ .append ({"pid":pid ,"mfg":r ["mfg"],"secs":secs ,"gate_skor":gs ,
         "y":etiketle (secs ,G ,Gd ),"G":G ,"Gd":Gd ,
         "diag":r ["diag"]})
-    return veri 
+    return data_ 
 
 
 class Siralayici :
@@ -175,10 +175,10 @@ class Siralayici :
         n_jobs =-1 ,random_state =seed )
         self .maks_cift =maks_cift 
 
-    def fit (self ,veri ):
+    def fit (self ,data_ ):
         rng =np .random .RandomState (0 )
         A ,B =[],[]
-        for d in veri :
+        for d in data_ :
             for i ,o in enumerate (d ["secs"]):
                 y =d ["y"][i ]
                 poz =np .where (y ==1 )[0 ]
@@ -214,20 +214,20 @@ class Siralayici :
         return s /max (n -1 ,1 )
 
 
-def egit (veri ,kip =None ):
+def egit (data_ ,kip =None ):
     kip =kip or os .environ .get ("P5V2_KIP","ikili")
     if kip =="siralama":
-        m =Siralayici ().fit (veri )
-        return m ,(m .n_cift ,veri [0 ]["secs"][0 ][0 ][2 ].__len__ ()),-1.0 
+        m =Siralayici ().fit (data_ )
+        return m ,(m .n_cift ,data_ [0 ]["secs"][0 ][0 ][2 ].__len__ ()),-1.0 
     X =np .vstack ([np .asarray ([s [2 ]for s in d ["secs"][i ]],float )
-    for d in veri for i in range (len (d ["secs"]))])
-    y =np .concatenate ([d ["y"][i ]for d in veri for i in range (len (d ["secs"]))])
+    for d in data_ for i in range (len (d ["secs"]))])
+    y =np .concatenate ([d ["y"][i ]for d in data_ for i in range (len (d ["secs"]))])
     clf =RandomForestClassifier (n_estimators =300 ,min_samples_leaf =5 ,n_jobs =-1 ,
     random_state =0 ,class_weight ="balanced").fit (X ,y )
     return clf ,X .shape ,float (y .mean ())
 
 
-def uygula (veri ,clf ,gate_esik =None ):
+def uygula (data_ ,clf ,gate_esik =None ):
     """gate_esik verilirse ORTAK SECIMDEN SONRA last kabul as uygulanir.
 
     Plandaki order: ham pool -> ortak secim -> GATE (last kabul/kalibrasyon).
@@ -237,7 +237,7 @@ def uygula (veri ,clf ,gate_esik =None ):
     import canonical_d7 as KZ # MIKRO toplama -- headline olcegi
     from p1c_threshold import maske 
     T ,R =[],[]
-    for d in veri :
+    for d in data_ :
         if isinstance (clf ,Siralayici ):
             skor =[clf .skorla ([s [2 ]for s in o ])for o in d ["secs"]]
         else :
@@ -258,26 +258,26 @@ def main ():
     ap .add_argument ("--ob",default ="results/_p1_olasilik_g10")
     ap .add_argument ("--gate",default ="results/wire_gate_v7.pkl")
     a =ap .parse_args ()
-    sv =d6_record .exam ();kayit =d6_record .yukle (set (sv ["pidler"]))
+    sv =d6_record .exam ();rec_ =d6_record .yukle (set (sv ["pidler"]))
     gate =pickle .load (open (a .gate ,"rb"))
     S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
     cyl =pickle .load (open ("results/_d6_silindirler.pkl","rb"))
     acik =pickle .load (open ("results/_d6_acikliklar.pkl","rb"))
     pidler =sorted ({f [:-4 ]for f in os .listdir (a .ob )if f .endswith (".npz")}
-    &set (kayit ))
+    &set (rec_ ))
     print (f"part {len (pidler )} | veri kuruluyor...",flush =True )
-    veri =veri_kur (pidler ,kayit ,a .ob ,cyl ,acik ,S ,gate )
-    print (f"kullanilabilir part {len (veri )}",flush =True )
+    data_ =veri_kur (pidler ,rec_ ,a .ob ,cyl ,acik ,S ,gate )
+    print (f"kullanilabilir part {len (data_ )}",flush =True )
 
     # MARKA-DISI (LOMO) -- havuzlanmis secim wrong objektif for selects
-    mfgs =sorted ({d ["mfg"]for d in veri })
-    say =collections .Counter (d ["mfg"]for d in veri )
+    mfgs =sorted ({d ["mfg"]for d in data_ })
+    say =collections .Counter (d ["mfg"]for d in data_ )
     test_mf =[m for m ,c in say .most_common ()if c >=30 ]
     print (f"LOMO markalari: {test_mf }\n",flush =True )
-    sonuc ={}
+    res_ ={}
     for m in test_mf :
-        tr =[d for d in veri if d ["mfg"]!=m ]
-        te =[d for d in veri if d ["mfg"]==m ]
+        tr =[d for d in data_ if d ["mfg"]!=m ]
+        te =[d for d in data_ if d ["mfg"]==m ]
         clf ,sh ,poz =egit (tr )
         (t ,r ),(tm ,rm )=uygula (te ,clf )
         # NESTED LOMO: gate esigi DIS test markasini HIC gormeden, EGITIM
@@ -310,7 +310,7 @@ def main ():
             False ,signed =True )[:3 ])
         t0 ,r0 =f1w (T0 ),f1w (R0 )
         t0m ,r0m =KZ .mikro (T0 ),KZ .mikro (R0 )
-        sonuc [m ]={"n":len (te ),"ic_esik":list (en_e ),"tespit_taban":t0 ,"tespit":t ,
+        res_ [m ]={"n":len (te ),"ic_esik":list (en_e ),"tespit_taban":t0 ,"tespit":t ,
         "robot_taban":r0 ,"robot":r ,
         "tespit_gate":tg ,"robot_gate":rg ,
         "robot_gate_MIKRO":rgm ,"tespit_gate_MIKRO":tgm ,
@@ -320,11 +320,11 @@ def main ():
         f"({r -r0 :+.4f}) | +GATE {rg :.4f} || MIKRO: baseline {r0m :.4f} -> "
         f"p5v2 {rm :.4f} -> +GATE {rgm :.4f}",
         flush =True )
-    if sonuc :
-        rf =float (np .mean ([v ["robot_fark"]for v in sonuc .values ()]))
-        tf =float (np .mean ([v ["tespit_fark"]for v in sonuc .values ()]))
+    if res_ :
+        rf =float (np .mean ([v ["robot_fark"]for v in res_ .values ()]))
+        tf =float (np .mean ([v ["tespit_fark"]for v in res_ .values ()]))
         print (f"\nLOMO ORTALAMA: tespit {tf :+.4f} | robot {rf :+.4f}")
-        json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,"robot_fark_ort":rf ,"tespit_fark_ort":tf ,
+        json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"robot_fark_ort":rf ,"tespit_fark_ort":tf ,
         "baseline":"secim YOK, hep MEVCUT (v_o)"},
         open ("results/p5v2_lomo.json","w"),indent =1 )
         print ("receipt -> results/p5v2_lomo.json")

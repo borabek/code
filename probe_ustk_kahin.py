@@ -79,9 +79,9 @@ def _ustk (d ,s ,k ):
     """Skora according to first k secenek, NMS with (same kabul kutusu)."""
     P =d ["P"][d ["idx"]]
     YD =d ["YD"]
-    sira =np .argsort (-np .asarray (s ))
+    rank_ =np .argsort (-np .asarray (s ))
     secP ,secD =[],[]
-    for j in sira :
+    for j in rank_ :
         if len (secP )>=k :
             break 
         p =P [j ]
@@ -94,27 +94,27 @@ def _ustk (d ,s ,k ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
+    print (f"{len (data_ )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
     flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_satir =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_satir ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_satir =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_satir ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz =np .where (Y ==1 )[0 ]
         neg =np .where (Y ==0 )[0 ]
@@ -125,11 +125,11 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     agg =collections .defaultdict (lambda :collections .Counter ())
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         a =agg [d ["mfg"]]
@@ -171,7 +171,7 @@ def main ():
     print (f"{'TOPLAM':<7}{T ['gt']:>7}{kf :>9.4f}{uf :>12.4f}{tv :>9.4f}"
     f"{uf -kf :>+9.4f}")
     print (f"\nYORUM: USTK_KAHIN - KURAL = {uf -kf :+.4f}")
-    print ("  BUYUKSE -> sorun ADET/ESIK (lattice + adet tahmini kolu ACILIR)")
+    print ("  BUYUKSE -> sorun ADET/ESIK (lattice + count tahmini kolu ACILIR)")
     print ("  ~0 ISE  -> sorun SIRALAMA (secicinin kendisi degismeli)")
     json .dump ({"dizin":os .environ ["P6_DIZIN"],"cluster":KUME ,"brand":out ,
     "toplam":{"kural":kf ,"ustk_kahin":uf ,"ceiling":tv ,

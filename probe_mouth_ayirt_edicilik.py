@@ -77,10 +77,10 @@ def main ():
     f"atlanan part {n_atlanan }\n",flush =True )
 
     print (f"{'tanimlayici':<16} {'AUC':>7}  (0.5 = bilgi yok)")
-    sonuc ={}
+    res_ ={}
     for j ,ad in enumerate (AT .AD ):
         a =auc (X [:,j ],Y )
-        sonuc [ad ]=a 
+        res_ [ad ]=a 
         direction =""if not np .isfinite (a )else ("  <-- AYIRT EDIYOR"
         if abs (a -0.5 )>=0.10 else "")
         print (f"{ad :<16} {a :>7.4f}{direction }")
@@ -102,7 +102,7 @@ def main ():
         print (f"{ad :<16} {ici [ad ]:>14.4f}"
         +("  <-- AYIRT EDIYOR"if abs (ici [ad ]-0.5 )>=0.10 else ""))
 
-    json .dump ({"damga":makbuz_hash .damga (),"auc":sonuc ,"parca_ici_auc":ici ,
+    json .dump ({"damga":makbuz_hash .damga (),"auc":res_ ,"parca_ici_auc":ici ,
     "n_aday":int (len (X )),"pozitif_oran":float (Y .mean ()),
     "not":"EGITIM YOK, saf ayrilabilirlik. D7 brand-disi. Etiket: "
     "B-rep onerisi GT'ye tespit toleransinda mi."},

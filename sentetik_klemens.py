@@ -38,9 +38,9 @@ def _rng (seed ):
     return np .random .default_rng (seed )
 
 
-def _silindir (yaricap ,boy ,merkez ,axis ):
+def _silindir (yaricap ,boy ,center_ ,axis ):
     T =trimesh .geometry .align_vectors ([0 ,0 ,1 ],axis )
-    T [:3 ,3 ]=merkez 
+    T [:3 ,3 ]=center_ 
     return trimesh .creation .cylinder (radius =yaricap ,height =boy ,
     transform =T ,sections =24 )
 
@@ -54,15 +54,15 @@ def uret (seed =0 ):
     """
     r =_rng (seed )
     n_kutup =int (r .integers (*KUTUP ))
-    adim =float (r .uniform (*ADIM ))
+    step_ =float (r .uniform (*ADIM ))
     cap =float (r .uniform (*GIRIS_CAP ))
     # cap adimi asamaz; real klemenste giris adimin ~%60'ini gecmez
-    cap =min (cap ,0.6 *adim )
+    cap =min (cap ,0.6 *step_ )
     h =float (r .uniform (*GOVDE_H ))
     dr =float (r .uniform (*GOVDE_D ))
     derin =float (r .uniform (*GIRIS_DERIN ))
     derin =min (derin ,0.45 *dr )
-    genis =n_kutup *adim 
+    genis =n_kutup *step_ 
     body =trimesh .creation .box (extents =(genis ,dr ,h ))
 
     cift_sira =bool (r .random ()<0.65 )# giris/cikis karsit yuzlerde
@@ -82,7 +82,7 @@ def uret (seed =0 ):
         +np .sin (yon_egim )*e2 ))
         eks =eks /np .linalg .norm (eks )
         for k in range (n_kutup ):
-            x =-genis /2 +adim *(k +0.5 )
+            x =-genis /2 +step_ *(k +0.5 )
             z =float (r .uniform (-0.15 ,0.15 ))*h 
             mouth =np .array ([x ,sign *dr /2 ,z ])
             kesiciler .append (_silindir (cap /2 ,2 *derin ,
@@ -132,7 +132,7 @@ def uret (seed =0 ):
         # Bunlar olmadan corpus "each opening giristir" ogretir; ogrenilmesi
         # gereken ayrim full da bunlarla giris arasindadir.
     for _ in range (int (r .integers (1 ,4 ))):# montaj deligi (uctan)
-        x =float (r .choice ([-genis /2 +adim *0.4 ,genis /2 -adim *0.4 ]))
+        x =float (r .choice ([-genis /2 +step_ *0.4 ,genis /2 -step_ *0.4 ]))
         kesiciler .append (_silindir (
         float (r .uniform (1.2 ,3.0 )),2 *h ,
         np .array ([x ,0.0 ,0.0 ]),np .array ([0.0 ,0.0 ,1.0 ])))
@@ -143,7 +143,7 @@ def uret (seed =0 ):
         yv .apply_translation ([0 ,0 ,-h /2 +yh /2 ])
         kesiciler .append (yv )
     for _ in range (int (r .integers (0 ,3 ))):# test noktasi (upper)
-        x =float (r .uniform (-genis /2 +adim ,genis /2 -adim ))
+        x =float (r .uniform (-genis /2 +step_ ,genis /2 -step_ ))
         kesiciler .append (_silindir (
         float (r .uniform (0.5 ,1.2 )),h *0.5 ,
         np .array ([x ,0.0 ,h /2 -h *0.15 ]),np .array ([0.0 ,0.0 ,1.0 ])))
@@ -156,7 +156,7 @@ def uret (seed =0 ):
             continue 
     G =np .asarray (G ,float ).reshape (-1 ,3 )
     Gd =np .asarray (Gd ,float ).reshape (-1 ,3 )
-    metadata ={"seed":seed ,"kutup":n_kutup ,"adim":adim ,"cap":cap ,
+    metadata ={"seed":seed ,"kutup":n_kutup ,"adim":step_ ,"cap":cap ,
     "body":[genis ,dr ,h ],"derin":derin ,
     "cift_sira":cift_sira ,"egim_derece":float (np .degrees (egim )),
     "gt":len (G )}

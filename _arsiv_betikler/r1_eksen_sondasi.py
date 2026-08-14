@@ -63,4 +63,4 @@ for pid ,p ,pd ,gd in sec :
         if abs (float (a @gd ))>=np .cos (np .deg2rad (10 )):kur +=1 
     except Exception :pass 
 print (f"olculen {olc } | kanal ekseni GT'yi (<=10deg) buluyor: {kur } (%{100 *kur /max (olc ,1 ):.0f})")
-print ("-> %50+ ise R1 GERCEK KOL; %20 alti ise dik vakalar kare/yay giris, baska mekanizma")
+print ("-> %50+ whereas R1 GERCEK KOL; %20 six whereas dik vakalar kare/yay giris, baska mekanizma")

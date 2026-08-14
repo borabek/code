@@ -54,4 +54,4 @@ n3 =(
 s =yama (o3 ,n3 ,s )
 
 io .open (P ,"w",encoding ="utf-8",newline ="").write (s )
-print ("1-3 yamalandi: etiket yukleme + prep + bayraklar")
+print ("1-3 yamalandi: label yukleme + prep + bayraklar")

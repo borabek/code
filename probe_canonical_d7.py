@@ -16,15 +16,15 @@ from korpus_kimlik import step_kimlik as SK
 
 YANAL ,ACI =2.0 ,10.0 
 d7p =set (map (str ,json .load (open ("results/d7_sinav_kumesi.json"))["pidler"]))
-kayit =d6_record .yukle (d7p )
+rec_ =d6_record .yukle (d7p )
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 OB ="results/_p1_olasilik_d7"
-pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (kayit ))
+pidler =sorted ({f [:-4 ]for f in os .listdir (OB )if f .endswith (".npz")}&set (rec_ ))
 print (f"part {len (pidler )}",flush =True )
 
 T ,R =[],[]
 for pid in pidler :
-    r =kayit [pid ]
+    r =rec_ [pid ]
     G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
     if not len (G ):
         continue 

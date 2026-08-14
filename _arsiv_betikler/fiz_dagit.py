@@ -58,7 +58,7 @@ def main ():
     "brep_axes._fit_circle duzeltmesine BAGIMLI (yaricap oncesinde 3.5 fold "
     "kucuktu). Onceki model: results/wire_gate.pkl.pre_fiz"),
     },open (PKL ,"wb"))
-    print ("gate 18 sutunla egitildi ve yazildi")
+    print ("gate 18 sutunla egitildi and yazildi")
 
     cfg =json .load (open ("cp_config.json",encoding ="utf-8"))
     cfg ["gate_fiz_feats"]=True 
@@ -70,7 +70,7 @@ def main ():
     m =pickle .load (open (PKL ,"rb"))
     assert m ["n_feat"]==18 and len (m ["feat_names"])==18 
     assert m ["clf"].predict_proba (X [:5 ]).shape ==(5 ,2 )
-    print ("dogrulama: 18 sutun, tahmin calisiyor")
+    print ("dogrulama: 18 column, prediction calisiyor")
 
 
 if __name__ =="__main__":

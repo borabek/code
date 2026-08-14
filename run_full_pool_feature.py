@@ -118,7 +118,7 @@ def main ():
             y =project_label (P ,G ,np .asarray (r ["Gd"],float ),float (r ["diag"]))
             np .savez_compressed (yol ,X =X .astype (np .float32 ),y =y .astype (np .int8 ),
             P =P .astype (np .float32 ),D =D .astype (np .float32 ),
-            kaynak =kayn .astype (np .int8 ))
+            src_ =kayn .astype (np .int8 ))
             yazilan +=1 
             if yazilan %50 ==0 :
                 h =(time .time ()-t0 )/yazilan 

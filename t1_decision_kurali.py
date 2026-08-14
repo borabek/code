@@ -118,7 +118,7 @@ def main ():
     dh1 ,rh1 ,_ =kos (en [0 ],en [1 ],None )
     print (f"\n[bilgi] HAVUZLANMIS 194 part: tespit {f1w (dh0 ):.4f} -> {f1w (dh1 ):.4f} "
     f"({f1w (dh1 )-f1w (dh0 ):+.4f}) | robot {f1w (rh0 ):.4f} -> {f1w (rh1 ):.4f}")
-    print ("   (bu satir HUKUM DEGIL: kural DEV'de secildi, pool DEV'i de iceriyor)")
+    print ("   (this row VERDICT DEGIL: rule DEV'de secildi, pool DEV'i de iceriyor)")
 
     gecti =dd >=0.005 and lo >0 
     print (f"\nKILL: VAL tespit +0.005 VE GA>0 -> "

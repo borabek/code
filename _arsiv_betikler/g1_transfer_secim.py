@@ -59,9 +59,9 @@ def main ():
             a_di =auc (X [i_di ,j ],y [i_di ].astype (bool ))
             f .append (abs (abs (a_ic -.5 )-abs (a_di -.5 )))
         dus [j ]=float (np .mean (f ))
-    sira =np .argsort (dus )# most KARARLI before
-    print (f"\nEN KARARLI 10 : {[AD [i ]for i in sira [:10 ]]}")
-    print (f"EN EZBERCI 10 : {[AD [i ]for i in sira [::-1 ][:10 ]]}")
+    rank_ =np .argsort (dus )# most KARARLI before
+    print (f"\nEN KARARLI 10 : {[AD [i ]for i in rank_ [:10 ]]}")
+    print (f"EN EZBERCI 10 : {[AD [i ]for i in rank_ [::-1 ][:10 ]]}")
 
     def yap (sut ):
         idx =np .array (sorted (sut ))
@@ -92,7 +92,7 @@ def main ():
     T .baslik (D )
     SON ={};PARCA ={}
     for k in (58 ,50 ,45 ,40 ,35 ,30 ,25 ,20 ,15 ,10 ):
-        sut =list (sira [:k ])
+        sut =list (rank_ [:k ])
         ad =f"k={k }"+("  (TABAN)"if k ==58 else "")
         SON [k ],PARCA [k ]=T .calistir (D ,yap (sut ),ad )
 
@@ -116,12 +116,12 @@ def main ():
         en =None 
         print ("\nKILL: hicbir k manufacturer-disi ORT'de +0.01 vermedi -> G1 KAPANDI")
     with io .open ("results/g1_transfer_secim.json","w",encoding ="utf-8")as f :
-        json .dump ({"kararlilik":{AD [i ]:float (dus [i ])for i in sira },
+        json .dump ({"kararlilik":{AD [i ]:float (dus [i ])for i in rank_ },
         "sonuc":{str (k ):{"havuzlanmis":SON [k ]["havuzlanmis"]["tespit"],
         "uretici_ort":SON [k ]["_URETICI_DISI_ORT"],
         "robot":SON [k ]["havuzlanmis"]["robot"]}for k in SON },
         "kazanan":en ,
-        "secili_sutunlar":[AD [i ]for i in sira [:en ]]if en else None },f ,indent =1 )
+        "secili_sutunlar":[AD [i ]for i in rank_ [:en ]]if en else None },f ,indent =1 )
     print ("receipt -> results/g1_transfer_secim.json")
 
 

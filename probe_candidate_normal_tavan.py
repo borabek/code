@@ -125,8 +125,8 @@ def main ():
     "Yeniden cikarimin TAVANI. D7'ye BAKILMADI."},
     open ("results/aday_normal_tavan.json","w"),indent =1 )
     print ("\nmakbuz -> results/aday_normal_tavan.json")
-    print ("KARAR: candidate normali ~banka'ya yakinsa yeniden inference HAK EDILIR")
-    print ("       (24 fold az secenek, ayni recall). Cok dusukse mekanizma OLU.")
+    print ("DECISION: candidate normali ~banka'ya yakinsa yeniden inference HAK EDILIR")
+    print ("       (24 fold few secenek, same recall). Cok dusukse mekanizma OLU.")
 
 
 if __name__ =="__main__":

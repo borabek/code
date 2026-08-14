@@ -53,21 +53,21 @@ def birlestir (listeler ,min_oy ):
     """
     P =np .concatenate ([l [0 ]for l in listeler ])if listeler else np .zeros ((0 ,3 ))
     D =np .concatenate ([l [1 ]for l in listeler ])if listeler else np .zeros ((0 ,3 ))
-    kaynak =np .concatenate ([np .full (len (l [0 ]),i )for i ,l in 
+    src_ =np .concatenate ([np .full (len (l [0 ]),i )for i ,l in 
     enumerate (listeler )])if listeler else np .zeros (0 ,int )
     if not len (P ):
         return np .zeros ((0 ,3 )),np .zeros ((0 ,3 ))
     kullanildi =np .zeros (len (P ),bool )
     oP ,oD =[],[]
     # cipa order: before first varyant (6000 = mevcut davranis), after digerleri
-    sira =np .argsort (kaynak ,kind ="stable")
-    for i in sira :
+    rank_ =np .argsort (src_ ,kind ="stable")
+    for i in rank_ :
         if kullanildi [i ]:
             continue 
         d =np .linalg .norm (P -P [i ][None ,:],axis =1 )
         uye =np .where ((d <=KUME_MM )&(~kullanildi ))[0 ]
         kullanildi [uye ]=True 
-        oy =len (set (kaynak [uye ].tolist ()))
+        oy =len (set (src_ [uye ].tolist ()))
         if oy <min_oy :
             continue 
             # konum: uyelerin ortalamasi. direction: cipanin yonuyle same yarikureye
@@ -93,7 +93,7 @@ def olc (kayitlar ,selector ):
         Gd =_birim (r ["Gd"])
         diag =float (r ["diag"])
         P ,D =selector (pid ,r )
-        satir ={"pid":pid }
+        line_ ={"pid":pid }
         for ad ,kw in (("tespit",dict (tol =2.0 ,am =180.0 ,signed =False )),
         ("rob",dict (tol =2.0 ,am =10.0 ,signed =False )),
         ("rbi",dict (tol =2.0 ,am =10.0 ,signed =True ))):
@@ -103,8 +103,8 @@ def olc (kayitlar ,selector ):
             tot [ad ][0 ]+=tp 
             tot [ad ][1 ]+=fp 
             tot [ad ][2 ]+=fn 
-            satir [ad ]=(tp ,fp ,fn )
-        part .append (satir )
+            line_ [ad ]=(tp ,fp ,fn )
+        part .append (line_ )
     def f1 (t ):
         tp ,fp ,fn =t 
         return 2 *tp /max (2 *tp +fp +fn ,1 )
@@ -129,14 +129,14 @@ def esli_bootstrap (pa ,pb ,ad ,n =4000 ,seed =0 ):
 
 def main ():
     hedefler =[6000 ,5000 ,7200 ]# 6000 ONCE: cipa = mevcut davranis
-    dosya ={t :f"results/_dokum_remesh{t }.json"for t in hedefler }
-    dosya [6000 ]=os .environ .get ("RT_TABAN","results/_dokum_taban.json")
+    file_ ={t :f"results/_dokum_remesh{t }.json"for t in hedefler }
+    file_ [6000 ]=os .environ .get ("RT_TABAN","results/_dokum_taban.json")
     K ={}
     for t in hedefler :
-        if not os .path .exists (dosya [t ]):
-            print (f"EKSIK: {dosya [t ]} -- arm tamamlanmadi")
+        if not os .path .exists (file_ [t ]):
+            print (f"EKSIK: {file_ [t ]} -- arm tamamlanmadi")
             return 1 
-        K [t ]=_yukle (dosya [t ])
+        K [t ]=_yukle (file_ [t ])
     ortak =sorted (set .intersection (*[set (K [t ])for t in hedefler ]))
     print (f"yol={YOL } | ortak part: {len (ortak )} "
     f"(tekil: {[len (K [t ])for t in hedefler ]})")
@@ -160,7 +160,7 @@ def main ():
             return birlestir (L ,min_oy )
         return f 
 
-    sonuc ={}
+    res_ ={}
     taban_parca =None 
     print (f"\n{'varyant':28s} {'tespit':>8s} {'rob':>8s} {'rob-ISR':>8s}")
     for ad ,sec in [("TABAN (6000)",tek (6000 )),
@@ -170,7 +170,7 @@ def main ():
     (f"TOPLULUK oylama(>=2)",top (2 )),
     (f"TOPLULUK oybirligi(>=3)",top (3 ))]:
         m ,part =olc (K [6000 ],sec )
-        sonuc [ad ]={"metrik":m ,"part":part }
+        res_ [ad ]={"metrik":m ,"part":part }
         if taban_parca is None :
             taban_parca =part 
         print (f"{ad :28s} {m ['tespit']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
@@ -178,17 +178,17 @@ def main ():
     print ("\n--- ESLI PARCA BOOTSTRAP (TABAN'a gore fark) ---")
     print (f"{'varyant':28s} {'metrik':>8s} {'fark':>9s} "
     f"{'%95 GA':>22s} {'poz%':>6s}")
-    for ad in sonuc :
+    for ad in res_ :
         if ad .startswith ("TABAN"):
             continue 
         for mad in ("tespit","rob","rbi"):
-            f ,lo ,hi ,pz =esli_bootstrap (taban_parca ,sonuc [ad ]["part"],mad )
+            f ,lo ,hi ,pz =esli_bootstrap (taban_parca ,res_ [ad ]["part"],mad )
             yildiz =" *"if (lo >0 or hi <0 )else ""
             print (f"{ad :28s} {mad :>8s} {f :+9.4f} "
             f"[{lo :+.4f},{hi :+.4f}]{yildiz :>3s} {100 *pz :5.1f}")
 
     with open ("results/remesh_toplulugu.json","w")as fh :
-        json .dump ({ad :v ["metrik"]for ad ,v in sonuc .items ()},fh ,indent =1 )
+        json .dump ({ad :v ["metrik"]for ad ,v in res_ .items ()},fh ,indent =1 )
     print ("\n-> results/remesh_toplulugu.json")
     return 0 
 

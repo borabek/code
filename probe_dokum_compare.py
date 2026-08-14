@@ -43,15 +43,15 @@ def olc (kayitlar ,pidler ):
         Gd =_birim (r ["Gd"])
         P =np .asarray (r ["P"],float ).reshape (-1 ,3 )
         D =_birim (r ["D"])if len (P )else np .zeros ((0 ,3 ))
-        satir ={}
+        line_ ={}
         for ad ,tol ,am ,pct ,isr in OLCUTLER :
             tp ,fp ,fn ,_ =match_hungarian (P ,D ,G ,Gd ,float (r ["diag"]),
             tol ,am ,pct ,signed =isr )
             tot [ad ][0 ]+=tp 
             tot [ad ][1 ]+=fp 
             tot [ad ][2 ]+=fn 
-            satir [ad ]=(tp ,fp ,fn )
-        part .append (satir )
+            line_ [ad ]=(tp ,fp ,fn )
+        part .append (line_ )
     f1 =lambda t :2 *t [0 ]/max (2 *t [0 ]+t [1 ]+t [2 ],1 )# noqa: E731
     return {k :f1 (v )for k ,v in tot .items ()},part 
 

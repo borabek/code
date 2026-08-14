@@ -118,14 +118,14 @@ def main ():
     # porcelain: "XY PATH". Durum kodu two karakter, after a bosluk. Ama git
     # some kabuklarda basi clips; safe path ILK bosluktan sonrasini almak.
     yol =lambda l :l .split (" ",1 )[1 ].strip ().strip ('"')# noqa: E731
-    yeni =[yol (l )for l in kirli .splitlines ()if l .lstrip ().startswith ("??")]
+    new_ =[yol (l )for l in kirli .splitlines ()if l .lstrip ().startswith ("??")]
     degisen =[yol (l )for l in kirli .splitlines ()
     if not l .lstrip ().startswith ("??")]
-    print (f"\n-- 1) KOD --  {len (degisen )} degismis, {len (yeni )} yeni dosya")
-    for f in (degisen +yeni )[:20 ]:
+    print (f"\n-- 1) KOD --  {len (degisen )} degismis, {len (new_ )} yeni dosya")
+    for f in (degisen +new_ )[:20 ]:
         print (f"      {f }")
-    if len (degisen )+len (yeni )>20 :
-        print (f"      ... +{len (degisen )+len (yeni )-20 }")
+    if len (degisen )+len (new_ )>20 :
+        print (f"      ... +{len (degisen )+len (new_ )-20 }")
     silinecek =subprocess .check_output (
     ["git","clean","-nd"],cwd =KOK ,text =True ).strip ()
     if silinecek :
@@ -170,11 +170,11 @@ def main ():
         sys .exit (1 )
     if ds or ps :
         print ("\nUYARI: GERI ALINAMAZ kumede deviation var (yukarida). Kod ve model")
-        print ("geri alindi, ama bu dosyalar kontrol noktasindaki hallerinde DEGIL.")
-        print ("Yeniden uretilmeleri gerekir.")
+        print ("geri alindi, but this dosyalar kontrol noktasindaki hallerinde DEGIL.")
+        print ("Yeniden uretilmeleri is required.")
         sys .exit (2 )
     print ("\nTAM DONUS BASARILI -- her sey kontrol noktasindaki gibi.")
-    print ("Kaniti icin:  python probe_dagitim_dogrula.py   (beklenen robot 0.2980)")
+    print ("Kaniti for:  python probe_dagitim_dogrula.py   (beklenen robot 0.2980)")
 
 
 if __name__ =="__main__":

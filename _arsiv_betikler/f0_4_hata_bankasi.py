@@ -84,14 +84,14 @@ def main ():
         cift ,fn_idx =esle (P ,G ,Gd ,tol )
         bl =BAY .get (r ["pid"])or []
         for i in range (len (P )):
-            kayit =dict (ortak )
+            rec_ =dict (ortak )
             if len (bl )==len (P ):
                 b =bl [i ]
-                kayit ["govde_ici"]=bool (b ["govde_ici"])
-                kayit ["ileri"]=(float (b ["ileri"])if np .isfinite (b ["ileri"])else None )
-                kayit ["ic_cap"]=(float (b ["ic_cap"])if np .isfinite (b ["ic_cap"])else None )
-                kayit ["onu_kapali"]=bool (np .isfinite (b ["ileri"])and float (b ["ileri"])<5.0 )
-            (TP if i in cift else FP ).append (kayit )
+                rec_ ["govde_ici"]=bool (b ["govde_ici"])
+                rec_ ["ileri"]=(float (b ["ileri"])if np .isfinite (b ["ileri"])else None )
+                rec_ ["ic_cap"]=(float (b ["ic_cap"])if np .isfinite (b ["ic_cap"])else None )
+                rec_ ["onu_kapali"]=bool (np .isfinite (b ["ileri"])and float (b ["ileri"])<5.0 )
+            (TP if i in cift else FP ).append (rec_ )
 
             # FN SEBEBI: gate ONCESI havuzda candidate present miydi?
             #
@@ -115,14 +115,14 @@ def main ():
         else :
             yakin_var =np .zeros (len (G ),bool )
         for b in fn_idx :
-            kayit =dict (ortak )
+            rec_ =dict (ortak )
             if b not in gt_tum :
-                kayit ["sebep"]="ADAY_YOK"if not yakin_var [b ]else "ADAY_KALABALIK"
+                rec_ ["sebep"]="ADAY_YOK"if not yakin_var [b ]else "ADAY_KALABALIK"
             elif not k [gt_tum [b ]]:
-                kayit ["sebep"]="GATE_REDDI"# candidate vardi, gate reddetti
+                rec_ ["sebep"]="GATE_REDDI"# candidate vardi, gate reddetti
             else :
-                kayit ["sebep"]="ATAMA"# kabul edildi but baska GT'ye gitti
-            FN .append (kayit )
+                rec_ ["sebep"]="ATAMA"# kabul edildi but baska GT'ye gitti
+            FN .append (rec_ )
         ortak ["_havuz_kapsama"]=float (yakin_var .mean ())if len (G )else 1.0 
         KAPSAMA .append ((len (G ),float (yakin_var .sum ())))
 

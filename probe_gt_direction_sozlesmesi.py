@@ -46,8 +46,8 @@ def main ():
         if (n <1e-9 ).any ():
             continue 
         Gn =Gd /n 
-        merkez =G .mean (0 )
-        disa =((G -merkez )*Gn ).sum (1 )>0 
+        center_ =G .mean (0 )
+        disa =((G -center_ )*Gn ).sum (1 )>0 
         a =ist [r .get ("mfg","?")]
         a ["part"].append (1 )
         a ["gt"].append (len (G ))
@@ -76,10 +76,10 @@ def main ():
     open ("results/gt_yon_sozlesmesi.json","w"),indent =1 )
     print ("\nmakbuz -> results/gt_yon_sozlesmesi.json")
     print ("OKUMA:")
-    print ("  baskinlik ~1.0 -> part ICINDE tutarli (sozlesme var)")
-    print ("  disari_orani markalar arasinda dagilmissa -> SOZLESME MARKAYA")
-    print ("     GORE DEGISIYOR; sign bir PARCA OZELLIGI olarak ogrenilebilir")
-    print ("  baskinlik ~0.5 -> part icinde bile karisik; sorun daha derin")
+    print ("  baskinlik ~1.0 -> part ICINDE tutarli (sozlesme present)")
+    print ("  disari_orani markalar between dagilmissa -> SOZLESME MARKAYA")
+    print ("     GORE DEGISIYOR; sign a PARCA OZELLIGI as ogrenilebilir")
+    print ("  baskinlik ~0.5 -> part inside bile karisik; sorun more derin")
 
 
 if __name__ =="__main__":

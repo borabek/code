@@ -22,21 +22,21 @@ from korpus_kimlik import step_kimlik as SK
 
 YANAL ,ACI =2.0 ,10.0 
 sv =json .load (open ("results/d7_sinav_kumesi.json"))
-kayit =d6_record .yukle (set (map (str ,sv ["pidler"])))
+rec_ =d6_record .yukle (set (map (str ,sv ["pidler"])))
 S ={SK (s ):s for s in glob .glob ("all_wscad_stp/*.stp")}
 g5 =pickle .load (open ("results/wire_gate_v5.pkl","rb"))
 g7g =pickle .load (open ("results/wire_gate_v7.pkl","rb"))
 OB_ESKI ,OB_YENI ="results/_p1_olasilik_d7","results/_p1_olasilik_d7g10"
 pidler =sorted ({f [:-4 ]for f in os .listdir (OB_ESKI )if f .endswith (".npz")}
 &{f [:-4 ]for f in os .listdir (OB_YENI )if f .endswith (".npz")}
-&set (kayit ))
+&set (rec_ ))
 print (f"ortak part {len (pidler )} (D7 = DEV, FINAL DEGIL)\n",flush =True )
 
 
 def kos (ob ,gate ,p5 =None ):
     T ,R =[],[]
     for pid in pidler :
-        r =kayit [pid ]
+        r =rec_ [pid ]
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         if not len (G ):
             continue 
@@ -74,12 +74,12 @@ def kos (ob ,gate ,p5 =None ):
     return f1w (T ),f1w (R )
 
 
-sonuc ={}
-t ,r =kos (OB_ESKI ,g5 );sonuc ["1_eski (g7+gate v5)"]={"tespit":t ,"robot":r }
+res_ ={}
+t ,r =kos (OB_ESKI ,g5 );res_ ["1_eski (g7+gate v5)"]={"tespit":t ,"robot":r }
 print (f"1) eski yigin (g7 + gate v5)      tespit {t :.4f} | robot {r :.4f}",flush =True )
-t ,r =kos (OB_YENI ,g7g );sonuc ["2_A3A4 (g10+gate v7)"]={"tespit":t ,"robot":r }
+t ,r =kos (OB_YENI ,g7g );res_ ["2_A3A4 (g10+gate v7)"]={"tespit":t ,"robot":r }
 print (f"2) g10 + gate v7 (A3-A4)          tespit {t :.4f} | robot {r :.4f}",flush =True )
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,"n_parca":len (pidler ),
+json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"n_parca":len (pidler ),
 "not":"D7 = DEV (harcandi). FINAL DEGIL. 0.2344 ile AYNI cluster."},
 open ("results/d7_yeni_yigin.json","w"),indent =1 )
 print ("receipt -> results/d7_yeni_yigin.json")

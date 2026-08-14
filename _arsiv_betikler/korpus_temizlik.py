@@ -102,7 +102,7 @@ def main ():
             shutil .move (x ,os .path .join (ARSIV_OKSUZ ,os .path .basename (x )))
             n2 +=1 
     print (f"\n2) JSON'u olmayan STEP -> {ARSIV_OKSUZ }: {n2 } dosya ({len (oksuz )} kimlik)")
-    print ("   F1 etkisi YOK: eligible() JSON uzerinden doner, bu kimliklere hic bakmaz.")
+    print ("   F1 etkisi YOK: eligible() JSON uzerinden returns, this kimliklere never bakmaz.")
     st2 =glob .glob ("all_wscad_stp/*.stp")
     sk2 ={step_kimlik (s ):[s ]for s in st2 }
 

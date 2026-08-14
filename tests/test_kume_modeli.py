@@ -71,10 +71,10 @@ def _egit_noktasal (parts ,n_giris ,devir =60 ,seed =0 ):
     m =_Noktasal (n_giris )
     opt =torch .optim .AdamW (m .parameters (),lr =3e-3 ,weight_decay =1e-4 )
     rng =np .random .default_rng (seed )
-    sira =np .arange (len (parts ))
+    rank_ =np .arange (len (parts ))
     for _ in range (devir ):
-        rng .shuffle (sira )
-        for i in sira :
+        rng .shuffle (rank_ )
+        for i in rank_ :
             X ,y =parts [i ]
             Xt =torch .as_tensor (X )
             yt =torch .as_tensor (y )
@@ -95,7 +95,7 @@ def test_kume_modeli_noktasali_belirgin_yener ():
     ks =KM .egit (training ,n_giris ,devir =60 ,lr =3e-3 ,lam =1.0 ,
     cihaz ="cpu",seed =0 )
     kume_isabet =_tepe_isabet (
-    lambda X :KM .tahmin (ks ,X ,cihaz ="cpu"),exam )
+    lambda X :KM .pred_ (ks ,X ,cihaz ="cpu"),exam )
 
     nk =_egit_noktasal (training ,n_giris ,devir =60 ,seed =0 )# AYNI butce
 
@@ -134,4 +134,4 @@ if __name__ =="__main__":
         if ad .startswith ("test_"):
             f ()
             print (f"  GECTI  {ad }")
-    print ("hepsi gecti")
+    print ("all of them gecti")

@@ -106,7 +106,7 @@ def main ():
     a ,b =out ["TEZ-SAF"]["robot"],out ["GENISLETILMIS"]["robot"]
     print (f"\nTAM ZINCIRDE: tez-saf {a :.4f} | genisletilmis {b :.4f} "
     f"({b -a :+.4f}) | dagitilan urun 0.2029")
-    print ("KARAR: "+("DAGITILABILIR"if b >0.2029 else "urunu gecemedi"))
+    print ("DECISION: "+("DAGITILABILIR"if b >0.2029 else "urunu gecemedi"))
     json .dump ({"damga":makbuz_hash .damga (),"sonuc":out ,"urun":0.2029 ,
     "not":"TAM URUN ZINCIRI (poz kafasi dahil). Esikler D6'da "
     "secildi, D7'de yeniden taranmadi. MIKRO."},

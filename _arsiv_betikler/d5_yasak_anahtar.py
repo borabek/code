@@ -36,7 +36,7 @@ def main ():
     protocol .tez_dogrula ()
     import measure_set as OK 
     from big_arbiter import eligible 
-    from geometri_anahtar import anahtar 
+    from geometri_anahtar import key_ 
     from infer_step_cp import step_to_mesh 
 
     gk =OK .geo_anahtarlari ()
@@ -63,7 +63,7 @@ def main ():
                 json .dump (OUT ,f )
         try :
             V ,F =step_to_mesh (yol [p ])
-            OUT [p ]=anahtar (V ,F )
+            OUT [p ]=key_ (V ,F )
         except Exception as e :
             error +=1 
             if error <=5 :

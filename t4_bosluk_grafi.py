@@ -60,9 +60,9 @@ def topoloji (step_path ):
                 tip =gmsh .model .getType (2 ,tag )
                 cm =gmsh .model .occ .getCenterOfMass (2 ,tag )
                 alan =float (gmsh .model .occ .getMass (2 ,tag ))
-                sinir =[abs (t )for _ ,t in gmsh .model .getBoundary ([(2 ,tag )],oriented =False )]
+                bound_ =[abs (t )for _ ,t in gmsh .model .getBoundary ([(2 ,tag )],oriented =False )]
                 Y [tag ]={"tip":tip ,"cm":np .array (cm ,float ),"alan":alan ,
-                "kenar":sinir ,"axis":None ,"r":None }
+                "kenar":bound_ ,"axis":None ,"r":None }
                 if tip =="Cylinder":
                     b =gmsh .model .getParametrizationBounds (2 ,tag )
                     us =np .linspace (b [0 ][0 ],b [1 ][0 ],8 )
@@ -177,9 +177,9 @@ def main ():
             except Exception as e :
                 print (f"    {r ['pid']}: {type (e ).__name__ }")
                 CACHE [r ["pid"]]=None 
-        veri =CACHE [r ["pid"]]
-        FB =ozellik (P ,Pd ,*veri )if veri is not None else np .zeros ((len (P ),len (AD )))
-        basarili +=int (veri is not None )
+        data_ =CACHE [r ["pid"]]
+        FB =ozellik (P ,Pd ,*data_ )if data_ is not None else np .zeros ((len (P ),len (AD )))
+        basarili +=int (data_ is not None )
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
         diff =P [:,None ,:]-G [None ,:,:]
         al =(diff *Gd [None ,:,:]).sum (-1 )

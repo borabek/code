@@ -50,10 +50,10 @@ def konum_yonu (idx ,YD ,tek ):
     parcada yonler two signed kumede but TEK eksende.
     """
     out =np .zeros ((len (tek ),3 ))
-    sira =np .argsort (idx ,kind ="stable")
-    idx_s =idx [sira ]
-    sinir =np .flatnonzero (np .diff (idx_s ))+1 
-    for t_ ,p in enumerate (np .split (sira ,sinir )):
+    rank_ =np .argsort (idx ,kind ="stable")
+    idx_s =idx [rank_ ]
+    bound_ =np .flatnonzero (np .diff (idx_s ))+1 
+    for t_ ,p in enumerate (np .split (rank_ ,bound_ )):
         Y =_birim (YD [p ])
         if len (Y )==1 :
             out [t_ ]=Y [0 ]

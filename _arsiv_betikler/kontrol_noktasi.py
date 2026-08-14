@@ -78,12 +78,12 @@ def dizin_parmak_izi (d ):
 
 
 def main ():
-    etiket =sys .argv [1 ]if len (sys .argv )>1 else time .strftime ("%Y-%m-%d")
-    kn =os .path .join (KOK ,f"_KN_{etiket }")
+    label_ =sys .argv [1 ]if len (sys .argv )>1 else time .strftime ("%Y-%m-%d")
+    kn =os .path .join (KOK ,f"_KN_{label_ }")
     dos =os .path .join (kn ,"dosyalar")
     os .makedirs (dos ,exist_ok =True )
 
-    man ={"etiket":etiket ,"zaman":time .strftime ("%Y-%m-%d %H:%M:%S"),
+    man ={"etiket":label_ ,"zaman":time .strftime ("%Y-%m-%d %H:%M:%S"),
     "kopya":{},"damga":{},"parmak_izi":{},"eksik":[]}
     try :
         man ["git"]=subprocess .check_output (
@@ -127,7 +127,7 @@ def main ():
     print (f"  parmak iz: {len (man ['parmak_izi'])} dizin")
     if man ["eksik"]:
         print (f"  EKSIK    : {man ['eksik']}")
-    print ("\nGeri donus:  python rollback.py "+etiket )
+    print ("\nGeri donus:  python rollback.py "+label_ )
 
 
 if __name__ =="__main__":

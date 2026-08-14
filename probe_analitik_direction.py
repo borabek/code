@@ -52,13 +52,13 @@ def agizlar (sil ):
     for c in sil :
         ax =np .asarray (c ["axis"],float )
         ax =ax /max (np .linalg .norm (ax ),1e-12 )
-        merkez =np .asarray (c ["center"],float )
+        center_ =np .asarray (c ["center"],float )
         for k in ("mouth_a","mouth_b"):
             m =c .get (k )
             if m is None :
                 continue 
             m =np .asarray (m ,float )
-            v =m -merkez 
+            v =m -center_ 
             if np .linalg .norm (v )<1e-6 :
                 continue 
                 # DISARI BAKAN direction: eksenin, merkezden agza giden bilesenle

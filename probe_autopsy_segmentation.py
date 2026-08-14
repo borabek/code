@@ -102,10 +102,10 @@ def main ():
     open ("results/otopsi_segmentasyon.json","w"),indent =1 )
     print ("\nmakbuz -> results/otopsi_segmentasyon.json")
     print ("OKUMA:")
-    print ("  >0.5 dusuk ama >0.1 yuksek -> segmentasyon ZAYIF ama VAR")
+    print ("  >0.5 low but >0.1 high -> segmentasyon ZAYIF but VAR")
     print ("     (threshold/duyarlilik kolu acilir)")
-    print ("  >0.1 de dusuk -> segmentasyon o CP'leri HIC GORMUYOR;")
-    print ("     darbogaz EN BASTA ve asagidaki hicbir numara kurtaramaz")
+    print ("  >0.1 de low -> segmentasyon that CP'leri HIC GORMUYOR;")
+    print ("     darbogaz EN BASTA and asagidaki no numara kurtaramaz")
 
 
 if __name__ =="__main__":

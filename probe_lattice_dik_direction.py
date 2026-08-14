@@ -63,27 +63,27 @@ def _birim (v ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } | dik tol {DIK_TOL }",
+    print (f"{len (data_ )} part | katlar {katlar } | dik tol {DIK_TOL }",
     flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_s =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_s =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -93,12 +93,12 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         G =np .asarray (d ["G"],float )
@@ -115,8 +115,8 @@ def main ():
             continue 
 
         say ={a :0 for a in ("hepsi","dik_suzgec","dik_kipsel","kahin")}
-        for (seed ,adim ),_puan ,uret in bul :
-            u =_birim (adim .reshape (1 ,3 ))[0 ]
+        for (seed ,step_ ),_puan ,uret in bul :
+            u =_birim (step_ .reshape (1 ,3 ))[0 ]
             v =uret [:,None ,:]-G [None ,:,:]
             al =(v *Gn [None ,:,:]).sum (-1 )
             yan =np .linalg .norm (v -al [...,None ]*Gn [None ,:,:],axis =-1 )
@@ -180,7 +180,7 @@ def main ():
     "Uretilen konumlarda direction secimi. D7'ye BAKILMADI."},
     open (f"results/kafes_dik_yon_{KUME }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/kafes_dik_yon_{KUME }.json")
-    print ("OKUMA: DIK suzgec BUGUNKUyu asiyorsa kisit ise yariyor;")
+    print ("OKUMA: DIK suzgec BUGUNKUyu asiyorsa kisit whereas yariyor;")
     print ("       KAHIN'e yaklasiyorsa direction secimi COZULMUS demektir.")
 
 

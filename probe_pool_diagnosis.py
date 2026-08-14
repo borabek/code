@@ -42,8 +42,8 @@ def kapsama (P ,D ,G ,Gd ,signed ):
 
 
 def main ():
-    kayit =[r for r in json .load (open (DOKUM ))if r .get ("yol")==YOL ]
-    print (f"{DOKUM } / yol={YOL } -> {len (kayit )} part")
+    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("yol")==YOL ]
+    print (f"{DOKUM } / yol={YOL } -> {len (rec_ )} part")
     ust_kume_ihlali =0 
     havuz_bos =0 
     say ={k :0 for k in ("gt","cikti","pool","havuz_var_cikti_yok",
@@ -52,7 +52,7 @@ def main ():
         for k in say :
             say [k ]=0 
         ust_kume_ihlali =havuz_bos =0 
-        for r in kayit :
+        for r in rec_ :
             G =np .asarray (r ["G"],float ).reshape (-1 ,3 )
             if not len (G ):
                 continue 

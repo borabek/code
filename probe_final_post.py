@@ -60,14 +60,14 @@ halka_n =None ):
     if not len (P ):
         return P ,D 
     D =_birim (D )
-    merkez =P .mean (0 )
+    center_ =P .mean (0 )
     if arm in ("eksen_snap","snap_disari"):
         E =_birim (ana_eksenler (P ))
         # each yonu, |cos| most large which is ana eksene oturt (ISARETSIZ eslesme)
         c =np .abs (D @E .T )
         j =np .argmax (c ,axis =1 )
-        yeni =E [j ]*np .sign (np .sum (D *E [j ],axis =1 ))[:,None ]
-        D =_birim (yeni )
+        new_ =E [j ]*np .sign (np .sum (D *E [j ],axis =1 ))[:,None ]
+        D =_birim (new_ )
     if arm =="disari_mesh"and mesh_merkez is not None :
         r =P -np .asarray (mesh_merkez ,float )[None ,:]
         sign =np .sign (np .sum (D *r ,axis =1 ))
@@ -79,7 +79,7 @@ halka_n =None ):
         sign [sign ==0 ]=1.0 
         D =D *sign [:,None ]
     if arm in ("disari","snap_disari"):
-        r =P -merkez [None ,:]
+        r =P -center_ [None ,:]
         sign =np .sign (np .sum (D *r ,axis =1 ))
         sign [sign ==0 ]=1.0 
         D =D *sign [:,None ]

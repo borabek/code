@@ -52,7 +52,7 @@ def _z (X ,pid ):
     return Z 
 
 
-def egit (npz ,agirlik =None ,cols =None ,depth =None ,yaprak =3 ,seed =0 ):
+def egit (npz ,wgt_ =None ,cols =None ,depth =None ,yaprak =3 ,seed =0 ):
     """weight: None | 'manufacturer' | 'grup'  ·  cols: kullanilacak HAM column indeksleri."""
     from sklearn .ensemble import RandomForestClassifier 
     d =np .load (npz ,allow_pickle =True )
@@ -68,10 +68,10 @@ def egit (npz ,agirlik =None ,cols =None ,depth =None ,yaprak =3 ,seed =0 ):
     # budamadan da sinanabilir: KAPASITE kisitlamasi (depth/yaprak). O path urunun
     # karar yoluyla TAM UYUMLU because feature duzeni degismiyor.
     w =None 
-    if agirlik =="manufacturer":
+    if wgt_ =="manufacturer":
         c =collections .Counter (mfg .tolist ())
         w =np .array ([1.0 /c [m ]for m in mfg ]);w *=len (w )/w .sum ()
-    elif agirlik =="grup":
+    elif wgt_ =="grup":
         import measure_set as OK 
         gk =OK .geo_anahtarlari ()
         g =np .array ([gk .get (p ,"yok:"+p )for p in pid ])
@@ -99,8 +99,8 @@ def main ():
 
     KOL =[
     ("v3 TABAN (degismemis)",dict ()),
-    ("G2 manufacturer-dengeli",dict (agirlik ="manufacturer")),
-    ("G3 ikiz-agirlikli",dict (agirlik ="grup")),
+    ("G2 manufacturer-dengeli",dict (wgt_ ="manufacturer")),
+    ("G3 ikiz-agirlikli",dict (wgt_ ="grup")),
     ("G4a kapasite dusuk (depth 8, yaprak 10)",dict (depth =8 ,yaprak =10 )),
     ("G4b kapasite cok dusuk (depth 5, yaprak 25)",dict (depth =5 ,yaprak =25 )),
     ]

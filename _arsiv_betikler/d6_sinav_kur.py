@@ -57,13 +57,13 @@ def kova_adi (n ):
 def egitimde_gorulen_ureticiler ():
     """HER training yapitindaki ureticiler. Biri bile atlanirsa cluster KIRLENIR."""
     gor =set ()
-    kaynak ={}
+    src_ ={}
     for f in ("results/zengin_parite_w2.npz","results/zengin_parite_v3.npz",
     "results/zengin_parite_v5.npz"):
         if os .path .exists (f ):
             d =np .load (f ,allow_pickle =True )
             u ={str (m )for m in np .asarray (d ["mfg"])}
-            gor |=u ;kaynak [f ]=len (u )
+            gor |=u ;src_ [f ]=len (u )
             # seg training korpuslari: pid -> manufacturer esleme is required
     import big_arbiter 
     mp ={p :m for m ,p ,_jf ,_s in big_arbiter .eligible ()}
@@ -73,8 +73,8 @@ def egitimde_gorulen_ureticiler ():
         pids =[os .path .basename (os .path .normpath (p ))for p in glob .glob (d +"/*/")]
         u ={mp .get (p )for p in pids }-{None }
         if u :
-            gor |=u ;kaynak [d ]=len (u )
-    return gor ,kaynak 
+            gor |=u ;src_ [d ]=len (u )
+    return gor ,src_ 
 
 
 def main ():
@@ -82,9 +82,9 @@ def main ():
     protocol .tez_dogrula ()
     from big_arbiter import eligible 
 
-    gor ,kaynak =egitimde_gorulen_ureticiler ()
-    print ("EGITIMDE GORULEN URETICILER (kaynak basina adet):")
-    for k ,n in sorted (kaynak .items ()):
+    gor ,src_ =egitimde_gorulen_ureticiler ()
+    print ("EGITIMDE GORULEN URETICILER (source basina count):")
+    for k ,n in sorted (src_ .items ()):
         print (f"  {k :<42}{n :>4}")
     print (f"  TOPLAM tekil: {len (gor )}\n")
 
@@ -96,7 +96,7 @@ def main ():
     print (f"  n<{MIN_URETICI } oldugu icin EGITIME birakilanlar: "
     f"{[(m ,mfg_n [m ])for m in kucuk ]}\n")
     if not aday_u :
-        print ("HIC temiz manufacturer yok -- cluster kurulamaz.");return 
+        print ("HIC temiz manufacturer absent -- cluster kurulamaz.");return 
 
         # turetme kayitlari (GT + geometri anahtari for)
     R =[]
@@ -106,10 +106,10 @@ def main ():
                 R +=pickle .load (h )
         except (OSError ,ValueError ,EOFError ,pickle .UnpicklingError ):
             print (f"  UYARI: {f } okunamadi")
-    kayit ={}
+    rec_ ={}
     for r in R :# same pid birden very shard'da may be
-        kayit .setdefault (r ["pid"],r )
-    print (f"turetme kaydi: {len (kayit )} part")
+        rec_ .setdefault (r ["pid"],r )
+    print (f"turetme kaydi: {len (rec_ )} part")
 
     YASAK =set ()
     if os .path .exists (GEO_YASAK ):
@@ -121,7 +121,7 @@ def main ():
     for m ,p ,_jf ,_s in sorted (E ,key =lambda t :(t [0 ],t [1 ])):
         if m not in aday_u :
             continue 
-        r =kayit .get (p )
+        r =rec_ .get (p )
         if r is None :
             atlanan ["turetme_yok"]+=1 ;continue 
             # `r["G"]` numpy dizisi may be -- `or` with bosluk kontrolu ValueError gives

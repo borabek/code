@@ -74,7 +74,7 @@ def main ():
         SKOR [b ]=S 
         print (f"  skorlar hazir: {b }",flush =True )
 
-    def puan (b ,alt ,carpan ,baseline ,carpan_cok =None ,taban_cok =None ):
+    def score_ (b ,alt ,carpan ,baseline ,carpan_cok =None ,taban_cok =None ):
         det =[]
         for r in alt :
             P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
@@ -97,10 +97,10 @@ def main ():
     en ,arg =-1 ,None 
     for c in CARPANLAR :
         for t in TABANLAR :
-            f =T .f1w (puan ("havuzlanmis",DER ,c ,t ))
+            f =T .f1w (score_ ("havuzlanmis",DER ,c ,t ))
             if f >en :
                 en ,arg =f ,(c ,t )
-    su_an =T .f1w (puan ("havuzlanmis",DER ,0.5 ,0.25 ))
+    su_an =T .f1w (score_ ("havuzlanmis",DER ,0.5 ,0.25 ))
     print (f"\nsu anki (0.50, 0.25)   havuzlanmis {su_an :.4f}")
     print (f"TAM TARAMA en iyisi    {arg }  {en :.4f}   (+{en -su_an :.4f})  <- SISIK, ayni kumede secildi")
 
@@ -116,10 +116,10 @@ def main ():
         e ,a =-1 ,(0.5 ,0.25 )
         for c in CARPANLAR :
             for t in TABANLAR :
-                f =T .f1w (puan ("havuzlanmis",sec_alt ,c ,t ))
+                f =T .f1w (score_ ("havuzlanmis",sec_alt ,c ,t ))
                 if f >e :
                     e ,a =f ,(c ,t )
-        det_capraz +=puan ("havuzlanmis",olc_alt ,a [0 ],a [1 ])
+        det_capraz +=score_ ("havuzlanmis",olc_alt ,a [0 ],a [1 ])
         print (f"  yarida secilen threshold {a } -> diger yaride measured ({len (olc_alt )} part)")
     f_capraz =T .f1w (det_capraz )
     print (f"CAPRAZ SECIM (DURUST)  {f_capraz :.4f}   ({f_capraz -su_an :+.4f})")
@@ -132,14 +132,14 @@ def main ():
         e ,a =-1 ,(0.5 ,0.25 ,0.5 ,0.25 )
         for c in CARPANLAR :
             for t in TABANLAR :
-                f =T .f1w (puan ("havuzlanmis",sec_alt ,c ,t ))
+                f =T .f1w (score_ ("havuzlanmis",sec_alt ,c ,t ))
                 if f >e :
                     e ,a =f ,(c ,t ,c ,t )
         for cc_ in CARPANLAR :
-            f =T .f1w (puan ("havuzlanmis",sec_alt ,a [0 ],a [1 ],cc_ ,a [1 ]))
+            f =T .f1w (score_ ("havuzlanmis",sec_alt ,a [0 ],a [1 ],cc_ ,a [1 ]))
             if f >e :
                 e ,a =f ,(a [0 ],a [1 ],cc_ ,a [1 ])
-        det_rej +=puan ("havuzlanmis",olc_alt ,a [0 ],a [1 ],a [2 ],a [3 ])
+        det_rej +=score_ ("havuzlanmis",olc_alt ,a [0 ],a [1 ],a [2 ],a [3 ])
         print (f"  regime-kosullu threshold {a } secildi")
     f_rej =T .f1w (det_rej )
     print (f"REJIM-KOSULLU (DURUST) {f_rej :.4f}   ({f_rej -su_an :+.4f})")
@@ -149,11 +149,11 @@ def main ():
     ud_su ,ud_ye =[],[]
     for b ,mk in bolmeler [1 :]:
         alt =[x for x in DER if x ["mfg"]==b .replace ("-disi","")]
-        a_ =T .f1w (puan (b ,alt ,0.5 ,0.25 ));b_ =T .f1w (puan (b ,alt ,arg [0 ],arg [1 ]))
+        a_ =T .f1w (score_ (b ,alt ,0.5 ,0.25 ));b_ =T .f1w (score_ (b ,alt ,arg [0 ],arg [1 ]))
         ud_su .append (a_ );ud_ye .append (b_ )
         print (f"  {b :<12} {a_ :.4f} -> {b_ :.4f}  ({b_ -a_ :+.4f})")
 
-    det_a =puan ("havuzlanmis",DER ,0.5 ,0.25 )
+    det_a =score_ ("havuzlanmis",DER ,0.5 ,0.25 )
     lo ,hi =0.0 ,0.0 
     fn =lambda rows :T .f1w ([q for _ ,q in rows ])-T .f1w ([p for p ,_ in rows ])
     _ ,lo ,hi =measure_set .grup_bootstrap (list (zip (det_a ,det_capraz if len (det_capraz )==len (det_a )else det_a )),

@@ -84,16 +84,16 @@ def main ():
         n =atlanan =0 
         for pid ,r in sorted (kay .items ()):
             pid =str (pid )
-            kaynak =f"{OZ }/{ad }_{pid }.npz"
+            src_ =f"{OZ }/{ad }_{pid }.npz"
             hedef =f"{CIK }/{ad }_{pid }.npz"
-            if os .path .exists (hedef )or not os .path .exists (kaynak ):
+            if os .path .exists (hedef )or not os .path .exists (src_ ):
                 atlanan +=1 
                 continue 
             f =f"{OB [ad ]}/{pid }.npz"
             if not os .path .exists (f ):
                 atlanan +=1 
                 continue 
-            z =np .load (kaynak )
+            z =np .load (src_ )
             P =np .asarray (z ["P"],float )
             D =np .asarray (z ["D"],float )
             zz =np .load (f )

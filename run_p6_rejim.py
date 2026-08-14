@@ -89,16 +89,16 @@ def taban_cikti (d ,model ):
     """
     k =np .where (d ["X"][:,C0 ]==1.0 )[0 ]
     k =k [d ["kaynak"][d ["idx"][k ]]!=2 ]
-    bos =(np .zeros ((0 ,3 )),np .zeros ((0 ,3 )))
+    empty_ =(np .zeros ((0 ,3 )),np .zeros ((0 ,3 )))
     if not len (k ):
-        return bos ,np .zeros (0 )
+        return empty_ ,np .zeros (0 )
     ci =d ["idx"][k ]
     X =d ["X"][k ][:,:AB ]
     s =np .asarray (model .predict_proba (
     wire_gate .within_part (X ,"zskor"))[:,1 ],float )
     m =s >=product_genis .ESIK 
     if not m .any ():
-        return bos ,s 
+        return empty_ ,s 
     P ,D =d ["P"][ci [m ]],d ["D"][ci [m ]]
     T =d ["X"][k ][m ][:,AB +len (YB .OZ_AD ):]
     if len (P )>1 :
@@ -129,10 +129,10 @@ def p6_cikti (d ,pk ):
     nms_mm =float (pk ["nms"]))
 
 
-def puanla (veri ,secim ):
+def puanla (data_ ,sel_ ):
     """`secim[i]` True whereas P6 ciktisi, False whereas TABAN ciktisi is used."""
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,p6 in zip (veri ,secim ):
+    for d ,p6 in zip (data_ ,sel_ ):
         P ,D =d ["_p6"]if p6 else d ["_tb"]
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
@@ -155,69 +155,69 @@ def main ():
     if tb_model is None :
         sys .exit ("dagitilan gate modeli yok")
 
-    veri =[]
+    data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):
-        veri +=yukle (cluster .strip (),int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+        data_ +=yukle (cluster .strip (),int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
-    print (f"{len (veri )} part yuklendi ({time .time ()-t0 :.0f} s)",flush =True )
+    print (f"{len (data_ )} part yuklendi ({time .time ()-t0 :.0f} s)",flush =True )
 
-    for i ,d in enumerate (veri ,1 ):
+    for i ,d in enumerate (data_ ,1 ):
         d ["_tb"],s_tb =taban_cikti (d ,tb_model )
         d ["_p6"]=p6_cikti (d ,pk )
         d ["_ist"]=istatistik (d ,s_tb )
         if i %400 ==0 :
-            print (f"  cikti {i }/{len (veri )} ({time .time ()-t0 :.0f} s)",
+            print (f"  cikti {i }/{len (data_ )} ({time .time ()-t0 :.0f} s)",
             flush =True )
 
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=200 ]
     print (f"brand katlari: {katlar }",flush =True )
 
-    hep_tb =puanla (veri ,[False ]*len (veri ))
-    hep_p6 =puanla (veri ,[True ]*len (veri ))
+    hep_tb =puanla (data_ ,[False ]*len (data_ ))
+    hep_p6 =puanla (data_ ,[True ]*len (data_ ))
     print (f"\nHEPSI TABAN : robot {hep_tb ['robot']:.4f} makro {hep_tb ['makro']:.4f}")
     print (f"HEPSI P6    : robot {hep_p6 ['robot']:.4f} makro {hep_p6 ['makro']:.4f}")
 
     # --- fold inside threshold secimi, disarida birakilan markada measurement ----------
-    sonuc ={}
+    res_ ={}
     for ist in ISTATISTIKLER :
-        v =np .array ([d ["_ist"][ist ]for d in veri ])
+        v =np .array ([d ["_ist"][ist ]for d in data_ ])
         candidates =[-np .inf ]+list (np .percentile (v ,[10 ,20 ,30 ,40 ,50 ,60 ,
         70 ,80 ,90 ]))+[np .inf ]
         top =collections .Counter ()
         secilen =[]
         for b in katlar :
-            ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-            dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-            IC =[veri [i ]for i in ic ]
+            ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+            dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+            IC =[data_ [i ]for i in ic ]
             en =max (candidates ,key =lambda e :puanla (
-            IC ,[veri [i ]["_ist"][ist ]>=e for i in ic ])["makro"])
-            r =puanla ([veri [i ]for i in dis ],
-            [veri [i ]["_ist"][ist ]>=en for i in dis ])
+            IC ,[data_ [i ]["_ist"][ist ]>=e for i in ic ])["makro"])
+            r =puanla ([data_ [i ]for i in dis ],
+            [data_ [i ]["_ist"][ist ]>=en for i in dis ])
             for k_ in ("TP","FP","FN"):
                 top [k_ ]+=r [k_ ]
             secilen .append (en )
         f1 =2 *top ["TP"]/max (2 *top ["TP"]+top ["FP"]+top ["FN"],1 )
-        sonuc [ist ]={"robot":f1 ,"esikler":[float (x )for x in secilen ],
+        res_ [ist ]={"robot":f1 ,"esikler":[float (x )for x in secilen ],
         **dict (top )}
         print (f"{ist :<11} fold-disi robot {f1 :.4f} | secilen esikler "
         f"{[round (float (x ),2 )for x in secilen ]}",flush =True )
 
-    en_ist =max (sonuc ,key =lambda k :sonuc [k ]["robot"])
+    en_ist =max (res_ ,key =lambda k :res_ [k ]["robot"])
     # threshold: katlarda secilenlerin MEDYANI (single kata asiri uymasin)
-    en_esik =float (np .median (sonuc [en_ist ]["esikler"]))
+    en_esik =float (np .median (res_ [en_ist ]["esikler"]))
     print (f"\nSECILEN: {en_ist } >= {en_esik :.3f} -> P6, altinda TABAN")
-    print (f"  fold-disi robot {sonuc [en_ist ]['robot']:.4f}  "
+    print (f"  fold-disi robot {res_ [en_ist ]['robot']:.4f}  "
     f"(hepsi-baseline {hep_tb ['robot']:.4f}, hepsi-P6 {hep_p6 ['robot']:.4f})")
 
     pk ["regime"]={"istatistik":en_ist ,"threshold":en_esik }
     with open (PAKET ,"wb")as f :
         pickle .dump (pk ,f )
     json .dump ({"damga":makbuz_hash .damga (),"hepsi_taban":hep_tb ,
-    "hepsi_p6":hep_p6 ,"istatistikler":sonuc ,
+    "hepsi_p6":hep_p6 ,"istatistikler":res_ ,
     "secilen":{"istatistik":en_ist ,"threshold":en_esik },
-    "katlar":katlar ,"n_parca":len (veri ),
+    "katlar":katlar ,"n_parca":len (data_ ),
     "not":"Rejim yonlendirme: part basina P6 mu TABAN mi. Esik "
     "brand katlarinda MAKRO olcutle secildi; disarida "
     "birakilan markada TARANMADI. D7'ye BAKILMADI."},

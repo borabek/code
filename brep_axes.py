@@ -32,9 +32,9 @@ def _oku (yol ):
         return json .load (f )
 
 
-def _yaz (yol ,veri ):
+def _yaz (yol ,data_ ):
     with open (yol ,"w",encoding ="utf-8")as f :
-        json .dump (veri ,f )
+        json .dump (data_ ,f )
 
 
 CYL_VER =2 # v2: radius/centre CEMBER OTURTMA with (v1 centroid kullaniyordu, YAY'larda wrong)

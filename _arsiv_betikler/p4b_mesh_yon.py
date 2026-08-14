@@ -50,12 +50,12 @@ def bosluk_yonu (mesh ,p ,n =N_ISIN ,max_mm =40.0 ):
         np .repeat (p [None ,:],n ,0 ),D ,multiple_hits =False )
     except Exception :
         return None 
-    mesafe =np .full (n ,max_mm ,float )
+    dist_ =np .full (n ,max_mm ,float )
     for L ,i in zip (loc ,idx ):
         m =float (np .linalg .norm (L -p ))
-        if m <mesafe [i ]:
-            mesafe [i ]=m 
-    j =int (np .argmax (mesafe ))
-    if mesafe [j ]<2.0 :
+        if m <dist_ [i ]:
+            dist_ [i ]=m 
+    j =int (np .argmax (dist_ ))
+    if dist_ [j ]<2.0 :
         return None 
     return D [j ]/(np .linalg .norm (D [j ])+1e-12 )

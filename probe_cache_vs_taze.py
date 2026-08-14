@@ -121,7 +121,7 @@ def main ():
         f"{r ['taze_auc']:>10.4f}{r ['auc_farki']:>+11.4f}")
     print ("\nOKUMA: TAZE auc belirgin yuksekse zincirin basi BAYAT ONBELLEK")
     print ("       yuzunden zayif demektir -- yeniden training GEREKMEDEN,")
-    print ("       yalnizca onbellegi tazeleyerek duzelir.")
+    print ("       only onbellegi tazeleyerek duzelir.")
     json .dump ({"onbellek_model":n_ob ,"canli_model":len (cks ),
     "brand":out ,
     "not":"Onbellekteki pbs vs canli modellerle taze inference, "

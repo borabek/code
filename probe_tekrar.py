@@ -87,9 +87,9 @@ def tekrar_tavani (G ):
         return 1 ,None 
     if len (candidate )>400 :
         candidate =candidate [np .random .default_rng (0 ).choice (len (candidate ),400 ,False )]
-    for adim in candidate :
-        L =np .linalg .norm (adim )
-        u =adim /L 
+    for step_ in candidate :
+        L =np .linalg .norm (step_ )
+        u =step_ /L 
         for seed in G :
             t =(G -seed )@u 
             dik =np .linalg .norm ((G -seed )-t [:,None ]*u [None ,:],axis =1 )
@@ -103,27 +103,27 @@ def tekrar_tavani (G ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
+    print (f"{len (data_ )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
     flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_satir =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_satir ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_satir =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_satir ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -133,11 +133,11 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         a =ist [d ["mfg"]]
@@ -147,13 +147,13 @@ def main ():
         dg =dogru_maske (d )# (secenek, GT)
         if not dg .any ():
             continue 
-        sira =np .argsort (np .argsort (-np .asarray (s )))
+        rank_ =np .argsort (np .argsort (-np .asarray (s )))
         # HER GT for: onu tutan seceneklerin EN IYI order
         gt_sira =[]
         for j in range (dg .shape [1 ]):
             u =np .where (dg [:,j ])[0 ]
             if len (u ):
-                gt_sira .append (int (sira [u ].min ()))
+                gt_sira .append (int (rank_ [u ].min ()))
         if not gt_sira :
             continue 
         gt_sira =np .sort (gt_sira )
@@ -163,10 +163,10 @@ def main ():
         # first k sirada kac GT present (k = real CP count)
         a ["ilkk_icinde"].append (float ((gt_sira <max (k ,1 )).mean ()))
         # TEKRAR TAVANI
-        tut ,adim =tekrar_tavani (G )
+        tut ,step_ =tekrar_tavani (G )
         a ["tekrar_orani"].append (tut /max (k ,1 ))
-        if adim :
-            a ["adim"].append (adim )
+        if step_ :
+            a ["adim"].append (step_ )
 
     print (f"\n{'brand':<7}{'CP/p':>7}{'ILK GT':>9}{'ORTANCA':>9}{'SON GT':>9}"
     f"{'ilk-k icinde':>14}{'TEKRAR tavani':>15}{'adim mm':>9}")
@@ -189,7 +189,7 @@ def main ():
         f"{r ['adim_mm']:>9.2f}")
     print ("\nOKUMA:")
     print ("  ILK GT << SON GT  -> model ILKINI buluyor, TEKRARLARI bulamiyor")
-    print ("  TEKRAR tavani yuksek -> tek bir otelemeyle GT'lerin o orani")
+    print ("  TEKRAR tavani high -> single a otelemeyle GT'lerin that orani")
     print ("     URETILEBILIR; markalar-arasi transfer GEREKMEZ")
     json .dump ({"dizin":os .environ ["P6_DIZIN"],"cluster":KUME ,"brand":out ,
     "not":"GT sirasi = o GT'yi tutan seceneklerin EN IYI sirasi. "

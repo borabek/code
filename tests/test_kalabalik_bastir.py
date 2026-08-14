@@ -31,15 +31,15 @@ def test_sinir_tam_yaricapta_BASTIRILMAZ ():
 
 def test_olcum_ve_urun_yolu_AYNI_maskeyi_alir ():
     """`crowd_mask` TEK KAYNAK; `suppress_crowd` onu cagirir."""
-    girdi =[cp (0 ,0.5 ),cp (4 ,0.9 ),cp (40 ,0.6 )]
-    m =wire_gate .crowd_mask ([c ["point"]for c in girdi ],
-    [c ["wire_score"]for c in girdi ],6.0 )
-    assert [c ["point"][0 ]for c in wire_gate .suppress_crowd (girdi ,r_mm =6.0 )]==[c ["point"][0 ]for c ,k in zip (girdi ,m )if k ]
+    inp_ =[cp (0 ,0.5 ),cp (4 ,0.9 ),cp (40 ,0.6 )]
+    m =wire_gate .crowd_mask ([c ["point"]for c in inp_ ],
+    [c ["wire_score"]for c in inp_ ],6.0 )
+    assert [c ["point"][0 ]for c in wire_gate .suppress_crowd (inp_ ,r_mm =6.0 )]==[c ["point"][0 ]for c ,k in zip (inp_ ,m )if k ]
 
 
 def test_sifir_yaricap_KAPATIR ():
-    girdi =[cp (0 ,0.3 ),cp (1 ,0.9 )]
-    assert wire_gate .suppress_crowd (girdi ,r_mm =0.0 )==girdi 
+    inp_ =[cp (0 ,0.3 ),cp (1 ,0.9 )]
+    assert wire_gate .suppress_crowd (inp_ ,r_mm =0.0 )==inp_ 
 
 
 def test_girdi_sirasi_korunur ():

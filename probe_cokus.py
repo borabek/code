@@ -73,28 +73,28 @@ def dogru_maske (d ):
 
 def main ():
     t0 =time .time ()
-    veri =[d for d in yukle (KUME ,int (os .environ .get ("P6_TR","0")))]
-    for d in veri :
+    data_ =[d for d in yukle (KUME ,int (os .environ .get ("P6_TR","0")))]
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
+    print (f"{len (data_ )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
     flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_satir =sum (len (veri [i ]["y"])for i in ic )
-        ilk =temel (veri [ic [0 ]])
-        M =np .empty ((n_satir ,ilk .shape [1 ]),np .float32 )
-        M [:len (ilk )]=ilk 
-        o =len (ilk )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_satir =sum (len (data_ [i ]["y"])for i in ic )
+        first_ =temel (data_ [ic [0 ]])
+        M =np .empty ((n_satir ,first_ .shape [1 ]),np .float32 )
+        M [:len (first_ )]=first_ 
+        o =len (first_ )
         for i in ic [1 :]:
-            b_ =temel (veri [i ])
+            b_ =temel (data_ [i ])
             M [o :o +len (b_ )]=b_ 
             o +=len (b_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz =np .where (Y ==1 )[0 ]
         neg =np .where (Y ==0 )[0 ]
@@ -104,11 +104,11 @@ def main ():
         max_iter =ITER ,learning_rate =0.06 ,max_leaf_nodes =63 ,
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         for i in dis :
-            oof [i ]=m .predict_proba (temel (veri [i ]).astype (np .float32 ))[:,1 ]
+            oof [i ]=m .predict_proba (temel (data_ [i ]).astype (np .float32 ))[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         mfg =d ["mfg"]
@@ -129,8 +129,8 @@ def main ():
         if not n or not dg .any ():
             continue 
             # DOGRU secenegin part ICINDEKI order yuzdeligi (0 = most vertex)
-        sira =np .argsort (np .argsort (-s ))
-        en_iyi_dogru =int (sira [dg ].min ())
+        rank_ =np .argsort (np .argsort (-s ))
+        en_iyi_dogru =int (rank_ [dg ].min ())
         a ["en_iyi_sira"].append (en_iyi_dogru )
         a ["en_iyi_yuzdelik"].append (en_iyi_dogru /max (n -1 ,1 ))
         a ["ilk10"].append (1.0 if en_iyi_dogru <10 else 0.0 )

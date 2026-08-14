@@ -80,7 +80,7 @@ def main ():
         print (f"  MUHURLENMIS (<0.5):  {(r <0.5 ).sum ()} ({100 *(r <0.5 ).mean ():.0f}%)")
         print (f"  KORUNMUS   (>=0.5):  {(r >=0.5 ).sum ()} ({100 *(r >=0.5 ).mean ():.0f}%)")
         print ("\n  YORUM: medyan ~1.0 -> remesh acikligi KORUYOR (Manifold detourunu ATLA).")
-        print ("         medyan <<0.5 -> remesh MUHURLUYOR (Manifold/ManifoldPlus denemeye deger).")
+        print ("         medyan <<0.5 -> remesh MUHURLUYOR (Manifold/ManifoldPlus denemeye value).")
     json .dump ({"n_fn":n_fn ,"ratios":ratios },open ("results/remesh_preserve.json","w"),indent =1 )
 
 

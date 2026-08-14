@@ -112,12 +112,12 @@ def main ():
                 a_ort =np .degrees (np .arccos (np .clip (np .abs (DIR @ort ),0 ,1 )))
                 a_bir =np .degrees (np .arccos (np .clip (np .abs (DIR @d0 ),0 ,1 )))
                 yay =float (np .mean (a_ort ))
-                sira =np .argsort (np .argsort (-CONF ))
+                rank_ =np .argsort (np .argsort (-CONF ))
                 b =int (np .argmin (np .linalg .norm (Gm -p0 ,axis =1 )))
                 a_gt =np .degrees (np .arccos (np .clip (np .abs (DIR @Gdm [b ]),0 ,1 )))
                 for u_ in range (len (DIR )):
                     X .append ([CONF [u_ ],MES [u_ ],a_ort [u_ ],a_bir [u_ ],float (len (DIR )),
-                    yay ,float (sira [u_ ])]+X58 [ci ].tolist ())
+                    yay ,float (rank_ [u_ ])]+X58 [ci ].tolist ())
                     Y .append (1 if a_gt [u_ ]<=10.0 else 0 )
                     PID .append (pid );GEO .append (gk .get (pid ,"yok:"+pid ));CPI .append (f"{pid }#{ci }")
         except Exception as e :

@@ -26,7 +26,7 @@ def main ():
         args =["--start-maximized"],no_viewport =True )
         page =ctx .pages [0 ]if ctx .pages else ctx .new_page ()
         page .goto (URL ,wait_until ="domcontentloaded",timeout =90000 )
-        print ("TARAYICI ACIK -- WSCAD Universe'e GIRIS YAP.")
+        print ("TARAYICI OPEN -- WSCAD Universe'e GIRIS YAP.")
         print ("Giris yaptiktan sonra bu pencereyi KAPATMA; 10 dk boyunca bekliyorum.\n")
 
         # poll for a logged-in signal: the page stops showing a login control
@@ -44,7 +44,7 @@ def main ():
                 print ("Artik indirmeyi ben yurutebilirim (wscad_download.py).")
                 ctx .close ()
                 return 0 
-        print ("zaman asimi -- giris tespit edilemedi; pencereyi acik birak ve tekrar dene")
+        print ("zaman asimi -- giris tespit edilemedi; pencereyi open birak and tekrar dene")
         ctx .close ()
         return 1 
 

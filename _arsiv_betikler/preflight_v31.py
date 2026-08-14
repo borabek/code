@@ -103,7 +103,7 @@ def main ():
     free =shutil .disk_usage (".").free /(1 <<30 )
     print (f"\n[3] DISK: {free :.1f} GB bos")
     if free <6 :
-        print ("    !! RISKLI -- prep-cache + checkpoint icin en az 6GB oneriliyor")
+        print ("    !! RISKLI -- prep-cache + checkpoint for at least 6GB oneriliyor")
     else :
         print ("    OK")
 

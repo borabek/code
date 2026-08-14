@@ -148,11 +148,11 @@ def test_cokus_yonlendirme_ESIGE_gore_model_degistirir ():
     wg =_wg ()
 
     class _Sahte :
-        def __init__ (self ,deger ):self .deger =deger 
+        def __init__ (self ,val_ ):self .val_ =val_ 
         def predict_proba (self ,X ):
             import numpy as _np 
-            return _np .column_stack ([1 -_np .full (len (X ),self .deger ),
-            _np .full (len (X ),self .deger )])
+            return _np .column_stack ([1 -_np .full (len (X ),self .val_ ),
+            _np .full (len (X ),self .val_ )])
 
     m ={"clf_z":_Sahte (0.77 ),"esik_cokus":0.50 ,"donusum_z":"zskor"}
     X =np .random .default_rng (0 ).normal (size =(4 ,3 ))

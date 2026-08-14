@@ -108,17 +108,17 @@ def main ():
         if baseline is None :
             baseline =rc 
         print (f"{ad :<12}{rc :>13.4f}{s ['candidate']:>13}{s ['candidate']/max (top_gt ,1 ):>10.2f}")
-    son =SAY [AYAR [-1 ][0 ]]["ulasan"]/max (top_gt ,1 )
-    kaz =son -baseline 
+    last_ =SAY [AYAR [-1 ][0 ]]["ulasan"]/max (top_gt ,1 )
+    kaz =last_ -baseline 
     print (f"\nrecall kazanci (GEVSEK-2 vs URUN): {kaz :+.4f}")
     bedel =SAY [AYAR [-1 ][0 ]]["candidate"]/max (SAY [AYAR [0 ][0 ]]["candidate"],1 )
     print (f"candidate sayisi carpani: {bedel :.2f}x")
     if kaz >=0.03 :
         print ("\nKARAR: ESIK SORUNU -- adaysiz CP'lerin onemli bolumu gevsetmeyle GELIYOR.")
-        print ("       Kapi acildi: simdi bedel (candidate sayisi) gate'e havale edilip UCTAN UCA olculur.")
+        print ("       Kapi acildi: simdi bedel (candidate count) gate'e havale edilip UCTAN UCA olculur.")
     else :
         print ("\nKARAR: SEGMENTASYON GORMUYOR -- gevsetme recall'i kurtarmiyor.")
-        print ("       Rota B = etiket/ontoloji ve PAHALIDIR; ucuz threshold duzeltmesi YOK.")
+        print ("       Rota B = label/ontoloji and PAHALIDIR; ucuz threshold duzeltmesi YOK.")
     with io .open ("results/b2_turetme.json","w",encoding ="utf-8")as f :
         json .dump ({"gt":top_gt ,"sonuc":{a :SAY [a ]for a in SAY },
         "recall_kazanci":float (kaz ),"aday_carpani":float (bedel )},f ,indent =1 )

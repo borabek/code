@@ -68,4 +68,4 @@ a13 ,_ =oof_auc (X ,"13 feature (mevcut gate)")
 a17 ,_ =oof_auc (np .hstack ([X ,Fx ]),"13 + 4 konsensus-axis feature")
 print (f"\n  KAZANC: {a17 -a13 :+.4f} AUC")
 print ("  -> P0-c'ye DEVAM (gercek katki, F1'e cevir)"if a17 -a13 >0.01 
-else "  -> KATKI YOK: 13 feature bu bilgiyi zaten tasiyor; axis kolu KAPANIR (durust)")
+else "  -> KATKI YOK: 13 feature this bilgiyi already tasiyor; axis kolu KAPANIR (durust)")

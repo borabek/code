@@ -108,13 +108,13 @@ def main ():
     print (f"\nORTALAMA CESITLILIK KAZANCI: {ort :+.4f}")
     if ort >=0.02 :
         print ("  -> CESITLILIGIN HACIMDEN BAGIMSIZ DEGERI VAR. Ucuncu manufacturer talebi HAKLI:")
-        print ("     ayni sayida PXC/WEI parcasindan DAHA degerlidir.")
+        print ("     same sayida PXC/WEI parcasindan DAHA degerlidir.")
     elif ort >=0.005 :
-        print ("  -> Cesitliligin ZAYIF ama pozitif degeri var; talep hacim uzerinden yazilmali,")
-        print ("     cesitlilik ikincil rationale olarak eklenmeli.")
+        print ("  -> Cesitliligin ZAYIF but pozitif degeri present; talep hacim uzerinden yazilmali,")
+        print ("     cesitlilik ikincil rationale as eklenmeli.")
     else :
-        print ("  -> CESITLILIK EK DEGER VERMIYOR: onemli olan HACIM. Ucuncu manufacturer yerine")
-        print ("     EN UCUZ kaynaktan part almak dogru strateji.")
+        print ("  -> CESITLILIK EK DEGER VERMIYOR: onemli which is HACIM. Ucuncu manufacturer instead of")
+        print ("     EN UCUZ kaynaktan part almak correct strateji.")
     with io .open ("results/q1_cesitlilik.json","w",encoding ="utf-8")as f :
         json .dump ({"sonuc":SON ,"cesitlilik_kazanci":{str (k ):float (v )
         for k ,v in KAZANC .items ()},

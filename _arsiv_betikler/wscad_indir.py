@@ -153,10 +153,10 @@ def main ():
     a =ap .parse_args ()
 
     os .makedirs (GECICI ,exist_ok =True )
-    kayit =_kayit_yukle ()
+    rec_ =_kayit_yukle ()
     hedef =hedefleri_sec (a .n ,a .manufacturer ,a .hepsi )
-    hedef =[m for m in hedef if kayit .get (m ["part"],{}).get ("durum")!="ok"]
-    print (f"hedef: {len (hedef )} part | kayitta {len (kayit )} onceki deneme",flush =True )
+    hedef =[m for m in hedef if rec_ .get (m ["part"],{}).get ("durum")!="ok"]
+    print (f"hedef: {len (hedef )} part | kayitta {len (rec_ )} onceki deneme",flush =True )
 
     from playwright .sync_api import sync_playwright 
     t0 =time .time ()
@@ -169,7 +169,7 @@ def main ():
         pg .set_default_timeout (45000 )
 
         # --- CHECK: arac saglam mi
-        print ("KONTROL parcalari (arac saglamlik sinavi):",flush =True )
+        print ("CHECK parcalari (arac saglamlik sinavi):",flush =True )
         k_ok =0 
         for c in KONTROL :
             d ,ay =indir (pg ,ctx ,c )
@@ -177,7 +177,7 @@ def main ():
             k_ok +=(d =="ok")
         if k_ok ==0 :
             print ("\n!! KONTROL GRUBU TAMAMEN BASARISIZ -- arac bozuk, sonuclar GECERSIZ.")
-            print ("   Indirmeye devam EDILMIYOR (sessiz sifir riski).")
+            print ("   Indirmeye devam EDILMIYOR (silent sifir riski).")
             ctx .close ()
             return 
         print (f"   -> {k_ok }/{len (KONTROL )} kontrol indi, arac saglam\n",flush =True )
@@ -189,17 +189,17 @@ def main ():
             except Exception as e :
                 d ,ay ="error",f"{type (e ).__name__ }: {str (e )[:60 ]}"
             sayac [d ]=sayac .get (d ,0 )+1 
-            kayit [part ]={"durum":d ,"ayrinti":ay ,"manufacturer":m ["manufacturer"],
+            rec_ [part ]={"durum":d ,"ayrinti":ay ,"manufacturer":m ["manufacturer"],
             "zaman":time .strftime ("%Y-%m-%d %H:%M:%S")}
             print (f"  [{i }/{len (hedef )}] {m ['manufacturer']:<7}{part :<24}{d :<12}{ay [:52 ]}",flush =True )
             if i %10 ==0 :
                 with io .open (KAYIT ,"w",encoding ="utf-8")as f :
-                    json .dump (kayit ,f ,indent =1 ,ensure_ascii =False )
+                    json .dump (rec_ ,f ,indent =1 ,ensure_ascii =False )
             time .sleep (a .gecikme )
         ctx .close ()
 
     with io .open (KAYIT ,"w",encoding ="utf-8")as f :
-        json .dump (kayit ,f ,indent =1 ,ensure_ascii =False )
+        json .dump (rec_ ,f ,indent =1 ,ensure_ascii =False )
     sure =time .time ()-t0 
     print (f"\nSONUC: {sayac }")
     print (f"sure {sure :.0f}s | part basina {sure /max (len (hedef ),1 ):.1f}s")

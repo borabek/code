@@ -65,24 +65,24 @@ def main ():
     if kirli_gate or kirli_seg :
         print (f"  DUR: cluster KIRLI -- gate {sorted (kirli_gate )} seg {sorted (kirli_seg )}")
         return 
-    print ("  dogrulama: gate v5 ve yeni oto-etiket korpusunda YOK -- TEMIZ")
+    print ("  dogrulama: gate v5 and new oto-label korpusunda YOK -- TEMIZ")
 
     E =eligible ()
     n_mfg =collections .Counter (m for m ,_p ,_jf ,_s in E )
     HEDEF ={m for m in HEDEF if n_mfg [m ]>=MIN_URETICI }
-    kayit =d6_record .yukle ()
+    rec_ =d6_record .yukle ()
     YASAK =set ()
     if os .path .exists (GEO_YASAK ):
         YASAK =set (json .load (io .open (GEO_YASAK ,encoding ="utf-8")).values ())
         # D6 pid'leri and anahtarlari da yasak: two exam kumesi CAKISMAMALI
     D6P =set (d6 ["pidler"])
-    D6A ={kayit [p ].get ("geo")for p in D6P if p in kayit and kayit [p ].get ("geo")}
+    D6A ={rec_ [p ].get ("geo")for p in D6P if p in rec_ and rec_ [p ].get ("geo")}
 
     secili ,gruplar ,atlanan =[],set (),collections .Counter ()
     for m ,p ,_jf ,_s in sorted (E ,key =lambda t :(t [0 ],t [1 ])):
         if m not in HEDEF :
             continue 
-        r =kayit .get (p )
+        r =rec_ .get (p )
         if r is None :
             atlanan ["turetme_yok"]+=1 ;continue 
         _g =r .get ("G")

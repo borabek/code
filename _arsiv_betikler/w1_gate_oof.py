@@ -38,7 +38,7 @@ def metrics (mask ,oof ,thr ):
 OOF =oof_scores (X ,y ,grp )# single OOF (urun gate, sizintisiz)
 masks ={"ALL":np .ones (len (y ),bool ),"WEI":mfg ==1 ,"PXC":mfg ==0 }
 
-print ("=== (1) MEVCUT URUN: global gate 0.35, OOF (f1_sweep ile ayni olmali) ===")
+print ("=== (1) MEVCUT URUN: global gate 0.35, OOF (f1_sweep with same must be) ===")
 for nm ,m in masks .items ():
     p ,r ,f =metrics (m ,OOF ,0.35 );print (f"  {nm :4s}: P={p :.3f} R={r :.3f} F1={f :.3f}")
 
@@ -90,4 +90,4 @@ for nm ,m in masks .items ():
     report [nm ]={"cv_f1":f ,"cv_thr_med":mt ,"global035_f1":g ,"gain":f -g }
 json .dump (report ,open ("results/gate_thr_oof_report.json","w"),indent =2 )
 print ("\n-> results/gate_thr_oof_report.json")
-print ("KARAR: (3) kazanc >0 ise gercek+deployable. ALL kazanci = metadata'siz global threshold degisimi.")
+print ("DECISION: (3) kazanc >0 whereas real+deployable. ALL kazanci = metadata'siz global threshold degisimi.")

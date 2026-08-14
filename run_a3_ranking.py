@@ -91,7 +91,7 @@ def cluster (on ,mesh =False ):
     return out 
 
 
-def agirlik (tr ,kip ):
+def wgt_ (tr ,kip ):
     w =[]
     for d in tr :
         n =len (d ["y"])
@@ -105,10 +105,10 @@ def agirlik (tr ,kip ):
     return np .concatenate (w )
 
 
-def olc (skorla ,veri ,e ,S ,tam =False ):
+def olc (skorla ,data_ ,e ,S ,tam =False ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =skorla (d ["X"])
         k =s >=e 
         if not k .any ():
@@ -146,9 +146,9 @@ def main ():
     Y =np .concatenate ([d ["y"]for d in tr ])
     print (f"training {M .shape } pozitif {Y .mean ():.4f} | D6 {len (dev )} | "
     f"D7 {len (te )}\n",flush =True )
-    sonuc ={}
+    res_ ={}
     for kip in ("duz","parca_esit","poz_dengeli","karma"):
-        w =None if kip =="duz"else agirlik (tr ,kip )
+        w =None if kip =="duz"else wgt_ (tr ,kip )
         m =HistGradientBoostingClassifier (
         max_iter =600 ,learning_rate =0.06 ,max_leaf_nodes =63 ,
         l2_regularization =1.0 ,random_state =0 ).fit (M ,Y ,sample_weight =w )
@@ -164,7 +164,7 @@ def main ():
                 en =(e ,r )
         e ,_ =en 
         r7 =olc (sk ,te ,e ,S ,tam =True )
-        sonuc [kip ]=dict (r7 ,threshold =e )
+        res_ [kip ]=dict (r7 ,threshold =e )
         print (f"{kip :<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | "
         f"tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
 
@@ -200,18 +200,18 @@ def main ():
             en =(e ,r )
     e ,_ =en 
     r7 =olc (sk_pair ,te ,e ,S ,tam =True )
-    sonuc ["pairwise"]=dict (r7 ,threshold =e )
+    res_ ["pairwise"]=dict (r7 ,threshold =e )
     print (f"{'pairwise':<12} threshold {e :.2f} -> D7 robot **{r7 ['robot']:.4f}** | "
     f"tespit {r7 ['tespit']:.4f} | makro {r7 ['makro']:.4f}",flush =True )
 
-    iyi =max (sonuc ,key =lambda k :sonuc [k ]["robot"])
-    print (f"\nEN IYI: {iyi } {sonuc [iyi ]['robot']:.4f} | baseline (duz) "
-    f"{sonuc ['duz']['robot']:.4f} | fark "
-    f"{sonuc [iyi ]['robot']-sonuc ['duz']['robot']:+.4f}")
+    iyi =max (res_ ,key =lambda k :res_ [k ]["robot"])
+    print (f"\nEN IYI: {iyi } {res_ [iyi ]['robot']:.4f} | baseline (duz) "
+    f"{res_ ['duz']['robot']:.4f} | fark "
+    f"{res_ [iyi ]['robot']-res_ ['duz']['robot']:+.4f}")
     print ("KAPI: >= +0.02")
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,"en_iyi":iyi ,
+    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"en_iyi":iyi ,
     "not":"Tek degisken: OGRENME HEDEFI (agirlik / pairwise). Esik "
-    "her model icin D6'da secildi. Isaret duzeltmesi HER kolda "
+    "each model for D6'da secildi. Isaret duzeltmesi HER kolda "
     "acik. D7 brand-disi, TAM ZINCIR, MIKRO."},
     open ("results/a3_siralama.json","w"),indent =1 )
     print ("receipt -> results/a3_siralama.json")

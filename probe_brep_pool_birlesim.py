@@ -55,7 +55,7 @@ KOLLAR ={
 "SEG + B-rep (r<=3mm)":None ,
 "B-rep TEK BASINA":None ,
 }
-sonuc ={}
+res_ ={}
 for ad in KOLLAR :
     TP =FN =nA =0 ;per =collections .defaultdict (lambda :[0 ,0 ])
     for r in R :
@@ -78,18 +78,18 @@ for ad in KOLLAR :
         TP +=tp ;FN +=fn ;nA +=len (P )
         a =per [r ["mfg"]];a [0 ]+=tp ;a [1 ]+=fn 
     rc =TP /max (TP +FN ,1 )
-    sonuc [ad ]={"recall":rc ,"aday_per_parca":nA /max (len (R ),1 ),
+    res_ [ad ]={"recall":rc ,"aday_per_parca":nA /max (len (R ),1 ),
     "brand":{m :a [0 ]/max (a [0 ]+a [1 ],1 )for m ,a in per .items ()}}
-    print (f"{ad :<22} recall {rc :.4f} | candidate/part {sonuc [ad ]['aday_per_parca']:>6.1f}",
+    print (f"{ad :<22} recall {rc :.4f} | candidate/part {res_ [ad ]['aday_per_parca']:>6.1f}",
     flush =True )
 
-t =sonuc ["SEG (kanonik)"]
+t =res_ ["SEG (kanonik)"]
 print (f"\n{'brand':<8} {'SEG':>8} {'+B-rep':>8} {'fark':>8}")
-u =sonuc ["SEG + B-rep (tum)"]
+u =res_ ["SEG + B-rep (tum)"]
 for m in sorted (t ["brand"],key =lambda k :t ["brand"][k ]):
     print (f"  {m :<7} {t ['brand'][m ]:>7.4f} {u ['brand'].get (m ,0 ):>8.4f} "
     f"{u ['brand'].get (m ,0 )-t ['brand'][m ]:>+8.4f}")
-json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,
+json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,
 "not":"HAVUZ RECALL. B-rep onerileri TEZ TURETMESI DEGIL, ek candidate "
 "kaynagi -- ayri raporlanir. D7 brand-disi."},
 open ("results/brep_havuz_birlesim.json","w"),indent =1 )

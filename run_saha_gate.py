@@ -58,15 +58,15 @@ def temel (d ):
     p6_decision .kaynak_blok (d ["kaynak"][d ["idx"]])])
 
 
-def yigin_f32 (ogeler ,uret ,satir ):
+def yigin_f32 (ogeler ,uret ,line_ ):
     """float64 ara yigin OLMADAN float32 matris. `run_extra_feature` with same
     rationale: full-open korpusta `vstack(...).astype(float32)` before float64
     birlestirip 10.2 GiB istiyor and MemoryError veriyor."""
-    n_satir =sum (satir (o )for o in ogeler )
-    ilk =np .asarray (uret (ogeler [0 ]),np .float32 )
-    M =np .empty ((n_satir ,ilk .shape [1 ]),np .float32 )
-    M [:len (ilk )]=ilk 
-    y =len (ilk )
+    n_satir =sum (line_ (o )for o in ogeler )
+    first_ =np .asarray (uret (ogeler [0 ]),np .float32 )
+    M =np .empty ((n_satir ,first_ .shape [1 ]),np .float32 )
+    M [:len (first_ )]=first_ 
+    y =len (first_ )
     for o in ogeler [1 :]:
         b =uret (o )
         M [y :y +len (b )]=b 
@@ -78,26 +78,26 @@ def yigin_f32 (ogeler ,uret ,satir ):
 
 def main ():
     t0 =time .time ()
-    veri =[]
+    data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):
         for d in yukle (cluster .strip (),int (os .environ .get ("P6_TR","0"))):
             d ["_kume"]=cluster .strip ()
-            veri .append (d )
-    for d in veri :
+            data_ .append (d )
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
+    print (f"{len (data_ )} part | katlar {katlar } ({time .time ()-t0 :.0f} s)",
     flush =True )
 
-    kayit =[]# (skor, dogru_mu)
+    rec_ =[]# (skor, dogru_mu)
     gt_top =0 
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        M =yigin_f32 (ic ,lambda i :temel (veri [i ]),
-        lambda i :len (veri [i ]["y"]))
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        M =yigin_f32 (ic ,lambda i :temel (data_ [i ]),
+        lambda i :len (data_ [i ]["y"]))
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz =np .where (Y ==1 )[0 ]
         neg =np .where (Y ==0 )[0 ]
@@ -107,7 +107,7 @@ def main ():
         max_iter =ITER ,learning_rate =0.06 ,max_leaf_nodes =63 ,
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         for i in dis :
-            d =veri [i ]
+            d =data_ [i ]
             s =m .predict_proba (temel (d ).astype (np .float32 ))[:,1 ]
             P ,D ,_ ,sk =p6_decision .sec_ayrintili (
             d ["P"],d ["idx"],d ["YD"],s ,KURAL ,nms_mm =NMS )
@@ -119,17 +119,17 @@ def main ():
             dogru =np .zeros (len (P ),bool )
             for e in bilgi ["eslesme"]:
                 dogru [e [0 ]]=True 
-            kayit .extend (zip (np .asarray (sk ,float ).tolist (),dogru .tolist ()))
-        print (f"  {b :<6} biriken tahmin {len (kayit )} ({time .time ()-t0 :.0f} s)",
+            rec_ .extend (zip (np .asarray (sk ,float ).tolist (),dogru .tolist ()))
+        print (f"  {b :<6} biriken tahmin {len (rec_ )} ({time .time ()-t0 :.0f} s)",
         flush =True )
 
-    if not kayit :
+    if not rec_ :
         sys .exit ("hic tahmin yok")
-    sk =np .array ([a for a ,_ in kayit ])
-    dg =np .array ([b for _ ,b in kayit ],bool )
-    sira =np .argsort (-sk )
-    dg_s =dg [sira ]
-    sk_s =sk [sira ]
+    sk =np .array ([a for a ,_ in rec_ ])
+    dg =np .array ([b for _ ,b in rec_ ],bool )
+    rank_ =np .argsort (-sk )
+    dg_s =dg [rank_ ]
+    sk_s =sk [rank_ ]
     kum_tp =np .cumsum (dg_s )
     n =np .arange (1 ,len (dg_s )+1 )
     precision =kum_tp /n 
@@ -157,7 +157,7 @@ def main ():
         f"{kapsama [k ]:>9.4f}")
 
     json .dump ({"damga":makbuz_hash .damga (),"dizin":os .environ ["P6_DIZIN"],
-    "katlar":katlar ,"n_parca":len (veri ),"n_tahmin":len (sk ),
+    "katlar":katlar ,"n_parca":len (data_ ),"n_tahmin":len (sk ),
     "gt_toplam":int (gt_top ),"ham_kesinlik":float (dg .mean ()),
     "kural":list (KURAL ),"nms":NMS ,"oneri":oneri ,
     "not":"GORULMEMIS MARKA katlarinda (LOMO) precision-kapsama. "

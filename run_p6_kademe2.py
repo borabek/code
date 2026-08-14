@@ -147,8 +147,8 @@ def alt_ornekle_zor (M ,Y ,s1 ,fold =NEG_KAT ,seed =0 ):
         sec_neg =rng .choice (neg ,n ,replace =False )if len (neg )else neg 
     else :
         yari =n //2 
-        sira =neg [np .argsort (-np .asarray (s1 ,float )[neg ])]
-        zor =sira [:yari ]
+        rank_ =neg [np .argsort (-np .asarray (s1 ,float )[neg ])]
+        zor =rank_ [:yari ]
         kalan =np .setdiff1d (neg ,zor ,assume_unique =False )
         rast =(rng .choice (kalan ,min (n -yari ,len (kalan )),replace =False )
         if len (kalan )else np .zeros (0 ,int ))
@@ -183,12 +183,12 @@ def kafes_bloku (d ,s ):
     return lattice .oznitelik (d ["P"][d ["idx"]],d ["YD"],Pt ,Dt )
 
 
-def puanla (d ,s ,kural ,nms ,arm ):
+def puanla (d ,s ,rule_ ,nms ,arm ):
     if arm =="TABAN":
         k =taban_satir (d )
         ci =d ["idx"][k ]# candidate indeksleri
         sk =s [k ]
-        m =p6_decision .kabul_maskesi (sk ,kural )
+        m =p6_decision .kabul_maskesi (sk ,rule_ )
         if not m .any ():
             return np .zeros ((0 ,3 )),np .zeros ((0 ,3 ))
         P ,D =d ["P"][ci [m ]],d ["D"][ci [m ]]
@@ -198,15 +198,15 @@ def puanla (d ,s ,kural ,nms ,arm ):
             import wire_gate 
             n =wire_gate .crowd_mask (P ,sk [m ])
         return P [n ],product_genis .isaret_duzelt (D [n ],T [n ])
-    return p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,kural ,nms_mm =nms )
+    return p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,rule_ ,nms_mm =nms )
 
 
-def olc (veri ,skor ,kural ,nms ,arm ):
+def olc (data_ ,skor ,rule_ ,nms ,arm ):
     tp =fp =fn =0 
     tes =[]
     per =collections .defaultdict (lambda :[0 ,0 ,0 ])
-    for d ,s in zip (veri ,skor ):
-        P ,D =puanla (d ,s ,kural ,nms ,arm )
+    for d ,s in zip (data_ ,skor ):
+        P ,D =puanla (d ,s ,rule_ ,nms ,arm )
         a ,b ,c =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],K .YANAL ,K .ACI ,
         False ,signed =True )[:3 ]
         tp +=a ;fp +=b ;fn +=c 
@@ -375,11 +375,11 @@ def _pp (m ,X ):
     return m .predict_proba (X )[:,1 ]
 
 
-def skorla (m ,veri ,arm ,kafes_bloklar =None ,s1ler =None ,sira_bloklar =None ):
+def skorla (m ,data_ ,arm ,kafes_bloklar =None ,s1ler =None ,sira_bloklar =None ):
     """Kolun skorlari. P6_KAFES'te KISA LISTE DISI satirlar 0 kalir --
     i.e. ikinci kademe birinci kademeyi EZEMEZ, only icinden selects."""
     out =[]
-    for i ,d in enumerate (veri ):
+    for i ,d in enumerate (data_ ):
         if arm =="P6_KAFES":
             s =np .zeros (len (d ["X"]))
             k =kisa (s1ler [i ])
@@ -542,7 +542,7 @@ def main ():
             for x in KURALLAR for n in NMSLER )if KAHIN else 0.0 )
             for k in ("TP","FP","FN"):
                 top [arm ][k ]+=r [k ]
-            ayrinti [b ][arm ]=dict (r ,kural =list (en [0 ]),nms =en [1 ],
+            ayrinti [b ][arm ]=dict (r ,rule_ =list (en [0 ]),nms =en [1 ],
             kural_kahini =kah )
         a =ayrinti [b ]
         # KOLLAR cevre degiskeniyle degisebiliyor; satiri SABIT arm adlariyla
@@ -555,34 +555,34 @@ def main ():
 
     print (f"\n{'arm':<12} {'robot':>8} {'recall':>8} {'precision':>9} "
     f"{'TP':>7} {'FP':>7} {'FN':>7}")
-    son ={}
+    last_ ={}
     for arm in KOLLAR :
         c =top [arm ]
         f1 =2 *c ["TP"]/max (2 *c ["TP"]+c ["FP"]+c ["FN"],1 )
         rc =c ["TP"]/max (c ["TP"]+c ["FN"],1 )
         pr =c ["TP"]/max (c ["TP"]+c ["FP"],1 )
-        son [arm ]={"robot":f1 ,"recall":rc ,"precision":pr ,**dict (c )}
+        last_ [arm ]={"robot":f1 ,"recall":rc ,"precision":pr ,**dict (c )}
         print (f"{arm :<12} {f1 :>8.4f} {rc :>8.4f} {pr :>9.4f} {c ['TP']:>7} "
         f"{c ['FP']:>7} {c ['FN']:>7}")
         # Farklar KOL LISTESINE according to uretilir; sabit arm adi yazmak list
         # kisaldiginda KeyError veriyordu (two times became).
-    if "TABAN"in son :
+    if "TABAN"in last_ :
         for k in KOLLAR :
             if k !="TABAN":
                 print (f"\n{k :<9} - TABAN = "
-                f"{son [k ]['robot']-son ['TABAN']['robot']:+.4f}",end ="")
+                f"{last_ [k ]['robot']-last_ ['TABAN']['robot']:+.4f}",end ="")
         print ()
 
         # --- 3) NIHAI MODELLER (tum full) ---------------------------------------
-    en_kol =max (KOLLAR ,key =lambda k :son [k ]["robot"])
+    en_kol =max (KOLLAR ,key =lambda k :last_ [k ]["robot"])
     kural_sayim =collections .Counter (
     (tuple (ayrinti [b ][en_kol ]["kural"]),ayrinti [b ][en_kol ]["nms"])
     for b in katlar )
-    kural ,nms =kural_sayim .most_common (1 )[0 ][0 ]
-    print (f"\nSECILEN arm {en_kol } | kural {kural } | nms {nms } "
+    rule_ ,nms =kural_sayim .most_common (1 )[0 ][0 ]
+    print (f"\nSECILEN arm {en_kol } | kural {rule_ } | nms {nms } "
     f"(brand katlarinda en sik)")
     m1 =egit (tr ,"P6")
-    paket ={"kademe1":m1 ,"arm":en_kol ,"kural":list (kural ),"nms":nms ,
+    paket ={"kademe1":m1 ,"arm":en_kol ,"kural":list (rule_ ),"nms":nms ,
     "zskor":"ab","AB":AB ,"tohum_kural":list (TOHUM_KURAL ),
     "tohum_nms":TOHUM_NMS ,"kisa_esik":KISA_ESIK ,"sira":SIRA }
     if en_kol =="P6_KAFES":
@@ -591,9 +591,9 @@ def main ():
         paket ["kademe2"]=egit (tr ,"P6_KAFES",kafes_tr ,oof ,sira_tr )
     with open ("results/p6_kademe2_model.pkl","wb")as f :
         pickle .dump (paket ,f )
-    json .dump ({"damga":makbuz_hash .damga (),"toplam":son ,"brand":ayrinti ,
+    json .dump ({"damga":makbuz_hash .damga (),"toplam":last_ ,"brand":ayrinti ,
     "n_egitim":len (tr ),"katlar":katlar ,"secilen":en_kol ,
-    "kural":list (kural ),"nms":nms ,"dizin":os .environ ["P6_DIZIN"],
+    "kural":list (rule_ ),"nms":nms ,"dizin":os .environ ["P6_DIZIN"],
     "not":"tam korpusunun MARKA KATLARINDA kural secimi + arm "
     "kiyasi. Tohumlar OUT-OF-FOLD skorlardan. D6 ve D7'ye "
     "BAKILMADI."},

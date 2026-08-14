@@ -162,7 +162,7 @@ def brep_cikar (step_path ):
     return cyl ,acik 
 
 
-def cikti (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
+def out_ (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     """URUNUN genisletilmis ciktisi. Doner: cps listesi (point/direction).
 
     Girdi `cps_seg` tezin `v_o` adaylaridir and HAVUZDA KALIR (source 0).

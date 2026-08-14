@@ -186,7 +186,7 @@ def main ():
     "imzasi (icsel, donme/oteleme duyarsiz)")
     ap .add_argument ("--sinir-weight",type =float ,default =0.0 ,
     help ="Y13 sinir-farkindali loss agirligi. CP fiziksel "
-    "olarak bir SINIRDIR (mouth cemberi) ama mevcut loss "
+    "as a SINIRDIR (mouth cemberi) but mevcut loss "
     "BOLGEYI hedefler. 0 = kapali (davranis degismez).")
     ap .add_argument ("--tversky-gamma",type =float ,default =1.0 ,
     help ="Y14 Focal-Tversky ussu. 1.0 = klasik Tversky "
@@ -204,7 +204,7 @@ def main ():
     help ="FEW-SHOT: kismi ornekleri N kez tekrarla (agirliklandirma)")
     ap .add_argument ("--init-from",default ="",
     help ="FEW-SHOT/FINE-TUNE: bu ckpt'ten baslat (sifirdan degil). "
-    "Mimari birebir ayni olmali; strict=True ile yuklenir.")
+    "Mimari birebir same must be; strict=True with yuklenir.")
     ap .add_argument ("--train-dir",default ="",help ="RESOLUTION EXPERIMENT: load the corpus TRAIN split from a load_extra-style dir (e.g. _corpus12k_train) instead of scheffler_dataset -- lets us retrain at a different remesh resolution without touching the frozen corpus")
     ap .add_argument ("--val-dir",default ="",help ="same for VAL (must match the train resolution)")
     ap .add_argument ("--val-partial",action ="store_true",
@@ -300,7 +300,7 @@ def main ():
         flush =True )
     if a .yalniz_kismi :
         if not partial :
-            raise SystemExit ("--yalniz-kismi verildi ama --partial-dir bos")
+            raise SystemExit ("--only-kismi verildi but --partial-dir empty")
         print (f"  [few-shot] YALNIZ KISMI KIP: corpus ({len (tr )}) + extra ({len (extra )}) "
         f"BIRAKILDI, training {len (partial )} ornek",flush =True )
         tr ,extra =[],[]

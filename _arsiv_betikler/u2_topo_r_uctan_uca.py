@@ -142,16 +142,16 @@ def main ():
             R [(R_ ,mad )]=(det2 ,rob2 )
         print ()
 
-    anahtar =sorted ({k [1 ]for k in R if k [1 ]!="tanidik"})
+    key_ =sorted ({k [1 ]for k in R if k [1 ]!="tanidik"})
     taban_tan =f1w (R [(6.0 ,"tanidik")][0 ])
-    taban_kotu =min (f1w (R [(6.0 ,a )][0 ])for a in anahtar )
+    taban_kotu =min (f1w (R [(6.0 ,a )][0 ])for a in key_ )
     print (f"KARAR (baseline R=6.0: tanidik {taban_tan :.4f} | gorulmemis en kotu {taban_kotu :.4f})")
     kazanan ,en_iyi =None ,None 
     for R_ in R_LISTE :
         if R_ ==6.0 :
             continue 
         dt =f1w (R [(R_ ,"tanidik")][0 ])-taban_tan 
-        ek =min (f1w (R [(R_ ,a )][0 ])for a in anahtar )
+        ek =min (f1w (R [(R_ ,a )][0 ])for a in key_ )
         gecti =(dt >=-0.01 )and (ek >taban_kotu )
         print (f"  R={R_ :<5} tanidik {dt :+.4f} | en kotu {taban_kotu :.4f} -> {ek :.4f} "
         f"({ek -taban_kotu :+.4f}) -> {'GECTI'if gecti else 'GECMEDI'}")

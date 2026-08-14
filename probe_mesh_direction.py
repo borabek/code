@@ -89,8 +89,8 @@ def main ():
             if (aci <=K .ACI ).any ():
                 ok_t +=1 
                 # komsuluk: kutudaki tepelerin cevresi
-            merkez =V [t_ler ].mean (0 )
-            komsu =np .where (np .linalg .norm (V -merkez ,axis =1 )<=KOMSU_R )[0 ]
+            center_ =V [t_ler ].mean (0 )
+            komsu =np .where (np .linalg .norm (V -center_ ,axis =1 )<=KOMSU_R )[0 ]
             if len (komsu )<3 :
                 continue 
             NK =VN [komsu ]
@@ -143,8 +143,8 @@ def main ():
     "normal / PCA duzlem normali. D7'ye BAKILMADI."},
     open ("results/mesh_yon.json","w"),indent =1 )
     print ("\nmakbuz -> results/mesh_yon.json")
-    print ("OKUMA: NIT'te yuksek cikarsa direction darbogazi GEOMETRIYLE kapanir")
-    print ("       ve B-rep'e bagimlilik ortadan kalkar.")
+    print ("OKUMA: NIT'te high cikarsa direction darbogazi GEOMETRIYLE kapanir")
+    print ("       and B-rep'e bagimlilik ortadan kalkar.")
 
 
 if __name__ =="__main__":

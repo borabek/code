@@ -84,4 +84,4 @@ if __name__ =="__main__":
         if ad .startswith ("test_"):
             f ()
             print (f"  GECTI  {ad }")
-    print ("hepsi gecti")
+    print ("all of them gecti")

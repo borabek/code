@@ -83,19 +83,19 @@ def secenekler (P ,D ,i ,cyl ,gate_s ,bask ,komsu_r =KOMSU_R ,eksen_r =EKSEN_R )
         # TEKRAR AYIKLAMA: each other `AYIRT_ACI`'dan yakin yonler AYNI secenektir.
         # Mevcut HER ZAMAN korunur (first sirada oldugu for dogal as kazanir).
     secili ,oz =[],[]
-    for v ,kaynak ,mes in candidates :
+    for v ,src_ ,mes in candidates :
         v =_birim ([v ])[0 ]
         if any (_aci (v ,w )<AYIRT_ACI for w ,_ ,_ in secili ):
             continue 
-        secili .append ((v ,kaynak ,mes ))
-    for v ,kaynak ,mes in secili :
+        secili .append ((v ,src_ ,mes ))
+    for v ,src_ ,mes in secili :
         destek =int (sum (1 for w in D if _aci (v ,w )<AYIRT_ACI ))
         oz .append ([
-        float (kaynak =="mevcut"),
+        float (src_ =="mevcut"),
         _aci (v ,d ),
-        float (kaynak =="komsu"),
-        float (kaynak =="axis"),
-        float (kaynak =="baskin"),
+        float (src_ =="komsu"),
+        float (src_ =="axis"),
+        float (src_ =="baskin"),
         mes ,
         mes /max (diag ,1e-6 ),
         _aci (v ,bask )if bask is not None else 0.0 ,
@@ -118,7 +118,7 @@ def uygula (P ,D ,cyl ,gate_skorlari ,puanla ):
     if len (P )==0 :
         return D 
     bask =baskin_yon (D )
-    yeni =D .copy ()
+    new_ =D .copy ()
     for i in range (len (P )):
         V ,X =secenekler (P ,D ,i ,cyl ,float (gate_skorlari [i ]),bask )
         if len (V )<2 :
@@ -126,5 +126,5 @@ def uygula (P ,D ,cyl ,gate_skorlari ,puanla ):
         s =np .asarray (puanla (X ),float )
         j =int (np .argmax (s ))
         if j !=0 and s [j ]>s [0 ]:
-            yeni [i ]=V [j ]
-    return yeni 
+            new_ [i ]=V [j ]
+    return new_ 

@@ -30,9 +30,9 @@ d6 =d6_record .exam ();k6 =d6_record .yukle (set (d6 ["pidler"]))
 print (f"D6 training {len (k6 )} | D7 measurement {len (k7 )}",flush =True )
 
 
-def kur (kayit ,cy ,ac ,etiketli ,x58f ):
+def kur (rec_ ,cy ,ac ,etiketli ,x58f ):
     v =[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         X =x58f (r )
         P =np .asarray (r ["P"],float );D =np .asarray (r ["Pd"],float )
         if X is None or not len (P ):

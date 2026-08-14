@@ -41,10 +41,10 @@ YAKIN_R =float (os .environ .get ("KY_YAKIN","2.0"))# izgara -> candidate yarica
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
-    for d in veri :
+    for d in data_ :
         if d ["mfg"]not in MARKALAR :
             continue 
         G =np .asarray (d ["G"],float )

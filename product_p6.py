@@ -74,7 +74,7 @@ def secenek_tablosu (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
         return None 
     Ps =np .asarray ([c ["point"]for c in cps_seg ],float )
     Ds =np .asarray ([c ["direction"]for c in cps_seg ],float )
-    P ,D ,kaynak =product_genis .pool (Ps ,Ds ,cyl ,acik )
+    P ,D ,src_ =product_genis .pool (Ps ,Ds ,cyl ,acik )
     if len (P )<2 :
         return None 
     if MESH_HAVUZ :
@@ -97,7 +97,7 @@ def secenek_tablosu (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
             if len (s_ ):
                 P =np .vstack ([P ,Pm [s_ ]])
                 D =np .vstack ([D ,Dm [s_ ]])
-                kaynak =np .concatenate ([kaynak ,np .full (len (s_ ),2 ,int )])
+                src_ =np .concatenate ([src_ ,np .full (len (s_ ),2 ,int )])
     V =np .asarray (V ,float )
     diag =float (np .linalg .norm (V .max (0 )-V .min (0 )))
     mesh =trimesh .Trimesh (V ,np .asarray (F ,np .int64 ),process =False )
@@ -108,11 +108,11 @@ def secenek_tablosu (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     B =product_genis .tanimlayici (P ,D ,cyl ,mesh ,diag )
     # YELPAZE only mesh OLMAYAN adaylara -- egitimdekiyle AYNI rule.
     idx ,YD ,C =YB .secenekler (P ,D ,cyl ,V ,mesh =mesh ,diag =diag ,
-    fan_maske =(np .asarray (kaynak ,int )!=2 ))
+    fan_maske =(np .asarray (src_ ,int )!=2 ))
     if not len (idx ):
         return None 
     Dblok =product_genis .tanimlayici (P [idx ],YD ,cyl ,mesh ,diag )
-    return P ,idx ,YD ,np .hstack ([A [idx ],B [idx ],C ,Dblok ]),kaynak 
+    return P ,idx ,YD ,np .hstack ([A [idx ],B [idx ],C ,Dblok ]),src_ 
 
 
     # SESSIZ GERI DUSME SAYACI. Kol calisamazsa `None` returns and cagiran ESKI yola
@@ -122,7 +122,7 @@ SAYAC ={"cagri":0 ,"p6":0 ,"model_yok":0 ,"aday_yok":0 ,"tablo_yok":0 ,
 "rejim_disi":0 }
 
 
-def _rejim_gecer (pk ,P ,kaynak ):
+def _rejim_gecer (pk ,P ,src_ ):
     """REJIM KAPISI: this parcada P6 mi, DAGITILAN TABAN mi?
 
     MEASURED (real training, brand katlari):
@@ -140,18 +140,18 @@ def _rejim_gecer (pk ,P ,kaynak ):
     r =pk .get ("regime")
     if not r :
         return True 
-    k =np .asarray (kaynak ,int )
+    k =np .asarray (src_ ,int )
     n01 =int ((k !=2 ).sum ())
     nm =int ((k ==2 ).sum ())
-    deger ={"n01":float (n01 ),"mesh_oran":nm /max (n01 ,1 ),
+    val_ ={"n01":float (n01 ),"mesh_oran":nm /max (n01 ,1 ),
     "n_aday":float (len (P )),
     "n_secenek":float (len (P ))}.get (r ["istatistik"])
-    if deger is None :
+    if val_ is None :
         return True 
-    return deger >=float (r ["threshold"])
+    return val_ >=float (r ["threshold"])
 
 
-def cikti (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
+def out_ (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     SAYAC ["cagri"]+=1 
     pk =model_yukle ()
     if pk is None :
@@ -164,15 +164,15 @@ def cikti (V ,F ,probs ,cps_seg ,step_path ,CE ,CT ):
     if tab is None :
         SAYAC ["tablo_yok"]+=1 
         return None 
-    P ,idx ,YD ,X ,kaynak =tab 
-    if not _rejim_gecer (pk ,P ,kaynak ):
+    P ,idx ,YD ,X ,src_ =tab 
+    if not _rejim_gecer (pk ,P ,src_ ):
         SAYAC ["rejim_disi"]+=1 
         return None 
     SAYAC ["p6"]+=1 # BU parcada P6 gercekten kullanildi
     zskor =pk .get ("zskor","ab")
     # EGITIMDEKI SUTUN SIRASI: [donusturulmus 92] + [source gostergesi 3]
     Xd =np .hstack ([p6_decision .donustur (X ,zskor ),
-    p6_decision .kaynak_blok (kaynak [idx ])])
+    p6_decision .kaynak_blok (src_ [idx ])])
     if pk .get ("arm")=="P6_GEO":
     # SEGMENTASYON BLOGU (first 58 column) ATILIR -- egitimdekiyle AYNI dilim.
         ab =int (pk .get ("AB",67 ))

@@ -70,15 +70,15 @@ def main ():
     T .baslik (D )
     EGRI ={}
     for pay in PAYLAR :
-        satir =[]
+        line_ =[]
         for th in TOHUMLAR :
             S ,_ =T .calistir (D ,kol_yap (pay ,th ),f"pay={pay :.3f} t{th }",
             tohumlar =(th ,),ayrinti =False )
-            satir .append (S )
-        hav =float (np .mean ([s ["havuzlanmis"]["tespit"]for s in satir ]))
-        ud =float (np .mean ([s ["_URETICI_DISI_ORT"]for s in satir ]))
-        rob =float (np .mean ([s ["havuzlanmis"]["robot"]for s in satir ]))
-        sd =float (np .std ([s ["havuzlanmis"]["tespit"]for s in satir ]))
+            line_ .append (S )
+        hav =float (np .mean ([s ["havuzlanmis"]["tespit"]for s in line_ ]))
+        ud =float (np .mean ([s ["_URETICI_DISI_ORT"]for s in line_ ]))
+        rob =float (np .mean ([s ["havuzlanmis"]["robot"]for s in line_ ]))
+        sd =float (np .std ([s ["havuzlanmis"]["tespit"]for s in line_ ]))
         g_var =np .unique (grup [keep ])
         n_g =max (2 ,int (round (pay *len (g_var ))))
         EGRI [pay ]={"grup":n_g ,"havuzlanmis":hav ,"deviation":sd ,

@@ -33,7 +33,7 @@ D =[G6 [p ]for p in sorted (set (sv ['pidler']))if p in G6 ]
 yol ={p :s for m ,p ,jf ,s in eligible ()}
 m ,_ =egit ('results/zengin_parite_v3.npz')
 
-VC ={};kayit =[]
+VC ={};rec_ =[]
 for r in D :
     if r ['X']is None or r .get ('XR')is None :continue 
     M =np .hstack ([r ['X'],r ['XR']]).astype (float )
@@ -58,10 +58,10 @@ for r in D :
             ic ,ort =mouth_width (VC [r ['pid']],G [b_ ],Gd [b_ ])
         except Exception :
             ic =ort =0.0 
-        kayit .append ((pe2 [a_ ,b_ ],np .degrees (np .arccos (abs (cos [a_ ,b_ ]))),float (ic ),float (ort )))
-    if len (kayit )>200 :break 
+        rec_ .append ((pe2 [a_ ,b_ ],np .degrees (np .arccos (abs (cos [a_ ,b_ ]))),float (ic ),float (ort )))
+    if len (rec_ )>200 :break 
 
-K =np .array (kayit )
+K =np .array (rec_ )
 yan ,aci ,ic ,ort =K [:,0 ],K [:,1 ],K [:,2 ],K [:,3 ]
 ok =ic >0.1 
 print (f"olculen {len (K )} cift | mouth capi olculebilen {ok .sum ()}")

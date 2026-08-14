@@ -67,16 +67,16 @@ def yon_adaylari (V ,P ):
     ax =[(a ,0.0 ,i )for i ,a in enumerate (pca (V ))]# mesh ekseni
     ax +=[(a ,1.0 ,i )for i ,a in enumerate (pca (P ))]# candidate bulutu ekseni
     out =[]
-    for a ,tur ,sira in ax :
+    for a ,tur ,rank_ in ax :
         a =np .asarray (a ,float );n =np .linalg .norm (a )
         if n <1e-9 :
             continue 
         a =a /n 
-        out .append ((a ,tur ,sira ));out .append ((-a ,tur ,sira ))
+        out .append ((a ,tur ,rank_ ));out .append ((-a ,tur ,rank_ ))
     return out 
 
 
-def oznitelik (a ,tur ,sira ,P ,D ,V ,brep_ax ,diag ):
+def oznitelik (a ,tur ,rank_ ,P ,D ,V ,brep_ax ,diag ):
     uy =np .abs (D @a )if len (D )else np .array ([0.0 ])
     if len (P )>=2 :
         Q =P -P .mean (0 )
@@ -97,16 +97,16 @@ def oznitelik (a ,tur ,sira ,P ,D ,V ,brep_ax ,diag ):
             pass 
     return [float (uy .mean ()),float (np .median (uy )),bu ,float (tur ),
     boy /max (diag ,1e-6 ),dik /max (diag ,1e-6 ),
-    boy /max (dik ,1e-6 ),float (len (P )),diag ,float (sira ),duz ,
+    boy /max (dik ,1e-6 ),float (len (P )),diag ,float (rank_ ),duz ,
     float (uy .std ())]
 
 
-def parca_verisi (kayit ,gate ,cyl ,ob_kok ,match_hungarian ,sadece =None ):
+def parca_verisi (rec_ ,gate ,cyl ,ob_kok ,match_hungarian ,sadece =None ):
     """Her part for (feature, label) -- label: this direction EN COK robot-hazir veren mi."""
     import brep_snap 
     import p3c_axis_selector as P3C 
     X ,y ,grp ,ek =[],[],[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         if sadece is not None and r ["mfg"]not in sadece :
             continue 
         pak =P3C .parca_adaylari (r ,gate ,cyl )
@@ -124,24 +124,24 @@ def parca_verisi (kayit ,gate ,cyl ,ob_kok ,match_hungarian ,sadece =None ):
         if not ad :
             continue 
         skor =[]
-        for (a ,tur ,sira )in ad :
+        for (a ,tur ,rank_ )in ad :
             Dk =np .tile (a ,(len (P ),1 ))
             tp =match_hungarian (P ,Dk ,G ,Gd ,r ["diag"],ROBOT_YANAL ,ROBOT_ACI ,
             False ,signed =True )[0 ]
             skor .append (tp )
         en =max (skor )
-        for (a ,tur ,sira ),s in zip (ad ,skor ):
-            X .append (oznitelik (a ,tur ,sira ,P ,D ,V ,BA ,r ["diag"]))
+        for (a ,tur ,rank_ ),s in zip (ad ,skor ):
+            X .append (oznitelik (a ,tur ,rank_ ,P ,D ,V ,BA ,r ["diag"]))
             y .append (int (s ==en and en >0 ))
             grp .append (pid );ek .append ((pid ,a ))
     return np .asarray (X ,float ),np .asarray (y ,int ),np .asarray (grp ,str ),ek 
 
 
-def uygula (kayit ,gate ,cyl ,ob_kok ,sec ,threshold ,match_hungarian ,f1w ,mfgler =None ):
+def uygula (rec_ ,gate ,cyl ,ob_kok ,sec ,threshold ,match_hungarian ,f1w ,mfgler =None ):
     import brep_snap 
     import p3c_axis_selector as P3C 
     T ,R =[],[]
-    for pid ,r in kayit .items ():
+    for pid ,r in rec_ .items ():
         if mfgler is not None and r ["mfg"]not in mfgler :
             continue 
         G =np .asarray (r ["G"],float );Gd =np .asarray (r ["Gd"],float )
@@ -205,9 +205,9 @@ def main ():
         pickle .dump ({"clf":sec ,"oz":OZ_AD },f )
 
     sv =d6_record .exam ()
-    kayit =d6_record .yukle (set (sv ["pidler"]))
-    dev ={p :r for p ,r in kayit .items ()if r ["mfg"]in DEV_MFG }
-    sin ={p :r for p ,r in kayit .items ()if r ["mfg"]not in DEV_MFG }
+    rec_ =d6_record .yukle (set (sv ["pidler"]))
+    dev ={p :r for p ,r in rec_ .items ()if r ["mfg"]in DEV_MFG }
+    sin ={p :r for p ,r in rec_ .items ()if r ["mfg"]not in DEV_MFG }
     d0t ,d0r =uygula (dev ,gate ,cyl_d6 ,OB_D6 ,None ,0 ,match_hungarian ,f1w )
     print (f"\nDEV secicisiz: tespit {d0t :.4f} robot {d0r :.4f}")
     en ,en_r ,izg =None ,d0r ,{}

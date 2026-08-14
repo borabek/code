@@ -46,53 +46,53 @@ def auc (s ,y ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle ("d6",0 )
-    for d in veri :
+    data_ =yukle ("d6",0 )
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int );d ["_M"]=temel (d )
-    n_sut =veri [0 ]["_M"].shape [1 ]
-    print (f"{len (veri )} part | {n_sut } sutun",flush =True )
+    n_sut =data_ [0 ]["_M"].shape [1 ]
+    print (f"{len (data_ )} part | {n_sut } sutun",flush =True )
     # KAT TOHUMU (2026-08-13). Ilk kosu +0.0097 verdi but single tohumluydu
     # and noise bandindaydi. `Y7_TOHUM` with fold bolunmesi degistirilip
     # same arm tekrarlanir; three tohumda da pozitifse karar verilebilir.
     _tohum =int (os .environ .get ("Y7_TOHUM","1"))
-    rng =np .random .default_rng (_tohum );pay =rng .permutation (len (veri ))%3 
+    rng =np .random .default_rng (_tohum );pay =rng .permutation (len (data_ ))%3 
 
     # --- ONEM: a fold on permutasyon vekili
-    ic =[i for i in range (len (veri ))if pay [i ]!=0 ]
-    dis =[i for i in range (len (veri ))if pay [i ]==0 ]
-    M =np .vstack ([veri [i ]["_M"]for i in ic ])
-    Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+    ic =[i for i in range (len (data_ ))if pay [i ]!=0 ]
+    dis =[i for i in range (len (data_ ))if pay [i ]==0 ]
+    M =np .vstack ([data_ [i ]["_M"]for i in ic ])
+    Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
     r2 =np .random .default_rng (0 )
     poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
     sec =np .concatenate ([poz ,r2 .choice (neg ,min (len (neg ),NEG_KAT *len (poz )),replace =False )])
     m0 =yap ().fit (M [sec ],Y [sec ])
-    MD =np .vstack ([veri [i ]["_M"]for i in dis ]);YD =np .concatenate ([veri [i ]["y"]for i in dis ])
+    MD =np .vstack ([data_ [i ]["_M"]for i in dis ]);YD =np .concatenate ([data_ [i ]["y"]for i in dis ])
     taban_auc =auc (m0 .predict_proba (MD )[:,1 ],YD )
     onem =np .zeros (n_sut )
     for j in range (n_sut ):
         X2 =MD .copy ();X2 [:,j ]=r2 .permutation (X2 [:,j ])
         onem [j ]=taban_auc -auc (m0 .predict_proba (X2 )[:,1 ],YD )
-    sira =np .argsort (-onem )
+    rank_ =np .argsort (-onem )
     print (f"baseline AUC {taban_auc :.4f} | onem hesaplandi ({time .time ()-t0 :.0f} s)",flush =True )
-    print (f"  en onemli 5 sutun: {sira [:5 ].tolist ()}")
+    print (f"  en onemli 5 sutun: {rank_ [:5 ].tolist ()}")
     print (f"  onemi <=0 olan sutun sayisi: {int ((onem <=0 ).sum ())}/{n_sut }")
 
     KOLLAR =[("hepsi",n_sut ),("ilk75",int (n_sut *0.75 )),
     ("ilk50",int (n_sut *0.50 )),("ilk25",int (n_sut *0.25 ))]
     agg ={k :collections .Counter ()for k ,_ in KOLLAR }
     for f_ in range (3 ):
-        ic =[i for i in range (len (veri ))if pay [i ]!=f_ ]
-        dis =[i for i in range (len (veri ))if pay [i ]==f_ ]
+        ic =[i for i in range (len (data_ ))if pay [i ]!=f_ ]
+        dis =[i for i in range (len (data_ ))if pay [i ]==f_ ]
         for ad ,k in KOLLAR :
-            sut =sira [:k ]
-            M =np .vstack ([veri [i ]["_M"][:,sut ]for i in ic ])
-            Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+            sut =rank_ [:k ]
+            M =np .vstack ([data_ [i ]["_M"][:,sut ]for i in ic ])
+            Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
             rr =np .random .default_rng (0 )
             poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
             s_ =np .concatenate ([poz ,rr .choice (neg ,min (len (neg ),NEG_KAT *max (len (poz ),1 )),replace =False )])
             mm =yap ().fit (M [s_ ],Y [s_ ]);del M 
             for i in dis :
-                d =veri [i ]
+                d =data_ [i ]
                 s =mm .predict_proba (d ["_M"][:,sut ])[:,1 ]
                 P ,D =p6_decision .sec (d ["P"],d ["idx"],d ["YD"],s ,KURAL ,nms_mm =NMS )
                 tp ,fp ,fn =match_hungarian (P ,D ,d ["G"],d ["Gd"],d ["diag"],
@@ -101,16 +101,16 @@ def main ():
         print (f"  fold{f_ } bitti ({time .time ()-t0 :.0f} s)",flush =True )
 
     def f1 (c ):return 2 *c ["tp"]/max (2 *c ["tp"]+c ["fp"]+c ["fn"],1 )
-    son ={k :f1 (agg [k ])for k ,_ in KOLLAR }
-    print (f"\n=== TABAN (hepsi) {son ['hepsi']:.4f} ===")
+    last_ ={k :f1 (agg [k ])for k ,_ in KOLLAR }
+    print (f"\n=== TABAN (hepsi) {last_ ['hepsi']:.4f} ===")
     for ad ,k in KOLLAR [1 :]:
-        fark =son [ad ]-son ["hepsi"]
-        print (f"  {ad :<8}({k :>3} sutun) {son [ad ]:.4f}   {fark :+.4f}"
+        fark =last_ [ad ]-last_ ["hepsi"]
+        print (f"  {ad :<8}({k :>3} sutun) {last_ [ad ]:.4f}   {fark :+.4f}"
         +("  <- KAPI GECTI"if fark >=0.01 else ""))
     json .dump ({"damga":makbuz_hash .damga (),"kat_tohumu":_tohum ,
     "n_sutun":n_sut ,
     "taban_auc":taban_auc ,"onemsiz_sutun":int ((onem <=0 ).sum ()),
-    "toplam":son ,
+    "toplam":last_ ,
     "not":"Oznitelik secimi, permutasyon onemi. TANIDIK brand "
     "(rastgele katlar). D7'ye BAKILMADI."},
     open (f"results/oznitelik_secimi_t{_tohum }.json","w"),indent =1 )

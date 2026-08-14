@@ -191,7 +191,7 @@ def main ():
     ap .add_argument ("--remesh-target",type =int ,default =6000 )
     ap .add_argument ("--icp",action ="store_true",help ="FAZ 1: ICP-refined hizalama ile de eslestir; coarse vs ICP F1 karsilastir")
     ap .add_argument ("--skip-parts",nargs ="+",default =[],help ="hang eden patolojik parcalari atla (step_to_mesh/remesh takilan)")
-    ap .add_argument ("--verbose-parts",action ="store_true",help ="her parcayi islemeden once pid bas (hang teshisi)")
+    ap .add_argument ("--verbose-parts",action ="store_true",help ="each parcayi islemeden before pid head (hang teshisi)")
     ap .add_argument ("--inward-mm",type =float ,default =0.0 ,
     help ="shift each predicted CP INWARD along its own insertion axis before matching. "
     "MEASURED 2026-07-22: the manufacturer defines its ConnectionPoint at the "

@@ -331,7 +331,7 @@ def main ():
         if len (alt )>=10 :
             kaydet (f"  {mad } disarida",alt ,(tr_mfg !=k )&hepsi ,"uretici_disi")
 
-    print ("-- 3. GORULMEMIS URUN SERISI (n=7, daha kolay axis) "+"-"*39 )
+    print ("-- 3. GORULMEMIS URUN SERISI (n=7, more easy axis) "+"-"*39 )
     te =collections .Counter (r ["pid"][:ONEK ]for r in DER )
     trs =collections .Counter (p [:ONEK ]for p in np .unique (tr_pid ))
     for s_ in sorted (k for k in te if te [k ]>=10 and trs [k ]>=30 ):
@@ -350,14 +350,14 @@ def main ():
     for k ,v in ozet .items ():
         print (f"  {k :<22}{v :.4f}")
 
-    cikti ={"olcum_tarihi":"2026-08-01","gate":{
+    out_ ={"olcum_tarihi":"2026-08-01","gate":{
     "n_feat":int (dag ["n_feat"]),"yonlendirmeli":bool (yonlendirmeli ),
     "esik_cokus":float (dag .get ("esik_cokus",0 ))if yonlendirmeli else None ,
     "topo_r":dag .get ("topo_r")},"bolmeler":SON ,"ozet":ozet ,
     "not":("Tum sayilar TEK kosudan; measurement urunun kendi karar yolunu (wire_gate.decision_score "
     "+ decision_mask) kullanir, taklit etmez. LOCKED harcanmadi.")}
     with io .open ("results/headline.json","w",encoding ="utf-8")as f :
-        json .dump (cikti ,f ,indent =1 ,ensure_ascii =False )
+        json .dump (out_ ,f ,indent =1 ,ensure_ascii =False )
     print ("\nmakbuz -> results/headline.json")
 
     if a .yaz :
@@ -394,7 +394,7 @@ def main ():
         "2026-08-01'de kollari karistirmisti (tespit yeni koldan, robot eskisinden).")
         with io .open ("cp_config.json","w",encoding ="ascii")as f :
             json .dump (cfg ,f ,indent =1 ,ensure_ascii =True )
-        print ("cp_config.current_product.headline_F1 GUNCELLENDI (uretilmis, elle degil)")
+        print ("cp_config.current_product.headline_F1 GUNCELLENDI (uretilmis, elle not)")
 
 
 if __name__ =="__main__":

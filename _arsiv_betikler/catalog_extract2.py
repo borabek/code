@@ -108,7 +108,7 @@ def main ():
             fh .write (f"{a }\t{t }\n")
 
     print (f"YENI KLEMENS: {len (keep )} -> {args .out }")
-    print ("  zaten elimizde:",stats ["zaten elimizde"],
+    print ("  already elimizde:",stats ["zaten elimizde"],
     "| kara listede:",stats ["kara listede"])
     print ("  aile dagilimi:",", ".join (
     f"{k .split (':')[1 ]}:{v }"for k ,v in stats .most_common (40 )

@@ -101,8 +101,8 @@ def main ():
     t0 =time .time ()
     import pickle 
     import trimesh 
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    print (f"{len (veri )} part",flush =True )
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    print (f"{len (data_ )} part",flush =True )
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     # ONBELLEK: isin atma part basina ~3 s suruyor (tum cluster ~25 dk).
     # Betimleyiciler GT'siz and modelden bagimsiz oldugu for a times
@@ -115,7 +115,7 @@ def main ():
         print (f"onbellekten okundu: {n } part",flush =True )
         return _rapor (ist ,n )
     n =0 
-    for d in veri :
+    for d in data_ :
         mf =f"{MESH }/{d ['pid']}.npz"
         if not os .path .exists (mf ):
             continue 
@@ -202,8 +202,8 @@ def _rapor (ist ,n ):
     "recall >= 0.95. D7'ye BAKILMADI."},
     open (f"results/konum_havuzu_{KUME }.json","w"),indent =1 )
     print (f"\nmakbuz -> results/konum_havuzu_{KUME }.json")
-    print ("OKUMA: recall >= 0.95 iken 'gereken AUC' 0.705'in ALTINA inen bir")
-    print ("       satir varsa arm CANLI; yoksa pool kucultme bu yoldan olmaz")
+    print ("OKUMA: recall >= 0.95 iken 'gereken AUC' 0.705'in ALTINA inen a")
+    print ("       row varsa arm CANLI; otherwise pool kucultme this yoldan olmaz")
 
 
 if __name__ =="__main__":

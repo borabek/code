@@ -56,7 +56,7 @@ def main ():
         time .sleep (3 )
 
         if giris_var_mi (page ):
-            print ("OTURUM ZATEN ACIK",flush =True )
+            print ("OTURUM ZATEN OPEN",flush =True )
         else :
             print ("\n>>> ACILAN PENCEREDE GIRIS YAP. Bekliyorum (en fazla 10 dk)...",flush =True )
             t0 =time .time ()
@@ -112,7 +112,7 @@ def main ():
         with io .open ("results/wscad_kesif.json","w",encoding ="utf-8")as f :
             json .dump (rapor ,f ,indent =1 ,ensure_ascii =False )
         print ("\nmakbuz -> results/wscad_kesif.json (+ .html, .png)",flush =True )
-        print ("PENCERE ACIK BIRAKILIYOR (60s) -- sonra kapanir, oturum profilde KALIR",flush =True )
+        print ("PENCERE OPEN BIRAKILIYOR (60s) -- after kapanir, oturum profilde KALIR",flush =True )
         time .sleep (60 )
         ctx .close ()
 

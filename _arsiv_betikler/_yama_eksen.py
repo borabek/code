@@ -30,13 +30,13 @@ anchor =("    allc = [dict(c, _mid=i) for i, lst in enumerate(cp_lists) for c in
 +"        p = np.asarray(c[\"point\"], float)"+N 
 +"        hit = next((k for k in kept if np.linalg.norm(p - np.asarray(k[\"point\"], float)) <= cluster_mm), None)"+N )
 
-yeni =("    allc = [dict(c, _mid=i) for i, lst in enumerate(cp_lists) for c in lst]"+N 
+new_ =("    allc = [dict(c, _mid=i) for i, lst in enumerate(cp_lists) for c in lst]"+N 
 +"    allc.sort(key=lambda c: -float(c.get(\"confidence\", 0.0)))"+N 
 +"    # EKSEN-FARKINDALIKLI HAVUZLAMA (cp_config.robot_eksen_havuz): iki candidate ayni"+N 
 +"    # aciklktan sayilir -> DIK mesafe <= yanal_mm VE eksenler hizali (<=20 derece);"+N 
 +"    # DERINLIK farki serbest. Gerekce: tez CP'yi AGIZDA (v_o), manufacturer KONTAKTA"+N 
-+"    # tanimlar; uyeler ayni kanali farkli derinlikte isaretleyebilir. Puanlayici"+N 
-+"    # (big_arbiter.greedy) zaten boyle calisiyor -- bu, urunun kendi icindeki"+N 
++"    # tanimlar; uyeler same kanali different derinlikte isaretleyebilir. Puanlayici"+N 
++"    # (big_arbiter.greedy) already boyle calisiyor -- this, urunun own icindeki"+N 
 +"    # tutarsizligi kapatir. Olculdu: birlesme %67.7 -> %70.7; ayrica lateral 3mm"+N 
 +"    # siniri KOMSU KUTUPLARI (adim 3.5-6mm) duz 5mm kureden daha iyi korur."+N 
 +"    _eks = bool(_cfg.get(\"robot_eksen_havuz\", False))"+N 
@@ -60,6 +60,6 @@ yeni =("    allc = [dict(c, _mid=i) for i, lst in enumerate(cp_lists) for c in l
 +"            hit = next((k for k in kept if np.linalg.norm(p - np.asarray(k[\"point\"], float)) <= cluster_mm), None)"+N )
 
 assert anchor in s ,"KALIP YOK"
-s =s .replace (anchor ,yeni ,1 )
+s =s .replace (anchor ,new_ ,1 )
 io .open (P ,"w",encoding ="utf-8",newline ="").write (s )
 print ("robot_cp._vote2 axis-farkindalikli hale getirildi (bayrakla)")

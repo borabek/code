@@ -65,26 +65,26 @@ def auc (s ,y ):
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar }",flush =True )
+    print (f"{len (data_ )} part | katlar {katlar }",flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_s =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_s =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -94,19 +94,19 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         y =d ["y"]
         if y .sum ()==0 :
             continue 
         s =np .asarray (s ,float )
-        sira =np .argsort (-s )
-        yer =np .where (y [sira ]==1 )[0 ]# dogrularin 0-tabanli order
+        rank_ =np .argsort (-s )
+        yer =np .where (y [rank_ ]==1 )[0 ]# dogrularin 0-tabanli order
         k =int (len (d ["G"]))
         a =ist [d ["mfg"]]
         a ["gt"].append (k )
@@ -135,8 +135,8 @@ def main ():
         f"{r ['sira_ilk']:>10.0f}{r ['sira_son']:>10.0f}"
         f"{r ['ustk']:>8.3f}{r ['gereken_auc']:>13.4f}")
     print ("\nOKUMA: 'gereken_auc' = ilk-k'nin dogrularla dolmasi icin gereken")
-    print ("       kaba AUC (buyukluk mertebesi). auc_secici ile arasindaki")
-    print ("       fark, 0.75'e giden mesafenin TEK sayilik ifadesidir.")
+    print ("       kaba AUC (buyukluk mertebesi). auc_secici with arasindaki")
+    print ("       difference, 0.75'e giden mesafenin TEK sayilik ifadesidir.")
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
     "not":"ADAY duzeyinde ayirt edicilik (mesh tepesi DEGIL). "
     "Gorulmemis brand katlari. D7'ye BAKILMADI."},

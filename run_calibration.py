@@ -68,7 +68,7 @@ def secim_ve_oznitelik (d ,pk ):
     if not len (P ):
         return P ,D ,np .zeros ((0 ,len (OZ_AD )))
     smax =float (s .max ())if len (s )else 1.0 
-    sira =np .argsort (np .argsort (-s ))/max (len (s )-1 ,1 )
+    rank_ =np .argsort (np .argsort (-s ))/max (len (s )-1 ,1 )
     Pt ,Dt =p6_decision .sec_ayrintili (
     d ["P"],d ["idx"],d ["YD"],s ,tuple (pk ["tohum_kural"]),
     nms_mm =float (pk ["tohum_nms"]))[:2 ]
@@ -82,7 +82,7 @@ def secim_ve_oznitelik (d ,pk ):
         hem =float (sj .max ()-np .median (sj ))if len (sj )>1 else 0.0 
         # secilen secenegin satiri: skoru sc[r] which is
         t =j [int (np .argmin (np .abs (sj -sc [r ])))]
-        X .append ([sc [r ],sc [r ]/max (smax ,1e-9 ),float (sira [t ]),hem ,
+        X .append ([sc [r ],sc [r ]/max (smax ,1e-9 ),float (rank_ [t ]),hem ,
         float (sj .max ()-sj .min ())if len (sj )>1 else 0.0 ,
         float (len (sj )),float (kb [t ,1 ]),float (kb [t ,6 ]),
         float (D_blok [t ,3 ]),float (D_blok [t ,5 ]),
@@ -109,13 +109,13 @@ def egri (S ,Y ):
 def main ():
     t0 =time .time ()
     pk =pickle .load (open (PAKET ,"rb"))
-    veri =[]
+    data_ =[]
     for cluster in os .environ .get ("P6_KUME","tam,d6").split (","):
-        veri +=yukle (cluster .strip (),int (os .environ .get ("P6_TR","0")))
-    print (f"{len (veri )} part ({time .time ()-t0 :.0f} s)",flush =True )
+        data_ +=yukle (cluster .strip (),int (os .environ .get ("P6_TR","0")))
+    print (f"{len (data_ )} part ({time .time ()-t0 :.0f} s)",flush =True )
 
     X ,Y ,M =[],[],[]
-    for i ,d in enumerate (veri ,1 ):
+    for i ,d in enumerate (data_ ,1 ):
         P ,D ,x =secim_ve_oznitelik (d ,pk )
         if not len (P ):
             continue 
@@ -124,7 +124,7 @@ def main ():
         Y .append (y )
         M +=[d ["mfg"]]*len (y )
         if i %600 ==0 :
-            print (f"  {i }/{len (veri )} ({time .time ()-t0 :.0f} s)",flush =True )
+            print (f"  {i }/{len (data_ )} ({time .time ()-t0 :.0f} s)",flush =True )
     X =np .vstack (X )
     Y =np .concatenate (Y )
     M =np .asarray (M )
@@ -152,7 +152,7 @@ def main ():
         Sk [dis ]=m .predict_proba (X [dis ])[:,1 ]
     kd =np .isin (M ,katlar )
     if not kd .any ():
-        sys .exit ("fold-disi tahmin YOK -- daha buyuk cluster ile kos")
+        sys .exit ("fold-disi prediction YOK -- more large cluster with kos")
     ks ,kk ,kc =egri (Sk [kd ],Y [kd ])
     # HAM SKOR kiyasi AYNI fold-disi altkumede yapilmali; tum veride yapmak
     # kalibre modeli haksiz avantajli/dezavantajli gosterirdi.
@@ -170,10 +170,10 @@ def main ():
         out [str (h )]={"ham_kapsama":ha ,"kalibre_kapsama":kb_ }
         print (f"{h :>7.2f}{ha :>14.4f}{kb_ :>18.4f}")
 
-    son =HistGradientBoostingClassifier (
+    last_ =HistGradientBoostingClassifier (
     max_iter =300 ,learning_rate =0.06 ,max_leaf_nodes =31 ,
     l2_regularization =1.0 ,random_state =0 ).fit (X ,Y )
-    pk ["kalibrasyon"]={"model":son ,"oz_ad":OZ_AD }
+    pk ["kalibrasyon"]={"model":last_ ,"oz_ad":OZ_AD }
     with open (PAKET ,"wb")as f :
         pickle .dump (pk ,f )
     json .dump ({"damga":makbuz_hash .damga (),"n_tahmin":int (len (Y )),

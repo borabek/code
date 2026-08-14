@@ -125,11 +125,11 @@ def main ():
     bask =kotu .most_common (1 )[0 ][0 ]if tk else "-"
     print (f"\nKOTU YARIDA BASKIN KOVA: {bask }")
     if bask =="GATE_REDDI":
-        print ("  -> G2/G3/G4 (gate kollari) GERCEKTEN ise yarayabilir; Gun 1 plani GECERLI")
+        print ("  -> G2/G3/G4 (gate kollari) GERCEKTEN whereas yarayabilir; Gun 1 plani VALID")
     elif bask =="ADAY_YOK":
         print ("  -> gate kollari TAVANA CARPAR; dogrudan G5'e (TEMSIL) gecilmeli")
     else :
-        print ("  -> cozunurluk/metrik kovasi baskin; G2-G4'ten once o incelenmeli")
+        print ("  -> cozunurluk/metrik kovasi baskin; G2-G4'ten before that incelenmeli")
 
     with io .open (MAKBUZ ,"w",encoding ="utf-8")as f :
         json .dump ({m :{"F1":f1 ,"tp":u ["tp"],"fp":u ["fp"],"fn":dict (u ["fn"]),

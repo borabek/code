@@ -88,7 +88,7 @@ def main ():
     print (f"\n{n_parts } training parcasi tarandi -> {len (rows )} anlasmazlik bolgesi")
     print (f"  part basina ortalama {len (rows )/max (n_parts ,1 ):.1f}")
     top =sorted (per_part .items (),key =lambda kv :-kv [1 ])[:8 ]
-    print ("  en cok anlasmazlik: "+", ".join (f"{k }({v })"for k ,v in top ))
+    print ("  at most anlasmazlik: "+", ".join (f"{k }({v })"for k ,v in top ))
     print (f"  -> {a .out }")
 
 

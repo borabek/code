@@ -47,11 +47,11 @@ def bilesenler (P ,D ,g ,gd ):
 
 
 def main ():
-    kayit =os .environ .get ("AYR_KAYIT","results/_der_yeni.pkl")
+    rec_ =os .environ .get ("AYR_KAYIT","results/_der_yeni.pkl")
     cluster =os .environ .get ("AYR_KUME","results/val_kumesi.json")
     pids ={str (p )for p in json .load (open (cluster ))["pidler"]}
-    R =[r for r in pickle .load (open (kayit ,"rb"))if str (r ["pid"])in pids ]
-    print (f"kayit {kayit } | cluster {cluster } | part {len (R )}",flush =True )
+    R =[r for r in pickle .load (open (rec_ ,"rb"))if str (r ["pid"])in pids ]
+    print (f"kayit {rec_ } | cluster {cluster } | part {len (R )}",flush =True )
 
     say =collections .Counter ()
     n_gt =0 
@@ -112,7 +112,7 @@ def main ():
     f"(+{(ceiling ['yalniz_yanal']-r_tam )/max (n_gt ,1 ):.4f})")
     print (f"YALNIZ ACI duzelirse     {ceiling ['yalniz_aci']/max (n_gt ,1 ):.4f}  "
     f"(+{(ceiling ['yalniz_aci']-r_tam )/max (n_gt ,1 ):.4f})")
-    json .dump ({"damga":makbuz_hash .damga (),"kayit":kayit ,"cluster":cluster ,
+    json .dump ({"damga":makbuz_hash .damga (),"kayit":rec_ ,"cluster":cluster ,
     "n_gt":n_gt ,"sayim":dict (say ),
     "robot_recall":r_tam /max (n_gt ,1 ),
     "yalniz_yanal_tavani":ceiling ["yalniz_yanal"]/max (n_gt ,1 ),

@@ -81,27 +81,27 @@ def kutu_maskesi (Pk ,g ,gn ,lateral =None ,axial =None ):
 def main ():
     t0 =time .time ()
     import trimesh 
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar } | konum<= {MAKS_KONUM } "
+    print (f"{len (data_ )} part | katlar {katlar } | konum<= {MAKS_KONUM } "
     f"direction<= {MAKS_YON }",flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_s =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_s =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -111,13 +111,13 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
     n =0 
     atlanan =collections .Counter ()
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None :
             continue 
         mf =f"{MESH }/{d ['pid']}.npz"
@@ -131,7 +131,7 @@ def main ():
             continue 
         ag =trimesh .Trimesh (vertices =V ,faces =F ,process =False )
         isinci =trimesh .ray .ray_triangle .RayMeshIntersector (ag )
-        merkez =V .mean (0 )
+        center_ =V .mean (0 )
 
         G =np .asarray (d ["G"],float )
         Gn =_birim (np .asarray (d ["Gd"],float ))
@@ -197,7 +197,7 @@ def main ():
                 say ["tup_hava"]+=1 
 
                 # --- ISARET KURALI 2: kuresel weight merkezinden disari
-            r =kok -merkez 
+            r =kok -center_ 
             v2 =e *(1.0 if (e @r )>=0 else -1.0 )
             if np .degrees (np .arccos (
             np .clip (float (v2 @Gn [j ]),-1 ,1 )))<=K .ACI :
@@ -212,7 +212,7 @@ def main ():
             print (f"  {n } part ({time .time ()-t0 :.0f} s)",flush =True )
 
     print (f"\n{n } part | atlanan {dict (atlanan )}")
-    print ("GT ile ESLESEN adaylarda direction dogrulugu (CARPIM kutusu)")
+    print ("GT with ESLESEN adaylarda direction dogrulugu (CARPIM kutusu)")
     print (f"{'brand':<7}{'GT':>7}"+"".join (f"{k :>13}"for k in KOLLAR ))
     out ={}
     for m_ in sorted (ist ,key =lambda x :-sum (ist [x ]["gt"])):

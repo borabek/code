@@ -103,13 +103,13 @@ def main ():
     print (f"URUN kuralinin sectigi: MAE {np .abs (n_urun -KGT ).mean ():.2f} "
     f"(K regresoru {error .mean ():.2f})")
 
-    def puanla (kural ,kk =None ):
+    def puanla (rule_ ,kk =None ):
         det ,rob ,gg =[],[],[]
         for n_ ,d_ in enumerate (R ):
             r =d_ ["r"];sk =d_ ["skor"];P =d_ ["P"];Xr =d_ ["X"]
-            if kural =="urun":
+            if rule_ =="urun":
                 m =(sk >=0.5 *max (sk .max (),1e-9 ))&(sk >=0.25 )
-            elif kural =="topk":
+            elif rule_ =="topk":
                 K =int (max (1 ,round (kk [n_ ])))
                 m =np .zeros (len (sk ),bool )
                 m [np .argsort (sk )[::-1 ][:K ]]=True 

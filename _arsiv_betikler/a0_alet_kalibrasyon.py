@@ -163,7 +163,7 @@ def main ():
     print (f"      mouth_width deviation %{100 *mw_max :.0f} (<=%10 -> {'GECTI'if g2 else 'KALDI'})")
     print (f"\nHUKUM: fiziksel bayraklar -> {rapor ['kill']['sonuc']}")
     if not (g1 and g2 ):
-        print ("  B1-B4'te bu bayraklar RED KRITERI OLAMAZ; yalniz raporlanir.")
+        print ("  B1-B4'te this bayraklar RED KRITERI OLAMAZ; only raporlanir.")
     with io .open ("results/a0_alet_kalibrasyon.json","w",encoding ="utf-8")as f :
         json .dump (rapor ,f ,indent =1 ,ensure_ascii =False )
     print ("receipt -> results/a0_alet_kalibrasyon.json")

@@ -28,7 +28,7 @@ print (f"selector egitildi: {len (X )} satir, dogru candidate %{100 *y .mean ():
 imp =sorted (zip (clf .feature_importances_ ,["ic_cap","ort_cap","ileri","geri","maks","min",
 "n_ileri","n_geri","mevcut_uyum","eksen_hizali","boy/cap","aday_tipi"]),
 reverse =True )
-print ("  en onemli 4 oznitelik:",[f"{n } {v :.2f}"for v ,n in imp [:4 ]])
+print ("  most onemli 4 feature:",[f"{n } {v :.2f}"for v ,n in imp [:4 ]])
 
 sv =json .load (io .open ('results/d5_4_sinav_kumesi.json',encoding ='utf-8'))
 G6 ={r ['pid']:r for r in pickle .load (open ('results/_der_yeni_g6.pkl','rb'))}

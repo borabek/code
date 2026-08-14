@@ -40,7 +40,7 @@ def main ():
             error +=1 ;continue 
         try :
             V ,F =obj_oku (o )
-            k =geometri_anahtar .anahtar (V ,F )
+            k =geometri_anahtar .key_ (V ,F )
         except Exception :
             error +=1 ;continue 
         if k in yasak :

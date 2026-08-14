@@ -48,7 +48,7 @@ def main ():
     t_lo =cfg .get ("robot_wire_gate_threshold")
     t_hi =cfg .get ("robot_wire_gate_threshold_highcp")
     print (f"3) threshold kaynagi       : cp_config {t_lo }/{t_hi }")
-    print ("   (measurement betikleri bu degerleri KENDI secmemeli; buradan okumali)")
+    print ("   (measurement betikleri this degerleri KENDI secmemeli; buradan okumali)")
 
     import wire_gate 
     m =wire_gate ._load (wire_gate .MODEL_PATH )
@@ -66,7 +66,7 @@ def main ():
         for f in fails :
             print (f"  - {f }")
         return 1 
-    print ("PARITE TAMAM -- olculen urun ile dagitilan urun ayni.")
+    print ("PARITE TAMAM -- olculen urun with dagitilan urun same.")
     return 0 
 
 

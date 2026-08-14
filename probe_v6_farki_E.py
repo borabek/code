@@ -135,10 +135,10 @@ def egit (tr ):
     M .shape ,float (Y .mean ()))
 
 
-def olc (model ,veri ,tip ,e ):
+def olc (model ,data_ ,tip ,e ):
     rob =collections .defaultdict (lambda :[0 ,0 ,0 ])
     tes =[]
-    for d in veri :
+    for d in data_ :
         s =np .asarray (wire_gate .decision_score (model ,d ["X"]),float )
         k =(s >=e )if tip =="mutlak"else maske (s ,e [0 ],e [1 ])
         P ,D =(d ["P"][k ],d ["D"][k ])if k .any ()else (d ["P"][:0 ],d ["D"][:0 ])
@@ -167,10 +167,10 @@ def sinav_kur (segtek ):
         if not (f .startswith ("d7_")and f .endswith (".npz")):
             continue 
         te .append (f [3 :-4 ])
-    kayit =K .yukle (te )
+    rec_ =K .yukle (te )
     out =[]
     for pid in te :
-        r =kayit [pid ]
+        r =rec_ [pid ]
         z =np .load (f"{OZ }/d7_{pid }.npz")
         m =(z ["kaynak"]==0 )if segtek else np .ones (len (z ["kaynak"]),bool )
         if int (m .sum ())<2 :
@@ -183,7 +183,7 @@ def sinav_kur (segtek ):
 
 
 def main ():
-    sonuc ={}
+    res_ ={}
     modeller ={}
     for ad ,segtek in (("TEZ-SAF",True ),("GENISLETILMIS",False )):
         tr ,dev =kume_kur (segtek )
@@ -200,13 +200,13 @@ def main ():
         tip ,e ,dr =en 
         te =sinav_kur (segtek )
         tr_ =olc (m ,te ,tip ,e )
-        sonuc [ad ]={"secilen_kural":f"{tip } {e }","D6_robot":dr ["robot"],
+        res_ [ad ]={"secilen_kural":f"{tip } {e }","D6_robot":dr ["robot"],
         "D7":tr_ }
         print (f"  SECILEN (D6'da) {tip } {e } -> D7 robot **{tr_ ['robot']:.4f}** | "
         f"tespit {tr_ ['tespit']:.4f} | makro {tr_ ['makro']:.4f} | "
         f"en kotu {tr_ ['en_kotu']:.4f}",flush =True )
-    a =sonuc ["TEZ-SAF"]["D7"]["robot"]
-    b =sonuc ["GENISLETILMIS"]["D7"]["robot"]
+    a =res_ ["TEZ-SAF"]["D7"]["robot"]
+    b =res_ ["GENISLETILMIS"]["D7"]["robot"]
     print (f"\nORNEKLEM-DISI ESIKLE:")
     print (f"  TEZ-SAF        {a :.4f}")
     print (f"  GENISLETILMIS  {b :.4f}   (fark {b -a :+.4f})")
@@ -214,13 +214,13 @@ def main ():
     print ("\nKARAR: "+("GENISLETILMIS HAVUZ KAZANDI -- dagitilabilir"
     if b >0.2029 else 
     "urunu GECEMEDI -- dagitilmaz"))
-    json .dump ({"damga":makbuz_hash .damga (),"sonuc":sonuc ,"urun":0.2029 ,
+    json .dump ({"damga":makbuz_hash .damga (),"sonuc":res_ ,"urun":0.2029 ,
     "not":"Esik D6'da secildi (D7'den brand olarak AYRIK), training "
     "korpusu D6'yi ICERMEZ. D7 brand-disi, MIKRO."},
     open ("results/v6_farki_E.json","w"),indent =1 )
     with open ("results/v6_farki_E_modeller.pkl","wb")as f :
         pickle .dump (modeller ,f )
-    print ("modeller -> results/v6_farki_E_modeller.pkl")
+    print ("models -> results/v6_farki_E_modeller.pkl")
     print ("receipt -> results/v6_farki_E.json")
 
 

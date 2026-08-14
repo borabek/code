@@ -189,7 +189,7 @@ def main ():
             YSOZ =pickle .load (f )
         import c4_yon_secici as _c4 # noqa: F401  (only KAYNAK for)
         YON =YSOZ 
-        print ("direction sozlugu yuklendi (birlesik measurement icin)")
+        print ("direction sozlugu yuklendi (birlesik measurement for)")
 
     def puanla (marj ,alt ,yon_uygula =False ,yon_marj =0.05 ,yon_skor =None ):
         rob ,det ,gg =[],[],[]

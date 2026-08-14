@@ -123,11 +123,11 @@ def grup_bootstrap (satirlar ,gruplar ,f1_fn ,n =4000 ,seed =0 ):
     grup_ind =collections .defaultdict (list )
     for i ,g in enumerate (gruplar ):
         grup_ind [g ].append (i )
-    anahtar =list (grup_ind )
+    key_ =list (grup_ind )
     v =[]
     for _ in range (n ):
-        sec =rng .integers (0 ,len (anahtar ),len (anahtar ))
-        idx =[i for k in sec for i in grup_ind [anahtar [k ]]]
+        sec =rng .integers (0 ,len (key_ ),len (key_ ))
+        idx =[i for k in sec for i in grup_ind [key_ [k ]]]
         v .append (f1_fn ([satirlar [i ]for i in idx ]))
     v =np .asarray (v ,float )
     return float (v .mean ()),float (np .percentile (v ,2.5 )),float (np .percentile (v ,97.5 ))

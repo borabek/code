@@ -94,16 +94,16 @@ def main ():
         keep =(tr_mfg !=k )&~np .isin (tr_grp ,list (tg ))
         clf =RandomForestClassifier (n_estimators =400 ,min_samples_leaf =3 ,n_jobs =-1 ,
         random_state =0 ).fit (d ["X"][keep ][:,:18 ],d ["y"][keep ])
-        for kural in ("sabit",(0.5 ,0.25 ),(0.5 ,0.20 )):
+        for rule_ in ("sabit",(0.5 ,0.25 ),(0.5 ,0.20 )):
             det ,rob =[],[]
             for r in icinde :
                 P =np .zeros ((0 ,3 ));Pd =np .zeros ((0 ,3 ))
                 if r ["X"]is not None :
                     s =clf .predict_proba (r ["X"])[:,1 ]
-                    if kural =="sabit":
+                    if rule_ =="sabit":
                         m =s >=(THR ["cok"]if r ["is_hi"]else THR ["dusuk"])
                     else :
-                        o_ ,t_ =kural 
+                        o_ ,t_ =rule_ 
                         m =(s >=o_ *max (float (s .max ()),1e-9 ))&(s >=t_ )
                     if m .any ():
                         P =r ["P"][m ];Pd =r ["Pd"][m ]
@@ -111,13 +111,13 @@ def main ():
                 det .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],0.0 ,180.0 ,True ))
                 rob .append ((kk ,)+esle (P ,Pd ,r ["G"],r ["Gd"],r ["diag"],2.0 ,10.0 ,False ))
             p_ ,r_ =pr (det )
-            nm ="sabit (mevcut)"if kural =="sabit"else f"goreli {kural [0 ]} + baseline {kural [1 ]}"
+            nm ="sabit (mevcut)"if rule_ =="sabit"else f"goreli {rule_ [0 ]} + baseline {rule_ [1 ]}"
             print (f"{ad +' ('+str (len (icinde ))+')':<18}{nm :<26}{f1w (det ):>9.4f}"
             f"{f1w (rob ):>9.4f}{p_ :>9.3f}{r_ :>9.3f}",flush =True )
             out .setdefault (ad ,{})[nm ]={"tespit":float (f1w (det )),"robot":float (f1w (rob ))}
         print ()
 
-    print ("KARAR:")
+    print ("DECISION:")
     ok =True 
     for ad ,v in out .items ():
         sb =v ["sabit (mevcut)"]["tespit"]

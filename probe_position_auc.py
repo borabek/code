@@ -68,37 +68,37 @@ def auc (s ,y ):
 
 def konum_topla (s ,y ,idx ):
     """each benzersiz konum for (max skor, correct mu)."""
-    sira =np .argsort (idx ,kind ="stable")
-    idx_s ,s_s ,y_s =idx [sira ],s [sira ],y [sira ]
-    sinir =np .flatnonzero (np .diff (idx_s ))+1 
-    ss =np .split (s_s ,sinir )
-    yy =np .split (y_s ,sinir )
+    rank_ =np .argsort (idx ,kind ="stable")
+    idx_s ,s_s ,y_s =idx [rank_ ],s [rank_ ],y [rank_ ]
+    bound_ =np .flatnonzero (np .diff (idx_s ))+1 
+    ss =np .split (s_s ,bound_ )
+    yy =np .split (y_s ,bound_ )
     return (np .asarray ([q .max ()for q in ss ]),
     np .asarray ([int (q .max ())for q in yy ]))
 
 
 def main ():
     t0 =time .time ()
-    veri =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
-    for d in veri :
+    data_ =yukle (KUME ,int (os .environ .get ("P6_TR","0")))
+    for d in data_ :
         d ["y"]=np .asarray (d ["y"],int )
         d ["_M"]=temel (d )
-    brand =collections .Counter (d ["mfg"]for d in veri )
+    brand =collections .Counter (d ["mfg"]for d in data_ )
     katlar =[m for m ,n in brand .items ()if n >=KAT_MIN ]
-    print (f"{len (veri )} part | katlar {katlar }",flush =True )
+    print (f"{len (data_ )} part | katlar {katlar }",flush =True )
 
-    oof =[None ]*len (veri )
+    oof =[None ]*len (data_ )
     for b in katlar :
-        ic =[i for i ,d in enumerate (veri )if d ["mfg"]!=b ]
-        dis =[i for i ,d in enumerate (veri )if d ["mfg"]==b ]
-        n_s =sum (len (veri [i ]["y"])for i in ic )
-        M =np .empty ((n_s ,veri [0 ]["_M"].shape [1 ]),np .float32 )
+        ic =[i for i ,d in enumerate (data_ )if d ["mfg"]!=b ]
+        dis =[i for i ,d in enumerate (data_ )if d ["mfg"]==b ]
+        n_s =sum (len (data_ [i ]["y"])for i in ic )
+        M =np .empty ((n_s ,data_ [0 ]["_M"].shape [1 ]),np .float32 )
         o =0 
         for i in ic :
-            m_ =veri [i ]["_M"]
+            m_ =data_ [i ]["_M"]
             M [o :o +len (m_ )]=m_ 
             o +=len (m_ )
-        Y =np .concatenate ([veri [i ]["y"]for i in ic ])
+        Y =np .concatenate ([data_ [i ]["y"]for i in ic ])
         rng =np .random .default_rng (0 )
         poz ,neg =np .where (Y ==1 )[0 ],np .where (Y ==0 )[0 ]
         sec =np .concatenate ([poz ,rng .choice (
@@ -108,11 +108,11 @@ def main ():
         l2_regularization =1.0 ,random_state =0 ).fit (M [sec ],Y [sec ])
         del M 
         for i in dis :
-            oof [i ]=m .predict_proba (veri [i ]["_M"])[:,1 ]
+            oof [i ]=m .predict_proba (data_ [i ]["_M"])[:,1 ]
         print (f"  OOF {b } ({time .time ()-t0 :.0f} s)",flush =True )
 
     ist =collections .defaultdict (lambda :collections .defaultdict (list ))
-    for d ,s in zip (veri ,oof ):
+    for d ,s in zip (data_ ,oof ):
         if s is None or d ["y"].sum ()==0 :
             continue 
         s =np .asarray (s ,float )
@@ -122,14 +122,14 @@ def main ():
         if ky .sum ()==0 or ky .sum ()==len (ky ):
             continue 
         k =int (ky .sum ())
-        sira =np .argsort (-ks )
+        rank_ =np .argsort (-ks )
         a =ist [d ["mfg"]]
         a ["gt"].append (int (len (d ["G"])))
         a ["n_konum"].append (len (ks ))
         a ["auc_secenek"].append (auc (s ,y ))
         a ["auc_konum"].append (auc (ks ,ky ))
         a ["rastgele_k"].append (k /len (ks ))
-        a ["ustk_konum"].append (float (ky [sira [:k ]].sum ())/k )
+        a ["ustk_konum"].append (float (ky [rank_ [:k ]].sum ())/k )
         # YALNIZ correct konumlar inside direction ayrimi
         dk =np .isin (idx ,np .unique (idx )[ky .astype (bool )])
         if dk .any ()and 0 <y [dk ].sum ()<dk .sum ():
@@ -155,8 +155,8 @@ def main ():
         f"{r ['auc_yon']:>10.4f}{r ['ustk_konum']:>12.4f}"
         f"{r ['rastgele_k']:>12.4f}")
     print ("\nOKUMA:")
-    print ("  auc_KONUM ~ 0.5 ve ustk ~ rastgele -> KONUM bilgisi YOK")
-    print ("  auc_KONUM yuksek ama ustk dusuk    -> siralama var, kural kotu")
+    print ("  auc_KONUM ~ 0.5 and ustk ~ rastgele -> KONUM bilgisi YOK")
+    print ("  auc_KONUM high but ustk low    -> ranking present, rule kotu")
     json .dump ({"damga":makbuz_hash .damga (),"cluster":KUME ,"brand":out ,
     "not":"KONUM duzeyi ayirt edicilik. Secenek AUC'sinin yonden "
     "mi konumdan mi geldigini ayirir. D7'ye BAKILMADI."},

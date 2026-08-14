@@ -76,10 +76,10 @@ def uygula (D ,H ,arm ):
     raise ValueError (arm )
 
 
-def olc (kayit ,arm ):
+def olc (rec_ ,arm ):
     tot ={k :[0 ,0 ,0 ]for k in ("tespit","rob","rbi")}
     part =[]
-    for r in kayit :
+    for r in rec_ :
         G =np .asarray (r ["G"],float ).reshape (-1 ,3 )
         if not len (G ):
             continue 
@@ -90,7 +90,7 @@ def olc (kayit ,arm ):
         if len (H )!=len (D ):
             H =np .zeros_like (D )
         D2 =uygula (D ,_birim (H )if len (H )else H ,arm )
-        satir ={}
+        line_ ={}
         for ad ,(tol ,am ,isr )in (("tespit",(2.0 ,180.0 ,False )),
         ("rob",(2.0 ,10.0 ,False )),
         ("rbi",(2.0 ,10.0 ,True ))):
@@ -99,8 +99,8 @@ def olc (kayit ,arm ):
             tot [ad ][0 ]+=tp 
             tot [ad ][1 ]+=fp 
             tot [ad ][2 ]+=fn 
-            satir [ad ]=(tp ,fp ,fn )
-        part .append (satir )
+            line_ [ad ]=(tp ,fp ,fn )
+        part .append (line_ )
     f1 =lambda t :2 *t [0 ]/max (2 *t [0 ]+t [1 ]+t [2 ],1 )# noqa: E731
     return {k :f1 (v )for k ,v in tot .items ()},part 
 
@@ -119,29 +119,29 @@ def boot (pa ,pb ,ad ,n =4000 ,seed =0 ):
 
 
 def main ():
-    kayit =[r for r in json .load (open (DOKUM ))if r .get ("yol")==YOL 
+    rec_ =[r for r in json .load (open (DOKUM ))if r .get ("yol")==YOL 
     and r .get ("halka_normal")]
-    print (f"{DOKUM } / yol={YOL } -> {len (kayit )} part (halka normali olan)")
-    if not kayit :
+    print (f"{DOKUM } / yol={YOL } -> {len (rec_ )} part (halka normali olan)")
+    if not rec_ :
         return 1 
     KOLLAR =["baseline","sign","tam",
     "kapili_10","kapili_20","kapili_30","kapili_45",
     "harman_0.25","harman_0.5","harman_0.75"]
-    sonuc ={}
+    res_ ={}
     print (f"\n{'arm':14s} {'tespit':>8s} {'rob':>8s} {'rob-ISR':>8s}")
     for arm in KOLLAR :
-        m ,p =olc (kayit ,arm )
-        sonuc [arm ]=(m ,p )
+        m ,p =olc (rec_ ,arm )
+        res_ [arm ]=(m ,p )
         print (f"{arm :14s} {m ['tespit']:8.4f} {m ['rob']:8.4f} {m ['rbi']:8.4f}")
     print ("\n--- ESLI BOOTSTRAP (tabana gore) ---")
     print (f"{'arm':14s} {'metrik':>7s} {'fark':>9s} {'%95 GA':>22s} {'poz%':>6s}")
     for arm in KOLLAR [1 :]:
         for ad in ("rob","rbi"):
-            f ,lo ,hi ,pz =boot (sonuc ["baseline"][1 ],sonuc [arm ][1 ],ad )
+            f ,lo ,hi ,pz =boot (res_ ["baseline"][1 ],res_ [arm ][1 ],ad )
             yz =" *"if (lo >0 or hi <0 )else ""
             print (f"{arm :14s} {ad :>7s} {f :+9.4f} "
             f"[{lo :+.4f},{hi :+.4f}]{yz :>3s} {100 *pz :5.1f}")
-    json .dump ({k :v [0 ]for k ,v in sonuc .items ()},
+    json .dump ({k :v [0 ]for k ,v in res_ .items ()},
     open (f"results/halka_eksen_{YOL }.json","w"),indent =1 )
     print (f"\n-> results/halka_eksen_{YOL }.json")
     return 0 
