@@ -21,6 +21,9 @@
 !*.sh
 !*.yml
 !*.yaml
+!*.pptx
+!*.html
+!*.csv
 !.gitignore
 
 # --- 4) buyuk / turetilmis dizinler TAMAMEN disarida

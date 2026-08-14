@@ -1,0 +1,261 @@
+<meta charset="utf-8">
+<title>WSCAD 5-class labeler</title>
+<style>
+  :root { --bg:#1e1f24; --panel:#2a2c33; --ink:#e8e8ea; --mut:#9aa0aa; }
+  * { box-sizing:border-box; }
+  body { margin:0; font:13px/1.4 system-ui,sans-serif; background:var(--bg); color:var(--ink); overflow:hidden; }
+  #wrap { display:flex; height:100vh; }
+  #view { flex:1; position:relative; }
+  #canvas { width:100%; height:100%; display:block; }
+  #side { width:290px; background:var(--panel); padding:14px; overflow:auto; }
+  h1 { font-size:15px; margin:0 0 4px; }
+  .sub { color:var(--mut); font-size:11px; margin:0 0 12px; }
+  .cls { display:flex; align-items:center; gap:8px; padding:7px 9px; border-radius:7px; cursor:pointer; margin:3px 0; border:2px solid transparent; }
+  .cls.active { border-color:#fff; }
+  .sw { width:18px; height:18px; border-radius:4px; border:1px solid #0006; }
+  .cls .k { margin-left:auto; color:var(--mut); font-variant-numeric:tabular-nums; }
+  .cls .n { min-width:34px; text-align:right; color:var(--mut); font-size:11px; }
+  button { background:#3a86ff; color:#fff; border:0; border-radius:7px; padding:9px 12px; font-size:13px; cursor:pointer; width:100%; margin:5px 0; }
+  button.sec { background:#4a4d57; }
+  label.row { display:flex; align-items:center; gap:8px; margin:9px 0; color:var(--mut); }
+  input[type=range]{ flex:1; }
+  .file { display:block; margin:6px 0; }
+  .hint { color:var(--mut); font-size:11px; margin-top:12px; border-top:1px solid #ffffff18; padding-top:10px; }
+  kbd { background:#0005; border-radius:4px; padding:1px 5px; font-family:monospace; }
+  #pid { font-weight:600; color:#7fd18a; }
+  #msg { color:#ffcf6b; min-height:16px; font-size:11px; }
+</style>
+<div id="wrap">
+  <div id="view"><canvas id="canvas"></canvas></div>
+  <div id="side">
+    <h1>WSCAD 5-class labeler</h1>
+    <p class="sub">Load an OBJ, click a region, press its number. Export writes <code>labels.txt</code> (one class per vertex, OBJ order).</p>
+    <input class="file" type="file" id="objfile" accept=".obj">
+    <div>part: <span id="pid">(none)</span></div>
+    <div id="msg"></div>
+    <div id="classes"></div>
+    <label class="row"><input type="checkbox" id="regionmode" checked> region click (flood-fill)</label>
+    <label class="row">merge angle <input type="range" id="thr" min="5" max="80" value="35"> <span id="thrv">35°</span></label>
+    <label class="row">cavity shading <input type="range" id="shade" min="0" max="100" value="70"> <span id="shadev">70%</span></label>
+    <button id="exp">⬇ Download labels.txt</button>
+    <input class="file" type="file" id="labfile" accept=".txt" title="resume: load an existing labels.txt">
+    <button class="sec" id="loadlab">↻ Resume from a labels.txt</button>
+    <div class="hint">
+      <b>Keys</b> <kbd>0</kbd>Housing <kbd>1</kbd>Contact <kbd>2</kbd>SnapPoint <kbd>3</kbd>CableEntry <kbd>4</kbd>LabelSurface<br>
+      <kbd>Z</kbd> undo · drag=rotate · wheel=zoom · click=paint active class<br>
+      <b>CP = CableEntry (round cable-gland entry) OR Contact WITH real depth (screw/clamp
+      terminal, often square -- still a CP).</b> Flat pads/screw-heads are not CPs. Paint the
+      whole opening/recess, whichever class it physically is.
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const CLASSES = [
+  {name:"Housing",      col:[0.72,0.72,0.72]},
+  {name:"Contact",      col:[0.15,0.45,0.95]},
+  {name:"SnapPoint",    col:[0.95,0.85,0.15]},
+  {name:"CableEntry",   col:[0.10,0.80,0.25]},
+  {name:"LabelSurface", col:[0.95,0.60,0.15]},
+];
+let active = 3;            // default to CableEntry; switch to 1 (Contact) for clamp/screw terminals
+let V=[], Fidx=[], labels=null, nV=0;
+let geom=null, mesh=null, colorAttr=null, faceNormals=null, edgeMap=null;
+let cavity=null, nbrs=null;   // per-vertex concavity in [0,1] (1 = deep recess) for neutral shading
+let undoStack=[];
+let renderer, scene, camera, controls, raycaster, pointer;
+
+// ---- three.js scene ----
+const canvas = document.getElementById("canvas");
+renderer = new THREE.WebGLRenderer({canvas, antialias:true});
+scene = new THREE.Scene(); scene.background = new THREE.Color(0x1e1f24);
+camera = new THREE.PerspectiveCamera(45, 1, 0.1, 5000);
+controls = new THREE.OrbitControls(camera, renderer.domElement);
+scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+const dl = new THREE.DirectionalLight(0xffffff, 0.6); dl.position.set(1,1,2); scene.add(dl);
+const dl2 = new THREE.DirectionalLight(0xffffff, 0.4); dl2.position.set(-1,-1,-1); scene.add(dl2);
+raycaster = new THREE.Raycaster(); pointer = new THREE.Vector2();
+function resize(){ const w=canvas.clientWidth,h=canvas.clientHeight; renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); }
+window.addEventListener("resize", resize); resize();
+(function loop(){ requestAnimationFrame(loop); controls.update(); renderer.render(scene,camera); })();
+
+// ---- class UI ----
+const cbox = document.getElementById("classes");
+CLASSES.forEach((c,i)=>{
+  const d=document.createElement("div"); d.className="cls"; d.dataset.i=i;
+  d.innerHTML=`<span class="sw" style="background:rgb(${c.col.map(x=>Math.round(x*255)).join(",")})"></span>${c.name}<span class="n" id="cnt${i}">0</span><span class="k">${i}</span>`;
+  d.onclick=()=>setActive(i); cbox.appendChild(d);
+});
+function setActive(i){ active=i; [...cbox.children].forEach((d,j)=>d.classList.toggle("active", j===i)); }
+setActive(active);
+
+// ---- OBJ parse ----
+document.getElementById("objfile").onchange = e=>{
+  const f=e.target.files[0]; if(!f) return;
+  document.getElementById("pid").textContent = f.name.replace(/\.obj$/i,"");
+  const r=new FileReader(); r.onload=()=>{ parseOBJ(r.result); }; r.readAsText(f);
+};
+function parseOBJ(txt){
+  V=[]; Fidx=[];
+  const lines=txt.split(/\r?\n/);
+  for(const ln of lines){
+    if(ln[0]==="v" && ln[1]===" "){ const p=ln.split(/\s+/); V.push([+p[1],+p[2],+p[3]]); }
+    else if(ln[0]==="f" && ln[1]===" "){
+      const p=ln.trim().split(/\s+/).slice(1).map(s=>parseInt(s.split("/")[0],10)-1);
+      for(let k=2;k<p.length;k++){ Fidx.push([p[0],p[k-1],p[k]]); } // triangulate fan
+    }
+  }
+  nV=V.length; labels=new Uint8Array(nV); undoStack=[];
+  buildGeometry(); computeCavity(); buildAdjacency(); recolor(); updateCounts();
+  msg(`loaded ${nV} verts, ${Fidx.length} tris`);
+}
+function buildGeometry(){
+  if(mesh){ scene.remove(mesh); geom.dispose(); }
+  geom=new THREE.BufferGeometry();
+  const pos=new Float32Array(nV*3);
+  for(let i=0;i<nV;i++){ pos[i*3]=V[i][0]; pos[i*3+1]=V[i][1]; pos[i*3+2]=V[i][2]; }
+  const idx=new Uint32Array(Fidx.length*3);
+  for(let i=0;i<Fidx.length;i++){ idx[i*3]=Fidx[i][0]; idx[i*3+1]=Fidx[i][1]; idx[i*3+2]=Fidx[i][2]; }
+  const col=new Float32Array(nV*3);
+  geom.setAttribute("position", new THREE.BufferAttribute(pos,3));
+  geom.setAttribute("color", new THREE.BufferAttribute(col,3));
+  geom.setIndex(new THREE.BufferAttribute(idx,1));
+  geom.computeVertexNormals(); geom.computeBoundingSphere();
+  colorAttr=geom.getAttribute("color");
+  const mat=new THREE.MeshStandardMaterial({vertexColors:true, roughness:0.9, metalness:0.0, flatShading:false});
+  mesh=new THREE.Mesh(geom, mat); scene.add(mesh);
+  // frame camera
+  const s=geom.boundingSphere; controls.target.copy(s.center);
+  camera.position.copy(s.center).add(new THREE.Vector3(0,0,s.radius*2.6));
+  camera.near=s.radius/100; camera.far=s.radius*20; camera.updateProjectionMatrix();
+}
+// NEUTRAL geometric shading: per-vertex concavity. For each vertex, the mean of
+// dot(normalize(neighbour - v), outward normal): a convex bump gives <0, a recess/pit/bore gives >0.
+// Smoothed, then normalised to [0,1]. This makes wire openings, clamp slots and bores visibly darker
+// WITHOUT using the model -- pure geometry, so it cannot bias which class you paint.
+function computeCavity(){
+  nbrs = Array.from({length:nV}, ()=>[]);
+  for(const f of Fidx){
+    nbrs[f[0]].push(f[1],f[2]); nbrs[f[1]].push(f[0],f[2]); nbrs[f[2]].push(f[0],f[1]);
+  }
+  const nrm = geom.getAttribute("normal");
+  let a=new THREE.Vector3(), n=new THREE.Vector3();
+  let cv = new Float32Array(nV);
+  for(let i=0;i<nV;i++){
+    n.set(nrm.getX(i), nrm.getY(i), nrm.getZ(i));
+    let s=0, c=0;
+    for(const j of nbrs[i]){
+      a.set(V[j][0]-V[i][0], V[j][1]-V[i][1], V[j][2]-V[i][2]);
+      const L=a.length(); if(L<1e-9) continue;
+      s += a.dot(n)/L; c++;
+    }
+    cv[i] = c ? s/c : 0;
+  }
+  for(let it=0; it<2; it++){          // smooth so single-triangle noise doesn't speckle
+    const t=new Float32Array(nV);
+    for(let i=0;i<nV;i++){ let s=cv[i], c=1; for(const j of nbrs[i]){ s+=cv[j]; c++; } t[i]=s/c; }
+    cv=t;
+  }
+  let mn=Infinity, mx=-Infinity;
+  for(let i=0;i<nV;i++){ if(cv[i]<mn)mn=cv[i]; if(cv[i]>mx)mx=cv[i]; }
+  const rng=(mx-mn)||1;
+  cavity=new Float32Array(nV);
+  for(let i=0;i<nV;i++) cavity[i]=(cv[i]-mn)/rng;
+}
+
+function buildAdjacency(){
+  faceNormals=new Array(Fidx.length); edgeMap=new Map();
+  const a=new THREE.Vector3(),b=new THREE.Vector3(),c=new THREE.Vector3(),ab=new THREE.Vector3(),ac=new THREE.Vector3();
+  for(let i=0;i<Fidx.length;i++){
+    const f=Fidx[i];
+    a.fromArray(V[f[0]]); b.fromArray(V[f[1]]); c.fromArray(V[f[2]]);
+    ab.subVectors(b,a); ac.subVectors(c,a); const n=new THREE.Vector3().crossVectors(ab,ac).normalize();
+    faceNormals[i]=n;
+    for(const [u,v] of [[f[0],f[1]],[f[1],f[2]],[f[2],f[0]]]){
+      const key=u<v?u+"_"+v:v+"_"+u;
+      if(!edgeMap.has(key)) edgeMap.set(key,[]); edgeMap.get(key).push(i);
+    }
+  }
+}
+
+// ---- painting ----
+let down=null;
+renderer.domElement.addEventListener("pointerdown", e=>{ down={x:e.clientX,y:e.clientY}; });
+renderer.domElement.addEventListener("pointerup", e=>{
+  if(!down||!mesh) return;
+  const moved=Math.hypot(e.clientX-down.x, e.clientY-down.y); down=null;
+  if(moved>5) return;                       // it was a drag (rotate), not a paint
+  const rect=renderer.domElement.getBoundingClientRect();
+  pointer.x=((e.clientX-rect.left)/rect.width)*2-1; pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;
+  raycaster.setFromCamera(pointer,camera);
+  const hit=raycaster.intersectObject(mesh,false)[0];
+  if(!hit) return;
+  paintFace(hit.faceIndex);
+});
+function paintFace(fi){
+  const thr=Math.cos(+document.getElementById("thr").value*Math.PI/180);
+  const region=document.getElementById("regionmode").checked;
+  const faces = region ? floodFill(fi, thr) : [fi];
+  // save undo (only the vertices we touch)
+  const touched=new Set(); faces.forEach(f=>Fidx[f].forEach(v=>touched.add(v)));
+  const snap=[]; touched.forEach(v=>snap.push([v,labels[v]])); undoStack.push(snap); if(undoStack.length>50) undoStack.shift();
+  touched.forEach(v=>labels[v]=active);
+  recolor(); updateCounts();
+}
+function floodFill(start, thrCos){
+  const seen=new Set([start]), stack=[start], out=[start], n0=faceNormals[start];
+  while(stack.length){
+    const fi=stack.pop(), f=Fidx[fi];
+    for(const [u,v] of [[f[0],f[1]],[f[1],f[2]],[f[2],f[0]]]){
+      const key=u<v?u+"_"+v:v+"_"+u;
+      for(const nb of edgeMap.get(key)){
+        if(seen.has(nb)) continue;
+        if(faceNormals[fi].dot(faceNormals[nb])>=thrCos){ seen.add(nb); stack.push(nb); out.push(nb); }
+      }
+    }
+  }
+  return out;
+}
+function recolor(){
+  const c=colorAttr.array;
+  const k=(+document.getElementById("shade").value)/100;   // cavity shading strength
+  for(let i=0;i<nV;i++){
+    const col=CLASSES[labels[i]].col;
+    const s = cavity ? (1 - k*cavity[i]) : 1;              // deeper recess -> darker (neutral)
+    c[i*3]=col[0]*s; c[i*3+1]=col[1]*s; c[i*3+2]=col[2]*s;
+  }
+  colorAttr.needsUpdate=true;
+}
+function updateCounts(){ const n=new Array(5).fill(0); for(let i=0;i<nV;i++) n[labels[i]]++; for(let i=0;i<5;i++) document.getElementById("cnt"+i).textContent=n[i]; }
+function msg(t){ document.getElementById("msg").textContent=t; }
+
+// ---- keys ----
+window.addEventListener("keydown", e=>{
+  if(e.key>="0" && e.key<="4"){ setActive(+e.key); }
+  else if(e.key==="z"||e.key==="Z"){ const s=undoStack.pop(); if(s){ s.forEach(([v,l])=>labels[v]=l); recolor(); updateCounts(); msg("undo"); } }
+});
+document.getElementById("thr").oninput=e=>document.getElementById("thrv").textContent=e.target.value+"°";
+document.getElementById("shade").oninput=e=>{
+  document.getElementById("shadev").textContent=e.target.value+"%";
+  if(labels) recolor();
+};
+
+// ---- export / resume ----
+document.getElementById("exp").onclick=()=>{
+  if(!labels){ msg("load an OBJ first"); return; }
+  const txt=Array.from(labels).join("\n")+"\n";
+  const blob=new Blob([txt],{type:"text/plain"});
+  const pid=document.getElementById("pid").textContent.replace(/[^A-Za-z0-9._-]/g,"_");
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=(pid||"part")+".labels.txt"; a.click();
+  msg(`exported ${nV} labels`);
+};
+document.getElementById("loadlab").onclick=()=>{
+  const f=document.getElementById("labfile").files[0]; if(!f||!labels){ msg("pick a labels.txt (after loading the OBJ)"); return; }
+  const r=new FileReader(); r.onload=()=>{
+    const vals=r.result.trim().split(/\s+/).map(Number);
+    if(vals.length!==nV){ msg(`labels ${vals.length} != verts ${nV}`); return; }
+    for(let i=0;i<nV;i++) labels[i]=vals[i]|0; recolor(); updateCounts(); msg("resumed from labels.txt");
+  }; r.readAsText(f);
+};
+</script>
